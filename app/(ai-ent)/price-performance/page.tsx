@@ -2,7 +2,7 @@ import { PageHeader, EmptyState } from "@/lib/ui/page";
 import { loadPricingDataset } from "./data";
 import { PricingSection } from "./components/pricing-live";
 
-export const metadata = { title: "Price / Performance | New AI.Ent" };
+export const metadata = { title: "Price / Performance | AI Enterprise" };
 
 export default function PricePerformancePage() {
   const pricing = loadPricingDataset();

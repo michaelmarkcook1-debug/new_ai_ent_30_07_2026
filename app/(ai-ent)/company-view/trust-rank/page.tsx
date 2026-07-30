@@ -4,7 +4,7 @@ import { DerivationDrawer, KpiGauge } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { loadShellFixture } from "../data";
 
-export const metadata = { title: "Trust Rank: Shell | New AI.Ent" };
+export const metadata = { title: "Trust Rank: Shell | AI Enterprise" };
 
 function StatusChip({ status }: { status: string }) {
   const inForce = status.toLowerCase().includes("in force") || status.toLowerCase().includes("enacted");

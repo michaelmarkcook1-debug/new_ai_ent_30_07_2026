@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { AnalystView } from "./analyst-view";
 
-export const metadata = { title: "AI Analyst: Shell | New AI.Ent" };
+export const metadata = { title: "AI Analyst: Shell | AI Enterprise" };
 
 const PRELOADED = [
   "Shell AI vendor assessment brief (sample)",

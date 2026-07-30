@@ -2,7 +2,7 @@ import { PageHeader } from "@/lib/ui/page";
 import { loadPulseFixture } from "./data";
 import { PulseView } from "./components/pulse-view";
 
-export const metadata = { title: "The Pulse | New AI.Ent" };
+export const metadata = { title: "The Pulse | AI Enterprise" };
 
 export default async function PulsePage() {
   const fixture = await loadPulseFixture();

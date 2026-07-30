@@ -8,8 +8,9 @@ import { LANE_LABEL } from "@/lib/provenance";
 export function LaneBadge({ lane }: { lane: DataLane }) {
   const styles: Record<DataLane, string> = {
     live: "bg-good-bg text-good border-good/30",
-    aie: "bg-secondary/10 text-secondary-content border-secondary/30 dark:bg-secondary/40",
-    "aie-live": "bg-secondary/10 text-good border-good/30 dark:bg-secondary/40",
+    aie: "bg-aie-bg text-aie border-aie/30",
+    // AIE content pulled live: the dataset's blue, with the live green ring.
+    "aie-live": "bg-aie-bg text-aie border-good/60",
     sample: "bg-warn-bg text-warn border-warn/30",
     mock: "bg-warn-bg text-warn border-warn/30",
     stub: "bg-base-200 text-muted border-base-300",

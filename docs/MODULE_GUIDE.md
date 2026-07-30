@@ -23,7 +23,7 @@ follow it exactly so the app reads as one product.
 ## Module anatomy
 
 Each module lives in `app/(ai-ent)/<module>/` with:
-- `page.tsx`: server component; metadata title "<Module> | New AI.Ent".
+- `page.tsx`: server component; metadata title "<Module> | AI Enterprise".
 - `data.ts`: the module's data adapter (fixture loading, AIE imports,
   proxy paths). Modules import ONLY from `lib/` and their own folder.
 - `components/*.tsx`: module components, client where interactive.

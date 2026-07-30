@@ -4,7 +4,7 @@ import { EditorialBanner, QuestionChips } from "@/lib/ui/cards";
 import { KpiGauge, DerivationDrawer } from "@/lib/ui/score";
 import { loadShellFixture } from "./data";
 
-export const metadata = { title: "Company View: Shell | New AI.Ent" };
+export const metadata = { title: "Company View: Shell | AI Enterprise" };
 
 const TAB_LINKS = [
   { href: "/company-view/ai-exposure", title: "AI Exposure", blurb: "Where AI helps or threatens each function of the business." },

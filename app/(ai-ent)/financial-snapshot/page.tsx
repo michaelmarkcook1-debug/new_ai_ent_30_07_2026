@@ -3,7 +3,7 @@ import { PROBED_TICKERS, privateVendorCards } from "./data";
 import { LiveTickers } from "./components/live-tickers";
 import { PrivateCompanyCards } from "./components/private-cards";
 
-export const metadata = { title: "Financial Snapshot | New AI.Ent" };
+export const metadata = { title: "Financial Snapshot | AI Enterprise" };
 
 export default function FinancialSnapshotPage() {
   const cards = privateVendorCards();

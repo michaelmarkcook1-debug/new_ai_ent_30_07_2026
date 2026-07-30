@@ -13,7 +13,7 @@ import { WinningLosing } from "./components/winning-losing";
 import { DependencyByLayer } from "./components/dependency-by-layer";
 import { CategoryLeaders } from "./components/category-leaders";
 
-export const metadata = { title: "Market Watch | New AI.Ent" };
+export const metadata = { title: "Market Watch | AI Enterprise" };
 
 // Market Watch: the AIE homepage market read. Category shares and the
 // winning/losing read now pull live from the deployed AIE app; the ported

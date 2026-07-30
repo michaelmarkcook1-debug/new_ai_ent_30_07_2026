@@ -2,7 +2,7 @@ import { PageHeader } from "@/lib/ui/page";
 import { buildRankingRows, datasetDate } from "./data";
 import { RankingsTable } from "./components/rankings-table";
 
-export const metadata = { title: "Vendor View | New AI.Ent" };
+export const metadata = { title: "Vendor View | AI Enterprise" };
 
 export default function VendorViewPage() {
   const rows = buildRankingRows();

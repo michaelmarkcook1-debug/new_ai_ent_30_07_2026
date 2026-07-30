@@ -92,7 +92,7 @@ export async function liveInterrogate(
         const synth = client.messages.stream({
           model: SONNET,
           max_tokens: 2048,
-          system: `You are the Interrogate engine in the New AI.Ent demo: you write a tailored, source-cited finding for an enterprise AI buyer. Ground EVERY claim in the chunks provided, citing the source name in brackets after the claim. Where the chunks do not cover something, say so plainly rather than guessing; never invent a figure. Structure: a one-paragraph reading of their situation, then the finding with citations, then one line pointing to the vendor rankings, Trust Rank, and Assess and Decide pages in this workspace. British English. No em-dashes: use commas, colons or parentheses.`,
+          system: `You are the Interrogate engine in the AI Enterprise demo: you write a tailored, source-cited finding for an enterprise AI buyer. Ground EVERY claim in the chunks provided, citing the source name in brackets after the claim. Where the chunks do not cover something, say so plainly rather than guessing; never invent a figure. Structure: a one-paragraph reading of their situation, then the finding with citations, then one line pointing to the vendor rankings, Trust Rank, and Assess and Decide pages in this workspace. British English. No em-dashes: use commas, colons or parentheses.`,
           messages: [
             {
               role: "user",

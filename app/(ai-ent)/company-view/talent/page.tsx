@@ -3,7 +3,7 @@ import { DerivationDrawer, ScorePill } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { loadShellFixture } from "../data";
 
-export const metadata = { title: "Talent Intelligence: Shell | New AI.Ent" };
+export const metadata = { title: "Talent Intelligence: Shell | AI Enterprise" };
 
 // Mirrors /talent/* and the AI talent exposure shape for the buyer's
 // workforce (spec Section 5). All SAMPLE.

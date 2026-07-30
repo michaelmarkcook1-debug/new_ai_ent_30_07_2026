@@ -1,10 +1,15 @@
 @import "tailwindcss";
 
-/* AG brand tokens, verified against app.analystgenius.ai on 30 July 2026.
+/* AI Enterprise brand tokens. The shell structure and typography still
+   follow the verified AG portal patterns (extracted 30 July 2026), but the
+   accent family is deliberately green rather than AG's indigo so the product
+   reads as distinct from AnalystGenius. Primary carries white text on solid
+   fills (nav active state, buttons), so both values are dark enough to keep
+   that legible: light 4.7:1, dark 3.4:1.
    Light values on :root, dark overrides via [data-theme="dark"]. */
 :root {
-  --ag-primary: #4f36ff;
-  --ag-secondary: #383266;
+  --ag-primary: #0b8457;
+  --ag-secondary: #1f4438;
   --ag-secondary-content: #ffffff;
   --ag-base-100: #ffffff;
   --ag-base-200: #f9f9f9;
@@ -17,12 +22,17 @@
   --ag-green-bg: #dcfce7;
   --ag-amber-bg: #fef3c7;
   --ag-red-bg: #fee2e2;
+  /* AIE data-lane marker. Deliberately a cool blue: the brand accent and the
+     semantic "good" band are both green now, so the dataset badges need a
+     third hue to stay readable at a glance. */
+  --ag-aie: #2b50c8;
+  --ag-aie-bg: #e6ecfd;
 }
 
 [data-theme="dark"] {
-  --ag-primary: #7c6aff;
-  --ag-secondary: #383266;
-  --ag-secondary-content: #c4b8ff;
+  --ag-primary: #1fa672;
+  --ag-secondary: #1f4438;
+  --ag-secondary-content: #a7e8c9;
   --ag-base-100: #141414;
   --ag-base-200: #1c1c1c;
   --ag-base-300: #2a2a2a;
@@ -34,6 +44,8 @@
   --ag-green-bg: rgba(22, 163, 74, 0.18);
   --ag-amber-bg: rgba(217, 119, 6, 0.18);
   --ag-red-bg: rgba(255, 68, 68, 0.18);
+  --ag-aie: #9db4ff;
+  --ag-aie-bg: rgba(43, 80, 200, 0.22);
 }
 
 @theme inline {
@@ -51,6 +63,8 @@
   --color-good-bg: var(--ag-green-bg);
   --color-warn-bg: var(--ag-amber-bg);
   --color-bad-bg: var(--ag-red-bg);
+  --color-aie: var(--ag-aie);
+  --color-aie-bg: var(--ag-aie-bg);
   --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;

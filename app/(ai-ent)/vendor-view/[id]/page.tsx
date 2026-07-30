@@ -26,8 +26,8 @@ export async function generateMetadata({
   const profile = getVendorProfile(id);
   return {
     title: profile
-      ? `${profile.intel.name} | Vendor View | New AI.Ent`
-      : "Vendor View | New AI.Ent",
+      ? `${profile.intel.name} | Vendor View | AI Enterprise`
+      : "Vendor View | AI Enterprise",
   };
 }
 

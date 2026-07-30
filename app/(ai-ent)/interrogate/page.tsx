@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { PageHeader } from "@/lib/ui/page";
 import { InterrogateView } from "./interrogate-view";
 
-export const metadata = { title: "Interrogate | New AI.Ent" };
+export const metadata = { title: "Interrogate | AI Enterprise" };
 
 // The hero piece: adaptive questioning that ends in a tailored,
 // source-cited finding, mirroring the deployed AI Enterprise app's

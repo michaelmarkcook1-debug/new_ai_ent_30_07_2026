@@ -3,7 +3,7 @@ import { DependencyMap } from "./components/dependency-map";
 import { ModelsCatalogue } from "./components/models-catalogue";
 import { IntegratorLayer } from "./components/integrator-layer";
 
-export const metadata = { title: "AI Ecosystem Navigator | New AI.Ent" };
+export const metadata = { title: "AI Ecosystem Navigator | AI Enterprise" };
 
 export default function EcosystemNavigatorPage() {
   return (

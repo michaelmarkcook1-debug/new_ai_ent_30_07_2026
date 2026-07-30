@@ -4,7 +4,7 @@ import { AieFeed } from "./components/aie-feed";
 import { CompanyNewsSection } from "./components/company-news";
 import { LiveFeed } from "./components/live-feed";
 
-export const metadata = { title: "News | New AI.Ent" };
+export const metadata = { title: "News | AI Enterprise" };
 
 export default function NewsFeedPage() {
   const { items, meta } = loadFeed();

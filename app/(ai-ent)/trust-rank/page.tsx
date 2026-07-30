@@ -7,7 +7,7 @@ import {
 } from "./data";
 import { TrustRankView } from "./components/trust-rank-view";
 
-export const metadata = { title: "Trust Rank | New AI.Ent" };
+export const metadata = { title: "Trust Rank | AI Enterprise" };
 
 export default async function TrustRankPage() {
   const fixture = await loadTrustRankFixture();

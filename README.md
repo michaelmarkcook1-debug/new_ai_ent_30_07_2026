@@ -1,9 +1,10 @@
-# New AI.Ent demo (AnalystGenius)
+# AI Enterprise
 
-A working demo of New AI.Ent (Enterprise AI): AG's module structure applied
-to the enterprise AI supply side, for buyers deciding which AI models,
-platforms and delivery partners to choose. It runs entirely on your
-machine; nothing is deployed anywhere.
+A working demo of AI Enterprise: proven analyst module structure applied to
+the enterprise AI supply side, for buyers deciding which AI models,
+platforms and delivery partners to choose. It carries its own green identity
+rather than the AnalystGenius indigo, so it reads as a distinct product. It
+runs entirely on your machine; nothing is deployed anywhere.
 
 ## What you need first
 

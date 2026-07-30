@@ -4,7 +4,7 @@ import { AiePillarsSection } from "./components/aie-pillars";
 import { LiveUnifiedSection } from "./components/live-unified";
 import { ThirdPartySignals } from "./components/third-party";
 
-export const metadata = { title: "Reputation Tracker | New AI.Ent" };
+export const metadata = { title: "Reputation Tracker | AI Enterprise" };
 
 export default async function ReputationTrackerPage() {
   const fixture = await loadReputationFixture();

@@ -99,7 +99,7 @@ export async function liveAnswer(
         const synth = client.messages.stream({
           model,
           max_tokens: deep ? 4096 : 2048,
-          system: `You are the AG AI Analyst inside the New AI.Ent demo. Answer ONLY from the grounded chunks provided. Cite the source name in brackets after each claim, like [Shell AI vendor assessment brief (sample)]. If the chunks do not contain the answer, say plainly that the answer is not in the grounded sources; never guess and never invent a figure. British English. No em-dashes: use commas, colons or parentheses. Keep answers focused and concise.`,
+          system: `You are the AG AI Analyst inside the AI Enterprise demo. Answer ONLY from the grounded chunks provided. Cite the source name in brackets after each claim, like [Shell AI vendor assessment brief (sample)]. If the chunks do not contain the answer, say plainly that the answer is not in the grounded sources; never guess and never invent a figure. British English. No em-dashes: use commas, colons or parentheses. Keep answers focused and concise.`,
           messages: [
             {
               role: "user",

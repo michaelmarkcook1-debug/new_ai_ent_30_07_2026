@@ -122,3 +122,22 @@ Dates are absolute; the build day is 30 July 2026.
     onto exactly one of its segments filter upstream; archetypes spanning
     several send no industry filter, and the panel states that the slice
     is unfiltered upstream rather than implying a filter that did not run.
+17. **Green identity and the AI Enterprise name (30 July 2026).** Michael
+    asked for the product to read as distinct from AnalystGenius, so the
+    accent family moved from AG's indigo to green and the product is now
+    named AI Enterprise. This deliberately departs from spec Section 3,
+    which pinned the verified AG brand tokens and said not to invent brand
+    colours: the instruction supersedes it for the accent only. Everything
+    else in Section 3 still holds (Plus Jakarta Sans, Inter, JetBrains
+    Mono, the shell anatomy, the house UI idioms, light default with the
+    persisted `ag_theme` toggle). Primary is `#0b8457` light and `#1fa672`
+    dark, both dark enough to keep white text legible on the solid fills
+    (4.7:1 and 3.4:1); secondary moved to a deep green slate.
+    Consequence handled: the AIE lane badges previously borrowed the
+    purple secondary, which would now collide with the semantic green
+    "good" band, so the AIE dataset and AIE live badges were given their
+    own cool blue marker (`--ag-aie`). The three lanes therefore stay
+    readable at a glance: green for live BoardRadar, blue for AIE, amber
+    for sample. The wordmark is "AI Enterprise" with an "AI" mark, and
+    the AnalystGenius wordmark no longer appears in the shell; AG is still
+    named in the docs where it explains provenance.

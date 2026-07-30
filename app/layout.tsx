@@ -13,9 +13,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "New AI.Ent | AnalystGenius",
+  title: "AI Enterprise",
   description:
-    "Enterprise AI buyer intelligence demo: market intelligence, your company, vendor assessment.",
+    "Enterprise AI buyer intelligence: market intelligence, your company, vendor assessment.",
 };
 
 // Applies the persisted theme before first paint (mirrors the live portal:

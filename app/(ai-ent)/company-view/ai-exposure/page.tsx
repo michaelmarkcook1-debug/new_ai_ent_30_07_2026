@@ -4,7 +4,7 @@ import { KpiGauge, DerivationDrawer, ScorePill } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { loadShellFixture } from "../data";
 
-export const metadata = { title: "AI Exposure: Shell | New AI.Ent" };
+export const metadata = { title: "AI Exposure: Shell | AI Enterprise" };
 
 // Mirrors the /ai-exposure response shape (riskScore, opportunityScore,
 // aiReadinessScore, comparisonTable, keyFindings, recommendations) with a

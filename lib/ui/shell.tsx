@@ -129,14 +129,14 @@ export function Shell({
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
           </button>
           <Link href="/pulse" className="flex items-center gap-1.5">
-            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary font-display text-[13px] font-extrabold text-white">
-              A
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary font-display text-[11px] font-extrabold tracking-tight text-white">
+              AI
             </span>
             <span className="font-display text-[15px] font-extrabold tracking-tight">
-              AnalystGenius
+              AI Enterprise
             </span>
-            <span className="ml-1 rounded bg-secondary/10 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-secondary dark:bg-secondary/40 dark:text-secondary-content">
-              New AI.Ent
+            <span className="ml-1 hidden rounded bg-secondary/10 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-secondary dark:bg-secondary/40 dark:text-secondary-content md:inline">
+              Buyer intelligence
             </span>
           </Link>
         </div>
@@ -217,7 +217,7 @@ export function Shell({
                     E
                   </span>
                   <div className="min-w-0">
-                    <p className="truncate text-[11px] font-semibold">EAI Demo</p>
+                    <p className="truncate text-[11px] font-semibold">AI Enterprise</p>
                     <p className="truncate font-mono text-[9px] text-muted">signed in</p>
                   </div>
                 </div>

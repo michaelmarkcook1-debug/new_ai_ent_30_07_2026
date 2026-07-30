@@ -3,7 +3,7 @@ import { aieVendorRankings, loadCompetitiveIntelFixture } from "./data";
 import { CompetitiveHeatmap } from "./components/heatmap";
 import { AieRankings } from "./components/aie-rankings";
 
-export const metadata = { title: "Competitive Intel | New AI.Ent" };
+export const metadata = { title: "Competitive Intel | AI Enterprise" };
 
 export default async function CompetitiveIntelPage() {
   const fixture = await loadCompetitiveIntelFixture();

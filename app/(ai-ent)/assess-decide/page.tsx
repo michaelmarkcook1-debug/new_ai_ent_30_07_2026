@@ -2,7 +2,7 @@ import { PageHeader } from "@/lib/ui/page";
 import { loadShellFixture } from "@/lib/shell-fixture";
 import { AssessDecideView } from "./assess-decide-view";
 
-export const metadata = { title: "Assess and Decide | New AI.Ent" };
+export const metadata = { title: "Assess and Decide | AI Enterprise" };
 
 // Assess and Decide, promoted to its own tab (30 July 2026). Mirrors the
 // deployed AI Enterprise assessment: three depth tiers, the six-pillar

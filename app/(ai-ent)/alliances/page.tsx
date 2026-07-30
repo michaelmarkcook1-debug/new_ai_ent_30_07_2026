@@ -2,7 +2,7 @@ import { PageHeader } from "@/lib/ui/page";
 import { getAlliancesData } from "./data";
 import { AlliancesView } from "./components/alliances-view";
 
-export const metadata = { title: "Alliances | New AI.Ent" };
+export const metadata = { title: "Alliances | AI Enterprise" };
 
 // Alliances: the AIE alliances map. PORT lane; every edge is a native
 // exposure-map record with its confidence tier and public sources.

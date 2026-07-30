@@ -3,7 +3,7 @@ import { loadSecurityDeskFixture } from "./data";
 import { CyberRiskPanel } from "./components/cyber-risk-panel";
 import { LabsSection } from "./components/labs-section";
 
-export const metadata = { title: "The Security Desk | New AI.Ent" };
+export const metadata = { title: "The Security Desk | AI Enterprise" };
 
 export default async function SecurityDeskPage() {
   const fixture = await loadSecurityDeskFixture();

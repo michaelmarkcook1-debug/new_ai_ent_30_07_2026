@@ -2,7 +2,7 @@ import { PageHeader } from "@/lib/ui/page";
 import { MarketExplorer } from "./components/market-explorer";
 import { DeliveryMatrix } from "./components/delivery-matrix";
 
-export const metadata = { title: "Market View | New AI.Ent" };
+export const metadata = { title: "Market View | AI Enterprise" };
 
 export default function MarketViewPage() {
   return (
