@@ -1,0 +1,85 @@
+@import "tailwindcss";
+
+/* AG brand tokens, verified against app.analystgenius.ai on 30 July 2026.
+   Light values on :root, dark overrides via [data-theme="dark"]. */
+:root {
+  --ag-primary: #4f36ff;
+  --ag-secondary: #383266;
+  --ag-secondary-content: #ffffff;
+  --ag-base-100: #ffffff;
+  --ag-base-200: #f9f9f9;
+  --ag-base-300: #dddddd;
+  --ag-base-content: #1a1a1a;
+  --ag-error: #ff4444;
+  --ag-muted: #6b6b6b;
+  --ag-green: #16a34a;
+  --ag-amber: #d97706;
+  --ag-green-bg: #dcfce7;
+  --ag-amber-bg: #fef3c7;
+  --ag-red-bg: #fee2e2;
+}
+
+[data-theme="dark"] {
+  --ag-primary: #7c6aff;
+  --ag-secondary: #383266;
+  --ag-secondary-content: #c4b8ff;
+  --ag-base-100: #141414;
+  --ag-base-200: #1c1c1c;
+  --ag-base-300: #2a2a2a;
+  --ag-base-content: #ebebeb;
+  --ag-error: #ff6b6b;
+  --ag-muted: #9a9a9a;
+  --ag-green: #4ade80;
+  --ag-amber: #fbbf24;
+  --ag-green-bg: rgba(22, 163, 74, 0.18);
+  --ag-amber-bg: rgba(217, 119, 6, 0.18);
+  --ag-red-bg: rgba(255, 68, 68, 0.18);
+}
+
+@theme inline {
+  --color-primary: var(--ag-primary);
+  --color-secondary: var(--ag-secondary);
+  --color-secondary-content: var(--ag-secondary-content);
+  --color-base-100: var(--ag-base-100);
+  --color-base-200: var(--ag-base-200);
+  --color-base-300: var(--ag-base-300);
+  --color-base-content: var(--ag-base-content);
+  --color-error: var(--ag-error);
+  --color-muted: var(--ag-muted);
+  --color-good: var(--ag-green);
+  --color-warn: var(--ag-amber);
+  --color-good-bg: var(--ag-green-bg);
+  --color-warn-bg: var(--ag-amber-bg);
+  --color-bad-bg: var(--ag-red-bg);
+  --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html {
+  background: var(--ag-base-100);
+  color: var(--ag-base-content);
+}
+
+body {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-size: 14px;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* Micro-label: tiny ALL-CAPS JetBrains Mono label above figures */
+.micro-label {
+  font-family: var(--font-jetbrains), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ag-muted);
+}
+
+::selection {
+  background: var(--ag-primary);
+  color: #fff;
+}

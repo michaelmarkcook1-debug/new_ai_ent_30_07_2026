@@ -1,0 +1,154 @@
+{
+  "provenance": { "sourceBasis": "sample", "confidence": null, "sourceUrl": null, "sourceNote": "Illustrative demo content, not a measurement" },
+  "editorial": {
+    "title": "Agent platforms consolidate while buyers push for provable ROI",
+    "date": "30 July 2026",
+    "body": "The frontier labs are converging on agentic workflows as the enterprise battleground, and platform vendors are racing to bundle orchestration, governance and evaluation into one contract. Buyers hold more leverage than the headlines suggest: model quality gaps are narrowing quarter on quarter, switching costs remain manageable at the application layer, and the delivery channel (the systems integrators below) is competing hard on AI readiness. The disciplined move this quarter is to price that leverage into every renewal conversation."
+  },
+  "questions": [
+    "Which model providers are strongest in regulated industries?",
+    "Where does our current stack create vendor lock-in risk?",
+    "Which integrators lead on agentic delivery capability?",
+    "What changed in EU AI Act enforcement this month?"
+  ],
+  "kpis": [
+    {
+      "label": "MARKET DEAL MOMENTUM",
+      "tooltip": "Composite of enterprise AI deal announcements, expansion signals and procurement activity across the tracked universe. 0 to 100, higher is stronger.",
+      "score": 78,
+      "delta": 6,
+      "definition": "0 to 100, higher is stronger. Composite of deal and procurement signals across tracked vendors.",
+      "provenance": { "sourceBasis": "sample", "confidence": null, "sourceUrl": null, "sourceNote": "Illustrative demo value" }
+    },
+    {
+      "label": "ENTERPRISE ADOPTION",
+      "tooltip": "Breadth of production deployments evidenced in public case studies and disclosed customer counts. 0 to 100.",
+      "score": 64,
+      "delta": 4,
+      "definition": "0 to 100, higher is broader. Evidenced production deployments, not pilots.",
+      "provenance": { "sourceBasis": "sample", "confidence": null, "sourceUrl": null, "sourceNote": "Illustrative demo value" }
+    },
+    {
+      "label": "REGULATORY PRESSURE",
+      "tooltip": "Intensity of AI regulatory activity affecting enterprise deployments across the US, EU, UK and India. 0 to 100, higher means more pressure.",
+      "score": 57,
+      "delta": 9,
+      "definition": "0 to 100, higher means more pressure on deployments in force this quarter.",
+      "provenance": { "sourceBasis": "sample", "confidence": null, "sourceUrl": null, "sourceNote": "Illustrative demo value" }
+    },
+    {
+      "label": "TALENT FLOW",
+      "tooltip": "Net movement of AI engineering and research talent into the tracked vendor set versus the wider market. 0 to 100.",
+      "score": 71,
+      "delta": -2,
+      "definition": "0 to 100, higher means talent is concentrating in the tracked vendors.",
+      "provenance": { "sourceBasis": "sample", "confidence": null, "sourceUrl": null, "sourceNote": "Illustrative demo value" }
+    }
+  ],
+  "spotlights": {
+    "anthropic": {
+      "headlineScore": 82,
+      "divergence": "narrative ahead of reality",
+      "generated": "30 July 2026",
+      "sourceCounts": { "narrative": 48, "reality": 31 },
+      "dimensions": [
+        { "name": "Product momentum", "narrative": 88, "reality": 79, "caption": "Release cadence is real; enterprise feature depth still maturing." },
+        { "name": "Enterprise traction", "narrative": 80, "reality": 68, "caption": "Strong logo growth; disclosed production scale trails the coverage." },
+        { "name": "Safety posture", "narrative": 90, "reality": 86, "caption": "Safety narrative is closest to evidenced practice." },
+        { "name": "Ecosystem depth", "narrative": 72, "reality": 61, "caption": "Partner network broadening from a smaller base than peers." }
+      ]
+    },
+    "openai": {
+      "headlineScore": 84,
+      "divergence": "narrative ahead of reality",
+      "generated": "30 July 2026",
+      "sourceCounts": { "narrative": 61, "reality": 35 },
+      "dimensions": [
+        { "name": "Product momentum", "narrative": 92, "reality": 84, "caption": "Fastest perceived cadence in the set; quality variance under load persists." },
+        { "name": "Enterprise traction", "narrative": 86, "reality": 74, "caption": "Broadest adoption funnel; conversion to production varies by sector." },
+        { "name": "Safety posture", "narrative": 74, "reality": 66, "caption": "Governance story improving; enterprise assurance artefacts still thinner." },
+        { "name": "Ecosystem depth", "narrative": 88, "reality": 80, "caption": "Largest third-party ecosystem across the tracked set." }
+      ]
+    },
+    "microsoft": {
+      "headlineScore": 81,
+      "divergence": "narrative near reality",
+      "generated": "30 July 2026",
+      "sourceCounts": { "narrative": 55, "reality": 42 },
+      "dimensions": [
+        { "name": "Product momentum", "narrative": 82, "reality": 78, "caption": "Copilot surface expansion steady; depth per surface uneven." },
+        { "name": "Enterprise traction", "narrative": 88, "reality": 84, "caption": "Distribution advantage through existing agreements is evidenced." },
+        { "name": "Safety posture", "narrative": 78, "reality": 74, "caption": "Mature compliance machinery carried over from cloud." },
+        { "name": "Ecosystem depth", "narrative": 84, "reality": 80, "caption": "Deep integrator bench; see the delivery channel watch." }
+      ]
+    },
+    "google": {
+      "headlineScore": 79,
+      "divergence": "reality ahead of narrative",
+      "generated": "30 July 2026",
+      "sourceCounts": { "narrative": 44, "reality": 38 },
+      "dimensions": [
+        { "name": "Product momentum", "narrative": 76, "reality": 82, "caption": "Model quality outpaces the market conversation." },
+        { "name": "Enterprise traction", "narrative": 70, "reality": 74, "caption": "Vertex adoption stronger than coverage implies." },
+        { "name": "Safety posture", "narrative": 76, "reality": 76, "caption": "Aligned narrative and evidenced practice." },
+        { "name": "Ecosystem depth", "narrative": 72, "reality": 75, "caption": "Growing integrator certifications, quietly." }
+      ]
+    }
+  },
+  "comparison": {
+    "metrics": ["Overview", "Composite", "Momentum", "Adoption", "Trust", "Delivery readiness"],
+    "rows": [
+      { "id": "anthropic", "name": "Anthropic", "composite": 82, "momentum": 85, "adoption": 72, "trust": 88, "delivery": 70, "estimated": true },
+      { "id": "openai", "name": "OpenAI", "composite": 84, "momentum": 90, "adoption": 81, "trust": 68, "delivery": 78, "estimated": true },
+      { "id": "microsoft", "name": "Microsoft", "composite": 81, "momentum": 78, "adoption": 86, "trust": 76, "delivery": 88, "estimated": true },
+      { "id": "google", "name": "Google", "composite": 79, "momentum": 80, "adoption": 74, "trust": 76, "delivery": 76, "estimated": true },
+      { "id": "aws", "name": "AWS", "composite": 76, "momentum": 72, "adoption": 80, "trust": 74, "delivery": 84, "estimated": true },
+      { "id": "meta", "name": "Meta", "composite": 71, "momentum": 76, "adoption": 62, "trust": 60, "delivery": 58, "estimated": true },
+      { "id": "nvidia", "name": "NVIDIA", "composite": 80, "momentum": 82, "adoption": 78, "trust": 72, "delivery": 66, "estimated": true },
+      { "id": "ibm", "name": "IBM", "composite": 68, "momentum": 58, "adoption": 66, "trust": 80, "delivery": 82, "estimated": true },
+      { "id": "salesforce", "name": "Salesforce", "composite": 70, "momentum": 64, "adoption": 72, "trust": 70, "delivery": 74, "estimated": true },
+      { "id": "servicenow", "name": "ServiceNow", "composite": 72, "momentum": 68, "adoption": 74, "trust": 72, "delivery": 78, "estimated": true },
+      { "id": "sap", "name": "SAP", "composite": 66, "momentum": 58, "adoption": 68, "trust": 71, "delivery": 72, "estimated": true },
+      { "id": "cohere", "name": "Cohere", "composite": 62, "momentum": 60, "adoption": 52, "trust": 74, "delivery": 55, "estimated": true }
+    ]
+  },
+  "insights": {
+    "strategic": [
+      { "severity": "HIGH", "category": "Market", "title": "Model quality convergence is shifting negotiating leverage to buyers", "detail": "Benchmark gaps between the top three frontier models narrowed again this quarter; multi-vendor strategies are increasingly credible.", "horizon": "near-term" },
+      { "severity": "MEDIUM", "category": "Product", "title": "Agent frameworks are becoming the new lock-in surface", "detail": "Orchestration layers, not models, now carry the highest switching costs in enterprise deployments.", "horizon": "medium-term" },
+      { "severity": "MEDIUM", "category": "Market", "title": "Inference pricing pressure is compressing platform margins", "detail": "Sustained price cuts favour buyers negotiating multi-year commitments now.", "horizon": "near-term" }
+    ],
+    "threats": [
+      { "severity": "CRITICAL", "category": "Regulatory", "title": "EU AI Act general-purpose obligations begin to bite", "detail": "Deployers of high-risk systems face documentation duties that flow down into vendor contracts.", "horizon": "near-term" },
+      { "severity": "HIGH", "category": "Security", "title": "Agentic systems widen the enterprise attack surface", "detail": "Tool-using agents with production credentials are the fastest-growing security review workload.", "horizon": "near-term" },
+      { "severity": "MEDIUM", "category": "Talent", "title": "AI platform talent concentration raises key-person risk at smaller vendors", "detail": "Poaching cycles between labs shorten roadmap reliability at the application layer.", "horizon": "medium-term" }
+    ],
+    "opportunities": [
+      { "severity": "HIGH", "category": "Market", "title": "Regulated-industry reference deployments are finally citable", "detail": "Financial services and healthcare case studies with named customers give late movers a template.", "horizon": "near-term" },
+      { "severity": "MEDIUM", "category": "Product", "title": "Retrieval and grounding tooling has matured enough to standardise", "detail": "Evaluation harnesses now make grounded accuracy a measurable procurement criterion.", "horizon": "near-term" },
+      { "severity": "MEDIUM", "category": "Talent", "title": "Delivery channel capability is deepening fast", "detail": "Integrator AI readiness scores are rising across the catalogue; see the delivery channel watch card.", "horizon": "medium-term" }
+    ]
+  },
+  "marketNews": [
+    { "headline": "Frontier lab announces enterprise agent platform with audit trails", "summary": "Governance features aimed squarely at regulated buyers.", "sourceDomain": "reuters.com", "date": "29 Jul 2026", "tags": ["Product", "Governance"], "sentiment": "Positive" },
+    { "headline": "Hyperscaler cuts inference prices for third consecutive quarter", "summary": "Buyers renegotiating committed-spend agreements cite the cuts.", "sourceDomain": "bloomberg.com", "date": "28 Jul 2026", "tags": ["Pricing"], "sentiment": "Positive" },
+    { "headline": "EU publishes guidance on general-purpose AI obligations", "summary": "Clarifies documentation duties for deployers of high-risk systems.", "sourceDomain": "ft.com", "date": "25 Jul 2026", "tags": ["Regulatory"], "sentiment": "Neutral" },
+    { "headline": "Enterprise survey points to consolidation of AI vendor shortlists", "summary": "Buyers narrowing from evaluation sprawl to two or three strategic platforms.", "sourceDomain": "wsj.com", "date": "23 Jul 2026", "tags": ["Market"], "sentiment": "Neutral" }
+  ],
+  "vendorNews": {
+    "anthropic": [
+      { "headline": "Anthropic expands enterprise tier with regional data residency", "summary": "Residency options target European regulated industries.", "sourceDomain": "techcrunch.com", "date": "28 Jul 2026", "tags": ["Product"], "sentiment": "Positive" },
+      { "headline": "New safety evaluation results published for latest model family", "summary": "Third-party red-team findings disclosed alongside internal results.", "sourceDomain": "theverge.com", "date": "24 Jul 2026", "tags": ["Governance"], "sentiment": "Positive" }
+    ],
+    "openai": [
+      { "headline": "OpenAI deepens enterprise support commitments", "summary": "Dedicated capacity and uptime terms for large accounts.", "sourceDomain": "cnbc.com", "date": "27 Jul 2026", "tags": ["Product"], "sentiment": "Positive" },
+      { "headline": "Questions raised over agent reliability in production pilots", "summary": "Early adopters report variance in long-running task completion.", "sourceDomain": "theinformation.com", "date": "22 Jul 2026", "tags": ["Product"], "sentiment": "Negative" }
+    ],
+    "microsoft": [
+      { "headline": "Copilot governance controls extended across tenant boundaries", "summary": "Admin tooling aimed at multinational deployments.", "sourceDomain": "zdnet.com", "date": "26 Jul 2026", "tags": ["Product", "Governance"], "sentiment": "Positive" }
+    ],
+    "google": [
+      { "headline": "Vertex platform adds cross-model evaluation tooling", "summary": "Side-by-side quality measurement for enterprise workloads.", "sourceDomain": "venturebeat.com", "date": "25 Jul 2026", "tags": ["Product"], "sentiment": "Positive" }
+    ]
+  }
+}
