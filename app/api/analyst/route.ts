@@ -68,14 +68,8 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  // Live mode: tiered Anthropic calls (wired when a key is supplied).
-  return NextResponse.json(
-    {
-      success: false,
-      error:
-        "Live analyst mode detected a key but is not yet enabled in this build step; scripted mode runs when the key is absent.",
-      code: "LIVE_MODE_PENDING",
-    },
-    { status: 501 }
-  );
+  // Live mode: tiered Anthropic calls, streamed as SSE.
+  const key = await analystApiKey();
+  const { liveAnswer } = await import("./live");
+  return liveAnswer(key as string, question, corpus, Boolean(body.deep));
 }

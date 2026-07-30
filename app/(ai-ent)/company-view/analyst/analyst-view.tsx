@@ -52,6 +52,44 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ question, deep }),
       });
+
+      // Live mode streams SSE; scripted mode returns JSON.
+      if (res.headers.get("content-type")?.includes("text/event-stream") && res.body) {
+        let text = "";
+        let meta: AnswerMeta = { tiers: [], tokens: 0, mode: "live", citations: [] };
+        setMessages((m) => [...m, { role: "assistant", text: "" }]);
+        const reader = res.body.getReader();
+        const decoder = new TextDecoder();
+        let buffer = "";
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          buffer += decoder.decode(value, { stream: true });
+          const parts = buffer.split("\n\n");
+          buffer = parts.pop() ?? "";
+          for (const part of parts) {
+            if (!part.startsWith("data: ")) continue;
+            const evt = JSON.parse(part.slice(6));
+            if (evt.type === "delta") {
+              text += evt.text;
+            } else if (evt.type === "meta") {
+              meta = { ...meta, citations: evt.citations ?? [] };
+            } else if (evt.type === "done") {
+              meta = { ...meta, tiers: evt.tiers ?? [], tokens: evt.tokens ?? 0, mode: evt.mode ?? "live" };
+            } else if (evt.type === "error") {
+              text += `\n\n(The live analyst call failed: ${evt.message})`;
+            }
+            setMessages((m) => {
+              const copy = [...m];
+              copy[copy.length - 1] = { role: "assistant", text, meta };
+              return copy;
+            });
+          }
+        }
+        setBusy(false);
+        return;
+      }
+
       const data = await res.json();
       if (data.success) {
         setMessages((m) => [
