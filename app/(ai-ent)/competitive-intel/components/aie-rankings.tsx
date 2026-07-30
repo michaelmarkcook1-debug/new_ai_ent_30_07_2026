@@ -1,0 +1,69 @@
+import Link from "next/link";
+import { LaneBadge } from "@/lib/ui/badges";
+import { DerivationDrawer, ScorePill } from "@/lib/ui/score";
+import { MicroLabel } from "@/lib/ui/micro";
+import type { AieRankingRow } from "../types";
+
+// AIE vendor rankings block: the seed roster's overall scores with their
+// native confidence labels, linking through to each vendor's view. Plain
+// scored list, no medal or league-table styling.
+export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
+  return (
+    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+      <div className="flex items-start justify-between gap-2">
+        <MicroLabel
+          label="AIE vendor rankings"
+          tooltip="Overall scores from the AIE intelligence dataset (ranking-engine seed), shown with the dataset's own confidence figures. Investors are excluded."
+        />
+        <LaneBadge lane="aie" />
+      </div>
+      <p className="mt-1 text-[11px] text-muted">
+        Overall scores from the AIE dataset with native confidence labels.
+        Separate from the sample heatmap: the two are never blended.
+      </p>
+      <ul className="mt-3 space-y-1.5">
+        {rows.map((r) => (
+          <li key={r.id} className="flex items-center justify-between gap-2">
+            <span className="min-w-0">
+              <Link
+                href={`/vendor-view/${r.id}`}
+                className="block truncate text-[12.5px] font-medium hover:text-primary hover:underline"
+              >
+                {r.name}
+              </Link>
+              <span className="block truncate font-mono text-[9px] uppercase tracking-wider text-muted">
+                {r.category}
+              </span>
+            </span>
+            <span className="flex shrink-0 items-center gap-1.5">
+              <span
+                className="font-mono text-[10px] text-muted"
+                title="The dataset's native confidence figure for this vendor's score"
+              >
+                conf {r.confidenceScore}
+              </span>
+              <ScorePill score={r.overallScore} />
+            </span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-3 border-t border-base-300 pt-2">
+        <DerivationDrawer title="How the AIE vendor scores are derived">
+          <p>
+            Each overall score (0 to 100) comes straight from the AIE
+            intelligence dataset seed, where it is maintained alongside
+            per-pillar capability scores, evidence grades and a native
+            confidence figure per vendor. The confidence label shown next to
+            each score is the dataset's own, passed through untouched.
+          </p>
+          <p className="text-muted">
+            Scores are confidence-labelled derived signals, not analyst medals:
+            claims below the strong-evidence bar are suppressed in the source
+            dataset rather than scored. Follow a vendor link for the pillar
+            detail behind its score.
+          </p>
+        </DerivationDrawer>
+      </div>
+    </section>
+  );
+}
