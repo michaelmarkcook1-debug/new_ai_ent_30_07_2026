@@ -1,0 +1,2320 @@
+{
+ "provenance": "Independent benchmark scores from Artificial Analysis (Intelligence Index), paired with published list input prices. Captured from the AI Enterprise model inventory on 31 July 2026; freshest benchmark 24 July 2026.",
+ "benchmarkSource": "Artificial Analysis",
+ "capturedAt": "2026-07-31",
+ "freshestBenchmark": "2026-07-24",
+ "count": 330,
+ "frontierCount": 10,
+ "models": [
+  {
+   "model": "Claude Opus 5 (Adaptive Reasoning, Max Effort)",
+   "intelligence": 60.7,
+   "inputPerM": 5.0,
+   "throughput": 54.0,
+   "frontier": true
+  },
+  {
+   "model": "Claude Opus 5 (Adaptive Reasoning, Xhigh Effort)",
+   "intelligence": 60.1,
+   "inputPerM": 5.0,
+   "throughput": 53.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Fable 5 (Adaptive Reasoning, Max Effort, Opus 4.8 Fallback)",
+   "intelligence": 59.9,
+   "inputPerM": 10.0,
+   "throughput": 64.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Opus 5 (Adaptive Reasoning, High Effort)",
+   "intelligence": 58.9,
+   "inputPerM": 5.0,
+   "throughput": 53.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Sol (max)",
+   "intelligence": 58.9,
+   "inputPerM": 5.0,
+   "throughput": 67.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Sol (xhigh)",
+   "intelligence": 57.7,
+   "inputPerM": 5.0,
+   "throughput": 64.0,
+   "frontier": false
+  },
+  {
+   "model": "Kimi K3",
+   "intelligence": 57.1,
+   "inputPerM": 3.0,
+   "throughput": 35.0,
+   "frontier": true
+  },
+  {
+   "model": "Claude Opus 5 (Adaptive Reasoning, Medium Effort)",
+   "intelligence": 56.3,
+   "inputPerM": 5.0,
+   "throughput": 53.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Sol (high)",
+   "intelligence": 55.9,
+   "inputPerM": 5.0,
+   "throughput": 64.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Opus 4.8 (Adaptive Reasoning, Max Effort)",
+   "intelligence": 55.7,
+   "inputPerM": 5.0,
+   "throughput": 61.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Terra (max)",
+   "intelligence": 55.0,
+   "inputPerM": 2.5,
+   "throughput": 135.0,
+   "frontier": true
+  },
+  {
+   "model": "GPT-5.5 (xhigh)",
+   "intelligence": 54.8,
+   "inputPerM": 5.0,
+   "throughput": 68.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4.5 (high)",
+   "intelligence": 53.8,
+   "inputPerM": 2.0,
+   "throughput": 58.0,
+   "frontier": true
+  },
+  {
+   "model": "GPT-5.6 Sol (medium)",
+   "intelligence": 53.6,
+   "inputPerM": 5.0,
+   "throughput": 60.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Opus 4.7 (Adaptive Reasoning, Max Effort)",
+   "intelligence": 53.5,
+   "inputPerM": 5.0,
+   "throughput": 50.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Sonnet 5 (Adaptive Reasoning, Max Effort)",
+   "intelligence": 53.4,
+   "inputPerM": 2.0,
+   "throughput": 73.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.5 (high)",
+   "intelligence": 53.1,
+   "inputPerM": 5.0,
+   "throughput": 64.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Terra (xhigh)",
+   "intelligence": 51.6,
+   "inputPerM": 2.0,
+   "throughput": 117.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.4 (xhigh)",
+   "intelligence": 51.4,
+   "inputPerM": 2.5,
+   "throughput": 134.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Luna (max)",
+   "intelligence": 51.2,
+   "inputPerM": 0.2,
+   "throughput": 195.0,
+   "frontier": true
+  },
+  {
+   "model": "GLM-5.2 (max)",
+   "intelligence": 51.1,
+   "inputPerM": 1.4,
+   "throughput": 138.0,
+   "frontier": false
+  },
+  {
+   "model": "Muse Spark 1.1 (xhigh)",
+   "intelligence": 50.6,
+   "inputPerM": 1.3,
+   "throughput": 115.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Opus 5 (Adaptive Reasoning, Low Effort)",
+   "intelligence": 50.6,
+   "inputPerM": 5.0,
+   "throughput": 55.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.5 (medium)",
+   "intelligence": 50.4,
+   "inputPerM": 5.0,
+   "throughput": 63.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3.5 Flash (high)",
+   "intelligence": 50.2,
+   "inputPerM": 1.5,
+   "throughput": 178.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3.6 Flash (high)",
+   "intelligence": 50.1,
+   "inputPerM": 1.5,
+   "throughput": 224.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Sol (low)",
+   "intelligence": 49.4,
+   "inputPerM": 5.0,
+   "throughput": 60.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Luna (xhigh)",
+   "intelligence": 49.1,
+   "inputPerM": 0.2,
+   "throughput": 189.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Terra (high)",
+   "intelligence": 49.0,
+   "inputPerM": 2.0,
+   "throughput": 109.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort)",
+   "intelligence": 47.2,
+   "inputPerM": 3.0,
+   "throughput": 48.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3.1 Pro Preview",
+   "intelligence": 46.5,
+   "inputPerM": 2.0,
+   "throughput": 123.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Luna (high)",
+   "intelligence": 46.1,
+   "inputPerM": 1.0,
+   "throughput": 179.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.7 Max",
+   "intelligence": 46.0,
+   "inputPerM": 2.5,
+   "throughput": 202.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Terra (medium)",
+   "intelligence": 45.6,
+   "inputPerM": 2.0,
+   "throughput": 118.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3.5 Flash (medium)",
+   "intelligence": 45.4,
+   "inputPerM": 1.5,
+   "throughput": 166.0,
+   "frontier": false
+  },
+  {
+   "model": "MiniMax-M3",
+   "intelligence": 44.4,
+   "inputPerM": 0.3,
+   "throughput": 71.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V4 Pro (Reasoning, Max Effort)",
+   "intelligence": 44.3,
+   "inputPerM": 0.43,
+   "throughput": 65.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.3 Codex (xhigh)",
+   "intelligence": 44.3,
+   "inputPerM": 1.8,
+   "throughput": 121.0,
+   "frontier": false
+  },
+  {
+   "model": "Kimi K2.6",
+   "intelligence": 44.2,
+   "inputPerM": 0.95,
+   "throughput": 39.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Opus 4.6 (Adaptive Reasoning, Max Effort)",
+   "intelligence": 43.7,
+   "inputPerM": 5.0,
+   "throughput": 45.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.5 (low)",
+   "intelligence": 43.5,
+   "inputPerM": 5.0,
+   "throughput": 59.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V4 Pro (Reasoning, High Effort)",
+   "intelligence": 43.1,
+   "inputPerM": 0.43,
+   "throughput": 59.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Opus 4.7 (Non-reasoning, High Effort)",
+   "intelligence": 42.7,
+   "inputPerM": 5.0,
+   "throughput": 45.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.2 (xhigh)",
+   "intelligence": 42.2,
+   "inputPerM": 1.8,
+   "throughput": 72.0,
+   "frontier": false
+  },
+  {
+   "model": "Kimi K2.7 Code",
+   "intelligence": 41.9,
+   "inputPerM": 0.95,
+   "throughput": 41.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Sonnet 5 (Non-reasoning, High Effort)",
+   "intelligence": 41.7,
+   "inputPerM": 2.0,
+   "throughput": 65.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Sol (Non-reasoning)",
+   "intelligence": 41.2,
+   "inputPerM": 5.0,
+   "throughput": 58.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Opus 4.5 (Reasoning)",
+   "intelligence": 40.8,
+   "inputPerM": 5.0,
+   "throughput": 49.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Terra (low)",
+   "intelligence": 40.5,
+   "inputPerM": 2.5,
+   "throughput": 111.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V4 Flash (Reasoning, Max Effort)",
+   "intelligence": 40.3,
+   "inputPerM": 0.14,
+   "throughput": 122.0,
+   "frontier": true
+  },
+  {
+   "model": "GLM-5.1 (Reasoning)",
+   "intelligence": 40.2,
+   "inputPerM": 1.4,
+   "throughput": 67.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.2 Codex (xhigh)",
+   "intelligence": 40.1,
+   "inputPerM": 1.8,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.4 mini (xhigh)",
+   "intelligence": 40.0,
+   "inputPerM": 0.75,
+   "throughput": 173.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.6 Max Preview",
+   "intelligence": 40.0,
+   "inputPerM": 1.3,
+   "throughput": 51.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok Build 0.1 0616",
+   "intelligence": 39.8,
+   "inputPerM": 1.0,
+   "throughput": 102.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.6 Plus",
+   "intelligence": 39.6,
+   "inputPerM": 0.5,
+   "throughput": 53.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3 Pro Preview (high)",
+   "intelligence": 39.6,
+   "inputPerM": 2.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GLM-5 (Reasoning)",
+   "intelligence": 39.5,
+   "inputPerM": 1.0,
+   "throughput": 40.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.4 (low)",
+   "intelligence": 39.1,
+   "inputPerM": 2.5,
+   "throughput": 96.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.7 Plus",
+   "intelligence": 39.0,
+   "inputPerM": 0.4,
+   "throughput": 53.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.4 nano (xhigh)",
+   "intelligence": 38.2,
+   "inputPerM": 0.2,
+   "throughput": 156.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Luna (medium)",
+   "intelligence": 38.1,
+   "inputPerM": 0.2,
+   "throughput": 171.0,
+   "frontier": false
+  },
+  {
+   "model": "MiniMax-M2.7",
+   "intelligence": 38.1,
+   "inputPerM": 0.3,
+   "throughput": 54.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.2 (medium)",
+   "intelligence": 38.0,
+   "inputPerM": 1.8,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3 Flash Preview (Reasoning)",
+   "intelligence": 37.8,
+   "inputPerM": 0.5,
+   "throughput": 191.0,
+   "frontier": false
+  },
+  {
+   "model": "Nemotron 3 Ultra 550B A55B (Reasoning)",
+   "intelligence": 37.8,
+   "inputPerM": 0.68,
+   "throughput": 182.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Opus 4.6 (Non-reasoning, High Effort)",
+   "intelligence": 37.8,
+   "inputPerM": 5.0,
+   "throughput": 39.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4.3 (high)",
+   "intelligence": 37.6,
+   "inputPerM": 1.3,
+   "throughput": 135.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V4 Flash (Reasoning, High Effort)",
+   "intelligence": 37.5,
+   "inputPerM": 0.14,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.6 27B (Reasoning)",
+   "intelligence": 37.1,
+   "inputPerM": 0.6,
+   "throughput": 54.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4.20 0309 v2 (Reasoning)",
+   "intelligence": 37.0,
+   "inputPerM": 2.0,
+   "throughput": 186.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.1 (high)",
+   "intelligence": 36.9,
+   "inputPerM": 1.3,
+   "throughput": 100.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3.5 Flash-Lite",
+   "intelligence": 36.5,
+   "inputPerM": 0.3,
+   "throughput": 382.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4.20 0309 (Reasoning)",
+   "intelligence": 36.5,
+   "inputPerM": 2.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Claude 4.5 Sonnet (Reasoning)",
+   "intelligence": 36.4,
+   "inputPerM": 3.0,
+   "throughput": 42.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5 Codex (high)",
+   "intelligence": 36.1,
+   "inputPerM": 1.3,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4.3 (medium)",
+   "intelligence": 36.0,
+   "inputPerM": 1.3,
+   "throughput": 130.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Sonnet 4.6 (Non-reasoning, High Effort)",
+   "intelligence": 35.9,
+   "inputPerM": 3.0,
+   "throughput": 43.0,
+   "frontier": false
+  },
+  {
+   "model": "Kimi K2.5 (Reasoning)",
+   "intelligence": 35.4,
+   "inputPerM": 0.6,
+   "throughput": 37.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4.3 (low)",
+   "intelligence": 35.4,
+   "inputPerM": 1.3,
+   "throughput": 122.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-5.1 (Non-reasoning)",
+   "intelligence": 35.4,
+   "inputPerM": 1.4,
+   "throughput": 59.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.5 (Non-reasoning)",
+   "intelligence": 35.4,
+   "inputPerM": 5.0,
+   "throughput": 56.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3.5 Flash (minimal)",
+   "intelligence": 34.9,
+   "inputPerM": 1.5,
+   "throughput": 166.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.1 Codex (high)",
+   "intelligence": 34.7,
+   "inputPerM": 1.3,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5 (high)",
+   "intelligence": 34.7,
+   "inputPerM": 1.3,
+   "throughput": 103.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Opus 4.5 (Non-reasoning)",
+   "intelligence": 34.7,
+   "inputPerM": 5.0,
+   "throughput": 46.0,
+   "frontier": false
+  },
+  {
+   "model": "Kimi K2.6 (Non-reasoning)",
+   "intelligence": 34.6,
+   "inputPerM": 0.95,
+   "throughput": 37.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude Sonnet 4.6 (Non-reasoning, Low Effort)",
+   "intelligence": 34.3,
+   "inputPerM": 3.0,
+   "throughput": 43.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-5.2 (Non-reasoning)",
+   "intelligence": 34.1,
+   "inputPerM": 1.4,
+   "throughput": 58.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Terra (Non-reasoning)",
+   "intelligence": 34.0,
+   "inputPerM": 2.0,
+   "throughput": 112.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 27B (Reasoning)",
+   "intelligence": 33.8,
+   "inputPerM": 0.3,
+   "throughput": 77.0,
+   "frontier": false
+  },
+  {
+   "model": "MiniMax-M2.5",
+   "intelligence": 33.7,
+   "inputPerM": 0.3,
+   "throughput": 74.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 397B A17B (Reasoning)",
+   "intelligence": 33.7,
+   "inputPerM": 0.6,
+   "throughput": 70.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.7 (Reasoning)",
+   "intelligence": 33.7,
+   "inputPerM": 0.6,
+   "throughput": 94.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5 (medium)",
+   "intelligence": 33.7,
+   "inputPerM": 1.3,
+   "throughput": 83.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 4.1 Opus (Reasoning)",
+   "intelligence": 33.7,
+   "inputPerM": 15.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.5 Instant (May 2026)",
+   "intelligence": 33.5,
+   "inputPerM": 5.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Luna (low)",
+   "intelligence": 33.3,
+   "inputPerM": 0.2,
+   "throughput": 174.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4",
+   "intelligence": 33.3,
+   "inputPerM": 3.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3 Pro Preview (low)",
+   "intelligence": 33.1,
+   "inputPerM": 2.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Kimi K2 Thinking",
+   "intelligence": 32.7,
+   "inputPerM": 0.6,
+   "throughput": 119.0,
+   "frontier": false
+  },
+  {
+   "model": "o3-pro",
+   "intelligence": 32.5,
+   "inputPerM": 20.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GLM-5 (Non-reasoning)",
+   "intelligence": 32.4,
+   "inputPerM": 1.0,
+   "throughput": 39.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 122B A10B (Reasoning)",
+   "intelligence": 32.3,
+   "inputPerM": 0.4,
+   "throughput": 137.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V3.2 (Reasoning)",
+   "intelligence": 32.0,
+   "inputPerM": 0.28,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 397B A17B (Non-reasoning)",
+   "intelligence": 32.0,
+   "inputPerM": 0.6,
+   "throughput": 69.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.6 35B A3B (Reasoning)",
+   "intelligence": 31.6,
+   "inputPerM": 0.25,
+   "throughput": 141.0,
+   "frontier": false
+  },
+  {
+   "model": "MiniMax-M2.1",
+   "intelligence": 31.4,
+   "inputPerM": 0.3,
+   "throughput": 71.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V4 Pro (Non-reasoning)",
+   "intelligence": 31.2,
+   "inputPerM": 0.43,
+   "throughput": 64.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5 (low)",
+   "intelligence": 31.2,
+   "inputPerM": 1.3,
+   "throughput": 81.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 4 Opus (Reasoning)",
+   "intelligence": 31.0,
+   "inputPerM": 15.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5 mini (medium)",
+   "intelligence": 30.9,
+   "inputPerM": 0.25,
+   "throughput": 95.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.1 Codex mini (high)",
+   "intelligence": 30.6,
+   "inputPerM": 0.25,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 Omni Plus",
+   "intelligence": 30.6,
+   "inputPerM": 0.4,
+   "throughput": 54.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.6 27B (Non-reasoning)",
+   "intelligence": 30.5,
+   "inputPerM": 0.6,
+   "throughput": 56.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V3.1 Terminus (Reasoning)",
+   "intelligence": 30.4,
+   "inputPerM": 1.6,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "o3",
+   "intelligence": 30.4,
+   "inputPerM": 2.0,
+   "throughput": 119.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.4 nano (medium)",
+   "intelligence": 30.2,
+   "inputPerM": 0.2,
+   "throughput": 155.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Medium 3.5",
+   "intelligence": 29.9,
+   "inputPerM": 1.5,
+   "throughput": 66.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.4 mini (medium)",
+   "intelligence": 29.8,
+   "inputPerM": 0.75,
+   "throughput": 168.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 4.5 Haiku (Reasoning)",
+   "intelligence": 29.6,
+   "inputPerM": 1.0,
+   "throughput": 97.0,
+   "frontier": false
+  },
+  {
+   "model": "Kimi K2.5 (Non-reasoning)",
+   "intelligence": 29.4,
+   "inputPerM": 0.6,
+   "throughput": 41.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 35B A3B (Reasoning)",
+   "intelligence": 29.3,
+   "inputPerM": 0.25,
+   "throughput": 145.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 27B (Non-reasoning)",
+   "intelligence": 29.3,
+   "inputPerM": 0.3,
+   "throughput": 84.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 4.5 Sonnet (Non-reasoning)",
+   "intelligence": 29.3,
+   "inputPerM": 3.0,
+   "throughput": 40.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 4 Sonnet (Reasoning)",
+   "intelligence": 28.9,
+   "inputPerM": 3.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.5 Instant (June 2026)",
+   "intelligence": 28.9,
+   "inputPerM": 5.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V4 Flash (Non-reasoning)",
+   "intelligence": 28.7,
+   "inputPerM": 0.14,
+   "throughput": 118.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.6 (Reasoning)",
+   "intelligence": 28.7,
+   "inputPerM": 0.55,
+   "throughput": 39.0,
+   "frontier": false
+  },
+  {
+   "model": "MiniMax-M2",
+   "intelligence": 28.3,
+   "inputPerM": 0.3,
+   "throughput": 68.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 4.1 Opus (Non-reasoning)",
+   "intelligence": 28.2,
+   "inputPerM": 15.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.4 (Non-reasoning)",
+   "intelligence": 27.7,
+   "inputPerM": 2.5,
+   "throughput": 91.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 122B A10B (Non-reasoning)",
+   "intelligence": 27.6,
+   "inputPerM": 0.4,
+   "throughput": 150.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4 Fast (Reasoning)",
+   "intelligence": 27.4,
+   "inputPerM": 0.2,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3 Flash Preview (Non-reasoning)",
+   "intelligence": 27.4,
+   "inputPerM": 0.5,
+   "throughput": 179.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.7 (Non-reasoning)",
+   "intelligence": 26.6,
+   "inputPerM": 0.6,
+   "throughput": 102.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.6 Luna (Non-reasoning)",
+   "intelligence": 26.6,
+   "inputPerM": 1.0,
+   "throughput": 177.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.2 (Non-reasoning)",
+   "intelligence": 26.0,
+   "inputPerM": 1.8,
+   "throughput": 62.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 2.5 Pro",
+   "intelligence": 25.8,
+   "inputPerM": 1.3,
+   "throughput": 139.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemma 4 26B A4B (Reasoning)",
+   "intelligence": 25.7,
+   "inputPerM": 0.13,
+   "throughput": null,
+   "frontier": true
+  },
+  {
+   "model": "o4-mini (high)",
+   "intelligence": 25.6,
+   "inputPerM": 1.1,
+   "throughput": 154.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 4 Sonnet (Non-reasoning)",
+   "intelligence": 25.5,
+   "inputPerM": 3.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Claude 4 Opus (Non-reasoning)",
+   "intelligence": 25.5,
+   "inputPerM": 15.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "NVIDIA Nemotron 3 Super 120B A12B (Reasoning)",
+   "intelligence": 25.4,
+   "inputPerM": 0.2,
+   "throughput": 154.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V3.2 Exp (Reasoning)",
+   "intelligence": 25.4,
+   "inputPerM": 0.28,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5 mini (high)",
+   "intelligence": 25.3,
+   "inputPerM": 0.25,
+   "throughput": 82.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 3.1 Flash-Lite",
+   "intelligence": 25.0,
+   "inputPerM": 0.25,
+   "throughput": 311.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 Max Thinking (Preview)",
+   "intelligence": 25.0,
+   "inputPerM": 1.2,
+   "throughput": 55.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4.3 (Non-reasoning)",
+   "intelligence": 24.8,
+   "inputPerM": 1.3,
+   "throughput": 122.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V3.2 (Non-reasoning)",
+   "intelligence": 24.7,
+   "inputPerM": 0.28,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.6 35B A3B (Non-reasoning)",
+   "intelligence": 24.2,
+   "inputPerM": 0.38,
+   "throughput": 167.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 35B A3B (Non-reasoning)",
+   "intelligence": 24.0,
+   "inputPerM": 0.25,
+   "throughput": 168.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 Max",
+   "intelligence": 24.0,
+   "inputPerM": 1.2,
+   "throughput": 58.0,
+   "frontier": false
+  },
+  {
+   "model": "gpt-oss-120b (high)",
+   "intelligence": 23.8,
+   "inputPerM": 0.15,
+   "throughput": 214.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 4.5 Haiku (Non-reasoning)",
+   "intelligence": 23.7,
+   "inputPerM": 1.0,
+   "throughput": 91.0,
+   "frontier": false
+  },
+  {
+   "model": "Kimi K2 0905",
+   "intelligence": 23.5,
+   "inputPerM": 0.6,
+   "throughput": 38.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 3.7 Sonnet (Non-reasoning)",
+   "intelligence": 23.5,
+   "inputPerM": 3.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "o1",
+   "intelligence": 23.4,
+   "inputPerM": 15.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.6 (Non-reasoning)",
+   "intelligence": 23.0,
+   "inputPerM": 0.57,
+   "throughput": 54.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.7-Flash (Reasoning)",
+   "intelligence": 22.9,
+   "inputPerM": 0.07,
+   "throughput": 86.0,
+   "frontier": true
+  },
+  {
+   "model": "Grok 3 mini Reasoning (high)",
+   "intelligence": 22.5,
+   "inputPerM": 0.3,
+   "throughput": 78.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4.20 0309 (Non-reasoning)",
+   "intelligence": 22.5,
+   "inputPerM": 2.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 2.5 Pro Preview (May' 25)",
+   "intelligence": 22.3,
+   "inputPerM": 1.3,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Gemma 4 12B (Reasoning)",
+   "intelligence": 21.8,
+   "inputPerM": 0.1,
+   "throughput": 27.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemma 4 31B (Non-reasoning)",
+   "intelligence": 21.8,
+   "inputPerM": 0.14,
+   "throughput": 66.0,
+   "frontier": false
+  },
+  {
+   "model": "Nova 2.0 Pro Preview (medium)",
+   "intelligence": 21.8,
+   "inputPerM": 1.3,
+   "throughput": 115.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4.20 0309 v2 (Non-reasoning)",
+   "intelligence": 21.8,
+   "inputPerM": 2.0,
+   "throughput": 169.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 9B (Reasoning)",
+   "intelligence": 21.4,
+   "inputPerM": 0.14,
+   "throughput": 83.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V3.1 Terminus (Non-reasoning)",
+   "intelligence": 21.4,
+   "inputPerM": 0.27,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V3.2 Exp (Non-reasoning)",
+   "intelligence": 21.3,
+   "inputPerM": 0.28,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 Coder Next",
+   "intelligence": 21.1,
+   "inputPerM": 0.35,
+   "throughput": 141.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V3.1 (Non-reasoning)",
+   "intelligence": 21.0,
+   "inputPerM": 0.56,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Nova 2.0 Omni (medium)",
+   "intelligence": 20.9,
+   "inputPerM": 0.3,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V3.1 (Reasoning)",
+   "intelligence": 20.7,
+   "inputPerM": 0.59,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 VL 235B A22B (Reasoning)",
+   "intelligence": 20.6,
+   "inputPerM": 0.7,
+   "throughput": 56.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.1 (Non-reasoning)",
+   "intelligence": 20.4,
+   "inputPerM": 1.3,
+   "throughput": 85.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemma 4 26B A4B (Non-reasoning)",
+   "intelligence": 20.1,
+   "inputPerM": 0.13,
+   "throughput": 41.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 2.5 Flash (Reasoning)",
+   "intelligence": 20.1,
+   "inputPerM": 0.3,
+   "throughput": 238.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek R1 0528 (May '25)",
+   "intelligence": 20.1,
+   "inputPerM": 1.4,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 4B (Reasoning)",
+   "intelligence": 20.1,
+   "inputPerM": 0.03,
+   "throughput": 22.0,
+   "frontier": true
+  },
+  {
+   "model": "GPT-5 nano (high)",
+   "intelligence": 19.9,
+   "inputPerM": 0.05,
+   "throughput": 158.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Small 4 (Reasoning)",
+   "intelligence": 19.6,
+   "inputPerM": 0.15,
+   "throughput": 157.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 235B A22B 2507 (Reasoning)",
+   "intelligence": 19.6,
+   "inputPerM": 0.7,
+   "throughput": 53.0,
+   "frontier": false
+  },
+  {
+   "model": "Nova 2.0 Pro Preview (low)",
+   "intelligence": 19.6,
+   "inputPerM": 1.3,
+   "throughput": 116.0,
+   "frontier": false
+  },
+  {
+   "model": "Kimi K2",
+   "intelligence": 19.4,
+   "inputPerM": 0.57,
+   "throughput": 37.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-4.1",
+   "intelligence": 19.4,
+   "inputPerM": 2.0,
+   "throughput": 108.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 Max (Preview)",
+   "intelligence": 19.2,
+   "inputPerM": 1.2,
+   "throughput": 57.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5 nano (medium)",
+   "intelligence": 19.0,
+   "inputPerM": 0.05,
+   "throughput": 142.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 Omni Flash",
+   "intelligence": 19.0,
+   "inputPerM": 0.1,
+   "throughput": 237.0,
+   "frontier": false
+  },
+  {
+   "model": "Nova 2.0 Lite (medium)",
+   "intelligence": 19.0,
+   "inputPerM": 0.3,
+   "throughput": 155.0,
+   "frontier": false
+  },
+  {
+   "model": "o3-mini",
+   "intelligence": 19.0,
+   "inputPerM": 1.1,
+   "throughput": 218.0,
+   "frontier": false
+  },
+  {
+   "model": "o1-pro",
+   "intelligence": 18.9,
+   "inputPerM": 150.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek R1 (Jan '25)",
+   "intelligence": 18.5,
+   "inputPerM": 1.7,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Grok 3",
+   "intelligence": 18.4,
+   "inputPerM": 4.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Nova 2.0 Lite (high)",
+   "intelligence": 18.2,
+   "inputPerM": 0.3,
+   "throughput": 148.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 235B A22B 2507 Instruct",
+   "intelligence": 18.2,
+   "inputPerM": 0.7,
+   "throughput": 55.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 Coder 480B A35B Instruct",
+   "intelligence": 18.0,
+   "inputPerM": 1.5,
+   "throughput": 61.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 VL 32B (Reasoning)",
+   "intelligence": 17.9,
+   "inputPerM": 0.7,
+   "throughput": 88.0,
+   "frontier": false
+  },
+  {
+   "model": "Magistral Medium 1.2",
+   "intelligence": 17.9,
+   "inputPerM": 2.0,
+   "throughput": 44.0,
+   "frontier": false
+  },
+  {
+   "model": "Nova 2.0 Lite (low)",
+   "intelligence": 17.8,
+   "inputPerM": 0.3,
+   "throughput": 144.0,
+   "frontier": false
+  },
+  {
+   "model": "MiniMax M1 80k",
+   "intelligence": 17.7,
+   "inputPerM": 0.55,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.4 nano (Non-Reasoning)",
+   "intelligence": 17.6,
+   "inputPerM": 0.2,
+   "throughput": 155.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5 (minimal)",
+   "intelligence": 17.2,
+   "inputPerM": 1.3,
+   "throughput": 80.0,
+   "frontier": false
+  },
+  {
+   "model": "o1-preview",
+   "intelligence": 17.0,
+   "inputPerM": 17.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.6V (Reasoning)",
+   "intelligence": 16.8,
+   "inputPerM": 0.3,
+   "throughput": 62.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 Next 80B A3B (Reasoning)",
+   "intelligence": 16.7,
+   "inputPerM": 0.5,
+   "throughput": 207.0,
+   "frontier": false
+  },
+  {
+   "model": "Nova 2.0 Omni (low)",
+   "intelligence": 16.6,
+   "inputPerM": 0.3,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5.4 mini (Non-Reasoning)",
+   "intelligence": 16.6,
+   "inputPerM": 0.75,
+   "throughput": 152.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.5-Air",
+   "intelligence": 16.5,
+   "inputPerM": 0.17,
+   "throughput": 75.0,
+   "frontier": false
+  },
+  {
+   "model": "Grok 4 Fast (Non-reasoning)",
+   "intelligence": 16.5,
+   "inputPerM": 0.2,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3.5 4B (Non-reasoning)",
+   "intelligence": 16.0,
+   "inputPerM": 0.03,
+   "throughput": 17.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Large 3",
+   "intelligence": 15.9,
+   "inputPerM": 0.5,
+   "throughput": 47.0,
+   "frontier": false
+  },
+  {
+   "model": "o3-mini (high)",
+   "intelligence": 15.6,
+   "inputPerM": 1.1,
+   "throughput": 194.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.7-Flash (Non-reasoning)",
+   "intelligence": 15.5,
+   "inputPerM": 0.07,
+   "throughput": 133.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V3 0324",
+   "intelligence": 15.4,
+   "inputPerM": 0.27,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 2.5 Flash-Lite Preview (Sep '25) (Reasoning)",
+   "intelligence": 15.1,
+   "inputPerM": 0.1,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "gpt-oss-20b (high)",
+   "intelligence": 14.9,
+   "inputPerM": 0.07,
+   "throughput": 165.0,
+   "frontier": false
+  },
+  {
+   "model": "Nemotron 3 Nano Omni 30B A3B Reasoning",
+   "intelligence": 14.9,
+   "inputPerM": 0.07,
+   "throughput": 307.0,
+   "frontier": false
+  },
+  {
+   "model": "gpt-oss-120b (low)",
+   "intelligence": 14.9,
+   "inputPerM": 0.15,
+   "throughput": 275.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-4.1 mini",
+   "intelligence": 14.8,
+   "inputPerM": 0.4,
+   "throughput": 84.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Small 3.1",
+   "intelligence": 14.7,
+   "inputPerM": 0.1,
+   "throughput": 138.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Medium 3.1",
+   "intelligence": 14.7,
+   "inputPerM": 0.4,
+   "throughput": 82.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 30B A3B 2507 (Reasoning)",
+   "intelligence": 14.4,
+   "inputPerM": 0.2,
+   "throughput": 137.0,
+   "frontier": false
+  },
+  {
+   "model": "Nova 2.0 Pro Preview (Non-reasoning)",
+   "intelligence": 14.4,
+   "inputPerM": 1.3,
+   "throughput": 93.0,
+   "frontier": false
+  },
+  {
+   "model": "gpt-oss-20b (low)",
+   "intelligence": 14.3,
+   "inputPerM": 0.07,
+   "throughput": 168.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5 mini (minimal)",
+   "intelligence": 14.3,
+   "inputPerM": 0.25,
+   "throughput": 79.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama 4 Maverick",
+   "intelligence": 14.3,
+   "inputPerM": 0.27,
+   "throughput": 106.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 VL 235B A22B Instruct",
+   "intelligence": 14.3,
+   "inputPerM": 0.7,
+   "throughput": 48.0,
+   "frontier": false
+  },
+  {
+   "model": "NVIDIA Nemotron 3 Nano 30B A3B (Reasoning)",
+   "intelligence": 14.2,
+   "inputPerM": 0.05,
+   "throughput": 250.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek V3 (Dec '24)",
+   "intelligence": 14.2,
+   "inputPerM": 0.36,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 2.5 Flash (Non-reasoning)",
+   "intelligence": 14.1,
+   "inputPerM": 0.3,
+   "throughput": 208.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 Next 80B A3B Instruct",
+   "intelligence": 13.7,
+   "inputPerM": 0.5,
+   "throughput": 184.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 Coder 30B A3B Instruct",
+   "intelligence": 13.6,
+   "inputPerM": 0.45,
+   "throughput": 87.0,
+   "frontier": false
+  },
+  {
+   "model": "QwQ 32B",
+   "intelligence": 13.4,
+   "inputPerM": 0.66,
+   "throughput": 30.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 235B A22B (Reasoning)",
+   "intelligence": 13.4,
+   "inputPerM": 0.7,
+   "throughput": 60.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 VL 30B A3B (Reasoning)",
+   "intelligence": 13.3,
+   "inputPerM": 0.2,
+   "throughput": 107.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemma 4 12B (Non-reasoning)",
+   "intelligence": 13.2,
+   "inputPerM": 0.1,
+   "throughput": 27.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 2.5 Flash-Lite Preview (Sep '25) (Non-reasoning)",
+   "intelligence": 13.1,
+   "inputPerM": 0.1,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Nova Premier",
+   "intelligence": 12.7,
+   "inputPerM": 2.5,
+   "throughput": 32.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Medium 3",
+   "intelligence": 12.5,
+   "inputPerM": 0.4,
+   "throughput": 49.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Small 4 (Non-reasoning)",
+   "intelligence": 12.4,
+   "inputPerM": 0.15,
+   "throughput": 139.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama Nemotron Super 49B v1.5 (Reasoning)",
+   "intelligence": 12.4,
+   "inputPerM": 0.4,
+   "throughput": 80.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemma 4 E4B (Reasoning)",
+   "intelligence": 11.9,
+   "inputPerM": 0.02,
+   "throughput": 90.0,
+   "frontier": true
+  },
+  {
+   "model": "Nova 2.0 Lite (Non-reasoning)",
+   "intelligence": 11.8,
+   "inputPerM": 0.3,
+   "throughput": 142.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 3 Opus",
+   "intelligence": 11.8,
+   "inputPerM": 15.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 32B (Reasoning)",
+   "intelligence": 11.5,
+   "inputPerM": 0.7,
+   "throughput": 90.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 2.5 Flash-Lite (Reasoning)",
+   "intelligence": 11.4,
+   "inputPerM": 0.1,
+   "throughput": 277.0,
+   "frontier": false
+  },
+  {
+   "model": "Magistral Small 1.2",
+   "intelligence": 11.3,
+   "inputPerM": 0.5,
+   "throughput": 89.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-4o (Nov '24)",
+   "intelligence": 11.2,
+   "inputPerM": 2.5,
+   "throughput": 112.0,
+   "frontier": false
+  },
+  {
+   "model": "Ministral 3 14B",
+   "intelligence": 11.1,
+   "inputPerM": 0.2,
+   "throughput": 73.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 VL 32B Instruct",
+   "intelligence": 11.1,
+   "inputPerM": 0.7,
+   "throughput": 34.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.6V (Non-reasoning)",
+   "intelligence": 11.0,
+   "inputPerM": 0.3,
+   "throughput": 81.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 235B A22B (Non-reasoning)",
+   "intelligence": 10.9,
+   "inputPerM": 0.7,
+   "throughput": 58.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Small 3.2",
+   "intelligence": 10.6,
+   "inputPerM": 0.1,
+   "throughput": 141.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 VL 8B (Reasoning)",
+   "intelligence": 10.6,
+   "inputPerM": 0.18,
+   "throughput": 108.0,
+   "frontier": false
+  },
+  {
+   "model": "Nova 2.0 Omni (Non-reasoning)",
+   "intelligence": 10.5,
+   "inputPerM": 0.3,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 14B (Reasoning)",
+   "intelligence": 10.4,
+   "inputPerM": 0.35,
+   "throughput": 45.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama 4 Scout",
+   "intelligence": 10.0,
+   "inputPerM": 0.18,
+   "throughput": 88.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 VL 30B A3B Instruct",
+   "intelligence": 10.0,
+   "inputPerM": 0.2,
+   "throughput": 106.0,
+   "frontier": false
+  },
+  {
+   "model": "DeepSeek R1 Distill Llama 70B",
+   "intelligence": 9.9,
+   "inputPerM": 0.7,
+   "throughput": 27.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 3.5 Sonnet (Oct '24)",
+   "intelligence": 9.9,
+   "inputPerM": 3.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-4.1 nano",
+   "intelligence": 9.6,
+   "inputPerM": 0.1,
+   "throughput": 200.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 Omni 30B A3B (Reasoning)",
+   "intelligence": 9.6,
+   "inputPerM": 0.25,
+   "throughput": 98.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen2.5 Instruct 72B",
+   "intelligence": 9.6,
+   "inputPerM": 0.47,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-4o (Aug '24)",
+   "intelligence": 9.6,
+   "inputPerM": 2.5,
+   "throughput": 90.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama 3.3 Instruct 70B",
+   "intelligence": 9.4,
+   "inputPerM": 0.6,
+   "throughput": 81.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 30B A3B (Reasoning)",
+   "intelligence": 9.3,
+   "inputPerM": 0.2,
+   "throughput": 101.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 30B A3B 2507 Instruct",
+   "intelligence": 9.1,
+   "inputPerM": 0.2,
+   "throughput": 146.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.5V (Reasoning)",
+   "intelligence": 9.1,
+   "inputPerM": 0.6,
+   "throughput": 80.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama 3.1 Nemotron Ultra 253B v1 (Reasoning)",
+   "intelligence": 9.1,
+   "inputPerM": 0.6,
+   "throughput": 51.0,
+   "frontier": false
+  },
+  {
+   "model": "Ministral 3 8B",
+   "intelligence": 9.0,
+   "inputPerM": 0.15,
+   "throughput": 124.0,
+   "frontier": false
+  },
+  {
+   "model": "NVIDIA Nemotron Nano 12B v2 VL (Reasoning)",
+   "intelligence": 9.0,
+   "inputPerM": 0.2,
+   "throughput": 80.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemma 4 E4B (Non-reasoning)",
+   "intelligence": 8.9,
+   "inputPerM": 0.02,
+   "throughput": 92.0,
+   "frontier": false
+  },
+  {
+   "model": "NVIDIA Nemotron Nano 9B V2 (Reasoning)",
+   "intelligence": 8.8,
+   "inputPerM": 0.04,
+   "throughput": 203.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama Nemotron Super 49B v1.5 (Non-reasoning)",
+   "intelligence": 8.7,
+   "inputPerM": 0.4,
+   "throughput": 73.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 32B (Non-reasoning)",
+   "intelligence": 8.6,
+   "inputPerM": 0.7,
+   "throughput": 93.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-4o (May '24)",
+   "intelligence": 8.6,
+   "inputPerM": 5.0,
+   "throughput": 85.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama 3.1 Instruct 405B",
+   "intelligence": 8.5,
+   "inputPerM": 2.5,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 VL 8B Instruct",
+   "intelligence": 8.4,
+   "inputPerM": 0.18,
+   "throughput": 110.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 8B (Reasoning)",
+   "intelligence": 8.3,
+   "inputPerM": 0.18,
+   "throughput": 38.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 3.5 Sonnet (June '24)",
+   "intelligence": 8.3,
+   "inputPerM": 3.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "GPT-5 nano (minimal)",
+   "intelligence": 8.0,
+   "inputPerM": 0.05,
+   "throughput": 157.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-4 Turbo",
+   "intelligence": 7.9,
+   "inputPerM": 10.0,
+   "throughput": 31.0,
+   "frontier": false
+  },
+  {
+   "model": "Nova Pro",
+   "intelligence": 7.7,
+   "inputPerM": 0.8,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Command A",
+   "intelligence": 7.7,
+   "inputPerM": 2.5,
+   "throughput": 60.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama 3.1 Instruct 8B",
+   "intelligence": 7.6,
+   "inputPerM": 0.08,
+   "throughput": 142.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama 3.1 Nemotron Instruct 70B",
+   "intelligence": 7.6,
+   "inputPerM": 1.2,
+   "throughput": 83.0,
+   "frontier": false
+  },
+  {
+   "model": "NVIDIA Nemotron 3 Nano 30B A3B (Non-reasoning)",
+   "intelligence": 7.4,
+   "inputPerM": 0.05,
+   "throughput": 195.0,
+   "frontier": false
+  },
+  {
+   "model": "NVIDIA Nemotron Nano 9B V2 (Non-reasoning)",
+   "intelligence": 7.4,
+   "inputPerM": 0.05,
+   "throughput": 172.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Large 2 (Jul '24)",
+   "intelligence": 7.3,
+   "inputPerM": 2.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 14B (Non-reasoning)",
+   "intelligence": 7.0,
+   "inputPerM": 0.35,
+   "throughput": 52.0,
+   "frontier": false
+  },
+  {
+   "model": "GLM-4.5V (Non-reasoning)",
+   "intelligence": 7.0,
+   "inputPerM": 0.6,
+   "throughput": 81.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-4",
+   "intelligence": 7.0,
+   "inputPerM": 30.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Nova Lite",
+   "intelligence": 6.9,
+   "inputPerM": 0.06,
+   "throughput": 153.0,
+   "frontier": false
+  },
+  {
+   "model": "Gemini 2.5 Flash-Lite (Non-reasoning)",
+   "intelligence": 6.9,
+   "inputPerM": 0.1,
+   "throughput": 201.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Small 3",
+   "intelligence": 6.9,
+   "inputPerM": 0.1,
+   "throughput": 144.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-4o mini",
+   "intelligence": 6.9,
+   "inputPerM": 0.15,
+   "throughput": 81.0,
+   "frontier": false
+  },
+  {
+   "model": "Ministral 3 3B",
+   "intelligence": 6.8,
+   "inputPerM": 0.1,
+   "throughput": 284.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 30B A3B (Non-reasoning)",
+   "intelligence": 6.8,
+   "inputPerM": 0.2,
+   "throughput": 102.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama 3.1 Instruct 70B",
+   "intelligence": 6.8,
+   "inputPerM": 0.56,
+   "throughput": 57.0,
+   "frontier": false
+  },
+  {
+   "model": "Granite 4.1 8B",
+   "intelligence": 6.7,
+   "inputPerM": 0.05,
+   "throughput": 94.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen2.5 Turbo",
+   "intelligence": 6.3,
+   "inputPerM": 0.05,
+   "throughput": 104.0,
+   "frontier": false
+  },
+  {
+   "model": "Jamba 1.7 Large",
+   "intelligence": 5.3,
+   "inputPerM": 2.0,
+   "throughput": 58.0,
+   "frontier": false
+  },
+  {
+   "model": "Granite 4.0 H Small",
+   "intelligence": 5.2,
+   "inputPerM": 0.06,
+   "throughput": 357.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 8B (Non-reasoning)",
+   "intelligence": 5.1,
+   "inputPerM": 0.18,
+   "throughput": 39.0,
+   "frontier": false
+  },
+  {
+   "model": "Qwen3 Omni 30B A3B Instruct",
+   "intelligence": 5.1,
+   "inputPerM": 0.25,
+   "throughput": 89.0,
+   "frontier": false
+  },
+  {
+   "model": "Jamba 1.5 Large",
+   "intelligence": 5.1,
+   "inputPerM": 2.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Jamba 1.6 Large",
+   "intelligence": 5.0,
+   "inputPerM": 2.0,
+   "throughput": 59.0,
+   "frontier": false
+  },
+  {
+   "model": "Phi-4",
+   "intelligence": 4.9,
+   "inputPerM": 0.13,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Nova Micro",
+   "intelligence": 4.7,
+   "inputPerM": 0.04,
+   "throughput": 300.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Small (Sep '24)",
+   "intelligence": 4.7,
+   "inputPerM": 0.2,
+   "throughput": 147.0,
+   "frontier": false
+  },
+  {
+   "model": "Claude 3 Sonnet",
+   "intelligence": 4.7,
+   "inputPerM": 3.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "NVIDIA Nemotron Nano 12B v2 VL (Non-reasoning)",
+   "intelligence": 4.6,
+   "inputPerM": 0.2,
+   "throughput": 174.0,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Large (Feb '24)",
+   "intelligence": 4.4,
+   "inputPerM": 4.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Llama 2 Chat 7B",
+   "intelligence": 4.3,
+   "inputPerM": 0.05,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Claude 3 Haiku",
+   "intelligence": 3.9,
+   "inputPerM": 0.25,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Small (Feb '24)",
+   "intelligence": 3.6,
+   "inputPerM": 0.15,
+   "throughput": 150.0,
+   "frontier": false
+  },
+  {
+   "model": "GPT-3.5 Turbo",
+   "intelligence": 3.6,
+   "inputPerM": 0.5,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Mistral Medium",
+   "intelligence": 3.6,
+   "inputPerM": 1.5,
+   "throughput": 52.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama 3 Instruct 70B",
+   "intelligence": 3.5,
+   "inputPerM": 0.65,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Llama 3.2 Instruct 11B (Vision)",
+   "intelligence": 3.3,
+   "inputPerM": 0.34,
+   "throughput": 6.0,
+   "frontier": false
+  },
+  {
+   "model": "Command-R+ (Apr '24)",
+   "intelligence": 3.0,
+   "inputPerM": 3.0,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Jamba 1.5 Mini",
+   "intelligence": 2.7,
+   "inputPerM": 0.2,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Jamba 1.6 Mini",
+   "intelligence": 2.6,
+   "inputPerM": 0.2,
+   "throughput": 186.0,
+   "frontier": false
+  },
+  {
+   "model": "Mixtral 8x7B Instruct",
+   "intelligence": 2.4,
+   "inputPerM": 0.45,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Mistral 7B Instruct",
+   "intelligence": 2.1,
+   "inputPerM": 0.25,
+   "throughput": 114.0,
+   "frontier": false
+  },
+  {
+   "model": "Command-R (Mar '24)",
+   "intelligence": 2.1,
+   "inputPerM": 0.5,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Granite 3.3 8B (Non-reasoning)",
+   "intelligence": 1.8,
+   "inputPerM": 0.03,
+   "throughput": 353.0,
+   "frontier": false
+  },
+  {
+   "model": "Llama 3 Instruct 8B",
+   "intelligence": 1.2,
+   "inputPerM": 0.04,
+   "throughput": null,
+   "frontier": false
+  },
+  {
+   "model": "Gemma 3n E4B Instruct",
+   "intelligence": 1.2,
+   "inputPerM": 0.06,
+   "throughput": 53.0,
+   "frontier": false
+  }
+ ]
+}
