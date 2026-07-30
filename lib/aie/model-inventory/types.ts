@@ -2,7 +2,7 @@
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
 /**
- * Commercial LLM Models by Vendor — type model.
+ * Commercial LLM Models by Vendor, type model.
  *
  * Truth-engine compatible: every CommercialModel record carries source +
  * evidence + uncertainty metadata. The repository's truthfulness gates

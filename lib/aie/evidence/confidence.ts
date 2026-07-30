@@ -2,7 +2,7 @@
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
 /**
- * Confidence calculator — derives a 0-100 confidence score from the raw
+ * Confidence calculator, derives a 0-100 confidence score from the raw
  * fields of an evidence record. Used by every connector's normalisation step.
  */
 

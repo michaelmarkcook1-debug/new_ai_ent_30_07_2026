@@ -13,7 +13,7 @@
  *   - hosted third-party records keep ownerVendorId pointing at the actual owner
  *     (Anthropic stays Anthropic on Bedrock; OpenAI stays OpenAI on Azure)
  *   - vendors with no confirmed first-party model are explicitly marked
- *     refresh-required or infrastructure-only — never invented
+ *     refresh-required or infrastructure-only, never invented
  *
  * NEVER add a model name, model id, or source URL that isn't in the prompt's
  * source list or directly linkable from it.
@@ -30,7 +30,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_openai_models_docs",
     vendorId: "openai",
-    sourceName: "OpenAI — Models documentation",
+    sourceName: "OpenAI, Models documentation",
     sourceUrl: "https://platform.openai.com/docs/models",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -43,7 +43,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_openai_developers_api",
     vendorId: "openai",
-    sourceName: "OpenAI — Developers API docs",
+    sourceName: "OpenAI, Developers API docs",
     sourceUrl: "https://developers.openai.com/api/docs/models",
     sourceType: "official_api_models_endpoint",
     capturedAt: NOW_ISO,
@@ -57,7 +57,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_anthropic_models_overview",
     vendorId: "anthropic",
-    sourceName: "Anthropic — Claude Models overview",
+    sourceName: "Anthropic, Claude Models overview",
     sourceUrl: "https://docs.anthropic.com/en/docs/about-claude/models/overview",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -70,7 +70,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_anthropic_models_list_api",
     vendorId: "anthropic",
-    sourceName: "Anthropic — models-list API",
+    sourceName: "Anthropic, models-list API",
     sourceUrl: "https://docs.anthropic.com/en/api/models-list",
     sourceType: "official_api_models_endpoint",
     capturedAt: NOW_ISO,
@@ -84,7 +84,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_google_gemini_api_models",
     vendorId: "googl",
-    sourceName: "Google AI — Gemini API model docs",
+    sourceName: "Google AI, Gemini API model docs",
     sourceUrl: "https://ai.google.dev/gemini-api/docs/models",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -97,7 +97,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_google_vertex_models",
     vendorId: "googl",
-    sourceName: "Google Cloud — Vertex AI generative models",
+    sourceName: "Google Cloud, Vertex AI generative models",
     sourceUrl: "https://cloud.google.com/vertex-ai/generative-ai/docs/models",
     sourceType: "official_model_catalog",
     capturedAt: NOW_ISO,
@@ -111,7 +111,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_mistral_models",
     vendorId: "mistral",
-    sourceName: "Mistral AI — Models documentation",
+    sourceName: "Mistral AI, Models documentation",
     sourceUrl: "https://docs.mistral.ai/models",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -125,7 +125,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_cohere_models",
     vendorId: "cohere",
-    sourceName: "Cohere — Models documentation",
+    sourceName: "Cohere, Models documentation",
     sourceUrl: "https://docs.cohere.com/docs/models",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -139,7 +139,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_xai_models",
     vendorId: "xai",
-    sourceName: "xAI — Models documentation",
+    sourceName: "xAI, Models documentation",
     sourceUrl: "https://docs.x.ai/docs/models",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -153,7 +153,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_aws_bedrock_models",
     vendorId: "amzn",
-    sourceName: "AWS — Bedrock supported foundation models",
+    sourceName: "AWS, Bedrock supported foundation models",
     sourceUrl: "https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html",
     sourceType: "official_marketplace_docs",
     capturedAt: NOW_ISO,
@@ -167,7 +167,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_azure_ai_foundry_models",
     vendorId: "msft",
-    sourceName: "Azure AI Foundry — Models",
+    sourceName: "Azure AI Foundry, Models",
     sourceUrl: "https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/overview",
     sourceType: "official_marketplace_docs",
     capturedAt: NOW_ISO,
@@ -180,7 +180,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_azure_ai_foundry_partners",
     vendorId: "msft",
-    sourceName: "Azure AI Foundry — Models from partners",
+    sourceName: "Azure AI Foundry, Models from partners",
     sourceUrl: "https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-from-partners",
     sourceType: "official_marketplace_docs",
     capturedAt: NOW_ISO,
@@ -194,7 +194,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_ibm_watsonx_foundation_models",
     vendorId: "ibm",
-    sourceName: "IBM — watsonx.ai foundation models",
+    sourceName: "IBM, watsonx.ai foundation models",
     sourceUrl: "https://www.ibm.com/products/watsonx-ai/foundation-models",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -208,7 +208,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_oracle_genai_models",
     vendorId: "orcl",
-    sourceName: "Oracle — OCI Generative AI pretrained models",
+    sourceName: "Oracle, OCI Generative AI pretrained models",
     sourceUrl: "https://docs.oracle.com/en-us/iaas/Content/generative-ai/pretrained-models.htm",
     sourceType: "official_marketplace_docs",
     capturedAt: NOW_ISO,
@@ -222,7 +222,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_salesforce_agentforce_models",
     vendorId: "crm",
-    sourceName: "Salesforce — Agentforce supported models",
+    sourceName: "Salesforce, Agentforce supported models",
     sourceUrl: "https://developer.salesforce.com/docs/ai/agentforce/guide/supported-models.html",
     sourceType: "official_product_docs",
     capturedAt: NOW_ISO,
@@ -236,7 +236,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_now_llm_docs",
     vendorId: "now",
-    sourceName: "ServiceNow — Now LLM exploration",
+    sourceName: "ServiceNow, Now LLM exploration",
     sourceUrl: "https://www.servicenow.com/docs/r/intelligent-experiences/servicenow-large-language-model-now-llm/exploring-large-language-models.html",
     sourceType: "official_product_docs",
     capturedAt: NOW_ISO,
@@ -250,7 +250,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_writer_palmyra_models",
     vendorId: "writer",
-    sourceName: "Writer — Palmyra models",
+    sourceName: "Writer, Palmyra models",
     sourceUrl: "https://dev.writer.com/home/models",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -264,7 +264,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_glean_llms",
     vendorId: "glean",
-    sourceName: "Glean — LLM administration",
+    sourceName: "Glean, LLM administration",
     sourceUrl: "https://docs.glean.com/administration/llms",
     sourceType: "official_product_docs",
     capturedAt: NOW_ISO,
@@ -278,7 +278,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_harvey_models",
     vendorId: "harvey",
-    sourceName: "Harvey — supported AI models",
+    sourceName: "Harvey, supported AI models",
     sourceUrl: "https://help.harvey.ai/articles/what-ai-models-does-harvey-use",
     sourceType: "official_product_docs",
     capturedAt: NOW_ISO,
@@ -288,12 +288,12 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
     freshnessStatus: "fresh",
     notes: "Harvey uses third-party models; Harvey is application/orchestration vendor.",
   },
-  // Moveworks (not in our vendor list — included via lookup)
+  // Moveworks (not in our vendor list, included via lookup)
   // Perplexity
   {
     id: "src_perplexity_pending",
     vendorId: "perplexity",
-    sourceName: "Perplexity — Sonar / Enterprise Pro docs (pending verification)",
+    sourceName: "Perplexity, Sonar / Enterprise Pro docs (pending verification)",
     sourceUrl: "https://docs.perplexity.ai/",
     sourceType: "seed_placeholder",
     capturedAt: NOW_ISO,
@@ -303,11 +303,11 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
     freshnessStatus: "unknown",
     notes: "Source list incomplete; Sonar API docs require verification before enabling models.",
   },
-  // NVIDIA — Nemotron is a first-party family per developer.nvidia.com.
+  // NVIDIA, Nemotron is a first-party family per developer.nvidia.com.
   {
     id: "src_nvidia_nemotron",
     vendorId: "nvda",
-    sourceName: "NVIDIA — Nemotron developer hub",
+    sourceName: "NVIDIA, Nemotron developer hub",
     sourceUrl: "https://developer.nvidia.com/nemotron",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -315,13 +315,13 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
     evidenceGrade: "E2",
     confidenceScore: 72,
     freshnessStatus: "fresh",
-    notes: "Nemotron 3 series — Nano / Super / multimodal / RAG / Speech / Safety variants.",
+    notes: "Nemotron 3 series, Nano / Super / multimodal / RAG / Speech / Safety variants.",
   },
-  // Meta — Llama series owner.
+  // Meta, Llama series owner.
   {
     id: "src_meta_llama",
     vendorId: "meta",
-    sourceName: "Meta — Llama overview",
+    sourceName: "Meta, Llama overview",
     sourceUrl: "https://www.llama.com/docs/overview/",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -329,13 +329,13 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
     evidenceGrade: "E2",
     confidenceScore: 72,
     freshnessStatus: "fresh",
-    notes: "Llama family overview — Meta is the original owner.",
+    notes: "Llama family overview, Meta is the original owner.",
   },
   // DeepSeek
   {
     id: "src_deepseek_models",
     vendorId: "deepseek",
-    sourceName: "DeepSeek — pricing & model docs",
+    sourceName: "DeepSeek, pricing & model docs",
     sourceUrl: "https://api-docs.deepseek.com/quick_start/pricing",
     sourceType: "official_pricing_page",
     capturedAt: NOW_ISO,
@@ -345,11 +345,11 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
     freshnessStatus: "fresh",
     notes: "DeepSeek v4 series. deepseek-chat / deepseek-reasoner are compatibility aliases.",
   },
-  // Alibaba / Qwen — global frontier family.
+  // Alibaba / Qwen, global frontier family.
   {
     id: "src_alibaba_qwen",
     vendorId: "alibaba",
-    sourceName: "Alibaba Cloud — Model Studio (Qwen)",
+    sourceName: "Alibaba Cloud, Model Studio (Qwen)",
     sourceUrl: "https://www.alibabacloud.com/help/en/model-studio/models",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -363,7 +363,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_moonshot_kimi",
     vendorId: "moonshot",
-    sourceName: "Moonshot AI — Platform docs (Kimi)",
+    sourceName: "Moonshot AI, Platform docs (Kimi)",
     sourceUrl: "https://platform.moonshot.ai",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -373,11 +373,11 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
     freshnessStatus: "fresh",
     notes: "Kimi K2 series.",
   },
-  // Z.ai / Zhipu — GLM family.
+  // Z.ai / Zhipu, GLM family.
   {
     id: "src_zai_glm",
     vendorId: "zai",
-    sourceName: "Z.ai — GLM model docs",
+    sourceName: "Z.ai, GLM model docs",
     sourceUrl: "https://docs.z.ai/guides/llm/glm-5.1",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -391,7 +391,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
   {
     id: "src_minimax_models",
     vendorId: "minimax",
-    sourceName: "MiniMax — Platform model docs",
+    sourceName: "MiniMax, Platform model docs",
     sourceUrl: "https://platform.minimax.io/docs/guides/models-intro",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -401,11 +401,11 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
     freshnessStatus: "fresh",
     notes: "MiniMax M2 series + her-variant.",
   },
-  // AI21 Labs — Jamba.
+  // AI21 Labs, Jamba.
   {
     id: "src_ai21_jamba",
     vendorId: "ai21",
-    sourceName: "AI21 — Jamba foundation models",
+    sourceName: "AI21, Jamba foundation models",
     sourceUrl: "https://docs.ai21.com/docs/jamba-foundation-models",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -415,11 +415,11 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
     freshnessStatus: "fresh",
     notes: "Jamba Large / Mini hybrid Mamba+Transformer architecture.",
   },
-  // Aleph Alpha — Pharia.
+  // Aleph Alpha, Pharia.
   {
     id: "src_aleph_alpha_pharia",
     vendorId: "aleph",
-    sourceName: "Aleph Alpha — Pharia model variants",
+    sourceName: "Aleph Alpha, Pharia model variants",
     sourceUrl: "https://docs.aleph-alpha.com/phariaai-dev-guide/latest/pharia-llm/model-variants.html",
     sourceType: "official_model_docs",
     capturedAt: NOW_ISO,
@@ -427,13 +427,13 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
     evidenceGrade: "E1",
     confidenceScore: 55,
     freshnessStatus: "fresh",
-    notes: "Pharia model variants — weight-available release; commercial API availability unclear.",
+    notes: "Pharia model variants, weight-available release; commercial API availability unclear.",
   },
-  // Snowflake Arctic — first-party open enterprise LLM family.
+  // Snowflake Arctic, first-party open enterprise LLM family.
   {
     id: "src_snowflake_arctic",
     vendorId: "snow",
-    sourceName: "Snowflake — Arctic model family",
+    sourceName: "Snowflake, Arctic model family",
     sourceUrl: "https://www.snowflake.com/en/product/features/arctic/",
     sourceType: "official_product_docs",
     capturedAt: NOW_ISO,
@@ -441,7 +441,7 @@ export const SEED_MODEL_SOURCES: CommercialModelSource[] = [
     evidenceGrade: "E2",
     confidenceScore: 70,
     freshnessStatus: "fresh",
-    notes: "Snowflake Arctic — first-party / open-weight enterprise LLM. Cortex hosts third-party models separately.",
+    notes: "Snowflake Arctic, first-party / open-weight enterprise LLM. Cortex hosts third-party models separately.",
   },
 ];
 
@@ -510,7 +510,7 @@ export const SEED_MODELS: CommercialModel[] = [
     inputModalities: ["text", "image"], outputModalities: ["text"], toolSupport: ["function_calling"],
     sourceIds: ["src_openai_models_docs", "src_openai_developers_api"],
     sourceUrls: ["https://platform.openai.com/docs/models", "https://developers.openai.com/api/docs/models"],
-    sourceNames: ["OpenAI — Models documentation", "OpenAI — Developers API docs"],
+    sourceNames: ["OpenAI, Models documentation", "OpenAI, Developers API docs"],
   }),
   model({
     id: "model_openai_gpt54",
@@ -521,7 +521,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_openai_models_docs", "src_openai_developers_api"],
     sourceUrls: ["https://platform.openai.com/docs/models", "https://developers.openai.com/api/docs/models"],
-    sourceNames: ["OpenAI — Models documentation", "OpenAI — Developers API docs"],
+    sourceNames: ["OpenAI, Models documentation", "OpenAI, Developers API docs"],
   }),
   model({
     id: "model_openai_gpt54_mini",
@@ -532,7 +532,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_openai_models_docs"],
     sourceUrls: ["https://platform.openai.com/docs/models"],
-    sourceNames: ["OpenAI — Models documentation"],
+    sourceNames: ["OpenAI, Models documentation"],
   }),
   model({
     id: "model_openai_gpt54_nano",
@@ -543,7 +543,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_openai_models_docs"],
     sourceUrls: ["https://platform.openai.com/docs/models"],
-    sourceNames: ["OpenAI — Models documentation"],
+    sourceNames: ["OpenAI, Models documentation"],
   }),
   model({
     id: "model_openai_o4",
@@ -554,7 +554,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_openai_models_docs"],
     sourceUrls: ["https://platform.openai.com/docs/models"],
-    sourceNames: ["OpenAI — Models documentation"],
+    sourceNames: ["OpenAI, Models documentation"],
     uncertaintyNote: "Reasoning-tier model family per official model docs. Variants and exact model IDs require live API verification.",
   }),
 
@@ -570,7 +570,7 @@ export const SEED_MODELS: CommercialModel[] = [
     contextWindow: 1_000_000,
     sourceIds: ["src_anthropic_models_overview", "src_anthropic_models_list_api"],
     sourceUrls: ["https://docs.anthropic.com/en/docs/about-claude/models/overview", "https://docs.anthropic.com/en/api/models-list"],
-    sourceNames: ["Anthropic — Claude Models overview", "Anthropic — models-list API"],
+    sourceNames: ["Anthropic, Claude Models overview", "Anthropic, models-list API"],
   }),
   model({
     id: "model_anthropic_claude_sonnet_46",
@@ -581,7 +581,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_anthropic_models_overview"],
     sourceUrls: ["https://platform.claude.com/docs/en/about-claude/models/overview"],
-    sourceNames: ["Anthropic — Claude Models overview"],
+    sourceNames: ["Anthropic, Claude Models overview"],
   }),
   model({
     id: "model_anthropic_claude_haiku_45",
@@ -592,7 +592,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_anthropic_models_overview"],
     sourceUrls: ["https://platform.claude.com/docs/en/about-claude/models/overview"],
-    sourceNames: ["Anthropic — Claude Models overview"],
+    sourceNames: ["Anthropic, Claude Models overview"],
   }),
 
   // ───────────── Google (first-party) ─────────────
@@ -608,7 +608,7 @@ export const SEED_MODELS: CommercialModel[] = [
     inputModalities: ["text", "image", "audio", "video"], outputModalities: ["text"],
     sourceIds: ["src_google_gemini_api_models", "src_google_vertex_models"],
     sourceUrls: ["https://ai.google.dev/gemini-api/docs/models"],
-    sourceNames: ["Google AI — Gemini API model docs"],
+    sourceNames: ["Google AI, Gemini API model docs"],
   }),
   model({
     id: "model_google_gemini_3_flash",
@@ -619,7 +619,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_google_gemini_api_models"],
     sourceUrls: ["https://ai.google.dev/gemini-api/docs/models"],
-    sourceNames: ["Google AI — Gemini API model docs"],
+    sourceNames: ["Google AI, Gemini API model docs"],
   }),
   model({
     id: "model_google_gemini_31_flash_lite",
@@ -630,7 +630,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_google_gemini_api_models"],
     sourceUrls: ["https://ai.google.dev/gemini-api/docs/models"],
-    sourceNames: ["Google AI — Gemini API model docs"],
+    sourceNames: ["Google AI, Gemini API model docs"],
   }),
   model({
     id: "model_google_gemini_25_pro",
@@ -642,7 +642,7 @@ export const SEED_MODELS: CommercialModel[] = [
     inputModalities: ["text", "image", "audio", "video"], outputModalities: ["text"],
     sourceIds: ["src_google_gemini_api_models", "src_google_vertex_models"],
     sourceUrls: ["https://ai.google.dev/gemini-api/docs/models", "https://cloud.google.com/vertex-ai/generative-ai/docs/models"],
-    sourceNames: ["Google AI — Gemini API model docs", "Google Cloud — Vertex AI generative models"],
+    sourceNames: ["Google AI, Gemini API model docs", "Google Cloud, Vertex AI generative models"],
   }),
   model({
     id: "model_google_gemini_25_flash",
@@ -653,7 +653,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_google_gemini_api_models"],
     sourceUrls: ["https://ai.google.dev/gemini-api/docs/models"],
-    sourceNames: ["Google AI — Gemini API model docs"],
+    sourceNames: ["Google AI, Gemini API model docs"],
   }),
   model({
     id: "model_google_gemma3",
@@ -664,7 +664,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_google_gemini_api_models"],
     sourceUrls: ["https://ai.google.dev/gemini-api/docs/models"],
-    sourceNames: ["Google AI — Gemini API model docs"],
+    sourceNames: ["Google AI, Gemini API model docs"],
     uncertaintyNote: "Open-weight family. Commercial use governed by Gemma terms; not a hosted commercial API in the same sense as Gemini.",
   }),
 
@@ -679,7 +679,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_mistral_models"],
     sourceUrls: ["https://docs.mistral.ai/models/overview"],
-    sourceNames: ["Mistral AI — Models overview"],
+    sourceNames: ["Mistral AI, Models overview"],
   }),
   model({
     id: "model_mistral_medium_35",
@@ -690,7 +690,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_mistral_models"],
     sourceUrls: ["https://docs.mistral.ai/models/overview"],
-    sourceNames: ["Mistral AI — Models overview"],
+    sourceNames: ["Mistral AI, Models overview"],
   }),
   model({
     id: "model_mistral_small_4",
@@ -701,7 +701,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_mistral_models"],
     sourceUrls: ["https://docs.mistral.ai/models/overview"],
-    sourceNames: ["Mistral AI — Models overview"],
+    sourceNames: ["Mistral AI, Models overview"],
   }),
   model({
     id: "model_mistral_ministral_3",
@@ -712,7 +712,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_mistral_models"],
     sourceUrls: ["https://docs.mistral.ai/models/overview"],
-    sourceNames: ["Mistral AI — Models overview"],
+    sourceNames: ["Mistral AI, Models overview"],
     uncertaintyNote: "Edge-optimised family. Variants (3B / 8B) require live API verification.",
   }),
   model({
@@ -724,7 +724,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_mistral_models"],
     sourceUrls: ["https://docs.mistral.ai/models/overview"],
-    sourceNames: ["Mistral AI — Models overview"],
+    sourceNames: ["Mistral AI, Models overview"],
   }),
   model({
     id: "model_mistral_codestral",
@@ -735,7 +735,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_mistral_models"],
     sourceUrls: ["https://docs.mistral.ai/models/overview"],
-    sourceNames: ["Mistral AI — Models overview"],
+    sourceNames: ["Mistral AI, Models overview"],
   }),
   model({
     id: "model_mistral_voxtral",
@@ -746,7 +746,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_mistral_models"],
     sourceUrls: ["https://docs.mistral.ai/models/overview"],
-    sourceNames: ["Mistral AI — Models overview"],
+    sourceNames: ["Mistral AI, Models overview"],
   }),
   model({
     id: "model_mistral_ocr",
@@ -757,7 +757,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_mistral_models"],
     sourceUrls: ["https://docs.mistral.ai/models/overview"],
-    sourceNames: ["Mistral AI — Models overview"],
+    sourceNames: ["Mistral AI, Models overview"],
   }),
 
   // ───────────── Cohere (first-party) ─────────────
@@ -772,7 +772,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_cohere_models"],
     sourceUrls: ["https://docs.cohere.com/docs/models"],
-    sourceNames: ["Cohere — Models documentation"],
+    sourceNames: ["Cohere, Models documentation"],
   }),
   model({
     id: "model_cohere_command_a_reasoning",
@@ -783,7 +783,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_cohere_models"],
     sourceUrls: ["https://docs.cohere.com/docs/models"],
-    sourceNames: ["Cohere — Models documentation"],
+    sourceNames: ["Cohere, Models documentation"],
   }),
   model({
     id: "model_cohere_command_a_vision",
@@ -794,7 +794,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_cohere_models"],
     sourceUrls: ["https://docs.cohere.com/docs/models"],
-    sourceNames: ["Cohere — Models documentation"],
+    sourceNames: ["Cohere, Models documentation"],
   }),
   model({
     id: "model_cohere_command_a_translate",
@@ -805,7 +805,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_cohere_models"],
     sourceUrls: ["https://docs.cohere.com/docs/models"],
-    sourceNames: ["Cohere — Models documentation"],
+    sourceNames: ["Cohere, Models documentation"],
   }),
   model({
     id: "model_cohere_command_r7b",
@@ -816,7 +816,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_cohere_models"],
     sourceUrls: ["https://docs.cohere.com/docs/models"],
-    sourceNames: ["Cohere — Models documentation"],
+    sourceNames: ["Cohere, Models documentation"],
   }),
   model({
     id: "model_cohere_embed",
@@ -827,7 +827,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_cohere_models"],
     sourceUrls: ["https://docs.cohere.com/docs/models"],
-    sourceNames: ["Cohere — Models documentation"],
+    sourceNames: ["Cohere, Models documentation"],
   }),
   model({
     id: "model_cohere_rerank",
@@ -838,7 +838,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_cohere_models"],
     sourceUrls: ["https://docs.cohere.com/docs/models"],
-    sourceNames: ["Cohere — Models documentation"],
+    sourceNames: ["Cohere, Models documentation"],
   }),
   model({
     id: "model_cohere_transcribe",
@@ -849,7 +849,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_cohere_models"],
     sourceUrls: ["https://docs.cohere.com/docs/models"],
-    sourceNames: ["Cohere — Models documentation"],
+    sourceNames: ["Cohere, Models documentation"],
   }),
   model({
     id: "model_cohere_aya",
@@ -860,7 +860,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_cohere_models"],
     sourceUrls: ["https://docs.cohere.com/docs/models"],
-    sourceNames: ["Cohere — Models documentation"],
+    sourceNames: ["Cohere, Models documentation"],
     uncertaintyNote: "Multilingual research/open-weight family.",
   }),
 
@@ -876,7 +876,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_xai_models"],
     sourceUrls: ["https://docs.x.ai/developers/models"],
-    sourceNames: ["xAI — Models documentation"],
+    sourceNames: ["xAI, Models documentation"],
   }),
   model({
     id: "model_xai_voice",
@@ -887,7 +887,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_xai_models"],
     sourceUrls: ["https://docs.x.ai/developers/models"],
-    sourceNames: ["xAI — Models documentation"],
+    sourceNames: ["xAI, Models documentation"],
   }),
   model({
     id: "model_xai_imagine",
@@ -898,7 +898,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_xai_models"],
     sourceUrls: ["https://docs.x.ai/developers/models"],
-    sourceNames: ["xAI — Models documentation"],
+    sourceNames: ["xAI, Models documentation"],
   }),
 
   // ───────────── AWS (first-party Nova/Titan + hosted third-party) ─────────────
@@ -911,7 +911,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_aws_bedrock_models"],
     sourceUrls: ["https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html"],
-    sourceNames: ["AWS — Bedrock supported foundation models"],
+    sourceNames: ["AWS, Bedrock supported foundation models"],
   }),
   model({
     id: "model_amzn_titan_text_embeddings",
@@ -922,7 +922,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_aws_bedrock_models"],
     sourceUrls: ["https://docs.aws.amazon.com/bedrock/latest/userguide/titan-models.html"],
-    sourceNames: ["AWS — Titan model docs"],
+    sourceNames: ["AWS, Titan model docs"],
   }),
   model({
     id: "model_amzn_titan_multimodal_embeddings",
@@ -933,7 +933,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_aws_bedrock_models"],
     sourceUrls: ["https://docs.aws.amazon.com/bedrock/latest/userguide/titan-models.html"],
-    sourceNames: ["AWS — Titan model docs"],
+    sourceNames: ["AWS, Titan model docs"],
   }),
   model({
     id: "model_amzn_titan_image_generator",
@@ -944,9 +944,9 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_aws_bedrock_models"],
     sourceUrls: ["https://docs.aws.amazon.com/bedrock/latest/userguide/titan-models.html"],
-    sourceNames: ["AWS — Titan model docs"],
+    sourceNames: ["AWS, Titan model docs"],
   }),
-  // Hosted third-party on Bedrock — owner stays original
+  // Hosted third-party on Bedrock, owner stays original
   model({
     id: "model_bedrock_anthropic_claude",
     vendorId: "amzn", vendorName: "Amazon",
@@ -956,7 +956,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_aws_bedrock_models"],
     sourceUrls: ["https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html"],
-    sourceNames: ["AWS — Bedrock supported foundation models"],
+    sourceNames: ["AWS, Bedrock supported foundation models"],
   }),
   model({
     id: "model_bedrock_meta_llama",
@@ -967,7 +967,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_aws_bedrock_models"],
     sourceUrls: ["https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html"],
-    sourceNames: ["AWS — Bedrock supported foundation models"],
+    sourceNames: ["AWS, Bedrock supported foundation models"],
   }),
   model({
     id: "model_bedrock_mistral",
@@ -978,7 +978,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_aws_bedrock_models"],
     sourceUrls: ["https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html"],
-    sourceNames: ["AWS — Bedrock supported foundation models"],
+    sourceNames: ["AWS, Bedrock supported foundation models"],
   }),
   model({
     id: "model_bedrock_cohere",
@@ -989,7 +989,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_aws_bedrock_models"],
     sourceUrls: ["https://docs.aws.amazon.com/bedrock/latest/userguide/models-supported.html"],
-    sourceNames: ["AWS — Bedrock supported foundation models"],
+    sourceNames: ["AWS, Bedrock supported foundation models"],
   }),
 
   // ───────────── Microsoft (first-party Phi/MAI/Copilot + hosted third-party) ─────────────
@@ -1002,9 +1002,9 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_azure_ai_foundry_models"],
     sourceUrls: ["https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/overview"],
-    sourceNames: ["Azure AI Foundry — Models"],
+    sourceNames: ["Azure AI Foundry, Models"],
   }),
-  // Microsoft AI Internal models (MAI series) — Microsoft's first-party
+  // Microsoft AI Internal models (MAI series), Microsoft's first-party
   // frontier models developed internally, sitting alongside the OpenAI
   // partnership in Foundry.
   model({
@@ -1016,9 +1016,9 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_azure_ai_foundry_models"],
     sourceUrls: ["https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/overview"],
-    sourceNames: ["Azure AI Foundry — Models"],
+    sourceNames: ["Azure AI Foundry, Models"],
   }),
-  // Copilot product family — Microsoft's first-party assistant brand,
+  // Copilot product family, Microsoft's first-party assistant brand,
   // packaged across M365, GitHub, Dynamics, Security, and Sales/Service.
   // Each variant is a first-party Microsoft product even though the
   // underlying LLM is OpenAI GPT served via Azure AI Foundry.
@@ -1031,7 +1031,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "underlying_product_model",
     sourceIds: ["src_azure_ai_foundry_models"],
     sourceUrls: ["https://www.microsoft.com/en-us/microsoft-365/copilot"],
-    sourceNames: ["Microsoft 365 Copilot — official product page"],
+    sourceNames: ["Microsoft 365 Copilot, official product page"],
   }),
   model({
     id: "model_msft_copilot_github",
@@ -1042,7 +1042,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "underlying_product_model",
     sourceIds: ["src_azure_ai_foundry_models"],
     sourceUrls: ["https://github.com/features/copilot"],
-    sourceNames: ["GitHub Copilot — official product page"],
+    sourceNames: ["GitHub Copilot, official product page"],
   }),
   model({
     id: "model_msft_copilot_studio",
@@ -1053,7 +1053,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "underlying_product_model",
     sourceIds: ["src_azure_ai_foundry_models"],
     sourceUrls: ["https://www.microsoft.com/en-us/microsoft-copilot/microsoft-copilot-studio"],
-    sourceNames: ["Microsoft Copilot Studio — official product page"],
+    sourceNames: ["Microsoft Copilot Studio, official product page"],
   }),
   model({
     id: "model_msft_copilot_dynamics",
@@ -1064,7 +1064,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "underlying_product_model",
     sourceIds: ["src_azure_ai_foundry_models"],
     sourceUrls: ["https://www.microsoft.com/en-us/dynamics-365/solutions/ai"],
-    sourceNames: ["Dynamics 365 Copilot — official product page"],
+    sourceNames: ["Dynamics 365 Copilot, official product page"],
   }),
   model({
     id: "model_msft_copilot_security",
@@ -1075,9 +1075,9 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "underlying_product_model",
     sourceIds: ["src_azure_ai_foundry_models"],
     sourceUrls: ["https://www.microsoft.com/en-us/security/business/ai-machine-learning/microsoft-security-copilot"],
-    sourceNames: ["Microsoft Security Copilot — official product page"],
+    sourceNames: ["Microsoft Security Copilot, official product page"],
   }),
-  // Hosted on Azure AI Foundry — owner stays original
+  // Hosted on Azure AI Foundry, owner stays original
   model({
     id: "model_azure_openai_gpt",
     vendorId: "msft", vendorName: "Microsoft",
@@ -1087,7 +1087,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_azure_ai_foundry_models", "src_azure_ai_foundry_partners"],
     sourceUrls: ["https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/overview", "https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-from-partners"],
-    sourceNames: ["Azure AI Foundry — Models", "Azure AI Foundry — Models from partners"],
+    sourceNames: ["Azure AI Foundry, Models", "Azure AI Foundry, Models from partners"],
   }),
   model({
     id: "model_azure_anthropic_claude",
@@ -1098,7 +1098,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_azure_ai_foundry_partners"],
     sourceUrls: ["https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-from-partners"],
-    sourceNames: ["Azure AI Foundry — Models from partners"],
+    sourceNames: ["Azure AI Foundry, Models from partners"],
   }),
   model({
     id: "model_azure_mistral",
@@ -1109,7 +1109,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_azure_ai_foundry_partners"],
     sourceUrls: ["https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-from-partners"],
-    sourceNames: ["Azure AI Foundry — Models from partners"],
+    sourceNames: ["Azure AI Foundry, Models from partners"],
   }),
 
   // ───────────── IBM (Granite first-party) ─────────────
@@ -1122,7 +1122,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_ibm_watsonx_foundation_models"],
     sourceUrls: ["https://www.ibm.com/products/watsonx-ai/foundation-models"],
-    sourceNames: ["IBM — watsonx.ai foundation models"],
+    sourceNames: ["IBM, watsonx.ai foundation models"],
   }),
   model({
     id: "model_ibm_granite_code",
@@ -1133,7 +1133,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_ibm_watsonx_foundation_models"],
     sourceUrls: ["https://www.ibm.com/products/watsonx-ai/foundation-models"],
-    sourceNames: ["IBM — watsonx.ai foundation models"],
+    sourceNames: ["IBM, watsonx.ai foundation models"],
   }),
   model({
     id: "model_ibm_granite_guardian",
@@ -1144,10 +1144,10 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_ibm_watsonx_foundation_models"],
     sourceUrls: ["https://www.ibm.com/products/watsonx-ai/foundation-models"],
-    sourceNames: ["IBM — watsonx.ai foundation models"],
+    sourceNames: ["IBM, watsonx.ai foundation models"],
   }),
 
-  // ───────────── Oracle (host only — third-party) ─────────────
+  // ───────────── Oracle (host only, third-party) ─────────────
   model({
     id: "model_oci_cohere",
     vendorId: "orcl", vendorName: "Oracle",
@@ -1157,7 +1157,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_oracle_genai_models"],
     sourceUrls: ["https://docs.oracle.com/en-us/iaas/Content/generative-ai/pretrained-models.htm"],
-    sourceNames: ["Oracle — OCI Generative AI pretrained models"],
+    sourceNames: ["Oracle, OCI Generative AI pretrained models"],
   }),
   model({
     id: "model_oci_meta",
@@ -1168,7 +1168,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_oracle_genai_models"],
     sourceUrls: ["https://docs.oracle.com/en-us/iaas/Content/generative-ai/pretrained-models.htm"],
-    sourceNames: ["Oracle — OCI Generative AI pretrained models"],
+    sourceNames: ["Oracle, OCI Generative AI pretrained models"],
   }),
 
   // ───────────── Salesforce (orchestration / Default model) ─────────────
@@ -1181,7 +1181,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "underlying_product_model",
     sourceIds: ["src_salesforce_agentforce_models"],
     sourceUrls: ["https://developer.salesforce.com/docs/ai/agentforce/guide/supported-models.html"],
-    sourceNames: ["Salesforce — Agentforce supported models"],
+    sourceNames: ["Salesforce, Agentforce supported models"],
     uncertaintyNote: "Salesforce orchestrates external providers; Default model used inside Agentforce is not customer-selectable as a standalone API.",
   }),
   model({
@@ -1193,7 +1193,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_salesforce_agentforce_models"],
     sourceUrls: ["https://developer.salesforce.com/docs/ai/agentforce/guide/supported-models.html"],
-    sourceNames: ["Salesforce — Agentforce supported models"],
+    sourceNames: ["Salesforce, Agentforce supported models"],
     uncertaintyNote: "Multiple providers supported. Source confirms list; ownership remains with each underlying provider.",
   }),
 
@@ -1207,7 +1207,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "underlying_product_model",
     sourceIds: ["src_now_llm_docs"],
     sourceUrls: ["https://www.servicenow.com/docs/r/intelligent-experiences/servicenow-large-language-model-now-llm/exploring-large-language-models.html"],
-    sourceNames: ["ServiceNow — Now LLM exploration"],
+    sourceNames: ["ServiceNow, Now LLM exploration"],
     uncertaintyNote: "ServiceNow domain LLM. Not customer-selectable as a general API.",
   }),
   model({
@@ -1219,7 +1219,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_now_llm_docs"],
     sourceUrls: ["https://www.servicenow.com/docs/r/intelligent-experiences/servicenow-large-language-model-now-llm/exploring-large-language-models.html"],
-    sourceNames: ["ServiceNow — Now LLM exploration"],
+    sourceNames: ["ServiceNow, Now LLM exploration"],
     uncertaintyNote: "Now LLM Service brokers third-party LLMs; ownership remains with each provider.",
   }),
 
@@ -1235,7 +1235,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_writer_palmyra_models"],
     sourceUrls: ["https://dev.writer.com/home/models"],
-    sourceNames: ["Writer — Palmyra models"],
+    sourceNames: ["Writer, Palmyra models"],
   }),
   model({
     id: "model_writer_palmyra_x4",
@@ -1246,7 +1246,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_writer_palmyra_models"],
     sourceUrls: ["https://dev.writer.com/home/models"],
-    sourceNames: ["Writer — Palmyra models"],
+    sourceNames: ["Writer, Palmyra models"],
   }),
   model({
     id: "model_writer_palmyra_x_003_instruct",
@@ -1257,7 +1257,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_writer_palmyra_models"],
     sourceUrls: ["https://dev.writer.com/home/models"],
-    sourceNames: ["Writer — Palmyra models"],
+    sourceNames: ["Writer, Palmyra models"],
   }),
   model({
     id: "model_writer_palmyra_vision",
@@ -1268,7 +1268,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_writer_palmyra_models"],
     sourceUrls: ["https://dev.writer.com/home/models"],
-    sourceNames: ["Writer — Palmyra models"],
+    sourceNames: ["Writer, Palmyra models"],
   }),
   model({
     id: "model_writer_palmyra_med",
@@ -1279,7 +1279,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_writer_palmyra_models"],
     sourceUrls: ["https://dev.writer.com/home/models"],
-    sourceNames: ["Writer — Palmyra models"],
+    sourceNames: ["Writer, Palmyra models"],
     uncertaintyNote: "Healthcare-tuned variant.",
   }),
   model({
@@ -1291,7 +1291,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_writer_palmyra_models"],
     sourceUrls: ["https://dev.writer.com/home/models"],
-    sourceNames: ["Writer — Palmyra models"],
+    sourceNames: ["Writer, Palmyra models"],
     uncertaintyNote: "Financial-services-tuned variant.",
   }),
   model({
@@ -1303,7 +1303,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_writer_palmyra_models"],
     sourceUrls: ["https://dev.writer.com/home/models"],
-    sourceNames: ["Writer — Palmyra models"],
+    sourceNames: ["Writer, Palmyra models"],
   }),
 
   // ───────────── Glean (orchestration) ─────────────
@@ -1316,7 +1316,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_glean_llms"],
     sourceUrls: ["https://docs.glean.com/administration/llms"],
-    sourceNames: ["Glean — LLM administration"],
+    sourceNames: ["Glean, LLM administration"],
     uncertaintyNote: "Glean is a model hub; supported LLMs remain owned by their original providers.",
   }),
 
@@ -1330,13 +1330,13 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "hosted_on_marketplace",
     sourceIds: ["src_harvey_models"],
     sourceUrls: ["https://help.harvey.ai/articles/what-ai-models-does-harvey-use"],
-    sourceNames: ["Harvey — supported AI models"],
+    sourceNames: ["Harvey, supported AI models"],
     uncertaintyNote: "Harvey is an application/orchestration vendor; models remain owned by their original providers.",
   }),
 
   // ───────────── Perplexity (Sonar family) ─────────────
   // Refreshed: Sonar is the commercial search-answering API. NOT a
-  // general frontier LLM — classified narrowly.
+  // general frontier LLM, classified narrowly.
   model({
     id: "model_perplexity_sonar",
     vendorId: "perplexity", vendorName: "Perplexity",
@@ -1346,7 +1346,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_perplexity_pending"],
     sourceUrls: ["https://docs.perplexity.ai/docs/sonar/models"],
-    sourceNames: ["Perplexity — Sonar models"],
+    sourceNames: ["Perplexity, Sonar models"],
     uncertaintyNote: "Sonar is a search-answering API, not a general frontier LLM.",
   }),
   model({
@@ -1358,7 +1358,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_perplexity_pending"],
     sourceUrls: ["https://docs.perplexity.ai/docs/sonar/models"],
-    sourceNames: ["Perplexity — Sonar models"],
+    sourceNames: ["Perplexity, Sonar models"],
   }),
   model({
     id: "model_perplexity_sonar_reasoning_pro",
@@ -1369,7 +1369,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_perplexity_pending"],
     sourceUrls: ["https://docs.perplexity.ai/docs/sonar/models"],
-    sourceNames: ["Perplexity — Sonar models"],
+    sourceNames: ["Perplexity, Sonar models"],
   }),
   model({
     id: "model_perplexity_sonar_deep_research",
@@ -1380,7 +1380,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_perplexity_pending"],
     sourceUrls: ["https://docs.perplexity.ai/docs/sonar/models"],
-    sourceNames: ["Perplexity — Sonar models"],
+    sourceNames: ["Perplexity, Sonar models"],
   }),
 
   // ───────────── NVIDIA (refresh required) ─────────────
@@ -1393,8 +1393,8 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "unknown",
     sourceIds: ["src_nvidia_pending"],
     sourceUrls: ["https://developer.nvidia.com/nemotron"],
-    sourceNames: ["NVIDIA — Nemotron developer hub"],
-    uncertaintyNote: "Nemotron 3 family — Nano / Super / Speech / Safety / RAG variants per developer.nvidia.com.",
+    sourceNames: ["NVIDIA, Nemotron developer hub"],
+    uncertaintyNote: "Nemotron 3 family, Nano / Super / Speech / Safety / RAG variants per developer.nvidia.com.",
   }),
   model({
     id: "model_nvda_nemotron_3_super",
@@ -1405,7 +1405,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_nvidia_nemotron"],
     sourceUrls: ["https://developer.nvidia.com/nemotron"],
-    sourceNames: ["NVIDIA — Nemotron developer hub"],
+    sourceNames: ["NVIDIA, Nemotron developer hub"],
   }),
   model({
     id: "model_nvda_nemotron_3_omni",
@@ -1416,7 +1416,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_nvidia_nemotron"],
     sourceUrls: ["https://developer.nvidia.com/nemotron"],
-    sourceNames: ["NVIDIA — Nemotron developer hub"],
+    sourceNames: ["NVIDIA, Nemotron developer hub"],
   }),
   model({
     id: "model_nvda_nemotron_speech",
@@ -1427,7 +1427,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_nvidia_nemotron"],
     sourceUrls: ["https://developer.nvidia.com/nemotron"],
-    sourceNames: ["NVIDIA — Nemotron developer hub"],
+    sourceNames: ["NVIDIA, Nemotron developer hub"],
   }),
 
   // ───────────── Meta (first-party Llama owner) ─────────────
@@ -1444,7 +1444,7 @@ export const SEED_MODELS: CommercialModel[] = [
     inputModalities: ["text", "image"], outputModalities: ["text"],
     sourceIds: ["src_meta_llama"],
     sourceUrls: ["https://www.llama.com/docs/overview/"],
-    sourceNames: ["Meta — Llama overview"],
+    sourceNames: ["Meta, Llama overview"],
   }),
   model({
     id: "model_meta_llama_4_scout",
@@ -1455,7 +1455,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_meta_llama"],
     sourceUrls: ["https://www.llama.com/docs/overview/"],
-    sourceNames: ["Meta — Llama overview"],
+    sourceNames: ["Meta, Llama overview"],
   }),
 
   // ───────────── DeepSeek (first-party) ─────────────
@@ -1468,7 +1468,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_deepseek_models"],
     sourceUrls: ["https://api-docs.deepseek.com/quick_start/pricing"],
-    sourceNames: ["DeepSeek — pricing & model docs"],
+    sourceNames: ["DeepSeek, pricing & model docs"],
   }),
   model({
     id: "model_deepseek_v4_flash",
@@ -1479,13 +1479,13 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_deepseek_models"],
     sourceUrls: ["https://api-docs.deepseek.com/quick_start/pricing"],
-    sourceNames: ["DeepSeek — pricing & model docs"],
+    sourceNames: ["DeepSeek, pricing & model docs"],
   }),
 
   // ───────────── Snowflake (first-party Arctic) ─────────────
   // Per user direction: Snowflake moves out of infrastructure-only.
   // Cortex is treated separately as a hosting layer for third-party
-  // models — Arctic is the first-party open enterprise LLM family.
+  // models, Arctic is the first-party open enterprise LLM family.
   model({
     id: "model_snowflake_arctic",
     vendorId: "snow", vendorName: "Snowflake",
@@ -1495,12 +1495,12 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_snowflake_arctic"],
     sourceUrls: ["https://www.snowflake.com/en/product/features/arctic/"],
-    sourceNames: ["Snowflake — Arctic model family"],
+    sourceNames: ["Snowflake, Arctic model family"],
     uncertaintyNote: "Arctic published as open-weight enterprise LLM. Cortex separately hosts third-party models (treated as hosted layer).",
   }),
 
   // ───────────── Alibaba / Qwen (first-party) ─────────────
-  // Global frontier family — Qwen3 + Qwen3.5 series with reasoning,
+  // Global frontier family, Qwen3 + Qwen3.5 series with reasoning,
   // multimodal, and flash size variants per Alibaba Cloud Model Studio.
   model({
     id: "model_alibaba_qwen3_max",
@@ -1511,7 +1511,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_alibaba_qwen"],
     sourceUrls: ["https://www.alibabacloud.com/help/en/model-studio/models"],
-    sourceNames: ["Alibaba Cloud — Model Studio"],
+    sourceNames: ["Alibaba Cloud, Model Studio"],
   }),
   model({
     id: "model_alibaba_qwen35_plus",
@@ -1522,7 +1522,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_alibaba_qwen"],
     sourceUrls: ["https://www.alibabacloud.com/help/en/model-studio/models"],
-    sourceNames: ["Alibaba Cloud — Model Studio"],
+    sourceNames: ["Alibaba Cloud, Model Studio"],
   }),
   model({
     id: "model_alibaba_qwen35_flash",
@@ -1533,7 +1533,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_alibaba_qwen"],
     sourceUrls: ["https://www.alibabacloud.com/help/en/model-studio/models"],
-    sourceNames: ["Alibaba Cloud — Model Studio"],
+    sourceNames: ["Alibaba Cloud, Model Studio"],
   }),
   model({
     id: "model_alibaba_qwq",
@@ -1544,7 +1544,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_alibaba_qwen"],
     sourceUrls: ["https://www.alibabacloud.com/help/en/model-studio/models"],
-    sourceNames: ["Alibaba Cloud — Model Studio"],
+    sourceNames: ["Alibaba Cloud, Model Studio"],
   }),
 
   // ───────────── Moonshot AI / Kimi (first-party) ─────────────
@@ -1557,7 +1557,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_moonshot_kimi"],
     sourceUrls: ["https://platform.moonshot.ai"],
-    sourceNames: ["Moonshot AI — Platform docs"],
+    sourceNames: ["Moonshot AI, Platform docs"],
   }),
   model({
     id: "model_moonshot_k25",
@@ -1568,7 +1568,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_moonshot_kimi"],
     sourceUrls: ["https://platform.moonshot.ai"],
-    sourceNames: ["Moonshot AI — Platform docs"],
+    sourceNames: ["Moonshot AI, Platform docs"],
   }),
   model({
     id: "model_moonshot_k2_thinking",
@@ -1579,7 +1579,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_moonshot_kimi"],
     sourceUrls: ["https://platform.moonshot.ai"],
-    sourceNames: ["Moonshot AI — Platform docs"],
+    sourceNames: ["Moonshot AI, Platform docs"],
   }),
 
   // ───────────── Z.ai / Zhipu (first-party) ─────────────
@@ -1592,7 +1592,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_zai_glm"],
     sourceUrls: ["https://docs.z.ai/guides/llm/glm-5.1"],
-    sourceNames: ["Z.ai — GLM model docs"],
+    sourceNames: ["Z.ai, GLM model docs"],
   }),
 
   // ───────────── MiniMax (first-party) ─────────────
@@ -1605,7 +1605,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_minimax_models"],
     sourceUrls: ["https://platform.minimax.io/docs/guides/models-intro"],
-    sourceNames: ["MiniMax — Platform model docs"],
+    sourceNames: ["MiniMax, Platform model docs"],
   }),
   model({
     id: "model_minimax_m25",
@@ -1616,7 +1616,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_minimax_models"],
     sourceUrls: ["https://platform.minimax.io/docs/guides/models-intro"],
-    sourceNames: ["MiniMax — Platform model docs"],
+    sourceNames: ["MiniMax, Platform model docs"],
   }),
   model({
     id: "model_minimax_m2_her",
@@ -1627,7 +1627,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_minimax_models"],
     sourceUrls: ["https://platform.minimax.io/docs/guides/models-intro"],
-    sourceNames: ["MiniMax — Platform model docs"],
+    sourceNames: ["MiniMax, Platform model docs"],
     uncertaintyNote: "Speech / voice variant.",
   }),
 
@@ -1641,7 +1641,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_ai21_jamba"],
     sourceUrls: ["https://docs.ai21.com/docs/jamba-foundation-models"],
-    sourceNames: ["AI21 — Jamba foundation models"],
+    sourceNames: ["AI21, Jamba foundation models"],
     uncertaintyNote: "Hybrid Mamba + Transformer architecture, long context.",
   }),
   model({
@@ -1653,10 +1653,10 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "api_available",
     sourceIds: ["src_ai21_jamba"],
     sourceUrls: ["https://docs.ai21.com/docs/jamba-foundation-models"],
-    sourceNames: ["AI21 — Jamba foundation models"],
+    sourceNames: ["AI21, Jamba foundation models"],
   }),
 
-  // ───────────── Aleph Alpha — Pharia (lower-confidence) ─────────────
+  // ───────────── Aleph Alpha, Pharia (lower-confidence) ─────────────
   model({
     id: "model_aleph_pharia",
     vendorId: "aleph", vendorName: "Aleph Alpha",
@@ -1666,7 +1666,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "unknown",
     sourceIds: ["src_aleph_alpha_pharia"],
     sourceUrls: ["https://docs.aleph-alpha.com/phariaai-dev-guide/latest/pharia-llm/model-variants.html"],
-    sourceNames: ["Aleph Alpha — Pharia model variants"],
+    sourceNames: ["Aleph Alpha, Pharia model variants"],
     evidenceGrade: "E1", confidenceScore: 55, dataStatus: "seed",
     uncertaintyNote: "Weight-available release. Commercial API availability unclear from current source set.",
   }),
@@ -1681,7 +1681,7 @@ export const SEED_MODELS: CommercialModel[] = [
     commercialAvailability: "not_commercially_available",
     sourceIds: ["src_anthropic_models_overview"],
     sourceUrls: ["https://docs.anthropic.com/en/docs/about-claude/models/overview"],
-    sourceNames: ["Anthropic — Claude Models overview"],
+    sourceNames: ["Anthropic, Claude Models overview"],
     deprecationDate: "2025-07-21",
   }),
 ];
@@ -1689,7 +1689,7 @@ export const SEED_MODELS: CommercialModel[] = [
 /**
  * Vendors in our universe with no first-party commercial LLM and no third-party
  * hosted via their platform. They appear in the dashboard with an
- * "infrastructure-only" or "refresh required" badge — never invented entries.
+ * "infrastructure-only" or "refresh required" badge, never invented entries.
  */
-// `snow` removed — Snowflake now has first-party Arctic.
+// `snow` removed, Snowflake now has first-party Arctic.
 export const INFRASTRUCTURE_ONLY_VENDOR_IDS = ["amd", "avgo", "asml", "arm", "sap", "databricks", "cerebras", "hebbia", "rogo"];

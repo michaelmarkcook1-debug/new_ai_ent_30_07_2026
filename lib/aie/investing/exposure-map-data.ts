@@ -1,7 +1,7 @@
 // Ported from ranking-engine repo: lib/investing/exposure-map-data.ts
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
-// Indirect Exposure Map — verified relationship data.
+// Indirect Exposure Map, verified relationship data.
 // ──────────────────────────────────────────────────
 // Hand-curated edge list for the dashboard hero map. Every edge here
 // is either source-backed (HIGH / MEDIUM) or explicitly marked SEED
@@ -19,7 +19,7 @@
 //   4. Speculative / unverified edges are NEVER added at HIGH confidence.
 //      They appear at SEED with a clear summary or are omitted entirely.
 //   5. Vague category buckets ("frontier labs", "AI infrastructure")
-//      are NOT used — every node is a named company.
+//      are NOT used, every node is a named company.
 
 export type RelationshipType =
   | "investment"
@@ -43,7 +43,7 @@ export interface ExposureMapNode {
   ownership: OwnershipType;
   /** Concise role label shown under the node name in the tooltip. */
   category: string;
-  /** Optional Clearbit domain — we resolve to https://logo.clearbit.com/{domain}.
+  /** Optional Clearbit domain, we resolve to https://logo.clearbit.com/{domain}.
    * If absent or load fails the node renders a monogram fallback. */
   logoDomain?: string;
   /** Two-letter monogram used when logoDomain is missing or fails. */
@@ -63,7 +63,7 @@ export interface ExposureMapEdge {
   confidence: ConfidenceTier;
   /** Human-readable rough size (e.g. "$13B", "Bedrock catalog"). */
   estimatedValue?: string;
-  /** ISO date — when the relationship was last publicly updated. */
+  /** ISO date, when the relationship was last publicly updated. */
   dateUpdated: string;
   /** One-sentence explanation shown in the tooltip. */
   summary: string;
@@ -87,7 +87,7 @@ export const EXPOSURE_NODES: ExposureMapNode[] = [
     category: "Cloud / OCI", logoDomain: "oracle.com", monogram: "OR", brandColor: "#C74634" },
   // Meta is a publicly-traded company AND a model owner. Per the
   // redesign brief it belongs on the right side as the originator of
-  // Llama — see the `meta` right-side node below. We don't double-list
+  // Llama, see the `meta` right-side node below. We don't double-list
   // it on the left, which would suggest it's a buyer of itself.
   { id: "CRM", label: "Salesforce", ticker: "CRM", side: "left", ownership: "public",
     category: "CRM AI / BYOLLM", logoDomain: "salesforce.com", monogram: "SF", brandColor: "#00A1E0" },
@@ -146,7 +146,7 @@ export const EXPOSURE_NODES: ExposureMapNode[] = [
     category: "Frontier lab", logoDomain: "x.ai", monogram: "xA", brandColor: "#0F0F0F" },
   { id: "perplexity", label: "Perplexity", side: "right", ownership: "private",
     category: "Search-answer API", logoDomain: "perplexity.ai", monogram: "PX", brandColor: "#20808D" },
-  // Meta is publicly traded but listed here as a model owner — Llama
+  // Meta is publicly traded but listed here as a model owner, Llama
   // is hosted across Bedrock, Azure AI Foundry, and OCI Generative AI.
   { id: "meta", label: "Meta", ticker: "META", side: "right", ownership: "public",
     category: "Model owner (Llama)", logoDomain: "meta.com", monogram: "ME", brandColor: "#0866FF" },
@@ -181,7 +181,7 @@ export const EXPOSURE_NODES: ExposureMapNode[] = [
 /** Subset of right-side nodes shown only when "Extended ecosystem" is toggled on. */
 /**
  * Previously a curated subset shown only when the operator clicked the
- * "Extended ecosystem →" toggle. Now empty — the full ecosystem renders
+ * "Extended ecosystem →" toggle. Now empty, the full ecosystem renders
  * by default on the dedicated /investor-tools/exposure-map page. The
  * export is preserved as a stable contract; renderer code falls through
  * to "all nodes always" when this set is empty.
@@ -193,11 +193,11 @@ export const EXTENDED_ECOSYSTEM_NODE_IDS: ReadonlySet<string> = new Set([]);
 // May 2026. Confidence tier reflects how directly the relationship is
 // disclosed in primary sources:
 //
-//   HIGH    — disclosed in SEC filings, press releases, or model
+//   HIGH   , disclosed in SEC filings, press releases, or model
 //             catalogs that the operator can independently verify.
-//   MEDIUM  — publicly stated but lower disclosure depth (partnership
+//   MEDIUM , publicly stated but lower disclosure depth (partnership
 //             announcement, smaller funding rounds, indirect press).
-//   SEED    — plausible but not independently verified. Operator
+//   SEED   , plausible but not independently verified. Operator
 //             should treat as a hypothesis.
 
 export const EXPOSURE_EDGES: ExposureMapEdge[] = [
@@ -234,7 +234,7 @@ export const EXPOSURE_EDGES: ExposureMapEdge[] = [
     strengthScore: 0.5, confidence: "medium",
     estimatedValue: "Foundry catalog",
     dateUpdated: "2024-04-18",
-    summary: "Llama models hosted on Azure AI Foundry — Meta remains the original owner.",
+    summary: "Llama models hosted on Azure AI Foundry, Meta remains the original owner.",
     sourceUrls: [
       "https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/concepts/models-from-partners",
     ],
@@ -442,7 +442,7 @@ export const EXPOSURE_EDGES: ExposureMapEdge[] = [
   },
 
   // ─── ASML ──────────────────────────────────────────────────
-  // ASML supply-chain edges intentionally OMITTED — ASML's exposure
+  // ASML supply-chain edges intentionally OMITTED, ASML's exposure
   // to frontier labs is indirect (it sells lithography equipment to
   // foundries, not directly to AI labs). Per the spec: "ASML
   // relationships should be treated as supply-chain exposure only,
@@ -453,10 +453,10 @@ export const EXPOSURE_EDGES: ExposureMapEdge[] = [
   // Bipartite-renderer note: TSMC's true counterparties (NVDA, AMD,
   // Cerebras) sit on the left side, so direct TSM→NVDA edges can't
   // render. We route TSMC's edges through the frontier labs whose
-  // compute stack ultimately bottlenecks through TSMC fabrication —
+  // compute stack ultimately bottlenecks through TSMC fabrication,
   // each summary names the intermediate silicon. Confidence is
   // MEDIUM (indirect but well-documented systemic exposure).
-  { id: "tsm-openai",   sourceId: "TSM", targetId: "openai",   relationshipType: "supply_chain", strengthScore: 0.95, confidence: "medium", estimatedValue: "H100/B200 fab",   dateUpdated: "2025-03-01", summary: "OpenAI's GPU fleet (NVIDIA H100/B200) is fabricated by TSMC — the AI-compute bottleneck for OpenAI runs through TSMC's leading-edge N4/N3 process nodes.",      sourceUrls: ["https://www.tsmc.com/english/aboutTSMC/CSR_Report"] },
+  { id: "tsm-openai",   sourceId: "TSM", targetId: "openai",   relationshipType: "supply_chain", strengthScore: 0.95, confidence: "medium", estimatedValue: "H100/B200 fab",   dateUpdated: "2025-03-01", summary: "OpenAI's GPU fleet (NVIDIA H100/B200) is fabricated by TSMC, the AI-compute bottleneck for OpenAI runs through TSMC's leading-edge N4/N3 process nodes.",      sourceUrls: ["https://www.tsmc.com/english/aboutTSMC/CSR_Report"] },
   { id: "tsm-anthropic", sourceId: "TSM", targetId: "anthropic", relationshipType: "supply_chain", strengthScore: 0.85, confidence: "medium", estimatedValue: "Trainium + H100 fab", dateUpdated: "2025-03-01", summary: "Anthropic's training (AWS Trainium) and inference (NVIDIA H100) silicon are both TSMC-fabricated.", sourceUrls: ["https://www.tsmc.com/"] },
   { id: "tsm-meta",      sourceId: "TSM", targetId: "meta",      relationshipType: "supply_chain", strengthScore: 0.9,  confidence: "medium", estimatedValue: "H100 cluster fab",    dateUpdated: "2025-03-01", summary: "Meta's 350K+ H100 fleet for Llama training is fabricated by TSMC; MTIA accelerators are also on TSMC N5.", sourceUrls: ["https://www.tsmc.com/"] },
   { id: "tsm-deepmind",  sourceId: "TSM", targetId: "deepmind",  relationshipType: "supply_chain", strengthScore: 0.85, confidence: "medium", estimatedValue: "TPU fab",            dateUpdated: "2025-03-01", summary: "Google's TPU v5/v6 silicon (used by DeepMind for Gemini training) is fabricated by TSMC.", sourceUrls: ["https://www.tsmc.com/"] },
@@ -466,44 +466,44 @@ export const EXPOSURE_EDGES: ExposureMapEdge[] = [
   // ─── AMD ───────────────────────────────────────────────────
   { id: "amd-mistral", sourceId: "AMD", targetId: "mistral", relationshipType: "supply_chain",         strengthScore: 0.55, confidence: "medium", estimatedValue: "MI300 partnership", dateUpdated: "2024-12-01", summary: "Mistral named in AMD's Instinct MI300X / MI325X enterprise reference customers; partial MI300-based inference workloads.", sourceUrls: ["https://www.amd.com/en/products/accelerators/instinct/mi300.html"] },
   { id: "amd-cohere",  sourceId: "AMD", targetId: "cohere",  relationshipType: "supply_chain",         strengthScore: 0.5,  confidence: "seed",   estimatedValue: "MI300 evaluation",  dateUpdated: "2025-01-15", summary: "Cohere has publicly evaluated AMD MI300X as part of enterprise/government compute diversification.", sourceUrls: ["https://cohere.com/"] },
-  { id: "amd-meta",    sourceId: "AMD", targetId: "meta",    relationshipType: "supply_chain",         strengthScore: 0.7,  confidence: "high",   estimatedValue: "MI300X deployment", dateUpdated: "2024-10-10", summary: "Meta is a flagship AMD Instinct MI300X customer — announced large-scale Llama inference deployment on MI300.", sourceUrls: ["https://www.amd.com/en/newsroom/press-releases/2023-12-6-amd-launches-instinct-mi300-series.html"] },
+  { id: "amd-meta",    sourceId: "AMD", targetId: "meta",    relationshipType: "supply_chain",         strengthScore: 0.7,  confidence: "high",   estimatedValue: "MI300X deployment", dateUpdated: "2024-10-10", summary: "Meta is a flagship AMD Instinct MI300X customer, announced large-scale Llama inference deployment on MI300.", sourceUrls: ["https://www.amd.com/en/newsroom/press-releases/2023-12-6-amd-launches-instinct-mi300-series.html"] },
   { id: "amd-aleph",   sourceId: "AMD", targetId: "aleph",   relationshipType: "commercial_partnership", strengthScore: 0.45, confidence: "medium", estimatedValue: "Sovereign compute", dateUpdated: "2024-11-01", summary: "Aleph Alpha's sovereign compute pivot includes AMD silicon alongside HPE-hosted infrastructure.", sourceUrls: ["https://aleph-alpha.com/"] },
 
   // ─── CoreWeave ─────────────────────────────────────────────
-  { id: "crwv-openai",   sourceId: "CRWV", targetId: "openai",   relationshipType: "cloud", strengthScore: 0.9,  confidence: "high",   estimatedValue: "$11.9B 5-yr",      dateUpdated: "2025-03-10", summary: "CoreWeave signed an $11.9B multi-year compute agreement with OpenAI in March 2025 — one of the largest GPU-cloud deals on record.", sourceUrls: ["https://www.coreweave.com/"] },
+  { id: "crwv-openai",   sourceId: "CRWV", targetId: "openai",   relationshipType: "cloud", strengthScore: 0.9,  confidence: "high",   estimatedValue: "$11.9B 5-yr",      dateUpdated: "2025-03-10", summary: "CoreWeave signed an $11.9B multi-year compute agreement with OpenAI in March 2025, one of the largest GPU-cloud deals on record.", sourceUrls: ["https://www.coreweave.com/"] },
   { id: "crwv-mistral",  sourceId: "CRWV", targetId: "mistral",  relationshipType: "cloud", strengthScore: 0.55, confidence: "medium", estimatedValue: "Frontier compute",  dateUpdated: "2024-11-01", summary: "CoreWeave lists Mistral among its frontier-AI compute customers for H100-class training capacity.", sourceUrls: ["https://www.coreweave.com/"] },
   { id: "crwv-meta",     sourceId: "CRWV", targetId: "meta",     relationshipType: "cloud", strengthScore: 0.5,  confidence: "seed",   estimatedValue: "Burst capacity",    dateUpdated: "2024-09-01", summary: "Meta has used CoreWeave for burst GPU capacity beyond its in-house clusters; relationship not formally disclosed.", sourceUrls: ["https://www.coreweave.com/"] },
 
   // ─── HPE ───────────────────────────────────────────────────
-  { id: "hpe-aleph", sourceId: "HPE", targetId: "aleph", relationshipType: "commercial_partnership", strengthScore: 0.65, confidence: "medium", estimatedValue: "Sovereign hosting", dateUpdated: "2024-06-01", summary: "Aleph Alpha + HPE strategic partnership for sovereign European AI compute — HPE GreenLake delivers on-prem and hybrid hosting for Aleph models.", sourceUrls: ["https://www.hpe.com/", "https://aleph-alpha.com/"] },
+  { id: "hpe-aleph", sourceId: "HPE", targetId: "aleph", relationshipType: "commercial_partnership", strengthScore: 0.65, confidence: "medium", estimatedValue: "Sovereign hosting", dateUpdated: "2024-06-01", summary: "Aleph Alpha + HPE strategic partnership for sovereign European AI compute, HPE GreenLake delivers on-prem and hybrid hosting for Aleph models.", sourceUrls: ["https://www.hpe.com/", "https://aleph-alpha.com/"] },
 
   // ─── Dell / Supermicro ─────────────────────────────────────
-  { id: "dell-xai",  sourceId: "DELL", targetId: "xai",  relationshipType: "supply_chain", strengthScore: 0.7, confidence: "high", estimatedValue: "$5B Colossus servers", dateUpdated: "2024-07-22", summary: "Dell publicly named as a key server supplier for xAI's Memphis Colossus cluster — multi-billion-dollar GPU-server contract.", sourceUrls: ["https://www.dell.com/en-us/lp/dt/ai-solutions"] },
+  { id: "dell-xai",  sourceId: "DELL", targetId: "xai",  relationshipType: "supply_chain", strengthScore: 0.7, confidence: "high", estimatedValue: "$5B Colossus servers", dateUpdated: "2024-07-22", summary: "Dell publicly named as a key server supplier for xAI's Memphis Colossus cluster, multi-billion-dollar GPU-server contract.", sourceUrls: ["https://www.dell.com/en-us/lp/dt/ai-solutions"] },
   { id: "smci-xai",  sourceId: "SMCI", targetId: "xai",  relationshipType: "supply_chain", strengthScore: 0.7, confidence: "high", estimatedValue: "Colossus servers",     dateUpdated: "2024-07-22", summary: "Super Micro publicly named as the other primary server supplier alongside Dell for xAI Colossus.", sourceUrls: ["https://www.supermicro.com/"] },
 
   // ─── OVHcloud ──────────────────────────────────────────────
-  { id: "ovh-lighton", sourceId: "OVH", targetId: "lighton", relationshipType: "cloud", strengthScore: 0.6, confidence: "medium", estimatedValue: "Sovereign hosting", dateUpdated: "2024-04-01", summary: "LightOn's enterprise LLMs hosted on OVHcloud sovereign GPU infrastructure — French-French sovereign AI stack.", sourceUrls: ["https://www.ovhcloud.com/"] },
+  { id: "ovh-lighton", sourceId: "OVH", targetId: "lighton", relationshipType: "cloud", strengthScore: 0.6, confidence: "medium", estimatedValue: "Sovereign hosting", dateUpdated: "2024-04-01", summary: "LightOn's enterprise LLMs hosted on OVHcloud sovereign GPU infrastructure, French-French sovereign AI stack.", sourceUrls: ["https://www.ovhcloud.com/"] },
   { id: "ovh-mistral", sourceId: "OVH", targetId: "mistral", relationshipType: "cloud", strengthScore: 0.45, confidence: "seed",   estimatedValue: "Sovereign option",  dateUpdated: "2024-09-01", summary: "Mistral models available on OVHcloud AI Endpoints as a French-sovereign hosting option alongside Azure/AWS.", sourceUrls: ["https://www.ovhcloud.com/"] },
 
   // ─── Tencent / Baidu (China subsidiaries) ──────────────────
   { id: "tcehy-hunyuan", sourceId: "TCEHY", targetId: "hunyuan", relationshipType: "subsidiary", strengthScore: 1.0, confidence: "high", estimatedValue: "Wholly owned", dateUpdated: "2024-05-17", summary: "Hunyuan is Tencent's in-house multimodal foundation-model family, served via Tencent Cloud and consumer apps (WeChat).", sourceUrls: ["https://cloud.tencent.com/product/hunyuan"] },
-  { id: "bidu-ernie",    sourceId: "BIDU",  targetId: "ernie",   relationshipType: "subsidiary", strengthScore: 1.0, confidence: "high", estimatedValue: "Wholly owned", dateUpdated: "2024-06-28", summary: "ERNIE is Baidu's foundation-model family — vertically integrated with Baidu AI Cloud and Baidu Kunlun AI chips.", sourceUrls: ["https://yiyan.baidu.com/"] },
+  { id: "bidu-ernie",    sourceId: "BIDU",  targetId: "ernie",   relationshipType: "subsidiary", strengthScore: 1.0, confidence: "high", estimatedValue: "Wholly owned", dateUpdated: "2024-06-28", summary: "ERNIE is Baidu's foundation-model family, vertically integrated with Baidu AI Cloud and Baidu Kunlun AI chips.", sourceUrls: ["https://yiyan.baidu.com/"] },
 
   // ─── Cerebras ──────────────────────────────────────────────
   { id: "cerebras-openai",  sourceId: "cerebras", targetId: "openai",  relationshipType: "commercial_partnership", strengthScore: 0.4,  confidence: "seed",   estimatedValue: "Inference eval",      dateUpdated: "2025-02-01", summary: "OpenAI has been publicly named in Cerebras' aspirational customer list; relationship not formally confirmed.", sourceUrls: ["https://www.cerebras.net/"] },
-  { id: "cerebras-mistral", sourceId: "cerebras", targetId: "mistral", relationshipType: "commercial_partnership", strengthScore: 0.7,  confidence: "high",   estimatedValue: "Inference partner",   dateUpdated: "2024-08-27", summary: "Mistral Le Chat runs Mistral Large on Cerebras WSE-3 — landmark wafer-scale inference partnership.", sourceUrls: ["https://www.cerebras.net/press-release/mistral-cerebras/"] },
-  { id: "cerebras-falcon",  sourceId: "cerebras", targetId: "falcon",  relationshipType: "commercial_partnership", strengthScore: 0.85, confidence: "high",   estimatedValue: "Condor Galaxy training", dateUpdated: "2023-07-20", summary: "Falcon models trained on G42 + Cerebras' Condor Galaxy supercomputer network — flagship sovereign + WSE-3 training partnership.", sourceUrls: ["https://www.cerebras.net/press-release/g42-cerebras-condor-galaxy/"] },
-  { id: "cerebras-meta",    sourceId: "cerebras", targetId: "meta",    relationshipType: "commercial_partnership", strengthScore: 0.55, confidence: "medium", estimatedValue: "Llama inference",     dateUpdated: "2024-08-27", summary: "Llama 3.x served via Cerebras Inference cloud at industry-leading tokens/sec — open-model inference channel.", sourceUrls: ["https://inference.cerebras.ai/"] },
+  { id: "cerebras-mistral", sourceId: "cerebras", targetId: "mistral", relationshipType: "commercial_partnership", strengthScore: 0.7,  confidence: "high",   estimatedValue: "Inference partner",   dateUpdated: "2024-08-27", summary: "Mistral Le Chat runs Mistral Large on Cerebras WSE-3, landmark wafer-scale inference partnership.", sourceUrls: ["https://www.cerebras.net/press-release/mistral-cerebras/"] },
+  { id: "cerebras-falcon",  sourceId: "cerebras", targetId: "falcon",  relationshipType: "commercial_partnership", strengthScore: 0.85, confidence: "high",   estimatedValue: "Condor Galaxy training", dateUpdated: "2023-07-20", summary: "Falcon models trained on G42 + Cerebras' Condor Galaxy supercomputer network, flagship sovereign + WSE-3 training partnership.", sourceUrls: ["https://www.cerebras.net/press-release/g42-cerebras-condor-galaxy/"] },
+  { id: "cerebras-meta",    sourceId: "cerebras", targetId: "meta",    relationshipType: "commercial_partnership", strengthScore: 0.55, confidence: "medium", estimatedValue: "Llama inference",     dateUpdated: "2024-08-27", summary: "Llama 3.x served via Cerebras Inference cloud at industry-leading tokens/sec, open-model inference channel.", sourceUrls: ["https://inference.cerebras.ai/"] },
 
   // ─── Groq ──────────────────────────────────────────────────
-  { id: "groq-meta",     sourceId: "groq", targetId: "meta",     relationshipType: "commercial_partnership", strengthScore: 0.8, confidence: "high",   estimatedValue: "Llama LPU inference", dateUpdated: "2024-09-24", summary: "Llama 3.x hosted on Groq LPU inference — flagship open-model partnership announced at Meta Connect.", sourceUrls: ["https://groq.com/"] },
+  { id: "groq-meta",     sourceId: "groq", targetId: "meta",     relationshipType: "commercial_partnership", strengthScore: 0.8, confidence: "high",   estimatedValue: "Llama LPU inference", dateUpdated: "2024-09-24", summary: "Llama 3.x hosted on Groq LPU inference, flagship open-model partnership announced at Meta Connect.", sourceUrls: ["https://groq.com/"] },
   { id: "groq-mistral",  sourceId: "groq", targetId: "mistral",  relationshipType: "commercial_partnership", strengthScore: 0.6, confidence: "high",   estimatedValue: "Mixtral inference",   dateUpdated: "2024-04-01", summary: "Mistral / Mixtral models hosted on GroqCloud for ultra-low-latency inference.", sourceUrls: ["https://groq.com/"] },
   { id: "groq-deepseek", sourceId: "groq", targetId: "deepseek", relationshipType: "commercial_partnership", strengthScore: 0.5, confidence: "medium", estimatedValue: "R1 inference",        dateUpdated: "2025-02-05", summary: "DeepSeek R1 / R1-distill served via GroqCloud as part of open-reasoning model lineup.", sourceUrls: ["https://groq.com/"] },
 
   // ─── Together AI ───────────────────────────────────────────
-  { id: "together-meta",     sourceId: "togetherai", targetId: "meta",     relationshipType: "commercial_partnership", strengthScore: 0.8, confidence: "high",   estimatedValue: "Llama hosting",  dateUpdated: "2024-08-01", summary: "Together AI is a flagship Llama inference + fine-tuning host — full Llama 3.x family available.", sourceUrls: ["https://www.together.ai/"] },
+  { id: "together-meta",     sourceId: "togetherai", targetId: "meta",     relationshipType: "commercial_partnership", strengthScore: 0.8, confidence: "high",   estimatedValue: "Llama hosting",  dateUpdated: "2024-08-01", summary: "Together AI is a flagship Llama inference + fine-tuning host, full Llama 3.x family available.", sourceUrls: ["https://www.together.ai/"] },
   { id: "together-deepseek", sourceId: "togetherai", targetId: "deepseek", relationshipType: "commercial_partnership", strengthScore: 0.7, confidence: "high",   estimatedValue: "R1 hosting",     dateUpdated: "2025-01-25", summary: "DeepSeek V3 + R1 hosted on Together AI as one of the first non-Chinese inference endpoints.", sourceUrls: ["https://www.together.ai/"] },
-  { id: "together-alibaba",  sourceId: "togetherai", targetId: "alibaba",  relationshipType: "commercial_partnership", strengthScore: 0.6, confidence: "high",   estimatedValue: "Qwen hosting",   dateUpdated: "2024-10-01", summary: "Qwen 2.5 / Qwen 3 served via Together AI — open-weight multilingual lineup.", sourceUrls: ["https://www.together.ai/"] },
+  { id: "together-alibaba",  sourceId: "togetherai", targetId: "alibaba",  relationshipType: "commercial_partnership", strengthScore: 0.6, confidence: "high",   estimatedValue: "Qwen hosting",   dateUpdated: "2024-10-01", summary: "Qwen 2.5 / Qwen 3 served via Together AI, open-weight multilingual lineup.", sourceUrls: ["https://www.together.ai/"] },
   { id: "together-mistral",  sourceId: "togetherai", targetId: "mistral",  relationshipType: "commercial_partnership", strengthScore: 0.55, confidence: "medium", estimatedValue: "Mixtral hosting", dateUpdated: "2024-04-01", summary: "Mistral 7B / Mixtral hosted on Together AI inference cloud.", sourceUrls: ["https://www.together.ai/"] },
 
   // ─── Fireworks AI ──────────────────────────────────────────
@@ -518,21 +518,21 @@ export const EXPOSURE_EDGES: ExposureMapEdge[] = [
   { id: "g42-falcon", sourceId: "g42", targetId: "falcon", relationshipType: "investment", strengthScore: 0.85, confidence: "high", estimatedValue: "UAE state compute", dateUpdated: "2023-09-01", summary: "G42 provides the sovereign compute (Condor Galaxy supercomputers, AI cloud) underpinning Falcon's TII training programme.", sourceUrls: ["https://www.g42.ai/"] },
 
   // ─── Huawei (China sovereign silicon) ──────────────────────
-  { id: "huawei-deepseek", sourceId: "huawei", targetId: "deepseek", relationshipType: "supply_chain", strengthScore: 0.6, confidence: "medium", estimatedValue: "Ascend 910B inference", dateUpdated: "2025-02-10", summary: "DeepSeek has publicly demonstrated R1 inference on Huawei Ascend 910B — strategic China-sovereign silicon hedge against US chip restrictions.", sourceUrls: ["https://www.huawei.com/"] },
+  { id: "huawei-deepseek", sourceId: "huawei", targetId: "deepseek", relationshipType: "supply_chain", strengthScore: 0.6, confidence: "medium", estimatedValue: "Ascend 910B inference", dateUpdated: "2025-02-10", summary: "DeepSeek has publicly demonstrated R1 inference on Huawei Ascend 910B, strategic China-sovereign silicon hedge against US chip restrictions.", sourceUrls: ["https://www.huawei.com/"] },
 
-  // ─── NVIDIA — additional frontier exposure ─────────────────
-  { id: "nvda-meta",     sourceId: "NVDA", targetId: "meta",     relationshipType: "supply_chain", strengthScore: 1.0,  confidence: "high",   estimatedValue: "350K+ H100 fleet",  dateUpdated: "2024-01-18", summary: "Meta is one of NVIDIA's largest customers — public guidance of 350K+ H100 GPUs by end of 2024 for Llama training and Reality Labs.", sourceUrls: ["https://about.fb.com/news/2024/01/metas-ai-roadmap/"] },
-  { id: "nvda-deepseek", sourceId: "NVDA", targetId: "deepseek", relationshipType: "supply_chain", strengthScore: 0.7,  confidence: "medium", estimatedValue: "H800/H20 exposure", dateUpdated: "2025-01-27", summary: "DeepSeek trained V3 / R1 on NVIDIA H800 + H20 GPUs (the China-export-compliant variants) — exposure is real but subject to ongoing US export-control tightening.", sourceUrls: ["https://www.deepseek.com/"] },
+  // ─── NVIDIA, additional frontier exposure ─────────────────
+  { id: "nvda-meta",     sourceId: "NVDA", targetId: "meta",     relationshipType: "supply_chain", strengthScore: 1.0,  confidence: "high",   estimatedValue: "350K+ H100 fleet",  dateUpdated: "2024-01-18", summary: "Meta is one of NVIDIA's largest customers, public guidance of 350K+ H100 GPUs by end of 2024 for Llama training and Reality Labs.", sourceUrls: ["https://about.fb.com/news/2024/01/metas-ai-roadmap/"] },
+  { id: "nvda-deepseek", sourceId: "NVDA", targetId: "deepseek", relationshipType: "supply_chain", strengthScore: 0.7,  confidence: "medium", estimatedValue: "H800/H20 exposure", dateUpdated: "2025-01-27", summary: "DeepSeek trained V3 / R1 on NVIDIA H800 + H20 GPUs (the China-export-compliant variants), exposure is real but subject to ongoing US export-control tightening.", sourceUrls: ["https://www.deepseek.com/"] },
   { id: "nvda-alibaba",  sourceId: "NVDA", targetId: "alibaba",  relationshipType: "supply_chain", strengthScore: 0.7,  confidence: "medium", estimatedValue: "H800/H20 fleet",    dateUpdated: "2024-09-01", summary: "Alibaba Cloud's Qwen training fleet relies on NVIDIA H800 / H20 silicon alongside Alibaba's own T-Head accelerators.", sourceUrls: ["https://www.alibabacloud.com/"] },
   { id: "nvda-falcon",   sourceId: "NVDA", targetId: "falcon",   relationshipType: "supply_chain", strengthScore: 0.65, confidence: "medium", estimatedValue: "DGX/H100 capacity",  dateUpdated: "2024-04-01", summary: "TII's Falcon training capacity spans NVIDIA DGX H100 (UAE installations) alongside the Cerebras Condor Galaxy partnership.", sourceUrls: ["https://falconllm.tii.ae/"] },
   { id: "nvda-zai",      sourceId: "NVDA", targetId: "zai",      relationshipType: "supply_chain", strengthScore: 0.55, confidence: "seed",   estimatedValue: "H800 training",     dateUpdated: "2024-09-01", summary: "Z.ai's GLM family trained on NVIDIA H800 capacity inside China; sovereign-silicon transition underway.", sourceUrls: ["https://z.ai/"] },
-  { id: "nvda-ernie",    sourceId: "NVDA", targetId: "ernie",    relationshipType: "supply_chain", strengthScore: 0.5,  confidence: "seed",   estimatedValue: "H800 + Kunlun mix", dateUpdated: "2024-09-01", summary: "Baidu ERNIE trained on a mix of NVIDIA H800 and Baidu's own Kunlun P800 chips — vertically integrated stack with sovereign hedge.", sourceUrls: ["https://yiyan.baidu.com/"] },
+  { id: "nvda-ernie",    sourceId: "NVDA", targetId: "ernie",    relationshipType: "supply_chain", strengthScore: 0.5,  confidence: "seed",   estimatedValue: "H800 + Kunlun mix", dateUpdated: "2024-09-01", summary: "Baidu ERNIE trained on a mix of NVIDIA H800 and Baidu's own Kunlun P800 chips, vertically integrated stack with sovereign hedge.", sourceUrls: ["https://yiyan.baidu.com/"] },
   { id: "nvda-hunyuan",  sourceId: "NVDA", targetId: "hunyuan",  relationshipType: "supply_chain", strengthScore: 0.55, confidence: "seed",   estimatedValue: "H800 fleet",        dateUpdated: "2024-09-01", summary: "Tencent Hunyuan training relies on NVIDIA H800 capacity inside Tencent Cloud.", sourceUrls: ["https://cloud.tencent.com/"] },
   { id: "nvda-lighton",  sourceId: "NVDA", targetId: "lighton",  relationshipType: "supply_chain", strengthScore: 0.4,  confidence: "seed",   estimatedValue: "Sovereign GPU",     dateUpdated: "2024-04-01", summary: "LightOn enterprise LLMs trained on NVIDIA GPUs hosted in OVHcloud sovereign-EU infrastructure.", sourceUrls: ["https://www.lighton.ai/"] },
   { id: "nvda-aleph",    sourceId: "NVDA", targetId: "aleph",    relationshipType: "supply_chain", strengthScore: 0.5,  confidence: "medium", estimatedValue: "H100 alongside AMD", dateUpdated: "2024-11-01", summary: "Aleph Alpha's training stack uses NVIDIA H100 alongside its AMD MI300 sovereign-compute pivot.", sourceUrls: ["https://aleph-alpha.com/"] },
 
-  // ─── Microsoft — Falcon (Azure sovereign catalog) ──────────
-  { id: "msft-falcon", sourceId: "MSFT", targetId: "falcon", relationshipType: "model_hosting", strengthScore: 0.45, confidence: "medium", estimatedValue: "Azure catalog", dateUpdated: "2024-05-22", summary: "Falcon family available in the Azure AI Foundry model catalog — sovereign + Microsoft distribution channel.", sourceUrls: ["https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/"] },
+  // ─── Microsoft, Falcon (Azure sovereign catalog) ──────────
+  { id: "msft-falcon", sourceId: "MSFT", targetId: "falcon", relationshipType: "model_hosting", strengthScore: 0.45, confidence: "medium", estimatedValue: "Azure catalog", dateUpdated: "2024-05-22", summary: "Falcon family available in the Azure AI Foundry model catalog, sovereign + Microsoft distribution channel.", sourceUrls: ["https://learn.microsoft.com/en-us/azure/ai-foundry/foundry-models/"] },
 ];
 
 // ──────────────── Sanity check ────────────────

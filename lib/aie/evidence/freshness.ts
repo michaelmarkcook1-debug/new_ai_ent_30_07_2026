@@ -2,7 +2,7 @@
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
 /**
- * Freshness gate — translates a sourceDate + a per-source horizon into a
+ * Freshness gate, translates a sourceDate + a per-source horizon into a
  * fresh / stale / unknown status. The horizon is per source class:
  * official filings stay fresh for 90 days, market sentiment for 14, etc.
  */

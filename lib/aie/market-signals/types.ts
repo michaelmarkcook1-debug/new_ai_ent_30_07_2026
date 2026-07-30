@@ -2,7 +2,7 @@
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
 /**
- * Market Signals Engine — types.
+ * Market Signals Engine, types.
  * Per the addendum (Sections 4, 5, 6, 9, 10).
  */
 

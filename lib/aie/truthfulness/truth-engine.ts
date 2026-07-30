@@ -2,26 +2,26 @@
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
 /**
- * Truth Engine — minimum contract.
+ * Truth Engine, minimum contract.
  *
  * Spec: Stage 1 prompt pack, Task 04
  *   `04_TASK_3_TRUTH_ENGINE_MINIMUM_CONTRACT.md`
  *
  * One module, one set of unified helpers any consumer can rely on:
  *
- *   canRenderAsVerified(record) — strict gate; E0/seed/missing-source all
+ *   canRenderAsVerified(record), strict gate; E0/seed/missing-source all
  *                                 forbidden; freshness gate enforced.
- *   truthDisplayStatus(record)  — short label for UI badges.
- *   truthBadgeProps(record)     — { label, tone, title } for inline badges.
- *   requiresValidation(record)  — boolean: source-validation must be shown.
+ *   truthDisplayStatus(record) , short label for UI badges.
+ *   truthBadgeProps(record)    , { label, tone, title } for inline badges.
+ *   requiresValidation(record) , boolean: source-validation must be shown.
  *
  * The TruthRecord type below is the canonical claim shape across the app.
  * Consumers (capabilities cell, dashboard widgets, simulator overlays) wrap
  * their own data into a TruthRecord-shaped value before asking these
- * helpers — no per-consumer copy of the rules.
+ * helpers, no per-consumer copy of the rules.
  *
  * Truthfulness rules (locked by tests):
- *   1. E0 cannot render as verified — ever.
+ *   1. E0 cannot render as verified, ever.
  *   2. dataStatus "seed" cannot render as verified.
  *   3. dataStatus "stale" downgrades; not verified.
  *   4. dataStatus "disputed" requires validation; not verified.
@@ -66,7 +66,7 @@ export interface TruthRecord {
   sourceIds: string[];
 
   evidenceGrade: EvidenceGrade;
-  /** 0–100 — caller computes via lib/evidence/confidence.confidenceFor(). */
+  /** 0–100, caller computes via lib/evidence/confidence.confidenceFor(). */
   confidenceScore: number;
   dataStatus: TruthDataStatus;
   freshnessStatus: TruthFreshnessStatus;
@@ -145,22 +145,22 @@ export function truthBadgeProps(record: TruthRecord): TruthBadgeProps {
     };
   }
   if (record.dataStatus === "disputed") {
-    return { label: "Disputed", tone: "bad", title: record.uncertaintyNote ?? "Conflicting sources — human review required." };
+    return { label: "Disputed", tone: "bad", title: record.uncertaintyNote ?? "Conflicting sources, human review required." };
   }
   if (record.dataStatus === "unsupported") {
-    return { label: "Unknown", tone: "bad", title: "Unsupported claim — not rendered as fact." };
+    return { label: "Unknown", tone: "bad", title: "Unsupported claim, not rendered as fact." };
   }
   if (record.dataStatus === "unknown") {
     return { label: "Unknown", tone: "neutral", title: record.uncertaintyNote ?? "No data." };
   }
   if (stale) {
-    return { label: "Stale", tone: "warn", title: "Source older than freshness horizon — refresh required." };
+    return { label: "Stale", tone: "warn", title: "Source older than freshness horizon, refresh required." };
   }
   if (noSources) {
-    return { label: "Source validation required", tone: "bad", title: "No source citations recorded — claim cannot render as fact." };
+    return { label: "Source validation required", tone: "bad", title: "No source citations recorded, claim cannot render as fact." };
   }
   if (record.dataStatus === "seed") {
-    return { label: "Seed", tone: "warn", title: "Typed seed module — not source-backed evidence yet." };
+    return { label: "Seed", tone: "warn", title: "Typed seed module, not source-backed evidence yet." };
   }
   if (record.dataStatus === "documented") {
     return {

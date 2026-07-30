@@ -47,7 +47,16 @@ Dates are absolute; the build day is 30 July 2026.
 9. **Anthropic API key.** ANTHROPIC_API_KEY is empty in .env.local, so the
    AI Analyst ships in scripted sample mode with badged canned answers, per
    Section 8. Adding a key switches it live without code changes.
-10. **Sample content policy.** SAMPLE-badged narrative content (headlines,
+10. **Em-dash sanitisation of ported files.** The ranking-engine source
+    files contain em-dashes in comments and data strings; spec rule 7 bans
+    em-dashes anywhere and some of those strings render in the UI. All
+    em-dashes in lib/aie/ were replaced with commas or colons by a scripted
+    transformation on 30 July 2026. This is typography only; no words,
+    figures or labels were altered. Recorded BoardRadar responses in
+    fixtures/br/ were NOT modified (they are evidence and pass through
+    untouched); the ordinary English word "peak" appearing inside recorded
+    upstream text is not the competitor framework name and is left as is.
+11. **Sample content policy.** SAMPLE-badged narrative content (headlines,
     insight titles) is written to be plausible and clearly illustrative; no
     real-world measurement, benchmark or financial figure is stated in
     SAMPLE content. Real figures appear only in live BoardRadar payloads or

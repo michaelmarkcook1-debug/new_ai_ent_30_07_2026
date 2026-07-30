@@ -1,7 +1,7 @@
 // Ported from ranking-engine repo: lib/intelligence/seed-capabilities.ts
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
-// Capability tracker seeds — 10 capability families × selected vendors.
+// Capability tracker seeds, 10 capability families × selected vendors.
 
 import type { Capability, VendorCapability } from "./types";
 

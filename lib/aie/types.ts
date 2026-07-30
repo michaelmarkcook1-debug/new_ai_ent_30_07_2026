@@ -1,7 +1,7 @@
 // Ported from ranking-engine repo: lib/types.ts
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
-// Enterprise AI Platform Ranking Engine — Core Type Model
+// Enterprise AI Platform Ranking Engine, Core Type Model
 // Source: Product Spec v1.0, Sections 8–13, 16, 18.
 // Six user-facing pillars; 12-domain backend; E0–E5 evidence grading.
 
@@ -95,7 +95,7 @@ export type AutonomyAppetite = "advisory_only" | "human_in_loop" | "supervised_a
 
 export type AdoptionMaturityBand = "nascent" | "emerging" | "developing" | "mainstream" | "advanced";
 
-// User input — context that drives scoring (spec §7)
+// User input, context that drives scoring (spec §7)
 /* ─── Guided tier additional inputs ─────────────────────────────── */
 
 export type GovernanceStrictness = 1 | 2 | 3 | 4 | 5;
@@ -181,7 +181,7 @@ export interface EvidenceItem {
   grade: EvidenceGrade;
   // 0-100 raw capability assertion this evidence supports
   rawScore: number;
-  // For freshness modifier — days threshold per source category handled in engine
+  // For freshness modifier, days threshold per source category handled in engine
   freshnessDays?: number;
 }
 
@@ -223,7 +223,7 @@ export interface Vendor {
 export interface IndustryProfile {
   id: IndustryArchetype;
   name: string;
-  // Pillar weights — must sum to 1.0
+  // Pillar weights, must sum to 1.0
   weights: Record<PillarId, number>;
   fatalBlockerDomains: DomainId[]; // weak coverage in these → fatal in this industry
   evidenceStrictness: number; // 1.0 baseline; >1 demands higher grades
@@ -237,7 +237,7 @@ export interface IndustryProfile {
   };
 }
 
-// Engine outputs — spec §18
+// Engine outputs, spec §18
 
 export interface PillarBreakdown {
   pillar: PillarId;

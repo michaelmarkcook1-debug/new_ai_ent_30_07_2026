@@ -173,7 +173,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
   scope("glean", "Glean", [
     ["Glean Assistant", "enterprise_assistant"],
     // Glean's marketing rebrand of the Assistant. Both names appear on
-    // glean.com — kept as a separate scope entry so the linkage
+    // glean.com, kept as a separate scope entry so the linkage
     // suggester catches either form in the excerpt.
     ["Glean Work AI", "enterprise_assistant"],
     ["Glean Agents", "agent_platform"],
@@ -223,7 +223,7 @@ const PRODUCT_SEEDS: ProductSeed[] = [
     ["Financial data/platform integrations", "finance_ai"],
     ["Institutional investment memo outputs", "finance_ai"],
   ], { modules: [...DEFAULT_MODULES, "AI Platform Fit Assessment", "Investment Simulator"], simulator: true, assessment: true }),
-  // Perplexity is a PLATFORM vendor only — included in ProductScope,
+  // Perplexity is a PLATFORM vendor only, included in ProductScope,
   // Capabilities, Commercial Models, Vendor Intelligence, and News
   // Intelligence; EXCLUDED from every Investor Tools surface
   // (Investment Intelligence, Investment Simulator, IPO Watch, Public

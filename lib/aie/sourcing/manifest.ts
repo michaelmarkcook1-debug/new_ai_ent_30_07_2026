@@ -1,7 +1,7 @@
 // Ported from ranking-engine repo: lib/sourcing/manifest.ts
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
-// Sourcing manifest — single source of truth for "where every data point comes from".
+// Sourcing manifest, single source of truth for "where every data point comes from".
 //
 // Each entry pairs a vendor with one URL on the public web that we believe
 // gives evidence for one or more backend domains. The runner fetches the URL,
@@ -44,7 +44,7 @@ export interface SourceManifestEntry {
   expectedDomains: string[];
   // How many days a fetched snapshot is treated as fresh.
   freshnessHorizonDays: number;
-  // Operator notes — why we chose this URL, caveats.
+  // Operator notes, why we chose this URL, caveats.
   notes?: string;
 }
 
@@ -254,7 +254,7 @@ export const SOURCE_MANIFEST: SourceManifestEntry[] = [
     label: "Mistral security",
     expectedDomains: ["data_security_privacy"],
     freshnessHorizonDays: TRUST_HORIZON,
-    notes: "EU-jurisdiction default — important for sovereignty scoring." },
+    notes: "EU-jurisdiction default, important for sovereignty scoring." },
   { vendorId: "vendor_mistral", category: "pricing_page",
     url: "https://mistral.ai/pricing",
     label: "Mistral pricing",

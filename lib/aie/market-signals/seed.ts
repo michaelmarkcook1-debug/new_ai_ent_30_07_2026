@@ -2,9 +2,9 @@
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
 /**
- * Seed market signals — source-cited, deterministic.
+ * Seed market signals, source-cited, deterministic.
  * Truthfulness gate: anything not backed by a real public URL is marked
- * `dataStatus: "seed"` and `evidenceGrade: "E1"` so it cannot move centre —
+ * `dataStatus: "seed"` and `evidenceGrade: "E1"` so it cannot move centre,
  * only widen bands or trigger a watchlist alert. See engine.ts.
  */
 
@@ -37,7 +37,7 @@ export const SEED_SIGNALS: MarketSignal[] = [
     volatilityImpact: 12, valuationImpact: 8, revenueImpact: 0, marginImpact: 0,
     ipoWindowImpact: 6, liquidityImpact: 4, regulatoryImpact: 0, infrastructureImpact: 0, politicalRiskImpact: 0,
     notes: "Hold-with-easing-bias is mildly supportive of long-duration tech multiples.",
-    uncertaintyNote: "Data as published — interpretation of statement bias is analyst judgment.",
+    uncertaintyNote: "Data as published, interpretation of statement bias is analyst judgment.",
     requiresHumanReview: false,
   },
   {
@@ -57,7 +57,7 @@ export const SEED_SIGNALS: MarketSignal[] = [
     volatilityImpact: -6, valuationImpact: 5, revenueImpact: 0, marginImpact: 0,
     ipoWindowImpact: 4, liquidityImpact: 3, regulatoryImpact: 0, infrastructureImpact: 0, politicalRiskImpact: 0,
     notes: "Disinflation supportive of multiple expansion in tech.",
-    uncertaintyNote: "Single-print risk — revisions possible.",
+    uncertaintyNote: "Single-print risk, revisions possible.",
     requiresHumanReview: false,
   },
   {
@@ -114,7 +114,7 @@ export const SEED_SIGNALS: MarketSignal[] = [
     affectedExposureClasses: ["ai_infrastructure_enabler"],
     affectedModules: ["investor_tools", "simulator", "vendor_profile", "watchlist", "briefing"],
     sourceId: "src_bis_export_controls_2025",
-    sourceName: "US BIS Federal Register notice — AI advanced computing rule",
+    sourceName: "US BIS Federal Register notice, AI advanced computing rule",
     sourceUrl: "https://www.federalregister.gov/agencies/industry-and-security-bureau",
     sourceType: "regulatory_release", sourceDate: "2025-01-13", capturedAt: NOW_ISO,
     evidenceGrade: "E5", confidenceScore: 90, dataStatus: "verified",
@@ -164,7 +164,7 @@ export const SEED_SIGNALS: MarketSignal[] = [
     sentiment: 0.35, direction: "positive", magnitude: 55, timeHorizon: "medium_term",
     volatilityImpact: 4, valuationImpact: 14, revenueImpact: 18, marginImpact: 2,
     ipoWindowImpact: 0, liquidityImpact: 0, regulatoryImpact: 0, infrastructureImpact: 16, politicalRiskImpact: 0,
-    notes: "Forward release date — placeholder seed entry pending publication.",
+    notes: "Forward release date, placeholder seed entry pending publication.",
     uncertaintyNote: "Source published 2026-05-22; this is a forward placeholder (seed).",
     requiresHumanReview: true,
   },
@@ -186,7 +186,7 @@ export const SEED_SIGNALS: MarketSignal[] = [
     sentiment: 0.5, direction: "positive", magnitude: 58, timeHorizon: "medium_term",
     volatilityImpact: 8, valuationImpact: 10, revenueImpact: 8, marginImpact: -4,
     ipoWindowImpact: 6, liquidityImpact: 0, regulatoryImpact: 0, infrastructureImpact: 4, politicalRiskImpact: 0,
-    notes: "Independent benchmarking still maturing — confidence will rise as 3rd parties test.",
+    notes: "Independent benchmarking still maturing, confidence will rise as 3rd parties test.",
     uncertaintyNote: "Vendor-published benchmarks should be corroborated by 3rd parties.",
     requiresHumanReview: false,
   },
@@ -217,7 +217,7 @@ export const SEED_SIGNALS: MarketSignal[] = [
   {
     id: "sig_legal_nyt_openai_copyright",
     signalType: "legal_litigation", signalCategory: "legal_litigation",
-    title: "NYT v. OpenAI/Microsoft — discovery progressing",
+    title: "NYT v. OpenAI/Microsoft, discovery progressing",
     summary: "Federal district court permitted broader discovery on training-data sourcing.",
     entityIds: ["openai", "microsoft"], entityTypes: ["vendor"],
     vendorIds: ["openai", "msft"], tickers: ["MSFT"],
@@ -252,7 +252,7 @@ export const SEED_SIGNALS: MarketSignal[] = [
     sentiment: 0.3, direction: "positive", magnitude: 45, timeHorizon: "medium_term",
     volatilityImpact: -4, valuationImpact: 6, revenueImpact: 0, marginImpact: 0,
     ipoWindowImpact: 22, liquidityImpact: 8, regulatoryImpact: 0, infrastructureImpact: 0, politicalRiskImpact: 0,
-    notes: "Window is selective — quality issuers see better reception.",
+    notes: "Window is selective, quality issuers see better reception.",
     uncertaintyNote: "Aggregate counts can shift on a single multi-billion deal.",
     requiresHumanReview: false,
   },
@@ -273,7 +273,7 @@ export const SEED_SIGNALS: MarketSignal[] = [
     sentiment: 0.4, direction: "mixed", magnitude: 22, timeHorizon: "short_term",
     volatilityImpact: 14, valuationImpact: 0, revenueImpact: 0, marginImpact: 0,
     ipoWindowImpact: 0, liquidityImpact: 0, regulatoryImpact: 0, infrastructureImpact: 0, politicalRiskImpact: 0,
-    notes: "Market talk only — bot-risk score elevated. Cannot move centre under truthfulness gate.",
+    notes: "Market talk only, bot-risk score elevated. Cannot move centre under truthfulness gate.",
     uncertaintyNote: "Low-confidence chatter. Renders only as a watchlist alert and band-widener.",
     requiresHumanReview: true,
   },
@@ -297,7 +297,7 @@ export const SEED_MARKET_TALK: MarketTalkSignal[] = [
     volumeScore: 52, sentimentScore: -18, noveltyScore: 38, repetitionScore: 30, botRiskScore: 8,
     sourceConfidence: 35, dataStatus: "seed",
     derivedFrom: ["src_search_trends_2026_05"],
-    uncertaintyNote: "Search-volume proxy — directional only.",
+    uncertaintyNote: "Search-volume proxy, directional only.",
     capturedAt: NOW_ISO,
   },
 ];

@@ -4,7 +4,7 @@
 // Enterprise AI workflow taxonomy.
 // ─────────────────────────────────
 // The source of truth for the workflows a buyer can select inside the
-// Assessment. The original v1 of this list was 10 entries — this v2
+// Assessment. The original v1 of this list was 10 entries, this v2
 // expands it to 60+ workflows organised by industry-function category
 // so the Guided and Advanced assessment tiers can offer the depth
 // procurement teams expect, while the Quick tier still presents a
@@ -23,7 +23,7 @@
 //   - `industries`: industry archetypes where the workflow is common.
 //       Empty array = horizontal (relevant to all industries).
 //   - `commonInputs`: short tags describing the data the workflow
-//       ingests — feeds the dynamic data-sensitivity weighting.
+//       ingests, feeds the dynamic data-sensitivity weighting.
 //   - `regulatoryFlags`: regulatory regimes that typically apply.
 //       Used by the risk engine to raise reliability requirements
 //       and trigger "controlled deployment" bands when relevant.
@@ -75,7 +75,7 @@ export interface UseCase {
   reliabilityRequirement: number; // 1-5
   autonomyDefault: "advisory_only" | "human_in_loop" | "supervised_agent";
   category: string;
-  // v2 fields — all optional so older tests that construct a UseCase
+  // v2 fields, all optional so older tests that construct a UseCase
   // by positional sense continue to work. New code reads these via
   // helper accessors below that default sensibly when undefined.
   description?: string;
@@ -707,7 +707,7 @@ export const USE_CASES: UseCase[] = [
     label: "Identity & Access Review",
     riskTier: "high", reliabilityRequirement: 5, autonomyDefault: "human_in_loop",
     category: "IT", subcategory: "Security",
-    description: "Quarterly access reviews — flag over-privileged accounts.",
+    description: "Quarterly access reviews, flag over-privileged accounts.",
     tier: "advanced", industries: [],
     commonInputs: ["IDP exports", "role matrix", "termination logs"],
     regulatoryFlags: ["SOX", "SOC2"], complexity: "moderate",

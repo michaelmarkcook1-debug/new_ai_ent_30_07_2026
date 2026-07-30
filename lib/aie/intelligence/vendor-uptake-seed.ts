@@ -22,8 +22,8 @@ export interface SegmentShareRow {
 
 export interface CompanySizeRow {
   vendor: string;
-  large: number;        // 0..1 — large-enterprise share
-  sme: number;          // 0..1 — SME share
+  large: number;        // 0..1, large-enterprise share
+  sme: number;          // 0..1, SME share
 }
 
 export const REGIONS: Region[] = ["North America","Europe & UK","APAC","Latin America","Middle East & Africa"];
@@ -698,7 +698,7 @@ export function aggregateUptake(opts: {
   return out.sort((a, b) => b.share - a.share);
 }
 
-// Heatmap helper — returns share for one (region, industry, vendor) cell.
+// Heatmap helper, returns share for one (region, industry, vendor) cell.
 export function getCellShare(region: Region, industry: Industry, vendor: string): number {
   const row = SEGMENT_SHARES.find((r) => r.region === region && r.industry === industry && r.vendor === vendor);
   return row?.share ?? 0;

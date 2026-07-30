@@ -228,7 +228,7 @@ export interface SimulationPortfolio {
    * holding via the live-data enrichment, computes a per-holding tilt
    * via lib/investing/news-tilt.ts, and applies the portfolio-weighted
    * tilt to each scenario chart path. The base scenario math itself
-   * stays untouched — the overlay is layered on top so the deterministic
+   * stays untouched, the overlay is layered on top so the deterministic
    * test suite continues to pass.
    */
   applyNewsOverlay?: boolean;

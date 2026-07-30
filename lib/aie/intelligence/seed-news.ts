@@ -16,7 +16,7 @@ const make = (
   related: string[] = [],
 ): NewsItem => ({
   id, title, summary, whyItMatters,
-  // Source URLs intentionally stripped from seed data — these news items are
+  // Source URLs intentionally stripped from seed data, these news items are
   // illustrative MOCKS, not real published articles. Live ingestion (admin →
   // ingestion) populates real source URLs after analyst review.
   sourceName: `[MOCK] ${source}`,
@@ -37,7 +37,7 @@ export const NEWS_ITEMS: NewsItem[] = [
   make("news_1", 1,
     "Microsoft launches Copilot Tuning for regulated workloads",
     "Microsoft introduced Copilot Tuning that allows enterprises to fine-tune Copilot inside their tenant boundary using their own permissioned data, with extended audit logs and Sovereign Cloud support.",
-    "Sharpens Microsoft's enterprise-control narrative for regulated buyers — narrows the practical gap with vertical AI providers in legal and financial workflows.",
+    "Sharpens Microsoft's enterprise-control narrative for regulated buyers, narrows the practical gap with vertical AI providers in legal and financial workflows.",
     ["vendor_microsoft"], ["Product launch", "Enterprise control"],
     ["enterprise_control", "business_fit"], 78, 84, "positive",
     "Microsoft AI Blog", "https://blogs.microsoft.com",
@@ -73,7 +73,7 @@ export const NEWS_ITEMS: NewsItem[] = [
   make("news_5", 5,
     "ServiceNow + Moveworks integration shipping in Q3",
     "ServiceNow confirmed deeper integration of Moveworks conversational front-end into Now Assist; combined product GA scheduled for Q3.",
-    "Strengthens the ITSM/HR conversational moat — and reduces standalone Moveworks differentiation.",
+    "Strengthens the ITSM/HR conversational moat, and reduces standalone Moveworks differentiation.",
     ["vendor_servicenow", "vendor_moveworks"], ["Strategy signal", "Partnership"],
     ["business_fit", "market_strength"], 68, 78, "positive",
     "ServiceNow newsroom", "https://www.servicenow.com/company/media.html"),
@@ -132,7 +132,7 @@ export const NEWS_ITEMS: NewsItem[] = [
 
   make("news_12", 12,
     "Glean adds enterprise-wide agent audit + replay",
-    "Glean shipped agent audit + replay across all permission-aware connectors — every action captured for review by audit + security teams.",
+    "Glean shipped agent audit + replay across all permission-aware connectors, every action captured for review by audit + security teams.",
     "Differentiates Glean further on permission semantics + auditability vs hyperscaler assistants.",
     ["vendor_glean"], ["Product launch", "Enterprise control"],
     ["enterprise_control"], 64, 80, "positive",
@@ -167,7 +167,7 @@ export const NEWS_ITEMS: NewsItem[] = [
   make("news_16", 16,
     "Google launches Gemini Enterprise Permissioning Layer",
     "Google announced an enterprise permissioning layer that integrates with Workspace + Drive ACLs to provide source-permission inheritance for Gemini Apps.",
-    "Closes a long-standing gap with Glean and Microsoft Copilot's permission semantics — but Workspace conversion remains the gating factor.",
+    "Closes a long-standing gap with Glean and Microsoft Copilot's permission semantics, but Workspace conversion remains the gating factor.",
     ["vendor_google"], ["Enterprise control", "Product launch"],
     ["enterprise_control"], 70, 78, "positive",
     "Google Cloud Next", "https://cloud.google.com/next",
@@ -269,7 +269,7 @@ export const NEWS_ITEMS: NewsItem[] = [
   make("news_28", 28,
     "OpenAI ships DPA + EU residency expansion",
     "OpenAI extended Data Processing Addendum coverage and EU residency to all Enterprise + Team customers, plus added auditor-friendly logs.",
-    "Reduces friction with EU regulated buyers — closes a long-standing gap.",
+    "Reduces friction with EU regulated buyers, closes a long-standing gap.",
     ["vendor_openai"], ["Enterprise control"],
     ["enterprise_control"], 68, 80, "positive",
     "OpenAI", "https://openai.com/enterprise",

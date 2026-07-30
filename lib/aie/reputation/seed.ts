@@ -1,19 +1,19 @@
 // Ported from ranking-engine repo: lib/reputation/seed.ts
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
-// Reputation tracker — seed dataset.
+// Reputation tracker, seed dataset.
 // ──────────────────────────────────
 // Three pillars per the May-2026 product brief:
 //
-//   developer   — github / reddit / forums where DEVELOPERS USING the
+//   developer  , github / reddit / forums where DEVELOPERS USING the
 //                 vendor's models report on developer experience.
 //                 NOT employees of the vendor.
 //
-//   employee    — glassdoor / forums / linkedin / tribunal filings.
+//   employee   , glassdoor / forums / linkedin / tribunal filings.
 //                 Variables: work-life balance, culture, litigation,
 //                 career growth, compensation.
 //
-//   customer    — average downtime, value for money, customer service,
+//   customer   , average downtime, value for money, customer service,
 //                 responsiveness, quality of service. Sourced from
 //                 G2 / Capterra / TrustRadius + status-page archives.
 //
@@ -34,21 +34,21 @@ export interface DeveloperReputation {
   githubStars?: number;
   githubLastFetched?: string; // ISO date
   redditSentiment: number;    // r/LocalLLaMA, r/MachineLearning, r/OpenAI etc.
-  // Real-data provenance for the Reddit column — populated when the
+  // Real-data provenance for the Reddit column, populated when the
   // value was computed from the public Reddit search API. Marked
   // "documented" not "verified" because unauthenticated search volume
   // is name-ambiguity contaminated; the score uses upvote-ratio only.
   redditSource?: string;
   redditUpvoteRatio?: number;
   redditLastFetched?: string;
-  // Real-data provenance for the API-reliability column — populated
+  // Real-data provenance for the API-reliability column, populated
   // from the vendor's Atlassian Statuspage incident history.
   apiSource?: string;
   apiIncidents90d?: number;
   apiMajorIncidents90d?: number;
   apiLastFetched?: string;
   forumScore: number;         // HackerNews, devforum, stackoverflow signal
-  // Real-data provenance for the forum column — populated when the
+  // Real-data provenance for the forum column, populated when the
   // value was computed from the public HackerNews (Algolia) API.
   forumSource?: string;
   forumHnHits?: number;       // 12-month story count on HN
@@ -56,10 +56,10 @@ export interface DeveloperReputation {
   apiReliability: number;     // self-reported API issues from devs
   documentationScore: number; // dev-facing docs quality
   overall: number;
-  primaryThemes: string[];    // 1-3 short bullets — top devs talk about
+  primaryThemes: string[];    // 1-3 short bullets, top devs talk about
   sources: string[];          // attribution URLs / forums
   dataStatus: "seed" | "documented" | "verified";
-  // Per-cell status — overrides the row-level dataStatus where set.
+  // Per-cell status, overrides the row-level dataStatus where set.
   // Lets us show that GitHub is verified-live while other columns
   // are still seed within the same row.
   cellStatus?: Partial<Record<"github" | "reddit" | "forum" | "api" | "docs", "seed" | "documented" | "verified">>;
@@ -73,7 +73,7 @@ export interface EmployeeReputation {
   litigationScore: number;    // 0-100 derived from count + severity
   careerGrowth: number;
   compensation: number;
-  // Alignment between stated mission and lived employee experience —
+  // Alignment between stated mission and lived employee experience,
   // do employees believe in / feel aligned with the company mission?
   // Curated seed: no free API exists for this; it is informed by
   // public review themes but not machine-extracted.
@@ -82,7 +82,7 @@ export interface EmployeeReputation {
   primaryThemes: string[];
   sources: string[];
   dataStatus: "seed" | "documented" | "verified";
-  // Real-data provenance for the litigation column — raw count of
+  // Real-data provenance for the litigation column, raw count of
   // employment-related court records from the CourtListener API.
   // Size-dominated, so we also normalise per-employee below.
   litigationFootprint?: number;
@@ -91,7 +91,7 @@ export interface EmployeeReputation {
   // Litigation normalised to a rate. approxHeadcount is a public
   // estimate (seed-grade); litigationPerThousand = footprint /
   // headcount × 1000. The numerator is real (CourtListener); the
-  // denominator is an estimate — so the RATE is "documented".
+  // denominator is an estimate, so the RATE is "documented".
   approxHeadcount?: number;
   litigationPerThousand?: number;
   cellStatus?: Partial<Record<"litigation" | "litigationRate" | "mission", "seed" | "documented" | "verified">>;
@@ -136,10 +136,10 @@ function emp(
   vendorId: string,
   wlb: number, culture: number, litCount: number, careerGrowth: number, comp: number,
   themes: string[], sources: string[],
-  // Mission alignment — optional 9th arg. Defaults to a culture-anchored
+  // Mission alignment, optional 9th arg. Defaults to a culture-anchored
   // estimate when not supplied (mission alignment tracks culture
   // closely in public review data); the MISSION_OVERLAY refines named
-  // vendors. Curated seed throughout — no free API exists for it.
+  // vendors. Curated seed throughout, no free API exists for it.
   missionAlignment?: number,
 ): EmployeeReputation {
   // Litigation score: 100 if zero filings, drops 8 points per filing,
@@ -187,7 +187,7 @@ function cust(
 
 // ──────────────── Seed scores per vendor ────────────────
 // Vendor ids match the INTELLIGENCE_VENDORS spine so the same vendor
-// chip / profile link works across surfaces. Themes are short — they
+// chip / profile link works across surfaces. Themes are short, they
 // drive the "What devs talk about" / "What employees say" / "What
 // customers like" sub-panels.
 
@@ -228,7 +228,7 @@ export const DEVELOPER_REPUTATION: DeveloperReputation[] = [
   dev("snowflake", 74, 68, 74, 80, 78,
     ["Cortex API simple", "Arctic adoption growing", "Locked to data-cloud first"],
     ["github.com/Snowflake-Labs", "community.snowflake.com"]),
-  // ── Spine coverage extension — May 2026 ──
+  // ── Spine coverage extension, May 2026 ──
   dev("salesforce", 64, 58, 68, 72, 80,
     ["Einstein Studio improving", "Per-seat pricing concerns flagged in dev threads", "BYOLLM patterns more flexible"],
     ["github.com/forcedotcom", "developer.salesforce.com"]),
@@ -283,7 +283,7 @@ export const DEVELOPER_REPUTATION: DeveloperReputation[] = [
 ];
 
 // ──────────────────────────────────────────────────────────────────
-// REAL-DATA OVERLAY — GitHub column
+// REAL-DATA OVERLAY, GitHub column
 // ──────────────────────────────────────────────────────────────────
 // Fetched 2026-05-15 from api.github.com/repos/{repo}. Each entry
 // records the flagship repo we sampled, the live stargazers_count,
@@ -324,7 +324,7 @@ const GITHUB_OVERLAY: GithubOverlay[] = [
   { vendorId: "writer", repo: "writer/writer-framework", stars: 1441, score: 74, lastFetched: "2026-05-15" },
   { vendorId: "glean", repo: "gleanwork (org, 38 repos)", stars: 83, score: 42, lastFetched: "2026-05-15" }, // org followers as proxy
   { vendorId: "sap", repo: "SAP (org, 314 repos)", stars: 4184, score: 60, lastFetched: "2026-05-15" }, // org followers as proxy
-  // No public engineering presence — kept seed but flagged.
+  // No public engineering presence, kept seed but flagged.
   { vendorId: "harvey", repo: null, stars: null, score: null, lastFetched: "2026-05-15" },
   { vendorId: "hebbia", repo: null, stars: null, score: null, lastFetched: "2026-05-15" },
   { vendorId: "moveworks", repo: null, stars: null, score: null, lastFetched: "2026-05-15" },
@@ -353,17 +353,17 @@ for (const o of GITHUB_OVERLAY) {
 }
 
 // ──────────────────────────────────────────────────────────────────
-// REAL-DATA OVERLAY — Forum column (HackerNews)
+// REAL-DATA OVERLAY, Forum column (HackerNews)
 // ──────────────────────────────────────────────────────────────────
 // Fetched 2026-05-15 from the public HackerNews Algolia API
-// (hn.algolia.com/api/v1/search) — 12-month story window. Score:
+// (hn.algolia.com/api/v1/search), 12-month story window. Score:
 //
 //   volumeScore     = clamp((log10(nbHits + 1) / 4) × 100, 0, 100)
 //   engagementScore = clamp((log10(avgPoints + 1) / 2.7) × 100, 0, 100)
 //   forumScore      = round(0.55 × volume + 0.45 × engagement)
 //
 // Enterprise-SaaS vendors (SAP, ServiceNow, Oracle) genuinely have
-// low HN developer chatter — HN skews toward frontier-lab dev tools.
+// low HN developer chatter, HN skews toward frontier-lab dev tools.
 // That low score is a true signal, not a gap.
 interface ForumOverlay { vendorId: string; hits: number; score: number }
 const HN_OVERLAY: ForumOverlay[] = [
@@ -402,7 +402,7 @@ for (const o of HN_OVERLAY) {
 }
 
 // ──────────────────────────────────────────────────────────────────
-// REAL-DATA OVERLAY — Reddit reception (documented, not verified)
+// REAL-DATA OVERLAY, Reddit reception (documented, not verified)
 // ──────────────────────────────────────────────────────────────────
 // Fetched 2026-05-15 from the public Reddit search API
 // (reddit.com/search.json, 12-month window). The score uses ONLY the
@@ -412,7 +412,7 @@ for (const o of HN_OVERLAY) {
 //
 // Volume IS deliberately discarded: unauthenticated Reddit search is
 // name-ambiguity contaminated (the raw fetch put tiny-startup "Rogo"
-// above "Google" on volume — clear noise). Upvote-ratio is bounded
+// above "Google" on volume, clear noise). Upvote-ratio is bounded
 // [0,1] and far more robust to that contamination, but it still mixes
 // in off-topic posts, so this column is marked "documented" not
 // "verified". True sentiment needs the authenticated API + subreddit
@@ -454,7 +454,7 @@ for (const o of REDDIT_OVERLAY) {
 }
 
 // ──────────────────────────────────────────────────────────────────
-// REAL-DATA OVERLAY — API reliability (Atlassian Statuspage incidents)
+// REAL-DATA OVERLAY, API reliability (Atlassian Statuspage incidents)
 // ──────────────────────────────────────────────────────────────────
 // Fetched 2026-05-15 from each vendor's Atlassian Statuspage
 // incidents.json. Only 8 of 20 vendors expose an accessible Atlassian
@@ -465,7 +465,7 @@ for (const o of REDDIT_OVERLAY) {
 //
 // Caveat: Atlassian's incidents.json caps at ~50 records. A vendor
 // that hit the cap (Anthropic) may post very granular component-level
-// incidents — a high count can reflect transparent reporting as much
+// incidents, a high count can reflect transparent reporting as much
 // as genuine downtime. The raw counts are surfaced so the reader can
 // judge.
 interface ApiOverlay { vendorId: string; incidents90d: number; major90d: number; score: number }
@@ -530,7 +530,7 @@ export const EMPLOYEE_REPUTATION: EmployeeReputation[] = [
   emp("salesforce", 72, 70, 6, 74, 82,
     ["Ohana culture marketed but mixed reviews", "Layoff cycles in 2023-24", "Comp solid"],
     ["glassdoor.com/Overview/Working-at-Salesforce"]),
-  // ── Spine coverage extension — May 2026 ──
+  // ── Spine coverage extension, May 2026 ──
   emp("servicenow", 78, 76, 3, 78, 84,
     ["Stable engineering culture", "Strong career mobility within suite", "Equity narrative positive"],
     ["glassdoor.com/Overview/Working-at-ServiceNow"]),
@@ -585,7 +585,7 @@ export const EMPLOYEE_REPUTATION: EmployeeReputation[] = [
 ];
 
 // ──────────────────────────────────────────────────────────────────
-// REAL-DATA OVERLAY — Litigation footprint (CourtListener)
+// REAL-DATA OVERLAY, Litigation footprint (CourtListener)
 // ──────────────────────────────────────────────────────────────────
 // Fetched 2026-05-15 from the CourtListener v4 search API. Each value
 // is the count of court records matching the vendor name AND
@@ -599,7 +599,7 @@ export const EMPLOYEE_REPUTATION: EmployeeReputation[] = [
 // (Microsoft's all-time 55,901 → 24-month 8,963; IBM 20,077 → 1,115).
 //
 // footprint = real CourtListener count, 24-month window (verified).
-// headcount = approximate current employee count — public estimate
+// headcount = approximate current employee count, public estimate
 //   (~May 2026). AWS uses the AWS division headcount to match the
 //   "Amazon Web Services" search scope.
 // litigationPerThousand = footprint / headcount × 1000. Numerator real,
@@ -609,7 +609,7 @@ export const EMPLOYEE_REPUTATION: EmployeeReputation[] = [
 //
 // Covers ALL reputation-tab vendors (the 20-vendor spine + the 9
 // extended global vendors) so every Employee-tab row gets the same
-// per-1k-derived score — no row falls back to a stale seed score.
+// per-1k-derived score, no row falls back to a stale seed score.
 interface LitigationOverlay { vendorId: string; footprint: number; headcount: number }
 const COURTLISTENER_OVERLAY: LitigationOverlay[] = [
   // 20-vendor spine
@@ -647,7 +647,7 @@ const COURTLISTENER_OVERLAY: LitigationOverlay[] = [
 // Map a per-1,000-employee litigation rate to a 0-100 score where a
 // LOWER rate is BETTER. Log scale: the rates span ~0 to ~700, so a
 // linear map would floor every large vendor. log10 keeps the curve
-// readable — rate 10 → ~75, rate 100 → ~52, rate 250 → ~42,
+// readable, rate 10 → ~75, rate 100 → ~52, rate 250 → ~42,
 // rate 700 → ~31.
 function litigationRateToScore(perK: number): number {
   const raw = 100 - (Math.log10(perK + 1) / Math.log10(800)) * 70;
@@ -666,15 +666,15 @@ for (const o of COURTLISTENER_OVERLAY) {
   // Reconcile: the litigation SCORE (which feeds Overall) now derives
   // from the real per-1,000-employee rate, NOT the old curated
   // litigationCount. This makes the colour, the score, and the rate
-  // all agree — previously the colour followed the seed count while
+  // all agree, previously the colour followed the seed count while
   // the rate fed nothing, so a vendor could show red with a low rate.
   row.litigationScore = litigationRateToScore(perK);
   row.cellStatus = {
     ...(row.cellStatus ?? {}),
-    litigation: "verified",     // raw footprint — real CourtListener count
-    litigationRate: "documented", // per-1000 rate — real numerator, estimated denominator
+    litigation: "verified",     // raw footprint, real CourtListener count
+    litigationRate: "documented", // per-1000 rate, real numerator, estimated denominator
   };
-  // Overall is a 6-metric mean — recompute now that litigationScore moved.
+  // Overall is a 6-metric mean, recompute now that litigationScore moved.
   row.overall = Math.round(
     (row.workLifeBalance + row.culture + row.litigationScore +
      row.careerGrowth + row.compensation + row.missionAlignment) / 6,
@@ -682,10 +682,10 @@ for (const o of COURTLISTENER_OVERLAY) {
 }
 
 // ──────────────────────────────────────────────────────────────────
-// SEED OVERLAY — Mission alignment (Employee pillar)
+// SEED OVERLAY, Mission alignment (Employee pillar)
 // ──────────────────────────────────────────────────────────────────
 // Alignment between the company's stated mission and the lived
-// employee experience. Curated seed — no free API exists. The values
+// employee experience. Curated seed, no free API exists. The values
 // are informed by recurring themes in public employee discussion
 // (mission-driven framing is consistently cited at frontier labs;
 // large incumbents score lower as employees report the mission feels
@@ -718,7 +718,7 @@ for (const o of MISSION_OVERLAY) {
   if (!row) continue;
   row.missionAlignment = o.score;
   row.cellStatus = { ...(row.cellStatus ?? {}), mission: "seed" };
-  // Recompute overall — now a 6-metric mean.
+  // Recompute overall, now a 6-metric mean.
   row.overall = Math.round(
     (row.workLifeBalance + row.culture + row.litigationScore +
      row.careerGrowth + row.compensation + row.missionAlignment) / 6,
@@ -762,7 +762,7 @@ export const CUSTOMER_REPUTATION: CustomerReputation[] = [
   cust("cohere", 99.7, 80, 80, 80, 82,
     ["Enterprise-tuned support", "Embed/Rerank quality strong", "Less mass-market mindshare"],
     ["status.cohere.com", "g2.com/products/cohere"]),
-  // ── Spine coverage extension — May 2026 ──
+  // ── Spine coverage extension, May 2026 ──
   cust("sap", 99.8, 64, 72, 70, 76,
     ["Enterprise ERP integration valued", "Implementation complexity flagged", "Slower AI cadence cited"],
     ["status.sap.com", "g2.com/products/sap"]),
@@ -824,7 +824,7 @@ export const REPUTATION_INDEX = {
 };
 
 // Union of vendor ids that have at least one reputation score in any
-// pillar — drives the vendor list on the page.
+// pillar, drives the vendor list on the page.
 export const REPUTATION_VENDOR_IDS = Array.from(
   new Set([
     ...DEVELOPER_REPUTATION.map((r) => r.vendorId),

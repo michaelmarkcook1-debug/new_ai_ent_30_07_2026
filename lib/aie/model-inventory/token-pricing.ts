@@ -1,7 +1,7 @@
 // Ported from ranking-engine repo: lib/model-inventory/token-pricing.ts
 // Origin snapshot: _archive/ranking-engine-stray-copy-2026-07-08, copied 30 July 2026.
 
-// Token pricing reference table — input + output pricing.
+// Token pricing reference table, input + output pricing.
 // ──────────────────────────────────────────────────────────
 // Source: frontier_model_pricing_google_docs.html, captured 2026-06-02
 // from public vendor API pricing pages.
@@ -23,7 +23,7 @@ export interface TokenPrice {
   outputPerM: number | null;
   /** Optional cached-input price where vendor publishes a clean line. */
   cachedInputPerM: number | null;
-  /** Caveats — batch discounts, extra fees, residency premiums. */
+  /** Caveats, batch discounts, extra fees, residency premiums. */
   note: string;
   /** Official pricing page. */
   sourceUrl: string;
@@ -32,7 +32,7 @@ export interface TokenPrice {
 export const TOKEN_PRICING_CAPTURED_AT = "2026-06-02";
 
 export const TOKEN_PRICING_DISCLAIMER =
-  "Reference list pricing (USD per 1M tokens), captured 2026-06-02 from public vendor API pricing pages. List price ≠ negotiated enterprise price — batch APIs commonly list 50% lower; committed-use, volume, and residency terms vary. Rows with no price were not verified from a reliable live source. Seed reference data, not a contract.";
+  "Reference list pricing (USD per 1M tokens), captured 2026-06-02 from public vendor API pricing pages. List price ≠ negotiated enterprise price, batch APIs commonly list 50% lower; committed-use, volume, and residency terms vary. Rows with no price were not verified from a reliable live source. Seed reference data, not a contract.";
 
 export const TOKEN_PRICING: TokenPrice[] = [
   // ─── OpenAI ────────────────────────────────────────────────────
