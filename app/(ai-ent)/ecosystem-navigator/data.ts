@@ -24,106 +24,27 @@ export type { ExposureMapNode, ExposureMapEdge, RelationshipType, ConfidenceTier
 // Section (a): dependency map, grouped into layer bands.
 // ──────────────────────────────────────────────────────────────────────────
 
-export type BandId =
-  | "hyperscaler"
-  | "frontier"
-  | "enterprise"
-  | "application"
-  | "infrastructure";
-
-export interface LayerBand {
-  id: BandId;
-  label: string;
-  description: string;
-  nodes: ExposureMapNode[];
-}
-
 // Exposure-map node ids that differ from the tracked-vendor roster ids.
 const NODE_ID_ALIASES: Record<string, string> = {
   togetherai: "together",
 };
 
-// Fallback layers for exposure-map nodes outside the tracked roster,
-// derived from each node's own AIE category label (silicon, servers and
-// clouds keep their supply-side placement; model owners sit with the labs).
-const FALLBACK_LAYER: Record<string, BandId> = {
-  deepmind: "frontier",
-  nemotron: "frontier",
-  aleph: "frontier",
-  lighton: "frontier",
-  falcon: "frontier",
-  ernie: "frontier",
-  hunyuan: "frontier",
-  TCEHY: "hyperscaler",
-  BIDU: "hyperscaler",
-  OVH: "hyperscaler",
-  ASML: "infrastructure",
-  HPE: "infrastructure",
-  DELL: "infrastructure",
-  SMCI: "infrastructure",
-  huawei: "infrastructure",
-};
-
-const BAND_META: { id: BandId; label: string; description: string }[] = [
-  {
-    id: "frontier",
-    label: "Frontier and model labs",
-    description: "Model owners: frontier labs, open-model owners and regional labs.",
-  },
-  {
-    id: "hyperscaler",
-    label: "Hyperscalers and cloud platforms",
-    description: "Cloud platforms that fund, host and distribute the models.",
-  },
-  {
-    id: "enterprise",
-    label: "Enterprise data platforms",
-    description: "Data-platform incumbents with first-party model programmes.",
-  },
-  {
-    id: "application",
-    label: "Enterprise applications and assistants",
-    description: "Application-layer vendors that consume or embed models.",
-  },
-  {
-    id: "infrastructure",
-    label: "Silicon, servers and inference clouds",
-    description: "The supply chain: chips, foundries, servers and GPU clouds.",
-  },
-];
-
-export function layerForNode(node: ExposureMapNode): BandId {
-  const rosterId = NODE_ID_ALIASES[node.id] ?? node.id;
+// Node to vendor-profile link. Returns null when the node has no tracked
+// vendor profile, so the graph renders plain text instead of a dead link.
+// No layer or category is inferred here: the dependency graph groups by the
+// dataset's own left and right sides (exposure owner to provider), which is
+// recorded per node, rather than by any taxonomy invented in this app.
+export function vendorLinkIdForNode(nodeId: string): string | null {
+  const node = EXPOSURE_NODES.find((n) => n.id === nodeId);
+  const rosterId = NODE_ID_ALIASES[nodeId] ?? nodeId;
   const byId = TRACKED_VENDORS.find((v) => v.id === rosterId);
-  if (byId) return byId.layer;
-  if (node.ticker) {
+  if (byId) return byId.id;
+  if (node?.ticker) {
     const byTicker = TRACKED_VENDORS.find((v) => v.ticker === node.ticker);
-    if (byTicker) return byTicker.layer;
+    if (byTicker) return byTicker.id;
   }
-  const fallback = FALLBACK_LAYER[node.id];
-  if (fallback) return fallback;
-  // Last resort keeps the map rendering if the dataset gains a node we have
-  // not mapped: model owners sit with the labs, everything else supply-side.
-  return node.side === "right" ? "frontier" : "infrastructure";
+  return null;
 }
-
-export function layerBands(): LayerBand[] {
-  return BAND_META.map((meta) => ({
-    ...meta,
-    nodes: EXPOSURE_NODES.filter((n) => layerForNode(n) === meta.id).sort((a, b) =>
-      a.label.localeCompare(b.label, "en-GB")
-    ),
-  })).filter((band) => band.nodes.length > 0);
-}
-
-// Capital layer from the AIE roster: investors appear on the map legend but
-// carry no sourced dependency edges in the exposure dataset.
-export const INVESTOR_BAND = {
-  label: "Capital layer (investors)",
-  description:
-    "AIE roster investors. No sourced dependency edges are recorded for the capital layer in the exposure dataset, so none are drawn.",
-  investors: ECOSYSTEM_ONLY,
-};
 
 export const RELATIONSHIP_LABEL: Record<RelationshipType, string> = {
   investment: "Investment",

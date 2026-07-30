@@ -1,5 +1,5 @@
 import { PageHeader } from "@/lib/ui/page";
-import { DependencyMap } from "./components/dependency-map";
+import { DependencyGraph } from "./components/dependency-graph";
 import { ModelsCatalogue } from "./components/models-catalogue";
 import { IntegratorLayer } from "./components/integrator-layer";
 
@@ -14,7 +14,7 @@ export default function EcosystemNavigatorPage() {
         lanes={["aie", "live"]}
       />
       <div className="space-y-8">
-        <DependencyMap />
+        <DependencyGraph />
         <ModelsCatalogue />
         <IntegratorLayer />
       </div>
