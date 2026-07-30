@@ -27,6 +27,8 @@ const ICONS: Record<string, React.ReactNode> = {
   security: <path d="M12 3 5 6v5c0 4.4 3 8.4 7 10 4-1.6 7-5.6 7-10V6l-7-3Z" />,
   trust: <><path d="M12 3 5 6v5c0 4.4 3 8.4 7 10 4-1.6 7-5.6 7-10V6l-7-3Z" /><path d="m9 12 2 2 4-4" /></>,
   news: <><rect x="3" y="5" width="18" height="15" rx="2" /><path d="M7 9h7M7 13h10M7 17h10" /></>,
+  interrogate: <><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5 8.38 8.38 0 0 1 8.5 8.5Z" /><path d="M9.5 9.5a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 2.2-2.4 3.2" /><path d="M12 17h.01" /></>,
+  assess: <><path d="M9 6h11M9 12h11M9 18h11" /><path d="m3.5 6 1 1 2-2M3.5 12l1 1 2-2M3.5 18l1 1 2-2" /></>,
 };
 
 function Icon({ name }: { name: string }) {
@@ -53,8 +55,10 @@ export const NAV_GROUPS: NavGroup[] = [
   {
     label: "AI and Your Company",
     items: [
+      { label: "Interrogate", href: "/interrogate", icon: "interrogate" },
       { label: "Market View", href: "/market-view", icon: "market" },
       { label: "Company View: Shell", href: "/company-view", icon: "company" },
+      { label: "Assess and Decide", href: "/assess-decide", icon: "assess" },
     ],
   },
   {
@@ -149,7 +153,7 @@ export function Shell({
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9a6 6 0 1 1 12 0c0 6 2 7 2 7H4s2-1 2-7" /><path d="M10 20a2 2 0 0 0 4 0" /></svg>
           </button>
           <Link
-            href="/company-view/analyst"
+            href="/interrogate"
             className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition hover:opacity-90"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m12 3 1.9 5.6L19.5 10l-5.6 1.4L12 17l-1.9-5.6L4.5 10l5.6-1.4L12 3Z" /></svg>

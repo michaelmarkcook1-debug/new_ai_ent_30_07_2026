@@ -9,12 +9,12 @@ export function LaneBadge({ lane }: { lane: DataLane }) {
   const styles: Record<DataLane, string> = {
     live: "bg-good-bg text-good border-good/30",
     aie: "bg-secondary/10 text-secondary-content border-secondary/30 dark:bg-secondary/40",
+    "aie-live": "bg-secondary/10 text-good border-good/30 dark:bg-secondary/40",
     sample: "bg-warn-bg text-warn border-warn/30",
     mock: "bg-warn-bg text-warn border-warn/30",
     stub: "bg-base-200 text-muted border-base-300",
   };
-  const label =
-    lane === "aie" ? LANE_LABEL.aie : LANE_LABEL[lane];
+  const label = LANE_LABEL[lane];
   return (
     <span
       className={`inline-flex items-center rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider border ${styles[lane]}`}
@@ -23,11 +23,13 @@ export function LaneBadge({ lane }: { lane: DataLane }) {
           ? "Live from the BoardRadar API"
           : lane === "aie"
             ? "Real AI Enterprise dataset content, re-used from the ranking-engine repository"
-            : lane === "mock"
-              ? "Recorded response served because live data was unavailable"
-              : lane === "stub"
-                ? "Module in development"
-                : "Illustrative sample value, not a real measurement"
+            : lane === "aie-live"
+              ? "Current AI Enterprise content, pulled live from the deployed app's public API through our proxy"
+              : lane === "mock"
+                ? "Recorded response served because live data was unavailable"
+                : lane === "stub"
+                  ? "Module in development"
+                  : "Illustrative sample value, not a real measurement"
       }
     >
       {label}

@@ -10,7 +10,7 @@ export default function MarketViewPage() {
       <PageHeader
         title="Market View"
         subtitle="Who is using which models, how and where: slice the AIE adoption dataset by industry, region and organisation size, inspect workflows with evidenced impact, and watch the live Service Providers delivery matrix."
-        lanes={["aie", "live"]}
+        lanes={["aie-live", "aie", "live"]}
       />
       <MarketExplorer />
       <DeliveryMatrix />

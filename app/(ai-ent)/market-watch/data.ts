@@ -374,6 +374,25 @@ export function getWatchlists(): WatchlistView[] {
   }));
 }
 
+// Serialisable lookups for the live category-share client component.
+export interface ShareLookups {
+  categories: { id: string; name: string; description: string }[];
+  vendorNames: Record<string, string>;
+  trackedIds: string[];
+}
+
+export function getShareLookups(): ShareLookups {
+  return {
+    categories: MARKET_CATEGORIES.map((c) => ({
+      id: c.id,
+      name: c.name,
+      description: c.description,
+    })),
+    vendorNames: Object.fromEntries(VENDOR_NAME),
+    trackedIds: [...TRACKED_IDS],
+  };
+}
+
 // Shared date formatter for dataset date stamps (en-GB, deterministic).
 export function formatDate(iso: string): string {
   if (!iso) return "";

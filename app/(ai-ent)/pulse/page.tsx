@@ -11,7 +11,7 @@ export default async function PulsePage() {
       <PageHeader
         title="The Pulse"
         subtitle="The daily read on the enterprise AI market: model moves, adoption signals, regulation and spend, with the delivery channel watched live."
-        lanes={["sample", "live"]}
+        lanes={["sample", "live", "aie-live"]}
       />
       <PulseView fixture={fixture} />
     </>

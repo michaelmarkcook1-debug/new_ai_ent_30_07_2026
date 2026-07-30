@@ -8,6 +8,21 @@ import type { Industry } from "@/lib/aie";
 // industry archetypes are mapped onto them so one Industry filter drives
 // both the archetype adoption profile and the uptake slice. The mapping is
 // a UI convenience and is disclosed in the derivation drawer.
+// The live uptake API filters on a single industry display name and rejects
+// unknown values. Its valid list matches the ported segment names exactly,
+// so archetypes that map to ONE segment can filter upstream; archetypes
+// spanning several segments send no filter and the panel says so.
+export const ARCHETYPE_TO_LIVE_INDUSTRY: Record<string, string | undefined> = {
+  regulated_financial: "Financial services",
+  health_life_sciences: "Healthcare / life sciences",
+  legal_professional: undefined,
+  public_sector_education: undefined,
+  critical_infrastructure_defence: undefined,
+  enterprise_software: "Technology / software",
+  industrial_physical_ops: "Manufacturing / industrials",
+  commercial_enterprise: undefined,
+};
+
 export const ARCHETYPE_TO_UPTAKE: Record<string, Industry[]> = {
   regulated_financial: ["Financial services"],
   health_life_sciences: ["Healthcare / life sciences"],

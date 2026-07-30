@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { LaneBadge } from "@/lib/ui/badges";
-import { EditorialBanner, InsightCard, QuestionChips } from "@/lib/ui/cards";
+import { EditorialBanner, InsightCard } from "@/lib/ui/cards";
 import { KpiGauge, DerivationDrawer } from "@/lib/ui/score";
-import { NewsList } from "@/lib/ui/news";
 import { MicroLabel } from "@/lib/ui/micro";
 import { SpotlightCard } from "./spotlight";
 import { VendorComparisonTable } from "./comparison";
 import { DeliveryChannelWatch } from "./delivery-watch";
+import { InterrogateHero } from "./interrogate-hero";
+import { PulseLiveNews } from "./live-news";
 import type { PulseFixture } from "../types";
 
 // The Pulse, composed exactly in the Section 7 order: editorial banner,
@@ -32,16 +33,8 @@ export function PulseView({ fixture }: { fixture: PulseFixture }) {
         {fixture.editorial.body}
       </EditorialBanner>
 
-      {/* 2. Suggested question chips (2 by 2), prefill the AI Analyst */}
-      <section>
-        <MicroLabel
-          label="Ask the AI Analyst"
-          tooltip="Each chip prefills the AI Analyst with a ready-made question."
-        />
-        <div className="mt-1.5">
-          <QuestionChips questions={fixture.questions} />
-        </div>
-      </section>
+      {/* 2. The hero: Interrogate, with the suggested chips inside it */}
+      <InterrogateHero questions={fixture.questions} />
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {/* 3. Spotlight tracking card */}
@@ -136,19 +129,14 @@ export function PulseView({ fixture }: { fixture: PulseFixture }) {
         ))}
       </section>
 
-      {/* 7. Market news beside selected-vendor news, abridged */}
-      <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <NewsList
-          title="Market news"
-          items={fixture.marketNews}
-          badge={<LaneBadge lane="sample" />}
-        />
-        <NewsList
-          title={`${selectedName} news`}
-          items={fixture.vendorNews[selected] ?? []}
-          badge={<LaneBadge lane="sample" />}
-        />
-      </section>
+      {/* 7. Market news beside selected-vendor news, live from the AIE feed
+          with the sample strips as the last-resort fallback */}
+      <PulseLiveNews
+        fallbackMarket={fixture.marketNews}
+        fallbackVendor={fixture.vendorNews[selected] ?? []}
+        selectedVendorId={selected}
+        selectedVendorName={selectedName}
+      />
     </div>
   );
 }

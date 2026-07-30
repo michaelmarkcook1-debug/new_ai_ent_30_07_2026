@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   INDUSTRIES,
@@ -17,7 +17,12 @@ import { LaneBadge, SeverityBadge, type Severity } from "@/lib/ui/badges";
 import { ScorePill, DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { EmptyState } from "@/lib/ui/page";
-import { ARCHETYPE_TO_UPTAKE, UPTAKE_VENDOR_ID } from "../data";
+import { aieFetch, type AieSource, type AieUptakeRow } from "@/lib/aie-live";
+import {
+  ARCHETYPE_TO_LIVE_INDUSTRY,
+  ARCHETYPE_TO_UPTAKE,
+  UPTAKE_VENDOR_ID,
+} from "../data";
 
 // Native confidence labels from the uptake seed, shown verbatim.
 function ConfidenceChip({ label }: { label: string }) {
@@ -87,6 +92,28 @@ export function MarketExplorer() {
   const [size, setSize] = useState<"" | CompanySize>("");
   const [category, setCategory] = useState("");
   const [workflowId, setWorkflowId] = useState("");
+  const [live, setLive] = useState<AieUptakeRow[] | null>(null);
+  const [liveSource, setLiveSource] = useState<AieSource>("live");
+
+  // The live uptake API expects its own industry display names and rejects
+  // anything else, so only mapped archetypes send the filter; the rest run
+  // unfiltered upstream and the UI says so.
+  const liveIndustry = archetypeId ? ARCHETYPE_TO_LIVE_INDUSTRY[archetypeId] : undefined;
+
+  useEffect(() => {
+    let cancelled = false;
+    const params: Record<string, string> = {};
+    if (liveIndustry) params.industry = liveIndustry;
+    if (region) params.region = region;
+    aieFetch<{ rows: AieUptakeRow[] }>("uptake", params).then((res) => {
+      if (cancelled) return;
+      setLiveSource(res.source);
+      setLive(res.ok && res.data?.rows ? res.data.rows : null);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [liveIndustry, region]);
 
   const archetypes = useMemo(() => Object.values(INDUSTRIES), []);
   const byCategory = useMemo(() => workflowsByCategory(USE_CASES), []);
@@ -97,7 +124,7 @@ export function MarketExplorer() {
   const workflow = USE_CASES.find((u) => u.id === workflowId);
   const archetype = archetypeId ? INDUSTRIES[archetypeId] : null;
 
-  const rows = useMemo(
+  const portedRows = useMemo(
     () =>
       aggregateUptake({
         regions: region ? [region] : undefined,
@@ -106,6 +133,15 @@ export function MarketExplorer() {
       }),
     [archetypeId, region, size]
   );
+  // Live rows carry the same fields (vendor, share as a 0 to 1 fraction,
+  // contributingCells, confidence), so the panel renders either source.
+  const usingLive = live !== null;
+  const rows = usingLive ? live : portedRows;
+  const uptakeLane = usingLive
+    ? liveSource === "mock"
+      ? "mock"
+      : "aie-live"
+    : "aie";
   const maxShare = rows.reduce((acc, r) => Math.max(acc, r.share), 0);
 
   const sliceLabel = [
@@ -220,11 +256,18 @@ export function MarketExplorer() {
           <div className="flex items-start justify-between gap-2">
             <MicroLabel
               label="Model providers in this slice"
-              tooltip="Share of model-provider adoption within the selected slice, from the AIE region-by-industry uptake dataset. Shares are normalised inside the slice; confidence labels are the dataset's own."
+              tooltip="Share of model-provider adoption within the selected slice. Shares are normalised inside the slice; confidence labels are the source's own."
             />
-            <LaneBadge lane="aie" />
+            <LaneBadge lane={uptakeLane} />
           </div>
           <p className="mt-1 text-[11px] text-muted">{sliceLabel}</p>
+          <p className="mt-0.5 text-[10.5px] text-muted">
+            {usingLive
+              ? archetypeId && !liveIndustry
+                ? "Pulled live from the deployed AIE app. This archetype spans several of the engine's industry segments, so the live slice is unfiltered by industry and the filter applies to the panels below."
+                : "Pulled live from the deployed AIE app, filtered upstream by the selections above."
+              : "The live uptake pull did not answer, so the ported region-by-industry dataset is shown."}
+          </p>
           <div className="mt-3">
             {rows.length === 0 ? (
               <EmptyState
@@ -282,7 +325,9 @@ export function MarketExplorer() {
           <div className="mt-3 border-t border-base-300 pt-2">
             <DerivationDrawer title="How the adoption shares are derived">
               <p>
-                Shares come from the AIE vendor uptake dataset: 585 region by
+                Shares come from the AIE vendor uptake model, pulled live from
+                the deployed app when it answers and from the ported dataset
+                otherwise. The ported dataset is 585 region by
                 industry by vendor rows (5 regions, 9 industry segments, 13
                 model providers), each a fraction normalised within its
                 region-and-industry cell and carrying the dataset's own

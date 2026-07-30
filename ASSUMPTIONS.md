@@ -85,3 +85,40 @@ Dates are absolute; the build day is 30 July 2026.
     real-world measurement, benchmark or financial figure is stated in
     SAMPLE content. Real figures appear only in live BoardRadar payloads or
     AIE dataset rows with their own provenance.
+
+13. **AIE live linkage (30 July 2026).** The deployed AI Enterprise app at
+    ranking-engine-red.vercel.app exposes public JSON APIs, and the spec
+    permits proxying them as a secondary source. A second proxy at
+    `/api/aie/[...path]` (GET only, ten-path whitelist, 300 second cache,
+    12 second timeout, one retry, recorded fixtures in
+    `fixtures/aie-live/`) now serves them, and a new `aie-live` lane badge
+    ("AIE live") marks that content. No credentials are involved: the
+    upstream routes are public. Wired live: The Pulse news strips, the
+    News page's live feed, Market Watch category shares and the winning
+    and losing read, Reputation Tracker's three pillars, Price and
+    Performance token pricing, Market View uptake, and the Assess and
+    Decide pillar strip. Every one keeps its previous source as an
+    explicit fallback, so a failed pull degrades to the ported dataset or
+    a Cached sample badge rather than an empty screen.
+14. **Assess and Decide promoted to its own tab.** It now sits in the
+    sidebar under AI and Your Company with the three depth tiers of the
+    deployed app (Opportunity, Strategy, Procurement), adjustable
+    weights, and the live six-pillar methodology strip. The old path
+    `/company-view/assess` redirects so no existing link dead-ends, and
+    the Company View tab strip still lists it.
+15. **Interrogate is the hero.** A new module at `/interrogate` runs the
+    adaptive pattern from the deployed app: state your situation, answer
+    a small number of sharp questions chosen from what you have not yet
+    covered, then receive a tailored finding where every claim carries a
+    citation. It is the target of the top-bar "Ask AI" button, occupies
+    the hero band on The Pulse, and receives the suggested question
+    chips. Scripted sample mode uses a curated question bank and an
+    extractive finding; with a key in `.env.local` Haiku shapes the
+    questions and Sonnet streams the finding. Grounding adds the live AIE
+    vendor read to the existing sources. The AI Analyst remains inside
+    Company View for document-grounded questions.
+16. **Live uptake filtering.** The live uptake API accepts a single
+    industry display name and rejects unknown values. Archetypes that map
+    onto exactly one of its segments filter upstream; archetypes spanning
+    several send no industry filter, and the panel states that the slice
+    is unfiltered upstream rather than implying a filter that did not run.

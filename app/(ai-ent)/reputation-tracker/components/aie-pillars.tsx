@@ -1,16 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   REPUTATION_INDEX,
   REPUTATION_VENDOR_IDS,
   INTELLIGENCE_VENDORS,
 } from "@/lib/aie";
+import type {
+  CustomerReputation,
+  DeveloperReputation,
+  EmployeeReputation,
+} from "@/lib/aie/reputation/seed";
+import { aieFetch, type AieSource } from "@/lib/aie-live";
 import { LaneBadge } from "@/lib/ui/badges";
 import { ScorePill, DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { EmptyState } from "@/lib/ui/page";
+
+// Live rows from the deployed AIE app's reputation API: identical schema to
+// the ported seed, so the same pillar UI renders either source.
+interface LiveReputationRow {
+  vendorId: string;
+  developer: DeveloperReputation | null;
+  employee: EmployeeReputation | null;
+  customer: CustomerReputation | null;
+}
 
 // Vendor display names come from the intelligence seed spine; the one
 // reputation-only id (aleph) gets a local fallback so nothing renders raw.
@@ -103,6 +118,7 @@ function PillarCard({
   drawerTitle,
   drawerBody,
   children,
+  lane = "aie",
 }: {
   title: string;
   tooltip: string;
@@ -110,12 +126,13 @@ function PillarCard({
   drawerTitle: string;
   drawerBody: React.ReactNode;
   children: React.ReactNode;
+  lane?: "aie" | "aie-live" | "mock";
 }) {
   return (
     <section className="rounded-lg border border-base-300 bg-base-100 p-4">
       <div className="flex items-start justify-between gap-2">
         <MicroLabel label={title} tooltip={tooltip} />
-        <LaneBadge lane="aie" />
+        <LaneBadge lane={lane} />
       </div>
       <div className="mt-2 flex items-center gap-2">
         <span className="font-mono text-2xl font-bold leading-none">{overall}</span>
@@ -130,25 +147,55 @@ function PillarCard({
 }
 
 // AIE three-pillar reputation section: developer, employee and customer
-// pillars straight from the ported reputation seed, native labels intact.
+// pillars, pulled live from the deployed AIE app when it answers (identical
+// schema to the ported seed, which remains the fallback with its own badge).
 export function AiePillarsSection() {
-  const vendorIds = [...REPUTATION_VENDOR_IDS].sort((a, b) =>
-    nameOf(a).localeCompare(nameOf(b))
-  );
+  const [live, setLive] = useState<Map<string, LiveReputationRow> | null>(null);
+  const [source, setSource] = useState<AieSource>("live");
   const [vendorId, setVendorId] = useState("anthropic");
 
-  const dev = REPUTATION_INDEX.developer.get(vendorId);
-  const emp = REPUTATION_INDEX.employee.get(vendorId);
-  const cust = REPUTATION_INDEX.customer.get(vendorId);
+  useEffect(() => {
+    let cancelled = false;
+    aieFetch<{ rows: LiveReputationRow[] }>("reputation").then((res) => {
+      if (cancelled) return;
+      setSource(res.source);
+      if (res.ok && res.data?.rows) {
+        setLive(new Map(res.data.rows.map((r) => [r.vendorId, r])));
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const usingLive = live !== null;
+  const lane: "aie" | "aie-live" | "mock" = usingLive
+    ? source === "mock"
+      ? "mock"
+      : "aie-live"
+    : "aie";
+  const vendorIds = (usingLive ? [...live.keys()] : [...REPUTATION_VENDOR_IDS]).sort(
+    (a, b) => nameOf(a).localeCompare(nameOf(b))
+  );
+
+  const liveRow = usingLive ? live.get(vendorId) : undefined;
+  const dev = usingLive ? liveRow?.developer ?? undefined : REPUTATION_INDEX.developer.get(vendorId);
+  const emp = usingLive ? liveRow?.employee ?? undefined : REPUTATION_INDEX.employee.get(vendorId);
+  const cust = usingLive ? liveRow?.customer ?? undefined : REPUTATION_INDEX.customer.get(vendorId);
 
   return (
     <section>
       <div className="flex flex-wrap items-center gap-2">
         <MicroLabel
           label="AI vendor reputation"
-          tooltip="Three-pillar reputation read (developer, employee, customer) from the AIE dataset. Native per-cell confidence labels (seed, documented, verified) are kept visible."
+          tooltip="Three-pillar reputation read (developer, employee, customer). Native per-cell confidence labels (seed, documented, verified) are kept visible whichever source renders."
         />
-        <LaneBadge lane="aie" />
+        <LaneBadge lane={lane} />
+        <span className="micro-label">
+          {usingLive
+            ? "Pulled live from the deployed AIE app; identical schema to the ported seed"
+            : "Ported seed (the live pull did not answer)"}
+        </span>
         <span className="font-mono text-[10px] text-muted">
           {vendorIds.length} vendors tracked
         </span>
@@ -179,6 +226,7 @@ export function AiePillarsSection() {
             title="Developer reputation"
             tooltip="How developers using this vendor's models report on developer experience, from public GitHub, Reddit, HackerNews and status-page signals. Not employees of the vendor."
             overall={dev.overall}
+            lane={lane}
             drawerTitle="How the developer pillar is derived"
             drawerBody={
               <>
@@ -284,6 +332,7 @@ export function AiePillarsSection() {
             title="Employee reputation"
             tooltip="Employee experience from public review platforms, forums and public court records: work-life balance, culture, litigation, career growth, compensation and mission alignment."
             overall={emp.overall}
+            lane={lane}
             drawerTitle="How the employee pillar is derived"
             drawerBody={
               <>
@@ -354,6 +403,7 @@ export function AiePillarsSection() {
             title="Customer reputation"
             tooltip="Customer experience of the vendor's service: uptime, value for money, customer service, responsiveness and quality, sourced from review platforms and status-page archives."
             overall={cust.overall}
+            lane={lane}
             drawerTitle="How the customer pillar is derived"
             drawerBody={
               <>

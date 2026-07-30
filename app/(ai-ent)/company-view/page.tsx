@@ -10,7 +10,7 @@ const TAB_LINKS = [
   { href: "/company-view/ai-exposure", title: "AI Exposure", blurb: "Where AI helps or threatens each function of the business." },
   { href: "/company-view/talent", title: "Talent Intelligence", blurb: "Workforce readiness, AI literacy by level, role exposure." },
   { href: "/company-view/trust-rank", title: "Trust Rank", blurb: "Governance posture and the regulatory grid across ten jurisdictions." },
-  { href: "/company-view/assess", title: "Assess and Decide", blurb: "The weighted four-dimension adoption decision, derivation one click away." },
+  { href: "/assess-decide", title: "Assess and Decide", blurb: "Now its own tab: depth tiers, your weights, and the worked derivation." },
 ];
 
 export default async function CompanyOverviewPage() {

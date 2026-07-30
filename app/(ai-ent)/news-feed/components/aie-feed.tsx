@@ -47,7 +47,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
     <section className="rounded-lg border border-base-300 bg-base-100">
       <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
         <div className="flex flex-wrap items-center gap-2">
-          <h3 className="text-[13px] font-bold">AI market brief</h3>
+          <h3 className="text-[13px] font-bold">AI market brief (historical seed)</h3>
           <LaneBadge lane="aie" />
           <span className="font-mono text-[9px] uppercase tracking-wider text-muted">
             seed

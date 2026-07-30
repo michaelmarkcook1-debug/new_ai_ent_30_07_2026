@@ -8,7 +8,8 @@ const TABS = [
   { label: "AI Exposure", href: "/company-view/ai-exposure" },
   { label: "Talent Intelligence", href: "/company-view/talent" },
   { label: "Trust Rank", href: "/company-view/trust-rank" },
-  { label: "Assess and Decide", href: "/company-view/assess" },
+  // Assess and Decide is its own top-level tab now; this entry jumps there.
+  { label: "Assess and Decide", href: "/assess-decide" },
   { label: "AI Analyst", href: "/company-view/analyst" },
 ];
 
