@@ -141,3 +141,34 @@ Dates are absolute; the build day is 30 July 2026.
     for sample. The wordmark is "AI Enterprise" with an "AI" mark, and
     the AnalystGenius wordmark no longer appears in the shell; AG is still
     named in the docs where it explains provenance.
+18. **Comparability: rank within a market category, never across one
+    (31 July 2026).** The rankings previously ordered all tracked vendors on
+    one composite, which compared a chip foundry with a CRM assistant. That
+    is not a defensible comparison and it is now structurally prevented.
+    `lib/comparability.ts` takes the ranking engine's own taxonomy: the 13
+    MARKET_CATEGORIES for the boundary and MARKET_SHARE_ESTIMATES for
+    membership, so both come from the dataset rather than an editorial
+    choice here. A vendor competes in every category the dataset places it
+    in (Microsoft in seven, Google in five) and is ranked separately in each
+    against that category's real competitors. Sorting reorders within a
+    category only, so no interaction can produce a cross-category league
+    table. Categories with fewer than three placements are marked thin and
+    state that the order is a tier, not a rank. Tracked vendors the dataset
+    places in no category are listed separately and not ranked, rather than
+    being dropped or forced into a category they do not compete in. Applied
+    to Vendor View rankings, The Pulse comparison table and the Competitive
+    Intel rankings; recorded as rule 3b in docs/MODULE_GUIDE.md so future
+    modules inherit it.
+19. **Cost versus capability graph (31 July 2026).** The Price and
+    Performance page previously showed an honest empty state because the
+    ported repo snapshot carried no benchmark data. The deployed AI
+    Enterprise app has since published one, so the graph is ported: 330
+    commercially available models plotting published list input price (log
+    scale) against the independent Artificial Analysis Intelligence Index.
+    The efficiency frontier is computed here from the data (each model no
+    cheaper peer beats on intelligence) and reproduces the source's own
+    10-model frontier exactly, which is why the derivation drawer can state
+    the method rather than cite a supplied flag. Benchmarks sit under the
+    third-party signals divider, attributed and dated; AG produces no
+    benchmark of its own. The token pricing table now sits behind a
+    disclosure so the graph leads.

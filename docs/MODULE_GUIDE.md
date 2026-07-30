@@ -14,6 +14,16 @@ follow it exactly so the app reads as one product.
    Never the words Magic Quadrant, Wave or PEAK. Third-party analyst
    recognitions only under a "Third-party signals" divider, attributed,
    never blended into an AG score.
+3b. **Comparability: rank within a market category, never across one.** A
+   chip foundry, a cloud platform and a CRM assistant do not share a
+   yardstick, so one ordered list containing all three asserts a comparison
+   the evidence cannot support. Any surface that ranks, sorts or compares
+   vendors MUST group by the dataset's own `category` field and order only
+   inside a group. Use `groupByCategory`, `categoryOf`, `categoriesPresent`,
+   `COMPARABILITY_NOTE` and `THIN_CATEGORY_NOTE` from `lib/comparability`;
+   never hand-roll the rule. Where a category holds fewer than three
+   tracked vendors, mark it thin and say the order is a tier, not a rank.
+   Sorting controls must reorder within a category, never merge categories.
 4. British English in ALL UI copy ("per cent", "analyse", "colour"). No
    em-dashes anywhere: use commas, colons, parentheses or "to". Code
    comments in American English.

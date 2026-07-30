@@ -4,6 +4,12 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
 import { ScorePill } from "@/lib/ui/score";
+import {
+  COMPARABILITY_NOTE,
+  THIN_CATEGORY_NOTE,
+  categoriesPresent,
+  vendorIdsInCategory,
+} from "@/lib/comparability";
 import type { ComparisonRow } from "../types";
 
 type MetricKey = "composite" | "momentum" | "adoption" | "trust" | "delivery";
@@ -31,10 +37,26 @@ export function VendorComparisonTable({
   const [tab, setTab] = useState<MetricKey | "overview">("overview");
   const [sortBy, setSortBy] = useState<MetricKey>("composite");
 
+  // Comparison is scoped to one market category: these vendors span frontier
+  // labs, cloud platforms, silicon and application suites, which do not share
+  // a yardstick. The selector picks the comparable set.
+  const categories = useMemo(
+    () => categoriesPresent(rows.map((r) => r.id)),
+    [rows]
+  );
+  const [categoryId, setCategoryId] = useState<string>(
+    () => categoriesPresent(rows.map((r) => r.id))[0]?.id ?? ""
+  );
+
+  const inCategory = useMemo(() => {
+    const members = new Set(vendorIdsInCategory(categoryId));
+    return rows.filter((r) => members.has(r.id));
+  }, [rows, categoryId]);
+
   const sorted = useMemo(() => {
     const key = tab === "overview" ? sortBy : tab;
-    return [...rows].sort((a, b) => b[key] - a[key]);
-  }, [rows, tab, sortBy]);
+    return [...inCategory].sort((a, b) => b[key] - a[key]);
+  }, [inCategory, tab, sortBy]);
 
   const visibleMetrics: MetricKey[] =
     tab === "overview" ? ["composite", "momentum", "adoption", "trust", "delivery"] : [tab];
@@ -60,11 +82,37 @@ export function VendorComparisonTable({
         </div>
         <div className="flex items-center gap-2">
           <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[10px] text-muted">
-            {rows.length} companies
+            {sorted.length} of {rows.length} tracked
           </span>
           <LaneBadge lane="sample" />
         </div>
       </div>
+
+      {/* Comparability gate: one market category at a time */}
+      <div className="flex flex-wrap items-center gap-1.5 border-b border-base-300 px-3 py-2">
+        <span className="micro-label">Comparing within</span>
+        <select
+          aria-label="Market category"
+          value={categoryId}
+          onChange={(e) => setCategoryId(e.target.value)}
+          className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
+        >
+          {categories.map((c) => (
+            <option key={c.id} value={c.id}>
+              {c.name}
+            </option>
+          ))}
+        </select>
+        <p className="ml-1 max-w-2xl text-[11px] text-muted">
+          {COMPARABILITY_NOTE}
+        </p>
+      </div>
+
+      {sorted.length < 3 ? (
+        <p className="border-b border-base-300 px-3 py-1.5 text-[11px] text-muted">
+          {THIN_CATEGORY_NOTE}
+        </p>
+      ) : null}
       <div className="overflow-x-auto">
         <table className="w-full text-left">
           <thead>

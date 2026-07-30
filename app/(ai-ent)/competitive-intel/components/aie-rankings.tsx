@@ -1,5 +1,10 @@
 import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
+import {
+  COMPARABILITY_NOTE,
+  THIN_CATEGORY_NOTE,
+  placeByCategory,
+} from "@/lib/comparability";
 import { DerivationDrawer, ScorePill } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import type { AieRankingRow } from "../types";
@@ -21,32 +26,51 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
         Overall scores from the AIE dataset with native confidence labels.
         Separate from the sample heatmap: the two are never blended.
       </p>
-      <ul className="mt-3 space-y-1.5">
-        {rows.map((r) => (
-          <li key={r.id} className="flex items-center justify-between gap-2">
-            <span className="min-w-0">
-              <Link
-                href={`/vendor-view/${r.id}`}
-                className="block truncate text-[12.5px] font-medium hover:text-primary hover:underline"
-              >
-                {r.name}
-              </Link>
-              <span className="block truncate font-mono text-[9px] uppercase tracking-wider text-muted">
-                {r.category}
-              </span>
-            </span>
-            <span className="flex shrink-0 items-center gap-1.5">
-              <span
-                className="font-mono text-[10px] text-muted"
-                title="The dataset's native confidence figure for this vendor's score"
-              >
-                conf {r.confidenceScore}
-              </span>
-              <ScorePill score={r.overallScore} />
-            </span>
-          </li>
-        ))}
-      </ul>
+      <p className="mt-1 text-[11px] text-muted">{COMPARABILITY_NOTE}</p>
+      <div className="mt-3 space-y-3">
+        {placeByCategory(rows, (a: AieRankingRow, b: AieRankingRow) => b.overallScore - a.overallScore).map(
+          (group) => (
+            <div key={group.category.id}>
+              <div className="flex items-baseline justify-between gap-2 border-b border-base-300 pb-1">
+                <h4 className="text-[11.5px] font-bold">{group.category.name}</h4>
+                <span className="shrink-0 font-mono text-[9px] text-muted">
+                  {group.rows.length}
+                  {group.thin ? " (thin)" : ""}
+                </span>
+              </div>
+              {group.thin ? (
+                <p className="mt-1 text-[10px] text-muted">
+                  {THIN_CATEGORY_NOTE}
+                </p>
+              ) : null}
+              <ul className="mt-1.5 space-y-1.5">
+                {group.rows.map((r: AieRankingRow) => (
+                  <li
+                    key={r.id}
+                    className="flex items-center justify-between gap-2"
+                  >
+                    <Link
+                      href={`/vendor-view/${r.id}`}
+                      className="min-w-0 truncate text-[12.5px] font-medium hover:text-primary hover:underline"
+                    >
+                      {r.name}
+                    </Link>
+                    <span className="flex shrink-0 items-center gap-1.5">
+                      <span
+                        className="font-mono text-[10px] text-muted"
+                        title="The dataset's native confidence figure for this vendor's score"
+                      >
+                        conf {r.confidenceScore}
+                      </span>
+                      <ScorePill score={r.overallScore} />
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )
+        )}
+      </div>
       <div className="mt-3 border-t border-base-300 pt-2">
         <DerivationDrawer title="How the AIE vendor scores are derived">
           <p>

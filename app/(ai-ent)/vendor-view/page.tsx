@@ -10,7 +10,7 @@ export default function VendorViewPage() {
     <>
       <PageHeader
         title="Vendor View"
-        subtitle="The tracked enterprise AI vendor set as an evidence table: one named score per column, sortable, with the derivation one click away. Rows open the full vendor profile."
+        subtitle="The tracked enterprise AI vendor set as an evidence table, ranked within each market category and never across one. One named score per column, the derivation one click away, rows open the full vendor profile."
         lanes={["aie"]}
       />
       <RankingsTable rows={rows} generatedOn={datasetDate()} />
