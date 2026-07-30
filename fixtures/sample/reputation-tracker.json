@@ -1,0 +1,48 @@
+{
+  "generated": "2026-07-30",
+  "note": "Illustrative third-party recognition entries. Each names a generic third party; full attribution lands when the licensed feed is wired. Entries sit under the third-party divider only and are never blended into any AG score.",
+  "thirdPartySignals": [
+    {
+      "id": "analyst-market-guide",
+      "source": "Global technology research and advisory firm",
+      "sourceType": "Industry analyst recognition, attributed on wiring",
+      "title": "Representative-vendor listing, enterprise AI assistant platforms",
+      "detail": "The firm's mid-2026 market guide lists a set of representative vendors for enterprise AI assistant platforms. The firm, the report and the listed vendors are attributed in full once the licensed feed is wired.",
+      "period": "H1 2026",
+      "provenance": {
+        "sourceBasis": "sample",
+        "confidence": null,
+        "sourceUrl": null,
+        "sourceNote": "Illustrative sample entry, not a real citation"
+      }
+    },
+    {
+      "id": "peer-review-choice",
+      "source": "Enterprise software peer-review aggregator",
+      "sourceType": "Industry analyst recognition, attributed on wiring",
+      "title": "Customer-choice listing, AI development platforms",
+      "detail": "An annual customer-choice listing compiled from verified customer reviews of AI development platforms. Placement reflects review volume and average rating on the aggregator's own scale, which is quoted verbatim when wired.",
+      "period": "2026 edition",
+      "provenance": {
+        "sourceBasis": "sample",
+        "confidence": null,
+        "sourceUrl": null,
+        "sourceNote": "Illustrative sample entry, not a real citation"
+      }
+    },
+    {
+      "id": "developer-community-survey",
+      "source": "Independent developer community survey",
+      "sourceType": "Industry analyst recognition, attributed on wiring",
+      "title": "Most-admired AI developer tools, annual survey",
+      "detail": "A large annual developer survey ranks the AI tools developers most admire and most want to use next year. Survey methodology and sample size are attributed alongside the citation when wired.",
+      "period": "2026 survey",
+      "provenance": {
+        "sourceBasis": "sample",
+        "confidence": null,
+        "sourceUrl": null,
+        "sourceNote": "Illustrative sample entry, not a real citation"
+      }
+    }
+  ]
+}

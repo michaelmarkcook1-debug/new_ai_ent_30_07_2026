@@ -33,6 +33,7 @@
       "tooltip": "Intensity of AI regulatory activity affecting enterprise deployments across the US, EU, UK and India. 0 to 100, higher means more pressure.",
       "score": 57,
       "delta": 9,
+      "invert": true,
       "definition": "0 to 100, higher means more pressure on deployments in force this quarter.",
       "provenance": { "sourceBasis": "sample", "confidence": null, "sourceUrl": null, "sourceNote": "Illustrative demo value" }
     },

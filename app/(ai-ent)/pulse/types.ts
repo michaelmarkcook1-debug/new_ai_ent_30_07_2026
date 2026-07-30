@@ -23,6 +23,7 @@ export interface PulseKpi {
   score: number;
   delta: number;
   definition: string;
+  invert?: boolean;
   provenance: ProvenanceEnvelope;
 }
 

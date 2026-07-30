@@ -81,6 +81,7 @@ export function PulseView({ fixture }: { fixture: PulseFixture }) {
             delta={k.delta}
             definition={k.definition}
             badge={<LaneBadge lane="sample" />}
+            invert={k.invert}
           />
         ))}
       </section>

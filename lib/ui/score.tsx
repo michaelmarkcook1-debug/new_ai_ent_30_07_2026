@@ -59,6 +59,7 @@ export function KpiGauge({
   delta,
   definition,
   badge,
+  invert = false,
 }: {
   label: string;
   tooltip?: string;
@@ -66,8 +67,11 @@ export function KpiGauge({
   delta?: number | null;
   definition: string;
   badge?: React.ReactNode;
+  // For lower-is-better metrics (risk scores): flips the band colouring
+  // without changing the displayed value.
+  invert?: boolean;
 }) {
-  const band = score === null ? null : scoreBand(score);
+  const band = score === null ? null : scoreBand(invert ? 100 - score : score);
   const colour =
     band === "good"
       ? "var(--ag-green)"
@@ -106,7 +110,13 @@ export function KpiGauge({
           </div>
           {typeof delta === "number" ? (
             <div
-              className={`mt-1 flex items-center gap-0.5 font-mono text-[11px] ${delta > 0 ? "text-good" : delta < 0 ? "text-error" : "text-muted"}`}
+              className={`mt-1 flex items-center gap-0.5 font-mono text-[11px] ${
+                delta === 0
+                  ? "text-muted"
+                  : (delta > 0) !== invert
+                    ? "text-good"
+                    : "text-error"
+              }`}
             >
               {delta > 0 ? "▲" : delta < 0 ? "▼" : "▬"} {delta > 0 ? "+" : ""}
               {delta} vs last quarter

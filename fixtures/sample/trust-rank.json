@@ -1,0 +1,106 @@
+{
+  "provenance": {
+    "sourceBasis": "sample",
+    "confidence": null,
+    "sourceUrl": null,
+    "sourceNote": "Illustrative governance-posture pattern mirroring the BoardRadar governance-risk response shape. Every value here is demo sample content, not a measurement."
+  },
+  "postures": {
+    "anthropic": {
+      "vendorId": "anthropic",
+      "vendorName": "Anthropic",
+      "riskScore": 41,
+      "confidence": null,
+      "analysisDate": "30 July 2026",
+      "summary": "Illustrative posture for a private frontier lab. Board oversight sits with a small investor group alongside a long-term benefit governance structure, so the questions that matter to enterprise buyers are follow-through on safety governance, copyright litigation exposure common to frontier labs, and concentration in compute supply agreements rather than shareholder activism.",
+      "keyFindings": [
+        "As a private company there are no public-market filings to test; governance visibility relies on voluntary disclosure and contract terms.",
+        "Copyright actions against frontier labs remain the sector's principal legal overhang; outcomes will shape training-data licensing economics.",
+        "EU general-purpose AI obligations create a recurring documentation and transparency workload from August 2025 onwards.",
+        "Compute supply is concentrated in a small number of cloud partners, which is a resilience consideration rather than a governance failure."
+      ],
+      "recommendations": [
+        "Ask for the vendor's EU AI Act documentation pack and its cadence of updates as part of any procurement exercise.",
+        "Contract for audit and incident-notification rights that substitute for the disclosure a listed company would owe.",
+        "Track litigation milestones each quarter and reassess exposure rather than assuming a static position."
+      ],
+      "litigationAssessment": {
+        "key_cases": [
+          "[COPYRIGHT] Training-data copyright actions against frontier labs are the sector's live legal question; outcomes shape licensing economics for every model provider.",
+          "[REGULATORY] EU general-purpose AI obligations require ongoing documentation and transparency compliance from August 2025."
+        ],
+        "active_cases": 2,
+        "exposure_level": "medium"
+      },
+      "activistVulnerability": {
+        "risk_level": "low",
+        "likely_targets": [
+          "Investor pressure concentrates on compute spend discipline and the pace of enterprise revenue conversion, not board control: there is no activist route into a private company."
+        ]
+      }
+    },
+    "openai": {
+      "vendorId": "openai",
+      "vendorName": "OpenAI",
+      "riskScore": 52,
+      "confidence": null,
+      "analysisDate": "30 July 2026",
+      "summary": "Illustrative posture. The governance story combines an unusual corporate structure that has been publicly revised more than once, active copyright litigation, and very large multi-party compute commitments. None of that blocks procurement, but each strand deserves explicit contractual treatment.",
+      "keyFindings": [
+        "The corporate and board structure has changed publicly several times, so counterparties should confirm which entity they contract with and its obligations.",
+        "The New York Times copyright action is progressing through discovery, per the court docket tracked in the AIE market signals dataset.",
+        "Multi-party compute commitments spread supplier risk but add capital-intensity exposure to the commercial model.",
+        "Regulatory attention on training-data practices is live in more than one jurisdiction."
+      ],
+      "recommendations": [
+        "Confirm the contracting entity and the survival of terms across any future restructuring.",
+        "Price litigation risk into term length: prefer shorter renewal cycles while copyright questions remain open.",
+        "Require data-processing and residency commitments in writing rather than relying on published policy."
+      ],
+      "litigationAssessment": {
+        "key_cases": [
+          "[COPYRIGHT] NYT v. OpenAI and Microsoft: federal district court permitted broader discovery on training-data sourcing (docket tracked in the AIE market signals dataset).",
+          "[REGULATORY] A regulator has opened an enquiry into the training-data practices of a frontier model provider, per the AIE news seed."
+        ],
+        "active_cases": 3,
+        "exposure_level": "high"
+      },
+      "activistVulnerability": {
+        "risk_level": "medium",
+        "likely_targets": [
+          "Investor and partner pressure focuses on governance stability and the balance between the capped-profit heritage and commercial expansion."
+        ]
+      }
+    },
+    "mistral": {
+      "vendorId": "mistral",
+      "vendorName": "Mistral AI",
+      "riskScore": 36,
+      "confidence": null,
+      "analysisDate": "30 July 2026",
+      "summary": "Illustrative posture. A younger European lab with a conventional venture structure and a public-sector customer base that rewards compliance discipline. The main governance questions are scale-up execution and dependence on a small leadership group rather than litigation.",
+      "keyFindings": [
+        "European domicile aligns the company with EU AI Act supervision from the start, which many public-sector buyers treat as a positive.",
+        "Sovereign-cloud and government frameworks bring procurement scrutiny that substitutes for some public-market discipline.",
+        "Key-person concentration is the standard early-stage governance consideration at this size."
+      ],
+      "recommendations": [
+        "Ask for the compliance artefacts produced for public-sector frameworks; they travel well into private-sector due diligence.",
+        "Agree continuity and escrow terms proportionate to the vendor's size."
+      ],
+      "litigationAssessment": {
+        "key_cases": [
+          "[REGULATORY] EU general-purpose AI obligations apply; the company's EU domicile makes national supervision the operative channel."
+        ],
+        "active_cases": 1,
+        "exposure_level": "low"
+      },
+      "activistVulnerability": {
+        "risk_level": "low",
+        "likely_targets": [
+          "Venture investor influence is the operative channel; pressure centres on commercial scale-up pace."
+        ]
+      }
+    }
+  }
+}
