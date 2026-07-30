@@ -1,0 +1,218 @@
+{
+  "provenance": { "sourceBasis": "sample", "confidence": null, "sourceUrl": null, "sourceNote": "Exemplar buyer fixture. Shell is not in the BoardRadar universe; every value here is an illustrative sample shaped like the real API responses." },
+  "profile": {
+    "name": "Shell",
+    "label": "Exemplar buyer",
+    "industry": "Energy",
+    "note": "The tailored snapshot a customer sees. All figures SAMPLE badged; shapes mirror the live BoardRadar response schemas exactly, so wiring a real buyer is a data swap, not a rebuild."
+  },
+  "overview": {
+    "insight": {
+      "title": "AI moves from pilots to the operating model",
+      "date": "30 July 2026",
+      "body": "For an energy major, the near-term value of enterprise AI concentrates in four functions: trading analytics, predictive maintenance, safety assurance and back-office automation. The decision in front of the business is no longer whether to adopt but which platform combination to standardise on, under which governance regime, and with which delivery partner. The tabs in this view walk that decision end to end: exposure, talent, trust and the weighted assessment."
+    },
+    "kpis": [
+      { "label": "AI OPPORTUNITY", "score": 74, "delta": 5, "definition": "0 to 100, higher is stronger. Where AI helps the functions of the business.", "tooltip": "Composite of function-level opportunity signals across the organisation." },
+      { "label": "AI THREAT EXPOSURE", "score": 41, "delta": 2, "definition": "0 to 100, higher means more disruption risk to current ways of working.", "tooltip": "Composite of function-level disruption signals." },
+      { "label": "WORKFORCE READINESS", "score": 58, "delta": 7, "definition": "0 to 100, higher is more ready. AI skills density and training reach.", "tooltip": "Talent readiness composite from the Talent Intelligence tab." },
+      { "label": "GOVERNANCE POSTURE", "score": 66, "delta": 3, "definition": "0 to 100, higher is stronger. Controls and compliance readiness for AI deployment.", "tooltip": "Governance composite from the Trust Rank tab." }
+    ],
+    "questions": [
+      "Which of our functions gain most from agentic AI this year?",
+      "What does the EU AI Act require of our safety-critical use cases?",
+      "Which vendor shortlist fits our governance posture?",
+      "Who should deliver our AI programme, and at what readiness?"
+    ]
+  },
+  "aiExposure": {
+    "success": true,
+    "companyName": "Shell",
+    "isPrivate": false,
+    "hasAnalysis": true,
+    "riskScore": 41,
+    "opportunityScore": 74,
+    "aiReadinessScore": 58,
+    "summary": "AI helps more than it threatens across the portfolio: trading, maintenance and safety functions carry high evidenced opportunity, while clerical and document-heavy functions face the largest workflow disruption. Readiness is mid-pack for the sector and improving.",
+    "comparisonTable": [
+      { "ticker": "SHELL", "name": "Shell", "isMainCompany": true, "deliveryEfficiencyScore": 62, "aiStrategyBenchmark": 58 },
+      { "ticker": "PEER-A", "name": "European supermajor peer A", "isMainCompany": false, "deliveryEfficiencyScore": 57, "aiStrategyBenchmark": 52 },
+      { "ticker": "PEER-B", "name": "US supermajor peer B", "isMainCompany": false, "deliveryEfficiencyScore": 64, "aiStrategyBenchmark": 61 }
+    ],
+    "functionExposure": [
+      { "function": "Trading and supply", "helps": 86, "threatens": 30, "note": "Signal extraction, scenario generation and hedging analytics with human sign-off." },
+      { "function": "Predictive maintenance", "helps": 82, "threatens": 22, "note": "Asset telemetry models cut unplanned downtime; well-evidenced sector pattern." },
+      { "function": "HSSE and safety assurance", "helps": 71, "threatens": 18, "note": "Anomaly detection and permit-to-work document checking; regulator-sensitive." },
+      { "function": "Retail and customer", "helps": 64, "threatens": 44, "note": "Service automation reshapes contact-centre roles." },
+      { "function": "Finance and back office", "helps": 60, "threatens": 62, "note": "Highest workflow disruption: document processing and reconciliation." },
+      { "function": "Legal and contracting", "helps": 55, "threatens": 48, "note": "Drafting assistance under privilege controls." }
+    ],
+    "keyFindings": [
+      "Opportunity concentrates in functions with rich telemetry and document flows",
+      "Threat exposure is highest where work is clerical and rules-based",
+      "Sector peers are standardising on two-platform strategies with one frontier and one incumbent stack",
+      "Delivery capability, not model quality, is the binding constraint this year"
+    ],
+    "recommendations": [
+      "Prioritise maintenance and trading use cases with measurable baselines",
+      "Stand up a model-agnostic orchestration layer before deepening any single vendor dependency",
+      "Route safety-critical use cases through the strictest applicable regime (EU AI Act high-risk) by default",
+      "Contract delivery partners against the AI readiness ranking, not headline day rates"
+    ]
+  },
+  "talent": {
+    "insight": "The workforce skews technical for the sector, with strong engineering depth but a thin dedicated AI specialist bench relative to ambition. Training reach is widening; the constraint is experienced applied-AI leadership in the functions.",
+    "kpis": {
+      "headcount": 96000,
+      "headcountYoY": -1000,
+      "attritionPct": 8.5,
+      "attritionWindow": "Trailing 12mo",
+      "aiTrainedLabel": "25K+",
+      "aiTrainedSub": "Foundation-level",
+      "aiSpecialistsLabel": "~800",
+      "aiSpecialistsSub": "Estimated dedicated roles",
+      "avgTenureYears": 8.2,
+      "avgTenureSource": "Sample estimate"
+    },
+    "pyramid": [
+      { "level": "Executive", "previous24m": 40, "previous": 44, "previous6m": 47, "current": 50 },
+      { "level": "Senior management", "previous24m": 35, "previous": 39, "previous6m": 43, "current": 46 },
+      { "level": "Middle management", "previous24m": 30, "previous": 34, "previous6m": 38, "current": 42 },
+      { "level": "Professional", "previous24m": 28, "previous": 33, "previous6m": 38, "current": 44 },
+      { "level": "Operational", "previous24m": 15, "previous": 18, "previous6m": 22, "current": 26 }
+    ],
+    "pyramidMetric": "AI literacy index by level, 0 to 100",
+    "functional": [
+      { "name": "Engineering and projects", "pct": 31 },
+      { "name": "Operations and production", "pct": 27 },
+      { "name": "Commercial and trading", "pct": 14 },
+      { "name": "Corporate functions", "pct": 12 },
+      { "name": "Digital and IT", "pct": 9 },
+      { "name": "Retail", "pct": 7 }
+    ],
+    "leadership": [
+      { "speaker": "Group technology leadership", "role": "Technology function", "signal": "high", "quote": "Sample signal: public statements emphasise scaling AI in maintenance and trading with human accountability retained.", "source": "Illustrative sample, role-level only", "date": "2026" },
+      { "speaker": "Trading leadership", "role": "Trading function", "signal": "medium", "quote": "Sample signal: analytics investment framed as decision support, not autonomous execution.", "source": "Illustrative sample, role-level only", "date": "2026" }
+    ],
+    "aiTalentExposure": {
+      "workforce": 96000,
+      "avgAiExposurePct": 46,
+      "avgAiExposureBasis": "headcount-weighted",
+      "highExposureThresholdPct": 80,
+      "highExposureRoleCount": 3,
+      "highRiskRoleCount": 6,
+      "growthRoleCount": 4,
+      "roleCoveragePct": 92,
+      "summary": "Just under half the workforce sits in roles where AI changes a material share of tasks. Growth concentrates in applied AI engineering, data product and AI assurance roles.",
+      "roles": [
+        { "role": "Document processing and administration", "exposurePct": 84, "direction": "contracting" },
+        { "role": "Customer service", "exposurePct": 78, "direction": "contracting" },
+        { "role": "Financial operations", "exposurePct": 72, "direction": "contracting" },
+        { "role": "Maintenance planning", "exposurePct": 58, "direction": "stable" },
+        { "role": "Trading analytics", "exposurePct": 55, "direction": "growing" },
+        { "role": "HSSE assurance", "exposurePct": 41, "direction": "stable" },
+        { "role": "AI and data engineering", "exposurePct": 25, "direction": "growing" },
+        { "role": "Field operations", "exposurePct": 22, "direction": "stable" }
+      ]
+    }
+  },
+  "trustRank": {
+    "governance": {
+      "riskScore": 34,
+      "summary": "Governance posture is strong for the sector: an established risk framework extends naturally to AI assurance, and board oversight of digital risk is in place. The gap to close is AI-specific: model inventories, deployment gates and documentation that satisfies the EU AI Act's high-risk requirements where they apply.",
+      "confidence": "sample",
+      "keyFindings": [
+        "Enterprise risk framework adapts well to AI assurance duties",
+        "Model inventory and use-case registry are partial, not complete",
+        "Supplier AI clauses lag the pace of procurement",
+        "Safety-critical deployments will attract high-risk classification in the EU"
+      ],
+      "recommendations": [
+        "Complete the AI use-case registry before the next audit cycle",
+        "Gate high-risk deployments behind documented conformity checks",
+        "Standardise AI clauses in vendor and integrator contracts",
+        "Assign named accountability for each production model"
+      ]
+    },
+    "regulatoryGrid": [
+      { "jurisdiction": "European Union", "regime": "EU AI Act", "status": "In force, phased application", "note": "General-purpose AI obligations apply from August 2025; high-risk system requirements phase in through 2026 and 2027. Safety-critical industrial use cases likely qualify as high-risk.", "aieSource": true },
+      { "jurisdiction": "United Kingdom", "regime": "Principles-based, regulator-led approach", "status": "Guidance", "note": "No horizontal statute; sector regulators apply five cross-cutting principles. Financial trading AI falls under existing conduct rules.", "aieSource": false },
+      { "jurisdiction": "United States (federal)", "regime": "Executive action plus sector rules", "status": "Evolving", "note": "No comprehensive federal statute; export controls on advanced chips shape infrastructure choices. Sector agencies police claims and safety.", "aieSource": true },
+      { "jurisdiction": "California", "regime": "State AI statutes", "status": "In force, partial", "note": "Transparency and safety-disclosure obligations for large model developers affect vendor selection more than deployment.", "aieSource": false },
+      { "jurisdiction": "Colorado", "regime": "Colorado AI Act", "status": "Enacted, applying 2026", "note": "Duties on deployers of high-risk AI systems in consequential decisions; relevant to HR and customer-facing uses.", "aieSource": false },
+      { "jurisdiction": "Texas", "regime": "State AI governance act", "status": "Enacted", "note": "Government-use focused with narrower private-sector duties; monitor for energy-sector guidance.", "aieSource": false },
+      { "jurisdiction": "New York", "regime": "Automated employment decision rules", "status": "In force", "note": "Bias audit duties for automated hiring tools; applies to talent workflows.", "aieSource": false },
+      { "jurisdiction": "Germany", "regime": "EU AI Act plus national supervision", "status": "In force via EU", "note": "National market surveillance authorities enforce; works councils add co-determination duties for workplace AI.", "aieSource": false },
+      { "jurisdiction": "France", "regime": "EU AI Act plus CNIL guidance", "status": "In force via EU", "note": "Data protection authority active on AI and personal data; relevant to customer analytics.", "aieSource": false },
+      { "jurisdiction": "India", "regime": "Advisory-led, DPDP Act adjacent", "status": "Guidance", "note": "No horizontal AI statute; data protection law and sector advisories govern. Large delivery-centre exposure makes workforce transition rules the watch item.", "aieSource": false }
+    ],
+    "vendorRulings": [
+      { "vendor": "Frontier labs (general)", "item": "EU general-purpose AI obligations", "note": "Documentation and transparency duties sit with model providers; deployers inherit downstream duties. Confidence-labelled from the AIE legislation material.", "aieSource": true },
+      { "vendor": "US chip export controls", "item": "Advanced compute restrictions", "note": "Shapes where sovereign and regional AI capacity can be built; a supply-chain consideration for global deployment. Seeded from the AIE market signals dataset.", "aieSource": true }
+    ]
+  },
+  "assess": {
+    "success": true,
+    "assessment": {
+      "subject": "Shell's enterprise AI adoption decision",
+      "weightedTotal": 68,
+      "generated": "30 July 2026",
+      "dimensions": [
+        {
+          "id": "strategic_fit",
+          "label": "Strategic fit",
+          "weight": 0.3,
+          "score": 76,
+          "rationale": "The highest-value use cases (trading, maintenance, safety) align with proven sector patterns and existing data assets.",
+          "subcriteria": [
+            { "label": "Use-case value concentration", "score": 82, "note": "Four functions carry most of the value." },
+            { "label": "Data readiness", "score": 71, "note": "Telemetry rich; document estates fragmented." },
+            { "label": "Competitive urgency", "score": 74, "note": "Peers are standardising now." }
+          ]
+        },
+        {
+          "id": "execution_readiness",
+          "label": "Execution readiness",
+          "weight": 0.25,
+          "score": 61,
+          "rationale": "Engineering depth is real but the applied-AI bench is thin; delivery partners will carry early scale.",
+          "subcriteria": [
+            { "label": "Internal capability", "score": 55, "note": "Specialist bench small relative to ambition." },
+            { "label": "Delivery channel strength", "score": 72, "note": "Strong integrator options; see live readiness ranking." },
+            { "label": "Change capacity", "score": 56, "note": "Concurrent transformations compete for attention." }
+          ]
+        },
+        {
+          "id": "governance_trust",
+          "label": "Governance and trust",
+          "weight": 0.25,
+          "score": 66,
+          "rationale": "Strong enterprise risk machinery; AI-specific controls partially built. EU high-risk duties are the pacing item.",
+          "subcriteria": [
+            { "label": "Control framework", "score": 74, "note": "Adapts from existing risk management." },
+            { "label": "Regulatory exposure", "score": 58, "note": "High-risk classification likely for safety-critical uses." },
+            { "label": "Vendor trust posture", "score": 66, "note": "Shortlist must clear governance bar; see Trust Rank." }
+          ]
+        },
+        {
+          "id": "economics",
+          "label": "Economics",
+          "weight": 0.2,
+          "score": 69,
+          "rationale": "Falling inference prices and credible multi-vendor leverage favour committing now with staged spend.",
+          "subcriteria": [
+            { "label": "Cost trajectory", "score": 78, "note": "Sustained price competition among providers." },
+            { "label": "Value evidence", "score": 64, "note": "Baselines exist for maintenance; thinner elsewhere." },
+            { "label": "Lock-in risk", "score": 63, "note": "Manageable at the application layer if orchestration stays model-agnostic." }
+          ]
+        }
+      ],
+      "derivation": {
+        "method": "Weighted sum of four dimension scores, each 0 to 100. Dimension scores are the evidence-weighted mean of their subcriteria. Weights reflect a buyer decision where strategic fit dominates.",
+        "formula": "weightedTotal = sum(weight_i x score_i), weights sum to 1.0",
+        "confidenceNote": "All values SAMPLE for the exemplar buyer. In production each subcriterion cites its evidence items and claims below the strong-evidence bar are suppressed.",
+        "schemaNote": "Shape mirrors GET /assessment/framework (dimensions, weights, rationales, subcriteria) so a live buyer assessment is a data swap."
+      }
+    }
+  }
+}

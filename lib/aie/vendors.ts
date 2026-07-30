@@ -91,6 +91,7 @@ const TICKER_BY_ID: Record<string, string> = {
   sap: "SAP",
   ibm: "IBM",
   snowflake: "SNOW",
+  alibaba: "BABA",
   meta: "META",
   nvidia: "NVDA",
   amd: "AMD",
@@ -99,7 +100,7 @@ const TICKER_BY_ID: Record<string, string> = {
 };
 
 // Confirmed live in BoardRadar (coverage probe).
-const BR_TICKERS = new Set(["MSFT", "GOOGL", "AMZN", "IBM", "ORCL", "CRM", "NOW", "SAP"]);
+const BR_TICKERS = new Set(["MSFT", "GOOGL", "AMZN", "IBM", "ORCL", "CRM", "NOW", "SAP", "BABA"]);
 
 function layerFor(id: string, category: string): Layer {
   const override = LAYER_OVERRIDES[id];
