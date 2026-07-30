@@ -80,7 +80,7 @@ export default async function AiExposurePage() {
                 <tr key={row.function} className="hover:bg-base-200/60">
                   <td className="px-3 py-2 text-[12.5px] font-semibold">{row.function}</td>
                   <td className="px-3 py-2"><ScorePill score={row.helps} /></td>
-                  <td className="px-3 py-2"><ScorePill score={row.threatens} /></td>
+                  <td className="px-3 py-2"><ScorePill score={row.threatens} invert /></td>
                   <td className="px-3 py-2 text-[11.5px] text-muted">{row.note}</td>
                 </tr>
               ))}

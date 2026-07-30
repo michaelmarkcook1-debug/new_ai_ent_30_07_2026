@@ -12,11 +12,15 @@ export function ScorePill({
   estimated,
   lockedLabel,
   onClick,
+  invert = false,
 }: {
   score: number | null;
   estimated?: boolean;
   lockedLabel?: string;
   onClick?: () => void;
+  // For lower-is-better values (threat, risk): flips the colour band while
+  // displaying the raw value unchanged.
+  invert?: boolean;
 }) {
   if (score === null || score === undefined) {
     return (
@@ -32,7 +36,7 @@ export function ScorePill({
       </span>
     );
   }
-  const band = scoreBand(score);
+  const band = scoreBand(invert ? 100 - score : score);
   const styles = {
     good: "bg-good-bg text-good",
     warn: "bg-warn-bg text-warn",

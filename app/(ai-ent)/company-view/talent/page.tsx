@@ -119,7 +119,7 @@ export default async function TalentPage() {
               {x.roles.map((r) => (
                 <tr key={r.role} className="hover:bg-base-200/60">
                   <td className="px-3 py-2 text-[12.5px] font-semibold">{r.role}</td>
-                  <td className="px-3 py-2"><ScorePill score={r.exposurePct} estimated /></td>
+                  <td className="px-3 py-2"><ScorePill score={r.exposurePct} estimated invert /></td>
                   <td className="px-3 py-2">
                     <span
                       className={`font-mono text-[11px] ${r.direction === "growing" ? "text-good" : r.direction === "contracting" ? "text-error" : "text-muted"}`}
