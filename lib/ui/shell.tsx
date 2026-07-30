@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { AgMark } from "@/lib/ui/logo";
 
 // The AG shell: top bar with logo, scope chip and "Ask AI" pill; left
 // sidebar with ALL-CAPS group labels, icons, active item as a solid primary
@@ -129,8 +130,8 @@ export function Shell({
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
           </button>
           <Link href="/pulse" className="flex items-center gap-1.5">
-            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary font-display text-[11px] font-extrabold tracking-tight text-white">
-              AI
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-white">
+              <AgMark className="h-3.5 w-3.5" />
             </span>
             <span className="font-display text-[15px] font-extrabold tracking-tight">
               AI Enterprise

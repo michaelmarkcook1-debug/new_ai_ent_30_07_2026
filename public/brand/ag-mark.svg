@@ -1,0 +1,20 @@
+<!-- AnalystGenius house mark, traced from the supplied artwork on 30 July 2026.
+     Uses currentColor so one file serves both variants: it renders white on a
+     coloured chip and brand-coloured on a plain background. If the original
+     vector is available, replace the paths here and nothing else changes. -->
+<svg viewBox="0 0 376 376" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AnalystGenius">
+  <!-- Sail: straight left edge from the foot up to the apex, convex right
+       edge sweeping back down, with the triangular counter cut out via the
+       even-odd fill rule. -->
+  <path
+    fill="currentColor"
+    fill-rule="evenodd"
+    clip-rule="evenodd"
+    d="M190 12 L8 352 L232 352 C232 352 268 300 268 208 C268 116 190 12 190 12 Z M190 190 L142 279 L238 279 Z"
+  />
+  <!-- Detached foot: the parallelogram at the lower right. -->
+  <path
+    fill="currentColor"
+    d="M256 279 L332 279 L370 352 L294 352 Z"
+  />
+</svg>
