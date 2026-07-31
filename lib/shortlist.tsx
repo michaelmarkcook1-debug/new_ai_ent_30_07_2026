@@ -71,13 +71,24 @@ export function ShortlistProvider({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
-  const persist = useCallback((next: string[]) => {
-    setIds(next);
-    try {
-      localStorage.setItem(KEY, JSON.stringify(next));
-    } catch {
-      // Private browsing can refuse writes. The in-memory list still works.
-    }
+  // Takes an updater rather than a finished array, so the next list is always
+  // derived from the current one inside React's own queue.
+  //
+  // Computing it from the `ids` captured at render time loses writes: two
+  // clicks that land before React commits a re-render both read the same stale
+  // list, and the second overwrites the first in state and in localStorage. On
+  // a chart-heavy page with a busy main thread that is an ordinary double
+  // click, and the add silently does nothing.
+  const persist = useCallback((update: (prev: string[]) => string[]) => {
+    setIds((prev) => {
+      const next = update(prev);
+      try {
+        localStorage.setItem(KEY, JSON.stringify(next));
+      } catch {
+        // Private browsing can refuse writes. The in-memory list still works.
+      }
+      return next;
+    });
   }, []);
 
   const value = useMemo<ShortlistState>(
@@ -87,15 +98,15 @@ export function ShortlistProvider({ children }: { children: React.ReactNode }) {
       full: ids.length >= MAX,
       has: (id) => ids.includes(id),
       toggle: (id) =>
-        persist(
-          ids.includes(id)
-            ? ids.filter((x) => x !== id)
-            : ids.length >= MAX
-              ? ids
-              : [...ids, id]
+        persist((prev) =>
+          prev.includes(id)
+            ? prev.filter((x) => x !== id)
+            : prev.length >= MAX
+              ? prev
+              : [...prev, id]
         ),
-      remove: (id) => persist(ids.filter((x) => x !== id)),
-      clear: () => persist([]),
+      remove: (id) => persist((prev) => prev.filter((x) => x !== id)),
+      clear: () => persist(() => []),
     }),
     [ids, ready, persist]
   );
