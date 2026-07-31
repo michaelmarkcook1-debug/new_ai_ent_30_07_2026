@@ -1,0 +1,748 @@
+{
+ "metric": "Hacker News story volume and reception per quarter",
+ "provenance": "Hacker News via the Algolia search API, exact-quoted vendor queries, story items only. A real observable signal behind the developer reputation pillar. NOT a reputation score history: the reputation dataset publishes point-in-time pillar scores and no history, so those cannot be plotted over time without inventing the past.",
+ "source": "hn.algolia.com",
+ "capturedAt": "2026-07-31",
+ "quarters": [
+  "2024Q3",
+  "2024Q4",
+  "2025Q1",
+  "2025Q2",
+  "2025Q3",
+  "2025Q4",
+  "2026Q1",
+  "2026Q2"
+ ],
+ "vendors": [
+  {
+   "vendorId": "openai",
+   "name": "OpenAI",
+   "query": "OpenAI",
+   "ambiguity": null,
+   "series": [
+    {
+     "period": "2024Q3",
+     "year": 2024,
+     "quarter": 3,
+     "stories": 755,
+     "meanPoints": 205.5,
+     "meanComments": 134.7
+    },
+    {
+     "period": "2024Q4",
+     "year": 2024,
+     "quarter": 4,
+     "stories": 834,
+     "meanPoints": 210.7,
+     "meanComments": 160.6
+    },
+    {
+     "period": "2025Q1",
+     "year": 2025,
+     "quarter": 1,
+     "stories": 958,
+     "meanPoints": 241.4,
+     "meanComments": 198.1
+    },
+    {
+     "period": "2025Q2",
+     "year": 2025,
+     "quarter": 2,
+     "stories": 975,
+     "meanPoints": 234.7,
+     "meanComments": 186.7
+    },
+    {
+     "period": "2025Q3",
+     "year": 2025,
+     "quarter": 3,
+     "stories": 1103,
+     "meanPoints": 229.9,
+     "meanComments": 157.5
+    },
+    {
+     "period": "2025Q4",
+     "year": 2025,
+     "quarter": 4,
+     "stories": 1237,
+     "meanPoints": 281.7,
+     "meanComments": 251.4
+    },
+    {
+     "period": "2026Q1",
+     "year": 2026,
+     "quarter": 1,
+     "stories": 1576,
+     "meanPoints": 340.9,
+     "meanComments": 215.2
+    },
+    {
+     "period": "2026Q2",
+     "year": 2026,
+     "quarter": 2,
+     "stories": 1264,
+     "meanPoints": 374,
+     "meanComments": 265
+    }
+   ],
+   "total": 8702
+  },
+  {
+   "vendorId": "anthropic",
+   "name": "Anthropic",
+   "query": "Anthropic",
+   "ambiguity": null,
+   "series": [
+    {
+     "period": "2024Q3",
+     "year": 2024,
+     "quarter": 3,
+     "stories": 149,
+     "meanPoints": 43.2,
+     "meanComments": 21.6
+    },
+    {
+     "period": "2024Q4",
+     "year": 2024,
+     "quarter": 4,
+     "stories": 209,
+     "meanPoints": 62,
+     "meanComments": 46.5
+    },
+    {
+     "period": "2025Q1",
+     "year": 2025,
+     "quarter": 1,
+     "stories": 215,
+     "meanPoints": 47.1,
+     "meanComments": 26.2
+    },
+    {
+     "period": "2025Q2",
+     "year": 2025,
+     "quarter": 2,
+     "stories": 358,
+     "meanPoints": 36.9,
+     "meanComments": 21.4
+    },
+    {
+     "period": "2025Q3",
+     "year": 2025,
+     "quarter": 3,
+     "stories": 403,
+     "meanPoints": 125.3,
+     "meanComments": 97.6
+    },
+    {
+     "period": "2025Q4",
+     "year": 2025,
+     "quarter": 4,
+     "stories": 386,
+     "meanPoints": 103.3,
+     "meanComments": 49.4
+    },
+    {
+     "period": "2026Q1",
+     "year": 2026,
+     "quarter": 1,
+     "stories": 1286,
+     "meanPoints": 301,
+     "meanComments": 196.2
+    },
+    {
+     "period": "2026Q2",
+     "year": 2026,
+     "quarter": 2,
+     "stories": 1268,
+     "meanPoints": 424.9,
+     "meanComments": 346
+    }
+   ],
+   "total": 4274
+  },
+  {
+   "vendorId": "google",
+   "name": "Google DeepMind",
+   "query": "DeepMind",
+   "ambiguity": null,
+   "series": [
+    {
+     "period": "2024Q3",
+     "year": 2024,
+     "quarter": 3,
+     "stories": 44,
+     "meanPoints": 71.8,
+     "meanComments": 27.5
+    },
+    {
+     "period": "2024Q4",
+     "year": 2024,
+     "quarter": 4,
+     "stories": 57,
+     "meanPoints": 94.9,
+     "meanComments": 37.5
+    },
+    {
+     "period": "2025Q1",
+     "year": 2025,
+     "quarter": 1,
+     "stories": 37,
+     "meanPoints": 84.2,
+     "meanComments": 42.7
+    },
+    {
+     "period": "2025Q2",
+     "year": 2025,
+     "quarter": 2,
+     "stories": 89,
+     "meanPoints": 61.5,
+     "meanComments": 29.2
+    },
+    {
+     "period": "2025Q3",
+     "year": 2025,
+     "quarter": 3,
+     "stories": 86,
+     "meanPoints": 37.6,
+     "meanComments": 18.7
+    },
+    {
+     "period": "2025Q4",
+     "year": 2025,
+     "quarter": 4,
+     "stories": 67,
+     "meanPoints": 47.3,
+     "meanComments": 23.9
+    },
+    {
+     "period": "2026Q1",
+     "year": 2026,
+     "quarter": 1,
+     "stories": 82,
+     "meanPoints": 33,
+     "meanComments": 23.5
+    },
+    {
+     "period": "2026Q2",
+     "year": 2026,
+     "quarter": 2,
+     "stories": 76,
+     "meanPoints": 43.3,
+     "meanComments": 11
+    }
+   ],
+   "total": 538
+  },
+  {
+   "vendorId": "mistral",
+   "name": "Mistral",
+   "query": "Mistral AI",
+   "ambiguity": null,
+   "series": [
+    {
+     "period": "2024Q3",
+     "year": 2024,
+     "quarter": 3,
+     "stories": 6,
+     "meanPoints": 12.5,
+     "meanComments": 2
+    },
+    {
+     "period": "2024Q4",
+     "year": 2024,
+     "quarter": 4,
+     "stories": 4,
+     "meanPoints": 11.3,
+     "meanComments": 3.8
+    },
+    {
+     "period": "2025Q1",
+     "year": 2025,
+     "quarter": 1,
+     "stories": 6,
+     "meanPoints": 3.7,
+     "meanComments": 0.3
+    },
+    {
+     "period": "2025Q2",
+     "year": 2025,
+     "quarter": 2,
+     "stories": 9,
+     "meanPoints": 107.6,
+     "meanComments": 47.9
+    },
+    {
+     "period": "2025Q3",
+     "year": 2025,
+     "quarter": 3,
+     "stories": 9,
+     "meanPoints": 106.2,
+     "meanComments": 48.6
+    },
+    {
+     "period": "2025Q4",
+     "year": 2025,
+     "quarter": 4,
+     "stories": 2,
+     "meanPoints": 4.5,
+     "meanComments": 0.5
+    },
+    {
+     "period": "2026Q1",
+     "year": 2026,
+     "quarter": 1,
+     "stories": 13,
+     "meanPoints": 59.9,
+     "meanComments": 15.2
+    },
+    {
+     "period": "2026Q2",
+     "year": 2026,
+     "quarter": 2,
+     "stories": 17,
+     "meanPoints": 54.3,
+     "meanComments": 19.3
+    }
+   ],
+   "total": 66
+  },
+  {
+   "vendorId": "meta",
+   "name": "Meta (Llama)",
+   "query": "Llama",
+   "ambiguity": "Also matches the animal and unrelated projects.",
+   "series": [
+    {
+     "period": "2024Q3",
+     "year": 2024,
+     "quarter": 3,
+     "stories": 265,
+     "meanPoints": 79.8,
+     "meanComments": 27.6
+    },
+    {
+     "period": "2024Q4",
+     "year": 2024,
+     "quarter": 4,
+     "stories": 166,
+     "meanPoints": 87.9,
+     "meanComments": 26.9
+    },
+    {
+     "period": "2025Q1",
+     "year": 2025,
+     "quarter": 1,
+     "stories": 132,
+     "meanPoints": 33.3,
+     "meanComments": 16.7
+    },
+    {
+     "period": "2025Q2",
+     "year": 2025,
+     "quarter": 2,
+     "stories": 166,
+     "meanPoints": 75.5,
+     "meanComments": 33.5
+    },
+    {
+     "period": "2025Q3",
+     "year": 2025,
+     "quarter": 3,
+     "stories": 92,
+     "meanPoints": 38.8,
+     "meanComments": 14.8
+    },
+    {
+     "period": "2025Q4",
+     "year": 2025,
+     "quarter": 4,
+     "stories": 92,
+     "meanPoints": 15.1,
+     "meanComments": 6.9
+    },
+    {
+     "period": "2026Q1",
+     "year": 2026,
+     "quarter": 1,
+     "stories": 174,
+     "meanPoints": 27.8,
+     "meanComments": 16.3
+    },
+    {
+     "period": "2026Q2",
+     "year": 2026,
+     "quarter": 2,
+     "stories": 107,
+     "meanPoints": 4.1,
+     "meanComments": 0.7
+    }
+   ],
+   "total": 1194
+  },
+  {
+   "vendorId": "deepseek",
+   "name": "DeepSeek",
+   "query": "DeepSeek",
+   "ambiguity": null,
+   "series": [
+    {
+     "period": "2024Q3",
+     "year": 2024,
+     "quarter": 3,
+     "stories": 12,
+     "meanPoints": 19.4,
+     "meanComments": 8.9
+    },
+    {
+     "period": "2024Q4",
+     "year": 2024,
+     "quarter": 4,
+     "stories": 46,
+     "meanPoints": 27,
+     "meanComments": 14.2
+    },
+    {
+     "period": "2025Q1",
+     "year": 2025,
+     "quarter": 1,
+     "stories": 1046,
+     "meanPoints": 420.4,
+     "meanComments": 237.3
+    },
+    {
+     "period": "2025Q2",
+     "year": 2025,
+     "quarter": 2,
+     "stories": 174,
+     "meanPoints": 67,
+     "meanComments": 23
+    },
+    {
+     "period": "2025Q3",
+     "year": 2025,
+     "quarter": 3,
+     "stories": 134,
+     "meanPoints": 49.9,
+     "meanComments": 16.2
+    },
+    {
+     "period": "2025Q4",
+     "year": 2025,
+     "quarter": 4,
+     "stories": 133,
+     "meanPoints": 71,
+     "meanComments": 30.4
+    },
+    {
+     "period": "2026Q1",
+     "year": 2026,
+     "quarter": 1,
+     "stories": 168,
+     "meanPoints": 20.2,
+     "meanComments": 9
+    },
+    {
+     "period": "2026Q2",
+     "year": 2026,
+     "quarter": 2,
+     "stories": 214,
+     "meanPoints": 175.4,
+     "meanComments": 97.3
+    }
+   ],
+   "total": 1927
+  },
+  {
+   "vendorId": "xai",
+   "name": "xAI (Grok)",
+   "query": "Grok",
+   "ambiguity": null,
+   "series": [
+    {
+     "period": "2024Q3",
+     "year": 2024,
+     "quarter": 3,
+     "stories": 32,
+     "meanPoints": 18.3,
+     "meanComments": 16
+    },
+    {
+     "period": "2024Q4",
+     "year": 2024,
+     "quarter": 4,
+     "stories": 33,
+     "meanPoints": 9.3,
+     "meanComments": 4.9
+    },
+    {
+     "period": "2025Q1",
+     "year": 2025,
+     "quarter": 1,
+     "stories": 90,
+     "meanPoints": 17.2,
+     "meanComments": 11.7
+    },
+    {
+     "period": "2025Q2",
+     "year": 2025,
+     "quarter": 2,
+     "stories": 100,
+     "meanPoints": 39.7,
+     "meanComments": 22.4
+    },
+    {
+     "period": "2025Q3",
+     "year": 2025,
+     "quarter": 3,
+     "stories": 217,
+     "meanPoints": 75.4,
+     "meanComments": 56.4
+    },
+    {
+     "period": "2025Q4",
+     "year": 2025,
+     "quarter": 4,
+     "stories": 127,
+     "meanPoints": 19.3,
+     "meanComments": 14
+    },
+    {
+     "period": "2026Q1",
+     "year": 2026,
+     "quarter": 1,
+     "stories": 247,
+     "meanPoints": 53.5,
+     "meanComments": 53.5
+    },
+    {
+     "period": "2026Q2",
+     "year": 2026,
+     "quarter": 2,
+     "stories": 137,
+     "meanPoints": 27.4,
+     "meanComments": 19.5
+    }
+   ],
+   "total": 983
+  },
+  {
+   "vendorId": "cohere",
+   "name": "Cohere",
+   "query": "Cohere",
+   "ambiguity": "A different Cohere (YC user support) shares the name.",
+   "series": [
+    {
+     "period": "2024Q3",
+     "year": 2024,
+     "quarter": 3,
+     "stories": 8,
+     "meanPoints": 9.5,
+     "meanComments": 2
+    },
+    {
+     "period": "2024Q4",
+     "year": 2024,
+     "quarter": 4,
+     "stories": 11,
+     "meanPoints": 4.4,
+     "meanComments": 0.7
+    },
+    {
+     "period": "2025Q1",
+     "year": 2025,
+     "quarter": 1,
+     "stories": 13,
+     "meanPoints": 8.5,
+     "meanComments": 2.2
+    },
+    {
+     "period": "2025Q2",
+     "year": 2025,
+     "quarter": 2,
+     "stories": 9,
+     "meanPoints": 13.4,
+     "meanComments": 6.9
+    },
+    {
+     "period": "2025Q3",
+     "year": 2025,
+     "quarter": 3,
+     "stories": 6,
+     "meanPoints": 2.5,
+     "meanComments": 0.7
+    },
+    {
+     "period": "2025Q4",
+     "year": 2025,
+     "quarter": 4,
+     "stories": 3,
+     "meanPoints": 4.3,
+     "meanComments": 3
+    },
+    {
+     "period": "2026Q1",
+     "year": 2026,
+     "quarter": 1,
+     "stories": 15,
+     "meanPoints": 17.1,
+     "meanComments": 5.9
+    },
+    {
+     "period": "2026Q2",
+     "year": 2026,
+     "quarter": 2,
+     "stories": 23,
+     "meanPoints": 10.6,
+     "meanComments": 2.9
+    }
+   ],
+   "total": 88
+  },
+  {
+   "vendorId": "moonshot",
+   "name": "Moonshot (Kimi)",
+   "query": "Kimi",
+   "ambiguity": null,
+   "series": [
+    {
+     "period": "2024Q3",
+     "year": 2024,
+     "quarter": 3,
+     "stories": 7,
+     "meanPoints": 5.7,
+     "meanComments": 0.7
+    },
+    {
+     "period": "2024Q4",
+     "year": 2024,
+     "quarter": 4,
+     "stories": 5,
+     "meanPoints": 12.2,
+     "meanComments": 17.6
+    },
+    {
+     "period": "2025Q1",
+     "year": 2025,
+     "quarter": 1,
+     "stories": 15,
+     "meanPoints": 41.3,
+     "meanComments": 26.6
+    },
+    {
+     "period": "2025Q2",
+     "year": 2025,
+     "quarter": 2,
+     "stories": 5,
+     "meanPoints": 41.4,
+     "meanComments": 10.2
+    },
+    {
+     "period": "2025Q3",
+     "year": 2025,
+     "quarter": 3,
+     "stories": 46,
+     "meanPoints": 20.7,
+     "meanComments": 4.8
+    },
+    {
+     "period": "2025Q4",
+     "year": 2025,
+     "quarter": 4,
+     "stories": 30,
+     "meanPoints": 49,
+     "meanComments": 20.3
+    },
+    {
+     "period": "2026Q1",
+     "year": 2026,
+     "quarter": 1,
+     "stories": 82,
+     "meanPoints": 31.2,
+     "meanComments": 15.4
+    },
+    {
+     "period": "2026Q2",
+     "year": 2026,
+     "quarter": 2,
+     "stories": 63,
+     "meanPoints": 50.2,
+     "meanComments": 22.3
+    }
+   ],
+   "total": 253
+  },
+  {
+   "vendorId": "alibaba",
+   "name": "Alibaba (Qwen)",
+   "query": "Qwen",
+   "ambiguity": null,
+   "series": [
+    {
+     "period": "2024Q3",
+     "year": 2024,
+     "quarter": 3,
+     "stories": 13,
+     "meanPoints": 5.8,
+     "meanComments": 1.5
+    },
+    {
+     "period": "2024Q4",
+     "year": 2024,
+     "quarter": 4,
+     "stories": 21,
+     "meanPoints": 16.2,
+     "meanComments": 5.9
+    },
+    {
+     "period": "2025Q1",
+     "year": 2025,
+     "quarter": 1,
+     "stories": 39,
+     "meanPoints": 24.3,
+     "meanComments": 11.6
+    },
+    {
+     "period": "2025Q2",
+     "year": 2025,
+     "quarter": 2,
+     "stories": 47,
+     "meanPoints": 30.8,
+     "meanComments": 8.6
+    },
+    {
+     "period": "2025Q3",
+     "year": 2025,
+     "quarter": 3,
+     "stories": 94,
+     "meanPoints": 26,
+     "meanComments": 7.3
+    },
+    {
+     "period": "2025Q4",
+     "year": 2025,
+     "quarter": 4,
+     "stories": 68,
+     "meanPoints": 16.5,
+     "meanComments": 6.1
+    },
+    {
+     "period": "2026Q1",
+     "year": 2026,
+     "quarter": 1,
+     "stories": 144,
+     "meanPoints": 51.3,
+     "meanComments": 19.7
+    },
+    {
+     "period": "2026Q2",
+     "year": 2026,
+     "quarter": 2,
+     "stories": 117,
+     "meanPoints": 64.1,
+     "meanComments": 29.4
+    }
+   ],
+   "total": 543
+  }
+ ]
+}

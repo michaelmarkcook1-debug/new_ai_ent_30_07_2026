@@ -1,6 +1,7 @@
 import { PageHeader } from "@/lib/ui/page";
 import { loadThirdPartySignals } from "./third-party-data";
 import { AiePillarsSection } from "./components/aie-pillars";
+import { ReputationHistoryChart } from "./components/history-chart";
 import { LiveUnifiedSection } from "./components/live-unified";
 import { ThirdPartySignals } from "./components/third-party";
 
@@ -16,6 +17,7 @@ export default async function ReputationTrackerPage() {
         lanes={["aie", "live", thirdParty.lane]}
       />
       <div className="space-y-4">
+        <ReputationHistoryChart />
         <AiePillarsSection />
         <LiveUnifiedSection />
         <ThirdPartySignals view={thirdParty} />
