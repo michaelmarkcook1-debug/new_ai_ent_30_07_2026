@@ -26,24 +26,6 @@ import {
 } from "../data";
 
 // Native confidence labels from the uptake seed, shown verbatim.
-function ConfidenceChip({ label }: { label: string }) {
-  const styles: Record<string, string> = {
-    High: "bg-good-bg text-good",
-    Medium: "bg-base-200 text-base-content",
-    "Medium-Low": "bg-warn-bg text-warn",
-    "Low-Medium": "bg-warn-bg text-warn",
-    Low: "bg-base-200 text-muted",
-  };
-  return (
-    <span
-      className={`inline-flex rounded px-1 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wider ${styles[label] ?? "bg-base-200 text-muted"}`}
-      title="The dataset's own confidence label for the contributing cells"
-    >
-      {label}
-    </span>
-  );
-}
-
 function BandChip({ band }: { band: string }) {
   const styles: Record<string, string> = {
     nascent: "bg-base-200 text-muted",
@@ -312,7 +294,7 @@ export function MarketExplorer() {
                 </li>
               </ul>
               <p className="text-muted">
-                These are confidence-labelled adoption-share estimates from
+                These are directional adoption-share estimates from
                 the dataset, not disclosed vendor revenue or market-share
                 figures.
               </p>

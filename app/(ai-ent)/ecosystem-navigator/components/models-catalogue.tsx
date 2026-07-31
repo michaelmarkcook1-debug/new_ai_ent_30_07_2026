@@ -74,7 +74,7 @@ function ModelRow({ m }: { m: CommercialModel }) {
           className="font-mono text-[10px] text-muted"
           title={m.uncertaintyNote}
         >
-          {m.dataStatus} {m.evidenceGrade} conf {m.confidenceScore}
+          {m.dataStatus} {m.evidenceGrade}
         </span>
       </td>
       <td className="px-2 py-1.5">

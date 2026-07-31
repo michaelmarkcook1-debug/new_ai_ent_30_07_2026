@@ -271,7 +271,7 @@ export function RankingsTable({
       <p className="font-mono text-[10px] text-muted">
         <span className="micro-label mr-2">Generated</span>
         {generatedOn}. Column labels are the dataset&apos;s own field names.
-        Values are confidence-labelled analyst estimates from the AI Enterprise
+        Values are AG's own estimates from the AI Enterprise
         dataset, not audited market fact.
       </p>
     </div>
@@ -295,10 +295,6 @@ function RankingsDerivation() {
           intelligence seed.
         </li>
         <li>
-          <span className="font-mono text-[12px]">confidenceScore</span>: the
-          analyst confidence attached to that vendor record.
-        </li>
-        <li>
           Each pillar column is the{" "}
           <span className="font-mono text-[12px]">capabilityScore</span> for
           that pillar from the dataset&apos;s per-vendor pillar scores, shown
@@ -307,8 +303,8 @@ function RankingsDerivation() {
       </ul>
       <p>
         The dataset&apos;s own evidence language applies throughout: values are
-        confidence-labelled derived signals, each pillar cell carries an
-        evidence grade (E1 to E5) and a numeric confidence, and claims below
+        derived signals, each pillar cell carries an evidence grade (E1 to
+        E5), and claims below
         the strong-evidence bar are suppressed at source rather than presented
         as verified. Weakly evidenced cells (E1 to E2) are flagged in the
         dataset as needing third-party validation before high-risk rollout.

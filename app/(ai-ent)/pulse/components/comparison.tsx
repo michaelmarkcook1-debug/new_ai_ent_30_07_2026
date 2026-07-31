@@ -29,7 +29,7 @@ const COLUMNS: {
   {
     key: "composite",
     label: "Composite",
-    title: "vendors[].overallScore: the AI Enterprise analyst composite, 0 to 100.",
+    title: "vendors[].overallScore: AG's own overall score for the vendor, 0 to 100.",
   },
   {
     key: "momentum",
@@ -210,14 +210,6 @@ export function VendorComparisonTable({
                   </td>
                   <td className="px-3 py-2">
                     <ScorePill score={v.composite} />
-                    {v.compositeConfidence !== null ? (
-                      <div
-                        className="font-mono text-[8.5px] text-muted"
-                        title="The dataset's own confidence in this composite."
-                      >
-                        conf {v.compositeConfidence.toFixed(0)}
-                      </div>
-                    ) : null}
                   </td>
                   <td className="px-3 py-2">
                     {v.momentum === null ? (
@@ -284,9 +276,9 @@ export function VendorComparisonTable({
         <DerivationDrawer title="How these columns are derived">
           <p>
             Each column is one named field from the AI Enterprise datasets, not
-            a composite built here. Composite is the analyst{" "}
-            <code>overallScore</code> with the dataset&apos;s own confidence
-            beside it. Momentum is the rolling 30 day{" "}
+            a composite built here. Composite is AG&apos;s own{" "}
+            <code>overallScore</code> for the vendor. Momentum is the rolling
+            30 day{" "}
             <code>momentumScore</code>. Capability maturity is the mean{" "}
             <code>maturityScore</code> across a vendor&apos;s assessed
             capabilities, shown with the weakest evidence grade among them,

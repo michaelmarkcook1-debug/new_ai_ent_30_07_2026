@@ -23,7 +23,7 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
         <LaneBadge lane="aie" />
       </div>
       <p className="mt-1 text-[11px] text-muted">
-        Overall scores from the AIE dataset with native confidence labels.
+        AG's own overall score for each vendor.
         Separate from the live BoardRadar heatmap beside it: the two datasets
         cover different companies on different scales and are never blended.
       </p>
@@ -57,12 +57,6 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
                       {r.name}
                     </Link>
                     <span className="flex shrink-0 items-center gap-1.5">
-                      <span
-                        className="font-mono text-[10px] text-muted"
-                        title="The dataset's native confidence figure for this vendor's score"
-                      >
-                        conf {r.confidenceScore}
-                      </span>
                       <ScorePill score={r.overallScore} />
                     </span>
                   </li>

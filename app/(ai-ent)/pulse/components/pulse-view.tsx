@@ -87,7 +87,15 @@ export function PulseView({
         </div>
       </div>
 
-      {/* 4. Market KPI gauges, every one a real aggregate */}
+      {/* 4. Market averages, every one a real aggregate */}
+      <section>
+        <h2 className="text-[15px] font-bold">Market averages</h2>
+        <p className="mt-0.5 max-w-3xl text-[12px] text-muted">
+          How the typical tracked AI vendor looks today. Each figure is an
+          average across the vendor set, not a score for any one vendor, and
+          each says how many it covers.
+        </p>
+      </section>
       <section className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-5">
         {metrics.kpis.map((k) => (
           <KpiGauge

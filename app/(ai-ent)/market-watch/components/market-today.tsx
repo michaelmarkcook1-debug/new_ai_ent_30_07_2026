@@ -60,8 +60,7 @@ export function MarketToday({
             tooltip="The AIE market signals seed classifies the current market regime from public official sources. Values are shown exactly as labelled in the dataset."
           />
           <div className="flex items-center gap-2">
-            <span className="font-mono text-[10px] text-muted">Regime confidence</span>
-            <ScorePill score={regime.confidenceScore} estimated />
+
           </div>
         </div>
         <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
@@ -104,7 +103,7 @@ export function MarketToday({
                 {s.evidenceGrade}
               </span>
               <span className="font-mono text-[10px] text-muted">
-                conf {s.confidenceScore}
+
               </span>
               <span className="ml-auto font-mono text-[10px] text-muted">
                 {formatDate(s.sourceDate)}

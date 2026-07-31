@@ -41,14 +41,7 @@ export function SignalCard({
         )}
       </div>
       <p className="mt-1.5 text-[12.5px] leading-snug">{signal.headline}</p>
-      {signal.confidence !== null ? (
-        <p
-          className="mt-2 font-mono text-[9.5px] uppercase tracking-wider text-muted"
-          title="The dataset's own confidence in this signal, carried across unchanged."
-        >
-          confidence {signal.confidence.toFixed(1)}
-        </p>
-      ) : null}
+
     </div>
   );
 }

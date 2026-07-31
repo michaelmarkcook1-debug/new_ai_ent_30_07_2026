@@ -83,12 +83,6 @@ function ShareCards({ categories }: { categories: CategoryShareView[] }) {
                       style={{ width: `${Math.min(100, row.share)}%` }}
                     />
                   </div>
-                  <span
-                    className="font-mono text-[9px] text-muted"
-                    title="Native confidence label from the AIE share model (0 to 100)"
-                  >
-                    conf {row.confidence}
-                  </span>
                 </div>
               </div>
             ))}

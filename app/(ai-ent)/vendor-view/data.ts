@@ -67,15 +67,11 @@ export interface RankingRow {
 export const SCORE_COLUMNS: { key: ScoreSortKey; help: string }[] = [
   {
     key: "overallScore",
-    help: "Composite analyst estimate recorded per vendor in the AI Enterprise intelligence seed (0 to 100).",
-  },
-  {
-    key: "confidenceScore",
-    help: "Analyst confidence in the vendor record (0 to 100), carried unchanged from the dataset.",
+    help: "AG's own overall score for the vendor, from the AI Enterprise intelligence seed (0 to 100).",
   },
   ...PILLARS.map((p) => ({
     key: p.id as ScoreSortKey,
-    help: `${p.label}: the capabilityScore for this pillar from VENDOR_PILLAR_SCORES, with its evidence grade and numeric confidence.`,
+    help: `${p.label}: the capabilityScore for this pillar from VENDOR_PILLAR_SCORES, with its evidence grade.`,
   })),
 ];
 

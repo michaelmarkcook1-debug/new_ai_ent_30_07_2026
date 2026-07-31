@@ -1,4 +1,3 @@
-import type { PostureView } from "@/lib/vendor-posture";
 "use client";
 
 import { useMemo, useState } from "react";
@@ -15,6 +14,7 @@ import {
   type RegEventView,
 } from "../lens";
 import { GovernancePostureBlock } from "./governance-posture";
+import type { PostureView } from "@/lib/vendor-posture";
 
 const DATE_FMT = new Intl.DateTimeFormat("en-GB", {
   day: "numeric",
@@ -267,8 +267,7 @@ export function TrustRankView({
                     {e.signal.title}
                   </p>
                   <p className="mt-1 font-mono text-[10px] text-muted">
-                    {e.signal.evidenceGrade} · confidence {e.signal.confidenceScore} ·{" "}
-                    {e.signal.dataStatus}
+                    {e.signal.evidenceGrade} · {e.signal.dataStatus}
                   </p>
                   <p className="mt-1 text-[11px] text-muted">
                     {e.signal.sourceUrl ? (

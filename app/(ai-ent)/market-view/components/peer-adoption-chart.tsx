@@ -24,14 +24,6 @@ const ROW_H = 30;
 const PAD = { top: 26, right: 116, bottom: 30, left: 168 };
 const PLOT_W = W - PAD.left - PAD.right;
 
-// The dataset's own confidence vocabulary, weakest last.
-const CONFIDENCE_STYLE: Record<string, string> = {
-  high: "fill-[var(--ag-green)]",
-  medium: "fill-[var(--ag-muted)]",
-  "low-medium": "fill-[var(--ag-amber)]",
-  low: "fill-[var(--ag-amber)]",
-};
-
 export function PeerAdoptionChart({
   rows,
   vendorIdFor,
@@ -93,9 +85,6 @@ export function PeerAdoptionChart({
           const barY = y + 6;
           const barH = ROW_H - 14;
           const id = vendorIdFor?.(r.vendor);
-          const conf =
-            CONFIDENCE_STYLE[r.confidence.toLowerCase()] ??
-            "fill-[var(--ag-muted)]";
           const label = (
             <text
               x={PAD.left - 10}
@@ -133,8 +122,7 @@ export function PeerAdoptionChart({
               >
                 <title>
                   {r.vendor}: {(r.share * 100).toFixed(1)}% modelled adoption
-                  share, {r.confidence} confidence, {r.contributingCells}{" "}
-                  contributing cells
+                  share, {r.contributingCells} contributing cells
                 </title>
               </rect>
 
@@ -147,16 +135,6 @@ export function PeerAdoptionChart({
                 fontWeight={700}
               >
                 {(r.share * 100).toFixed(1)}%
-              </text>
-              <text
-                x={W - PAD.right + 58}
-                y={y + ROW_H / 2}
-                textAnchor="end"
-                dominantBaseline="middle"
-                className={`${conf} font-mono`}
-                fontSize={9}
-              >
-                {r.confidence.toLowerCase()}
               </text>
               <text
                 x={W - 6}
@@ -188,8 +166,8 @@ export function PeerAdoptionChart({
         <DerivationDrawer title="How the adoption shares are derived">
           <p>
             Each bar is the share of observed adoption signal the vendor holds
-            within this cohort, with the dataset&apos;s own confidence label and
-            the number of contributing cells behind it. Cell counts matter: the
+            within this cohort, with the number of contributing cells behind
+            it. Cell counts matter: the
             same percentage off three cells and off forty-five is not the same
             claim, so both are shown rather than the percentage alone.
           </p>

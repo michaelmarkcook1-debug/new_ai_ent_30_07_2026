@@ -77,12 +77,11 @@ export function ScoreBlock({ profile }: { profile: VendorProfile }) {
       <p>
         These values are carried unchanged from the AI Enterprise dataset.{" "}
         <span className="font-mono text-[12px]">overallScore</span> and{" "}
-        <span className="font-mono text-[12px]">confidenceScore</span> are the
-        composite analyst estimate and its confidence from the vendor record;
+        is AG&apos;s own overall score for the vendor;
         each pillar row is that pillar&apos;s{" "}
         <span className="font-mono text-[12px]">capabilityScore</span> with its
-        evidence grade (E1 to E5) and numeric confidence. Values are
-        confidence-labelled derived signals, and claims below the
+        evidence grade (E1 to E5). Values are derived signals, and claims
+        below the
         strong-evidence bar are suppressed at source rather than presented as
         verified.
       </p>
@@ -95,8 +94,7 @@ export function ScoreBlock({ profile }: { profile: VendorProfile }) {
               <p className="font-semibold">
                 {pillar.label}{" "}
                 <span className="font-mono text-[11px] text-muted">
-                  {pillar.id} · {row.evidenceGrade} · confidence{" "}
-                  {row.confidence}
+                  {pillar.id} · {row.evidenceGrade}
                 </span>
               </p>
               {row.strengths.length > 0 ? (
@@ -131,12 +129,6 @@ export function ScoreBlock({ profile }: { profile: VendorProfile }) {
           </div>
         </div>
         <div>
-          <span className="micro-label">confidenceScore</span>
-          <div className="mt-1">
-            <ScorePill score={intel.confidenceScore} />
-          </div>
-        </div>
-        <div>
           <span className="micro-label">marketPosition</span>
           <div className="mt-1 font-mono text-[12px]">
             {intel.marketPosition}
@@ -151,7 +143,6 @@ export function ScoreBlock({ profile }: { profile: VendorProfile }) {
                 <th className={TH_CLASS}>Pillar</th>
                 <th className={TH_CLASS}>capabilityScore</th>
                 <th className={TH_CLASS}>evidenceGrade</th>
-                <th className={TH_CLASS}>confidence</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-base-300">
@@ -171,9 +162,6 @@ export function ScoreBlock({ profile }: { profile: VendorProfile }) {
                     </td>
                     <td className="px-2 py-1.5 font-mono text-[11px]">
                       {row.evidenceGrade}
-                    </td>
-                    <td className="px-2 py-1.5 font-mono text-[11px] text-muted">
-                      {row.confidence}
                     </td>
                   </tr>
                 );

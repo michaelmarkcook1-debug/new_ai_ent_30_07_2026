@@ -281,59 +281,69 @@ export async function loadMarketMetrics(): Promise<MarketMetrics> {
   const risks = signal(dashRes.data?.riskAlerts, "alert");
   const highRisks = risks.filter((r) => r.severity === "high").length;
 
+  // Labels are written for someone reading the page for the first time.
+  //
+  // "Analyst composite" was the first label on the first gauge, which invited
+  // exactly the wrong reading: that an industry analyst firm scored these
+  // vendors. It is AI Enterprise's own assessment (the dataset calls the field
+  // an analyst_estimate, meaning its in-house analyst). Spec rule 4 forbids
+  // blending third-party recognition into an AG score, so a label that merely
+  // implies it is a defect even when the underlying data is clean. Every gauge
+  // now says what it measures in plain words; the field names live in the
+  // derivation drawer, which is where a reader goes for them.
   const kpis: MarketKpi[] = [
     {
-      label: "ANALYST COMPOSITE, MEAN",
+      label: "AVERAGE AG VENDOR SCORE",
       tooltip:
-        "Mean of the AI Enterprise analyst composite across every tracked vendor that carries one. 0 to 100, higher is stronger.",
+        "How the typical tracked AI vendor scores overall on AG's own assessment, out of 100. AG's score, not a rating from any industry analyst firm.",
       score: round1(mean(composites)),
       delta: null,
       definition:
-        "Mean overallScore across tracked vendors. No prior period is published, so no change is shown.",
+        "AG's own overall score for each tracked AI vendor, averaged across the set, out of 100. Produced by AG, not by any industry analyst firm. No earlier period is published, so no change is shown.",
       sourceField: "vendors[].overallScore",
       sampleSize: composites.length,
     },
     {
-      label: "CAPABILITY MATURITY, MEAN",
+      label: "AVERAGE AG CAPABILITY SCORE",
       tooltip:
-        "Mean evidence-graded capability maturity across the tracked vendor set, over ten assessed capabilities. 0 to 100.",
+        "How mature the typical vendor's product is across ten areas AG assesses: agents, security, governance, integrations and six more. AG's assessment, 0 to 100.",
       score: round1(mean(maturities)),
       delta: null,
       definition:
-        "Mean of each vendor's own mean maturityScore across its assessed capabilities. Every row carries an evidence grade.",
+        "How mature the typical vendor's product is, out of 100, averaged across the ten capability areas AG assesses. AG's assessment, with every underlying row carrying an evidence grade.",
       sourceField: "capabilities.vendorCapabilities[].maturityScore",
       sampleSize: maturities.length,
     },
     {
-      label: "REPUTATION, MEAN",
+      label: "AVERAGE REPUTATION",
       tooltip:
-        "Mean of the customer, developer and employee pillar scores across vendors the reputation dataset covers. 0 to 100.",
+        "How the typical vendor is rated by the people who buy it, build on it and work in it. Aggregated by AG from external sources such as G2, GitHub and Glassdoor; the ratings are theirs, not AG's.",
       score: round1(mean(reputations)),
       delta: null,
       definition:
-        "Mean of the three pillar overall scores per vendor, then across vendors. Covers only vendors the dataset reaches.",
+        "How the typical vendor is rated by its customers, its developers and its own employees, out of 100. AG aggregates these from external review, developer and workplace sources; the underlying ratings are theirs, not AG's. Covers fewer vendors than the full tracked set.",
       sourceField: "reputation.rows[].{customer,developer,employee}.overall",
       sampleSize: reputations.length,
     },
     {
-      label: "VERIFIED EVIDENCE COVERAGE",
+      label: "EVIDENCE VERIFIED",
       tooltip:
-        "Share of assessed capability rows the dataset marks verified, rather than inferred, documented or tested. 0 to 100, higher means more of the picture is directly evidenced.",
+        "How much of the evidence behind AG's scores was checked against a primary source, rather than inferred or taken from vendor documentation. This grades AG's own data, not any vendor.",
       score: round1(evidenceCoverage),
       delta: null,
       definition:
-        "Capability rows with status verified, as a percentage of all assessed rows. A readout on the evidence base itself, not on any vendor.",
+        "How much of the evidence behind AG's scores has been checked against a primary source, as a percentage. This measures the quality of AG's own data, not the performance of any vendor.",
       sourceField: "capabilities.vendorCapabilities[].status = verified",
       sampleSize: allCapRows.length,
     },
     {
-      label: "OPEN HIGH-SEVERITY RISKS",
+      label: "HIGH-SEVERITY RISK ALERTS",
       tooltip:
-        "Count of open risk alerts the dataset grades high severity. Lower is better, so the band colouring is inverted.",
+        "How many serious risks are currently flagged across all tracked vendors. A count, not a score out of 100, and fewer is better.",
       score: highRisks === 0 ? 0 : highRisks,
       delta: null,
       definition:
-        "Count, not a 0 to 100 score: the gauge shows the raw number of high-severity alerts on the tracked set.",
+        "How many serious risks are currently flagged across all tracked vendors. This is a count, not a score out of 100, and fewer is better.",
       invert: true,
       sourceField: "market-dashboard.riskAlerts[] where severity = high",
       sampleSize: risks.length,

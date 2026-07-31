@@ -100,21 +100,9 @@ export function CategoryLeaders({
                     {row.leader.share}%
                     <span className="ml-0.5 font-normal text-muted">est.</span>
                   </span>
-                  <span
-                    className="ml-1.5 font-mono text-[9px] text-muted"
-                    title="Native confidence label on the share estimate (0 to 100)"
-                  >
-                    conf {row.leader.shareConfidence}
-                  </span>
                 </td>
                 <td className="px-3 py-2 text-right">
                   <ScorePill score={row.leader.overallScore} estimated />
-                  <span
-                    className="ml-1.5 font-mono text-[9px] text-muted"
-                    title="Native confidence label on the composite score (0 to 100)"
-                  >
-                    conf {row.leader.confidenceScore}
-                  </span>
                 </td>
                 <td className="px-3 py-2">
                   <span className="flex flex-wrap gap-x-2 gap-y-0.5">

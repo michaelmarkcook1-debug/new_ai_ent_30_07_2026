@@ -48,7 +48,6 @@ export function ProvenanceBadge({ env }: { env: ProvenanceEnvelope }) {
     sample: "bg-warn-bg text-warn",
   };
   const note = [
-    env.confidence ? `Confidence: ${env.confidence}` : null,
     env.sourceNote ?? null,
   ]
     .filter(Boolean)
@@ -59,7 +58,6 @@ export function ProvenanceBadge({ env }: { env: ProvenanceEnvelope }) {
       title={note || env.sourceBasis}
     >
       {env.sourceBasis}
-      {env.confidence ? <span className="opacity-70">{env.confidence}</span> : null}
     </span>
   );
   if (env.sourceUrl) {

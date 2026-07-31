@@ -31,12 +31,6 @@ function VendorCard({ item }: { item: AieDashboardVendorRef }) {
     <div className="rounded-lg border border-base-300 bg-base-100 p-3">
       <div className="flex flex-wrap items-center justify-between gap-2">
         {name}
-        <span
-          className="font-mono text-[10px] text-muted"
-          title="The dashboard's own confidence figure for this call, as returned"
-        >
-          conf {Math.round(item.confidence)}%
-        </span>
       </div>
       <div className="mt-1">
         <CategoryChip label={item.vendor.category} />

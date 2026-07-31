@@ -150,7 +150,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
                       className="shrink-0 font-mono text-[10px] text-muted"
                       title="The dataset's native impact and confidence labels, 0 to 100. See the derivation drawer above."
                     >
-                      Impact {n.impactScore} · Confidence {n.confidenceScore}
+                      Impact {n.impactScore}
                     </span>
                   </div>
                   <p className="mt-0.5 text-[12px] leading-snug text-base-content/85">
