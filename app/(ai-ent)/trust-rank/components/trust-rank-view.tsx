@@ -1,3 +1,4 @@
+import type { PostureView } from "@/lib/vendor-posture";
 "use client";
 
 import { useMemo, useState } from "react";
@@ -10,7 +11,6 @@ import {
   LAYER_LABEL,
   rulingsForLayer,
   type GridRowView,
-  type GovernancePosture,
   type LensVendor,
   type RegEventView,
 } from "../lens";
@@ -58,7 +58,7 @@ export function TrustRankView({
   vendors: LensVendor[];
   grid: GridRowView[];
   events: RegEventView[];
-  postures: Record<string, GovernancePosture>;
+  postures: PostureView;
 }) {
   const defaultId =
     vendors.find((v) => v.id === "anthropic")?.id ?? vendors[0]?.id ?? "";
@@ -69,7 +69,9 @@ export function TrustRankView({
     [vendors, selectedId]
   );
   const rulings = selected ? rulingsForLayer(selected.layer) : [];
-  const posture = selected ? (postures[selected.id] ?? null) : null;
+  const posture = selected
+    ? (postures.rows.find((r) => r.vendorId === selected.id) ?? null)
+    : null;
 
   if (!selected) return null;
 
@@ -312,7 +314,11 @@ export function TrustRankView({
       </section>
 
       {/* Governance posture pattern block for the selected vendor */}
-      <GovernancePostureBlock vendor={selected} posture={posture} />
+      <GovernancePostureBlock
+        vendor={selected}
+        posture={posture}
+        lane={postures.lane}
+      />
 
       <div className="text-right">
         <Link

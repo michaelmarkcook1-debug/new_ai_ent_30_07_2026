@@ -74,29 +74,3 @@ export function eventTypeLabel(eventType: string): string {
   return EVENT_TYPE_LABEL[eventType] ?? eventType;
 }
 
-// Governance-posture pattern block, SAMPLE lane. Mirrors the BoardRadar
-// /governance-risk response shape (see fixtures/br/governance-risk_MSFT.json).
-export interface GovernancePosture {
-  vendorId: string;
-  vendorName: string;
-  riskScore: number;
-  confidence: string | null;
-  analysisDate: string;
-  summary: string;
-  keyFindings: string[];
-  recommendations: string[];
-  litigationAssessment: {
-    key_cases: string[];
-    active_cases: number;
-    exposure_level: string;
-  };
-  activistVulnerability: {
-    risk_level: string;
-    likely_targets: string[];
-  };
-}
-
-export interface TrustRankFixture {
-  provenance: ProvenanceEnvelope;
-  postures: Record<string, GovernancePosture>;
-}

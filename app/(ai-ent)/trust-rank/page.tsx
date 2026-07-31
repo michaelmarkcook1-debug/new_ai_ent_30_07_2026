@@ -3,26 +3,26 @@ import {
   loadGrid,
   loadLensVendors,
   loadRegEvents,
-  loadTrustRankFixture,
+  loadGovernancePostures,
 } from "./data";
 import { TrustRankView } from "./components/trust-rank-view";
 
 export const metadata = { title: "Trust Rank | AI Enterprise" };
 
 export default async function TrustRankPage() {
-  const fixture = await loadTrustRankFixture();
+  const postures = await loadGovernancePostures();
   return (
     <>
       <PageHeader
         title="Trust Rank"
-        subtitle="The vendor-oriented view over AI legislation: a jurisdiction grid with a vendor lens, vendor-specific rulings, confidence-labelled regulatory events, and the governance-posture pattern for the selected vendor."
-        lanes={["aie", "sample"]}
+        subtitle="The vendor-oriented view over AI legislation: a jurisdiction grid with a vendor lens, vendor-specific rulings, confidence-labelled regulatory events, and the evidence-graded governance assessment for the selected vendor."
+        lanes={["aie", postures.lane]}
       />
       <TrustRankView
         vendors={loadLensVendors()}
         grid={loadGrid()}
         events={loadRegEvents()}
-        postures={fixture.postures}
+        postures={postures}
       />
     </>
   );

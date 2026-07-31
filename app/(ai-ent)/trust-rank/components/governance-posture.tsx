@@ -1,28 +1,37 @@
 "use client";
 
-import { LaneBadge, SeverityBadge, type Severity } from "@/lib/ui/badges";
+import { LaneBadge } from "@/lib/ui/badges";
 import { DerivationDrawer, ScorePill } from "@/lib/ui/score";
 import { EmptyState } from "@/lib/ui/page";
-import { Accordion } from "@/lib/ui/accordion";
 import { MicroLabel } from "@/lib/ui/micro";
-import type { GovernancePosture, LensVendor } from "../lens";
+import type { VendorPosture } from "@/lib/vendor-posture";
+import type { LensVendor } from "../lens";
 
-function levelSeverity(level: string): Severity {
-  const l = level.toLowerCase();
-  if (l === "high") return "HIGH";
-  if (l === "medium") return "MEDIUM";
-  return "LOW";
-}
+// Governance posture for the selected vendor, from the real AI Enterprise
+// governance capability assessment: a maturity reading, the dataset's own row
+// status and evidence grade, the evidence excerpt behind it, and the open
+// risks the vendor record lists.
+//
+// This is an assessment of published governance practice. It is not the
+// BoardRadar governance-risk analysis, which covers public companies and
+// reports litigation and activist exposure. The two are different
+// measurements over different universes and are never merged.
 
-// Governance-posture pattern block, SAMPLE lane. Mirrors the BoardRadar
-// /governance-risk response shape so the demo shows the pattern the live
-// endpoint fills for universe companies.
+const STATUS_HELP: Record<string, string> = {
+  verified: "Checked against a primary source.",
+  tested: "Tested against public or proxy evidence.",
+  documented: "Recorded from vendor documentation.",
+  inferred: "Inferred from adjacent signals: the weakest basis here.",
+};
+
 export function GovernancePostureBlock({
   vendor,
   posture,
+  lane,
 }: {
   vendor: LensVendor;
-  posture: GovernancePosture | null;
+  posture: VendorPosture | null;
+  lane: "aie" | "aie-live";
 }) {
   return (
     <section className="rounded-lg border border-base-300 bg-base-100 p-4">
@@ -30,112 +39,105 @@ export function GovernancePostureBlock({
         <div>
           <div className="flex items-center gap-2">
             <MicroLabel
-              label="Governance posture (pattern)"
-              tooltip="This block mirrors the BoardRadar governance-risk response shape: risk score, summary, key findings, recommendations, litigation assessment and activist vulnerability. For vendors outside the BoardRadar universe the content is illustrative SAMPLE."
+              label="Governance posture"
+              tooltip="The AI Enterprise governance capability assessment for this vendor: maturity, row status, evidence grade and the evidence excerpt behind it."
             />
-            <LaneBadge lane="sample" />
+            <LaneBadge lane={lane} />
           </div>
           <h3 className="mt-1 text-[15px] font-bold">{vendor.name}</h3>
         </div>
         {posture ? (
-          <span className="font-mono text-[10px] text-muted">
-            Generated {posture.analysisDate}
-          </span>
+          <div className="flex flex-wrap items-center gap-2">
+            <ScorePill score={posture.maturity} lockedLabel="Not assessed" />
+            <span
+              className="font-mono text-[9.5px] uppercase tracking-wider text-muted"
+              title={
+                posture.status
+                  ? (STATUS_HELP[posture.status] ?? posture.status)
+                  : undefined
+              }
+            >
+              {posture.status ?? "no status"}
+              {posture.evidenceGrade ? ` · ${posture.evidenceGrade}` : ""}
+            </span>
+          </div>
         ) : null}
       </div>
 
       {posture === null ? (
         <div className="mt-3">
           <EmptyState
-            title="Awaiting public disclosure"
-            detail={
-              vendor.brTicker
-                ? `No sample posture is held for ${vendor.name}: BoardRadar carries a live governance-risk analysis for this company (ticker ${vendor.brTicker}) in the company modules, so the demo does not overwrite it with sample content.`
-                : `No governance-posture sample is held for ${vendor.name} in this demo, and no public disclosure fills the pattern. Nothing is invented in its place.`
-            }
+            title="No governance assessment recorded"
+            detail={`The AI Enterprise dataset holds no governance capability row for ${vendor.name}. Awaiting assessment rather than an estimated posture.`}
           />
         </div>
       ) : (
-        <>
-          <div className="mt-3 flex items-center gap-3">
+        <div className="mt-3 space-y-3">
+          {posture.note ? (
             <div>
-              <span className="micro-label">Governance risk score</span>
-              <div className="mt-1 flex items-center gap-2">
-                <ScorePill score={posture.riskScore} />
-                <DerivationDrawer title="How the governance risk score is derived">
-                  <p>
-                    This block mirrors the BoardRadar governance-risk response
-                    shape. For companies in the BoardRadar universe the live
-                    endpoint computes the 0 to 100 risk score from filings,
-                    litigation exposure, ownership structure and activist
-                    vulnerability, and states its own confidence.
-                  </p>
-                  <p>
-                    {posture.vendorName} is outside that universe, so the value
-                    shown here is an illustrative SAMPLE that demonstrates the
-                    pattern: it is not a measurement, and the badge says so.
-                    Where no sample is held either, the block renders an honest
-                    empty state instead of a number.
-                  </p>
-                </DerivationDrawer>
-              </div>
-            </div>
-          </div>
-
-          <p className="mt-3 text-[13px] leading-relaxed text-base-content/85">
-            {posture.summary}
-          </p>
-
-          <div className="mt-3 space-y-2">
-            <Accordion title="Key findings" count={posture.keyFindings.length}>
-              <ul className="list-disc space-y-1.5 pl-4 text-[12px] leading-snug text-base-content/85">
-                {posture.keyFindings.map((f) => (
-                  <li key={f}>{f}</li>
-                ))}
-              </ul>
-            </Accordion>
-            <Accordion title="Recommendations" count={posture.recommendations.length}>
-              <ul className="list-disc space-y-1.5 pl-4 text-[12px] leading-snug text-base-content/85">
-                {posture.recommendations.map((r) => (
-                  <li key={r}>{r}</li>
-                ))}
-              </ul>
-            </Accordion>
-          </div>
-
-          <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2">
-            <div className="rounded-lg border border-base-300 bg-base-100 p-3">
-              <div className="flex items-center justify-between gap-2">
-                <MicroLabel label="Litigation assessment" />
-                <SeverityBadge
-                  severity={levelSeverity(posture.litigationAssessment.exposure_level)}
-                />
-              </div>
-              <p className="mt-1 font-mono text-[10px] text-muted">
-                {posture.litigationAssessment.active_cases} tracked matters
-                (sample count)
+              <MicroLabel
+                label="Evidence"
+                tooltip="The evidence excerpt the assessment cites for this row, carried across unchanged."
+              />
+              <p className="mt-0.5 text-[12px] leading-relaxed text-muted">
+                {posture.note}
               </p>
-              <ul className="mt-2 list-disc space-y-1.5 pl-4 text-[12px] leading-snug text-base-content/85">
-                {posture.litigationAssessment.key_cases.map((c) => (
-                  <li key={c}>{c}</li>
+            </div>
+          ) : (
+            <p className="text-[12px] text-muted">
+              No evidence note is recorded against this assessment.
+            </p>
+          )}
+
+          {posture.riskProfile.length > 0 ? (
+            <div>
+              <MicroLabel
+                label="Open risks on the vendor record"
+                tooltip="The risks the vendor record lists, carried across verbatim. Not governance findings made here."
+              />
+              <ul className="mt-1 flex flex-wrap gap-1">
+                {posture.riskProfile.map((r) => (
+                  <li
+                    key={r}
+                    className="rounded-full border border-base-300 px-2 py-0.5 text-[11px] text-muted"
+                  >
+                    {r}
+                  </li>
                 ))}
               </ul>
             </div>
-            <div className="rounded-lg border border-base-300 bg-base-100 p-3">
-              <div className="flex items-center justify-between gap-2">
-                <MicroLabel label="Activist and investor pressure" />
-                <SeverityBadge
-                  severity={levelSeverity(posture.activistVulnerability.risk_level)}
-                />
-              </div>
-              <ul className="mt-2 list-disc space-y-1.5 pl-4 text-[12px] leading-snug text-base-content/85">
-                {posture.activistVulnerability.likely_targets.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
-            </div>
+          ) : null}
+
+          <div className="flex flex-wrap items-center justify-between gap-2 border-t border-base-300 pt-2">
+            <span className="font-mono text-[9.5px] text-muted">
+              {posture.lastVerified
+                ? `verified ${posture.lastVerified.slice(0, 10)}`
+                : "no verification date"}
+            </span>
+            <DerivationDrawer title="How the governance posture is derived">
+              <p>
+                The score is the governance capability maturity from the AI
+                Enterprise assessment, 0 to 100, with the dataset&apos;s own
+                row status and evidence grade beside it. Grades run E1
+                (strongest) to E5. The evidence excerpt above is what the
+                assessment cites; it is not rewritten here.
+              </p>
+              <p>
+                This is an assessment of published governance practice. It is
+                not the BoardRadar governance-risk analysis, which covers
+                public companies and reports litigation and activist exposure.
+                Those measure different things over different universes, so
+                they are shown separately and never combined into one figure.
+              </p>
+              <p className="text-muted">
+                A status of inferred means the reading rests on adjacent
+                signals rather than a primary source. Where the dataset has no
+                row for a vendor, this block says so instead of estimating a
+                posture.
+              </p>
+            </DerivationDrawer>
           </div>
-        </>
+        </div>
       )}
     </section>
   );

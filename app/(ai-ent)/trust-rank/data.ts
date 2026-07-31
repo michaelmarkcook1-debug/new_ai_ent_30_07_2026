@@ -1,14 +1,9 @@
+import { loadVendorPostures, type PostureView } from "@/lib/vendor-posture";
 import { promises as fs } from "fs";
 import path from "path";
 import { REGULATORY_GRID } from "@/lib/regulatory";
 import { SEED_REGULATORY_EVENTS, SEED_SIGNALS, TRACKED_VENDORS } from "@/lib/aie";
-import type {
-  GridRowView,
-  LensVendor,
-  RegEventView,
-  TrustRankFixture,
-  VendorLayer,
-} from "./lens";
+import type { GridRowView, LensVendor, RegEventView, VendorLayer } from "./lens";
 
 // Module data adapter (server only): Trust Rank vendor view is PORT lane
 // (regulatory grid rows and rulings flagged aieSource, plus the AIE
@@ -85,10 +80,6 @@ export function loadRegEvents(): RegEventView[] {
   });
 }
 
-export async function loadTrustRankFixture(): Promise<TrustRankFixture> {
-  const file = await fs.readFile(
-    path.join(process.cwd(), "fixtures", "sample", "trust-rank.json"),
-    "utf8"
-  );
-  return JSON.parse(file) as TrustRankFixture;
+export async function loadGovernancePostures(): Promise<PostureView> {
+  return loadVendorPostures("governance");
 }

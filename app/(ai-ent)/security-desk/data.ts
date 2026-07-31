@@ -1,15 +1,11 @@
-import { promises as fs } from "fs";
-import path from "path";
-import type { SecurityDeskFixture } from "./types";
+import { loadVendorPostures, type PostureView } from "@/lib/vendor-posture";
 
-// Module data adapter: The Security Desk is SCHEMA lane with probed LIVE
-// coverage. The live half is fetched client-side via the proxy
-// (/api/br/cyber-risk); this adapter only loads the sample fixture for the
-// private-lab posture cards.
-export async function loadSecurityDeskFixture(): Promise<SecurityDeskFixture> {
-  const file = await fs.readFile(
-    path.join(process.cwd(), "fixtures", "sample", "security-desk.json"),
-    "utf8"
-  );
-  return JSON.parse(file) as SecurityDeskFixture;
+// Module data adapter. The live half (BoardRadar cyber-risk for the public
+// platform vendors) is fetched client-side via the proxy. This adapter loads
+// the real security capability assessment for the private labs, which the
+// BoardRadar universe does not cover.
+const PRIVATE_LABS = ["anthropic", "openai", "xai", "mistral", "cohere"];
+
+export async function loadLabPostures(): Promise<PostureView> {
+  return loadVendorPostures("security", PRIVATE_LABS);
 }
