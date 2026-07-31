@@ -183,7 +183,7 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
           ] as const
         ).map(([label, value, tooltip]) => (
           <div key={label} className="rounded-lg border border-base-300 bg-base-100 p-4">
-            <div className="flex items-start justify-between gap-2">
+            <div className="flex flex-wrap items-start justify-between gap-2">
               <MicroLabel label={label} tooltip={tooltip} />
               <LaneBadge lane="aie" />
             </div>
@@ -245,7 +245,7 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
             aria-label="Filter alliances by company"
             value={selected}
             onChange={(e) => setSelected(e.target.value)}
-            className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
           >
             <option value="all">All companies ({data.summary.total} edges)</option>
             {data.options.map((o) => (

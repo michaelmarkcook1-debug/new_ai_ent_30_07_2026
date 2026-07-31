@@ -492,7 +492,7 @@ function ReputationCard({
 }) {
   return (
     <div className="rounded-lg border border-base-300 bg-base-100 p-3">
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="micro-label">{label}</span>
         <span className="font-mono text-[9px] uppercase tracking-wider text-muted">
           {dataStatus}

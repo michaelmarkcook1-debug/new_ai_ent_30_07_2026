@@ -111,7 +111,7 @@ export function LiveTalentExposure({
             key={c.label}
             className="rounded-lg border border-base-300 bg-base-100 p-4"
           >
-            <div className="flex items-start justify-between gap-2">
+            <div className="flex flex-wrap items-start justify-between gap-2">
               <MicroLabel label={c.label} tooltip={c.help} />
               <LaneBadge lane={lane} />
             </div>

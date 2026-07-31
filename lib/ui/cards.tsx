@@ -20,7 +20,7 @@ export function EditorialBanner({
 }) {
   return (
     <section className="rounded-lg border border-primary/25 bg-primary/5 p-4">
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <span className="micro-label text-primary">Analyst Insight</span>
           {badge}

@@ -98,7 +98,7 @@ function CompanyNewsPanel({
 
   return (
     <section className="rounded-lg border border-base-300 bg-base-100">
-      <div className="flex items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
         <div className="flex items-center gap-2">
           <h3 className="text-[13px] font-bold">{label} news</h3>
           <LaneBadge lane={source === "mock" ? "mock" : "live"} />
@@ -107,7 +107,7 @@ function CompanyNewsPanel({
           aria-label="Company"
           value={ticker}
           onChange={(e) => setTicker(e.target.value)}
-          className="rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
         >
           {universe.map((u) => (
             <option key={u.ticker} value={u.ticker}>
@@ -136,7 +136,7 @@ function CompanyNewsPanel({
                   {domain ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={`https://www.google.com/s2/favicons?domain=${domain}&sz=32`}
+                      src={`/api/favicon?domain=${encodeURIComponent(domain)}`}
                       alt=""
                       width={14}
                       height={14}
@@ -158,7 +158,7 @@ function CompanyNewsPanel({
                       <p className="mt-0.5 truncate text-[11px] text-muted">{summary}</p>
                     ) : null}
                     <div className="mt-1 flex flex-wrap items-center gap-1.5">
-                      <span className="font-mono text-[10px] text-muted">
+                      <span className="break-all font-mono text-[10px] text-muted">
                         {domain ?? "source"} · {DATE_FMT.format(new Date(a.date))}
                       </span>
                       {sentimentPill(a.sentiment?.label)}

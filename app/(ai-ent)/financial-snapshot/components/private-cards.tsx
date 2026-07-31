@@ -27,7 +27,7 @@ const CATEGORY_LABEL: Partial<Record<SourceCategory, string>> = {
 function PrivateCard({ card }: { card: PrivateVendorCard }) {
   return (
     <div className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-4">
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-2">
         <h3 className="text-[15px] font-bold">
           <Link
             href={`/vendor-view/${card.id}`}

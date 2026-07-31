@@ -136,7 +136,7 @@ export default async function TrustRankPage({
         <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
           {f.trustRank.vendorRulings.map((v) => (
             <div key={v.item} className="rounded border border-base-300 p-3">
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <span className="text-[12px] font-semibold">{v.vendor}</span>
                 <LaneBadge lane={v.aieSource ? "aie" : "sample"} />
               </div>

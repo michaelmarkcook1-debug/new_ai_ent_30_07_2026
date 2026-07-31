@@ -235,7 +235,7 @@ export function MarketExplorer() {
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {/* Who is strong in this slice */}
         <section className="rounded-lg border border-base-300 bg-base-100 p-4 lg:col-span-2">
-          <div className="flex items-start justify-between gap-2">
+          <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Model providers in this slice"
               tooltip="Share of model-provider adoption within the selected slice. Shares are normalised inside the slice; confidence labels are the source's own."
@@ -304,7 +304,7 @@ export function MarketExplorer() {
 
         {/* Industry adoption profile */}
         <section className="rounded-lg border border-base-300 bg-base-100 p-4">
-          <div className="flex items-start justify-between gap-2">
+          <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Industry adoption profile"
               tooltip="The AIE industry archetype's adoption profile: how far AI use has progressed from experimentation to scaled deployment, including agentic use."

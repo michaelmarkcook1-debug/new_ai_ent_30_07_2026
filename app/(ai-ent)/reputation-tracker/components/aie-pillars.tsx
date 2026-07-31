@@ -74,7 +74,7 @@ function MetricRow({
   note?: string;
 }) {
   return (
-    <li className="flex items-start justify-between gap-2 py-1">
+    <li className="flex flex-wrap items-start justify-between gap-2 py-1">
       <div className="min-w-0">
         <span className="text-[12.5px]">{label}</span>
         {note ? <p className="text-[10px] leading-snug text-muted">{note}</p> : null}
@@ -130,7 +130,7 @@ function PillarCard({
 }) {
   return (
     <section className="rounded-lg border border-base-300 bg-base-100 p-4">
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel label={title} tooltip={tooltip} />
         <LaneBadge lane={lane} />
       </div>
@@ -203,7 +203,7 @@ export function AiePillarsSection() {
           aria-label="Reputation vendor"
           value={vendorId}
           onChange={(e) => setVendorId(e.target.value)}
-          className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
         >
           {vendorIds.map((id) => (
             <option key={id} value={id}>
@@ -423,7 +423,7 @@ export function AiePillarsSection() {
             }
           >
             <ul className="divide-y divide-base-300/60">
-              <li className="flex items-center justify-between gap-2 py-1">
+              <li className="flex flex-wrap items-center justify-between gap-2 py-1">
                 <span className="text-[12.5px]">Average uptime</span>
                 <span className="flex items-center gap-1.5">
                   <StatusChip status={cust.dataStatus} />

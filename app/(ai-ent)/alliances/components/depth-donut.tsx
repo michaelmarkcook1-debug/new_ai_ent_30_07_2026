@@ -153,7 +153,7 @@ export function DepthDonut({ edges }: { edges: AllianceEdgeView[] }) {
               {segments.map((s) => (
                 <li
                   key={s.band.key}
-                  className="flex items-center justify-between gap-2 text-[12px]"
+                  className="flex flex-wrap items-center justify-between gap-2 text-[12px]"
                   title={s.band.help}
                 >
                   <span className="flex items-center gap-1.5">

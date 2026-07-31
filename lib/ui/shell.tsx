@@ -161,14 +161,22 @@ export function Shell({
       <div className="flex flex-1">
         {/* Sidebar */}
         <aside
-          className={`sticky top-12 h-[calc(100vh-3rem)] shrink-0 overflow-y-auto border-r border-base-300 bg-base-200/60 pb-16 transition-all ${collapsed ? "w-12" : "w-56"}`}
+          // Below md the sidebar collapses to icons on its own, whatever the
+          // manual toggle says. At 375px a 224px rail left 151px for content,
+          // which pushed every page into horizontal scroll.
+          className={`sticky top-12 h-[calc(100vh-3rem)] shrink-0 overflow-y-auto border-r border-base-300 bg-base-200/60 pb-16 transition-all ${collapsed ? "w-12" : "w-12 md:w-56"}`}
         >
           <nav className="flex h-full flex-col px-2 py-3">
             <div className="flex-1 space-y-4">
               {NAV_GROUPS.map((group) => (
                 <div key={group.label}>
                   {!collapsed ? (
-                    <div className="micro-label mb-1.5 px-2">{group.label}</div>
+                    <>
+                      <div className="micro-label mb-1.5 hidden px-2 md:block">
+                        {group.label}
+                      </div>
+                      <div className="mb-1.5 border-t border-base-300 md:hidden" />
+                    </>
                   ) : (
                     <div className="mb-1.5 border-t border-base-300" />
                   )}
@@ -189,7 +197,11 @@ export function Shell({
                             }`}
                           >
                             <Icon name={item.icon} />
-                            {!collapsed ? <span className="truncate">{item.label}</span> : null}
+                            {!collapsed ? (
+                              <span className="hidden truncate md:inline">
+                                {item.label}
+                              </span>
+                            ) : null}
                           </Link>
                         </li>
                       );
@@ -205,14 +217,16 @@ export function Shell({
                 className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[11px] text-muted hover:bg-base-300/50"
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d={collapsed ? "m9 6 6 6-6 6" : "m15 6-6 6 6 6"} /></svg>
-                {!collapsed ? "Sidebar mode" : null}
+                {!collapsed ? (
+                  <span className="hidden md:inline">Sidebar mode</span>
+                ) : null}
               </button>
               {!collapsed ? (
                 <div className="flex items-center gap-2 rounded-md px-2 py-1">
                   <span className="flex h-6 w-6 items-center justify-center rounded-full bg-secondary text-[10px] font-bold text-white">
                     E
                   </span>
-                  <div className="min-w-0">
+                  <div className="hidden min-w-0 md:block">
                     <p className="truncate text-[11px] font-semibold">AI Enterprise</p>
                     <p className="truncate font-mono text-[9px] text-muted">signed in</p>
                   </div>

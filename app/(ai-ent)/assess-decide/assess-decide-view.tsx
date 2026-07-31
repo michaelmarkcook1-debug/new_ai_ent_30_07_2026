@@ -165,7 +165,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
       <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {assessment.dimensions.map((d) => (
           <div key={d.id} className="rounded-lg border border-base-300 bg-base-100 p-4">
-            <div className="flex items-start justify-between gap-2">
+            <div className="flex flex-wrap items-start justify-between gap-2">
               <div>
                 <p className="text-[13px] font-bold">{d.label}</p>
                 <p className="font-mono text-[10px] text-muted">
@@ -196,7 +196,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
             {openDim === d.id ? (
               <ul className="mt-2 space-y-1.5 border-t border-base-300 pt-2">
                 {d.subcriteria.map((s) => (
-                  <li key={s.label} className="flex items-start justify-between gap-2">
+                  <li key={s.label} className="flex flex-wrap items-start justify-between gap-2">
                     <div>
                       <p className="text-[12px] font-medium">{s.label}</p>
                       <p className="text-[11px] text-muted">{s.note}</p>
@@ -212,7 +212,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
 
       {/* The engine's methodology backbone, live */}
       <section className="rounded-lg border border-base-300 bg-base-100 p-4">
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <MicroLabel
             label="The engine behind this: six pillars, evidence-graded"
             tooltip="The AIE assessment engine's pillars and default weights, pulled live from the deployed app. Pillar weights shift dynamically with industry, data sensitivity, risk tolerance, autonomy appetite and budget sensitivity."

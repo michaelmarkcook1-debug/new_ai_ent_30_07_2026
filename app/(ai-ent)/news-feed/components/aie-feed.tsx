@@ -79,7 +79,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
           aria-label="Timeframe"
           value={timeframe}
           onChange={(e) => setTimeframe(e.target.value)}
-          className="rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
         >
           {TIMEFRAMES.map((t) => (
             <option key={t.label}>{t.label}</option>

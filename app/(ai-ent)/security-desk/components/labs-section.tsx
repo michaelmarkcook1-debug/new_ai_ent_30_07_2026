@@ -52,7 +52,7 @@ export function LabsSection({ view }: { view: PostureView }) {
               key={lab.vendorId}
               className="flex flex-col gap-2.5 rounded-lg border border-base-300 bg-base-100 p-4"
             >
-              <div className="flex items-start justify-between gap-2">
+              <div className="flex flex-wrap items-start justify-between gap-2">
                 <div>
                   <h3 className="text-[13px] font-bold">{lab.vendorName}</h3>
                   <p className="text-[10.5px] text-muted">{lab.category}</p>
@@ -110,7 +110,7 @@ export function LabsSection({ view }: { view: PostureView }) {
                 </div>
               ) : null}
 
-              <div className="mt-auto flex items-center justify-between gap-2 border-t border-base-300 pt-2">
+              <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-base-300 pt-2">
                 <span className="font-mono text-[9px] text-muted">
                   {lab.lastVerified
                     ? `verified ${lab.lastVerified.slice(0, 10)}`

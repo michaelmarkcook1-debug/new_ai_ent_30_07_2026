@@ -103,7 +103,7 @@ export function CompetitiveHeatmap() {
       aria-label="Peer group anchor"
       value={anchor}
       onChange={(e) => setAnchor(e.target.value)}
-      className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
+      className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
     >
       {ANCHOR_GROUPS.map((g) => (
         <optgroup key={g.group} label={g.group}>
@@ -299,7 +299,7 @@ export function CompetitiveHeatmap() {
           {/* Momentum index strip from the same response */}
           {data?.rankings?.length ? (
             <div className="mt-4 border-t border-base-300 pt-3">
-              <div className="flex items-center justify-between gap-2">
+              <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <MicroLabel
                     label="Competitive momentum index"

@@ -56,7 +56,7 @@ export function PulseView({
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {/* 3. Spotlight tracking card */}
         <div className="lg:col-span-2">
-          <div className="mb-2 flex items-center gap-2">
+          <div className="mb-2 flex flex-wrap items-center gap-2">
             <MicroLabel
               label="Spotlight"
               tooltip="Pick a tracked vendor to inspect its narrative-versus-reality read."
@@ -65,7 +65,7 @@ export function PulseView({
               aria-label="Spotlight vendor"
               value={selected}
               onChange={(e) => setSelected(e.target.value)}
-              className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+              className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
             >
               {spotlightIds.map((id) => (
                 <option key={id} value={id}>
@@ -178,7 +178,7 @@ export function PulseView({
           ] as const
         ).map(([title, list, blurb]) => (
           <div key={title}>
-            <div className="mb-1 flex items-center gap-2">
+            <div className="mb-1 flex flex-wrap items-center gap-2">
               <h3 className="text-[13px] font-bold">{title}</h3>
               <LaneBadge lane={metrics.lane} />
               <span className="font-mono text-[10px] text-muted">

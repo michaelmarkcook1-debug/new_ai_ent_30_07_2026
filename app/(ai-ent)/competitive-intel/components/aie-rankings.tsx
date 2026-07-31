@@ -15,7 +15,7 @@ import type { AieRankingRow } from "../types";
 export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
   return (
     <section className="rounded-lg border border-base-300 bg-base-100 p-4">
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel
           label="AIE vendor rankings"
           tooltip="Overall scores from the AIE intelligence dataset (ranking-engine seed), shown with the dataset's own confidence figures. Investors are excluded."
@@ -48,7 +48,7 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
                 {group.rows.map((r: AieRankingRow) => (
                   <li
                     key={r.id}
-                    className="flex items-center justify-between gap-2"
+                    className="flex flex-wrap items-center justify-between gap-2"
                   >
                     <Link
                       href={`/vendor-view/${r.id}`}

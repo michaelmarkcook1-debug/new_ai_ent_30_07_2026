@@ -132,7 +132,7 @@ export function VendorComparisonTable({
           aria-label="Market category"
           value={categoryId}
           onChange={(e) => setCategoryId(e.target.value)}
-          className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
         >
           {categories.map((c) => (
             <option key={c.id} value={c.id}>

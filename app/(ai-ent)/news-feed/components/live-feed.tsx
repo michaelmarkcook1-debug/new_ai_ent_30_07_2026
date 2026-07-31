@@ -104,7 +104,7 @@ export function LiveFeed() {
           aria-label="Vendor filter"
           value={vendor}
           onChange={(e) => setVendor(e.target.value)}
-          className="rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
         >
           <option value="all">All vendors</option>
           {vendors.map((v) => (
@@ -166,7 +166,7 @@ export function LiveFeed() {
         ) : (
           filtered.slice(0, 25).map((n) => (
             <li key={n.id} className="px-3 py-3">
-              <div className="flex items-start justify-between gap-3">
+              <div className="flex flex-wrap items-start justify-between gap-3">
                 <a
                   href={n.sourceUrl}
                   target="_blank"

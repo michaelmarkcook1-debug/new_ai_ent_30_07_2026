@@ -46,7 +46,7 @@ export function CompanySelect({ selected }: { selected: string | null }) {
       aria-label="Company"
       value={selected ?? "SHELL"}
       onChange={(e) => pick(e.target.value)}
-      className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
+      className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
     >
       <option value="SHELL">Shell (exemplar, sample)</option>
       {/* Until the roster arrives, keep the current selection selectable so

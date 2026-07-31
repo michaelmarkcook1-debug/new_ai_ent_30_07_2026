@@ -102,7 +102,7 @@ export function IntegratorLayer() {
       <div className="mt-3 grid grid-cols-1 gap-4 xl:grid-cols-5">
         {/* Provider readiness table */}
         <div className="delivery-channel-card rounded-lg bg-base-100 p-4 xl:col-span-2">
-          <div className="flex items-start justify-between gap-2">
+          <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Integrator readiness"
               tooltip="Top of the live BoardRadar provider catalogue by AI readiness score. Assessment and readiness figures are shown exactly as the API returns them."
@@ -208,7 +208,7 @@ export function IntegratorLayer() {
                 aria-label="Integrator"
                 value={ticker}
                 onChange={(e) => setTicker(e.target.value)}
-                className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+                className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
               >
                 {selectorOptions.length === 0 ? (
                   <option value="ACN">Accenture (ACN)</option>

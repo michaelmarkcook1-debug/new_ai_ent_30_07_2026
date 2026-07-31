@@ -29,8 +29,8 @@ export function NewsList({
   const [timeframe, setTimeframe] = useState(timeframes[0]);
   return (
     <section className="rounded-lg border border-base-300 bg-base-100">
-      <div className="flex items-center justify-between border-b border-base-300 px-3 py-2">
-        <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
+        <div className="flex flex-wrap items-center gap-2">
           <h3 className="text-[13px] font-bold">{title}</h3>
           {badge}
         </div>
@@ -38,7 +38,7 @@ export function NewsList({
           aria-label="Timeframe"
           value={timeframe}
           onChange={(e) => setTimeframe(e.target.value)}
-          className="rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
         >
           {timeframes.map((t) => (
             <option key={t}>{t}</option>
@@ -55,7 +55,7 @@ export function NewsList({
             <li key={i} className="px-3 py-2.5">
               <div className="flex items-start gap-2">
                 <img
-                  src={`https://www.google.com/s2/favicons?domain=${n.sourceDomain}&sz=32`}
+                  src={`/api/favicon?domain=${encodeURIComponent(n.sourceDomain)}`}
                   alt=""
                   width={14}
                   height={14}
@@ -78,7 +78,7 @@ export function NewsList({
                     <p className="mt-0.5 truncate text-[11px] text-muted">{n.summary}</p>
                   ) : null}
                   <div className="mt-1 flex flex-wrap items-center gap-1.5">
-                    <span className="font-mono text-[10px] text-muted">
+                    <span className="break-all font-mono text-[10px] text-muted">
                       {n.sourceDomain} · {n.date}
                     </span>
                     {(n.tags ?? []).map((t) => (

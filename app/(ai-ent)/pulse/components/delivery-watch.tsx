@@ -49,7 +49,7 @@ export function DeliveryChannelWatch() {
 
   return (
     <section className="delivery-channel-card rounded-lg bg-base-100 p-4">
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel
           label="Delivery channel watch"
           tooltip="AI readiness of the services channel: the integrators who would deliver your AI programme. Live from the BoardRadar provider catalogue and AI readiness ranking."
@@ -73,7 +73,7 @@ export function DeliveryChannelWatch() {
         ) : (
           <ul className="space-y-1.5">
             {entries!.map((e, i) => (
-              <li key={e.ticker} className="flex items-center justify-between gap-2">
+              <li key={e.ticker} className="flex flex-wrap items-center justify-between gap-2">
                 <span className="flex items-center gap-2 text-[12.5px]">
                   <span className="w-4 text-right font-mono text-[10px] text-muted">
                     {i + 1}

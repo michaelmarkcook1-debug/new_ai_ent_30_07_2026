@@ -32,7 +32,7 @@ function RatingList({ entries }: { entries: [string, number][] }) {
   return (
     <ul className="divide-y divide-base-300/60">
       {entries.map(([key, value]) => (
-        <li key={key} className="flex items-center justify-between gap-2 py-1">
+        <li key={key} className="flex flex-wrap items-center justify-between gap-2 py-1">
           <span className="text-[12px]">{labelise(key)}</span>
           <Rating value={value} />
         </li>
@@ -54,7 +54,7 @@ function Card({
 }) {
   return (
     <section className="rounded-lg border border-base-300 bg-base-100 p-4">
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel label={title} tooltip={tooltip} />
         {badge}
       </div>
@@ -111,7 +111,7 @@ export function LiveUnifiedSection() {
           aria-label="BoardRadar ticker"
           value={ticker}
           onChange={(e) => setTicker(e.target.value)}
-          className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
         >
           {TICKERS.map((t) => (
             <option key={t} value={t}>
@@ -183,7 +183,7 @@ export function LiveUnifiedSection() {
                 >
                   <ul className="divide-y divide-base-300/60">
                     {data.customerReviews.platforms.map((p) => (
-                      <li key={p.platform} className="flex items-center justify-between gap-2 py-1">
+                      <li key={p.platform} className="flex flex-wrap items-center justify-between gap-2 py-1">
                         <span className="text-[12px]">{p.platform}</span>
                         <span className="flex items-center gap-2">
                           <span className="font-mono text-[10px] text-muted">
@@ -276,7 +276,7 @@ export function LiveUnifiedSection() {
                   >
                     <ul className="divide-y divide-base-300/60">
                       {table.rows.map((row) => (
-                        <li key={row.metric} className="flex items-center justify-between gap-2 py-1">
+                        <li key={row.metric} className="flex flex-wrap items-center justify-between gap-2 py-1">
                           <span className="text-[12px]">{row.metric}</span>
                           {typeof row.values[data.ticker] === "number" ? (
                             <Rating value={row.values[data.ticker]} />

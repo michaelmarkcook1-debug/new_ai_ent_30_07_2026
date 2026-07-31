@@ -88,7 +88,7 @@ export function TrustRankView({
             aria-label="Vendor lens"
             value={selectedId}
             onChange={(e) => setSelectedId(e.target.value)}
-            className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
           >
             {vendors.map((v) => (
               <option key={v.id} value={v.id}>
@@ -209,7 +209,7 @@ export function TrustRankView({
           <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
             {rulings.map((r) => (
               <div key={r.item} className="rounded-lg border border-base-300 bg-base-100 p-4">
-                <div className="flex items-center justify-between gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="micro-label">{r.vendor}</span>
                   <LaneBadge lane={r.aieSource ? "aie" : "sample"} />
                 </div>

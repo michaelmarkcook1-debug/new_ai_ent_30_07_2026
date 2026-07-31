@@ -49,7 +49,7 @@ function NarrativeBlock({ label, tooltip, body }: { label: string; tooltip: stri
 function EvidenceList({ label, items, emptyNote }: { label: string; items: string[]; emptyNote: string }) {
   return (
     <div className="rounded-lg border border-base-300 bg-base-100 p-4">
-      <div className="flex items-center justify-between gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-2">
         <h3 className="text-[13px] font-bold">{label}</h3>
         <span className="font-mono text-[10px] text-muted">{items.length}</span>
       </div>
@@ -108,7 +108,7 @@ export function CyberRiskPanel() {
             aria-label="Vendor ticker"
             value={ticker}
             onChange={(e) => setTicker(e.target.value)}
-            className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
           >
             {CYBER_LIVE_TICKERS.map((t) => (
               <option key={t.ticker} value={t.ticker}>

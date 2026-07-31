@@ -126,7 +126,7 @@ export function DeliveryMatrix() {
                   key={cat.id}
                   className="rounded-lg border border-base-300 bg-base-100 p-4"
                 >
-                  <div className="flex items-start justify-between gap-2">
+                  <div className="flex flex-wrap items-start justify-between gap-2">
                     <h4 className="text-[13px] font-bold">{cat.label}</h4>
                     <LaneBadge lane={lane} />
                   </div>

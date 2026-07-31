@@ -17,7 +17,7 @@ export function SpotlightCard({
 }) {
   return (
     <section className="rounded-lg border border-base-300 bg-base-100 p-4">
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <MicroLabel
             label="Tracking"
@@ -25,7 +25,7 @@ export function SpotlightCard({
           />
           <h3 className="mt-0.5 text-[15px] font-bold">{vendorName}</h3>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[10px] text-muted">
             {spotlight.divergence}
           </span>
