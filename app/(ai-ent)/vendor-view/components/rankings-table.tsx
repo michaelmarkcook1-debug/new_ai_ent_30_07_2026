@@ -94,7 +94,7 @@ export function RankingsTable({
               }`}
             >
               {g.category.name}
-              <span className="ml-1 font-mono text-[9px] opacity-70">{g.rows.length}</span>
+              
             </button>
           ))}
         </div>
@@ -212,22 +212,10 @@ export function RankingsTable({
                     </td>
                     {SCORE_COLUMNS.map((col) => {
                       const value = scoreFor(row, col.key);
-                      const grade =
-                        col.key === "overallScore" || col.key === "confidenceScore"
-                          ? null
-                          : row.pillars[col.key]?.grade ?? null;
                       return (
                         <td key={col.key} className="px-3 py-2">
                           <span className="inline-flex items-center gap-1">
                             <ScorePill score={value} />
-                            {grade ? (
-                              <span
-                                className="font-mono text-[9px] text-muted"
-                                title="Evidence grade recorded against this pillar score in the AIE dataset"
-                              >
-                                {grade}
-                              </span>
-                            ) : null}
                           </span>
                         </td>
                       );

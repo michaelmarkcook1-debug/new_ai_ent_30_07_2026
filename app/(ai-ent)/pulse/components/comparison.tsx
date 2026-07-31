@@ -171,9 +171,6 @@ export function VendorComparisonTable({
                   >
                     {c.label} {sortBy === c.key ? "↓" : ""}
                   </button>
-                  <div className="font-mono text-[8.5px] text-muted">
-                    {coverage(c.key)}/{rows.length}
-                  </div>
                 </th>
               ))}
               <th className="px-3 py-2" />
@@ -225,14 +222,6 @@ export function VendorComparisonTable({
                   </td>
                   <td className="px-3 py-2">
                     <ScorePill score={v.maturity} />
-                    {v.maturityEvidence ? (
-                      <div
-                        className="font-mono text-[8.5px] text-muted"
-                        title={`Weakest evidence grade across ${v.maturityRows} assessed capability rows.`}
-                      >
-                        {v.maturityEvidence} · {v.maturityRows} rows
-                      </div>
-                    ) : null}
                   </td>
                   <td className="px-3 py-2">
                     {v.reputation === null ? (

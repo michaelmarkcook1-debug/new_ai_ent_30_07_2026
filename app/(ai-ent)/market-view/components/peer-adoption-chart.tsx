@@ -136,16 +136,6 @@ export function PeerAdoptionChart({
               >
                 {(r.share * 100).toFixed(1)}%
               </text>
-              <text
-                x={W - 6}
-                y={y + ROW_H / 2}
-                textAnchor="end"
-                dominantBaseline="middle"
-                className="fill-[var(--ag-muted)] font-mono"
-                fontSize={9}
-              >
-                {r.contributingCells} cells
-              </text>
             </g>
           );
         })}

@@ -1,4 +1,5 @@
 import { PageHeader } from "@/lib/ui/page";
+import { INTELLIGENCE_VENDORS } from "@/lib/aie";
 import { loadThirdPartySignals } from "./third-party-data";
 import { AiePillarsSection } from "./components/aie-pillars";
 import { ReputationHistoryChart } from "./components/history-chart";
@@ -9,6 +10,9 @@ export const metadata = { title: "Reputation Tracker | AI Enterprise" };
 
 export default async function ReputationTrackerPage() {
   const thirdParty = await loadThirdPartySignals();
+  const vendorNames = Object.fromEntries(
+    INTELLIGENCE_VENDORS.map((v) => [v.id, v.name]),
+  );
   return (
     <>
       <PageHeader
@@ -17,7 +21,7 @@ export default async function ReputationTrackerPage() {
         lanes={["aie", "live", thirdParty.lane]}
       />
       <div className="space-y-4">
-        <ReputationHistoryChart />
+        <ReputationHistoryChart vendorNames={vendorNames} />
         <AiePillarsSection />
         <LiveUnifiedSection />
         <ThirdPartySignals view={thirdParty} />

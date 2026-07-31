@@ -34,10 +34,11 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
             <div key={group.category.id}>
               <div className="flex items-baseline justify-between gap-2 border-b border-base-300 pb-1">
                 <h4 className="text-[11.5px] font-bold">{group.category.name}</h4>
-                <span className="shrink-0 font-mono text-[9px] text-muted">
-                  {group.rows.length}
-                  {group.thin ? " (thin)" : ""}
-                </span>
+                {group.thin ? (
+                  <span className="shrink-0 font-mono text-[9px] text-muted">
+                    thin
+                  </span>
+                ) : null}
               </div>
               {group.thin ? (
                 <p className="mt-1 text-[10px] text-muted">

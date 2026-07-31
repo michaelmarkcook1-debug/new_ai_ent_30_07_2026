@@ -187,11 +187,7 @@ export function ProviderCapabilityMatrix({
                     >
                       {r.mean === null ? "–" : Math.round(r.mean)}
                     </div>
-                    {r.weakestGrade ? (
-                      <div className="text-center font-mono text-[8.5px] text-muted">
-                        {r.weakestGrade}
-                      </div>
-                    ) : null}
+
                   </td>
                 </tr>
               ))}
