@@ -17,6 +17,7 @@ import { LaneBadge, SeverityBadge, type Severity } from "@/lib/ui/badges";
 import { ScorePill, DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { EmptyState } from "@/lib/ui/page";
+import { PeerAdoptionChart } from "./peer-adoption-chart";
 import { aieFetch, type AieSource, type AieUptakeRow } from "@/lib/aie-live";
 import {
   ARCHETYPE_TO_LIVE_INDUSTRY,
@@ -142,7 +143,6 @@ export function MarketExplorer() {
       ? "mock"
       : "aie-live"
     : "aie";
-  const maxShare = rows.reduce((acc, r) => Math.max(acc, r.share), 0);
 
   const sliceLabel = [
     archetype
@@ -275,51 +275,11 @@ export function MarketExplorer() {
                 detail="The uptake dataset has no contributing cells here; nothing is shown rather than a guess."
               />
             ) : (
-              <ul className="space-y-1.5">
-                {rows.map((r, i) => {
-                  const vendorId = UPTAKE_VENDOR_ID[r.vendor];
-                  const pct = (r.share * 100).toFixed(1);
-                  return (
-                    <li key={r.vendor} className="flex items-center gap-2">
-                      <span className="w-4 shrink-0 text-right font-mono text-[10px] text-muted">
-                        {i + 1}
-                      </span>
-                      <span className="w-32 shrink-0 truncate text-[12.5px]">
-                        {vendorId ? (
-                          <Link
-                            href={`/vendor-view/${vendorId}`}
-                            className="hover:text-primary hover:underline"
-                          >
-                            {r.vendor}
-                          </Link>
-                        ) : (
-                          r.vendor
-                        )}
-                      </span>
-                      <span className="h-2 flex-1 overflow-hidden rounded-full bg-base-200">
-                        <span
-                          className="block h-full rounded-full bg-primary/70"
-                          style={{
-                            width: `${maxShare > 0 ? (r.share / maxShare) * 100 : 0}%`,
-                          }}
-                        />
-                      </span>
-                      <span className="w-24 shrink-0 text-right font-mono text-[11px]">
-                        {pct} per cent
-                      </span>
-                      <span className="w-20 shrink-0 text-right">
-                        <ConfidenceChip label={r.confidence} />
-                      </span>
-                      <span
-                        className="w-12 shrink-0 text-right font-mono text-[9px] text-muted"
-                        title="Contributing region-by-industry cells"
-                      >
-                        {r.contributingCells} cells
-                      </span>
-                    </li>
-                  );
-                })}
-              </ul>
+              <PeerAdoptionChart
+                rows={rows}
+                vendorIdFor={(v) => UPTAKE_VENDOR_ID[v]}
+                showDerivation={false}
+              />
             )}
           </div>
           <div className="mt-3 border-t border-base-300 pt-2">

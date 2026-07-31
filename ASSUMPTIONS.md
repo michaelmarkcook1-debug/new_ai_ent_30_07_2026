@@ -229,3 +229,35 @@ Dates are absolute; the build day is 30 July 2026.
       analyst banner, the suggested questions, the narrative-versus-reality
       spotlight, the Shell exemplar's own tabs, and the AI Analyst's scripted
       mode when no `ANTHROPIC_API_KEY` is present.
+21. **Remaining ranking-engine visuals ported (31 July 2026).** A sweep of the
+    deployed ranking engine found four visuals this app did not carry. All
+    four are now built on real data:
+    - **Frontier model face-off** (Price and Performance). Each frontier-lab
+      vendor's single highest-rated model on identical fields. The vendor set
+      is the frontier_model_api market category from the dataset taxonomy, not
+      a hardcoded "top four", so the count follows the data; category vendors
+      with no priced and scored model are named as absent rather than dropped.
+    - **Alliance topology** (Alliances). A radial chord map of the 25
+      partnership and investment edges. Deliberately not a force simulation:
+      placement is deterministic, so the same data always draws the same map,
+      and no position implies rank or size. The source renders an interactive
+      physics canvas; a stable layout was chosen instead because a map that
+      moves between renders cannot be cited.
+    - **Partnership depth donut** (Alliances). strengthScore banded into deep,
+      established and emerging. The band boundaries are drawn here, not
+      published upstream, and the drawer says so. Depth and confidence are
+      reported separately: a deep alliance can still be seed-graded.
+    - **Peer adoption chart** (Market View). The uptake slice was previously a
+      list of thin rules; it is now a ranked bar chart carrying each row's own
+      confidence label and contributing-cell count, because the same
+      percentage off 3 cells and off 45 is not the same claim. It replaced the
+      list rather than being added beside it, so uptake is not rendered twice.
+    Deliberately **not** ported: the source repo's `QuadrantChart` ("AI Atlas
+    chart, analyst-style 2x2"). Spec rule 4 forbids quadrant and wave charts
+    outright. It is also absent from the deployed navigation, so the archived
+    repo is ahead of this app there but behind the live product.
+    Noted while checking: the deployed cost/capability scatter now reports 9
+    efficiency-frontier models against the 10 in the 31 July capture, so the
+    upstream data has moved. The page states its capture date and freshest
+    benchmark date, so it reports its own vintage rather than implying
+    currency.
