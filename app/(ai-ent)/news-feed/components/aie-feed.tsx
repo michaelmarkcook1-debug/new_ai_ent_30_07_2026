@@ -27,7 +27,7 @@ function sentimentBadge(s: FeedItem["sentiment"]) {
 
 // Full-length AIE Brief feed: headline, summary, why it matters, native
 // source label and date, topic tag chips, sentiment, vendors, and the
-// dataset's own impact and confidence figures kept as native labels.
+// dataset's own impact figures kept as native labels.
 export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) {
   const [topic, setTopic] = useState<string | null>(null);
   const [timeframe, setTimeframe] = useState(TIMEFRAMES[0].label);
@@ -61,11 +61,11 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
               published article.
             </p>
             <p>
-              The impact and confidence figures on each item are the
+              The impact figure on each item is the
               dataset&apos;s own 0 to 100 labels: impact estimates how much the
               event should move vendor assessment, confidence is the
               dataset&apos;s belief in the classification. They are
-              confidence-labelled dataset values, not scores computed by this
+              native dataset values, not scores computed by this
               product, and claims below the strong-evidence bar are suppressed
               rather than shown.
             </p>
@@ -148,7 +148,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
                     <p className="text-[13px] font-semibold leading-snug">{n.title}</p>
                     <span
                       className="shrink-0 font-mono text-[10px] text-muted"
-                      title="The dataset's native impact and confidence labels, 0 to 100. See the derivation drawer above."
+                      title="The dataset's native impact label, 0 to 100. See the derivation drawer above."
                     >
                       Impact {n.impactScore}
                     </span>

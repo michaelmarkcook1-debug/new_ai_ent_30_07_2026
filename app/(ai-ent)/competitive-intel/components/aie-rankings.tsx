@@ -10,7 +10,7 @@ import { MicroLabel } from "@/lib/ui/micro";
 import type { AieRankingRow } from "../types";
 
 // AIE vendor rankings block: the seed roster's overall scores with their
-// native confidence labels, linking through to each vendor's view. Plain
+// evidence grades, linking through to each vendor's view. Plain
 // scored list, no medal or league-table styling.
 export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
   return (
@@ -18,7 +18,7 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
       <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel
           label="AIE vendor rankings"
-          tooltip="Overall scores from the AIE intelligence dataset (ranking-engine seed), shown with the dataset's own confidence figures. Investors are excluded."
+          tooltip="AG's own overall score per vendor from the AI Enterprise intelligence dataset. Investors are excluded."
         />
         <LaneBadge lane="aie" />
       </div>
@@ -71,14 +71,12 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
           <p>
             Each overall score (0 to 100) comes straight from the AIE
             intelligence dataset seed, where it is maintained alongside
-            per-pillar capability scores, evidence grades and a native
-            confidence figure per vendor. The confidence label shown next to
-            each score is the dataset's own, passed through untouched.
+            per-pillar capability scores and evidence grades.
           </p>
           <p className="text-muted">
-            Scores are confidence-labelled derived signals, not analyst medals:
-            claims below the strong-evidence bar are suppressed in the source
-            dataset rather than scored. Follow a vendor link for the pillar
+            Scores are derived signals, not analyst medals: claims below the
+            strong-evidence bar are suppressed in the source dataset rather
+            than scored. Follow a vendor link for the pillar
             detail behind its score.
           </p>
         </DerivationDrawer>

@@ -100,7 +100,7 @@ export function WinningLosing() {
       </div>
       <p className="mt-1 max-w-3xl text-[11px] text-muted">
         The deployed AIE dashboard&apos;s momentum calls, reasons verbatim with
-        their own confidence figures; names link into the vendor profiles
+        the reason each call gives; names link into the vendor profiles
         where the vendor is in the tracked roster.
       </p>
       {data === null ? (

@@ -83,7 +83,7 @@ export function MarketToday({
             <p className="text-muted">Dataset note: {regime.uncertaintyNote}</p>
             <p className="text-muted">
               Nothing in this strip is measured by this demo; it is the dataset&apos;s own
-              confidence-labelled read, re-rendered with its labels intact.
+              source-cited read, re-rendered with its labels intact.
             </p>
           </DerivationDrawer>
         </div>

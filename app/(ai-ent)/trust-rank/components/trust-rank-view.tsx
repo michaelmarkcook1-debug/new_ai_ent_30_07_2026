@@ -232,7 +232,7 @@ export function TrustRankView({
             <p>
               These events come from the AIE market-signals dataset with their
               native labels kept intact: the evidence grade (E1 to E5), the
-              dataset&apos;s confidence figure and its data status are shown
+              dataset&apos;s evidence grade and data status are shown
               exactly as recorded, alongside the cited source.
             </p>
             <p>

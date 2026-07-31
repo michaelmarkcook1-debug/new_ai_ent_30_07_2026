@@ -69,7 +69,7 @@ export default async function TrustRankPage({
               <p>
                 Mirrors GET /governance-risk: a 0 to 100 composite over control
                 effectiveness, disclosure quality, litigation exposure and
-                AI-specific assurance gaps, each confidence labelled. SAMPLE
+                AI-specific assurance gaps. SAMPLE
                 for the exemplar buyer.
               </p>
             </DerivationDrawer>

@@ -43,7 +43,7 @@ export function CategoryLeaders({
       </div>
       <p className="mt-1 max-w-3xl text-[11px] text-muted">
         Leadership here means the highest seed share estimate in each category,
-        shown with the dataset&apos;s own composite score and confidence labels. No
+        shown with the dataset&apos;s own composite scores. No
         ranking beyond the dataset&apos;s own fields is applied.
       </p>
       <div className="mt-1">
@@ -56,7 +56,7 @@ export function CategoryLeaders({
           <p>
             The composite score is the dataset&apos;s own <code>overallScore</code>{" "}
             (0 to 100) for the vendor, an analyst seed estimate carrying its own
-            confidence figure, shown here with an &quot;est.&quot; marker. The position
+            estimate, shown here with an &quot;est.&quot; marker. The position
             label (Leader, Major challenger and so on) is also the dataset&apos;s own
             banding of that score, not a judgement made by this demo.
           </p>

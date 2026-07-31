@@ -25,7 +25,7 @@ import {
   UPTAKE_VENDOR_ID,
 } from "../data";
 
-// Native confidence labels from the uptake seed, shown verbatim.
+
 function BandChip({ band }: { band: string }) {
   const styles: Record<string, string> = {
     nascent: "bg-base-200 text-muted",
@@ -68,7 +68,7 @@ const selectClass =
 // The Market View explorer: who is using which models, how and where.
 // Filters over the AIE industry archetypes, workflow taxonomy and the
 // region-by-industry vendor uptake seed; results keep the seed's own
-// adoption shares and confidence labels.
+// adoption shares.
 export function MarketExplorer() {
   const [archetypeId, setArchetypeId] = useState("");
   const [region, setRegion] = useState<"" | Region>("");
@@ -273,7 +273,7 @@ export function MarketExplorer() {
                 industry by vendor rows (5 regions, 9 industry segments, 13
                 model providers), each a fraction normalised within its
                 region-and-industry cell and carrying the dataset's own
-                confidence label.
+                estimate.
               </p>
               <ul className="list-disc space-y-1 pl-4 text-muted">
                 <li>

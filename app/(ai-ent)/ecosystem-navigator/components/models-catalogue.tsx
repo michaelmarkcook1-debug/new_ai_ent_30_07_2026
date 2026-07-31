@@ -133,7 +133,7 @@ export function ModelsCatalogue() {
             <strong>Data status</strong> stays at &quot;seed&quot; until live verification against the
             vendor&apos;s own model-list endpoint flips it to &quot;documented&quot; or
             &quot;verified&quot;. <strong>Evidence grade</strong> (for example E2) and the numeric
-            confidence figure are the dataset&apos;s native labels, not scores computed by this
+            evidence grade are the dataset&apos;s native labels, not scores computed by this
             product.
           </p>
           <p>

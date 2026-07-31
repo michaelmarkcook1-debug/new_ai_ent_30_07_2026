@@ -8,7 +8,7 @@ import { aieFetch, type AieNewsItem, type AieSource } from "@/lib/aie-live";
 
 // Live AI-market feed pulled from the deployed AIE app's public news API
 // through our proxy: current items with the pipeline's own impact and
-// confidence labels. The seed brief below remains the historical record.
+// impact labels. The seed brief below remains the historical record.
 
 function sentimentBadge(s: string | null | undefined) {
   if (s === "positive") return <SentimentPill sentiment="Positive" />;
@@ -89,7 +89,7 @@ export function LiveFeed() {
               API, pulled through our own proxy minutes ago. Its ingestion
               pipeline reads GDELT, vendor press releases, the AI press desks,
               SEC 8-K filings, expert newsletters and benchmark organisations,
-              then labels each item with its own impact and confidence figures
+              then labels each item with its own impact figure
               (0 to 100). Those labels pass through untouched: nothing here is
               scored by this product.
             </p>
@@ -177,7 +177,7 @@ export function LiveFeed() {
                 </a>
                 <span
                   className="shrink-0 font-mono text-[10px] text-muted"
-                  title="The pipeline's own impact and confidence labels, 0 to 100."
+                  title="The pipeline's own impact label, 0 to 100."
                 >
                   Impact {n.impactScore ?? "n/a"}
                 </span>

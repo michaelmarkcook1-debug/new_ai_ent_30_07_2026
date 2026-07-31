@@ -191,7 +191,7 @@ export function CapabilitiesSection({ profile }: { profile: VendorProfile }) {
         capability families per covered vendor). Each cell keeps the
         dataset&apos;s native labels: a status (inferred, documented, tested or
         verified), a maturityScore (0 to 100), an evidence grade (E1 to E5)
-        and a last-verified date. Values are confidence-labelled derived
+        and a last-verified date. Values are evidence-gradelled derived
         signals; a claim only reads as verified when the dataset itself grades
         it that way, and claims below the strong-evidence bar are suppressed
         at source.
@@ -576,7 +576,7 @@ export function ReputationSection({ profile }: { profile: VendorProfile }) {
       </p>
       <p>
         Every cell keeps its native data status: scores marked seed remain
-        confidence-labelled derived signals until real ingestion verifies
+        evidence-graded derived signals until real ingestion verifies
         them, and nothing below that bar is presented as verified.
       </p>
     </DerivationDrawer>

@@ -197,10 +197,10 @@ export function CategoryShareLive({
             Enterprise app&apos;s market-share API through our proxy. The delta
             arrow is its own <code>changePct</code> versus its previous estimate,
             and the small &quot;conf&quot; figure is the row&apos;s native
-            confidence label (0 to 100).
+            estimate (0 to 100).
           </p>
           <p className="text-muted">
-            These are directional, confidence-labelled estimates, not audited
+            These are directional, evidence-graded estimates, not audited
             market shares; the engine&apos;s own provenance line stays visible
             above. When the live pull fails the ported seed renders instead
             under its AIE dataset badge, and a recorded response serves under

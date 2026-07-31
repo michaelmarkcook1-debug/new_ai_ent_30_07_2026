@@ -9,7 +9,7 @@ import { aieServerFetch, type AieLane } from "@/lib/aie-server";
 // that is the honest answer.
 //
 // Source map, one metric to one field:
-//   composite   -> vendors[].overallScore        (analyst composite, 0 to 100)
+//   composite   -> vendors[].overallScore        (AG's own score, 0 to 100)
 //   confidence  -> vendors[].confidenceScore     (the dataset's own confidence)
 //   momentum    -> market-dashboard.agenticMomentum[].momentum.momentumScore
 //   maturity    -> mean of capabilities.vendorCapabilities[].maturityScore
