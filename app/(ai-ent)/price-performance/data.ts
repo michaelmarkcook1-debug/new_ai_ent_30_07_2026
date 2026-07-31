@@ -128,6 +128,97 @@ function providerOf(model: string): string {
   return "Unattributed";
 }
 
+// ---------- Frontier model face-off ----------
+// Each frontier-lab vendor's single highest-rated model, compared on
+// identical fields so the comparison is like for like.
+//
+// The vendor set is the frontier_model_api market category from the ranking
+// engine's own taxonomy, not an editorial pick here, and the count is
+// whatever that category actually supports rather than a fixed "top four".
+
+export interface FaceOffEntry {
+  provider: string;
+  model: string;
+  intelligence: number;
+  inputPerM: number;
+  throughput: number | null;
+  frontier: boolean;
+  /** Intelligence points behind the leader; 0 for the leader itself. */
+  behindLeader: number;
+}
+
+export interface FaceOffView {
+  entries: FaceOffEntry[];
+  leader: FaceOffEntry | null;
+  /** Leader's margin over the runner-up, null when fewer than two qualify. */
+  leadGap: number | null;
+  benchmarkSource: string;
+  capturedAtDisplay: string;
+  freshestBenchmarkDisplay: string;
+  /** Category vendors with no priced and scored model, named honestly. */
+  absent: string[];
+}
+
+// Frontier-category vendor ids mapped to the provider labels providerOf()
+// produces from model names. Ids come from the dataset's own taxonomy.
+const FRONTIER_VENDOR_LABELS: Record<string, string> = {
+  openai: "OpenAI",
+  anthropic: "Anthropic",
+  google: "Google",
+  xai: "xAI",
+  meta: "Meta",
+  mistral: "Mistral",
+  cohere: "Cohere",
+  deepseek: "DeepSeek",
+  alibaba: "Alibaba",
+  moonshot: "Moonshot",
+  zai: "Zhipu",
+  minimax: "MiniMax",
+  ai21: "AI21",
+  snowflake: "Snowflake",
+};
+
+export function loadFrontierFaceOff(): FaceOffView {
+  const view = loadCostCapability();
+  const wanted = new Set(Object.values(FRONTIER_VENDOR_LABELS));
+
+  const best = new Map<string, CostCapabilityModel>();
+  for (const m of view.models) {
+    if (!wanted.has(m.provider)) continue;
+    const held = best.get(m.provider);
+    if (!held || m.intelligence > held.intelligence) best.set(m.provider, m);
+  }
+
+  const ranked = [...best.values()].sort(
+    (a, b) => b.intelligence - a.intelligence
+  );
+  const top = ranked[0]?.intelligence ?? 0;
+
+  const entries: FaceOffEntry[] = ranked.map((m) => ({
+    provider: m.provider,
+    model: m.model,
+    intelligence: m.intelligence,
+    inputPerM: m.inputPerM,
+    throughput: m.throughput,
+    frontier: m.frontier,
+    behindLeader: Math.round((top - m.intelligence) * 10) / 10,
+  }));
+
+  return {
+    entries,
+    leader: entries[0] ?? null,
+    leadGap:
+      entries.length > 1
+        ? Math.round((entries[0].intelligence - entries[1].intelligence) * 10) /
+          10
+        : null,
+    benchmarkSource: view.benchmarkSource,
+    capturedAtDisplay: view.capturedAtDisplay,
+    freshestBenchmarkDisplay: view.freshestBenchmarkDisplay,
+    absent: [...wanted].filter((label) => !best.has(label)).sort(),
+  };
+}
+
 export function loadCostCapability(): CostCapabilityView {
   // Static import keeps this a build-time read: the figures are a dated
   // capture, not a per-request pull.

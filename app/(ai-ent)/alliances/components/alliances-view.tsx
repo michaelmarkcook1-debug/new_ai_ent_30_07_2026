@@ -5,6 +5,8 @@ import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
 import { DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
+import { AllianceMap } from "./alliance-map";
+import { DepthDonut } from "./depth-donut";
 import {
   ALLIANCE_TYPE_LABEL,
   type AllianceEdgeView,
@@ -189,6 +191,20 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
           </div>
         ))}
       </section>
+
+      {/* Topology map beside the depth distribution */}
+      <div className="grid grid-cols-1 gap-4 xl:grid-cols-4">
+        <div className="xl:col-span-3">
+          <AllianceMap
+            edges={data.edges}
+            vendorNodeIds={data.vendorNodeIds}
+            datasetUpdated={data.datasetUpdatedLatest}
+          />
+        </div>
+        <div className="xl:col-span-1">
+          <DepthDonut edges={data.edges} />
+        </div>
+      </div>
       <div className="-mt-2 flex flex-wrap items-center gap-3">
         <DerivationDrawer title="How the alliance figures are derived">
           <p>

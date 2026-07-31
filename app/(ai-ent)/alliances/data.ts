@@ -92,6 +92,8 @@ export interface AlliancesData {
   options: AllianceVendorOption[];
   summary: AllianceSummary;
   datasetUpdatedLatest: string;
+  /** Node ids the dataset places on the model and API provider side. */
+  vendorNodeIds: string[];
 }
 
 const NODE_LABEL = new Map(EXPOSURE_NODES.map((n) => [n.id, n.label]));
@@ -150,5 +152,9 @@ export function getAlliancesData(): AlliancesData {
     "",
   );
 
-  return { edges, options, summary, datasetUpdatedLatest };
+  const vendorNodeIds = EXPOSURE_NODES.filter((n) => n.side === "right").map(
+    (n) => n.id,
+  );
+
+  return { edges, options, summary, datasetUpdatedLatest, vendorNodeIds };
 }

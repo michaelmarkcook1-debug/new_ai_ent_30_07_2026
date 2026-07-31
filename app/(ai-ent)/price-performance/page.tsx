@@ -1,6 +1,11 @@
 import { PageHeader } from "@/lib/ui/page";
-import { loadCostCapability, loadPricingDataset } from "./data";
+import {
+  loadCostCapability,
+  loadFrontierFaceOff,
+  loadPricingDataset,
+} from "./data";
 import { CostCapabilityChart } from "./components/cost-capability";
+import { FrontierFaceOff } from "./components/frontier-faceoff";
 import { PricingDisclosure } from "./components/pricing-disclosure";
 
 export const metadata = { title: "Price / Performance | AI Enterprise" };
@@ -8,6 +13,7 @@ export const metadata = { title: "Price / Performance | AI Enterprise" };
 export default function PricePerformancePage() {
   const pricing = loadPricingDataset();
   const costCapability = loadCostCapability();
+  const faceOff = loadFrontierFaceOff();
   return (
     <>
       <PageHeader
@@ -31,6 +37,8 @@ export default function PricePerformancePage() {
             and never blends a third-party score into an AG figure.
           </p>
         </section>
+
+        <FrontierFaceOff view={faceOff} />
 
         <CostCapabilityChart view={costCapability} />
 
