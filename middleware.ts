@@ -38,4 +38,14 @@ export function middleware(request: NextRequest) {
 export const config = {
   // Everything except Next.js internals and static assets.
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  // Node.js rather than the default Edge runtime.
+  //
+  // Next bundles ncc-compiled tracing code into the middleware chunk that
+  // does `__nccwpck_require__.ab = __dirname + "/"`. The guard tests
+  // __nccwpck_require__, not __dirname, so on Edge (where __dirname does not
+  // exist) it throws ReferenceError and every request 500s with
+  // MIDDLEWARE_INVOCATION_FAILED. Nothing in this file needs Edge, and
+  // middleware on Vercel now runs full Node.js on Fluid Compute, so the Node
+  // runtime is both the fix and the platform default direction.
+  runtime: "nodejs",
 };
