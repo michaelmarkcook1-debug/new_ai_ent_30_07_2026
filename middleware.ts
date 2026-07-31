@@ -23,20 +23,27 @@
 
 const REALM = 'Basic realm="AI Enterprise demo"';
 
-export function middleware(request: Request): Response | undefined {
+// What NextResponse.next() puts on the wire, without importing it. Returning
+// undefined is not the same thing: the request falls through to no route at
+// all and every path answers 404. Verified against Next's own source at
+// node_modules/next/dist/esm/server/web/spec-extension/response.js, where
+// next() is `new NextResponse(null, {headers: {'x-middleware-next': '1'}})`.
+const CONTINUE = () =>
+  new Response(null, { headers: { "x-middleware-next": "1" } });
+
+export function middleware(request: Request): Response {
   const user = process.env.DEMO_USER;
   const pass = process.env.DEMO_PASS;
-  if (!user || !pass) return undefined;
+  if (!user || !pass) return CONTINUE();
 
   const expected = btoa(`${user}:${pass}`);
   const header = request.headers.get("authorization");
 
-  // Returning undefined continues the chain, and that is the whole success
-  // path. The browser replays the Authorization header on every same-origin
-  // request once the handshake is done, fetch() included, so there is nothing
-  // to carry in a cookie.
+  // The browser replays the Authorization header on every same-origin request
+  // once the handshake is done, fetch() included, so there is nothing to carry
+  // in a cookie.
   if (header?.startsWith("Basic ") && header.slice(6) === expected) {
-    return undefined;
+    return CONTINUE();
   }
 
   return new Response("Authentication required", {
