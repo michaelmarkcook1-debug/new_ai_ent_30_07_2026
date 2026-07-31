@@ -19,6 +19,8 @@ import { MicroLabel } from "@/lib/ui/micro";
 import { EmptyState } from "@/lib/ui/page";
 import { PeerAdoptionChart } from "./peer-adoption-chart";
 import { aieFetch, type AieSource, type AieUptakeRow } from "@/lib/aie-live";
+import { WorkflowShortlistPanel } from "./workflow-shortlist";
+import type { WorkflowShortlist } from "@/lib/workflow-vendors";
 import {
   ARCHETYPE_TO_LIVE_INDUSTRY,
   ARCHETYPE_TO_UPTAKE,
@@ -69,7 +71,11 @@ const selectClass =
 // Filters over the AIE industry archetypes, workflow taxonomy and the
 // region-by-industry vendor uptake seed; results keep the seed's own
 // adoption shares.
-export function MarketExplorer() {
+export function MarketExplorer({
+  workflowVendors,
+}: {
+  workflowVendors: Record<string, WorkflowShortlist>;
+}) {
   const [archetypeId, setArchetypeId] = useState("");
   const [region, setRegion] = useState<"" | Region>("");
   const [size, setSize] = useState<"" | CompanySize>("");
@@ -505,6 +511,13 @@ export function MarketExplorer() {
                   )}
                 </div>
               </div>
+            </div>
+            <div className="mt-4">
+              <WorkflowShortlistPanel
+                shortlist={workflowVendors[workflow.category] ?? null}
+                workflowLabel={workflow.label}
+                riskTier={workflow.riskTier}
+              />
             </div>
           </div>
         ) : (
