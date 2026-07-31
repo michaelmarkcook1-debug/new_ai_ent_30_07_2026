@@ -5,6 +5,7 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { ScorePill, DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import type { WorkflowShortlist } from "@/lib/workflow-vendors";
+import { ShortlistButton } from "@/lib/ui/shortlist-button";
 
 // Who to shortlist for the selected workflow.
 //
@@ -45,8 +46,9 @@ function VendorList({
           {v.marketPosition ? (
             <span className="text-[10.5px] text-muted">{v.marketPosition}</span>
           ) : null}
-          <span className="ml-auto">
+          <span className="ml-auto flex items-center gap-1.5">
             <ScorePill score={v.score} />
+            <ShortlistButton vendorId={v.vendorId} name={v.name} size="xs" />
           </span>
         </li>
       ))}

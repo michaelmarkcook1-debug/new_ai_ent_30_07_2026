@@ -5,12 +5,14 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AgMark } from "@/lib/ui/logo";
 import { AskAiButton } from "@/lib/ui/ask-ai";
+import { ShortlistProvider } from "@/lib/shortlist";
+import { ShortlistIndicator } from "@/lib/ui/shortlist-indicator";
 
 // The AG shell: top bar with logo, scope chip and "Ask AI" pill; left
 // sidebar with ALL-CAPS group labels, icons, active item as a solid primary
 // rounded rectangle (anatomy verified against the live portal, spec S3).
 
-type NavItem = { label: string; href: string; icon: string };
+type NavItem = { label: string; href: string; icon: string; hint?: string };
 type NavGroup = { label: string; items: NavItem[] };
 
 // Minimal inline icon set keyed by name.
@@ -45,31 +47,32 @@ export const NAV_GROUPS: NavGroup[] = [
   {
     label: "Market Intelligence",
     items: [
-      { label: "The Pulse", href: "/pulse", icon: "pulse" },
-      { label: "Market Watch", href: "/market-watch", icon: "watch" },
-      { label: "Financial Snapshot", href: "/financial-snapshot", icon: "finance" },
-      { label: "Competitive Intel", href: "/competitive-intel", icon: "intel" },
-      { label: "Reputation Tracker", href: "/reputation-tracker", icon: "reputation" },
-      { label: "Vendor View", href: "/vendor-view", icon: "vendor" },
-      { label: "Alliances", href: "/alliances", icon: "alliance" },
+      { label: "Start here", href: "/start", icon: "pulse", hint: "Orientation: pick the question closest to yours" },
+      { label: "The Pulse", href: "/pulse", icon: "pulse", hint: "Today's market read: averages, risks and who is moving" },
+      { label: "Market Watch", href: "/market-watch", icon: "watch", hint: "Category shares, leaders and the winning/losing read" },
+      { label: "Financial Snapshot", href: "/financial-snapshot", icon: "finance", hint: "Vendor financials, segment revenue and what AI they disclose" },
+      { label: "Competitive Intel", href: "/competitive-intel", icon: "intel", hint: "Compare model providers across ten assessed capabilities" },
+      { label: "Reputation Tracker", href: "/reputation-tracker", icon: "reputation", hint: "How buyers, developers and staff rate each vendor" },
+      { label: "Vendor View", href: "/vendor-view", icon: "vendor", hint: "Full profile and rankings for every tracked vendor" },
+      { label: "Alliances", href: "/alliances", icon: "alliance", hint: "Who partners with whom, and how deep the tie is" },
     ],
   },
   {
     label: "AI and Your Company",
     items: [
-      { label: "Interrogate", href: "/interrogate", icon: "interrogate" },
-      { label: "Market View", href: "/market-view", icon: "market" },
-      { label: "Company View: Shell", href: "/company-view", icon: "company" },
-      { label: "Assess and Decide", href: "/assess-decide", icon: "assess" },
+      { label: "Interrogate", href: "/interrogate", icon: "interrogate", hint: "Describe your situation, get a cited finding" },
+      { label: "Market View", href: "/market-view", icon: "market", hint: "Pick a workflow, get the vendors that serve it" },
+      { label: "Company View: Shell", href: "/company-view", icon: "company", hint: "The tailored view of your own organisation" },
+      { label: "Assess and Decide", href: "/assess-decide", icon: "assess", hint: "Score a decision against your own weights" },
     ],
   },
   {
     label: "Vendor Assessment",
     items: [
-      { label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", icon: "navigator" },
-      { label: "Price / Performance", href: "/price-performance", icon: "price" },
-      { label: "The Security Desk", href: "/security-desk", icon: "security" },
-      { label: "Trust Rank", href: "/trust-rank", icon: "trust" },
+      { label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", icon: "navigator", hint: "Who depends on whom across the AI stack" },
+      { label: "Price / Performance", href: "/price-performance", icon: "price", hint: "What capability costs, and the efficiency frontier" },
+      { label: "The Security Desk", href: "/security-desk", icon: "security", hint: "Security posture and open risks per vendor" },
+      { label: "Trust Rank", href: "/trust-rank", icon: "trust", hint: "What AI regulation binds you, by jurisdiction" },
       { label: "News", href: "/news-feed", icon: "news" },
     ],
   },
@@ -118,6 +121,7 @@ export function Shell({
   const [collapsed, setCollapsed] = useState(false);
 
   return (
+    <ShortlistProvider>
     <div className="flex min-h-screen flex-col">
       {/* Top bar */}
       <div className="sticky top-0 z-30 flex h-12 items-center justify-between border-b border-base-300 bg-base-100/95 px-3 backdrop-blur">
@@ -142,10 +146,11 @@ export function Shell({
             </span>
           </Link>
         </div>
-        <div className="flex items-center gap-2">
-          <span className="hidden rounded-full border border-base-300 px-2.5 py-1 font-mono text-[10px] text-muted sm:inline-flex">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <span className="hidden rounded-full border border-base-300 px-2.5 py-1 font-mono text-[10px] text-muted md:inline-flex">
             {scopeLabel}
           </span>
+          <ShortlistIndicator />
           <ThemeToggle />
           <button
             type="button"
@@ -189,7 +194,7 @@ export function Shell({
                         <li key={item.href}>
                           <Link
                             href={item.href}
-                            title={item.label}
+                            title={item.hint ?? item.label}
                             className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-[12.5px] font-medium transition ${
                               active
                                 ? "bg-primary text-white shadow-sm"
@@ -240,5 +245,6 @@ export function Shell({
         <main className="min-w-0 flex-1 px-5 py-4 pb-12">{children}</main>
       </div>
     </div>
+    </ShortlistProvider>
   );
 }

@@ -7,6 +7,7 @@ import { DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { COMPARABILITY_NOTE } from "@/lib/comparability";
 import type { ProviderMatrix } from "../provider-matrix-data";
+import { ShortlistButton } from "@/lib/ui/shortlist-button";
 
 // Competitive dynamics across the model providers: rows are the providers in
 // one market category, columns are the ten assessed capabilities, cells are
@@ -140,12 +141,15 @@ export function ProviderCapabilityMatrix({
               {matrix.rows.map((r) => (
                 <tr key={r.vendorId}>
                   <td className="whitespace-nowrap py-0.5 pr-2">
-                    <Link
-                      href={`/vendor-view/${r.vendorId}`}
-                      className="text-[12.5px] font-semibold hover:text-primary hover:underline"
-                    >
-                      {r.name}
-                    </Link>
+                    <span className="flex items-center gap-1.5">
+                      <ShortlistButton vendorId={r.vendorId} name={r.name} size="xs" />
+                      <Link
+                        href={`/vendor-view/${r.vendorId}`}
+                        className="text-[12.5px] font-semibold hover:text-primary hover:underline"
+                      >
+                        {r.name}
+                      </Link>
+                    </span>
                     {r.marketPosition ? (
                       <div className="text-[10px] text-muted">
                         {r.marketPosition}

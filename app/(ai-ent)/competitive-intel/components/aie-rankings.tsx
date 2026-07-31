@@ -8,6 +8,7 @@ import {
 import { DerivationDrawer, ScorePill } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import type { AieRankingRow } from "../types";
+import { ShortlistButton } from "@/lib/ui/shortlist-button";
 
 // AIE vendor rankings block: the seed roster's overall scores with their
 // evidence grades, linking through to each vendor's view. Plain
@@ -59,6 +60,7 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
                     </Link>
                     <span className="flex shrink-0 items-center gap-1.5">
                       <ScorePill score={r.overallScore} />
+                      <ShortlistButton vendorId={r.id} name={r.name} size="xs" />
                     </span>
                   </li>
                 ))}
