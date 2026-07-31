@@ -5,7 +5,7 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { EditorialBanner } from "@/lib/ui/cards";
 import { KpiGauge, DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
-import { SpotlightCard } from "./spotlight";
+import { SpotlightCard, VendorSnapshotCard } from "./spotlight";
 import { VendorComparisonTable } from "./comparison";
 import { DeliveryChannelWatch } from "./delivery-watch";
 import { PulseLiveNews } from "./live-news";
@@ -30,10 +30,29 @@ export function PulseView({
 }) {
   const spotlightIds = Object.keys(fixture.spotlights);
   const [selected, setSelected] = useState(spotlightIds[0] ?? "anthropic");
-  const spotlight =
-    fixture.spotlights[selected] ?? fixture.spotlights[spotlightIds[0]];
-  const selectedName =
-    metrics.vendors.find((v) => v.id === selected)?.name ?? selected;
+
+  // Every tracked AI vendor is selectable, not just the four with a written
+  // narrative-versus-reality read. The two groups are kept apart in the picker
+  // so it is clear which is which before choosing, rather than after.
+  //
+  // Investors are excluded: they fund AI vendors, they do not sell AI, so a
+  // capability or reputation read on one answers no buying question. The
+  // services channel never appears here at all, because the integrators live
+  // in the BoardRadar delivery layer and never enter the AI vendor set.
+  const isAiVendor = (v: (typeof metrics.vendors)[number]) =>
+    v.category !== "AI investor";
+
+  const selectable = metrics.vendors.filter(isAiVendor);
+  const withRead = selectable
+    .filter((v) => fixture.spotlights[v.id])
+    .sort((a, b) => a.name.localeCompare(b.name));
+  const withoutRead = selectable
+    .filter((v) => !fixture.spotlights[v.id])
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const spotlight = fixture.spotlights[selected] ?? null;
+  const selectedVendor = metrics.vendors.find((v) => v.id === selected) ?? null;
+  const selectedName = selectedVendor?.name ?? selected;
 
   const vendorHref = (id: string) =>
     metrics.vendors.some((v) => v.id === id) ? `/vendor-view/${id}` : null;
@@ -67,18 +86,31 @@ export function PulseView({
               onChange={(e) => setSelected(e.target.value)}
               className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
             >
-              {spotlightIds.map((id) => (
-                <option key={id} value={id}>
-                  {metrics.vendors.find((v) => v.id === id)?.name ?? id}
-                </option>
-              ))}
+              <optgroup label="Narrative versus reality read published">
+                {withRead.map((v) => (
+                  <option key={v.id} value={v.id}>
+                    {v.name}
+                  </option>
+                ))}
+              </optgroup>
+              <optgroup label="AG figures only">
+                {withoutRead.map((v) => (
+                  <option key={v.id} value={v.id}>
+                    {v.name}
+                  </option>
+                ))}
+              </optgroup>
             </select>
           </div>
-          <SpotlightCard
-            vendorId={selected}
-            vendorName={selectedName}
-            spotlight={spotlight}
-          />
+          {spotlight ? (
+            <SpotlightCard
+              vendorId={selected}
+              vendorName={selectedName}
+              spotlight={spotlight}
+            />
+          ) : selectedVendor ? (
+            <VendorSnapshotCard vendor={selectedVendor} />
+          ) : null}
         </div>
         {/* LIVE delivery channel card */}
         <div className="lg:col-span-1">
