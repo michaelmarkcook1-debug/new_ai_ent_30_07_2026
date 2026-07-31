@@ -124,10 +124,10 @@ export function buildSignals(
 ): PulseSignal[] {
   const signals: PulseSignal[] = [];
 
-  if (priceRatio !== null) {
+  if (priceRatio !== null && priceRatio >= 2) {
     signals.push({
-      what: `Frontier models cost about ${priceRatio} times as much per point of benchmarked capability as the rest of the field.`,
-      why: "Paying frontier rates for routine work is the largest avoidable line in most deployments, and the spread is wide enough to fund a tiering exercise on its own.",
+      what: `The top-scoring model costs ${priceRatio} times more than the cheapest model that reaches 80 per cent of its benchmark score.`,
+      why: "The last increment of capability is priced far above the rest of the curve. Most enterprise work does not need it, so paying for it everywhere is the largest avoidable line in a deployment.",
       supports: "Price efficiency, and the model allocation below it.",
       source: `Across ${modelCount} priced and benchmarked models`,
       href: "/price-performance",
@@ -186,10 +186,10 @@ export function buildActions(
       action: "Tier your model spend",
       detail:
         priceRatio !== null && priceRatio >= 2
-          ? `Frontier models cost roughly ${priceRatio}x per point of capability. Map workloads to tiers before renewal and reserve frontier for complex or regulated work.`
+          ? `The top model costs ${priceRatio}x the cheapest one reaching 80 per cent of its score. Map workloads to tiers before renewal and reserve the top tier for complex or regulated work.`
           : "Map workloads to model tiers before renewal, and check the price spread against your own token mix rather than list rates.",
       meta: {
-        confidence: priceRatio !== null && priceRatio >= 2 ? "Medium" : "Low",
+        confidence: priceRatio !== null && priceRatio >= 5 ? "Medium" : "Low",
         horizon: "90 days",
         lane: "derived",
         lastUpdated,

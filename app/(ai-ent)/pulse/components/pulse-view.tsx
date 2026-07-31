@@ -122,8 +122,8 @@ export function PulseView({
         judgement={fixture.editorial.body}
         changed={
           metrics.gaining.length + metrics.slipping.length > 0
-            ? `${metrics.gaining.length} tracked vendors are gaining position and ${metrics.slipping.length} are slipping, while frontier and mainstream model pricing continue to separate.`
-            : "Vendor positions are steady this period, while frontier and mainstream model pricing continue to separate."
+            ? `${metrics.gaining.length} tracked vendors are gaining position and ${metrics.slipping.length} are slipping, and the gap between the best model and a near-equivalent has widened into a real commercial choice.`
+            : "Vendor positions are steady this period, and the gap between the best model and a near-equivalent has widened into a real commercial choice."
         }
         matters="Capability is no longer the scarce input. Buying leverage now comes from matching model tier to task and from holding vendors to evidence rather than claims."
         todo="Tier your model spend before the next renewal, re-open any shortlist older than two quarters, and clear open governance risks before widening scope."

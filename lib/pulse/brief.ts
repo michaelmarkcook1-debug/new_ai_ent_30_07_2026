@@ -159,41 +159,54 @@ export function buildScorecard(
       : "Not available in the current payload.",
   });
 
-  // 3. Price efficiency. Cross-sectional, not a trend: what a point of
-  // benchmarked intelligence costs at the frontier against the rest of the
-  // field. A wide gap means the expensive tier is optional for most work,
-  // which is the actual buying conclusion.
+  // 3. Price efficiency: what the last stretch of capability costs.
+  //
+  // Deliberately not frontier against non-frontier. The frontier flag marks
+  // the Pareto-efficient set on the cost/capability curve, not the expensive
+  // tier, so that comparison is tautological: the efficient set is cheaper per
+  // point because that is what makes it the efficient set. Computing it that
+  // way produced a confident, meaningless reading.
+  //
+  // The question a buyer actually has is what the top model's last increment
+  // of capability costs against the cheapest model that gets most of the way.
+  // That is answerable from this capture and is the whole tiering argument.
   const priced = models.filter(
     (m) => m.inputPerM > 0 && typeof m.intelligence === "number"
   );
-  const frontier = priced.filter((m) => m.frontier);
-  const rest = priced.filter((m) => !m.frontier);
-  const costPerPoint = (list: CostCapabilityModel[]) =>
-    list.length
-      ? round1(
-          list.reduce((a, m) => a + m.inputPerM / m.intelligence, 0) / list.length
-        )
+  const best = priced.reduce<CostCapabilityModel | null>(
+    (a, m) => (a === null || m.intelligence > a.intelligence ? m : a),
+    null
+  );
+  const NEAR = 0.8;
+  const adequate = best
+    ? priced.filter((m) => m.intelligence >= best.intelligence * NEAR)
+    : [];
+  const cheapestAdequate = adequate.length
+    ? adequate.reduce((a, m) => (m.inputPerM < a.inputPerM ? m : a))
+    : null;
+  const ratio =
+    best && cheapestAdequate && cheapestAdequate.inputPerM > 0
+      ? round1(best.inputPerM / cheapestAdequate.inputPerM)
       : null;
-  const fCost = costPerPoint(frontier);
-  const rCost = costPerPoint(rest);
-  const ratio = fCost !== null && rCost !== null && rCost > 0 ? round1(fCost / rCost) : null;
   dims.push({
     key: "price",
     name: "Price efficiency",
     status:
-      ratio === null ? "Not published" : ratio >= 2 ? "Favourable" : ratio >= 1.2 ? "Mixed" : "Tight",
+      ratio === null ? "Not published" : ratio >= 5 ? "Favourable" : ratio >= 2 ? "Mixed" : "Tight",
     direction: "unpublished",
     meaning:
-      ratio === null
-        ? "Not enough priced models with benchmark scores to compare tiers."
-        : ratio >= 2
-          ? `Frontier models cost about ${ratio} times as much per point of benchmarked intelligence as the rest of the field, so paying frontier rates for routine work is expensive by a wide margin.`
-          : ratio >= 1.2
-            ? `Frontier models cost about ${ratio} times as much per point of benchmarked intelligence as the rest of the field, so the premium is real but not decisive.`
-            : "Frontier and mainstream models cost about the same per point of benchmarked intelligence, so tiering by cost alone saves little.",
+      ratio === null || !best || !cheapestAdequate
+        ? "Not enough priced models with benchmark scores to compare capability against cost."
+        : ratio >= 5
+          ? `${adequate.length} models reach 80 per cent of the best benchmark score, and the cheapest costs ${ratio} times less than the top model. Most work does not need the last 20 per cent of capability, and paying for it is the largest avoidable cost in a deployment.`
+          : ratio >= 2
+            ? `${adequate.length} models reach 80 per cent of the best benchmark score, and the cheapest costs ${ratio} times less than the top model. Worth tiering, though the saving is not dramatic.`
+            : `The cheapest model reaching 80 per cent of the best benchmark score costs about the same as the top model, so there is little to gain from tiering on price alone.`,
     confidence: priced.length >= 100 ? "High" : priced.length >= 30 ? "Medium" : "Low",
     lane: "derived",
-    basis: `${frontier.length} frontier and ${rest.length} non-frontier models with both a price and a benchmark score. Cross-sectional comparison of the current capture: only one capture exists, so this is not a trend.`,
+    basis: best && cheapestAdequate
+      ? `${priced.length} models with both a published price and a benchmark score. Top score ${best.intelligence} at $${best.inputPerM} per million input tokens; cheapest model within 80 per cent of it is $${cheapestAdequate.inputPerM}. Input price only, and a single capture, so this is a spread and not a trend.`
+      : `${priced.length} priced and benchmarked models: not enough to compare.`,
   });
 
   // 4. Governance and operational risk. A count of open high-severity risks,
@@ -225,36 +238,61 @@ export function buildScorecard(
       : "Not available in the current payload.",
   });
 
-  // 5. Competitive intensity. How concentrated the estimated share is: a
-  // market where the top few hold most of it gives a buyer less leverage.
-  const shares = [...metrics.shares]
-    .map((s) => s.estimatedShare)
-    .filter((n): n is number => typeof n === "number")
-    .sort((a, b) => b - a);
-  const top3 = shares.slice(0, 3).reduce((a, b) => a + b, 0);
-  const hasShare = shares.length >= 4;
+  // 5. Competitive intensity: how concentrated a typical category is.
+  //
+  // Concentration is computed inside each category and then summarised across
+  // them, never by pooling. Shares are per-category and each category sums to
+  // about 100, so taking the three largest across the whole set and adding
+  // them produced 118 per cent, which is both impossible and a breach of the
+  // rule this app applies everywhere else: compare within a market category,
+  // never across one.
+  const byCategory = new Map<string, number[]>();
+  for (const s of metrics.shares) {
+    if (typeof s.estimatedShare !== "number") continue;
+    const list = byCategory.get(s.categoryId) ?? [];
+    list.push(s.estimatedShare);
+    byCategory.set(s.categoryId, list);
+  }
+  const top3PerCategory = [...byCategory.values()]
+    .filter((list) => list.length >= 3)
+    .map((list) =>
+      [...list].sort((a, b) => b - a).slice(0, 3).reduce((a, b) => a + b, 0)
+    )
+    .sort((a, b) => a - b);
+  const medianTop3 = top3PerCategory.length
+    ? round1(top3PerCategory[Math.floor(top3PerCategory.length / 2)])
+    : null;
   dims.push({
     key: "intensity",
     name: "Competitive intensity",
-    status: !hasShare ? "Not published" : top3 >= 60 ? "Concentrated" : top3 >= 40 ? "Moderate" : "Fragmented",
-    direction: metrics.shareMovementPublished ? "flat" : "unpublished",
-    meaning: !hasShare
-      ? "Not enough share estimates to judge concentration."
-      : top3 >= 60
-        ? `The top three positions hold about ${round1(top3)} per cent of estimated share, so buyers face few real alternatives and less pricing leverage.`
-        : top3 >= 40
-          ? `The top three positions hold about ${round1(top3)} per cent of estimated share, leaving credible alternatives in most categories.`
-          : `Estimated share is spread widely, with the top three holding about ${round1(top3)} per cent, so there is room to negotiate against genuine alternatives.`,
-    confidence: hasShare ? "Medium" : "Low",
+    status:
+      medianTop3 === null
+        ? "Not published"
+        : medianTop3 >= 75
+          ? "Concentrated"
+          : medianTop3 >= 50
+            ? "Moderate"
+            : "Fragmented",
+    direction: "unpublished",
+    meaning:
+      medianTop3 === null
+        ? "Too few categories carry three or more share estimates to judge concentration."
+        : medianTop3 >= 75
+          ? `In a typical category the top three vendors hold about ${medianTop3} per cent of estimated share, so there are few real alternatives and correspondingly little pricing leverage.`
+          : medianTop3 >= 50
+            ? `In a typical category the top three vendors hold about ${medianTop3} per cent of estimated share, leaving credible alternatives to negotiate against.`
+            : `In a typical category the top three vendors hold about ${medianTop3} per cent of estimated share, so the field is open and there is real room to negotiate.`,
+    confidence: top3PerCategory.length >= 4 ? "Medium" : "Low",
     lane,
-    basis: metrics.shareMovementPublished
-      ? `Sum of the three largest estimated category shares, across ${shares.length} estimates.`
-      : `Sum of the three largest estimated category shares, across ${shares.length} estimates. The source publishes no movement for these, so no direction is shown.`,
+    basis:
+      medianTop3 === null
+        ? "Not enough categories with three or more share estimates."
+        : `Median across ${top3PerCategory.length} market categories of the combined share held by that category's three largest vendors. Computed inside each category and never pooled, since shares are per-category and do not sum across them. The source publishes no movement for these, so no direction is shown.`,
   });
 
   // Overall recommendation, assembled from the dimensions rather than asserted
   // over the top of them. It only claims what the readings support.
-  const priceFavourable = ratio !== null && ratio >= 2;
+  const priceFavourable = ratio !== null && ratio >= 5;
   const readinessOk = mScore !== null && mScore >= 55;
   const riskElevated = highRisks !== null && highRisks > 3;
 
@@ -264,10 +302,10 @@ export function buildScorecard(
       "Hold scope tight. Capability across the tracked set is early and high-severity risks are open, so run contained pilots with named owners rather than committing to a platform.";
   } else if (readinessOk && priceFavourable) {
     overall =
-      "Accelerate controlled adoption while applying commercial pressure. Capability is sufficient to deploy against real work, and the price spread between tiers is wide enough that matching model tier to task is the largest available saving.";
+      "Accelerate controlled adoption while applying commercial pressure. Capability is sufficient to deploy against real work, and the cost of the last increment of capability is high enough that matching model tier to task is the largest available saving.";
   } else if (readinessOk) {
     overall =
-      "Proceed selectively. Capability supports production use, but the price gap between tiers is not wide enough to fund tiering on cost alone, so choose on fit and governance.";
+      "Proceed selectively. Capability supports production use, but the price gap between the best model and a near-equivalent is not wide enough to fund tiering on cost alone, so choose on fit and governance.";
   } else {
     overall =
       "Test before committing. The tracked set is not yet uniformly production-ready, so favour short commitments and re-evaluate as evidence accumulates.";
