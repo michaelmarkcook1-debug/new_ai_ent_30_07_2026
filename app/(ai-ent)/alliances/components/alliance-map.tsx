@@ -229,7 +229,7 @@ export function AllianceMap({
           Model and API provider
         </span>
         <span className="flex items-center gap-1.5 text-[11px]">
-          <span className="inline-block h-2.5 w-2.5 rounded-full bg-[var(--ag-aie)]" />
+          <span className="inline-block h-2.5 w-2.5 rounded-full bg-[var(--ag-channel)]" />
           Partner or integrator
         </span>
       </div>
@@ -296,7 +296,7 @@ export function AllianceMap({
                     fill={
                       n.side === "vendor"
                         ? "var(--ag-primary)"
-                        : "var(--ag-aie)"
+                        : "var(--ag-channel)"
                     }
                     stroke="var(--ag-base-100)"
                     strokeWidth="1.5"

@@ -101,7 +101,7 @@ export function IntegratorLayer() {
 
       <div className="mt-3 grid grid-cols-1 gap-4 xl:grid-cols-5">
         {/* Provider readiness table */}
-        <div className="rounded-lg border border-base-300 bg-base-100 p-4 xl:col-span-2">
+        <div className="delivery-channel-card rounded-lg bg-base-100 p-4 xl:col-span-2">
           <div className="flex items-start justify-between gap-2">
             <MicroLabel
               label="Integrator readiness"
@@ -197,7 +197,7 @@ export function IntegratorLayer() {
         </div>
 
         {/* Integrator by AI-platform matrix */}
-        <div className="rounded-lg border border-base-300 bg-base-100 p-4 xl:col-span-3">
+        <div className="delivery-channel-card rounded-lg bg-base-100 p-4 xl:col-span-3">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <div className="flex flex-wrap items-center gap-2">
               <MicroLabel

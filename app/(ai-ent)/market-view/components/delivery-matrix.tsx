@@ -96,7 +96,7 @@ export function DeliveryMatrix() {
           />
         ) : data ? (
           <div className="space-y-3">
-            <div className="rounded-lg border border-base-300 bg-base-100 p-4">
+            <div className="delivery-channel-card rounded-lg bg-base-100 p-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <h3 className="text-[15px] font-bold">
                   {data.displayName || data.providerName}

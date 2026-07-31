@@ -27,6 +27,13 @@
      third hue to stay readable at a glance. */
   --ag-aie: #2b50c8;
   --ag-aie-bg: #e6ecfd;
+  /* Delivery-channel marker. Systems integrators and IT services deliver AI
+     but do not build it, and conflating the two has already caused one wrong
+     read on this product. Purple is reserved for that distinction: it is not
+     the brand accent (green), not the data lane (blue) and not a semantic
+     band, so a purple edge means one thing only. */
+  --ag-channel: #7e22ce;
+  --ag-channel-bg: #f6ecfe;
 }
 
 [data-theme="dark"] {
@@ -46,6 +53,8 @@
   --ag-red-bg: rgba(255, 68, 68, 0.18);
   --ag-aie: #9db4ff;
   --ag-aie-bg: rgba(43, 80, 200, 0.22);
+  --ag-channel: #c084fc;
+  --ag-channel-bg: rgba(126, 34, 206, 0.22);
 }
 
 @theme inline {
@@ -65,6 +74,8 @@
   --color-bad-bg: var(--ag-red-bg);
   --color-aie: var(--ag-aie);
   --color-aie-bg: var(--ag-aie-bg);
+  --color-channel: var(--ag-channel);
+  --color-channel-bg: var(--ag-channel-bg);
   --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
@@ -96,4 +107,12 @@ h1, h2, h3, h4 {
 ::selection {
   background: var(--ag-primary);
   color: #fff;
+}
+
+/* Delivery channel: integrators and IT service providers. Any card whose
+   subject is the services channel rather than AI vendors carries this edge,
+   so the distinction is visible before the copy is read. */
+.delivery-channel-card {
+  border-width: 3px;
+  border-color: var(--ag-channel);
 }

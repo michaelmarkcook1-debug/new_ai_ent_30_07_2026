@@ -117,8 +117,14 @@ export function CompetitiveHeatmap() {
     </select>
   );
 
+  const isChannel = SERVICES_TICKERS.has(anchor);
+
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section
+      className={`rounded-lg bg-base-100 p-4 ${
+        isChannel ? "delivery-channel-card" : "border border-base-300"
+      }`}
+    >
       <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel
           label="Competitive dynamics heatmap"
@@ -135,7 +141,7 @@ export function CompetitiveHeatmap() {
         company on that dimension. The peer group is the one the API returns
         for the selected anchor, not a set chosen here.
       </p>
-      {SERVICES_TICKERS.has(anchor) ? (
+      {isChannel ? (
         <p className="mt-2 rounded border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[11.5px] text-warn">
           This peer group is the delivery channel: systems integrators that
           implement AI for enterprises, not AI vendors competing on model or

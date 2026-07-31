@@ -48,7 +48,7 @@ export function DeliveryChannelWatch() {
   }, []);
 
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="delivery-channel-card rounded-lg bg-base-100 p-4">
       <div className="flex items-start justify-between gap-2">
         <MicroLabel
           label="Delivery channel watch"
