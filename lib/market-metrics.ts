@@ -270,14 +270,6 @@ export async function loadMarketMetrics(): Promise<MarketMetrics> {
   );
   const shareMovementPublished = movedShares.length > 0;
 
-  // Evidence coverage: how much of the capability set is verified rather than
-  // inferred. This is a data-integrity readout, and it is real.
-  const allCapRows = capsRes.data?.vendorCapabilities ?? [];
-  const verifiedRows = allCapRows.filter((r) => r.status === "verified").length;
-  const evidenceCoverage = allCapRows.length
-    ? (verifiedRows / allCapRows.length) * 100
-    : null;
-
   const risks = signal(dashRes.data?.riskAlerts, "alert");
   const highRisks = risks.filter((r) => r.severity === "high").length;
 
@@ -324,17 +316,6 @@ export async function loadMarketMetrics(): Promise<MarketMetrics> {
         "How the typical vendor is rated by its customers, its developers and its own employees, out of 100. AG aggregates these from external review, developer and workplace sources; the underlying ratings are theirs, not AG's. Covers fewer vendors than the full tracked set.",
       sourceField: "reputation.rows[].{customer,developer,employee}.overall",
       sampleSize: reputations.length,
-    },
-    {
-      label: "EVIDENCE VERIFIED",
-      tooltip:
-        "How much of the evidence behind AG's scores was checked against a primary source, rather than inferred or taken from vendor documentation. This grades AG's own data, not any vendor.",
-      score: round1(evidenceCoverage),
-      delta: null,
-      definition:
-        "How much of the evidence behind AG's scores has been checked against a primary source, as a percentage. This measures the quality of AG's own data, not the performance of any vendor.",
-      sourceField: "capabilities.vendorCapabilities[].status = verified",
-      sampleSize: allCapRows.length,
     },
     {
       label: "HIGH-SEVERITY RISK ALERTS",
