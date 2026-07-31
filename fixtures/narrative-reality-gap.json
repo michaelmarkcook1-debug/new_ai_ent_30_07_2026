@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-07-31T15:09:32.855Z",
+ "generatedAt": "2026-07-31T21:07:06.433Z",
  "windowDays": 365,
  "vendorCount": 43,
  "measuredCount": 26,
@@ -175,8 +175,8 @@
    "domain": "anthropic.com",
    "hn": {
     "stories": 449,
-    "points": 56588,
-    "comments": 38162,
+    "points": 56606,
+    "comments": 38177,
     "sampled": 100
    },
    "aieNews": {
@@ -233,10 +233,10 @@
    "realityWeight": 6.4,
    "domain": "mistral.ai",
    "hn": {
-    "stories": 51,
-    "points": 8807,
-    "comments": 2842,
-    "sampled": 51
+    "stories": 50,
+    "points": 8788,
+    "comments": 2830,
+    "sampled": 50
    },
    "aieNews": {
     "items": 3,
@@ -295,7 +295,7 @@
    "hn": {
     "stories": 16,
     "points": 915,
-    "comments": 450,
+    "comments": 451,
     "sampled": 16
    },
    "aieNews": {
@@ -469,7 +469,7 @@
    "realityWeight": 7.2,
    "domain": "microsoft.com",
    "hn": {
-    "stories": 1570,
+    "stories": 1617,
     "points": 12087,
     "comments": 5564,
     "sampled": 100
@@ -499,9 +499,9 @@
    "realityWeight": 8.7,
    "domain": "openai.com",
    "hn": {
-    "stories": 970,
-    "points": 48885,
-    "comments": 33450,
+    "stories": 987,
+    "points": 48892,
+    "comments": 33452,
     "sampled": 100
    },
    "aieNews": {
@@ -530,8 +530,8 @@
    "domain": "deepseek.com",
    "hn": {
     "stories": 20,
-    "points": 4698,
-    "comments": 2988,
+    "points": 4871,
+    "comments": 3054,
     "sampled": 20
    },
    "aieNews": {
@@ -1011,10 +1011,10 @@
    "realityWeight": 7,
    "domain": "lambdalabs.com",
    "hn": {
-    "stories": 3,
-    "points": 7,
+    "stories": 0,
+    "points": 0,
     "comments": 0,
-    "sampled": 3
+    "sampled": 0
    },
    "aieNews": {
     "items": 0,
