@@ -1,0 +1,264 @@
+{
+ "provenance": "Reported business-segment revenue parsed from each filer's own SEC XBRL filing instance. Audited figures as filed. NOT AI revenue: no filer in this set discloses an AI revenue line.",
+ "source": "SEC EDGAR",
+ "capturedAt": "2026-07-31",
+ "companies": [
+  {
+   "ticker": "AMZN",
+   "name": "Amazon",
+   "vendorId": "aws",
+   "category": "Cloud AI platform",
+   "entity": "AMAZON COM INC",
+   "form": "10-K",
+   "accession": "000101872426000004",
+   "filingDate": "2026-02-06",
+   "periodStart": "2025-01-01",
+   "periodEnd": "2025-12-31",
+   "concept": "RevenueFromContractWithCustomerExcludingAssessedTax",
+   "filingUrl": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231_htm.xml",
+   "segments": [
+    {
+     "segment": "North America",
+     "member": "amzn:NorthAmericaSegmentMember",
+     "revenueUsd": 426305000000,
+     "sharePct": 59.5
+    },
+    {
+     "segment": "International",
+     "member": "amzn:InternationalSegmentMember",
+     "revenueUsd": 161894000000,
+     "sharePct": 22.6
+    },
+    {
+     "segment": "Amazon Web Services",
+     "member": "amzn:AmazonWebServicesSegmentMember",
+     "revenueUsd": 128725000000,
+     "sharePct": 18
+    }
+   ],
+   "segmentTotalUsd": 716924000000
+  },
+  {
+   "ticker": "MSFT",
+   "name": "Microsoft",
+   "vendorId": "microsoft",
+   "category": "Cloud AI platform",
+   "entity": "MICROSOFT CORP",
+   "form": "10-K",
+   "accession": "000119312526323660",
+   "filingDate": "2026-07-29",
+   "periodStart": "2025-07-01",
+   "periodEnd": "2026-06-30",
+   "concept": "RevenueFromContractWithCustomerExcludingAssessedTax",
+   "filingUrl": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630_htm.xml",
+   "segments": [
+    {
+     "segment": "Productivity And Business Processes",
+     "member": "msft:ProductivityAndBusinessProcessesMember",
+     "revenueUsd": 139996000000,
+     "sharePct": 42.2
+    },
+    {
+     "segment": "Intelligent Cloud",
+     "member": "msft:IntelligentCloudMember",
+     "revenueUsd": 137791000000,
+     "sharePct": 41.5
+    },
+    {
+     "segment": "More Personal Computing",
+     "member": "msft:MorePersonalComputingMember",
+     "revenueUsd": 54052000000,
+     "sharePct": 16.3
+    }
+   ],
+   "segmentTotalUsd": 331839000000
+  },
+  {
+   "ticker": "GOOGL",
+   "name": "Alphabet",
+   "vendorId": "google",
+   "category": "Cloud AI platform",
+   "entity": "Alphabet Inc.",
+   "form": "10-K",
+   "accession": "000165204426000018",
+   "filingDate": "2026-02-05",
+   "periodStart": "2025-01-01",
+   "periodEnd": "2025-12-31",
+   "concept": "RevenueFromContractWithCustomerExcludingAssessedTax",
+   "filingUrl": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231_htm.xml",
+   "segments": [
+    {
+     "segment": "Google Services",
+     "member": "goog:GoogleServicesMember",
+     "revenueUsd": 342721000000,
+     "sharePct": 85.1
+    },
+    {
+     "segment": "Google Cloud",
+     "member": "goog:GoogleCloudMember",
+     "revenueUsd": 58705000000,
+     "sharePct": 14.6
+    },
+    {
+     "segment": "All Other Segments",
+     "member": "us-gaap:AllOtherSegmentsMember",
+     "revenueUsd": 1537000000,
+     "sharePct": 0.4
+    }
+   ],
+   "segmentTotalUsd": 402963000000
+  },
+  {
+   "ticker": "ORCL",
+   "name": "Oracle",
+   "vendorId": "oracle",
+   "category": "Cloud AI platform",
+   "entity": "ORACLE CORP",
+   "form": "10-K",
+   "accession": "000119312526277521",
+   "filingDate": "2026-06-22",
+   "periodStart": "2025-06-01",
+   "periodEnd": "2026-05-31",
+   "concept": "RevenueFromContractWithCustomerExcludingAssessedTax",
+   "filingUrl": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526277521/orcl-20260531_htm.xml",
+   "segments": [
+    {
+     "segment": "Cloud And Software Business",
+     "member": "orcl:CloudAndSoftwareBusinessMember",
+     "revenueUsd": 58530000000,
+     "sharePct": 86.9
+    },
+    {
+     "segment": "Services Business",
+     "member": "orcl:ServicesBusinessMember",
+     "revenueUsd": 5743000000,
+     "sharePct": 8.5
+    },
+    {
+     "segment": "Hardware Business",
+     "member": "orcl:HardwareBusinessMember",
+     "revenueUsd": 3084000000,
+     "sharePct": 4.6
+    }
+   ],
+   "segmentTotalUsd": 67357000000
+  },
+  {
+   "ticker": "IBM",
+   "name": "IBM",
+   "vendorId": "ibm",
+   "category": "Regulated-industry AI",
+   "entity": "INTERNATIONAL BUSINESS MACHINES CORP",
+   "form": "10-K",
+   "accession": "000005114326000010",
+   "filingDate": "2026-02-24",
+   "periodStart": "2025-01-01",
+   "periodEnd": "2025-12-31",
+   "concept": "Revenues",
+   "filingUrl": "https://www.sec.gov/Archives/edgar/data/51143/000005114326000010/ibm-20251231_htm.xml",
+   "segments": [
+    {
+     "segment": "Software",
+     "member": "ibm:SoftwareMember",
+     "revenueUsd": 29962000000,
+     "sharePct": 44.4
+    },
+    {
+     "segment": "Consulting",
+     "member": "ibm:ConsultingMember",
+     "revenueUsd": 21055000000,
+     "sharePct": 31.2
+    },
+    {
+     "segment": "Infrastructure",
+     "member": "ibm:InfrastructureMember",
+     "revenueUsd": 15718000000,
+     "sharePct": 23.3
+    },
+    {
+     "segment": "Financing",
+     "member": "ibm:FinancingMember",
+     "revenueUsd": 737000000,
+     "sharePct": 1.1
+    }
+   ],
+   "segmentTotalUsd": 67472000000
+  },
+  {
+   "ticker": "NVDA",
+   "name": "NVIDIA",
+   "vendorId": "nvidia",
+   "category": "AI infrastructure",
+   "entity": "NVIDIA CORP",
+   "form": "10-K",
+   "accession": "000104581026000021",
+   "filingDate": "2026-02-25",
+   "periodStart": "2025-01-27",
+   "periodEnd": "2026-01-25",
+   "concept": "Revenues",
+   "filingUrl": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125_htm.xml",
+   "segments": [
+    {
+     "segment": "Compute And Networking",
+     "member": "nvda:ComputeAndNetworkingSegmentMember",
+     "revenueUsd": 193479000000,
+     "sharePct": 89.6
+    },
+    {
+     "segment": "Graphics",
+     "member": "nvda:GraphicsSegmentMember",
+     "revenueUsd": 22459000000,
+     "sharePct": 10.4
+    }
+   ],
+   "segmentTotalUsd": 215938000000
+  },
+  {
+   "ticker": "CRM",
+   "name": "Salesforce",
+   "vendorId": "salesforce",
+   "category": "CRM/customer AI",
+   "form": "10-K",
+   "singleSegment": true,
+   "error": "reports as a single segment: no segment breakout is disclosed"
+  },
+  {
+   "ticker": "NOW",
+   "name": "ServiceNow",
+   "vendorId": "servicenow",
+   "category": "ITSM/HR/service AI",
+   "form": "10-K",
+   "singleSegment": false,
+   "error": "segment axis present but no usable single-segment contexts"
+  },
+  {
+   "ticker": "META",
+   "name": "Meta Platforms",
+   "vendorId": "meta",
+   "category": "Frontier model/API",
+   "entity": "Meta Platforms, Inc.",
+   "form": "10-K",
+   "accession": "000162828026003942",
+   "filingDate": "2026-01-29",
+   "periodStart": "2025-01-01",
+   "periodEnd": "2025-12-31",
+   "concept": "RevenueFromContractWithCustomerExcludingAssessedTax",
+   "filingUrl": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/meta-20251231_htm.xml",
+   "segments": [
+    {
+     "segment": "Family Of Apps",
+     "member": "meta:FamilyOfAppsMember",
+     "revenueUsd": 198759000000,
+     "sharePct": 98.9
+    },
+    {
+     "segment": "Reality Labs",
+     "member": "meta:RealityLabsMember",
+     "revenueUsd": 2207000000,
+     "sharePct": 1.1
+    }
+   ],
+   "segmentTotalUsd": 200966000000
+  }
+ ]
+}
