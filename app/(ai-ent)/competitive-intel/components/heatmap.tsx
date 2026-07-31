@@ -29,22 +29,42 @@ function cellClass(value: number): string {
   return CELL_CLASS[v];
 }
 
-// Anchors the API resolves with a real peer set. Companies whose peer group
-// comes back as themselves alone are still selectable, and the panel says so
-// rather than presenting a one-row grid as a comparison.
-const ANCHORS: { ticker: string; label: string }[] = [
-  { ticker: "ACN", label: "Accenture" },
-  { ticker: "IBM", label: "IBM" },
-  { ticker: "GOOGL", label: "Alphabet" },
-  { ticker: "MSFT", label: "Microsoft" },
-  { ticker: "AMZN", label: "Amazon" },
-  { ticker: "CRM", label: "Salesforce" },
-  { ticker: "NOW", label: "ServiceNow" },
-  { ticker: "ORCL", label: "Oracle" },
+// The endpoint resolves exactly two real peer groups, and they are different
+// markets. Grouping them in the selector keeps that explicit: an AI platform
+// heatmap and an IT-services heatmap answer different questions, and reading
+// one as the other is the mistake this grouping exists to prevent.
+//
+// Anchors that return only themselves are omitted. A one-row grid is not a
+// comparison, and offering it invites the reader to treat a single company as
+// a competitive set.
+const ANCHOR_GROUPS: {
+  group: string;
+  note: string;
+  anchors: { ticker: string; label: string }[];
+}[] = [
+  {
+    group: "AI platforms",
+    note: "Hyperscale platform vendors competing on AI capability.",
+    anchors: [
+      { ticker: "GOOGL", label: "Alphabet" },
+      { ticker: "AMZN", label: "Amazon" },
+      { ticker: "BABA", label: "Alibaba" },
+    ],
+  },
+  {
+    group: "Delivery channel (IT services)",
+    note: "Systems integrators that deliver AI, not AI vendors themselves.",
+    anchors: [
+      { ticker: "ACN", label: "Accenture" },
+      { ticker: "IBM", label: "IBM" },
+    ],
+  },
 ];
 
+const SERVICES_TICKERS = new Set(["ACN", "IBM"]);
+
 export function CompetitiveHeatmap() {
-  const [anchor, setAnchor] = useState("ACN");
+  const [anchor, setAnchor] = useState("GOOGL");
   const [data, setData] = useState<CompetitiveIntelFixture | null>(null);
   const [source, setSource] = useState<BrSource>("live");
   const [selected, setSelected] = useState("");
@@ -85,10 +105,14 @@ export function CompetitiveHeatmap() {
       onChange={(e) => setAnchor(e.target.value)}
       className="rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
     >
-      {ANCHORS.map((a) => (
-        <option key={a.ticker} value={a.ticker}>
-          {a.label}
-        </option>
+      {ANCHOR_GROUPS.map((g) => (
+        <optgroup key={g.group} label={g.group}>
+          {g.anchors.map((a) => (
+            <option key={a.ticker} value={a.ticker}>
+              {a.label}
+            </option>
+          ))}
+        </optgroup>
       ))}
     </select>
   );
@@ -111,6 +135,15 @@ export function CompetitiveHeatmap() {
         company on that dimension. The peer group is the one the API returns
         for the selected anchor, not a set chosen here.
       </p>
+      {SERVICES_TICKERS.has(anchor) ? (
+        <p className="mt-2 rounded border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[11.5px] text-warn">
+          This peer group is the delivery channel: systems integrators that
+          implement AI for enterprises, not AI vendors competing on model or
+          platform capability. Read it as &quot;who delivers AI well&quot;, not
+          &quot;who builds the best AI&quot;. For the AI vendor market, switch
+          the anchor to an AI platform or use the rankings beside this panel.
+        </p>
+      ) : null}
 
       {state === "loading" ? (
         <p className="mt-4 text-[12px] text-muted">Loading peer group…</p>
