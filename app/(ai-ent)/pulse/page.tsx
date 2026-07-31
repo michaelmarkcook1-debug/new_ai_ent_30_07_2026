@@ -1,19 +1,22 @@
 import { PageHeader } from "@/lib/ui/page";
-import { loadPulseFixture } from "./data";
+import { loadPulseFixture, loadPulseMetrics } from "./data";
 import { PulseView } from "./components/pulse-view";
 
 export const metadata = { title: "The Pulse | AI Enterprise" };
 
 export default async function PulsePage() {
-  const fixture = await loadPulseFixture();
+  const [fixture, metrics] = await Promise.all([
+    loadPulseFixture(),
+    loadPulseMetrics(),
+  ]);
   return (
     <>
       <PageHeader
         title="The Pulse"
         subtitle="The daily read on the enterprise AI market: model moves, adoption signals, regulation and spend, with the delivery channel watched live."
-        lanes={["sample", "live", "aie-live"]}
+        lanes={[metrics.lane, "live", "sample"]}
       />
-      <PulseView fixture={fixture} />
+      <PulseView fixture={fixture} metrics={metrics} />
     </>
   );
 }
