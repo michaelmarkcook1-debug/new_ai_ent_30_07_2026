@@ -31,6 +31,8 @@ interface Snapshot {
   sourceAsOf: string | null;
   vendorCount: number;
   vendors: SnapVendor[];
+  /** True for illustrative quarters seeded to demonstrate the chart. */
+  synthetic?: boolean;
 }
 
 const PILLARS: { key: PillarKey; label: string; help: string }[] = [
@@ -67,8 +69,11 @@ export function ReputationHistoryChart({
     source: string;
     provenance: string;
     snapshots: Snapshot[];
+    demoQuarters?: number;
   };
   const snaps = data.snapshots ?? [];
+  const demoCount = snaps.filter((s) => s.synthetic).length;
+  const firstRealIndex = snaps.findIndex((s) => !s.synthetic);
   const latest = snaps[snaps.length - 1];
 
   const [pillar, setPillar] = useState<PillarKey>("overall");
@@ -125,9 +130,10 @@ export function ReputationHistoryChart({
               label="Reputation trend"
               tooltip="The real reputation pillar scores, captured on a schedule so a trend accumulates. Nothing is back-projected."
             />
-            <LaneBadge lane="aie-live" />
+            <LaneBadge lane={demoCount > 0 ? "sample" : "aie-live"} />
             <span className="font-mono text-[10px] text-muted">
-              {snaps.length} snapshot{snaps.length === 1 ? "" : "s"}
+              {snaps.length - demoCount} captured
+              {demoCount > 0 ? `, ${demoCount} illustrative` : ""}
             </span>
           </div>
           <p className="mt-1 max-w-3xl text-[11.5px] text-muted">
@@ -175,6 +181,16 @@ export function ReputationHistoryChart({
           </button>
         ))}
       </div>
+
+      {demoCount > 0 ? (
+        <p className="mt-2 rounded border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[11.5px] text-warn">
+          The first {demoCount} quarters are <strong>illustrative sample data,
+          invented to demonstrate the trend</strong>. They are drawn dashed and
+          are not captured readings. Only{" "}
+          {snaps.filter((s) => !s.synthetic).map((s) => s.capturedAt).join(", ")}{" "}
+          {snaps.length - demoCount === 1 ? "is a real capture" : "are real captures"}.
+        </p>
+      ) : null}
 
       {!enoughHistory ? (
         // One point is not a trend. Show the current standing instead and be
@@ -266,6 +282,7 @@ export function ReputationHistoryChart({
                     fontWeight={hover === i ? 700 : 400}
                   >
                     {s.capturedAt.slice(5)}
+                    {s.synthetic ? "*" : ""}
                   </text>
                   <rect
                     x={x(i) - PW / Math.max(1, snaps.length - 1) / 2}
@@ -297,7 +314,28 @@ export function ReputationHistoryChart({
                       strokeWidth={1.9}
                       strokeLinejoin="round"
                       strokeLinecap="round"
+                      strokeDasharray={demoCount > 0 ? "5 3" : undefined}
+                      opacity={demoCount > 0 ? 0.7 : 1}
                     />
+                    {/* The captured stretch is redrawn solid on top, so a real
+                        reading is never mistaken for a seeded one. */}
+                    {firstRealIndex > 0 ? (
+                      <polyline
+                        points={snaps
+                          .map((sn, i) => {
+                            if (i < firstRealIndex - 1) return null;
+                            const val = valueFor(sn, id);
+                            return val === null ? null : `${x(i)},${y(val)}`;
+                          })
+                          .filter(Boolean)
+                          .join(" ")}
+                        fill="none"
+                        stroke={colour}
+                        strokeWidth={2.4}
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                      />
+                    ) : null}
                     {snaps.map((s, i) => {
                       const v = valueFor(s, id);
                       return v !== null && hover === i ? (
@@ -369,6 +407,19 @@ export function ReputationHistoryChart({
             be, so below two captures the chart shows the current standing and
             says so rather than drawing a line through one point.
           </p>
+          {demoCount > 0 ? (
+            <p>
+              <strong>
+                The first {demoCount} quarters on this chart are invented.
+              </strong>{" "}
+              They were seeded so the trend could be demonstrated before real
+              captures accumulate, they are drawn dashed and marked with an
+              asterisk on the axis, and they carry the SAMPLE badge. Remove them
+              with <code>node scripts/seed-demo-reputation-history.mjs
+              --clear</code>. Every other figure in this product is a real
+              reading, which is exactly why these are labelled this heavily.
+            </p>
+          ) : null}
           <p className="text-muted">
             Overall is the mean of the three pillars, taken per vendor over the
             pillars it carries. Source: {data.source}.

@@ -4,6 +4,642 @@
  "source": "ranking-engine-red.vercel.app/api/reputation",
  "snapshots": [
   {
+   "capturedAt": "2025-10-31",
+   "synthetic": true,
+   "sourceAsOf": null,
+   "provenance": "ILLUSTRATIVE SAMPLE. Invented for demonstration; not a captured reading.",
+   "vendorCount": 29,
+   "vendors": [
+    {
+     "vendorId": "openai",
+     "customer": 80.1,
+     "developer": 85.1,
+     "employee": 67.1,
+     "overall": 77.4
+    },
+    {
+     "vendorId": "anthropic",
+     "customer": 86.7,
+     "developer": 71.7,
+     "employee": 77.7,
+     "overall": 78.7
+    },
+    {
+     "vendorId": "google",
+     "customer": 79.7,
+     "developer": 76.7,
+     "employee": 70.7,
+     "overall": 75.7
+    },
+    {
+     "vendorId": "microsoft",
+     "customer": 83.3,
+     "developer": 84.3,
+     "employee": 73.3,
+     "overall": 80.3
+    },
+    {
+     "vendorId": "aws",
+     "customer": 82.5,
+     "developer": 72.5,
+     "employee": 69.5,
+     "overall": 74.8
+    },
+    {
+     "vendorId": "meta",
+     "customer": 76.3,
+     "developer": 75.3,
+     "employee": 68.3,
+     "overall": 73.3
+    },
+    {
+     "vendorId": "mistral",
+     "customer": 79.3,
+     "developer": 76.3,
+     "employee": 75.3,
+     "overall": 77
+    },
+    {
+     "vendorId": "cohere",
+     "customer": 82.6,
+     "developer": 73.6,
+     "employee": 70.6,
+     "overall": 75.6
+    },
+    {
+     "vendorId": "deepseek",
+     "customer": 78.6,
+     "developer": 74.6,
+     "employee": 63.6,
+     "overall": 72.3
+    },
+    {
+     "vendorId": "xai",
+     "customer": 70.7,
+     "developer": 60.7,
+     "employee": 64.7,
+     "overall": 65.4
+    },
+    {
+     "vendorId": "databricks",
+     "customer": 80.9,
+     "developer": 71.9,
+     "employee": 74.9,
+     "overall": 75.9
+    },
+    {
+     "vendorId": "snowflake",
+     "customer": 79.3,
+     "developer": 56.3,
+     "employee": 70.3,
+     "overall": 68.6
+    },
+    {
+     "vendorId": "salesforce",
+     "customer": 78.1,
+     "developer": 66.1,
+     "employee": 70.1,
+     "overall": 71.4
+    },
+    {
+     "vendorId": "servicenow",
+     "customer": 78.1,
+     "developer": 59.1,
+     "employee": 73.1,
+     "overall": 70.1
+    },
+    {
+     "vendorId": "oracle",
+     "customer": 71.6,
+     "developer": 61.6,
+     "employee": 63.6,
+     "overall": 65.6
+    },
+    {
+     "vendorId": "sap",
+     "customer": 73.3,
+     "developer": 55.3,
+     "employee": 68.3,
+     "overall": 65.6
+    },
+    {
+     "vendorId": "ibm",
+     "customer": 76.3,
+     "developer": 57.3,
+     "employee": 63.3,
+     "overall": 65.6
+    },
+    {
+     "vendorId": "glean",
+     "customer": 84.3,
+     "developer": 64.3,
+     "employee": 82.3,
+     "overall": 77
+    },
+    {
+     "vendorId": "harvey",
+     "customer": 81.7,
+     "developer": 62.7,
+     "employee": 75.7,
+     "overall": 73.4
+    },
+    {
+     "vendorId": "writer",
+     "customer": 80.1,
+     "developer": 66.1,
+     "employee": 74.1,
+     "overall": 73.4
+    },
+    {
+     "vendorId": "hebbia",
+     "customer": 81.8,
+     "developer": 69.8,
+     "employee": 75.8,
+     "overall": 75.8
+    },
+    {
+     "vendorId": "rogo",
+     "customer": 78.1,
+     "developer": 67.1,
+     "employee": 77.1,
+     "overall": 74.1
+    },
+    {
+     "vendorId": "moveworks",
+     "customer": 81.7,
+     "developer": 58.7,
+     "employee": 74.7,
+     "overall": 71.7
+    },
+    {
+     "vendorId": "alibaba",
+     "customer": 77,
+     "developer": 70,
+     "employee": 66,
+     "overall": 71
+    },
+    {
+     "vendorId": "moonshot",
+     "customer": 77.9,
+     "developer": 68.9,
+     "employee": 70.9,
+     "overall": 72.6
+    },
+    {
+     "vendorId": "zai",
+     "customer": 73.3,
+     "developer": 63.3,
+     "employee": 70.3,
+     "overall": 69
+    },
+    {
+     "vendorId": "minimax",
+     "customer": 76.7,
+     "developer": 66.7,
+     "employee": 66.7,
+     "overall": 70
+    },
+    {
+     "vendorId": "ai21",
+     "customer": 79.8,
+     "developer": 69.8,
+     "employee": 78.8,
+     "overall": 76.1
+    },
+    {
+     "vendorId": "aleph",
+     "customer": 70.4,
+     "developer": 58.4,
+     "employee": 72.4,
+     "overall": 67.1
+    }
+   ]
+  },
+  {
+   "capturedAt": "2026-01-31",
+   "synthetic": true,
+   "sourceAsOf": null,
+   "provenance": "ILLUSTRATIVE SAMPLE. Invented for demonstration; not a captured reading.",
+   "vendorCount": 29,
+   "vendors": [
+    {
+     "vendorId": "openai",
+     "customer": 80.1,
+     "developer": 85.1,
+     "employee": 67.1,
+     "overall": 77.4
+    },
+    {
+     "vendorId": "anthropic",
+     "customer": 87,
+     "developer": 72,
+     "employee": 78,
+     "overall": 79
+    },
+    {
+     "vendorId": "google",
+     "customer": 82,
+     "developer": 79,
+     "employee": 73,
+     "overall": 78
+    },
+    {
+     "vendorId": "microsoft",
+     "customer": 82,
+     "developer": 83,
+     "employee": 72,
+     "overall": 79
+    },
+    {
+     "vendorId": "aws",
+     "customer": 80.5,
+     "developer": 70.5,
+     "employee": 67.5,
+     "overall": 72.8
+    },
+    {
+     "vendorId": "meta",
+     "customer": 78,
+     "developer": 77,
+     "employee": 70,
+     "overall": 75
+    },
+    {
+     "vendorId": "mistral",
+     "customer": 80.4,
+     "developer": 77.4,
+     "employee": 76.4,
+     "overall": 78.1
+    },
+    {
+     "vendorId": "cohere",
+     "customer": 82.9,
+     "developer": 73.9,
+     "employee": 70.9,
+     "overall": 75.9
+    },
+    {
+     "vendorId": "deepseek",
+     "customer": 79,
+     "developer": 75,
+     "employee": 64,
+     "overall": 72.7
+    },
+    {
+     "vendorId": "xai",
+     "customer": 73.3,
+     "developer": 63.3,
+     "employee": 67.3,
+     "overall": 68
+    },
+    {
+     "vendorId": "databricks",
+     "customer": 82.8,
+     "developer": 73.8,
+     "employee": 76.8,
+     "overall": 77.8
+    },
+    {
+     "vendorId": "snowflake",
+     "customer": 81.1,
+     "developer": 58.1,
+     "employee": 72.1,
+     "overall": 70.4
+    },
+    {
+     "vendorId": "salesforce",
+     "customer": 77.6,
+     "developer": 65.6,
+     "employee": 69.6,
+     "overall": 70.9
+    },
+    {
+     "vendorId": "servicenow",
+     "customer": 80.9,
+     "developer": 61.9,
+     "employee": 75.9,
+     "overall": 72.9
+    },
+    {
+     "vendorId": "oracle",
+     "customer": 74.3,
+     "developer": 64.3,
+     "employee": 66.3,
+     "overall": 68.3
+    },
+    {
+     "vendorId": "sap",
+     "customer": 72.6,
+     "developer": 54.6,
+     "employee": 67.6,
+     "overall": 64.9
+    },
+    {
+     "vendorId": "ibm",
+     "customer": 76.4,
+     "developer": 57.4,
+     "employee": 63.4,
+     "overall": 65.7
+    },
+    {
+     "vendorId": "glean",
+     "customer": 83.5,
+     "developer": 63.5,
+     "employee": 81.5,
+     "overall": 76.2
+    },
+    {
+     "vendorId": "harvey",
+     "customer": 82.5,
+     "developer": 63.5,
+     "employee": 76.5,
+     "overall": 74.2
+    },
+    {
+     "vendorId": "writer",
+     "customer": 80.8,
+     "developer": 66.8,
+     "employee": 74.8,
+     "overall": 74.1
+    },
+    {
+     "vendorId": "hebbia",
+     "customer": 82.6,
+     "developer": 70.6,
+     "employee": 76.6,
+     "overall": 76.6
+    },
+    {
+     "vendorId": "rogo",
+     "customer": 79.4,
+     "developer": 68.4,
+     "employee": 78.4,
+     "overall": 75.4
+    },
+    {
+     "vendorId": "moveworks",
+     "customer": 82.1,
+     "developer": 59.1,
+     "employee": 75.1,
+     "overall": 72.1
+    },
+    {
+     "vendorId": "alibaba",
+     "customer": 77.5,
+     "developer": 70.5,
+     "employee": 66.5,
+     "overall": 71.5
+    },
+    {
+     "vendorId": "moonshot",
+     "customer": 78,
+     "developer": 69,
+     "employee": 71,
+     "overall": 72.7
+    },
+    {
+     "vendorId": "zai",
+     "customer": 72.7,
+     "developer": 62.7,
+     "employee": 69.7,
+     "overall": 68.4
+    },
+    {
+     "vendorId": "minimax",
+     "customer": 74.7,
+     "developer": 64.7,
+     "employee": 64.7,
+     "overall": 68
+    },
+    {
+     "vendorId": "ai21",
+     "customer": 79.7,
+     "developer": 69.7,
+     "employee": 78.7,
+     "overall": 76
+    },
+    {
+     "vendorId": "aleph",
+     "customer": 73.9,
+     "developer": 61.9,
+     "employee": 75.9,
+     "overall": 70.6
+    }
+   ]
+  },
+  {
+   "capturedAt": "2026-04-30",
+   "synthetic": true,
+   "sourceAsOf": null,
+   "provenance": "ILLUSTRATIVE SAMPLE. Invented for demonstration; not a captured reading.",
+   "vendorCount": 29,
+   "vendors": [
+    {
+     "vendorId": "openai",
+     "customer": 81.4,
+     "developer": 86.4,
+     "employee": 68.4,
+     "overall": 78.7
+    },
+    {
+     "vendorId": "anthropic",
+     "customer": 87.1,
+     "developer": 72.1,
+     "employee": 78.1,
+     "overall": 79.1
+    },
+    {
+     "vendorId": "google",
+     "customer": 82.6,
+     "developer": 79.6,
+     "employee": 73.6,
+     "overall": 78.6
+    },
+    {
+     "vendorId": "microsoft",
+     "customer": 83.7,
+     "developer": 84.7,
+     "employee": 73.7,
+     "overall": 80.7
+    },
+    {
+     "vendorId": "aws",
+     "customer": 82.8,
+     "developer": 72.8,
+     "employee": 69.8,
+     "overall": 75.1
+    },
+    {
+     "vendorId": "meta",
+     "customer": 79.4,
+     "developer": 78.4,
+     "employee": 71.4,
+     "overall": 76.4
+    },
+    {
+     "vendorId": "mistral",
+     "customer": 82,
+     "developer": 79,
+     "employee": 78,
+     "overall": 79.7
+    },
+    {
+     "vendorId": "cohere",
+     "customer": 82.2,
+     "developer": 73.2,
+     "employee": 70.2,
+     "overall": 75.2
+    },
+    {
+     "vendorId": "deepseek",
+     "customer": 81.2,
+     "developer": 77.2,
+     "employee": 66.2,
+     "overall": 74.9
+    },
+    {
+     "vendorId": "xai",
+     "customer": 74.4,
+     "developer": 64.4,
+     "employee": 68.4,
+     "overall": 69.1
+    },
+    {
+     "vendorId": "databricks",
+     "customer": 83.3,
+     "developer": 74.3,
+     "employee": 77.3,
+     "overall": 78.3
+    },
+    {
+     "vendorId": "snowflake",
+     "customer": 83.3,
+     "developer": 60.3,
+     "employee": 74.3,
+     "overall": 72.6
+    },
+    {
+     "vendorId": "salesforce",
+     "customer": 79.4,
+     "developer": 67.4,
+     "employee": 71.4,
+     "overall": 72.7
+    },
+    {
+     "vendorId": "servicenow",
+     "customer": 81.7,
+     "developer": 62.7,
+     "employee": 76.7,
+     "overall": 73.7
+    },
+    {
+     "vendorId": "oracle",
+     "customer": 74.6,
+     "developer": 64.6,
+     "employee": 66.6,
+     "overall": 68.6
+    },
+    {
+     "vendorId": "sap",
+     "customer": 75.3,
+     "developer": 57.3,
+     "employee": 70.3,
+     "overall": 67.6
+    },
+    {
+     "vendorId": "ibm",
+     "customer": 78.8,
+     "developer": 59.8,
+     "employee": 65.8,
+     "overall": 68.1
+    },
+    {
+     "vendorId": "glean",
+     "customer": 85.2,
+     "developer": 65.2,
+     "employee": 83.2,
+     "overall": 77.9
+    },
+    {
+     "vendorId": "harvey",
+     "customer": 84.5,
+     "developer": 65.5,
+     "employee": 78.5,
+     "overall": 76.2
+    },
+    {
+     "vendorId": "writer",
+     "customer": 82.8,
+     "developer": 68.8,
+     "employee": 76.8,
+     "overall": 76.1
+    },
+    {
+     "vendorId": "hebbia",
+     "customer": 82.3,
+     "developer": 70.3,
+     "employee": 76.3,
+     "overall": 76.3
+    },
+    {
+     "vendorId": "rogo",
+     "customer": 79.3,
+     "developer": 68.3,
+     "employee": 78.3,
+     "overall": 75.3
+    },
+    {
+     "vendorId": "moveworks",
+     "customer": 84.3,
+     "developer": 61.3,
+     "employee": 77.3,
+     "overall": 74.3
+    },
+    {
+     "vendorId": "alibaba",
+     "customer": 79.6,
+     "developer": 72.6,
+     "employee": 68.6,
+     "overall": 73.6
+    },
+    {
+     "vendorId": "moonshot",
+     "customer": 78.9,
+     "developer": 69.9,
+     "employee": 71.9,
+     "overall": 73.6
+    },
+    {
+     "vendorId": "zai",
+     "customer": 74.8,
+     "developer": 64.8,
+     "employee": 71.8,
+     "overall": 70.5
+    },
+    {
+     "vendorId": "minimax",
+     "customer": 76.9,
+     "developer": 66.9,
+     "employee": 66.9,
+     "overall": 70.2
+    },
+    {
+     "vendorId": "ai21",
+     "customer": 81.6,
+     "developer": 71.6,
+     "employee": 80.6,
+     "overall": 77.9
+    },
+    {
+     "vendorId": "aleph",
+     "customer": 73.6,
+     "developer": 61.6,
+     "employee": 75.6,
+     "overall": 70.3
+    }
+   ]
+  },
+  {
    "capturedAt": "2026-07-31",
    "sourceAsOf": "2026-07-31T05:18:30.676Z",
    "provenance": "curated seed — public review, developer and workplace sources; pending live refresh",
@@ -214,5 +850,6 @@
     }
    ]
   }
- ]
+ ],
+ "demoQuarters": 3
 }
