@@ -1,1 +1,88 @@
-{"provenance":"MODELLED ESTIMATE — May 2026 segment-share model; directional, not audited market share","scope":{"industry":"all","region":"all"},"count":13,"rows":[{"vendor":"OpenAI","share":0.26494679952710687,"contributingCells":45,"confidence":"Medium"},{"vendor":"Google DeepMind","share":0.1807638290118135,"contributingCells":45,"confidence":"Medium"},{"vendor":"Anthropic","share":0.17255042267042378,"contributingCells":45,"confidence":"Medium"},{"vendor":"IBM watsonx","share":0.08183183850523121,"contributingCells":45,"confidence":"Low-Medium"},{"vendor":"Cohere","share":0.05317602823136207,"contributingCells":45,"confidence":"Low-Medium"},{"vendor":"Mistral AI","share":0.051222677534911436,"contributingCells":45,"confidence":"Low"},{"vendor":"Harvey","share":0.0477315353914257,"contributingCells":45,"confidence":"Low"},{"vendor":"Perplexity","share":0.041500368892167946,"contributingCells":45,"confidence":"Low-Medium"},{"vendor":"Meta","share":0.03244695508404521,"contributingCells":45,"confidence":"Low-Medium"},{"vendor":"Writer","share":0.032175841563036135,"contributingCells":45,"confidence":"Low-Medium"},{"vendor":"Moveworks","share":0.016826816238366567,"contributingCells":45,"confidence":"Low-Medium"},{"vendor":"xAI","share":0.014657908070293966,"contributingCells":45,"confidence":"Low"},{"vendor":"Rogo","share":0.010168979279815823,"contributingCells":45,"confidence":"Low"}]}
+{
+ "provenance": "MODELLED ESTIMATE \u2014 May 2026 segment-share model; directional, not audited market share",
+ "scope": {
+  "industry": "all",
+  "region": "all"
+ },
+ "count": 13,
+ "rows": [
+  {
+   "vendor": "OpenAI",
+   "share": 0.26494679952710687,
+   "contributingCells": 45,
+   "confidence": "Medium"
+  },
+  {
+   "vendor": "Google DeepMind",
+   "share": 0.1807638290118135,
+   "contributingCells": 45,
+   "confidence": "Medium"
+  },
+  {
+   "vendor": "Anthropic",
+   "share": 0.17255042267042378,
+   "contributingCells": 45,
+   "confidence": "Medium"
+  },
+  {
+   "vendor": "IBM watsonx",
+   "share": 0.08183183850523121,
+   "contributingCells": 45,
+   "confidence": "Low-Medium"
+  },
+  {
+   "vendor": "Cohere",
+   "share": 0.05317602823136207,
+   "contributingCells": 45,
+   "confidence": "Low-Medium"
+  },
+  {
+   "vendor": "Mistral AI",
+   "share": 0.051222677534911436,
+   "contributingCells": 45,
+   "confidence": "Low"
+  },
+  {
+   "vendor": "Harvey",
+   "share": 0.0477315353914257,
+   "contributingCells": 45,
+   "confidence": "Low"
+  },
+  {
+   "vendor": "Perplexity",
+   "share": 0.041500368892167946,
+   "contributingCells": 45,
+   "confidence": "Low-Medium"
+  },
+  {
+   "vendor": "Meta",
+   "share": 0.03244695508404521,
+   "contributingCells": 45,
+   "confidence": "Low-Medium"
+  },
+  {
+   "vendor": "Writer",
+   "share": 0.032175841563036135,
+   "contributingCells": 45,
+   "confidence": "Low-Medium"
+  },
+  {
+   "vendor": "Moveworks",
+   "share": 0.016826816238366567,
+   "contributingCells": 45,
+   "confidence": "Low-Medium"
+  },
+  {
+   "vendor": "xAI",
+   "share": 0.014657908070293966,
+   "contributingCells": 45,
+   "confidence": "Low"
+  },
+  {
+   "vendor": "Rogo",
+   "share": 0.010168979279815823,
+   "contributingCells": 45,
+   "confidence": "Low"
+  }
+ ]
+}

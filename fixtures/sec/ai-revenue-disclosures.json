@@ -1,0 +1,121 @@
+{
+ "provenance": "Quantified AI revenue statements found in the filers' own SEC filings (10-K, 10-Q and 8-K exhibits), quoted verbatim with the filing URL. No figure here is computed: AI revenue is not an XBRL-tagged line and cannot be extracted structurally.",
+ "source": "SEC EDGAR full-text search",
+ "capturedAt": "2026-07-31",
+ "queries": [
+  "\"AI revenue\"",
+  "\"AI annualized revenue run rate\"",
+  "\"generative AI\" \"book of business\"",
+  "\"AI-related revenue\""
+ ],
+ "vendors": [
+  {
+   "ticker": "AMZN",
+   "name": "Amazon",
+   "vendorId": "aws",
+   "discloses": true,
+   "statements": [
+    {
+     "statement": "AI appears to be moving ten times faster. 2/ Amazon is smack in the middle of this land rush, and companies are choosing AWS for AI. Three years after AWS launched commercially, it had a $58 million revenue run rate. Three years into this AI wave, AWS’s AI revenue run rate is over $15 billion in Q1 2026 (nearly 260 times larger than AWS at that same point)— and ascending rapidly. Customers are choosing AWS for AI for a few reasons.",
+     "form": "EX-99.1",
+     "filedAt": "2026-04-09",
+     "accession": "0001104659-26-041034",
+     "url": "https://www.sec.gov/Archives/edgar/data/1018724/000110465926041034/tm263815d3_ex99-1.htm"
+    }
+   ]
+  },
+  {
+   "ticker": "MSFT",
+   "name": "Microsoft",
+   "vendorId": "microsoft",
+   "discloses": false,
+   "statements": []
+  },
+  {
+   "ticker": "GOOGL",
+   "name": "Alphabet",
+   "vendorId": "google",
+   "discloses": false,
+   "statements": []
+  },
+  {
+   "ticker": "ORCL",
+   "name": "Oracle",
+   "vendorId": "oracle",
+   "discloses": false,
+   "statements": []
+  },
+  {
+   "ticker": "IBM",
+   "name": "IBM",
+   "vendorId": "ibm",
+   "discloses": true,
+   "statements": [
+    {
+     "statement": "We launched new products such as the next generation of watsonx Code Assistant that provides coding support for multiple languages and Guardium Quantum Safe that helps organizations monitor and manage their cryptographic security to fix vulnerabilities. And these investments in generative AI are paying off, with the Software AI book of business reaching about $1 billion inception to date in the fourth quarter. Our performance continues to benefit from our recent acquisitions. We are seeing growing contribution from the StreamSets and webMethods assets acquired in the second quarter.",
+     "form": "EX-99.1",
+     "filedAt": "2025-01-30",
+     "accession": "0000051143-25-000007",
+     "url": "https://www.sec.gov/Archives/edgar/data/51143/000005114325000007/ibm_ex99x1.htm"
+    },
+    {
+     "statement": "In addition, our Consulting services are critical in helping clients build their AI strategies from the ground up. We also continue to see our Infrastructure segment play a larger role as clients leverage their hardware investments in their AI strategies. Our book of business related to generative AI now stands at greater than $2 billion inception to date. The mix is roughly one-quarter software and three-quarters consulting signings. We believe these strong results highlight our momentum and traction with clients.",
+     "form": "EX-99.1",
+     "filedAt": "2024-07-25",
+     "accession": "0000051143-24-000035",
+     "url": "https://www.sec.gov/Archives/edgar/data/51143/000005114324000035/a2q24-ex991.htm"
+    },
+    {
+     "statement": "This contributed to backlog growth of 5% year over year and our trailing twelve-month book-to-bill remaining over 1.15. Meanwhile, continued discretionary spending constraints impacted our small engagement performance and backlog realization in the quarter. As Arvind mentioned, our book of business in generative AI inception to date is greater than $2 billion, and about three-quarters of it represents consulting signings, with strong quarter over quarter momentum. Our extensive industry and domain expertise has placed us in an early leadership role, which is crucial at the onset of a technology shift.",
+     "form": "EX-99.1",
+     "filedAt": "2024-07-25",
+     "accession": "0000051143-24-000035",
+     "url": "https://www.sec.gov/Archives/edgar/data/51143/000005114324000035/a2q24-ex991.htm"
+    }
+   ]
+  },
+  {
+   "ticker": "NVDA",
+   "name": "NVIDIA",
+   "vendorId": "nvidia",
+   "discloses": true,
+   "statements": [
+    {
+     "statement": "Data Center compute revenue was $22.6 billion, up 162% from a year ago and up 17% sequentially. Networking revenue was $3.7 billion, up 114% from a year ago driven by InfiniBand and Ethernet for AI revenue, which includes Spectrum-X end-to-end ethernet platform. Networking revenue sequentially was up 16% and includes a doubling of Ethernet for AI revenue. We shipped customer samples of our Blackwell architecture in the second quarter.",
+     "form": "EX-99.2",
+     "filedAt": "2024-08-28",
+     "accession": "0001045810-24-000262",
+     "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000262/q2fy25cfocommentary.htm"
+    },
+    {
+     "statement": "Networking revenue was $3.7 billion, up 114% from a year ago driven by InfiniBand and Ethernet for AI revenue, which includes Spectrum-X end-to-end ethernet platform. Networking revenue sequentially was up 16% and includes a doubling of Ethernet for AI revenue. We shipped customer samples of our Blackwell architecture in the second quarter. We executed a change to the Blackwell GPU mask to improve production yield. Blackwell production ramp is scheduled to begin in the fourth quarter and continue into fiscal 2026.",
+     "form": "EX-99.2",
+     "filedAt": "2024-08-28",
+     "accession": "0001045810-24-000262",
+     "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581024000262/q2fy25cfocommentary.htm"
+    }
+   ]
+  },
+  {
+   "ticker": "CRM",
+   "name": "Salesforce",
+   "vendorId": "salesforce",
+   "discloses": false,
+   "statements": []
+  },
+  {
+   "ticker": "NOW",
+   "name": "ServiceNow",
+   "vendorId": "servicenow",
+   "discloses": false,
+   "statements": []
+  },
+  {
+   "ticker": "META",
+   "name": "Meta Platforms",
+   "vendorId": "meta",
+   "discloses": false,
+   "statements": []
+  }
+ ]
+}

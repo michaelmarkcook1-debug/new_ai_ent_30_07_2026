@@ -1,1 +1,2367 @@
-{"provenance":"curated seed — public review, developer and workplace sources; pending live refresh","asOf":"2026-07-30T19:33:59.261Z","count":29,"rows":[{"vendorId":"openai","customer":{"vendorId":"openai","averageUptimePct":99.3,"valueForMoney":74,"customerService":72,"responsiveness":78,"qualityOfService":90,"overall":83,"primaryThemes":["Best-in-class model quality (most reviews)","Pricing variance complaints","Outages in 2024-25 noted"],"sources":["status.openai.com","g2.com/products/openai","trustradius.com"],"dataStatus":"seed"},"developer":{"vendorId":"openai","githubScore":93,"redditSentiment":100,"forumScore":100,"apiReliability":62,"documentationScore":86,"overall":88,"primaryThemes":["Strong SDK + community","Pricing volatility complaints","Rate-limit frustration during peaks"],"sources":["github.com/openai","reddit.com/r/OpenAI","news.ycombinator.com"],"dataStatus":"seed","githubRepo":"openai/openai-python","githubStars":30766,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented","api":"verified"},"forumSource":"hn.algolia.com","forumHnHits":10849,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.953,"redditLastFetched":"2026-05-15","apiSource":"Atlassian Statuspage incidents.json","apiIncidents90d":25,"apiMajorIncidents90d":3,"apiLastFetched":"2026-05-15"},"employee":{"vendorId":"openai","workLifeBalance":60,"culture":65,"litigationCount":4,"litigationScore":49,"careerGrowth":78,"compensation":92,"missionAlignment":74,"overall":70,"primaryThemes":["Mission alignment strong","High turnover post-2024 governance events","Top-of-market comp"],"sources":["glassdoor.com/Overview/Working-at-OpenAI","linkedin.com/company/openai"],"dataStatus":"seed","litigationFootprint":404,"approxHeadcount":3000,"litigationPerThousand":134.7,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"anthropic","customer":{"vendorId":"anthropic","averageUptimePct":99.6,"valueForMoney":80,"customerService":84,"responsiveness":86,"qualityOfService":92,"overall":88,"primaryThemes":["Reasoning + coding quality leads reviews","Fewer outage incidents","Slower feature shipping cited"],"sources":["status.anthropic.com","g2.com/products/claude"],"dataStatus":"seed"},"developer":{"vendorId":"anthropic","githubScore":80,"redditSentiment":97,"forumScore":67,"apiReliability":30,"documentationScore":90,"overall":73,"primaryThemes":["Claude Code praised as default IDE assistant","Best-in-class coding benchmarks","Tool-use stable"],"sources":["github.com/anthropics","reddit.com/r/ClaudeAI","news.ycombinator.com"],"dataStatus":"seed","githubRepo":"anthropics/anthropic-sdk-python","githubStars":3451,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented","api":"verified"},"forumSource":"hn.algolia.com","forumHnHits":1453,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.936,"redditLastFetched":"2026-05-15","apiSource":"Atlassian Statuspage incidents.json","apiIncidents90d":50,"apiMajorIncidents90d":17,"apiLastFetched":"2026-05-15"},"employee":{"vendorId":"anthropic","workLifeBalance":76,"culture":84,"litigationCount":0,"litigationScore":55,"careerGrowth":80,"compensation":90,"missionAlignment":90,"overall":79,"primaryThemes":["Smaller team, less turnover","Safety-first culture cited as a draw","Strong comp + equity"],"sources":["glassdoor.com/Overview/Working-at-Anthropic","linkedin.com/company/anthropic"],"dataStatus":"seed","litigationFootprint":177,"approxHeadcount":2500,"litigationPerThousand":70.8,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"google","customer":{"vendorId":"google","averageUptimePct":99.7,"valueForMoney":82,"customerService":76,"responsiveness":78,"qualityOfService":84,"overall":84,"primaryThemes":["Vertex AI enterprise polish improving","Workspace integration valued","Support response variable"],"sources":["status.cloud.google.com","g2.com/products/google-cloud-vertex-ai"],"dataStatus":"seed"},"developer":{"vendorId":"google","githubScore":80,"redditSentiment":97,"forumScore":70,"apiReliability":78,"documentationScore":82,"overall":81,"primaryThemes":["Gemini API quality improving","Vertex setup friction","Multimodal lead recognised"],"sources":["github.com/google-gemini","reddit.com/r/Bard","ai.google.dev"],"dataStatus":"seed","githubRepo":"googleapis/python-genai","githubStars":3701,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":1445,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.935,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"google","workLifeBalance":78,"culture":72,"litigationCount":6,"litigationScore":73,"careerGrowth":76,"compensation":88,"missionAlignment":64,"overall":75,"primaryThemes":["Process-heavy but stable","Recent layoffs noted in reviews","Top-tier comp + benefits"],"sources":["glassdoor.com/Overview/Working-at-Google","blind"],"dataStatus":"seed","litigationFootprint":2223,"approxHeadcount":183000,"litigationPerThousand":12.1,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"microsoft","customer":{"vendorId":"microsoft","averageUptimePct":99.8,"valueForMoney":78,"customerService":80,"responsiveness":82,"qualityOfService":84,"overall":85,"primaryThemes":["Enterprise procurement praised","Tenant isolation + audit valued","Cost-control complaints common"],"sources":["status.azure.com","g2.com/products/microsoft-azure-ai"],"dataStatus":"seed"},"developer":{"vendorId":"microsoft","githubScore":97,"redditSentiment":100,"forumScore":71,"apiReliability":78,"documentationScore":84,"overall":86,"primaryThemes":["Azure OpenAI well-documented","Copilot Studio devex polished","Foundry partner-model gaps"],"sources":["github.com/Azure","reddit.com/r/AZURE"],"dataStatus":"seed","githubRepo":"microsoft/autogen","githubStars":58060,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":498,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.953,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"microsoft","workLifeBalance":82,"culture":78,"litigationCount":5,"litigationScore":61,"careerGrowth":78,"compensation":86,"missionAlignment":66,"overall":75,"primaryThemes":["Strong work-life balance reputation","Career mobility good","Comp competitive"],"sources":["glassdoor.com/Overview/Working-at-Microsoft","blind"],"dataStatus":"seed","litigationFootprint":8963,"approxHeadcount":228000,"litigationPerThousand":39.3,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"aws","customer":{"vendorId":"aws","averageUptimePct":99.85,"valueForMoney":76,"customerService":78,"responsiveness":80,"qualityOfService":84,"overall":84,"primaryThemes":["Bedrock model choice headline strength","Support tier matters greatly","Complex billing"],"sources":["health.aws.amazon.com","g2.com/products/amazon-bedrock"],"dataStatus":"seed"},"developer":{"vendorId":"aws","githubScore":81,"redditSentiment":75,"forumScore":51,"apiReliability":82,"documentationScore":80,"overall":74,"primaryThemes":["Bedrock model choice praised","AWS IAM friction common","Stable, deep tooling"],"sources":["github.com/aws","reddit.com/r/aws"],"dataStatus":"seed","githubRepo":"aws/aws-sdk-pandas","githubStars":4111,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":150,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.838,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"aws","workLifeBalance":64,"culture":60,"litigationCount":8,"litigationScore":85,"careerGrowth":72,"compensation":86,"missionAlignment":60,"overall":71,"primaryThemes":["High-intensity culture flagged","PIP fear common in reviews","Comp strong but conditional"],"sources":["glassdoor.com/Overview/Working-at-Amazon","blind"],"dataStatus":"seed","litigationFootprint":490,"approxHeadcount":150000,"litigationPerThousand":3.3,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"meta","customer":{"vendorId":"meta","averageUptimePct":99.5,"valueForMoney":88,"customerService":64,"responsiveness":70,"qualityOfService":84,"overall":81,"primaryThemes":["Open-weights value flagged","Limited direct customer-support surface","Self-host TCO praised"],"sources":["g2.com/products/llama"],"dataStatus":"seed"},"developer":{"vendorId":"meta","githubScore":88,"redditSentiment":86,"forumScore":80,"apiReliability":70,"documentationScore":78,"overall":80,"primaryThemes":["Llama open-weights huge community","Self-hosting wins on cost","Inference quality variable"],"sources":["github.com/meta-llama","reddit.com/r/LocalLLaMA"],"dataStatus":"seed"},"employee":{"vendorId":"meta","workLifeBalance":70,"culture":68,"litigationCount":7,"litigationScore":66,"careerGrowth":76,"compensation":90,"missionAlignment":65,"overall":73,"primaryThemes":["Layoff cycles in reviews","Comp top-of-market","Performance bar tightened post-2023"],"sources":["glassdoor.com/Overview/Working-at-Meta","blind"],"dataStatus":"seed","litigationFootprint":1777,"approxHeadcount":75000,"litigationPerThousand":23.7,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented"}}},{"vendorId":"mistral","customer":{"vendorId":"mistral","averageUptimePct":99.4,"valueForMoney":86,"customerService":74,"responsiveness":76,"qualityOfService":82,"overall":83,"primaryThemes":["Cost-per-token praised","Sovereignty positioning valued","Smaller support footprint"],"sources":["status.mistral.ai","g2.com/products/mistral-ai"],"dataStatus":"seed"},"developer":{"vendorId":"mistral","githubScore":86,"redditSentiment":98,"forumScore":63,"apiReliability":76,"documentationScore":78,"overall":80,"primaryThemes":["Strong Codestral adoption","European-sovereign positioning","Some API-stability complaints"],"sources":["github.com/mistralai","reddit.com/r/MistralAI"],"dataStatus":"seed","githubRepo":"mistralai/mistral-inference","githubStars":10807,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":376,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.941,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"mistral","workLifeBalance":80,"culture":82,"litigationCount":0,"litigationScore":74,"careerGrowth":74,"compensation":78,"missionAlignment":86,"overall":79,"primaryThemes":["European base + remote-friendly","Growing fast, scope expansion possible","Comp solid for Paris"],"sources":["glassdoor.com/Overview/Working-at-Mistral-AI"],"dataStatus":"seed","litigationFootprint":4,"approxHeadcount":350,"litigationPerThousand":11.4,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"cohere","customer":{"vendorId":"cohere","averageUptimePct":99.7,"valueForMoney":80,"customerService":80,"responsiveness":80,"qualityOfService":82,"overall":84,"primaryThemes":["Enterprise-tuned support","Embed/Rerank quality strong","Less mass-market mindshare"],"sources":["status.cohere.com","g2.com/products/cohere"],"dataStatus":"seed"},"developer":{"vendorId":"cohere","githubScore":66,"redditSentiment":68,"forumScore":68,"apiReliability":94,"documentationScore":80,"overall":75,"primaryThemes":["Enterprise positioning narrows community","Rerank/Embed quality strong","Less retail dev mindshare"],"sources":["github.com/cohere-ai","reddit.com/r/cohere"],"dataStatus":"seed","githubRepo":"cohere-ai/cohere-python","githubStars":383,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented","api":"verified"},"forumSource":"hn.algolia.com","forumHnHits":850,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.805,"redditLastFetched":"2026-05-15","apiSource":"Atlassian Statuspage incidents.json","apiIncidents90d":3,"apiMajorIncidents90d":1,"apiLastFetched":"2026-05-15"},"employee":{"vendorId":"cohere","workLifeBalance":78,"culture":80,"litigationCount":0,"litigationScore":49,"careerGrowth":72,"compensation":76,"missionAlignment":78,"overall":72,"primaryThemes":["Smaller team, broad scope","Toronto/SF mix","Comp competitive but below US frontier labs"],"sources":["glassdoor.com/Overview/Working-at-Cohere"],"dataStatus":"seed","litigationFootprint":74,"approxHeadcount":600,"litigationPerThousand":123.3,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"deepseek","customer":{"vendorId":"deepseek","averageUptimePct":99.2,"valueForMoney":92,"customerService":66,"responsiveness":70,"qualityOfService":84,"overall":82,"primaryThemes":["Cost-per-quality leadership cited","Geopolitical / data-residency caveats","API stability improving"],"sources":["status.deepseek.com","g2.com/products/deepseek"],"dataStatus":"seed"},"developer":{"vendorId":"deepseek","githubScore":86,"redditSentiment":84,"forumScore":76,"apiReliability":72,"documentationScore":70,"overall":78,"primaryThemes":["Cost-per-quality praised loudly","Reasoning benchmarks strong","Compliance hesitation in regulated buyers"],"sources":["github.com/deepseek-ai","reddit.com/r/LocalLLaMA"],"dataStatus":"seed"},"employee":{"vendorId":"deepseek","workLifeBalance":70,"culture":72,"litigationCount":0,"litigationScore":42,"careerGrowth":72,"compensation":76,"missionAlignment":68,"overall":67,"primaryThemes":["Small focused team","Research-led culture","Compensation strong for domestic peers"],"sources":["news.ycombinator.com"],"dataStatus":"seed","litigationFootprint":49,"approxHeadcount":200,"litigationPerThousand":245,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented"}}},{"vendorId":"xai","customer":{"vendorId":"xai","averageUptimePct":99,"valueForMoney":72,"customerService":64,"responsiveness":66,"qualityOfService":72,"overall":75,"primaryThemes":["Compute scale story valued","Enterprise control surface thin","Governance opacity flagged"],"sources":["status.x.ai"],"dataStatus":"seed"},"developer":{"vendorId":"xai","githubScore":70,"redditSentiment":68,"forumScore":64,"apiReliability":60,"documentationScore":62,"overall":65,"primaryThemes":["Compute scale impressive","Tooling still maturing","Devex inconsistent vs frontier set"],"sources":["docs.x.ai","reddit.com/r/grok"],"dataStatus":"seed"},"employee":{"vendorId":"xai","workLifeBalance":64,"culture":60,"litigationCount":2,"litigationScore":74,"careerGrowth":70,"compensation":88,"missionAlignment":57,"overall":69,"primaryThemes":["High-velocity, high-intensity culture","Founder-driven environment cited","Top-of-market comp + equity upside"],"sources":["news.ycombinator.com","linkedin.com/company/xai"],"dataStatus":"seed","litigationFootprint":13,"approxHeadcount":1200,"litigationPerThousand":10.8,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented"}}},{"vendorId":"databricks","customer":{"vendorId":"databricks","averageUptimePct":99.5,"valueForMoney":78,"customerService":78,"responsiveness":80,"qualityOfService":84,"overall":84,"primaryThemes":["Data + AI build workflow praised","Setup learning curve flagged","Customer success teams strong"],"sources":["status.databricks.com","g2.com/products/databricks"],"dataStatus":"seed"},"developer":{"vendorId":"databricks","githubScore":68,"redditSentiment":86,"forumScore":56,"apiReliability":80,"documentationScore":84,"overall":75,"primaryThemes":["Mosaic AI strong for build workflows","Complex setup for non-data teams"],"sources":["github.com/databricks","community.databricks.com"],"dataStatus":"seed","githubRepo":"databricks/databricks-sdk-py","githubStars":548,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":211,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.886,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"databricks","workLifeBalance":76,"culture":76,"litigationCount":2,"litigationScore":76,"careerGrowth":80,"compensation":86,"missionAlignment":76,"overall":78,"primaryThemes":["Pre-IPO equity narrative","Strong technical bar","Fast pace, scaling org pains"],"sources":["glassdoor.com/Overview/Working-at-Databricks"],"dataStatus":"seed","litigationFootprint":68,"approxHeadcount":7500,"litigationPerThousand":9.1,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"snowflake","customer":{"vendorId":"snowflake","averageUptimePct":99.85,"valueForMoney":74,"customerService":80,"responsiveness":80,"qualityOfService":84,"overall":84,"primaryThemes":["Reliability outstanding","Compute cost surprises flagged","Cortex experience improving"],"sources":["status.snowflake.com","g2.com/products/snowflake"],"dataStatus":"seed"},"developer":{"vendorId":"snowflake","githubScore":50,"redditSentiment":76,"forumScore":41,"apiReliability":62,"documentationScore":78,"overall":61,"primaryThemes":["Cortex API simple","Arctic adoption growing","Locked to data-cloud first"],"sources":["github.com/Snowflake-Labs","community.snowflake.com"],"dataStatus":"seed","githubRepo":"Snowflake-Labs/snowflake-arctic","githubStars":560,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented","api":"verified"},"forumSource":"hn.algolia.com","forumHnHits":23,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.843,"redditLastFetched":"2026-05-15","apiSource":"Atlassian Statuspage incidents.json","apiIncidents90d":13,"apiMajorIncidents90d":8,"apiLastFetched":"2026-05-15"},"employee":{"vendorId":"snowflake","workLifeBalance":78,"culture":74,"litigationCount":2,"litigationScore":66,"careerGrowth":76,"compensation":84,"missionAlignment":72,"overall":75,"primaryThemes":["Stable post-IPO","Sales culture intense","Engineering comp solid"],"sources":["glassdoor.com/Overview/Working-at-Snowflake"],"dataStatus":"seed","litigationFootprint":185,"approxHeadcount":7800,"litigationPerThousand":23.7,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"salesforce","customer":{"vendorId":"salesforce","averageUptimePct":99.6,"valueForMoney":70,"customerService":78,"responsiveness":78,"qualityOfService":80,"overall":81,"primaryThemes":["CRM workflow fit valued","Per-seat pricing flagged","Service quality varies by region"],"sources":["status.salesforce.com","g2.com/products/salesforce"],"dataStatus":"seed"},"developer":{"vendorId":"salesforce","githubScore":73,"redditSentiment":89,"forumScore":32,"apiReliability":72,"documentationScore":80,"overall":69,"primaryThemes":["Einstein Studio improving","Per-seat pricing concerns flagged in dev threads","BYOLLM patterns more flexible"],"sources":["github.com/forcedotcom","developer.salesforce.com"],"dataStatus":"seed","githubRepo":"salesforce/CodeGen","githubStars":5176,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":22,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.901,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"salesforce","workLifeBalance":72,"culture":70,"litigationCount":6,"litigationScore":73,"careerGrowth":74,"compensation":82,"missionAlignment":68,"overall":73,"primaryThemes":["Ohana culture marketed but mixed reviews","Layoff cycles in 2023-24","Comp solid"],"sources":["glassdoor.com/Overview/Working-at-Salesforce"],"dataStatus":"seed","litigationFootprint":967,"approxHeadcount":76000,"litigationPerThousand":12.7,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"servicenow","customer":{"vendorId":"servicenow","averageUptimePct":99.7,"valueForMoney":72,"customerService":80,"responsiveness":80,"qualityOfService":82,"overall":83,"primaryThemes":["Strong ITSM workflow value","Implementation complexity flagged","Reliable platform"],"sources":["status.servicenow.com","g2.com/products/servicenow"],"dataStatus":"seed"},"developer":{"vendorId":"servicenow","githubScore":65,"redditSentiment":91,"forumScore":9,"apiReliability":76,"documentationScore":80,"overall":64,"primaryThemes":["Now LLM Service brokering praised","Implementation complexity flagged","Platform-bound tooling"],"sources":["github.com/ServiceNow","community.servicenow.com"],"dataStatus":"seed","githubRepo":"ServiceNow/Fast-LLM","githubStars":311,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":1,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.911,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"servicenow","workLifeBalance":78,"culture":76,"litigationCount":3,"litigationScore":81,"careerGrowth":78,"compensation":84,"missionAlignment":70,"overall":78,"primaryThemes":["Stable engineering culture","Strong career mobility within suite","Equity narrative positive"],"sources":["glassdoor.com/Overview/Working-at-ServiceNow"],"dataStatus":"seed","litigationFootprint":129,"approxHeadcount":26000,"litigationPerThousand":5,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"oracle","customer":{"vendorId":"oracle","averageUptimePct":99.6,"valueForMoney":64,"customerService":72,"responsiveness":70,"qualityOfService":76,"overall":76,"primaryThemes":["Database integration valued","Procurement experience friction","Premium pricing"],"sources":["status.oraclecloud.com","g2.com/products/oracle-cloud-infrastructure"],"dataStatus":"seed"},"developer":{"vendorId":"oracle","githubScore":67,"redditSentiment":100,"forumScore":17,"apiReliability":72,"documentationScore":74,"overall":66,"primaryThemes":["OCI Generative AI documentation thin in places","Cohere/Meta hosting valued","Procurement-led developer access"],"sources":["github.com/oracle","community.oracle.com"],"dataStatus":"seed","githubRepo":"oracle/oci-python-sdk","githubStars":473,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":2,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.963,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"oracle","workLifeBalance":64,"culture":58,"litigationCount":12,"litigationScore":94,"careerGrowth":64,"compensation":70,"missionAlignment":56,"overall":68,"primaryThemes":["Process-heavy reputation","Career mobility limited","Litigation history above peer average"],"sources":["glassdoor.com/Overview/Working-at-Oracle","courtlistener.com"],"dataStatus":"seed","litigationFootprint":120,"approxHeadcount":159000,"litigationPerThousand":0.8,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"sap","customer":{"vendorId":"sap","averageUptimePct":99.8,"valueForMoney":64,"customerService":72,"responsiveness":70,"qualityOfService":76,"overall":76,"primaryThemes":["Enterprise ERP integration valued","Implementation complexity flagged","Slower AI cadence cited"],"sources":["status.sap.com","g2.com/products/sap"],"dataStatus":"seed"},"developer":{"vendorId":"sap","githubScore":60,"redditSentiment":83,"forumScore":9,"apiReliability":68,"documentationScore":72,"overall":58,"primaryThemes":["Joule + BTP developer story still maturing","ABAP integration noted","Slow dev community velocity"],"sources":["github.com/SAP","community.sap.com"],"dataStatus":"seed","githubRepo":"SAP (org, 314 repos)","githubStars":4184,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":1,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.874,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"sap","workLifeBalance":68,"culture":64,"litigationCount":8,"litigationScore":89,"careerGrowth":66,"compensation":74,"missionAlignment":62,"overall":71,"primaryThemes":["European mature-org culture","Slower mobility cited","Restructuring cycles in reviews"],"sources":["glassdoor.com/Overview/Working-at-SAP"],"dataStatus":"seed","litigationFootprint":196,"approxHeadcount":108000,"litigationPerThousand":1.8,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"ibm","customer":{"vendorId":"ibm","averageUptimePct":99.7,"valueForMoney":70,"customerService":78,"responsiveness":76,"qualityOfService":78,"overall":80,"primaryThemes":["Control + governance narrative","Hybrid story credible","Slower roll-out cadence"],"sources":["status.ibm.com","g2.com/products/ibm-watsonx"],"dataStatus":"seed"},"developer":{"vendorId":"ibm","githubScore":55,"redditSentiment":68,"forumScore":28,"apiReliability":74,"documentationScore":78,"overall":61,"primaryThemes":["watsonx.ai documentation comprehensive","Hybrid + Granite story credible","Smaller retail community"],"sources":["github.com/IBM","community.ibm.com"],"dataStatus":"seed","githubRepo":"ibm-granite/granite-3.0-language-models","githubStars":272,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":23,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.805,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"ibm","workLifeBalance":64,"culture":60,"litigationCount":10,"litigationScore":83,"careerGrowth":64,"compensation":70,"missionAlignment":58,"overall":67,"primaryThemes":["Process-heavy culture","Litigation history above peer average","Career mobility limited in legacy units"],"sources":["glassdoor.com/Overview/Working-at-IBM","courtlistener.com"],"dataStatus":"seed","litigationFootprint":1115,"approxHeadcount":280000,"litigationPerThousand":4,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"glean","customer":{"vendorId":"glean","averageUptimePct":99.7,"valueForMoney":76,"customerService":84,"responsiveness":82,"qualityOfService":86,"overall":86,"primaryThemes":["Enterprise knowledge fit valued","Implementation depends on source quality","Customer success teams praised"],"sources":["status.glean.com","g2.com/products/glean"],"dataStatus":"seed"},"developer":{"vendorId":"glean","githubScore":42,"redditSentiment":90,"forumScore":44,"apiReliability":76,"documentationScore":76,"overall":66,"primaryThemes":["Connector breadth praised","Setup complexity flagged","Slack-app surface valued"],"sources":["github.com/gleanwork","developer.glean.com"],"dataStatus":"seed","githubRepo":"gleanwork (org, 38 repos)","githubStars":83,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":38,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.904,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"glean","workLifeBalance":80,"culture":80,"litigationCount":0,"litigationScore":100,"careerGrowth":76,"compensation":82,"missionAlignment":84,"overall":84,"primaryThemes":["Small, mission-driven team","Pre-IPO equity narrative","Hiring bar high"],"sources":["glassdoor.com/Overview/Working-at-Glean"],"dataStatus":"seed","litigationFootprint":0,"approxHeadcount":1000,"litigationPerThousand":0,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"harvey","customer":{"vendorId":"harvey","averageUptimePct":99.7,"valueForMoney":70,"customerService":82,"responsiveness":84,"qualityOfService":88,"overall":85,"primaryThemes":["Legal-domain depth valued","Pricing opacity flagged","White-glove support standard"],"sources":["status.harvey.ai","g2.com/products/harvey-ai"],"dataStatus":"seed"},"developer":{"vendorId":"harvey","githubScore":62,"redditSentiment":84,"forumScore":23,"apiReliability":90,"documentationScore":72,"overall":66,"primaryThemes":["Closed-platform, no public dev surface","Reviewed via firm-side feedback","Legal-domain depth recognised"],"sources":["news.ycombinator.com","lawnext.com"],"dataStatus":"seed","cellStatus":{"github":"seed","forum":"verified","reddit":"documented","api":"verified"},"forumSource":"hn.algolia.com","forumHnHits":9,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.878,"redditLastFetched":"2026-05-15","apiSource":"Atlassian Statuspage incidents.json","apiIncidents90d":6,"apiMajorIncidents90d":1,"apiLastFetched":"2026-05-15"},"employee":{"vendorId":"harvey","workLifeBalance":78,"culture":80,"litigationCount":0,"litigationScore":68,"careerGrowth":76,"compensation":86,"missionAlignment":88,"overall":79,"primaryThemes":["Mission-driven legal-tech culture","Fast scaling, high bar","Top-of-market comp for legal-tech"],"sources":["glassdoor.com/Overview/Working-at-Harvey"],"dataStatus":"seed","litigationFootprint":10,"approxHeadcount":500,"litigationPerThousand":20,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"writer","customer":{"vendorId":"writer","averageUptimePct":99.5,"valueForMoney":76,"customerService":80,"responsiveness":80,"qualityOfService":82,"overall":84,"primaryThemes":["Brand-safe content workflows valued","Vertical variants (Med/Fin) praised","Implementation depth varies"],"sources":["status.writer.com","g2.com/products/writer"],"dataStatus":"seed"},"developer":{"vendorId":"writer","githubScore":74,"redditSentiment":93,"forumScore":26,"apiReliability":76,"documentationScore":80,"overall":70,"primaryThemes":["Palmyra API clear","Enterprise-tuned positioning narrows community","Domain variants (Med/Fin) appreciated"],"sources":["dev.writer.com","github.com/writerai"],"dataStatus":"seed","githubRepo":"writer/writer-framework","githubStars":1441,"githubLastFetched":"2026-05-15","cellStatus":{"github":"verified","forum":"verified","reddit":"documented"},"forumSource":"hn.algolia.com","forumHnHits":5,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.918,"redditLastFetched":"2026-05-15"},"employee":{"vendorId":"writer","workLifeBalance":76,"culture":76,"litigationCount":1,"litigationScore":81,"careerGrowth":74,"compensation":78,"missionAlignment":80,"overall":78,"primaryThemes":["Smaller team, varied scope","Remote-friendly","Comp competitive for category"],"sources":["glassdoor.com/Overview/Working-at-Writer"],"dataStatus":"seed","litigationFootprint":2,"approxHeadcount":400,"litigationPerThousand":5,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"hebbia","customer":{"vendorId":"hebbia","averageUptimePct":99.5,"valueForMoney":74,"customerService":80,"responsiveness":80,"qualityOfService":84,"overall":84,"primaryThemes":["Document-intelligence quality praised","Niche-vertical focus narrows reviews","Workflow depth strong"],"sources":["g2.com/products/hebbia"],"dataStatus":"seed"},"developer":{"vendorId":"hebbia","githubScore":60,"redditSentiment":98,"forumScore":33,"apiReliability":99,"documentationScore":70,"overall":72,"primaryThemes":["Document-intelligence focus narrow","Workflow-bound positioning limits dev mindshare","Niche but praised in target verticals"],"sources":["hebbia.com","news.ycombinator.com"],"dataStatus":"seed","cellStatus":{"github":"seed","forum":"verified","reddit":"documented","api":"verified"},"forumSource":"hn.algolia.com","forumHnHits":37,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.942,"redditLastFetched":"2026-05-15","apiSource":"Atlassian Statuspage incidents.json","apiIncidents90d":1,"apiMajorIncidents90d":0,"apiLastFetched":"2026-05-15"},"employee":{"vendorId":"hebbia","workLifeBalance":74,"culture":76,"litigationCount":0,"litigationScore":81,"careerGrowth":72,"compensation":80,"missionAlignment":82,"overall":78,"primaryThemes":["Niche financial-services AI specialism","Small team, fast scope expansion","Comp competitive"],"sources":["glassdoor.com/Overview/Working-at-Hebbia"],"dataStatus":"seed","litigationFootprint":1,"approxHeadcount":200,"litigationPerThousand":5,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"rogo","customer":{"vendorId":"rogo","averageUptimePct":99.2,"valueForMoney":72,"customerService":76,"responsiveness":76,"qualityOfService":80,"overall":81,"primaryThemes":["Financial-services domain fit","Early-stage customer base","Workflow depth growing"],"sources":["g2.com/products/rogo"],"dataStatus":"seed"},"developer":{"vendorId":"rogo","githubScore":56,"redditSentiment":95,"forumScore":43,"apiReliability":92,"documentationScore":66,"overall":70,"primaryThemes":["Early-stage; limited public developer surface","Domain-specific (financial services)","Mindshare growing in target buyers"],"sources":["rogo.ai","news.ycombinator.com"],"dataStatus":"seed","cellStatus":{"github":"seed","forum":"verified","reddit":"documented","api":"verified"},"forumSource":"hn.algolia.com","forumHnHits":42,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.929,"redditLastFetched":"2026-05-15","apiSource":"Atlassian Statuspage incidents.json","apiIncidents90d":2,"apiMajorIncidents90d":2,"apiLastFetched":"2026-05-15"},"employee":{"vendorId":"rogo","workLifeBalance":74,"culture":76,"litigationCount":0,"litigationScore":100,"careerGrowth":70,"compensation":76,"missionAlignment":82,"overall":80,"primaryThemes":["Very early-stage; limited review surface","Mission-driven legal/finance overlap","Equity-heavy comp"],"sources":["linkedin.com/company/rogoai"],"dataStatus":"seed","litigationFootprint":0,"approxHeadcount":120,"litigationPerThousand":0,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"moveworks","customer":{"vendorId":"moveworks","averageUptimePct":99.6,"valueForMoney":76,"customerService":84,"responsiveness":84,"qualityOfService":82,"overall":85,"primaryThemes":["Employee-service deflection metrics quoted","Strong customer success","Platform constraints noted"],"sources":["status.moveworks.com","g2.com/products/moveworks"],"dataStatus":"seed"},"developer":{"vendorId":"moveworks","githubScore":60,"redditSentiment":81,"forumScore":19,"apiReliability":76,"documentationScore":74,"overall":62,"primaryThemes":["Employee-service vertical focus narrows dev surface","Integration depth praised","Limited self-serve API"],"sources":["developer.moveworks.com"],"dataStatus":"seed","cellStatus":{"github":"seed","forum":"verified","reddit":"documented","api":"verified"},"forumSource":"hn.algolia.com","forumHnHits":6,"forumLastFetched":"2026-05-15","redditSource":"reddit.com/search","redditUpvoteRatio":0.865,"redditLastFetched":"2026-05-15","apiSource":"Atlassian Statuspage incidents.json","apiIncidents90d":6,"apiMajorIncidents90d":6,"apiLastFetched":"2026-05-15"},"employee":{"vendorId":"moveworks","workLifeBalance":76,"culture":74,"litigationCount":1,"litigationScore":85,"careerGrowth":74,"compensation":80,"missionAlignment":78,"overall":78,"primaryThemes":["Stable enterprise-AI org","Strong engineering culture","Comp solid"],"sources":["glassdoor.com/Overview/Working-at-Moveworks"],"dataStatus":"seed","litigationFootprint":2,"approxHeadcount":600,"litigationPerThousand":3.3,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented","mission":"seed"}}},{"vendorId":"alibaba","customer":{"vendorId":"alibaba","averageUptimePct":99.4,"valueForMoney":86,"customerService":70,"responsiveness":72,"qualityOfService":78,"overall":81,"primaryThemes":["Multilingual coverage praised","Compliance-gated for Western buyers","Cost competitive"],"sources":["g2.com/products/alibaba-cloud","status.alibabacloud.com"],"dataStatus":"seed"},"developer":{"vendorId":"alibaba","githubScore":80,"redditSentiment":74,"forumScore":70,"apiReliability":70,"documentationScore":74,"overall":74,"primaryThemes":["Qwen open-weight engagement strong globally","Compliance hesitation in regulated buyers","Cost-per-token attractive"],"sources":["github.com/QwenLM","reddit.com/r/LocalLLaMA","modelscope.cn"],"dataStatus":"seed"},"employee":{"vendorId":"alibaba","workLifeBalance":64,"culture":62,"litigationCount":6,"litigationScore":95,"careerGrowth":70,"compensation":72,"missionAlignment":59,"overall":70,"primaryThemes":["High-intensity culture flagged in reviews","Tech-track career path strong","Comp competitive in domestic market"],"sources":["glassdoor.com/Overview/Working-at-Alibaba"],"dataStatus":"seed","litigationFootprint":115,"approxHeadcount":200000,"litigationPerThousand":0.6,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented"}}},{"vendorId":"moonshot","customer":{"vendorId":"moonshot","averageUptimePct":99,"valueForMoney":84,"customerService":68,"responsiveness":70,"qualityOfService":80,"overall":80,"primaryThemes":["Long-context use cases praised","Limited Western enterprise track record","Pricing attractive"],"sources":["platform.moonshot.ai"],"dataStatus":"seed"},"developer":{"vendorId":"moonshot","githubScore":76,"redditSentiment":72,"forumScore":68,"apiReliability":70,"documentationScore":70,"overall":71,"primaryThemes":["Long-context positioning resonates","Limited Western dev coverage","K2 Thinking benchmarks discussed"],"sources":["platform.moonshot.ai","reddit.com/r/LocalLLaMA"],"dataStatus":"seed"},"employee":{"vendorId":"moonshot","workLifeBalance":72,"culture":74,"litigationCount":0,"litigationScore":75,"careerGrowth":72,"compensation":76,"missionAlignment":70,"overall":73,"primaryThemes":["Younger startup energy","Research-led","Stock-option upside narrative"],"sources":["news.ycombinator.com"],"dataStatus":"seed","litigationFootprint":2,"approxHeadcount":200,"litigationPerThousand":10,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented"}}},{"vendorId":"zai","customer":{"vendorId":"zai","averageUptimePct":99,"valueForMoney":76,"customerService":64,"responsiveness":66,"qualityOfService":74,"overall":76,"primaryThemes":["Sovereignty positioning","Limited Western customer-review surface","Pricing competitive"],"sources":["docs.z.ai"],"dataStatus":"seed"},"developer":{"vendorId":"zai","githubScore":70,"redditSentiment":64,"forumScore":64,"apiReliability":66,"documentationScore":66,"overall":66,"primaryThemes":["GLM 5.1 announcements limited in English-language press","Sovereignty positioning emerging","Smaller global dev footprint"],"sources":["docs.z.ai"],"dataStatus":"seed"},"employee":{"vendorId":"zai","workLifeBalance":68,"culture":68,"litigationCount":0,"litigationScore":100,"careerGrowth":68,"compensation":70,"missionAlignment":65,"overall":73,"primaryThemes":["Limited Western HR data surface","Research culture","Comp narrative limited in English-language sources"],"sources":["news.ycombinator.com"],"dataStatus":"seed","litigationFootprint":0,"approxHeadcount":800,"litigationPerThousand":0,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented"}}},{"vendorId":"minimax","customer":{"vendorId":"minimax","averageUptimePct":99.2,"valueForMoney":78,"customerService":68,"responsiveness":70,"qualityOfService":76,"overall":78,"primaryThemes":["Multimodal coverage valued","Consumer-AI provenance affects enterprise read","Pricing competitive"],"sources":["platform.minimax.io"],"dataStatus":"seed"},"developer":{"vendorId":"minimax","githubScore":70,"redditSentiment":68,"forumScore":66,"apiReliability":68,"documentationScore":68,"overall":68,"primaryThemes":["Multimodal + speech variants noted","Smaller global community","Consumer-AI provenance affects enterprise read"],"sources":["platform.minimax.io","reddit.com/r/LocalLLaMA"],"dataStatus":"seed"},"employee":{"vendorId":"minimax","workLifeBalance":68,"culture":68,"litigationCount":0,"litigationScore":66,"careerGrowth":70,"compensation":70,"missionAlignment":65,"overall":68,"primaryThemes":["Consumer-AI provenance shapes culture","Engineering bar growing","Limited tribunal-record surface"],"sources":["news.ycombinator.com"],"dataStatus":"seed","litigationFootprint":12,"approxHeadcount":500,"litigationPerThousand":24,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented"}}},{"vendorId":"ai21","customer":{"vendorId":"ai21","averageUptimePct":99.4,"valueForMoney":74,"customerService":78,"responsiveness":78,"qualityOfService":80,"overall":82,"primaryThemes":["Long-context cost-efficiency cited","Strong enterprise tooling","Smaller customer-review surface"],"sources":["status.ai21.com","g2.com/products/ai21-labs"],"dataStatus":"seed"},"developer":{"vendorId":"ai21","githubScore":70,"redditSentiment":68,"forumScore":72,"apiReliability":74,"documentationScore":78,"overall":72,"primaryThemes":["Jamba long-context architecture praised","Hybrid Mamba+Transformer differentiator","Enterprise-tuned positioning"],"sources":["docs.ai21.com","github.com/AI21Labs"],"dataStatus":"seed"},"employee":{"vendorId":"ai21","workLifeBalance":78,"culture":78,"litigationCount":0,"litigationScore":100,"careerGrowth":76,"compensation":78,"missionAlignment":74,"overall":81,"primaryThemes":["Israel + remote-hybrid","Stable, smaller org","Comp competitive for region"],"sources":["glassdoor.com/Overview/Working-at-AI21-Labs"],"dataStatus":"seed","litigationFootprint":0,"approxHeadcount":350,"litigationPerThousand":0,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented"}}},{"vendorId":"aleph","customer":{"vendorId":"aleph","averageUptimePct":99.2,"valueForMoney":66,"customerService":70,"responsiveness":70,"qualityOfService":72,"overall":75,"primaryThemes":["Sovereignty + on-prem story central","Limited commercial-API review surface","European customer base concentrated"],"sources":["docs.aleph-alpha.com"],"dataStatus":"seed"},"developer":{"vendorId":"aleph","githubScore":60,"redditSentiment":58,"forumScore":62,"apiReliability":64,"documentationScore":70,"overall":63,"primaryThemes":["Pharia open-weight release valued in Europe","Commercial-API maturity unclear","Sovereignty narrative central"],"sources":["docs.aleph-alpha.com"],"dataStatus":"seed"},"employee":{"vendorId":"aleph","workLifeBalance":74,"culture":74,"litigationCount":0,"litigationScore":100,"careerGrowth":70,"compensation":72,"missionAlignment":70,"overall":77,"primaryThemes":["European mature-org pace","Sovereignty mission resonates","Comp below US frontier peers"],"sources":["glassdoor.com/Overview/Working-at-Aleph-Alpha"],"dataStatus":"seed","litigationFootprint":0,"approxHeadcount":200,"litigationPerThousand":0,"litigationSource":"courtlistener.com","litigationLastFetched":"2026-05-16","cellStatus":{"litigation":"verified","litigationRate":"documented"}}}]}
+{
+ "provenance": "curated seed \u2014 public review, developer and workplace sources; pending live refresh",
+ "asOf": "2026-07-31T04:59:32.927Z",
+ "count": 29,
+ "rows": [
+  {
+   "vendorId": "openai",
+   "customer": {
+    "vendorId": "openai",
+    "averageUptimePct": 99.3,
+    "valueForMoney": 74,
+    "customerService": 72,
+    "responsiveness": 78,
+    "qualityOfService": 90,
+    "overall": 83,
+    "primaryThemes": [
+     "Best-in-class model quality (most reviews)",
+     "Pricing variance complaints",
+     "Outages in 2024-25 noted"
+    ],
+    "sources": [
+     "status.openai.com",
+     "g2.com/products/openai",
+     "trustradius.com"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "openai",
+    "githubScore": 93,
+    "redditSentiment": 100,
+    "forumScore": 100,
+    "apiReliability": 62,
+    "documentationScore": 86,
+    "overall": 88,
+    "primaryThemes": [
+     "Strong SDK + community",
+     "Pricing volatility complaints",
+     "Rate-limit frustration during peaks"
+    ],
+    "sources": [
+     "github.com/openai",
+     "reddit.com/r/OpenAI",
+     "news.ycombinator.com"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "openai/openai-python",
+    "githubStars": 30766,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented",
+     "api": "verified"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 10849,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.953,
+    "redditLastFetched": "2026-05-15",
+    "apiSource": "Atlassian Statuspage incidents.json",
+    "apiIncidents90d": 25,
+    "apiMajorIncidents90d": 3,
+    "apiLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "openai",
+    "workLifeBalance": 60,
+    "culture": 65,
+    "litigationCount": 4,
+    "litigationScore": 49,
+    "careerGrowth": 78,
+    "compensation": 92,
+    "missionAlignment": 74,
+    "overall": 70,
+    "primaryThemes": [
+     "Mission alignment strong",
+     "High turnover post-2024 governance events",
+     "Top-of-market comp"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-OpenAI",
+     "linkedin.com/company/openai"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 404,
+    "approxHeadcount": 3000,
+    "litigationPerThousand": 134.7,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "anthropic",
+   "customer": {
+    "vendorId": "anthropic",
+    "averageUptimePct": 99.6,
+    "valueForMoney": 80,
+    "customerService": 84,
+    "responsiveness": 86,
+    "qualityOfService": 92,
+    "overall": 88,
+    "primaryThemes": [
+     "Reasoning + coding quality leads reviews",
+     "Fewer outage incidents",
+     "Slower feature shipping cited"
+    ],
+    "sources": [
+     "status.anthropic.com",
+     "g2.com/products/claude"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "anthropic",
+    "githubScore": 80,
+    "redditSentiment": 97,
+    "forumScore": 67,
+    "apiReliability": 30,
+    "documentationScore": 90,
+    "overall": 73,
+    "primaryThemes": [
+     "Claude Code praised as default IDE assistant",
+     "Best-in-class coding benchmarks",
+     "Tool-use stable"
+    ],
+    "sources": [
+     "github.com/anthropics",
+     "reddit.com/r/ClaudeAI",
+     "news.ycombinator.com"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "anthropics/anthropic-sdk-python",
+    "githubStars": 3451,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented",
+     "api": "verified"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 1453,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.936,
+    "redditLastFetched": "2026-05-15",
+    "apiSource": "Atlassian Statuspage incidents.json",
+    "apiIncidents90d": 50,
+    "apiMajorIncidents90d": 17,
+    "apiLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "anthropic",
+    "workLifeBalance": 76,
+    "culture": 84,
+    "litigationCount": 0,
+    "litigationScore": 55,
+    "careerGrowth": 80,
+    "compensation": 90,
+    "missionAlignment": 90,
+    "overall": 79,
+    "primaryThemes": [
+     "Smaller team, less turnover",
+     "Safety-first culture cited as a draw",
+     "Strong comp + equity"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Anthropic",
+     "linkedin.com/company/anthropic"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 177,
+    "approxHeadcount": 2500,
+    "litigationPerThousand": 70.8,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "google",
+   "customer": {
+    "vendorId": "google",
+    "averageUptimePct": 99.7,
+    "valueForMoney": 82,
+    "customerService": 76,
+    "responsiveness": 78,
+    "qualityOfService": 84,
+    "overall": 84,
+    "primaryThemes": [
+     "Vertex AI enterprise polish improving",
+     "Workspace integration valued",
+     "Support response variable"
+    ],
+    "sources": [
+     "status.cloud.google.com",
+     "g2.com/products/google-cloud-vertex-ai"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "google",
+    "githubScore": 80,
+    "redditSentiment": 97,
+    "forumScore": 70,
+    "apiReliability": 78,
+    "documentationScore": 82,
+    "overall": 81,
+    "primaryThemes": [
+     "Gemini API quality improving",
+     "Vertex setup friction",
+     "Multimodal lead recognised"
+    ],
+    "sources": [
+     "github.com/google-gemini",
+     "reddit.com/r/Bard",
+     "ai.google.dev"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "googleapis/python-genai",
+    "githubStars": 3701,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 1445,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.935,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "google",
+    "workLifeBalance": 78,
+    "culture": 72,
+    "litigationCount": 6,
+    "litigationScore": 73,
+    "careerGrowth": 76,
+    "compensation": 88,
+    "missionAlignment": 64,
+    "overall": 75,
+    "primaryThemes": [
+     "Process-heavy but stable",
+     "Recent layoffs noted in reviews",
+     "Top-tier comp + benefits"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Google",
+     "blind"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 2223,
+    "approxHeadcount": 183000,
+    "litigationPerThousand": 12.1,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "microsoft",
+   "customer": {
+    "vendorId": "microsoft",
+    "averageUptimePct": 99.8,
+    "valueForMoney": 78,
+    "customerService": 80,
+    "responsiveness": 82,
+    "qualityOfService": 84,
+    "overall": 85,
+    "primaryThemes": [
+     "Enterprise procurement praised",
+     "Tenant isolation + audit valued",
+     "Cost-control complaints common"
+    ],
+    "sources": [
+     "status.azure.com",
+     "g2.com/products/microsoft-azure-ai"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "microsoft",
+    "githubScore": 97,
+    "redditSentiment": 100,
+    "forumScore": 71,
+    "apiReliability": 78,
+    "documentationScore": 84,
+    "overall": 86,
+    "primaryThemes": [
+     "Azure OpenAI well-documented",
+     "Copilot Studio devex polished",
+     "Foundry partner-model gaps"
+    ],
+    "sources": [
+     "github.com/Azure",
+     "reddit.com/r/AZURE"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "microsoft/autogen",
+    "githubStars": 58060,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 498,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.953,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "microsoft",
+    "workLifeBalance": 82,
+    "culture": 78,
+    "litigationCount": 5,
+    "litigationScore": 61,
+    "careerGrowth": 78,
+    "compensation": 86,
+    "missionAlignment": 66,
+    "overall": 75,
+    "primaryThemes": [
+     "Strong work-life balance reputation",
+     "Career mobility good",
+     "Comp competitive"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Microsoft",
+     "blind"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 8963,
+    "approxHeadcount": 228000,
+    "litigationPerThousand": 39.3,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "aws",
+   "customer": {
+    "vendorId": "aws",
+    "averageUptimePct": 99.85,
+    "valueForMoney": 76,
+    "customerService": 78,
+    "responsiveness": 80,
+    "qualityOfService": 84,
+    "overall": 84,
+    "primaryThemes": [
+     "Bedrock model choice headline strength",
+     "Support tier matters greatly",
+     "Complex billing"
+    ],
+    "sources": [
+     "health.aws.amazon.com",
+     "g2.com/products/amazon-bedrock"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "aws",
+    "githubScore": 81,
+    "redditSentiment": 75,
+    "forumScore": 51,
+    "apiReliability": 82,
+    "documentationScore": 80,
+    "overall": 74,
+    "primaryThemes": [
+     "Bedrock model choice praised",
+     "AWS IAM friction common",
+     "Stable, deep tooling"
+    ],
+    "sources": [
+     "github.com/aws",
+     "reddit.com/r/aws"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "aws/aws-sdk-pandas",
+    "githubStars": 4111,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 150,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.838,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "aws",
+    "workLifeBalance": 64,
+    "culture": 60,
+    "litigationCount": 8,
+    "litigationScore": 85,
+    "careerGrowth": 72,
+    "compensation": 86,
+    "missionAlignment": 60,
+    "overall": 71,
+    "primaryThemes": [
+     "High-intensity culture flagged",
+     "PIP fear common in reviews",
+     "Comp strong but conditional"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Amazon",
+     "blind"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 490,
+    "approxHeadcount": 150000,
+    "litigationPerThousand": 3.3,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "meta",
+   "customer": {
+    "vendorId": "meta",
+    "averageUptimePct": 99.5,
+    "valueForMoney": 88,
+    "customerService": 64,
+    "responsiveness": 70,
+    "qualityOfService": 84,
+    "overall": 81,
+    "primaryThemes": [
+     "Open-weights value flagged",
+     "Limited direct customer-support surface",
+     "Self-host TCO praised"
+    ],
+    "sources": [
+     "g2.com/products/llama"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "meta",
+    "githubScore": 88,
+    "redditSentiment": 86,
+    "forumScore": 80,
+    "apiReliability": 70,
+    "documentationScore": 78,
+    "overall": 80,
+    "primaryThemes": [
+     "Llama open-weights huge community",
+     "Self-hosting wins on cost",
+     "Inference quality variable"
+    ],
+    "sources": [
+     "github.com/meta-llama",
+     "reddit.com/r/LocalLLaMA"
+    ],
+    "dataStatus": "seed"
+   },
+   "employee": {
+    "vendorId": "meta",
+    "workLifeBalance": 70,
+    "culture": 68,
+    "litigationCount": 7,
+    "litigationScore": 66,
+    "careerGrowth": 76,
+    "compensation": 90,
+    "missionAlignment": 65,
+    "overall": 73,
+    "primaryThemes": [
+     "Layoff cycles in reviews",
+     "Comp top-of-market",
+     "Performance bar tightened post-2023"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Meta",
+     "blind"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 1777,
+    "approxHeadcount": 75000,
+    "litigationPerThousand": 23.7,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented"
+    }
+   }
+  },
+  {
+   "vendorId": "mistral",
+   "customer": {
+    "vendorId": "mistral",
+    "averageUptimePct": 99.4,
+    "valueForMoney": 86,
+    "customerService": 74,
+    "responsiveness": 76,
+    "qualityOfService": 82,
+    "overall": 83,
+    "primaryThemes": [
+     "Cost-per-token praised",
+     "Sovereignty positioning valued",
+     "Smaller support footprint"
+    ],
+    "sources": [
+     "status.mistral.ai",
+     "g2.com/products/mistral-ai"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "mistral",
+    "githubScore": 86,
+    "redditSentiment": 98,
+    "forumScore": 63,
+    "apiReliability": 76,
+    "documentationScore": 78,
+    "overall": 80,
+    "primaryThemes": [
+     "Strong Codestral adoption",
+     "European-sovereign positioning",
+     "Some API-stability complaints"
+    ],
+    "sources": [
+     "github.com/mistralai",
+     "reddit.com/r/MistralAI"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "mistralai/mistral-inference",
+    "githubStars": 10807,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 376,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.941,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "mistral",
+    "workLifeBalance": 80,
+    "culture": 82,
+    "litigationCount": 0,
+    "litigationScore": 74,
+    "careerGrowth": 74,
+    "compensation": 78,
+    "missionAlignment": 86,
+    "overall": 79,
+    "primaryThemes": [
+     "European base + remote-friendly",
+     "Growing fast, scope expansion possible",
+     "Comp solid for Paris"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Mistral-AI"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 4,
+    "approxHeadcount": 350,
+    "litigationPerThousand": 11.4,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "cohere",
+   "customer": {
+    "vendorId": "cohere",
+    "averageUptimePct": 99.7,
+    "valueForMoney": 80,
+    "customerService": 80,
+    "responsiveness": 80,
+    "qualityOfService": 82,
+    "overall": 84,
+    "primaryThemes": [
+     "Enterprise-tuned support",
+     "Embed/Rerank quality strong",
+     "Less mass-market mindshare"
+    ],
+    "sources": [
+     "status.cohere.com",
+     "g2.com/products/cohere"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "cohere",
+    "githubScore": 66,
+    "redditSentiment": 68,
+    "forumScore": 68,
+    "apiReliability": 94,
+    "documentationScore": 80,
+    "overall": 75,
+    "primaryThemes": [
+     "Enterprise positioning narrows community",
+     "Rerank/Embed quality strong",
+     "Less retail dev mindshare"
+    ],
+    "sources": [
+     "github.com/cohere-ai",
+     "reddit.com/r/cohere"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "cohere-ai/cohere-python",
+    "githubStars": 383,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented",
+     "api": "verified"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 850,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.805,
+    "redditLastFetched": "2026-05-15",
+    "apiSource": "Atlassian Statuspage incidents.json",
+    "apiIncidents90d": 3,
+    "apiMajorIncidents90d": 1,
+    "apiLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "cohere",
+    "workLifeBalance": 78,
+    "culture": 80,
+    "litigationCount": 0,
+    "litigationScore": 49,
+    "careerGrowth": 72,
+    "compensation": 76,
+    "missionAlignment": 78,
+    "overall": 72,
+    "primaryThemes": [
+     "Smaller team, broad scope",
+     "Toronto/SF mix",
+     "Comp competitive but below US frontier labs"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Cohere"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 74,
+    "approxHeadcount": 600,
+    "litigationPerThousand": 123.3,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "deepseek",
+   "customer": {
+    "vendorId": "deepseek",
+    "averageUptimePct": 99.2,
+    "valueForMoney": 92,
+    "customerService": 66,
+    "responsiveness": 70,
+    "qualityOfService": 84,
+    "overall": 82,
+    "primaryThemes": [
+     "Cost-per-quality leadership cited",
+     "Geopolitical / data-residency caveats",
+     "API stability improving"
+    ],
+    "sources": [
+     "status.deepseek.com",
+     "g2.com/products/deepseek"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "deepseek",
+    "githubScore": 86,
+    "redditSentiment": 84,
+    "forumScore": 76,
+    "apiReliability": 72,
+    "documentationScore": 70,
+    "overall": 78,
+    "primaryThemes": [
+     "Cost-per-quality praised loudly",
+     "Reasoning benchmarks strong",
+     "Compliance hesitation in regulated buyers"
+    ],
+    "sources": [
+     "github.com/deepseek-ai",
+     "reddit.com/r/LocalLLaMA"
+    ],
+    "dataStatus": "seed"
+   },
+   "employee": {
+    "vendorId": "deepseek",
+    "workLifeBalance": 70,
+    "culture": 72,
+    "litigationCount": 0,
+    "litigationScore": 42,
+    "careerGrowth": 72,
+    "compensation": 76,
+    "missionAlignment": 68,
+    "overall": 67,
+    "primaryThemes": [
+     "Small focused team",
+     "Research-led culture",
+     "Compensation strong for domestic peers"
+    ],
+    "sources": [
+     "news.ycombinator.com"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 49,
+    "approxHeadcount": 200,
+    "litigationPerThousand": 245,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented"
+    }
+   }
+  },
+  {
+   "vendorId": "xai",
+   "customer": {
+    "vendorId": "xai",
+    "averageUptimePct": 99,
+    "valueForMoney": 72,
+    "customerService": 64,
+    "responsiveness": 66,
+    "qualityOfService": 72,
+    "overall": 75,
+    "primaryThemes": [
+     "Compute scale story valued",
+     "Enterprise control surface thin",
+     "Governance opacity flagged"
+    ],
+    "sources": [
+     "status.x.ai"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "xai",
+    "githubScore": 70,
+    "redditSentiment": 68,
+    "forumScore": 64,
+    "apiReliability": 60,
+    "documentationScore": 62,
+    "overall": 65,
+    "primaryThemes": [
+     "Compute scale impressive",
+     "Tooling still maturing",
+     "Devex inconsistent vs frontier set"
+    ],
+    "sources": [
+     "docs.x.ai",
+     "reddit.com/r/grok"
+    ],
+    "dataStatus": "seed"
+   },
+   "employee": {
+    "vendorId": "xai",
+    "workLifeBalance": 64,
+    "culture": 60,
+    "litigationCount": 2,
+    "litigationScore": 74,
+    "careerGrowth": 70,
+    "compensation": 88,
+    "missionAlignment": 57,
+    "overall": 69,
+    "primaryThemes": [
+     "High-velocity, high-intensity culture",
+     "Founder-driven environment cited",
+     "Top-of-market comp + equity upside"
+    ],
+    "sources": [
+     "news.ycombinator.com",
+     "linkedin.com/company/xai"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 13,
+    "approxHeadcount": 1200,
+    "litigationPerThousand": 10.8,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented"
+    }
+   }
+  },
+  {
+   "vendorId": "databricks",
+   "customer": {
+    "vendorId": "databricks",
+    "averageUptimePct": 99.5,
+    "valueForMoney": 78,
+    "customerService": 78,
+    "responsiveness": 80,
+    "qualityOfService": 84,
+    "overall": 84,
+    "primaryThemes": [
+     "Data + AI build workflow praised",
+     "Setup learning curve flagged",
+     "Customer success teams strong"
+    ],
+    "sources": [
+     "status.databricks.com",
+     "g2.com/products/databricks"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "databricks",
+    "githubScore": 68,
+    "redditSentiment": 86,
+    "forumScore": 56,
+    "apiReliability": 80,
+    "documentationScore": 84,
+    "overall": 75,
+    "primaryThemes": [
+     "Mosaic AI strong for build workflows",
+     "Complex setup for non-data teams"
+    ],
+    "sources": [
+     "github.com/databricks",
+     "community.databricks.com"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "databricks/databricks-sdk-py",
+    "githubStars": 548,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 211,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.886,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "databricks",
+    "workLifeBalance": 76,
+    "culture": 76,
+    "litigationCount": 2,
+    "litigationScore": 76,
+    "careerGrowth": 80,
+    "compensation": 86,
+    "missionAlignment": 76,
+    "overall": 78,
+    "primaryThemes": [
+     "Pre-IPO equity narrative",
+     "Strong technical bar",
+     "Fast pace, scaling org pains"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Databricks"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 68,
+    "approxHeadcount": 7500,
+    "litigationPerThousand": 9.1,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "snowflake",
+   "customer": {
+    "vendorId": "snowflake",
+    "averageUptimePct": 99.85,
+    "valueForMoney": 74,
+    "customerService": 80,
+    "responsiveness": 80,
+    "qualityOfService": 84,
+    "overall": 84,
+    "primaryThemes": [
+     "Reliability outstanding",
+     "Compute cost surprises flagged",
+     "Cortex experience improving"
+    ],
+    "sources": [
+     "status.snowflake.com",
+     "g2.com/products/snowflake"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "snowflake",
+    "githubScore": 50,
+    "redditSentiment": 76,
+    "forumScore": 41,
+    "apiReliability": 62,
+    "documentationScore": 78,
+    "overall": 61,
+    "primaryThemes": [
+     "Cortex API simple",
+     "Arctic adoption growing",
+     "Locked to data-cloud first"
+    ],
+    "sources": [
+     "github.com/Snowflake-Labs",
+     "community.snowflake.com"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "Snowflake-Labs/snowflake-arctic",
+    "githubStars": 560,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented",
+     "api": "verified"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 23,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.843,
+    "redditLastFetched": "2026-05-15",
+    "apiSource": "Atlassian Statuspage incidents.json",
+    "apiIncidents90d": 13,
+    "apiMajorIncidents90d": 8,
+    "apiLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "snowflake",
+    "workLifeBalance": 78,
+    "culture": 74,
+    "litigationCount": 2,
+    "litigationScore": 66,
+    "careerGrowth": 76,
+    "compensation": 84,
+    "missionAlignment": 72,
+    "overall": 75,
+    "primaryThemes": [
+     "Stable post-IPO",
+     "Sales culture intense",
+     "Engineering comp solid"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Snowflake"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 185,
+    "approxHeadcount": 7800,
+    "litigationPerThousand": 23.7,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "salesforce",
+   "customer": {
+    "vendorId": "salesforce",
+    "averageUptimePct": 99.6,
+    "valueForMoney": 70,
+    "customerService": 78,
+    "responsiveness": 78,
+    "qualityOfService": 80,
+    "overall": 81,
+    "primaryThemes": [
+     "CRM workflow fit valued",
+     "Per-seat pricing flagged",
+     "Service quality varies by region"
+    ],
+    "sources": [
+     "status.salesforce.com",
+     "g2.com/products/salesforce"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "salesforce",
+    "githubScore": 73,
+    "redditSentiment": 89,
+    "forumScore": 32,
+    "apiReliability": 72,
+    "documentationScore": 80,
+    "overall": 69,
+    "primaryThemes": [
+     "Einstein Studio improving",
+     "Per-seat pricing concerns flagged in dev threads",
+     "BYOLLM patterns more flexible"
+    ],
+    "sources": [
+     "github.com/forcedotcom",
+     "developer.salesforce.com"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "salesforce/CodeGen",
+    "githubStars": 5176,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 22,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.901,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "salesforce",
+    "workLifeBalance": 72,
+    "culture": 70,
+    "litigationCount": 6,
+    "litigationScore": 73,
+    "careerGrowth": 74,
+    "compensation": 82,
+    "missionAlignment": 68,
+    "overall": 73,
+    "primaryThemes": [
+     "Ohana culture marketed but mixed reviews",
+     "Layoff cycles in 2023-24",
+     "Comp solid"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Salesforce"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 967,
+    "approxHeadcount": 76000,
+    "litigationPerThousand": 12.7,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "servicenow",
+   "customer": {
+    "vendorId": "servicenow",
+    "averageUptimePct": 99.7,
+    "valueForMoney": 72,
+    "customerService": 80,
+    "responsiveness": 80,
+    "qualityOfService": 82,
+    "overall": 83,
+    "primaryThemes": [
+     "Strong ITSM workflow value",
+     "Implementation complexity flagged",
+     "Reliable platform"
+    ],
+    "sources": [
+     "status.servicenow.com",
+     "g2.com/products/servicenow"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "servicenow",
+    "githubScore": 65,
+    "redditSentiment": 91,
+    "forumScore": 9,
+    "apiReliability": 76,
+    "documentationScore": 80,
+    "overall": 64,
+    "primaryThemes": [
+     "Now LLM Service brokering praised",
+     "Implementation complexity flagged",
+     "Platform-bound tooling"
+    ],
+    "sources": [
+     "github.com/ServiceNow",
+     "community.servicenow.com"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "ServiceNow/Fast-LLM",
+    "githubStars": 311,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 1,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.911,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "servicenow",
+    "workLifeBalance": 78,
+    "culture": 76,
+    "litigationCount": 3,
+    "litigationScore": 81,
+    "careerGrowth": 78,
+    "compensation": 84,
+    "missionAlignment": 70,
+    "overall": 78,
+    "primaryThemes": [
+     "Stable engineering culture",
+     "Strong career mobility within suite",
+     "Equity narrative positive"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-ServiceNow"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 129,
+    "approxHeadcount": 26000,
+    "litigationPerThousand": 5,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "oracle",
+   "customer": {
+    "vendorId": "oracle",
+    "averageUptimePct": 99.6,
+    "valueForMoney": 64,
+    "customerService": 72,
+    "responsiveness": 70,
+    "qualityOfService": 76,
+    "overall": 76,
+    "primaryThemes": [
+     "Database integration valued",
+     "Procurement experience friction",
+     "Premium pricing"
+    ],
+    "sources": [
+     "status.oraclecloud.com",
+     "g2.com/products/oracle-cloud-infrastructure"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "oracle",
+    "githubScore": 67,
+    "redditSentiment": 100,
+    "forumScore": 17,
+    "apiReliability": 72,
+    "documentationScore": 74,
+    "overall": 66,
+    "primaryThemes": [
+     "OCI Generative AI documentation thin in places",
+     "Cohere/Meta hosting valued",
+     "Procurement-led developer access"
+    ],
+    "sources": [
+     "github.com/oracle",
+     "community.oracle.com"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "oracle/oci-python-sdk",
+    "githubStars": 473,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 2,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.963,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "oracle",
+    "workLifeBalance": 64,
+    "culture": 58,
+    "litigationCount": 12,
+    "litigationScore": 94,
+    "careerGrowth": 64,
+    "compensation": 70,
+    "missionAlignment": 56,
+    "overall": 68,
+    "primaryThemes": [
+     "Process-heavy reputation",
+     "Career mobility limited",
+     "Litigation history above peer average"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Oracle",
+     "courtlistener.com"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 120,
+    "approxHeadcount": 159000,
+    "litigationPerThousand": 0.8,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "sap",
+   "customer": {
+    "vendorId": "sap",
+    "averageUptimePct": 99.8,
+    "valueForMoney": 64,
+    "customerService": 72,
+    "responsiveness": 70,
+    "qualityOfService": 76,
+    "overall": 76,
+    "primaryThemes": [
+     "Enterprise ERP integration valued",
+     "Implementation complexity flagged",
+     "Slower AI cadence cited"
+    ],
+    "sources": [
+     "status.sap.com",
+     "g2.com/products/sap"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "sap",
+    "githubScore": 60,
+    "redditSentiment": 83,
+    "forumScore": 9,
+    "apiReliability": 68,
+    "documentationScore": 72,
+    "overall": 58,
+    "primaryThemes": [
+     "Joule + BTP developer story still maturing",
+     "ABAP integration noted",
+     "Slow dev community velocity"
+    ],
+    "sources": [
+     "github.com/SAP",
+     "community.sap.com"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "SAP (org, 314 repos)",
+    "githubStars": 4184,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 1,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.874,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "sap",
+    "workLifeBalance": 68,
+    "culture": 64,
+    "litigationCount": 8,
+    "litigationScore": 89,
+    "careerGrowth": 66,
+    "compensation": 74,
+    "missionAlignment": 62,
+    "overall": 71,
+    "primaryThemes": [
+     "European mature-org culture",
+     "Slower mobility cited",
+     "Restructuring cycles in reviews"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-SAP"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 196,
+    "approxHeadcount": 108000,
+    "litigationPerThousand": 1.8,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "ibm",
+   "customer": {
+    "vendorId": "ibm",
+    "averageUptimePct": 99.7,
+    "valueForMoney": 70,
+    "customerService": 78,
+    "responsiveness": 76,
+    "qualityOfService": 78,
+    "overall": 80,
+    "primaryThemes": [
+     "Control + governance narrative",
+     "Hybrid story credible",
+     "Slower roll-out cadence"
+    ],
+    "sources": [
+     "status.ibm.com",
+     "g2.com/products/ibm-watsonx"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "ibm",
+    "githubScore": 55,
+    "redditSentiment": 68,
+    "forumScore": 28,
+    "apiReliability": 74,
+    "documentationScore": 78,
+    "overall": 61,
+    "primaryThemes": [
+     "watsonx.ai documentation comprehensive",
+     "Hybrid + Granite story credible",
+     "Smaller retail community"
+    ],
+    "sources": [
+     "github.com/IBM",
+     "community.ibm.com"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "ibm-granite/granite-3.0-language-models",
+    "githubStars": 272,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 23,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.805,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "ibm",
+    "workLifeBalance": 64,
+    "culture": 60,
+    "litigationCount": 10,
+    "litigationScore": 83,
+    "careerGrowth": 64,
+    "compensation": 70,
+    "missionAlignment": 58,
+    "overall": 67,
+    "primaryThemes": [
+     "Process-heavy culture",
+     "Litigation history above peer average",
+     "Career mobility limited in legacy units"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-IBM",
+     "courtlistener.com"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 1115,
+    "approxHeadcount": 280000,
+    "litigationPerThousand": 4,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "glean",
+   "customer": {
+    "vendorId": "glean",
+    "averageUptimePct": 99.7,
+    "valueForMoney": 76,
+    "customerService": 84,
+    "responsiveness": 82,
+    "qualityOfService": 86,
+    "overall": 86,
+    "primaryThemes": [
+     "Enterprise knowledge fit valued",
+     "Implementation depends on source quality",
+     "Customer success teams praised"
+    ],
+    "sources": [
+     "status.glean.com",
+     "g2.com/products/glean"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "glean",
+    "githubScore": 42,
+    "redditSentiment": 90,
+    "forumScore": 44,
+    "apiReliability": 76,
+    "documentationScore": 76,
+    "overall": 66,
+    "primaryThemes": [
+     "Connector breadth praised",
+     "Setup complexity flagged",
+     "Slack-app surface valued"
+    ],
+    "sources": [
+     "github.com/gleanwork",
+     "developer.glean.com"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "gleanwork (org, 38 repos)",
+    "githubStars": 83,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 38,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.904,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "glean",
+    "workLifeBalance": 80,
+    "culture": 80,
+    "litigationCount": 0,
+    "litigationScore": 100,
+    "careerGrowth": 76,
+    "compensation": 82,
+    "missionAlignment": 84,
+    "overall": 84,
+    "primaryThemes": [
+     "Small, mission-driven team",
+     "Pre-IPO equity narrative",
+     "Hiring bar high"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Glean"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 0,
+    "approxHeadcount": 1000,
+    "litigationPerThousand": 0,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "harvey",
+   "customer": {
+    "vendorId": "harvey",
+    "averageUptimePct": 99.7,
+    "valueForMoney": 70,
+    "customerService": 82,
+    "responsiveness": 84,
+    "qualityOfService": 88,
+    "overall": 85,
+    "primaryThemes": [
+     "Legal-domain depth valued",
+     "Pricing opacity flagged",
+     "White-glove support standard"
+    ],
+    "sources": [
+     "status.harvey.ai",
+     "g2.com/products/harvey-ai"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "harvey",
+    "githubScore": 62,
+    "redditSentiment": 84,
+    "forumScore": 23,
+    "apiReliability": 90,
+    "documentationScore": 72,
+    "overall": 66,
+    "primaryThemes": [
+     "Closed-platform, no public dev surface",
+     "Reviewed via firm-side feedback",
+     "Legal-domain depth recognised"
+    ],
+    "sources": [
+     "news.ycombinator.com",
+     "lawnext.com"
+    ],
+    "dataStatus": "seed",
+    "cellStatus": {
+     "github": "seed",
+     "forum": "verified",
+     "reddit": "documented",
+     "api": "verified"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 9,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.878,
+    "redditLastFetched": "2026-05-15",
+    "apiSource": "Atlassian Statuspage incidents.json",
+    "apiIncidents90d": 6,
+    "apiMajorIncidents90d": 1,
+    "apiLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "harvey",
+    "workLifeBalance": 78,
+    "culture": 80,
+    "litigationCount": 0,
+    "litigationScore": 68,
+    "careerGrowth": 76,
+    "compensation": 86,
+    "missionAlignment": 88,
+    "overall": 79,
+    "primaryThemes": [
+     "Mission-driven legal-tech culture",
+     "Fast scaling, high bar",
+     "Top-of-market comp for legal-tech"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Harvey"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 10,
+    "approxHeadcount": 500,
+    "litigationPerThousand": 20,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "writer",
+   "customer": {
+    "vendorId": "writer",
+    "averageUptimePct": 99.5,
+    "valueForMoney": 76,
+    "customerService": 80,
+    "responsiveness": 80,
+    "qualityOfService": 82,
+    "overall": 84,
+    "primaryThemes": [
+     "Brand-safe content workflows valued",
+     "Vertical variants (Med/Fin) praised",
+     "Implementation depth varies"
+    ],
+    "sources": [
+     "status.writer.com",
+     "g2.com/products/writer"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "writer",
+    "githubScore": 74,
+    "redditSentiment": 93,
+    "forumScore": 26,
+    "apiReliability": 76,
+    "documentationScore": 80,
+    "overall": 70,
+    "primaryThemes": [
+     "Palmyra API clear",
+     "Enterprise-tuned positioning narrows community",
+     "Domain variants (Med/Fin) appreciated"
+    ],
+    "sources": [
+     "dev.writer.com",
+     "github.com/writerai"
+    ],
+    "dataStatus": "seed",
+    "githubRepo": "writer/writer-framework",
+    "githubStars": 1441,
+    "githubLastFetched": "2026-05-15",
+    "cellStatus": {
+     "github": "verified",
+     "forum": "verified",
+     "reddit": "documented"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 5,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.918,
+    "redditLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "writer",
+    "workLifeBalance": 76,
+    "culture": 76,
+    "litigationCount": 1,
+    "litigationScore": 81,
+    "careerGrowth": 74,
+    "compensation": 78,
+    "missionAlignment": 80,
+    "overall": 78,
+    "primaryThemes": [
+     "Smaller team, varied scope",
+     "Remote-friendly",
+     "Comp competitive for category"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Writer"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 2,
+    "approxHeadcount": 400,
+    "litigationPerThousand": 5,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "hebbia",
+   "customer": {
+    "vendorId": "hebbia",
+    "averageUptimePct": 99.5,
+    "valueForMoney": 74,
+    "customerService": 80,
+    "responsiveness": 80,
+    "qualityOfService": 84,
+    "overall": 84,
+    "primaryThemes": [
+     "Document-intelligence quality praised",
+     "Niche-vertical focus narrows reviews",
+     "Workflow depth strong"
+    ],
+    "sources": [
+     "g2.com/products/hebbia"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "hebbia",
+    "githubScore": 60,
+    "redditSentiment": 98,
+    "forumScore": 33,
+    "apiReliability": 99,
+    "documentationScore": 70,
+    "overall": 72,
+    "primaryThemes": [
+     "Document-intelligence focus narrow",
+     "Workflow-bound positioning limits dev mindshare",
+     "Niche but praised in target verticals"
+    ],
+    "sources": [
+     "hebbia.com",
+     "news.ycombinator.com"
+    ],
+    "dataStatus": "seed",
+    "cellStatus": {
+     "github": "seed",
+     "forum": "verified",
+     "reddit": "documented",
+     "api": "verified"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 37,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.942,
+    "redditLastFetched": "2026-05-15",
+    "apiSource": "Atlassian Statuspage incidents.json",
+    "apiIncidents90d": 1,
+    "apiMajorIncidents90d": 0,
+    "apiLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "hebbia",
+    "workLifeBalance": 74,
+    "culture": 76,
+    "litigationCount": 0,
+    "litigationScore": 81,
+    "careerGrowth": 72,
+    "compensation": 80,
+    "missionAlignment": 82,
+    "overall": 78,
+    "primaryThemes": [
+     "Niche financial-services AI specialism",
+     "Small team, fast scope expansion",
+     "Comp competitive"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Hebbia"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 1,
+    "approxHeadcount": 200,
+    "litigationPerThousand": 5,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "rogo",
+   "customer": {
+    "vendorId": "rogo",
+    "averageUptimePct": 99.2,
+    "valueForMoney": 72,
+    "customerService": 76,
+    "responsiveness": 76,
+    "qualityOfService": 80,
+    "overall": 81,
+    "primaryThemes": [
+     "Financial-services domain fit",
+     "Early-stage customer base",
+     "Workflow depth growing"
+    ],
+    "sources": [
+     "g2.com/products/rogo"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "rogo",
+    "githubScore": 56,
+    "redditSentiment": 95,
+    "forumScore": 43,
+    "apiReliability": 92,
+    "documentationScore": 66,
+    "overall": 70,
+    "primaryThemes": [
+     "Early-stage; limited public developer surface",
+     "Domain-specific (financial services)",
+     "Mindshare growing in target buyers"
+    ],
+    "sources": [
+     "rogo.ai",
+     "news.ycombinator.com"
+    ],
+    "dataStatus": "seed",
+    "cellStatus": {
+     "github": "seed",
+     "forum": "verified",
+     "reddit": "documented",
+     "api": "verified"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 42,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.929,
+    "redditLastFetched": "2026-05-15",
+    "apiSource": "Atlassian Statuspage incidents.json",
+    "apiIncidents90d": 2,
+    "apiMajorIncidents90d": 2,
+    "apiLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "rogo",
+    "workLifeBalance": 74,
+    "culture": 76,
+    "litigationCount": 0,
+    "litigationScore": 100,
+    "careerGrowth": 70,
+    "compensation": 76,
+    "missionAlignment": 82,
+    "overall": 80,
+    "primaryThemes": [
+     "Very early-stage; limited review surface",
+     "Mission-driven legal/finance overlap",
+     "Equity-heavy comp"
+    ],
+    "sources": [
+     "linkedin.com/company/rogoai"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 0,
+    "approxHeadcount": 120,
+    "litigationPerThousand": 0,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "moveworks",
+   "customer": {
+    "vendorId": "moveworks",
+    "averageUptimePct": 99.6,
+    "valueForMoney": 76,
+    "customerService": 84,
+    "responsiveness": 84,
+    "qualityOfService": 82,
+    "overall": 85,
+    "primaryThemes": [
+     "Employee-service deflection metrics quoted",
+     "Strong customer success",
+     "Platform constraints noted"
+    ],
+    "sources": [
+     "status.moveworks.com",
+     "g2.com/products/moveworks"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "moveworks",
+    "githubScore": 60,
+    "redditSentiment": 81,
+    "forumScore": 19,
+    "apiReliability": 76,
+    "documentationScore": 74,
+    "overall": 62,
+    "primaryThemes": [
+     "Employee-service vertical focus narrows dev surface",
+     "Integration depth praised",
+     "Limited self-serve API"
+    ],
+    "sources": [
+     "developer.moveworks.com"
+    ],
+    "dataStatus": "seed",
+    "cellStatus": {
+     "github": "seed",
+     "forum": "verified",
+     "reddit": "documented",
+     "api": "verified"
+    },
+    "forumSource": "hn.algolia.com",
+    "forumHnHits": 6,
+    "forumLastFetched": "2026-05-15",
+    "redditSource": "reddit.com/search",
+    "redditUpvoteRatio": 0.865,
+    "redditLastFetched": "2026-05-15",
+    "apiSource": "Atlassian Statuspage incidents.json",
+    "apiIncidents90d": 6,
+    "apiMajorIncidents90d": 6,
+    "apiLastFetched": "2026-05-15"
+   },
+   "employee": {
+    "vendorId": "moveworks",
+    "workLifeBalance": 76,
+    "culture": 74,
+    "litigationCount": 1,
+    "litigationScore": 85,
+    "careerGrowth": 74,
+    "compensation": 80,
+    "missionAlignment": 78,
+    "overall": 78,
+    "primaryThemes": [
+     "Stable enterprise-AI org",
+     "Strong engineering culture",
+     "Comp solid"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Moveworks"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 2,
+    "approxHeadcount": 600,
+    "litigationPerThousand": 3.3,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented",
+     "mission": "seed"
+    }
+   }
+  },
+  {
+   "vendorId": "alibaba",
+   "customer": {
+    "vendorId": "alibaba",
+    "averageUptimePct": 99.4,
+    "valueForMoney": 86,
+    "customerService": 70,
+    "responsiveness": 72,
+    "qualityOfService": 78,
+    "overall": 81,
+    "primaryThemes": [
+     "Multilingual coverage praised",
+     "Compliance-gated for Western buyers",
+     "Cost competitive"
+    ],
+    "sources": [
+     "g2.com/products/alibaba-cloud",
+     "status.alibabacloud.com"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "alibaba",
+    "githubScore": 80,
+    "redditSentiment": 74,
+    "forumScore": 70,
+    "apiReliability": 70,
+    "documentationScore": 74,
+    "overall": 74,
+    "primaryThemes": [
+     "Qwen open-weight engagement strong globally",
+     "Compliance hesitation in regulated buyers",
+     "Cost-per-token attractive"
+    ],
+    "sources": [
+     "github.com/QwenLM",
+     "reddit.com/r/LocalLLaMA",
+     "modelscope.cn"
+    ],
+    "dataStatus": "seed"
+   },
+   "employee": {
+    "vendorId": "alibaba",
+    "workLifeBalance": 64,
+    "culture": 62,
+    "litigationCount": 6,
+    "litigationScore": 95,
+    "careerGrowth": 70,
+    "compensation": 72,
+    "missionAlignment": 59,
+    "overall": 70,
+    "primaryThemes": [
+     "High-intensity culture flagged in reviews",
+     "Tech-track career path strong",
+     "Comp competitive in domestic market"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Alibaba"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 115,
+    "approxHeadcount": 200000,
+    "litigationPerThousand": 0.6,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented"
+    }
+   }
+  },
+  {
+   "vendorId": "moonshot",
+   "customer": {
+    "vendorId": "moonshot",
+    "averageUptimePct": 99,
+    "valueForMoney": 84,
+    "customerService": 68,
+    "responsiveness": 70,
+    "qualityOfService": 80,
+    "overall": 80,
+    "primaryThemes": [
+     "Long-context use cases praised",
+     "Limited Western enterprise track record",
+     "Pricing attractive"
+    ],
+    "sources": [
+     "platform.moonshot.ai"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "moonshot",
+    "githubScore": 76,
+    "redditSentiment": 72,
+    "forumScore": 68,
+    "apiReliability": 70,
+    "documentationScore": 70,
+    "overall": 71,
+    "primaryThemes": [
+     "Long-context positioning resonates",
+     "Limited Western dev coverage",
+     "K2 Thinking benchmarks discussed"
+    ],
+    "sources": [
+     "platform.moonshot.ai",
+     "reddit.com/r/LocalLLaMA"
+    ],
+    "dataStatus": "seed"
+   },
+   "employee": {
+    "vendorId": "moonshot",
+    "workLifeBalance": 72,
+    "culture": 74,
+    "litigationCount": 0,
+    "litigationScore": 75,
+    "careerGrowth": 72,
+    "compensation": 76,
+    "missionAlignment": 70,
+    "overall": 73,
+    "primaryThemes": [
+     "Younger startup energy",
+     "Research-led",
+     "Stock-option upside narrative"
+    ],
+    "sources": [
+     "news.ycombinator.com"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 2,
+    "approxHeadcount": 200,
+    "litigationPerThousand": 10,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented"
+    }
+   }
+  },
+  {
+   "vendorId": "zai",
+   "customer": {
+    "vendorId": "zai",
+    "averageUptimePct": 99,
+    "valueForMoney": 76,
+    "customerService": 64,
+    "responsiveness": 66,
+    "qualityOfService": 74,
+    "overall": 76,
+    "primaryThemes": [
+     "Sovereignty positioning",
+     "Limited Western customer-review surface",
+     "Pricing competitive"
+    ],
+    "sources": [
+     "docs.z.ai"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "zai",
+    "githubScore": 70,
+    "redditSentiment": 64,
+    "forumScore": 64,
+    "apiReliability": 66,
+    "documentationScore": 66,
+    "overall": 66,
+    "primaryThemes": [
+     "GLM 5.1 announcements limited in English-language press",
+     "Sovereignty positioning emerging",
+     "Smaller global dev footprint"
+    ],
+    "sources": [
+     "docs.z.ai"
+    ],
+    "dataStatus": "seed"
+   },
+   "employee": {
+    "vendorId": "zai",
+    "workLifeBalance": 68,
+    "culture": 68,
+    "litigationCount": 0,
+    "litigationScore": 100,
+    "careerGrowth": 68,
+    "compensation": 70,
+    "missionAlignment": 65,
+    "overall": 73,
+    "primaryThemes": [
+     "Limited Western HR data surface",
+     "Research culture",
+     "Comp narrative limited in English-language sources"
+    ],
+    "sources": [
+     "news.ycombinator.com"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 0,
+    "approxHeadcount": 800,
+    "litigationPerThousand": 0,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented"
+    }
+   }
+  },
+  {
+   "vendorId": "minimax",
+   "customer": {
+    "vendorId": "minimax",
+    "averageUptimePct": 99.2,
+    "valueForMoney": 78,
+    "customerService": 68,
+    "responsiveness": 70,
+    "qualityOfService": 76,
+    "overall": 78,
+    "primaryThemes": [
+     "Multimodal coverage valued",
+     "Consumer-AI provenance affects enterprise read",
+     "Pricing competitive"
+    ],
+    "sources": [
+     "platform.minimax.io"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "minimax",
+    "githubScore": 70,
+    "redditSentiment": 68,
+    "forumScore": 66,
+    "apiReliability": 68,
+    "documentationScore": 68,
+    "overall": 68,
+    "primaryThemes": [
+     "Multimodal + speech variants noted",
+     "Smaller global community",
+     "Consumer-AI provenance affects enterprise read"
+    ],
+    "sources": [
+     "platform.minimax.io",
+     "reddit.com/r/LocalLLaMA"
+    ],
+    "dataStatus": "seed"
+   },
+   "employee": {
+    "vendorId": "minimax",
+    "workLifeBalance": 68,
+    "culture": 68,
+    "litigationCount": 0,
+    "litigationScore": 66,
+    "careerGrowth": 70,
+    "compensation": 70,
+    "missionAlignment": 65,
+    "overall": 68,
+    "primaryThemes": [
+     "Consumer-AI provenance shapes culture",
+     "Engineering bar growing",
+     "Limited tribunal-record surface"
+    ],
+    "sources": [
+     "news.ycombinator.com"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 12,
+    "approxHeadcount": 500,
+    "litigationPerThousand": 24,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented"
+    }
+   }
+  },
+  {
+   "vendorId": "ai21",
+   "customer": {
+    "vendorId": "ai21",
+    "averageUptimePct": 99.4,
+    "valueForMoney": 74,
+    "customerService": 78,
+    "responsiveness": 78,
+    "qualityOfService": 80,
+    "overall": 82,
+    "primaryThemes": [
+     "Long-context cost-efficiency cited",
+     "Strong enterprise tooling",
+     "Smaller customer-review surface"
+    ],
+    "sources": [
+     "status.ai21.com",
+     "g2.com/products/ai21-labs"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "ai21",
+    "githubScore": 70,
+    "redditSentiment": 68,
+    "forumScore": 72,
+    "apiReliability": 74,
+    "documentationScore": 78,
+    "overall": 72,
+    "primaryThemes": [
+     "Jamba long-context architecture praised",
+     "Hybrid Mamba+Transformer differentiator",
+     "Enterprise-tuned positioning"
+    ],
+    "sources": [
+     "docs.ai21.com",
+     "github.com/AI21Labs"
+    ],
+    "dataStatus": "seed"
+   },
+   "employee": {
+    "vendorId": "ai21",
+    "workLifeBalance": 78,
+    "culture": 78,
+    "litigationCount": 0,
+    "litigationScore": 100,
+    "careerGrowth": 76,
+    "compensation": 78,
+    "missionAlignment": 74,
+    "overall": 81,
+    "primaryThemes": [
+     "Israel + remote-hybrid",
+     "Stable, smaller org",
+     "Comp competitive for region"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-AI21-Labs"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 0,
+    "approxHeadcount": 350,
+    "litigationPerThousand": 0,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented"
+    }
+   }
+  },
+  {
+   "vendorId": "aleph",
+   "customer": {
+    "vendorId": "aleph",
+    "averageUptimePct": 99.2,
+    "valueForMoney": 66,
+    "customerService": 70,
+    "responsiveness": 70,
+    "qualityOfService": 72,
+    "overall": 75,
+    "primaryThemes": [
+     "Sovereignty + on-prem story central",
+     "Limited commercial-API review surface",
+     "European customer base concentrated"
+    ],
+    "sources": [
+     "docs.aleph-alpha.com"
+    ],
+    "dataStatus": "seed"
+   },
+   "developer": {
+    "vendorId": "aleph",
+    "githubScore": 60,
+    "redditSentiment": 58,
+    "forumScore": 62,
+    "apiReliability": 64,
+    "documentationScore": 70,
+    "overall": 63,
+    "primaryThemes": [
+     "Pharia open-weight release valued in Europe",
+     "Commercial-API maturity unclear",
+     "Sovereignty narrative central"
+    ],
+    "sources": [
+     "docs.aleph-alpha.com"
+    ],
+    "dataStatus": "seed"
+   },
+   "employee": {
+    "vendorId": "aleph",
+    "workLifeBalance": 74,
+    "culture": 74,
+    "litigationCount": 0,
+    "litigationScore": 100,
+    "careerGrowth": 70,
+    "compensation": 72,
+    "missionAlignment": 70,
+    "overall": 77,
+    "primaryThemes": [
+     "European mature-org pace",
+     "Sovereignty mission resonates",
+     "Comp below US frontier peers"
+    ],
+    "sources": [
+     "glassdoor.com/Overview/Working-at-Aleph-Alpha"
+    ],
+    "dataStatus": "seed",
+    "litigationFootprint": 0,
+    "approxHeadcount": 200,
+    "litigationPerThousand": 0,
+    "litigationSource": "courtlistener.com",
+    "litigationLastFetched": "2026-05-16",
+    "cellStatus": {
+     "litigation": "verified",
+     "litigationRate": "documented"
+    }
+   }
+  }
+ ]
+}

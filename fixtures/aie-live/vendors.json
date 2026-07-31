@@ -1,1 +1,3365 @@
-{"vendors":[{"id":"ai21","name":"AI21 Labs","slug":"ai21","category":"Frontier model/API","description":"Jamba hybrid Mamba+Transformer family; long-context efficiency thesis.","headquarters":"Tel Aviv, Israel","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","Long-context / hybrid architectures"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":48.6,"confidenceScore":90.6,"marketPosition":"Specialist contender","strategy":"Sell architectural efficiency (long-context cost) into enterprise + regulated buyers.","productCapabilities":["Models","Long-context"],"enterpriseControls":["enterprise integration patterns"],"agenticCapability":"Jamba Large/Mini optimised for long-context; agentic story is implementation-led.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Smaller market share","ecosystem breadth"],"analystInterpretation":"Solid technical specialist for long-context workloads.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider"]},{"id":"amd","name":"AMD","slug":"amd","category":"AI infrastructure","description":"The principal credible GPU alternative to NVIDIA via the Instinct MI line, increasingly adopted by hyperscalers and labs seeking supply diversification.","headquarters":"Santa Clara, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI hardware"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":56.9,"confidenceScore":93.8,"marketPosition":"Category leader","strategy":"Win on price/performance and supply diversification; close the software gap (ROCm) versus CUDA.","productCapabilities":["Accelerators","ROCm software"],"enterpriseControls":["data-centre security features"],"agenticCapability":"Not an agent vendor; an accelerator-supply alternative.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Software-ecosystem gap vs CUDA","supply ramp"],"analystInterpretation":"The main lever buyers and clouds have to reduce single-source silicon risk; software maturity is the watch item.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Hardware Provider","Infrastructure Player"],"infraBand":"silicon"},{"id":"aws","name":"AWS","slug":"aws","category":"Cloud AI platform","description":"Infrastructure-heavy AI platform provider with breadth across model choice, deployment, and cloud operations.","headquarters":"Seattle, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Cloud AI platform","Agent platform","Infrastructure"],"supportedEcosystems":["aws","databricks","salesforce","servicenow"],"deploymentOptions":["saas","vpc","hybrid","sovereign"],"autonomyLevelMax":"supervised_agent","overallScore":52.9,"confidenceScore":97.7,"marketPosition":"Major challenger","strategy":"Win through Bedrock-style model optionality, cloud-native deployment, and enterprise infrastructure trust.","productCapabilities":["Cloud AI","Agent platform","Infrastructure","Governance"],"enterpriseControls":["cloud identity","network controls","observability"],"agenticCapability":"Strong agent platform foundations for AWS estates; business-user assistant layer is less concentrated.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Complexity for non-AWS estates","service sprawl"],"analystInterpretation":"Best considered a control plane and deployment platform, not a single assistant market-share proxy.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Platform Vendor","Cloud / Hosting Provider","Investor","Infrastructure Player","Model Provider"],"infraBand":"cloud_compute","infraBandSecondary":"silicon"},{"id":"alibaba","name":"Alibaba","slug":"alibaba","category":"Frontier model/API","description":"Qwen series + Alibaba Cloud Model Studio — broad multilingual + reasoning coverage.","headquarters":"Hangzhou, China","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","Cloud AI platform"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":62.8,"confidenceScore":95.5,"marketPosition":"Major challenger","strategy":"Distribute Qwen via Alibaba Cloud and open-weight release; lead non-English benchmarks.","productCapabilities":["Models","Cloud AI","Multilingual"],"enterpriseControls":["regional cloud controls"],"agenticCapability":"Qwen3.5 family covers Plus / Flash variants + QwQ reasoning; agentic stack via Model Studio.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Geopolitical access","Western enterprise sales reach"],"analystInterpretation":"Top-3 global frontier vendor; enterprise procurement gated by jurisdiction.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Cloud / Hosting Provider","Sovereign / Regional AI","Open-Source Ecosystem"],"infraBand":"cloud_compute"},{"id":"a16z","name":"Andreessen Horowitz","slug":"a16z","category":"AI investor","description":"Marquee venture investor (~$90B AUM) positioned across the AI stack — infrastructure (Databricks), models (OpenAI, Mistral, xAI) and applications; 2026 fundraise allocated $3.4B to AI specifically.","headquarters":"Menlo Park, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Investor"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":54.7,"confidenceScore":97.3,"marketPosition":"Specialist contender","strategy":"Invest across every layer of the AI stack as a category-conviction strategy.","productCapabilities":["Venture capital","broad AI portfolio"],"enterpriseControls":["n/a"],"agenticCapability":"Not an operator; a signal of where smart capital concentrates.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Late-stage entry pricing","portfolio influence is indirect"],"analystInterpretation":"A useful signal of which categories smart capital is concentrating in, not a procurement input.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Investor"]},{"id":"anthropic","name":"Anthropic","slug":"anthropic","category":"Frontier model/API","description":"Frontier-reasoning + coding leader with computer-use GA and broad hyperscaler distribution. Claude Sonnet is the default model for Cursor, Aider, and GitHub Copilot Workspace; Claude Opus leads enterprise reasoning benchmarks.","headquarters":"San Francisco, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","Developer/coding agent","Agent platform"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas","vpc"],"autonomyLevelMax":"supervised_agent","overallScore":68.6,"confidenceScore":97.8,"marketPosition":"Leader","strategy":"Lead on reasoning + coding quality, ship computer-use and tool-use primitives, and distribute through Bedrock, Vertex, Snowflake, and Databricks rather than a packaged assistant UI.","productCapabilities":["Frontier reasoning","Coding","Computer-use agents","Multi-cloud distribution"],"enterpriseControls":["DPA + audit logs","AWS Bedrock + GCP Vertex tenant isolation","PrivateLink / VPC routing"],"agenticCapability":"Computer-use GA and tool-use leadership put Anthropic on the same agent tier as OpenAI / MSFT / AWS; buyer diligence should still inspect deployment, retention, and audit-log evidence.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Capital intensity vs hyperscaler peers","Multi-hyperscaler distribution dependency"],"analystInterpretation":"Reasoning + coding leader with a credible safety narrative; the gap on a packaged enterprise assistant is a distribution choice, not a capability one.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Application Vendor"]},{"id":"broadcom","name":"Broadcom","slug":"broadcom","category":"AI infrastructure","description":"Custom-silicon (ASIC) and networking powerhouse; co-designs hyperscaler accelerators (e.g. Google TPU lineage) and supplies the switching fabric for AI data centres.","headquarters":"Palo Alto, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI hardware","Networking"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":59,"confidenceScore":98.1,"marketPosition":"Major challenger","strategy":"Win the custom-accelerator and networking layer that hyperscalers use to reduce NVIDIA dependence.","productCapabilities":["Custom ASICs","Networking switches","Optical"],"enterpriseControls":["hardware supply assurance"],"agenticCapability":"Not an agent vendor; deep infrastructure enabler.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Customer concentration","cyclical demand"],"analystInterpretation":"A quieter but structural beneficiary of AI build-out; relevant to anyone modelling the non-NVIDIA silicon path.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Hardware Provider","Infrastructure Player"],"infraBand":"silicon"},{"id":"cerebras","name":"Cerebras","slug":"cerebras","category":"AI infrastructure","description":"Wafer-scale (WSE-3) inference challenger; IPO'd May 2026 (~$56B day-one valuation) anchored by a $20B+ OpenAI compute commitment with warrants up to ~10%.","headquarters":"Sunnyvale, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI hardware","AI infrastructure"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":55.3,"confidenceScore":96.3,"marketPosition":"Category leader","strategy":"Differentiate on inference latency/throughput via wafer-scale silicon; diversify away from historical single-customer concentration.","productCapabilities":["Wafer-scale accelerators","Cerebras Inference cloud"],"enterpriseControls":["data-centre controls"],"agenticCapability":"Not an agent vendor; a latency/throughput and supply-diversification signal.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Historical customer concentration (G42)","competition from NVIDIA/AMD","IPO-valuation sensitivity"],"analystInterpretation":"An independent inference-speed alternative; the OpenAI commitment reduces but does not remove its historical concentration risk.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Hardware Provider","Infrastructure Player","Model Provider"],"infraBand":"silicon","infraBandSecondary":"inference"},{"id":"cohere","name":"Cohere (incl. Aleph Alpha)","slug":"cohere","category":"Frontier model/API","description":"Enterprise-oriented model provider focused on secure deployment and retrieval; merged with Germany's Aleph Alpha in April 2026 to form a transatlantic sovereign-AI champion (~$20B combined, Cohere shareholders ~90%).","headquarters":"Toronto, Canada","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","RAG/enterprise search","Regulated-industry AI"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas","vpc","hybrid","sovereign"],"autonomyLevelMax":"human_in_loop","overallScore":51.3,"confidenceScore":97.8,"marketPosition":"Specialist contender","strategy":"Focus on enterprise models, private/sovereign deployment, and knowledge-intensive workloads; combine Cohere's Command/Embed/Rerank with Aleph Alpha's Pharia/Luminous lines and STACKIT sovereign-cloud reach.","productCapabilities":["Models","RAG","Private deployment","Sovereign deployment"],"enterpriseControls":["deployment controls","data residency controls","STACKIT sovereign cloud"],"agenticCapability":"Agentic layer is less visible than model and retrieval strengths; merger integration is still consolidating.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Recent merger integration risk","lower broad-market visibility"],"analystInterpretation":"A credible specialist when private deployment, data residency, and RAG quality matter more than suite breadth; the Aleph Alpha merger strengthens its European sovereign position.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Data & Services Provider","Sovereign / Regional AI","Application Vendor"]},{"id":"coreweave","name":"CoreWeave","slug":"coreweave","category":"AI infrastructure","description":"The defining 'neocloud' — a GPU-specialist cloud with a multi-billion revenue backlog (~$66B reported) and a ~$21B long-term capacity agreement with Meta through 2032.","headquarters":"Livingston, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI infrastructure","Cloud / hosting"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":62.6,"confidenceScore":91.7,"marketPosition":"Category leader","strategy":"Provide dedicated, NVIDIA-rich GPU capacity to labs and enterprises faster than hyperscalers, on long contracts.","productCapabilities":["GPU cloud","managed clusters"],"enterpriseControls":["tenant isolation","data-centre controls"],"agenticCapability":"Not an agent vendor; specialist compute supply.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["GPU-backed debt financing","customer concentration","demand-cycle exposure"],"analystInterpretation":"A fast, NVIDIA-heavy capacity option; the balance-sheet structure (GPU-backed loans) makes it a counterparty-risk question distinct from renting from a hyperscaler.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Infrastructure Player","Cloud / Hosting Provider","Application Vendor"],"infraBand":"neocloud"},{"id":"databricks","name":"Databricks","slug":"databricks","category":"Cloud AI platform","description":"Data and AI platform with strong lakehouse footprint and model-building orientation.","headquarters":"San Francisco, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Cloud AI platform","Data AI","Developer/coding agent"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas","vpc","hybrid","sovereign"],"autonomyLevelMax":"human_in_loop","overallScore":43.9,"confidenceScore":97.4,"marketPosition":"Category leader","strategy":"Use data estate, open model tooling, and governance to become enterprise AI build platform.","productCapabilities":["Data AI","Model operations","Governance"],"enterpriseControls":["data governance","lineage"],"agenticCapability":"Agentic capability is strongest for data/analytics and custom enterprise build patterns.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Business-user assistant reach","implementation skill needs"],"analystInterpretation":"Strong for build-oriented enterprises that treat data governance as the AI foundation.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Data & Services Provider","Platform Vendor","Infrastructure Player"],"infraBand":"data_platform"},{"id":"deepseek","name":"DeepSeek","slug":"deepseek","category":"Frontier model/API","description":"Cost-efficient frontier reasoning lab — V4 series materially undercuts US pricing.","headquarters":"Hangzhou, China","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","Reasoning models"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":60.6,"confidenceScore":96.8,"marketPosition":"Category leader","strategy":"Win on price-per-token + reasoning quality through aggressive open release cadence.","productCapabilities":["Models","Reasoning"],"enterpriseControls":["limited enterprise tooling"],"agenticCapability":"Strong reasoning benchmarks; geopolitical and data-residency caveats apply for many buyers.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Geopolitical access risk","data residency concerns"],"analystInterpretation":"Compelling on cost-per-quality; access compliance is the deciding factor for regulated buyers.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Sovereign / Regional AI","Open-Source Ecosystem","Application Vendor"]},{"id":"fireworks","name":"Fireworks AI","slug":"fireworks","category":"AI infrastructure","description":"Leading software-layer (GPU-based) inference platform optimised for throughput; reportedly in talks at ~$15B valuation, customers include Cursor, Perplexity and Notion.","headquarters":"Redwood City, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI infrastructure","Cloud / hosting","Open-source ecosystem"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":55.8,"confidenceScore":98.3,"marketPosition":"Specialist contender","strategy":"Differentiate on inference throughput optimisation (FireAttention) rather than custom silicon.","productCapabilities":["Inference cloud","FireAttention kernels","managed fine-tuning"],"enterpriseControls":["tenant isolation"],"agenticCapability":"Hosts open models for agentic use; not an agent vendor itself.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Software-optimisation moat pressured by custom silicon and hyperscaler catalogs"],"analystInterpretation":"A throughput-optimised open-model inference option; differentiates on software, not silicon.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Infrastructure Player","Cloud / Hosting Provider","Open-Source Ecosystem"],"infraBand":"neocloud","infraBandSecondary":"inference"},{"id":"g42","name":"G42 / Falcon (TII)","slug":"g42","category":"Sovereign/regional AI","description":"Abu Dhabi's sovereign-AI holding company (~$2.3B raised; Microsoft holds a $1.5B equity stake with a board seat); the TII Falcon models are the most-cited regional open-weights frontier line, with a Cerebras-based supercomputer footprint.","headquarters":"Abu Dhabi, UAE","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Sovereign/regional AI","AI infrastructure","Frontier model/API"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":41.5,"confidenceScore":93.3,"marketPosition":"Emerging specialist","strategy":"Be the AI capital of the Arab world with explicit US-technology alignment; pair sovereign compute with the Falcon open-weights franchise.","productCapabilities":["Falcon open-weights models","sovereign compute","Khazna data centres"],"enterpriseControls":["UAE data perimeter","Intergovernmental Assurance Agreement"],"agenticCapability":"Agentic capability is application-embedded; the draw is sovereign compute + Arabic-native models.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Geopolitical alignment commitments","Western enterprise sales reach"],"analystInterpretation":"A sovereignty, compute and jurisdiction signal for Gulf and aligned-market deployments; Microsoft alignment shapes who can procure and where.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Sovereign / Regional AI","Infrastructure Player","Model Provider"],"infraBand":"cloud_compute"},{"id":"glean","name":"Glean","slug":"glean","category":"RAG/enterprise search","description":"Enterprise knowledge assistant specialist with strong workplace search heritage.","headquarters":"Palo Alto, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["RAG/enterprise search","Enterprise assistant"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":59,"confidenceScore":98.9,"marketPosition":"Category leader","strategy":"Own enterprise knowledge retrieval and expand from answer engine into assistant and agent workflows.","productCapabilities":["Enterprise search","Knowledge assistant","RAG"],"enterpriseControls":["source permissions","connector controls"],"agenticCapability":"Promising knowledge-agent path; source permissioning remains a central buyer checkpoint.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Platform breadth","dependency on content connectors"],"analystInterpretation":"Strong category specialist for knowledge-heavy enterprises.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Application Vendor","Data & Services Provider"]},{"id":"google","name":"Google","slug":"google","category":"Cloud AI platform","description":"Technically deep platform with improving enterprise packaging through Google Cloud and Workspace.","headquarters":"Mountain View, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Cloud AI platform","Frontier model/API","RAG/enterprise search"],"supportedEcosystems":["google_workspace","gcp","databricks","snowflake"],"deploymentOptions":["saas","vpc","hybrid","sovereign"],"autonomyLevelMax":"supervised_agent","overallScore":62.1,"confidenceScore":97.8,"marketPosition":"Major challenger","strategy":"Differentiate on model research, multimodal capability, data/cloud integration, and Workspace adoption.","productCapabilities":["Models","Cloud AI","Enterprise search","Workspace"],"enterpriseControls":["cloud controls","data controls","identity"],"agenticCapability":"Strong model and multimodal progress; enterprise agent operating model varies by buyer stack.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Enterprise adoption consistency","fragmented portfolio perception"],"analystInterpretation":"Strong challenger where data, search, and cloud-native workloads matter.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Platform Vendor","Model Provider","Cloud / Hosting Provider","Hardware Provider","Application Vendor"],"infraBand":"cloud_compute","infraBandSecondary":"silicon"},{"id":"groq","name":"Groq","slug":"groq","category":"AI infrastructure","description":"Inference neocloud built on its LPU technology; pivoted to cloud hosting after NVIDIA's ~$20B Dec-2025 licensing/acquihire transferred its core engineering team, and is raising ~$650M.","headquarters":"Mountain View, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI infrastructure","Cloud / hosting"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":64.1,"confidenceScore":97.6,"marketPosition":"Emerging specialist","strategy":"Host inference-heavy applications on GroqCloud after the LPU IP licensing to NVIDIA.","productCapabilities":["LPU inference cloud"],"enterpriseControls":["tenant isolation"],"agenticCapability":"Hosts models for low-latency inference; not an agent vendor.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Post-acquihire roadmap uncertainty","engineering-team loss","unproven unit economics"],"analystInterpretation":"Watch-list infrastructure rather than a stable dependency; the NVIDIA acquihire leaves its roadmap unproven.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Infrastructure Player","Cloud / Hosting Provider"],"infraBand":"neocloud","infraBandSecondary":"inference"},{"id":"humain","name":"HUMAIN","slug":"humain","category":"Sovereign/regional AI","description":"Saudi Arabia's national AI champion, announced May 2025 as a wholly-owned PIF subsidiary, building sovereign compute and model capability.","headquarters":"Riyadh, Saudi Arabia","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Sovereign/regional AI","AI infrastructure","Cloud / hosting"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":48.5,"confidenceScore":92.2,"marketPosition":"Emerging specialist","strategy":"Build kingdom-scale sovereign compute and model capability backed by PIF capital.","productCapabilities":["Sovereign compute build-out"],"enterpriseControls":["national data perimeter"],"agenticCapability":"Very early; enterprise-readiness evidence outside the region is limited.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Very early stage","capability evidence limited outside region"],"analystInterpretation":"A well-capitalised sovereignty and regional-access signal for Gulf-market and aligned deployments; early on enterprise readiness.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Sovereign / Regional AI","Infrastructure Player","Cloud / Hosting Provider"],"infraBand":"cloud_compute"},{"id":"harvey","name":"Harvey","slug":"harvey","category":"Regulated-industry AI","description":"Legal AI specialist with strong mindshare in law firms and legal departments.","headquarters":"San Francisco, US","ownershipType":"private","supportedIndustries":["Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Legal AI","Regulated-industry AI"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":58.6,"confidenceScore":98.9,"marketPosition":"Category leader","strategy":"Own legal knowledge work and expand into adjacent professional-services workflows.","productCapabilities":["Legal research","Contract review","Professional services"],"enterpriseControls":["matter controls","audit"],"agenticCapability":"Agentic capability is valuable but should be bounded by human review and privilege controls.","industryStrength":[{"industry":"Legal","score":91,"note":"Strong legal workflow fit with human review."}],"riskProfile":["Vertical concentration","pricing opacity"],"analystInterpretation":"High-signal vertical leader; market share should be assessed in legal, not generic AI.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Vertical Specialist","Application Vendor"]},{"id":"hebbia","name":"Hebbia","slug":"hebbia","category":"RAG/enterprise search","description":"Research and document intelligence specialist with strength in high-value knowledge work.","headquarters":"New York, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["RAG/enterprise search","Financial services AI"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":54.5,"confidenceScore":98.4,"marketPosition":"Emerging specialist","strategy":"Target analysts and deal teams with structured document intelligence and workflow depth.","productCapabilities":["Document intelligence","Financial research","RAG"],"enterpriseControls":["workspace controls"],"agenticCapability":"Agentic capability is workflow-specific and should be tested against regulated review needs.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Scale evidence","category scope"],"analystInterpretation":"Compelling specialist for research-intensive teams, with confidence still shaped by reference depth.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Vertical Specialist","Application Vendor","Data & Services Provider"]},{"id":"ibm","name":"IBM","slug":"ibm","category":"Regulated-industry AI","description":"Governance and hybrid-enterprise specialist with credibility in regulated operating environments.","headquarters":"Armonk, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Regulated-industry AI","Governance","Hybrid AI"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas","vpc","hybrid","sovereign"],"autonomyLevelMax":"human_in_loop","overallScore":44.8,"confidenceScore":97.4,"marketPosition":"Specialist contender","strategy":"Compete on trusted AI, hybrid deployment, consulting, governance, and model lifecycle management.","productCapabilities":["Governance","Hybrid deployment","Regulated AI"],"enterpriseControls":["model governance","audit","hybrid controls"],"agenticCapability":"More conservative agentic posture; strong where auditability and controls outweigh speed.","industryStrength":[{"industry":"Regulated enterprise","score":82,"note":"Control-led posture suits risk-heavy buyers."}],"riskProfile":["Momentum perception","developer mindshare"],"analystInterpretation":"Useful benchmark for control maturity even when not the fastest growth story.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Platform Vendor","Model Provider","Data & Services Provider"]},{"id":"lambda","name":"Lambda","slug":"lambda","category":"AI infrastructure","description":"GPU-cloud neocloud serving training and inference capacity to AI builders ($1.5B+ Series E).","headquarters":"San Francisco, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI infrastructure","Cloud / hosting"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":57.7,"confidenceScore":98.7,"marketPosition":"Emerging specialist","strategy":"Offer NVIDIA capacity (on-demand + reserved) outside the big-three hyperscalers.","productCapabilities":["GPU cloud","reserved clusters"],"enterpriseControls":["tenant isolation"],"agenticCapability":"Not an agent vendor; compute-supply and pricing-leverage option.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Capital intensity","GPU-supply exposure","limited disclosures"],"analystInterpretation":"A capacity and pricing-leverage option for buyers wanting NVIDIA GPUs without hyperscaler lock-in.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Infrastructure Player","Cloud / Hosting Provider"],"infraBand":"neocloud"},{"id":"mgx","name":"MGX","slug":"mgx","category":"AI investor","description":"UAE state-backed AI investment vehicle racing toward $100B+ AUM; co-led Anthropic's round (valuing it ~$965B) and holds a multi-billion OpenAI position.","headquarters":"Abu Dhabi, UAE","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Investor","Sovereign/regional AI"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":50.7,"confidenceScore":84.1,"marketPosition":"Emerging specialist","strategy":"Deploy sovereign capital at mega-round scale across frontier labs and AI infrastructure.","productCapabilities":["Sovereign capital","frontier-lab stakes"],"enterpriseControls":["n/a"],"agenticCapability":"Not an operator; Gulf sovereign-capital signal with jurisdiction implications.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["State-linked capital raises jurisdiction/governance considerations"],"analystInterpretation":"Signals Gulf sovereign capital shaping model access and data-centre build-out; relevant to sovereignty and jurisdiction questions.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Investor","Sovereign / Regional AI"]},{"id":"meta","name":"Meta","slug":"meta","category":"Frontier model/API","description":"Llama owner with deep open-weights distribution and Meta-AI consumer product surface.","headquarters":"Menlo Park, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","Open-weight models","Consumer AI"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":62.4,"confidenceScore":97.7,"marketPosition":"Major challenger","strategy":"Lead open-weights ecosystem while running Meta AI as a consumer assistant; deepen developer reach via Llama API.","productCapabilities":["Models","Open-weights","Consumer AI"],"enterpriseControls":["model card transparency","responsible use license"],"agenticCapability":"Llama 4 brings stronger multimodal and tool-use; enterprise productisation lags hyperscalers.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Enterprise control narrative thin","consumer-AI brand concentration"],"analystInterpretation":"Decisive for open-weights strategies; less of a packaged enterprise platform play.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Open-Source Ecosystem","Application Vendor"]},{"id":"microsoft","name":"Microsoft","slug":"microsoft","category":"Cloud AI platform","description":"Distribution leader through Microsoft 365, Azure, GitHub, and enterprise procurement reach.","headquarters":"Redmond, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Cloud AI platform","Enterprise assistant","Developer/coding agent"],"supportedEcosystems":["microsoft","azure","github","servicenow","sap"],"deploymentOptions":["saas","vpc","hybrid","sovereign"],"autonomyLevelMax":"supervised_agent","overallScore":44.7,"confidenceScore":97.6,"marketPosition":"Leader","strategy":"Bundle AI into productivity, developer, security, and cloud workflows while shifting buyers into Azure-managed control planes.","productCapabilities":["Enterprise assistant","Developer productivity","Cloud AI","Governance"],"enterpriseControls":["identity","compliance","tenant controls","security"],"agenticCapability":"Strong copilot estate with widening agent orchestration across productivity and developer workflows.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Bundling opacity","cost governance complexity"],"analystInterpretation":"Likely to own the enterprise access layer, but category share must be measured by workload, not by suite reach.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Platform Vendor","Application Vendor","Investor","Infrastructure Player","Model Provider","Cloud / Hosting Provider"],"infraBand":"cloud_compute","infraBandSecondary":"silicon"},{"id":"minimax","name":"MiniMax","slug":"minimax","category":"Frontier model/API","description":"MiniMax M2 series + her-variant for speech; consumer + B2B AI surface.","headquarters":"Shanghai, China","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","Speech / multimodal"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":56.4,"confidenceScore":93.3,"marketPosition":"Emerging specialist","strategy":"Differentiate on speech-multimodal and consumer-AI integration patterns.","productCapabilities":["Models","Speech"],"enterpriseControls":["limited enterprise disclosures"],"agenticCapability":"M2 family covers speech and multimodal; enterprise control story underdeveloped.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Geopolitical access","enterprise depth"],"analystInterpretation":"Interesting multimodal contender; not yet a packaged enterprise platform.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Sovereign / Regional AI"]},{"id":"mistral","name":"Mistral","slug":"mistral","category":"Frontier model/API","description":"European model provider with strong open-weight and sovereignty positioning.","headquarters":"Paris, France","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","Open model","European AI"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas","vpc","hybrid","sovereign"],"autonomyLevelMax":"human_in_loop","overallScore":51.4,"confidenceScore":97.7,"marketPosition":"Specialist contender","strategy":"Win buyers needing model optionality, European positioning, and flexible deployment.","productCapabilities":["Models","Sovereign AI","Developer AI"],"enterpriseControls":["deployment optionality"],"agenticCapability":"Agentic capability depends heavily on partners and implementation layer.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Enterprise control proof depth","smaller account coverage"],"analystInterpretation":"Momentum is real, but enterprise readiness should be validated workload by workload.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Sovereign / Regional AI","Open-Source Ecosystem"]},{"id":"moonshot","name":"Moonshot AI","slug":"moonshot","category":"Frontier model/API","description":"Kimi K2 series — known for long-context handling and reasoning depth.","headquarters":"Beijing, China","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","Long-context models"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":58.4,"confidenceScore":97.7,"marketPosition":"Specialist contender","strategy":"Build a reasoning-and-long-context niche through K2 Thinking and platform.moonshot.ai.","productCapabilities":["Models","Long-context","Reasoning"],"enterpriseControls":["limited enterprise controls disclosure"],"agenticCapability":"K2 Thinking adds reasoning; commercial enterprise track record is short.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Geopolitical access","enterprise-readiness gap"],"analystInterpretation":"Strong technical contender; enterprise validation still early.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Sovereign / Regional AI"]},{"id":"moveworks","name":"Moveworks","slug":"moveworks","category":"ITSM/HR/service AI","description":"Employee support automation specialist focused on IT, HR, and internal service workflows.","headquarters":"Mountain View, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["ITSM/HR/service AI","Workflow automation AI"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":61.1,"confidenceScore":98.5,"marketPosition":"Category leader","strategy":"Expand from support automation into broader enterprise service agents.","productCapabilities":["Employee service","Workflow automation","ITSM"],"enterpriseControls":["workflow approval","identity"],"agenticCapability":"Strong supervised service automation; broad autonomy depends on workflow integration depth.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Category concentration","suite competition"],"analystInterpretation":"Clear value in service automation, especially where ticket deflection is measurable.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Application Vendor","Vertical Specialist"]},{"id":"nvidia","name":"NVIDIA","slug":"nvidia","category":"AI infrastructure","description":"The dominant AI accelerator company; GPUs (Hopper/Blackwell) and CUDA are the de-facto training and inference substrate, with DGX Cloud as a direct compute offering and a widening strategic-investment portfolio.","headquarters":"Santa Clara, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI hardware","AI infrastructure","Investor"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":61.5,"confidenceScore":93.5,"marketPosition":"Leader","strategy":"Hold the silicon + software (CUDA) standard, extend into systems (DGX) and networking, and use strategic investments to seed demand across labs and neoclouds.","productCapabilities":["Accelerators","CUDA software","Networking","DGX Cloud"],"enterpriseControls":["data-centre security features","confidential computing"],"agenticCapability":"Not an agent vendor; the enabling layer beneath nearly every agentic system.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Supply concentration","export-control exposure","valuation sensitivity"],"analystInterpretation":"The single highest-concentration dependency in enterprise AI. Treat NVIDIA exposure as a systemic supply risk to plan around, not a vendor to simply select.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Hardware Provider","Infrastructure Player","Investor","Model Provider"],"infraBand":"silicon","infraBandSecondary":"neocloud"},{"id":"nscale","name":"Nscale","slug":"nscale","category":"AI infrastructure","description":"UK/Europe sovereign GPU-cloud neocloud (raised $1.1B+ Series B, further $2B in 2026) targeting data-residency-sensitive workloads.","headquarters":"London, UK","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI infrastructure","Cloud / hosting","Sovereign AI"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":57.2,"confidenceScore":92.8,"marketPosition":"Emerging specialist","strategy":"Provide non-US, data-resident GPU capacity for European sovereign and regulated buyers.","productCapabilities":["Sovereign GPU cloud"],"enterpriseControls":["EU data residency","tenant isolation"],"agenticCapability":"Not an agent vendor; sovereignty-oriented compute supply.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Early-stage scale","utilisation economics unproven"],"analystInterpretation":"A sovereignty and bargaining-leverage compute option where non-US, data-resident capacity is a procurement requirement.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Infrastructure Player","Cloud / Hosting Provider","Sovereign / Regional AI"],"infraBand":"neocloud"},{"id":"openai","name":"OpenAI","slug":"openai","category":"Frontier model/API","description":"Category shaper with strong model cadence and fast enterprise API expansion.","headquarters":"San Francisco, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","Agent platform","Enterprise assistant"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas","vpc"],"autonomyLevelMax":"supervised_agent","overallScore":68.6,"confidenceScore":97.8,"marketPosition":"Leader","strategy":"Lead with model quality, agent runtime, enterprise controls, and ecosystem distribution through strategic partners.","productCapabilities":["Models","Agents","Developer productivity","Knowledge assistant"],"enterpriseControls":["SSO","admin controls","API controls"],"agenticCapability":"Advanced supervised and autonomous agent patterns; enterprise production controls still need careful validation.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Commercial dependency concentration","fast-changing roadmap"],"analystInterpretation":"Winning, but buyers should separate model capability from enterprise operating control.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Application Vendor"]},{"id":"oracle","name":"Oracle","slug":"oracle","category":"Cloud AI platform","description":"Enterprise application and database incumbent with AI embedded into cloud and business suites.","headquarters":"Austin, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Cloud AI platform","Regulated-industry AI","Enterprise applications"],"supportedEcosystems":["oracle","oci","microsoft"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":53.8,"confidenceScore":98.6,"marketPosition":"Category leader","strategy":"Use cloud infrastructure, database estate, and apps to pull AI into existing Oracle accounts.","productCapabilities":["Enterprise apps","Database AI","Cloud AI"],"enterpriseControls":["database controls","app controls"],"agenticCapability":"Agentic capability is more application-embedded than broad open agent platform.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Perception gap","ecosystem breadth"],"analystInterpretation":"Relevant for Oracle-heavy estates; market leadership varies sharply by category.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Platform Vendor","Cloud / Hosting Provider","Infrastructure Player","Application Vendor"],"infraBand":"cloud_compute"},{"id":"perplexity","name":"Perplexity","slug":"perplexity","category":"Enterprise assistant","description":"AI search and answer engine with the Sonar model line; expanding from consumer search into enterprise research and knowledge workflows.","headquarters":"San Francisco, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI search","Enterprise assistant","RAG/enterprise search"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":50.4,"confidenceScore":95,"marketPosition":"Specialist contender","strategy":"Win AI-native search and research as an application, blending first-party Sonar models with frontier model routing.","productCapabilities":["AI search","Research assistant","Sonar models"],"enterpriseControls":["workspace controls"],"agenticCapability":"Agentic research flows are emerging; enterprise controls and source-quality evidence need validation before knowledge-work scale-up.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Enterprise control depth","source quality at scale"],"analystInterpretation":"Best read as an AI search and research application with model-provider characteristics through Sonar, not a horizontal enterprise platform.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Application Vendor","Model Provider"]},{"id":"rogo","name":"Rogo","slug":"rogo","category":"Regulated-industry AI","description":"Financial-services AI specialist targeting banking, investing, and research workflows.","headquarters":"New York, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Financial services AI","RAG/enterprise search"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":58.1,"confidenceScore":98.7,"marketPosition":"Emerging specialist","strategy":"Win regulated financial teams through domain fit, workflow language, and curated data experiences.","productCapabilities":["Financial research","Knowledge assistant"],"enterpriseControls":["domain controls"],"agenticCapability":"Agentic capability should remain supervised in high-stakes finance contexts.","industryStrength":[{"industry":"Financial services","score":86,"note":"Finance-specific workflow and language fit."}],"riskProfile":["Limited horizontal proof","vendor maturity"],"analystInterpretation":"Interesting vertical specialist; evaluate evidence depth before enterprise-scale rollout.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Vertical Specialist","Application Vendor"]},{"id":"sap","name":"SAP","slug":"sap","category":"Enterprise applications","description":"ERP and business-process incumbent embedding AI into finance, supply chain, HR, and procurement.","headquarters":"Walldorf, Germany","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Enterprise applications","Workflow automation AI","Regulated-industry AI"],"supportedEcosystems":["sap","microsoft","aws"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":56.3,"confidenceScore":98.6,"marketPosition":"Specialist contender","strategy":"Defend and extend system-of-record workflows through embedded assistants and process intelligence.","productCapabilities":["ERP AI","Process intelligence","Governance"],"enterpriseControls":["role controls","process audit"],"agenticCapability":"Agentic capability is strongest in governed business processes rather than open-ended autonomy.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Suite dependency","slower perceived cadence"],"analystInterpretation":"Strong for SAP-centric operating models; do not confuse ERP reach with frontier AI share.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Application Vendor","Platform Vendor","Model Provider"]},{"id":"sakana","name":"Sakana AI","slug":"sakana","category":"Sovereign/regional AI","description":"Tokyo-based lab building Japan's domestic frontier-model capability with a distinctive evolutionary/merged-model research approach.","headquarters":"Tokyo, Japan","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Sovereign/regional AI","Frontier model/API"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":55.9,"confidenceScore":97.1,"marketPosition":"Emerging specialist","strategy":"Anchor Japan's domestic frontier capability with a research-led, efficiency-oriented model approach.","productCapabilities":["Evolutionary / merged models"],"enterpriseControls":["limited enterprise disclosures"],"agenticCapability":"Research-stage; enterprise productisation and controls evidence are early.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Research-stage positioning","enterprise-readiness evidence early"],"analystInterpretation":"A regional-sovereignty and research-diversity signal more than a current enterprise default.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Sovereign / Regional AI","Model Provider"]},{"id":"salesforce","name":"Salesforce","slug":"salesforce","category":"CRM/customer AI","description":"CRM workflow owner with strong access to sales, service, and customer data.","headquarters":"San Francisco, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["CRM/customer AI","Agent platform","Workflow automation AI"],"supportedEcosystems":["salesforce","slack","mulesoft","snowflake"],"deploymentOptions":["saas","vpc"],"autonomyLevelMax":"human_in_loop","overallScore":55.8,"confidenceScore":98.7,"marketPosition":"Major challenger","strategy":"Embed AI agents into CRM workflows and monetise via packaged customer-facing productivity outcomes.","productCapabilities":["CRM AI","Service AI","Agents"],"enterpriseControls":["data cloud governance","admin controls"],"agenticCapability":"Strong domain-agent narrative in sales and service; cross-enterprise autonomy requires validation.","industryStrength":[{"industry":"Customer operations","score":89,"note":"Strong CRM data and workflow position."}],"riskProfile":["Platform cost","CRM-centric scope"],"analystInterpretation":"A sector leader for customer workflows, but not a universal enterprise AI platform.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Application Vendor","Platform Vendor","Data & Services Provider"]},{"id":"sequoia","name":"Sequoia Capital","slug":"sequoia","category":"AI investor","description":"Long-standing frontier-AI venture backer (~$56B AUM); raised a ~$7B expansion fund in 2026 for late-stage AI bets including OpenAI and Anthropic.","headquarters":"Menlo Park, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Investor"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":53,"confidenceScore":95.9,"marketPosition":"Specialist contender","strategy":"Back frontier labs and AI infrastructure as a late-stage category-conviction play.","productCapabilities":["Venture capital","late-stage AI fund"],"enterpriseControls":["n/a"],"agenticCapability":"Not an operator; a category-conviction signal.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Mega-round amounts often undisclosed","indirect influence"],"analystInterpretation":"Read Sequoia's concentration as category conviction; it does not bear on enterprise deployment fitness.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Investor"]},{"id":"servicenow","name":"ServiceNow","slug":"servicenow","category":"ITSM/HR/service AI","description":"Workflow automation incumbent with strong IT, HR, and enterprise service management footprint.","headquarters":"Santa Clara, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["ITSM/HR/service AI","Workflow automation AI","Agent platform"],"supportedEcosystems":["servicenow","microsoft","workday","sap"],"deploymentOptions":["saas","vpc"],"autonomyLevelMax":"human_in_loop","overallScore":45.7,"confidenceScore":90.6,"marketPosition":"Category leader","strategy":"Position AI agents as workflow execution inside systems of record for service operations.","productCapabilities":["ITSM","HR service","Workflow automation"],"enterpriseControls":["workflow audit","RBAC","approval controls"],"agenticCapability":"Good supervised workflow-agent fit; autonomy should be staged around approval and audit paths.","industryStrength":[{"industry":"Enterprise service operations","score":88,"note":"Strong ITSM and service workflow ownership."}],"riskProfile":["Suite dependency","implementation complexity"],"analystInterpretation":"A practical enterprise agent player where workflows already live in ServiceNow.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Application Vendor","Platform Vendor","Vertical Specialist"]},{"id":"snowflake","name":"Snowflake","slug":"snowflake","category":"Cloud AI platform","description":"Data cloud incumbent embedding AI into analytics, apps, and governed enterprise data workflows.","headquarters":"Bozeman, US","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Cloud AI platform","Data AI","RAG/enterprise search"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":46.7,"confidenceScore":96.7,"marketPosition":"Category leader","strategy":"Turn governed data estate into AI applications, search, and application-development layer.","productCapabilities":["Data AI","Enterprise search","Governance"],"enterpriseControls":["data access controls","governance"],"agenticCapability":"Agentic capability is emerging around governed data and app workflows.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["AI platform breadth","ecosystem competition"],"analystInterpretation":"Strong data-layer contender; category share differs greatly between data AI and assistant markets.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Data & Services Provider","Platform Vendor","Infrastructure Player"],"infraBand":"data_platform"},{"id":"softbank","name":"SoftBank","slug":"softbank","category":"AI investor","description":"One of the largest single-cheque AI investors; committed ~$30B to OpenAI's 2026 round (with further $10B tranches) and co-anchors the Stargate data-centre JV.","headquarters":"Tokyo, Japan","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Investor"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":59,"confidenceScore":77.8,"marketPosition":"Specialist contender","strategy":"Concentrate mega-scale capital where compute and model access follow; pair investment with infrastructure JVs.","productCapabilities":["Strategic capital","Stargate JV"],"enterpriseControls":["n/a"],"agenticCapability":"Not an operator; a capital-and-distribution signal.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Concentration of bets","tranche/contingency conditions vary"],"analystInterpretation":"Where SoftBank concentrates capital, compute and model access tend to follow; a capital-flow signal, not a procurement input.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Investor"]},{"id":"tsmc","name":"TSMC","slug":"tsmc","category":"AI infrastructure","description":"The foundry that manufactures the leading-edge chips for NVIDIA, AMD, Apple and the hyperscalers; the physical bottleneck of the entire AI hardware supply chain.","headquarters":"Hsinchu, Taiwan","ownershipType":"public","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI hardware","Semiconductor fabrication"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":68.4,"confidenceScore":78.9,"marketPosition":"Major challenger","strategy":"Hold the leading-edge process lead and capacity that every fabless AI-chip designer depends on.","productCapabilities":["Leading-edge fabrication","advanced packaging (CoWoS)"],"enterpriseControls":["supply-chain assurance"],"agenticCapability":"Not an agent vendor; the foundation beneath the silicon layer.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Geographic concentration (Taiwan)","geopolitical exposure","capacity constraints"],"analystInterpretation":"The deepest single point in the AI supply chain; geopolitical and capacity risk here propagates to every chip vendor above it.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Hardware Provider","Infrastructure Player"],"infraBand":"silicon"},{"id":"together","name":"Together AI","slug":"together","category":"AI infrastructure","description":"Open-model inference and fine-tuning cloud; a flagship host for Llama, DeepSeek, Qwen and Mistral ($305M Series B).","headquarters":"San Francisco, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["AI infrastructure","Cloud / hosting","Open-source ecosystem"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":56,"confidenceScore":96.8,"marketPosition":"Specialist contender","strategy":"Be the open-weight deployment route when self-hosting is impractical but closed APIs are undesirable.","productCapabilities":["Inference cloud","fine-tuning","open-model catalog"],"enterpriseControls":["tenant isolation"],"agenticCapability":"Hosts open models for agentic use; not an agent vendor itself.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Open-model hosting margins","hyperscaler catalog competition"],"analystInterpretation":"The open-weight deployment path for enterprises avoiding both self-hosting and closed APIs.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Infrastructure Player","Cloud / Hosting Provider","Open-Source Ecosystem"],"infraBand":"neocloud","infraBandSecondary":"inference"},{"id":"writer","name":"Writer","slug":"writer","category":"Enterprise assistant","description":"Enterprise generative AI platform focused on brand-safe content, workflows, and knowledge apps.","headquarters":"San Francisco, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Enterprise assistant","Content AI","Agent platform"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":54.7,"confidenceScore":96.9,"marketPosition":"Category leader","strategy":"Differentiate through enterprise content workflows, governance, and business-user tooling.","productCapabilities":["Content AI","Knowledge apps","Governance"],"enterpriseControls":["brand controls","admin controls"],"agenticCapability":"Agentic workflows are emerging around content and knowledge operations.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Category crowding","proof at broad scale"],"analystInterpretation":"Potential winner in governed content workflows, less proven as a universal platform.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Application Vendor","Model Provider"]},{"id":"zai","name":"Z.ai","slug":"zai","category":"Frontier model/API","description":"Zhipu / Z.ai — GLM-5.1 frontier model; significant in Chinese enterprise + research market.","headquarters":"Beijing, China","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":60.1,"confidenceScore":96.1,"marketPosition":"Emerging specialist","strategy":"Anchor GLM as Chinese frontier alternative with English/multilingual coverage expanding.","productCapabilities":["Models"],"enterpriseControls":["limited enterprise tooling"],"agenticCapability":"GLM-5.1 multimodal capable; broader agent stack underdeveloped vs frontier US labs.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Geopolitical access","Western enterprise reach"],"analystInterpretation":"Relevant for jurisdictional diversity; Western enterprise readiness limited.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Sovereign / Regional AI"]},{"id":"xai","name":"xAI","slug":"xai","category":"Frontier model/API","description":"Frontier lab with Grok model line and Memphis Colossus compute build-out; investor + governance opacity remain a constraint.","headquarters":"Palo Alto, US","ownershipType":"private","supportedIndustries":["Commercial enterprise","Financial services","Healthcare","Public sector","Technology"],"supportedUseCases":["Frontier model/API","Agent platform"],"supportedEcosystems":["microsoft","aws","google_workspace","salesforce"],"deploymentOptions":["saas"],"autonomyLevelMax":"human_in_loop","overallScore":62,"confidenceScore":97.5,"marketPosition":"Specialist contender","strategy":"Win on compute scale, real-time signal (X integration), and aggressive model cadence.","productCapabilities":["Models","Real-time signal","Voice + image APIs"],"enterpriseControls":["limited published controls"],"agenticCapability":"Grok and tool-use shipping; enterprise track record and audit story thin.","industryStrength":[{"industry":"Technology","score":78,"note":"Good developer and platform fit."},{"industry":"Financial services","score":68,"note":"Requires control validation."},{"industry":"Healthcare","score":62,"note":"Needs privacy and clinical workflow evidence."}],"riskProfile":["Governance opacity","geopolitical / regulatory visibility"],"analystInterpretation":"High-beta frontier contender; enterprise readiness lags the leading set.","lastUpdated":"2026-05-07T00:00:00.000Z","roleTags":["Model Provider","Infrastructure Player"],"infraBand":"neocloud"}]}
+{
+ "vendors": [
+  {
+   "id": "ai21",
+   "name": "AI21 Labs",
+   "slug": "ai21",
+   "category": "Frontier model/API",
+   "description": "Jamba hybrid Mamba+Transformer family; long-context efficiency thesis.",
+   "headquarters": "Tel Aviv, Israel",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "Long-context / hybrid architectures"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 48.6,
+   "confidenceScore": 90.6,
+   "marketPosition": "Specialist contender",
+   "strategy": "Sell architectural efficiency (long-context cost) into enterprise + regulated buyers.",
+   "productCapabilities": [
+    "Models",
+    "Long-context"
+   ],
+   "enterpriseControls": [
+    "enterprise integration patterns"
+   ],
+   "agenticCapability": "Jamba Large/Mini optimised for long-context; agentic story is implementation-led.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Smaller market share",
+    "ecosystem breadth"
+   ],
+   "analystInterpretation": "Solid technical specialist for long-context workloads.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider"
+   ]
+  },
+  {
+   "id": "amd",
+   "name": "AMD",
+   "slug": "amd",
+   "category": "AI infrastructure",
+   "description": "The principal credible GPU alternative to NVIDIA via the Instinct MI line, increasingly adopted by hyperscalers and labs seeking supply diversification.",
+   "headquarters": "Santa Clara, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI hardware"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 56.9,
+   "confidenceScore": 93.8,
+   "marketPosition": "Category leader",
+   "strategy": "Win on price/performance and supply diversification; close the software gap (ROCm) versus CUDA.",
+   "productCapabilities": [
+    "Accelerators",
+    "ROCm software"
+   ],
+   "enterpriseControls": [
+    "data-centre security features"
+   ],
+   "agenticCapability": "Not an agent vendor; an accelerator-supply alternative.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Software-ecosystem gap vs CUDA",
+    "supply ramp"
+   ],
+   "analystInterpretation": "The main lever buyers and clouds have to reduce single-source silicon risk; software maturity is the watch item.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Hardware Provider",
+    "Infrastructure Player"
+   ],
+   "infraBand": "silicon"
+  },
+  {
+   "id": "aws",
+   "name": "AWS",
+   "slug": "aws",
+   "category": "Cloud AI platform",
+   "description": "Infrastructure-heavy AI platform provider with breadth across model choice, deployment, and cloud operations.",
+   "headquarters": "Seattle, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Cloud AI platform",
+    "Agent platform",
+    "Infrastructure"
+   ],
+   "supportedEcosystems": [
+    "aws",
+    "databricks",
+    "salesforce",
+    "servicenow"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc",
+    "hybrid",
+    "sovereign"
+   ],
+   "autonomyLevelMax": "supervised_agent",
+   "overallScore": 53,
+   "confidenceScore": 97.7,
+   "marketPosition": "Major challenger",
+   "strategy": "Win through Bedrock-style model optionality, cloud-native deployment, and enterprise infrastructure trust.",
+   "productCapabilities": [
+    "Cloud AI",
+    "Agent platform",
+    "Infrastructure",
+    "Governance"
+   ],
+   "enterpriseControls": [
+    "cloud identity",
+    "network controls",
+    "observability"
+   ],
+   "agenticCapability": "Strong agent platform foundations for AWS estates; business-user assistant layer is less concentrated.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Complexity for non-AWS estates",
+    "service sprawl"
+   ],
+   "analystInterpretation": "Best considered a control plane and deployment platform, not a single assistant market-share proxy.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Platform Vendor",
+    "Cloud / Hosting Provider",
+    "Investor",
+    "Infrastructure Player",
+    "Model Provider"
+   ],
+   "infraBand": "cloud_compute",
+   "infraBandSecondary": "silicon"
+  },
+  {
+   "id": "alibaba",
+   "name": "Alibaba",
+   "slug": "alibaba",
+   "category": "Frontier model/API",
+   "description": "Qwen series + Alibaba Cloud Model Studio \u2014 broad multilingual + reasoning coverage.",
+   "headquarters": "Hangzhou, China",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "Cloud AI platform"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 62.7,
+   "confidenceScore": 95.6,
+   "marketPosition": "Major challenger",
+   "strategy": "Distribute Qwen via Alibaba Cloud and open-weight release; lead non-English benchmarks.",
+   "productCapabilities": [
+    "Models",
+    "Cloud AI",
+    "Multilingual"
+   ],
+   "enterpriseControls": [
+    "regional cloud controls"
+   ],
+   "agenticCapability": "Qwen3.5 family covers Plus / Flash variants + QwQ reasoning; agentic stack via Model Studio.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Geopolitical access",
+    "Western enterprise sales reach"
+   ],
+   "analystInterpretation": "Top-3 global frontier vendor; enterprise procurement gated by jurisdiction.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Cloud / Hosting Provider",
+    "Sovereign / Regional AI",
+    "Open-Source Ecosystem"
+   ],
+   "infraBand": "cloud_compute"
+  },
+  {
+   "id": "a16z",
+   "name": "Andreessen Horowitz",
+   "slug": "a16z",
+   "category": "AI investor",
+   "description": "Marquee venture investor (~$90B AUM) positioned across the AI stack \u2014 infrastructure (Databricks), models (OpenAI, Mistral, xAI) and applications; 2026 fundraise allocated $3.4B to AI specifically.",
+   "headquarters": "Menlo Park, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Investor"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 54.9,
+   "confidenceScore": 97.9,
+   "marketPosition": "Specialist contender",
+   "strategy": "Invest across every layer of the AI stack as a category-conviction strategy.",
+   "productCapabilities": [
+    "Venture capital",
+    "broad AI portfolio"
+   ],
+   "enterpriseControls": [
+    "n/a"
+   ],
+   "agenticCapability": "Not an operator; a signal of where smart capital concentrates.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Late-stage entry pricing",
+    "portfolio influence is indirect"
+   ],
+   "analystInterpretation": "A useful signal of which categories smart capital is concentrating in, not a procurement input.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Investor"
+   ]
+  },
+  {
+   "id": "anthropic",
+   "name": "Anthropic",
+   "slug": "anthropic",
+   "category": "Frontier model/API",
+   "description": "Frontier-reasoning + coding leader with computer-use GA and broad hyperscaler distribution. Claude Sonnet is the default model for Cursor, Aider, and GitHub Copilot Workspace; Claude Opus leads enterprise reasoning benchmarks.",
+   "headquarters": "San Francisco, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "Developer/coding agent",
+    "Agent platform"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc"
+   ],
+   "autonomyLevelMax": "supervised_agent",
+   "overallScore": 68.8,
+   "confidenceScore": 97.8,
+   "marketPosition": "Leader",
+   "strategy": "Lead on reasoning + coding quality, ship computer-use and tool-use primitives, and distribute through Bedrock, Vertex, Snowflake, and Databricks rather than a packaged assistant UI.",
+   "productCapabilities": [
+    "Frontier reasoning",
+    "Coding",
+    "Computer-use agents",
+    "Multi-cloud distribution"
+   ],
+   "enterpriseControls": [
+    "DPA + audit logs",
+    "AWS Bedrock + GCP Vertex tenant isolation",
+    "PrivateLink / VPC routing"
+   ],
+   "agenticCapability": "Computer-use GA and tool-use leadership put Anthropic on the same agent tier as OpenAI / MSFT / AWS; buyer diligence should still inspect deployment, retention, and audit-log evidence.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Capital intensity vs hyperscaler peers",
+    "Multi-hyperscaler distribution dependency"
+   ],
+   "analystInterpretation": "Reasoning + coding leader with a credible safety narrative; the gap on a packaged enterprise assistant is a distribution choice, not a capability one.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Application Vendor"
+   ]
+  },
+  {
+   "id": "broadcom",
+   "name": "Broadcom",
+   "slug": "broadcom",
+   "category": "AI infrastructure",
+   "description": "Custom-silicon (ASIC) and networking powerhouse; co-designs hyperscaler accelerators (e.g. Google TPU lineage) and supplies the switching fabric for AI data centres.",
+   "headquarters": "Palo Alto, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI hardware",
+    "Networking"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 58.8,
+   "confidenceScore": 98.3,
+   "marketPosition": "Major challenger",
+   "strategy": "Win the custom-accelerator and networking layer that hyperscalers use to reduce NVIDIA dependence.",
+   "productCapabilities": [
+    "Custom ASICs",
+    "Networking switches",
+    "Optical"
+   ],
+   "enterpriseControls": [
+    "hardware supply assurance"
+   ],
+   "agenticCapability": "Not an agent vendor; deep infrastructure enabler.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Customer concentration",
+    "cyclical demand"
+   ],
+   "analystInterpretation": "A quieter but structural beneficiary of AI build-out; relevant to anyone modelling the non-NVIDIA silicon path.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Hardware Provider",
+    "Infrastructure Player"
+   ],
+   "infraBand": "silicon"
+  },
+  {
+   "id": "cerebras",
+   "name": "Cerebras",
+   "slug": "cerebras",
+   "category": "AI infrastructure",
+   "description": "Wafer-scale (WSE-3) inference challenger; IPO'd May 2026 (~$56B day-one valuation) anchored by a $20B+ OpenAI compute commitment with warrants up to ~10%.",
+   "headquarters": "Sunnyvale, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI hardware",
+    "AI infrastructure"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 55,
+   "confidenceScore": 97.1,
+   "marketPosition": "Category leader",
+   "strategy": "Differentiate on inference latency/throughput via wafer-scale silicon; diversify away from historical single-customer concentration.",
+   "productCapabilities": [
+    "Wafer-scale accelerators",
+    "Cerebras Inference cloud"
+   ],
+   "enterpriseControls": [
+    "data-centre controls"
+   ],
+   "agenticCapability": "Not an agent vendor; a latency/throughput and supply-diversification signal.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Historical customer concentration (G42)",
+    "competition from NVIDIA/AMD",
+    "IPO-valuation sensitivity"
+   ],
+   "analystInterpretation": "An independent inference-speed alternative; the OpenAI commitment reduces but does not remove its historical concentration risk.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Hardware Provider",
+    "Infrastructure Player",
+    "Model Provider"
+   ],
+   "infraBand": "silicon",
+   "infraBandSecondary": "inference"
+  },
+  {
+   "id": "cohere",
+   "name": "Cohere (incl. Aleph Alpha)",
+   "slug": "cohere",
+   "category": "Frontier model/API",
+   "description": "Enterprise-oriented model provider focused on secure deployment and retrieval; merged with Germany's Aleph Alpha in April 2026 to form a transatlantic sovereign-AI champion (~$20B combined, Cohere shareholders ~90%).",
+   "headquarters": "Toronto, Canada",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "RAG/enterprise search",
+    "Regulated-industry AI"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc",
+    "hybrid",
+    "sovereign"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 51.4,
+   "confidenceScore": 97.8,
+   "marketPosition": "Specialist contender",
+   "strategy": "Focus on enterprise models, private/sovereign deployment, and knowledge-intensive workloads; combine Cohere's Command/Embed/Rerank with Aleph Alpha's Pharia/Luminous lines and STACKIT sovereign-cloud reach.",
+   "productCapabilities": [
+    "Models",
+    "RAG",
+    "Private deployment",
+    "Sovereign deployment"
+   ],
+   "enterpriseControls": [
+    "deployment controls",
+    "data residency controls",
+    "STACKIT sovereign cloud"
+   ],
+   "agenticCapability": "Agentic layer is less visible than model and retrieval strengths; merger integration is still consolidating.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Recent merger integration risk",
+    "lower broad-market visibility"
+   ],
+   "analystInterpretation": "A credible specialist when private deployment, data residency, and RAG quality matter more than suite breadth; the Aleph Alpha merger strengthens its European sovereign position.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Data & Services Provider",
+    "Sovereign / Regional AI",
+    "Application Vendor"
+   ]
+  },
+  {
+   "id": "coreweave",
+   "name": "CoreWeave",
+   "slug": "coreweave",
+   "category": "AI infrastructure",
+   "description": "The defining 'neocloud' \u2014 a GPU-specialist cloud with a multi-billion revenue backlog (~$66B reported) and a ~$21B long-term capacity agreement with Meta through 2032.",
+   "headquarters": "Livingston, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI infrastructure",
+    "Cloud / hosting"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 62,
+   "confidenceScore": 93.6,
+   "marketPosition": "Category leader",
+   "strategy": "Provide dedicated, NVIDIA-rich GPU capacity to labs and enterprises faster than hyperscalers, on long contracts.",
+   "productCapabilities": [
+    "GPU cloud",
+    "managed clusters"
+   ],
+   "enterpriseControls": [
+    "tenant isolation",
+    "data-centre controls"
+   ],
+   "agenticCapability": "Not an agent vendor; specialist compute supply.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "GPU-backed debt financing",
+    "customer concentration",
+    "demand-cycle exposure"
+   ],
+   "analystInterpretation": "A fast, NVIDIA-heavy capacity option; the balance-sheet structure (GPU-backed loans) makes it a counterparty-risk question distinct from renting from a hyperscaler.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Infrastructure Player",
+    "Cloud / Hosting Provider",
+    "Application Vendor"
+   ],
+   "infraBand": "neocloud"
+  },
+  {
+   "id": "databricks",
+   "name": "Databricks",
+   "slug": "databricks",
+   "category": "Cloud AI platform",
+   "description": "Data and AI platform with strong lakehouse footprint and model-building orientation.",
+   "headquarters": "San Francisco, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Cloud AI platform",
+    "Data AI",
+    "Developer/coding agent"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc",
+    "hybrid",
+    "sovereign"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 44,
+   "confidenceScore": 97.4,
+   "marketPosition": "Category leader",
+   "strategy": "Use data estate, open model tooling, and governance to become enterprise AI build platform.",
+   "productCapabilities": [
+    "Data AI",
+    "Model operations",
+    "Governance"
+   ],
+   "enterpriseControls": [
+    "data governance",
+    "lineage"
+   ],
+   "agenticCapability": "Agentic capability is strongest for data/analytics and custom enterprise build patterns.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Business-user assistant reach",
+    "implementation skill needs"
+   ],
+   "analystInterpretation": "Strong for build-oriented enterprises that treat data governance as the AI foundation.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Data & Services Provider",
+    "Platform Vendor",
+    "Infrastructure Player"
+   ],
+   "infraBand": "data_platform"
+  },
+  {
+   "id": "deepseek",
+   "name": "DeepSeek",
+   "slug": "deepseek",
+   "category": "Frontier model/API",
+   "description": "Cost-efficient frontier reasoning lab \u2014 V4 series materially undercuts US pricing.",
+   "headquarters": "Hangzhou, China",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "Reasoning models"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 60.3,
+   "confidenceScore": 97,
+   "marketPosition": "Category leader",
+   "strategy": "Win on price-per-token + reasoning quality through aggressive open release cadence.",
+   "productCapabilities": [
+    "Models",
+    "Reasoning"
+   ],
+   "enterpriseControls": [
+    "limited enterprise tooling"
+   ],
+   "agenticCapability": "Strong reasoning benchmarks; geopolitical and data-residency caveats apply for many buyers.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Geopolitical access risk",
+    "data residency concerns"
+   ],
+   "analystInterpretation": "Compelling on cost-per-quality; access compliance is the deciding factor for regulated buyers.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Sovereign / Regional AI",
+    "Open-Source Ecosystem",
+    "Application Vendor"
+   ]
+  },
+  {
+   "id": "fireworks",
+   "name": "Fireworks AI",
+   "slug": "fireworks",
+   "category": "AI infrastructure",
+   "description": "Leading software-layer (GPU-based) inference platform optimised for throughput; reportedly in talks at ~$15B valuation, customers include Cursor, Perplexity and Notion.",
+   "headquarters": "Redwood City, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI infrastructure",
+    "Cloud / hosting",
+    "Open-source ecosystem"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 54.9,
+   "confidenceScore": 98.5,
+   "marketPosition": "Specialist contender",
+   "strategy": "Differentiate on inference throughput optimisation (FireAttention) rather than custom silicon.",
+   "productCapabilities": [
+    "Inference cloud",
+    "FireAttention kernels",
+    "managed fine-tuning"
+   ],
+   "enterpriseControls": [
+    "tenant isolation"
+   ],
+   "agenticCapability": "Hosts open models for agentic use; not an agent vendor itself.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Software-optimisation moat pressured by custom silicon and hyperscaler catalogs"
+   ],
+   "analystInterpretation": "A throughput-optimised open-model inference option; differentiates on software, not silicon.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Infrastructure Player",
+    "Cloud / Hosting Provider",
+    "Open-Source Ecosystem"
+   ],
+   "infraBand": "neocloud",
+   "infraBandSecondary": "inference"
+  },
+  {
+   "id": "g42",
+   "name": "G42 / Falcon (TII)",
+   "slug": "g42",
+   "category": "Sovereign/regional AI",
+   "description": "Abu Dhabi's sovereign-AI holding company (~$2.3B raised; Microsoft holds a $1.5B equity stake with a board seat); the TII Falcon models are the most-cited regional open-weights frontier line, with a Cerebras-based supercomputer footprint.",
+   "headquarters": "Abu Dhabi, UAE",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Sovereign/regional AI",
+    "AI infrastructure",
+    "Frontier model/API"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 42.6,
+   "confidenceScore": 94.6,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Be the AI capital of the Arab world with explicit US-technology alignment; pair sovereign compute with the Falcon open-weights franchise.",
+   "productCapabilities": [
+    "Falcon open-weights models",
+    "sovereign compute",
+    "Khazna data centres"
+   ],
+   "enterpriseControls": [
+    "UAE data perimeter",
+    "Intergovernmental Assurance Agreement"
+   ],
+   "agenticCapability": "Agentic capability is application-embedded; the draw is sovereign compute + Arabic-native models.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Geopolitical alignment commitments",
+    "Western enterprise sales reach"
+   ],
+   "analystInterpretation": "A sovereignty, compute and jurisdiction signal for Gulf and aligned-market deployments; Microsoft alignment shapes who can procure and where.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Sovereign / Regional AI",
+    "Infrastructure Player",
+    "Model Provider"
+   ],
+   "infraBand": "cloud_compute"
+  },
+  {
+   "id": "glean",
+   "name": "Glean",
+   "slug": "glean",
+   "category": "RAG/enterprise search",
+   "description": "Enterprise knowledge assistant specialist with strong workplace search heritage.",
+   "headquarters": "Palo Alto, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "RAG/enterprise search",
+    "Enterprise assistant"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 59.2,
+   "confidenceScore": 98.9,
+   "marketPosition": "Category leader",
+   "strategy": "Own enterprise knowledge retrieval and expand from answer engine into assistant and agent workflows.",
+   "productCapabilities": [
+    "Enterprise search",
+    "Knowledge assistant",
+    "RAG"
+   ],
+   "enterpriseControls": [
+    "source permissions",
+    "connector controls"
+   ],
+   "agenticCapability": "Promising knowledge-agent path; source permissioning remains a central buyer checkpoint.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Platform breadth",
+    "dependency on content connectors"
+   ],
+   "analystInterpretation": "Strong category specialist for knowledge-heavy enterprises.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Application Vendor",
+    "Data & Services Provider"
+   ]
+  },
+  {
+   "id": "google",
+   "name": "Google",
+   "slug": "google",
+   "category": "Cloud AI platform",
+   "description": "Technically deep platform with improving enterprise packaging through Google Cloud and Workspace.",
+   "headquarters": "Mountain View, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Cloud AI platform",
+    "Frontier model/API",
+    "RAG/enterprise search"
+   ],
+   "supportedEcosystems": [
+    "google_workspace",
+    "gcp",
+    "databricks",
+    "snowflake"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc",
+    "hybrid",
+    "sovereign"
+   ],
+   "autonomyLevelMax": "supervised_agent",
+   "overallScore": 62.3,
+   "confidenceScore": 97.8,
+   "marketPosition": "Major challenger",
+   "strategy": "Differentiate on model research, multimodal capability, data/cloud integration, and Workspace adoption.",
+   "productCapabilities": [
+    "Models",
+    "Cloud AI",
+    "Enterprise search",
+    "Workspace"
+   ],
+   "enterpriseControls": [
+    "cloud controls",
+    "data controls",
+    "identity"
+   ],
+   "agenticCapability": "Strong model and multimodal progress; enterprise agent operating model varies by buyer stack.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Enterprise adoption consistency",
+    "fragmented portfolio perception"
+   ],
+   "analystInterpretation": "Strong challenger where data, search, and cloud-native workloads matter.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Platform Vendor",
+    "Model Provider",
+    "Cloud / Hosting Provider",
+    "Hardware Provider",
+    "Application Vendor"
+   ],
+   "infraBand": "cloud_compute",
+   "infraBandSecondary": "silicon"
+  },
+  {
+   "id": "groq",
+   "name": "Groq",
+   "slug": "groq",
+   "category": "AI infrastructure",
+   "description": "Inference neocloud built on its LPU technology; pivoted to cloud hosting after NVIDIA's ~$20B Dec-2025 licensing/acquihire transferred its core engineering team, and is raising ~$650M.",
+   "headquarters": "Mountain View, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI infrastructure",
+    "Cloud / hosting"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 63.7,
+   "confidenceScore": 97.7,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Host inference-heavy applications on GroqCloud after the LPU IP licensing to NVIDIA.",
+   "productCapabilities": [
+    "LPU inference cloud"
+   ],
+   "enterpriseControls": [
+    "tenant isolation"
+   ],
+   "agenticCapability": "Hosts models for low-latency inference; not an agent vendor.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Post-acquihire roadmap uncertainty",
+    "engineering-team loss",
+    "unproven unit economics"
+   ],
+   "analystInterpretation": "Watch-list infrastructure rather than a stable dependency; the NVIDIA acquihire leaves its roadmap unproven.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Infrastructure Player",
+    "Cloud / Hosting Provider"
+   ],
+   "infraBand": "neocloud",
+   "infraBandSecondary": "inference"
+  },
+  {
+   "id": "humain",
+   "name": "HUMAIN",
+   "slug": "humain",
+   "category": "Sovereign/regional AI",
+   "description": "Saudi Arabia's national AI champion, announced May 2025 as a wholly-owned PIF subsidiary, building sovereign compute and model capability.",
+   "headquarters": "Riyadh, Saudi Arabia",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Sovereign/regional AI",
+    "AI infrastructure",
+    "Cloud / hosting"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 48.6,
+   "confidenceScore": 92.6,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Build kingdom-scale sovereign compute and model capability backed by PIF capital.",
+   "productCapabilities": [
+    "Sovereign compute build-out"
+   ],
+   "enterpriseControls": [
+    "national data perimeter"
+   ],
+   "agenticCapability": "Very early; enterprise-readiness evidence outside the region is limited.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Very early stage",
+    "capability evidence limited outside region"
+   ],
+   "analystInterpretation": "A well-capitalised sovereignty and regional-access signal for Gulf-market and aligned deployments; early on enterprise readiness.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Sovereign / Regional AI",
+    "Infrastructure Player",
+    "Cloud / Hosting Provider"
+   ],
+   "infraBand": "cloud_compute"
+  },
+  {
+   "id": "harvey",
+   "name": "Harvey",
+   "slug": "harvey",
+   "category": "Regulated-industry AI",
+   "description": "Legal AI specialist with strong mindshare in law firms and legal departments.",
+   "headquarters": "San Francisco, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Legal AI",
+    "Regulated-industry AI"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 58.9,
+   "confidenceScore": 98.9,
+   "marketPosition": "Category leader",
+   "strategy": "Own legal knowledge work and expand into adjacent professional-services workflows.",
+   "productCapabilities": [
+    "Legal research",
+    "Contract review",
+    "Professional services"
+   ],
+   "enterpriseControls": [
+    "matter controls",
+    "audit"
+   ],
+   "agenticCapability": "Agentic capability is valuable but should be bounded by human review and privilege controls.",
+   "industryStrength": [
+    {
+     "industry": "Legal",
+     "score": 91,
+     "note": "Strong legal workflow fit with human review."
+    }
+   ],
+   "riskProfile": [
+    "Vertical concentration",
+    "pricing opacity"
+   ],
+   "analystInterpretation": "High-signal vertical leader; market share should be assessed in legal, not generic AI.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Vertical Specialist",
+    "Application Vendor"
+   ]
+  },
+  {
+   "id": "hebbia",
+   "name": "Hebbia",
+   "slug": "hebbia",
+   "category": "RAG/enterprise search",
+   "description": "Research and document intelligence specialist with strength in high-value knowledge work.",
+   "headquarters": "New York, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "RAG/enterprise search",
+    "Financial services AI"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 54.1,
+   "confidenceScore": 98.4,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Target analysts and deal teams with structured document intelligence and workflow depth.",
+   "productCapabilities": [
+    "Document intelligence",
+    "Financial research",
+    "RAG"
+   ],
+   "enterpriseControls": [
+    "workspace controls"
+   ],
+   "agenticCapability": "Agentic capability is workflow-specific and should be tested against regulated review needs.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Scale evidence",
+    "category scope"
+   ],
+   "analystInterpretation": "Compelling specialist for research-intensive teams, with confidence still shaped by reference depth.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Vertical Specialist",
+    "Application Vendor",
+    "Data & Services Provider"
+   ]
+  },
+  {
+   "id": "ibm",
+   "name": "IBM",
+   "slug": "ibm",
+   "category": "Regulated-industry AI",
+   "description": "Governance and hybrid-enterprise specialist with credibility in regulated operating environments.",
+   "headquarters": "Armonk, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Regulated-industry AI",
+    "Governance",
+    "Hybrid AI"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc",
+    "hybrid",
+    "sovereign"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 45.2,
+   "confidenceScore": 97.5,
+   "marketPosition": "Specialist contender",
+   "strategy": "Compete on trusted AI, hybrid deployment, consulting, governance, and model lifecycle management.",
+   "productCapabilities": [
+    "Governance",
+    "Hybrid deployment",
+    "Regulated AI"
+   ],
+   "enterpriseControls": [
+    "model governance",
+    "audit",
+    "hybrid controls"
+   ],
+   "agenticCapability": "More conservative agentic posture; strong where auditability and controls outweigh speed.",
+   "industryStrength": [
+    {
+     "industry": "Regulated enterprise",
+     "score": 82,
+     "note": "Control-led posture suits risk-heavy buyers."
+    }
+   ],
+   "riskProfile": [
+    "Momentum perception",
+    "developer mindshare"
+   ],
+   "analystInterpretation": "Useful benchmark for control maturity even when not the fastest growth story.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Platform Vendor",
+    "Model Provider",
+    "Data & Services Provider"
+   ]
+  },
+  {
+   "id": "lambda",
+   "name": "Lambda",
+   "slug": "lambda",
+   "category": "AI infrastructure",
+   "description": "GPU-cloud neocloud serving training and inference capacity to AI builders ($1.5B+ Series E).",
+   "headquarters": "San Francisco, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI infrastructure",
+    "Cloud / hosting"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 57.3,
+   "confidenceScore": 98.9,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Offer NVIDIA capacity (on-demand + reserved) outside the big-three hyperscalers.",
+   "productCapabilities": [
+    "GPU cloud",
+    "reserved clusters"
+   ],
+   "enterpriseControls": [
+    "tenant isolation"
+   ],
+   "agenticCapability": "Not an agent vendor; compute-supply and pricing-leverage option.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Capital intensity",
+    "GPU-supply exposure",
+    "limited disclosures"
+   ],
+   "analystInterpretation": "A capacity and pricing-leverage option for buyers wanting NVIDIA GPUs without hyperscaler lock-in.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Infrastructure Player",
+    "Cloud / Hosting Provider"
+   ],
+   "infraBand": "neocloud"
+  },
+  {
+   "id": "mgx",
+   "name": "MGX",
+   "slug": "mgx",
+   "category": "AI investor",
+   "description": "UAE state-backed AI investment vehicle racing toward $100B+ AUM; co-led Anthropic's round (valuing it ~$965B) and holds a multi-billion OpenAI position.",
+   "headquarters": "Abu Dhabi, UAE",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Investor",
+    "Sovereign/regional AI"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 52.5,
+   "confidenceScore": 88,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Deploy sovereign capital at mega-round scale across frontier labs and AI infrastructure.",
+   "productCapabilities": [
+    "Sovereign capital",
+    "frontier-lab stakes"
+   ],
+   "enterpriseControls": [
+    "n/a"
+   ],
+   "agenticCapability": "Not an operator; Gulf sovereign-capital signal with jurisdiction implications.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "State-linked capital raises jurisdiction/governance considerations"
+   ],
+   "analystInterpretation": "Signals Gulf sovereign capital shaping model access and data-centre build-out; relevant to sovereignty and jurisdiction questions.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Investor",
+    "Sovereign / Regional AI"
+   ]
+  },
+  {
+   "id": "meta",
+   "name": "Meta",
+   "slug": "meta",
+   "category": "Frontier model/API",
+   "description": "Llama owner with deep open-weights distribution and Meta-AI consumer product surface.",
+   "headquarters": "Menlo Park, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "Open-weight models",
+    "Consumer AI"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 61.9,
+   "confidenceScore": 97.8,
+   "marketPosition": "Major challenger",
+   "strategy": "Lead open-weights ecosystem while running Meta AI as a consumer assistant; deepen developer reach via Llama API.",
+   "productCapabilities": [
+    "Models",
+    "Open-weights",
+    "Consumer AI"
+   ],
+   "enterpriseControls": [
+    "model card transparency",
+    "responsible use license"
+   ],
+   "agenticCapability": "Llama 4 brings stronger multimodal and tool-use; enterprise productisation lags hyperscalers.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Enterprise control narrative thin",
+    "consumer-AI brand concentration"
+   ],
+   "analystInterpretation": "Decisive for open-weights strategies; less of a packaged enterprise platform play.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Open-Source Ecosystem",
+    "Application Vendor"
+   ]
+  },
+  {
+   "id": "microsoft",
+   "name": "Microsoft",
+   "slug": "microsoft",
+   "category": "Cloud AI platform",
+   "description": "Distribution leader through Microsoft 365, Azure, GitHub, and enterprise procurement reach.",
+   "headquarters": "Redmond, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Cloud AI platform",
+    "Enterprise assistant",
+    "Developer/coding agent"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "azure",
+    "github",
+    "servicenow",
+    "sap"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc",
+    "hybrid",
+    "sovereign"
+   ],
+   "autonomyLevelMax": "supervised_agent",
+   "overallScore": 44.7,
+   "confidenceScore": 97.6,
+   "marketPosition": "Leader",
+   "strategy": "Bundle AI into productivity, developer, security, and cloud workflows while shifting buyers into Azure-managed control planes.",
+   "productCapabilities": [
+    "Enterprise assistant",
+    "Developer productivity",
+    "Cloud AI",
+    "Governance"
+   ],
+   "enterpriseControls": [
+    "identity",
+    "compliance",
+    "tenant controls",
+    "security"
+   ],
+   "agenticCapability": "Strong copilot estate with widening agent orchestration across productivity and developer workflows.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Bundling opacity",
+    "cost governance complexity"
+   ],
+   "analystInterpretation": "Likely to own the enterprise access layer, but category share must be measured by workload, not by suite reach.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Platform Vendor",
+    "Application Vendor",
+    "Investor",
+    "Infrastructure Player",
+    "Model Provider",
+    "Cloud / Hosting Provider"
+   ],
+   "infraBand": "cloud_compute",
+   "infraBandSecondary": "silicon"
+  },
+  {
+   "id": "minimax",
+   "name": "MiniMax",
+   "slug": "minimax",
+   "category": "Frontier model/API",
+   "description": "MiniMax M2 series + her-variant for speech; consumer + B2B AI surface.",
+   "headquarters": "Shanghai, China",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "Speech / multimodal"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 56.4,
+   "confidenceScore": 93.3,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Differentiate on speech-multimodal and consumer-AI integration patterns.",
+   "productCapabilities": [
+    "Models",
+    "Speech"
+   ],
+   "enterpriseControls": [
+    "limited enterprise disclosures"
+   ],
+   "agenticCapability": "M2 family covers speech and multimodal; enterprise control story underdeveloped.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Geopolitical access",
+    "enterprise depth"
+   ],
+   "analystInterpretation": "Interesting multimodal contender; not yet a packaged enterprise platform.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Sovereign / Regional AI"
+   ]
+  },
+  {
+   "id": "mistral",
+   "name": "Mistral",
+   "slug": "mistral",
+   "category": "Frontier model/API",
+   "description": "European model provider with strong open-weight and sovereignty positioning.",
+   "headquarters": "Paris, France",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "Open model",
+    "European AI"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc",
+    "hybrid",
+    "sovereign"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 51.5,
+   "confidenceScore": 97.7,
+   "marketPosition": "Specialist contender",
+   "strategy": "Win buyers needing model optionality, European positioning, and flexible deployment.",
+   "productCapabilities": [
+    "Models",
+    "Sovereign AI",
+    "Developer AI"
+   ],
+   "enterpriseControls": [
+    "deployment optionality"
+   ],
+   "agenticCapability": "Agentic capability depends heavily on partners and implementation layer.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Enterprise control proof depth",
+    "smaller account coverage"
+   ],
+   "analystInterpretation": "Momentum is real, but enterprise readiness should be validated workload by workload.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Sovereign / Regional AI",
+    "Open-Source Ecosystem"
+   ]
+  },
+  {
+   "id": "moonshot",
+   "name": "Moonshot AI",
+   "slug": "moonshot",
+   "category": "Frontier model/API",
+   "description": "Kimi K2 series \u2014 known for long-context handling and reasoning depth.",
+   "headquarters": "Beijing, China",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "Long-context models"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 58.6,
+   "confidenceScore": 97.7,
+   "marketPosition": "Specialist contender",
+   "strategy": "Build a reasoning-and-long-context niche through K2 Thinking and platform.moonshot.ai.",
+   "productCapabilities": [
+    "Models",
+    "Long-context",
+    "Reasoning"
+   ],
+   "enterpriseControls": [
+    "limited enterprise controls disclosure"
+   ],
+   "agenticCapability": "K2 Thinking adds reasoning; commercial enterprise track record is short.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Geopolitical access",
+    "enterprise-readiness gap"
+   ],
+   "analystInterpretation": "Strong technical contender; enterprise validation still early.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Sovereign / Regional AI"
+   ]
+  },
+  {
+   "id": "moveworks",
+   "name": "Moveworks",
+   "slug": "moveworks",
+   "category": "ITSM/HR/service AI",
+   "description": "Employee support automation specialist focused on IT, HR, and internal service workflows.",
+   "headquarters": "Mountain View, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "ITSM/HR/service AI",
+    "Workflow automation AI"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 61.2,
+   "confidenceScore": 98.5,
+   "marketPosition": "Category leader",
+   "strategy": "Expand from support automation into broader enterprise service agents.",
+   "productCapabilities": [
+    "Employee service",
+    "Workflow automation",
+    "ITSM"
+   ],
+   "enterpriseControls": [
+    "workflow approval",
+    "identity"
+   ],
+   "agenticCapability": "Strong supervised service automation; broad autonomy depends on workflow integration depth.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Category concentration",
+    "suite competition"
+   ],
+   "analystInterpretation": "Clear value in service automation, especially where ticket deflection is measurable.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Application Vendor",
+    "Vertical Specialist"
+   ]
+  },
+  {
+   "id": "nvidia",
+   "name": "NVIDIA",
+   "slug": "nvidia",
+   "category": "AI infrastructure",
+   "description": "The dominant AI accelerator company; GPUs (Hopper/Blackwell) and CUDA are the de-facto training and inference substrate, with DGX Cloud as a direct compute offering and a widening strategic-investment portfolio.",
+   "headquarters": "Santa Clara, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI hardware",
+    "AI infrastructure",
+    "Investor"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 61.5,
+   "confidenceScore": 93.5,
+   "marketPosition": "Leader",
+   "strategy": "Hold the silicon + software (CUDA) standard, extend into systems (DGX) and networking, and use strategic investments to seed demand across labs and neoclouds.",
+   "productCapabilities": [
+    "Accelerators",
+    "CUDA software",
+    "Networking",
+    "DGX Cloud"
+   ],
+   "enterpriseControls": [
+    "data-centre security features",
+    "confidential computing"
+   ],
+   "agenticCapability": "Not an agent vendor; the enabling layer beneath nearly every agentic system.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Supply concentration",
+    "export-control exposure",
+    "valuation sensitivity"
+   ],
+   "analystInterpretation": "The single highest-concentration dependency in enterprise AI. Treat NVIDIA exposure as a systemic supply risk to plan around, not a vendor to simply select.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Hardware Provider",
+    "Infrastructure Player",
+    "Investor",
+    "Model Provider"
+   ],
+   "infraBand": "silicon",
+   "infraBandSecondary": "neocloud"
+  },
+  {
+   "id": "nscale",
+   "name": "Nscale",
+   "slug": "nscale",
+   "category": "AI infrastructure",
+   "description": "UK/Europe sovereign GPU-cloud neocloud (raised $1.1B+ Series B, further $2B in 2026) targeting data-residency-sensitive workloads.",
+   "headquarters": "London, UK",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI infrastructure",
+    "Cloud / hosting",
+    "Sovereign AI"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 57.2,
+   "confidenceScore": 92.8,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Provide non-US, data-resident GPU capacity for European sovereign and regulated buyers.",
+   "productCapabilities": [
+    "Sovereign GPU cloud"
+   ],
+   "enterpriseControls": [
+    "EU data residency",
+    "tenant isolation"
+   ],
+   "agenticCapability": "Not an agent vendor; sovereignty-oriented compute supply.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Early-stage scale",
+    "utilisation economics unproven"
+   ],
+   "analystInterpretation": "A sovereignty and bargaining-leverage compute option where non-US, data-resident capacity is a procurement requirement.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Infrastructure Player",
+    "Cloud / Hosting Provider",
+    "Sovereign / Regional AI"
+   ],
+   "infraBand": "neocloud"
+  },
+  {
+   "id": "openai",
+   "name": "OpenAI",
+   "slug": "openai",
+   "category": "Frontier model/API",
+   "description": "Category shaper with strong model cadence and fast enterprise API expansion.",
+   "headquarters": "San Francisco, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "Agent platform",
+    "Enterprise assistant"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc"
+   ],
+   "autonomyLevelMax": "supervised_agent",
+   "overallScore": 68.4,
+   "confidenceScore": 97.8,
+   "marketPosition": "Leader",
+   "strategy": "Lead with model quality, agent runtime, enterprise controls, and ecosystem distribution through strategic partners.",
+   "productCapabilities": [
+    "Models",
+    "Agents",
+    "Developer productivity",
+    "Knowledge assistant"
+   ],
+   "enterpriseControls": [
+    "SSO",
+    "admin controls",
+    "API controls"
+   ],
+   "agenticCapability": "Advanced supervised and autonomous agent patterns; enterprise production controls still need careful validation.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Commercial dependency concentration",
+    "fast-changing roadmap"
+   ],
+   "analystInterpretation": "Winning, but buyers should separate model capability from enterprise operating control.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Application Vendor"
+   ]
+  },
+  {
+   "id": "oracle",
+   "name": "Oracle",
+   "slug": "oracle",
+   "category": "Cloud AI platform",
+   "description": "Enterprise application and database incumbent with AI embedded into cloud and business suites.",
+   "headquarters": "Austin, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Cloud AI platform",
+    "Regulated-industry AI",
+    "Enterprise applications"
+   ],
+   "supportedEcosystems": [
+    "oracle",
+    "oci",
+    "microsoft"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 53.8,
+   "confidenceScore": 98.6,
+   "marketPosition": "Category leader",
+   "strategy": "Use cloud infrastructure, database estate, and apps to pull AI into existing Oracle accounts.",
+   "productCapabilities": [
+    "Enterprise apps",
+    "Database AI",
+    "Cloud AI"
+   ],
+   "enterpriseControls": [
+    "database controls",
+    "app controls"
+   ],
+   "agenticCapability": "Agentic capability is more application-embedded than broad open agent platform.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Perception gap",
+    "ecosystem breadth"
+   ],
+   "analystInterpretation": "Relevant for Oracle-heavy estates; market leadership varies sharply by category.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Platform Vendor",
+    "Cloud / Hosting Provider",
+    "Infrastructure Player",
+    "Application Vendor"
+   ],
+   "infraBand": "cloud_compute"
+  },
+  {
+   "id": "perplexity",
+   "name": "Perplexity",
+   "slug": "perplexity",
+   "category": "Enterprise assistant",
+   "description": "AI search and answer engine with the Sonar model line; expanding from consumer search into enterprise research and knowledge workflows.",
+   "headquarters": "San Francisco, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI search",
+    "Enterprise assistant",
+    "RAG/enterprise search"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 50.4,
+   "confidenceScore": 95,
+   "marketPosition": "Specialist contender",
+   "strategy": "Win AI-native search and research as an application, blending first-party Sonar models with frontier model routing.",
+   "productCapabilities": [
+    "AI search",
+    "Research assistant",
+    "Sonar models"
+   ],
+   "enterpriseControls": [
+    "workspace controls"
+   ],
+   "agenticCapability": "Agentic research flows are emerging; enterprise controls and source-quality evidence need validation before knowledge-work scale-up.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Enterprise control depth",
+    "source quality at scale"
+   ],
+   "analystInterpretation": "Best read as an AI search and research application with model-provider characteristics through Sonar, not a horizontal enterprise platform.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Application Vendor",
+    "Model Provider"
+   ]
+  },
+  {
+   "id": "rogo",
+   "name": "Rogo",
+   "slug": "rogo",
+   "category": "Regulated-industry AI",
+   "description": "Financial-services AI specialist targeting banking, investing, and research workflows.",
+   "headquarters": "New York, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Financial services AI",
+    "RAG/enterprise search"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 58,
+   "confidenceScore": 98.7,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Win regulated financial teams through domain fit, workflow language, and curated data experiences.",
+   "productCapabilities": [
+    "Financial research",
+    "Knowledge assistant"
+   ],
+   "enterpriseControls": [
+    "domain controls"
+   ],
+   "agenticCapability": "Agentic capability should remain supervised in high-stakes finance contexts.",
+   "industryStrength": [
+    {
+     "industry": "Financial services",
+     "score": 86,
+     "note": "Finance-specific workflow and language fit."
+    }
+   ],
+   "riskProfile": [
+    "Limited horizontal proof",
+    "vendor maturity"
+   ],
+   "analystInterpretation": "Interesting vertical specialist; evaluate evidence depth before enterprise-scale rollout.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Vertical Specialist",
+    "Application Vendor"
+   ]
+  },
+  {
+   "id": "sap",
+   "name": "SAP",
+   "slug": "sap",
+   "category": "Enterprise applications",
+   "description": "ERP and business-process incumbent embedding AI into finance, supply chain, HR, and procurement.",
+   "headquarters": "Walldorf, Germany",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Enterprise applications",
+    "Workflow automation AI",
+    "Regulated-industry AI"
+   ],
+   "supportedEcosystems": [
+    "sap",
+    "microsoft",
+    "aws"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 56.9,
+   "confidenceScore": 98.7,
+   "marketPosition": "Specialist contender",
+   "strategy": "Defend and extend system-of-record workflows through embedded assistants and process intelligence.",
+   "productCapabilities": [
+    "ERP AI",
+    "Process intelligence",
+    "Governance"
+   ],
+   "enterpriseControls": [
+    "role controls",
+    "process audit"
+   ],
+   "agenticCapability": "Agentic capability is strongest in governed business processes rather than open-ended autonomy.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Suite dependency",
+    "slower perceived cadence"
+   ],
+   "analystInterpretation": "Strong for SAP-centric operating models; do not confuse ERP reach with frontier AI share.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Application Vendor",
+    "Platform Vendor",
+    "Model Provider"
+   ]
+  },
+  {
+   "id": "sakana",
+   "name": "Sakana AI",
+   "slug": "sakana",
+   "category": "Sovereign/regional AI",
+   "description": "Tokyo-based lab building Japan's domestic frontier-model capability with a distinctive evolutionary/merged-model research approach.",
+   "headquarters": "Tokyo, Japan",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Sovereign/regional AI",
+    "Frontier model/API"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 55.9,
+   "confidenceScore": 97.1,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Anchor Japan's domestic frontier capability with a research-led, efficiency-oriented model approach.",
+   "productCapabilities": [
+    "Evolutionary / merged models"
+   ],
+   "enterpriseControls": [
+    "limited enterprise disclosures"
+   ],
+   "agenticCapability": "Research-stage; enterprise productisation and controls evidence are early.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Research-stage positioning",
+    "enterprise-readiness evidence early"
+   ],
+   "analystInterpretation": "A regional-sovereignty and research-diversity signal more than a current enterprise default.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Sovereign / Regional AI",
+    "Model Provider"
+   ]
+  },
+  {
+   "id": "salesforce",
+   "name": "Salesforce",
+   "slug": "salesforce",
+   "category": "CRM/customer AI",
+   "description": "CRM workflow owner with strong access to sales, service, and customer data.",
+   "headquarters": "San Francisco, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "CRM/customer AI",
+    "Agent platform",
+    "Workflow automation AI"
+   ],
+   "supportedEcosystems": [
+    "salesforce",
+    "slack",
+    "mulesoft",
+    "snowflake"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 55.8,
+   "confidenceScore": 98.7,
+   "marketPosition": "Major challenger",
+   "strategy": "Embed AI agents into CRM workflows and monetise via packaged customer-facing productivity outcomes.",
+   "productCapabilities": [
+    "CRM AI",
+    "Service AI",
+    "Agents"
+   ],
+   "enterpriseControls": [
+    "data cloud governance",
+    "admin controls"
+   ],
+   "agenticCapability": "Strong domain-agent narrative in sales and service; cross-enterprise autonomy requires validation.",
+   "industryStrength": [
+    {
+     "industry": "Customer operations",
+     "score": 89,
+     "note": "Strong CRM data and workflow position."
+    }
+   ],
+   "riskProfile": [
+    "Platform cost",
+    "CRM-centric scope"
+   ],
+   "analystInterpretation": "A sector leader for customer workflows, but not a universal enterprise AI platform.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Application Vendor",
+    "Platform Vendor",
+    "Data & Services Provider"
+   ]
+  },
+  {
+   "id": "sequoia",
+   "name": "Sequoia Capital",
+   "slug": "sequoia",
+   "category": "AI investor",
+   "description": "Long-standing frontier-AI venture backer (~$56B AUM); raised a ~$7B expansion fund in 2026 for late-stage AI bets including OpenAI and Anthropic.",
+   "headquarters": "Menlo Park, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Investor"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 53,
+   "confidenceScore": 95.9,
+   "marketPosition": "Specialist contender",
+   "strategy": "Back frontier labs and AI infrastructure as a late-stage category-conviction play.",
+   "productCapabilities": [
+    "Venture capital",
+    "late-stage AI fund"
+   ],
+   "enterpriseControls": [
+    "n/a"
+   ],
+   "agenticCapability": "Not an operator; a category-conviction signal.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Mega-round amounts often undisclosed",
+    "indirect influence"
+   ],
+   "analystInterpretation": "Read Sequoia's concentration as category conviction; it does not bear on enterprise deployment fitness.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Investor"
+   ]
+  },
+  {
+   "id": "servicenow",
+   "name": "ServiceNow",
+   "slug": "servicenow",
+   "category": "ITSM/HR/service AI",
+   "description": "Workflow automation incumbent with strong IT, HR, and enterprise service management footprint.",
+   "headquarters": "Santa Clara, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "ITSM/HR/service AI",
+    "Workflow automation AI",
+    "Agent platform"
+   ],
+   "supportedEcosystems": [
+    "servicenow",
+    "microsoft",
+    "workday",
+    "sap"
+   ],
+   "deploymentOptions": [
+    "saas",
+    "vpc"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 45.7,
+   "confidenceScore": 90.6,
+   "marketPosition": "Category leader",
+   "strategy": "Position AI agents as workflow execution inside systems of record for service operations.",
+   "productCapabilities": [
+    "ITSM",
+    "HR service",
+    "Workflow automation"
+   ],
+   "enterpriseControls": [
+    "workflow audit",
+    "RBAC",
+    "approval controls"
+   ],
+   "agenticCapability": "Good supervised workflow-agent fit; autonomy should be staged around approval and audit paths.",
+   "industryStrength": [
+    {
+     "industry": "Enterprise service operations",
+     "score": 88,
+     "note": "Strong ITSM and service workflow ownership."
+    }
+   ],
+   "riskProfile": [
+    "Suite dependency",
+    "implementation complexity"
+   ],
+   "analystInterpretation": "A practical enterprise agent player where workflows already live in ServiceNow.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Application Vendor",
+    "Platform Vendor",
+    "Vertical Specialist"
+   ]
+  },
+  {
+   "id": "snowflake",
+   "name": "Snowflake",
+   "slug": "snowflake",
+   "category": "Cloud AI platform",
+   "description": "Data cloud incumbent embedding AI into analytics, apps, and governed enterprise data workflows.",
+   "headquarters": "Bozeman, US",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Cloud AI platform",
+    "Data AI",
+    "RAG/enterprise search"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 46.7,
+   "confidenceScore": 96.7,
+   "marketPosition": "Category leader",
+   "strategy": "Turn governed data estate into AI applications, search, and application-development layer.",
+   "productCapabilities": [
+    "Data AI",
+    "Enterprise search",
+    "Governance"
+   ],
+   "enterpriseControls": [
+    "data access controls",
+    "governance"
+   ],
+   "agenticCapability": "Agentic capability is emerging around governed data and app workflows.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "AI platform breadth",
+    "ecosystem competition"
+   ],
+   "analystInterpretation": "Strong data-layer contender; category share differs greatly between data AI and assistant markets.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Data & Services Provider",
+    "Platform Vendor",
+    "Infrastructure Player"
+   ],
+   "infraBand": "data_platform"
+  },
+  {
+   "id": "softbank",
+   "name": "SoftBank",
+   "slug": "softbank",
+   "category": "AI investor",
+   "description": "One of the largest single-cheque AI investors; committed ~$30B to OpenAI's 2026 round (with further $10B tranches) and co-anchors the Stargate data-centre JV.",
+   "headquarters": "Tokyo, Japan",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Investor"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 59,
+   "confidenceScore": 77.8,
+   "marketPosition": "Specialist contender",
+   "strategy": "Concentrate mega-scale capital where compute and model access follow; pair investment with infrastructure JVs.",
+   "productCapabilities": [
+    "Strategic capital",
+    "Stargate JV"
+   ],
+   "enterpriseControls": [
+    "n/a"
+   ],
+   "agenticCapability": "Not an operator; a capital-and-distribution signal.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Concentration of bets",
+    "tranche/contingency conditions vary"
+   ],
+   "analystInterpretation": "Where SoftBank concentrates capital, compute and model access tend to follow; a capital-flow signal, not a procurement input.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Investor"
+   ]
+  },
+  {
+   "id": "tsmc",
+   "name": "TSMC",
+   "slug": "tsmc",
+   "category": "AI infrastructure",
+   "description": "The foundry that manufactures the leading-edge chips for NVIDIA, AMD, Apple and the hyperscalers; the physical bottleneck of the entire AI hardware supply chain.",
+   "headquarters": "Hsinchu, Taiwan",
+   "ownershipType": "public",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI hardware",
+    "Semiconductor fabrication"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 68.1,
+   "confidenceScore": 87,
+   "marketPosition": "Major challenger",
+   "strategy": "Hold the leading-edge process lead and capacity that every fabless AI-chip designer depends on.",
+   "productCapabilities": [
+    "Leading-edge fabrication",
+    "advanced packaging (CoWoS)"
+   ],
+   "enterpriseControls": [
+    "supply-chain assurance"
+   ],
+   "agenticCapability": "Not an agent vendor; the foundation beneath the silicon layer.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Geographic concentration (Taiwan)",
+    "geopolitical exposure",
+    "capacity constraints"
+   ],
+   "analystInterpretation": "The deepest single point in the AI supply chain; geopolitical and capacity risk here propagates to every chip vendor above it.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Hardware Provider",
+    "Infrastructure Player"
+   ],
+   "infraBand": "silicon"
+  },
+  {
+   "id": "together",
+   "name": "Together AI",
+   "slug": "together",
+   "category": "AI infrastructure",
+   "description": "Open-model inference and fine-tuning cloud; a flagship host for Llama, DeepSeek, Qwen and Mistral ($305M Series B).",
+   "headquarters": "San Francisco, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "AI infrastructure",
+    "Cloud / hosting",
+    "Open-source ecosystem"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 56.1,
+   "confidenceScore": 96.9,
+   "marketPosition": "Specialist contender",
+   "strategy": "Be the open-weight deployment route when self-hosting is impractical but closed APIs are undesirable.",
+   "productCapabilities": [
+    "Inference cloud",
+    "fine-tuning",
+    "open-model catalog"
+   ],
+   "enterpriseControls": [
+    "tenant isolation"
+   ],
+   "agenticCapability": "Hosts open models for agentic use; not an agent vendor itself.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Open-model hosting margins",
+    "hyperscaler catalog competition"
+   ],
+   "analystInterpretation": "The open-weight deployment path for enterprises avoiding both self-hosting and closed APIs.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Infrastructure Player",
+    "Cloud / Hosting Provider",
+    "Open-Source Ecosystem"
+   ],
+   "infraBand": "neocloud",
+   "infraBandSecondary": "inference"
+  },
+  {
+   "id": "writer",
+   "name": "Writer",
+   "slug": "writer",
+   "category": "Enterprise assistant",
+   "description": "Enterprise generative AI platform focused on brand-safe content, workflows, and knowledge apps.",
+   "headquarters": "San Francisco, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Enterprise assistant",
+    "Content AI",
+    "Agent platform"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 55.2,
+   "confidenceScore": 96.9,
+   "marketPosition": "Category leader",
+   "strategy": "Differentiate through enterprise content workflows, governance, and business-user tooling.",
+   "productCapabilities": [
+    "Content AI",
+    "Knowledge apps",
+    "Governance"
+   ],
+   "enterpriseControls": [
+    "brand controls",
+    "admin controls"
+   ],
+   "agenticCapability": "Agentic workflows are emerging around content and knowledge operations.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Category crowding",
+    "proof at broad scale"
+   ],
+   "analystInterpretation": "Potential winner in governed content workflows, less proven as a universal platform.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Application Vendor",
+    "Model Provider"
+   ]
+  },
+  {
+   "id": "zai",
+   "name": "Z.ai",
+   "slug": "zai",
+   "category": "Frontier model/API",
+   "description": "Zhipu / Z.ai \u2014 GLM-5.1 frontier model; significant in Chinese enterprise + research market.",
+   "headquarters": "Beijing, China",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 60.1,
+   "confidenceScore": 96.1,
+   "marketPosition": "Emerging specialist",
+   "strategy": "Anchor GLM as Chinese frontier alternative with English/multilingual coverage expanding.",
+   "productCapabilities": [
+    "Models"
+   ],
+   "enterpriseControls": [
+    "limited enterprise tooling"
+   ],
+   "agenticCapability": "GLM-5.1 multimodal capable; broader agent stack underdeveloped vs frontier US labs.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Geopolitical access",
+    "Western enterprise reach"
+   ],
+   "analystInterpretation": "Relevant for jurisdictional diversity; Western enterprise readiness limited.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Sovereign / Regional AI"
+   ]
+  },
+  {
+   "id": "xai",
+   "name": "xAI",
+   "slug": "xai",
+   "category": "Frontier model/API",
+   "description": "Frontier lab with Grok model line and Memphis Colossus compute build-out; investor + governance opacity remain a constraint.",
+   "headquarters": "Palo Alto, US",
+   "ownershipType": "private",
+   "supportedIndustries": [
+    "Commercial enterprise",
+    "Financial services",
+    "Healthcare",
+    "Public sector",
+    "Technology"
+   ],
+   "supportedUseCases": [
+    "Frontier model/API",
+    "Agent platform"
+   ],
+   "supportedEcosystems": [
+    "microsoft",
+    "aws",
+    "google_workspace",
+    "salesforce"
+   ],
+   "deploymentOptions": [
+    "saas"
+   ],
+   "autonomyLevelMax": "human_in_loop",
+   "overallScore": 62.4,
+   "confidenceScore": 97.5,
+   "marketPosition": "Specialist contender",
+   "strategy": "Win on compute scale, real-time signal (X integration), and aggressive model cadence.",
+   "productCapabilities": [
+    "Models",
+    "Real-time signal",
+    "Voice + image APIs"
+   ],
+   "enterpriseControls": [
+    "limited published controls"
+   ],
+   "agenticCapability": "Grok and tool-use shipping; enterprise track record and audit story thin.",
+   "industryStrength": [
+    {
+     "industry": "Technology",
+     "score": 78,
+     "note": "Good developer and platform fit."
+    },
+    {
+     "industry": "Financial services",
+     "score": 68,
+     "note": "Requires control validation."
+    },
+    {
+     "industry": "Healthcare",
+     "score": 62,
+     "note": "Needs privacy and clinical workflow evidence."
+    }
+   ],
+   "riskProfile": [
+    "Governance opacity",
+    "geopolitical / regulatory visibility"
+   ],
+   "analystInterpretation": "High-beta frontier contender; enterprise readiness lags the leading set.",
+   "lastUpdated": "2026-05-07T00:00:00.000Z",
+   "roleTags": [
+    "Model Provider",
+    "Infrastructure Player"
+   ],
+   "infraBand": "neocloud"
+  }
+ ]
+}
