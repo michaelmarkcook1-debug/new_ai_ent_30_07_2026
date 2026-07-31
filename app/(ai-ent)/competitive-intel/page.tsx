@@ -24,7 +24,7 @@ export default async function CompetitiveIntelPage({
     <>
       <PageHeader
         title="Competitive Intel"
-        subtitle="How the model providers compare: evidence-graded capability maturity across one market category at a time, beside the AIE vendor rankings. Intensity grids and confidence-labelled scores, never quadrants."
+        subtitle="How the model providers compare: evidence-graded capability maturity across one market category at a time, beside the AIE vendor rankings. Intensity grids, never quadrants."
         lanes={[matrix.lane, "live"]}
       />
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
