@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
-import { ScorePill } from "@/lib/ui/score";
+import { ScorePill, DerivationDrawer } from "@/lib/ui/score";
 import type { Spotlight } from "../types";
 import type { VendorMetrics } from "@/lib/market-metrics";
+import type { GapVendor } from "@/lib/narrative-gap";
 
 // Spotlight tracking card using the narrative-versus-reality pattern:
 // headline score, divergence badge, paired bars with deltas and captions,
@@ -87,6 +88,146 @@ export function SpotlightCard({
         </span>
         <Link
           href={`/vendor-view/${vendorId}`}
+          className="text-[11px] font-semibold text-primary hover:underline"
+        >
+          Full vendor profile
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+// The derived narrative-versus-reality read, for vendors with no hand-written
+// one. Same question as the editorial card above, answered by measurement
+// rather than judgement, and badged DERIVED rather than SAMPLE so the two are
+// never mistaken for each other.
+//
+// Both numbers are percentiles within the tracked AI vendor set, not absolute
+// scores, because a capability score and a story count share no scale. The
+// card says so rather than leaving a reader to assume "82" means 82 out of 100
+// of anything.
+export function DerivedGapCard({
+  vendor,
+  method,
+  generatedAt,
+  cohortSize,
+}: {
+  vendor: GapVendor;
+  method: { reality: string; narrative: string; gap: string; threshold: string; bias: string };
+  generatedAt: string;
+  cohortSize: number;
+}) {
+  const gap = vendor.gap ?? 0;
+  const narrative = vendor.narrativeScore ?? 0;
+  const reality = vendor.realityScore ?? 0;
+
+  return (
+    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <div>
+          <MicroLabel
+            label="Tracking"
+            tooltip="Narrative versus reality, computed from measured inputs rather than written by hand."
+          />
+          <h3 className="mt-0.5 text-[15px] font-bold">{vendor.name}</h3>
+          <p className="text-[11px] text-muted">
+            {vendor.marketPosition ?? vendor.category}
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[10px] text-muted">
+            {vendor.direction}
+          </span>
+          <LaneBadge lane="derived" />
+        </div>
+      </div>
+
+      <div className="mt-3 flex items-baseline gap-2">
+        <span
+          className={`font-mono text-4xl font-bold ${gap > 0 ? "text-warn" : gap < 0 ? "text-good" : ""}`}
+        >
+          {gap > 0 ? "+" : ""}
+          {gap}
+        </span>
+        <span className="font-mono text-[11px] text-muted">
+          percentile points of gap
+        </span>
+      </div>
+
+      <div className="mt-4 space-y-1.5">
+        <div className="flex items-center gap-2">
+          <span className="w-14 font-mono text-[9px] uppercase text-muted">
+            Narrative
+          </span>
+          <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
+            <div
+              className="h-1.5 rounded-full bg-secondary/70 dark:bg-secondary-content/60"
+              style={{ width: `${narrative}%` }}
+            />
+          </div>
+          <span className="w-9 text-right font-mono text-[10px]">{narrative}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="w-14 font-mono text-[9px] uppercase text-muted">
+            Reality
+          </span>
+          <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
+            <div
+              className="h-1.5 rounded-full bg-primary"
+              style={{ width: `${reality}%` }}
+            />
+          </div>
+          <span className="w-9 text-right font-mono text-[10px]">{reality}</span>
+        </div>
+      </div>
+
+      <p className="mt-2 text-[11px] leading-snug text-muted">
+        Both are percentiles within the {cohortSize} tracked AI vendors, not
+        scores out of 100. Narrative is how far the technical conversation
+        carries this vendor; reality is its evidence-weighted capability
+        maturity.
+      </p>
+
+      <div className="mt-3 border-t border-base-300 pt-2">
+        <DerivationDrawer title="How this is derived">
+          <p>
+            <strong>Reality.</strong> {method.reality} For {vendor.name} that is{" "}
+            {vendor.realityRows} assessed capability rows, weakest evidence
+            grade {vendor.realityWeakestEvidence ?? "not recorded"}, giving a
+            weighted maturity of {vendor.reality ?? "not available"} before
+            ranking.
+          </p>
+          <p>
+            <strong>Narrative.</strong> {method.narrative}
+          </p>
+          <p>
+            For {vendor.name} the sources that cleared the threshold were{" "}
+            <strong>{vendor.narrativeSources.join(" and ") || "none"}</strong>:{" "}
+            {vendor.aieNews.items} tagged news{" "}
+            {vendor.aieNews.items === 1 ? "item" : "items"}
+            {vendor.hn
+              ? `, and ${vendor.hn.stories} Hacker News stories on ${vendor.domain} drawing ${vendor.hn.points} points and ${vendor.hn.comments} comments`
+              : ", and no domain mapped for story matching"}
+            . {method.threshold}
+          </p>
+          <p>
+            <strong>The gap.</strong> {method.gap}
+          </p>
+          <p className="text-muted">
+            <strong>What this does not measure.</strong> {method.bias}
+          </p>
+          <p className="text-muted">
+            Compiled {generatedAt.slice(0, 10)} by
+            scripts/narrative-reality-gap.mjs. It is a derived reading, not a
+            published figure, and not the same thing as the hand-written
+            editorial read carried for a few vendors.
+          </p>
+        </DerivationDrawer>
+      </div>
+
+      <div className="mt-2 flex items-center justify-end border-t border-base-300 pt-2">
+        <Link
+          href={`/vendor-view/${vendor.vendorId}`}
           className="text-[11px] font-semibold text-primary hover:underline"
         >
           Full vendor profile

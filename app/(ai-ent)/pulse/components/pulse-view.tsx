@@ -5,13 +5,14 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { EditorialBanner } from "@/lib/ui/cards";
 import { KpiGauge, DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
-import { SpotlightCard, VendorSnapshotCard } from "./spotlight";
+import { SpotlightCard, VendorSnapshotCard, DerivedGapCard } from "./spotlight";
 import { VendorComparisonTable } from "./comparison";
 import { DeliveryChannelWatch } from "./delivery-watch";
 import { PulseLiveNews } from "./live-news";
 import { SignalCard } from "./signal-card";
 import type { MarketMetrics } from "@/lib/market-metrics";
 import type { PulseFixture } from "../types";
+import type { NarrativeGap } from "@/lib/narrative-gap";
 
 // The Pulse. The market figures are real throughout: KPI gauges, the
 // comparison table and the three signal columns all read from the AI
@@ -24,9 +25,11 @@ import type { PulseFixture } from "../types";
 export function PulseView({
   fixture,
   metrics,
+  gap,
 }: {
   fixture: PulseFixture;
   metrics: MarketMetrics;
+  gap: NarrativeGap | null;
 }) {
   const spotlightIds = Object.keys(fixture.spotlights);
   const [selected, setSelected] = useState(spotlightIds[0] ?? "anthropic");
@@ -43,15 +46,28 @@ export function PulseView({
     v.category !== "AI investor";
 
   const selectable = metrics.vendors.filter(isAiVendor);
+
+  // Three tiers, best available read first: the hand-written editorial one,
+  // then the compiled one, then the vendor's own figures. The groups are
+  // labelled by which of the three a vendor falls into, so the picker says
+  // what kind of answer it is about to give.
+  const hasDerived = (id: string) =>
+    Boolean(gap?.vendors.some((v) => v.vendorId === id && v.gap !== null));
+
   const withRead = selectable
     .filter((v) => fixture.spotlights[v.id])
     .sort((a, b) => a.name.localeCompare(b.name));
+  const withDerived = selectable
+    .filter((v) => !fixture.spotlights[v.id] && hasDerived(v.id))
+    .sort((a, b) => a.name.localeCompare(b.name));
   const withoutRead = selectable
-    .filter((v) => !fixture.spotlights[v.id])
+    .filter((v) => !fixture.spotlights[v.id] && !hasDerived(v.id))
     .sort((a, b) => a.name.localeCompare(b.name));
 
   const spotlight = fixture.spotlights[selected] ?? null;
   const selectedVendor = metrics.vendors.find((v) => v.id === selected) ?? null;
+  const selectedGap =
+    gap?.vendors.find((v) => v.vendorId === selected && v.gap !== null) ?? null;
   const selectedName = selectedVendor?.name ?? selected;
 
   const vendorHref = (id: string) =>
@@ -93,6 +109,13 @@ export function PulseView({
                   </option>
                 ))}
               </optgroup>
+              <optgroup label="Derived read compiled">
+                {withDerived.map((v) => (
+                  <option key={v.id} value={v.id}>
+                    {v.name}
+                  </option>
+                ))}
+              </optgroup>
               <optgroup label="AG figures only">
                 {withoutRead.map((v) => (
                   <option key={v.id} value={v.id}>
@@ -107,6 +130,13 @@ export function PulseView({
               vendorId={selected}
               vendorName={selectedName}
               spotlight={spotlight}
+            />
+          ) : selectedGap && gap ? (
+            <DerivedGapCard
+              vendor={selectedGap}
+              method={gap.method}
+              generatedAt={gap.generatedAt}
+              cohortSize={gap.vendorCount}
             />
           ) : selectedVendor ? (
             <VendorSnapshotCard vendor={selectedVendor} />

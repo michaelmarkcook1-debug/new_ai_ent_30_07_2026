@@ -25,12 +25,25 @@ export interface ProvenancedValue<T = number> extends ProvenanceEnvelope {
 // Data lane of a whole module or card (spec Section 4, extended 30 July
 // 2026 with the aie-live lane: current content pulled from the deployed
 // AI Enterprise app's public APIs through our own proxy).
-export type DataLane = "live" | "aie" | "aie-live" | "sample" | "mock" | "stub";
+// "derived" is its own lane on purpose. It is not live, because no source
+// publishes it, and it is not sample, because nothing about it is invented: it
+// is computed by us from named inputs that can be re-fetched and checked. The
+// existing lanes would have forced it into a badge that lied in one direction
+// or the other.
+export type DataLane =
+  | "live"
+  | "aie"
+  | "aie-live"
+  | "derived"
+  | "sample"
+  | "mock"
+  | "stub";
 
 export const LANE_LABEL: Record<DataLane, string> = {
   live: "LIVE",
   aie: "AIE dataset",
   "aie-live": "AIE live",
+  derived: "DERIVED",
   sample: "SAMPLE",
   mock: "Cached sample",
   stub: "In development",

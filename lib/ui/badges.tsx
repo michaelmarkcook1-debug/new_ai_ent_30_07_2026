@@ -11,6 +11,9 @@ export function LaneBadge({ lane }: { lane: DataLane }) {
     aie: "bg-aie-bg text-aie border-aie/30",
     // AIE content pulled live: the dataset's blue, with the live green ring.
     "aie-live": "bg-aie-bg text-aie border-good/60",
+    // Computed by us, from real inputs. Neutral rather than green or amber,
+    // because it is neither someone else's published figure nor an invented one.
+    derived: "bg-base-200 text-secondary border-secondary/40",
     sample: "bg-warn-bg text-warn border-warn/30",
     mock: "bg-warn-bg text-warn border-warn/30",
     stub: "bg-base-200 text-muted border-base-300",
@@ -26,7 +29,9 @@ export function LaneBadge({ lane }: { lane: DataLane }) {
             ? "Real AI Enterprise dataset content, re-used from the ranking-engine repository"
             : lane === "aie-live"
               ? "Current AI Enterprise content, pulled live from the deployed app's public API through our proxy"
-              : lane === "mock"
+              : lane === "derived"
+                ? "Computed by AG from named inputs that can be re-fetched and checked. No source publishes this figure directly, and nothing in it is invented"
+                : lane === "mock"
                 ? "Recorded response served because live data was unavailable"
                 : lane === "stub"
                   ? "Module in development"
