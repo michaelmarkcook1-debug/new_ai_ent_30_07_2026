@@ -1,37 +1,47 @@
-import { NextRequest, NextResponse } from "next/server";
-
 // Lightweight basic auth for the whole demo (Section 9 of the spec).
-// Credentials come from DEMO_USER / DEMO_PASS in .env.local.
+// Credentials come from DEMO_USER / DEMO_PASS.
 // If either is unset the gate is open, which keeps local dev friction-free.
-export function middleware(request: NextRequest) {
+//
+// This file deliberately imports nothing.
+//
+// Importing NextResponse from next/server pulls 97 modules into the middleware
+// bundle, among them Next's ncc-compiled @opentelemetry/api, which runs
+// `__nccwpck_require__.ab = __dirname + "/"` at module scope. The guard tests
+// __nccwpck_require__ rather than __dirname, so on Edge, where __dirname does
+// not exist, it throws ReferenceError and every request 500s with
+// MIDDLEWARE_INVOCATION_FAILED. A local production build strips that path and
+// looks clean, which is what made this hard to see; Vercel enables tracing in
+// its production builds and the path survives.
+//
+// Moving to the Node runtime avoids __dirname but hits a different wall: Next
+// 15.5 emits the Node middleware as ESM while nothing in the function bundle
+// declares "type": "module", so Node loads it as CJS and exits 1 on the first
+// import statement.
+//
+// Web-standard Request and Response are enough to check a header, and they
+// keep the module graph at one file, so neither failure applies.
+
+const REALM = 'Basic realm="AI Enterprise demo"';
+
+export function middleware(request: Request): Response | undefined {
   const user = process.env.DEMO_USER;
   const pass = process.env.DEMO_PASS;
-  if (!user || !pass) return NextResponse.next();
+  if (!user || !pass) return undefined;
 
   const expected = btoa(`${user}:${pass}`);
-
-  // A same-site cookie set after the first successful Basic handshake keeps
-  // client-side fetch() calls authenticated (browsers do not always replay
-  // Basic credentials on fetch). The cookie carries the same base64 token as
-  // the Basic header itself, so it grants nothing the header did not.
-  if (request.cookies.get("eai_auth")?.value === expected) {
-    return NextResponse.next();
-  }
-
   const header = request.headers.get("authorization");
+
+  // Returning undefined continues the chain, and that is the whole success
+  // path. The browser replays the Authorization header on every same-origin
+  // request once the handshake is done, fetch() included, so there is nothing
+  // to carry in a cookie.
   if (header?.startsWith("Basic ") && header.slice(6) === expected) {
-    const res = NextResponse.next();
-    res.cookies.set("eai_auth", expected, {
-      httpOnly: true,
-      sameSite: "lax",
-      path: "/",
-    });
-    return res;
+    return undefined;
   }
 
-  return new NextResponse("Authentication required", {
+  return new Response("Authentication required", {
     status: 401,
-    headers: { "WWW-Authenticate": 'Basic realm="AI Enterprise demo"' },
+    headers: { "WWW-Authenticate": REALM },
   });
 }
 
