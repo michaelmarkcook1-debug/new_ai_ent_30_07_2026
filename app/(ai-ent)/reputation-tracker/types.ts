@@ -1,5 +1,3 @@
-import type { ProvenanceEnvelope } from "@/lib/provenance";
-
 // Types for the /reputation-tracker/unified BoardRadar response, matching
 // the recorded shape in fixtures/br/reputation-tracker_unified_MSFT.json.
 
@@ -90,20 +88,3 @@ export interface UnifiedReputation {
   timestamp?: string;
 }
 
-// Sample fixture types for the third-party signals divider section.
-
-export interface ThirdPartySignal {
-  id: string;
-  source: string;
-  sourceType: string;
-  title: string;
-  detail: string;
-  period: string;
-  provenance: ProvenanceEnvelope;
-}
-
-export interface ReputationFixture {
-  generated: string;
-  note: string;
-  thirdPartySignals: ThirdPartySignal[];
-}
