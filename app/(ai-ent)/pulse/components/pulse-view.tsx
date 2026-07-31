@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { LaneBadge } from "@/lib/ui/badges";
-import { EditorialBanner, QuestionChips } from "@/lib/ui/cards";
+import { EditorialBanner } from "@/lib/ui/cards";
 import { KpiGauge, DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { SpotlightCard } from "./spotlight";
@@ -15,9 +15,12 @@ import type { PulseFixture } from "../types";
 
 // The Pulse. The market figures are real throughout: KPI gauges, the
 // comparison table and the three signal columns all read from the AI
-// Enterprise datasets through lib/market-metrics. The analyst banner, the
-// suggested questions and the narrative versus reality spotlight stay
-// SAMPLE-badged, because they are editorial judgements no dataset publishes.
+// Enterprise datasets through lib/market-metrics. The analyst banner and the
+// narrative versus reality spotlight stay SAMPLE-badged, because they are
+// editorial judgements no dataset publishes.
+//
+// Suggested questions now live in the top-bar Ask AI menu rather than as a
+// chip grid here, so the page leads with its own subject.
 export function PulseView({
   fixture,
   metrics,
@@ -49,17 +52,6 @@ export function PulseView({
       >
         {fixture.editorial.body}
       </EditorialBanner>
-
-      {/* 2. Suggested question chips (2 by 2), prefill the AI Analyst */}
-      <section>
-        <MicroLabel
-          label="Ask the AI Analyst"
-          tooltip="Each chip prefills the AI Analyst with a ready-made question."
-        />
-        <div className="mt-1.5">
-          <QuestionChips questions={fixture.questions} />
-        </div>
-      </section>
 
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         {/* 3. Spotlight tracking card */}

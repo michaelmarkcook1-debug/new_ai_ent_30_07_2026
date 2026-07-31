@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   CategoryChip,
   HorizonTag,
@@ -59,24 +58,6 @@ export function InsightCard({ insight }: { insight: Insight }) {
       <div className="mt-2">
         <HorizonTag horizon={insight.horizon} />
       </div>
-    </div>
-  );
-}
-
-// Suggested question chips: 2 by 2 grid of outline pills that prefill the
-// AI Analyst on click (spec Section 7).
-export function QuestionChips({ questions }: { questions: string[] }) {
-  return (
-    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-      {questions.map((q) => (
-        <Link
-          key={q}
-          href={`/company-view/analyst?q=${encodeURIComponent(q)}`}
-          className="rounded-full border border-base-300 px-3 py-2 text-center text-[12px] text-base-content/85 transition hover:border-primary hover:text-primary"
-        >
-          {q}
-        </Link>
-      ))}
     </div>
   );
 }

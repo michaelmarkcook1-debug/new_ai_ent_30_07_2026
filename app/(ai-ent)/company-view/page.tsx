@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
-import { EditorialBanner, QuestionChips } from "@/lib/ui/cards";
+import { EditorialBanner } from "@/lib/ui/cards";
 import { KpiGauge, DerivationDrawer } from "@/lib/ui/score";
 import { loadShellFixture } from "./data";
 import { resolveCompany } from "@/lib/company-source";
@@ -70,10 +70,6 @@ export default async function CompanyOverviewPage({
         </DerivationDrawer>
       </div>
 
-      <section>
-        <h3 className="mb-2 text-[13px] font-bold">Ask about your organisation</h3>
-        <QuestionChips questions={f.overview.questions} />
-      </section>
 
       <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {TAB_LINKS.map((t) => (

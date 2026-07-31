@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AgMark } from "@/lib/ui/logo";
+import { AskAiButton } from "@/lib/ui/ask-ai";
 
 // The AG shell: top bar with logo, scope chip and "Ask AI" pill; left
 // sidebar with ALL-CAPS group labels, icons, active item as a solid primary
@@ -153,13 +154,7 @@ export function Shell({
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9a6 6 0 1 1 12 0c0 6 2 7 2 7H4s2-1 2-7" /><path d="M10 20a2 2 0 0 0 4 0" /></svg>
           </button>
-          <Link
-            href="/interrogate"
-            className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition hover:opacity-90"
-          >
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="m12 3 1.9 5.6L19.5 10l-5.6 1.4L12 17l-1.9-5.6L4.5 10l5.6-1.4L12 3Z" /></svg>
-            Ask AI
-          </Link>
+          <AskAiButton />
         </div>
       </div>
 
