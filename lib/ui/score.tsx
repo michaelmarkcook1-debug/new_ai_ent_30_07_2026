@@ -43,12 +43,20 @@ export function ScorePill({
     bad: "bg-bad-bg text-error",
   } as const;
   const Tag = onClick ? "button" : "span";
+  // Upstream sometimes returns a raw quotient (53.33333333333333). Printing
+  // every digit claims a precision the measurement does not have, so the
+  // display rounds to one decimal and drops a trailing zero. The full value
+  // stays in the title for anyone who needs it.
+  const shown = Number.isInteger(score)
+    ? String(score)
+    : String(Math.round(score * 10) / 10);
   return (
     <Tag
       {...(onClick ? { onClick, type: "button" as const } : {})}
+      title={shown === String(score) ? undefined : `Exact value: ${score}`}
       className={`inline-flex items-center rounded-full px-2 py-0.5 font-mono text-[11px] font-semibold ${styles[band]} ${onClick ? "cursor-pointer hover:ring-1 hover:ring-primary" : ""}`}
     >
-      {score}
+      {shown}
       {estimated ? <span className="ml-0.5 font-normal opacity-75">est.</span> : null}
     </Tag>
   );

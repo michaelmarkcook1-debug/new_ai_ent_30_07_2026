@@ -172,3 +172,60 @@ Dates are absolute; the build day is 30 July 2026.
     third-party signals divider, attributed and dated; AG produces no
     benchmark of its own. The token pricing table now sits behind a
     disclosure so the graph leads.
+20. **Data integrity audit and the removal of sample figures (31 July 2026).**
+    Michael asked for an audit of whether every surface faithfully shows what
+    the ranking engine and AG actually publish, and for real sources behind
+    the SAMPLE figures. Findings and what changed:
+    - **The Pulse was entirely sample.** Its market figures now come from
+      `lib/market-metrics.ts`, which maps one metric to one named upstream
+      field and returns null where the data does not reach: composite from
+      `vendors[].overallScore`, momentum from `agenticMomentum`, maturity from
+      the capability assessments, reputation from the three pillars, presence
+      from `market-share`. Verified against an independent computation over
+      the same payloads.
+    - **A false-movement trap.** `market-share` carries `previousEstimate` and
+      `changePct` on every row, which looks like trend data. Every
+      `previousEstimate` is a copy of the current estimate and every
+      `changePct` is 0. A "share gaining" figure off that would have read as
+      "nothing is growing" when the truth is "no movement is published". The
+      KPI was dropped and surfaces now say movement is not published rather
+      than rendering a flat zero.
+    - **Columns claiming more than the data supports.** The Pulse comparison
+      table's adoption, trust and delivery-readiness columns were renamed to
+      capability maturity, reputation and category presence, which is what the
+      underlying fields actually measure. Category presence carries the
+      source's own words: a directional adoption-signal estimate, not measured
+      revenue share.
+    - **Third-party signals were placeholders.** Generic analyst-firm cards
+      were replaced with the real external sources the reputation dataset
+      cites (GitHub, Hacker News, Reddit, vendor status pages, CourtListener),
+      each with coverage counts, the dataset's own verified/documented/seed
+      cell grades and fetch dates.
+    - **Sample where live existed.** The competitive heatmap rendered a sample
+      fixture while the BoardRadar competitive-intelligence endpoint was
+      answering. It is now live with a peer-group anchor selector.
+    - **"No source exists" was wrong twice.** The Security Desk's private labs
+      and Trust Rank's governance block both claimed no source covered them.
+      The AI Enterprise capability dataset assesses all 47 tracked vendors on
+      Security and Governance with evidence grades and cited evidence. Both
+      surfaces now show it. It is kept separate from BoardRadar cyber-risk and
+      governance-risk, which measure incidents and exposure over public
+      companies: different measurements, never merged.
+    - **A dead route badged live.** The BoardRadar proxy passed non-JSON 404s
+      through as `x-eai-source: live` with a JSON content type, so a path the
+      API no longer recognises looked like a successful pull and skipped the
+      recorded fixture. Only JSON 4xx now passes through as a real answer.
+    - **False precision.** Upstream returns raw quotients (53.33333333333333).
+      ScorePill now displays one decimal, with the exact value in the title.
+    - **Shell can never be covered.** The BoardRadar universe is 161
+      technology, financial services and telecoms companies; Shell is an
+      energy major and is not among them. Rather than leave the module
+      permanently sample, Company View now takes `?company=TICKER` and runs
+      against any covered company: AI Exposure and Talent Intelligence fetch
+      live, and tabs with no live equivalent say so instead of showing the
+      exemplar's figures under another company's name. Shell remains the
+      default, badged sample.
+    - Remaining sample content is editorial by nature and stays badged: the
+      analyst banner, the suggested questions, the narrative-versus-reality
+      spotlight, the Shell exemplar's own tabs, and the AI Analyst's scripted
+      mode when no `ANTHROPIC_API_KEY` is present.

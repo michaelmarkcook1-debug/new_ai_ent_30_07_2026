@@ -13,8 +13,12 @@ const TABS = [
   { label: "AI Analyst", href: "/company-view/analyst" },
 ];
 
-export function CompanyTabs() {
+// The selected company travels with the tab links, so switching tabs keeps
+// the company you are looking at. It arrives as a prop from the server rather
+// than through useSearchParams, so the links are correct on first paint.
+export function CompanyTabs({ company }: { company?: string | null }) {
   const pathname = usePathname();
+  const qs = company ? `?company=${encodeURIComponent(company)}` : "";
   return (
     <nav className="flex flex-wrap gap-1 border-b border-base-300 pb-2">
       {TABS.map((t) => {
@@ -22,10 +26,12 @@ export function CompanyTabs() {
           t.href === "/company-view"
             ? pathname === t.href
             : pathname.startsWith(t.href);
+        // Assess and Decide sits outside this module and takes no company.
+        const href = t.href.startsWith("/company-view") ? `${t.href}${qs}` : t.href;
         return (
           <Link
             key={t.href}
-            href={t.href}
+            href={href}
             className={`rounded-full px-3 py-1.5 text-[12px] font-semibold transition ${
               active
                 ? "bg-primary text-white shadow-sm"

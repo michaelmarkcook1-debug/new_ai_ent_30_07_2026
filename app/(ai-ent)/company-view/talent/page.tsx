@@ -2,17 +2,51 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { DerivationDrawer, ScorePill } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { loadShellFixture } from "../data";
+import { resolveCompany } from "@/lib/company-source";
+import { brServerFetch } from "@/lib/br-server";
+import { CompanyShell } from "../components/company-shell";
+import { LiveTalentExposure } from "./live-exposure";
 
-export const metadata = { title: "Talent Intelligence: Shell | AI Enterprise" };
+export const metadata = { title: "Talent Intelligence | AI Enterprise" };
 
 // Mirrors /talent/* and the AI talent exposure shape for the buyer's
 // workforce (spec Section 5). All SAMPLE.
-export default async function TalentPage() {
+export default async function TalentPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const company = resolveCompany((await searchParams).company);
+
+  // The AI talent exposure matrix has a live equivalent with the same field
+  // names, so a covered company gets the real thing. The surrounding sections
+  // (workforce pyramid, functional readiness, leadership signals) are written
+  // for the exemplar and have no per-company source, so they are omitted
+  // rather than shown under another company's name.
+  if (company.live && company.ticker) {
+    const res = await brServerFetch<{ matrix: Record<string, unknown> }>(
+      "ai-talent/exposure",
+      { ticker: company.ticker }
+    );
+    return (
+      <CompanyShell company={company} displayName={
+        (res.data?.matrix?.displayName as string | undefined) ?? null
+      }>
+        <LiveTalentExposure
+          matrix={res.data?.matrix ?? null}
+          source={res.source}
+          ticker={company.ticker}
+        />
+      </CompanyShell>
+    );
+  }
+
   const f = await loadShellFixture();
   const t = f.talent;
   const x = t.aiTalentExposure;
   const fmt = new Intl.NumberFormat("en-GB");
   return (
+    <CompanyShell company={company}>
     <div className="space-y-4">
       <section className="rounded-lg border border-primary/25 bg-primary/5 p-4">
         <div className="flex items-center justify-between">
@@ -156,5 +190,6 @@ export default async function TalentPage() {
         </div>
       </section>
     </div>
+    </CompanyShell>
   );
 }

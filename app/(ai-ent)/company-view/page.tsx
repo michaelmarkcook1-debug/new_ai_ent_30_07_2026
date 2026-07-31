@@ -3,8 +3,11 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { EditorialBanner, QuestionChips } from "@/lib/ui/cards";
 import { KpiGauge, DerivationDrawer } from "@/lib/ui/score";
 import { loadShellFixture } from "./data";
+import { resolveCompany } from "@/lib/company-source";
+import { CompanyShell } from "./components/company-shell";
+import { ExemplarOnly } from "./components/exemplar-only";
 
-export const metadata = { title: "Company View: Shell | AI Enterprise" };
+export const metadata = { title: "Company View | AI Enterprise" };
 
 const TAB_LINKS = [
   { href: "/company-view/ai-exposure", title: "AI Exposure", blurb: "Where AI helps or threatens each function of the business." },
@@ -13,9 +16,26 @@ const TAB_LINKS = [
   { href: "/assess-decide", title: "Assess and Decide", blurb: "Now its own tab: depth tiers, your weights, and the worked derivation." },
 ];
 
-export default async function CompanyOverviewPage() {
+export default async function CompanyOverviewPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const company = resolveCompany((await searchParams).company);
+  if (company.live) {
+    return (
+      <CompanyShell company={company}>
+        <ExemplarOnly
+          tab="Overview"
+          pathname="/company-view"
+          reason="This overview is an editorial digest written for the exemplar buyer, and the API publishes no per-company equivalent."
+        />
+      </CompanyShell>
+    );
+  }
   const f = await loadShellFixture();
   return (
+    <CompanyShell company={company}>
     <div className="space-y-4">
       <EditorialBanner
         title={f.overview.insight.title}
@@ -69,5 +89,6 @@ export default async function CompanyOverviewPage() {
         ))}
       </section>
     </div>
+    </CompanyShell>
   );
 }

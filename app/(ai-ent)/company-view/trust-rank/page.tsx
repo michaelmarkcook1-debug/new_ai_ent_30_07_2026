@@ -3,8 +3,11 @@ import { Accordion } from "@/lib/ui/accordion";
 import { DerivationDrawer, KpiGauge } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { loadShellFixture } from "../data";
+import { resolveCompany } from "@/lib/company-source";
+import { CompanyShell } from "../components/company-shell";
+import { ExemplarOnly } from "../components/exemplar-only";
 
-export const metadata = { title: "Trust Rank: Shell | AI Enterprise" };
+export const metadata = { title: "Trust Rank | AI Enterprise" };
 
 function StatusChip({ status }: { status: string }) {
   const inForce = status.toLowerCase().includes("in force") || status.toLowerCase().includes("enacted");
@@ -24,10 +27,27 @@ function StatusChip({ status }: { status: string }) {
 // Governance posture (mirrors /governance-risk) plus the regulatory grid
 // seeded from AIE legislation material (spec Section 5). One of the two
 // moments that sell the product; the grid answers "what binds us, where".
-export default async function TrustRankPage() {
+export default async function TrustRankPage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  const company = resolveCompany((await searchParams).company);
+  if (company.live) {
+    return (
+      <CompanyShell company={company}>
+        <ExemplarOnly
+          tab="Trust Rank"
+          pathname="/company-view/trust-rank"
+          reason="The jurisdiction grid and governance posture here are written for the exemplar buyer. The market-wide Trust Rank module covers the vendor set on real data."
+        />
+      </CompanyShell>
+    );
+  }
   const f = await loadShellFixture();
   const g = f.trustRank.governance;
   return (
+    <CompanyShell company={company}>
     <div className="space-y-4">
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
         <KpiGauge
@@ -127,5 +147,6 @@ export default async function TrustRankPage() {
         </div>
       </section>
     </div>
+    </CompanyShell>
   );
 }
