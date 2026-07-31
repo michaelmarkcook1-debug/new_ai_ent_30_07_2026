@@ -97,6 +97,9 @@ export function SpotlightCard({
   );
 }
 
+const plural = (n: number, one: string, many: string) =>
+  `${n} ${n === 1 ? one : many}`;
+
 // The derived narrative-versus-reality read, for vendors with no hand-written
 // one. Same question as the editorial card above, answered by measurement
 // rather than judgement, and badged DERIVED rather than SAMPLE so the two are
@@ -203,10 +206,9 @@ export function DerivedGapCard({
           <p>
             For {vendor.name} the sources that cleared the threshold were{" "}
             <strong>{vendor.narrativeSources.join(" and ") || "none"}</strong>:{" "}
-            {vendor.aieNews.items} tagged news{" "}
-            {vendor.aieNews.items === 1 ? "item" : "items"}
+            {plural(vendor.aieNews.items, "tagged news item", "tagged news items")}
             {vendor.hn
-              ? `, and ${vendor.hn.stories} Hacker News stories on ${vendor.domain} drawing ${vendor.hn.points} points and ${vendor.hn.comments} comments`
+              ? `, and ${plural(vendor.hn.stories, "Hacker News story", "Hacker News stories")} on ${vendor.domain} drawing ${plural(vendor.hn.points, "point", "points")} and ${plural(vendor.hn.comments, "comment", "comments")}`
               : ", and no domain mapped for story matching"}
             . {method.threshold}
           </p>
