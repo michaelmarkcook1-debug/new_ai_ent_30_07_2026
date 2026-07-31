@@ -1,19 +1,9 @@
-import { promises as fs } from "fs";
-import path from "path";
 import { INTELLIGENCE_VENDORS } from "@/lib/aie";
-import type { AieRankingRow, CompetitiveIntelFixture } from "./types";
+import type { AieRankingRow } from "./types";
 
-// Module data adapter: Competitive Intel is SCHEMA lane (the heatmap sample
-// fixture mirrors the BoardRadar competitive-intelligence heatmap response
-// schema) plus PORT lane (the AIE vendor rankings from the seed dataset).
-
-export async function loadCompetitiveIntelFixture(): Promise<CompetitiveIntelFixture> {
-  const file = await fs.readFile(
-    path.join(process.cwd(), "fixtures", "sample", "competitive-intel.json"),
-    "utf8"
-  );
-  return JSON.parse(file) as CompetitiveIntelFixture;
-}
+// Module data adapter. The heatmap is fetched live from the BoardRadar
+// competitive-intelligence endpoint by the client component; this adapter
+// only supplies the AIE vendor rankings from the ported seed dataset.
 
 // AIE dataset ranking rows: the seed roster's overall scores with their
 // native confidence labels, investors excluded, top of the set first.

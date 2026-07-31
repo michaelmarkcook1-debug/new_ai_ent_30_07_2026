@@ -144,9 +144,16 @@ export async function GET(
       try {
         const res = await fetchWithTimeout(url);
         const body = await res.text();
-        // 4xx responses are real answers (e.g. MISSING_IDENTIFIER); pass them
-        // through so the UI can render an honest state. Retry only on 5xx.
-        if (res.status < 500) {
+        // A 4xx carrying JSON is a real answer (e.g. MISSING_IDENTIFIER), so
+        // it passes through and the UI renders an honest state. A response
+        // that is not JSON at all is a routing failure, not data: the API
+        // serves an HTML error page for a path it does not recognise. Calling
+        // that "live" would badge a dead route as a successful pull, so it
+        // falls through to the recorded fixture instead. Retry only on 5xx.
+        const looksJson = (res.headers.get("content-type") ?? "").includes(
+          "json"
+        );
+        if (res.status < 500 && looksJson) {
           cache.set(cacheKey, {
             body,
             status: res.status,

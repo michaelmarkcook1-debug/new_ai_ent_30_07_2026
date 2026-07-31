@@ -1,9 +1,7 @@
-import type { ProvenanceEnvelope } from "@/lib/provenance";
-
-// Mirrors the BoardRadar competitive-intelligence heatmap response schema
-// (recorded in fixtures/br/competitive-intelligence_heatmap_ACN.json), with
-// provenance envelopes added because every value in the sample fixture is
-// authored for the demo (sourceBasis "sample").
+// The BoardRadar competitive-intelligence heatmap response, consumed live.
+// Optional fields mark what the endpoint does not always return, so the UI
+// can render a dash rather than substituting a zero (zero is a real score on
+// the 0 to 5 scale and would misread as weakest).
 
 export interface HeatmapCompanyRow {
   company: string;
@@ -14,8 +12,7 @@ export interface HeatmapCompanyRow {
   relationshipType: string;
   isDisruptor: boolean;
   metrics: Record<string, number>;
-  categoryAverage: number;
-  provenance: ProvenanceEnvelope;
+  categoryAverage?: number;
 }
 
 export interface HeatmapRanking {
@@ -24,28 +21,26 @@ export interface HeatmapRanking {
   ticker: string;
   displayName: string;
   website: string;
-  competitiveMomentumIndex: number;
-  trend: number;
-  provenance: ProvenanceEnvelope;
+  competitiveMomentumIndex?: number;
+  trend?: number;
 }
 
 export interface HeatmapCategoryMeta {
   id: string;
   label: string;
   description: string;
-  methodology: { summary: string; details: string };
+  methodology?: { summary: string; details: string };
 }
 
 export interface CompetitiveIntelFixture {
   success: boolean;
   primaryTicker: string;
   isPrivate: boolean;
-  provenance: ProvenanceEnvelope;
   heatMap: Record<string, HeatmapCompanyRow[]>;
-  metrics: Record<string, string[]>;
-  rankings: HeatmapRanking[];
-  categories: Record<string, HeatmapCategoryMeta>;
-  metricDescriptions: Record<string, string>;
+  metrics?: Record<string, string[]>;
+  rankings?: HeatmapRanking[];
+  categories?: Record<string, HeatmapCategoryMeta>;
+  metricDescriptions?: Record<string, string>;
 }
 
 export interface AieRankingRow {
