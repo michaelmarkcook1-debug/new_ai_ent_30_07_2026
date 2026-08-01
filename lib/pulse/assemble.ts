@@ -3,7 +3,6 @@ import path from "path";
 import type { MarketMetrics } from "@/lib/market-metrics";
 import type { FinancialIndicator } from "@/app/(ai-ent)/pulse/components/financial-strip";
 import type { PulseSignal } from "@/app/(ai-ent)/pulse/components/decision-lists";
-import type { Confidence } from "./brief";
 
 // Server-side assembly for the Pulse brief: the pieces that need the
 // filesystem or that stitch several sources together.
@@ -131,7 +130,6 @@ export function buildSignals(
       supports: "Price efficiency, and the model allocation below it.",
       source: `Across ${modelCount} priced and benchmarked models`,
       href: "/price-performance",
-      confidence: modelCount >= 100 ? "High" : "Medium",
       lane: "derived",
     });
   }
@@ -148,7 +146,6 @@ export function buildSignals(
       supports: "Market momentum, and the movers list below.",
       source: "AIE market dashboard",
       href: "/vendor-view",
-      confidence: gaining + slipping >= 6 ? "High" : "Medium",
       lane: metrics.lane,
     });
   }
@@ -159,10 +156,9 @@ export function buildSignals(
     signals.push({
       what: `${undisclosed} of ${disclosureShortfall.total} tracked public vendors state no AI revenue figure in their filings.`,
       why: "Vendor claims about AI traction are largely unaudited. Treat commercial projections in a sales cycle as unverified unless the filing carries them.",
-      supports: "The confidence attached to every recommendation here.",
+      supports: "How far to trust any vendor's own commercial claims.",
       source: "SEC filings, full-text search",
       href: "/financial-snapshot",
-      confidence: "High",
       lane: "aie",
     });
   }
@@ -180,7 +176,7 @@ export function buildActions(
   highRisks: number | null,
   readiness: number | null,
   lastUpdated: string | null
-): { action: string; detail: string; meta: { confidence: Confidence; horizon: "Immediate" | "30 days" | "90 days" | "12 months"; lane: "derived"; lastUpdated: string | null } }[] {
+): { action: string; detail: string; meta: { horizon: "Immediate" | "30 days" | "90 days" | "12 months"; lane: "derived"; lastUpdated: string | null } }[] {
   return [
     {
       action: "Tier your model spend",
@@ -189,7 +185,6 @@ export function buildActions(
           ? `The top model costs ${priceRatio}x the cheapest one reaching 80 per cent of its score. Map workloads to tiers before renewal and reserve the top tier for complex or regulated work.`
           : "Map workloads to model tiers before renewal, and check the price spread against your own token mix rather than list rates.",
       meta: {
-        confidence: priceRatio !== null && priceRatio >= 5 ? "Medium" : "Low",
         horizon: "90 days",
         lane: "derived",
         lastUpdated,
@@ -200,7 +195,6 @@ export function buildActions(
       detail:
         "Capability across the tracked set moves faster than most procurement cycles. Any shortlist older than two quarters should be re-checked against current rankings before it is signed.",
       meta: {
-        confidence: "Medium",
         horizon: "30 days",
         lane: "derived",
         lastUpdated,
@@ -217,7 +211,6 @@ export function buildActions(
           : "No high-severity risk is currently open. Keep the review cadence rather than standing it down, since readiness is uneven across the set" +
             (readiness !== null ? ` (typical capability maturity ${readiness}).` : "."),
       meta: {
-        confidence: "Medium",
         horizon: highRisks !== null && highRisks > 0 ? "Immediate" : "90 days",
         lane: "derived",
         lastUpdated,

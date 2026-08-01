@@ -7,7 +7,6 @@ import { MicroLabel } from "@/lib/ui/micro";
 import { Accordion } from "@/lib/ui/accordion";
 import { SpotlightCard, VendorSnapshotCard, DerivedGapCard } from "./spotlight";
 import { VendorComparisonTable } from "./comparison";
-import { DeliveryChannelWatch } from "./delivery-watch";
 import { PulseLiveNews } from "./live-news";
 import {
   PulseHero,
@@ -127,7 +126,7 @@ export function PulseView({
         }
         matters="Capability is no longer the scarce input. Buying leverage now comes from matching model tier to task and from holding vendors to evidence rather than claims."
         todo="Tier your model spend before the next renewal, re-open any shortlist older than two quarters, and clear open governance risks before widening scope."
-        action={`Recommended action: ${brief.overall.meta.confidence === "Low" ? "Test" : "Accelerate"}`}
+        action={`Recommended action: ${brief.overall.action}`}
         meta={brief.overall.meta}
         evidenceNote={`Drawn from ${metrics.kpis.reduce((a, k) => Math.max(a, k.sampleSize), 0)} tracked vendors, ${benchmark.modelCount} priced and benchmarked models, and the open risk and movement classifications published for this period.`}
         editorialDate={fixture.editorial.date}
@@ -221,7 +220,7 @@ export function PulseView({
                   {decision.reason}
                 </p>
                 {decision.keyDimensions.length ? (
-                  <p className="mt-2 text-[11.5px] leading-snug text-muted">
+                  <p className="mt-2 text-[12px] leading-snug text-muted">
                     Based on {decision.keyDimensions.join(", ")}.
                   </p>
                 ) : null}
@@ -257,9 +256,6 @@ export function PulseView({
         indicators={financial.indicators}
         capturedAt={financial.capturedAt}
       />
-
-      {/* 12. The delivery channel, unchanged */}
-      <DeliveryChannelWatch />
 
       {/* 13. Everything that used to be above the fold, kept and collapsed */}
       <section className="space-y-2">

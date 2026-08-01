@@ -4,7 +4,7 @@ import { MicroLabel } from "@/lib/ui/micro";
 import { Accordion } from "@/lib/ui/accordion";
 import { MetaRow } from "./executive-brief";
 import type { MarketSignal } from "@/lib/market-metrics";
-import type { RecommendationMeta, Confidence } from "@/lib/pulse/brief";
+import type { RecommendationMeta } from "@/lib/pulse/brief";
 import type { DataLane } from "@/lib/provenance";
 
 // The three short decision lists: material risks, movers, supporting signals.
@@ -16,9 +16,6 @@ import type { DataLane } from "@/lib/provenance";
 // One rule throughout: where the source gives a headline and nothing more,
 // this says so rather than dressing the headline up as analysis. Inventing a
 // cause for a vendor's movement would be inventing the most consequential part.
-
-const confidenceFrom = (n: number | null): Confidence =>
-  n === null ? "Low" : n >= 0.75 ? "High" : n >= 0.5 ? "Medium" : "Low";
 
 export function MaterialRisks({
   risks,
@@ -44,7 +41,7 @@ export function MaterialRisks({
         </div>
         <Link
           href="/trust-rank"
-          className="text-[11.5px] font-semibold text-primary hover:underline"
+          className="text-[12px] font-semibold text-primary hover:underline"
         >
           Full governance and risk analysis →
         </Link>
@@ -58,7 +55,6 @@ export function MaterialRisks({
         <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-3">
           {top.map((r) => {
             const meta: RecommendationMeta = {
-              confidence: confidenceFrom(r.confidence),
               horizon: r.severity?.toLowerCase() === "high" ? "Immediate" : "90 days",
               lane,
               lastUpdated,
@@ -73,7 +69,7 @@ export function MaterialRisks({
                     {r.headline}
                   </h3>
                   {r.severity ? (
-                    <span className="shrink-0 rounded-full bg-warn-bg px-2 py-0.5 font-mono text-[9px] uppercase text-warn">
+                    <span className="shrink-0 rounded-full bg-warn-bg px-2 py-0.5 font-mono text-[12px] uppercase text-warn">
                       {r.severity}
                     </span>
                   ) : null}
@@ -81,7 +77,7 @@ export function MaterialRisks({
 
                 <dl className="mt-2.5 flex-1 space-y-2">
                   <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                    <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                       Who is affected
                     </dt>
                     <dd className="text-[12px] leading-snug">
@@ -90,7 +86,7 @@ export function MaterialRisks({
                     </dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                    <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                       What to do
                     </dt>
                     <dd className="text-[12px] leading-snug">
@@ -148,11 +144,11 @@ export function Movers({
     return (
       <div>
         <div className="mb-2 flex flex-wrap items-center gap-2">
-          <h3 className="text-[12.5px] font-bold">{title}</h3>
+          <h3 className="text-[13px] font-bold">{title}</h3>
           <LaneBadge lane={lane} />
         </div>
         {top.length === 0 ? (
-          <p className="rounded-lg border border-dashed border-base-300 px-3 py-4 text-[11.5px] text-muted">
+          <p className="rounded-lg border border-dashed border-base-300 px-3 py-4 text-[12px] text-muted">
             Nothing classified this way at the moment.
           </p>
         ) : (
@@ -169,15 +165,12 @@ export function Movers({
                   >
                     {s.vendorName}
                   </Link>
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
-                    Confidence {confidenceFrom(s.confidence)}
-                  </span>
                 </div>
                 <p className="mt-1 text-[12px] leading-snug text-muted">
                   {s.headline}
                 </p>
                 <p className="mt-1.5 text-[12px] leading-snug">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                  <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
                     For buyers
                   </span>
                   <br />
@@ -214,7 +207,7 @@ export function Movers({
         />
         <Link
           href="/vendor-view"
-          className="text-[11.5px] font-semibold text-primary hover:underline"
+          className="text-[12px] font-semibold text-primary hover:underline"
         >
           All vendor rankings →
         </Link>
@@ -233,7 +226,7 @@ export function Movers({
             `Worth a dated check before renewing or widening ${v}, rather than an immediate change.`
         )}
       </div>
-      <p className="mt-2 text-[11px] text-muted">
+      <p className="mt-2 text-[12px] text-muted">
         Our analysis reports the movement and the reason each vendor is
         classified that way. Where a cause is not published, none is asserted
         here: attributing a reason we cannot evidence would be the least
@@ -249,7 +242,6 @@ export interface PulseSignal {
   supports: string;
   source: string;
   href: string | null;
-  confidence: Confidence;
   lane: DataLane;
 }
 
@@ -263,7 +255,7 @@ export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
         />
         <Link
           href="/news-feed"
-          className="text-[11.5px] font-semibold text-primary hover:underline"
+          className="text-[12px] font-semibold text-primary hover:underline"
         >
           All market news →
         </Link>
@@ -282,7 +274,7 @@ export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
               className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-4"
             >
               <div className="flex items-center justify-between gap-2">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
                   Signal {i + 1}
                 </span>
                 <LaneBadge lane={s.lane} />
@@ -292,13 +284,13 @@ export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
               </p>
               <dl className="mt-2 flex-1 space-y-2">
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                  <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                     Why it matters
                   </dt>
                   <dd className="text-[12px] leading-snug">{s.why}</dd>
                 </div>
                 <div>
-                  <dt className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                  <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                     Supports
                   </dt>
                   <dd className="text-[12px] leading-snug text-muted">
@@ -307,19 +299,15 @@ export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
                 </div>
               </dl>
               <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-base-300 pt-2">
-                <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
-                  Confidence{" "}
-                  <span className="text-base-content">{s.confidence}</span>
-                </span>
                 {s.href ? (
                   <Link
                     href={s.href}
-                    className="text-[11px] font-semibold text-primary hover:underline"
+                    className="text-[12px] font-semibold text-primary hover:underline"
                   >
                     {s.source} →
                   </Link>
                 ) : (
-                  <span className="font-mono text-[10px] text-muted">
+                  <span className="font-mono text-[12px] text-muted">
                     {s.source}
                   </span>
                 )}
@@ -354,8 +342,8 @@ export function DeeperAnalysis() {
               href={href}
               className="block rounded-lg border border-base-300 px-3 py-2.5 transition hover:border-primary"
             >
-              <span className="text-[12.5px] font-semibold">{title}</span>
-              <span className="mt-0.5 block text-[11.5px] leading-snug text-muted">
+              <span className="text-[13px] font-semibold">{title}</span>
+              <span className="mt-0.5 block text-[12px] leading-snug text-muted">
                 {blurb}
               </span>
             </Link>

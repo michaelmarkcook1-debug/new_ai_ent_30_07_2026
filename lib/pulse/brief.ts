@@ -17,18 +17,30 @@ import type { CostCapabilityModel } from "@/app/(ai-ent)/price-performance/data"
 // the direction is not published rather than drawing an arrow that means
 // nothing.
 
-export type Confidence = "High" | "Medium" | "Low";
 export type Horizon = "Immediate" | "30 days" | "90 days" | "12 months";
 export type Direction = "up" | "down" | "flat" | "unpublished";
 
 /**
- * Metadata every visible recommendation carries. Evidence state reuses the
- * existing DataLane taxonomy rather than introducing a parallel one, and
- * confidence is separate from it: a live figure can still support only a
- * low-confidence call, and a derived one can support a high-confidence call.
+ * How a reading should be coloured. This is the only thing on the page that
+ * carries green, amber or red: a reader should be able to tell good from bad
+ * without reading a word.
+ *
+ * Provenance badges stay neutral. The old arrangement spent all the colour on
+ * lane badges, so the palette answered "where did this come from" and never
+ * "is this good or bad", which is backwards for a brief.
+ */
+export type Tone = "good" | "warn" | "bad" | "neutral";
+
+/**
+ * Metadata a visible recommendation carries.
+ *
+ * No confidence field. Confidence labels were removed from the platform on
+ * request and should not have been reintroduced here. Evidence state reuses
+ * the existing DataLane taxonomy and answers the same question more honestly:
+ * a reader wants to know whether a figure is measured or assumed, not how
+ * sure we claim to feel about it.
  */
 export interface RecommendationMeta {
-  confidence: Confidence;
   horizon: Horizon;
   lane: DataLane;
   lastUpdated: string | null;
@@ -38,10 +50,16 @@ export interface ScorecardDimension {
   key: string;
   name: string;
   status: string;
+  tone: Tone;
+  /**
+   * The number behind the reading, shown large. Findings were previously
+   * buried inside prose sentences, so nothing on the page read as a figure.
+   */
+  figure: string | null;
+  figureCaption: string | null;
   direction: Direction;
   /** One sentence on what the reading means for a buyer. */
   meaning: string;
-  confidence: Confidence;
   lane: DataLane;
   /** The figures this was computed from, shown in the evidence drawer. */
   basis: string;
@@ -59,7 +77,12 @@ export interface PricePick {
 
 export interface ExecutiveBrief {
   scorecard: ScorecardDimension[];
-  overall: { recommendation: string; meta: RecommendationMeta };
+  overall: {
+    /** Accelerate / Test / Renegotiate / Monitor / Pause. */
+    action: string;
+    recommendation: string;
+    meta: RecommendationMeta;
+  };
   /**
    * The computed values behind the dimensions, returned rather than re-derived
    * by callers. The actions and signals cite the same numbers the scorecard
@@ -121,7 +144,10 @@ export function buildScorecard(
           : netMovers < 0
             ? `More vendors are slipping than gaining (${slipping} against ${gaining}), which points to consolidation around fewer credible options.`
             : `Gainers and decliners are evenly matched (${gaining} each), so no clear direction in the field.`,
-    confidence: gaining + slipping >= 6 ? "High" : gaining + slipping >= 3 ? "Medium" : "Low",
+    tone:
+      gaining + slipping === 0 ? "neutral" : netMovers > 0 ? "good" : netMovers < 0 ? "warn" : "neutral",
+    figure: gaining + slipping === 0 ? null : `${gaining}:${slipping}`,
+    figureCaption: gaining + slipping === 0 ? null : "gaining to slipping",
     lane,
     basis: `${gaining} vendors reading as gaining, ${slipping} as slipping, from the AIE market dashboard's own classification.`,
   });
@@ -152,7 +178,9 @@ export function buildScorecard(
           : mScore >= 55
             ? `The typical tracked vendor scores ${mScore} for assessed capability maturity: workable, but capability varies enough that the shortlist matters more than the market.`
             : `The typical tracked vendor scores ${mScore} for assessed capability maturity, so expect to carry more integration and assurance work in-house.`,
-    confidence: maturity && maturity.sampleSize >= 30 ? "High" : "Medium",
+    tone: mScore === null ? "neutral" : mScore >= 70 ? "good" : mScore >= 55 ? "warn" : "bad",
+    figure: mScore === null ? null : String(mScore),
+    figureCaption: mScore === null ? null : "mean capability maturity",
     lane,
     basis: maturity
       ? `Mean of ${maturity.sourceField} over ${maturity.sampleSize} vendors. No prior period is published, so no direction of travel is shown.`
@@ -202,7 +230,10 @@ export function buildScorecard(
           : ratio >= 2
             ? `${adequate.length} models reach 80 per cent of the best benchmark score, and the cheapest costs ${ratio} times less than the top model. Worth tiering, though the saving is not dramatic.`
             : `The cheapest model reaching 80 per cent of the best benchmark score costs about the same as the top model, so there is little to gain from tiering on price alone.`,
-    confidence: priced.length >= 100 ? "High" : priced.length >= 30 ? "Medium" : "Low",
+    tone: ratio === null ? "neutral" : ratio >= 5 ? "good" : ratio >= 2 ? "warn" : "bad",
+    figure: ratio === null ? null : `${ratio}\u00d7`,
+    figureCaption:
+      ratio === null ? null : "cost of the top model over a near-equivalent",
     lane: "derived",
     basis: best && cheapestAdequate
       ? `${priced.length} models with both a published price and a benchmark score. Top score ${best.intelligence} at $${best.inputPerM} per million input tokens; cheapest model within 80 per cent of it is $${cheapestAdequate.inputPerM}. Input price only, and a single capture, so this is a spread and not a trend.`
@@ -231,7 +262,9 @@ export function buildScorecard(
         : highRisks === 0
           ? "No high-severity risk is open against a tracked vendor."
           : `${highRisks} high-severity ${highRisks === 1 ? "risk is" : "risks are"} open against tracked vendors, so governance review belongs in the shortlist stage rather than after it.`,
-    confidence: "High",
+    tone: highRisks === null ? "neutral" : highRisks === 0 ? "good" : highRisks <= 3 ? "warn" : "bad",
+    figure: highRisks === null ? null : String(highRisks),
+    figureCaption: highRisks === null ? null : "open high-severity risks",
     lane,
     basis: riskKpi
       ? `Count of ${riskKpi.sourceField} over ${riskKpi.sampleSize} records.`
@@ -282,7 +315,10 @@ export function buildScorecard(
           : medianTop3 >= 50
             ? `In a typical category the top three vendors hold about ${medianTop3} per cent of estimated share, leaving credible alternatives to negotiate against.`
             : `In a typical category the top three vendors hold about ${medianTop3} per cent of estimated share, so the field is open and there is real room to negotiate.`,
-    confidence: top3PerCategory.length >= 4 ? "Medium" : "Low",
+    tone:
+      medianTop3 === null ? "neutral" : medianTop3 >= 75 ? "bad" : medianTop3 >= 50 ? "warn" : "good",
+    figure: medianTop3 === null ? null : `${medianTop3}%`,
+    figureCaption: medianTop3 === null ? null : "held by the top three, typical category",
     lane,
     basis:
       medianTop3 === null
@@ -297,26 +333,31 @@ export function buildScorecard(
   const riskElevated = highRisks !== null && highRisks > 3;
 
   let overall: string;
+  let action: string;
   if (!readinessOk && riskElevated) {
     overall =
       "Hold scope tight. Capability across the tracked set is early and high-severity risks are open, so run contained pilots with named owners rather than committing to a platform.";
+    action = "Pause";
   } else if (readinessOk && priceFavourable) {
     overall =
       "Accelerate controlled adoption while applying commercial pressure. Capability is sufficient to deploy against real work, and the cost of the last increment of capability is high enough that matching model tier to task is the largest available saving.";
+    action = "Accelerate";
   } else if (readinessOk) {
     overall =
       "Proceed selectively. Capability supports production use, but the price gap between the best model and a near-equivalent is not wide enough to fund tiering on cost alone, so choose on fit and governance.";
+    action = "Monitor";
   } else {
     overall =
       "Test before committing. The tracked set is not yet uniformly production-ready, so favour short commitments and re-evaluate as evidence accumulates.";
+    action = "Test";
   }
 
   return {
     scorecard: dims,
     overall: {
+      action,
       recommendation: overall,
       meta: {
-        confidence: readinessOk && priced.length >= 100 ? "Medium" : "Low",
         horizon: "90 days",
         lane: "derived",
         lastUpdated: updated,
@@ -348,8 +389,7 @@ export function buildPricePicks(
   const priced = models.filter(
     (m) => m.inputPerM > 0 && typeof m.intelligence === "number"
   );
-  const meta = (confidence: Confidence, horizon: Horizon): RecommendationMeta => ({
-    confidence,
+  const meta = (horizon: Horizon): RecommendationMeta => ({
     horizon,
     lane: "derived",
     lastUpdated: capturedAt,
@@ -362,7 +402,7 @@ export function buildPricePicks(
         model: null,
         reason: "",
         fit: "",
-        meta: meta("Low", "30 days"),
+        meta: meta("30 days"),
         unavailable: "Data unavailable: no model in the capture carries both a price and a benchmark score.",
       },
     ];
@@ -404,7 +444,7 @@ export function buildPricePicks(
         ? `Scores ${bestValue.intelligence} on the ${benchmarkSource} benchmark at $${bestValue.inputPerM} per million input tokens, giving ${vpd(bestValue)} points per dollar while staying at or above the median benchmark score.`
         : "",
       fit: "Mainstream knowledge work where quality matters but frontier reasoning is not required.",
-      meta: meta("Medium", "90 days"),
+      meta: meta("90 days"),
       unavailable: bestValue ? null : "Insufficient evidence to make a reliable recommendation.",
     },
     {
@@ -414,7 +454,7 @@ export function buildPricePicks(
         ? `Cheapest priced model in the capture at $${cheapest.inputPerM} per million input tokens, scoring ${cheapest.intelligence} on the ${benchmarkSource} benchmark.`
         : "",
       fit: "High-volume, low-risk workflows where throughput and unit cost dominate.",
-      meta: meta("Medium", "90 days"),
+      meta: meta("90 days"),
       unavailable: cheapest ? null : "Insufficient evidence to make a reliable recommendation.",
     },
     {
@@ -424,7 +464,7 @@ export function buildPricePicks(
         ? `Highest benchmark score in the capture at ${bestReasoning.intelligence}, priced at $${bestReasoning.inputPerM} per million input tokens.`
         : "",
       fit: "Work where a wrong answer is expensive: strategy, complex analysis, regulated decisions.",
-      meta: meta("Medium", "90 days"),
+      meta: meta("90 days"),
       unavailable: bestReasoning ? null : "Insufficient evidence to make a reliable recommendation.",
     },
     {
@@ -432,7 +472,7 @@ export function buildPricePicks(
       model: null,
       reason: "",
       fit: "",
-      meta: meta("Low", "90 days"),
+      meta: meta("90 days"),
       // Stated rather than estimated. One capture cannot show movement, and
       // guessing at an improvement would be the exact failure this app avoids.
       unavailable:
@@ -445,7 +485,7 @@ export function buildPricePicks(
         ? `At $${worstValue.inputPerM} per million input tokens it returns ${vpd(worstValue)} benchmark points per dollar, the weakest return among models priced at or above the field median.`
         : "",
       fit: "Worth challenging at renewal, or reserving for the narrow cases that justify it.",
-      meta: meta("Low", "90 days"),
+      meta: meta("90 days"),
       unavailable: worstValue ? null : "Insufficient evidence to make a reliable recommendation.",
     },
   ];
@@ -492,7 +532,7 @@ export function decisionFor(
       status: "Monitor",
       reason:
         "No composite is published for this vendor, so there is not enough to act on either way.",
-      meta: { confidence: "Low", horizon: "90 days", lane, lastUpdated },
+      meta: { horizon: "90 days", lane, lastUpdated },
       keyDimensions: dims,
     };
   }
@@ -501,7 +541,7 @@ export function decisionFor(
       status: "Pause",
       reason:
         "A high-severity risk is open against this vendor. Resolve it before expanding commitment, whatever the score says.",
-      meta: { confidence: "Medium", horizon: "Immediate", lane, lastUpdated },
+      meta: { horizon: "Immediate", lane, lastUpdated },
       keyDimensions: dims,
     };
   }
@@ -509,7 +549,7 @@ export function decisionFor(
     return {
       status: "Shortlist",
       reason: `Scores ${composite} against its own market category, near the top of the tracked set.`,
-      meta: { confidence: "Medium", horizon: "90 days", lane, lastUpdated },
+      meta: { horizon: "90 days", lane, lastUpdated },
       keyDimensions: dims,
     };
   }
@@ -517,14 +557,14 @@ export function decisionFor(
     return {
       status: "Test",
       reason: `Scores ${composite}: credible enough for a contained pilot, not yet for a platform commitment.`,
-      meta: { confidence: "Medium", horizon: "90 days", lane, lastUpdated },
+      meta: { horizon: "90 days", lane, lastUpdated },
       keyDimensions: dims,
     };
   }
   return {
     status: "Monitor",
     reason: `Scores ${composite} against its category, below the level that would justify a pilot on the published evidence.`,
-    meta: { confidence: "Low", horizon: "12 months", lane, lastUpdated },
+    meta: { horizon: "12 months", lane, lastUpdated },
     keyDimensions: dims,
   };
 }

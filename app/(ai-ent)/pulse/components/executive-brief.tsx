@@ -14,15 +14,15 @@ import type { DataLane } from "@/lib/provenance";
 // publishes an opinion. Everything under it is computed from figures the app
 // already holds, and each dimension carries the numbers it came from.
 
+// Metadata sits quietly under a recommendation. Horizon and evidence state
+// only: confidence labels are gone from the platform and do not belong here.
+// 12px floor throughout, since the audit found the most common text size on
+// this page was 10px, which is not a size to read a brief in.
 export function MetaRow({ meta }: { meta: RecommendationMeta }) {
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[10px] uppercase tracking-wider text-muted">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[12px] text-muted">
       <span>
-        Confidence <span className="text-base-content">{meta.confidence}</span>
-      </span>
-      <span aria-hidden>·</span>
-      <span>
-        Horizon <span className="text-base-content">{meta.horizon}</span>
+        Act within <span className="text-base-content">{meta.horizon}</span>
       </span>
       <span aria-hidden>·</span>
       <LaneBadge lane={meta.lane} />
@@ -31,43 +31,28 @@ export function MetaRow({ meta }: { meta: RecommendationMeta }) {
           <span aria-hidden>·</span>
           <span>Updated {meta.lastUpdated.slice(0, 10)}</span>
         </>
-      ) : (
-        <>
-          <span aria-hidden>·</span>
-          <span>Update date not published</span>
-        </>
-      )}
+      ) : null}
     </div>
   );
 }
 
-const ARROW: Record<ScorecardDimension["direction"], string> = {
-  up: "↑",
-  down: "↓",
-  flat: "→",
-  unpublished: "",
+// The only place green, amber and red appear. A reader should be able to sort
+// good from bad without reading a word, which the previous version made
+// impossible: every verdict rendered in the same white, so "Favourable" and
+// "Elevated" were visually identical.
+const TONE_TEXT: Record<ScorecardDimension["tone"], string> = {
+  good: "text-good",
+  warn: "text-warn",
+  bad: "text-error",
+  neutral: "text-muted",
 };
 
-function DirectionTag({ d }: { d: ScorecardDimension }) {
-  if (d.direction === "unpublished") {
-    return (
-      <span className="font-mono text-[10px] text-muted">
-        direction not published
-      </span>
-    );
-  }
-  const tone =
-    d.direction === "up"
-      ? "text-good"
-      : d.direction === "down"
-        ? "text-warn"
-        : "text-muted";
-  return (
-    <span className={`font-mono text-[10px] ${tone}`}>
-      {ARROW[d.direction]} {d.direction === "flat" ? "no change" : d.direction === "up" ? "improving" : "weakening"}
-    </span>
-  );
-}
+const TONE_RULE: Record<ScorecardDimension["tone"], string> = {
+  good: "border-l-good",
+  warn: "border-l-warn",
+  bad: "border-l-error",
+  neutral: "border-l-base-300",
+};
 
 export function PulseHero({
   headline,
@@ -99,7 +84,7 @@ export function PulseHero({
         />
         <div className="flex items-center gap-2">
           <LaneBadge lane="sample" />
-          <span className="font-mono text-[10px] text-muted">
+          <span className="font-mono text-[12px] text-muted">
             {editorialDate}
           </span>
         </div>
@@ -109,7 +94,7 @@ export function PulseHero({
         {headline}
       </h2>
 
-      <p className="mt-3 max-w-3xl text-[13.5px] leading-relaxed text-muted">
+      <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-muted">
         {judgement}
       </p>
 
@@ -122,10 +107,10 @@ export function PulseHero({
           ] as const
         ).map(([label, body]) => (
           <div key={label}>
-            <dt className="font-mono text-[10px] uppercase tracking-wider text-muted">
+            <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
               {label}
             </dt>
-            <dd className="mt-1 text-[12.5px] leading-snug">{body}</dd>
+            <dd className="mt-1 text-[13px] leading-snug">{body}</dd>
           </div>
         ))}
       </dl>
@@ -170,10 +155,10 @@ export function ExecutiveActions({
             className="rounded-lg border border-base-300 bg-base-100 p-4"
           >
             <div className="flex items-baseline gap-2">
-              <span className="font-mono text-[11px] text-muted">{i + 1}</span>
+              <span className="font-mono text-[12px] text-muted">{i + 1}</span>
               <h3 className="text-[13.5px] font-bold">{a.action}</h3>
             </div>
-            <p className="mt-1.5 text-[12px] leading-snug text-muted">
+            <p className="mt-1.5 text-[13px] leading-snug text-muted">
               {a.detail}
             </p>
             <div className="mt-3 border-t border-base-300 pt-2">
@@ -203,33 +188,50 @@ export function Scorecard({
         <LaneBadge lane={lane} />
       </div>
       <p className="mt-1 max-w-3xl text-[12px] text-muted">
-        Five readings on the market as a whole, not a vendor ranking. Each says
-        what it means for a buyer and how far to trust it.
+        Five readings on the market as a whole, not a vendor ranking. Colour
+        carries the verdict: green is favourable, amber is watch, red is act.
       </p>
 
       <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {brief.scorecard.map((d) => (
           <div
             key={d.key}
-            className="rounded-lg border border-base-300 bg-base-100 p-4"
+            className={`rounded-lg border border-l-4 border-base-300 bg-base-100 p-4 ${TONE_RULE[d.tone]}`}
           >
-            <div className="flex items-start justify-between gap-2">
-              <h3 className="text-[12.5px] font-bold">{d.name}</h3>
-              <LaneBadge lane={d.lane} />
+            <h3 className="text-[13px] font-bold">{d.name}</h3>
+
+            {/* The figure leads. Previously the numbers were buried inside the
+                sentence below, so nothing on the card read as a finding. */}
+            <div className="mt-2 flex items-baseline gap-2">
+              {d.figure ? (
+                <span
+                  className={`font-mono text-[30px] font-bold leading-none ${TONE_TEXT[d.tone]}`}
+                >
+                  {d.figure}
+                </span>
+              ) : null}
+              <span
+                className={`text-[15px] font-semibold ${d.figure ? TONE_TEXT[d.tone] : "text-muted"}`}
+              >
+                {d.status}
+              </span>
             </div>
-            <div className="mt-1.5 flex flex-wrap items-baseline gap-2">
-              <span className="text-[17px] font-bold">{d.status}</span>
-              <DirectionTag d={d} />
-            </div>
-            <p className="mt-1.5 text-[12px] leading-snug text-muted">
+            {d.figureCaption ? (
+              <p className="mt-1 text-[12px] text-muted">{d.figureCaption}</p>
+            ) : null}
+
+            <p className="mt-2.5 text-[13px] leading-snug text-muted">
               {d.meaning}
-            </p>
-            <p className="mt-2 border-t border-base-300 pt-2 font-mono text-[10px] uppercase tracking-wider text-muted">
-              Confidence <span className="text-base-content">{d.confidence}</span>
             </p>
           </div>
         ))}
       </div>
+
+      <p className="mt-2 text-[12px] text-muted">
+        No direction of travel is shown on any reading: the sources publish a
+        current value with no prior period, so there is nothing to compare
+        against.
+      </p>
 
       <div className="mt-3 rounded-lg border border-primary/40 bg-primary/5 p-4">
         <MicroLabel label="Overall recommendation" />
@@ -252,10 +254,11 @@ export function Scorecard({
             ))}
           </ul>
           <p className="text-muted">
-            Direction of travel is shown only where a prior reading exists. The
-            AIE datasets publish current values without a prior period for most
-            of these, so most dimensions say the direction is not published
-            rather than drawing an arrow that would mean nothing.
+            Direction of travel is not shown. The AIE datasets publish current
+            values without a prior period, and the share estimates carry a
+            changePct that is zero on every row because each prior estimate is
+            a copy of the current one. An arrow drawn from that would mean
+            nothing.
           </p>
         </DerivationDrawer>
       </div>

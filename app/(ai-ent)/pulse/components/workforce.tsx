@@ -96,10 +96,10 @@ export function Workforce({
               />
               <div className="min-w-0 flex-1">
                 <dt className="flex items-baseline justify-between gap-2">
-                  <span className="text-[12.5px] font-semibold">{b.label}</span>
+                  <span className="text-[13px] font-semibold">{b.label}</span>
                   <span className="font-mono text-[12px]">{b.percent}%</span>
                 </dt>
-                <dd className="text-[11.5px] leading-snug text-muted">
+                <dd className="text-[12px] leading-snug text-muted">
                   {b.work}
                 </dd>
               </div>
@@ -107,7 +107,7 @@ export function Workforce({
           ))}
         </dl>
 
-        <p className="mt-3 rounded border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[11px] leading-snug text-warn">
+        <p className="mt-3 rounded border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[12px] leading-snug text-warn">
           Illustrative allocation, not a measurement. Nothing here measures what
           share of your work is routine against complex. Adjust by industry and
           role.
@@ -175,7 +175,7 @@ export function Workforce({
           </div>
           <Link
             href="/market-view"
-            className="text-[11.5px] font-semibold text-primary hover:underline"
+            className="text-[12px] font-semibold text-primary hover:underline"
           >
             All workflows →
           </Link>
@@ -183,7 +183,7 @@ export function Workforce({
 
         <div className="mt-3 flex flex-wrap gap-2">
           <label className="flex items-center gap-1.5">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+            <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
               Industry
             </span>
             <select
@@ -202,7 +202,7 @@ export function Workforce({
             </select>
           </label>
           <label className="flex items-center gap-1.5">
-            <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+            <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
               Workflow
             </span>
             <select
@@ -228,7 +228,7 @@ export function Workforce({
           <>
             <div className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
               <h3 className="text-[15px] font-bold">{rec.workflowLabel}</h3>
-              <span className="text-[11.5px] text-muted">
+              <span className="text-[12px] text-muted">
                 {rec.industryLabel} · {rec.category}
               </span>
             </div>
@@ -237,16 +237,16 @@ export function Workforce({
               <span className="rounded-full bg-primary px-3 py-1 text-[12px] font-semibold text-white">
                 {rec.tierLabel}
               </span>
-              <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[10px] text-muted">
+              <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[12px] text-muted">
                 {rec.riskTier} risk
               </span>
-              <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[10px] text-muted">
+              <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[12px] text-muted">
                 {rec.complexity}
               </span>
               {rec.regulatoryFlags.slice(0, 3).map((f) => (
                 <span
                   key={f}
-                  className="rounded-full bg-warn-bg px-2 py-0.5 font-mono text-[9px] text-warn"
+                  className="rounded-full bg-warn-bg px-2 py-0.5 font-mono text-[12px] text-warn"
                 >
                   {f.replace(/_/g, " ")}
                 </span>
@@ -255,24 +255,24 @@ export function Workforce({
 
             <dl className="mt-3 space-y-2.5">
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                   Why
                 </dt>
-                <dd className="mt-0.5 text-[12.5px] leading-snug">{rec.why}</dd>
+                <dd className="mt-0.5 text-[13px] leading-snug">{rec.why}</dd>
               </div>
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                   Escalate to a higher tier for
                 </dt>
-                <dd className="mt-0.5 text-[12.5px] leading-snug text-muted">
+                <dd className="mt-0.5 text-[13px] leading-snug text-muted">
                   {rec.escalateFor.join(" · ")}
                 </dd>
               </div>
               <div>
-                <dt className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                   Likely impact
                 </dt>
-                <dd className="mt-0.5 text-[12.5px] leading-snug">
+                <dd className="mt-0.5 text-[13px] leading-snug">
                   {rec.impact}
                 </dd>
               </div>

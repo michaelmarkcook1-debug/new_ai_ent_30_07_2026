@@ -34,7 +34,7 @@ export function PriceSummary({
         </div>
         <Link
           href="/price-performance"
-          className="text-[11.5px] font-semibold text-primary hover:underline"
+          className="text-[12px] font-semibold text-primary hover:underline"
         >
           Full price-performance analysis →
         </Link>
@@ -46,29 +46,27 @@ export function PriceSummary({
             key={p.slot}
             className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-4"
           >
-            <h3 className="font-mono text-[10px] uppercase tracking-wider text-muted">
+            <h3 className="font-mono text-[12px] uppercase tracking-wider text-muted">
               {p.slot}
             </h3>
 
             {p.unavailable ? (
-              <>
-                <p className="mt-2 text-[13px] font-semibold text-muted">
-                  No recommendation
-                </p>
-                <p className="mt-1.5 flex-1 text-[12px] leading-snug text-muted">
-                  {p.unavailable}
-                </p>
-              </>
+              // An absence is stated, not shouted. Rendering these at the same
+              // weight as a finding put four "no data" messages among the
+              // thirteen largest items on the page.
+              <p className="mt-2 flex-1 text-[12px] leading-snug text-muted">
+                {p.unavailable}
+              </p>
             ) : (
               <>
-                <p className="mt-1.5 text-balance text-[14px] font-bold leading-tight">
+                <p className="mt-1.5 text-balance text-[17px] font-bold leading-tight">
                   {p.model}
                 </p>
-                <p className="mt-1.5 text-[12px] leading-snug text-muted">
+                <p className="mt-1.5 text-[13px] leading-snug text-muted">
                   {p.reason}
                 </p>
-                <p className="mt-2 flex-1 text-[11.5px] leading-snug">
-                  <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+                <p className="mt-2 flex-1 text-[12px] leading-snug">
+                  <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
                     Enterprise fit
                   </span>
                   <br />

@@ -174,13 +174,13 @@ describe("price picks", () => {
     expect(picks[0].unavailable).toMatch(/data unavailable/i);
   });
 
-  it("attaches confidence, horizon and evidence state to every pick", () => {
+  it("attaches horizon and evidence state to every pick, and no confidence", () => {
     for (const p of buildPricePicks(models, "2026-07-31", "Test")) {
-      expect(["High", "Medium", "Low"]).toContain(p.meta.confidence);
       expect(["Immediate", "30 days", "90 days", "12 months"]).toContain(
         p.meta.horizon
       );
       expect(p.meta.lane).toBe("derived");
+      expect(p.meta).not.toHaveProperty("confidence");
     }
   });
 });
@@ -194,7 +194,7 @@ describe("vendor decision", () => {
   it("monitors rather than guessing when no composite is published", () => {
     const d = decisionFor(null, null, null, false, "aie-live", null);
     expect(d.status).toBe("Monitor");
-    expect(d.meta.confidence).toBe("Low");
+    expect(d.meta).not.toHaveProperty("confidence");
   });
 
   it("shortlists a strong score and tests a middling one", () => {
@@ -213,6 +213,58 @@ describe("vendor decision", () => {
   });
 });
 
+describe("colour and figures", () => {
+  it("gives every dimension a tone so good and bad are never the same colour", () => {
+    const out = buildScorecard(metrics(), [model(100, 50), model(85, 1)]);
+    for (const d of out.scorecard) {
+      expect(["good", "warn", "bad", "neutral"]).toContain(d.tone);
+    }
+    // A favourable price spread and elevated risk must not share a tone.
+    const price = out.scorecard.find((d) => d.key === "price");
+    const risk = out.scorecard.find((d) => d.key === "risk");
+    expect(price!.tone).not.toBe(risk!.tone);
+  });
+
+  it("surfaces a display figure rather than burying numbers in prose", () => {
+    // Every dimension gets its inputs, so all five should carry a figure.
+    const signal = (id: string) => ({
+      vendorId: id,
+      vendorName: id,
+      headline: "h",
+      severity: null,
+      confidence: null,
+    });
+    const out = buildScorecard(
+      metrics({
+        gaining: [signal("a"), signal("b")],
+        slipping: [signal("c")],
+        shares: [share("x", 50), share("x", 30), share("x", 15), share("x", 5)],
+      }),
+      [model(100, 50), model(85, 1)]
+    );
+    const withFigures = out.scorecard.filter((d) => d.figure !== null);
+    expect(withFigures).toHaveLength(5);
+    expect(out.scorecard.find((d) => d.key === "price")!.figure).toBe("50\u00d7");
+    expect(out.scorecard.find((d) => d.key === "risk")!.figure).toBe("6");
+    expect(out.scorecard.find((d) => d.key === "momentum")!.figure).toBe("2:1");
+    expect(out.scorecard.find((d) => d.key === "intensity")!.figure).toBe("95%");
+  });
+
+  it("omits the figure where the input is missing, rather than showing a zero", () => {
+    // No movers and no shares: those two must have no figure at all.
+    const out = buildScorecard(metrics(), [model(100, 50), model(85, 1)]);
+    expect(out.scorecard.find((d) => d.key === "momentum")!.figure).toBeNull();
+    expect(out.scorecard.find((d) => d.key === "intensity")!.figure).toBeNull();
+    expect(out.scorecard.find((d) => d.key === "price")!.figure).not.toBeNull();
+  });
+
+  it("carries no confidence field on any dimension", () => {
+    for (const d of buildScorecard(metrics(), [model(50, 1)]).scorecard) {
+      expect(d).not.toHaveProperty("confidence");
+    }
+  });
+});
+
 describe("no-data behaviour", () => {
   it("builds a full scorecard with empty inputs and claims nothing", () => {
     const bare = metrics({ kpis: [], shares: [], gaining: [], slipping: [] });
@@ -220,6 +272,9 @@ describe("no-data behaviour", () => {
     expect(out.scorecard).toHaveLength(5);
     const claimed = out.scorecard.filter((d) => d.status !== "Not published");
     expect(claimed).toHaveLength(0);
+    // Nothing to colour when nothing is claimed.
+    expect(out.scorecard.every((d) => d.tone === "neutral")).toBe(true);
+    expect(out.scorecard.every((d) => d.figure === null)).toBe(true);
     expect(out.overall.recommendation).toBeTruthy();
   });
 });

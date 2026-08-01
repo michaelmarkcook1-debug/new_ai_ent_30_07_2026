@@ -28,6 +28,9 @@ export function FinancialStrip({
   indicators: FinancialIndicator[];
   capturedAt: string | null;
 }) {
+  const measured = indicators.filter((i) => !i.isAbsence);
+  const absent = indicators.filter((i) => i.isAbsence);
+
   return (
     <section>
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -40,35 +43,47 @@ export function FinancialStrip({
         </div>
         <Link
           href="/financial-snapshot"
-          className="text-[11.5px] font-semibold text-primary hover:underline"
+          className="text-[12px] font-semibold text-primary hover:underline"
         >
           Full financial snapshot →
         </Link>
       </div>
 
+      {/* Indicators that carry a figure get a card. Ones that carry an absence
+          get a single shared line underneath, because four cards each saying
+          "not disclosed" in 17px bold spent most of this section's space, and
+          most of its visual weight, on nothing. The absence is still stated:
+          it is just no longer the loudest thing here. */}
       <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        {indicators.map((ind) => (
+        {measured.map((ind) => (
           <div
             key={ind.label}
             className="rounded-lg border border-base-300 bg-base-100 p-4"
           >
             <div className="flex items-start justify-between gap-2">
-              <h3 className="font-mono text-[10px] uppercase tracking-wider text-muted">
+              <h3 className="font-mono text-[12px] uppercase tracking-wider text-muted">
                 {ind.label}
               </h3>
               <LaneBadge lane={ind.lane} />
             </div>
-            <p
-              className={`mt-1.5 text-[17px] font-bold leading-tight ${ind.isAbsence ? "text-muted" : ""}`}
-            >
+            <p className="mt-1.5 text-[24px] font-bold leading-none">
               {ind.value}
             </p>
-            <p className="mt-1 text-[11.5px] leading-snug text-muted">
+            <p className="mt-1.5 text-[13px] leading-snug text-muted">
               {ind.detail}
             </p>
           </div>
         ))}
       </div>
+
+      {absent.length > 0 ? (
+        <p className="mt-2 text-[12px] leading-snug text-muted">
+          <span className="font-semibold">Not available: </span>
+          {absent.map((a) => a.label.toLowerCase()).join(", ")}. Nobody
+          publishes these for this vendor set, and no estimate is substituted
+          in their place.
+        </p>
+      ) : null}
 
       <div className="mt-2">
         <DerivationDrawer title="Where these come from">
