@@ -58,7 +58,15 @@ export async function buildFinancialIndicators(): Promise<{
     (c) => Array.isArray(c.segments) && c.segments.length > 0
   );
 
-  const indicators: FinancialIndicator[] = [
+  // An indicator is an absence when its value is not a figure. Deriving this
+  // rather than setting it by hand means a "Data unavailable" fallback can
+  // never slip through and render at headline size, which is what happened
+  // when the flag was hardcoded per indicator.
+  const ABSENT = /^(not disclosed|not published|data unavailable|insufficient evidence)$/i;
+  const withAbsence = (list: Omit<FinancialIndicator, "isAbsence">[]) =>
+    list.map((i) => ({ ...i, isAbsence: ABSENT.test(i.value.trim()) }));
+
+  const indicators: FinancialIndicator[] = withAbsence([
     {
       label: "AI revenue disclosure",
       value: vendors.length
@@ -68,7 +76,6 @@ export async function buildFinancialIndicators(): Promise<{
         ? `Only ${disclosing.map((v) => v.name).join(", ")} state a quantified AI revenue figure in their filings. The rest report none.`
         : "No filing capture is currently held.",
       lane: "aie",
-      isAbsence: disclosing.length < vendors.length / 2,
     },
     {
       label: "Segment revenue filed",
@@ -79,7 +86,6 @@ export async function buildFinancialIndicators(): Promise<{
         ? "Vendors whose filings break revenue down by segment, which is as close as most get to showing where AI money lands."
         : "No filing capture is currently held.",
       lane: "aie",
-      isAbsence: false,
     },
     {
       label: "Funding durability",
@@ -87,7 +93,6 @@ export async function buildFinancialIndicators(): Promise<{
       detail:
         "Runway and funding depth are not filed by public vendors and not published by private ones. No estimate is substituted.",
       lane: "aie",
-      isAbsence: true,
     },
     {
       label: "Enterprise spending direction",
@@ -95,9 +100,8 @@ export async function buildFinancialIndicators(): Promise<{
       detail:
         "No prior period is published for the tracked spend figures, so no direction of travel can be shown without inventing one.",
       lane: "aie",
-      isAbsence: true,
     },
-  ];
+  ]);
 
   return {
     indicators,
