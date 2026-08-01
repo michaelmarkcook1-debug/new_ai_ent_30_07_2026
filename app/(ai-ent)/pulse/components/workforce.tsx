@@ -6,6 +6,7 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
 import {
+  ALLOCATION_EVIDENCE,
   DEFAULT_ALLOCATION,
   INDUSTRY_LABEL,
   recommendFor,
@@ -113,30 +114,50 @@ export function Workforce({
         </p>
 
         <div className="mt-2">
-          <DerivationDrawer title="Why this is an assumption, not a finding">
+          <DerivationDrawer title="Why this is an assumption, and what is measured">
             <p>
-              These percentages are a starting point for a conversation, not an
-              output. No dataset in this product measures the distribution of
-              work inside an enterprise, so any split presented as measured
-              would be invented.
+              These percentages are a planning assumption, not an output. A
+              research pass went looking for a measured replacement and
+              concluded there is not one, for a substantive reason rather than
+              a gap in the search: <strong>the allocation is not a property of
+              work.</strong> It is a property of work measured against current
+              model capability, and that denominator moves every few months. A
+              figure measured today expires when the next model ships, which is
+              why nobody publishes one.
             </p>
             <p>
-              What is real is the shape of the workflow catalogue:{" "}
+              What is measured, and what the argument here actually rests on:
+            </p>
+            <ul className="list-disc space-y-1.5 pl-4">
+              {ALLOCATION_EVIDENCE.map((e) => (
+                <li key={e.figure}>
+                  <strong className="text-base-content">{e.figure}</strong>{" "}
+                  <span className="text-muted">
+                    ({e.source}, {e.period}).
+                  </span>{" "}
+                  {e.claim}
+                </li>
+              ))}
+            </ul>
+            <p>
+              The catalogue shape is real but is deliberately not the
+              allocation:{" "}
               <strong>
-                {complexityMix.complex} per cent of the{" "}
-                {complexityMix.counted} catalogued workflows are complex,{" "}
-                {complexityMix.moderate} per cent moderate and{" "}
-                {complexityMix.simple} per cent simple
+                {complexityMix.complex} per cent of the {complexityMix.counted}{" "}
+                catalogued workflows are complex, {complexityMix.moderate} per
+                cent moderate and {complexityMix.simple} per cent simple
               </strong>
-              . That is deliberately not used as the allocation: a catalogue
-              records workflow types, and over-samples the interesting ones. It
-              says nothing about how much of each an enterprise actually does.
+              . A catalogue records workflow types and over-samples the
+              interesting ones, so it says nothing about how much of each an
+              enterprise does. O*NET occupation data was obtained and rejected
+              for the same reason: it counts occupations, not hours.
             </p>
             <p className="text-muted">
-              The point the split is making holds regardless of the exact
-              numbers: most enterprise work does not need frontier reasoning,
-              and paying frontier rates for it is the largest avoidable cost in
-              most deployments.
+              The conclusion holds without the split being true. Capability
+              barely degrades across tiers while price moves by an order of
+              magnitude, so the burden of proof belongs on using the expensive
+              tier rather than on avoiding it. Full write-up in
+              docs/model-allocation-research.md.
             </p>
           </DerivationDrawer>
         </div>

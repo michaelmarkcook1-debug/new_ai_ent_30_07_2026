@@ -22,6 +22,22 @@ import { USE_CASES, type UseCase, type IndustryTag } from "@/lib/aie/use-cases";
 // interesting cases. The real distribution is still shown, because it is
 // genuinely informative, but labelled as what it is: share of catalogued
 // workflows, not share of work volume.
+//
+// A research pass on 1 August 2026 tried to replace the split with a measured
+// figure and concluded it cannot be done. Written up in
+// docs/model-allocation-research.md. The short version: the allocation is not
+// a property of work, it is a property of work measured against current model
+// capability, and that denominator moves every few months. Nobody publishes it
+// because it is not a stable quantity. O*NET Job Zones were obtained but are
+// occupation counts rather than work volume, and the BLS employment weights
+// that would fix that are unreachable.
+//
+// What the research did produce is the evidence in ALLOCATION_EVIDENCE below,
+// which supports the argument the section is making without pretending to be
+// the allocation itself. The strongest of these is the success gap: model
+// quality falls about four points from simple to college-level tasks while
+// price moves by an order of magnitude. That argument does not need the split
+// to be true.
 
 export type ModelTier = "frontier" | "mid" | "low";
 
@@ -58,6 +74,49 @@ export const DEFAULT_ALLOCATION: AllocationBand[] = [
     label: "Low-cost models and automation",
     percent: 15,
     work: "Routine, repetitive and low-risk workflows",
+  },
+];
+
+export interface EvidenceItem {
+  claim: string;
+  figure: string;
+  source: string;
+  url: string;
+  period: string;
+}
+
+/**
+ * What the research pass actually established. None of these is the
+ * allocation. They are shown beside it so a reader asking "where does 10 per
+ * cent come from" gets an honest answer: it is a planning assumption, this is
+ * what is measured nearby, and the argument does not rest on the split.
+ */
+export const ALLOCATION_EVIDENCE: EvidenceItem[] = [
+  {
+    claim:
+      "Model quality falls only slightly as tasks get harder, while price across tiers moves by an order of magnitude. This is the argument for tiering, and it does not depend on knowing the split.",
+    figure: "70% success on sub-high-school tasks against 66% on college-level tasks",
+    source: "Anthropic Economic Index",
+    url: "https://www.anthropic.com/research/anthropic-economic-index-january-2026-report",
+    period: "January 2026 report",
+  },
+  {
+    claim:
+      "People bring harder-than-average work to AI, so observed usage is not a representative sample of enterprise work and cannot be read as one.",
+    figure:
+      "13.2 mean education-years for tasks in the economy against 14.4 for tasks appearing in usage",
+    source: "Anthropic Economic Index",
+    url: "https://www.anthropic.com/research/anthropic-economic-index-january-2026-report",
+    period: "January 2026 report",
+  },
+  {
+    claim:
+      "Usage is concentrated in a narrow slice of the workforce, so any allocation drawn from observed usage would describe those occupations rather than an enterprise.",
+    figure:
+      "Computer and mathematical roles are about 4% of US employment but 30% of surveyed usage; management 7% against 23%",
+    source: "Anthropic Economic Index",
+    url: "https://www.anthropic.com/research/economic-index-june-2026-report",
+    period: "10 April to 10 June 2026",
   },
 ];
 
