@@ -44,8 +44,9 @@ import type {
 // second read and in the way on the first.
 //
 // Provenance did not get simplified along with the layout. Every figure still
-// carries its lane badge, every recommendation carries confidence and horizon
-// separately from its evidence state, and the derivation drawers are intact.
+// carries its lane badge and the derivation drawers are intact. Colour now
+// carries the verdict rather than the provenance, so a reader can sort good
+// from bad before reading a word.
 
 export function PulseView({
   fixture,
