@@ -61,7 +61,7 @@ export const NAV_GROUPS: NavGroup[] = [
     label: "AI and Your Company",
     items: [
       { label: "Interrogate", href: "/interrogate", icon: "interrogate", hint: "Describe your situation, get a cited finding" },
-      { label: "Market View", href: "/market-view", icon: "market", hint: "Pick a workflow, get the vendors that serve it" },
+      { label: "Model 4 Role", href: "/market-view", icon: "market", hint: "Pick a workflow, get the model tier and vendors that serve it" },
       { label: "Company View: Shell", href: "/company-view", icon: "company", hint: "The tailored view of your own organisation" },
       { label: "Assess and Decide", href: "/assess-decide", icon: "assess", hint: "Score a decision against your own weights" },
     ],

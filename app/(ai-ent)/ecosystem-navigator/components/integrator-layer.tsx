@@ -314,7 +314,7 @@ export function IntegratorLayer() {
             href="/market-view"
             className="text-[12px] font-semibold text-primary hover:underline"
           >
-            Open the delivery matrix in Market View
+            Open the delivery matrix in Model 4 Role
           </Link>
           <Link
             href="/vendor-view"

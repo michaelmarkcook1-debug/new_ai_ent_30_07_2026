@@ -24,7 +24,7 @@ const JOBS: {
       "Pick your industry and the workflow itself, from 146 tracked workflows. You get its risk tier, reliability bar and regulatory flags, then the vendors that ship it and the model providers you would build it on.",
     href: "/market-view",
     cta: "Start with your workflow",
-    then: "Market View",
+    then: "Model 4 Role",
   },
   {
     question: "Just tell me what to do in our situation.",

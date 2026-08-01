@@ -28,7 +28,7 @@ export function ShortlistView({ vendors }: { vendors: VendorMetrics[] }) {
     return (
       <EmptyState
         title="Your shortlist is empty"
-        detail="Add vendors with the + button wherever they appear: on a workflow shortlist in Market View, in the Vendor View rankings, or on the Competitive Intel matrix. The list is kept in this browser only."
+        detail="Add vendors with the + button wherever they appear: on a workflow shortlist in Model 4 Role, in the Vendor View rankings, or on the Competitive Intel matrix. The list is kept in this browser only."
       />
     );
   }
