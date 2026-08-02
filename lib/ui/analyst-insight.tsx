@@ -1,0 +1,148 @@
+import { LaneBadge } from "@/lib/ui/badges";
+import { MicroLabel } from "@/lib/ui/micro";
+import { DerivationDrawer } from "@/lib/ui/score";
+import type { AnalystInsightData } from "@/lib/analyst/insight";
+
+// The Analyst Insight that opens every page except the Pulse.
+//
+// Same shape as the Pulse hero, which is the reference: label, headline,
+// judgement, then the action. The Pulse itself is untouched; this is that
+// pattern applied to the other tabs, driven by each page's own data.
+//
+// No confidence badge. The brief asks for one, but confidence labels were
+// removed from this platform on request and putting them back on fourteen new
+// surfaces would undo that deliberately. Evidence state and the record count
+// answer the useful half of the question: whether a reading is measured or
+// assumed, and how much sits behind it.
+
+const ACTION_TONE: Record<string, string> = {
+  Accelerate: "bg-good-bg text-good border-good/40",
+  Expand: "bg-good-bg text-good border-good/40",
+  Shortlist: "bg-good-bg text-good border-good/40",
+  Monitor: "bg-base-200 text-muted border-base-300",
+  Investigate: "bg-warn-bg text-warn border-warn/40",
+  Renegotiate: "bg-warn-bg text-warn border-warn/40",
+  Pause: "bg-error-bg text-error border-error/40",
+  "Reduce exposure": "bg-error-bg text-error border-error/40",
+};
+
+export function AnalystInsight({
+  insight,
+  /** What the page is about, shown as the label. */
+  context,
+}: {
+  insight: AnalystInsightData;
+  context: string;
+}) {
+  const { evidence } = insight;
+
+  return (
+    <section className="rounded-xl border border-base-300 border-l-2 border-l-primary/70 bg-primary/[0.03] p-5 sm:p-6">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <svg
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            className="text-primary"
+            aria-hidden
+          >
+            <path d="M3 3v18h18" />
+            <path d="m19 9-5 5-4-4-3 3" />
+          </svg>
+          <MicroLabel
+            label="Analyst insight"
+            tooltip={`What the ${context} data means, before the data itself.`}
+          />
+        </div>
+        <div className="flex flex-wrap items-center gap-2">
+          <LaneBadge lane={evidence.lane} />
+          {evidence.lastUpdated ? (
+            <span className="font-mono text-[12px] text-muted">
+              {evidence.lastUpdated.slice(0, 10)}
+            </span>
+          ) : null}
+        </div>
+      </div>
+
+      {insight.insufficient ? (
+        // The data will not carry a conclusion, so none is offered. This is a
+        // first-class state rather than a softened version of a claim.
+        <p className="mt-3 max-w-3xl text-[14px] leading-relaxed text-muted">
+          <span className="font-semibold text-base-content">
+            Current evidence is insufficient to draw a reliable conclusion.
+          </span>{" "}
+          {insight.insufficient}
+        </p>
+      ) : (
+        <>
+          <h2 className="mt-3 max-w-3xl text-balance text-[18px] font-bold leading-snug sm:text-[21px]">
+            {insight.headline}
+          </h2>
+
+          <p className="mt-3 max-w-3xl text-[13.5px] leading-relaxed text-muted">
+            {insight.summary}
+          </p>
+
+          {insight.implications.length > 0 ? (
+            <ul className="mt-4 max-w-3xl space-y-1.5 border-t border-base-300/70 pt-3">
+              {insight.implications.slice(0, 3).map((im) => (
+                <li key={im} className="flex gap-2.5 text-[13px] leading-snug">
+                  <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-primary" aria-hidden />
+                  <span>{im}</span>
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          <div className="mt-4 flex flex-wrap items-center gap-3 border-t border-base-300/70 pt-3">
+            <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
+              Recommended action
+            </span>
+            <span
+              className={`rounded-full border px-3 py-1 text-[13px] font-semibold ${ACTION_TONE[insight.action] ?? ACTION_TONE.Monitor}`}
+            >
+              {insight.action}
+            </span>
+          </div>
+        </>
+      )}
+
+      <div className="mt-3">
+        <DerivationDrawer
+          title="What this reading rests on"
+          trigger="What this rests on"
+        >
+          <p>
+            Computed from {evidence.count.toLocaleString()} records on this
+            page&apos;s own datasets:{" "}
+            {evidence.sources.map((s) => (
+              <strong key={s} className="text-base-content">
+                {s}
+                {s === evidence.sources[evidence.sources.length - 1] ? "" : ", "}
+              </strong>
+            ))}
+            .
+            {evidence.lastUpdated
+              ? ` Last updated ${evidence.lastUpdated.slice(0, 10)}.`
+              : " No update date is published for these sources."}
+          </p>
+          <p>
+            This reading is assembled from figures rather than written by a
+            language model. Every sentence above is constructed from a value
+            held on this page, which is why it cannot drift from the data
+            underneath it, and why it says nothing where the data runs out.
+          </p>
+          <p className="text-muted">
+            It interprets the page&apos;s own datasets and weights them first.
+            It is not general commentary on the AI market, and it does not
+            reach for a conclusion the figures here will not carry.
+          </p>
+        </DerivationDrawer>
+      </div>
+    </section>
+  );
+}

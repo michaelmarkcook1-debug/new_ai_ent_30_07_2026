@@ -12,7 +12,7 @@ export default function AlliancesPage() {
     <>
       <PageHeader
         title="Alliances"
-        subtitle="Who backs whom and who partners with whom across the AI supply side: the partnership and investment edges of the AIE exposure map, each with its native confidence tier, value note and public sources."
+        subtitle="Who backs whom and who partners with whom across the AI supply side: the partnership and investment edges of the AIE exposure map, each with its native evidence tier, value note and public sources."
         lanes={["aie"]}
       />
       <AlliancesView data={data} />

@@ -244,7 +244,7 @@ export function MarketExplorer({
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Model providers in this slice"
-              tooltip="Share of model-provider adoption within the selected slice. Shares are normalised inside the slice; confidence labels are the source's own."
+              tooltip="Share of model-provider adoption within the selected slice. Shares are normalised inside the slice; evidence labels are the source's own."
             />
             <LaneBadge lane={uptakeLane} />
           </div>

@@ -61,7 +61,7 @@ const JOBS: {
   {
     question: "Who depends on whom? Where is our lock-in?",
     detail:
-      "The dependency graph across the AI stack: who supplies whom, which relationships are verified, and which are only seed-confidence.",
+      "The dependency graph across the AI stack: who supplies whom, which relationships are verified, and which are only seed evidence.",
     href: "/ecosystem-navigator",
     cta: "Trace the dependencies",
     then: "AI Ecosystem Navigator",

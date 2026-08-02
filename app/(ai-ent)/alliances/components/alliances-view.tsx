@@ -29,7 +29,7 @@ const CONFIDENCE_TITLE: Record<string, string> = {
   seed: "Native dataset tier: plausible but not independently verified; treat as a hypothesis",
 };
 
-function ConfidenceBadge({ tier }: { tier: string }) {
+function EvidenceBadge({ tier }: { tier: string }) {
   return (
     <span
       className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${CONFIDENCE_STYLE[tier] ?? CONFIDENCE_STYLE.seed}`}
@@ -92,7 +92,7 @@ function EdgeCard({ edge }: { edge: AllianceEdgeView }) {
     <article className="rounded-lg border border-base-300 bg-base-100 p-4">
       <div className="flex flex-wrap items-center gap-1.5">
         <TypeChip type={edge.type} />
-        <ConfidenceBadge tier={edge.confidence} />
+        <EvidenceBadge tier={edge.confidence} />
         {edge.estimatedValue ? (
           <span
             className="font-mono text-[10px] text-base-content/80"
@@ -224,8 +224,8 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
             score, where 1.0 is the strongest tie.
           </p>
           <p className="text-muted">
-            Confidence split in this dataset: {data.summary.byConfidence.high} high,{" "}
-            {data.summary.byConfidence.medium} medium, {data.summary.byConfidence.seed} seed.
+            Evidence split in this dataset: {data.summary.byConfidence.high} verified,{" "}
+            {data.summary.byConfidence.medium} documented, {data.summary.byConfidence.seed} seed.
             Seed-tier edges should be treated as hypotheses, not confirmed relationships.
           </p>
         </DerivationDrawer>

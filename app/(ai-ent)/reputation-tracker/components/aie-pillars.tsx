@@ -188,7 +188,7 @@ export function AiePillarsSection() {
       <div className="flex flex-wrap items-center gap-2">
         <MicroLabel
           label="AI vendor reputation"
-          tooltip="Three-pillar reputation read (developer, employee, customer). Native per-cell confidence labels (seed, documented, verified) are kept visible whichever source renders."
+          tooltip="Three-pillar reputation read (developer, employee, customer). Native per-cell evidence labels (seed, documented, verified) are kept visible whichever source renders."
         />
         <LaneBadge lane={lane} />
         <span className="micro-label">

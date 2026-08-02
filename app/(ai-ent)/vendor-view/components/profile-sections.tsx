@@ -259,7 +259,7 @@ const EDGE_TYPE_LABEL: Record<string, string> = {
   subsidiary: "Subsidiary",
 };
 
-function ConfidenceTierChip({ tier }: { tier: string }) {
+function EvidenceTierChip({ tier }: { tier: string }) {
   const styles: Record<string, string> = {
     high: "bg-good-bg text-good",
     medium: "bg-warn-bg text-warn",
@@ -323,7 +323,7 @@ export function DependencySection({ profile }: { profile: VendorProfile }) {
                     item.edge.relationshipType
                   }
                 />
-                <ConfidenceTierChip tier={item.edge.confidence} />
+                <EvidenceTierChip tier={item.edge.confidence} />
                 {item.edge.estimatedValue ? (
                   <span className="font-mono text-[10px] text-muted">
                     {item.edge.estimatedValue}

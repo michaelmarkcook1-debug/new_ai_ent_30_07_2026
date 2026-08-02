@@ -15,7 +15,7 @@ export default async function TrustRankPage() {
     <>
       <PageHeader
         title="Trust Rank"
-        subtitle="The vendor-oriented view over AI legislation: a jurisdiction grid with a vendor lens, vendor-specific rulings, confidence-labelled regulatory events, and the evidence-graded governance assessment for the selected vendor."
+        subtitle="The vendor-oriented view over AI legislation: a jurisdiction grid with a vendor lens, vendor-specific rulings, dated regulatory events, and the evidence-graded governance assessment for the selected vendor."
         lanes={["aie", postures.lane]}
       />
       <TrustRankView

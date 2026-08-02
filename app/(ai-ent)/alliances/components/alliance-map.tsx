@@ -327,7 +327,7 @@ export function AllianceMap({
         <div className="lg:col-span-1">
           <MicroLabel
             label={focus ? "Alliance dossier" : "Inspect"}
-            tooltip="Click a node on the map to see every alliance it carries, with the dataset's own summary, confidence and sources."
+            tooltip="Click a node on the map to see every alliance it carries, with the dataset's own summary, evidence tier and sources."
           />
           {!focus ? (
             <p className="mt-2 rounded-lg border border-dashed border-base-300 px-3 py-6 text-[11.5px] text-muted">
@@ -357,7 +357,7 @@ export function AllianceMap({
                       {e.summary}
                     </p>
                     <p className="mt-1 font-mono text-[9px] text-muted">
-                      {e.confidence} confidence
+                      {e.confidence} evidence
                       {e.estimatedValue ? ` · ${e.estimatedValue}` : ""} ·
                       updated {e.dateUpdated.slice(0, 10)}
                     </p>
@@ -398,7 +398,7 @@ export function AllianceMap({
             Every edge is a commercial partnership or investment recorded in the
             AI Enterprise exposure dataset, with its own summary, confidence
             tier and public sources. Line thickness is the dataset&apos;s
-            <code> strengthScore</code>; seed-confidence edges render dashed
+            <code> strengthScore</code>; seed-evidence edges render dashed
             because they are recorded but not independently verified.
           </p>
           <p>

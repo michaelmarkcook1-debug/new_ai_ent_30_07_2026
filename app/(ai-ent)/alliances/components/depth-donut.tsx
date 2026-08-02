@@ -174,7 +174,7 @@ export function DepthDonut({ edges }: { edges: AllianceEdgeView[] }) {
               ))}
             </ul>
             <p className="mt-2 border-t border-base-300 pt-1.5 font-mono text-[10px] text-muted">
-              {verified} of {total} ({verifiedPct}%) above seed confidence
+              {verified} of {total} ({verifiedPct}%) above seed evidence
             </p>
           </div>
         </div>

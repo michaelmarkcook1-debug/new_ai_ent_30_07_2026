@@ -295,10 +295,6 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
                   </tbody>
                 </table>
               </div>
-              <div>
-                <p className="micro-label mb-1">Confidence</p>
-                <p className="text-muted">{assessment.derivation.confidenceNote}</p>
-              </div>
               <div className="flex items-center gap-2 border-t border-base-300 pt-2">
                 <LaneBadge lane="sample" />
                 <p className="text-[11px] text-muted">{assessment.derivation.schemaNote}</p>

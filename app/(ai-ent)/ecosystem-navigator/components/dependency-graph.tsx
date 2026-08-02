@@ -223,8 +223,8 @@ export function DependencyGraph() {
         </div>
         <div className="flex flex-wrap items-center gap-1.5">
           <MicroLabel
-            label="Confidence"
-            tooltip="The dataset's own confidence tier per edge. Seed edges render dashed and need independent verification."
+            label="Evidence"
+            tooltip="The dataset's own evidence tier per edge. Seed edges render dashed and need independent verification."
           />
           {CONFIDENCE_ORDER.map((c) => {
             const on = confidences.has(c);
@@ -492,7 +492,7 @@ export function DependencyGraph() {
                       <span className="text-[11.5px] font-semibold">{tgt?.label}</span>
                       <span
                         className="font-mono text-[9px] uppercase tracking-wider text-muted"
-                        title="The dataset's own confidence tier for this edge"
+                        title="The dataset's own evidence tier for this edge"
                       >
                         {e.confidence}
                       </span>

@@ -30,7 +30,7 @@ export default function MarketWatchPage() {
     <>
       <PageHeader
         title="Market Watch"
-        subtitle="The enterprise AI market read: today's regime and source-cited signals, live share by category, the live winning and losing read, dependency concentration and category leaders. All figures keep their native confidence labels; news lives on The Pulse and News."
+        subtitle="The enterprise AI market read: today's regime and source-cited signals, live share by category, the live winning and losing read, dependency concentration and category leaders. All figures keep their native evidence labels; news lives on The Pulse and News."
         lanes={["aie-live", "aie"]}
       />
       <div className="space-y-6">
