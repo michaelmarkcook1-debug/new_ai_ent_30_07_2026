@@ -55,6 +55,10 @@ function VendorName({
 // and the hardest to scan. They are grouped into the five layers a buyer
 // actually shops in, and each layer opens closed.
 //
+// Matched on category id rather than display name: the live payload keys on
+// ids, and matching the rendered label meant one category silently fell into
+// the catch-all whenever a name carried different spacing.
+//
 // Grouping is by where a category sits in the stack, not by score, so it stays
 // stable as vendors move. A category the map does not name falls into "Other
 // categories" rather than being dropped.
@@ -63,43 +67,43 @@ const LAYERS: { id: string; label: string; blurb: string; match: string[] }[] = 
     id: "models",
     label: "Models and reasoning",
     blurb: "The models themselves, and the coding agents built directly on them.",
-    match: ["Frontier model/API", "Developer/coding agent"],
+    match: ["frontier_model_api", "developer_coding_agent"],
   },
   {
     id: "compute",
     label: "Compute and silicon",
     blurb: "Where the models actually run, and the hardware underneath.",
-    match: ["AI cloud & compute", "AI silicon / acceleration", "Neocloud & inference"],
+    match: ["ai_cloud_compute", "ai_silicon", "neocloud_inference"],
   },
   {
     id: "platform",
     label: "Platforms",
     blurb: "The build-and-operate layer: cloud AI platforms and agent platforms.",
-    match: ["Cloud AI platform", "Agent platform"],
+    match: ["cloud_ai_platform", "agent_platform"],
   },
   {
     id: "apps",
     label: "Enterprise applications",
     blurb: "Bought as finished software rather than assembled.",
     match: [
-      "Enterprise assistant",
-      "CRM/customer AI",
-      "ITSM/HR/service AI",
-      "Workflow automation AI",
+      "enterprise_assistant",
+      "crm_customer_ai",
+      "itsm_hr_service_ai",
+      "workflow_automation_ai",
     ],
   },
   {
     id: "knowledge",
     label: "Knowledge and regulated work",
     blurb: "Retrieval over your own material, and the regulated verticals.",
-    match: ["RAG/enterprise search", "Regulated-industry AI"],
+    match: ["rag_enterprise_search", "regulated_industry_ai"],
   },
 ];
 
 function groupCategories(categories: CategoryShareView[]) {
   const taken = new Set<string>();
   const groups = LAYERS.map((layer) => {
-    const members = categories.filter((c) => layer.match.includes(c.name));
+    const members = categories.filter((c) => layer.match.includes(c.id));
     members.forEach((c) => taken.add(c.id));
     return { ...layer, members };
   }).filter((g) => g.members.length > 0);

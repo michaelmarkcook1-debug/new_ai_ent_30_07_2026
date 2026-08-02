@@ -8,8 +8,8 @@
    that legible: light 4.7:1, dark 3.4:1.
    Light values on :root, dark overrides via [data-theme="dark"]. */
 :root {
-  --ag-primary: #0b8457;
-  --ag-secondary: #1f4438;
+  --ag-primary: #1d4ed8;
+  --ag-secondary: #1e3a8a;
   --ag-secondary-content: #ffffff;
   --ag-base-100: #ffffff;
   --ag-base-200: #f9f9f9;
@@ -37,9 +37,9 @@
 }
 
 [data-theme="dark"] {
-  --ag-primary: #1fa672;
-  --ag-secondary: #1f4438;
-  --ag-secondary-content: #a7e8c9;
+  --ag-primary: #3b82f6;
+  --ag-secondary: #1e3a8a;
+  --ag-secondary-content: #bfdbfe;
   --ag-base-100: #141414;
   --ag-base-200: #1c1c1c;
   --ag-base-300: #2a2a2a;
