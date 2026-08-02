@@ -116,3 +116,39 @@ h1, h2, h3, h4 {
   border-width: 3px;
   border-color: var(--ag-channel);
 }
+
+
+/* ---------------------------------------------------------------------------
+   Focus visibility.
+
+   Four of the app's 55 buttons carried a focus style, so a keyboard user had
+   no idea where they were on most screens. Applied once here rather than
+   edited onto every control, which is also the only way it stays true as
+   controls are added.
+
+   :focus-visible rather than :focus, so a pointer click does not leave a ring
+   behind on a control the user has already finished with.
+--------------------------------------------------------------------------- */
+:where(a, button, select, input, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--ag-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+   Reduced motion.
+
+   Nothing in the app honoured prefers-reduced-motion. Transitions collapse to
+   near-instant rather than being removed outright, so state changes still read
+   as changes for anyone who needs the feedback.
+--------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

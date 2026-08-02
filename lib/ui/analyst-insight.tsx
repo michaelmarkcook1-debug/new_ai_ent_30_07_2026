@@ -37,7 +37,7 @@ export function AnalystInsight({
   const { evidence } = insight;
 
   return (
-    <section className="rounded-xl border border-base-300 border-l-2 border-l-primary/70 bg-primary/[0.03] p-5 sm:p-6">
+    <section className="rounded-xl border border-primary/35 bg-primary/[0.04] p-5 sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <svg

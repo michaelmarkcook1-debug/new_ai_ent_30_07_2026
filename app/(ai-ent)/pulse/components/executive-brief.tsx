@@ -47,11 +47,14 @@ const TONE_TEXT: Record<ScorecardDimension["tone"], string> = {
   neutral: "text-muted",
 };
 
+// Full borders rather than a left stripe. A coloured side-rule on a card is
+// never a deliberate design choice, and the tone reads just as clearly from a
+// full border sitting alongside the coloured figure inside.
 const TONE_RULE: Record<ScorecardDimension["tone"], string> = {
-  good: "border-l-good",
-  warn: "border-l-warn",
-  bad: "border-l-error",
-  neutral: "border-l-base-300",
+  good: "border-good/45",
+  warn: "border-warn/45",
+  bad: "border-error/45",
+  neutral: "border-base-300",
 };
 
 export function PulseHero({
@@ -157,7 +160,7 @@ export function ExecutiveActions({
         {actions.map((a, i) => (
           <li
             key={a.action}
-            className="rounded-lg border border-base-300 border-l-2 border-l-primary/70 bg-primary/[0.04] p-4"
+            className="rounded-lg border border-primary/35 bg-primary/[0.04] p-4"
           >
             <div className="flex items-baseline gap-2.5">
               <span className="font-mono text-[13px] font-bold text-primary">
@@ -203,7 +206,7 @@ export function Scorecard({
         {brief.scorecard.map((d) => (
           <div
             key={d.key}
-            className={`rounded-lg border border-l-4 border-base-300 bg-base-100 p-4 ${TONE_RULE[d.tone]}`}
+            className={`rounded-lg border bg-base-100 p-4 ${TONE_RULE[d.tone]}`}
           >
             <h3 className="text-[13px] font-bold">{d.name}</h3>
 
