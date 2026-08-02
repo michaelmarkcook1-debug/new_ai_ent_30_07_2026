@@ -1,6 +1,7 @@
 import type { DataLane } from "@/lib/provenance";
 import type { MarketMetrics } from "@/lib/market-metrics";
 import type { CostCapabilityModel } from "@/app/(ai-ent)/price-performance/data";
+import { largestPriceImprovement } from "./price-improvement";
 
 // Derivations behind the executive brief.
 //
@@ -386,6 +387,7 @@ export function buildPricePicks(
   capturedAt: string | null,
   benchmarkSource: string
 ): PricePick[] {
+  const improvement = largestPriceImprovement(models);
   const priced = models.filter(
     (m) => m.inputPerM > 0 && typeof m.intelligence === "number"
   );
@@ -467,16 +469,20 @@ export function buildPricePicks(
       meta: meta("90 days"),
       unavailable: bestReasoning ? null : "Insufficient evidence to make a reliable recommendation.",
     },
+    // Computable now that a second price capture exists. The key qualifier is
+    // in the reason: nothing was repriced, so this is capability arriving at a
+    // lower price point rather than a discount on anything.
     {
       slot: "Largest price-performance improvement",
-      model: null,
-      reason: "",
-      fit: "",
+      model: improvement.best?.model ?? null,
+      reason: improvement.best
+        ? `Scores ${improvement.best.intelligence} at $${improvement.best.priceNow} per million input tokens. Reaching that level in the ${"2 June 2026"} capture meant ${improvement.best.baselineModel} at $${improvement.best.baselinePrice}, so the same capability now costs ${improvement.best.factor} times less. No model was repriced between the two captures: ${improvement.unchangedCount} of ${improvement.unchangedCount + improvement.repricedCount} models present in both are listed at exactly the same price, so this is new capability arriving underneath the old prices rather than a discount.`
+        : "",
+      fit: "The clearest case for re-testing a workload you priced earlier in the year. The tier you chose may now be two steps more expensive than it needs to be.",
       meta: meta("90 days"),
-      // Stated rather than estimated. One capture cannot show movement, and
-      // guessing at an improvement would be the exact failure this app avoids.
-      unavailable:
-        "Insufficient evidence: only one benchmark capture is held, so no change over time can be shown. This becomes available once a second capture accumulates.",
+      unavailable: improvement.best
+        ? null
+        : "Insufficient evidence: no model in the later capture both carries a benchmark score and undercuts an earlier option at the same capability.",
     },
     {
       slot: "Priced above evidenced value",

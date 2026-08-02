@@ -278,3 +278,37 @@ describe("no-data behaviour", () => {
     expect(out.overall.recommendation).toBeTruthy();
   });
 });
+
+describe("largest price-performance improvement", () => {
+  it("finds a real improvement now that two price captures exist", async () => {
+    const { largestPriceImprovement } = await import(
+      "@/lib/pulse/price-improvement"
+    );
+    const cc = (await import("@/fixtures/aie-live/cost-capability.json"))
+      .default as { models: Omit<CostCapabilityModel, "provider">[] };
+    const out = largestPriceImprovement(
+      cc.models.map((m) => ({ ...m, provider: "x" }))
+    );
+    expect(out.best).not.toBeNull();
+    expect(out.best!.factor).toBeGreaterThan(1);
+    // The whole point of the finding: nothing was repriced between captures,
+    // so this must never be described as a discount.
+    expect(out.repricedCount).toBe(0);
+    expect(out.unchangedCount).toBeGreaterThan(0);
+  });
+
+  it("excludes models that beat everything earlier rather than crediting an infinite gain", async () => {
+    const { largestPriceImprovement } = await import(
+      "@/lib/pulse/price-improvement"
+    );
+    const cc = (await import("@/fixtures/aie-live/cost-capability.json"))
+      .default as { models: Omit<CostCapabilityModel, "provider">[] };
+    const out = largestPriceImprovement(
+      cc.models.map((m) => ({ ...m, provider: "x" }))
+    );
+    // Models above the old capability ceiling are reported separately, and
+    // never appear as the winning improvement.
+    expect(out.beyondBaseline.length).toBeGreaterThan(0);
+    expect(out.beyondBaseline).not.toContain(out.best!.model);
+  });
+});

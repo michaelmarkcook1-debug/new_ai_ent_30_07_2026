@@ -224,7 +224,7 @@
    "name": "Alibaba",
    "slug": "alibaba",
    "category": "Frontier model/API",
-   "description": "Qwen series + Alibaba Cloud Model Studio \u2014 broad multilingual + reasoning coverage.",
+   "description": "Qwen series + Alibaba Cloud Model Studio — broad multilingual + reasoning coverage.",
    "headquarters": "Hangzhou, China",
    "ownershipType": "public",
    "supportedIndustries": [
@@ -248,8 +248,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 62.7,
-   "confidenceScore": 95.6,
+   "overallScore": 62.4,
+   "confidenceScore": 95.7,
    "marketPosition": "Major challenger",
    "strategy": "Distribute Qwen via Alibaba Cloud and open-weight release; lead non-English benchmarks.",
    "productCapabilities": [
@@ -297,7 +297,7 @@
    "name": "Andreessen Horowitz",
    "slug": "a16z",
    "category": "AI investor",
-   "description": "Marquee venture investor (~$90B AUM) positioned across the AI stack \u2014 infrastructure (Databricks), models (OpenAI, Mistral, xAI) and applications; 2026 fundraise allocated $3.4B to AI specifically.",
+   "description": "Marquee venture investor (~$90B AUM) positioned across the AI stack — infrastructure (Databricks), models (OpenAI, Mistral, xAI) and applications; 2026 fundraise allocated $3.4B to AI specifically.",
    "headquarters": "Menlo Park, US",
    "ownershipType": "private",
    "supportedIndustries": [
@@ -390,7 +390,7 @@
     "vpc"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 68.8,
+   "overallScore": 68.3,
    "confidenceScore": 97.8,
    "marketPosition": "Leader",
    "strategy": "Lead on reasoning + coding quality, ship computer-use and tool-use primitives, and distribute through Bedrock, Vertex, Snowflake, and Databricks rather than a packaged assistant UI.",
@@ -611,7 +611,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 51.4,
+   "overallScore": 50.9,
    "confidenceScore": 97.8,
    "marketPosition": "Specialist contender",
    "strategy": "Focus on enterprise models, private/sovereign deployment, and knowledge-intensive workloads; combine Cohere's Command/Embed/Rerank with Aleph Alpha's Pharia/Luminous lines and STACKIT sovereign-cloud reach.",
@@ -662,7 +662,7 @@
    "name": "CoreWeave",
    "slug": "coreweave",
    "category": "AI infrastructure",
-   "description": "The defining 'neocloud' \u2014 a GPU-specialist cloud with a multi-billion revenue backlog (~$66B reported) and a ~$21B long-term capacity agreement with Meta through 2032.",
+   "description": "The defining 'neocloud' — a GPU-specialist cloud with a multi-billion revenue backlog (~$66B reported) and a ~$21B long-term capacity agreement with Meta through 2032.",
    "headquarters": "Livingston, US",
    "ownershipType": "public",
    "supportedIndustries": [
@@ -686,7 +686,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 62,
+   "overallScore": 61.9,
    "confidenceScore": 93.6,
    "marketPosition": "Category leader",
    "strategy": "Provide dedicated, NVIDIA-rich GPU capacity to labs and enterprises faster than hyperscalers, on long contracts.",
@@ -812,7 +812,7 @@
    "name": "DeepSeek",
    "slug": "deepseek",
    "category": "Frontier model/API",
-   "description": "Cost-efficient frontier reasoning lab \u2014 V4 series materially undercuts US pricing.",
+   "description": "Cost-efficient frontier reasoning lab — V4 series materially undercuts US pricing.",
    "headquarters": "Hangzhou, China",
    "ownershipType": "private",
    "supportedIndustries": [
@@ -836,7 +836,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 60.3,
+   "overallScore": 62.7,
    "confidenceScore": 97,
    "marketPosition": "Category leader",
    "strategy": "Win on price-per-token + reasoning quality through aggressive open release cadence.",
@@ -981,7 +981,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 42.6,
+   "overallScore": 42.7,
    "confidenceScore": 94.6,
    "marketPosition": "Emerging specialist",
    "strategy": "Be the AI capital of the Arab world with explicit US-technology alignment; pair sovereign compute with the Falcon open-weights franchise.",
@@ -1348,7 +1348,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 58.9,
+   "overallScore": 56.6,
    "confidenceScore": 98.9,
    "marketPosition": "Category leader",
    "strategy": "Own legal knowledge work and expand into adjacent professional-services workflows.",
@@ -1618,7 +1618,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 52.5,
+   "overallScore": 53.3,
    "confidenceScore": 88,
    "marketPosition": "Emerging specialist",
    "strategy": "Deploy sovereign capital at mega-round scale across frontier labs and AI infrastructure.",
@@ -1687,7 +1687,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 61.9,
+   "overallScore": 61.7,
    "confidenceScore": 97.8,
    "marketPosition": "Major challenger",
    "strategy": "Lead open-weights ecosystem while running Meta AI as a consumer assistant; deepen developer reach via Llama API.",
@@ -1764,7 +1764,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 44.7,
+   "overallScore": 45,
    "confidenceScore": 97.6,
    "marketPosition": "Leader",
    "strategy": "Bundle AI into productivity, developer, security, and cloud workflows while shifting buyers into Azure-managed control planes.",
@@ -1917,7 +1917,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 51.5,
+   "overallScore": 51.2,
    "confidenceScore": 97.7,
    "marketPosition": "Specialist contender",
    "strategy": "Win buyers needing model optionality, European positioning, and flexible deployment.",
@@ -1964,7 +1964,7 @@
    "name": "Moonshot AI",
    "slug": "moonshot",
    "category": "Frontier model/API",
-   "description": "Kimi K2 series \u2014 known for long-context handling and reasoning depth.",
+   "description": "Kimi K2 series — known for long-context handling and reasoning depth.",
    "headquarters": "Beijing, China",
    "ownershipType": "private",
    "supportedIndustries": [
@@ -2058,7 +2058,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 61.2,
+   "overallScore": 60.6,
    "confidenceScore": 98.5,
    "marketPosition": "Category leader",
    "strategy": "Expand from support automation into broader enterprise service agents.",
@@ -2281,7 +2281,7 @@
     "vpc"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 68.4,
+   "overallScore": 68,
    "confidenceScore": 97.8,
    "marketPosition": "Leader",
    "strategy": "Lead with model quality, agent runtime, enterprise controls, and ecosystem distribution through strategic partners.",
@@ -2429,8 +2429,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 50.4,
-   "confidenceScore": 95,
+   "overallScore": 49.5,
+   "confidenceScore": 95.1,
    "marketPosition": "Specialist contender",
    "strategy": "Win AI-native search and research as an application, blending first-party Sonar models with frontier model routing.",
    "productCapabilities": [
@@ -2499,7 +2499,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 58,
+   "overallScore": 56.4,
    "confidenceScore": 98.7,
    "marketPosition": "Emerging specialist",
    "strategy": "Win regulated financial teams through domain fit, workflow language, and curated data experiences.",
@@ -3035,7 +3035,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 68.1,
+   "overallScore": 64.9,
    "confidenceScore": 87,
    "marketPosition": "Major challenger",
    "strategy": "Hold the leading-edge process lead and capacity that every fabless AI-chip designer depends on.",
@@ -3228,7 +3228,7 @@
    "name": "Z.ai",
    "slug": "zai",
    "category": "Frontier model/API",
-   "description": "Zhipu / Z.ai \u2014 GLM-5.1 frontier model; significant in Chinese enterprise + research market.",
+   "description": "Zhipu / Z.ai — GLM-5.1 frontier model; significant in Chinese enterprise + research market.",
    "headquarters": "Beijing, China",
    "ownershipType": "private",
    "supportedIndustries": [
@@ -3319,7 +3319,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 62.4,
+   "overallScore": 62.2,
    "confidenceScore": 97.5,
    "marketPosition": "Specialist contender",
    "strategy": "Win on compute scale, real-time signal (X integration), and aggressive model cadence.",

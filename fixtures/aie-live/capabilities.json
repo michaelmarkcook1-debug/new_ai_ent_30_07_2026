@@ -69,7 +69,7 @@
    "maturityScore": 55,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-30T23:32:44.503Z",
-   "notes": "From copilots \u2192 agents: Sierra, Glean, and Decagon show a pivot toward autonomous AI systems. Middleware matters: OpenRouter and Profound highlight growing investment in the invisi"
+   "notes": "From copilots → agents: Sierra, Glean, and Decagon show a pivot toward autonomous AI systems. Middleware matters: OpenRouter and Profound highlight growing investment in the invisi"
   },
   {
    "vendorId": "a16z",
@@ -78,7 +78,7 @@
    "maturityScore": 46,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-06T03:12:34.175Z",
-   "notes": "A 2024 Andreessen Horowitz analysis found that the total cost of ownership for API-based enterprise AI deployments is 3\u20135x the raw token cost when accounting for en"
+   "notes": "A 2024 Andreessen Horowitz analysis found that the total cost of ownership for API-based enterprise AI deployments is 3–5x the raw token cost when accounting for en"
   },
   {
    "vendorId": "a16z",
@@ -114,7 +114,7 @@
    "maturityScore": 52,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-30T23:32:44.503Z",
-   "notes": "From copilots \u2192 agents: Sierra, Glean, and Decagon show a pivot toward autonomous AI systems. Middleware matters: OpenRouter and Profound highlight growing investment in the invisi"
+   "notes": "From copilots → agents: Sierra, Glean, and Decagon show a pivot toward autonomous AI systems. Middleware matters: OpenRouter and Profound highlight growing investment in the invisi"
   },
   {
    "vendorId": "a16z",
@@ -123,7 +123,7 @@
    "maturityScore": 40.875,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-30T23:32:44.503Z",
-   "notes": "Greg Kamradt (ARC Prize): advancing AGI evaluation through reasoning-focused benchmarks resistant to memorization \u00b7 Andy Ayrey: exploring AI autonomy and cultural influence through"
+   "notes": "Greg Kamradt (ARC Prize): advancing AGI evaluation through reasoning-focused benchmarks resistant to memorization · Andy Ayrey: exploring AI autonomy and cultural influence through"
   },
   {
    "vendorId": "a16z",
@@ -159,7 +159,7 @@
    "maturityScore": 55,
    "evidenceGrade": "E2",
    "lastVerified": "2026-06-21T15:32:01.263Z",
-   "notes": "Our integration combines AI21 Maestro, our orchestration system for building reliable, multi-step AI agents, with Together AI's high-performance open-source model platform \u2014 includ"
+   "notes": "Our integration combines AI21 Maestro, our orchestration system for building reliable, multi-step AI agents, with Together AI's high-performance open-source model platform — includ"
   },
   {
    "vendorId": "ai21",
@@ -195,7 +195,7 @@
    "maturityScore": 54,
    "evidenceGrade": "E2",
    "lastVerified": "2026-06-21T15:39:48.972Z",
-   "notes": "PCI Compliant \u00b7 HIPAA Compliant \u00b7 SOC 2 Compliant \u00b7 GDPR Compliant \u00b7 ISO 27001 Compliant \u00b7 FedRamp Compliant \u00b7 CSA Star Level 1 Compliant"
+   "notes": "PCI Compliant · HIPAA Compliant · SOC 2 Compliant · GDPR Compliant · ISO 27001 Compliant · FedRamp Compliant · CSA Star Level 1 Compliant"
   },
   {
    "vendorId": "ai21",
@@ -240,7 +240,7 @@
    "maturityScore": 56.333333333333336,
    "evidenceGrade": "E2",
    "lastVerified": "2026-06-21T15:39:48.972Z",
-   "notes": "Supports SSO \u00b7 Two-factor authentication via SMS"
+   "notes": "Supports SSO · Two-factor authentication via SMS"
   },
   {
    "vendorId": "alibaba",
@@ -255,9 +255,9 @@
    "vendorId": "alibaba",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 44,
+   "maturityScore": 39.55555555555556,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T19:18:47.291Z",
+   "lastVerified": "2026-08-01T23:06:27.037Z",
    "notes": "Qwen3-235B-A22B-Instruct-2507 1416... Qwen3-30B-A3B-Instruct-2507 1382... Qwen3-32B 1342 Alibaba Apache 2.0"
   },
   {
@@ -348,7 +348,7 @@
    "maturityScore": 61.333333333333336,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-14T00:00:00.000Z",
-   "notes": "MI355X claims ~40% better tokens-per-dollar and ~30% faster inference than B200 on certain benchmarks \u2014 a price/perf strength."
+   "notes": "MI355X claims ~40% better tokens-per-dollar and ~30% faster inference than B200 on certain benchmarks — a price/perf strength."
   },
   {
    "vendorId": "amd",
@@ -384,7 +384,7 @@
    "maturityScore": 51.4,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-14T00:00:00.000Z",
-   "notes": "ROCm 7.0 offers native PyTorch and JAX support \u2014 a real, improving open integration path."
+   "notes": "ROCm 7.0 offers native PyTorch and JAX support — a real, improving open integration path."
   },
   {
    "vendorId": "amd",
@@ -426,19 +426,19 @@
    "vendorId": "anthropic",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 52.13725490196079,
+   "maturityScore": 52.654545454545456,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-31T01:14:36.231Z",
+   "lastVerified": "2026-08-02T00:45:55.602Z",
    "notes": "Jul 22: Service disruption on Claude Services Resolved - This incident has been resolved. Investigating an outage affecting features such as document creation in claude.ai, Cowork "
   },
   {
    "vendorId": "anthropic",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 66.6067415730337,
+   "maturityScore": 66.65217391304348,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:14:37.213Z",
-   "notes": "Claude Opus 4.8 (launched May 28, 2026) costs $5.00/$25.00 per MTok \u2014 same rate as Opus 4.7, with Fast Mode now at $10/$50 per MTok (down from $30/$150 on Opus 4.7). Claude Sonnet "
+   "lastVerified": "2026-08-02T00:45:55.602Z",
+   "notes": "Claude Opus 4.8 (launched May 28, 2026) costs $5.00/$25.00 per MTok — same rate as Opus 4.7, with Fast Mode now at $10/$50 per MTok (down from $30/$150 on Opus 4.7). Claude Sonnet "
   },
   {
    "vendorId": "anthropic",
@@ -453,45 +453,45 @@
    "vendorId": "anthropic",
    "capabilityId": "enterprise_assistant",
    "status": "verified",
-   "maturityScore": 55.529411764705884,
+   "maturityScore": 54.94444444444444,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T19:19:03.247Z",
+   "lastVerified": "2026-08-02T00:45:55.602Z",
    "notes": "Today, Claude Code's run-rate revenue has grown to over $2.5 billion; this figure has more than doubled since the beginning of 2026. The number of weekly active Claude Code users h"
   },
   {
    "vendorId": "anthropic",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 54.98888888888889,
+   "maturityScore": 54.77173913043478,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:14:37.213Z",
+   "lastVerified": "2026-08-02T00:45:55.602Z",
    "notes": "Anthropic has also obtained SOC 2 Type II attestation with an established control framework. Their controls follow regular testing cycles, and exception management follows a formal"
   },
   {
    "vendorId": "anthropic",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 60.67272727272727,
+   "maturityScore": 60.482142857142854,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:14:37.213Z",
+   "lastVerified": "2026-08-02T00:45:55.602Z",
    "notes": "Claude models are available on Amazon Bedrock and Google Cloud. Claude Platform on AWS bills through AWS Marketplace using Claude Consumption Units (CCUs). Claude in Microsoft Foun"
   },
   {
    "vendorId": "anthropic",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 59.527027027027025,
+   "maturityScore": 59.4,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-07-31T01:14:36.231Z",
+   "lastVerified": "2026-08-02T00:45:36.882Z",
    "notes": "In an externally conducted red team exercise that evaluated 23 models from multiple AI developers, Claude Sonnet 4.5 achieved the lowest rate of successful prompt injection attacks"
   },
   {
    "vendorId": "anthropic",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 59.68421052631579,
+   "maturityScore": 57.592592592592595,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:14:37.213Z",
+   "lastVerified": "2026-08-02T00:45:55.602Z",
    "notes": "At the beginning of 2025, less than two years after launch, Anthropic's run-rate revenue had grown to approximately $1 billion. By August 2025, just eight months later, our run-rat"
   },
   {
@@ -507,27 +507,27 @@
    "vendorId": "anthropic",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 59.61,
+   "maturityScore": 59.23300970873787,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-07-31T01:14:37.213Z",
+   "lastVerified": "2026-08-02T00:45:36.882Z",
    "notes": "Windsurf (CVE-2026-30615) was the only IDE where exploitation required zero user interaction...OX Security executed commands on six live production platforms and produced 10+ Criti"
   },
   {
    "vendorId": "aws",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 56.79775280898876,
+   "maturityScore": 56.704081632653065,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:15:01.942Z",
+   "lastVerified": "2026-08-02T00:47:56.551Z",
    "notes": "Inscribe developed an agentic AI system using Amazon Bedrock that reasons across documents the way an expert fraud analyst would. With this new agentic AI system, Inscribe now dete"
   },
   {
    "vendorId": "aws",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 66.2,
+   "maturityScore": 66,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:15:01.942Z",
+   "lastVerified": "2026-08-02T00:47:10.831Z",
    "notes": "Amazon Bedrock provided serverless access to multiple leading FMs, including Amazon Nova, Meta Llama, and Anthropic's Claude, without requiring the Yahoo team to build or manage co"
   },
   {
@@ -543,46 +543,46 @@
    "vendorId": "aws",
    "capabilityId": "enterprise_assistant",
    "status": "verified",
-   "maturityScore": 50.36363636363637,
+   "maturityScore": 50.5,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-23T18:51:57.348Z",
+   "lastVerified": "2026-08-02T00:46:23.590Z",
    "notes": "\"We are now able to iterate much faster thanks to our parallelized workflow and the ability to harness multiple top-end GPUs at once,\" explains Tim Chauncey, CTO of Outpost VFX. \"S"
   },
   {
    "vendorId": "aws",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 62.20192307692308,
+   "maturityScore": 61.76851851851852,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-31T01:14:57.394Z",
+   "lastVerified": "2026-08-02T00:47:56.551Z",
    "notes": "By combining semantic similarity scoring with sensitive keyword filtering, we created a guardrailed keyword expansion pipeline. Filtering happens before inference (to avoid expansi"
   },
   {
    "vendorId": "aws",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 66.24375,
+   "maturityScore": 66.34730538922156,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:15:01.942Z",
+   "lastVerified": "2026-08-02T00:47:56.551Z",
    "notes": "The solution involved adapting the Outpost VFX existing face swap model codebase to support distributed GPU training across multiple GPUs. The implementation used AWS multi-GPU Ama"
   },
   {
    "vendorId": "aws",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 52.19117647058823,
+   "maturityScore": 52.25,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:14:57.394Z",
+   "lastVerified": "2026-08-02T00:47:56.551Z",
    "notes": "When deployed through Amazon Bedrock, Claude 3.5 Sonnet v2 demonstrated substantially superior expansion capabilities compared to the legacy LSH method, frequently generating hundr"
   },
   {
    "vendorId": "aws",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 59.94318181818182,
+   "maturityScore": 60,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:14:57.394Z",
-   "notes": "Stripe uses an LLM Proxy service for the following reasons: One API, many models \u2013 The single endpoint simplifies specifying capabilities such as prompt caching or tool calling acr"
+   "lastVerified": "2026-08-02T00:47:56.551Z",
+   "notes": "Stripe uses an LLM Proxy service for the following reasons: One API, many models – The single endpoint simplifies specifying capabilities such as prompt caching or tool calling acr"
   },
   {
    "vendorId": "aws",
@@ -597,9 +597,9 @@
    "vendorId": "aws",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 59.552083333333336,
+   "maturityScore": 59.588235294117645,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:14:57.394Z",
+   "lastVerified": "2026-08-02T00:47:56.551Z",
    "notes": "DoD Level 2, DoD Level 4, DoD Level 5, DoD Level 6, FedRAMP"
   },
   {
@@ -654,7 +654,7 @@
    "maturityScore": 53.76,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-30T23:42:26.239Z",
-   "notes": "Per-customer custom silicon rather than a merchant developer ecosystem \u2014 narrower general integration surface."
+   "notes": "Per-customer custom silicon rather than a merchant developer ecosystem — narrower general integration surface."
   },
   {
    "vendorId": "broadcom",
@@ -663,7 +663,7 @@
    "maturityScore": 49.75,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-30T23:30:07.564Z",
-   "notes": "Figure 1 shows normalized virtual performance to be near that of bare metal, ranging from 95%\u2013100% on VMware vSphere 8.0 U3 with NVIDIA virtualized GPUs"
+   "notes": "Figure 1 shows normalized virtual performance to be near that of bare metal, ranging from 95%–100% on VMware vSphere 8.0 U3 with NVIDIA virtualized GPUs"
   },
   {
    "vendorId": "broadcom",
@@ -735,7 +735,7 @@
    "maturityScore": 35.625,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-27T03:11:35.943Z",
-   "notes": "SOC 2 Type 2 \u00b7 GDPR \u00b7 CCPA \u00b7 Meta \u00b7 AlphaSense \u00b7 Perplexity \u00b7 GSK \u00b7 Sandia National Laboratories \u00b7 nference \u00b7 OpenCall \u00b7 Argonne National Laboratory \u00b7 era \u00b7 LRZ \u00b7 C3 AI \u00b7 Tako"
+   "notes": "SOC 2 Type 2 · GDPR · CCPA · Meta · AlphaSense · Perplexity · GSK · Sandia National Laboratories · nference · OpenCall · Argonne National Laboratory · era · LRZ · C3 AI · Tako"
   },
   {
    "vendorId": "cerebras",
@@ -762,7 +762,7 @@
    "maturityScore": 64.45,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-30T23:42:28.806Z",
-   "notes": "In April 2026, Cerebras re-launched its IPO process, and as of May 2026 has boosted its targeted raise to approximately $4.8\u20135B at a valuation above $50B"
+   "notes": "In April 2026, Cerebras re-launched its IPO process, and as of May 2026 has boosted its targeted raise to approximately $4.8–5B at a valuation above $50B"
   },
   {
    "vendorId": "cerebras",
@@ -816,7 +816,7 @@
    "maturityScore": 67.5,
    "evidenceGrade": "E2",
    "lastVerified": "2026-06-29T20:53:05.895Z",
-   "notes": "Cohere is one of the fastest growing enterprise software companies ever \u2014 doubling revenue since January 2025 and now surpassing $100M in ARR, just 2.5 years after its first revenu"
+   "notes": "Cohere is one of the fastest growing enterprise software companies ever — doubling revenue since January 2025 and now surpassing $100M in ARR, just 2.5 years after its first revenu"
   },
   {
    "vendorId": "cohere",
@@ -849,9 +849,9 @@
    "vendorId": "cohere",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 57.31521739130435,
+   "maturityScore": 55.09166666666667,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:39:03.825Z",
+   "lastVerified": "2026-08-01T23:06:27.027Z",
    "notes": "In October 2025, Cohere's annualized revenue reached $150 million."
   },
   {
@@ -861,7 +861,7 @@
    "maturityScore": 58.333333333333336,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-27T03:08:07.521Z",
-   "notes": "Cohere's focus is enterprise RAG \u2014 all Command models ship with 128K context and strong long-document recall...Command R at $0.15 / $0.60 per 1M is genuinely cheap and competitive "
+   "notes": "Cohere's focus is enterprise RAG — all Command models ship with 128K context and strong long-document recall...Command R at $0.15 / $0.60 per 1M is genuinely cheap and competitive "
   },
   {
    "vendorId": "cohere",
@@ -906,7 +906,7 @@
    "maturityScore": 82,
    "evidenceGrade": "E4",
    "lastVerified": "2026-06-21T15:30:44.466Z",
-   "notes": "We worked hand-in-hand with members of CoreWeave's team to build the training clusters for our AI models\u2014like having an extension of our own team on the infrastructure side. The pe"
+   "notes": "We worked hand-in-hand with members of CoreWeave's team to build the training clusters for our AI models—like having an extension of our own team on the infrastructure side. The pe"
   },
   {
    "vendorId": "coreweave",
@@ -1104,7 +1104,7 @@
    "maturityScore": 62.35294117647059,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-31T01:15:42.931Z",
-   "notes": "\ud83e\udd48 DeepSeek-V4-Pro \u2705 1467 1491 71 87.5 DeepSeek MIT\n\ud83e\udd49 DeepSeek-V4-Flash 1445 1460 64 86.2 DeepSeek MIT\n\ud83e\ude99 DeepSeek-V3.2-Thinking 1422 1438 66 86.2 4 DeepSeek MIT\n\ud83e\ude99 DeepSeek-V3.2 "
+   "notes": "🥈 DeepSeek-V4-Pro ✅ 1467 1491 71 87.5 DeepSeek MIT\n🥉 DeepSeek-V4-Flash 1445 1460 64 86.2 DeepSeek MIT\n🪙 DeepSeek-V3.2-Thinking 1422 1438 66 86.2 4 DeepSeek MIT\n🪙 DeepSeek-V3.2 "
   },
   {
    "vendorId": "deepseek",
@@ -1122,7 +1122,7 @@
    "maturityScore": 61.333333333333336,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-31T01:15:42.931Z",
-   "notes": "DeepSeek-V4-Pro \u2705 1467... | DeepSeek-V3.2-Thinking 1422 | DeepSeek-V3.1-Thinking 1418 | DeepSeek-V3.2 1418 | DeepSeek-V3.1 1417 | DeepSeek-V3-0324 1377 | DeepSeek-R1-0528 1426 | De"
+   "notes": "DeepSeek-V4-Pro ✅ 1467... | DeepSeek-V3.2-Thinking 1422 | DeepSeek-V3.1-Thinking 1418 | DeepSeek-V3.2 1418 | DeepSeek-V3.1 1417 | DeepSeek-V3-0324 1377 | DeepSeek-R1-0528 1426 | De"
   },
   {
    "vendorId": "deepseek",
@@ -1248,7 +1248,7 @@
    "maturityScore": 65,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-31T03:26:11.266Z",
-   "notes": "Falcon LLM is an open source large language model for commercial use \u2014 Apache 2.0-licensed weights from TII in sizes from 1B to 180B parameters, with no usage caps or MAU restricti"
+   "notes": "Falcon LLM is an open source large language model for commercial use — Apache 2.0-licensed weights from TII in sizes from 1B to 180B parameters, with no usage caps or MAU restricti"
   },
   {
    "vendorId": "g42",
@@ -1329,7 +1329,7 @@
    "maturityScore": 55.35897435897436,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-31T01:18:03.608Z",
-   "notes": "Glean's agent builder was accessible to anyone at DBS through natural language queries \u2014 and Glean Protect ensured scalability without concerns of oversharing or leaking data."
+   "notes": "Glean's agent builder was accessible to anyone at DBS through natural language queries — and Glean Protect ensured scalability without concerns of oversharing or leaking data."
   },
   {
    "vendorId": "glean",
@@ -1356,7 +1356,7 @@
    "maturityScore": 51.93333333333333,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-31T01:18:03.608Z",
-   "notes": "Today, more than 70% of Confluent employees actively use Glean \u2014 a higher adoption rate than many other internal SaaS tools."
+   "notes": "Today, more than 70% of Confluent employees actively use Glean — a higher adoption rate than many other internal SaaS tools."
   },
   {
    "vendorId": "glean",
@@ -1365,7 +1365,7 @@
    "maturityScore": 54.81818181818182,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-30T23:41:23.017Z",
-   "notes": "Glean's agent builder was accessible to anyone at DBS through natural language queries \u2014 and Glean Protect ensured scalability without concerns of oversharing or leaking data."
+   "notes": "Glean's agent builder was accessible to anyone at DBS through natural language queries — and Glean Protect ensured scalability without concerns of oversharing or leaking data."
   },
   {
    "vendorId": "glean",
@@ -1545,7 +1545,7 @@
    "maturityScore": 54,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-30T23:40:43.769Z",
-   "notes": "PCI Compliant \u00b7 HIPAA Compliant \u00b7 SOC 2 Compliant \u00b7 GDPR Compliant \u00b7 ISO 27001 Compliant \u00b7 FedRamp Compliant \u00b7 CSA Star Level 1 Compliant"
+   "notes": "PCI Compliant · HIPAA Compliant · SOC 2 Compliant · GDPR Compliant · ISO 27001 Compliant · FedRamp Compliant · CSA Star Level 1 Compliant"
   },
   {
    "vendorId": "groq",
@@ -1554,7 +1554,7 @@
    "maturityScore": 61.38709677419355,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-31T01:19:12.328Z",
-   "notes": "For enterprise customers, Groq offers GroqRack compute clusters\u2014on-premises or colocation racks containing 64 to 576+ LPUs per rack. These systems target hyperscalers, sovereign cl"
+   "notes": "For enterprise customers, Groq offers GroqRack compute clusters—on-premises or colocation racks containing 64 to 576+ LPUs per rack. These systems target hyperscalers, sovereign cl"
   },
   {
    "vendorId": "groq",
@@ -1626,7 +1626,7 @@
    "maturityScore": 46.25714285714286,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-31T01:18:47.835Z",
-   "notes": "A&O Shearman's enterprise-wide Harvey deployment supports 4,000 staff across 43 jurisdictions, with 2,000 lawyers using ContractMatrix daily. Staff save 2\u20133 hours weekly on routine"
+   "notes": "A&O Shearman's enterprise-wide Harvey deployment supports 4,000 staff across 43 jurisdictions, with 2,000 lawyers using ContractMatrix daily. Staff save 2–3 hours weekly on routine"
   },
   {
    "vendorId": "harvey",
@@ -1689,7 +1689,7 @@
    "maturityScore": 49.84375,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-30T23:43:38.799Z",
-   "notes": "Matrix orchestrates multiple AI agents in parallel, leveraging OpenAI's o3\u2011mini, o1, and GPT\u20114o all at once. The result: an 'AI associate' that can perform in seconds what used to "
+   "notes": "Matrix orchestrates multiple AI agents in parallel, leveraging OpenAI's o3‑mini, o1, and GPT‑4o all at once. The result: an 'AI associate' that can perform in seconds what used to "
   },
   {
    "vendorId": "hebbia",
@@ -1743,7 +1743,7 @@
    "maturityScore": 52.104166666666664,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-30T23:31:43.006Z",
-   "notes": "Hebbia with o1 achieves 92% accuracy\u2014up from 68% with out-of-the-box RAG\u2014on a rigorous benchmark spanning both quantitative and qualitative tasks across complex legal and financial"
+   "notes": "Hebbia with o1 achieves 92% accuracy—up from 68% with out-of-the-box RAG—on a rigorous benchmark spanning both quantitative and qualitative tasks across complex legal and financial"
   },
   {
    "vendorId": "hebbia",
@@ -1968,7 +1968,7 @@
    "maturityScore": 58.91111111111111,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-30T23:38:56.316Z",
-   "notes": "GPU cloud pricing: rent NVIDIA H100, H200, and B200 | Lambda... Clear, straightforward pricing for Instances, 1-Click Clusters\u2122, and Superclusters. Contact us for reserved capacity"
+   "notes": "GPU cloud pricing: rent NVIDIA H100, H200, and B200 | Lambda... Clear, straightforward pricing for Instances, 1-Click Clusters™, and Superclusters. Contact us for reserved capacity"
   },
   {
    "vendorId": "lambda",
@@ -1995,7 +1995,7 @@
    "maturityScore": 53.05,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-30T23:38:56.316Z",
-   "notes": "Status: \u2713 Certified (Annual audit) Auditor: Independent CPA firm Last Audit: December 2025 Next Audit: December 2026"
+   "notes": "Status: ✓ Certified (Annual audit) Auditor: Independent CPA firm Last Audit: December 2025 Next Audit: December 2026"
   },
   {
    "vendorId": "lambda",
@@ -2226,19 +2226,19 @@
    "vendorId": "microsoft",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 47.76470588235294,
+   "maturityScore": 47.05555555555556,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-08T15:29:02.519Z",
+   "lastVerified": "2026-08-01T23:05:45.883Z",
    "notes": "You can also create and use agents to customize your Copilot experience with your organization's data sources... Agents are scoped or focused versions of Microsoft 365 Copilot that"
   },
   {
    "vendorId": "microsoft",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 58.23076923076923,
+   "maturityScore": 59.07142857142857,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-08T15:29:02.519Z",
-   "notes": "Microsoft 365 Copilot uses your organizational data and the web. It requires an add-on license. Microsoft 365 Copilot Chat uses the web and users can provide organizational data. I"
+   "lastVerified": "2026-08-01T23:05:45.883Z",
+   "notes": "M365 Copilot (Premium) indicates that a user has a Microsoft 365 Copilot add-on license and the full experience and priority access for Copilot chat in Word, Excel, PowerPoint, and"
   },
   {
    "vendorId": "microsoft",
@@ -2253,45 +2253,45 @@
    "vendorId": "microsoft",
    "capabilityId": "enterprise_assistant",
    "status": "verified",
-   "maturityScore": 45.6,
+   "maturityScore": 46.666666666666664,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-06-26T03:06:07.890Z",
+   "lastVerified": "2026-08-01T23:05:45.883Z",
    "notes": "Get sample prompts at the Copilot Prompt Gallery and training at the Microsoft 365 Copilot Skilling Center."
   },
   {
    "vendorId": "microsoft",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 55.18,
+   "maturityScore": 55.372549019607845,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-08T15:29:02.519Z",
-   "notes": "Microsoft has achieved ISO/IEC 42001:2023 certification\u2014a globally recognized standard for Artificial Intelligence Management Systems for both Azure AI Foundry Models and Microsoft"
+   "lastVerified": "2026-08-01T23:05:45.883Z",
+   "notes": "Microsoft has achieved ISO/IEC 42001:2023 certification—a globally recognized standard for Artificial Intelligence Management Systems for both Azure AI Foundry Models and Microsoft"
   },
   {
    "vendorId": "microsoft",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 67.81818181818181,
+   "maturityScore": 67.5945945945946,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-08T15:29:02.519Z",
+   "lastVerified": "2026-08-01T23:06:20.315Z",
    "notes": "Networking services showing 'Good' status: Azure ExpressRoute, ExpressRoute Circuits, ExpressRoute Gateways, Azure Private Link, Virtual Networks, VPN Gateway, Network Watcher, Azu"
   },
   {
    "vendorId": "microsoft",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 56.5,
+   "maturityScore": 56.61538461538461,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-08T15:29:02.519Z",
+   "lastVerified": "2026-08-01T23:05:45.883Z",
    "notes": "Responses include clickable citations that direct users to the relevant source content that was used."
   },
   {
    "vendorId": "microsoft",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 58.36363636363637,
+   "maturityScore": 58.916666666666664,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-08T15:28:56.320Z",
+   "lastVerified": "2026-08-01T23:06:20.315Z",
    "notes": "Products and services across Compute, Developer Tools, Networking, Storage with regional granularity showing East US, West US, UK South, Australia East, Japan East, etc."
   },
   {
@@ -2307,10 +2307,10 @@
    "vendorId": "microsoft",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 51.89333333333333,
+   "maturityScore": 51.92307692307692,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-08T15:29:02.519Z",
-   "notes": "Azure Firewall \u2026 Good [across multiple regions] \u2026 network security perimeter \u2026 Good [across multiple regions] \u2026 Azure Bastion \u2026 Good [across multiple regions] \u2026 Azure Private Link "
+   "lastVerified": "2026-08-01T23:06:20.315Z",
+   "notes": "Azure Firewall … Good [across multiple regions] … network security perimeter … Good [across multiple regions] … Azure Bastion … Good [across multiple regions] … Azure Private Link "
   },
   {
    "vendorId": "minimax",
@@ -2409,7 +2409,7 @@
    "maturityScore": 48.42424242424242,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-30T23:33:19.538Z",
-   "notes": "Studio \u00b7 Build, test, and run AI agents and apps."
+   "notes": "Studio · Build, test, and run AI agents and apps."
   },
   {
    "vendorId": "mistral",
@@ -2445,7 +2445,7 @@
    "maturityScore": 50.34615384615385,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-30T23:33:19.538Z",
-   "notes": "trust@mistral.ai \u00b7 Privacy PolicyOpens in new tab \u00b7 ISO 27001 \u00b7 ISO 27701 \u00b7 SOC 2 Type II \u00b7 GDPR \u00b7 View all"
+   "notes": "trust@mistral.ai · Privacy PolicyOpens in new tab · ISO 27001 · ISO 27701 · SOC 2 Type II · GDPR · View all"
   },
   {
    "vendorId": "mistral",
@@ -2472,7 +2472,7 @@
    "maturityScore": 59.13953488372093,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-30T23:33:19.538Z",
-   "notes": "Mistral announced a \u20ac1.7 billion Series C round at a \u20ac11.7 billion valuation in September 2025. Latest Mistral AI valuation: \u20ac11.7 billion ($13.8 billion). ASML took an 11% stake i"
+   "notes": "Mistral announced a €1.7 billion Series C round at a €11.7 billion valuation in September 2025. Latest Mistral AI valuation: €11.7 billion ($13.8 billion). ASML took an 11% stake i"
   },
   {
    "vendorId": "mistral",
@@ -2649,9 +2649,9 @@
    "vendorId": "moveworks",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 67.41379310344827,
+   "maturityScore": 63.29354838709677,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:44:08.831Z",
+   "lastVerified": "2026-08-01T23:06:25.243Z",
    "notes": "ServiceNow to extend leading agentic AI to every employee for every corner of the business with acquisition of Moveworks...Today announced it has signed a definitive agreement to a"
   },
   {
@@ -2670,7 +2670,7 @@
    "maturityScore": 60.582417582417584,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-30T23:44:08.831Z",
-   "notes": "PCI Compliant \u00b7 HIPAA Compliant \u00b7 SOC 2 Compliant \u00b7 GDPR Compliant \u00b7 ISO 27001 Compliant \u00b7 FedRamp Compliant \u00b7 CSA Star Level 1 Compliant"
+   "notes": "PCI Compliant · HIPAA Compliant · SOC 2 Compliant · GDPR Compliant · ISO 27001 Compliant · FedRamp Compliant · CSA Star Level 1 Compliant"
   },
   {
    "vendorId": "nscale",
@@ -2805,7 +2805,7 @@
    "maturityScore": 61.75,
    "evidenceGrade": "E4",
    "lastVerified": "2026-06-21T15:41:24.348Z",
-   "notes": "FedRAMP High \u00b7 NIST 800-53 High \u00b7 SOC2 \u00b7 ISO 27001 \u00b7 FISMA High \u00b7 Equivalent Sovereign use cases \u00b7 Appendix B lists the software components that have achieved this designation."
+   "notes": "FedRAMP High · NIST 800-53 High · SOC2 · ISO 27001 · FISMA High · Equivalent Sovereign use cases · Appendix B lists the software components that have achieved this designation."
   },
   {
    "vendorId": "nvidia",
@@ -2814,7 +2814,7 @@
    "maturityScore": 67.33333333333333,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-14T00:00:00.000Z",
-   "notes": "End-to-end software stack (libraries, compilers, orchestration) \u2014 the most complete accelerator ecosystem."
+   "notes": "End-to-end software stack (libraries, compilers, orchestration) — the most complete accelerator ecosystem."
   },
   {
    "vendorId": "nvidia",
@@ -2832,7 +2832,7 @@
    "maturityScore": 73.57142857142857,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-14T00:00:00.000Z",
-   "notes": "Sustained annual architecture cadence (Hopper\u2192Blackwell) with the fastest product ramp in company history."
+   "notes": "Sustained annual architecture cadence (Hopper→Blackwell) with the fastest product ramp in company history."
   },
   {
    "vendorId": "nvidia",
@@ -2886,7 +2886,7 @@
    "maturityScore": 67.33333333333333,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-30T23:28:30.199Z",
-   "notes": "Enterprise users report saving 40\u201360 minutes per day and being able to complete new technical tasks such as data analysis and coding. Case studies indicate AI is contributing to im"
+   "notes": "Enterprise users report saving 40–60 minutes per day and being able to complete new technical tasks such as data analysis and coding. Case studies indicate AI is contributing to im"
   },
   {
    "vendorId": "openai",
@@ -3012,7 +3012,7 @@
    "maturityScore": 53.36842105263158,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-08T15:30:38.834Z",
-   "notes": "Oracle a Market Leader in the 2025 ISG Research Buyers Guide\u2122 for AI Agents"
+   "notes": "Oracle a Market Leader in the 2025 ISG Research Buyers Guide™ for AI Agents"
   },
   {
    "vendorId": "oracle",
@@ -3099,10 +3099,10 @@
    "vendorId": "perplexity",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 58.583333333333336,
+   "maturityScore": 54.34615384615385,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-19T01:52:31.891Z",
-   "notes": "Agent API Models The Agent API added support for several new models this month, all with direct first-party token pricing. See the full list in the Agent API Models reference . GPT"
+   "lastVerified": "2026-08-01T23:06:25.252Z",
+   "notes": "Perplexity agreed to pay Snap $400M in cash and equity over one year to embed its answer engine in Snapchat's chat, reaching nearly one billion monthly users starting early 2026."
   },
   {
    "vendorId": "perplexity",
@@ -3111,7 +3111,7 @@
    "maturityScore": 55,
    "evidenceGrade": "E1",
    "lastVerified": "2026-07-19T01:52:31.891Z",
-   "notes": "Finance Search: Now Available The finance_search tool is now available in the Agent API. Pull structured financial and market data \u2014 quotes, financials, earnings, analyst estimates"
+   "notes": "Finance Search: Now Available The finance_search tool is now available in the Agent API. Pull structured financial and market data — quotes, financials, earnings, analyst estimates"
   },
   {
    "vendorId": "perplexity",
@@ -3192,7 +3192,7 @@
    "maturityScore": 64.44444444444444,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-30T23:42:53.691Z",
-   "notes": "Founders Gabriel Stengel (ex Lazard), John Willett (ex JPMorgan), and Tumas Rackaitis started Rogo around 2021\u20132022. Our talent-dense, small team includes former Gemini AI research"
+   "notes": "Founders Gabriel Stengel (ex Lazard), John Willett (ex JPMorgan), and Tumas Rackaitis started Rogo around 2021–2022. Our talent-dense, small team includes former Gemini AI research"
   },
   {
    "vendorId": "rogo",
@@ -3255,7 +3255,7 @@
    "maturityScore": 39.25,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-06T20:44:12.020Z",
-   "notes": "Sakana AI\u306f\u3001\u6280\u8853\u958b\u767a\u4e3b\u4f53\u3068\u3057\u3066\u63a1\u629e\u3055\u308c\u3066\u3044\u308b\u7dcf\u52d9\u7701\u4e8b\u696d\u300c\u30a4\u30f3\u30bf\u30fc\u30cd\u30c3\u30c8\u4e0a\u306e\u507d\u30fb\u8aa4\u60c5\u5831\u7b49\u3078\u306e\u5bfe\u7b56\u6280\u8853\u306e\u958b\u767a\u30fb\u5b9f\u8a3c\u4e8b\u696d\u300d\u306b\u304a\u3044\u3066\u3001SNS\u7a7a\u9593\u306e\u53ef\u8996\u5316\u3001\u7dcf\u5408\u7684\u306a\u507d\u60c5\u5831\u5224\u5b9a\u3001\u5bfe\u7b56\u6848\u306e\u7acb\u6848\u307e\u3067\u3092\u652f\u63f4\u3059\u308b\u30b7\u30b9\u30c6\u30e0\u958b\u767a\u3092\u5b8c\u4e86\u3057\u307e\u3057\u305f\u3002"
+   "notes": "Sakana AIは、技術開発主体として採択されている総務省事業「インターネット上の偽・誤情報等への対策技術の開発・実証事業」において、SNS空間の可視化、総合的な偽情報判定、対策案の立案までを支援するシステム開発を完了しました。"
   },
   {
    "vendorId": "sakana",
@@ -3264,7 +3264,7 @@
    "maturityScore": 61.5625,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-06T20:53:02.301Z",
-   "notes": "Sakana Fugu comes in two models \u2014 Fugu and Fugu Ultra \u2014 both available through one OpenAI-compatible API."
+   "notes": "Sakana Fugu comes in two models — Fugu and Fugu Ultra — both available through one OpenAI-compatible API."
   },
   {
    "vendorId": "sakana",
@@ -3336,7 +3336,7 @@
    "maturityScore": 52.5,
    "evidenceGrade": "E2",
    "lastVerified": "2026-06-29T03:05:54.148Z",
-   "notes": "McKinsey's analysis shows that AI in sales can increase leads and appointments by more than 50% and reduce call time by 60\u201370%, directly improving productivity and revenue impact."
+   "notes": "McKinsey's analysis shows that AI in sales can increase leads and appointments by more than 50% and reduce call time by 60–70%, directly improving productivity and revenue impact."
   },
   {
    "vendorId": "salesforce",
@@ -3345,7 +3345,7 @@
    "maturityScore": 49.266666666666666,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-07T22:10:07.772Z",
-   "notes": "Status By Product: Sales, Service, Industries, Agentforce, MuleSoft, Informatica, Tableau, Slack, B2C Commerce Cloud, Heroku, Experience Cloud\u2014all marked Available"
+   "notes": "Status By Product: Sales, Service, Industries, Agentforce, MuleSoft, Informatica, Tableau, Slack, B2C Commerce Cloud, Heroku, Experience Cloud—all marked Available"
   },
   {
    "vendorId": "salesforce",
@@ -3390,7 +3390,7 @@
    "maturityScore": 50.75,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-07T22:10:07.772Z",
-   "notes": "My Trust Center\u2014now generally available. Resources: Legal Terms of Service, Privacy Information, Contact, Cookie Preferences, Your Privacy Choices"
+   "notes": "My Trust Center—now generally available. Resources: Legal Terms of Service, Privacy Information, Contact, Cookie Preferences, Your Privacy Choices"
   },
   {
    "vendorId": "sap",
@@ -3462,7 +3462,7 @@
    "maturityScore": 60.59375,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-30T23:42:14.226Z",
-   "notes": "SAP SE, rated A1 (stable) by Moody's and A+ (stable) by S&P Global, successfully completed a Eurobond transaction with a total volume of \u20ac 3.5 billion across four tranches."
+   "notes": "SAP SE, rated A1 (stable) by Moody's and A+ (stable) by S&P Global, successfully completed a Eurobond transaction with a total volume of € 3.5 billion across four tranches."
   },
   {
    "vendorId": "sap",
@@ -3543,7 +3543,7 @@
    "maturityScore": 45,
    "evidenceGrade": "E1",
    "lastVerified": "2026-07-06T20:44:40.347Z",
-   "notes": "AI is undoubtedly a generational opportunity\u2014a force multiplier for productivity that has quickly become essential for teams to compete, with ChatGPT already in use by at least 92%"
+   "notes": "AI is undoubtedly a generational opportunity—a force multiplier for productivity that has quickly become essential for teams to compete, with ChatGPT already in use by at least 92%"
   },
   {
    "vendorId": "sequoia",
@@ -3624,7 +3624,7 @@
    "maturityScore": 51.4,
    "evidenceGrade": "E2",
    "lastVerified": "2026-06-21T14:21:55.547Z",
-   "notes": "The ServiceNow SDK lets you develop applications in source code using ServiceNow Fluent \u2014 a domain-specific language for creating application metadata as code."
+   "notes": "The ServiceNow SDK lets you develop applications in source code using ServiceNow Fluent — a domain-specific language for creating application metadata as code."
   },
   {
    "vendorId": "servicenow",
@@ -3822,7 +3822,7 @@
    "maturityScore": 55,
    "evidenceGrade": "E2",
    "lastVerified": "2026-06-22T09:46:40.769Z",
-   "notes": "SoftBank Group Corp. (\u30bd\u30d5\u30c8\u30d0\u30f3\u30af\u30b0\u30eb\u30fc\u30d7\u682a\u5f0f\u4f1a\u793e, SofutoBanku Gur\u016bpu Kabushiki gaisha) is a Japanese multinational investment holding company headquartered in Minato, Tokyo, that focuses on in"
+   "notes": "SoftBank Group Corp. (ソフトバンクグループ株式会社, SofutoBanku Gurūpu Kabushiki gaisha) is a Japanese multinational investment holding company headquartered in Minato, Tokyo, that focuses on in"
   },
   {
    "vendorId": "softbank",
@@ -3930,7 +3930,7 @@
    "maturityScore": 54.03030303030303,
    "evidenceGrade": "E2",
    "lastVerified": "2026-07-30T23:37:23.696Z",
-   "notes": "Choose from global regions to meet data residency and compliance requirements\u2014HIPAA for healthcare, GDPR for Europe, or banking regulations."
+   "notes": "Choose from global regions to meet data residency and compliance requirements—HIPAA for healthcare, GDPR for Europe, or banking regulations."
   },
   {
    "vendorId": "tsmc",
@@ -3939,7 +3939,7 @@
    "maturityScore": 55,
    "evidenceGrade": "E2",
    "lastVerified": "2026-06-22T09:46:39.195Z",
-   "notes": "To counteract the diminishing returns of physical scaling under Moore's Law, it is pioneering informational scaling\u2014using AI agents to extract unprecedented levels of yield, effici"
+   "notes": "To counteract the diminishing returns of physical scaling under Moore's Law, it is pioneering informational scaling—using AI agents to extract unprecedented levels of yield, effici"
   },
   {
    "vendorId": "tsmc",
@@ -4038,7 +4038,7 @@
    "maturityScore": 52.041666666666664,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-30T23:45:05.539Z",
-   "notes": "Writer Team pricing is seat-based, with published list pricing starting around $18\u2013$25 per user per month when billed annually. Writer's pay-as-you-go AI Studio API meters Palmyra "
+   "notes": "Writer Team pricing is seat-based, with published list pricing starting around $18–$25 per user per month when billed annually. Writer's pay-as-you-go AI Studio API meters Palmyra "
   },
   {
    "vendorId": "writer",
@@ -4263,7 +4263,7 @@
    "maturityScore": 55.935483870967744,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-15T21:25:21.589Z",
-   "notes": "This leaderboard is based on the following benchmarks. Arena + \u2014 an agent-driven battle platform... AAII \u2014 Artificial Analysis Intelligence Index v3 aggregating 10 challenging eval"
+   "notes": "This leaderboard is based on the following benchmarks. Arena + — an agent-driven battle platform... AAII — Artificial Analysis Intelligence Index v3 aggregating 10 challenging eval"
   },
   {
    "vendorId": "zai",

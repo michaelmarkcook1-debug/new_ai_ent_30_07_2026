@@ -849,6 +849,217 @@
      "overall": 71.7
     }
    ]
+  },
+  {
+   "capturedAt": "2026-08-02",
+   "sourceAsOf": "2026-08-02T04:57:17.596Z",
+   "provenance": "curated seed — public review, developer and workplace sources; pending live refresh",
+   "vendorCount": 29,
+   "vendors": [
+    {
+     "vendorId": "openai",
+     "customer": 83,
+     "developer": 88,
+     "employee": 70,
+     "overall": 80.3
+    },
+    {
+     "vendorId": "anthropic",
+     "customer": 88,
+     "developer": 73,
+     "employee": 79,
+     "overall": 80
+    },
+    {
+     "vendorId": "google",
+     "customer": 84,
+     "developer": 81,
+     "employee": 75,
+     "overall": 80
+    },
+    {
+     "vendorId": "microsoft",
+     "customer": 85,
+     "developer": 86,
+     "employee": 75,
+     "overall": 82
+    },
+    {
+     "vendorId": "aws",
+     "customer": 84,
+     "developer": 74,
+     "employee": 71,
+     "overall": 76.3
+    },
+    {
+     "vendorId": "meta",
+     "customer": 81,
+     "developer": 80,
+     "employee": 73,
+     "overall": 78
+    },
+    {
+     "vendorId": "mistral",
+     "customer": 83,
+     "developer": 80,
+     "employee": 79,
+     "overall": 80.7
+    },
+    {
+     "vendorId": "cohere",
+     "customer": 84,
+     "developer": 75,
+     "employee": 72,
+     "overall": 77
+    },
+    {
+     "vendorId": "deepseek",
+     "customer": 82,
+     "developer": 78,
+     "employee": 67,
+     "overall": 75.7
+    },
+    {
+     "vendorId": "xai",
+     "customer": 75,
+     "developer": 65,
+     "employee": 69,
+     "overall": 69.7
+    },
+    {
+     "vendorId": "databricks",
+     "customer": 84,
+     "developer": 75,
+     "employee": 78,
+     "overall": 79
+    },
+    {
+     "vendorId": "snowflake",
+     "customer": 84,
+     "developer": 61,
+     "employee": 75,
+     "overall": 73.3
+    },
+    {
+     "vendorId": "salesforce",
+     "customer": 81,
+     "developer": 69,
+     "employee": 73,
+     "overall": 74.3
+    },
+    {
+     "vendorId": "servicenow",
+     "customer": 83,
+     "developer": 64,
+     "employee": 78,
+     "overall": 75
+    },
+    {
+     "vendorId": "oracle",
+     "customer": 76,
+     "developer": 66,
+     "employee": 68,
+     "overall": 70
+    },
+    {
+     "vendorId": "sap",
+     "customer": 76,
+     "developer": 58,
+     "employee": 71,
+     "overall": 68.3
+    },
+    {
+     "vendorId": "ibm",
+     "customer": 80,
+     "developer": 61,
+     "employee": 67,
+     "overall": 69.3
+    },
+    {
+     "vendorId": "glean",
+     "customer": 86,
+     "developer": 66,
+     "employee": 84,
+     "overall": 78.7
+    },
+    {
+     "vendorId": "harvey",
+     "customer": 85,
+     "developer": 66,
+     "employee": 79,
+     "overall": 76.7
+    },
+    {
+     "vendorId": "writer",
+     "customer": 84,
+     "developer": 70,
+     "employee": 78,
+     "overall": 77.3
+    },
+    {
+     "vendorId": "hebbia",
+     "customer": 84,
+     "developer": 72,
+     "employee": 78,
+     "overall": 78
+    },
+    {
+     "vendorId": "rogo",
+     "customer": 81,
+     "developer": 70,
+     "employee": 80,
+     "overall": 77
+    },
+    {
+     "vendorId": "moveworks",
+     "customer": 85,
+     "developer": 62,
+     "employee": 78,
+     "overall": 75
+    },
+    {
+     "vendorId": "alibaba",
+     "customer": 81,
+     "developer": 74,
+     "employee": 70,
+     "overall": 75
+    },
+    {
+     "vendorId": "moonshot",
+     "customer": 80,
+     "developer": 71,
+     "employee": 73,
+     "overall": 74.7
+    },
+    {
+     "vendorId": "zai",
+     "customer": 76,
+     "developer": 66,
+     "employee": 73,
+     "overall": 71.7
+    },
+    {
+     "vendorId": "minimax",
+     "customer": 78,
+     "developer": 68,
+     "employee": 68,
+     "overall": 71.3
+    },
+    {
+     "vendorId": "ai21",
+     "customer": 82,
+     "developer": 72,
+     "employee": 81,
+     "overall": 78.3
+    },
+    {
+     "vendorId": "aleph",
+     "customer": 75,
+     "developer": 63,
+     "employee": 77,
+     "overall": 71.7
+    }
+   ]
   }
  ],
  "demoQuarters": 3

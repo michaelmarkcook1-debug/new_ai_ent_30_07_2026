@@ -1262,7 +1262,7 @@
    "autonomyDefault": "human_in_loop",
    "category": "IT",
    "subcategory": "Security",
-   "description": "Quarterly access reviews \u2014 flag over-privileged accounts.",
+   "description": "Quarterly access reviews — flag over-privileged accounts.",
    "tier": "advanced",
    "industries": [],
    "commonInputs": [
@@ -3549,13 +3549,13 @@
    "id": "amd",
    "name": "AMD",
    "category": "ai_compute",
-   "summary": "Instinct accelerators + ROCm software. EPYC and Ryzen AI exposure. Tracked as infrastructure_only \u2014 semiconductor enabler, not enterprise AI platform peer."
+   "summary": "Instinct accelerators + ROCm software. EPYC and Ryzen AI exposure. Tracked as infrastructure_only — semiconductor enabler, not enterprise AI platform peer."
   },
   {
    "id": "asml",
    "name": "ASML",
    "category": "semiconductor_equipment",
-   "summary": "EUV / High-NA EUV / DUV lithography systems. Semiconductor-manufacturing exposure for AI chips. Tracked as infrastructure_only \u2014 semiconductor equipment, not AI software."
+   "summary": "EUV / High-NA EUV / DUV lithography systems. Semiconductor-manufacturing exposure for AI chips. Tracked as infrastructure_only — semiconductor equipment, not AI software."
   },
   {
    "id": "aws",
@@ -3597,7 +3597,7 @@
    "id": "cerebras",
    "name": "Cerebras",
    "category": "ai_compute",
-   "summary": "Wafer-scale AI compute. IPO-watch candidate. Tracked as infrastructure_only \u2014 short-circuited in capabilityRenderState() since they ship hardware, not enterprise AI software."
+   "summary": "Wafer-scale AI compute. IPO-watch candidate. Tracked as infrastructure_only — short-circuited in capabilityRenderState() since they ship hardware, not enterprise AI software."
   },
   {
    "id": "cohere",

@@ -1,8 +1,8 @@
 {
- "generatedAt": "2026-07-31T21:07:06.433Z",
+ "generatedAt": "2026-08-02T04:57:38.652Z",
  "windowDays": 365,
  "vendorCount": 43,
- "measuredCount": 26,
+ "measuredCount": 28,
  "method": {
   "reality": "Evidence-weighted mean of AIE capability maturity scores, weighted E5 1.0, E4 0.9, E3 0.75, E2 0.55, E1 0.35, then percentile-ranked within the tracked AI vendor set.",
   "narrative": "Two sources, each percentile-ranked on its own scale and then averaged over whichever have a reading: AIE news items tagged to the vendor, and Hacker News stories whose URL is the vendor's own domain, the latter combined with the points and comments those stories drew at quarter weight and log-scaled. Matching on the domain rather than the name is deliberate: it can miss a vendor but never counts a different one.",
@@ -29,13 +29,13 @@
    "domain": "sakana.ai",
    "hn": {
     "stories": 44,
-    "points": 504,
+    "points": 505,
     "comments": 178,
     "sampled": 44
    },
    "aieNews": {
-    "items": 0,
-    "positive": 0,
+    "items": 1,
+    "positive": 1,
     "negative": 0
    },
    "realityScore": 4.8,
@@ -63,8 +63,8 @@
     "sampled": 51
    },
    "aieNews": {
-    "items": 2,
-    "positive": 1,
+    "items": 1,
+    "positive": 0,
     "negative": 0
    },
    "realityScore": 8.3,
@@ -73,6 +73,35 @@
    ],
    "narrativeScore": 64.3,
    "gap": 56,
+   "direction": "narrative ahead of reality"
+  },
+  {
+   "vendorId": "moonshot",
+   "name": "Moonshot AI",
+   "category": "Frontier model/API",
+   "marketPosition": "Specialist contender",
+   "reality": 51.9,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E1",
+   "realityWeight": 7.2,
+   "domain": "moonshot.ai",
+   "hn": {
+    "stories": 0,
+    "points": 0,
+    "comments": 0,
+    "sampled": 0
+   },
+   "aieNews": {
+    "items": 4,
+    "positive": 3,
+    "negative": 0
+   },
+   "realityScore": 2.4,
+   "narrativeSources": [
+    "aie-news"
+   ],
+   "narrativeScore": 57.8,
+   "gap": 55.4,
    "direction": "narrative ahead of reality"
   },
   {
@@ -105,35 +134,6 @@
    "direction": "narrative ahead of reality"
   },
   {
-   "vendorId": "ibm",
-   "name": "IBM",
-   "category": "Regulated-industry AI",
-   "marketPosition": "Specialist contender",
-   "reality": 56.8,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E1",
-   "realityWeight": 7.2,
-   "domain": "ibm.com",
-   "hn": {
-    "stories": 86,
-    "points": 1751,
-    "comments": 724,
-    "sampled": 86
-   },
-   "aieNews": {
-    "items": 2,
-    "positive": 0,
-    "negative": 0
-   },
-   "realityScore": 33.3,
-   "narrativeSources": [
-    "hn-domain"
-   ],
-   "narrativeScore": 85.7,
-   "gap": 52.4,
-   "direction": "narrative ahead of reality"
-  },
-  {
    "vendorId": "databricks",
    "name": "Databricks",
    "category": "Cloud AI platform",
@@ -150,76 +150,45 @@
     "sampled": 57
    },
    "aieNews": {
-    "items": 3,
-    "positive": 3,
+    "items": 2,
+    "positive": 2,
     "negative": 0
    },
    "realityScore": 17.9,
    "narrativeSources": [
-    "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 62.9,
-   "gap": 45,
+   "narrativeScore": 71.4,
+   "gap": 53.5,
    "direction": "narrative ahead of reality"
   },
   {
-   "vendorId": "anthropic",
-   "name": "Anthropic",
-   "category": "Frontier model/API",
-   "marketPosition": "Leader",
-   "reality": 60,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 8.4,
-   "domain": "anthropic.com",
-   "hn": {
-    "stories": 449,
-    "points": 56606,
-    "comments": 38177,
-    "sampled": 100
-   },
-   "aieNews": {
-    "items": 33,
-    "positive": 15,
-    "negative": 4
-   },
-   "realityScore": 57.1,
-   "narrativeSources": [
-    "aie-news",
-    "hn-domain"
-   ],
-   "narrativeScore": 97.6,
-   "gap": 40.5,
-   "direction": "narrative ahead of reality"
-  },
-  {
-   "vendorId": "xai",
-   "name": "xAI",
-   "category": "Frontier model/API",
+   "vendorId": "ibm",
+   "name": "IBM",
+   "category": "Regulated-industry AI",
    "marketPosition": "Specialist contender",
-   "reality": 57.7,
+   "reality": 56.8,
    "realityRows": 10,
    "realityWeakestEvidence": "E1",
    "realityWeight": 7.2,
-   "domain": "x.ai",
+   "domain": "ibm.com",
    "hn": {
-    "stories": 53,
-    "points": 2621,
-    "comments": 3097,
-    "sampled": 53
+    "stories": 87,
+    "points": 1755,
+    "comments": 724,
+    "sampled": 87
    },
    "aieNews": {
     "items": 2,
     "positive": 0,
-    "negative": 2
+    "negative": 0
    },
-   "realityScore": 42.9,
+   "realityScore": 33.3,
    "narrativeSources": [
     "hn-domain"
    ],
-   "narrativeScore": 83.3,
-   "gap": 40.4,
+   "narrativeScore": 85.7,
+   "gap": 52.4,
    "direction": "narrative ahead of reality"
   },
   {
@@ -239,47 +208,105 @@
     "sampled": 50
    },
    "aieNews": {
-    "items": 3,
+    "items": 2,
     "positive": 1,
     "negative": 0
    },
    "realityScore": 35.7,
    "narrativeSources": [
-    "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 70.1,
-   "gap": 34.4,
+   "narrativeScore": 88.1,
+   "gap": 52.4,
    "direction": "narrative ahead of reality"
   },
   {
-   "vendorId": "salesforce",
-   "name": "Salesforce",
-   "category": "CRM/customer AI",
-   "marketPosition": "Major challenger",
-   "reality": 56.3,
+   "vendorId": "nscale",
+   "name": "Nscale",
+   "category": "AI infrastructure",
+   "marketPosition": "Emerging specialist",
+   "reality": 52.9,
    "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 6.5,
-   "domain": "salesforce.com",
+   "realityWeakestEvidence": "E1",
+   "realityWeight": 4.9,
+   "domain": "nscale.com",
    "hn": {
-    "stories": 14,
-    "points": 363,
-    "comments": 244,
-    "sampled": 14
+    "stories": 9,
+    "points": 12,
+    "comments": 1,
+    "sampled": 9
    },
    "aieNews": {
     "items": 4,
     "positive": 3,
     "negative": 0
    },
-   "realityScore": 28.6,
+   "realityScore": 8.3,
+   "narrativeSources": [
+    "aie-news"
+   ],
+   "narrativeScore": 57.8,
+   "gap": 49.5,
+   "direction": "narrative ahead of reality"
+  },
+  {
+   "vendorId": "anthropic",
+   "name": "Anthropic",
+   "category": "Frontier model/API",
+   "marketPosition": "Leader",
+   "reality": 59.7,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 8.4,
+   "domain": "anthropic.com",
+   "hn": {
+    "stories": 448,
+    "points": 56637,
+    "comments": 38208,
+    "sampled": 100
+   },
+   "aieNews": {
+    "items": 27,
+    "positive": 8,
+    "negative": 6
+   },
+   "realityScore": 57.1,
    "narrativeSources": [
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 61.4,
-   "gap": 32.8,
+   "narrativeScore": 96.8,
+   "gap": 39.7,
+   "direction": "narrative ahead of reality"
+  },
+  {
+   "vendorId": "xai",
+   "name": "xAI",
+   "category": "Frontier model/API",
+   "marketPosition": "Specialist contender",
+   "reality": 57.7,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E1",
+   "realityWeight": 7.2,
+   "domain": "x.ai",
+   "hn": {
+    "stories": 53,
+    "points": 2621,
+    "comments": 3097,
+    "sampled": 53
+   },
+   "aieNews": {
+    "items": 5,
+    "positive": 3,
+    "negative": 2
+   },
+   "realityScore": 42.9,
+   "narrativeSources": [
+    "aie-news",
+    "hn-domain"
+   ],
+   "narrativeScore": 79.2,
+   "gap": 36.3,
    "direction": "narrative ahead of reality"
   },
   {
@@ -312,6 +339,66 @@
    "direction": "narrative ahead of reality"
   },
   {
+   "vendorId": "salesforce",
+   "name": "Salesforce",
+   "category": "CRM/customer AI",
+   "marketPosition": "Major challenger",
+   "reality": 56.3,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 6.5,
+   "domain": "salesforce.com",
+   "hn": {
+    "stories": 14,
+    "points": 363,
+    "comments": 244,
+    "sampled": 14
+   },
+   "aieNews": {
+    "items": 3,
+    "positive": 2,
+    "negative": 0
+   },
+   "realityScore": 28.6,
+   "narrativeSources": [
+    "aie-news",
+    "hn-domain"
+   ],
+   "narrativeScore": 50.8,
+   "gap": 22.2,
+   "direction": "narrative ahead of reality"
+  },
+  {
+   "vendorId": "aws",
+   "name": "AWS",
+   "category": "Cloud AI platform",
+   "marketPosition": "Major challenger",
+   "reality": 62.4,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 8.4,
+   "domain": "aws.amazon.com",
+   "hn": {
+    "stories": 235,
+    "points": 4486,
+    "comments": 2887,
+    "sampled": 100
+   },
+   "aieNews": {
+    "items": 6,
+    "positive": 5,
+    "negative": 0
+   },
+   "realityScore": 71.4,
+   "narrativeSources": [
+    "aie-news",
+    "hn-domain"
+   ],
+   "narrativeScore": 88.7,
+   "gap": 17.3,
+   "direction": "narrative ahead of reality"
+  },
+  {
    "vendorId": "snowflake",
    "name": "Snowflake",
    "category": "Cloud AI platform",
@@ -328,8 +415,8 @@
     "sampled": 30
    },
    "aieNews": {
-    "items": 5,
-    "positive": 5,
+    "items": 4,
+    "positive": 4,
     "negative": 0
    },
    "realityScore": 45.2,
@@ -337,9 +424,9 @@
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 67,
-   "gap": 21.8,
-   "direction": "narrative ahead of reality"
+   "narrativeScore": 59.9,
+   "gap": 14.7,
+   "direction": "narrative and reality aligned"
   },
   {
    "vendorId": "google",
@@ -360,14 +447,44 @@
    "aieNews": {
     "items": 21,
     "positive": 10,
-    "negative": 1
+    "negative": 4
    },
-   "realityScore": 77.4,
+   "realityScore": 82.1,
    "narrativeSources": [
     "aie-news"
    ],
-   "narrativeScore": 90,
-   "gap": 12.6,
+   "narrativeScore": 92.2,
+   "gap": 10.1,
+   "direction": "narrative and reality aligned"
+  },
+  {
+   "vendorId": "cohere",
+   "name": "Cohere (incl. Aleph Alpha)",
+   "category": "Frontier model/API",
+   "marketPosition": "Specialist contender",
+   "reality": 59.1,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 7.8,
+   "domain": "cohere.com",
+   "hn": {
+    "stories": 11,
+    "points": 402,
+    "comments": 118,
+    "sampled": 11
+   },
+   "aieNews": {
+    "items": 5,
+    "positive": 2,
+    "negative": 0
+   },
+   "realityScore": 54.8,
+   "narrativeSources": [
+    "aie-news",
+    "hn-domain"
+   ],
+   "narrativeScore": 62.5,
+   "gap": 7.7,
    "direction": "narrative and reality aligned"
   },
   {
@@ -375,7 +492,7 @@
    "name": "Perplexity",
    "category": "Enterprise assistant",
    "marketPosition": "Specialist contender",
-   "reality": 60.3,
+   "reality": 59.8,
    "realityRows": 10,
    "realityWeakestEvidence": "E1",
    "realityWeight": 5.5,
@@ -387,16 +504,17 @@
     "sampled": 76
    },
    "aieNews": {
-    "items": 2,
+    "items": 4,
     "positive": 2,
     "negative": 0
    },
-   "realityScore": 64.3,
+   "realityScore": 59.5,
    "narrativeSources": [
+    "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 76.2,
-   "gap": 11.9,
+   "narrativeScore": 65.8,
+   "gap": 6.3,
    "direction": "narrative and reality aligned"
   },
   {
@@ -429,63 +547,33 @@
    "direction": "narrative and reality aligned"
   },
   {
-   "vendorId": "aws",
-   "name": "AWS",
-   "category": "Cloud AI platform",
-   "marketPosition": "Major challenger",
-   "reality": 62.4,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 8.4,
-   "domain": "aws.amazon.com",
-   "hn": {
-    "stories": 236,
-    "points": 4486,
-    "comments": 2887,
-    "sampled": 100
-   },
-   "aieNews": {
-    "items": 3,
-    "positive": 3,
-    "negative": 0
-   },
-   "realityScore": 69,
-   "narrativeSources": [
-    "aie-news",
-    "hn-domain"
-   ],
-   "narrativeScore": 72.5,
-   "gap": 3.5,
-   "direction": "narrative and reality aligned"
-  },
-  {
    "vendorId": "microsoft",
    "name": "Microsoft",
    "category": "Cloud AI platform",
    "marketPosition": "Leader",
-   "reality": 64.2,
+   "reality": 64.3,
    "realityRows": 10,
    "realityWeakestEvidence": "E2",
    "realityWeight": 7.2,
    "domain": "microsoft.com",
    "hn": {
-    "stories": 1617,
+    "stories": 1489,
     "points": 12087,
-    "comments": 5564,
+    "comments": 5565,
     "sampled": 100
    },
    "aieNews": {
     "items": 21,
-    "positive": 12,
-    "negative": 0
+    "positive": 11,
+    "negative": 1
    },
    "realityScore": 90.5,
    "narrativeSources": [
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 93.8,
-   "gap": 3.3,
+   "narrativeScore": 94.9,
+   "gap": 4.4,
    "direction": "narrative and reality aligned"
   },
   {
@@ -499,13 +587,13 @@
    "realityWeight": 8.7,
    "domain": "openai.com",
    "hn": {
-    "stories": 987,
-    "points": 48892,
-    "comments": 33452,
+    "stories": 965,
+    "points": 49256,
+    "comments": 33730,
     "sampled": 100
    },
    "aieNews": {
-    "items": 28,
+    "items": 27,
     "positive": 3,
     "negative": 9
    },
@@ -514,97 +602,125 @@
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 98,
-   "gap": 2.8,
+   "narrativeScore": 99.2,
+   "gap": 4,
    "direction": "narrative and reality aligned"
   },
   {
-   "vendorId": "deepseek",
-   "name": "DeepSeek",
-   "category": "Frontier model/API",
+   "vendorId": "coreweave",
+   "name": "CoreWeave",
+   "category": "AI infrastructure",
    "marketPosition": "Category leader",
-   "reality": 62.7,
+   "reality": 62.8,
    "realityRows": 10,
    "realityWeakestEvidence": "E2",
-   "realityWeight": 7.6,
-   "domain": "deepseek.com",
+   "realityWeight": 7,
+   "domain": "coreweave.com",
    "hn": {
-    "stories": 20,
-    "points": 4871,
-    "comments": 3054,
-    "sampled": 20
-   },
-   "aieNews": {
-    "items": 8,
-    "positive": 1,
-    "negative": 3
-   },
-   "realityScore": 73.8,
-   "narrativeSources": [
-    "aie-news",
-    "hn-domain"
-   ],
-   "narrativeScore": 72.5,
-   "gap": -1.3,
-   "direction": "narrative and reality aligned"
-  },
-  {
-   "vendorId": "cohere",
-   "name": "Cohere (incl. Aleph Alpha)",
-   "category": "Frontier model/API",
-   "marketPosition": "Specialist contender",
-   "reality": 59.4,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 7.8,
-   "domain": "cohere.com",
-   "hn": {
-    "stories": 11,
-    "points": 402,
-    "comments": 118,
-    "sampled": 11
-   },
-   "aieNews": {
-    "items": 3,
-    "positive": 1,
-    "negative": 0
-   },
-   "realityScore": 54.8,
-   "narrativeSources": [
-    "aie-news",
-    "hn-domain"
-   ],
-   "narrativeScore": 51,
-   "gap": -3.8,
-   "direction": "narrative and reality aligned"
-  },
-  {
-   "vendorId": "glean",
-   "name": "Glean",
-   "category": "RAG/enterprise search",
-   "marketPosition": "Category leader",
-   "reality": 60.1,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E1",
-   "realityWeight": 8.3,
-   "domain": "glean.com",
-   "hn": {
-    "stories": 3,
-    "points": 13,
+    "stories": 5,
+    "points": 11,
     "comments": 0,
-    "sampled": 3
+    "sampled": 5
    },
    "aieNews": {
-    "items": 3,
-    "positive": 2,
+    "items": 5,
+    "positive": 4,
     "negative": 0
    },
-   "realityScore": 59.5,
+   "realityScore": 82.1,
    "narrativeSources": [
     "aie-news"
    ],
-   "narrativeScore": 52,
-   "gap": -7.5,
+   "narrativeScore": 75,
+   "gap": -7.1,
+   "direction": "narrative and reality aligned"
+  },
+  {
+   "vendorId": "nvidia",
+   "name": "NVIDIA",
+   "category": "AI infrastructure",
+   "marketPosition": "Leader",
+   "reality": 74.8,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 8.1,
+   "domain": "nvidia.com",
+   "hn": {
+    "stories": 243,
+    "points": 2935,
+    "comments": 1799,
+    "sampled": 100
+   },
+   "aieNews": {
+    "items": 10,
+    "positive": 6,
+    "negative": 0
+   },
+   "realityScore": 97.6,
+   "narrativeSources": [
+    "aie-news",
+    "hn-domain"
+   ],
+   "narrativeScore": 89,
+   "gap": -8.6,
+   "direction": "narrative and reality aligned"
+  },
+  {
+   "vendorId": "servicenow",
+   "name": "ServiceNow",
+   "category": "ITSM/HR/service AI",
+   "marketPosition": "Category leader",
+   "reality": 63.1,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 6.5,
+   "domain": "servicenow.com",
+   "hn": {
+    "stories": 1,
+    "points": 1,
+    "comments": 0,
+    "sampled": 1
+   },
+   "aieNews": {
+    "items": 5,
+    "positive": 1,
+    "negative": 1
+   },
+   "realityScore": 85.7,
+   "narrativeSources": [
+    "aie-news"
+   ],
+   "narrativeScore": 75,
+   "gap": -10.7,
+   "direction": "narrative and reality aligned"
+  },
+  {
+   "vendorId": "amd",
+   "name": "AMD",
+   "category": "AI infrastructure",
+   "marketPosition": "Category leader",
+   "reality": 64,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 7.5,
+   "domain": "amd.com",
+   "hn": {
+    "stories": 61,
+    "points": 965,
+    "comments": 438,
+    "sampled": 61
+   },
+   "aieNews": {
+    "items": 0,
+    "positive": 0,
+    "negative": 0
+   },
+   "realityScore": 88.1,
+   "narrativeSources": [
+    "hn-domain"
+   ],
+   "narrativeScore": 76.2,
+   "gap": -11.9,
    "direction": "narrative and reality aligned"
   },
   {
@@ -628,101 +744,42 @@
     "positive": 0,
     "negative": 0
    },
-   "realityScore": 61.9,
+   "realityScore": 64.3,
    "narrativeSources": [
     "hn-domain"
    ],
    "narrativeScore": 52.4,
-   "gap": -9.5,
+   "gap": -11.9,
    "direction": "narrative and reality aligned"
   },
   {
-   "vendorId": "nvidia",
-   "name": "NVIDIA",
-   "category": "AI infrastructure",
-   "marketPosition": "Leader",
-   "reality": 74.8,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 8.1,
-   "domain": "nvidia.com",
-   "hn": {
-    "stories": 242,
-    "points": 2935,
-    "comments": 1799,
-    "sampled": 100
-   },
-   "aieNews": {
-    "items": 19,
-    "positive": 11,
-    "negative": 0
-   },
-   "realityScore": 97.6,
-   "narrativeSources": [
-    "aie-news",
-    "hn-domain"
-   ],
-   "narrativeScore": 87.3,
-   "gap": -10.3,
-   "direction": "narrative and reality aligned"
-  },
-  {
-   "vendorId": "meta",
-   "name": "Meta",
+   "vendorId": "deepseek",
+   "name": "DeepSeek",
    "category": "Frontier model/API",
-   "marketPosition": "Major challenger",
-   "reality": 64.6,
+   "marketPosition": "Category leader",
+   "reality": 62.7,
    "realityRows": 10,
-   "realityWeakestEvidence": "E3",
-   "realityWeight": 8.2,
-   "domain": "ai.meta.com",
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 7.6,
+   "domain": "deepseek.com",
    "hn": {
-    "stories": 40,
-    "points": 2663,
-    "comments": 1092,
-    "sampled": 40
+    "stories": 20,
+    "points": 4952,
+    "comments": 3092,
+    "sampled": 20
    },
    "aieNews": {
-    "items": 10,
-    "positive": 5,
-    "negative": 0
+    "items": 4,
+    "positive": 1,
+    "negative": 1
    },
-   "realityScore": 92.9,
+   "realityScore": 78.6,
    "narrativeSources": [
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 79.3,
-   "gap": -13.6,
-   "direction": "narrative and reality aligned"
-  },
-  {
-   "vendorId": "amd",
-   "name": "AMD",
-   "category": "AI infrastructure",
-   "marketPosition": "Category leader",
-   "reality": 64,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 7.5,
-   "domain": "amd.com",
-   "hn": {
-    "stories": 61,
-    "points": 811,
-    "comments": 316,
-    "sampled": 61
-   },
-   "aieNews": {
-    "items": 1,
-    "positive": 1,
-    "negative": 0
-   },
-   "realityScore": 88.1,
-   "narrativeSources": [
-    "hn-domain"
-   ],
-   "narrativeScore": 71.4,
-   "gap": -16.7,
+   "narrativeScore": 63.4,
+   "gap": -15.2,
    "direction": "reality ahead of narrative"
   },
   {
@@ -742,7 +799,7 @@
     "sampled": 11
    },
    "aieNews": {
-    "items": 3,
+    "items": 4,
     "positive": 0,
     "negative": 0
    },
@@ -751,37 +808,38 @@
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 48.6,
-   "gap": -18.1,
+   "narrativeScore": 51.5,
+   "gap": -15.2,
    "direction": "reality ahead of narrative"
   },
   {
-   "vendorId": "servicenow",
-   "name": "ServiceNow",
-   "category": "ITSM/HR/service AI",
-   "marketPosition": "Category leader",
-   "reality": 63.1,
+   "vendorId": "meta",
+   "name": "Meta",
+   "category": "Frontier model/API",
+   "marketPosition": "Major challenger",
+   "reality": 64.6,
    "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 6.5,
-   "domain": "servicenow.com",
+   "realityWeakestEvidence": "E3",
+   "realityWeight": 8.2,
+   "domain": "ai.meta.com",
    "hn": {
-    "stories": 1,
-    "points": 1,
-    "comments": 0,
-    "sampled": 1
+    "stories": 39,
+    "points": 2661,
+    "comments": 1092,
+    "sampled": 39
    },
    "aieNews": {
-    "items": 3,
-    "positive": 1,
+    "items": 5,
+    "positive": 2,
     "negative": 0
    },
-   "realityScore": 85.7,
+   "realityScore": 92.9,
    "narrativeSources": [
-    "aie-news"
+    "aie-news",
+    "hn-domain"
    ],
-   "narrativeScore": 52,
-   "gap": -33.7,
+   "narrativeScore": 76.8,
+   "gap": -16.1,
    "direction": "reality ahead of narrative"
   },
   {
@@ -805,7 +863,7 @@
     "positive": 0,
     "negative": 0
    },
-   "realityScore": 71.4,
+   "realityScore": 75,
    "narrativeSources": [],
    "narrativeScore": null,
    "gap": null,
@@ -816,7 +874,7 @@
    "name": "Alibaba",
    "category": "Frontier model/API",
    "marketPosition": "Major challenger",
-   "reality": 63,
+   "reality": 62.5,
    "realityRows": 10,
    "realityWeakestEvidence": "E1",
    "realityWeight": 6.3,
@@ -828,11 +886,11 @@
     "sampled": 0
    },
    "aieNews": {
-    "items": 0,
-    "positive": 0,
+    "items": 1,
+    "positive": 1,
     "negative": 0
    },
-   "realityScore": 83.3,
+   "realityScore": 75,
    "narrativeSources": [],
    "narrativeScore": null,
    "gap": null,
@@ -866,33 +924,6 @@
    "direction": "not enough narrative signal"
   },
   {
-   "vendorId": "coreweave",
-   "name": "CoreWeave",
-   "category": "AI infrastructure",
-   "marketPosition": "Category leader",
-   "reality": 62.8,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 7,
-   "domain": "coreweave.com",
-   "hn": {
-    "stories": 5,
-    "points": 11,
-    "comments": 0,
-    "sampled": 5
-   },
-   "aieNews": {
-    "items": 0,
-    "positive": 0,
-    "negative": 0
-   },
-   "realityScore": 77.4,
-   "narrativeSources": [],
-   "narrativeScore": null,
-   "gap": null,
-   "direction": "not enough narrative signal"
-  },
-  {
    "vendorId": "g42",
    "name": "G42 / Falcon (TII)",
    "category": "Sovereign/regional AI",
@@ -914,6 +945,33 @@
     "negative": 0
    },
    "realityScore": 40.5,
+   "narrativeSources": [],
+   "narrativeScore": null,
+   "gap": null,
+   "direction": "not enough narrative signal"
+  },
+  {
+   "vendorId": "glean",
+   "name": "Glean",
+   "category": "RAG/enterprise search",
+   "marketPosition": "Category leader",
+   "reality": 60.1,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E1",
+   "realityWeight": 8.3,
+   "domain": "glean.com",
+   "hn": {
+    "stories": 3,
+    "points": 13,
+    "comments": 0,
+    "sampled": 3
+   },
+   "aieNews": {
+    "items": 2,
+    "positive": 2,
+    "negative": 0
+   },
+   "realityScore": 61.9,
    "narrativeSources": [],
    "narrativeScore": null,
    "gap": null,
@@ -963,8 +1021,8 @@
     "sampled": 7
    },
    "aieNews": {
-    "items": 0,
-    "positive": 0,
+    "items": 1,
+    "positive": 1,
     "negative": 0
    },
    "realityScore": 48.8,
@@ -1017,9 +1075,9 @@
     "sampled": 0
    },
    "aieNews": {
-    "items": 0,
+    "items": 1,
     "positive": 0,
-    "negative": 0
+    "negative": 1
    },
    "realityScore": 21.4,
    "narrativeSources": [],
@@ -1044,38 +1102,11 @@
     "sampled": 9
    },
    "aieNews": {
-    "items": 0,
-    "positive": 0,
+    "items": 2,
+    "positive": 2,
     "negative": 0
    },
    "realityScore": 23.8,
-   "narrativeSources": [],
-   "narrativeScore": null,
-   "gap": null,
-   "direction": "not enough narrative signal"
-  },
-  {
-   "vendorId": "moonshot",
-   "name": "Moonshot AI",
-   "category": "Frontier model/API",
-   "marketPosition": "Specialist contender",
-   "reality": 51.9,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E1",
-   "realityWeight": 7.2,
-   "domain": "moonshot.ai",
-   "hn": {
-    "stories": 0,
-    "points": 0,
-    "comments": 0,
-    "sampled": 0
-   },
-   "aieNews": {
-    "items": 2,
-    "positive": 0,
-    "negative": 0
-   },
-   "realityScore": 2.4,
    "narrativeSources": [],
    "narrativeScore": null,
    "gap": null,
@@ -1086,7 +1117,7 @@
    "name": "Moveworks",
    "category": "ITSM/HR/service AI",
    "marketPosition": "Category leader",
-   "reality": 62.9,
+   "reality": 62.3,
    "realityRows": 10,
    "realityWeakestEvidence": "E1",
    "realityWeight": 6.2,
@@ -1098,38 +1129,11 @@
     "sampled": 1
    },
    "aieNews": {
-    "items": 0,
+    "items": 1,
     "positive": 0,
     "negative": 0
    },
-   "realityScore": 81,
-   "narrativeSources": [],
-   "narrativeScore": null,
-   "gap": null,
-   "direction": "not enough narrative signal"
-  },
-  {
-   "vendorId": "nscale",
-   "name": "Nscale",
-   "category": "AI infrastructure",
-   "marketPosition": "Emerging specialist",
-   "reality": 52.9,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E1",
-   "realityWeight": 4.9,
-   "domain": "nscale.com",
-   "hn": {
-    "stories": 9,
-    "points": 12,
-    "comments": 1,
-    "sampled": 9
-   },
-   "aieNews": {
-    "items": 0,
-    "positive": 0,
-    "negative": 0
-   },
-   "realityScore": 8.3,
+   "realityScore": 69,
    "narrativeSources": [],
    "narrativeScore": null,
    "gap": null,
@@ -1152,7 +1156,7 @@
     "sampled": 0
    },
    "aieNews": {
-    "items": 0,
+    "items": 1,
     "positive": 0,
     "negative": 0
    },
@@ -1173,10 +1177,10 @@
    "realityWeight": 7.3,
    "domain": "sap.com",
    "hn": {
-    "stories": 8,
-    "points": 15,
+    "stories": 9,
+    "points": 17,
     "comments": 3,
-    "sampled": 8
+    "sampled": 9
    },
    "aieNews": {
     "items": 1,
@@ -1233,7 +1237,7 @@
     "sampled": 3
    },
    "aieNews": {
-    "items": 1,
+    "items": 0,
     "positive": 0,
     "negative": 0
    },
