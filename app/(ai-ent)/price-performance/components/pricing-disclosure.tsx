@@ -8,11 +8,15 @@ import { PricingSection } from "./pricing-live";
 // capability chart leads the page. It opens on request and keeps every
 // badge, date stamp and per-row attribution it had when it was inline.
 export function PricingDisclosure({
+  recheckedAt,
+  recheckedVendors,
   fallbackRows,
   fallbackCapturedAt,
 }: {
   fallbackRows: TokenPrice[];
   fallbackCapturedAt: string;
+  recheckedAt: string;
+  recheckedVendors: string[];
 }) {
   const [open, setOpen] = useState(false);
 
@@ -77,6 +81,8 @@ export function PricingDisclosure({
       <PricingSection
         fallbackRows={fallbackRows}
         fallbackCapturedAt={fallbackCapturedAt}
+        recheckedAt={recheckedAt}
+        recheckedVendors={recheckedVendors}
       />
     </div>
   );

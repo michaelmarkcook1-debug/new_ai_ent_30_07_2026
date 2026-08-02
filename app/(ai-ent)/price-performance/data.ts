@@ -1,4 +1,9 @@
 import { TOKEN_PRICING, TOKEN_PRICING_CAPTURED_AT } from "@/lib/aie";
+import {
+  TOKEN_PRICING_VERIFIED,
+  TOKEN_PRICING_VERIFIED_AT,
+  VERIFIED_VENDOR_IDS,
+} from "@/lib/aie/model-inventory/token-pricing-verified";
 import type { TokenPrice } from "@/lib/aie";
 import costCapability from "@/fixtures/aie-live/cost-capability.json";
 
@@ -7,13 +12,25 @@ import costCapability from "@/fixtures/aie-live/cost-capability.json";
 // dataset in the AIE repo, so the page renders an honest empty state
 // instead of inventing results.
 
+export interface PricingRow extends TokenPrice {
+  /** True when this row was read off the vendor's own page on the check date. */
+  recheckedAt: string | null;
+}
+
 export interface PricingDataset {
-  rows: TokenPrice[];
+  rows: PricingRow[];
   capturedAtIso: string;
   capturedAtDisplay: string;
   vendorCount: number;
   verifiedRowCount: number;
   unverifiedRowCount: number;
+  /** Date the overlay vendors were last read from their own pricing pages. */
+  recheckedAtDisplay: string;
+  recheckedVendors: string[];
+  recheckedRowCount: number;
+  /** Rows still carrying only the older snapshot. */
+  snapshotRowCount: number;
+  snapshotVendorCount: number;
 }
 
 const MONTHS = [
@@ -267,15 +284,38 @@ export function loadCostCapability(): CostCapabilityView {
 }
 
 export function loadPricingDataset(): PricingDataset {
-  const verified = TOKEN_PRICING.filter(
+  // Where a vendor has been re-read from its own pricing page, the overlay
+  // replaces that vendor's snapshot rows outright rather than sitting beside
+  // them. Keeping both would show Claude Opus 4.8 twice at two dates and leave
+  // a reader to work out which one to believe.
+  const rechecked = new Set<string>(VERIFIED_VENDOR_IDS);
+  const snapshotRows = TOKEN_PRICING.filter((r) => !rechecked.has(r.vendorId));
+
+  const rows: PricingRow[] = [
+    ...TOKEN_PRICING_VERIFIED.map((r) => ({
+      ...r,
+      recheckedAt: TOKEN_PRICING_VERIFIED_AT,
+    })),
+    ...snapshotRows.map((r) => ({ ...r, recheckedAt: null })),
+  ];
+
+  const priced = rows.filter(
     (r) => r.inputPerM !== null || r.outputPerM !== null
   ).length;
+
   return {
-    rows: TOKEN_PRICING,
+    rows,
     capturedAtIso: TOKEN_PRICING_CAPTURED_AT,
     capturedAtDisplay: formatIsoDateGb(TOKEN_PRICING_CAPTURED_AT),
-    vendorCount: new Set(TOKEN_PRICING.map((r) => r.vendorName)).size,
-    verifiedRowCount: verified,
-    unverifiedRowCount: TOKEN_PRICING.length - verified,
+    vendorCount: new Set(rows.map((r) => r.vendorName)).size,
+    verifiedRowCount: priced,
+    unverifiedRowCount: rows.length - priced,
+    recheckedAtDisplay: formatIsoDateGb(TOKEN_PRICING_VERIFIED_AT),
+    recheckedVendors: [
+      ...new Set(TOKEN_PRICING_VERIFIED.map((r) => r.vendorName)),
+    ],
+    recheckedRowCount: TOKEN_PRICING_VERIFIED.length,
+    snapshotRowCount: snapshotRows.length,
+    snapshotVendorCount: new Set(snapshotRows.map((r) => r.vendorName)).size,
   };
 }

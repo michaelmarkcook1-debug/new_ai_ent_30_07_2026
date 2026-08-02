@@ -45,6 +45,8 @@ export default function PricePerformancePage() {
         <PricingDisclosure
           fallbackRows={pricing.rows}
           fallbackCapturedAt={pricing.capturedAtIso}
+          recheckedAt="2026-08-02"
+          recheckedVendors={pricing.recheckedVendors}
         />
       </div>
     </>

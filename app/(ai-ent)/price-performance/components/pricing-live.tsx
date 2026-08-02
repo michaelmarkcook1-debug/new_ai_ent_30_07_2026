@@ -9,9 +9,19 @@ import type { TokenPrice } from "@/lib/aie";
 import { formatIsoDateGb } from "../data";
 import { PricingTable } from "./pricing-table";
 
-// Token list pricing, pulled live from the deployed AIE app's pricing API
-// (same schema as the ported dataset). The ported rows stay as the explicit
-// fallback so the table never empties.
+// Token list pricing.
+//
+// "Live" is not the same as "current", and this table is where that bit. The
+// AIE pricing API answers on request but serves a capture dated 2026-06-02
+// whatever day you ask it, so preferring it over the local rows meant showing
+// a two-month-old model list under a LIVE badge: no Claude Opus 5 or Sonnet 5,
+// no GPT-5.6, no Gemini 3.x, while the benchmark capture on the same page
+// already had all of them.
+//
+// Precedence is by capture date now, not by transport. The local rows carry an
+// overlay re-read from the vendor pricing pages on 2 August 2026 for the three
+// largest vendors, so they are used whenever they are fresher than what the
+// API returns, and the API wins if it ever moves ahead of them.
 
 interface LivePricing {
   rows: AiePricingRow[];
@@ -50,9 +60,14 @@ function fmtStamp(iso: string): string {
 export function PricingSection({
   fallbackRows,
   fallbackCapturedAt,
+  recheckedAt,
+  recheckedVendors,
 }: {
   fallbackRows: TokenPrice[];
   fallbackCapturedAt: string;
+  /** ISO date the overlay vendors were last read from their own pages. */
+  recheckedAt: string;
+  recheckedVendors: string[];
 }) {
   const [live, setLive] = useState<LivePricing | null>(null);
   const [source, setSource] = useState<AieSource>("live");
@@ -71,10 +86,17 @@ export function PricingSection({
     };
   }, []);
 
-  const usingLive = live !== null;
+  // Freshest wins. The local set is dated by its overlay, since that is the
+  // most recent thing in it; the API is dated by the capture it serves rather
+  // than by the moment it answered.
+  const localDate = recheckedAt > fallbackCapturedAt ? recheckedAt : fallbackCapturedAt;
+  const liveDate = live?.capturedAt?.slice(0, 10) ?? "";
+  const usingLive = live !== null && liveDate > localDate;
+
   const rows = usingLive ? live.rows.map(toTokenPrice) : fallbackRows;
-  const lane = usingLive ? (source === "mock" ? "mock" : "aie-live") : "aie";
-  const capturedAt = usingLive ? live.capturedAt : fallbackCapturedAt;
+  const lane = usingLive ? (source === "mock" ? "mock" : "aie-live") : "aie-live";
+  const capturedAt = usingLive ? live.capturedAt : localDate;
+  const apiBehind = live !== null && !usingLive;
   const vendorCount = new Set(rows.map((r) => r.vendorName)).size;
   const unverified = rows.filter(
     (r) => r.inputPerM === null && r.outputPerM === null
@@ -95,7 +117,10 @@ export function PricingSection({
             volume and residency terms vary. {unverified} rows carry no
             verified price and say so; nothing is guessed.
             {failed
-              ? " The live pull did not answer, so the ported dataset rows are shown."
+              ? " The pricing API did not answer, so the local rows are shown."
+              : ""}
+            {apiBehind
+              ? ` ${recheckedVendors.join(", ")} were re-read from their own pricing pages on ${fmtStamp(recheckedAt)}; the pricing API is still serving a ${fmtStamp(liveDate)} capture, so it is not used here.`
               : ""}
           </p>
         </div>
@@ -107,11 +132,11 @@ export function PricingSection({
           <p className="mt-0.5 font-mono text-[13px] font-bold">
             {fmtStamp(capturedAt)}
           </p>
-          <p className="text-[10px] text-muted">
+          <p className="text-[12px] text-muted">
             Snapshot of public vendor pricing pages
           </p>
           {usingLive && live.asOf ? (
-            <p className="mt-1 font-mono text-[9px] text-muted">
+            <p className="mt-1 font-mono text-[12px] text-muted">
               checked {fmtStamp(live.asOf)}
             </p>
           ) : null}
@@ -128,8 +153,16 @@ export function PricingSection({
             row.{" "}
             {usingLive
               ? "Rows are pulled live from the deployed AI Enterprise app's pricing API through our proxy; its own provenance line reads: "
-              : "Rows come from the ported AIE dataset because the live pull did not answer."}
+              : `Rows for ${recheckedVendors.join(", ")} were read directly from each vendor's own published pricing page on ${fmtStamp(recheckedAt)}, and every other vendor carries the ported AIE capture of ${fmtStamp(fallbackCapturedAt)}.`}
             {usingLive ? `"${live.provenance}"` : ""}
+          </p>
+          <p>
+            <strong>Live is not the same as current.</strong> The pricing API
+            answers on request but serves a capture dated{" "}
+            {fmtStamp(fallbackCapturedAt)} whichever day it is asked, so
+            preferring it by default showed a model list a generation behind
+            under a live badge. This table now takes whichever source has the
+            later capture date.
           </p>
           <ul className="list-disc space-y-1 pl-4 text-muted">
             <li>
