@@ -148,20 +148,27 @@ export function ExecutiveActions({
         label="Do these three things"
         tooltip="The actions that follow from today's judgement."
       />
+      {/* These are the only cards on the page a reader is meant to act on, so
+          they carry a light primary tint and an accent rule to set them apart
+          from the readings around them. Kept deliberately quiet: three cards at
+          the weight of the overall recommendation box would compete with the
+          judgement above rather than follow from it. */}
       <ol className="mt-2 grid grid-cols-1 gap-3 md:grid-cols-3">
         {actions.map((a, i) => (
           <li
             key={a.action}
-            className="rounded-lg border border-base-300 bg-base-100 p-4"
+            className="rounded-lg border border-base-300 border-l-2 border-l-primary/70 bg-primary/[0.04] p-4"
           >
-            <div className="flex items-baseline gap-2">
-              <span className="font-mono text-[12px] text-muted">{i + 1}</span>
+            <div className="flex items-baseline gap-2.5">
+              <span className="font-mono text-[13px] font-bold text-primary">
+                {i + 1}
+              </span>
               <h3 className="text-[13.5px] font-bold">{a.action}</h3>
             </div>
             <p className="mt-1.5 text-[13px] leading-snug text-muted">
               {a.detail}
             </p>
-            <div className="mt-3 border-t border-base-300 pt-2">
+            <div className="mt-3 border-t border-base-300/70 pt-2">
               <MetaRow meta={a.meta} />
             </div>
           </li>
