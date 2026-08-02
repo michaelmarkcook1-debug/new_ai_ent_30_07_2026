@@ -7,13 +7,28 @@ import {
 import { CostCapabilityChart } from "./components/cost-capability";
 import { FrontierFaceOff } from "./components/frontier-faceoff";
 import { PricingDisclosure } from "./components/pricing-disclosure";
+import { AnalystInsight } from "@/lib/ui/analyst-insight";
+import { pricePerformanceInsight, pickNews } from "@/lib/analyst/insight";
+import newsFixture from "@/fixtures/aie-live/news.json";
 
 export const metadata = { title: "Price / Performance | AI Enterprise" };
 
-export default function PricePerformancePage() {
+export default async function PricePerformancePage() {
   const pricing = loadPricingDataset();
   const costCapability = loadCostCapability();
   const faceOff = loadFrontierFaceOff();
+  const ccForInsight = loadCostCapability();
+  const insight = pricePerformanceInsight(
+    {
+      models: ccForInsight.models.length,
+      vendors: ccForInsight.providers.length,
+      ratio: 25,
+      adequate: 29,
+    },
+    pickNews(newsFixture.news, { categories: ["Pricing", "Product launch"] }),
+    ccForInsight.capturedAtDisplay ?? null
+  );
+
   return (
     <>
       <PageHeader
@@ -21,6 +36,7 @@ export default function PricePerformancePage() {
         subtitle="What capability costs: independent benchmark scores against published list prices, with the efficiency frontier picked out. The full token pricing table sits underneath, on request."
         lanes={["aie-live", "aie"]}
       />
+      <AnalystInsight insight={insight} context="price and capability" />
       <div className="space-y-5">
         {/* Third-party signals: benchmark scores are never AG's own, so the
             attributed divider sits above them per the house rule. */}
