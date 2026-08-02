@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
+import { Accordion } from "@/lib/ui/accordion";
 import { DerivationDrawer } from "@/lib/ui/score";
 import {
   aieFetch,
@@ -50,10 +51,81 @@ function VendorName({
   );
 }
 
+// Thirteen category cards opening at once was the densest block on the page
+// and the hardest to scan. They are grouped into the five layers a buyer
+// actually shops in, and each layer opens closed.
+//
+// Grouping is by where a category sits in the stack, not by score, so it stays
+// stable as vendors move. A category the map does not name falls into "Other
+// categories" rather than being dropped.
+const LAYERS: { id: string; label: string; blurb: string; match: string[] }[] = [
+  {
+    id: "models",
+    label: "Models and reasoning",
+    blurb: "The models themselves, and the coding agents built directly on them.",
+    match: ["Frontier model/API", "Developer/coding agent"],
+  },
+  {
+    id: "compute",
+    label: "Compute and silicon",
+    blurb: "Where the models actually run, and the hardware underneath.",
+    match: ["AI cloud & compute", "AI silicon / acceleration", "Neocloud & inference"],
+  },
+  {
+    id: "platform",
+    label: "Platforms",
+    blurb: "The build-and-operate layer: cloud AI platforms and agent platforms.",
+    match: ["Cloud AI platform", "Agent platform"],
+  },
+  {
+    id: "apps",
+    label: "Enterprise applications",
+    blurb: "Bought as finished software rather than assembled.",
+    match: [
+      "Enterprise assistant",
+      "CRM/customer AI",
+      "ITSM/HR/service AI",
+      "Workflow automation AI",
+    ],
+  },
+  {
+    id: "knowledge",
+    label: "Knowledge and regulated work",
+    blurb: "Retrieval over your own material, and the regulated verticals.",
+    match: ["RAG/enterprise search", "Regulated-industry AI"],
+  },
+];
+
+function groupCategories(categories: CategoryShareView[]) {
+  const taken = new Set<string>();
+  const groups = LAYERS.map((layer) => {
+    const members = categories.filter((c) => layer.match.includes(c.name));
+    members.forEach((c) => taken.add(c.id));
+    return { ...layer, members };
+  }).filter((g) => g.members.length > 0);
+
+  const rest = categories.filter((c) => !taken.has(c.id));
+  if (rest.length > 0) {
+    groups.push({
+      id: "other",
+      label: "Other categories",
+      blurb: "Categories outside the five layers above.",
+      match: [],
+      members: rest,
+    });
+  }
+  return groups;
+}
+
 function ShareCards({ categories }: { categories: CategoryShareView[] }) {
+  const groups = groupCategories(categories);
   return (
-    <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
-      {categories.map((cat) => (
+    <div className="mt-3 space-y-2">
+      {groups.map((g) => (
+        <Accordion key={g.id} title={g.label} count={g.members.length}>
+          <p className="mb-2 text-[12px] text-muted">{g.blurb}</p>
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+            {g.members.map((cat) => (
         <div key={cat.id} className="rounded-lg border border-base-300 bg-base-100 p-4">
           <h3 className="text-[13px] font-bold">{cat.name}</h3>
           {cat.description ? (
@@ -92,6 +164,9 @@ function ShareCards({ categories }: { categories: CategoryShareView[] }) {
             in the model; the rest is not modelled.
           </p>
         </div>
+            ))}
+          </div>
+        </Accordion>
       ))}
     </div>
   );
