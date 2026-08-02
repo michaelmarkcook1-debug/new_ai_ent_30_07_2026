@@ -238,7 +238,7 @@ export function DerivedGapCard({
                     </div>
                     <p className="text-[12px] leading-snug text-muted">
                       {soft
-                        ? `Sits well below this vendor's own standing. If ${c.capability.toLowerCase()} matters to your use case, the headline overstates them.`
+                        ? `Sits well below this vendor's own standing. If your use case leans on ${c.capability.toLowerCase()}, the headline overstates them.`
                         : `Runs ahead of this vendor's own standing, so it is a genuine strength rather than a halo from the overall score.`}
                     </p>
                   </div>
