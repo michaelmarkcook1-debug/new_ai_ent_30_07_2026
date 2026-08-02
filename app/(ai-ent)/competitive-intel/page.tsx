@@ -4,6 +4,10 @@ import { loadProviderMatrix } from "./provider-matrix-data";
 import { ProviderCapabilityMatrix } from "./components/provider-matrix";
 import { CompetitiveHeatmap } from "./components/heatmap";
 import { AieRankings } from "./components/aie-rankings";
+import { AnalystInsight } from "@/lib/ui/analyst-insight";
+import { competitiveInsight, pickNews } from "@/lib/analyst/insight";
+import { loadMarketMetrics } from "@/lib/market-metrics";
+import newsFixture from "@/fixtures/aie-live/news.json";
 
 export const metadata = { title: "Competitive Intel | AI Enterprise" };
 
@@ -20,6 +24,15 @@ export default async function CompetitiveIntelPage({
     Promise.resolve(aieVendorRankings()),
   ]);
 
+  const m = await loadMarketMetrics();
+  const insight = competitiveInsight(
+    m,
+    pickNews(newsFixture.news, { categories: ["Product launch", "Market movement"] }),
+    matrix.categoryName,
+    matrix.rows.length,
+    matrix.capabilities.length
+  );
+
   return (
     <>
       <PageHeader
@@ -27,6 +40,7 @@ export default async function CompetitiveIntelPage({
         subtitle="How the model providers compare: evidence-graded capability maturity across one market category at a time, beside the AIE vendor rankings. Intensity grids, never quadrants."
         lanes={[matrix.lane, "live"]}
       />
+      <AnalystInsight insight={insight} context="competitive" />
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
         <div className="xl:col-span-2">
           <ProviderCapabilityMatrix matrix={matrix} />

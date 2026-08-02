@@ -498,3 +498,193 @@ export function governanceInsight(
     insufficient: null,
   };
 }
+
+/**
+ * Alliances and Ecosystem Navigator: how much of the supply map is verified.
+ *
+ * Takes primitives rather than each page's own types, so a page passes what it
+ * already has and no page's internals leak into this module.
+ */
+export function supplyMapInsight(
+  opts: {
+    edges: number;
+    verified: number;
+    seed: number;
+    nodes: number;
+    label: "alliance" | "dependency";
+  },
+  news: InsightNews | null,
+  lastUpdated: string | null
+): AnalystInsightData {
+  const { edges, verified, seed, nodes, label } = opts;
+  if (edges === 0) {
+    return insufficient(
+      `No ${label} edges are currently recorded, so nothing can be said about how the supply side connects.`,
+      ["AIE exposure map"],
+      "aie"
+    );
+  }
+  const verifiedPct = pct(verified, edges);
+  const thin = verifiedPct < 50;
+
+  return {
+    headline: thin
+      ? `Most of the ${label} map is still seed evidence, so it shows where to look rather than what to conclude.`
+      : `Most of the ${label} map is verified, which makes concentration in it worth acting on.`,
+    summary: `${edges} ${label} edges connect ${nodes} organisations, ${verified} of them verified and ${seed} still seed. ${
+      thin
+        ? `At ${verifiedPct} per cent verified this map is a research starting point, not a basis for a supplier decision. Seed edges are recorded because a relationship was reported somewhere, not because it was confirmed, and the two look identical on a diagram unless the rendering separates them, which is why seed edges are drawn dashed here.`
+        : `At ${verifiedPct} per cent verified the shape of this map is reliable enough to plan against. Concentration in a supply graph is a different risk from concentration in a market: it shows up as correlated failure rather than as weak pricing, and it does not appear anywhere in a vendor score.`
+    } The useful question is not who has the most connections but whether your own critical path runs through one organisation more than once.`,
+    implications: [
+      thin
+        ? `${verifiedPct} per cent of edges are verified; treat the rest as leads rather than facts.`
+        : `${verifiedPct} per cent of edges are verified, so the map's shape can be planned against.`,
+      "Supply concentration shows up as correlated failure, which no vendor score captures.",
+      "Check whether your own critical path passes through the same organisation more than once.",
+    ],
+    action: thin ? "Investigate" : "Monitor",
+    news,
+    evidence: {
+      count: edges,
+      sources: ["AIE exposure map", "AIE dependency graph"],
+      lastUpdated,
+      lane: "aie",
+    },
+    insufficient: null,
+  };
+}
+
+/** Model 4 Role: whether the workflow catalogue can answer a buying question. */
+export function workflowInsight(
+  opts: { workflows: number; categories: number; mapped: number; highRisk: number },
+  news: InsightNews | null,
+  lastUpdated: string | null
+): AnalystInsightData {
+  const { workflows, categories, mapped, highRisk } = opts;
+  if (workflows === 0) {
+    return insufficient(
+      "No workflows are catalogued, so no tier or vendor recommendation can be made.",
+      ["AIE workflow catalogue"],
+      "aie"
+    );
+  }
+  const riskShare = pct(highRisk, workflows);
+
+  return {
+    headline:
+      riskShare >= 40
+        ? "Most catalogued workflows sit at high risk or above, so model choice here is a governance decision before it is a capability one."
+        : "Most catalogued workflows sit below the high-risk line, so tiering can be driven by cost rather than by assurance.",
+    summary: `${workflows} workflows across ${categories} categories, ${highRisk} of them at high or critical risk, which is ${riskShare} per cent of the catalogue. ${mapped} categories carry a vendor mapping. ${
+      riskShare >= 40
+        ? "A catalogue weighted this far toward high risk changes where the money goes: the constraint is assurance rather than inference cost, and the cheapest adequate model is the wrong answer wherever a wrong output carries legal or clinical consequence. Tier on risk first, then on cost within each tier."
+        : "With most work below the high-risk line, the tiering decision is genuinely commercial. Reserve the top tier for the minority of workflows that need it and let cost drive the rest, which is where the savings actually are."
+    } The tier a workflow needs is read from its recorded risk and complexity, not from which vendor is currently strongest.`,
+    implications: [
+      `${highRisk} of ${workflows} catalogued workflows are high or critical risk.`,
+      riskShare >= 40
+        ? "Assurance, not inference cost, is the binding constraint on most of this catalogue."
+        : "Cost can drive tiering across most of the catalogue; reserve the top tier for the minority that need it.",
+      "Tier follows recorded risk and complexity, not vendor strength.",
+    ],
+    action: riskShare >= 40 ? "Investigate" : "Accelerate",
+    news,
+    evidence: {
+      count: workflows,
+      sources: ["AIE workflow catalogue", "AIE vendor market categories"],
+      lastUpdated,
+      lane: "aie",
+    },
+    insufficient: null,
+  };
+}
+
+/** News: what the flow of events is actually telling a buyer. */
+export function newsInsight(
+  items: NewsItemRaw[],
+  lastUpdated: string | null
+): AnalystInsightData {
+  if (items.length < 10) {
+    return insufficient(
+      "Too few items are held to read a direction from the news flow.",
+      ["AIE news feed"],
+      "aie-live"
+    );
+  }
+  const neg = items.filter((n) => n.sentiment === "negative").length;
+  const pos = items.filter((n) => n.sentiment === "positive").length;
+  const highImpact = items.filter((n) => (n.impactScore ?? 0) >= 75).length;
+  const negShare = pct(neg, items.length);
+  const risky = items.filter((n) => (n.categories ?? []).includes("Risk event")).length;
+
+  return {
+    headline:
+      negShare >= 25
+        ? "The news flow has turned materially more negative, which usually precedes a change in vendor behaviour rather than following one."
+        : "The news flow remains net positive, so nothing in the current cycle argues for changing a vendor position on sentiment alone.",
+    summary: `${items.length} items in the current window, ${pos} positive and ${neg} negative, with ${highImpact} scored at high impact and ${risky} classified as risk events. ${
+      negShare >= 25
+        ? `A negative share of ${negShare} per cent is high enough to be worth reading rather than dismissing. News moves faster than any assessment in this platform, so it is the earliest signal available, but it is also the least verified: a single well-covered incident can move the mix without changing anything structural.`
+        : `A negative share of ${negShare} per cent is within the range where the flow reflects ordinary product and funding cycles rather than stress. News is the earliest signal here and the least verified, so it belongs as a prompt to check something rather than as a reason to act.`
+    } Treat this section as an early-warning surface: the scored assessments elsewhere in the platform are slower and better evidenced, and where the two disagree the assessment is usually right and the news is usually earlier.`,
+    implications: [
+      `${negShare} per cent of current items are negative, against ${pct(pos, items.length)} per cent positive.`,
+      "News leads the scored assessments but is the least verified signal in the platform.",
+      "Where news and assessment disagree, the assessment is usually right and the news usually earlier.",
+    ],
+    action: negShare >= 25 ? "Monitor" : "Monitor",
+    news: pickNews(items, { minImpact: 75 }),
+    evidence: {
+      count: items.length,
+      sources: ["AIE news feed"],
+      lastUpdated,
+      lane: "aie-live",
+    },
+    insufficient: null,
+  };
+}
+
+/** Price / Performance: the cost of the last increment of capability. */
+export function pricePerformanceInsight(
+  opts: { models: number; vendors: number; ratio: number | null; adequate: number },
+  news: InsightNews | null,
+  lastUpdated: string | null
+): AnalystInsightData {
+  const { models, vendors, ratio, adequate } = opts;
+  if (ratio === null) {
+    return insufficient(
+      "Not enough models carry both a published price and a benchmark score to compare capability against cost.",
+      ["Artificial Analysis benchmark", "Vendor pricing pages"],
+      "derived"
+    );
+  }
+  const wide = ratio >= 5;
+
+  return {
+    headline: wide
+      ? "The last increment of capability now costs an order of magnitude more than the rest of the curve, which makes tiering the largest available saving."
+      : "The price gap between the best model and a near-equivalent is too narrow to fund tiering on cost alone.",
+    summary: `${models} models from ${vendors} vendors carry both a published price and a benchmark score. ${adequate} of them reach 80 per cent of the top score, and the cheapest costs ${ratio} times less than the top model. ${
+      wide
+        ? "A multiple that large is the single most actionable figure on this page. It means the top tier should be reserved rather than defaulted to, and that a workload priced earlier in the year is probably sitting two steps above what it needs. The saving does not require changing vendor, only changing which model a workload routes to."
+        : "A narrow multiple means the tiering argument does not pay for itself here, and the choice should be made on fit, latency and governance instead. Revisit when the spread widens."
+    } Input price only: output tokens are priced separately and the mix varies by workload, so a blended figure would imply a workload this has not measured.`,
+    implications: [
+      `${adequate} models reach 80 per cent of the top benchmark score; the cheapest costs ${ratio}x less than the top.`,
+      wide
+        ? "Reserve the top tier rather than defaulting to it; the saving needs no vendor change."
+        : "Tiering does not pay for itself at this spread; choose on fit and governance.",
+      "Input price only, so test against your own token mix before committing.",
+    ],
+    action: wide ? "Renegotiate" : "Monitor",
+    news,
+    evidence: {
+      count: models,
+      sources: ["Artificial Analysis benchmark", "Vendor pricing pages"],
+      lastUpdated,
+      lane: "derived",
+    },
+    insufficient: null,
+  };
+}

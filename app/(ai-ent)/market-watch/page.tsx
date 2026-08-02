@@ -12,19 +12,29 @@ import { CategoryShareLive } from "./components/category-share-live";
 import { WinningLosing } from "./components/winning-losing";
 import { DependencyByLayer } from "./components/dependency-by-layer";
 import { CategoryLeaders } from "./components/category-leaders";
+import { AnalystInsight } from "@/lib/ui/analyst-insight";
+import { marketWatchInsight, pickNews } from "@/lib/analyst/insight";
+import { loadMarketMetrics } from "@/lib/market-metrics";
+import newsFixture from "@/fixtures/aie-live/news.json";
 
 export const metadata = { title: "Market Watch | AI Enterprise" };
 
 // Market Watch: the AIE homepage market read. Category shares and the
 // winning/losing read now pull live from the deployed AIE app; the ported
 // seed stays as the explicit fallback and everything else remains PORT lane.
-export default function MarketWatchPage() {
+export default async function MarketWatchPage() {
   const { regime, signals } = getMarketToday();
   const categories = getCategoryShares();
   const lookups = getShareLookups();
   const dependency = getDependencyByLayer();
   const leaders = getCategoryLeaders();
   const watchlists = getWatchlists();
+
+  const metricsForInsight = await loadMarketMetrics();
+  const insight = marketWatchInsight(
+    metricsForInsight,
+    pickNews(newsFixture.news, { categories: ["Market movement", "Strategy signal"] })
+  );
 
   return (
     <>
@@ -33,6 +43,7 @@ export default function MarketWatchPage() {
         subtitle="The enterprise AI market read: today's regime and source-cited signals, live share by category, the live winning and losing read, dependency concentration and category leaders. All figures keep their native evidence labels; news lives on The Pulse and News."
         lanes={["aie-live", "aie"]}
       />
+      <AnalystInsight insight={insight} context="market" />
       <div className="space-y-6">
         <MarketToday regime={regime} signals={signals} />
         <CategoryShareLive fallback={categories} lookups={lookups} />
