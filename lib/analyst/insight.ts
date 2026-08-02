@@ -49,6 +49,79 @@ export interface InsightEvidence {
   lane: DataLane;
 }
 
+/** One dated, sourced item the reading should be read against. */
+export interface InsightNews {
+  title: string;
+  whyItMatters: string | null;
+  sentiment: string | null;
+  impactScore: number | null;
+  publishedAt: string | null;
+  sourceName: string | null;
+  sourceUrl: string | null;
+  vendorNames: string[];
+}
+
+export interface NewsItemRaw {
+  title: string;
+  whyItMatters?: string | null;
+  sentiment?: string | null;
+  impactScore?: number | null;
+  publishedAt?: string | null;
+  sourceName?: string | null;
+  sourceUrl?: string | null;
+  vendors?: string[];
+  categories?: string[];
+}
+
+/**
+ * The highest-impact recent item that bears on this page.
+ *
+ * Selected by the source's own impact score rather than by anything invented
+ * here, and filtered to the page's subject so a financial page does not lead
+ * on a model launch. Returns null rather than reaching for a loosely related
+ * item: an insight with no relevant news is a normal state, not a gap to fill.
+ */
+export function pickNews(
+  items: NewsItemRaw[],
+  opts: {
+    categories?: string[];
+    vendorIds?: string[];
+    vendorNames?: Map<string, string>;
+    minImpact?: number;
+  } = {}
+): InsightNews | null {
+  const { categories, vendorIds, vendorNames, minImpact = 60 } = opts;
+  const relevant = items.filter((n) => {
+    if ((n.impactScore ?? 0) < minImpact) return false;
+    if (categories?.length) {
+      const cats = n.categories ?? [];
+      if (!cats.some((c) => categories.includes(c))) return false;
+    }
+    if (vendorIds?.length) {
+      const vs = n.vendors ?? [];
+      if (!vs.some((v) => vendorIds.includes(v))) return false;
+    }
+    return true;
+  });
+  if (relevant.length === 0) return null;
+
+  const best = relevant.reduce((a, b) =>
+    (b.impactScore ?? 0) > (a.impactScore ?? 0) ? b : a
+  );
+  return {
+    title: best.title,
+    whyItMatters: best.whyItMatters ?? null,
+    sentiment: best.sentiment ?? null,
+    impactScore: best.impactScore ?? null,
+    publishedAt: best.publishedAt ?? null,
+    sourceName: best.sourceName ?? null,
+    sourceUrl: best.sourceUrl ?? null,
+    vendorNames: (best.vendors ?? []).map(
+      (v) => vendorNames?.get(v) ?? v
+    ),
+  };
+}
+
 export interface AnalystInsightData {
   /** One sentence carrying a meaning, not a measurement. */
   headline: string;
@@ -57,6 +130,11 @@ export interface AnalystInsightData {
   /** At most three. */
   implications: string[];
   action: AnalystAction;
+  /**
+   * A dated, sourced item to read the conclusion against. Null when nothing
+   * recent bears on this page, which is a normal state rather than a gap.
+   */
+  news: InsightNews | null;
   evidence: InsightEvidence;
   /**
    * Set when the page's data cannot support a conclusion. The component then
@@ -83,6 +161,7 @@ function insufficient(
     summary: "",
     implications: [],
     action: "Monitor",
+    news: null,
     evidence: { count: 0, sources, lastUpdated: null, lane },
     insufficient: reason,
   };
@@ -93,7 +172,10 @@ function insufficient(
 /**
  * Market Watch: where share sits and whether the field is opening or closing.
  */
-export function marketWatchInsight(m: MarketMetrics): AnalystInsightData {
+export function marketWatchInsight(
+  m: MarketMetrics,
+  news: InsightNews | null = null
+): AnalystInsightData {
   const vendors = aiVendors(m);
   const byCategory = new Map<string, number[]>();
   for (const s of m.shares) {
@@ -143,6 +225,7 @@ export function marketWatchInsight(m: MarketMetrics): AnalystInsightData {
       "Share is an estimate per category, so it supports a direction of travel rather than a precise ranking.",
     ],
     action: tight ? "Investigate" : "Monitor",
+    news,
     evidence: {
       count: m.shares.length,
       sources: [
@@ -162,6 +245,7 @@ export function marketWatchInsight(m: MarketMetrics): AnalystInsightData {
  * The strongest finding here is an absence, so it leads.
  */
 export function financialInsight(
+  news: InsightNews | null,
   disclosure: { disclosing: number; total: number } | null,
   segmentsFiled: number,
   segmentTotal: number,
@@ -189,6 +273,7 @@ export function financialInsight(
       "Private vendors are outside this entirely, so absence here is not a signal about them either way.",
     ],
     action: undisclosed > disclosure.disclosing ? "Investigate" : "Monitor",
+    news,
     evidence: {
       count: disclosure.total + segmentTotal,
       sources: ["SEC filings, full-text search", "SEC segment revenue extraction"],
@@ -204,6 +289,7 @@ export function financialInsight(
  */
 export function competitiveInsight(
   m: MarketMetrics,
+  news: InsightNews | null,
   categoryName: string | null,
   providerCount: number,
   capabilityCount: number
@@ -243,6 +329,7 @@ export function competitiveInsight(
       "Comparison holds within a market category only; scores do not transfer across categories.",
     ],
     action: narrow ? "Renegotiate" : "Shortlist",
+    news,
     evidence: {
       count: providerCount * capabilityCount,
       sources: ["AIE capability matrix", "AIE vendor rankings"],
@@ -258,6 +345,7 @@ export function competitiveInsight(
  */
 export function reputationInsight(
   m: MarketMetrics,
+  news: InsightNews | null,
   snapshotCount: number,
   syntheticCount: number
 ): AnalystInsightData {
@@ -300,6 +388,7 @@ export function reputationInsight(
         : "The trend is real but short; a direction will not be reliable for several more captures.",
     ],
     action: spread > 25 ? "Shortlist" : "Monitor",
+    news,
     evidence: {
       count: vendors.length,
       sources: ["AIE reputation pillars", "AG reputation snapshots"],
@@ -313,7 +402,10 @@ export function reputationInsight(
 /**
  * Vendor View: what the ranking is and is not telling a buyer.
  */
-export function vendorViewInsight(m: MarketMetrics): AnalystInsightData {
+export function vendorViewInsight(
+  m: MarketMetrics,
+  news: InsightNews | null = null
+): AnalystInsightData {
   const vendors = aiVendors(m);
   const scored = vendors.filter((v) => v.composite !== null);
   if (scored.length < 5) {
@@ -349,6 +441,7 @@ export function vendorViewInsight(m: MarketMetrics): AnalystInsightData {
         : "Momentum is published across the scored set.",
     ],
     action: strongButRisky.length > 0 ? "Investigate" : "Shortlist",
+    news,
     evidence: {
       count: scored.length,
       sources: ["AIE vendor rankings", "AIE risk register"],
@@ -364,6 +457,7 @@ export function vendorViewInsight(m: MarketMetrics): AnalystInsightData {
  */
 export function governanceInsight(
   m: MarketMetrics,
+  news: InsightNews | null,
   jurisdictions: number,
   sourcedJurisdictions: number,
   label: "governance" | "security"
@@ -394,6 +488,7 @@ export function governanceInsight(
         : "Posture assessments are per-vendor and carry their own evidence state.",
     ],
     action: highSeverity > 0 ? "Investigate" : "Monitor",
+    news,
     evidence: {
       count: openRisks + jurisdictions,
       sources: ["AIE risk register", "AIE regulatory grid"],

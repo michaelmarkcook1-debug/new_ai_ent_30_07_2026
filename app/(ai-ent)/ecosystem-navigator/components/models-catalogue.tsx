@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { LaneBadge, CategoryChip } from "@/lib/ui/badges";
+import { Accordion } from "@/lib/ui/accordion";
 import { DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { EmptyState } from "@/lib/ui/page";
@@ -120,6 +121,8 @@ export function ModelsCatalogue() {
 
   return (
     <section>
+      {/* Collapsed by default. Ninety-eight model rows is a reference lookup,
+          not something to read on the way past. */}
       <div className="flex flex-wrap items-center gap-2">
         <h2 className="text-[15px] font-bold">Models catalogue</h2>
         <LaneBadge lane="aie" />
@@ -154,8 +157,13 @@ export function ModelsCatalogue() {
         </span>
       </div>
 
+      {/* Ninety-eight model rows is a reference lookup rather than something
+          to read on the way past, so the catalogue opens closed. */}
+      <div className="mt-2">
+      <Accordion title="Browse the model catalogue" count={MODEL_COUNT}>
+
       {/* Category chips built from the categories present in the data */}
-      <div className="mt-3 flex flex-wrap items-center gap-1.5">
+      <div className="mt-1 flex flex-wrap items-center gap-1.5">
         <button
           type="button"
           onClick={() => setCategory(null)}
@@ -233,6 +241,8 @@ export function ModelsCatalogue() {
         each vendor&apos;s model-list endpoint. Nothing in this catalogue is an invented benchmark,
         price or availability claim.
       </p>
+      </Accordion>
+      </div>
     </section>
   );
 }

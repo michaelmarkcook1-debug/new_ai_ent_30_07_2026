@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
+import { Accordion } from "@/lib/ui/accordion";
 import { DerivationDrawer, ScorePill } from "@/lib/ui/score";
 import { EVIDENCE_MODIFIER, PILLARS } from "@/lib/aie/types";
 import {
@@ -120,7 +121,13 @@ export function RankingsTable({
 
       {/* One ranked block per category */}
       {visibleGroups.map((group) => (
-        <section key={group.category.id} className="rounded-lg border border-base-300 bg-base-100">
+        <Accordion
+          key={group.category.id}
+          title={group.category.name}
+          count={group.rows.length}
+          defaultOpen={visibleGroups.length === 1}
+        >
+        <section className="rounded-lg border-base-300 bg-base-100">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
             <div className="min-w-0">
               <h3 className="text-[13px] font-bold">{group.category.name}</h3>
@@ -234,6 +241,7 @@ export function RankingsTable({
             </table>
           </div>
         </section>
+        </Accordion>
       ))}
 
       {notPlaced.length > 0 && !only ? (

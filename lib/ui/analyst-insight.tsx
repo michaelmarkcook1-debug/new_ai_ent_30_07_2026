@@ -98,6 +98,60 @@ export function AnalystInsight({
             </ul>
           ) : null}
 
+          {/* The dated item the conclusion should be read against. Selected by
+              the source's own impact score and filtered to this page's subject,
+              so it corroborates the reading rather than decorating it. Absent
+              when nothing recent bears on the page. */}
+          {insight.news ? (
+            <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-3">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                  Latest development
+                </span>
+                {insight.news.publishedAt ? (
+                  <span className="font-mono text-[12px] text-muted">
+                    {insight.news.publishedAt.slice(0, 10)}
+                  </span>
+                ) : null}
+                {insight.news.sentiment ? (
+                  <span
+                    className={`rounded-full px-2 py-0.5 font-mono text-[12px] ${
+                      insight.news.sentiment === "negative"
+                        ? "bg-warn-bg text-warn"
+                        : insight.news.sentiment === "positive"
+                          ? "bg-good-bg text-good"
+                          : "bg-base-200 text-muted"
+                    }`}
+                  >
+                    {insight.news.sentiment}
+                  </span>
+                ) : null}
+              </div>
+              <p className="mt-1.5 text-[13.5px] font-semibold leading-snug">
+                {insight.news.title}
+              </p>
+              {insight.news.whyItMatters ? (
+                <p className="mt-1 text-[13px] leading-snug text-muted">
+                  {insight.news.whyItMatters}
+                </p>
+              ) : null}
+              {insight.news.sourceUrl ? (
+                <a
+                  href={insight.news.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1.5 inline-block text-[12px] font-semibold text-primary hover:underline"
+                >
+                  {insight.news.sourceName ?? "Source"} →
+                </a>
+              ) : insight.news.sourceName ? (
+                <p className="mt-1.5 font-mono text-[12px] text-muted">
+                  {insight.news.sourceName}
+                </p>
+              ) : null}
+            </div>
+          ) : null}
+
           <div className="mt-4 flex flex-wrap items-center gap-3 border-t border-base-300/70 pt-3">
             <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
               Recommended action
