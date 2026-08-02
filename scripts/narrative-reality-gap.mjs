@@ -71,14 +71,23 @@ const EVIDENCE_WEIGHT = { E5: 1.0, E4: 0.9, E3: 0.75, E2: 0.55, E1: 0.35 };
 // Vendor id to primary domain. An identifier, not a measurement: it decides
 // which URLs count as being about this vendor, and nothing else. Vendors with
 // no usable domain are carried with narrative null rather than guessed at.
+//
+// Getting these wrong suppresses a vendor silently, which is what happened on
+// the first pass: Alibaba was pointed at alibabacloud.com and Cerebras at
+// cerebras.net, both of which return zero AI stories, so both read as having
+// no narrative at all. They ship under qwen.ai and cerebras.ai. A domain that
+// returns zero is now worth checking rather than believing.
 const DOMAIN = {
   ai21: "ai21.com",
   amd: "amd.com",
   aws: "aws.amazon.com",
-  alibaba: "alibabacloud.com",
+  // Alibaba ships its models as Qwen; alibabacloud.com carries the cloud
+  // business and returned zero AI stories.
+  alibaba: "qwen.ai",
   anthropic: "anthropic.com",
   broadcom: "broadcom.com",
-  cerebras: "cerebras.net",
+  // cerebras.net is the legacy domain and returns zero; the AI site is .ai.
+  cerebras: "cerebras.ai",
   cohere: "cohere.com",
   coreweave: "coreweave.com",
   databricks: "databricks.com",
@@ -90,12 +99,12 @@ const DOMAIN = {
   groq: "groq.com",
   harvey: "harvey.ai",
   hebbia: "hebbia.ai",
-  humain: "humain.ai",
+  humain: "humain.com",
   ibm: "ibm.com",
   lambda: "lambdalabs.com",
   meta: "ai.meta.com",
   microsoft: "microsoft.com",
-  minimax: "minimax.io",
+  minimax: "minimaxi.com",
   mistral: "mistral.ai",
   moonshot: "moonshot.ai",
   moveworks: "moveworks.com",

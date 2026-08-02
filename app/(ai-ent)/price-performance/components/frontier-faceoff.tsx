@@ -194,6 +194,22 @@ export function FrontierFaceOff({ view }: { view: FaceOffView }) {
             sitting on the efficiency frontier are different things: the leader
             can be dominated on value by something cheaper.
           </p>
+          <p>
+            <strong>A low position can mean the index is behind, not that the
+            vendor is.</strong> Each vendor is represented by its
+            highest-scoring model <em>in this capture</em>, so a vendor whose
+            newest release the index has not benchmarked yet appears at the
+            strength of its previous generation. Meta is the clearest case
+            here: it is placed on Llama 4 Maverick, while its current frontier
+            model, the proprietary Muse Spark, is not in the capture at all. Its
+            position on this table reflects a model two generations old.
+          </p>
+          <p className="text-muted">
+            No score is estimated for an unbenchmarked model to correct for
+            this, because that would be inventing the measurement the table
+            exists to report. The gap is stated instead, and it closes when the
+            index publishes.
+          </p>
           {view.absent.length > 0 ? (
             <p className="text-muted">
               In the category but absent from this table because they publish no
