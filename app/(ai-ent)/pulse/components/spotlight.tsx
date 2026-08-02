@@ -116,7 +116,14 @@ export function DerivedGapCard({
   cohortSize,
 }: {
   vendor: GapVendor;
-  method: { reality: string; narrative: string; gap: string; threshold: string; bias: string };
+  method: {
+    reality: string;
+    narrative: string;
+    portfolio: string;
+    gap: string;
+    threshold: string;
+    bias: string;
+  };
   generatedAt: string;
   cohortSize: number;
 }) {
@@ -191,6 +198,57 @@ export function DerivedGapCard({
         maturity.
       </p>
 
+      {/* Where the portfolio departs from its own headline. A single overall
+          number hides exactly what a buyer needs to know: a vendor strong on
+          average can be weak precisely where their use case lives. */}
+      {vendor.portfolio.length > 0 ? (
+        <div className="mt-4 border-t border-base-300 pt-3">
+          <MicroLabel
+            label="Where the portfolio does not match the headline"
+            tooltip="Capabilities furthest from this vendor's own overall standing, measured against the same capability in every other vendor."
+          />
+          <ul className="mt-2 space-y-2">
+            {vendor.portfolio.slice(0, 4).map((c) => {
+              const soft = c.divergence < 0;
+              return (
+                <li key={c.capabilityId} className="flex items-center gap-2.5">
+                  <span
+                    className={`w-14 shrink-0 text-right font-mono text-[13px] font-bold ${soft ? "text-warn" : "text-good"}`}
+                  >
+                    {c.divergence > 0 ? "+" : ""}
+                    {c.divergence}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex flex-wrap items-baseline gap-x-2">
+                      <span className="text-[13px] font-semibold">
+                        {c.capability}
+                      </span>
+                      <span className="font-mono text-[12px] text-muted">
+                        {c.percentile} percentile
+                      </span>
+                      {c.thinEvidence ? (
+                        <span className="rounded-full bg-warn-bg px-1.5 py-0.5 font-mono text-[12px] text-warn">
+                          {c.evidenceGrade} asserted
+                        </span>
+                      ) : (
+                        <span className="font-mono text-[12px] text-muted">
+                          {c.evidenceGrade}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[12px] leading-snug text-muted">
+                      {soft
+                        ? `Sits well below this vendor's own standing. If ${c.capability.toLowerCase()} matters to your use case, the headline overstates them.`
+                        : `Runs ahead of this vendor's own standing, so it is a genuine strength rather than a halo from the overall score.`}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      ) : null}
+
       <div className="mt-3 border-t border-base-300 pt-2">
         <DerivationDrawer title="How this is derived">
           <p>
@@ -214,6 +272,9 @@ export function DerivedGapCard({
           </p>
           <p>
             <strong>The gap.</strong> {method.gap}
+          </p>
+          <p>
+            <strong>Portfolio mismatch.</strong> {method.portfolio}
           </p>
           <p className="text-muted">
             <strong>What this does not measure.</strong> {method.bias}

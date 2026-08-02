@@ -218,6 +218,11 @@ async function main() {
     `${vendors.length} AI vendors, ${capRows.length} capability rows, ${news.length} news items`
   );
 
+  // Capability names, for the portfolio breakdown below.
+  const capName = new Map(
+    (capsRes.capabilities ?? []).map((c) => [c.id, c.name])
+  );
+
   const rows = [];
   for (const v of vendors) {
     // REALITY
@@ -259,9 +264,22 @@ async function main() {
     const positive = sentiments.filter((s) => s === "positive").length;
     const negative = sentiments.filter((s) => s === "negative").length;
 
+    // Per-capability reality, kept per vendor so the card can show where a
+    // portfolio diverges from its own headline. A single overall number hides
+    // exactly the thing a buyer needs: a vendor strong on average can be weak
+    // precisely where their use case lives.
+    const perCapability = graded.map((c) => ({
+      capabilityId: c.capabilityId,
+      capability: capName.get(c.capabilityId) ?? c.capabilityId,
+      maturity: c.maturityScore,
+      evidenceGrade: c.evidenceGrade,
+      status: c.status ?? null,
+    }));
+
     rows.push({
       vendorId: v.id,
       name: v.name,
+      perCapability,
       category: catName(v),
       marketPosition: v.marketPosition ?? null,
       reality: round1(reality),
@@ -302,6 +320,21 @@ async function main() {
   const MIN_NEWS = 3;
   const MIN_HN_STORIES = 10;
 
+  // Percentile-rank each capability across the cohort separately, so a
+  // vendor's standing on governance is measured against other vendors'
+  // governance rather than against its own agents score.
+  const capIds = new Set(rows.flatMap((r) => r.perCapability.map((c) => c.capabilityId)));
+  const capPct = new Map();
+  for (const capId of capIds) {
+    const entries = rows
+      .map((r) => {
+        const c = r.perCapability.find((x) => x.capabilityId === capId);
+        return c ? { id: r.vendorId, value: c.maturity } : null;
+      })
+      .filter(Boolean);
+    capPct.set(capId, percentiles(entries));
+  }
+
   for (const r of rows) {
     r.realityScore = realityPct.has(r.vendorId) ? realityPct.get(r.vendorId) : null;
 
@@ -333,6 +366,29 @@ async function main() {
           : r.gap <= -15
             ? "reality ahead of narrative"
             : "narrative and reality aligned";
+
+    // Where this vendor's portfolio departs from its own overall standing.
+    // Divergence is measured against the vendor's own reality percentile, so
+    // it reads as "soft spot for them" rather than "weak in the market".
+    const base = r.realityScore;
+    r.portfolio = base === null
+      ? []
+      : r.perCapability
+          .map((c) => {
+            const pct = capPct.get(c.capabilityId)?.get(r.vendorId) ?? null;
+            return pct === null
+              ? null
+              : {
+                  ...c,
+                  percentile: pct,
+                  divergence: round1(pct - base),
+                  // An unverified claim is its own kind of mismatch: the
+                  // capability is asserted but the evidence behind it is thin.
+                  thinEvidence: c.evidenceGrade === "E1" || c.evidenceGrade === "E2",
+                };
+          })
+          .filter(Boolean)
+          .sort((a, b) => Math.abs(b.divergence) - Math.abs(a.divergence));
   }
 
   rows.sort((a, b) => (b.gap ?? -999) - (a.gap ?? -999));
@@ -348,6 +404,8 @@ async function main() {
         "Evidence-weighted mean of AIE capability maturity scores, weighted E5 1.0, E4 0.9, E3 0.75, E2 0.55, E1 0.35, then percentile-ranked within the tracked AI vendor set.",
       narrative:
         "Two sources, each percentile-ranked on its own scale and then averaged over whichever have a reading: AIE news items tagged to the vendor, and Hacker News stories whose URL is the vendor's own domain, the latter combined with the points and comments those stories drew at quarter weight and log-scaled. Matching on the domain rather than the name is deliberate: it can miss a vendor but never counts a different one.",
+      portfolio:
+        "Each capability is percentile-ranked across the tracked set on its own, then compared with the vendor's overall reality percentile. A capability far below that line is a soft spot the headline score hides; far above it is a genuine standout. Evidence grade is carried through, because a capability asserted at E1 or E2 is a claim rather than a verified strength.",
       gap: "Narrative percentile minus reality percentile. Positive means the technical conversation runs ahead of the evidenced capability; negative means the vendor delivers more than it is talked about.",
       threshold:
         "A vendor needs at least 3 tagged news items or at least 10 domain-matched stories before either source counts. Below that the input is noise, and ranking noise would still read as a confident answer, so the gap is left null.",

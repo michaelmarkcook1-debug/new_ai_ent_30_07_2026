@@ -312,3 +312,47 @@ describe("largest price-performance improvement", () => {
     expect(out.beyondBaseline).not.toContain(out.best!.model);
   });
 });
+
+describe("narrative gap portfolio breakdown", () => {
+  it("measures each capability against the same capability elsewhere, not the vendor's own average", async () => {
+    const gap = (await import("@/fixtures/narrative-reality-gap.json"))
+      .default as {
+      vendors: {
+        vendorId: string;
+        realityScore: number | null;
+        portfolio: {
+          capabilityId: string;
+          percentile: number;
+          divergence: number;
+          evidenceGrade: string;
+          thinEvidence: boolean;
+        }[];
+      }[];
+    };
+    const measured = gap.vendors.filter((v) => v.realityScore !== null);
+    expect(measured.length).toBeGreaterThan(0);
+
+    for (const v of measured) {
+      for (const c of v.portfolio) {
+        // Percentile is a rank, so it must stay in range whatever the maturity.
+        expect(c.percentile).toBeGreaterThanOrEqual(0);
+        expect(c.percentile).toBeLessThanOrEqual(100);
+        // Divergence must be the stated subtraction, not a separate number.
+        expect(c.divergence).toBeCloseTo(c.percentile - v.realityScore!, 1);
+        // Thin evidence is exactly E1 and E2, never inferred from the score.
+        expect(c.thinEvidence).toBe(
+          c.evidenceGrade === "E1" || c.evidenceGrade === "E2"
+        );
+      }
+    }
+  });
+
+  it("sorts by size of departure so the biggest mismatch leads", async () => {
+    const gap = (await import("@/fixtures/narrative-reality-gap.json"))
+      .default as { vendors: { portfolio: { divergence: number }[] }[] };
+    for (const v of gap.vendors) {
+      const mags = v.portfolio.map((c) => Math.abs(c.divergence));
+      expect(mags).toEqual([...mags].sort((a, b) => b - a));
+    }
+  });
+});

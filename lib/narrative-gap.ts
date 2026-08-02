@@ -7,6 +7,20 @@ import path from "path";
 // its limits are documented. Recompiled by re-running that script, not by
 // editing this file or the fixture by hand.
 
+export interface PortfolioCapability {
+  capabilityId: string;
+  capability: string;
+  maturity: number;
+  evidenceGrade: string;
+  status: string | null;
+  /** Percentile for this capability alone, across the tracked set. */
+  percentile: number;
+  /** Percentile minus the vendor's own overall reality percentile. */
+  divergence: number;
+  /** True at E1 or E2: asserted rather than verified. */
+  thinEvidence: boolean;
+}
+
 export interface GapVendor {
   vendorId: string;
   name: string;
@@ -28,6 +42,10 @@ export interface GapVendor {
   realityRows: number;
   realityWeakestEvidence: string | null;
 
+  /** Capability-level breakdown, sorted by how far each departs from the
+   *  vendor's own overall standing. */
+  portfolio: PortfolioCapability[];
+
   domain: string | null;
   hn: { stories: number; points: number; comments: number } | null;
   aieNews: { items: number; positive: number; negative: number };
@@ -41,6 +59,7 @@ export interface NarrativeGap {
   method: {
     reality: string;
     narrative: string;
+    portfolio: string;
     gap: string;
     threshold: string;
     bias: string;
