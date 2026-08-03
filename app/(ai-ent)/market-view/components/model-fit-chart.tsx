@@ -286,19 +286,23 @@ export function PriceCapabilityChart({
           .filter((p) => p.isPick)
           .map((p) => (
             <g key={p.model.model_id}>
+              {/* Purple, not green. Green already draws the efficiency
+                  frontier on this chart, which is a property of the models;
+                  the recommendation is AG's pick out of them, and the two
+                  read as one thing while they share a colour. */}
               <circle
                 cx={xFor(p.cost)}
                 cy={yFor(p.intelligence)}
                 r="10"
                 fill="none"
-                stroke="var(--ag-green)"
+                stroke="var(--ag-insight)"
                 strokeWidth="2"
               />
               <circle
                 cx={xFor(p.cost)}
                 cy={yFor(p.intelligence)}
                 r="4.5"
-                fill="var(--ag-green)"
+                fill="var(--ag-insight)"
               >
                 <title>{`${p.model.model_id} — the recommendation`}</title>
               </circle>
@@ -371,7 +375,7 @@ export function PriceCapabilityChart({
 
       <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10.5px] text-muted">
         <span className="inline-flex items-center gap-1.5">
-          <span className="inline-block h-2.5 w-2.5 rounded-full bg-good" />
+          <span className="inline-block h-2.5 w-2.5 rounded-full bg-insight" />
           the recommendation
         </span>
         <span className="inline-flex items-center gap-1.5">

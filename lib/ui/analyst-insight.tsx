@@ -44,7 +44,7 @@ export function AnalystInsight({
   const { evidence } = insight;
 
   return (
-    <section className="rounded-xl border border-primary/35 bg-primary/[0.04] p-5 sm:p-6">
+    <section className="finding rounded-xl p-5 sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           <svg
@@ -54,7 +54,7 @@ export function AnalystInsight({
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
-            className="text-primary"
+            className="text-insight"
             aria-hidden
           >
             <path d="M3 3v18h18" />
@@ -105,7 +105,7 @@ export function AnalystInsight({
                 <ul className="measure mt-4 space-y-1.5 border-t border-base-300/70 pt-3">
                   {insight.implications.slice(0, 3).map((im) => (
                     <li key={im} className="flex gap-2.5 text-[13px] leading-snug">
-                      <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-primary" aria-hidden />
+                      <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-insight" aria-hidden />
                       <span>{im}</span>
                     </li>
                   ))}
@@ -171,8 +171,13 @@ export function AnalystInsight({
 
               {/* Sits at the foot of its column so the action lands in the
                   same place whether or not there is a news item above it. */}
-              <div className="mt-auto flex flex-wrap items-center gap-3 rounded-lg border border-base-300 bg-base-100 p-3">
-                <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
+              {/* The recommendation carries the judgement edge; the pill
+                  inside it keeps the semantic tone, because the colour of the
+                  action answers a different question from the colour of the
+                  box around it. Purple says AG concluded this, green, amber
+                  and red say what the conclusion is. */}
+              <div className="finding-strong mt-auto flex flex-wrap items-center gap-3 rounded-lg p-3">
+                <span className="font-mono text-[12px] uppercase tracking-wider text-insight">
                   Recommended action
                 </span>
                 <span

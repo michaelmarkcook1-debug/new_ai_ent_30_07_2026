@@ -19,10 +19,10 @@ export function EditorialBanner({
   badge?: React.ReactNode;
 }) {
   return (
-    <section className="rounded-lg border border-primary/25 bg-primary/5 p-4">
+    <section className="finding rounded-lg p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="micro-label text-primary">Analyst Insight</span>
+          <span className="micro-label text-insight">Analyst Insight</span>
           {badge}
         </div>
         <span className="font-mono text-[10px] text-muted">{date}</span>

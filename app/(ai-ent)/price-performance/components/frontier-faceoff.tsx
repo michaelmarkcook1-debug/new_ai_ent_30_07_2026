@@ -49,7 +49,7 @@ export function FrontierFaceOff({ view }: { view: FaceOffView }) {
       </div>
 
       {view.leader && view.leadGap !== null ? (
-        <p className="mt-3 rounded border border-primary/25 bg-primary/5 px-3 py-2 text-[12.5px] leading-relaxed">
+        <p className="finding mt-3 rounded px-3 py-2 text-[12.5px] leading-relaxed">
           <span className="font-semibold">{view.leader.provider}</span>
           &apos;s {view.leader.model} leads on the Intelligence Index at{" "}
           <span className="font-mono font-bold">{view.leader.intelligence}</span>

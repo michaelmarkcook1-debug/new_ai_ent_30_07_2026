@@ -132,7 +132,14 @@ export default function StartPage() {
           </li>
           <li>
             <span className="font-semibold text-base-content">
-              A purple edge means the delivery channel.
+              A purple edge means AG concluded it.
+            </span>{" "}
+            Every analyst insight, recommendation and action carries one, so an
+            interpretation is never mistaken for a measurement.
+          </li>
+          <li>
+            <span className="font-semibold text-base-content">
+              A teal edge means the delivery channel.
             </span>{" "}
             Systems integrators deliver AI but do not build it, and those panels
             are marked so the two are never confused.

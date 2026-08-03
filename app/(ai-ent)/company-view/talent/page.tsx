@@ -48,9 +48,9 @@ export default async function TalentPage({
   return (
     <CompanyShell company={company}>
     <div className="space-y-4">
-      <section className="rounded-lg border border-primary/25 bg-primary/5 p-4">
+      <section className="finding rounded-lg p-4">
         <div className="flex items-center justify-between">
-          <span className="micro-label text-primary">Talent insight</span>
+          <span className="micro-label text-insight">Talent insight</span>
           <LaneBadge lane="sample" />
         </div>
         <p className="measure mt-1 text-[13px] leading-relaxed">{t.insight}</p>

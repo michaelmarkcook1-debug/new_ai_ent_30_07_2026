@@ -27,13 +27,30 @@
      third hue to stay readable at a glance. */
   --ag-aie: #2b50c8;
   --ag-aie-bg: #e6ecfd;
+  /* AG judgement marker. Purple means one thing across the whole product:
+     this is AG's reading, not the underlying data. Every analyst insight,
+     recommendation and action carries it, so a reader can tell an
+     interpretation from a measurement before reading a word.
+
+     Deliberately not any of the other four families. Navy is brand chrome
+     (links, active nav, buttons), blue is the data lane, and green, amber and
+     red are reserved for the verdict a reading carries. Purple sits outside
+     all of them because "who is speaking" is a different question from "what
+     does it say". */
+  --ag-insight: #7c3aed;
+  --ag-insight-bg: #f4efff;
   /* Delivery-channel marker. Systems integrators and IT services deliver AI
      but do not build it, and conflating the two has already caused one wrong
-     read on this product. Purple is reserved for that distinction: it is not
-     the brand accent (green), not the data lane (blue) and not a semantic
-     band, so a purple edge means one thing only. */
-  --ag-channel: #7e22ce;
-  --ag-channel-bg: #f6ecfe;
+     read on this product, so the distinction keeps a hue of its own.
+
+     It was purple until judgement took that colour. Teal rather than a
+     neighbouring violet: two purples on one screen would reintroduce exactly
+     the confusion this marker exists to prevent. Teal against the semantic
+     green is safe because the two never appear in the same form; the channel
+     is always a 3px card edge with a labelled chip, the good band is always
+     text or a pill. */
+  --ag-channel: #0f766e;
+  --ag-channel-bg: #ccfbf1;
 }
 
 [data-theme="dark"] {
@@ -53,8 +70,10 @@
   --ag-red-bg: rgba(255, 68, 68, 0.18);
   --ag-aie: #9db4ff;
   --ag-aie-bg: rgba(43, 80, 200, 0.22);
-  --ag-channel: #c084fc;
-  --ag-channel-bg: rgba(126, 34, 206, 0.22);
+  --ag-insight: #a78bfa;
+  --ag-insight-bg: rgba(124, 58, 237, 0.16);
+  --ag-channel: #5eead4;
+  --ag-channel-bg: rgba(15, 118, 110, 0.22);
 }
 
 @theme inline {
@@ -74,6 +93,8 @@
   --color-bad-bg: var(--ag-red-bg);
   --color-aie: var(--ag-aie);
   --color-aie-bg: var(--ag-aie-bg);
+  --color-insight: var(--ag-insight);
+  --color-insight-bg: var(--ag-insight-bg);
   --color-channel: var(--ag-channel);
   --color-channel-bg: var(--ag-channel-bg);
   --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
@@ -107,6 +128,42 @@ h1, h2, h3, h4 {
 ::selection {
   background: var(--ag-primary);
   color: #fff;
+}
+
+/* ---------------------------------------------------------------------------
+   Judgement.
+
+   Anything AG concluded rather than measured carries the purple edge: analyst
+   insights, recommendations, actions, and the callouts that state a finding.
+   Applied through one class so the rule stays true as surfaces are added,
+   which editing twelve borders by hand would not.
+
+   These surfaces used the brand navy, which is also links, buttons and the
+   active nav item, so a recommendation looked like ordinary chrome and a
+   reader had no way to tell AG's view from the data underneath it.
+
+   `.finding` borders the card. `.finding-figure` is for the other case: where
+   the finding IS a figure rather than a paragraph, the number carries the
+   colour and the card is left alone.
+--------------------------------------------------------------------------- */
+@utility finding {
+  border: 1px solid color-mix(in srgb, var(--ag-insight) 40%, transparent);
+  background-color: color-mix(in srgb, var(--ag-insight) 5%, transparent);
+}
+
+@utility finding-strong {
+  border: 1px solid color-mix(in srgb, var(--ag-insight) 55%, transparent);
+  background-color: color-mix(in srgb, var(--ag-insight) 8%, transparent);
+}
+
+@utility finding-figure {
+  color: var(--ag-insight);
+}
+
+/* The row a recommendation points at, inside a table of candidates. */
+@utility finding-row {
+  background-color: color-mix(in srgb, var(--ag-insight) 9%, transparent);
+  box-shadow: inset 3px 0 0 0 var(--ag-insight);
 }
 
 /* ---------------------------------------------------------------------------

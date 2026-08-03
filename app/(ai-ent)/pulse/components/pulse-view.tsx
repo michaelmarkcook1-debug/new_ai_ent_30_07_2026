@@ -211,7 +211,7 @@ export function PulseView({
           {/* The decision, which is the part a buyer actually needs */}
           <div className="@container @4xl:col-span-1">
             {decision ? (
-              <div className="rounded-lg border border-primary/40 bg-primary/5 p-4">
+              <div className="finding-strong rounded-lg p-4">
                 <MicroLabel
                   label="What to do about it"
                   tooltip="The same composite, stated as an action."

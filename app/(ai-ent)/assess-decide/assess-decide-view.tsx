@@ -129,8 +129,12 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
         </div>
       </section>
 
-      {/* Headline, recomputed from the user's weights */}
-      <section className="flex flex-wrap items-center gap-6 rounded-lg border border-base-300 bg-base-100 p-5">
+      {/* Headline, recomputed from the user's weights. The weighted total is
+          AG's assessment rather than a published figure, so the card carries
+          the judgement edge. The ring keeps the semantic band, because the
+          colour of the score answers what the verdict is, not who reached
+          it. */}
+      <section className="finding flex flex-wrap items-center gap-6 rounded-lg p-5">
         <svg width="110" height="110" viewBox="0 0 110 110">
           <circle cx="55" cy="55" r={r} fill="none" stroke="var(--ag-base-300)" strokeWidth="9" opacity="0.5" />
           <circle

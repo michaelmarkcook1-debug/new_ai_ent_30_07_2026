@@ -41,9 +41,17 @@ const q = (n: number): number => Math.round(n * 1000) / 1000;
 
 // Type palette, matching the dependency graph's vocabulary so the two views
 // agree on what a partnership and an investment look like.
+// Edge types are relationship kinds, not verdicts and not judgements, so
+// neither may borrow a reserved hue.
+//
+// Investment was #8b5cf6, which is the judgement purple to within a shade. On
+// a product where purple now means "AG concluded this", an investment edge
+// drawn in it reads as a recommendation. Magenta is far enough from the purple
+// to separate at a glance and far enough from the error red not to look like a
+// warning.
 const TYPE_COLOUR: Record<string, string> = {
   commercial_partnership: "#0b8457",
-  investment: "#8b5cf6",
+  investment: "#be185d",
 };
 const TYPE_LABEL: Record<string, string> = {
   commercial_partnership: "Commercial partnership",

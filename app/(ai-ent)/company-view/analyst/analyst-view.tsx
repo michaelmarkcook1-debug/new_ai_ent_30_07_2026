@@ -187,10 +187,10 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
             messages.map((m, i) => (
               <div key={i} className={m.role === "user" ? "flex justify-end" : "flex justify-start"}>
                 <div
+                  // The analyst's answer is a finding, so it carries the
+                  // judgement edge; the user's own message does not.
                   className={`max-w-[85%] rounded-lg px-3 py-2 text-[13px] leading-relaxed ${
-                    m.role === "user"
-                      ? "bg-primary text-white"
-                      : "border border-base-300 bg-base-200/60"
+                    m.role === "user" ? "bg-primary text-white" : "finding"
                   }`}
                 >
                   <p className="whitespace-pre-wrap">{m.text}</p>

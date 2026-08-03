@@ -519,3 +519,44 @@ Dates are absolute; the build day is 30 July 2026.
     not retain its evidence. These 36 can be checked and those 258 cannot, which
     is an odd inversion of the usual assumption that the shipped data is the
     stronger. No SME has reviewed either set.
+26. **Purple marks AG's judgement (3 August 2026).** Michael asked for every
+    recommendation and analyst finding to carry a purple border on the card or
+    a purple highlight on the data point.
+    Findings and recommendations were rendered in the brand navy, which is also
+    every link, button and the active nav item, so the one thing on a page that
+    was AG's opinion looked exactly like the chrome around it. Purple now
+    answers a question no other colour on the product answers: **who is
+    speaking**. Navy is chrome, blue is the data lane, and green, amber and red
+    stay reserved for **what the verdict is**. The two are deliberately kept
+    apart: the Analyst Insight action sits in a purple box with a green, amber
+    or red pill inside it, and the Assess and Decide card has a purple edge
+    around an amber score ring.
+    Applied through four utilities in `globals.css` rather than a dozen
+    hand-edited borders, so the rule survives new surfaces: `finding`,
+    `finding-strong`, `finding-figure` and `finding-row`.
+    **Purple had to be taken off three other things first**, or the marker
+    would have meant two contradictory things at once:
+    - **The delivery channel** owned purple, under an explicit "purple means
+      one thing only" rule. It moves to teal. Teal against the semantic green
+      is safe because the forms never overlap: the channel is always a 3px card
+      edge with a labelled chip, the good band is always text or a pill.
+    - **The alliance map drew investment edges in `#8b5cf6`**, which is the
+      judgement purple to within a shade, so an investment read as a
+      recommendation. Now magenta.
+    - **Two categorical chart palettes carried `#7c3aed` itself**, the exact
+      judgement hue, as a vendor series colour. Both swapped for olive. A
+      second, more magenta purple (`#9333ea`) stays in those palettes: a
+      labelled categorical key is not making a claim, and removing it would
+      cost hue separation across ten and eleven series.
+    Deliberately **not** marked, because purple means AG concluded it and these
+    are the opposite: the verbatim company filing quotes on Financial Snapshot
+    ("Stated by the company"), the filter-status notices on Competitive Intel,
+    and the sharp questions on Interrogate, which lead to a finding but are not
+    one. The Start page legend, which documented purple as the delivery
+    channel, now states both meanings.
+    Verified across every tab: every element labelled Analyst insight, Overall
+    recommendation, Recommended action, Recommended model, What to do about it,
+    Talent insight or Tailored finding resolves inside a purple-marked surface,
+    in light and dark. Ecosystem Navigator and Financial Snapshot show none
+    because the Analyst Insight is not wired on those two pages, which is a
+    pre-existing gap rather than a missed marker.

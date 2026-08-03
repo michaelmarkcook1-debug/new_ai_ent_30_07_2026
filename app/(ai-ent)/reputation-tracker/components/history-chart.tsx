@@ -44,7 +44,7 @@ const PILLARS: { key: PillarKey; label: string; help: string }[] = [
 
 const PALETTE = [
   "#2b50c8", "#e8590c", "#9333ea", "#0891b2", "#be185d",
-  "#b45309", "#dc2626", "#7c3aed", "#0369a1", "#64748b",
+  "#b45309", "#dc2626", "#4d7c0f", "#0369a1", "#64748b",
 ];
 
 const W = 900;

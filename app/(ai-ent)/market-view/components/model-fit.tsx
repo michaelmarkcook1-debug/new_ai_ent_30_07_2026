@@ -745,12 +745,17 @@ export function ModelFit() {
                   <>
                     {h.model ? (
                       <p className="mt-3">
-                        <span className="micro-label block">
+                        <span className="micro-label block text-insight">
                           {answer.outcome === "best available"
                             ? "Allocated, not a fit"
                             : "Recommended model"}
                         </span>
-                        <span className="mt-0.5 block break-words text-[32px] font-extrabold leading-[1.15] tracking-tight text-primary sm:text-[38px]">
+                        {/* The recommendation is a name, not a paragraph, so
+                            the figure carries the judgement colour rather
+                            than the card around it. Purple, not the brand
+                            navy: navy is also every link and button on the
+                            page. */}
+                        <span className="finding-figure mt-0.5 block break-words text-[32px] font-extrabold leading-[1.15] tracking-tight sm:text-[38px]">
                           {h.model}
                         </span>
                       </p>

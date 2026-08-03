@@ -265,12 +265,16 @@ export function InterrogateView() {
           {turns.map((t, i) => (
             <div key={i} className={t.role === "user" ? "flex justify-end" : "flex justify-start"}>
               <div
+                // The finding carries the judgement edge; the questions that
+                // led to it do not, because a question is not a conclusion.
                 className={`max-w-[90%] rounded-lg px-4 py-3 text-[13.5px] leading-relaxed ${
                   t.role === "user"
                     ? "bg-primary text-white"
-                    : t.kind === "question"
-                      ? "border border-primary/40 bg-primary/5"
-                      : "border border-base-300 bg-base-100"
+                    : t.kind === "finding"
+                      ? "finding-strong"
+                      : t.kind === "question"
+                        ? "border border-primary/40 bg-primary/5"
+                        : "border border-base-300 bg-base-100"
                 }`}
               >
                 {t.kind === "question" ? (
@@ -279,7 +283,7 @@ export function InterrogateView() {
                   </p>
                 ) : null}
                 {t.kind === "finding" ? (
-                  <p className="micro-label mb-1">Tailored finding</p>
+                  <p className="micro-label mb-1 text-insight">Tailored finding</p>
                 ) : null}
                 <p className="whitespace-pre-wrap">{t.text}</p>
                 {t.links && t.links.length > 0 ? (

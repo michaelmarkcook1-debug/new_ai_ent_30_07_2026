@@ -119,7 +119,10 @@ export function PulseHero({
       </dl>
 
       <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-base-300 pt-4">
-        <span className="rounded-full bg-primary px-3 py-1 text-[12px] font-semibold text-white">
+        {/* Purple, not the brand navy. Navy is also links, buttons and the
+            active nav item, so the single most important sentence on the page
+            was rendered in the same colour as the chrome around it. */}
+        <span className="rounded-full bg-[var(--ag-insight)] px-3 py-1 text-[12px] font-semibold text-white">
           {action}
         </span>
         <MetaRow meta={meta} />
@@ -152,18 +155,15 @@ export function ExecutiveActions({
         tooltip="The actions that follow from today's judgement."
       />
       {/* These are the only cards on the page a reader is meant to act on, so
-          they carry a light primary tint and an accent rule to set them apart
-          from the readings around them. Kept deliberately quiet: three cards at
-          the weight of the overall recommendation box would compete with the
+          they carry the judgement edge that marks everything AG concluded
+          rather than measured. Kept at the lighter weight: three cards as
+          strong as the overall recommendation box would compete with the
           judgement above rather than follow from it. */}
       <ol className="mt-2 grid grid-cols-1 gap-3 @4xl:grid-cols-3">
         {actions.map((a, i) => (
-          <li
-            key={a.action}
-            className="rounded-lg border border-primary/35 bg-primary/[0.04] p-4"
-          >
+          <li key={a.action} className="finding rounded-lg p-4">
             <div className="flex items-baseline gap-2.5">
-              <span className="font-mono text-[13px] font-bold text-primary">
+              <span className="finding-figure font-mono text-[13px] font-bold">
                 {i + 1}
               </span>
               <h3 className="text-[13.5px] font-bold">{a.action}</h3>
@@ -243,7 +243,7 @@ export function Scorecard({
         against.
       </p>
 
-      <div className="mt-3 rounded-lg border border-primary/40 bg-primary/5 p-4">
+      <div className="finding-strong mt-3 rounded-lg p-4">
         <MicroLabel label="Overall recommendation" />
         <p className="mt-1 measure text-[13px] leading-snug">
           {brief.overall.recommendation}
