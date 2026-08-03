@@ -31224,99 +31224,104 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
-    "score": 50,
-    "critical": "Desirable",
-    "evidence_class": "E"
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "A"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
-    "score": 30,
-    "critical": "Desirable",
-    "evidence_class": "E"
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "B"
    },
    "CAP-16": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 8,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Agronomy is expert domain knowledge applied to field imagery; a wrong recommendation costs a season, not a life.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Holding the BASIS Certificate in Crop Protection has been a legal requirement since 1985 for anyone advising on or supplying plant protection products in the UK, and crop assurance schemes require advisers to sit on the BASIS Professional Register, so the domain, compliance and assurance requirements are set in law and by a register rather than inferred.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.basis-reg.co.uk/portals/0/documents/syllabuses/10915.pdf",
+   "https://www.hse.gov.uk/pesticides/using-pesticides/codes-of-practice/guidance-sustainable-use-ppp-regs-2012.htm",
+   "https://nationalcareers.service.gov.uk/job-profiles/agronomist"
+  ],
   "onet_analogue": "Soil and Plant Scientists"
  },
  "ROLE-0288": {
@@ -31328,99 +31333,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 12,
   "seniority": "Manager",
   "authority": "Operational",
-  "note": "Runs multi-stage operations independently across a seasonal workforce.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Responsible for a productive and sustainable livestock business meeting animal welfare and environmental standards, and for keeping farm assurance, training and environmental records accurate.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://tiah.org/w/farm-manager-livestock",
+   "https://www.businesscompanion.info/en/quick-guides/animals-and-agriculture"
+  ],
   "onet_analogue": "Farmers, Ranchers, and Other Agricultural Managers"
  },
  "ROLE-0289": {
@@ -31432,99 +31441,104 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "B"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-11": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "B"
    },
    "CAP-16": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 6,
   "seniority": "Manager",
   "authority": "Tactical",
-  "note": "HACCP is prescribed to the letter and an undetected error is a foodborne illness, so accuracy and assurance both sit at the top band.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "A documented HACCP-based food safety management system is a legal requirement, and BRCGS adds an audited standard covering traceability, allergen management and corrective action that retailers require contractually. An undetected failure is a foodborne illness, which is why accuracy and assurance both sit in the top band.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.brcgs.com/our-standards/food-safety",
+   "https://www.brcgs.com/media/2170948/fsi9-gn-sample.pdf",
+   "https://ehaccp.org/haccp-and-the-brc-scheme/27/04/2023/09/42/"
+  ],
   "onet_analogue": "Quality Control Systems Managers"
  },
  "ROLE-0287": {
@@ -31536,99 +31550,104 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-16": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 10,
   "seniority": "Manager",
   "authority": "Operational",
-  "note": "Animal welfare regulation plus visual assessment of condition as a core task.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Animal medicine records must be kept and made available for inspection by the authority, and the role is audited under farm assurance schemes. Physical inspection of condition, hygiene and disease signs is a routine duty, which is what puts visual interpretation high.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.nal.usda.gov/animal-health-and-welfare/animal-welfare-act-quick-reference-guides",
+   "https://tiah.org/w/farm-manager-livestock",
+   "https://www.vet.cornell.edu/animal-health-diagnostic-center/programs/nyschap/modules-documents/best-management-practices"
+  ],
   "onet_analogue": "Farmers, Ranchers, and Other Agricultural Managers"
  },
  "ROLE-0290": {
@@ -31640,99 +31659,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-16": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 14,
   "seniority": "Manager",
   "authority": "Operational",
-  "note": "Line orchestration where a failed handoff stops production within minutes.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Enforces compliance with food safety regulation and workplace safety standards while coordinating quality assurance, maintenance and logistics against production targets, so a failed handoff stops a line.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://careers.acbsp.org/career/food-processing-plant-manager/job-descriptions",
+   "https://www.careerexplorer.com/careers/food-production-supervisor/"
+  ],
   "onet_analogue": "Industrial Production Managers"
  },
  "ROLE-0241": {
@@ -31744,99 +31767,104 @@
    "CAP-01": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-10": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-11": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 18,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Airworthiness directives are prescribed to the letter and an undetected error is a safety event; seven mandatory requirements make it broad too.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Continuing airworthiness sits under EASA Part-M and maintenance organisations under Part-145, which mandate approved procedures, qualified licensed personnel, documented compliance monitoring and a quality system. Deviation is not a preference, and the consequence of an undetected error is a safety event.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.easa.europa.eu/en/the-agency/faqs/aircraft-maintenance-and-continuing-airworthiness",
+   "https://www.aviathrust.com/article/EASA-Part-145-Simplified",
+   "https://www.aircraftengineer.info/easa-part-145/"
+  ],
   "onet_analogue": "Production, Planning, and Expediting Clerks"
  },
  "ROLE-0244": {
@@ -31848,99 +31876,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 25,
   "seniority": "Individual contributor",
   "authority": "Operational",
-  "note": "Recovery decisions in seconds, over radio, with money and passengers moving.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Recovery coordination against a live schedule, over voice, where the value of a decision decays by the minute.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.airwaysmag.com/legacy-posts/flight-dispatchers-ensure-safety",
+   "https://www.iata.org/en/publications/newsletters/iata-knowledge-hub/what-it-takes-to-become-a-ramp-supervisor-from-a-to-z/"
+  ],
   "onet_analogue": "Dispatchers, Except Police, Fire, and Ambulance"
  },
  "ROLE-0239": {
@@ -31952,99 +31984,104 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-11": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
-    "score": 70,
+    "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 30,
   "seniority": "Individual contributor",
   "authority": "Operational",
-  "note": "The most demanding profile in this set: safety-critical, prescribed, real-time and spoken all at once.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "ICAO Annex 6 permits operational control to be delegated only to the pilot-in-command and the flight operations officer, and Annex 1 sets the licence. The role is accountable for a flight operating safely and within airspace regulation until it lands: the most demanding profile in this set, and the only one high on speech as well.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.icao.int/sites/default/files/Meetings/a42/Documents/WP/wp_621_en.pdf",
+   "https://sassofia.com/blog/icao-annex-6-part-i-general-requirements-and-state-responsibilities/",
+   "https://www.airwaysmag.com/legacy-posts/flight-dispatchers-ensure-safety"
+  ],
   "onet_analogue": "Airfield Operations Specialists"
  },
  "ROLE-0240": {
@@ -32056,99 +32093,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 20,
   "seniority": "Manager",
   "authority": "Operational",
-  "note": "Turnaround management against a clock, under a safety regime.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Oversees ramp servicing and turnaround so a flight departs safely and on time, managing staff performance and equipment inspection against a clock and a safety regime.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.iata.org/en/publications/newsletters/iata-knowledge-hub/what-it-takes-to-become-a-ramp-supervisor-from-a-to-z/",
+   "https://an.aero/what-ramp-agents-do-and-why-they-are-important/"
+  ],
   "onet_analogue": "Transportation, Storage, and Distribution Managers"
  },
  "ROLE-0242": {
@@ -32160,99 +32201,104 @@
    "CAP-01": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 10,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Network economics: novel problems, forecasting, and routine SQL.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Designs and optimises the route network: demand forecasting, aircraft assignment by range and load, slot constraints at congested airports, and route profitability, using scheduling optimisation software.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.iata.org/en/publications/newsletters/iata-knowledge-hub/how-to-work-in-airline-network-planning/",
+   "https://www.routesonline.com/download/content/10955/job-description/",
+   "https://talents.vaia.com/companies/american-airlines/fort-worth/analyst-network-and-schedule-planning-74421871/"
+  ],
   "onet_analogue": "Computer Network Architects"
  },
  "ROLE-0243": {
@@ -32264,99 +32310,104 @@
    "CAP-01": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 8,
   "seniority": "Manager",
   "authority": "Tactical",
-  "note": "Pricing science at method level, where the technique itself is chosen and defended.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Continuously updates demand forecasts from booking trends, competitor pricing, capacity and macroeconomic indicators, and adjusts seat availability across fare classes. The technique itself is chosen and defended, which is what puts quantitative reasoning at the top band.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://jobs.aa.com/job/Fort-Worth-Analyst,-Revenue-Management-Pricing-&-Yield-Management-TX-76101/86957-en_US/",
+   "https://careers.jetblue.com/job/Long-Island-City-Analyst-Revenue-Management-NY-11101/1409884000/",
+   "https://jobdescription.org/job-descriptions/airline-revenue-management-analyst-job-description-transportation"
+  ],
   "onet_analogue": "Financial and Investment Analysts"
  },
  "ROLE-0229": {
@@ -32368,99 +32419,104 @@
    "CAP-01": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 14,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Novel problems and visual composition; errors are rework, not harm.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Defines mechanics, progression and economy, balances difficulty curves against telemetry, and communicates the design through documentation, diagrams and visual mockups. Errors are rework, not harm.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.cgspectrum.com/career-pathways/game-designer",
+   "https://www.indeed.com/hire/job-description/game-designer",
+   "https://www.velvetjobs.com/job-descriptions/game-designer"
+  ],
   "onet_analogue": "Video Game Designers"
  },
  "ROLE-0230": {
@@ -32472,99 +32528,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 40,
   "seniority": "Individual contributor",
   "authority": "Operational",
-  "note": "Production software against an interdependent codebase.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Builds and prototypes gameplay systems in engine, against an interdependent codebase, validating feel and pacing before release.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.cgspectrum.com/career-pathways/game-designer",
+   "https://workscreen.io/game-designer-job-description-template/"
+  ],
   "onet_analogue": "Video Game Designers"
  },
  "ROLE-0231": {
@@ -32576,99 +32636,104 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 10,
   "seniority": "Manager",
   "authority": "Tactical",
-  "note": "Live service: metrics-driven, orchestrated, and waiting on nobody.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Runs the game after release: plans in-game events, monitors player data, handles live issues and server problems, and leads crisis management during an outage.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://intogames.org/careers/role/live-operations-manager",
+   "https://gamingcampus.com/careers/live-operations-manager.html",
+   "https://alderongames.com/work-with-us/live-operations-manager"
+  ],
   "onet_analogue": "General and Operations Managers"
  },
  "ROLE-0233": {
@@ -32680,99 +32745,103 @@
    "CAP-01": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
-    "score": 50,
+    "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 12,
   "seniority": "Manager",
   "authority": "Operational",
-  "note": "External voice to a global player base, routinely across languages.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "The studio's public voice: newsletters, social channels, live streams and handling criticism, feeding player sentiment back to designers. The sources did not establish a cross-language requirement, so it is not scored as one.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.screenskills.com/job-profiles/browse/games/production/community-manager/",
+   "https://workello.com/community-manager-video-games-job-description/"
+  ],
   "onet_analogue": "Public Relations Managers"
  },
  "ROLE-0232": {
@@ -32784,99 +32853,104 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-15": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-16": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 22,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Special-category reports, image and voice moderation, and translation where meaning must survive: the only role here demanding on all three modalities.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Reviews reports and takes enforcement action under platform policy, collecting and documenting evidence for regulatory enquiries and legal action, under online safety regimes including the DSA. Handles abuse reports and identity fraud, across image, voice and language.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.tspa.org/curriculum/ts-curriculum/functions-roles/",
+   "https://www.ismartrecruit.com/job-descriptions/trust-and-safety-analyst",
+   "https://powderkeg.com/job/16298/"
+  ],
   "onet_analogue": "Security Management Specialists"
  },
  "ROLE-0265": {
@@ -32888,99 +32962,104 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-15": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-16": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 6,
   "seniority": "Manager",
   "authority": "Tactical",
-  "note": "Research data under governance: pipelines, retention and audit.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Builds and operates research data governance so practice is compliant with legal, ethical, contractual and funder requirements, including GDPR on sensitive data and FAIR principles in funder data management plans.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://jobs.edgehill.ac.uk/Upload/vacancies/files/3357/EHA2444-0523%20-%20Research%20Data%20Manager%20-JDPS.pdf",
+   "https://libguides.ucd.ie/data/resources",
+   "https://casrai.org/guides/research-data-governance"
+  ],
   "onet_analogue": "Database Architects"
  },
  "ROLE-0262": {
@@ -32992,99 +33071,104 @@
    "CAP-01": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 35,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Work defined by problems nobody has framed, in a field that is unsettled.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Conducts independent research leading to publication, applies for grants and fellowships, and mentors students. The work is defined by questions nobody has settled, which is the definition of the top band on intelligence, reasoning and domain.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.velvetjobs.com/job-descriptions/postdoctoral-research-fellow",
+   "https://www.academicjobs.com/jobs-and-careers/what-is-a-research-fellow-how-to-become-one-academicjobs-24256",
+   "https://www.stonybrook.edu/commcms/postdoc/docs/Postdoc%20Hiring%20Tips%20-%20Jobchartfinal.pdf"
+  ],
   "onet_analogue": "Survey Researchers"
  },
  "ROLE-0263": {
@@ -33096,99 +33180,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 7,
   "seniority": "Manager",
   "authority": "Tactical",
-  "note": "Funder rules are strict and the submission is a binding persuasive document.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Develops and implements funding applications against funder rules, where the submission is a persuasive document that binds the institution.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.velvetjobs.com/job-descriptions/postdoctoral-research-fellow",
+   "https://casrai.org/guides/research-data-governance"
+  ],
   "onet_analogue": "Natural Sciences Managers"
  },
  "ROLE-0264": {
@@ -33200,99 +33288,104 @@
    "CAP-01": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-15": {
-    "score": 50,
-    "critical": "Desirable",
-    "evidence_class": "E"
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "A"
    },
    "CAP-16": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 16,
   "seniority": "Manager",
   "authority": "Operational",
-  "note": "Student records carry immigration and funding consequence.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Runs right-to-study checks for students subject to immigration control, monitors visa status, refusal, non-enrolment and non-completion rates, and prepares for audit. A record error is an immigration and sponsor licence consequence, not an inconvenience.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.port.ac.uk/about-us/structure-and-governance/legal/ukvi-student-compliance",
+   "https://jobs.uwl.ac.uk/Upload/vacancies/files/1686/DIR043%20-%20Job%20Description%20-%20UKVI%20Compliance%20Officer.pdf",
+   "https://www.jobs.ac.uk/job/DQL646/student-immigration-compliance-and-advice-manager"
+  ],
   "onet_analogue": "Education Administrators, Postsecondary"
  },
  "ROLE-0261": {
@@ -33304,99 +33397,104 @@
    "CAP-01": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 45,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Authority-level domain knowledge delivered as live spoken interaction.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Roughly 40 per cent teaching, 40 per cent research, 20 per cent administration: delivers lectures and seminars, sets, marks and moderates assessment, supervises projects and publishes. Live spoken delivery is the core mode, which is what puts speech at band four.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.prospects.ac.uk/job-profiles/higher-education-lecturer/",
+   "https://jobs.bcu.ac.uk/Upload/vacancies/files/6319/Lecturer.pdf",
+   "https://www.hr.admin.cam.ac.uk/files/usl.pdf"
+  ],
   "onet_analogue": "Business Teachers, Postsecondary"
  },
  "ROLE-0280": {
@@ -33408,99 +33506,103 @@
    "CAP-01": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 5,
   "seniority": "Manager",
   "authority": "Tactical",
-  "note": "Systematic review across a large client corpus.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Organises and shares firm knowledge so the right material reaches the right team at the right time, across a large client corpus.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://em-lyon.com/en/student/guides/jobs/knowledge-manager",
+   "https://creativesoncall.com/services/learning-and-knowledge-management/knowledge-management-consulting/"
+  ],
   "onet_analogue": "Document Management Specialists"
  },
  "ROLE-0279": {
@@ -33512,99 +33614,103 @@
    "CAP-01": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 30,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Runs client programmes independently, and is answerable for the read.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Develops and manages scope, plan, risks, issues and dependencies, runs governance meetings and drives business readiness, answerable for delivery rather than for the recommendation.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.velvetjobs.com/job-descriptions/business-transformation-consultant",
+   "https://www.indeed.com/hire/job-description/management-consultant"
+  ],
   "onet_analogue": "Management Analysts"
  },
  "ROLE-0278": {
@@ -33616,99 +33722,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 18,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Establishes what is known in a market and where the gaps are.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Combines research, data analysis and interviews to establish what is known in a market and where the gaps are, which is the top band on research and synthesis.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.indeed.com/hire/job-description/management-consultant",
+   "https://www.joinleland.com/library/a/what-do-consultants-do-at-mckinsey-bcg-and-bain"
+  ],
   "onet_analogue": "Market Research Analysts and Marketing Specialists"
  },
  "ROLE-0276": {
@@ -33720,99 +33830,104 @@
    "CAP-01": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 24,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Board-facing language where exact wording carries market consequence, on material non-public information.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Structured recommendations to leadership for evidence-based decisions, on problems whose shape has to be worked out first, on material the client has not made public.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.mckinsey.com/careers/our-roles/consulting-roles",
+   "https://www.mckinsey.com/careers/search-jobs/jobs/consultant-37690",
+   "https://www.preplounge.com/en/blog/consulting/area/strategy-consulting"
+  ],
   "onet_analogue": "Management Analysts"
  },
  "ROLE-0277": {
@@ -33824,99 +33939,103 @@
    "CAP-01": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 26,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Change delivery: broad but not as sharp-edged as strategy.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Guides change programmes through transformation and acts as the single point of contact for portfolio and programme managers.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.velvetjobs.com/job-descriptions/transformation-consultant",
+   "https://www.velvetjobs.com/job-descriptions/change-management-consultant"
+  ],
   "onet_analogue": "Management Analysts"
  },
  "ROLE-0285": {
@@ -33928,99 +34047,104 @@
    "CAP-01": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "B"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-16": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 15,
   "seniority": "Manager",
   "authority": "Operational",
-  "note": "Statutory building compliance, and incidents that will not wait.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Owns the statutory compliance programme for fire safety, asbestos, legionella, fixed-wire and emergency lighting, ensuring testing, servicing, risk assessments and resulting actions are completed and recorded, now within the building safety regime.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.iwfm.org.uk/professional-development/popular-courses/building-safety-act-for-facilities-managers.html",
+   "https://www.sfg20.co.uk/resources/article/facilities-management-compliance-ultimate-guide",
+   "https://jobs.iwfmjobs.com/job/71205/facilities-manager/?deviceType=Desktop&TrackID=5"
+  ],
   "onet_analogue": "Facilities Managers"
  },
  "ROLE-0284": {
@@ -34032,99 +34156,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 11,
   "seniority": "Manager",
   "authority": "Tactical",
-  "note": "Lease terms are binding documents and an error is expensive.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Researches applicant background, negotiates lease agreements and completes the paperwork, against occupancy and rate targets. The lease is a binding document, which is what puts writing at band four.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.salary.com/research/job-description/benchmark/commercial-leasing-manager-job-description",
+   "https://careers.taa.org/career/leasing-manager/job-descriptions"
+  ],
   "onet_analogue": "Property, Real Estate, and Community Association Managers"
  },
  "ROLE-0281": {
@@ -34136,99 +34264,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 9,
   "seniority": "Manager",
   "authority": "Tactical",
-  "note": "Asset strategy on modelled returns across an interdependent portfolio.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Runs budgets, tracks income and expense and reports to landlords and investors, researching market trends and rates across an interdependent portfolio.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.milbrookproperties.com/post/day-to-day-responsibilities-of-commercial-property-managers",
+   "https://careers.taa.org/career/leasing-property-manager/job-descriptions"
+  ],
   "onet_analogue": "Property, Real Estate, and Community Association Managers"
  },
  "ROLE-0282": {
@@ -34240,99 +34372,104 @@
    "CAP-01": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 28,
   "seniority": "Manager",
   "authority": "Operational",
-  "note": "Statutory duties on tenant safety and deposits, on personal data.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Annual gas safety inspection by a registered engineer, records kept and certificates issued to tenants within statutory windows, and deposit handling where non-compliance carries penalty damages of two to three times the deposit. Compliance here is law, not policy.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.johnsand.co/news/landlord-responsibilities-for-gas-safety-checks",
+   "https://gassafetycerts.com/article/legal-requirements-for-landlords-gas-safety-certificates",
+   "https://www.digonzini.com/blog/the-legal-responsibilities-of-a-property-manager"
+  ],
   "onet_analogue": "Property, Real Estate, and Community Association Managers"
  },
  "ROLE-0283": {
@@ -34344,99 +34481,104 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "B"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "B"
    },
    "CAP-11": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "B"
    },
    "CAP-12": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "B"
    },
    "CAP-16": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 13,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "A registered valuer is individually accountable and a negligent valuation is a legal liability: ten mandatory requirements, the broadest profile in this set.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Red Book Global Standards are mandatory rules for RICS members, and a registered valuer joins the Valuer Registration Scheme and agrees to risk-based audit in which RICS reviews a sample of valuations, files and reports. Individual accountability with a registration consequence is the definition of the top assurance band.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.rics.org/profession-standards/rics-standards-and-guidance/sector-standards/valuation-standards/red-book/red-book-global",
+   "https://www.rics.org/regulation/regulatory-schemes/valuer-registration",
+   "https://www.rics.org/surveyor-careers/career-development/accreditations/valuer-registration-assessment"
+  ],
   "onet_analogue": "Appraisers and Assessors of Real Estate"
  },
  "ROLE-0200": {
@@ -34448,99 +34590,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 7,
   "seniority": "Manager",
   "authority": "Tactical",
-  "note": "Portfolio performance against contracted availability.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Owns portfolio performance and availability against contracted terms, coordinating operations and reporting to owners and investors.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://rejobs.org/en/renewable-energy-jobs/energy-analytics",
+   "https://www.lviassociates.com/en-us/industry-insights/hiring-advice/the-role-of-a-project-developer-in-renewable-energy"
+  ],
   "onet_analogue": "Wind Energy Operations Managers"
  },
  "ROLE-0199": {
@@ -34552,99 +34698,104 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 90,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 6,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Method-level forecasting where the technique is chosen and defended, and an error is an imbalance charge within the hour.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Develops and maintains demand and renewable generation forecasting models, and analyses the relationship between forecasts, forward markets, system prices and imbalance cost. An error is an imbalance charge within the settlement period, which is what puts latency and accuracy high.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://smartestenergy.teamtailor.com/jobs/8139670-forecasting-analyst",
+   "https://jobs.engie.com/job/Forescasting-Analyst/60588-en_US/",
+   "https://rejobs.org/en/renewable-energy-jobs/energy-analytics"
+  ],
   "onet_analogue": "Operations Research Analysts"
  },
  "ROLE-0198": {
@@ -34656,99 +34807,104 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-04": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-12": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "A"
    },
    "CAP-16": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 9,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Grid codes are strict and a connection study is checked by the operator.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Grid code compliance is mandatory for grid-connected generation, and violation can bring penalties, generation restrictions or disconnection. The engineer carries a project from application through to Final Operational Notification with the system operator reviewing the work.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.nationalgrid.com/electricity-transmission/connections/detailed-connections-process",
+   "https://www.abb.com/global/en/industries/power-generation/solutions/grid-stability/grid-code-compliance",
+   "https://www.intertek.com/power-transmission-distribution/grid-code-compliance/"
+  ],
   "onet_analogue": "Electrical Engineers"
  },
  "ROLE-0196": {
@@ -34760,99 +34916,104 @@
    "CAP-01": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 12,
   "seniority": "Individual contributor",
   "authority": "Tactical",
-  "note": "Consent is won on contested evidence and persuasive written submissions.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Runs a project from site identification and fatal-flaw review through permitting and land agreements to financial close, managing consultants and supporting the consent process against contested local evidence.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://www.lviassociates.com/en-us/industry-insights/hiring-advice/the-role-of-a-project-developer-in-renewable-energy",
+   "https://www.akuoenergy.com/en/our-professions/renewable-energy-project-developper",
+   "https://www.greenrecruitmentcompany.com/job/renewable-energy-project-developer"
+  ],
   "onet_analogue": "Wind Energy Development Managers"
  },
  "ROLE-0197": {
@@ -34864,99 +35025,103 @@
    "CAP-01": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-02": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-03": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-04": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-05": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-06": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-07": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-08": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-09": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-10": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-11": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-12": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-13": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-14": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-15": {
     "score": 70,
     "critical": "Mandatory",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-16": {
     "score": 50,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-17": {
     "score": 30,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    },
    "CAP-18": {
     "score": 10,
     "critical": "Desirable",
-    "evidence_class": "E"
+    "evidence_class": "D"
    }
   },
   "headcount": 16,
   "seniority": "Manager",
   "authority": "Operational",
-  "note": "Safety-critical generation assets under a real-time control regime.",
-  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "note": "Runs generation assets to availability and safety targets under a real-time control regime, coordinating maintenance against output.",
+  "profile_source": "researched: regulation and mandatory standards first, then professional bodies, then current job descriptions",
+  "sources": [
+   "https://rejobs.org/en/renewable-energy-jobs/energy-analytics",
+   "https://www.abb.com/global/en/industries/power-generation/solutions/grid-stability/grid-code-compliance"
+  ],
   "onet_analogue": "Wind Energy Operations Managers"
  }
 }

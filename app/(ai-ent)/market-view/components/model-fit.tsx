@@ -97,6 +97,15 @@ const EVIDENCE_TITLE: Record<EvidenceKind, string> = {
     "A stated assumption, not a measurement. Adjustable in the controls above, because that is what makes an uncalibrated tool honest.",
 };
 
+/** The rubric's evidence classes, in its own words. */
+const EVIDENCE_CLASS_LABEL: Record<string, string> = {
+  A: "Regulatory or statutory: the duty is defined in law, regulation or a mandatory standard",
+  B: "Professional body: a competency framework from a chartered or professional institute",
+  C: "Occupational survey: O*NET or equivalent incumbent-rated data",
+  D: "Labour market: convergent evidence from multiple current job descriptions",
+  E: "Reasoned judgement: assessor inference from the role definition, no external source",
+};
+
 function EvidenceChip({ kind, label }: { kind: EvidenceKind; label?: string }) {
   return (
     <span
@@ -484,12 +493,19 @@ export function ModelFit() {
   const mandatoryCount = role
     ? Object.values(role.profile).filter((v) => v.critical === "Mandatory").length
     : 0;
-  // Authored for this build rather than researched. The engine already floors
-  // confidence at the worst evidence class, but a buyer should not have to infer
-  // that from a word in a facts strip.
-  const authoredProfile =
-    role != null &&
-    Object.values(role.profile).every((v) => v.evidence_class === "E");
+  // Roles added after the package shipped carry their sources. Showing them is
+  // the point: a profile a buyer can check is worth more than one they cannot,
+  // and the 258 that came with the package cite none.
+  const researched = role?.sources?.length ? role : null;
+  const evidenceMix = useMemo(() => {
+    if (!role) return null;
+    const c: Record<string, number> = {};
+    for (const v of Object.values(role.profile)) {
+      const k = v.evidence_class ?? "E";
+      c[k] = (c[k] ?? 0) + 1;
+    }
+    return c;
+  }, [role]);
 
   // What the catalogue filter costs, stated where the filter is. A toggle that
   // silently removes a third of the market is a toggle that lies by omission.
@@ -702,21 +718,56 @@ export function ModelFit() {
               <p className="mt-2 max-w-[62ch] text-[14px] leading-relaxed">
                 {headline(answer, detail, engine, role)}
               </p>
-              {authoredProfile ? (
-                <p className="measure mt-3 border-l-[3px] border-warn bg-warn-bg/40 px-3 py-2 text-[12.5px] leading-relaxed">
-                  <b>Weaker evidence than the rest of the library.</b> This role&apos;s
-                  requirements were authored against the rubric for this build, inferred from
-                  the role definition and its occupational analogue. The other 258 roles rest on
-                  convergent evidence from current job descriptions. That is the difference
-                  between evidence class E and class D, it is why this answer&apos;s confidence
-                  reads lower, and no subject-matter expert has reviewed either.
-                  {role.onet_analogue ? (
-                    <>
-                      {" "}
-                      Occupational analogue: {role.onet_analogue}.
-                    </>
-                  ) : null}
-                </p>
+              {researched ? (
+                <div className="mt-3 rounded border border-base-300 bg-base-200/40 px-3 py-2">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <MicroLabel
+                      label="What this profile rests on"
+                      tooltip="Regulation and mandatory standards first, then professional bodies, then current job descriptions. The evidence class is recorded per requirement, because the support genuinely differs within a role."
+                    />
+                    {evidenceMix
+                      ? (["A", "B", "C", "D", "E"] as const)
+                          .filter((k) => evidenceMix[k])
+                          .map((k) => (
+                            <span
+                              key={k}
+                              title={EVIDENCE_CLASS_LABEL[k]}
+                              className="inline-flex rounded bg-base-200 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted"
+                            >
+                              {evidenceMix[k]} × class {k}
+                            </span>
+                          ))
+                      : null}
+                  </div>
+                  <p className="measure mt-1.5 text-[11.5px] leading-relaxed">{role.note}</p>
+                  <ul className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+                    {researched.sources!.slice(0, 4).map((u) => (
+                      <li key={u}>
+                        <a
+                          href={u}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="font-mono text-[10px] text-primary hover:underline"
+                        >
+                          {(() => {
+                            try {
+                              return new URL(u).hostname.replace(/^www\./, "");
+                            } catch {
+                              return u;
+                            }
+                          })()}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="measure mt-1.5 text-[10.5px] text-muted">
+                    The 258 roles that shipped with the package cite no sources: they were
+                    produced by a research pipeline whose evidence was not retained. These
+                    were researched for this build and the sources kept, which is why they can
+                    be checked and the others cannot. No subject-matter expert has reviewed
+                    either set.
+                  </p>
+                </div>
               ) : null}
               {mandatoryCount === 0 && (answer.outcome === "supported" || answer.outcome === "qualified") ? (
                 <p className="mt-3 border-l-[3px] border-warn bg-warn-bg/40 px-3 py-2 text-[12.5px] leading-relaxed">
@@ -1158,8 +1209,21 @@ export function ModelFit() {
                             {meta.critical}
                           </span>
                         </td>
-                        <td className="px-2 py-1.5 font-mono text-[10px]">
-                          Class {meta.evidence_class}
+                        <td
+                          className="px-2 py-1.5 font-mono text-[10px]"
+                          title={EVIDENCE_CLASS_LABEL[meta.evidence_class ?? "E"]}
+                        >
+                          <span
+                            className={
+                              meta.evidence_class === "A" || meta.evidence_class === "B"
+                                ? "text-good"
+                                : meta.evidence_class === "E"
+                                  ? "text-warn"
+                                  : undefined
+                            }
+                          >
+                            Class {meta.evidence_class}
+                          </span>
                         </td>
                         <td className="px-2 py-1.5 text-[10.5px] text-muted">
                           {axis?.axis ?? "None found"}

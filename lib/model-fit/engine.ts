@@ -163,9 +163,11 @@ export interface Role {
   authority?: string;
   duties?: DutyRecord[];
   note?: string;
-  /** Present on profiles authored for this build rather than researched. */
+  /** How this profile was arrived at, on profiles added after the package shipped. */
   profile_source?: string;
-  /** The O*NET occupation the authored profile was reasoned from. */
+  /** The sources the profile was researched from, most authoritative first. */
+  sources?: string[];
+  /** The O*NET occupation the role maps to. */
   onet_analogue?: string;
 }
 

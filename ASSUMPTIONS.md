@@ -443,6 +443,9 @@ Dates are absolute; the build day is 30 July 2026.
       Real Estate and Renewable Energy, 36 roles between them. They are now
       authored, in `scripts/author-missing-industries.py`, which is the artefact
       to review rather than the JSON it writes.
+    **SUPERSEDED on 3 August 2026 by entry 25: these were researched and are
+    no longer class E.** What follows is kept because it records why the first
+    pass was labelled the way it was.
     **These 36 are evidence class E and must never be presented as anything
     else.** The shipped 258 are class D, "convergent evidence from multiple
     current job descriptions", produced by a four-stage research pipeline that
@@ -466,3 +469,53 @@ Dates are absolute; the build day is 30 July 2026.
     Outcomes across the full 294: 231 qualified, 4 supported, 6 partially
     supported, 43 not supported, 10 best available. Of the 36 authored, 32
     qualified and 4 returned no qualifying model.
+
+25. **The seven industries, researched (3 August 2026).** Michael asked for the
+    36 authored profiles to be researched properly rather than reasoned from the
+    role definitions, and they now are. `scripts/author-missing-industries.py` is
+    deleted and replaced by `scripts/research-missing-industries.py`, which
+    carries the evidence, the reasoning and the sources for every profile.
+    The package's own pipeline sets the standard, and it was followed: regulation
+    and mandatory standards first, then professional body competency frameworks,
+    then multiple current job descriptions, and never fill a field from general
+    knowledge alone. That pipeline runs on Haiku with web search and scores with
+    Sonnet; it needs an `ANTHROPIC_API_KEY` this machine does not have, so the
+    research was done directly and the scoring by hand against the same rubric.
+    **Evidence class is now recorded per requirement rather than per role**,
+    because the support genuinely differs within a role. A food safety manager's
+    instruction-following and accuracy requirements rest on statute and an
+    audited mandatory standard, which is class A; the same role's general
+    intelligence requirement rests on job descriptions, which is class D.
+    Recording one class for the whole role would overstate the weak half and
+    understate the strong half. Across the 648 requirements: 36 class A, 8
+    class B, 604 class D, and no class E remaining.
+    Nine roles turned out to be governed by named law or mandatory standards
+    rather than convention, and the profiles were corrected where the evidence
+    contradicted the first pass. Agronomist: the BASIS Certificate in Crop
+    Protection has been a legal requirement since 1985 for advising on plant
+    protection products, which raised instruction-following and assurance.
+    Flight Operations Controller: ICAO Annex 6 permits operational control to be
+    delegated only to the pilot-in-command and the flight operations officer,
+    which raised assurance to the top band. Student Administration Manager: UKVI
+    right-to-study checks and sponsor duties raised assurance. Aircraft
+    Maintenance Planner sits under EASA Part-M and Part-145, Property Manager
+    under gas safety and deposit statute, Facilities Manager under the statutory
+    compliance programme and building safety regime, Grid Connection Engineer
+    under mandatory grid code compliance, Trust and Safety Analyst under the DSA,
+    and Valuation Surveyor under RICS Red Book rules and the audited Valuer
+    Registration Scheme.
+    **The confidence these roles report moved from Very low to Low, which is the
+    mechanism working rather than a cosmetic change.** The engine floors a
+    recommendation's confidence at the worst evidence class among the
+    requirements that decided it. Better evidence, better confidence, visibly,
+    and with no special-casing anywhere.
+    The outcome distribution across all 294 roles is unchanged by the research
+    (231 qualified, 4 supported, 6 partially supported, 43 not supported, 10 best
+    available), which is a reassuring result: the research confirmed the shape of
+    the first pass rather than overturning it, while replacing its basis.
+    The panel now shows what each profile rests on, with the class mix and the
+    sources as links. Worth stating plainly: **the 258 roles that shipped with the
+    package cite no sources at all**, because the pipeline that produced them did
+    not retain its evidence. These 36 can be checked and those 258 cannot, which
+    is an odd inversion of the usual assumption that the shipped data is the
+    stronger. No SME has reviewed either set.
