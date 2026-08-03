@@ -1,0 +1,222 @@
+{
+ "capability_names": {
+  "CAP-01": "General intelligence",
+  "CAP-02": "Multi-step reasoning",
+  "CAP-03": "Domain reasoning",
+  "CAP-04": "Coding",
+  "CAP-05": "Agentic",
+  "CAP-06": "Quantitative",
+  "CAP-07": "Research & synthesis",
+  "CAP-08": "Writing",
+  "CAP-09": "Context handling",
+  "CAP-10": "Instruction following",
+  "CAP-11": "Accuracy",
+  "CAP-12": "Tool reliability",
+  "CAP-13": "Latency",
+  "CAP-14": "Data sensitivity",
+  "CAP-15": "Risk & assurance",
+  "CAP-16": "Visual interpretation",
+  "CAP-17": "Speech and audio",
+  "CAP-18": "Cross-language"
+ },
+ "axes": {
+  "CAP-01": {
+   "axis": "Intelligence Index v4.1",
+   "status": "live",
+   "source": "Artificial Analysis"
+  },
+  "CAP-02": {
+   "axis": "GPQA Diamond (graduate-level reasoning)",
+   "status": "live",
+   "source": "Artificial Analysis via BenchLM snapshot, 45 models; 56 in this catalogue"
+  },
+  "CAP-03": {
+   "axis": "Capability Index for the role's domain",
+   "status": "identified",
+   "source": "Artificial Analysis"
+  },
+  "CAP-04": {
+   "axis": "Coding Index; SciCode; Terminal-Bench",
+   "status": "identified",
+   "source": "Artificial Analysis"
+  },
+  "CAP-05": {
+   "axis": "AA-Briefcase Elo (agentic knowledge work)",
+   "status": "live",
+   "source": "Artificial Analysis, 57 models benchmarked; 44 present in this catalogue"
+  },
+  "CAP-06": {
+   "axis": "Economics; Finance & Accounting Index",
+   "status": "identified",
+   "source": "Artificial Analysis"
+  },
+  "CAP-07": {
+   "axis": "AA-Omniscience Accuracy; AA-LCR",
+   "status": "identified",
+   "source": "Artificial Analysis"
+  },
+  "CAP-08": {
+   "axis": "AA-Briefcase presentation Elo",
+   "status": "identified",
+   "source": "Artificial Analysis"
+  },
+  "CAP-09": {
+   "axis": "AA-LCR + published context window",
+   "status": "identified",
+   "source": "Artificial Analysis"
+  },
+  "CAP-10": {
+   "axis": "IFBench",
+   "status": "identified",
+   "source": "Artificial Analysis"
+  },
+  "CAP-11": {
+   "axis": "AA-Omniscience non-hallucination rate (100 minus hallucination)",
+   "status": "live",
+   "source": "Artificial Analysis via BenchLM snapshot, 154 models, 31 July 2026"
+  },
+  "CAP-12": {
+   "axis": "Tau3-Banking; AutomationBench-AA",
+   "status": "identified",
+   "source": "Artificial Analysis"
+  },
+  "CAP-13": {
+   "axis": "Output speed, tokens per second",
+   "status": "live",
+   "source": "Artificial Analysis"
+  },
+  "CAP-14": {
+   "axis": "Deployment, residency, retention",
+   "status": "none",
+   "source": "Vendor documentation. No benchmark exists."
+  },
+  "CAP-15": {
+   "axis": "Governance and Security maturity",
+   "status": "identified",
+   "source": "AI Enterprise, vendor level"
+  },
+  "CAP-16": {
+   "axis": "MMMU-Pro visual reasoning",
+   "status": "identified",
+   "source": "Artificial Analysis"
+  },
+  "CAP-17": {
+   "axis": "AA-WER Index; Speech to Speech Index",
+   "status": "identified",
+   "source": "Artificial Analysis"
+  },
+  "CAP-18": {
+   "axis": "None found",
+   "status": "none",
+   "source": "No published translation axis"
+  }
+ },
+ "calibration": {
+  "CAP-01": {
+   "model_field": "intelligence",
+   "status": "provisional",
+   "thresholds": {
+    "10": 0,
+    "30": 20,
+    "50": 32,
+    "70": 45,
+    "90": 56
+   },
+   "axis": "Intelligence Index v4.1"
+  },
+  "CAP-02": {
+   "model_field": "gpqa",
+   "status": "provisional",
+   "thresholds": {
+    "10": 0,
+    "30": 87.4,
+    "50": 90.7,
+    "70": 92.8,
+    "90": 93.6
+   },
+   "axis": "GPQA Diamond"
+  },
+  "CAP-03": {
+   "model_field": null,
+   "status": "unavailable",
+   "thresholds": {},
+   "axis": "Capability Index for the role's domain"
+  },
+  "CAP-04": {
+   "model_field": null,
+   "status": "unavailable",
+   "thresholds": {},
+   "axis": "Coding Index; SciCode; Terminal-Bench"
+  },
+  "CAP-05": {
+   "model_field": "briefcase",
+   "status": "provisional",
+   "thresholds": {
+    "10": 0,
+    "30": 612,
+    "50": 873,
+    "70": 1110,
+    "90": 1511
+   },
+   "axis": "AA-Briefcase Elo"
+  },
+  "CAP-06": {
+   "model_field": null,
+   "status": "unavailable",
+   "thresholds": {},
+   "axis": "Economics; Finance & Accounting Index"
+  },
+  "CAP-07": {
+   "model_field": null,
+   "status": "unavailable",
+   "thresholds": {},
+   "axis": "AA-Omniscience Accuracy; AA-LCR"
+  },
+  "CAP-08": {
+   "model_field": null,
+   "status": "unavailable",
+   "thresholds": {},
+   "axis": "AA-Briefcase presentation Elo"
+  },
+  "CAP-10": {
+   "model_field": null,
+   "status": "unavailable",
+   "thresholds": {},
+   "axis": "IFBench"
+  },
+  "CAP-11": {
+   "model_field": "reliability",
+   "status": "provisional",
+   "thresholds": {
+    "10": 0,
+    "30": 10.4,
+    "50": 17.4,
+    "70": 39.3,
+    "90": 65.9
+   },
+   "axis": "AA-Omniscience non-hallucination rate"
+  },
+  "CAP-12": {
+   "model_field": null,
+   "status": "unavailable",
+   "thresholds": {},
+   "axis": "Tau3-Banking; AutomationBench-AA"
+  },
+  "CAP-16": {
+   "model_field": "vision",
+   "status": "unavailable",
+   "thresholds": {}
+  },
+  "CAP-17": {
+   "model_field": "speech",
+   "status": "unavailable",
+   "thresholds": {}
+  },
+  "CAP-18": {
+   "model_field": null,
+   "status": "unavailable",
+   "thresholds": {},
+   "axis": "None found"
+  }
+ }
+}

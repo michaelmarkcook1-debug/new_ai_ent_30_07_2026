@@ -1,0 +1,5942 @@
+[
+ {
+  "model_id": "Claude Opus 5 (Adaptive Reasoning, Max Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 60.7,
+   "briefcase": 1720,
+   "reliability": 49.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 54,
+  "frontier": "On frontier",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 5 (Adaptive Reasoning, Xhigh Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 60.1,
+   "briefcase": 1693,
+   "reliability": 49.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 53,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Fable 5 (Adaptive Reasoning, Max Effort, Opus 4.8 Fallback)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 59.9,
+   "briefcase": 1574,
+   "reliability": 45.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 10.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 64,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 5 (Adaptive Reasoning, High Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 58.9,
+   "briefcase": 1606,
+   "reliability": 49.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 53,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Sol (max)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 58.9,
+   "briefcase": 1503,
+   "reliability": 11.2,
+   "gpqa": 94.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 67,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Sol (xhigh)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 57.7,
+   "briefcase": null,
+   "reliability": 11.2,
+   "gpqa": 94.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 64,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Kimi K3",
+  "vendor": "Moonshot",
+  "benchmarks": {
+   "intelligence": 57.1,
+   "briefcase": 1541,
+   "reliability": 49.1,
+   "gpqa": 93.5
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 35,
+  "frontier": "On frontier",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 5 (Adaptive Reasoning, Medium Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 56.3,
+   "briefcase": 1470,
+   "reliability": 49.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 53,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Sol (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 55.9,
+   "briefcase": null,
+   "reliability": 11.2,
+   "gpqa": 94.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 64,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 4.8 (Adaptive Reasoning, Max Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 55.7,
+   "briefcase": 1346,
+   "reliability": 64.1,
+   "gpqa": 93.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 61,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Terra (max)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 55.0,
+   "briefcase": null,
+   "reliability": 14.8,
+   "gpqa": 92.9
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 135,
+  "frontier": "On frontier",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.5 (xhigh)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 54.8,
+   "briefcase": 1153,
+   "reliability": 14.5,
+   "gpqa": 93.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 68,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4.5 (high)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 53.8,
+   "briefcase": 1318,
+   "reliability": 46.5,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 58,
+  "frontier": "On frontier",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Sol (medium)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 53.6,
+   "briefcase": null,
+   "reliability": 11.2,
+   "gpqa": 94.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 60,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 4.7 (Adaptive Reasoning, Max Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 53.5,
+   "briefcase": 1281,
+   "reliability": 48.1,
+   "gpqa": 94.2
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 50,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Sonnet 5 (Adaptive Reasoning, Max Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 53.4,
+   "briefcase": 1386,
+   "reliability": 62.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 73,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.5 (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 53.1,
+   "briefcase": 1099,
+   "reliability": 14.5,
+   "gpqa": 93.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 64,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Terra (xhigh)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 51.6,
+   "briefcase": null,
+   "reliability": 14.8,
+   "gpqa": 92.9
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 117,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.4 (xhigh)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 51.4,
+   "briefcase": null,
+   "reliability": 11.4,
+   "gpqa": 92.8
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 134,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Luna (max)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 51.2,
+   "briefcase": null,
+   "reliability": 9.9,
+   "gpqa": 92.3
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 195,
+  "frontier": "On frontier",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-5.2 (max)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 51.1,
+   "briefcase": 1254,
+   "reliability": 71.9,
+   "gpqa": 91.2
+  },
+  "cost_input_per_1m": 1.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 138,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Muse Spark 1.1 (xhigh)",
+  "vendor": "Unattributed",
+  "benchmarks": {
+   "intelligence": 50.6,
+   "briefcase": 868,
+   "reliability": 61.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 115,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 5 (Adaptive Reasoning, Low Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 50.6,
+   "briefcase": 1223,
+   "reliability": 49.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 55,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.5 (medium)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 50.4,
+   "briefcase": 1000,
+   "reliability": 14.5,
+   "gpqa": 93.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 63,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3.5 Flash (high)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 50.2,
+   "briefcase": 871,
+   "reliability": 39.3,
+   "gpqa": 92.7
+  },
+  "cost_input_per_1m": 1.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 178,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3.6 Flash (high)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 50.1,
+   "briefcase": 964,
+   "reliability": 46.5,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 224,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Sol (low)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 49.4,
+   "briefcase": null,
+   "reliability": 11.2,
+   "gpqa": 94.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 60,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Luna (xhigh)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 49.1,
+   "briefcase": null,
+   "reliability": 9.9,
+   "gpqa": 92.3
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 189,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Terra (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 49.0,
+   "briefcase": null,
+   "reliability": 14.8,
+   "gpqa": 92.9
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 109,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Sonnet 4.6 (Adaptive Reasoning, Max Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 47.2,
+   "briefcase": 1077,
+   "reliability": 34.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 48,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3.1 Pro Preview",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 46.5,
+   "briefcase": 457,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 123,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Luna (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 46.1,
+   "briefcase": null,
+   "reliability": 9.9,
+   "gpqa": 92.3
+  },
+  "cost_input_per_1m": 1.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 179,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.7 Max",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 46.0,
+   "briefcase": 912,
+   "reliability": 77.1,
+   "gpqa": 92.4
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 202,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Terra (medium)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 45.6,
+   "briefcase": null,
+   "reliability": 14.8,
+   "gpqa": 92.9
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 118,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3.5 Flash (medium)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 45.4,
+   "briefcase": 873,
+   "reliability": 39.3,
+   "gpqa": 92.7
+  },
+  "cost_input_per_1m": 1.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 166,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "MiniMax-M3",
+  "vendor": "MiniMax",
+  "benchmarks": {
+   "intelligence": 44.4,
+   "briefcase": 1110,
+   "reliability": 83.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 71,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V4 Pro (Reasoning, Max Effort)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 44.3,
+   "briefcase": 930,
+   "reliability": 11.4,
+   "gpqa": 90.1
+  },
+  "cost_input_per_1m": 0.43,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 65,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.3 Codex (xhigh)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 44.3,
+   "briefcase": 869,
+   "reliability": 13.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.8,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 121,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Kimi K2.6",
+  "vendor": "Moonshot",
+  "benchmarks": {
+   "intelligence": 44.2,
+   "briefcase": 818,
+   "reliability": 60.7,
+   "gpqa": 90.5
+  },
+  "cost_input_per_1m": 0.95,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 39,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 4.6 (Adaptive Reasoning, Max Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 43.7,
+   "briefcase": null,
+   "reliability": 24.0,
+   "gpqa": 89.2
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 45,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.5 (low)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 43.5,
+   "briefcase": null,
+   "reliability": 14.5,
+   "gpqa": 93.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 59,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V4 Pro (Reasoning, High Effort)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 43.1,
+   "briefcase": null,
+   "reliability": 11.4,
+   "gpqa": 90.1
+  },
+  "cost_input_per_1m": 0.43,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 59,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 4.7 (Non-reasoning, High Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 42.7,
+   "briefcase": 1086,
+   "reliability": 48.1,
+   "gpqa": 94.2
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 45,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.2 (xhigh)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 42.2,
+   "briefcase": null,
+   "reliability": 20.3,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.8,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 72,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Kimi K2.7 Code",
+  "vendor": "Moonshot",
+  "benchmarks": {
+   "intelligence": 41.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.95,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 41,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Sonnet 5 (Non-reasoning, High Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 41.7,
+   "briefcase": null,
+   "reliability": 62.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 65,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Sol (Non-reasoning)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 41.2,
+   "briefcase": null,
+   "reliability": 11.2,
+   "gpqa": 94.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 58,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 4.5 (Reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 40.8,
+   "briefcase": null,
+   "reliability": 24.6,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 49,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Terra (low)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 40.5,
+   "briefcase": null,
+   "reliability": 14.8,
+   "gpqa": 92.9
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 111,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V4 Flash (Reasoning, Max Effort)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 40.3,
+   "briefcase": 833,
+   "reliability": 10.3,
+   "gpqa": 88.1
+  },
+  "cost_input_per_1m": 0.14,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 122,
+  "frontier": "On frontier",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-5.1 (Reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 40.2,
+   "briefcase": 973,
+   "reliability": 70.6,
+   "gpqa": 86.2
+  },
+  "cost_input_per_1m": 1.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 67,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.2 Codex (xhigh)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 40.1,
+   "briefcase": null,
+   "reliability": 27.2,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.8,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.4 mini (xhigh)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 40.0,
+   "briefcase": 715,
+   "reliability": 10.2,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.75,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 173,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.6 Max Preview",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 40.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 51,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok Build 0.1 0616",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 39.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 102,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.6 Plus",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 39.6,
+   "briefcase": null,
+   "reliability": 68.0,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 53,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3 Pro Preview (high)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 39.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-5 (Reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 39.5,
+   "briefcase": null,
+   "reliability": 66.0,
+   "gpqa": 86.0
+  },
+  "cost_input_per_1m": 1.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 40,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.4 (low)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 39.1,
+   "briefcase": null,
+   "reliability": 11.4,
+   "gpqa": 92.8
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 96,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.7 Plus",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 39.0,
+   "briefcase": null,
+   "reliability": 74.5,
+   "gpqa": 90.3
+  },
+  "cost_input_per_1m": 0.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 53,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.4 nano (xhigh)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 38.2,
+   "briefcase": null,
+   "reliability": 26.4,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 156,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Luna (medium)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 38.1,
+   "briefcase": null,
+   "reliability": 9.9,
+   "gpqa": 92.3
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 171,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "MiniMax-M2.7",
+  "vendor": "MiniMax",
+  "benchmarks": {
+   "intelligence": 38.1,
+   "briefcase": null,
+   "reliability": 65.6,
+   "gpqa": 87.0
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 54,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.2 (medium)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 38.0,
+   "briefcase": null,
+   "reliability": 20.3,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.8,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3 Flash Preview (Reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 37.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 191,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nemotron 3 Ultra 550B A55B (Reasoning)",
+  "vendor": "NVIDIA",
+  "benchmarks": {
+   "intelligence": 37.8,
+   "briefcase": 873,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.68,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 182,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 4.6 (Non-reasoning, High Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 37.8,
+   "briefcase": null,
+   "reliability": 24.0,
+   "gpqa": 89.2
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 39,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4.3 (high)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 37.6,
+   "briefcase": 760,
+   "reliability": 75.0,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 135,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V4 Flash (Reasoning, High Effort)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 37.5,
+   "briefcase": null,
+   "reliability": 10.3,
+   "gpqa": 88.1
+  },
+  "cost_input_per_1m": 0.14,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.6 27B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 37.1,
+   "briefcase": 810,
+   "reliability": 51.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 54,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4.20 0309 v2 (Reasoning)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 37.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 186,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.1 (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 36.9,
+   "briefcase": null,
+   "reliability": 48.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 100,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3.5 Flash-Lite",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 36.5,
+   "briefcase": 636,
+   "reliability": 66.5,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 382,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4.20 0309 (Reasoning)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 36.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 4.5 Sonnet (Reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 36.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 42,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 Codex (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 36.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4.3 (medium)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 36.0,
+   "briefcase": null,
+   "reliability": 75.0,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 130,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Sonnet 4.6 (Non-reasoning, High Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 35.9,
+   "briefcase": null,
+   "reliability": 34.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 43,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Kimi K2.5 (Reasoning)",
+  "vendor": "Moonshot",
+  "benchmarks": {
+   "intelligence": 35.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": 87.6
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 37,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4.3 (low)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 35.4,
+   "briefcase": null,
+   "reliability": 75.0,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 122,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-5.1 (Non-reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 35.4,
+   "briefcase": null,
+   "reliability": 70.6,
+   "gpqa": 86.2
+  },
+  "cost_input_per_1m": 1.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 59,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.5 (Non-reasoning)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 35.4,
+   "briefcase": null,
+   "reliability": 14.5,
+   "gpqa": 93.6
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 56,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3.5 Flash (minimal)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 34.9,
+   "briefcase": null,
+   "reliability": 39.3,
+   "gpqa": 92.7
+  },
+  "cost_input_per_1m": 1.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 166,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.1 Codex (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 34.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 34.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 103,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Opus 4.5 (Non-reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 34.7,
+   "briefcase": null,
+   "reliability": 24.6,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 46,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Kimi K2.6 (Non-reasoning)",
+  "vendor": "Moonshot",
+  "benchmarks": {
+   "intelligence": 34.6,
+   "briefcase": null,
+   "reliability": 60.7,
+   "gpqa": 90.5
+  },
+  "cost_input_per_1m": 0.95,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 37,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude Sonnet 4.6 (Non-reasoning, Low Effort)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 34.3,
+   "briefcase": null,
+   "reliability": 34.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 43,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-5.2 (Non-reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 34.1,
+   "briefcase": null,
+   "reliability": 71.9,
+   "gpqa": 91.2
+  },
+  "cost_input_per_1m": 1.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 58,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Terra (Non-reasoning)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 34.0,
+   "briefcase": null,
+   "reliability": 14.8,
+   "gpqa": 92.9
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 112,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 27B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 33.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 77,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "MiniMax-M2.5",
+  "vendor": "MiniMax",
+  "benchmarks": {
+   "intelligence": 33.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 74,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 397B A17B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 33.7,
+   "briefcase": 554,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 70,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.7 (Reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 33.7,
+   "briefcase": null,
+   "reliability": 9.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 94,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 (medium)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 33.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 83,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 4.1 Opus (Reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 33.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 15.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.5 Instant (May 2026)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 33.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Luna (low)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 33.3,
+   "briefcase": null,
+   "reliability": 9.9,
+   "gpqa": 92.3
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 174,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 33.3,
+   "briefcase": null,
+   "reliability": 35.8,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3 Pro Preview (low)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 33.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Kimi K2 Thinking",
+  "vendor": "Moonshot",
+  "benchmarks": {
+   "intelligence": 32.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 119,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "o3-pro",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 32.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 20.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-5 (Non-reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 32.4,
+   "briefcase": null,
+   "reliability": 66.0,
+   "gpqa": 86.0
+  },
+  "cost_input_per_1m": 1.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 39,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 122B A10B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 32.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 137,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V3.2 (Reasoning)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 32.0,
+   "briefcase": null,
+   "reliability": 6.5,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.28,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 397B A17B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 32.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 69,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.6 35B A3B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 31.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 141,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "MiniMax-M2.1",
+  "vendor": "MiniMax",
+  "benchmarks": {
+   "intelligence": 31.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 71,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V4 Pro (Non-reasoning)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 31.2,
+   "briefcase": null,
+   "reliability": 11.4,
+   "gpqa": 90.1
+  },
+  "cost_input_per_1m": 0.43,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 64,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 (low)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 31.2,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 81,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 4 Opus (Reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 31.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 15.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 mini (medium)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 30.9,
+   "briefcase": null,
+   "reliability": 45.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 95,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.1 Codex mini (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 30.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 Omni Plus",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 30.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 54,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.6 27B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 30.5,
+   "briefcase": null,
+   "reliability": 51.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 56,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V3.1 Terminus (Reasoning)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 30.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "o3",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 30.4,
+   "briefcase": null,
+   "reliability": 12.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 119,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.4 nano (medium)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 30.2,
+   "briefcase": null,
+   "reliability": 26.4,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 155,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Medium 3.5",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 29.9,
+   "briefcase": 516,
+   "reliability": 18.0,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 66,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.4 mini (medium)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 29.8,
+   "briefcase": null,
+   "reliability": 10.2,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.75,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 168,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 4.5 Haiku (Reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 29.6,
+   "briefcase": 612,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 97,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Kimi K2.5 (Non-reasoning)",
+  "vendor": "Moonshot",
+  "benchmarks": {
+   "intelligence": 29.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": 87.6
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 41,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 35B A3B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 29.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 145,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 27B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 29.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 84,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 4.5 Sonnet (Non-reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 29.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 40,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 4 Sonnet (Reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 28.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.5 Instant (June 2026)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 28.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V4 Flash (Non-reasoning)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 28.7,
+   "briefcase": null,
+   "reliability": 10.3,
+   "gpqa": 88.1
+  },
+  "cost_input_per_1m": 0.14,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 118,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.6 (Reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 28.7,
+   "briefcase": null,
+   "reliability": 33.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.55,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 39,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "MiniMax-M2",
+  "vendor": "MiniMax",
+  "benchmarks": {
+   "intelligence": 28.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 68,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 4.1 Opus (Non-reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 28.2,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 15.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.4 (Non-reasoning)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 27.7,
+   "briefcase": null,
+   "reliability": 11.4,
+   "gpqa": 92.8
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 91,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 122B A10B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 27.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 150,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4 Fast (Reasoning)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 27.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3 Flash Preview (Non-reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 27.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 179,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.7 (Non-reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 26.6,
+   "briefcase": null,
+   "reliability": 9.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 102,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.6 Luna (Non-reasoning)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 26.6,
+   "briefcase": null,
+   "reliability": 9.9,
+   "gpqa": 92.3
+  },
+  "cost_input_per_1m": 1.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 177,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.2 (Non-reasoning)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 26.0,
+   "briefcase": null,
+   "reliability": 20.3,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.8,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 62,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 2.5 Pro",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 25.8,
+   "briefcase": null,
+   "reliability": 12.6,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 139,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemma 4 26B A4B (Reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 25.7,
+   "briefcase": null,
+   "reliability": 19.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.13,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "On frontier",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "o4-mini (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 25.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 154,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 4 Sonnet (Non-reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 25.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 4 Opus (Non-reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 25.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 15.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "NVIDIA Nemotron 3 Super 120B A12B (Reasoning)",
+  "vendor": "NVIDIA",
+  "benchmarks": {
+   "intelligence": 25.4,
+   "briefcase": 0,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 154,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V3.2 Exp (Reasoning)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 25.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.28,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 mini (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 25.3,
+   "briefcase": null,
+   "reliability": 45.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 82,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 3.1 Flash-Lite",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 25.0,
+   "briefcase": 231,
+   "reliability": 18.4,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 311,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 Max Thinking (Preview)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 25.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 55,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4.3 (Non-reasoning)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 24.8,
+   "briefcase": null,
+   "reliability": 75.0,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 122,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V3.2 (Non-reasoning)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 24.7,
+   "briefcase": null,
+   "reliability": 6.5,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.28,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.6 35B A3B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 24.2,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.38,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 167,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 35B A3B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 24.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 168,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 Max",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 24.0,
+   "briefcase": null,
+   "reliability": 10.6,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 58,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "gpt-oss-120b (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 23.8,
+   "briefcase": 7,
+   "reliability": 8.8,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.15,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 214,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 4.5 Haiku (Non-reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 23.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 91,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Kimi K2 0905",
+  "vendor": "Moonshot",
+  "benchmarks": {
+   "intelligence": 23.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 38,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 3.7 Sonnet (Non-reasoning)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 23.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "o1",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 23.4,
+   "briefcase": null,
+   "reliability": 30.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 15.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.6 (Non-reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 23.0,
+   "briefcase": null,
+   "reliability": 33.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.57,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 54,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.7-Flash (Reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 22.9,
+   "briefcase": null,
+   "reliability": 10.5,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.07,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 86,
+  "frontier": "On frontier",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 3 mini Reasoning (high)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 22.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 78,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4.20 0309 (Non-reasoning)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 22.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 2.5 Pro Preview (May' 25)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 22.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemma 4 12B (Reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 21.8,
+   "briefcase": null,
+   "reliability": 19.2,
+   "gpqa": 78.8
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 27,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemma 4 31B (Non-reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 21.8,
+   "briefcase": null,
+   "reliability": 18.4,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.14,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 66,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova 2.0 Pro Preview (medium)",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 21.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 115,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4.20 0309 v2 (Non-reasoning)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 21.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 169,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 9B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 21.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.14,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 83,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V3.1 Terminus (Non-reasoning)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 21.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.27,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V3.2 Exp (Non-reasoning)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 21.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.28,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 Coder Next",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 21.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.35,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 141,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V3.1 (Non-reasoning)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 21.0,
+   "briefcase": null,
+   "reliability": 16.5,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.56,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova 2.0 Omni (medium)",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 20.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V3.1 (Reasoning)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 20.7,
+   "briefcase": null,
+   "reliability": 16.5,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.59,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 VL 235B A22B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 20.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 56,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.1 (Non-reasoning)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 20.4,
+   "briefcase": null,
+   "reliability": 48.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 85,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemma 4 26B A4B (Non-reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 20.1,
+   "briefcase": null,
+   "reliability": 19.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.13,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 41,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 2.5 Flash (Reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 20.1,
+   "briefcase": null,
+   "reliability": 6.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 238,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek R1 0528 (May '25)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 20.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 4B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 20.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.03,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 22,
+  "frontier": "On frontier",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 nano (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 19.9,
+   "briefcase": null,
+   "reliability": 43.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.05,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 158,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Small 4 (Reasoning)",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 19.6,
+   "briefcase": null,
+   "reliability": 33.2,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.15,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 157,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 235B A22B 2507 (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 19.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 53,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova 2.0 Pro Preview (low)",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 19.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 116,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Kimi K2",
+  "vendor": "Moonshot",
+  "benchmarks": {
+   "intelligence": 19.4,
+   "briefcase": null,
+   "reliability": 25.8,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.57,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 37,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-4.1",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 19.4,
+   "briefcase": null,
+   "reliability": 20.4,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 108,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 Max (Preview)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 19.2,
+   "briefcase": null,
+   "reliability": 10.6,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 57,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 nano (medium)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 19.0,
+   "briefcase": null,
+   "reliability": 43.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.05,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 142,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 Omni Flash",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 19.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 237,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova 2.0 Lite (medium)",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 19.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 155,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "o3-mini",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 19.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 218,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "o1-pro",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 18.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 150.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek R1 (Jan '25)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 18.5,
+   "briefcase": null,
+   "reliability": 16.0,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 3",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 18.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 4.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova 2.0 Lite (high)",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 18.2,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 148,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 235B A22B 2507 Instruct",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 18.2,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 55,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 Coder 480B A35B Instruct",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 18.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 61,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 VL 32B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 17.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 88,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Magistral Medium 1.2",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 17.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 44,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova 2.0 Lite (low)",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 17.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 144,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "MiniMax M1 80k",
+  "vendor": "MiniMax",
+  "benchmarks": {
+   "intelligence": 17.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.55,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.4 nano (Non-Reasoning)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 17.6,
+   "briefcase": null,
+   "reliability": 26.4,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 155,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 (minimal)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 17.2,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 80,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "o1-preview",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 17.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 17.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.6V (Reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 16.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 62,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 Next 80B A3B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 16.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 207,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova 2.0 Omni (low)",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 16.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5.4 mini (Non-Reasoning)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 16.6,
+   "briefcase": null,
+   "reliability": 10.2,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.75,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 152,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.5-Air",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 16.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.17,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 75,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Grok 4 Fast (Non-reasoning)",
+  "vendor": "xAI",
+  "benchmarks": {
+   "intelligence": 16.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3.5 4B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 16.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.03,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 17,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Large 3",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 15.9,
+   "briefcase": null,
+   "reliability": 16.3,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 47,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "o3-mini (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 15.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 194,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.7-Flash (Non-reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 15.5,
+   "briefcase": null,
+   "reliability": 10.5,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.07,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 133,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V3 0324",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 15.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.27,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 2.5 Flash-Lite Preview (Sep '25) (Reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 15.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "gpt-oss-20b (high)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 14.9,
+   "briefcase": 0,
+   "reliability": 5.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.07,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 165,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nemotron 3 Nano Omni 30B A3B Reasoning",
+  "vendor": "NVIDIA",
+  "benchmarks": {
+   "intelligence": 14.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.07,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 307,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "gpt-oss-120b (low)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 14.9,
+   "briefcase": null,
+   "reliability": 8.8,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.15,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 275,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-4.1 mini",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 14.8,
+   "briefcase": null,
+   "reliability": 18.0,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 84,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Small 3.1",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 14.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 138,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Medium 3.1",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 14.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 82,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 30B A3B 2507 (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 14.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 137,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova 2.0 Pro Preview (Non-reasoning)",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 14.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 93,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "gpt-oss-20b (low)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 14.3,
+   "briefcase": null,
+   "reliability": 5.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.07,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 168,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 mini (minimal)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 14.3,
+   "briefcase": null,
+   "reliability": 45.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 79,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 4 Maverick",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 14.3,
+   "briefcase": 0,
+   "reliability": 12.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.27,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 106,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 VL 235B A22B Instruct",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 14.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 48,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "NVIDIA Nemotron 3 Nano 30B A3B (Reasoning)",
+  "vendor": "NVIDIA",
+  "benchmarks": {
+   "intelligence": 14.2,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.05,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 250,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek V3 (Dec '24)",
+  "vendor": "DeepSeek",
+  "benchmarks": {
+   "intelligence": 14.2,
+   "briefcase": null,
+   "reliability": 10.6,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.36,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 2.5 Flash (Non-reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 14.1,
+   "briefcase": null,
+   "reliability": 6.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 208,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 Next 80B A3B Instruct",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 13.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 184,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 Coder 30B A3B Instruct",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 13.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.45,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 87,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "QwQ 32B",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 13.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.66,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 30,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 235B A22B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 13.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 60,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 VL 30B A3B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 13.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 107,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemma 4 12B (Non-reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 13.2,
+   "briefcase": null,
+   "reliability": 19.2,
+   "gpqa": 78.8
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 27,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 2.5 Flash-Lite Preview (Sep '25) (Non-reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 13.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova Premier",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 12.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 32,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Medium 3",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 12.5,
+   "briefcase": null,
+   "reliability": 39.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 49,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Small 4 (Non-reasoning)",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 12.4,
+   "briefcase": null,
+   "reliability": 33.2,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.15,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 139,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama Nemotron Super 49B v1.5 (Reasoning)",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 12.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 80,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemma 4 E4B (Reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 11.9,
+   "briefcase": null,
+   "reliability": 68.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.02,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 90,
+  "frontier": "On frontier",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova 2.0 Lite (Non-reasoning)",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 11.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 142,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 3 Opus",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 11.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 15.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 32B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 11.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 90,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 2.5 Flash-Lite (Reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 11.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 277,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Magistral Small 1.2",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 11.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 89,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-4o (Nov '24)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 11.2,
+   "briefcase": null,
+   "reliability": 62.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 112,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Ministral 3 14B",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 11.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 73,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 VL 32B Instruct",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 11.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 34,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.6V (Non-reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 11.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 81,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 235B A22B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 10.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 58,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Small 3.2",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 10.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 141,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 VL 8B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 10.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.18,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 108,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova 2.0 Omni (Non-reasoning)",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 10.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.3,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 14B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 10.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.35,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 45,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 4 Scout",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 10.0,
+   "briefcase": null,
+   "reliability": 21.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.18,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 88,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 VL 30B A3B Instruct",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 10.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 106,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "DeepSeek R1 Distill Llama 70B",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 9.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 27,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 3.5 Sonnet (Oct '24)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 9.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-4.1 nano",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 9.6,
+   "briefcase": null,
+   "reliability": 19.6,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 200,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 Omni 30B A3B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 9.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 98,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen2.5 Instruct 72B",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 9.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.47,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-4o (Aug '24)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 9.6,
+   "briefcase": null,
+   "reliability": 62.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 90,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 3.3 Instruct 70B",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 9.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 81,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 30B A3B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 9.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 101,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 30B A3B 2507 Instruct",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 9.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 146,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.5V (Reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 9.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 80,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 3.1 Nemotron Ultra 253B v1 (Reasoning)",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 9.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 51,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Ministral 3 8B",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 9.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.15,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 124,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "NVIDIA Nemotron Nano 12B v2 VL (Reasoning)",
+  "vendor": "NVIDIA",
+  "benchmarks": {
+   "intelligence": 9.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 80,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemma 4 E4B (Non-reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 8.9,
+   "briefcase": null,
+   "reliability": 68.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.02,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 92,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "NVIDIA Nemotron Nano 9B V2 (Reasoning)",
+  "vendor": "NVIDIA",
+  "benchmarks": {
+   "intelligence": 8.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.04,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 203,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama Nemotron Super 49B v1.5 (Non-reasoning)",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 8.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.4,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 73,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 32B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 8.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.7,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 93,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-4o (May '24)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 8.6,
+   "briefcase": null,
+   "reliability": 62.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 5.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 85,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 3.1 Instruct 405B",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 8.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 VL 8B Instruct",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 8.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.18,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 110,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 8B (Reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 8.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.18,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 38,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 3.5 Sonnet (June '24)",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 8.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-5 nano (minimal)",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 8.0,
+   "briefcase": null,
+   "reliability": 43.7,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.05,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 157,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-4 Turbo",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 7.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 10.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 31,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova Pro",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 7.7,
+   "briefcase": null,
+   "reliability": 22.1,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.8,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Command A",
+  "vendor": "Cohere",
+  "benchmarks": {
+   "intelligence": 7.7,
+   "briefcase": 369,
+   "reliability": 85.9,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 60,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 3.1 Instruct 8B",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 7.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.08,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 142,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 3.1 Nemotron Instruct 70B",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 7.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 83,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "NVIDIA Nemotron 3 Nano 30B A3B (Non-reasoning)",
+  "vendor": "NVIDIA",
+  "benchmarks": {
+   "intelligence": 7.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.05,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 195,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "NVIDIA Nemotron Nano 9B V2 (Non-reasoning)",
+  "vendor": "NVIDIA",
+  "benchmarks": {
+   "intelligence": 7.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.05,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 172,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Large 2 (Jul '24)",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 7.3,
+   "briefcase": null,
+   "reliability": 32.2,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 14B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 7.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.35,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 52,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GLM-4.5V (Non-reasoning)",
+  "vendor": "Zhipu",
+  "benchmarks": {
+   "intelligence": 7.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.6,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 81,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-4",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 7.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 30.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova Lite",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 6.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.06,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 153,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemini 2.5 Flash-Lite (Non-reasoning)",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 6.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 201,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Small 3",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 6.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 144,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-4o mini",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 6.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.15,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 81,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Ministral 3 3B",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 6.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.1,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 284,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 30B A3B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 6.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 102,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 3.1 Instruct 70B",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 6.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.56,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 57,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Granite 4.1 8B",
+  "vendor": "IBM",
+  "benchmarks": {
+   "intelligence": 6.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.05,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 94,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen2.5 Turbo",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 6.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.05,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 104,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Jamba 1.7 Large",
+  "vendor": "AI21",
+  "benchmarks": {
+   "intelligence": 5.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 58,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Granite 4.0 H Small",
+  "vendor": "IBM",
+  "benchmarks": {
+   "intelligence": 5.2,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.06,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 357,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 8B (Non-reasoning)",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 5.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.18,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 39,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Qwen3 Omni 30B A3B Instruct",
+  "vendor": "Alibaba",
+  "benchmarks": {
+   "intelligence": 5.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 89,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Jamba 1.5 Large",
+  "vendor": "AI21",
+  "benchmarks": {
+   "intelligence": 5.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Jamba 1.6 Large",
+  "vendor": "AI21",
+  "benchmarks": {
+   "intelligence": 5.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 2.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 59,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Phi-4",
+  "vendor": "Microsoft",
+  "benchmarks": {
+   "intelligence": 4.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.13,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Nova Micro",
+  "vendor": "Amazon",
+  "benchmarks": {
+   "intelligence": 4.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.04,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 300,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Small (Sep '24)",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 4.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 147,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 3 Sonnet",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 4.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "NVIDIA Nemotron Nano 12B v2 VL (Non-reasoning)",
+  "vendor": "NVIDIA",
+  "benchmarks": {
+   "intelligence": 4.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 174,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Large (Feb '24)",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 4.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 4.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 2 Chat 7B",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 4.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.05,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Claude 3 Haiku",
+  "vendor": "Anthropic",
+  "benchmarks": {
+   "intelligence": 3.9,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Small (Feb '24)",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 3.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.15,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 150,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "GPT-3.5 Turbo",
+  "vendor": "OpenAI",
+  "benchmarks": {
+   "intelligence": 3.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral Medium",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 3.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 1.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 52,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 3 Instruct 70B",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 3.5,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.65,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 3.2 Instruct 11B (Vision)",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 3.3,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.34,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 6,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Command-R+ (Apr '24)",
+  "vendor": "Cohere",
+  "benchmarks": {
+   "intelligence": 3.0,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 3.0,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Jamba 1.5 Mini",
+  "vendor": "AI21",
+  "benchmarks": {
+   "intelligence": 2.7,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Jamba 1.6 Mini",
+  "vendor": "AI21",
+  "benchmarks": {
+   "intelligence": 2.6,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.2,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 186,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mixtral 8x7B Instruct",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 2.4,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.45,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Mistral 7B Instruct",
+  "vendor": "Mistral",
+  "benchmarks": {
+   "intelligence": 2.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.25,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 114,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Command-R (Mar '24)",
+  "vendor": "Cohere",
+  "benchmarks": {
+   "intelligence": 2.1,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.5,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Granite 3.3 8B (Non-reasoning)",
+  "vendor": "IBM",
+  "benchmarks": {
+   "intelligence": 1.8,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.03,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 353,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Llama 3 Instruct 8B",
+  "vendor": "Meta",
+  "benchmarks": {
+   "intelligence": 1.2,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.04,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": null,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ },
+ {
+  "model_id": "Gemma 3n E4B Instruct",
+  "vendor": "Google",
+  "benchmarks": {
+   "intelligence": 1.2,
+   "briefcase": null,
+   "reliability": null,
+   "gpqa": null
+  },
+  "cost_input_per_1m": 0.06,
+  "cost_output_per_1m": null,
+  "throughput_tokens_per_sec": 53,
+  "frontier": "dominated",
+  "context_window_tokens": null,
+  "data_handling": null,
+  "assurance": null,
+  "input_modalities": null
+ }
+]

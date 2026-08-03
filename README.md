@@ -60,6 +60,32 @@ mode: extractive quotes with citations, clearly badged. To go live, put a
 key in `.env.local` under `ANTHROPIC_API_KEY=` and restart. The key is
 read only from that file, so a key elsewhere on the machine is never spent.
 
+## Workforce Model Fit (Model 4 Role)
+
+Pick an industry, a function and a role, and the engine returns the
+cheapest model that meets that role's requirements, with the reasoning
+and the cost on screen: which requirements decided it, which models were
+eliminated and by what number, what it costs per person and for the whole
+role, and what the same people would cost on the top model instead.
+
+It sits on the Model 4 Role tab, above the adoption explorer. 258 roles
+across 29 industries against 330 priced models.
+
+What it does **not** claim matters as much as what it does. Model prices
+and benchmark scores are real and attributed. Role requirement profiles
+are authored judgement. Capability thresholds, token burn multipliers and
+headcount defaults are stated assumptions, and every one of them is a
+control you can move: the recommendation changes as you move them, which
+is the honest way to show how much of the answer rests on numbers nobody
+has measured yet. Requirements with no ingested benchmark are reported as
+unassessed, never quietly passed.
+
+The engine is a port of the integration package's reference
+implementation and is checked against it: run
+`python3 scripts/model-fit-baseline.py` (it reads the reference from
+`~/Downloads/pkg`) and then `npm test`, which replays all 258 roles under
+four control settings and fails on any disagreement.
+
 ## The demo walkthrough
 
 Follow `DEMO_SCRIPT.md` for the eight-step buyer journey, from the Pulse

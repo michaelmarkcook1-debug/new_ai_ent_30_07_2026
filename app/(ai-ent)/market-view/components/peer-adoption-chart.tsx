@@ -120,9 +120,10 @@ export function PeerAdoptionChart({
                 fill="var(--ag-primary)"
                 opacity={i === 0 ? 1 : 0.78}
               >
+                {/* One template string, not interleaved nodes: React refuses
+                    an array of children on <title> and logs on every render. */}
                 <title>
-                  {r.vendor}: {(r.share * 100).toFixed(1)}% modelled adoption
-                  share, {r.contributingCells} contributing cells
+                  {`${r.vendor}: ${(r.share * 100).toFixed(1)}% modelled adoption share, ${r.contributingCells} contributing cells`}
                 </title>
               </rect>
 

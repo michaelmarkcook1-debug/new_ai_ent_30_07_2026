@@ -261,3 +261,68 @@ Dates are absolute; the build day is 30 July 2026.
     upstream data has moved. The page states its capture date and freshest
     benchmark date, so it reports its own vintage rather than implying
     currency.
+
+22. **Workforce Model Fit embedded in Model 4 Role (2 August 2026).** The
+    integration package at `~/Downloads/pkg` was rebuilt inside this app as the
+    hero asset on `/market-view`. Decisions taken rather than asked:
+    - **The engine is a literal port, not a rewrite.** `lib/model-fit/engine.ts`
+      follows `02_engine/engine.py` line for line, including the eleven rules in
+      their stated order. Where the reference is awkward the port keeps the
+      behaviour and comments the reason, because the two are checked against
+      each other and a tidier port that answered differently would be worthless.
+    - **Proved against the reference, not merely against itself.**
+      `scripts/model-fit-baseline.py` runs the reference engine over all 258
+      roles under four control configurations plus six synthetic profiles and
+      writes `tests/fixtures/model-fit-python-baseline.json`;
+      `tests/model-fit-parity.test.ts` replays it against the port. The package's
+      own suite, `02_engine/test_engine.py`, is ported check for check in
+      `tests/model-fit-engine.test.ts`. Both ran green before any UI was wired.
+    - **One deliberate difference from the reference, and the reference is
+      wrong.** It appends thinly-covered requirements by iterating a Python set,
+      so the tail of `unassessed` comes out in a different order on every run:
+      two identical assessments of ROLE-0137 minutes apart list the same six
+      requirements in two different orders. The port keeps insertion order, and
+      the parity test compares that one list as a set. Nothing else is
+      order-insensitive.
+    - **Two smaller repairs the reference does not need but a module does.**
+      Validation coerces into a copy rather than in place, because the role
+      library is an imported module every screen shares and repairing one
+      caller's input must not alter the next one's; and a benchmark score prints
+      with its axis's own precision (55.0 on an index scale, 1720 on an Elo
+      scale) so elimination reasons read consistently down a column.
+    - **The bundled snapshot ships as data, per the brief.** 330 models, 258
+      roles and the calibration table sit in `lib/model-fit/data/`, copied
+      verbatim. `INTEGRATION.md` section 5 asks for the live price/performance
+      catalogue instead; that is the next step, and the loader is the only
+      thing that would change. The snapshot is 21 KB gzipped, so it is imported
+      into the client component and the engine recomputes locally: the
+      calibration slider has to move the answer while it is being dragged, and
+      a round trip per drag would defeat the point of exposing it.
+    - **Four catalogue columns are empty and stay empty.** Output price,
+      context window, deployment/residency and input modalities are null for all
+      330 models, so CAP-09, CAP-14, CAP-16 and CAP-17 cannot be checked at all
+      and CAP-13 only where throughput is published. The interface reports these
+      as unassessed or not assessable, never as passed. Cost is therefore
+      labelled "per 1M input tokens" rather than blended.
+    - **"Qualified" is shown as its own outcome.** The join specification names
+      three outcomes; the reference engine emits a fourth, `qualified`, when a
+      model clears everything checkable but requirements remain unassessed. The
+      port keeps it and the interface labels it, rather than folding it into
+      "supported" and implying a completeness the data does not have.
+    - **A silent overstatement in the reference is captioned, not fixed.** Four
+      roles (Account Executive, Account Manager and two Customer Success
+      Managers) have no Mandatory requirement at all, so nothing can eliminate
+      and the answer is simply the cheapest model in the catalogue, reported as
+      "meets every requirement". The engine is left alone for parity; the panel
+      says plainly what happened. Account Executive is the default selection, so
+      this is the first thing a demo sees.
+    - **Data lanes.** Engine output carries `derived`; the model catalogue
+      carries `aie`. Role profiles fit no existing lane — they are neither a
+      measurement nor an illustrative sample but authored judgement — so the
+      panel carries its own MEASURED / JUDGEMENT / ASSUMPTION chips and
+      reproduces the package's own measured-versus-judged table in full.
+    - **One pre-existing fix taken in passing.** `peer-adoption-chart.tsx` gave
+      its SVG `<title>` interleaved children, which React refuses, logging on
+      every render and raising the Next dev overlay on this page. Collapsed to a
+      single template string. Five more of the same are on other pages and were
+      left alone.
