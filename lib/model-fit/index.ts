@@ -81,6 +81,8 @@ export interface RoleSummary {
   headcount?: number;
   /** Duty profiles are held for every role but only computed on failure. */
   duties: number;
+  /** True when this role is filed once and applies to every sector. */
+  crossIndustry: boolean;
 }
 
 export const ROLE_INDEX: RoleSummary[] = Object.entries(ROLES).map(([id, r]) => ({
@@ -92,6 +94,7 @@ export const ROLE_INDEX: RoleSummary[] = Object.entries(ROLES).map(([id, r]) => 
   authority: r.authority,
   headcount: r.headcount,
   duties: r.duties?.length ?? 0,
+  crossIndustry: (r.industry ?? CROSS_INDUSTRY) === CROSS_INDUSTRY,
 }));
 
 /** Industries in the library, cross-industry first, then alphabetical. */
@@ -106,17 +109,61 @@ export function industryLabel(industry: string): string {
   return industry === CROSS_INDUSTRY ? CROSS_INDUSTRY_LABEL : industry;
 }
 
-/** Functions available inside one industry, alphabetical. */
+/**
+ * Cross-industry roles are not a category a buyer picks: they are roles that
+ * exist in every sector. A bank employs a Financial Controller and a Chief
+ * Information Officer just as a hospital does, and the library files them once
+ * rather than 29 times.
+ *
+ * So choosing an industry has to return that industry's specialist roles AND
+ * the 99 common ones. Filtering on `industry === chosen` alone hides 99 of the
+ * 105 roles a bank actually has, which reads as a library with nothing in it.
+ */
+function specificTo(industry: string): RoleSummary[] {
+  return ROLE_INDEX.filter((r) => r.industry === industry);
+}
+
+function commonTo(industry: string): RoleSummary[] {
+  return industry === CROSS_INDUSTRY
+    ? []
+    : ROLE_INDEX.filter((r) => r.industry === CROSS_INDUSTRY);
+}
+
+/** Functions available inside one industry, specialist and common, alphabetical. */
 export function functionsFor(industry: string): string[] {
+  if (!industry) return [];
   return Array.from(
-    new Set(ROLE_INDEX.filter((r) => r.industry === industry).map((r) => r.function))
+    new Set([...specificTo(industry), ...commonTo(industry)].map((r) => r.function))
   ).sort((a, b) => a.localeCompare(b));
 }
 
-export function rolesFor(industry: string, fn: string): RoleSummary[] {
-  return ROLE_INDEX.filter((r) => r.industry === industry && r.function === fn).sort((a, b) =>
-    a.name.localeCompare(b.name)
+/** How the choice divides, for the caption under the menu. */
+export function functionCounts(industry: string): { specific: number; common: number } {
+  const specific = new Set(specificTo(industry).map((r) => r.function));
+  const common = new Set(
+    commonTo(industry)
+      .map((r) => r.function)
+      .filter((f) => !specific.has(f))
   );
+  return { specific: specific.size, common: common.size };
+}
+
+/**
+ * Roles in one industry and function. Specialist roles first, then the common
+ * ones, each carrying `crossIndustry` so the interface can say which is which
+ * rather than blending two different claims into one list.
+ */
+export function rolesFor(industry: string, fn: string): RoleSummary[] {
+  if (!industry || !fn) return [];
+  const by = (a: RoleSummary, b: RoleSummary) => a.name.localeCompare(b.name);
+  return [
+    ...specificTo(industry)
+      .filter((r) => r.function === fn)
+      .sort(by),
+    ...commonTo(industry)
+      .filter((r) => r.function === fn)
+      .sort(by),
+  ];
 }
 
 export function roleById(id: string): Role | undefined {

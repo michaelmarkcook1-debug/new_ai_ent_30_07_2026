@@ -426,3 +426,43 @@ Dates are absolute; the build day is 30 July 2026.
       row.
     Live here means freshly fetched, not freshly measured: the upstream serves
     the same May 2026 model, which the drawer now says.
+
+24. **The role library, filled out (3 August 2026).** Two separate problems sat
+    behind "we haven't populated all the functions and roles for each industry",
+    and only one of them was a data gap.
+    - **Most of it was an interface bug.** 99 of the 258 roles are cross-industry:
+      filed once because a Financial Controller or a CIO exists in every sector.
+      The panel filtered on `industry === chosen`, so picking Banking showed 6
+      roles when Banking actually has 105, and every named industry looked all
+      but empty. `functionsFor` and `rolesFor` now return the industry's
+      specialist roles AND the common ones, in labelled option groups, with the
+      split stated under each menu: Banking went from 5 functions to 23.
+    - **The genuine gap was seven industries with nothing in them at all**, which
+      INTEGRATION.md section 6 lists as the largest remaining piece of work:
+      Agriculture, Airlines, Gaming, Higher Education, Management Consulting,
+      Real Estate and Renewable Energy, 36 roles between them. They are now
+      authored, in `scripts/author-missing-industries.py`, which is the artefact
+      to review rather than the JSON it writes.
+    **These 36 are evidence class E and must never be presented as anything
+    else.** The shipped 258 are class D, "convergent evidence from multiple
+    current job descriptions", produced by a four-stage research pipeline that
+    read those descriptions. These were authored against the same rubric and the
+    same five anchored bands, reasoned from each role's function definition,
+    seniority, decision authority and O*NET occupational analogue — but no job
+    advert was read and no SME has reviewed them, which is the definition of
+    class E. The rubric says class E is legitimate and often necessary, and says
+    equally plainly that it must never be dressed as A to D.
+    Three consequences, all deliberate:
+    - The engine floors a recommendation's confidence at the worst evidence class
+      among the requirements that decided it, so every one of these roles returns
+      **Very low** confidence without any special-casing. That is the mechanism
+      working, not a defect.
+    - The panel carries an explicit notice on these roles naming the class
+      difference and the occupational analogue it was reasoned from.
+    - The suite's no-duplicate-profiles check now covers 294 roles, and the
+      authoring script refuses to write a set containing a collision, because two
+      roles returning the same answer is the failure that broke the previous
+      build.
+    Outcomes across the full 294: 231 qualified, 4 supported, 6 partially
+    supported, 43 not supported, 10 best available. Of the 36 authored, 32
+    qualified and 4 returned no qualifying model.

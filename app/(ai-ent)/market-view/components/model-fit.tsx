@@ -18,6 +18,7 @@ import {
   SOURCES,
   SPEC_FIELD,
   SPEC_NUMERIC,
+  functionCounts,
   functionsFor,
   industryLabel,
   loadEngine,
@@ -336,6 +337,17 @@ export function ModelFit() {
     () => (industry && fn ? rolesFor(industry, fn) : []),
     [industry, fn]
   );
+  const counts = useMemo(
+    () => (industry ? functionCounts(industry) : { specific: 0, common: 0 }),
+    [industry]
+  );
+  const roleSplit = useMemo(
+    () => ({
+      specific: roles.filter((r) => !r.crossIndustry).length,
+      common: roles.filter((r) => r.crossIndustry).length,
+    }),
+    [roles]
+  );
   // Derived from the computed role, not the selected one: the panel below shows
   // the answer to the question that was asked, not the one being typed.
   const role: Role | undefined = useMemo(
@@ -472,6 +484,12 @@ export function ModelFit() {
   const mandatoryCount = role
     ? Object.values(role.profile).filter((v) => v.critical === "Mandatory").length
     : 0;
+  // Authored for this build rather than researched. The engine already floors
+  // confidence at the worst evidence class, but a buyer should not have to infer
+  // that from a word in a facts strip.
+  const authoredProfile =
+    role != null &&
+    Object.values(role.profile).every((v) => v.evidence_class === "E");
 
   // What the catalogue filter costs, stated where the filter is. A toggle that
   // silently removes a third of the market is a toggle that lies by omission.
@@ -523,9 +541,11 @@ export function ModelFit() {
           label="2. Function"
           disabled={!industry}
           note={
-            industry
-              ? `${functions.length} function${functions.length === 1 ? "" : "s"} in this industry`
-              : "waiting on an industry"
+            !industry
+              ? "waiting on an industry"
+              : industry === CROSS_INDUSTRY
+                ? `${functions.length} functions, common to every sector`
+                : `${counts.specific} specific to this industry, ${counts.common} common`
           }
         >
           <select
@@ -549,11 +569,13 @@ export function ModelFit() {
           label="3. Role"
           disabled={!fn}
           note={
-            fn
-              ? roles.length === 1
-                ? "the only role profiled in this function"
-                : `${roles.length} roles profiled in this function`
-              : "waiting on a function"
+            !fn
+              ? "waiting on a function"
+              : roleSplit.specific && roleSplit.common
+                ? `${roleSplit.specific} specific to ${industry}, ${roleSplit.common} common`
+                : roles.length === 1
+                  ? "the only role profiled in this function"
+                  : `${roles.length} roles profiled in this function`
           }
         >
           <select
@@ -566,11 +588,37 @@ export function ModelFit() {
             <option value="">
               {fn ? "Choose a role…" : "Choose a function first"}
             </option>
-            {roles.map((r) => (
-              <option key={r.role_id} value={r.role_id}>
-                {r.name}
-              </option>
-            ))}
+            {/* Specialist roles and common ones are two different claims, so
+                they sit in labelled groups rather than one undifferentiated list. */}
+            {roleSplit.specific > 0 ? (
+              <optgroup label={`Specific to ${industryLabel(industry)}`}>
+                {roles
+                  .filter((r) => !r.crossIndustry)
+                  .map((r) => (
+                    <option key={r.role_id} value={r.role_id}>
+                      {r.name}
+                    </option>
+                  ))}
+              </optgroup>
+            ) : null}
+            {roleSplit.common > 0 ? (
+              <optgroup label="Common to every industry">
+                {roles
+                  .filter((r) => r.crossIndustry)
+                  .map((r) => (
+                    <option key={r.role_id} value={r.role_id}>
+                      {r.name}
+                    </option>
+                  ))}
+              </optgroup>
+            ) : null}
+            {roleSplit.specific === 0 && roleSplit.common === 0
+              ? roles.map((r) => (
+                  <option key={r.role_id} value={r.role_id}>
+                    {r.name}
+                  </option>
+                ))
+              : null}
           </select>
         </Field>
         <div className="flex flex-wrap items-center gap-3">
@@ -654,6 +702,22 @@ export function ModelFit() {
               <p className="mt-2 max-w-[62ch] text-[14px] leading-relaxed">
                 {headline(answer, detail, engine, role)}
               </p>
+              {authoredProfile ? (
+                <p className="measure mt-3 border-l-[3px] border-warn bg-warn-bg/40 px-3 py-2 text-[12.5px] leading-relaxed">
+                  <b>Weaker evidence than the rest of the library.</b> This role&apos;s
+                  requirements were authored against the rubric for this build, inferred from
+                  the role definition and its occupational analogue. The other 258 roles rest on
+                  convergent evidence from current job descriptions. That is the difference
+                  between evidence class E and class D, it is why this answer&apos;s confidence
+                  reads lower, and no subject-matter expert has reviewed either.
+                  {role.onet_analogue ? (
+                    <>
+                      {" "}
+                      Occupational analogue: {role.onet_analogue}.
+                    </>
+                  ) : null}
+                </p>
+              ) : null}
               {mandatoryCount === 0 && (answer.outcome === "supported" || answer.outcome === "qualified") ? (
                 <p className="mt-3 border-l-[3px] border-warn bg-warn-bg/40 px-3 py-2 text-[12.5px] leading-relaxed">
                   <b>Read this one carefully.</b> No requirement in this profile is Mandatory,

@@ -58,7 +58,9 @@ const eng = loadEngine();
 
 describe("data", () => {
   it("roles load", () => {
-    expect(Object.keys(ROLES).length).toBe(258);
+    // 258 researched profiles plus 36 authored for the seven industries the
+    // package left uncovered. See scripts/author-missing-industries.py.
+    expect(Object.keys(ROLES).length).toBe(294);
   });
 
   it("every profile is complete", () => {
@@ -312,10 +314,10 @@ describe("full library", () => {
   it("matches the reference run's outcome distribution", () => {
     // The reference prints these counts when engine.py is run directly.
     expect(counts).toEqual({
-      qualified: 199,
+      qualified: 231,
       supported: 4,
       "partially supported": 6,
-      "not supported": 39,
+      "not supported": 43,
       "best available": 10,
     });
   });

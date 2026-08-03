@@ -163,6 +163,10 @@ export interface Role {
   authority?: string;
   duties?: DutyRecord[];
   note?: string;
+  /** Present on profiles authored for this build rather than researched. */
+  profile_source?: string;
+  /** The O*NET occupation the authored profile was reasoned from. */
+  onet_analogue?: string;
 }
 
 export interface ModelRecord {

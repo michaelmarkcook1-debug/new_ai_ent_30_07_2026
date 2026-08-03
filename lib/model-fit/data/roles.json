@@ -31214,5 +31214,3749 @@
   "headcount": 25,
   "seniority": "Manager",
   "authority": "Operational"
+ },
+ "ROLE-0286": {
+  "role_id": "ROLE-0286",
+  "name": "Agronomist",
+  "industry": "Agriculture & Food Production",
+  "function": "Agronomy & Crop Management",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 8,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Agronomy is expert domain knowledge applied to field imagery; a wrong recommendation costs a season, not a life.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Soil and Plant Scientists"
+ },
+ "ROLE-0288": {
+  "role_id": "ROLE-0288",
+  "name": "Farm Operations Manager",
+  "industry": "Agriculture & Food Production",
+  "function": "Farm Operations",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 12,
+  "seniority": "Manager",
+  "authority": "Operational",
+  "note": "Runs multi-stage operations independently across a seasonal workforce.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Farmers, Ranchers, and Other Agricultural Managers"
+ },
+ "ROLE-0289": {
+  "role_id": "ROLE-0289",
+  "name": "Food Safety Manager",
+  "industry": "Agriculture & Food Production",
+  "function": "Food Safety & Quality",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 6,
+  "seniority": "Manager",
+  "authority": "Tactical",
+  "note": "HACCP is prescribed to the letter and an undetected error is a foodborne illness, so accuracy and assurance both sit at the top band.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Quality Control Systems Managers"
+ },
+ "ROLE-0287": {
+  "role_id": "ROLE-0287",
+  "name": "Livestock Manager",
+  "industry": "Agriculture & Food Production",
+  "function": "Livestock & Animal Health",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 10,
+  "seniority": "Manager",
+  "authority": "Operational",
+  "note": "Animal welfare regulation plus visual assessment of condition as a core task.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Farmers, Ranchers, and Other Agricultural Managers"
+ },
+ "ROLE-0290": {
+  "role_id": "ROLE-0290",
+  "name": "Processing Plant Manager",
+  "industry": "Agriculture & Food Production",
+  "function": "Processing & Packing",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 14,
+  "seniority": "Manager",
+  "authority": "Operational",
+  "note": "Line orchestration where a failed handoff stops production within minutes.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Industrial Production Managers"
+ },
+ "ROLE-0241": {
+  "role_id": "ROLE-0241",
+  "name": "Aircraft Maintenance Planner",
+  "industry": "Airlines & Aviation",
+  "function": "Aircraft Maintenance & Engineering",
+  "profile": {
+   "CAP-01": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 18,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Airworthiness directives are prescribed to the letter and an undetected error is a safety event; seven mandatory requirements make it broad too.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Production, Planning, and Expediting Clerks"
+ },
+ "ROLE-0244": {
+  "role_id": "ROLE-0244",
+  "name": "Disruption Management Coordinator",
+  "industry": "Airlines & Aviation",
+  "function": "Disruption & Recovery",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 25,
+  "seniority": "Individual contributor",
+  "authority": "Operational",
+  "note": "Recovery decisions in seconds, over radio, with money and passengers moving.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Dispatchers, Except Police, Fire, and Ambulance"
+ },
+ "ROLE-0239": {
+  "role_id": "ROLE-0239",
+  "name": "Flight Operations Controller",
+  "industry": "Airlines & Aviation",
+  "function": "Flight Operations",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 30,
+  "seniority": "Individual contributor",
+  "authority": "Operational",
+  "note": "The most demanding profile in this set: safety-critical, prescribed, real-time and spoken all at once.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Airfield Operations Specialists"
+ },
+ "ROLE-0240": {
+  "role_id": "ROLE-0240",
+  "name": "Ground Operations Manager",
+  "industry": "Airlines & Aviation",
+  "function": "Ground Operations",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 20,
+  "seniority": "Manager",
+  "authority": "Operational",
+  "note": "Turnaround management against a clock, under a safety regime.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Transportation, Storage, and Distribution Managers"
+ },
+ "ROLE-0242": {
+  "role_id": "ROLE-0242",
+  "name": "Network Planning Analyst",
+  "industry": "Airlines & Aviation",
+  "function": "Network & Schedule Planning",
+  "profile": {
+   "CAP-01": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 10,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Network economics: novel problems, forecasting, and routine SQL.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Computer Network Architects"
+ },
+ "ROLE-0243": {
+  "role_id": "ROLE-0243",
+  "name": "Airline Revenue Manager",
+  "industry": "Airlines & Aviation",
+  "function": "Revenue Management",
+  "profile": {
+   "CAP-01": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 8,
+  "seniority": "Manager",
+  "authority": "Tactical",
+  "note": "Pricing science at method level, where the technique itself is chosen and defended.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Financial and Investment Analysts"
+ },
+ "ROLE-0229": {
+  "role_id": "ROLE-0229",
+  "name": "Game Designer",
+  "industry": "Gaming & Interactive Entertainment",
+  "function": "Game Design",
+  "profile": {
+   "CAP-01": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 14,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Novel problems and visual composition; errors are rework, not harm.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Video Game Designers"
+ },
+ "ROLE-0230": {
+  "role_id": "ROLE-0230",
+  "name": "Game Developer",
+  "industry": "Gaming & Interactive Entertainment",
+  "function": "Game Development",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 40,
+  "seniority": "Individual contributor",
+  "authority": "Operational",
+  "note": "Production software against an interdependent codebase.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Video Game Designers"
+ },
+ "ROLE-0231": {
+  "role_id": "ROLE-0231",
+  "name": "Live Operations Manager",
+  "industry": "Gaming & Interactive Entertainment",
+  "function": "Live Operations",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 10,
+  "seniority": "Manager",
+  "authority": "Tactical",
+  "note": "Live service: metrics-driven, orchestrated, and waiting on nobody.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "General and Operations Managers"
+ },
+ "ROLE-0233": {
+  "role_id": "ROLE-0233",
+  "name": "Community Manager",
+  "industry": "Gaming & Interactive Entertainment",
+  "function": "Player Support & Community",
+  "profile": {
+   "CAP-01": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 12,
+  "seniority": "Manager",
+  "authority": "Operational",
+  "note": "External voice to a global player base, routinely across languages.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Public Relations Managers"
+ },
+ "ROLE-0232": {
+  "role_id": "ROLE-0232",
+  "name": "Trust and Safety Analyst",
+  "industry": "Gaming & Interactive Entertainment",
+  "function": "Trust, Safety & Moderation",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 22,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Special-category reports, image and voice moderation, and translation where meaning must survive: the only role here demanding on all three modalities.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Security Management Specialists"
+ },
+ "ROLE-0265": {
+  "role_id": "ROLE-0265",
+  "name": "Research Data Manager",
+  "industry": "Higher Education & Research",
+  "function": "Libraries, Archives & Research Information",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 6,
+  "seniority": "Manager",
+  "authority": "Tactical",
+  "note": "Research data under governance: pipelines, retention and audit.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Database Architects"
+ },
+ "ROLE-0262": {
+  "role_id": "ROLE-0262",
+  "name": "Research Fellow",
+  "industry": "Higher Education & Research",
+  "function": "Research & Scholarship",
+  "profile": {
+   "CAP-01": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 35,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Work defined by problems nobody has framed, in a field that is unsettled.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Survey Researchers"
+ },
+ "ROLE-0263": {
+  "role_id": "ROLE-0263",
+  "name": "Research Development Manager",
+  "industry": "Higher Education & Research",
+  "function": "Research Development & Grants",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 7,
+  "seniority": "Manager",
+  "authority": "Tactical",
+  "note": "Funder rules are strict and the submission is a binding persuasive document.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Natural Sciences Managers"
+ },
+ "ROLE-0264": {
+  "role_id": "ROLE-0264",
+  "name": "Student Administration Manager",
+  "industry": "Higher Education & Research",
+  "function": "Student Administration & Support",
+  "profile": {
+   "CAP-01": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 16,
+  "seniority": "Manager",
+  "authority": "Operational",
+  "note": "Student records carry immigration and funding consequence.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Education Administrators, Postsecondary"
+ },
+ "ROLE-0261": {
+  "role_id": "ROLE-0261",
+  "name": "Lecturer",
+  "industry": "Higher Education & Research",
+  "function": "Teaching & Academic Delivery",
+  "profile": {
+   "CAP-01": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 45,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Authority-level domain knowledge delivered as live spoken interaction.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Business Teachers, Postsecondary"
+ },
+ "ROLE-0280": {
+  "role_id": "ROLE-0280",
+  "name": "Knowledge Manager",
+  "industry": "Management Consulting",
+  "function": "Knowledge Management",
+  "profile": {
+   "CAP-01": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 5,
+  "seniority": "Manager",
+  "authority": "Tactical",
+  "note": "Systematic review across a large client corpus.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Document Management Specialists"
+ },
+ "ROLE-0279": {
+  "role_id": "ROLE-0279",
+  "name": "Programme Delivery Consultant",
+  "industry": "Management Consulting",
+  "function": "Programme Delivery",
+  "profile": {
+   "CAP-01": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 30,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Runs client programmes independently, and is answerable for the read.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Management Analysts"
+ },
+ "ROLE-0278": {
+  "role_id": "ROLE-0278",
+  "name": "Research Analyst",
+  "industry": "Management Consulting",
+  "function": "Research & Insight",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 18,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Establishes what is known in a market and where the gaps are.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Market Research Analysts and Marketing Specialists"
+ },
+ "ROLE-0276": {
+  "role_id": "ROLE-0276",
+  "name": "Strategy Consultant",
+  "industry": "Management Consulting",
+  "function": "Strategy Consulting",
+  "profile": {
+   "CAP-01": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 24,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Board-facing language where exact wording carries market consequence, on material non-public information.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Management Analysts"
+ },
+ "ROLE-0277": {
+  "role_id": "ROLE-0277",
+  "name": "Transformation Consultant",
+  "industry": "Management Consulting",
+  "function": "Transformation Consulting",
+  "profile": {
+   "CAP-01": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 26,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Change delivery: broad but not as sharp-edged as strategy.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Management Analysts"
+ },
+ "ROLE-0285": {
+  "role_id": "ROLE-0285",
+  "name": "Facilities Manager",
+  "industry": "Real Estate & Property Services",
+  "function": "Facilities Management",
+  "profile": {
+   "CAP-01": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 15,
+  "seniority": "Manager",
+  "authority": "Operational",
+  "note": "Statutory building compliance, and incidents that will not wait.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Facilities Managers"
+ },
+ "ROLE-0284": {
+  "role_id": "ROLE-0284",
+  "name": "Leasing Manager",
+  "industry": "Real Estate & Property Services",
+  "function": "Leasing & Transactions",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 11,
+  "seniority": "Manager",
+  "authority": "Tactical",
+  "note": "Lease terms are binding documents and an error is expensive.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Property, Real Estate, and Community Association Managers"
+ },
+ "ROLE-0281": {
+  "role_id": "ROLE-0281",
+  "name": "Property Asset Manager",
+  "industry": "Real Estate & Property Services",
+  "function": "Property Asset Management",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 9,
+  "seniority": "Manager",
+  "authority": "Tactical",
+  "note": "Asset strategy on modelled returns across an interdependent portfolio.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Property, Real Estate, and Community Association Managers"
+ },
+ "ROLE-0282": {
+  "role_id": "ROLE-0282",
+  "name": "Property Manager",
+  "industry": "Real Estate & Property Services",
+  "function": "Property Management",
+  "profile": {
+   "CAP-01": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 28,
+  "seniority": "Manager",
+  "authority": "Operational",
+  "note": "Statutory duties on tenant safety and deposits, on personal data.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Property, Real Estate, and Community Association Managers"
+ },
+ "ROLE-0283": {
+  "role_id": "ROLE-0283",
+  "name": "Valuation Surveyor",
+  "industry": "Real Estate & Property Services",
+  "function": "Valuation",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 13,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "A registered valuer is individually accountable and a negligent valuation is a legal liability: ten mandatory requirements, the broadest profile in this set.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Appraisers and Assessors of Real Estate"
+ },
+ "ROLE-0200": {
+  "role_id": "ROLE-0200",
+  "name": "Renewable Asset Manager",
+  "industry": "Renewable Energy",
+  "function": "Asset Management & Performance",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 7,
+  "seniority": "Manager",
+  "authority": "Tactical",
+  "note": "Portfolio performance against contracted availability.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Wind Energy Operations Managers"
+ },
+ "ROLE-0199": {
+  "role_id": "ROLE-0199",
+  "name": "Generation Forecasting Analyst",
+  "industry": "Renewable Energy",
+  "function": "Generation Forecasting & Trading",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 6,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Method-level forecasting where the technique is chosen and defended, and an error is an imbalance charge within the hour.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Operations Research Analysts"
+ },
+ "ROLE-0198": {
+  "role_id": "ROLE-0198",
+  "name": "Grid Connection Engineer",
+  "industry": "Renewable Energy",
+  "function": "Grid Connection & Integration",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 9,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Grid codes are strict and a connection study is checked by the operator.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Electrical Engineers"
+ },
+ "ROLE-0196": {
+  "role_id": "ROLE-0196",
+  "name": "Renewable Project Developer",
+  "industry": "Renewable Energy",
+  "function": "Project Development",
+  "profile": {
+   "CAP-01": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 12,
+  "seniority": "Individual contributor",
+  "authority": "Tactical",
+  "note": "Consent is won on contested evidence and persuasive written submissions.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Wind Energy Development Managers"
+ },
+ "ROLE-0197": {
+  "role_id": "ROLE-0197",
+  "name": "Renewable Operations Manager",
+  "industry": "Renewable Energy",
+  "function": "Renewable Generation Operations",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-02": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-03": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-05": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-07": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-08": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-09": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-10": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-11": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-13": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "E"
+   },
+   "CAP-16": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "E"
+   }
+  },
+  "headcount": 16,
+  "seniority": "Manager",
+  "authority": "Operational",
+  "note": "Safety-critical generation assets under a real-time control regime.",
+  "profile_source": "authored against the rubric, evidence class E, no SME review",
+  "onet_analogue": "Wind Energy Operations Managers"
  }
 }
