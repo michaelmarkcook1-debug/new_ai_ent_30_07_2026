@@ -373,3 +373,56 @@ Dates are absolute; the build day is 30 July 2026.
     `Math.sin`/`Math.cos` differ in the last bit between Node and the browser and
     React abandoned hydration for the whole chart; coordinates are quantised to
     three decimals, which is far below a pixel and identical on both engines.
+24. **Layout: a capped content column and container queries (3 August 2026).**
+    Michael reported the sizing and screen fit as awkward across every tab.
+    Measured across all 18 routes at six widths, three causes:
+    - **Nothing capped the content column.** On a 1920px monitor the main
+      column ran 1696px, so paragraphs reached 300 characters a line while
+      their `max-w-3xl` siblings stopped at 768px. Cards read as content
+      hugging the left with dead space to the right. The column is now capped
+      at 1440px and centred.
+    - **Breakpoints described the window, not the space.** The sidebar takes
+      224px, so an `lg:` grid firing at a 1024px window was laying three
+      columns into 760px, and collapsing the sidebar reflowed nothing at all.
+      All 96 grid and 17 column-span declarations now query the content
+      container instead. Thresholds were chosen from the width each column
+      count needs, not translated from the old viewport numbers.
+    - **A pixel cap is not a measure.** `max-w-3xl` is 93 characters at 15px
+      and 134 at 11px, and the app used it at both. Replaced by a `measure`
+      utility in `ch`, which tracks the font size. Headlines keep a pixel cap,
+      since 76ch of 22px type is wider than the column.
+    Container queries carry `contain: layout`, which makes the element the
+    containing block for any fixed descendant. The derivation drawers would
+    have been trapped inside the centred column, so they portal to the body,
+    and the demo footer is now a sibling of the Shell. Both were verified
+    open at 1920px before the change was called done.
+    Deliberately not capped: paragraphs carrying a fill or a rule, where a
+    cap would stop the fill short of its container, and centred empty states.
+    Verified at 1920, 1440, 1280, 1024, 768 and 390: zero horizontal overflow
+    and no running copy past ~96 characters on any tab.
+25. **Uptake chart: what the bars are, and a control that did nothing
+    (3 August 2026).** Michael did not buy the output of the provider
+    adoption chart on Model 4 Role. Four faults, all found in the wiring:
+    - **The source's own caveat was dropped.** Every response carries
+      `provenance: "MODELLED ESTIMATE — May 2026 segment-share model;
+      directional, not audited market share"`. The panel discarded it and
+      showed a bare percentage under a LIVE badge, which reads as measurement.
+      It is now reproduced verbatim above the chart.
+    - **Organisation size was a dead control.** The upstream API facets on
+      industry and region only, and echoes that back in its `scope`. The size
+      was never sent, so selecting one changed nothing while the slice label
+      above the chart claimed the cut had been applied. Selecting a size now
+      moves the panel to the ported dataset, which carries the size split from
+      the same source spreadsheet, and the lane badge changes with it.
+    - **The ranking is breadth, not size of business.** `aggregateUptake`
+      takes an unweighted mean across matching region-by-industry cells, so
+      Legal in Latin America counts as much as Technology in North America.
+      That is why OpenAI leads at 26.5 per cent while Anthropic, which holds
+      38.3 per cent of North America Technology, sits third. Defensible, and
+      now stated on the panel rather than left for a reader to infer.
+    - **Cell counts and confidence were computed and never drawn.** The
+      component's own header argues that a share off 3 cells is not the same
+      claim as one off 45; it then printed neither. Both now sit against every
+      row.
+    Live here means freshly fetched, not freshly measured: the upstream serves
+    the same May 2026 model, which the drawer now says.
