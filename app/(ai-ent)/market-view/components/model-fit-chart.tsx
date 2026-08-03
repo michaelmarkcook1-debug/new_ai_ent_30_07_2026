@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { burnOf, type ModelRecord, type RankedModel } from "@/lib/model-fit";
+import { burnOf, shortName, type ModelRecord, type RankedModel } from "@/lib/model-fit";
 
 // Price against capability, for one role's join.
 //
@@ -44,13 +44,17 @@ function priceLabel(v: number): string {
 }
 
 /**
- * The family name for a frontier label: the effort tag is dropped because the
- * label is already crowded and the full id, effort and all, stays in the hover
- * readout and the title element.
+ * The label for a frontier point, keeping the effort variant.
+ *
+ * Dropping the tag to save width collapsed four separate frontier points into
+ * four labels all reading "Claude Opus 5", which is the precise thing
+ * shortName() exists to prevent: Opus at max and Opus at medium are different
+ * products at different prices, and on this chart they are different points.
+ * The full id stays in the hover readout either way.
  */
 function frontierName(modelId: string): string {
-  const base = modelId.replace(/\s*\([^)]*\)\s*$/, "").trim();
-  return base.length > 24 ? `${base.slice(0, 23)}…` : base;
+  const n = shortName(modelId);
+  return n.length > 28 ? `${n.slice(0, 27)}…` : n;
 }
 
 interface Point {
@@ -140,12 +144,19 @@ export function PriceCapabilityChart({
   // clears the one before it. Same approach as the price-performance chart.
   const frontierLabels = useMemo(() => {
     const GAP = 14;
+    // Roughly 5.6px per character at this size: enough to know whether a
+    // right-anchored label would run off the left edge of the plot.
+    const widthOf = (s: string) => s.length * 5.6;
     let prev = Number.POSITIVE_INFINITY;
     return frontier.map((p) => {
       const wanted = yFor(p.intelligence) - 10;
-      const labelY = Math.min(wanted, prev - GAP);
+      const labelY = Math.max(PAD.top + 6, Math.min(wanted, prev - GAP));
       prev = labelY;
-      return { p, labelY };
+      const label = frontierName(p.model.model_id);
+      // The cheapest frontier model sits hard against the left axis, where a
+      // label placed to its left falls off the chart. Those flip to the right.
+      const flip = xFor(p.cost) - 12 - widthOf(label) < PAD.left;
+      return { p, labelY, label, flip };
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [frontier, maxIntel]);
@@ -276,26 +287,26 @@ export function PriceCapabilityChart({
             empty by construction, so labels placed there have nothing to
             collide with except each other, and the walk below pushes each one
             clear of the last. */}
-        {frontierLabels.map(({ p, labelY }) => (
+        {frontierLabels.map(({ p, labelY, label, flip }) => (
           <g key={`fl-${p.model.model_id}`} pointerEvents="none">
             <line
               x1={xFor(p.cost)}
               y1={yFor(p.intelligence)}
-              x2={xFor(p.cost) - 9}
+              x2={xFor(p.cost) + (flip ? 9 : -9)}
               y2={labelY}
               stroke="var(--ag-green)"
               strokeWidth="1"
               opacity="0.4"
             />
             <text
-              x={xFor(p.cost) - 12}
+              x={xFor(p.cost) + (flip ? 12 : -12)}
               y={labelY + 3.5}
-              textAnchor="end"
+              textAnchor={flip ? "start" : "end"}
               fontSize="10.5"
               fontWeight="600"
               fill="var(--ag-base-content)"
             >
-              {frontierName(p.model.model_id)}
+              {label}
             </text>
           </g>
         ))}
