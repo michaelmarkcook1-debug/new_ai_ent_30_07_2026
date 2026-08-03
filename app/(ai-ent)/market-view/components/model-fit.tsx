@@ -715,9 +715,30 @@ export function ModelFit() {
                   {role.authority ? ` · ${role.authority} authority` : ""}
                 </span>
               </div>
-              <p className="mt-2 max-w-[62ch] text-[14px] leading-relaxed">
-                {headline(answer, detail, engine, role)}
-              </p>
+              {/* The model is the answer, so it gets the size and the colour.
+                  The reasoning sits under it at reading size. */}
+              {(() => {
+                const h = headline(answer, detail, engine, role);
+                return (
+                  <>
+                    {h.model ? (
+                      <p className="mt-3">
+                        <span className="micro-label block">
+                          {answer.outcome === "best available"
+                            ? "Allocated, not a fit"
+                            : "Recommended model"}
+                        </span>
+                        <span className="mt-0.5 block break-words text-[32px] font-extrabold leading-[1.15] tracking-tight text-primary sm:text-[38px]">
+                          {h.model}
+                        </span>
+                      </p>
+                    ) : null}
+                    <p className="mt-2 max-w-[62ch] text-[14px] leading-relaxed">
+                      {h.sentence}
+                    </p>
+                  </>
+                );
+              })()}
               {researched ? (
                 <div className="mt-3 rounded border border-base-300 bg-base-200/40 px-3 py-2">
                   <div className="flex flex-wrap items-center gap-2">
@@ -1502,12 +1523,21 @@ function specRequirement(cap: string, level: number): string {
   return need.length ? need.join(", ").replace(/_/g, " ") : "no control required";
 }
 
+/**
+ * The answer, split so the model can be the thing the eye lands on.
+ *
+ * `model` is the name alone, rendered large and in the accent colour on its own
+ * line; `sentence` is everything else. Where there is no single model — a role
+ * decomposed into duties, or one nothing clears — `model` is null and the
+ * sentence carries the whole answer, because inventing something to put in the
+ * big type would be the one place this panel must not overstate.
+ */
 function headline(
   answer: NonNullable<Assessment["answer"]>,
   detail: Recommendation,
   engine: ReturnType<typeof loadEngine>,
   role: Role
-): string {
+): { model: string | null; sentence: string } {
   const total = Object.keys(role.profile).length;
   const u = detail.unassessed.length;
   // An unpriced model can end up the recommendation: the ranking sorts it last,
@@ -1521,18 +1551,33 @@ function headline(
       ? " The catalogue publishes no price for it, so it cannot be costed."
       : "";
   if (answer.outcome === "supported" && detail.pick) {
-    return `${shortName(detail.pick.model_id)} meets every requirement for this role${at}.${unpriced}`;
+    return {
+      model: shortName(detail.pick.model_id),
+      sentence: `Meets every requirement for this role${at}.${unpriced}`,
+    };
   }
   if (answer.outcome === "qualified" && detail.pick) {
-    return `${shortName(detail.pick.model_id)} clears all ${total - u} requirements that can be checked today${at}. ${u} more await benchmark data.${unpriced}`;
+    return {
+      model: shortName(detail.pick.model_id),
+      sentence: `Clears all ${total - u} requirements that can be checked today${at}. ${u} more await benchmark data.${unpriced}`,
+    };
   }
   if (answer.outcome === "best available") {
-    return `No model meets this role in full. ${answer.model} is allocated as the highest-capability model available, and falls short on ${answer.unmet_requirements?.join(", ") || "one or more requirements"}.`;
+    return {
+      model: answer.model ?? null,
+      sentence: `No model meets this role in full. This is allocated as the highest-capability model available, and falls short on ${answer.unmet_requirements?.join(", ") || "one or more requirements"}.`,
+    };
   }
   if (answer.outcome === "partially supported") {
-    return `No single model meets this role in full. ${answer.duties_supported} of ${answer.duties_total} duties are supported when each is run through the join on its own.`;
+    return {
+      model: null,
+      sentence: `No single model meets this role in full. ${answer.duties_supported} of ${answer.duties_total} duties are supported when each is run through the join on its own.`,
+    };
   }
-  return `No model in the catalogue meets this role's requirements${
-    answer.blocked_by?.length ? `. Blocked by ${answer.blocked_by.join(", ")}` : ""
-  }. That is a real answer about the market, not a failure to find one.`;
+  return {
+    model: null,
+    sentence: `No model in the catalogue meets this role's requirements${
+      answer.blocked_by?.length ? `. Blocked by ${answer.blocked_by.join(", ")}` : ""
+    }. That is a real answer about the market, not a failure to find one.`,
+  };
 }
