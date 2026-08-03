@@ -121,9 +121,10 @@ export function DepthDonut({ edges }: { edges: AllianceEdgeView[] }) {
                   strokeWidth={STROKE}
                   strokeLinecap="butt"
                 >
+                  {/* One template string, not interleaved nodes: React refuses
+                      an array of children on <title> and logs on every render. */}
                   <title>
-                    {s.band.label}: {s.count} of {total} (
-                    {Math.round(s.share * 100)}%)
+                    {`${s.band.label}: ${s.count} of ${total} (${Math.round(s.share * 100)}%)`}
                   </title>
                 </path>
               ))}

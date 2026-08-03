@@ -1,6 +1,12 @@
 import { describe, it, expect } from "vitest";
 import { Engine, MODELS, CALIBRATION, CAPABILITY_NAMES, ROLES } from "@/lib/model-fit";
-import type { EngineOptions, Profile, Recommendation } from "@/lib/model-fit";
+import type {
+  EngineOptions,
+  ModelRecord,
+  Profile,
+  Recommendation,
+  Role,
+} from "@/lib/model-fit";
 import baseline from "./fixtures/model-fit-python-baseline.json";
 
 // Differential test: the TypeScript port against the integration package's
@@ -18,6 +24,11 @@ import baseline from "./fixtures/model-fit-python-baseline.json";
 // chosen model, the survivor ordering, the eliminations and their wording, the
 // consequence tier, the breadth shift, the confidence and its limiting
 // requirement.
+//
+// TWO THINGS ARE NOT COMPARED EXACTLY, and both are documented at the helper
+// that handles them: the ordering of `unassessed` (see below) and a trailing
+// `.0` inside a reason string (see normaliseDecimals). Everything else is
+// compared exactly.
 //
 // ONE DELIBERATE DIFFERENCE, and it is the reference that is wrong. The
 // reference collects thinly-covered requirements in a Python set and appends
@@ -60,18 +71,33 @@ interface BaselineConfig {
   rows: Record<string, BaselineRow>;
 }
 
+interface HealthShape {
+  models_total: number;
+  models_allowed: number;
+  models_unpriced: number;
+  verdict: string;
+  axes: Record<string, { field: string; coverage_pct: number; can_eliminate_on_absence: boolean }>;
+}
+
+interface SpecCase {
+  name: string;
+  role: Role;
+  kw: EngineOptions;
+  constraints: { excluded_vendors?: string[] } | null;
+  warnings: string[];
+  answer: Record<string, unknown>;
+  detail: RecSummary;
+  duties: BaselineRow["duties"];
+  health: HealthShape | null;
+}
+
 const fixture = baseline as unknown as {
   roles: number;
   models: number;
   configs: BaselineConfig[];
   synthetic: { name: string; scores: number[]; recommend: RecSummary }[];
-  health: {
-    models_total: number;
-    models_allowed: number;
-    models_unpriced: number;
-    verdict: string;
-    axes: Record<string, { field: string; coverage_pct: number; can_eliminate_on_absence: boolean }>;
-  };
+  health: HealthShape;
+  spec: { models: ModelRecord[]; cases: SpecCase[] };
 };
 
 function summarise(r: Recommendation): RecSummary {
@@ -117,11 +143,32 @@ const MONEY_FIELDS = [
 ] as const;
 
 /**
+ * A trailing `.0` inside a reason string is not comparable across the two
+ * languages, and pretending otherwise would be a lie in the test.
+ *
+ * Python keeps the JSON literal's type, so a model scoring `55.0` on a decimal
+ * axis prints "55.0" while one scoring `1720` on an Elo axis prints "1720".
+ * JavaScript has one number type and cannot recover that distinction: by the
+ * time the value reaches the engine, 55.0 and 55 are the same value. The port
+ * infers the axis's scale from the catalogue, which gets the shipped data right
+ * and is undecidable on a six-model catalogue whose index values happen to be
+ * whole.
+ *
+ * So the decimal is normalised away on BOTH sides before comparing. What is
+ * still compared exactly: which model, which requirement, which threshold, and
+ * every non-numeric word. `56.0` and `5.6` remain different strings.
+ */
+function normaliseDecimals(s: string): string {
+  return s.replace(/(\d)\.0(?!\d)/g, "$1");
+}
+
+/**
  * Canonical form for comparison: keys sorted (the baseline is dumped with
  * sort_keys), undefined dropped (the reference simply omits those keys), and
  * `unassessed` sorted for the reason given at the top of this file.
  */
 function canon(v: unknown): unknown {
+  if (typeof v === "string") return normaliseDecimals(v);
   if (Array.isArray(v)) return v.map(canon);
   if (v && typeof v === "object") {
     const o = v as Record<string, unknown>;
@@ -239,6 +286,100 @@ describe("the port matches the reference implementation", () => {
       expect(runs[1]).toEqual(runs[0]);
       expect(runs[2]).toEqual(runs[0]);
     }
+  });
+
+  // The shipped catalogue publishes no output price, no context window, no
+  // deployment record and no input modalities, so roughly a third of the join
+  // never executes against it: every specification comparison short-circuits to
+  // unknown and the blended-cost branch is dead. These cases run a small
+  // catalogue that populates all of it, through the reference and the port
+  // alike, so the code that lights up when the live catalogue gains those
+  // columns is not shipping unexercised.
+  describe("specification filters and blended cost", () => {
+    it("carries a catalogue that actually populates the dormant fields", () => {
+      const m = fixture.spec.models;
+      expect(m.length).toBeGreaterThan(0);
+      expect(m.some((x) => x.context_window_tokens != null)).toBe(true);
+      expect(m.some((x) => x.data_handling != null)).toBe(true);
+      expect(m.some((x) => x.assurance != null)).toBe(true);
+      expect(m.some((x) => x.input_modalities != null)).toBe(true);
+      expect(m.some((x) => x.cost_output_per_1m != null)).toBe(true);
+      // And leaves one model silent on all of them, because "not published" and
+      // "does not have it" are different answers.
+      expect(
+        m.some(
+          (x) =>
+            x.context_window_tokens == null &&
+            x.data_handling == null &&
+            x.input_modalities == null
+        )
+      ).toBe(true);
+    });
+
+    for (const c of fixture.spec.cases) {
+      it(`matches the reference: ${c.name}`, () => {
+        const engine = new Engine(
+          JSON.parse(JSON.stringify(fixture.spec.models)),
+          JSON.parse(JSON.stringify(CALIBRATION)),
+          CAPABILITY_NAMES,
+          c.kw
+        );
+        expect(engine.warnings).toEqual(c.warnings);
+
+        const got = engine.assess(JSON.parse(JSON.stringify(c.role)), c.constraints);
+        const gotAnswer = got.answer as unknown as Record<string, unknown>;
+
+        for (const field of MONEY_FIELDS) {
+          const a = c.answer[field] as number | null | undefined;
+          const b = gotAnswer[field] as number | null | undefined;
+          if (a == null || b == null) {
+            expect(b ?? null).toEqual(a ?? null);
+          } else {
+            expect(b).toBeCloseTo(a, 2);
+          }
+        }
+        const strip = (o: Record<string, unknown>) => {
+          const s = { ...o };
+          for (const f of MONEY_FIELDS) delete s[f];
+          return s;
+        };
+        expect(canon(strip(gotAnswer))).toEqual(canon(strip(c.answer)));
+        expect(canon(summarise(got.detail as Recommendation))).toEqual(canon(c.detail));
+        const gotDuties =
+          (got.detail as Recommendation & { duties?: unknown }).duties ?? null;
+        expect(canon(gotDuties)).toEqual(canon(c.duties ?? null));
+
+        if (c.health) {
+          const h = engine.health();
+          expect(h.models_total).toBe(c.health.models_total);
+          expect(h.models_allowed).toBe(c.health.models_allowed);
+          expect(h.models_unpriced).toBe(c.health.models_unpriced);
+          expect(h.verdict).toBe(c.health.verdict);
+        }
+      });
+    }
+
+    it("covers every specification requirement at every band", () => {
+      const names = new Set(fixture.spec.cases.map((c) => c.name));
+      for (const cap of ["CAP-09", "CAP-13", "CAP-14", "CAP-15", "CAP-16", "CAP-17"]) {
+        for (const band of [10, 30, 50, 70, 90]) {
+          expect(names.has(`${cap}-mandatory-${band}`)).toBe(true);
+        }
+      }
+    });
+
+    it("eliminates on each specification, with the reference's own wording", () => {
+      // Guards the reason strings specifically: a set of missing controls is
+      // rendered as the reference renders a Python list, and a whole-numbered
+      // float throughput keeps its decimal.
+      const reasons = fixture.spec.cases
+        .flatMap((c) => c.detail.elim_head)
+        .map((e) => e.reason);
+      expect(reasons).toContain("missing ['audit_logging', 'certifications']");
+      expect(reasons).toContain("does not accept audio input");
+      expect(reasons).toContain("throughput_tokens_per_sec 40.0 against 50 required");
+      expect(reasons).toContain("context_window_tokens 16000 against 500000 required");
+    });
   });
 
   it("reports the same health as the reference", () => {

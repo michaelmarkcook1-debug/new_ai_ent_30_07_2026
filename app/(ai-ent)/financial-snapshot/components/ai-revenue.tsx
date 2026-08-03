@@ -54,9 +54,10 @@ function SegmentBar({ company }: { company: CompanyRevenueView }) {
               fill={shades[Math.min(i, shades.length - 1)]}
               rx={1}
             >
+              {/* One template string, not interleaved nodes: React refuses
+                  an array of children on <title> and logs on every render. */}
               <title>
-                {s.segment}: {formatUsd(s.revenueUsd)} ({s.sharePct}% of
-                reported segment revenue)
+                {`${s.segment}: ${formatUsd(s.revenueUsd)} (${s.sharePct}% of reported segment revenue)`}
               </title>
             </rect>
           );

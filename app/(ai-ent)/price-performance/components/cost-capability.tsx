@@ -374,9 +374,10 @@ export function CostCapabilityChart({ view }: { view: CostCapabilityView }) {
                 opacity={hovered ? 0.28 : 0.62}
                 style={{ transition: "opacity 140ms" }}
               >
+                {/* One template string, not interleaved nodes: React refuses
+                    an array of children on <title> and logs on every render. */}
                 <title>
-                  {p.m.model}: Intelligence {p.m.intelligence}, $
-                  {p.m.inputPerM} per 1M input
+                  {`${p.m.model}: Intelligence ${p.m.intelligence}, $${p.m.inputPerM} per 1M input`}
                 </title>
               </circle>
             ))}
@@ -422,8 +423,7 @@ export function CostCapabilityChart({ view }: { view: CostCapabilityView }) {
                 strokeWidth={1.5}
               >
                 <title>
-                  {p.m.model}: Intelligence {p.m.intelligence}, $
-                  {p.m.inputPerM} per 1M input, on the efficiency frontier
+                  {`${p.m.model}: Intelligence ${p.m.intelligence}, $${p.m.inputPerM} per 1M input, on the efficiency frontier`}
                 </title>
               </circle>
             </g>

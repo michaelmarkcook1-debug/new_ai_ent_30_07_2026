@@ -24,6 +24,21 @@ const CY = H / 2 + 6;
 const R = 232;
 const NODE_R = 7;
 
+/**
+ * Quantise a trig-derived coordinate before it reaches an attribute.
+ *
+ * Math.sin and Math.cos are not required to be correctly rounded, so Node and
+ * the browser can disagree in the last bit: the server rendered cy
+ * "91.43590127604531" and the client computed 91.43590127604534. React saw two
+ * different strings and abandoned hydration for the whole map subtree, which is
+ * why the alliance chart logged a hydration mismatch on every load.
+ *
+ * Three decimals is far below a pixel in a 760-unit viewBox, and it is stable
+ * across both engines because the difference is many orders of magnitude
+ * smaller than the step.
+ */
+const q = (n: number): number => Math.round(n * 1000) / 1000;
+
 // Type palette, matching the dependency graph's vocabulary so the two views
 // agree on what a partnership and an investment look like.
 const TYPE_COLOUR: Record<string, string> = {
@@ -104,8 +119,8 @@ export function AllianceMap({
           id,
           label: label.get(id) ?? id,
           side,
-          x: CX + R * Math.cos(rad),
-          y: CY + R * Math.sin(rad),
+          x: q(CX + R * Math.cos(rad)),
+          y: q(CY + R * Math.sin(rad)),
           angle: deg,
           degree: degree.get(id) ?? 0,
         });
@@ -277,8 +292,8 @@ export function AllianceMap({
               // Labels read outward; flip the ones on the left half so none
               // render upside down.
               const flip = n.angle > 90 || n.angle < -90;
-              const lx = CX + (R + 14) * Math.cos((n.angle * Math.PI) / 180);
-              const ly = CY + (R + 14) * Math.sin((n.angle * Math.PI) / 180);
+              const lx = q(CX + (R + 14) * Math.cos((n.angle * Math.PI) / 180));
+              const ly = q(CY + (R + 14) * Math.sin((n.angle * Math.PI) / 180));
               return (
                 <g
                   key={n.id}
@@ -313,9 +328,10 @@ export function AllianceMap({
                   >
                     {n.label}
                   </text>
+                  {/* One template string, not interleaved nodes: React refuses
+                      an array of children on <title> and logs on every render. */}
                   <title>
-                    {n.label}: {n.degree} alliance
-                    {n.degree === 1 ? "" : "s"}
+                    {`${n.label}: ${n.degree} alliance${n.degree === 1 ? "" : "s"}`}
                   </title>
                 </g>
               );

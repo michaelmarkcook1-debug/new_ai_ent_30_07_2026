@@ -326,3 +326,50 @@ Dates are absolute; the build day is 30 July 2026.
       every render and raising the Next dev overlay on this page. Collapsed to a
       single template string. Five more of the same are on other pages and were
       left alone.
+
+23. **Audit of the Model Fit engine and interface (3 August 2026).** Six
+    defects found and fixed. The engine ones were all invisible to the shipped
+    catalogue, because it publishes no output price, no context window, no
+    deployment record and no input modalities: roughly a third of the join never
+    executes against it, and would have lit up unreviewed the day those columns
+    arrive. `scripts/model-fit-baseline.py` now runs a synthetic catalogue that
+    populates all of them through the reference, and the port is checked against
+    it across 41 further cases covering every specification requirement at every
+    band, blended cost, and all five outcomes.
+    - **A null headcount became 60 seats instead of 1.** The reference reads
+      `role.get("headcount", 60)`, where the default applies only to an absent
+      key; `?? 60` also swallows an explicit null. No role in the library carries
+      one today.
+    - **Missing controls were rendered as JSON.** The reference interpolates a
+      Python list, so a shortfall reads `missing ['audit_logging',
+      'certifications']`. The port produced double quotes and no spaces.
+    - **An unpriced model can be the recommendation.** The ranking sorts unpriced
+      models last, which decides nothing when one is the last model standing. The
+      headline then read "at $null per 1M input tokens". It now states the
+      absence instead.
+    - **The interface recomputed the engine's arithmetic.** Band shift, overflow,
+      ceiling and the top-rated model were reimplemented in the view, so the
+      threshold shown to a buyer could drift from the threshold that eliminated.
+      The engine now exposes `appliedThreshold()` and `topRated()`, `recommend()`
+      uses the former itself, and the view has no copy of those rules.
+    - **The headcount field snapped to 1 on every keystroke.** Clearing it to
+      type a new number coerced the empty string immediately. Held as text while
+      being edited, coerced for the engine.
+    - **Two verdicts overstated.** "Pick clears" was shown for requirements that
+      were never checked, and a Desirable shortfall was coloured as a failure
+      when it is the ranking signal working. Now "not assessable" and "desirable
+      shortfall". A Mandatory shortfall is unreachable by construction, which the
+      258-role sweep confirms: it never renders.
+    One thing deliberately **not** reproduced: Python prints `55.0` where
+    JavaScript prints `55`, because it keeps the JSON literal's type and
+    JavaScript has one number type. The port infers the axis's scale from the
+    catalogue, which is right for the shipped data and undecidable on a small
+    one, so the parity test normalises a trailing `.0` on both sides and
+    compares everything else exactly.
+    Interface verified by sweeping all 258 role views in the browser: zero
+    faults, zero missing sections, and an outcome distribution identical to the
+    engine's own. Also fixed the five remaining multi-child SVG `<title>` sites
+    flagged earlier, and a hydration mismatch on the alliance map, where
+    `Math.sin`/`Math.cos` differ in the last bit between Node and the browser and
+    React abandoned hydration for the whole chart; coordinates are quantised to
+    three decimals, which is far below a pixel and identical on both engines.

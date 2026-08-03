@@ -84,6 +84,194 @@ def rec_summary(r):
     }
 
 
+# ---------------------------------------------------------------------------
+# The dormant half of the engine.
+#
+# The shipped catalogue publishes no output price, no context window, no
+# deployment or retention record and no input modalities: those five fields are
+# null for all 330 models. So every specification comparison short-circuits to
+# "__unknown__" and the blended-cost branch never runs. Roughly a third of the
+# join is therefore never executed by the real data, and would light up
+# unreviewed the day the catalogue gains those columns.
+#
+# This catalogue populates them. It is written into the fixture so the port
+# replays the identical inputs rather than a second transcription of them.
+# ---------------------------------------------------------------------------
+SPEC_MODELS = [
+    # Fully specified, cheap, weak. Passes low bands, fails high ones.
+    {"model_id": "Budget One (non-reasoning)", "vendor": "Acme",
+     "benchmarks": {"intelligence": 20.0, "gpqa": None, "briefcase": None, "reliability": 5.0},
+     "cost_input_per_1m": 0.10, "cost_output_per_1m": 0.40,
+     "throughput_tokens_per_sec": 250, "context_window_tokens": 16000,
+     "data_handling": [], "assurance": [], "input_modalities": ["text"],
+     "frontier": None},
+    # Mid tier with retention control and audit logging, text and image.
+    {"model_id": "Middle Two (medium effort)", "vendor": "OpenAI",
+     "benchmarks": {"intelligence": 45.0, "gpqa": 90.0, "briefcase": 900,
+                    "reliability": 40.5},
+     "cost_input_per_1m": 2.0, "cost_output_per_1m": None,
+     "throughput_tokens_per_sec": 80, "context_window_tokens": 200000,
+     "data_handling": ["zero_retention_available"], "assurance": ["audit_logging"],
+     "input_modalities": ["text", "image"], "frontier": None},
+    # Fully controlled, expensive, every modality, reproducible output.
+    {"model_id": "Fortress Three (Adaptive Reasoning, Max Effort)", "vendor": "Anthropic",
+     "benchmarks": {"intelligence": 60.0, "gpqa": 93.0, "briefcase": 1600,
+                    "reliability": 66.0},
+     "cost_input_per_1m": 9.0, "cost_output_per_1m": 45.0,
+     "throughput_tokens_per_sec": 40.0, "context_window_tokens": 500000,
+     "data_handling": ["zero_retention_available", "vpc_or_private", "residency_control"],
+     "assurance": ["audit_logging", "certifications", "output_reproducibility"],
+     "input_modalities": ["text", "image", "audio"], "frontier": "On frontier"},
+    # Strong but publishes nothing about deployment: must not be assumed either way.
+    {"model_id": "Opaque Four (high)", "vendor": "Google",
+     "benchmarks": {"intelligence": 55.0, "gpqa": 92.0, "briefcase": 1400,
+                    "reliability": 60.0},
+     "cost_input_per_1m": 4.0, "cost_output_per_1m": None,
+     "throughput_tokens_per_sec": None, "context_window_tokens": None,
+     "data_handling": None, "assurance": None, "input_modalities": None,
+     "frontier": "On frontier"},
+    # Unpriced: reported, never costed, never ranked above a priced peer.
+    {"model_id": "Unpriced Five", "vendor": "Nobody",
+     "benchmarks": {"intelligence": 58.0, "gpqa": None, "briefcase": None,
+                    "reliability": 70.0},
+     "cost_input_per_1m": None, "cost_output_per_1m": None,
+     "throughput_tokens_per_sec": 10, "context_window_tokens": 4000,
+     "data_handling": ["zero_retention_available"], "assurance": ["audit_logging"],
+     "input_modalities": ["text"], "frontier": None},
+    # A China-based vendor, to check the exclusion still bites on this catalogue.
+    {"model_id": "Great Wall Six (xhigh)", "vendor": "DeepSeek",
+     "benchmarks": {"intelligence": 57.0, "gpqa": 91.0, "briefcase": 1300,
+                    "reliability": 55.0},
+     "cost_input_per_1m": 0.5, "cost_output_per_1m": 1.0,
+     "throughput_tokens_per_sec": 120, "context_window_tokens": 128000,
+     "data_handling": ["zero_retention_available", "vpc_or_private"],
+     "assurance": ["audit_logging", "certifications"],
+     "input_modalities": ["text", "image"], "frontier": None},
+]
+
+
+def spec_profile(overrides, base=10):
+    """A full 18-requirement profile at `base`, with named requirements raised."""
+    p = {f"CAP-{i:02d}": {"score": base,
+                          "critical": "Mandatory" if base >= 70 else "Desirable",
+                          "evidence_class": "D"} for i in range(1, 19)}
+    for cap, (score, critical) in overrides.items():
+        p[cap] = {"score": score, "critical": critical, "evidence_class": "D"}
+    return p
+
+
+def spec_cases():
+    """One case per specification requirement per band, plus the awkward ones."""
+    cases = []
+    for cap in ("CAP-09", "CAP-13", "CAP-14", "CAP-15", "CAP-16", "CAP-17"):
+        for band in BANDS_ALL:
+            cases.append({
+                "name": f"{cap}-mandatory-{band}",
+                "role": {"role_id": f"SPEC-{cap}-{band}", "name": cap,
+                         "profile": spec_profile({cap: (band, "Mandatory")}),
+                         "headcount": 10},
+                "kw": {}, "constraints": None,
+            })
+    # Every specification mandatory at once: the residency-and-assurance case
+    # that eliminates most of a catalogue before capability is considered.
+    cases.append({
+        "name": "all-specs-at-90",
+        "role": {"role_id": "SPEC-ALL-90", "name": "Everything",
+                 "profile": spec_profile({c: (90, "Mandatory") for c in
+                                          ("CAP-09", "CAP-13", "CAP-14", "CAP-15",
+                                           "CAP-16", "CAP-17")}),
+                 "headcount": 3},
+        "kw": {}, "constraints": None})
+    # Blended cost: two of these models publish an output price and two do not,
+    # so the ranking mixes a real blend with a vendor-ratio estimate.
+    cases.append({
+        "name": "blended-cost-ranking",
+        "role": {"role_id": "SPEC-COST", "name": "Cost",
+                 "profile": spec_profile({}), "headcount": 25},
+        "kw": {"usage": "heavy"}, "constraints": None})
+    cases.append({
+        "name": "blended-cost-ratio-override",
+        "role": {"role_id": "SPEC-COST-2", "name": "Cost",
+                 "profile": spec_profile({}), "headcount": 25},
+        "kw": {"out_multiple": 2.0, "effort_adjust": False}, "constraints": None})
+    # China-based vendors admitted, so the exclusion path is tested both ways.
+    cases.append({
+        "name": "cn-admitted",
+        "role": {"role_id": "SPEC-CN", "name": "CN",
+                 "profile": spec_profile({"CAP-01": (70, "Mandatory")}), "headcount": 4},
+        "kw": {"exclude_cn": False}, "constraints": None})
+    # Headcount stated as null. The reference defaults only on an absent key, so
+    # a null headcount is one seat, not sixty.
+    cases.append({
+        "name": "headcount-null",
+        "role": {"role_id": "SPEC-HC", "name": "Null headcount",
+                 "profile": spec_profile({}), "headcount": None},
+        "kw": {}, "constraints": None})
+    cases.append({
+        "name": "headcount-absent",
+        "role": {"role_id": "SPEC-HC2", "name": "Absent headcount",
+                 "profile": spec_profile({})},
+        "kw": {}, "constraints": None})
+    # The only survivor is a model with no price. The engine's own comment says
+    # unpriced models "cannot be recommended, only reported" — and that holds
+    # right up until one is the last model standing, at which point it is the
+    # recommendation and there is no cost to show for it.
+    cases.append({
+        "name": "unpriced-model-is-the-only-survivor",
+        "role": {"role_id": "SPEC-UNPRICED", "name": "Unpriced", "headcount": 2,
+                 "profile": spec_profile({"CAP-01": (90, "Mandatory"),
+                                          "CAP-11": (90, "Mandatory")})},
+        "kw": {}, "constraints": None})
+    # Nothing clears at all, on a role senior enough to allocate anyway.
+    IMPOSSIBLE = {"CAP-01": (90, "Mandatory"), "CAP-13": (90, "Mandatory"),
+                  "CAP-16": (90, "Mandatory")}
+    cases.append({
+        "name": "executive-fallback",
+        "role": {"role_id": "SPEC-EXEC", "name": "Chief", "seniority": "Leader",
+                 "authority": "Strategic", "headcount": 2,
+                 "profile": spec_profile(IMPOSSIBLE)},
+        "kw": {}, "constraints": None})
+    # The same profile without the seniority: not supported, and that is a real
+    # answer about the market rather than a failure to find one.
+    cases.append({
+        "name": "not-supported",
+        "role": {"role_id": "SPEC-NONE", "name": "Nobody", "headcount": 9,
+                 "profile": spec_profile(IMPOSSIBLE)},
+        "kw": {}, "constraints": None})
+    # Duty decomposition on a role that fails as a whole but is mostly doable.
+    cases.append({
+        "name": "duty-decomposition",
+        "role": {"role_id": "SPEC-DUTY", "name": "Mixed", "headcount": 7,
+                 "profile": spec_profile(IMPOSSIBLE),
+                 "duties": [
+                     {"duty": "Something easy", "profile": spec_profile({})},
+                     {"duty": "Something regulated",
+                      "profile": spec_profile({"CAP-14": (90, "Mandatory")})},
+                     {"duty": "Something demanding",
+                      "profile": spec_profile({"CAP-01": (90, "Mandatory")})},
+                     {"duty": "Something impossible",
+                      "profile": spec_profile(IMPOSSIBLE)}]},
+        "kw": {}, "constraints": None})
+    # Buyer constraints against this catalogue.
+    cases.append({
+        "name": "vendor-excluded",
+        "role": {"role_id": "SPEC-EXCL", "name": "Excluded",
+                 "profile": spec_profile({}), "headcount": 5},
+        "kw": {}, "constraints": {"excluded_vendors": ["Anthropic", "OpenAI"]}})
+    # Calibration pushed both ways against a six-model axis.
+    for off in (-40, 40):
+        cases.append({
+            "name": f"offset-{off}",
+            "role": {"role_id": f"SPEC-OFF{off}", "name": "Offset",
+                     "profile": spec_profile({"CAP-01": (50, "Mandatory")}),
+                     "headcount": 5},
+            "kw": {"offset_pct": off}, "constraints": None})
+    return cases
+
+
+BANDS_ALL = [10, 30, 50, 70, 90]
+
+
 def main():
     with open(os.path.join(DATA, "models.json")) as f:
         models = json.load(f)
@@ -125,11 +313,27 @@ def main():
         out["synthetic"].append({"name": name, "scores": scores,
                                  "recommend": rec_summary(eng.recommend(synth(scores)))})
 
+    # The specification and cost paths the shipped catalogue cannot reach.
+    out["spec"] = {"models": SPEC_MODELS, "cases": []}
+    for case in spec_cases():
+        sm = json.loads(json.dumps(SPEC_MODELS))
+        e = Engine(sm, json.loads(json.dumps(axes["calibration"])),
+                   axes["capability_names"], **case["kw"])
+        a = e.assess(json.loads(json.dumps(case["role"])), case["constraints"])
+        out["spec"]["cases"].append({
+            "name": case["name"], "role": case["role"], "kw": case["kw"],
+            "constraints": case["constraints"], "warnings": e.warnings,
+            "answer": a["answer"], "detail": rec_summary(a["detail"]),
+            "duties": a["detail"].get("duties"),
+            "health": e.health() if case["name"] == "blended-cost-ranking" else None,
+        })
+
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w") as f:
         json.dump(out, f, separators=(",", ":"), sort_keys=True)
     print(f"wrote {OUT} ({os.path.getsize(OUT) / 1024:.0f} KB), "
-          f"{len(roles)} roles x {len(CONFIGS)} configs")
+          f"{len(roles)} roles x {len(CONFIGS)} configs, "
+          f"{len(out['spec']['cases'])} specification cases")
 
 
 if __name__ == "__main__":

@@ -336,6 +336,20 @@ function formatScore(v: number, integralAxis: boolean): string {
   return Number.isInteger(v) ? v.toFixed(1) : String(v);
 }
 
+/**
+ * A list of missing controls, rendered as the reference renders it.
+ *
+ * The reference interpolates a Python list into the reason string, so a model
+ * short on assurance reads `missing ['audit_logging', 'certifications']`.
+ * JSON.stringify produces double quotes and no spaces, which is a different
+ * string. Nothing in the current catalogue reaches this line — data handling
+ * and assurance are null for all 330 models — but it fires the day the
+ * catalogue publishes those columns, which is the point of matching it now.
+ */
+function formatMissing(items: string[]): string {
+  return `[${items.map((x) => `'${x}'`).join(", ")}]`;
+}
+
 // ---------------------------------------------------------------------------
 // Validation. Silent wrong answers are worse than loud failures, so structural
 // faults raise and recoverable ones are coerced with a recorded warning.
@@ -558,6 +572,18 @@ export class Engine {
     return this._integral[field];
   }
 
+  /** The same question for a top-level specification field rather than an axis. */
+  specIsIntegral(field: string): boolean {
+    const key = `spec:${field}`;
+    if (!(key in this._integral)) {
+      this._integral[key] = this.allowed().every((m) => {
+        const v = (m as unknown as Record<string, unknown>)[field];
+        return v === null || v === undefined || Number.isInteger(v);
+      });
+    }
+    return this._integral[key];
+  }
+
   coverage(field: string): number {
     if (!(field in this._cov)) {
       const pool = this.allowed();
@@ -650,16 +676,60 @@ export class Engine {
       return [have.includes(MODALITY[cap]), `does not accept ${MODALITY[cap]} input`];
     }
     if (cap in SPEC_NUMERIC) {
+      const field = SPEC_FIELD[cap];
       const need = SPEC_NUMERIC[cap][level];
-      const have = m[SPEC_FIELD[cap] as "throughput_tokens_per_sec"];
+      const have = m[field as "throughput_tokens_per_sec"];
       if (have === null || have === undefined) return [true, "__unknown__"];
-      return [have >= need, `${SPEC_FIELD[cap]} ${have} against ${need} required`];
+      return [
+        have >= need,
+        `${field} ${formatScore(have, this.specIsIntegral(field))} against ${need} required`,
+      ];
     }
     const need = (cap === "CAP-14" ? DATA_REQ : ASSURANCE_REQ)[level];
     const have = m[SPEC_FIELD[cap] as "data_handling" | "assurance"];
     if (have === null || have === undefined) return [true, "__unknown__"];
     const miss = need.filter((x) => !have.includes(x)).sort();
-    return [miss.length === 0, miss.length ? `missing ${JSON.stringify(miss)}` : ""];
+    return [miss.length === 0, miss.length ? `missing ${formatMissing(miss)}` : ""];
+  }
+
+  /**
+   * The threshold a capability requirement is actually judged against: rule 2
+   * and 3's band shift, rule 4's overflow at the top band, and rule 5's ceiling,
+   * all applied. null when the requirement cannot be assessed at all.
+   *
+   * `recommend` uses this, and so does the interface, so the number shown to a
+   * buyer is by construction the number that did the eliminating. Reproducing
+   * the arithmetic a second time in the view is how the two drift apart.
+   */
+  appliedThreshold(cap: string, score: number, sh: number): { level: number; value: number } | null {
+    const k = this.cal(cap);
+    if (!k || !k.model_field || k.status === "unavailable") return null;
+    let level = Engine.shiftBand(score, sh);
+    let need = threshold(k.thresholds, level);
+    if (need === null) {
+      // The higher band has no measured threshold, so fall back to the stated
+      // level and record that it did (join specification, section 6a).
+      level = score;
+      need = threshold(k.thresholds, level);
+    }
+    if (need === null) return null;
+    return {
+      level,
+      value: Math.min(need + Engine.overflow(level, sh), this.axisMax(k.model_field)),
+    };
+  }
+
+  /**
+   * The highest-capability model in the catalogue. Rule 10's allocation, and
+   * the yardstick the interface prices "everyone gets the best" against.
+   * Ties go to the first, as the reference's max() does.
+   */
+  topRated(): ModelRecord | null {
+    const scored = this.allowed().filter((m) => (m.benchmarks ?? {}).intelligence);
+    if (!scored.length) return null;
+    return scored.reduce((a, b) =>
+      (b.benchmarks!.intelligence as number) > (a.benchmarks!.intelligence as number) ? b : a
+    );
   }
 
   /** true / false / null where the answer is unknown. */
@@ -738,17 +808,12 @@ export class Engine {
         unassessed.push(cap);
         continue;
       }
-      let lvl = Engine.shiftBand(meta.score, sh);
-      let need = threshold(k.thresholds, lvl);
-      if (need === null) {
-        lvl = meta.score;
-        need = threshold(k.thresholds, lvl);
-      }
-      if (need === null) {
+      const applied = this.appliedThreshold(cap, meta.score, sh);
+      if (!applied) {
         unassessed.push(cap);
         continue;
       }
-      need = Math.min(need + Engine.overflow(lvl, sh), this.axisMax(k.model_field));
+      const { level: lvl, value: need } = applied;
       for (const m of [...live]) {
         const have = (m.benchmarks ?? {})[k.model_field];
         if (have === null || have === undefined) {
@@ -860,8 +925,11 @@ export class Engine {
       };
     }
     const r = this.recommend(role.profile, constraints);
-    let seats = role.headcount ?? 60;
-    if (typeof seats !== "number" || seats < 1) seats = 1;
+    // The reference reads role.get("headcount", 60): the default applies only
+    // when the key is absent. A key present and null is a null headcount, which
+    // falls through to 1 below. `?? 60` would quietly turn it into 60 seats.
+    const stated: unknown = role.headcount === undefined ? 60 : role.headcount;
+    const seats: number = typeof stated === "number" && stated >= 1 ? stated : 1;
     const isExec = role.seniority === "Leader" && role.authority === "Strategic";
 
     if (r.pick) {
@@ -886,11 +954,8 @@ export class Engine {
 
     // Rule 10. Allocate the best available, never claim it is a fit.
     if (isExec) {
-      const scored = this.allowed().filter((m) => (m.benchmarks ?? {}).intelligence);
-      if (scored.length) {
-        const top = scored.reduce((a, b) =>
-          (b.benchmarks!.intelligence as number) > (a.benchmarks!.intelligence as number) ? b : a
-        );
+      const top = this.topRated();
+      if (top) {
         const unmet = r.deciding.filter((c) => !r.unassessed.includes(c));
         return {
           role_id: role.role_id,

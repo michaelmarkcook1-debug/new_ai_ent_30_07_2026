@@ -179,12 +179,17 @@ export function ModelFit() {
   const [outMultiple, setOutMultiple] = useState("");
   const [excludeCn, setExcludeCn] = useState(true);
   const [excluded, setExcluded] = useState<string[]>([]);
-  const [seatsOverride, setSeatsOverride] = useState<number | null>(null);
+  const [seatsText, setSeatsText] = useState<string | null>(null);
   const [showAllEliminations, setShowAllEliminations] = useState(false);
 
   const functions = useMemo(() => functionsFor(industry), [industry]);
   const roles = useMemo(() => rolesFor(industry, fn), [industry, fn]);
-  const role: Role | undefined = roleId ? roleById(roleId) : undefined;
+  // roleById returns a fresh object each call, so memoising on roleId is what
+  // stops every unrelated re-render from re-running the whole join.
+  const role: Role | undefined = useMemo(
+    () => (roleId ? roleById(roleId) : undefined),
+    [roleId]
+  );
 
   const vendors = useMemo(
     () =>
@@ -206,7 +211,14 @@ export function ModelFit() {
     [usage, burn, offset, outMultiple, excludeCn]
   );
 
-  const seats = seatsOverride ?? role?.headcount ?? 60;
+  // The engine's own default when a role states no headcount is 60. A part-typed
+  // or empty field falls back to the role's figure rather than to 1, so the cost
+  // panel does not flicker through a nonsense number mid-keystroke.
+  const roleSeats = role?.headcount === undefined ? 60 : role.headcount;
+  const defaultSeats = typeof roleSeats === "number" && roleSeats >= 1 ? roleSeats : 1;
+  const typedSeats = seatsText === null ? NaN : Number(seatsText);
+  const seats =
+    Number.isFinite(typedSeats) && typedSeats >= 1 ? Math.floor(typedSeats) : defaultSeats;
 
   const result: Assessment | null = useMemo(() => {
     if (!role) return null;
@@ -221,13 +233,13 @@ export function ModelFit() {
     setIndustry(next);
     setFn(nextFn);
     setRoleId(rolesFor(next, nextFn)[0]?.role_id ?? "");
-    setSeatsOverride(null);
+    setSeatsText(null);
   }
 
   function selectFunction(next: string) {
     setFn(next);
     setRoleId(rolesFor(industry, next)[0]?.role_id ?? "");
-    setSeatsOverride(null);
+    setSeatsText(null);
   }
 
   const detail =
@@ -238,35 +250,28 @@ export function ModelFit() {
   const pick = detail?.pick ?? null;
   const nextUp: RankedModel | null = detail && detail.live.length > 1 ? detail.live[1] : null;
 
-  // The intelligence threshold actually applied, so the chart can draw the line
-  // that did most of the eliminating.
+  // The intelligence threshold actually applied, read from the engine rather
+  // than recomputed here, so the line on the chart is the line that eliminated.
   const intelligenceThreshold = useMemo(() => {
     if (!role || !detail) return { value: null as number | null, label: null as string | null };
     const meta = role.profile["CAP-01"];
-    const cal = engine.cal("CAP-01");
-    if (!meta || meta.critical !== "Mandatory" || !cal?.model_field) {
-      return { value: null, label: null };
-    }
-    const level = shiftedLevel(meta.score, detail.shift);
-    const raw = cal.thresholds[String(level)];
-    if (raw === null || raw === undefined) return { value: null, label: null };
-    const value = Math.min(raw + overflowPoints(level, detail.shift), engine.axisMax("intelligence"));
+    if (!meta || meta.critical !== "Mandatory") return { value: null, label: null };
+    const applied = engine.appliedThreshold("CAP-01", meta.score, detail.shift);
+    if (!applied) return { value: null, label: null };
+    // The status is read, not asserted. Every threshold is provisional today;
+    // hardcoding that word is how a label keeps claiming it after a calibration
+    // run has replaced the number underneath it.
+    const status = engine.cal("CAP-01")?.status ?? "unavailable";
     return {
-      value,
-      label: `general intelligence, level ${level} · ${value.toFixed(1)} · provisional`,
+      value: applied.value,
+      label: `general intelligence, level ${applied.level} · ${applied.value.toFixed(1)} · ${status}`,
     };
   }, [role, detail, engine]);
 
   // "Everyone gets the best": what the top-index model would cost for the same
-  // people. The comparison the recommendation exists to beat.
-  const topModel = useMemo(() => {
-    const scored = engine.allowed().filter((m) => (m.benchmarks ?? {}).intelligence != null);
-    return scored.length
-      ? scored.reduce((a, b) =>
-          (b.benchmarks!.intelligence as number) > (a.benchmarks!.intelligence as number) ? b : a
-        )
-      : null;
-  }, [engine]);
+  // people. The comparison the recommendation exists to beat. Same model the
+  // engine would allocate under rule 10, by construction.
+  const topModel = useMemo(() => engine.topRated(), [engine]);
   // The model the answer actually costed. Usually the pick; on the executive
   // fallback it is the allocated model, which is a real cost against a
   // recommendation that does not exist, and the caption has to say so.
@@ -351,7 +356,7 @@ export function ModelFit() {
             value={roleId}
             onChange={(e) => {
               setRoleId(e.target.value);
-              setSeatsOverride(null);
+              setSeatsText(null);
             }}
             className={selectClass}
           >
@@ -575,12 +580,16 @@ export function ModelFit() {
                   </select>
                 </Field>
                 <Field label="People in this role">
+                  {/* Held as text while being typed. Coercing on every
+                      keystroke made the field unusable: clearing it to type a
+                      new number snapped it straight back to 1. */}
                   <input
                     aria-label="People in this role"
                     type="number"
                     min={1}
-                    value={seats}
-                    onChange={(e) => setSeatsOverride(Math.max(1, Number(e.target.value) || 1))}
+                    value={seatsText ?? String(seats)}
+                    onChange={(e) => setSeatsText(e.target.value)}
+                    onBlur={() => setSeatsText(String(seats))}
                     className={selectClass}
                   />
                 </Field>
@@ -766,21 +775,30 @@ export function ModelFit() {
                     const meta = role.profile[cap];
                     const rubric = RUBRIC[cap];
                     const axis = AXES[cap];
-                    const cal = engine.cal(cap);
                     const isSpec = cap in SPEC_FIELD;
                     const unassessed = detail.unassessed.includes(cap);
                     const decided = detail.deciding.includes(cap);
-                    const level = shiftedLevel(meta.score, detail.shift);
+                    // Specifications are never band-shifted, so the stated level
+                    // is the level applied; capabilities take theirs from the
+                    // engine, overflow and ceiling included.
+                    const appliedCapability = isSpec
+                      ? null
+                      : engine.appliedThreshold(cap, meta.score, detail.shift);
+                    const level = appliedCapability?.level ?? meta.score;
                     const shifted = !isSpec && level !== meta.score && !unassessed;
                     const applied = isSpec
                       ? specRequirement(cap, meta.score)
-                      : cal?.model_field
-                        ? appliedThreshold(cal.thresholds[String(level)], level, detail.shift)
+                      : appliedCapability
+                        ? `≥ ${appliedCapability.value.toFixed(1)} at level ${appliedCapability.level}`
                         : "no axis ingested";
                     // null from meets() means the question could not be put to
                     // the model at all: no axis, or no published value. That is
                     // not the same as clearing, and must never read like it.
                     const met = pick ? engine.meets(pick, cap, meta, detail.shift) : null;
+                    // A Mandatory shortfall eliminates, so a surviving pick can
+                    // only ever fall short on a Desirable requirement. Saying
+                    // "falls short" in red would read as a failure when it is
+                    // the ranking signal doing its job.
                     const verdict = unassessed
                       ? "unassessed"
                       : decided
@@ -791,7 +809,9 @@ export function ModelFit() {
                             ? "not assessable"
                             : met
                               ? "pick clears"
-                              : "pick falls short";
+                              : meta.critical === "Mandatory"
+                                ? "pick falls short"
+                                : "desirable shortfall";
                     return (
                       <tr key={cap} className="border-b border-base-300/60 align-top">
                         <td className="py-1.5 pr-2">
@@ -847,9 +867,12 @@ export function ModelFit() {
                                 : undefined
                             }
                             className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider ${
-                              verdict === "unassessed" || verdict === "not assessable"
+                              verdict === "unassessed" ||
+                              verdict === "not assessable" ||
+                              verdict === "not reached"
                                 ? "bg-base-200 text-muted"
-                                : verdict === "decided the answer"
+                                : verdict === "decided the answer" ||
+                                    verdict === "desirable shortfall"
                                   ? "bg-warn-bg text-warn"
                                   : verdict === "pick falls short"
                                     ? "bg-bad-bg text-error"
@@ -901,7 +924,10 @@ export function ModelFit() {
                 ).map(({ requirement, list }) => (
                   <li key={requirement} className="border-b border-base-300/60 pb-2">
                     <p className="text-[12.5px] font-semibold">
-                      {CAPABILITY_NAMES[requirement] ?? requirement}
+                      {CAPABILITY_NAMES[requirement] ??
+                        (requirement === "buyer constraint"
+                          ? "Buyer constraint"
+                          : requirement)}
                       <span className="ml-2 font-mono text-[10px] font-normal text-muted">
                         {list.length} model{list.length === 1 ? "" : "s"} eliminated
                         {list[0].kind ? ` · ${list[0].kind}` : ""}
@@ -947,6 +973,17 @@ export function ModelFit() {
             </div>
             <div className="mt-3 overflow-x-auto">
               <table className="w-full min-w-[520px] text-left text-[11.5px]">
+                <caption className="sr-only">
+                  Which parts of this recommendation are measured, which are authored
+                  judgement, and which are stated assumptions
+                </caption>
+                <thead className="sr-only">
+                  <tr>
+                    <th scope="col">Component</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Source</th>
+                  </tr>
+                </thead>
                 <tbody>
                   {(
                     [
@@ -959,7 +996,9 @@ export function ModelFit() {
                     ] as [string, EvidenceKind, string][]
                   ).map(([what, kind, note]) => (
                     <tr key={what} className="border-b border-base-300/60 align-top">
-                      <td className="py-1.5 pr-3 font-medium">{what}</td>
+                      <th scope="row" className="py-1.5 pr-3 text-left font-medium">
+                        {what}
+                      </th>
                       <td className="py-1.5 pr-3">
                         <EvidenceChip kind={kind} />
                       </td>
@@ -1056,31 +1095,13 @@ export function ModelFit() {
 }
 
 // ---------------------------------------------------------------------------
-// Presentation helpers. The band and overflow arithmetic mirrors the engine's
-// so the table can show the level that was actually applied, not the stated one.
+// Presentation helpers.
+//
+// Deliberately no band, overflow or ceiling arithmetic here: the engine exposes
+// appliedThreshold() and topRated() and this file calls them. A second copy of
+// those rules in the view is a copy that eventually disagrees with the answer
+// it is captioning.
 // ---------------------------------------------------------------------------
-
-const BAND_LADDER = [10, 30, 50, 70, 90];
-const OVERFLOW_POINTS = [0, 2, 4];
-
-function shiftedLevel(level: number, steps: number): number {
-  const i = BAND_LADDER.indexOf(level);
-  return BAND_LADDER[Math.min(BAND_LADDER.length - 1, Math.max(0, (i === -1 ? 0 : i) + steps))];
-}
-
-function overflowPoints(level: number, steps: number): number {
-  return level === 90 ? OVERFLOW_POINTS[Math.min(2, steps)] : 0;
-}
-
-function appliedThreshold(
-  raw: number | null | undefined,
-  level: number,
-  steps: number
-): string {
-  if (raw === null || raw === undefined) return "—";
-  const over = overflowPoints(level, steps);
-  return `≥ ${(raw + over).toFixed(1)} at level ${level}${over ? ` +${over}` : ""}`;
-}
 
 /**
  * What a specification requirement actually asks of a model. Specifications
@@ -1112,12 +1133,21 @@ function headline(
 ): string {
   const total = Object.keys(role.profile).length;
   const u = detail.unassessed.length;
-  const priceLabel = "per 1M input tokens";
+  // An unpriced model can end up the recommendation: the ranking sorts it last,
+  // which decides nothing when it is the last model standing. Interpolating a
+  // null price would read "at $null per 1M input tokens", so the clause is
+  // dropped and the absence is stated instead.
+  const cost = detail.pick ? engine.costPerMillion(detail.pick) : null;
+  const at = cost === null ? "" : `, at $${cost} per 1M input tokens`;
+  const unpriced =
+    detail.pick && cost === null
+      ? " The catalogue publishes no price for it, so it cannot be costed."
+      : "";
   if (answer.outcome === "supported" && detail.pick) {
-    return `${shortName(detail.pick.model_id)} meets every requirement for this role at $${engine.costPerMillion(detail.pick)} ${priceLabel}.`;
+    return `${shortName(detail.pick.model_id)} meets every requirement for this role${at}.${unpriced}`;
   }
   if (answer.outcome === "qualified" && detail.pick) {
-    return `${shortName(detail.pick.model_id)} clears all ${total - u} requirements that can be checked today, at $${engine.costPerMillion(detail.pick)} ${priceLabel}. ${u} more await benchmark data.`;
+    return `${shortName(detail.pick.model_id)} clears all ${total - u} requirements that can be checked today${at}. ${u} more await benchmark data.${unpriced}`;
   }
   if (answer.outcome === "best available") {
     return `No model meets this role in full. ${answer.model} is allocated as the highest-capability model available, and falls short on ${answer.unmet_requirements?.join(", ") || "one or more requirements"}.`;
