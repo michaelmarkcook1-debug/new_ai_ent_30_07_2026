@@ -29,7 +29,7 @@ export function MicroLabel({
             <path d="M12 16v-5M12 8h.01" />
           </svg>
           {open ? (
-            <span className="absolute left-0 top-full z-30 mt-1 w-56 rounded border border-base-300 bg-base-100 p-2 text-left font-sans text-[11px] normal-case tracking-normal text-base-content shadow-lg">
+            <span className="absolute left-0 top-full z-30 mt-1 w-56 rounded border border-base-300 bg-base-100 p-2 text-left font-sans text-xs normal-case tracking-normal text-base-content shadow-lg">
               {tooltip}
             </span>
           ) : null}

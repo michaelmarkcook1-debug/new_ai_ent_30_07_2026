@@ -90,10 +90,10 @@ export function IntegratorLayer() {
   return (
     <section>
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-[15px] font-bold">The delivery layer, live</h2>
+        <h2 className="text-base font-bold">The delivery layer, live</h2>
         <LaneBadge lane={laneFor(providersSource)} />
       </div>
-      <p className="measure mt-1 text-[12px] text-muted">
+      <p className="measure mt-1 text-sm text-muted">
         The services channel: the integrators who would deliver your AI programme, live from the
         BoardRadar provider catalogue. IT services content appears only here, as the labelled
         delivery channel, never blended with AI vendor scores.
@@ -101,7 +101,7 @@ export function IntegratorLayer() {
 
       <div className="mt-3 grid grid-cols-1 gap-4 @4xl:grid-cols-5">
         {/* Provider readiness table */}
-        <div className="@container delivery-channel-card rounded-lg bg-base-100 p-4 @4xl:col-span-2">
+        <div className="@container delivery-channel-card rounded-lg bg-base-100 p-5 @4xl:col-span-2">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Integrator readiness"
@@ -111,28 +111,28 @@ export function IntegratorLayer() {
           </div>
           <div className="mt-2">
             {providers === null && providersError === null ? (
-              <p className="py-6 text-center font-mono text-[11px] text-muted">
+              <p className="py-6 text-center font-mono text-xs text-muted">
                 Loading live provider catalogue...
               </p>
             ) : providersError ? (
-              <p className="py-6 text-center font-mono text-[11px] text-muted">
+              <p className="py-6 text-center font-mono text-xs text-muted">
                 Live data unavailable ({providersError}); no figure shown rather than a guess.
               </p>
             ) : (
               <>
-                <p className="mb-2 font-mono text-[10px] text-muted">
+                <p className="mb-2 font-mono text-xs text-muted">
                   Top {topProviders.length} of {providers!.length} providers by AI readiness
                 </p>
                 <table className="w-full border-collapse text-left">
                   <thead>
                     <tr>
-                      <th className="py-1 pr-2">
+                      <th className="py-1.5 pr-2">
                         <span className="micro-label">Provider</span>
                       </th>
-                      <th className="py-1 pr-2">
+                      <th className="py-1.5 pr-2">
                         <span className="micro-label">Assessment</span>
                       </th>
-                      <th className="py-1">
+                      <th className="py-1.5">
                         <span className="micro-label">AI readiness</span>
                       </th>
                     </tr>
@@ -140,20 +140,20 @@ export function IntegratorLayer() {
                   <tbody>
                     {topProviders.map((p) => (
                       <tr key={p.ticker} className="border-t border-base-300/70">
-                        <td className="py-1.5 pr-2">
+                        <td className="py-2 pr-2">
                           <button
                             type="button"
                             onClick={() => setTicker(p.ticker)}
-                            className={`text-left text-[12.5px] hover:text-primary hover:underline ${
+                            className={`text-left text-sm hover:text-primary hover:underline ${
                               p.ticker === ticker ? "font-semibold text-primary" : ""
                             }`}
                             title={`Open the ${p.displayName || p.name} platform matrix`}
                           >
                             {p.displayName || p.name}
                           </button>
-                          <span className="block text-[10px] text-muted">{p.segment}</span>
+                          <span className="block text-xs text-muted">{p.segment}</span>
                         </td>
-                        <td className="py-1.5 pr-2">
+                        <td className="py-2 pr-2">
                           <ScorePill
                             score={
                               typeof p.assessmentScore === "number"
@@ -162,7 +162,7 @@ export function IntegratorLayer() {
                             }
                           />
                         </td>
-                        <td className="py-1.5">
+                        <td className="py-2">
                           <ScorePill score={p.aiReadinessScore} />
                         </td>
                       </tr>
@@ -197,7 +197,7 @@ export function IntegratorLayer() {
         </div>
 
         {/* Integrator by AI-platform matrix */}
-        <div className="@container delivery-channel-card rounded-lg bg-base-100 p-4 @4xl:col-span-3">
+        <div className="@container delivery-channel-card rounded-lg bg-base-100 p-5 @4xl:col-span-3">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <div className="flex flex-wrap items-center gap-2">
               <MicroLabel
@@ -208,7 +208,7 @@ export function IntegratorLayer() {
                 aria-label="Integrator"
                 value={ticker}
                 onChange={(e) => setTicker(e.target.value)}
-                className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+                className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm"
               >
                 {selectorOptions.length === 0 ? (
                   <option value="ACN">Accenture (ACN)</option>
@@ -226,27 +226,27 @@ export function IntegratorLayer() {
 
           <div className="mt-2">
             {integrationLoading ? (
-              <p className="py-6 text-center font-mono text-[11px] text-muted">
+              <p className="py-6 text-center font-mono text-xs text-muted">
                 Loading live platform matrix for {ticker}... first call can take a moment while the
                 API computes.
               </p>
             ) : integrationError ? (
-              <p className="py-6 text-center font-mono text-[11px] text-muted">
+              <p className="py-6 text-center font-mono text-xs text-muted">
                 Live data unavailable for {ticker} ({integrationError}); no matrix shown rather
                 than a guess. Try Accenture (ACN), the reference integrator.
               </p>
             ) : integration ? (
               <>
-                <p className="measure text-[12px] leading-snug text-muted">{integration.intro}</p>
+                <p className="measure text-sm leading-snug text-muted">{integration.intro}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-3">
-                  <span className="font-mono text-[10px] text-muted">
+                  <span className="font-mono text-xs text-muted">
                     {integration.platformCounts.total} platforms:{" "}
                     {integration.platformCounts.proprietary} proprietary,{" "}
                     {integration.platformCounts.partner} partner
                   </span>
                   <span className="flex items-center gap-1.5">
                     <MicroLabel label="Generated" />
-                    <span className="font-mono text-[10px] text-muted">
+                    <span className="font-mono text-xs text-muted">
                       {formatDate(integration.generatedAt)}
                     </span>
                   </span>
@@ -254,15 +254,15 @@ export function IntegratorLayer() {
                 <div className="mt-3 space-y-3">
                   {integration.categories.map((cat) => (
                     <div key={cat.id} className="border-t border-base-300/70 pt-2">
-                      <h3 className="text-[13px] font-bold">{cat.label}</h3>
+                      <h3 className="text-sm font-bold">{cat.label}</h3>
                       <ul className="mt-1.5 space-y-1.5">
                         {cat.platforms.map((pl) => (
                           <li key={`${cat.id}-${pl.name}`} className="flex flex-wrap items-center gap-2">
-                            <span className="text-[12.5px] font-semibold">{pl.name}</span>
-                            <span className="inline-flex rounded-full border border-base-300 bg-base-200/60 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-base-content/80">
+                            <span className="text-sm font-semibold">{pl.name}</span>
+                            <span className="inline-flex rounded-full border border-base-300 bg-base-200/60 px-2 py-0.5 font-mono text-xs uppercase tracking-wider text-base-content/80">
                               {pl.vendor ?? "proprietary"}
                             </span>
-                            <span className="inline-flex rounded-full border border-base-300 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted">
+                            <span className="inline-flex rounded-full border border-base-300 px-2 py-0.5 font-mono text-xs uppercase tracking-wider text-muted">
                               {pl.integrationDepth} integration
                             </span>
                             <ProvenanceBadge env={pl.provenance} />
@@ -271,7 +271,7 @@ export function IntegratorLayer() {
                                 href={pl.sourceUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="font-mono text-[10px] text-primary hover:underline"
+                                className="font-mono text-xs text-primary hover:underline"
                                 title={pl.description}
                               >
                                 source
@@ -281,7 +281,7 @@ export function IntegratorLayer() {
                         ))}
                       </ul>
                       <p
-                        className="mt-1.5 text-[10px] text-muted"
+                        className="mt-1.5 text-xs text-muted"
                         title={[
                           `${integration.highDisplacementLabel}: ${cat.highDisplacementRoles.join(", ")}`,
                           `${integration.partialDisplacementLabel}: ${cat.partialDisplacementRoles.join(", ")}`,
@@ -300,25 +300,25 @@ export function IntegratorLayer() {
       </div>
 
       {/* Closing CTA */}
-      <div className="mt-4 rounded-lg border border-primary/25 bg-primary/5 p-4">
-        <p className="text-[13px] font-semibold">
+      <div className="mt-4 rounded-lg border border-primary/25 bg-primary/5 p-5">
+        <p className="text-sm font-semibold">
           You have seen the models, the dependencies and the platforms: and here is who delivers
           it.
         </p>
-        <p className="measure mt-1 text-[12px] text-muted">
+        <p className="measure mt-1 text-sm text-muted">
           The integrators above are the delivery layer for every vendor decision in this
           workspace. Services channel only, clearly labelled, never mixed into AI vendor scores.
         </p>
         <div className="mt-2 flex flex-wrap gap-3">
           <Link
             href="/market-view"
-            className="text-[12px] font-semibold text-primary hover:underline"
+            className="text-sm font-semibold text-primary hover:underline"
           >
             Open the delivery matrix in Model 4 Role
           </Link>
           <Link
             href="/vendor-view"
-            className="text-[12px] font-semibold text-primary hover:underline"
+            className="text-sm font-semibold text-primary hover:underline"
           >
             Back to vendor profiles
           </Link>

@@ -98,16 +98,16 @@ function CompanyNewsPanel({
 
   return (
     <section className="rounded-lg border border-base-300 bg-base-100">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2.5">
         <div className="flex items-center gap-2">
-          <h3 className="text-[13px] font-bold">{label} news</h3>
+          <h3 className="text-sm font-bold">{label} news</h3>
           <LaneBadge lane={source === "mock" ? "mock" : "live"} />
         </div>
         <select
           aria-label="Company"
           value={ticker}
           onChange={(e) => setTicker(e.target.value)}
-          className="max-w-full rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-xs text-muted"
         >
           {universe.map((u) => (
             <option key={u.ticker} value={u.ticker}>
@@ -117,11 +117,11 @@ function CompanyNewsPanel({
         </select>
       </div>
       {loading ? (
-        <p className="px-3 py-6 text-center font-mono text-[11px] text-muted">
+        <p className="px-3 py-6 text-center font-mono text-xs text-muted">
           Loading live news...
         </p>
       ) : errorCode ? (
-        <p className="px-3 py-6 text-center font-mono text-[11px] text-muted">
+        <p className="px-3 py-6 text-center font-mono text-xs text-muted">
           Live news unavailable ({errorCode}); nothing is shown rather than a
           guess.
         </p>
@@ -131,7 +131,7 @@ function CompanyNewsPanel({
             const domain = domainOf(a.source);
             const summary = a.summary || a.description || "";
             return (
-              <li key={`${a.source}-${i}`} className="px-3 py-2.5">
+              <li key={`${a.source}-${i}`} className="px-3 py-3">
                 <div className="flex items-start gap-2">
                   {domain ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -150,15 +150,15 @@ function CompanyNewsPanel({
                       href={a.source}
                       target="_blank"
                       rel="noreferrer"
-                      className="text-[13px] font-medium leading-snug hover:text-primary"
+                      className="text-sm font-medium leading-snug hover:text-primary"
                     >
                       {a.title}
                     </a>
                     {summary ? (
-                      <p className="mt-0.5 truncate text-[11px] text-muted">{summary}</p>
+                      <p className="mt-0.5 truncate text-xs text-muted">{summary}</p>
                     ) : null}
                     <div className="mt-1 flex flex-wrap items-center gap-1.5">
-                      <span className="break-all font-mono text-[10px] text-muted">
+                      <span className="break-all font-mono text-xs text-muted">
                         {domain ?? "source"} · {DATE_FMT.format(new Date(a.date))}
                       </span>
                       {sentimentPill(a.sentiment?.label)}
@@ -170,7 +170,7 @@ function CompanyNewsPanel({
           })}
         </ul>
       ) : (
-        <p className="px-3 py-6 text-center text-[12px] text-muted">
+        <p className="px-3 py-6 text-center text-sm text-muted">
           No recent articles returned for this company.
         </p>
       )}
@@ -214,19 +214,19 @@ export function CompanyNewsSection({ universe }: { universe: UniverseCompany[] }
         />
         <LaneBadge lane={source === "mock" ? "mock" : "live"} />
       </div>
-      <p className="mb-3 measure text-[11px] text-muted">
+      <p className="mb-3 measure text-xs text-muted">
         These panels cover companies in the BoardRadar universe, which is IT
         services first with the major AI platform players included. Private AI
         labs are not in this universe; their coverage lives in the AI market
         brief above.
       </p>
       {errorCode ? (
-        <p className="rounded-lg border border-base-300 bg-base-100 px-3 py-6 text-center font-mono text-[11px] text-muted">
+        <p className="rounded-lg border border-base-300 bg-base-100 px-3 py-6 text-center font-mono text-xs text-muted">
           Company resolution unavailable ({errorCode}); live news cannot be
           requested without a companyId.
         </p>
       ) : idByTicker === null ? (
-        <p className="rounded-lg border border-base-300 bg-base-100 px-3 py-6 text-center font-mono text-[11px] text-muted">
+        <p className="rounded-lg border border-base-300 bg-base-100 px-3 py-6 text-center font-mono text-xs text-muted">
           Resolving companies...
         </p>
       ) : (
@@ -246,7 +246,7 @@ export function CompanyNewsSection({ universe }: { universe: UniverseCompany[] }
       <div className="mt-3 text-right">
         <Link
           href="/vendor-view"
-          className="text-[11px] font-semibold text-primary hover:underline"
+          className="text-xs font-semibold text-primary hover:underline"
         >
           Vendor profiles: Vendor View
         </Link>

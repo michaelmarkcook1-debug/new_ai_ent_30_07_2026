@@ -20,9 +20,9 @@ export function Accordion({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between px-3 py-2.5 text-left"
+        className="flex w-full items-center justify-between px-3 py-3 text-left"
       >
-        <span className="text-[13px] font-bold">
+        <span className="text-sm font-bold">
           {title} ({count})
         </span>
         <svg
@@ -37,7 +37,7 @@ export function Accordion({
           <path d="m6 9 6 6 6-6" />
         </svg>
       </button>
-      {open ? <div className="border-t border-base-300 px-3 py-2.5">{children}</div> : null}
+      {open ? <div className="border-t border-base-300 px-3 py-3">{children}</div> : null}
     </div>
   );
 }

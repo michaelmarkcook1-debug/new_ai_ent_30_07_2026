@@ -29,15 +29,15 @@ export function PricingDisclosure({
           className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left"
         >
           <span>
-            <span className="text-[13px] font-bold">
+            <span className="text-sm font-bold">
               Token list pricing table
             </span>
-            <span className="mt-0.5 block text-[11.5px] text-muted">
+            <span className="mt-0.5 block text-xs text-muted">
               Every tracked model row: input, output and cached input per 1M
               tokens, each with its own source link and capture date.
             </span>
           </span>
-          <span className="flex shrink-0 items-center gap-1.5 rounded-full border border-base-300 px-3 py-1 text-[11px] font-semibold text-primary">
+          <span className="flex shrink-0 items-center gap-1.5 rounded-full border border-base-300 px-3 py-1.5 text-xs font-semibold text-primary">
             Show table
             <svg
               width="12"
@@ -62,7 +62,7 @@ export function PricingDisclosure({
         <button
           type="button"
           onClick={() => setOpen(false)}
-          className="inline-flex items-center gap-1.5 rounded-full border border-base-300 px-3 py-1 text-[11px] font-semibold text-muted transition hover:border-primary hover:text-primary"
+          className="inline-flex items-center gap-1.5 rounded-full border border-base-300 px-3 py-1.5 text-xs font-semibold text-muted transition hover:border-primary hover:text-primary"
         >
           Hide table
           <svg

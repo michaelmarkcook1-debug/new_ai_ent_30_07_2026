@@ -138,16 +138,16 @@ export function Shell({
             <span className="flex h-6 w-6 items-center justify-center rounded-md bg-primary text-white">
               <AgMark className="h-3.5 w-3.5" />
             </span>
-            <span className="font-display text-[15px] font-extrabold tracking-tight">
+            <span className="font-display text-base font-extrabold tracking-tight">
               AI Enterprise
             </span>
-            <span className="ml-1 hidden rounded bg-secondary/10 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-secondary dark:bg-secondary/40 dark:text-secondary-content md:inline">
+            <span className="ml-1 hidden rounded bg-secondary/10 px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-secondary dark:bg-secondary/40 dark:text-secondary-content md:inline">
               Buyer intelligence
             </span>
           </Link>
         </div>
         <div className="flex items-center gap-1.5 sm:gap-2">
-          <span className="hidden rounded-full border border-base-300 px-2.5 py-1 font-mono text-[10px] text-muted md:inline-flex">
+          <span className="hidden rounded-full border border-base-300 px-2.5 py-1.5 font-mono text-xs text-muted md:inline-flex">
             {scopeLabel}
           </span>
           <ShortlistIndicator />
@@ -195,7 +195,7 @@ export function Shell({
                           <Link
                             href={item.href}
                             title={item.hint ?? item.label}
-                            className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-[12.5px] font-medium transition ${
+                            className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium transition ${
                               active
                                 ? "bg-primary text-white shadow-sm"
                                 : "text-base-content/75 hover:bg-base-300/50 hover:text-base-content"
@@ -219,7 +219,7 @@ export function Shell({
               <button
                 type="button"
                 onClick={() => setCollapsed((v) => !v)}
-                className="flex w-full items-center gap-2 rounded-md px-2 py-1.5 text-[11px] text-muted hover:bg-base-300/50"
+                className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-xs text-muted hover:bg-base-300/50"
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d={collapsed ? "m9 6 6 6-6 6" : "m15 6-6 6 6 6"} /></svg>
                 {!collapsed ? (
@@ -227,13 +227,13 @@ export function Shell({
                 ) : null}
               </button>
               {!collapsed ? (
-                <div className="flex items-center gap-2 rounded-md px-2 py-1">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-secondary text-[10px] font-bold text-white">
+                <div className="flex items-center gap-2 rounded-md px-2 py-1.5">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-secondary text-xs font-bold text-white">
                     E
                   </span>
                   <div className="hidden min-w-0 md:block">
-                    <p className="truncate text-[11px] font-semibold">AI Enterprise</p>
-                    <p className="truncate font-mono text-[9px] text-muted">signed in</p>
+                    <p className="truncate text-xs font-semibold">AI Enterprise</p>
+                    <p className="truncate font-mono text-xs text-muted">signed in</p>
                   </div>
                 </div>
               ) : null}

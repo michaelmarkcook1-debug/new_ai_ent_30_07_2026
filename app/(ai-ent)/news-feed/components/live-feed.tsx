@@ -79,9 +79,9 @@ export function LiveFeed() {
 
   return (
     <section className="rounded-lg border border-base-300 bg-base-100">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2.5">
         <div className="flex flex-wrap items-center gap-2">
-          <h3 className="text-[13px] font-bold">Live AI-market feed</h3>
+          <h3 className="text-sm font-bold">Live AI-market feed</h3>
           <LaneBadge lane={lane} />
           <DerivationDrawer title="How the live feed is derived">
             <p>
@@ -104,7 +104,7 @@ export function LiveFeed() {
           aria-label="Vendor filter"
           value={vendor}
           onChange={(e) => setVendor(e.target.value)}
-          className="max-w-full rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-xs text-muted"
         >
           <option value="all">All vendors</option>
           {vendors.map((v) => (
@@ -116,7 +116,7 @@ export function LiveFeed() {
       </div>
 
       {items && categories.length > 0 ? (
-        <div className="flex flex-wrap items-center gap-1.5 border-b border-base-300 px-3 py-2">
+        <div className="flex flex-wrap items-center gap-1.5 border-b border-base-300 px-3 py-2.5">
           <MicroLabel
             label="Categories"
             tooltip="Category labels applied by the AIE pipeline. Pick one to filter."
@@ -124,7 +124,7 @@ export function LiveFeed() {
           <button
             type="button"
             onClick={() => setCategory(null)}
-            className={`rounded-full border px-2 py-0.5 text-[10px] transition ${
+            className={`rounded-full border px-2 py-0.5 text-xs transition ${
               category === null
                 ? "border-primary bg-primary text-white"
                 : "border-base-300 text-muted hover:border-primary hover:text-primary"
@@ -137,7 +137,7 @@ export function LiveFeed() {
               key={c}
               type="button"
               onClick={() => setCategory(category === c ? null : c)}
-              className={`rounded-full border px-2 py-0.5 text-[10px] transition ${
+              className={`rounded-full border px-2 py-0.5 text-xs transition ${
                 category === c
                   ? "border-primary bg-primary text-white"
                   : "border-base-300 text-muted hover:border-primary hover:text-primary"
@@ -151,16 +151,16 @@ export function LiveFeed() {
 
       <ul className="divide-y divide-base-300">
         {failed ? (
-          <li className="measure px-3 py-4 text-[12px] text-muted">
+          <li className="measure px-3 py-4 text-sm text-muted">
             The live feed is unavailable and no recorded fixture answered; no
             items are shown rather than a guess.
           </li>
         ) : items === null ? (
-          <li className="px-3 py-4 font-mono text-[11px] text-muted">
+          <li className="px-3 py-4 font-mono text-xs text-muted">
             Loading the live feed...
           </li>
         ) : filtered.length === 0 ? (
-          <li className="px-3 py-4 text-[12px] text-muted">
+          <li className="px-3 py-4 text-sm text-muted">
             No items match this filter.
           </li>
         ) : (
@@ -171,25 +171,25 @@ export function LiveFeed() {
                   href={n.sourceUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="measure text-[13px] font-semibold leading-snug hover:text-primary"
+                  className="measure text-sm font-semibold leading-snug hover:text-primary"
                 >
                   {n.title}
                 </a>
                 <span
-                  className="shrink-0 font-mono text-[10px] text-muted"
+                  className="shrink-0 font-mono text-xs text-muted"
                   title="The pipeline's own impact label, 0 to 100."
                 >
                   Impact {n.impactScore ?? "n/a"}
                 </span>
               </div>
-              <p className="measure mt-0.5 text-[12px] leading-snug text-base-content/85">{n.summary}</p>
+              <p className="measure mt-0.5 text-sm leading-snug text-base-content/85">{n.summary}</p>
               {n.whyItMatters ? (
-                <p className="measure mt-1 text-[11px] leading-snug text-muted">
+                <p className="measure mt-1 text-xs leading-snug text-muted">
                   <span className="font-semibold">Why it matters:</span> {n.whyItMatters}
                 </p>
               ) : null}
               <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
-                <span className="font-mono text-[10px] text-muted">
+                <span className="font-mono text-xs text-muted">
                   {n.sourceName} · {fmtDate(n.publishedAt)}
                 </span>
                 {(n.categories ?? []).slice(0, 3).map((c) => (
@@ -198,7 +198,7 @@ export function LiveFeed() {
                 {sentimentBadge(n.sentiment)}
               </div>
               {n.vendors && n.vendors.length > 0 ? (
-                <p className="measure mt-1 text-[10px] text-muted">Vendors: {n.vendors.join(", ")}</p>
+                <p className="measure mt-1 text-xs text-muted">Vendors: {n.vendors.join(", ")}</p>
               ) : null}
             </li>
           ))

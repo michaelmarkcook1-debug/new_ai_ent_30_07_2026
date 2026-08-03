@@ -67,14 +67,14 @@ function SegmentBar({ company }: { company: CompanyRevenueView }) {
       </svg>
       <ul className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
         {segs.map((s, i) => (
-          <li key={s.segment} className="flex items-center gap-1.5 text-[11px]">
+          <li key={s.segment} className="flex items-center gap-1.5 text-xs">
             <span
               className="inline-block h-2.5 w-2.5 rounded-sm"
               style={{ background: shades[Math.min(i, shades.length - 1)] }}
               aria-hidden
             />
             <span>{s.segment}</span>
-            <span className="font-mono text-[10.5px] text-muted">
+            <span className="font-mono text-xs text-muted">
               {formatUsd(s.revenueUsd)} · {s.sharePct}%
             </span>
           </li>
@@ -88,15 +88,15 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
   return (
     <section>
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-[15px] font-bold">
+        <h2 className="text-base font-bold">
           AI revenue: what is actually disclosed
         </h2>
         <LaneBadge lane="live" />
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           {view.disclosingCount} of {view.totalCount} disclose a figure
         </span>
       </div>
-      <p className="mt-1 measure text-[12px] text-muted">
+      <p className="mt-1 measure text-sm text-muted">
         No filer reports AI revenue as a segment, so there is no AI line to
         extract and none is estimated here. Two things are shown instead: the
         audited segment split from each company&apos;s own 10-K, which is a
@@ -108,7 +108,7 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
         {view.companies.map((c) => (
           <article
             key={c.ticker}
-            className="rounded-lg border border-base-300 bg-base-100 p-4"
+            className="rounded-lg border border-base-300 bg-base-100 p-5"
           >
             <div className="flex flex-wrap items-start justify-between gap-2">
               <div>
@@ -116,35 +116,35 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
                   {c.vendorId ? (
                     <Link
                       href={`/vendor-view/${c.vendorId}`}
-                      className="text-[14px] font-bold hover:text-primary hover:underline"
+                      className="text-base font-bold hover:text-primary hover:underline"
                     >
                       {c.name}
                     </Link>
                   ) : (
-                    <span className="text-[14px] font-bold">{c.name}</span>
+                    <span className="text-base font-bold">{c.name}</span>
                   )}
-                  <span className="font-mono text-[10px] text-muted">
+                  <span className="font-mono text-xs text-muted">
                     {c.ticker}
                   </span>
                   {c.category ? (
-                    <span className="rounded-full border border-base-300 px-2 py-0.5 text-[10.5px] text-muted">
+                    <span className="rounded-full border border-base-300 px-2 py-0.5 text-xs text-muted">
                       {c.category}
                     </span>
                   ) : null}
                 </div>
                 {c.segmentTotalUsd ? (
-                  <p className="mt-0.5 font-mono text-[11px] text-muted">
+                  <p className="mt-0.5 font-mono text-xs text-muted">
                     {formatUsd(c.segmentTotalUsd)} reported segment revenue
                     {c.periodEnd ? `, FY to ${c.periodEnd}` : ""}
                   </p>
                 ) : null}
               </div>
               {c.aiStatements.length > 0 ? (
-                <span className="rounded bg-good-bg px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-good">
+                <span className="rounded bg-good-bg px-2 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-good">
                   States a figure
                 </span>
               ) : (
-                <span className="rounded bg-base-200 px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-muted">
+                <span className="rounded bg-base-200 px-2 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-muted">
                   Not disclosed
                 </span>
               )}
@@ -161,7 +161,7 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
                 </div>
               </div>
             ) : (
-              <p className="mt-3 rounded border border-dashed border-base-300 px-3 py-2 text-[11.5px] text-muted">
+              <p className="mt-3 rounded border border-dashed border-base-300 px-3 py-2.5 text-xs text-muted">
                 {c.singleSegment
                   ? "Reports as a single segment: no breakout is disclosed, so there is no split to show."
                   : (c.segmentNote ??
@@ -170,21 +170,21 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
             )}
 
             {c.aiStatements.length > 0 ? (
-              <div className="mt-3 rounded-lg border border-primary/25 bg-primary/5 p-3">
+              <div className="mt-3 rounded-lg border border-primary/25 bg-primary/5 p-4">
                 <MicroLabel
                   label="Stated by the company"
                   tooltip="Quoted verbatim from the filing. Not computed, not paraphrased."
                 />
                 {c.aiStatements.slice(0, 2).map((s) => (
                   <div key={s.url + s.statement.slice(0, 40)} className="mt-1.5">
-                    <p className="measure text-[12px] leading-relaxed">
+                    <p className="measure text-sm leading-relaxed">
                       &ldquo;{s.statement}&rdquo;
                     </p>
                     <a
                       href={s.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="mt-0.5 inline-block font-mono text-[9.5px] text-primary hover:underline"
+                      className="mt-0.5 inline-block font-mono text-xs text-primary hover:underline"
                     >
                       {s.form ?? "filing"}
                       {s.filedAt ? ` filed ${s.filedAt}` : ""} · SEC EDGAR
@@ -193,7 +193,7 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
                 ))}
               </div>
             ) : (
-              <p className="measure mt-3 text-[11.5px] text-muted">
+              <p className="measure mt-3 text-xs text-muted">
                 States no quantified AI revenue figure in any 10-K, 10-Q or 8-K.
                 Its AI revenue is not public, and nothing here estimates one.
               </p>
@@ -204,7 +204,7 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
                 href={c.filingUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-2 inline-block font-mono text-[9px] text-muted hover:text-primary hover:underline"
+                className="mt-2 inline-block font-mono text-xs text-muted hover:text-primary hover:underline"
               >
                 source: {c.form} XBRL instance
               </a>

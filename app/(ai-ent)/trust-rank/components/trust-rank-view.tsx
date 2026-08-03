@@ -30,7 +30,7 @@ function StatusChip({ status }: { status: string }) {
       ? "bg-warn-bg text-warn"
       : "bg-base-200 text-muted";
   return (
-    <span className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${cls}`}>
+    <span className={`inline-flex rounded px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider ${cls}`}>
       {status}
     </span>
   );
@@ -78,7 +78,7 @@ export function TrustRankView({
   return (
     <div className="space-y-5">
       {/* Vendor lens selector */}
-      <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+      <section className="rounded-lg border border-base-300 bg-base-100 p-5">
         <div className="flex flex-wrap items-center gap-3">
           <MicroLabel
             label="Vendor lens"
@@ -88,7 +88,7 @@ export function TrustRankView({
             aria-label="Vendor lens"
             value={selectedId}
             onChange={(e) => setSelectedId(e.target.value)}
-            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm"
           >
             {vendors.map((v) => (
               <option key={v.id} value={v.id}>
@@ -130,7 +130,7 @@ export function TrustRankView({
             </p>
           </DerivationDrawer>
         </div>
-        <p className="measure mt-2 text-[11px] text-muted">
+        <p className="measure mt-2 text-xs text-muted">
           Highlighted rows below bear on the {LAYER_LABEL[selected.layer].toLowerCase()} layer.
           The grid itself is jurisdiction-first; the lens only changes emphasis,
           never the content.
@@ -140,20 +140,20 @@ export function TrustRankView({
       {/* Regulatory grid */}
       <section>
         <div className="mb-2 flex items-center gap-2">
-          <h3 className="text-[13px] font-bold">Regulatory grid</h3>
+          <h3 className="text-sm font-bold">Regulatory grid</h3>
           <LaneBadge lane="aie" />
           <LaneBadge lane="sample" />
         </div>
         <div className="overflow-x-auto rounded-lg border border-base-300 bg-base-100">
-          <table className="w-full min-w-[760px] text-left text-[12.5px]">
+          <table className="w-full min-w-[760px] text-left text-sm">
             <thead>
               <tr className="border-b border-base-300">
-                <th className="px-3 py-2"><span className="micro-label">Jurisdiction</span></th>
-                <th className="px-3 py-2"><span className="micro-label">Regime</span></th>
-                <th className="px-3 py-2"><span className="micro-label">Status</span></th>
-                <th className="px-3 py-2"><span className="micro-label">What it means</span></th>
-                <th className="px-3 py-2"><span className="micro-label">Source</span></th>
-                <th className="px-3 py-2"><span className="micro-label">Lens</span></th>
+                <th className="px-3 py-2.5"><span className="micro-label">Jurisdiction</span></th>
+                <th className="px-3 py-2.5"><span className="micro-label">Regime</span></th>
+                <th className="px-3 py-2.5"><span className="micro-label">Status</span></th>
+                <th className="px-3 py-2.5"><span className="micro-label">What it means</span></th>
+                <th className="px-3 py-2.5"><span className="micro-label">Source</span></th>
+                <th className="px-3 py-2.5"><span className="micro-label">Lens</span></th>
               </tr>
             </thead>
             <tbody className="divide-y divide-base-300">
@@ -164,24 +164,24 @@ export function TrustRankView({
                     key={row.jurisdiction}
                     className={applies ? "bg-primary/5" : undefined}
                   >
-                    <td className="px-3 py-2.5 font-semibold">{row.jurisdiction}</td>
-                    <td className="px-3 py-2.5">{row.regime}</td>
-                    <td className="px-3 py-2.5">
+                    <td className="px-3 py-3 font-semibold">{row.jurisdiction}</td>
+                    <td className="px-3 py-3">{row.regime}</td>
+                    <td className="px-3 py-3">
                       <StatusChip status={row.status} />
                     </td>
-                    <td className="max-w-md px-3 py-2.5 text-[12px] leading-snug text-base-content/85">
+                    <td className="max-w-md px-3 py-3 text-sm leading-snug text-base-content/85">
                       {row.note}
                     </td>
-                    <td className="px-3 py-2.5">
+                    <td className="px-3 py-3">
                       <LaneBadge lane={row.aieSource ? "aie" : "sample"} />
                     </td>
-                    <td className="px-3 py-2.5">
+                    <td className="px-3 py-3">
                       {applies ? (
-                        <span className="inline-flex rounded bg-primary/10 px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-primary">
+                        <span className="inline-flex rounded bg-primary/10 px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-primary">
                           Applies
                         </span>
                       ) : (
-                        <span className="font-mono text-[9px] text-muted">·</span>
+                        <span className="font-mono text-xs text-muted">·</span>
                       )}
                     </td>
                   </tr>
@@ -195,12 +195,12 @@ export function TrustRankView({
       {/* Vendor-specific rulings for the selected layer */}
       <section>
         <div className="mb-2 flex items-center gap-2">
-          <h3 className="text-[13px] font-bold">
+          <h3 className="text-sm font-bold">
             Rulings bearing on {selected.name}
           </h3>
         </div>
         {rulings.length === 0 ? (
-          <p className="rounded-lg border border-base-300 bg-base-100 px-3 py-4 text-[12px] text-muted">
+          <p className="rounded-lg border border-base-300 bg-base-100 px-3 py-4 text-sm text-muted">
             No vendor-specific ruling in the tracked material bears on the{" "}
             {LAYER_LABEL[selected.layer].toLowerCase()} layer. The jurisdiction
             rows above still apply; nothing further is asserted.
@@ -208,13 +208,13 @@ export function TrustRankView({
         ) : (
           <div className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
             {rulings.map((r) => (
-              <div key={r.item} className="rounded-lg border border-base-300 bg-base-100 p-4">
+              <div key={r.item} className="rounded-lg border border-base-300 bg-base-100 p-5">
                 <div className="flex flex-wrap items-center justify-between gap-2">
                   <span className="micro-label">{r.vendor}</span>
                   <LaneBadge lane={r.aieSource ? "aie" : "sample"} />
                 </div>
-                <p className="mt-1 text-[13px] font-semibold">{r.item}</p>
-                <p className="measure mt-1 text-[12px] leading-snug text-base-content/85">
+                <p className="mt-1 text-sm font-semibold">{r.item}</p>
+                <p className="measure mt-1 text-sm leading-snug text-base-content/85">
                   {r.note}
                 </p>
               </div>
@@ -226,7 +226,7 @@ export function TrustRankView({
       {/* Regulatory events from the AIE market-signals dataset */}
       <section>
         <div className="mb-2 flex flex-wrap items-center gap-2">
-          <h3 className="text-[13px] font-bold">Regulatory events</h3>
+          <h3 className="text-sm font-bold">Regulatory events</h3>
           <LaneBadge lane="aie" />
           <DerivationDrawer title="How the regulatory event figures are derived">
             <p>
@@ -247,29 +247,29 @@ export function TrustRankView({
         </div>
         <div className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
           {events.map((e) => (
-            <div key={e.id} className="rounded-lg border border-base-300 bg-base-100 p-4">
+            <div key={e.id} className="rounded-lg border border-base-300 bg-base-100 p-5">
               <div className="flex flex-wrap items-center gap-2">
                 <CategoryChip label={e.jurisdiction} />
                 <CategoryChip label={eventTypeLabel(e.eventType)} />
                 {e.effectiveDate ? (
-                  <span className="font-mono text-[10px] text-muted">
+                  <span className="font-mono text-xs text-muted">
                     Effective {DATE_FMT.format(new Date(e.effectiveDate))}
                   </span>
                 ) : (
-                  <span className="font-mono text-[10px] text-muted">
+                  <span className="font-mono text-xs text-muted">
                     Effective date not stated
                   </span>
                 )}
               </div>
               {e.signal ? (
                 <>
-                  <p className="measure mt-2 text-[13px] font-semibold leading-snug">
+                  <p className="measure mt-2 text-sm font-semibold leading-snug">
                     {e.signal.title}
                   </p>
-                  <p className="mt-1 font-mono text-[10px] text-muted">
+                  <p className="mt-1 font-mono text-xs text-muted">
                     {e.signal.evidenceGrade} · {e.signal.dataStatus}
                   </p>
-                  <p className="mt-1 text-[11px] text-muted">
+                  <p className="mt-1 text-xs text-muted">
                     {e.signal.sourceUrl ? (
                       <a
                         href={e.signal.sourceUrl}
@@ -292,18 +292,18 @@ export function TrustRankView({
                   .map(([k, v]) => (
                     <span
                       key={k}
-                      className="inline-flex rounded border border-base-300 px-1.5 py-0.5 font-mono text-[10px] text-muted"
+                      className="inline-flex rounded border border-base-300 px-1.5 py-0.5 font-mono text-xs text-muted"
                     >
                       {IMPACT_LABELS[k] ?? k} {v > 0 ? "+" : ""}
                       {v}
                     </span>
                   ))}
               </div>
-              <p className="measure mt-2 text-[11px] leading-snug text-muted">
+              <p className="measure mt-2 text-xs leading-snug text-muted">
                 {e.uncertaintyNote}
               </p>
               {e.affectedVendorIds.length > 0 ? (
-                <p className="mt-1 font-mono text-[10px] text-muted">
+                <p className="mt-1 font-mono text-xs text-muted">
                   Affects: {e.affectedVendorIds.join(", ")}
                 </p>
               ) : null}
@@ -322,7 +322,7 @@ export function TrustRankView({
       <div className="text-right">
         <Link
           href="/security-desk"
-          className="text-[11px] font-semibold text-primary hover:underline"
+          className="text-xs font-semibold text-primary hover:underline"
         >
           Cyber posture: The Security Desk
         </Link>

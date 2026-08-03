@@ -76,11 +76,11 @@ export default async function CompanyOverviewPage({
           <Link
             key={t.href}
             href={t.href}
-            className="rounded-lg border border-base-300 bg-base-100 p-4 transition hover:border-primary"
+            className="rounded-lg border border-base-300 bg-base-100 p-5 transition hover:border-primary"
           >
-            <p className="text-[13px] font-bold">{t.title}</p>
-            <p className="mt-1 text-[12px] text-muted">{t.blurb}</p>
-            <p className="mt-2 text-[11px] font-semibold text-primary">Open</p>
+            <p className="text-sm font-bold">{t.title}</p>
+            <p className="mt-1 text-sm text-muted">{t.blurb}</p>
+            <p className="mt-2 text-xs font-semibold text-primary">Open</p>
           </Link>
         ))}
       </section>

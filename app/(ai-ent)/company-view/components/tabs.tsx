@@ -32,7 +32,7 @@ export function CompanyTabs({ company }: { company?: string | null }) {
           <Link
             key={t.href}
             href={href}
-            className={`rounded-full px-3 py-1.5 text-[12px] font-semibold transition ${
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold transition ${
               active
                 ? "bg-primary text-white shadow-sm"
                 : "text-muted hover:bg-base-200 hover:text-base-content"

@@ -23,9 +23,9 @@ export function PageHeader({
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <h1 className="text-2xl font-extrabold tracking-tight">{title}</h1>
-          <p className="mt-0.5 font-mono text-[11px] text-muted">{today}</p>
+          <p className="mt-0.5 font-mono text-xs text-muted">{today}</p>
           {subtitle ? (
-            <p className="mt-1 measure text-[13px] text-muted">{subtitle}</p>
+            <p className="mt-1 measure text-sm text-muted">{subtitle}</p>
           ) : null}
         </div>
         <div className="flex items-center gap-2">{actions}</div>
@@ -56,8 +56,8 @@ export function EmptyState({
         <rect x="5" y="11" width="14" height="9" rx="2" />
         <path d="M8 11V7a4 4 0 0 1 8 0v4" />
       </svg>
-      <p className="mt-2 text-[13px] font-semibold text-base-content/80">{title}</p>
-      {detail ? <p className="mt-1 max-w-sm text-[11px] text-muted">{detail}</p> : null}
+      <p className="mt-2 text-sm font-semibold text-base-content/80">{title}</p>
+      {detail ? <p className="mt-1 max-w-sm text-xs text-muted">{detail}</p> : null}
     </div>
   );
 }
@@ -66,7 +66,7 @@ export function StubState({ module: moduleName }: { module: string }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-base-300 bg-base-200/50 px-4 py-16 text-center">
       <span className="micro-label">In development</span>
-      <p className="mt-2 max-w-md text-[13px] text-muted">
+      <p className="mt-2 max-w-md text-sm text-muted">
         {moduleName} is scoped for this workspace and under active build. The
         navigation stays live so nothing dead-ends; content lands here next.
       </p>
@@ -76,7 +76,7 @@ export function StubState({ module: moduleName }: { module: string }) {
 
 export function DemoFooter() {
   return (
-    <footer className="fixed bottom-0 left-0 right-0 z-20 border-t border-base-300 bg-base-200/95 px-4 py-1 text-center font-mono text-[10px] text-muted backdrop-blur">
+    <footer className="fixed bottom-0 left-0 right-0 z-20 border-t border-base-300 bg-base-200/95 px-4 py-1.5 text-center font-mono text-xs text-muted backdrop-blur">
       Demo build. Sample data is badged.
     </footer>
   );

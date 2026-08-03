@@ -34,7 +34,7 @@ export function PriceSummary({
         </div>
         <Link
           href="/price-performance"
-          className="text-[12px] font-semibold text-primary hover:underline"
+          className="text-sm font-semibold text-primary hover:underline"
         >
           Full price-performance analysis →
         </Link>
@@ -44,9 +44,9 @@ export function PriceSummary({
         {picks.map((p) => (
           <div
             key={p.slot}
-            className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-4"
+            className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-5"
           >
-            <h3 className="font-mono text-[12px] uppercase tracking-wider text-muted">
+            <h3 className="font-mono text-sm uppercase tracking-wider text-muted">
               {p.slot}
             </h3>
 
@@ -54,19 +54,19 @@ export function PriceSummary({
               // An absence is stated, not shouted. Rendering these at the same
               // weight as a finding put four "no data" messages among the
               // thirteen largest items on the page.
-              <p className="measure mt-2 flex-1 text-[12px] leading-snug text-muted">
+              <p className="measure mt-2 flex-1 text-sm leading-snug text-muted">
                 {p.unavailable}
               </p>
             ) : (
               <>
-                <p className="mt-1.5 text-balance text-[17px] font-bold leading-tight">
+                <p className="mt-1.5 text-balance text-lg font-bold leading-tight">
                   {p.model}
                 </p>
-                <p className="measure mt-1.5 text-[13px] leading-snug text-muted">
+                <p className="measure mt-1.5 text-sm leading-snug text-muted">
                   {p.reason}
                 </p>
-                <p className="measure mt-2 flex-1 text-[12px] leading-snug">
-                  <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                <p className="measure mt-2 flex-1 text-sm leading-snug">
+                  <span className="font-mono text-sm uppercase tracking-wider text-muted">
                     Enterprise fit
                   </span>
                   <br />

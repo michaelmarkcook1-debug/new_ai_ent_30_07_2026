@@ -27,11 +27,11 @@ function NodeName({
   label: string;
   vendorLinkId: string | null;
 }) {
-  if (!vendorLinkId) return <span className="text-[12px] font-medium">{label}</span>;
+  if (!vendorLinkId) return <span className="text-sm font-medium">{label}</span>;
   return (
     <Link
       href={`/vendor-view/${vendorLinkId}`}
-      className="text-[12px] font-medium hover:text-primary hover:underline"
+      className="text-sm font-medium hover:text-primary hover:underline"
     >
       {label}
     </Link>
@@ -42,13 +42,13 @@ export function DependencyByLayer({ view }: { view: DependencyView }) {
   return (
     <section>
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-[15px] font-bold">Most depended-upon by layer</h2>
+        <h2 className="text-base font-bold">Most depended-upon by layer</h2>
         <LaneBadge lane="aie" />
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           {view.edgeCount} typed edges, {view.nodeCount} counterparties
         </span>
       </div>
-      <p className="mt-1 measure text-[11px] text-muted">
+      <p className="mt-1 measure text-xs text-muted">
         Which suppliers the ecosystem leans on hardest: the count of inbound
         dependency edges each company carries in the AIE exposure map, split by
         relationship type.
@@ -82,7 +82,7 @@ export function DependencyByLayer({ view }: { view: DependencyView }) {
       {/* Legend */}
       <div className="mt-3 flex flex-wrap items-center gap-3">
         {RELATIONSHIP_TYPES.map((t) => (
-          <span key={t} className="flex items-center gap-1.5 text-[10px] text-muted">
+          <span key={t} className="flex items-center gap-1.5 text-xs text-muted">
             <span
               className="inline-block h-2 w-2 rounded-sm"
               style={{ background: TYPE_COLOUR[t] }}
@@ -95,18 +95,18 @@ export function DependencyByLayer({ view }: { view: DependencyView }) {
 
       <div className="mt-3 grid grid-cols-1 gap-3 @2xl:grid-cols-2">
         {view.groups.map((group) => (
-          <div key={group.layer} className="rounded-lg border border-base-300 bg-base-100 p-4">
-            <h3 className="text-[13px] font-bold">{group.layer}</h3>
+          <div key={group.layer} className="rounded-lg border border-base-300 bg-base-100 p-5">
+            <h3 className="text-sm font-bold">{group.layer}</h3>
             <div className="mt-3 space-y-2.5">
               {group.nodes.map((node) => (
                 <div key={node.nodeId}>
                   <div className="flex items-baseline justify-between gap-2">
                     <span className="flex items-baseline gap-1.5">
                       <NodeName label={node.label} vendorLinkId={node.vendorLinkId} />
-                      <span className="text-[10px] text-muted">{node.category}</span>
+                      <span className="text-xs text-muted">{node.category}</span>
                     </span>
                     <span
-                      className="font-mono text-[11px] font-semibold"
+                      className="font-mono text-xs font-semibold"
                       title="Count of inbound dependency edges in the AIE exposure map"
                     >
                       {node.total}

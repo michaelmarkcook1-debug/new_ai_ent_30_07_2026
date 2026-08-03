@@ -119,9 +119,9 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
               }`}
             >
               <p className="micro-label">{t.label}</p>
-              <p className="mt-1 text-[14px] font-bold">{t.question}</p>
-              <p className="measure mt-1 text-[11.5px] leading-snug text-muted">{t.note}</p>
-              <p className="mt-2 font-mono text-[10px] text-muted">
+              <p className="mt-1 text-base font-bold">{t.question}</p>
+              <p className="measure mt-1 text-xs leading-snug text-muted">{t.note}</p>
+              <p className="mt-2 font-mono text-xs text-muted">
                 {t.audience} · {t.duration}
               </p>
             </button>
@@ -134,7 +134,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
           the judgement edge. The ring keeps the semantic band, because the
           colour of the score answers what the verdict is, not who reached
           it. */}
-      <section className="finding flex flex-wrap items-center gap-6 rounded-lg p-5">
+      <section className="finding flex flex-wrap items-center gap-6 rounded-lg p-6">
         <svg width="110" height="110" viewBox="0 0 110 110">
           <circle cx="55" cy="55" r={r} fill="none" stroke="var(--ag-base-300)" strokeWidth="9" opacity="0.5" />
           <circle
@@ -142,16 +142,16 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
             strokeDasharray={`${(total / 100) * c} ${c - (total / 100) * c}`}
             strokeLinecap="round" transform="rotate(-90 55 55)"
           />
-          <text x="55" y="60" textAnchor="middle" className="font-mono" fontSize="26" fontWeight="700" fill="currentColor">
+          <text x="55" y="60" textAnchor="middle" className="font-mono" fontSize="30" fontWeight="700" fill="currentColor">
             {total}
           </text>
         </svg>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <h2 className="text-[15px] font-bold">{assessment.subject}</h2>
+            <h2 className="text-base font-bold">{assessment.subject}</h2>
             <LaneBadge lane="sample" />
           </div>
-          <p className="measure mt-1 text-[12.5px] text-muted">
+          <p className="measure mt-1 text-sm text-muted">
             Weighted total under the {activeTier.label.toLowerCase()} preset
             and your adjustments. Dimension scores never move with the
             weights: same verified basis, your priorities.
@@ -159,7 +159,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
           <button
             type="button"
             onClick={() => setDrawerOpen(true)}
-            className="mt-2 inline-flex items-center gap-1 rounded-full border border-primary px-3 py-1 text-[12px] font-semibold text-primary transition hover:bg-primary hover:text-white"
+            className="mt-2 inline-flex items-center gap-1 rounded-full border border-primary px-3 py-1.5 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white"
           >
             How this is derived
           </button>
@@ -169,11 +169,11 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
       {/* Dimensions with weight sliders */}
       <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
         {assessment.dimensions.map((d) => (
-          <div key={d.id} className="rounded-lg border border-base-300 bg-base-100 p-4">
+          <div key={d.id} className="rounded-lg border border-base-300 bg-base-100 p-5">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <div>
-                <p className="text-[13px] font-bold">{d.label}</p>
-                <p className="font-mono text-[10px] text-muted">
+                <p className="text-sm font-bold">{d.label}</p>
+                <p className="font-mono text-xs text-muted">
                   weight {Math.round((normalised[d.id] ?? 0) * 100)} per cent
                 </p>
               </div>
@@ -190,11 +190,11 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
               className="mt-3 w-full accent-[var(--ag-primary)]"
               aria-label={`Weight for ${d.label}`}
             />
-            <p className="measure mt-2 text-[12px] leading-snug text-muted">{d.rationale}</p>
+            <p className="measure mt-2 text-sm leading-snug text-muted">{d.rationale}</p>
             <button
               type="button"
               onClick={() => setOpenDim(openDim === d.id ? null : d.id)}
-              className="mt-2 text-[11px] font-semibold text-primary hover:underline"
+              className="mt-2 text-xs font-semibold text-primary hover:underline"
             >
               {openDim === d.id ? "Hide subcriteria" : `Subcriteria (${d.subcriteria.length})`}
             </button>
@@ -203,8 +203,8 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
                 {d.subcriteria.map((s) => (
                   <li key={s.label} className="flex flex-wrap items-start justify-between gap-2">
                     <div>
-                      <p className="text-[12px] font-medium">{s.label}</p>
-                      <p className="text-[11px] text-muted">{s.note}</p>
+                      <p className="text-sm font-medium">{s.label}</p>
+                      <p className="text-xs text-muted">{s.note}</p>
                     </div>
                     <ScorePill score={s.score} estimated />
                   </li>
@@ -216,7 +216,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
       </section>
 
       {/* The engine's methodology backbone, live */}
-      <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+      <section className="rounded-lg border border-base-300 bg-base-100 p-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <MicroLabel
             label="The engine behind this: six pillars, evidence-graded"
@@ -228,21 +228,21 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
           <div className="mt-3 grid grid-cols-2 gap-2 @3xl:grid-cols-3 @5xl:grid-cols-6">
             {pillars.map((p) => (
               <div key={p.id} className="rounded border border-base-300 p-2.5 text-center">
-                <p className="text-[11.5px] font-semibold leading-tight">{p.label}</p>
-                <p className="mt-1 font-mono text-[13px] font-bold text-primary">
+                <p className="text-xs font-semibold leading-tight">{p.label}</p>
+                <p className="mt-1 font-mono text-sm font-bold text-primary">
                   {Math.round(p.defaultWeight * 100)}%
                 </p>
               </div>
             ))}
           </div>
         ) : (
-          <p className="mt-3 font-mono text-[11px] text-muted">
+          <p className="mt-3 font-mono text-xs text-muted">
             {pillarSource === "error"
               ? "Live pillar weights unavailable; no figure shown rather than a guess."
               : "Loading the live pillar weights..."}
           </p>
         )}
-        <p className="measure mt-3 text-[11.5px] text-muted">
+        <p className="measure mt-3 text-xs text-muted">
           Evidence grading runs E0 (no evidence, weight 0.0) to E5 (independent
           audit, weight 1.0); claims below the strong-evidence bar are
           suppressed rather than shown. The exemplar decision above mirrors
@@ -258,7 +258,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
       {drawerOpen ? createPortal(
         <div className="fixed inset-0 z-50 flex justify-end bg-black/40" onClick={() => setDrawerOpen(false)}>
           <aside
-            className="h-full w-full max-w-md overflow-y-auto border-l border-base-300 bg-base-100 p-5 shadow-2xl"
+            className="h-full w-full max-w-md overflow-y-auto border-l border-base-300 bg-base-100 p-6 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between">
@@ -267,7 +267,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 6 6 18M6 6l12 12" /></svg>
               </button>
             </div>
-            <div className="mt-3 space-y-3 text-[13px] leading-relaxed">
+            <div className="mt-3 space-y-3 text-sm leading-relaxed">
               <div>
                 <p className="micro-label mb-1">Method</p>
                 <p>
@@ -278,34 +278,34 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
               </div>
               <div>
                 <p className="micro-label mb-1">Worked calculation (current weights)</p>
-                <table className="w-full text-left text-[12px]">
+                <table className="w-full text-left text-sm">
                   <thead>
                     <tr className="border-b border-base-300">
-                      <th className="py-1 font-mono text-[10px] uppercase text-muted">Dimension</th>
-                      <th className="py-1 font-mono text-[10px] uppercase text-muted">Weight</th>
-                      <th className="py-1 font-mono text-[10px] uppercase text-muted">Score</th>
-                      <th className="py-1 font-mono text-[10px] uppercase text-muted">Contribution</th>
+                      <th className="py-1.5 font-mono text-xs uppercase text-muted">Dimension</th>
+                      <th className="py-1.5 font-mono text-xs uppercase text-muted">Weight</th>
+                      <th className="py-1.5 font-mono text-xs uppercase text-muted">Score</th>
+                      <th className="py-1.5 font-mono text-xs uppercase text-muted">Contribution</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-base-300">
                     {assessment.dimensions.map((d) => (
                       <tr key={d.id}>
-                        <td className="py-1">{d.label}</td>
-                        <td className="py-1 font-mono">{(normalised[d.id] ?? 0).toFixed(2)}</td>
-                        <td className="py-1 font-mono">{d.score}</td>
-                        <td className="py-1 font-mono">{((normalised[d.id] ?? 0) * d.score).toFixed(1)}</td>
+                        <td className="py-1.5">{d.label}</td>
+                        <td className="py-1.5 font-mono">{(normalised[d.id] ?? 0).toFixed(2)}</td>
+                        <td className="py-1.5 font-mono">{d.score}</td>
+                        <td className="py-1.5 font-mono">{((normalised[d.id] ?? 0) * d.score).toFixed(1)}</td>
                       </tr>
                     ))}
                     <tr>
-                      <td className="py-1 font-bold" colSpan={3}>Weighted total</td>
-                      <td className="py-1 font-mono font-bold">{total}</td>
+                      <td className="py-1.5 font-bold" colSpan={3}>Weighted total</td>
+                      <td className="py-1.5 font-mono font-bold">{total}</td>
                     </tr>
                   </tbody>
                 </table>
               </div>
               <div className="flex items-center gap-2 border-t border-base-300 pt-2">
                 <LaneBadge lane="sample" />
-                <p className="text-[11px] text-muted">{assessment.derivation.schemaNote}</p>
+                <p className="text-xs text-muted">{assessment.derivation.schemaNote}</p>
               </div>
             </div>
           </aside>

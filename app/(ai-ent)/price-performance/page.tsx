@@ -42,12 +42,12 @@ export default async function PricePerformancePage() {
             attributed divider sits above them per the house rule. */}
         <section>
           <div className="flex items-center gap-3">
-            <h2 className="whitespace-nowrap text-[15px] font-bold">
+            <h2 className="whitespace-nowrap text-base font-bold">
               Third-party signals
             </h2>
             <div className="h-px flex-1 bg-base-300" aria-hidden />
           </div>
-          <p className="mt-1 measure text-[12px] text-muted">
+          <p className="mt-1 measure text-sm text-muted">
             Benchmark results below are published by {costCapability.benchmarkSource},
             attributed and dated per cell. AG produces no benchmark of its own
             and never blends a third-party score into an AG figure.

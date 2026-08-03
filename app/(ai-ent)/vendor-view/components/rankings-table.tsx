@@ -62,9 +62,9 @@ export function RankingsTable({
   return (
     <div className="space-y-3">
       {/* Comparability statement, category picker and the ranking basis */}
-      <section className="rounded-lg border border-base-300 bg-base-100 p-3">
+      <section className="rounded-lg border border-base-300 bg-base-100 p-4">
         <div className="flex flex-wrap items-start justify-between gap-2">
-          <p className="measure text-[12px] text-muted">
+          <p className="measure text-sm text-muted">
             <span className="micro-label mr-1.5">Comparability</span>
             {COMPARABILITY_NOTE}
           </p>
@@ -77,12 +77,12 @@ export function RankingsTable({
           <button
             type="button"
             onClick={() => setOnly(null)}
-            className={`rounded-full px-2.5 py-1 text-[11px] font-medium transition ${
+            className={`rounded-full px-2.5 py-1 text-xs font-medium transition ${
               only === null ? "bg-primary text-white" : "text-muted hover:bg-base-200"
             }`}
           >
             All categories
-            <span className="ml-1 font-mono text-[9px] opacity-70">{groups.length}</span>
+            <span className="ml-1 font-mono text-xs opacity-70">{groups.length}</span>
           </button>
           {groups.map((g) => (
             <button
@@ -90,7 +90,7 @@ export function RankingsTable({
               type="button"
               onClick={() => setOnly(only === g.category.id ? null : g.category.id)}
               title={g.category.description}
-              className={`rounded-full px-2.5 py-1 text-[11px] font-medium transition ${
+              className={`rounded-full px-2.5 py-1 text-xs font-medium transition ${
                 only === g.category.id ? "bg-primary text-white" : "text-muted hover:bg-base-200"
               }`}
             >
@@ -107,7 +107,7 @@ export function RankingsTable({
               type="button"
               onClick={() => setSortBy(col.key)}
               title={`${headerHelp(col.key)}. ${col.help}`}
-              className={`rounded border px-1.5 py-0.5 font-mono text-[10px] transition ${
+              className={`rounded border px-1.5 py-0.5 font-mono text-xs transition ${
                 sortBy === col.key
                   ? "border-primary text-primary"
                   : "border-base-300 text-muted hover:text-base-content"
@@ -128,11 +128,11 @@ export function RankingsTable({
           defaultOpen={visibleGroups.length === 1}
         >
         <section className="rounded-lg border-base-300 bg-base-100">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
+          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2.5">
             <div className="min-w-0">
-              <h3 className="text-[13px] font-bold">{group.category.name}</h3>
+              <h3 className="text-sm font-bold">{group.category.name}</h3>
               {group.category.description ? (
-                <p className="mt-0.5 text-[11px] text-muted">
+                <p className="mt-0.5 text-xs text-muted">
                   {group.category.description}
                 </p>
               ) : null}
@@ -140,20 +140,20 @@ export function RankingsTable({
             <div className="flex shrink-0 items-center gap-2">
               {group.thin ? (
                 <span
-                  className="rounded-full bg-warn-bg px-2 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-warn"
+                  className="rounded-full bg-warn-bg px-2 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-warn"
                   title={THIN_CATEGORY_NOTE}
                 >
                   thin category
                 </span>
               ) : null}
-              <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[10px] text-muted">
+              <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-xs text-muted">
                 {group.rows.length} vendors
               </span>
             </div>
           </div>
 
           {group.thin ? (
-            <p className="border-b border-base-300 px-3 py-1.5 text-[11px] text-muted">
+            <p className="border-b border-base-300 px-3 py-2 text-xs text-muted">
               {THIN_CATEGORY_NOTE}
             </p>
           ) : null}
@@ -162,19 +162,19 @@ export function RankingsTable({
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b border-base-300">
-                  <th className="px-3 py-2 font-mono text-[10px] font-medium uppercase tracking-wider text-muted">
+                  <th className="px-3 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-muted">
                     #
                   </th>
-                  <th className="px-3 py-2 font-mono text-[10px] font-medium uppercase tracking-wider text-muted">
+                  <th className="px-3 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-muted">
                     Vendor
                   </th>
                   {SCORE_COLUMNS.map((col) => (
-                    <th key={col.key} className="px-3 py-2">
+                    <th key={col.key} className="px-3 py-2.5">
                       <button
                         type="button"
                         onClick={() => setSortBy(col.key)}
                         title={`${headerHelp(col.key)}. ${col.help} Click to rank this category by it.`}
-                        className={`whitespace-nowrap font-mono text-[10px] font-medium tracking-wide ${
+                        className={`whitespace-nowrap font-mono text-xs font-medium tracking-wide ${
                           sortBy === col.key ? "text-primary" : "text-muted hover:text-base-content"
                         }`}
                       >
@@ -182,29 +182,29 @@ export function RankingsTable({
                       </button>
                     </th>
                   ))}
-                  <th className="px-3 py-2" />
+                  <th className="px-3 py-2.5" />
                 </tr>
               </thead>
               <tbody className="divide-y divide-base-300">
                 {group.rows.map((row, index) => (
                   <tr key={row.id} className="transition hover:bg-base-200/60">
-                    <td className="px-3 py-2 font-mono text-[10px] text-muted">{index + 1}</td>
-                    <td className="px-3 py-2">
+                    <td className="px-3 py-2.5 font-mono text-xs text-muted">{index + 1}</td>
+                    <td className="px-3 py-2.5">
                       <Link
                         href={`/vendor-view/${row.id}`}
-                        className="text-[12.5px] font-semibold hover:text-primary"
+                        className="text-sm font-semibold hover:text-primary"
                       >
                         {row.name}
                       </Link>
                       <div className="mt-0.5 flex flex-wrap items-center gap-1.5">
                         {row.ticker ? (
-                          <span className="font-mono text-[10px] text-muted">
+                          <span className="font-mono text-xs text-muted">
                             {row.ticker}
                           </span>
                         ) : null}
                         {categoryNamesForVendor(row.id).length > 1 ? (
                           <span
-                            className="font-mono text-[9px] text-muted"
+                            className="font-mono text-xs text-muted"
                             title={`Also competes in: ${categoryNamesForVendor(row.id)
                               .filter((n) => n !== group.category.name)
                               .join(", ")}`}
@@ -220,17 +220,17 @@ export function RankingsTable({
                     {SCORE_COLUMNS.map((col) => {
                       const value = scoreFor(row, col.key);
                       return (
-                        <td key={col.key} className="px-3 py-2">
+                        <td key={col.key} className="px-3 py-2.5">
                           <span className="inline-flex items-center gap-1">
                             <ScorePill score={value} />
                           </span>
                         </td>
                       );
                     })}
-                    <td className="px-3 py-2 text-right">
+                    <td className="px-3 py-2.5 text-right">
                       <Link
                         href={`/vendor-view/${row.id}`}
-                        className="whitespace-nowrap text-[11px] text-primary hover:underline"
+                        className="whitespace-nowrap text-xs text-primary hover:underline"
                       >
                         Profile
                       </Link>
@@ -245,17 +245,17 @@ export function RankingsTable({
       ))}
 
       {notPlaced.length > 0 && !only ? (
-        <section className="rounded-lg border border-dashed border-base-300 bg-base-200/40 p-3">
-          <h3 className="text-[12.5px] font-bold">
+        <section className="rounded-lg border border-dashed border-base-300 bg-base-200/40 p-4">
+          <h3 className="text-sm font-bold">
             Tracked but not placed in a market category ({notPlaced.length})
           </h3>
-          <p className="mt-1 measure text-[11px] text-muted">{UNPLACED_NOTE}</p>
+          <p className="mt-1 measure text-xs text-muted">{UNPLACED_NOTE}</p>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {notPlaced.map((row) => (
               <Link
                 key={row.id}
                 href={`/vendor-view/${row.id}`}
-                className="rounded-full border border-base-300 px-2 py-0.5 text-[11px] hover:border-primary hover:text-primary"
+                className="rounded-full border border-base-300 px-2 py-0.5 text-xs hover:border-primary hover:text-primary"
               >
                 {row.name}
               </Link>
@@ -264,7 +264,7 @@ export function RankingsTable({
         </section>
       ) : null}
 
-      <p className="measure font-mono text-[10px] text-muted">
+      <p className="measure font-mono text-xs text-muted">
         <span className="micro-label mr-2">Generated</span>
         {generatedOn}. Column labels are the dataset&apos;s own field names.
         Values are AG's own estimates from the AI Enterprise
@@ -286,13 +286,13 @@ function RankingsDerivation() {
       </p>
       <ul className="measure list-disc space-y-1 pl-4">
         <li>
-          <span className="font-mono text-[12px]">overallScore</span>: the
+          <span className="font-mono text-sm">overallScore</span>: the
           composite analyst estimate (0 to 100) recorded per vendor in the
           intelligence seed.
         </li>
         <li>
           Each pillar column is the{" "}
-          <span className="font-mono text-[12px]">capabilityScore</span> for
+          <span className="font-mono text-sm">capabilityScore</span> for
           that pillar from the dataset&apos;s per-vendor pillar scores, shown
           with its evidence grade.
         </li>
@@ -307,13 +307,13 @@ function RankingsDerivation() {
       </p>
       <div>
         <p className="font-semibold">Evidence grade modifiers (from the dataset)</p>
-        <table className="mt-1 w-full text-[12px]">
+        <table className="mt-1 w-full text-sm">
           <tbody>
             {(Object.entries(EVIDENCE_MODIFIER) as [string, number][]).map(
               ([grade, modifier]) => (
                 <tr key={grade} className="border-b border-base-300 last:border-0">
-                  <td className="py-1 pr-3 font-mono">{grade}</td>
-                  <td className="py-1 font-mono text-muted">{modifier}</td>
+                  <td className="py-1.5 pr-3 font-mono">{grade}</td>
+                  <td className="py-1.5 font-mono text-muted">{modifier}</td>
                 </tr>
               )
             )}

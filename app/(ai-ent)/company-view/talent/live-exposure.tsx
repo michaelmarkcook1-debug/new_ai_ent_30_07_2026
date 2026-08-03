@@ -109,25 +109,25 @@ export function LiveTalentExposure({
         ].map((c) => (
           <div
             key={c.label}
-            className="rounded-lg border border-base-300 bg-base-100 p-4"
+            className="rounded-lg border border-base-300 bg-base-100 p-5"
           >
             <div className="flex flex-wrap items-start justify-between gap-2">
               <MicroLabel label={c.label} tooltip={c.help} />
               <LaneBadge lane={lane} />
             </div>
-            <p className="mt-1.5 font-mono text-[20px] font-bold">{c.value}</p>
+            <p className="mt-1.5 font-mono text-xl font-bold">{c.value}</p>
           </div>
         ))}
       </section>
 
       {str("summary") ? (
-        <section className="rounded-lg border border-base-300 bg-base-100 p-4">
-          <p className="measure text-[13px] leading-relaxed">{str("summary")}</p>
+        <section className="rounded-lg border border-base-300 bg-base-100 p-5">
+          <p className="measure text-sm leading-relaxed">{str("summary")}</p>
         </section>
       ) : null}
 
       <section className="rounded-lg border border-base-300 bg-base-100">
-        <div className="flex items-center justify-between border-b border-base-300 px-3 py-2">
+        <div className="flex items-center justify-between border-b border-base-300 px-3 py-2.5">
           <MicroLabel
             label="AI talent exposure"
             tooltip={`Share of each role's tasks that AI changes materially.${
@@ -139,7 +139,7 @@ export function LiveTalentExposure({
           <LaneBadge lane={lane} />
         </div>
         {roles.length === 0 ? (
-          <p className="px-3 py-4 text-[11.5px] text-muted">
+          <p className="px-3 py-4 text-xs text-muted">
             No role-level breakdown is published for this company.
           </p>
         ) : (
@@ -147,19 +147,19 @@ export function LiveTalentExposure({
             <table className="w-full text-left">
               <thead>
                 <tr className="border-b border-base-300">
-                  <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">
+                  <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">
                     Role family
                   </th>
-                  <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">
+                  <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">
                     AI exposure
                   </th>
-                  <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">
+                  <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">
                     Direction
                   </th>
-                  <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">
+                  <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">
                     Hiring trend
                   </th>
-                  <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">
+                  <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">
                     Est. headcount
                   </th>
                 </tr>
@@ -178,19 +178,19 @@ export function LiveTalentExposure({
                     : null;
                   return (
                     <tr key={`${r.role}-${i}`} className="align-top hover:bg-base-200/60">
-                      <td className="px-3 py-2">
-                        <div className="text-[12.5px] font-semibold">
+                      <td className="px-3 py-2.5">
+                        <div className="text-sm font-semibold">
                           {r.role}
                         </div>
                         {r.rationale ? (
-                          <p className="mt-0.5 max-w-md text-[11px] leading-snug text-muted">
+                          <p className="mt-0.5 max-w-md text-xs leading-snug text-muted">
                             {r.rationale}
                           </p>
                         ) : null}
                         {r.layoffSignal?.level &&
                         r.layoffSignal.level !== "none" ? (
                           <span
-                            className="mt-1 inline-block rounded bg-warn-bg px-1.5 py-0.5 font-mono text-[8.5px] font-bold uppercase tracking-wider text-warn"
+                            className="mt-1 inline-block rounded bg-warn-bg px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-warn"
                             title={r.layoffSignal.note ?? undefined}
                           >
                             layoff signal {r.layoffSignal.level}
@@ -201,23 +201,23 @@ export function LiveTalentExposure({
                             href={sourceUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="ml-1 font-mono text-[9px] text-primary hover:underline"
+                            className="ml-1 font-mono text-xs text-primary hover:underline"
                           >
                             source
                           </a>
                         ) : null}
                       </td>
-                      <td className="px-3 py-2">
+                      <td className="px-3 py-2.5">
                         <ScorePill score={exposure} invert />
                       </td>
-                      <td className="px-3 py-2">
+                      <td className="px-3 py-2.5">
                         <span
-                          className={`font-mono text-[11px] ${DIRECTION_STYLE[dir] ?? "text-muted"}`}
+                          className={`font-mono text-xs ${DIRECTION_STYLE[dir] ?? "text-muted"}`}
                         >
                           {DIRECTION_MARK[dir] ?? "▬"} {dir || "not stated"}
                         </span>
                       </td>
-                      <td className="px-3 py-2 font-mono text-[11px]">
+                      <td className="px-3 py-2.5 font-mono text-xs">
                         {change === null ? (
                           <span className="text-muted">not published</span>
                         ) : (
@@ -234,7 +234,7 @@ export function LiveTalentExposure({
                           </span>
                         )}
                       </td>
-                      <td className="px-3 py-2 font-mono text-[11px]">
+                      <td className="px-3 py-2.5 font-mono text-xs">
                         {typeof r.estHeadcount === "number"
                           ? fmt.format(r.estHeadcount)
                           : "–"}
@@ -246,7 +246,7 @@ export function LiveTalentExposure({
             </table>
           </div>
         )}
-        <div className="border-t border-base-300 px-3 py-2">
+        <div className="border-t border-base-300 px-3 py-2.5">
           <DerivationDrawer title="How talent exposure is derived">
             <p>
               Every figure here is the endpoint&apos;s own: workforce,{" "}
@@ -267,7 +267,7 @@ export function LiveTalentExposure({
       </section>
 
       <section className="rounded-lg border border-dashed border-base-300 px-4 py-3">
-        <p className="measure text-[11.5px] text-muted">
+        <p className="measure text-xs text-muted">
           The workforce pyramid, functional readiness and leadership signals
           shown for the exemplar buyer have no per-company equivalent in the
           API, so they are omitted here rather than shown under this

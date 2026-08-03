@@ -56,12 +56,12 @@ export default async function CompetitiveIntelPage({
           model providers this page is about. */}
       <section className="mt-6 border-t-2 border-dashed border-[var(--ag-channel)] pt-4">
         <div className="flex flex-wrap items-center gap-2">
-          <h2 className="text-[15px] font-bold">Public-company view</h2>
-          <span className="rounded-full bg-channel-bg px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-channel">
+          <h2 className="text-base font-bold">Public-company view</h2>
+          <span className="rounded-full bg-channel-bg px-2 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-channel">
             Delivery channel
           </span>
         </div>
-        <p className="mt-1 measure text-[12px] text-muted">
+        <p className="mt-1 measure text-sm text-muted">
           The BoardRadar competitive-intelligence heatmap covers listed
           companies, so its peer groups are cloud platforms and the systems
           integrators that deliver AI. It cannot reach OpenAI, Anthropic,

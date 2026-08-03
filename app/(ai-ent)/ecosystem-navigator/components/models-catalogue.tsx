@@ -35,7 +35,7 @@ const STAGE_STYLE: Record<string, string> = {
 function StageBadge({ stage }: { stage: string }) {
   return (
     <span
-      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${STAGE_STYLE[stage] ?? "bg-base-200 text-muted"}`}
+      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider ${STAGE_STYLE[stage] ?? "bg-base-200 text-muted"}`}
     >
       {stage}
     </span>
@@ -50,47 +50,47 @@ function ModelRow({ m }: { m: CommercialModel }) {
       : m.vendorName;
   return (
     <tr className="border-t border-base-300/70 align-top">
-      <td className="px-2 py-1.5">
-        <span className="text-[12.5px] font-semibold">{m.modelName}</span>
-        <span className="block font-mono text-[10px] text-muted">{m.modelFamily}</span>
+      <td className="px-2 py-2">
+        <span className="text-sm font-semibold">{m.modelName}</span>
+        <span className="block font-mono text-xs text-muted">{m.modelFamily}</span>
       </td>
-      <td className="px-2 py-1.5 text-[12px]">{m.ownerVendorName}</td>
-      <td className="px-2 py-1.5">
-        <span className="text-[12px]">{channel}</span>
-        <span className="block text-[10px] text-muted">
+      <td className="px-2 py-2 text-sm">{m.ownerVendorName}</td>
+      <td className="px-2 py-2">
+        <span className="text-sm">{channel}</span>
+        <span className="block text-xs text-muted">
           {OWNERSHIP_LABEL[m.ownershipType] ?? m.ownershipType}
         </span>
       </td>
-      <td className="px-2 py-1.5">
+      <td className="px-2 py-2">
         <CategoryChip label={MODEL_CATEGORY_LABEL[m.modelCategory] ?? m.modelCategory} />
       </td>
-      <td className="px-2 py-1.5">
+      <td className="px-2 py-2">
         <StageBadge stage={m.availabilityStage} />
-        <span className="mt-0.5 block text-[10px] text-muted">
+        <span className="mt-0.5 block text-xs text-muted">
           {AVAILABILITY_LABEL[m.commercialAvailability] ?? m.commercialAvailability}
         </span>
       </td>
-      <td className="px-2 py-1.5">
+      <td className="px-2 py-2">
         <span
-          className="font-mono text-[10px] text-muted"
+          className="font-mono text-xs text-muted"
           title={m.uncertaintyNote}
         >
           {m.dataStatus} {m.evidenceGrade}
         </span>
       </td>
-      <td className="px-2 py-1.5">
+      <td className="px-2 py-2">
         {m.sourceUrls[0] ? (
           <a
             href={m.sourceUrls[0]}
             target="_blank"
             rel="noreferrer"
             title={m.sourceNames[0] ?? m.sourceUrls[0]}
-            className="font-mono text-[10px] text-primary hover:underline"
+            className="font-mono text-xs text-primary hover:underline"
           >
             source
           </a>
         ) : (
-          <span className="font-mono text-[10px] text-muted">none</span>
+          <span className="font-mono text-xs text-muted">none</span>
         )}
       </td>
     </tr>
@@ -124,7 +124,7 @@ export function ModelsCatalogue() {
       {/* Collapsed by default. Ninety-eight model rows is a reference lookup,
           not something to read on the way past. */}
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-[15px] font-bold">Models catalogue</h2>
+        <h2 className="text-base font-bold">Models catalogue</h2>
         <LaneBadge lane="aie" />
         <DerivationDrawer title="How the catalogue evidence labels work">
           <p>
@@ -151,7 +151,7 @@ export function ModelsCatalogue() {
           label="Generated"
           tooltip="Dates come from the dataset itself: the capture timestamp on each record and the most recent source date it cites."
         />
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           dataset captured {formatDate(stamp.capturedAt)}; latest source dated{" "}
           {formatDate(stamp.latestSourceDate)}
         </span>
@@ -167,26 +167,26 @@ export function ModelsCatalogue() {
         <button
           type="button"
           onClick={() => setCategory(null)}
-          className={`rounded-full border px-2.5 py-0.5 text-[11px] transition ${
+          className={`rounded-full border px-2.5 py-0.5 text-xs transition ${
             category === null
               ? "border-primary bg-primary/10 font-semibold text-primary"
               : "border-base-300 text-muted hover:border-primary hover:text-primary"
           }`}
         >
-          All <span className="font-mono text-[9px]">{MODEL_COUNT}</span>
+          All <span className="font-mono text-xs">{MODEL_COUNT}</span>
         </button>
         {categories.map((c) => (
           <button
             key={c.id}
             type="button"
             onClick={() => setCategory(category === c.id ? null : c.id)}
-            className={`rounded-full border px-2.5 py-0.5 text-[11px] transition ${
+            className={`rounded-full border px-2.5 py-0.5 text-xs transition ${
               category === c.id
                 ? "border-primary bg-primary/10 font-semibold text-primary"
                 : "border-base-300 text-muted hover:border-primary hover:text-primary"
             }`}
           >
-            {c.label} <span className="font-mono text-[9px]">{c.count}</span>
+            {c.label} <span className="font-mono text-xs">{c.count}</span>
           </button>
         ))}
       </div>
@@ -199,9 +199,9 @@ export function ModelsCatalogue() {
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search model, family or vendor"
           aria-label="Search models"
-          className="w-full max-w-xs rounded border border-base-300 bg-base-100 px-2.5 py-1.5 text-[12px] placeholder:text-muted focus:border-primary focus:outline-none"
+          className="w-full max-w-xs rounded border border-base-300 bg-base-100 px-2.5 py-2 text-sm placeholder:text-muted focus:border-primary focus:outline-none"
         />
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           Showing {filtered.length} of {MODEL_COUNT} models
         </span>
       </div>
@@ -220,7 +220,7 @@ export function ModelsCatalogue() {
                 <tr>
                   {["Model", "Owner", "Channel", "Category", "Availability", "Evidence", "Source"].map(
                     (h) => (
-                      <th key={h} className="px-2 py-2">
+                      <th key={h} className="px-2 py-2.5">
                         <span className="micro-label">{h}</span>
                       </th>
                     )
@@ -236,7 +236,7 @@ export function ModelsCatalogue() {
           </div>
         )}
       </div>
-      <p className="measure mt-1.5 text-[11px] text-muted">
+      <p className="measure mt-1.5 text-xs text-muted">
         Evidence labels are the dataset&apos;s own: seed records await live verification against
         each vendor&apos;s model-list endpoint. Nothing in this catalogue is an invented benchmark,
         price or availability claim.

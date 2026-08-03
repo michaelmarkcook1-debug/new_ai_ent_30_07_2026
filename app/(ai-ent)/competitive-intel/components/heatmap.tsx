@@ -103,7 +103,7 @@ export function CompetitiveHeatmap() {
       aria-label="Peer group anchor"
       value={anchor}
       onChange={(e) => setAnchor(e.target.value)}
-      className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
+      className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm font-semibold"
     >
       {ANCHOR_GROUPS.map((g) => (
         <optgroup key={g.group} label={g.group}>
@@ -135,14 +135,14 @@ export function CompetitiveHeatmap() {
           <LaneBadge lane={source === "live" ? "live" : "mock"} />
         </div>
       </div>
-      <p className="measure mt-1 text-[11px] text-muted">
+      <p className="measure mt-1 text-xs text-muted">
         An intensity grid, not a positioning chart: there are no axes and no
         quadrants. Each cell is the endpoint&apos;s own 0 to 5 score for that
         company on that dimension. The peer group is the one the API returns
         for the selected anchor, not a set chosen here.
       </p>
       {isChannel ? (
-        <p className="mt-2 rounded border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[11.5px] text-warn">
+        <p className="mt-2 rounded border border-warn/40 bg-warn-bg px-2.5 py-2 text-xs text-warn">
           This peer group is the delivery channel: systems integrators that
           implement AI for enterprises, not AI vendors competing on model or
           platform capability. Read it as &quot;who delivers AI well&quot;, not
@@ -152,9 +152,9 @@ export function CompetitiveHeatmap() {
       ) : null}
 
       {state === "loading" ? (
-        <p className="mt-4 text-[12px] text-muted">Loading peer group…</p>
+        <p className="mt-4 text-sm text-muted">Loading peer group…</p>
       ) : state === "empty" ? (
-        <p className="mt-4 rounded-lg border border-dashed border-base-300 px-3 py-6 text-[12px] text-muted">
+        <p className="mt-4 rounded-lg border border-dashed border-base-300 px-3 py-6 text-sm text-muted">
           No competitive analysis is published for this anchor. Awaiting public
           disclosure rather than an estimated grid.
         </p>
@@ -167,7 +167,7 @@ export function CompetitiveHeatmap() {
                 key={id}
                 type="button"
                 onClick={() => setSelected(id)}
-                className={`rounded-full border px-2.5 py-1 text-[11px] font-semibold transition ${
+                className={`rounded-full border px-2.5 py-1 text-xs font-semibold transition ${
                   selected === id
                     ? "border-primary bg-primary text-white"
                     : "border-base-300 bg-base-100 text-base-content/75 hover:border-primary hover:text-primary"
@@ -178,11 +178,11 @@ export function CompetitiveHeatmap() {
             ))}
           </div>
           {meta ? (
-            <p className="mt-1.5 text-[11px] text-muted">{meta.description}</p>
+            <p className="mt-1.5 text-xs text-muted">{meta.description}</p>
           ) : null}
 
           {soloPeerSet ? (
-            <p className="mt-2 rounded border border-base-300 bg-base-200/60 px-2.5 py-1.5 text-[11px] text-muted">
+            <p className="mt-2 rounded border border-base-300 bg-base-200/60 px-2.5 py-2 text-xs text-muted">
               The API returns no peer group for this anchor, so the grid is a
               single company. Pick another anchor to compare a set.
             </p>
@@ -190,16 +190,16 @@ export function CompetitiveHeatmap() {
 
           {/* The grid */}
           <div className="mt-3 overflow-x-auto">
-            <table className="w-full border-separate border-spacing-0.5 text-[12px]">
+            <table className="w-full border-separate border-spacing-0.5 text-sm">
               <thead>
                 <tr>
-                  <th className="min-w-[7rem] py-1 pr-2 text-left align-bottom">
+                  <th className="min-w-[7rem] py-1.5 pr-2 text-left align-bottom">
                     <span className="micro-label">Company</span>
                   </th>
                   {metricNames.map((m) => (
                     <th
                       key={m}
-                      className="px-1 py-1 text-center align-bottom"
+                      className="px-1 py-1.5 text-center align-bottom"
                       title={data?.metricDescriptions?.[m] ?? m}
                     >
                       <span className="micro-label whitespace-normal leading-tight">
@@ -207,7 +207,7 @@ export function CompetitiveHeatmap() {
                       </span>
                     </th>
                   ))}
-                  <th className="px-1 py-1 text-center align-bottom">
+                  <th className="px-1 py-1.5 text-center align-bottom">
                     <span className="micro-label">Avg</span>
                   </th>
                 </tr>
@@ -218,13 +218,13 @@ export function CompetitiveHeatmap() {
                     <td className="whitespace-nowrap py-0.5 pr-2 font-medium">
                       {row.displayName}
                       {row.ticker === anchor ? (
-                        <span className="ml-1 rounded bg-primary px-1 py-0.5 font-mono text-[8px] font-bold uppercase tracking-wider text-white">
+                        <span className="ml-1 rounded bg-primary px-1 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-white">
                           Anchor
                         </span>
                       ) : null}
                       {row.isDisruptor ? (
                         <span
-                          className="ml-1 rounded bg-warn-bg px-1 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wider text-warn"
+                          className="ml-1 rounded bg-warn-bg px-1 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-warn"
                           title="Flagged as a disruptor by the endpoint"
                         >
                           Disruptor
@@ -237,7 +237,7 @@ export function CompetitiveHeatmap() {
                         return (
                           <td key={m} className="p-0">
                             <div
-                              className="flex h-8 min-w-[3rem] items-center justify-center rounded bg-base-200 font-mono text-[10px] text-muted"
+                              className="flex h-8 min-w-[3rem] items-center justify-center rounded bg-base-200 font-mono text-xs text-muted"
                               title={`${row.displayName}: no score published for ${m}`}
                             >
                               &ndash;
@@ -248,7 +248,7 @@ export function CompetitiveHeatmap() {
                       return (
                         <td key={m} className="p-0">
                           <div
-                            className={`flex h-8 min-w-[3rem] items-center justify-center rounded font-mono text-[11px] font-semibold ${cellClass(value)}`}
+                            className={`flex h-8 min-w-[3rem] items-center justify-center rounded font-mono text-xs font-semibold ${cellClass(value)}`}
                             title={`${row.displayName}: ${m} ${value} of 5`}
                           >
                             {value}
@@ -257,7 +257,7 @@ export function CompetitiveHeatmap() {
                       );
                     })}
                     <td className="p-0">
-                      <div className="flex h-8 min-w-[3rem] items-center justify-center rounded border border-base-300 font-mono text-[11px] font-bold">
+                      <div className="flex h-8 min-w-[3rem] items-center justify-center rounded border border-base-300 font-mono text-xs font-bold">
                         {row.categoryAverage ?? "–"}
                       </div>
                     </td>
@@ -270,14 +270,14 @@ export function CompetitiveHeatmap() {
           {/* Legend and methodology */}
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
             <div className="flex items-center gap-1.5">
-              <span className="font-mono text-[10px] text-muted">Weak 0</span>
+              <span className="font-mono text-xs text-muted">Weak 0</span>
               {[0, 1, 2, 3, 4, 5].map((v) => (
                 <span
                   key={v}
                   className={`h-3.5 w-3.5 rounded-sm ${cellClass(v)}`}
                 />
               ))}
-              <span className="font-mono text-[10px] text-muted">5 Strong</span>
+              <span className="font-mono text-xs text-muted">5 Strong</span>
             </div>
             {meta ? (
               <DerivationDrawer title={`How ${meta.label} is derived`}>
@@ -325,9 +325,9 @@ export function CompetitiveHeatmap() {
                 {data.rankings.map((r) => (
                   <li
                     key={r.ticker || r.company}
-                    className="flex items-center gap-2 text-[12px]"
+                    className="flex items-center gap-2 text-sm"
                   >
-                    <span className="w-5 font-mono text-[10px] text-muted">
+                    <span className="w-5 font-mono text-xs text-muted">
                       {r.rank}
                     </span>
                     <span className="min-w-[9rem] font-medium">
@@ -341,11 +341,11 @@ export function CompetitiveHeatmap() {
                         }}
                       />
                     </span>
-                    <span className="w-10 text-right font-mono text-[11px] font-semibold">
+                    <span className="w-10 text-right font-mono text-xs font-semibold">
                       {r.competitiveMomentumIndex ?? "–"}
                     </span>
                     <span
-                      className="w-6 text-right font-mono text-[10px] text-muted"
+                      className="w-6 text-right font-mono text-xs text-muted"
                       title={
                         r.trend
                           ? `Trend ${r.trend > 0 ? "up" : "down"} ${Math.abs(r.trend)}`

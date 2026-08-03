@@ -22,10 +22,10 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <h3 className="text-[15px] font-bold">{title}</h3>
+          <h3 className="text-base font-bold">{title}</h3>
           <LaneBadge lane="aie" />
         </div>
         {drawer}
@@ -36,14 +36,14 @@ function Section({
 }
 
 const TH_CLASS =
-  "px-2 py-1.5 font-mono text-[10px] font-medium uppercase tracking-wider text-muted";
+  "px-2 py-1.5 font-mono text-xs font-medium uppercase tracking-wider text-muted";
 
 // ---------- Facts strip ----------
 
 export function ProfileFacts({ profile }: { profile: VendorProfile }) {
   const { vendor, intel } = profile;
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-center gap-1.5">
         <CategoryChip label={`Layer: ${vendor.layer}`} />
         <CategoryChip label={intel.category} />
@@ -58,7 +58,7 @@ export function ProfileFacts({ profile }: { profile: VendorProfile }) {
         />
         <LaneBadge lane="aie" />
       </div>
-      <p className="measure mt-3 text-[13px] leading-relaxed text-base-content/85">
+      <p className="measure mt-3 text-sm leading-relaxed text-base-content/85">
         <span className="micro-label mr-2">Analyst interpretation</span>
         {intel.analystInterpretation}
       </p>
@@ -76,10 +76,10 @@ export function ScoreBlock({ profile }: { profile: VendorProfile }) {
     <DerivationDrawer title={`How ${intel.name}'s scores are derived`}>
       <p>
         These values are carried unchanged from the AI Enterprise dataset.{" "}
-        <span className="font-mono text-[12px]">overallScore</span> and{" "}
+        <span className="font-mono text-sm">overallScore</span> and{" "}
         is AG&apos;s own overall score for the vendor;
         each pillar row is that pillar&apos;s{" "}
-        <span className="font-mono text-[12px]">capabilityScore</span> with its
+        <span className="font-mono text-sm">capabilityScore</span> with its
         evidence grade (E1 to E5). Values are derived signals, and claims
         below the
         strong-evidence bar are suppressed at source rather than presented as
@@ -93,22 +93,22 @@ export function ScoreBlock({ profile }: { profile: VendorProfile }) {
             <div key={pillar.id}>
               <p className="font-semibold">
                 {pillar.label}{" "}
-                <span className="font-mono text-[11px] text-muted">
+                <span className="font-mono text-xs text-muted">
                   {pillar.id} · {row.evidenceGrade}
                 </span>
               </p>
               {row.strengths.length > 0 ? (
-                <p className="text-[12px]">
+                <p className="text-sm">
                   Strengths: {row.strengths.join(" ")}
                 </p>
               ) : null}
               {row.risks.length > 0 ? (
-                <p className="text-[12px] text-muted">
+                <p className="text-sm text-muted">
                   Risks noted: {row.risks.join("; ")}
                 </p>
               ) : null}
               {row.missingEvidence.length > 0 ? (
-                <p className="text-[12px] text-warn">
+                <p className="text-sm text-warn">
                   Missing evidence: {row.missingEvidence.join(" ")}
                 </p>
               ) : null}
@@ -130,7 +130,7 @@ export function ScoreBlock({ profile }: { profile: VendorProfile }) {
         </div>
         <div>
           <span className="micro-label">marketPosition</span>
-          <div className="mt-1 font-mono text-[12px]">
+          <div className="mt-1 font-mono text-sm">
             {intel.marketPosition}
           </div>
         </div>
@@ -151,16 +151,16 @@ export function ScoreBlock({ profile }: { profile: VendorProfile }) {
                 if (!row) return null;
                 return (
                   <tr key={pillar.id}>
-                    <td className="px-2 py-1.5">
-                      <span className="font-mono text-[11px]">{pillar.id}</span>
-                      <span className="ml-2 text-[11px] text-muted">
+                    <td className="px-2 py-2">
+                      <span className="font-mono text-xs">{pillar.id}</span>
+                      <span className="ml-2 text-xs text-muted">
                         {pillar.label}
                       </span>
                     </td>
-                    <td className="px-2 py-1.5">
+                    <td className="px-2 py-2">
                       <ScorePill score={row.capabilityScore} />
                     </td>
-                    <td className="px-2 py-1.5 font-mono text-[11px]">
+                    <td className="px-2 py-2 font-mono text-xs">
                       {row.evidenceGrade}
                     </td>
                   </tr>
@@ -221,21 +221,21 @@ export function CapabilitiesSection({ profile }: { profile: VendorProfile }) {
             <tbody className="divide-y divide-base-300">
               {capabilities.map((item) => (
                 <tr key={item.row.capabilityId}>
-                  <td className="px-2 py-1.5">
-                    <span className="text-[12px] font-semibold" title={item.description}>
+                  <td className="px-2 py-2">
+                    <span className="text-sm font-semibold" title={item.description}>
                       {item.name}
                     </span>
                   </td>
-                  <td className="px-2 py-1.5">
+                  <td className="px-2 py-2">
                     <ScorePill score={item.row.maturityScore} />
                   </td>
-                  <td className="px-2 py-1.5 font-mono text-[11px]">
+                  <td className="px-2 py-2 font-mono text-xs">
                     {item.row.status}
                   </td>
-                  <td className="px-2 py-1.5 font-mono text-[11px]">
+                  <td className="px-2 py-2 font-mono text-xs">
                     {item.row.evidenceGrade}
                   </td>
-                  <td className="max-w-sm px-2 py-1.5 text-[11px] text-muted">
+                  <td className="max-w-sm px-2 py-2 text-xs text-muted">
                     {item.row.notes}
                   </td>
                 </tr>
@@ -267,7 +267,7 @@ function EvidenceTierChip({ tier }: { tier: string }) {
   };
   return (
     <span
-      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${styles[tier] ?? "bg-base-200 text-muted"}`}
+      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider ${styles[tier] ?? "bg-base-200 text-muted"}`}
       title={
         tier === "high"
           ? "Disclosed in filings, press releases or official model catalogues"
@@ -311,10 +311,10 @@ export function DependencySection({ profile }: { profile: VendorProfile }) {
           {edges.map((item) => (
             <li
               key={item.edge.id}
-              className="rounded-lg border border-base-300 bg-base-100 p-3"
+              className="rounded-lg border border-base-300 bg-base-100 p-4"
             >
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-[12.5px] font-semibold">
+                <span className="text-sm font-semibold">
                   {item.sourceLabel} → {item.targetLabel}
                 </span>
                 <CategoryChip
@@ -325,15 +325,15 @@ export function DependencySection({ profile }: { profile: VendorProfile }) {
                 />
                 <EvidenceTierChip tier={item.edge.confidence} />
                 {item.edge.estimatedValue ? (
-                  <span className="font-mono text-[10px] text-muted">
+                  <span className="font-mono text-xs text-muted">
                     {item.edge.estimatedValue}
                   </span>
                 ) : null}
-                <span className="font-mono text-[10px] text-muted">
+                <span className="font-mono text-xs text-muted">
                   updated {item.edge.dateUpdated}
                 </span>
               </div>
-              <p className="measure mt-1 text-[12px] leading-snug text-base-content/85">
+              <p className="measure mt-1 text-sm leading-snug text-base-content/85">
                 {item.edge.summary}
               </p>
               <div className="mt-1.5 flex flex-wrap items-center gap-2">
@@ -343,7 +343,7 @@ export function DependencySection({ profile }: { profile: VendorProfile }) {
                     href={url}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-mono text-[10px] text-primary hover:underline"
+                    className="font-mono text-xs text-primary hover:underline"
                   >
                     {new URL(url).hostname}
                   </a>
@@ -351,7 +351,7 @@ export function DependencySection({ profile }: { profile: VendorProfile }) {
                 {item.counterpartVendorId ? (
                   <Link
                     href={`/vendor-view/${item.counterpartVendorId}`}
-                    className="ml-auto text-[11px] text-primary hover:underline"
+                    className="ml-auto text-xs text-primary hover:underline"
                   >
                     Counterparty profile
                   </Link>
@@ -416,49 +416,49 @@ export function ModelsSection({ profile }: { profile: VendorProfile }) {
             <tbody className="divide-y divide-base-300">
               {models.map((model) => (
                 <tr key={model.id}>
-                  <td className="px-2 py-1.5">
+                  <td className="px-2 py-2">
                     <span
-                      className="text-[12px] font-semibold"
+                      className="text-sm font-semibold"
                       title={model.uncertaintyNote}
                     >
                       {model.modelName}
                     </span>
                     {model.hostingVendorName ? (
-                      <div className="text-[10px] text-muted">
+                      <div className="text-xs text-muted">
                         hosted by {model.hostingVendorName}
                       </div>
                     ) : null}
                   </td>
-                  <td className="px-2 py-1.5 font-mono text-[11px]">
+                  <td className="px-2 py-2 font-mono text-xs">
                     {model.modelFamily}
                   </td>
-                  <td className="px-2 py-1.5 font-mono text-[11px] text-muted">
+                  <td className="px-2 py-2 font-mono text-xs text-muted">
                     {model.modelCategory}
                   </td>
-                  <td className="px-2 py-1.5 font-mono text-[11px]">
+                  <td className="px-2 py-2 font-mono text-xs">
                     {model.availabilityStage}
                   </td>
-                  <td className="px-2 py-1.5 font-mono text-[11px] text-muted">
+                  <td className="px-2 py-2 font-mono text-xs text-muted">
                     {model.ownershipType}
                   </td>
-                  <td className="px-2 py-1.5">
-                    <span className="font-mono text-[11px]">
+                  <td className="px-2 py-2">
+                    <span className="font-mono text-xs">
                       {model.dataStatus} · {model.evidenceGrade}
                     </span>
                   </td>
-                  <td className="px-2 py-1.5">
+                  <td className="px-2 py-2">
                     {model.sourceUrls[0] ? (
                       <a
                         href={model.sourceUrls[0]}
                         target="_blank"
                         rel="noreferrer"
-                        className="font-mono text-[10px] text-primary hover:underline"
+                        className="font-mono text-xs text-primary hover:underline"
                         title={model.sourceNames[0]}
                       >
                         {new URL(model.sourceUrls[0]).hostname}
                       </a>
                     ) : (
-                      <span className="font-mono text-[10px] text-muted">
+                      <span className="font-mono text-xs text-muted">
                         none cited
                       </span>
                     )}
@@ -491,34 +491,34 @@ function ReputationCard({
   sources: string[];
 }) {
   return (
-    <div className="rounded-lg border border-base-300 bg-base-100 p-3">
+    <div className="rounded-lg border border-base-300 bg-base-100 p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <span className="micro-label">{label}</span>
-        <span className="font-mono text-[9px] uppercase tracking-wider text-muted">
+        <span className="font-mono text-xs uppercase tracking-wider text-muted">
           {dataStatus}
         </span>
       </div>
       <div className="mt-2 flex items-center gap-2">
         <ScorePill score={overall} />
-        <span className="font-mono text-[10px] text-muted">overall</span>
+        <span className="font-mono text-xs text-muted">overall</span>
       </div>
       <dl className="mt-2 space-y-0.5">
         {metrics.map((m) => (
           <div key={m.field} className="flex items-center justify-between">
-            <dt className="font-mono text-[10px] text-muted">{m.field}</dt>
-            <dd className="font-mono text-[11px]">{m.value}</dd>
+            <dt className="font-mono text-xs text-muted">{m.field}</dt>
+            <dd className="font-mono text-xs">{m.value}</dd>
           </div>
         ))}
       </dl>
       {themes.length > 0 ? (
-        <ul className="measure mt-2 list-disc space-y-0.5 pl-4 text-[11px] text-base-content/85">
+        <ul className="measure mt-2 list-disc space-y-0.5 pl-4 text-xs text-base-content/85">
           {themes.map((t) => (
             <li key={t}>{t}</li>
           ))}
         </ul>
       ) : null}
       {sources.length > 0 ? (
-        <p className="mt-2 break-words font-mono text-[9px] text-muted">
+        <p className="mt-2 break-words font-mono text-xs text-muted">
           {sources.join(" · ")}
         </p>
       ) : null}
@@ -655,16 +655,16 @@ export function SourcesSection({ profile }: { profile: VendorProfile }) {
                 href={entry.url}
                 target="_blank"
                 rel="noreferrer"
-                className="text-[12px] font-semibold text-primary hover:underline"
+                className="text-sm font-semibold text-primary hover:underline"
               >
                 {entry.label}
               </a>
               <CategoryChip label={entry.category.replace(/_/g, " ")} />
-              <span className="font-mono text-[10px] text-muted">
+              <span className="font-mono text-xs text-muted">
                 fresh for {entry.freshnessHorizonDays}{" "}
                 {entry.freshnessHorizonDays === 1 ? "day" : "days"}
               </span>
-              <span className="ml-auto break-all font-mono text-[9px] text-muted">
+              <span className="ml-auto break-all font-mono text-xs text-muted">
                 {entry.expectedDomains.join(" · ")}
               </span>
             </li>

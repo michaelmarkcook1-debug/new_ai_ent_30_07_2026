@@ -20,7 +20,7 @@ import type { DataLane } from "@/lib/provenance";
 // this page was 10px, which is not a size to read a brief in.
 export function MetaRow({ meta }: { meta: RecommendationMeta }) {
   return (
-    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[12px] text-muted">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-sm text-muted">
       <span>
         Act within <span className="text-base-content">{meta.horizon}</span>
       </span>
@@ -51,9 +51,9 @@ const TONE_TEXT: Record<ScorecardDimension["tone"], string> = {
 // never a deliberate design choice, and the tone reads just as clearly from a
 // full border sitting alongside the coloured figure inside.
 const TONE_RULE: Record<ScorecardDimension["tone"], string> = {
-  good: "border-good/45",
-  warn: "border-warn/45",
-  bad: "border-error/45",
+  good: "border-good/55",
+  warn: "border-warn/55",
+  bad: "border-error/55",
   neutral: "border-base-300",
 };
 
@@ -79,7 +79,9 @@ export function PulseHero({
   editorialDate: string;
 }) {
   return (
-    <section className="rounded-xl border border-base-300 bg-base-100 p-5 sm:p-7">
+    // The Pulse is the single largest judgement in the product and was
+    // wearing the same grey border as every data panel under it.
+    <section className="finding-strong rounded-xl p-6 sm:p-8">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <MicroLabel
           label="Today's Pulse"
@@ -87,17 +89,17 @@ export function PulseHero({
         />
         <div className="flex items-center gap-2">
           <LaneBadge lane="sample" />
-          <span className="font-mono text-[12px] text-muted">
+          <span className="font-mono text-sm text-muted">
             {editorialDate}
           </span>
         </div>
       </div>
 
-      <h2 className="mt-3 max-w-3xl text-balance text-[22px] font-bold leading-tight sm:text-[28px]">
+      <h2 className="mt-3 max-w-3xl text-balance text-xl font-bold leading-tight sm:text-3xl">
         {headline}
       </h2>
 
-      <p className="mt-3 measure text-[15px] leading-relaxed text-muted">
+      <p className="mt-3 measure text-base leading-relaxed text-muted">
         {judgement}
       </p>
 
@@ -110,10 +112,10 @@ export function PulseHero({
           ] as const
         ).map(([label, body]) => (
           <div key={label}>
-            <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
+            <dt className="font-mono text-sm uppercase tracking-wider text-muted">
               {label}
             </dt>
-            <dd className="measure mt-1 text-[13px] leading-snug">{body}</dd>
+            <dd className="measure mt-1 text-sm leading-snug">{body}</dd>
           </div>
         ))}
       </dl>
@@ -122,7 +124,7 @@ export function PulseHero({
         {/* Purple, not the brand navy. Navy is also links, buttons and the
             active nav item, so the single most important sentence on the page
             was rendered in the same colour as the chrome around it. */}
-        <span className="rounded-full bg-[var(--ag-insight)] px-3 py-1 text-[12px] font-semibold text-white">
+        <span className="rounded-full bg-[var(--ag-insight)] px-3 py-1.5 text-sm font-semibold text-white">
           {action}
         </span>
         <MetaRow meta={meta} />
@@ -161,14 +163,14 @@ export function ExecutiveActions({
           judgement above rather than follow from it. */}
       <ol className="mt-2 grid grid-cols-1 gap-3 @4xl:grid-cols-3">
         {actions.map((a, i) => (
-          <li key={a.action} className="finding rounded-lg p-4">
+          <li key={a.action} className="finding rounded-lg p-5">
             <div className="flex items-baseline gap-2.5">
-              <span className="finding-figure font-mono text-[13px] font-bold">
+              <span className="finding-figure font-mono text-sm font-bold">
                 {i + 1}
               </span>
-              <h3 className="text-[13.5px] font-bold">{a.action}</h3>
+              <h3 className="text-sm font-bold">{a.action}</h3>
             </div>
-            <p className="measure mt-1.5 text-[13px] leading-snug text-muted">
+            <p className="measure mt-1.5 text-sm leading-snug text-muted">
               {a.detail}
             </p>
             <div className="mt-3 border-t border-base-300/70 pt-2">
@@ -197,7 +199,7 @@ export function Scorecard({
         />
         <LaneBadge lane={lane} />
       </div>
-      <p className="mt-1 measure text-[12px] text-muted">
+      <p className="mt-1 measure text-sm text-muted">
         Five readings on the market as a whole, not a vendor ranking. Colour
         carries the verdict: green is favourable, amber is watch, red is act.
       </p>
@@ -206,46 +208,46 @@ export function Scorecard({
         {brief.scorecard.map((d) => (
           <div
             key={d.key}
-            className={`rounded-lg border bg-base-100 p-4 ${TONE_RULE[d.tone]}`}
+            className={`rounded-lg border-2 bg-base-100 p-4 ${TONE_RULE[d.tone]}`}
           >
-            <h3 className="text-[13px] font-bold">{d.name}</h3>
+            <h3 className="text-sm font-bold">{d.name}</h3>
 
             {/* The figure leads. Previously the numbers were buried inside the
                 sentence below, so nothing on the card read as a finding. */}
             <div className="mt-2 flex items-baseline gap-2">
               {d.figure ? (
                 <span
-                  className={`font-mono text-[30px] font-bold leading-none ${TONE_TEXT[d.tone]}`}
+                  className={`font-mono text-3xl font-bold leading-none ${TONE_TEXT[d.tone]}`}
                 >
                   {d.figure}
                 </span>
               ) : null}
               <span
-                className={`text-[15px] font-semibold ${d.figure ? TONE_TEXT[d.tone] : "text-muted"}`}
+                className={`text-base font-semibold ${d.figure ? TONE_TEXT[d.tone] : "text-muted"}`}
               >
                 {d.status}
               </span>
             </div>
             {d.figureCaption ? (
-              <p className="mt-1 text-[12px] text-muted">{d.figureCaption}</p>
+              <p className="mt-1 text-sm text-muted">{d.figureCaption}</p>
             ) : null}
 
-            <p className="measure mt-2.5 text-[13px] leading-snug text-muted">
+            <p className="measure mt-2.5 text-sm leading-snug text-muted">
               {d.meaning}
             </p>
           </div>
         ))}
       </div>
 
-      <p className="measure mt-2 text-[12px] text-muted">
+      <p className="measure mt-2 text-sm text-muted">
         No direction of travel is shown on any reading: the sources publish a
         current value with no prior period, so there is nothing to compare
         against.
       </p>
 
-      <div className="finding-strong mt-3 rounded-lg p-4">
+      <div className="finding-strong mt-3 rounded-lg p-5">
         <MicroLabel label="Overall recommendation" />
-        <p className="mt-1 measure text-[13px] leading-snug">
+        <p className="mt-1 measure text-sm leading-snug">
           {brief.overall.recommendation}
         </p>
         <div className="mt-2.5">

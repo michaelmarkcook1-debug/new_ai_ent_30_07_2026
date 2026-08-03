@@ -560,3 +560,48 @@ Dates are absolute; the build day is 30 July 2026.
     in light and dark. Ecosystem Navigator and Financial Snapshot show none
     because the Analyst Insight is not wired on those two pages, which is a
     pre-existing gap rather than a missed marker.
+27. **AG's type scale and spacing adopted (3 August 2026).** Michael asked for
+    the font, sizing and spacing of the live AnalystGenius portal.
+    The fonts were already right (Inter, Plus Jakarta Sans, JetBrains Mono,
+    confirmed against `app.analystgenius.ai`). Three things were not, and all
+    were measured off the portal rather than inferred from a screenshot:
+    - **Base size.** AG's body computes to 16px on a 24px line. This product
+      sat at 14px, so every inherited string read a step smaller than the same
+      string in AG.
+    - **No type scale at all.** There were 981 font sizes set per element
+      across 24 distinct values from 8px to 38px, so nothing shared a step.
+      They now sit on the named Tailwind classes, which carry AG's exact
+      line-heights because both are Tailwind v4 defaults on a 16px root: 12/16,
+      14/20, 16/24 and 30/36 all match values measured on the portal.
+    - **Micro-labels.** AG renders these at 0.7rem, 0.1em tracking, weight 500.
+      Ours were 10px at 0.08em and unweighted, which is what made the label
+      above every figure read as fine print rather than as structure.
+    Card padding follows AG's `--card-p: 1.5rem`, one step up throughout, with
+    row padding raised to match so the taller type is not cramped by padding
+    that suited 11px text.
+    Verified after the change: zero horizontal overflow on any tab at 1920,
+    1440, 1280, 1024, 768 and 390, and no page scrolls sideways.
+    Not adopted: AG's own arbitrary sizes below 12px. Its stylesheet ships
+    `text-[8px]` and `text-[9px]`, but nothing on a rendered page measured
+    under 11.2px, so the floor here follows what the portal draws rather than
+    what it defines.
+28. **Judgement edge weight, and colour on the ranking cards (3 August 2026).**
+    Michael asked for a heavier purple edge on everything AG concludes, for
+    the Pulse itself to carry it, and for ranking cards to be colour-coded.
+    - `finding` went to 2px at 55 per cent, `finding-strong` to 2.5px at 80.
+      At 1px these read as one more bordered card on a page full of them.
+    - **Today's Pulse was not marked at all.** The largest judgement in the
+      product wore the same grey border as the data panels beneath it. It now
+      carries the strong edge.
+    - **KPI gauge cards** drew their band on the gauge ring and nowhere else,
+      so a card had to be read before it could be sorted. The border carries
+      good, warn or bad as well. Where there is no score there is no colour: an
+      absent reading is not a neutral one. The Pulse scorecard's existing tone
+      borders were raised to the same 2px weight so the two read as one system.
+    - **Reputation trend labels collided.** Each series' name was drawn at its
+      own final y, so vendors finishing within a line-height of each other
+      printed on top of one another: Anthropic over Mistral, Google over
+      Microsoft, IBM over DeepSeek. Positions are now solved for the whole set,
+      sorted by value then pushed apart to a 13px minimum, which keeps the
+      vertical order a reader matches against the lines. Verified: 11 labels,
+      minimum gap 13px, zero collisions.

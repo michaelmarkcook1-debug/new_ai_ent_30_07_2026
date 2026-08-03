@@ -25,13 +25,13 @@ export function LabsSection({ view }: { view: PostureView }) {
   return (
     <section>
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-[15px] font-bold">Private AI labs</h2>
+        <h2 className="text-base font-bold">Private AI labs</h2>
         <LaneBadge lane={view.lane} />
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           {view.assessedCount} assessed
         </span>
       </div>
-      <p className="mt-1 measure text-[12px] text-muted">
+      <p className="mt-1 measure text-sm text-muted">
         These labs sit outside the probed BoardRadar universe, so no cyber
         incident analysis exists for them. What is shown instead is the AI
         Enterprise security capability assessment, which does cover them: a
@@ -42,7 +42,7 @@ export function LabsSection({ view }: { view: PostureView }) {
       </p>
 
       {view.rows.length === 0 ? (
-        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-6 text-[12px] text-muted">
+        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-6 text-sm text-muted">
           No security assessment rows are available for these vendors.
         </p>
       ) : (
@@ -50,12 +50,12 @@ export function LabsSection({ view }: { view: PostureView }) {
           {view.rows.map((lab) => (
             <article
               key={lab.vendorId}
-              className="flex flex-col gap-2.5 rounded-lg border border-base-300 bg-base-100 p-4"
+              className="flex flex-col gap-2.5 rounded-lg border border-base-300 bg-base-100 p-5"
             >
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <div>
-                  <h3 className="text-[13px] font-bold">{lab.vendorName}</h3>
-                  <p className="text-[10.5px] text-muted">{lab.category}</p>
+                  <h3 className="text-sm font-bold">{lab.vendorName}</h3>
+                  <p className="text-xs text-muted">{lab.category}</p>
                 </div>
                 <LaneBadge lane={view.lane} />
               </div>
@@ -63,7 +63,7 @@ export function LabsSection({ view }: { view: PostureView }) {
               <div className="flex flex-wrap items-center gap-2">
                 <ScorePill score={lab.maturity} lockedLabel="Not assessed" />
                 <span
-                  className="font-mono text-[9.5px] uppercase tracking-wider text-muted"
+                  className="font-mono text-xs uppercase tracking-wider text-muted"
                   title={
                     lab.status
                       ? (STATUS_HELP[lab.status] ?? lab.status)
@@ -81,12 +81,12 @@ export function LabsSection({ view }: { view: PostureView }) {
                     label="Evidence"
                     tooltip="The evidence excerpt the assessment records for this row, carried across unchanged."
                   />
-                  <p className="measure mt-0.5 text-[11.5px] leading-relaxed text-muted">
+                  <p className="measure mt-0.5 text-xs leading-relaxed text-muted">
                     {lab.note}
                   </p>
                 </div>
               ) : (
-                <p className="text-[11.5px] text-muted">
+                <p className="text-xs text-muted">
                   No evidence note is recorded against this assessment.
                 </p>
               )}
@@ -101,7 +101,7 @@ export function LabsSection({ view }: { view: PostureView }) {
                     {lab.riskProfile.map((r) => (
                       <li
                         key={r}
-                        className="rounded-full border border-base-300 px-2 py-0.5 text-[10.5px] text-muted"
+                        className="rounded-full border border-base-300 px-2 py-0.5 text-xs text-muted"
                       >
                         {r}
                       </li>
@@ -111,7 +111,7 @@ export function LabsSection({ view }: { view: PostureView }) {
               ) : null}
 
               <div className="mt-auto flex flex-wrap items-center justify-between gap-2 border-t border-base-300 pt-2">
-                <span className="font-mono text-[9px] text-muted">
+                <span className="font-mono text-xs text-muted">
                   {lab.lastVerified
                     ? `verified ${lab.lastVerified.slice(0, 10)}`
                     : "no verification date"}

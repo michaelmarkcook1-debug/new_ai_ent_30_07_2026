@@ -107,9 +107,13 @@ html {
   color: var(--ag-base-content);
 }
 
+/* 16px base, matching the live AG portal, where body computes to 16px on a
+   24px line. This product sat at 14px, which is why every inherited string
+   read a step smaller than the same string does in AG. */
 body {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  font-size: 14px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 h1, h2, h3, h4 {
@@ -117,10 +121,16 @@ h1, h2, h3, h4 {
 }
 
 /* Micro-label: tiny ALL-CAPS JetBrains Mono label above figures */
+/* Metrics read off the live AG portal: 0.7rem on a 1.5 line, 0.1em tracking,
+   weight 500. This was 10px at 0.08em and unweighted, which is what made the
+   labels above every figure read as fine print rather than as structure.
+   The face stays JetBrains Mono per the spec's verified extraction. */
 .micro-label {
   font-family: var(--font-jetbrains), ui-monospace, monospace;
-  font-size: 10px;
-  letter-spacing: 0.08em;
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--ag-muted);
 }
@@ -147,12 +157,15 @@ h1, h2, h3, h4 {
    colour and the card is left alone.
 --------------------------------------------------------------------------- */
 @utility finding {
-  border: 1px solid color-mix(in srgb, var(--ag-insight) 40%, transparent);
+  border: 2px solid color-mix(in srgb, var(--ag-insight) 55%, transparent);
   background-color: color-mix(in srgb, var(--ag-insight) 5%, transparent);
 }
 
+/* The hero judgement on a page: the Pulse, the overall recommendation, the
+   action. A full 2.5px at near-full strength, because at 1px these read as
+   just another bordered card in a page full of bordered cards. */
 @utility finding-strong {
-  border: 1px solid color-mix(in srgb, var(--ag-insight) 55%, transparent);
+  border: 2.5px solid color-mix(in srgb, var(--ag-insight) 80%, transparent);
   background-color: color-mix(in srgb, var(--ag-insight) 8%, transparent);
 }
 

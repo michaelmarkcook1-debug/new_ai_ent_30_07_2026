@@ -31,21 +31,21 @@ export function CompanyHeader({
     <header className="mb-3">
       <div className="flex flex-wrap items-center gap-2">
         <span
-          className={`flex h-8 w-8 items-center justify-center rounded-md font-display text-[13px] font-extrabold ${
+          className={`flex h-8 w-8 items-center justify-center rounded-md font-display text-sm font-extrabold ${
             company.live ? "bg-good-bg text-good" : "bg-warn-bg text-warn"
           }`}
         >
           {title.slice(0, 1).toUpperCase()}
         </span>
         <h1 className="text-2xl font-extrabold tracking-tight">{title}</h1>
-        <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider text-muted">
+        <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-xs uppercase tracking-wider text-muted">
           {company.live ? "BoardRadar coverage" : "Exemplar buyer"}
         </span>
         <LaneBadge lane={company.live ? "live" : "sample"} />
         <CompanySelect selected={company.ticker} />
       </div>
-      <p className="mt-0.5 font-mono text-[11px] text-muted">{today}</p>
-      <p className="mt-1 measure text-[12px] text-muted">
+      <p className="mt-0.5 font-mono text-xs text-muted">{today}</p>
+      <p className="mt-1 measure text-sm text-muted">
         {company.live ? (
           <>
             The tailored view a customer sees of their own organisation, run

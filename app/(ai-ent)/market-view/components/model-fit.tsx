@@ -19,7 +19,8 @@ import {
   SOURCES,
   SPEC_FIELD,
   SPEC_NUMERIC,
-  functionCounts,
+  functionGroups,
+  functionMenu,
   functionsFor,
   industryLabel,
   loadEngine,
@@ -80,8 +81,10 @@ const OUT_MULTIPLE_CHOICES: { value: string; label: string }[] = [
   { value: "6", label: "6× input price" },
 ];
 
+const COMMON_LABEL = "Common to every industry";
+
 const selectClass =
-  "rounded border border-base-300 bg-base-100 px-2 py-1.5 text-[12px] " +
+  "rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm " +
   "disabled:cursor-not-allowed disabled:bg-base-200 disabled:text-muted";
 
 type EvidenceKind = "measured" | "judgement" | "assumption";
@@ -114,7 +117,7 @@ function EvidenceChip({ kind, label }: { kind: EvidenceKind; label?: string }) {
   return (
     <span
       title={EVIDENCE_TITLE[kind]}
-      className={`inline-flex items-center rounded border px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${EVIDENCE_STYLE[kind]}`}
+      className={`inline-flex items-center rounded border px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider ${EVIDENCE_STYLE[kind]}`}
     >
       {label ?? kind}
     </span>
@@ -145,7 +148,7 @@ function Field({
       <span className="micro-label">{label}</span>
       {children}
       {note ? (
-        <span className="font-mono text-[10px] leading-snug text-muted">{note}</span>
+        <span className="font-mono text-xs leading-snug text-muted">{note}</span>
       ) : null}
     </label>
   );
@@ -163,8 +166,8 @@ function Fact({
   return (
     <div className="border-t border-base-300 px-4 py-3 sm:border-l sm:border-t-0">
       <p className="micro-label">{label}</p>
-      <p className="mt-1 text-[15px] font-bold leading-tight">{value}</p>
-      <p className="measure mt-0.5 text-[10.5px] leading-snug text-muted">{detail}</p>
+      <p className="mt-1 text-base font-bold leading-tight">{value}</p>
+      <p className="measure mt-0.5 text-xs leading-snug text-muted">{detail}</p>
     </div>
   );
 }
@@ -179,10 +182,10 @@ function CostBox({
   detail: string;
 }) {
   return (
-    <div className="rounded border border-base-300 bg-base-200/40 p-3">
+    <div className="rounded border border-base-300 bg-base-200/40 p-4">
       <p className="micro-label">{label}</p>
-      <p className="mt-1 font-mono text-[19px] font-bold leading-none">{value}</p>
-      <p className="measure mt-1.5 text-[10.5px] leading-snug text-muted">{detail}</p>
+      <p className="mt-1 font-mono text-xl font-bold leading-none">{value}</p>
+      <p className="measure mt-1.5 text-xs leading-snug text-muted">{detail}</p>
     </div>
   );
 }
@@ -221,7 +224,7 @@ function WaitingForCompute({
   return (
     <div
       aria-live="polite"
-      className="mt-4 select-none rounded-lg border border-dashed border-base-300 bg-base-200/40 p-4 opacity-60"
+      className="mt-4 select-none rounded-lg border border-dashed border-base-300 bg-base-200/40 p-5 opacity-60"
     >
       <div className="flex flex-wrap items-center gap-2">
         <span className="h-5 w-40 rounded bg-base-300/70" aria-hidden />
@@ -231,18 +234,18 @@ function WaitingForCompute({
       <div className="mt-1.5 h-3 w-1/2 rounded bg-base-300/50" aria-hidden />
       <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
         {Array.from({ length: 5 }, (_, i) => (
-          <div key={i} className="rounded border border-base-300/70 p-3">
+          <div key={i} className="rounded border border-base-300/70 p-4">
             <div className="h-2.5 w-2/3 rounded bg-base-300/60" aria-hidden />
             <div className="mt-2 h-4 w-1/2 rounded bg-base-300/70" aria-hidden />
           </div>
         ))}
       </div>
-      <p className="mt-4 text-[12.5px] font-medium text-base-content/70">
+      <p className="mt-4 text-sm font-medium text-base-content/70">
         {outstanding
           ? `Choose ${outstanding === "Industry" ? "an" : "a"} ${outstanding.toLowerCase()} to continue.`
           : "Press Compute to work out the answer."}
       </p>
-      <p className="measure mt-1 text-[11px] text-muted">
+      <p className="measure mt-1 text-xs text-muted">
         Nothing is calculated until all three are chosen. The engine is not
         guessing at a role while you are still picking one.
       </p>
@@ -350,10 +353,21 @@ export function ModelFit() {
     () => (industry && fn ? rolesFor(industry, fn) : []),
     [industry, fn]
   );
-  const counts = useMemo(
-    () => (industry ? functionCounts(industry) : { specific: 0, common: 0 }),
+  const fnGroups = useMemo(
+    () => (industry ? functionGroups(industry) : { specific: [], common: [] }),
     [industry]
   );
+  const fnMenu = useMemo(() => functionMenu(industry), [industry]);
+  const counts = {
+    specific: fnGroups.specific.length,
+    common: fnGroups.common.length,
+  };
+  // Under cross-industry there is no "specific to" anything: everything in the
+  // menu is the common set, and "Specific to Cross-industry (all sectors)"
+  // would be a heading that argues with itself. One phrase for the idea, shared
+  // with the Role menu, rather than two that mean the same thing.
+  const specificLabel =
+    industry === CROSS_INDUSTRY ? COMMON_LABEL : `Specific to ${industry}`;
   const roleSplit = useMemo(
     () => ({
       specific: roles.filter((r) => !r.crossIndustry).length,
@@ -531,7 +545,7 @@ export function ModelFit() {
   }, [excludeCn, engine]);
 
   return (
-    <section className="rounded-xl border border-primary/35 bg-primary/[0.04] p-4 sm:p-5">
+    <section className="rounded-xl border border-primary/35 bg-primary/[0.04] p-5 sm:p-6">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div className="flex items-center gap-2">
           <MicroLabel
@@ -540,7 +554,7 @@ export function ModelFit() {
           />
           <LaneBadge lane="derived" />
         </div>
-        <p className="font-mono text-[10px] text-muted">
+        <p className="font-mono text-xs text-muted">
           258 roles · 29 industries · {MODELS.length} models
         </p>
       </div>
@@ -561,9 +575,11 @@ export function ModelFit() {
             className={selectClass}
           >
             <option value="">Choose an industry…</option>
-            {/* Cross-industry is not a sector, it is the 99 roles every sector
-                has, so it sits above the grouping rather than inside it. */}
-            <option value={CROSS_INDUSTRY}>{industryLabel(CROSS_INDUSTRY)}</option>
+            {/* Cross-industry is not one of the nine sectors, so it gets a
+                heading of its own rather than floating above them unlabelled. */}
+            <optgroup label="Every sector">
+              <option value={CROSS_INDUSTRY}>{industryLabel(CROSS_INDUSTRY)}</option>
+            </optgroup>
             {INDUSTRY_GROUPS.map((g) => (
               <optgroup key={g.macro} label={g.macro}>
                 {g.industries.map((i) => (
@@ -596,10 +612,17 @@ export function ModelFit() {
             <option value="">
               {industry ? "Choose a function…" : "Choose an industry first"}
             </option>
-            {functions.map((f) => (
-              <option key={f} value={f}>
-                {f}
-              </option>
+            {/* Grouped as the industries are: the industry's own functions
+                under their own heading, then the common eighteen under macro
+                headings. Twenty-three in one list hid both distinctions. */}
+            {fnMenu.map((g) => (
+              <optgroup key={g.macro} label={g.macro}>
+                {g.functions.map((f) => (
+                  <option key={f} value={f}>
+                    {f}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </Field>
@@ -629,7 +652,7 @@ export function ModelFit() {
             {/* Specialist roles and common ones are two different claims, so
                 they sit in labelled groups rather than one undifferentiated list. */}
             {roleSplit.specific > 0 ? (
-              <optgroup label={`Specific to ${industryLabel(industry)}`}>
+              <optgroup label={specificLabel}>
                 {roles
                   .filter((r) => !r.crossIndustry)
                   .map((r) => (
@@ -640,7 +663,7 @@ export function ModelFit() {
               </optgroup>
             ) : null}
             {roleSplit.common > 0 ? (
-              <optgroup label="Common to every industry">
+              <optgroup label={COMMON_LABEL}>
                 {roles
                   .filter((r) => r.crossIndustry)
                   .map((r) => (
@@ -664,23 +687,23 @@ export function ModelFit() {
             type="button"
             onClick={compute}
             disabled={!ready}
-            className="rounded bg-primary px-4 py-1.5 text-[13px] font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+            className="rounded bg-primary px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
           >
             Compute
           </button>
           {needsCompute ? (
-            <span className="text-[11.5px] text-warn">
+            <span className="text-xs text-warn">
               Ready. Press Compute to work it out.
             </span>
           ) : !ready ? (
-            <span className="text-[11.5px] text-muted">
+            <span className="text-xs text-muted">
               Choose all three to enable.
             </span>
           ) : null}
         </div>
       </div>
       {industry === CROSS_INDUSTRY ? (
-        <p className="measure mt-2 text-[11px] text-muted">
+        <p className="measure mt-2 text-xs text-muted">
           Cross-industry roles carry one profile for every sector: a Financial Controller in
           banking and in retail return identical requirements. That is wrong, and the
           specification says so; it is not yet fixable from evidence, so it is labelled rather
@@ -689,9 +712,9 @@ export function ModelFit() {
       ) : null}
 
       {/* The catalogue filter, with its own consequence beside it. */}
-      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 rounded border border-base-300 bg-base-100 px-3 py-2">
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 rounded border border-base-300 bg-base-100 px-3 py-2.5">
         <span className="micro-label">Catalogue</span>
-        <label className="inline-flex items-center gap-2 text-[12px]">
+        <label className="inline-flex items-center gap-2 text-sm">
           <input
             type="checkbox"
             checked={excludeCn}
@@ -700,7 +723,7 @@ export function ModelFit() {
           />
           Exclude China-headquartered vendors
         </label>
-        <span className="font-mono text-[10.5px] text-warn">
+        <span className="font-mono text-xs text-warn">
           {withheldByCn
             ? `${withheldByCn.gone} of ${withheldByCn.total} models withheld · ${withheldByCn.frontierGone} of the ${withheldByCn.frontierTotal} frontier models are among them`
             : `all ${MODELS.length} models in play`}
@@ -710,11 +733,11 @@ export function ModelFit() {
       {!role || !answer || !detail ? (
         <WaitingForCompute industry={industry} fn={fn} roleId={roleId} />
       ) : answer.outcome === "cannot assess" ? (
-        <div className="mt-4 rounded border border-error/40 bg-bad-bg p-4">
-          <p className="text-[13px] font-semibold text-error">
+        <div className="mt-4 rounded border border-error/40 bg-bad-bg p-5">
+          <p className="text-sm font-semibold text-error">
             This role cannot be assessed: {answer.reason}
           </p>
-          <p className="measure mt-1 text-[11.5px] text-muted">
+          <p className="measure mt-1 text-xs text-muted">
             The engine refuses bad input rather than guessing, because a silently wrong
             recommendation is worse than a visible refusal.
           </p>
@@ -723,15 +746,15 @@ export function ModelFit() {
         <>
           {/* Headline */}
           <div className="mt-4 rounded-lg border border-base-300 bg-base-100">
-            <div className="p-4">
+            <div className="p-5">
               <div className="flex flex-wrap items-center gap-2">
-                <h2 className="text-[19px] font-extrabold leading-tight">{role.name}</h2>
+                <h2 className="text-xl font-extrabold leading-tight">{role.name}</h2>
                 <span
-                  className={`inline-flex rounded border px-2 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${OUTCOME_STYLE[answer.outcome]}`}
+                  className={`inline-flex rounded border px-2 py-0.5 font-mono text-xs font-bold uppercase tracking-wider ${OUTCOME_STYLE[answer.outcome]}`}
                 >
                   {OUTCOME_LABEL[answer.outcome]}
                 </span>
-                <span className="font-mono text-[10px] text-muted">
+                <span className="font-mono text-xs text-muted">
                   {role.role_id} · {role.function}
                   {role.seniority ? ` · ${role.seniority}` : ""}
                   {role.authority ? ` · ${role.authority} authority` : ""}
@@ -755,19 +778,19 @@ export function ModelFit() {
                             than the card around it. Purple, not the brand
                             navy: navy is also every link and button on the
                             page. */}
-                        <span className="finding-figure mt-0.5 block break-words text-[32px] font-extrabold leading-[1.15] tracking-tight sm:text-[38px]">
+                        <span className="finding-figure mt-0.5 block break-words text-3xl font-extrabold leading-[1.15] tracking-tight sm:text-4xl">
                           {h.model}
                         </span>
                       </p>
                     ) : null}
-                    <p className="mt-2 max-w-[62ch] text-[14px] leading-relaxed">
+                    <p className="mt-2 max-w-[62ch] text-base leading-relaxed">
                       {h.sentence}
                     </p>
                   </>
                 );
               })()}
               {researched ? (
-                <div className="mt-3 rounded border border-base-300 bg-base-200/40 px-3 py-2">
+                <div className="mt-3 rounded border border-base-300 bg-base-200/40 px-3 py-2.5">
                   <div className="flex flex-wrap items-center gap-2">
                     <MicroLabel
                       label="What this profile rests on"
@@ -780,14 +803,14 @@ export function ModelFit() {
                             <span
                               key={k}
                               title={EVIDENCE_CLASS_LABEL[k]}
-                              className="inline-flex rounded bg-base-200 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted"
+                              className="inline-flex rounded bg-base-200 px-1.5 py-0.5 font-mono text-xs uppercase tracking-wider text-muted"
                             >
                               {evidenceMix[k]} × class {k}
                             </span>
                           ))
                       : null}
                   </div>
-                  <p className="measure mt-1.5 text-[11.5px] leading-relaxed">{role.note}</p>
+                  <p className="measure mt-1.5 text-xs leading-relaxed">{role.note}</p>
                   <ul className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
                     {researched.sources!.slice(0, 4).map((u) => (
                       <li key={u}>
@@ -795,7 +818,7 @@ export function ModelFit() {
                           href={u}
                           target="_blank"
                           rel="noreferrer"
-                          className="font-mono text-[10px] text-primary hover:underline"
+                          className="font-mono text-xs text-primary hover:underline"
                         >
                           {(() => {
                             try {
@@ -808,7 +831,7 @@ export function ModelFit() {
                       </li>
                     ))}
                   </ul>
-                  <p className="measure mt-1.5 text-[10.5px] text-muted">
+                  <p className="measure mt-1.5 text-xs text-muted">
                     The 258 roles that shipped with the package cite no sources: they were
                     produced by a research pipeline whose evidence was not retained. These
                     were researched for this build and the sources kept, which is why they can
@@ -818,7 +841,7 @@ export function ModelFit() {
                 </div>
               ) : null}
               {mandatoryCount === 0 && (answer.outcome === "supported" || answer.outcome === "qualified") ? (
-                <p className="mt-3 border-l-[3px] border-warn bg-warn-bg/40 px-3 py-2 text-[12.5px] leading-relaxed">
+                <p className="mt-3 border-l-[3px] border-warn bg-warn-bg/40 px-3 py-2.5 text-sm leading-relaxed">
                   <b>Read this one carefully.</b> No requirement in this profile is Mandatory,
                   so nothing could eliminate anything and the answer is simply the cheapest
                   model in the catalogue. Desirable requirements rank the survivors, they never
@@ -826,7 +849,7 @@ export function ModelFit() {
                 </p>
               ) : null}
               {answer.outcome === "best available" ? (
-                <p className="mt-3 border-l-[3px] border-warn bg-warn-bg/40 px-3 py-2 text-[12.5px] leading-relaxed">
+                <p className="mt-3 border-l-[3px] border-warn bg-warn-bg/40 px-3 py-2.5 text-sm leading-relaxed">
                   <b>Executive allocation.</b> This role returned no qualifying model, so the
                   highest-capability option has been assigned. It does not meet{" "}
                   {answer.unmet_requirements?.length ?? 0} requirement
@@ -836,7 +859,7 @@ export function ModelFit() {
                 </p>
               ) : null}
               {answer.outcome === "partially supported" ? (
-                <p className="mt-3 border-l-[3px] border-warn bg-warn-bg/40 px-3 py-2 text-[12.5px] leading-relaxed">
+                <p className="mt-3 border-l-[3px] border-warn bg-warn-bg/40 px-3 py-2.5 text-sm leading-relaxed">
                   <b>Counts of duties, not proportions of a job.</b> Duties differ in time and
                   importance and this dataset does not weight them. The blocked duties are the
                   more interesting half of the answer: they are where human judgement is
@@ -844,7 +867,7 @@ export function ModelFit() {
                 </p>
               ) : null}
               {answer.warnings && answer.warnings.length > 0 ? (
-                <ul className="measure mt-3 list-disc space-y-0.5 pl-4 text-[11px] text-warn">
+                <ul className="measure mt-3 list-disc space-y-0.5 pl-4 text-xs text-warn">
                   {answer.warnings.map((w) => (
                     <li key={w}>{w}</li>
                   ))}
@@ -908,7 +931,7 @@ export function ModelFit() {
           </div>
 
           {/* Cost */}
-          <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-4">
+          <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-5">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <MicroLabel
                 label="What this costs"
@@ -1027,7 +1050,7 @@ export function ModelFit() {
                   />
                 </Field>
               </div>
-              <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-[12px]">
+              <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm">
                 <label className="inline-flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -1067,14 +1090,14 @@ export function ModelFit() {
                     key={v}
                     type="button"
                     onClick={() => setExcluded(excluded.filter((x) => x !== v))}
-                    className="inline-flex items-center gap-1 rounded-full border border-base-300 px-2 py-0.5 text-[11px] hover:border-error hover:text-error"
+                    className="inline-flex items-center gap-1 rounded-full border border-base-300 px-2 py-0.5 text-xs hover:border-error hover:text-error"
                   >
                     {v} ✕
                   </button>
                 ))}
               </div>
               {/* Every assumption in force right now, rewritten as they move. */}
-              <p className="measure mt-3 text-[11px] leading-relaxed text-warn">
+              <p className="measure mt-3 text-xs leading-relaxed text-warn">
                 {assumptionNarration({
                   role,
                   seats,
@@ -1086,7 +1109,7 @@ export function ModelFit() {
                   hasPick: Boolean(pick),
                 }).join(" ")}
               </p>
-              <p className="measure mt-2 text-[10.5px] text-muted">
+              <p className="measure mt-2 text-xs text-muted">
                 Buyer constraints eliminate first and are certain. Everything below them is
                 judgement. The calibration offset moves every capability threshold together as a
                 percentage of that axis&apos;s own range, so it means the same on an index
@@ -1099,7 +1122,7 @@ export function ModelFit() {
           </div>
 
           {/* Price against capability */}
-          <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-4">
+          <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-5">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <MicroLabel
                 label="Price against capability"
@@ -1121,13 +1144,13 @@ export function ModelFit() {
 
           {/* Duty decomposition, only when the role failed */}
           {"duties" in detail && detail.duties ? (
-            <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-4">
+            <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-5">
               <div className="flex flex-wrap items-start justify-between gap-2">
                 <MicroLabel
                   label="Duty breakdown"
                   tooltip="Decomposition runs only when the role-level answer fails. Each duty is scored independently and run through the full join."
                 />
-                <span className="font-mono text-[10px] text-muted">
+                <span className="font-mono text-xs text-muted">
                   {answer.duties_supported} of {answer.duties_total} duties supported
                 </span>
               </div>
@@ -1135,21 +1158,21 @@ export function ModelFit() {
                 {detail.duties.map((d) => (
                   <li
                     key={d.duty}
-                    className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 border-b border-base-300/60 pb-1.5 text-[12.5px]"
+                    className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5 border-b border-base-300/60 pb-1.5 text-sm"
                   >
                     <span
-                      className={`inline-flex w-[86px] shrink-0 rounded px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider ${d.supported ? "bg-good-bg text-good" : "bg-bad-bg text-error"}`}
+                      className={`inline-flex w-[86px] shrink-0 rounded px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider ${d.supported ? "bg-good-bg text-good" : "bg-bad-bg text-error"}`}
                     >
                       {d.supported ? "supported" : "blocked"}
                     </span>
                     <span className="flex-1">{d.duty}</span>
-                    <span className="font-mono text-[10.5px] text-muted">
+                    <span className="font-mono text-xs text-muted">
                       {d.supported ? d.model : `blocked by ${d.blocked_by.join(", ")}`}
                     </span>
                   </li>
                 ))}
               </ul>
-              <p className="measure mt-2 text-[11px] text-muted">
+              <p className="measure mt-2 text-xs text-muted">
                 Supported means a model meets the stated requirements for that duty, with a
                 human still accountable for the output. It does not mean the duty should be
                 removed from a job.
@@ -1158,7 +1181,7 @@ export function ModelFit() {
           ) : null}
 
           {/* Requirements */}
-          <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-4">
+          <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-5">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <MicroLabel
                 label="What this role requires"
@@ -1170,16 +1193,16 @@ export function ModelFit() {
               </div>
             </div>
             <div className="mt-3 overflow-x-auto">
-              <table className="w-full min-w-[760px] text-left text-[11.5px]">
+              <table className="w-full min-w-[760px] text-left text-xs">
                 <thead>
-                  <tr className="border-b border-base-300 font-mono text-[9px] uppercase tracking-wider text-muted">
-                    <th className="py-1.5 pr-2 font-medium">Requirement</th>
-                    <th className="px-1 py-1.5 text-right font-medium">Level</th>
-                    <th className="px-2 py-1.5 font-medium">Critical</th>
-                    <th className="px-2 py-1.5 font-medium">Evidence</th>
-                    <th className="px-2 py-1.5 font-medium">Benchmark axis</th>
-                    <th className="px-2 py-1.5 font-medium">Applied</th>
-                    <th className="py-1.5 pl-2 font-medium">Verdict</th>
+                  <tr className="border-b border-base-300 font-mono text-xs uppercase tracking-wider text-muted">
+                    <th className="py-2 pr-2 font-medium">Requirement</th>
+                    <th className="px-1 py-2 text-right font-medium">Level</th>
+                    <th className="px-2 py-2 font-medium">Critical</th>
+                    <th className="px-2 py-2 font-medium">Evidence</th>
+                    <th className="px-2 py-2 font-medium">Benchmark axis</th>
+                    <th className="px-2 py-2 font-medium">Applied</th>
+                    <th className="py-2 pl-2 font-medium">Verdict</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -1193,9 +1216,12 @@ export function ModelFit() {
                     // Specifications are never band-shifted, so the stated level
                     // is the level applied; capabilities take theirs from the
                     // engine, overflow and ceiling included.
+                    // Same rule as the verdict: the shift raises the bar only
+                    // where the requirement can eliminate.
+                    const rowShift = meta.critical === "Mandatory" ? detail.shift : 0;
                     const appliedCapability = isSpec
                       ? null
-                      : engine.appliedThreshold(cap, meta.score, detail.shift);
+                      : engine.appliedThreshold(cap, meta.score, rowShift);
                     const level = appliedCapability?.level ?? meta.score;
                     const shifted = !isSpec && level !== meta.score && !unassessed;
                     const applied = isSpec
@@ -1227,27 +1253,27 @@ export function ModelFit() {
                               : "desirable shortfall";
                     return (
                       <tr key={cap} className="border-b border-base-300/60 align-top">
-                        <td className="py-1.5 pr-2">
+                        <td className="py-2 pr-2">
                           <span
                             className="font-medium"
                             title={rubric ? rubric.measures : undefined}
                           >
                             {CAPABILITY_NAMES[cap]}
                           </span>
-                          <span className="ml-1.5 font-mono text-[9px] text-muted">{cap}</span>
+                          <span className="ml-1.5 font-mono text-xs text-muted">{cap}</span>
                           {rubric ? (
-                            <p className="mt-0.5 max-w-[34ch] text-[10.5px] leading-snug text-muted">
+                            <p className="mt-0.5 max-w-[34ch] text-xs leading-snug text-muted">
                               {rubric.bands[String(meta.score)]}
                             </p>
                           ) : null}
                         </td>
-                        <td className="px-1 py-1.5 text-right font-mono text-[11px]">
+                        <td className="px-1 py-2 text-right font-mono text-xs">
                           {meta.score}
                           {shifted ? (
-                            <span className="block text-[9px] text-warn">→ {level}</span>
+                            <span className="block text-xs text-warn">→ {level}</span>
                           ) : null}
                         </td>
-                        <td className="px-2 py-1.5">
+                        <td className="px-2 py-2">
                           <span
                             className={
                               meta.critical === "Mandatory"
@@ -1259,7 +1285,7 @@ export function ModelFit() {
                           </span>
                         </td>
                         <td
-                          className="px-2 py-1.5 font-mono text-[10px]"
+                          className="px-2 py-2 font-mono text-xs"
                           title={EVIDENCE_CLASS_LABEL[meta.evidence_class ?? "E"]}
                         >
                           <span
@@ -1274,31 +1300,31 @@ export function ModelFit() {
                             Class {meta.evidence_class}
                           </span>
                         </td>
-                        <td className="px-2 py-1.5 text-[10.5px] text-muted">
+                        <td className="px-2 py-2 text-xs text-muted">
                           {axis?.axis ?? "None found"}
                           {axis?.status ? (
                             <span
-                              className={`ml-1 font-mono text-[9px] uppercase ${axis.status === "live" ? "text-good" : "text-warn"}`}
+                              className={`ml-1 font-mono text-xs uppercase ${axis.status === "live" ? "text-good" : "text-warn"}`}
                             >
                               {axis.status === "live" ? "ingested" : axis.status}
                             </span>
                           ) : null}
                         </td>
-                        <td className="px-2 py-1.5 font-mono text-[10.5px]">
+                        <td className="px-2 py-2 font-mono text-xs">
                           {applied}
                           {/* Which requirement did the work is a different fact
                               from whether the pick passed it, so it sits beside
                               the threshold rather than replacing the verdict. */}
                           {decided ? (
                             <span
-                              className="mt-0.5 block text-[9px] uppercase tracking-wider text-warn"
+                              className="mt-0.5 block text-xs uppercase tracking-wider text-warn"
                               title="This requirement eliminated models from the catalogue."
                             >
                               eliminated {eliminatedBy.get(cap) ?? 0} models
                             </span>
                           ) : null}
                         </td>
-                        <td className="py-1.5 pl-2">
+                        <td className="py-2 pl-2">
                           <span
                             title={
                               verdict === "not checked"
@@ -1307,7 +1333,7 @@ export function ModelFit() {
                                   ? "The role asks for nothing here, so there is no test to pass. Counting this as cleared would inflate the tally."
                                   : undefined
                             }
-                            className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider ${
+                            className={`inline-flex rounded px-1.5 py-0.5 font-mono text-xs uppercase tracking-wider ${
                               verdict === "not checked" || verdict === "not reached"
                                 ? "bg-base-200 text-muted"
                                 : verdict === "not required"
@@ -1329,7 +1355,7 @@ export function ModelFit() {
               </table>
             </div>
             {detail.unassessed.length ? (
-              <p className="mt-2 rounded border border-warn/40 bg-warn-bg/40 px-3 py-2 text-[11.5px] leading-relaxed">
+              <p className="mt-2 rounded border border-warn/40 bg-warn-bg/40 px-3 py-2.5 text-xs leading-relaxed">
                 <b>{detail.unassessed.length} of {Object.keys(role.profile).length} requirements
                 cannot be assessed.</b>{" "}
                 Each has a named benchmark axis with no ingested data, or no axis anywhere. They
@@ -1341,18 +1367,18 @@ export function ModelFit() {
           </div>
 
           {/* Eliminations */}
-          <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-4">
+          <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-5">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <MicroLabel
                 label="Why not the others"
                 tooltip="Every elimination, with the requirement that caused it and the threshold actually applied."
               />
-              <span className="font-mono text-[10px] text-muted">
+              <span className="font-mono text-xs text-muted">
                 {detail.eliminated.length} eliminated · {detail.live.length} survive
               </span>
             </div>
             {eliminationsByRequirement.length === 0 ? (
-              <p className="measure mt-2 text-[12px] text-muted">
+              <p className="measure mt-2 text-sm text-muted">
                 Nothing was eliminated: every model in the catalogue meets this role&apos;s
                 mandatory requirements at the thresholds applied.
               </p>
@@ -1363,24 +1389,24 @@ export function ModelFit() {
                   : eliminationsByRequirement.slice(0, 4)
                 ).map(({ requirement, list }) => (
                   <li key={requirement} className="border-b border-base-300/60 pb-2">
-                    <p className="text-[12.5px] font-semibold">
+                    <p className="text-sm font-semibold">
                       {CAPABILITY_NAMES[requirement] ??
                         (requirement === "buyer constraint"
                           ? "Buyer constraint"
                           : requirement)}
-                      <span className="ml-2 font-mono text-[10px] font-normal text-muted">
+                      <span className="ml-2 font-mono text-xs font-normal text-muted">
                         {list.length} model{list.length === 1 ? "" : "s"} eliminated
                         {list[0].kind ? ` · ${list[0].kind}` : ""}
                       </span>
                     </p>
                     <ul className="mt-1 space-y-0.5">
                       {list.slice(0, 3).map((e) => (
-                        <li key={e.model} className="text-[11px] text-muted">
+                        <li key={e.model} className="text-xs text-muted">
                           <span className="font-mono">{shortName(e.model)}</span> — {e.reason}
                         </li>
                       ))}
                       {list.length > 3 ? (
-                        <li className="text-[11px] text-muted">
+                        <li className="text-xs text-muted">
                           and {list.length - 3} more on the same requirement
                         </li>
                       ) : null}
@@ -1393,7 +1419,7 @@ export function ModelFit() {
               <button
                 type="button"
                 onClick={() => setShowAllEliminations((v) => !v)}
-                className="mt-2 text-[11px] text-primary hover:underline"
+                className="mt-2 text-xs text-primary hover:underline"
               >
                 {showAllEliminations
                   ? "Show fewer requirements"
@@ -1403,7 +1429,7 @@ export function ModelFit() {
           </div>
 
           {/* The disclosure that makes the rest legitimate */}
-          <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-4">
+          <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-5">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <MicroLabel
                 label="What is measured and what is not"
@@ -1412,7 +1438,7 @@ export function ModelFit() {
               <LaneBadge lane="derived" />
             </div>
             <div className="mt-3 overflow-x-auto">
-              <table className="w-full min-w-[520px] text-left text-[11.5px]">
+              <table className="w-full min-w-[520px] text-left text-xs">
                 <caption className="sr-only">
                   Which parts of this recommendation are measured, which are authored
                   judgement, and which are stated assumptions
@@ -1436,19 +1462,19 @@ export function ModelFit() {
                     ] as [string, EvidenceKind, string][]
                   ).map(([what, kind, note]) => (
                     <tr key={what} className="border-b border-base-300/60 align-top">
-                      <th scope="row" className="py-1.5 pr-3 text-left font-medium">
+                      <th scope="row" className="py-2 pr-3 text-left font-medium">
                         {what}
                       </th>
-                      <td className="py-1.5 pr-3">
+                      <td className="py-2 pr-3">
                         <EvidenceChip kind={kind} />
                       </td>
-                      <td className="py-1.5 text-[10.5px] text-muted">{note}</td>
+                      <td className="py-2 text-xs text-muted">{note}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="measure mt-3 text-[11.5px] leading-relaxed text-muted">
+            <p className="measure mt-3 text-xs leading-relaxed text-muted">
               {SOURCES.note} Twenty roles in the library return no qualifying model. That is a
               finding about the market, not a fault: no model combines frontier capability with
               top-tier factual reliability.
@@ -1602,9 +1628,20 @@ function checkRequirement(
   engine: ReturnType<typeof loadEngine>,
   model: ModelRecord,
   cap: string,
-  meta: { score: number },
+  meta: { score: number; critical?: string },
   shift: number
 ): Check {
+  // The band shift is a headroom policy for requirements that can eliminate:
+  // a tier-90 role should not sit exactly on the bar of something that gates
+  // the work. A Desirable requirement gates nothing by definition, so raising
+  // its bar reports a model as falling short of a level the role never asked
+  // for. A role wanting general intelligence at band 3, served by a model that
+  // clears band 3, is not short of anything.
+  //
+  // The reference does shift desirable requirements when counting shortfalls
+  // for the ranking, and that is left alone so parity holds. This is what the
+  // buyer is told, and it answers the question they actually asked.
+  const effectiveShift = meta.critical === "Mandatory" ? shift : 0;
   if (cap in MODALITY) {
     if (meta.score <= 10) return "not-required";
     const have = model.input_modalities;
@@ -1629,7 +1666,7 @@ function checkRequirement(
     if (have === null || have === undefined) return "unchecked";
     return need.every((x) => have.includes(x)) ? "cleared" : "short";
   }
-  const applied = engine.appliedThreshold(cap, meta.score, shift);
+  const applied = engine.appliedThreshold(cap, meta.score, effectiveShift);
   const field = engine.cal(cap)?.model_field;
   if (!applied || !field) return "unchecked";
   if (applied.value <= 0) return "not-required";

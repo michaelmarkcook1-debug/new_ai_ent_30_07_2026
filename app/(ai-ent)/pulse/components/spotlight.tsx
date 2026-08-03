@@ -19,17 +19,17 @@ export function SpotlightCard({
   spotlight: Spotlight;
 }) {
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <MicroLabel
             label="Tracking"
             tooltip="Narrative versus reality: how the market conversation about this vendor compares with evidenced signals."
           />
-          <h3 className="mt-0.5 text-[15px] font-bold">{vendorName}</h3>
+          <h3 className="mt-0.5 text-base font-bold">{vendorName}</h3>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[12px] text-muted">
+          <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-sm text-muted">
             {spotlight.divergence}
           </span>
           <LaneBadge lane="sample" />
@@ -38,7 +38,7 @@ export function SpotlightCard({
 
       <div className="mt-3 flex items-baseline gap-2">
         <span className="font-mono text-4xl font-bold">{spotlight.headlineScore}</span>
-        <span className="font-mono text-[12px] text-muted">/ 100 composite</span>
+        <span className="font-mono text-sm text-muted">/ 100 composite</span>
       </div>
 
       <div className="mt-4 space-y-3">
@@ -47,9 +47,9 @@ export function SpotlightCard({
           return (
             <div key={d.name}>
               <div className="flex items-center justify-between">
-                <span className="text-[12px] font-semibold">{d.name}</span>
+                <span className="text-sm font-semibold">{d.name}</span>
                 <span
-                  className={`font-mono text-[12px] ${delta > 0 ? "text-warn" : delta < 0 ? "text-good" : "text-muted"}`}
+                  className={`font-mono text-sm ${delta > 0 ? "text-warn" : delta < 0 ? "text-good" : "text-muted"}`}
                   title="Narrative score minus reality score"
                 >
                   {delta > 0 ? "+" : ""}
@@ -58,37 +58,37 @@ export function SpotlightCard({
               </div>
               <div className="mt-1 space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className="w-14 font-mono text-[12px] uppercase text-muted">Narrative</span>
+                  <span className="w-14 font-mono text-sm uppercase text-muted">Narrative</span>
                   <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
                     <div
                       className="h-1.5 rounded-full bg-secondary/70 dark:bg-secondary-content/60"
                       style={{ width: `${d.narrative}%` }}
                     />
                   </div>
-                  <span className="w-6 text-right font-mono text-[12px]">{d.narrative}</span>
+                  <span className="w-6 text-right font-mono text-sm">{d.narrative}</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="w-14 font-mono text-[12px] uppercase text-muted">Reality</span>
+                  <span className="w-14 font-mono text-sm uppercase text-muted">Reality</span>
                   <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
                     <div className="h-1.5 rounded-full bg-primary" style={{ width: `${d.reality}%` }} />
                   </div>
-                  <span className="w-6 text-right font-mono text-[12px]">{d.reality}</span>
+                  <span className="w-6 text-right font-mono text-sm">{d.reality}</span>
                 </div>
               </div>
-              <p className="measure mt-1 text-[12px] leading-snug text-muted">{d.caption}</p>
+              <p className="measure mt-1 text-sm leading-snug text-muted">{d.caption}</p>
             </div>
           );
         })}
       </div>
 
       <div className="mt-4 flex items-center justify-between border-t border-base-300 pt-2">
-        <span className="font-mono text-[12px] text-muted">
+        <span className="font-mono text-sm text-muted">
           {spotlight.sourceCounts.narrative} narrative + {spotlight.sourceCounts.reality} reality sources ·
           generated {spotlight.generated}
         </span>
         <Link
           href={`/vendor-view/${vendorId}`}
-          className="text-[12px] font-semibold text-primary hover:underline"
+          className="text-sm font-semibold text-primary hover:underline"
         >
           Full vendor profile
         </Link>
@@ -132,20 +132,20 @@ export function DerivedGapCard({
   const reality = vendor.realityScore ?? 0;
 
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <MicroLabel
             label="Tracking"
             tooltip="Narrative versus reality, computed from measured inputs rather than written by hand."
           />
-          <h3 className="mt-0.5 text-[15px] font-bold">{vendor.name}</h3>
-          <p className="text-[12px] text-muted">
+          <h3 className="mt-0.5 text-base font-bold">{vendor.name}</h3>
+          <p className="text-sm text-muted">
             {vendor.marketPosition ?? vendor.category}
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[12px] text-muted">
+          <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-sm text-muted">
             {vendor.direction}
           </span>
           <LaneBadge lane="derived" />
@@ -159,14 +159,14 @@ export function DerivedGapCard({
           {gap > 0 ? "+" : ""}
           {gap}
         </span>
-        <span className="font-mono text-[12px] text-muted">
+        <span className="font-mono text-sm text-muted">
           percentile points of gap
         </span>
       </div>
 
       <div className="mt-4 space-y-1.5">
         <div className="flex items-center gap-2">
-          <span className="w-14 font-mono text-[12px] uppercase text-muted">
+          <span className="w-14 font-mono text-sm uppercase text-muted">
             Narrative
           </span>
           <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
@@ -175,10 +175,10 @@ export function DerivedGapCard({
               style={{ width: `${narrative}%` }}
             />
           </div>
-          <span className="w-9 text-right font-mono text-[12px]">{narrative}</span>
+          <span className="w-9 text-right font-mono text-sm">{narrative}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="w-14 font-mono text-[12px] uppercase text-muted">
+          <span className="w-14 font-mono text-sm uppercase text-muted">
             Reality
           </span>
           <div className="h-1.5 flex-1 rounded-full bg-base-300/60">
@@ -187,11 +187,11 @@ export function DerivedGapCard({
               style={{ width: `${reality}%` }}
             />
           </div>
-          <span className="w-9 text-right font-mono text-[12px]">{reality}</span>
+          <span className="w-9 text-right font-mono text-sm">{reality}</span>
         </div>
       </div>
 
-      <p className="measure mt-2 text-[12px] leading-snug text-muted">
+      <p className="measure mt-2 text-sm leading-snug text-muted">
         Both are percentiles within the {cohortSize} tracked AI vendors, not
         scores out of 100. Narrative is how far the technical conversation
         carries this vendor; reality is its evidence-weighted capability
@@ -213,30 +213,30 @@ export function DerivedGapCard({
               return (
                 <li key={c.capabilityId} className="flex items-center gap-2.5">
                   <span
-                    className={`w-14 shrink-0 text-right font-mono text-[13px] font-bold ${soft ? "text-warn" : "text-good"}`}
+                    className={`w-14 shrink-0 text-right font-mono text-sm font-bold ${soft ? "text-warn" : "text-good"}`}
                   >
                     {c.divergence > 0 ? "+" : ""}
                     {c.divergence}
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-baseline gap-x-2">
-                      <span className="text-[13px] font-semibold">
+                      <span className="text-sm font-semibold">
                         {c.capability}
                       </span>
-                      <span className="font-mono text-[12px] text-muted">
+                      <span className="font-mono text-sm text-muted">
                         {c.percentile} percentile
                       </span>
                       {c.thinEvidence ? (
-                        <span className="rounded-full bg-warn-bg px-1.5 py-0.5 font-mono text-[12px] text-warn">
+                        <span className="rounded-full bg-warn-bg px-1.5 py-0.5 font-mono text-sm text-warn">
                           {c.evidenceGrade} asserted
                         </span>
                       ) : (
-                        <span className="font-mono text-[12px] text-muted">
+                        <span className="font-mono text-sm text-muted">
                           {c.evidenceGrade}
                         </span>
                       )}
                     </div>
-                    <p className="measure text-[12px] leading-snug text-muted">
+                    <p className="measure text-sm leading-snug text-muted">
                       {soft
                         ? `Sits well below this vendor's own standing. If your use case leans on ${c.capability.toLowerCase()}, the headline overstates them.`
                         : `Runs ahead of this vendor's own standing, so it is a genuine strength rather than a halo from the overall score.`}
@@ -291,7 +291,7 @@ export function DerivedGapCard({
       <div className="mt-2 flex items-center justify-end border-t border-base-300 pt-2">
         <Link
           href={`/vendor-view/${vendor.vendorId}`}
-          className="text-[12px] font-semibold text-primary hover:underline"
+          className="text-sm font-semibold text-primary hover:underline"
         >
           Full vendor profile
         </Link>
@@ -319,22 +319,22 @@ export function VendorSnapshotCard({ vendor }: { vendor: VendorMetrics }) {
   ];
 
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <MicroLabel
             label="Tracking"
             tooltip="The AG figures published for this vendor. No narrative-versus-reality read is written for it."
           />
-          <h3 className="mt-0.5 text-[15px] font-bold">{vendor.name}</h3>
-          <p className="text-[12px] text-muted">
+          <h3 className="mt-0.5 text-base font-bold">{vendor.name}</h3>
+          <p className="text-sm text-muted">
             {vendor.marketPosition ?? vendor.category}
           </p>
         </div>
         <LaneBadge lane="aie-live" />
       </div>
 
-      <p className="mt-3 rounded border border-base-300 bg-base-200/60 px-2.5 py-2 text-[12px] leading-snug text-muted">
+      <p className="mt-3 rounded border border-base-300 bg-base-200/60 px-2.5 py-2.5 text-sm leading-snug text-muted">
         No narrative-versus-reality read is published for {vendor.name}. That
         comparison is written by hand for a few vendors at a time, and inventing
         one here would be inventing the numbers. What AG does publish for this
@@ -345,11 +345,11 @@ export function VendorSnapshotCard({ vendor }: { vendor: VendorMetrics }) {
         {rows.map(([label, value, note]) => (
           <div key={label} className="flex items-center justify-between gap-3">
             <div className="min-w-0">
-              <dt className="text-[12px] font-semibold">{label}</dt>
-              <dd className="measure text-[12px] leading-snug text-muted">{note}</dd>
+              <dt className="text-sm font-semibold">{label}</dt>
+              <dd className="measure text-sm leading-snug text-muted">{note}</dd>
             </div>
             {value === null ? (
-              <span className="shrink-0 font-mono text-[12px] text-muted">
+              <span className="shrink-0 font-mono text-sm text-muted">
                 not published
               </span>
             ) : (
@@ -360,12 +360,12 @@ export function VendorSnapshotCard({ vendor }: { vendor: VendorMetrics }) {
       </dl>
 
       <div className="mt-4 flex items-center justify-between border-t border-base-300 pt-2">
-        <span className="font-mono text-[12px] text-muted">
+        <span className="font-mono text-sm text-muted">
           {vendor.lastUpdated ? `updated ${vendor.lastUpdated.slice(0, 10)}` : "no update date published"}
         </span>
         <Link
           href={`/vendor-view/${vendor.id}`}
-          className="text-[12px] font-semibold text-primary hover:underline"
+          className="text-sm font-semibold text-primary hover:underline"
         >
           Full vendor profile
         </Link>

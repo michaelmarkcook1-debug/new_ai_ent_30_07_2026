@@ -21,7 +21,7 @@ export function LaneBadge({ lane }: { lane: DataLane }) {
   const label = LANE_LABEL[lane];
   return (
     <span
-      className={`inline-flex items-center rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider border ${styles[lane]}`}
+      className={`inline-flex items-center rounded px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider border ${styles[lane]}`}
       title={
         lane === "live"
           ? "Live from the BoardRadar API"
@@ -59,7 +59,7 @@ export function ProvenanceBadge({ env }: { env: ProvenanceEnvelope }) {
     .join(". ");
   const inner = (
     <span
-      className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider ${colour[env.sourceBasis] ?? "bg-base-200 text-muted"}`}
+      className={`inline-flex items-center gap-1 rounded px-1.5 py-0.5 font-mono text-xs uppercase tracking-wider ${colour[env.sourceBasis] ?? "bg-base-200 text-muted"}`}
       title={note || env.sourceBasis}
     >
       {env.sourceBasis}
@@ -86,7 +86,7 @@ export function SeverityBadge({ severity }: { severity: Severity }) {
   };
   return (
     <span
-      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] font-bold tracking-wider ${styles[severity]}`}
+      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-xs font-bold tracking-wider ${styles[severity]}`}
     >
       {severity}
     </span>
@@ -95,7 +95,7 @@ export function SeverityBadge({ severity }: { severity: Severity }) {
 
 export function CategoryChip({ label }: { label: string }) {
   return (
-    <span className="inline-flex rounded-full border border-base-300 px-2 py-0.5 text-[10px] text-muted">
+    <span className="inline-flex rounded-full border border-base-300 px-2 py-0.5 text-xs text-muted">
       {label}
     </span>
   );
@@ -103,7 +103,7 @@ export function CategoryChip({ label }: { label: string }) {
 
 export function HorizonTag({ horizon }: { horizon: string }) {
   return (
-    <span className="inline-flex items-center gap-1 font-mono text-[9px] uppercase tracking-wider text-muted">
+    <span className="inline-flex items-center gap-1 font-mono text-xs uppercase tracking-wider text-muted">
       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
         <circle cx="12" cy="12" r="9" />
         <path d="M12 7v5l3 3" />
@@ -120,7 +120,7 @@ export function SentimentPill({ sentiment }: { sentiment: "Positive" | "Negative
     Neutral: "bg-base-200 text-muted",
   } as const;
   return (
-    <span className={`inline-flex rounded-full px-2 py-0.5 text-[10px] font-medium ${styles[sentiment]}`}>
+    <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${styles[sentiment]}`}>
       {sentiment}
     </span>
   );

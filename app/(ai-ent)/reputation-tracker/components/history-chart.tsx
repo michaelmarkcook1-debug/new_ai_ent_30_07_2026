@@ -121,8 +121,34 @@ export function ReputationHistoryChart({
 
   const name = (id: string) => vendorNames[id] ?? id;
 
+  // Where each series' end label goes.
+  //
+  // They used to sit at the series' own final y, so any two vendors finishing
+  // within a line-height of each other printed on top of one another: at the
+  // last capture Anthropic and Mistral both land near 78, and the two names
+  // overlapped into one unreadable string. Google and Microsoft, and IBM and
+  // DeepSeek, did the same.
+  //
+  // Solved once for the whole set instead: sort by position, then walk down
+  // pushing any label that is too close to the one above it. That keeps the
+  // vertical order of the series, which is the thing a reader is matching
+  // against the lines, while guaranteeing every name is legible.
+  const labelY = (() => {
+    const GAP = 13;
+    const last = snaps[snaps.length - 1];
+    const ends = shown
+      .map((id) => ({ id, v: last ? valueFor(last, id) : null }))
+      .filter((e): e is { id: string; v: number } => e.v !== null)
+      .map((e) => ({ id: e.id, y: y(e.v) }))
+      .sort((a, b) => a.y - b.y);
+    for (let i = 1; i < ends.length; i++) {
+      if (ends[i].y - ends[i - 1].y < GAP) ends[i].y = ends[i - 1].y + GAP;
+    }
+    return new Map(ends.map((e) => [e.id, e.y]));
+  })();
+
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <div className="flex flex-wrap items-center gap-2">
@@ -131,12 +157,12 @@ export function ReputationHistoryChart({
               tooltip="The real reputation pillar scores, captured on a schedule so a trend accumulates. Nothing is back-projected."
             />
             <LaneBadge lane={demoCount > 0 ? "sample" : "aie-live"} />
-            <span className="font-mono text-[10px] text-muted">
+            <span className="font-mono text-xs text-muted">
               {snaps.length - demoCount} captured
               {demoCount > 0 ? `, ${demoCount} illustrative` : ""}
             </span>
           </div>
-          <p className="mt-1 measure text-[11.5px] text-muted">
+          <p className="mt-1 measure text-xs text-muted">
             The customer, developer and employee pillar scores, tracked over
             time. The source publishes current values only, so this history
             starts at the first capture and grows from there.
@@ -149,7 +175,7 @@ export function ReputationHistoryChart({
               type="button"
               onClick={() => setPillar(p.key)}
               title={p.help}
-              className={`rounded-full border px-2.5 py-1 text-[11px] font-medium transition ${
+              className={`rounded-full border px-2.5 py-1 text-xs font-medium transition ${
                 pillar === p.key
                   ? "border-primary bg-primary text-white"
                   : "border-base-300 text-muted hover:border-primary hover:text-primary"
@@ -168,7 +194,7 @@ export function ReputationHistoryChart({
             key={id}
             type="button"
             onClick={() => toggle(id)}
-            className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10.5px] transition ${
+            className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs transition ${
               muted.has(id) ? "border-base-300 opacity-40" : "border-base-300"
             }`}
           >
@@ -183,7 +209,7 @@ export function ReputationHistoryChart({
       </div>
 
       {demoCount > 0 ? (
-        <p className="mt-2 rounded border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[11.5px] text-warn">
+        <p className="mt-2 rounded border border-warn/40 bg-warn-bg px-2.5 py-2 text-xs text-warn">
           The first {demoCount} quarters are <strong>illustrative sample data,
           invented to demonstrate the trend</strong>. They are drawn dashed and
           are not captured readings. Only{" "}
@@ -196,8 +222,8 @@ export function ReputationHistoryChart({
         // One point is not a trend. Show the current standing instead and be
         // explicit that the line begins once a second capture lands.
         <div className="mt-3">
-          <div className="rounded-lg border border-dashed border-base-300 bg-base-200/40 px-3 py-2">
-            <p className="measure text-[12px]">
+          <div className="rounded-lg border border-dashed border-base-300 bg-base-200/40 px-3 py-2.5">
+            <p className="measure text-sm">
               <span className="font-semibold">Tracking has started.</span> One
               snapshot is held, taken {latest?.capturedAt}. A trend line needs
               two, so the current standing is shown below and the line begins at
@@ -210,7 +236,7 @@ export function ReputationHistoryChart({
               .sort((a, b) => (b.v ?? -1) - (a.v ?? -1))
               .map(({ id, v }, i) => (
                 <li key={id} className="flex items-center gap-2">
-                  <span className="w-32 shrink-0 truncate text-[12.5px]">
+                  <span className="w-32 shrink-0 truncate text-sm">
                     {name(id)}
                   </span>
                   <span className="h-2.5 flex-1 overflow-hidden rounded-full bg-base-200">
@@ -222,7 +248,7 @@ export function ReputationHistoryChart({
                       }}
                     />
                   </span>
-                  <span className="w-10 text-right font-mono text-[12px] font-semibold">
+                  <span className="w-10 text-right font-mono text-sm font-semibold">
                     {v ?? "–"}
                   </span>
                 </li>
@@ -350,12 +376,12 @@ export function ReputationHistoryChart({
                         />
                       ) : null;
                     })}
-                    {last !== null ? (
+                    {last !== null && labelY.has(id) ? (
                       <text
                         x={W - PAD.right + 6}
-                        y={y(last) + 3.5}
+                        y={labelY.get(id)! + 3.5}
                         className="fill-current"
-                        fontSize={10}
+                        fontSize={11}
                         fontWeight={500}
                       >
                         {name(id)}
@@ -367,13 +393,13 @@ export function ReputationHistoryChart({
             </svg>
           </div>
 
-          <div className="mt-1 min-h-[32px] rounded border border-base-300 bg-base-200/50 px-3 py-1.5">
+          <div className="mt-1 min-h-[32px] rounded border border-base-300 bg-base-200/50 px-3 py-2">
             {hover === null ? (
-              <p className="text-[11px] text-muted">
+              <p className="text-xs text-muted">
                 Move over the chart for the reading at each capture.
               </p>
             ) : (
-              <p className="measure flex flex-wrap items-center gap-x-3 text-[11.5px]">
+              <p className="measure flex flex-wrap items-center gap-x-3 text-xs">
                 <span className="font-mono font-bold">
                   {snaps[hover].capturedAt}
                 </span>
@@ -383,7 +409,7 @@ export function ReputationHistoryChart({
                   .sort((a, b) => (b.v ?? 0) - (a.v ?? 0))
                   .slice(0, 6)
                   .map(({ id, v }) => (
-                    <span key={id} className="font-mono text-[11px]">
+                    <span key={id} className="font-mono text-xs">
                       {name(id)} <span className="font-bold">{v}</span>
                     </span>
                   ))}

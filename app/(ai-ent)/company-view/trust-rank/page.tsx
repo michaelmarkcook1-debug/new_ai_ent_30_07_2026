@@ -14,7 +14,7 @@ function StatusChip({ status }: { status: string }) {
   const guidance = status.toLowerCase().includes("guidance") || status.toLowerCase().includes("evolving");
   return (
     <span
-      className={`inline-flex whitespace-nowrap rounded-full px-2 py-0.5 font-mono text-[10px] font-semibold ${
+      className={`inline-flex whitespace-nowrap rounded-full px-2 py-0.5 font-mono text-xs font-semibold ${
         inForce ? "bg-bad-bg text-error" : guidance ? "bg-base-200 text-muted" : "bg-warn-bg text-warn"
       }`}
       title={inForce ? "Binding obligations apply" : guidance ? "Non-binding or evolving" : "Enacted, application phasing in"}
@@ -58,12 +58,12 @@ export default async function TrustRankPage({
           badge={<LaneBadge lane="sample" />}
           invert
         />
-        <div className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-2">
+        <div className="@container rounded-lg border border-base-300 bg-base-100 p-5 @4xl:col-span-2">
           <div className="flex items-center justify-between">
             <MicroLabel label="Posture summary" tooltip="Narrative mirror of the live governance-risk summary field." />
             <LaneBadge lane="sample" />
           </div>
-          <p className="measure mt-2 text-[13px] leading-relaxed">{g.summary}</p>
+          <p className="measure mt-2 text-sm leading-relaxed">{g.summary}</p>
           <div className="mt-2">
             <DerivationDrawer title="How the governance score is derived">
               <p>
@@ -79,12 +79,12 @@ export default async function TrustRankPage({
 
       <section className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
         <Accordion title="Key Findings" count={g.keyFindings.length} defaultOpen>
-          <ul className="measure list-disc space-y-1.5 pl-4 text-[12.5px]">
+          <ul className="measure list-disc space-y-1.5 pl-4 text-sm">
             {g.keyFindings.map((k) => <li key={k}>{k}</li>)}
           </ul>
         </Accordion>
         <Accordion title="Recommendations" count={g.recommendations.length}>
-          <ul className="measure list-disc space-y-1.5 pl-4 text-[12.5px]">
+          <ul className="measure list-disc space-y-1.5 pl-4 text-sm">
             {g.recommendations.map((k) => <li key={k}>{k}</li>)}
           </ul>
         </Accordion>
@@ -92,7 +92,7 @@ export default async function TrustRankPage({
 
       {/* The regulatory grid */}
       <section className="rounded-lg border border-base-300 bg-base-100">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2.5">
           <MicroLabel
             label="Regulatory grid"
             tooltip="AI regulation by jurisdiction and what it means for this organisation's deployments. Rows seeded from the AIE legislation material are badged AIE dataset; the rest are SAMPLE."
@@ -106,21 +106,21 @@ export default async function TrustRankPage({
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-base-300">
-                <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">Jurisdiction</th>
-                <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">Regime</th>
-                <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">Status</th>
-                <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">What it means here</th>
-                <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">Source</th>
+                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">Jurisdiction</th>
+                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">Regime</th>
+                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">Status</th>
+                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">What it means here</th>
+                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">Source</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-base-300">
               {f.trustRank.regulatoryGrid.map((r) => (
                 <tr key={r.jurisdiction} className="align-top hover:bg-base-200/60">
-                  <td className="px-3 py-2.5 text-[12.5px] font-bold whitespace-nowrap">{r.jurisdiction}</td>
-                  <td className="px-3 py-2.5 text-[12px]">{r.regime}</td>
-                  <td className="px-3 py-2.5"><StatusChip status={r.status} /></td>
-                  <td className="px-3 py-2.5 max-w-md text-[12px] text-muted">{r.note}</td>
-                  <td className="px-3 py-2.5"><LaneBadge lane={r.aieSource ? "aie" : "sample"} /></td>
+                  <td className="px-3 py-3 text-sm font-bold whitespace-nowrap">{r.jurisdiction}</td>
+                  <td className="px-3 py-3 text-sm">{r.regime}</td>
+                  <td className="px-3 py-3"><StatusChip status={r.status} /></td>
+                  <td className="px-3 py-3 max-w-md text-sm text-muted">{r.note}</td>
+                  <td className="px-3 py-3"><LaneBadge lane={r.aieSource ? "aie" : "sample"} /></td>
                 </tr>
               ))}
             </tbody>
@@ -129,19 +129,19 @@ export default async function TrustRankPage({
       </section>
 
       {/* Vendor-specific rulings */}
-      <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+      <section className="rounded-lg border border-base-300 bg-base-100 p-5">
         <div className="flex items-center justify-between">
           <MicroLabel label="Vendor-specific rulings and controls" tooltip="Regulatory items that attach to vendors rather than jurisdictions." />
         </div>
         <div className="mt-2 grid grid-cols-1 gap-2 @xl:grid-cols-2">
           {f.trustRank.vendorRulings.map((v) => (
-            <div key={v.item} className="rounded border border-base-300 p-3">
+            <div key={v.item} className="rounded border border-base-300 p-4">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="text-[12px] font-semibold">{v.vendor}</span>
+                <span className="text-sm font-semibold">{v.vendor}</span>
                 <LaneBadge lane={v.aieSource ? "aie" : "sample"} />
               </div>
-              <p className="mt-0.5 text-[12px] font-medium text-primary">{v.item}</p>
-              <p className="mt-1 text-[11.5px] text-muted">{v.note}</p>
+              <p className="mt-0.5 text-sm font-medium text-primary">{v.item}</p>
+              <p className="mt-1 text-xs text-muted">{v.note}</p>
             </div>
           ))}
         </div>

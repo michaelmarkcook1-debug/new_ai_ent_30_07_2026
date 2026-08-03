@@ -11,12 +11,12 @@ type SortDir = "asc" | "desc";
 function price(v: number | null): React.ReactNode {
   if (v === null) {
     return (
-      <span className="text-[11px] italic text-muted" title="Not verified from a reliable live source in the dataset">
+      <span className="text-xs italic text-muted" title="Not verified from a reliable live source in the dataset">
         Not published
       </span>
     );
   }
-  return <span className="font-mono text-[12px]">${String(v)}</span>;
+  return <span className="font-mono text-sm">${String(v)}</span>;
 }
 
 function hostOf(url: string): string {
@@ -75,7 +75,7 @@ export function PricingTable({ rows }: { rows: TokenPrice[] }) {
         <button
           type="button"
           onClick={() => toggle(k)}
-          className={`inline-flex items-center gap-1 font-mono text-[10px] font-semibold uppercase tracking-wider ${active ? "text-primary" : "text-muted"} hover:text-primary`}
+          className={`inline-flex items-center gap-1 font-mono text-xs font-semibold uppercase tracking-wider ${active ? "text-primary" : "text-muted"} hover:text-primary`}
         >
           {label}
           {active ? <span aria-hidden>{sortDir === "asc" ? "▲" : "▼"}</span> : null}
@@ -86,25 +86,25 @@ export function PricingTable({ rows }: { rows: TokenPrice[] }) {
 
   return (
     <div className="mt-3 overflow-x-auto rounded-lg border border-base-300">
-      <table className="w-full min-w-[880px] border-collapse text-[12.5px]">
+      <table className="w-full min-w-[880px] border-collapse text-sm">
         <thead>
           <tr className="border-b border-base-300 bg-base-200/60">
             <SortHeader label="Vendor" k="vendor" />
             <SortHeader label="Model" k="model" />
             <SortHeader label="Input $/1M" k="input" align="right" />
             <SortHeader label="Output $/1M" k="output" align="right" />
-            <th className="px-3 py-2 text-right">
-              <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-muted">
+            <th className="px-3 py-2.5 text-right">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-muted">
                 Cached in $/1M
               </span>
             </th>
-            <th className="px-3 py-2 text-left">
-              <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-muted">
+            <th className="px-3 py-2.5 text-left">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-muted">
                 Dataset note
               </span>
             </th>
-            <th className="px-3 py-2 text-left">
-              <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-muted">
+            <th className="px-3 py-2.5 text-left">
+              <span className="font-mono text-xs font-semibold uppercase tracking-wider text-muted">
                 Source
               </span>
             </th>
@@ -113,18 +113,18 @@ export function PricingTable({ rows }: { rows: TokenPrice[] }) {
         <tbody>
           {sorted.map((row) => (
             <tr key={row.id} className="border-b border-base-300 last:border-b-0 hover:bg-base-200/40">
-              <td className="px-3 py-2 font-semibold">{row.vendorName}</td>
-              <td className="px-3 py-2">{row.modelName}</td>
-              <td className="px-3 py-2 text-right">{price(row.inputPerM)}</td>
-              <td className="px-3 py-2 text-right">{price(row.outputPerM)}</td>
-              <td className="px-3 py-2 text-right">{price(row.cachedInputPerM)}</td>
-              <td className="max-w-[300px] px-3 py-2 text-[11px] leading-snug text-muted">{row.note}</td>
-              <td className="whitespace-nowrap px-3 py-2">
+              <td className="px-3 py-2.5 font-semibold">{row.vendorName}</td>
+              <td className="px-3 py-2.5">{row.modelName}</td>
+              <td className="px-3 py-2.5 text-right">{price(row.inputPerM)}</td>
+              <td className="px-3 py-2.5 text-right">{price(row.outputPerM)}</td>
+              <td className="px-3 py-2.5 text-right">{price(row.cachedInputPerM)}</td>
+              <td className="max-w-[300px] px-3 py-2.5 text-xs leading-snug text-muted">{row.note}</td>
+              <td className="whitespace-nowrap px-3 py-2.5">
                 <a
                   href={row.sourceUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[11px] text-primary hover:underline"
+                  className="text-xs text-primary hover:underline"
                   title={row.sourceUrl}
                 >
                   {hostOf(row.sourceUrl)}

@@ -19,7 +19,7 @@ function sentimentBadge(s: FeedItem["sentiment"]) {
   if (s === "negative") return <SentimentPill sentiment="Negative" />;
   if (s === "neutral") return <SentimentPill sentiment="Neutral" />;
   return (
-    <span className="inline-flex rounded-full bg-base-200 px-2 py-0.5 text-[10px] font-medium text-base-content/80">
+    <span className="inline-flex rounded-full bg-base-200 px-2 py-0.5 text-xs font-medium text-base-content/80">
       Mixed
     </span>
   );
@@ -45,11 +45,11 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
 
   return (
     <section className="rounded-lg border border-base-300 bg-base-100">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2.5">
         <div className="flex flex-wrap items-center gap-2">
-          <h3 className="text-[13px] font-bold">AI market brief (historical seed)</h3>
+          <h3 className="text-sm font-bold">AI market brief (historical seed)</h3>
           <LaneBadge lane="aie" />
-          <span className="font-mono text-[9px] uppercase tracking-wider text-muted">
+          <span className="font-mono text-xs uppercase tracking-wider text-muted">
             seed
           </span>
           <DerivationDrawer title="How this feed is derived">
@@ -79,7 +79,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
           aria-label="Timeframe"
           value={timeframe}
           onChange={(e) => setTimeframe(e.target.value)}
-          className="max-w-full rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-[11px] text-muted"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-1.5 py-0.5 text-xs text-muted"
         >
           {TIMEFRAMES.map((t) => (
             <option key={t.label}>{t.label}</option>
@@ -87,7 +87,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
         </select>
       </div>
 
-      <div className="flex flex-wrap items-center gap-1.5 border-b border-base-300 px-3 py-2">
+      <div className="flex flex-wrap items-center gap-1.5 border-b border-base-300 px-3 py-2.5">
         <MicroLabel
           label="Topics"
           tooltip="Topic tags are derived from the category labels on the dataset items. Pick one to filter the feed."
@@ -95,7 +95,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
         <button
           type="button"
           onClick={() => setTopic(null)}
-          className={`rounded-full border px-2 py-0.5 text-[10px] transition ${
+          className={`rounded-full border px-2 py-0.5 text-xs transition ${
             topic === null
               ? "border-primary bg-primary text-white"
               : "border-base-300 text-muted hover:border-primary hover:text-primary"
@@ -108,7 +108,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
             key={t.tag}
             type="button"
             onClick={() => setTopic(topic === t.tag ? null : t.tag)}
-            className={`rounded-full border px-2 py-0.5 text-[10px] transition ${
+            className={`rounded-full border px-2 py-0.5 text-xs transition ${
               topic === t.tag
                 ? "border-primary bg-primary text-white"
                 : "border-base-300 text-muted hover:border-primary hover:text-primary"
@@ -123,14 +123,14 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
         <span className="micro-label">
           Dataset window {meta.windowStart} to {meta.windowEnd}
         </span>
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           {filtered.length} of {meta.itemCount} items
         </span>
       </div>
 
       <ul className="divide-y divide-base-300">
         {filtered.length === 0 ? (
-          <li className="px-3 py-4 text-[12px] text-muted">
+          <li className="px-3 py-4 text-sm text-muted">
             No items match this topic and timeframe.
           </li>
         ) : (
@@ -145,22 +145,22 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
-                    <p className="measure text-[13px] font-semibold leading-snug">{n.title}</p>
+                    <p className="measure text-sm font-semibold leading-snug">{n.title}</p>
                     <span
-                      className="shrink-0 font-mono text-[10px] text-muted"
+                      className="shrink-0 font-mono text-xs text-muted"
                       title="The dataset's native impact label, 0 to 100. See the derivation drawer above."
                     >
                       Impact {n.impactScore}
                     </span>
                   </div>
-                  <p className="measure mt-0.5 text-[12px] leading-snug text-base-content/85">
+                  <p className="measure mt-0.5 text-sm leading-snug text-base-content/85">
                     {n.summary}
                   </p>
-                  <p className="measure mt-1 text-[11px] leading-snug text-muted">
+                  <p className="measure mt-1 text-xs leading-snug text-muted">
                     <span className="font-semibold">Why it matters:</span> {n.whyItMatters}
                   </p>
                   <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
-                    <span className="font-mono text-[10px] text-muted">
+                    <span className="font-mono text-xs text-muted">
                       {n.sourceName} · {n.date}
                     </span>
                     {n.tags.map((t) => (
@@ -169,7 +169,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
                     {sentimentBadge(n.sentiment)}
                   </div>
                   {n.vendors.length > 0 ? (
-                    <p className="measure mt-1 text-[10px] text-muted">
+                    <p className="measure mt-1 text-xs text-muted">
                       Vendors: {n.vendors.join(", ")}
                     </p>
                   ) : null}

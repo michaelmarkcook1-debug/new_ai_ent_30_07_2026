@@ -43,6 +43,16 @@ function priceLabel(v: number): string {
   return v >= 1 ? `$${v}` : `$${v}`;
 }
 
+/**
+ * The family name for a frontier label: the effort tag is dropped because the
+ * label is already crowded and the full id, effort and all, stays in the hover
+ * readout and the title element.
+ */
+function frontierName(modelId: string): string {
+  const base = modelId.replace(/\s*\([^)]*\)\s*$/, "").trim();
+  return base.length > 24 ? `${base.slice(0, 23)}…` : base;
+}
+
 interface Point {
   model: ModelRecord;
   cost: number;
@@ -125,6 +135,21 @@ export function PriceCapabilityChart({
   const intelTicks = Array.from({ length: 5 }, (_, i) => Math.round((maxIntel / 4) * i));
   const hoveredPoint = points.find((p) => p.model.model_id === hovered) ?? null;
 
+  // Label placement: walk the frontier left to right, where intelligence rises
+  // with cost by construction so y only falls, and push each label up until it
+  // clears the one before it. Same approach as the price-performance chart.
+  const frontierLabels = useMemo(() => {
+    const GAP = 14;
+    let prev = Number.POSITIVE_INFINITY;
+    return frontier.map((p) => {
+      const wanted = yFor(p.intelligence) - 10;
+      const labelY = Math.min(wanted, prev - GAP);
+      prev = labelY;
+      return { p, labelY };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [frontier, maxIntel]);
+
   // Dot radius carries the burn multiplier when asked to: bigger dot, more
   // tokens spent reaching the same answer.
   const radiusFor = (p: Point, base: number) => {
@@ -156,7 +181,7 @@ export function PriceCapabilityChart({
               y={yFor(t) + 3}
               textAnchor="end"
               className="font-mono"
-              fontSize="10"
+              fontSize="11.5"
               fill="var(--ag-muted)"
             >
               {t}
@@ -179,7 +204,7 @@ export function PriceCapabilityChart({
               y={PAD.top + PLOT_H + 16}
               textAnchor="middle"
               className="font-mono"
-              fontSize="10"
+              fontSize="11.5"
               fill="var(--ag-muted)"
             >
               {priceLabel(t)}
@@ -190,7 +215,7 @@ export function PriceCapabilityChart({
           x={PAD.left}
           y={H - 10}
           className="font-mono"
-          fontSize="10.5"
+          fontSize="12"
           fill="var(--ag-muted)"
         >
           {adjustForBurn
@@ -203,7 +228,7 @@ export function PriceCapabilityChart({
           transform="rotate(-90)"
           textAnchor="middle"
           className="font-mono"
-          fontSize="10"
+          fontSize="11.5"
           fill="var(--ag-muted)"
         >
           intelligence index
@@ -227,7 +252,7 @@ export function PriceCapabilityChart({
               y={yFor(threshold) - 6}
               textAnchor="end"
               className="font-mono"
-              fontSize="11"
+              fontSize="12.5"
               fill="var(--ag-amber)"
             >
               {thresholdLabel}
@@ -246,6 +271,34 @@ export function PriceCapabilityChart({
             opacity="0.75"
           />
         ) : null}
+
+        {/* Frontier models, named. The region above and left of the frontier is
+            empty by construction, so labels placed there have nothing to
+            collide with except each other, and the walk below pushes each one
+            clear of the last. */}
+        {frontierLabels.map(({ p, labelY }) => (
+          <g key={`fl-${p.model.model_id}`} pointerEvents="none">
+            <line
+              x1={xFor(p.cost)}
+              y1={yFor(p.intelligence)}
+              x2={xFor(p.cost) - 9}
+              y2={labelY}
+              stroke="var(--ag-green)"
+              strokeWidth="1"
+              opacity="0.4"
+            />
+            <text
+              x={xFor(p.cost) - 12}
+              y={labelY + 3.5}
+              textAnchor="end"
+              fontSize="10.5"
+              fontWeight="600"
+              fill="var(--ag-base-content)"
+            >
+              {frontierName(p.model.model_id)}
+            </text>
+          </g>
+        ))}
 
         {/* Eliminated first, so the survivors and the pick sit on top. */}
         {points
@@ -323,7 +376,7 @@ export function PriceCapabilityChart({
             <text
               x={Math.min(xFor(hoveredPoint.cost) + 20, W - 342)}
               y={Math.max(yFor(hoveredPoint.intelligence) - 24, PAD.top + 14)}
-              fontSize="11"
+              fontSize="12.5"
               fill="var(--ag-base-content)"
             >
               {hoveredPoint.model.model_id.slice(0, 46)}
@@ -332,7 +385,7 @@ export function PriceCapabilityChart({
               x={Math.min(xFor(hoveredPoint.cost) + 20, W - 342)}
               y={Math.max(yFor(hoveredPoint.intelligence) - 11, PAD.top + 27)}
               className="font-mono"
-              fontSize="9.5"
+              fontSize="12.5"
               fill="var(--ag-muted)"
             >
               {`index ${hoveredPoint.intelligence} · $${hoveredPoint.listPrice} list${
@@ -345,7 +398,7 @@ export function PriceCapabilityChart({
         ) : null}
       </svg>
 
-      <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 text-[11px]">
+      <div className="mt-2 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs">
         <label className="inline-flex items-center gap-1.5">
           <input
             type="checkbox"
@@ -373,7 +426,7 @@ export function PriceCapabilityChart({
         </span>
       </div>
 
-      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-[10.5px] text-muted">
+      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted">
         <span className="inline-flex items-center gap-1.5">
           <span className="inline-block h-2.5 w-2.5 rounded-full bg-insight" />
           the recommendation
@@ -396,7 +449,7 @@ export function PriceCapabilityChart({
         </span>
       </div>
 
-      <figcaption className="measure mt-2 text-[11px] leading-relaxed text-warn">
+      <figcaption className="measure mt-2 text-xs leading-relaxed text-warn">
         {plotted} models plotted
         {withheld > 0
           ? `, ${withheld} withheld because the catalogue states no reasoning effort for them, and assuming one would put them on the frontier by default`

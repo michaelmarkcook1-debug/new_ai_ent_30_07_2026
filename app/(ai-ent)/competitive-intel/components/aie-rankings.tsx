@@ -15,7 +15,7 @@ import { ShortlistButton } from "@/lib/ui/shortlist-button";
 // scored list, no medal or league-table styling.
 export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel
           label="AIE vendor rankings"
@@ -23,26 +23,26 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
         />
         <LaneBadge lane="aie" />
       </div>
-      <p className="measure mt-1 text-[11px] text-muted">
+      <p className="measure mt-1 text-xs text-muted">
         AG's own overall score for each vendor.
         Separate from the live BoardRadar heatmap beside it: the two datasets
         cover different companies on different scales and are never blended.
       </p>
-      <p className="measure mt-1 text-[11px] text-muted">{COMPARABILITY_NOTE}</p>
+      <p className="measure mt-1 text-xs text-muted">{COMPARABILITY_NOTE}</p>
       <div className="mt-3 space-y-3">
         {placeByCategory(rows, (a: AieRankingRow, b: AieRankingRow) => b.overallScore - a.overallScore).map(
           (group) => (
             <div key={group.category.id}>
               <div className="flex items-baseline justify-between gap-2 border-b border-base-300 pb-1">
-                <h4 className="text-[11.5px] font-bold">{group.category.name}</h4>
+                <h4 className="text-xs font-bold">{group.category.name}</h4>
                 {group.thin ? (
-                  <span className="shrink-0 font-mono text-[9px] text-muted">
+                  <span className="shrink-0 font-mono text-xs text-muted">
                     thin
                   </span>
                 ) : null}
               </div>
               {group.thin ? (
-                <p className="mt-1 text-[10px] text-muted">
+                <p className="mt-1 text-xs text-muted">
                   {THIN_CATEGORY_NOTE}
                 </p>
               ) : null}
@@ -54,7 +54,7 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
                   >
                     <Link
                       href={`/vendor-view/${r.id}`}
-                      className="min-w-0 truncate text-[12.5px] font-medium hover:text-primary hover:underline"
+                      className="min-w-0 truncate text-sm font-medium hover:text-primary hover:underline"
                     >
                       {r.name}
                     </Link>

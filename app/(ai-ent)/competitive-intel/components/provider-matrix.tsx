@@ -61,7 +61,7 @@ export function ProviderCapabilityMatrix({
     : null;
 
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <div className="flex flex-wrap items-center gap-2">
@@ -70,7 +70,7 @@ export function ProviderCapabilityMatrix({
               tooltip="Rows are the providers in the selected market category, columns are the ten assessed capabilities, darker means a stronger evidence-graded maturity score."
             />
             <LaneBadge lane={matrix.lane} />
-            <span className="font-mono text-[10px] text-muted">
+            <span className="font-mono text-xs text-muted">
               {matrix.rows.length} providers &times; {matrix.capabilities.length}{" "}
               capabilities
             </span>
@@ -82,7 +82,7 @@ export function ProviderCapabilityMatrix({
             aria-label="Market category"
             value={categoryId}
             onChange={(e) => setCategoryId(e.target.value)}
-            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
+            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm font-semibold"
           >
             {matrix.categories.map((c) => (
               <option key={c.id} value={c.id}>
@@ -93,12 +93,12 @@ export function ProviderCapabilityMatrix({
         </div>
       </div>
 
-      <p className="mt-1.5 measure text-[11px] text-muted">
+      <p className="mt-1.5 measure text-xs text-muted">
         {COMPARABILITY_NOTE}
       </p>
 
       {!showing ? (
-        <p className="mt-3 rounded border border-primary/30 bg-primary/5 px-3 py-2 text-[12px]">
+        <p className="mt-3 rounded border border-primary/30 bg-primary/5 px-3 py-2.5 text-sm">
           Showing {matrix.categoryName}.{" "}
           <Link
             href={`/competitive-intel?category=${categoryId}`}
@@ -110,21 +110,21 @@ export function ProviderCapabilityMatrix({
       ) : null}
 
       {matrix.rows.length === 0 ? (
-        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-6 text-[12px] text-muted">
+        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-6 text-sm text-muted">
           No provider in this category carries a capability assessment.
         </p>
       ) : (
         <div className="mt-3 overflow-x-auto">
-          <table className="w-full border-separate border-spacing-0.5 text-[12px]">
+          <table className="w-full border-separate border-spacing-0.5 text-sm">
             <thead>
               <tr>
-                <th className="min-w-[10rem] py-1 pr-2 text-left align-bottom">
+                <th className="min-w-[10rem] py-1.5 pr-2 text-left align-bottom">
                   <span className="micro-label">Provider</span>
                 </th>
                 {matrix.capabilities.map((c) => (
                   <th
                     key={c.id}
-                    className="px-1 py-1 text-center align-bottom"
+                    className="px-1 py-1.5 text-center align-bottom"
                     title={c.description}
                   >
                     <span className="micro-label whitespace-normal leading-tight">
@@ -132,7 +132,7 @@ export function ProviderCapabilityMatrix({
                     </span>
                   </th>
                 ))}
-                <th className="px-1 py-1 text-center align-bottom">
+                <th className="px-1 py-1.5 text-center align-bottom">
                   <span className="micro-label">Mean</span>
                 </th>
               </tr>
@@ -145,13 +145,13 @@ export function ProviderCapabilityMatrix({
                       <ShortlistButton vendorId={r.vendorId} name={r.name} size="xs" />
                       <Link
                         href={`/vendor-view/${r.vendorId}`}
-                        className="text-[12.5px] font-semibold hover:text-primary hover:underline"
+                        className="text-sm font-semibold hover:text-primary hover:underline"
                       >
                         {r.name}
                       </Link>
                     </span>
                     {r.marketPosition ? (
-                      <div className="text-[10px] text-muted">
+                      <div className="text-xs text-muted">
                         {r.marketPosition}
                       </div>
                     ) : null}
@@ -168,7 +168,7 @@ export function ProviderCapabilityMatrix({
                           onClick={() =>
                             setFocus(on ? null : { v: r.vendorId, c: c.id })
                           }
-                          className={`flex h-9 w-full min-w-[3.2rem] items-center justify-center rounded font-mono text-[11px] font-semibold transition ${cellClass(v)} ${on ? "ring-2 ring-primary" : ""}`}
+                          className={`flex h-9 w-full min-w-[3.2rem] items-center justify-center rounded font-mono text-xs font-semibold transition ${cellClass(v)} ${on ? "ring-2 ring-primary" : ""}`}
                           title={
                             v === null
                               ? `${r.name}: ${c.name} not assessed`
@@ -182,7 +182,7 @@ export function ProviderCapabilityMatrix({
                   })}
                   <td className="p-0">
                     <div
-                      className="flex h-9 min-w-[3.2rem] items-center justify-center rounded border border-base-300 font-mono text-[11px] font-bold"
+                      className="flex h-9 min-w-[3.2rem] items-center justify-center rounded border border-base-300 font-mono text-xs font-bold"
                       title={
                         r.weakestGrade
                           ? `Mean over ${r.assessed} assessed capabilities. Weakest evidence grade in the row: ${r.weakestGrade}.`
@@ -202,27 +202,27 @@ export function ProviderCapabilityMatrix({
 
       {/* Legend */}
       <div className="mt-3 flex flex-wrap items-center gap-2">
-        <span className="font-mono text-[10px] text-muted">Weaker</span>
+        <span className="font-mono text-xs text-muted">Weaker</span>
         {[20, 35, 50, 60, 72, 85].map((v) => (
           <span key={v} className={`h-3.5 w-6 rounded-sm ${cellClass(v)}`} />
         ))}
-        <span className="font-mono text-[10px] text-muted">Stronger</span>
-        <span className="ml-2 font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">Stronger</span>
+        <span className="ml-2 font-mono text-xs text-muted">
           0 to 100 maturity &middot; click a cell for its evidence
         </span>
       </div>
 
       {/* Evidence for the selected cell */}
       {focusCell && focusRow && focusCap ? (
-        <div className="mt-3 rounded-lg border border-primary/30 bg-primary/5 p-3">
+        <div className="mt-3 rounded-lg border border-primary/30 bg-primary/5 p-4">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[12.5px] font-bold">{focusRow.name}</span>
-            <span className="text-[12px] text-muted">{focusCap.name}</span>
-            <span className="font-mono text-[12px] font-bold">
+            <span className="text-sm font-bold">{focusRow.name}</span>
+            <span className="text-sm text-muted">{focusCap.name}</span>
+            <span className="font-mono text-sm font-bold">
               {focusCell.maturity ?? "not assessed"}
             </span>
             <span
-              className="font-mono text-[9.5px] uppercase tracking-wider text-muted"
+              className="font-mono text-xs uppercase tracking-wider text-muted"
               title={
                 focusCell.status
                   ? (STATUS_HELP[focusCell.status] ?? focusCell.status)
@@ -233,11 +233,11 @@ export function ProviderCapabilityMatrix({
               {focusCell.evidenceGrade ? ` · ${focusCell.evidenceGrade}` : ""}
             </span>
           </div>
-          <p className="measure mt-1.5 text-[11.5px] leading-relaxed text-muted">
+          <p className="measure mt-1.5 text-xs leading-relaxed text-muted">
             {focusCell.note ?? "No evidence note is recorded for this cell."}
           </p>
           {focusCell.lastVerified ? (
-            <p className="mt-1 font-mono text-[9px] text-muted">
+            <p className="mt-1 font-mono text-xs text-muted">
               verified {focusCell.lastVerified.slice(0, 10)}
             </p>
           ) : null}

@@ -17,39 +17,39 @@ export function FrontierFaceOff({ view }: { view: FaceOffView }) {
   const top = view.leader?.intelligence ?? 0;
 
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <h2 className="text-[15px] font-bold">Frontier model face-off</h2>
+            <h2 className="text-base font-bold">Frontier model face-off</h2>
             <LaneBadge lane="aie-live" />
-            <span className="font-mono text-[10px] text-muted">
+            <span className="font-mono text-xs text-muted">
               {view.entries.length} vendors
             </span>
           </div>
-          <p className="mt-1 measure text-[12px] text-muted">
+          <p className="mt-1 measure text-sm text-muted">
             Each frontier-lab vendor&apos;s single highest-rated model, on the
             same fields for every one, so they compare like for like. The
             vendor set is the frontier model and API category from the dataset
             taxonomy, not a shortlist chosen here.
           </p>
         </div>
-        <div className="rounded-lg border border-base-300 bg-base-200/60 px-3 py-2">
+        <div className="rounded-lg border border-base-300 bg-base-200/60 px-3 py-2.5">
           <MicroLabel
             label="As of"
             tooltip="Capture date of the model inventory, and the date of the freshest benchmark within it."
           />
-          <p className="mt-0.5 font-mono text-[11px] font-bold">
+          <p className="mt-0.5 font-mono text-xs font-bold">
             {view.capturedAtDisplay}
           </p>
-          <p className="font-mono text-[9px] text-muted">
+          <p className="font-mono text-xs text-muted">
             freshest benchmark {view.freshestBenchmarkDisplay}
           </p>
         </div>
       </div>
 
       {view.leader && view.leadGap !== null ? (
-        <p className="finding mt-3 rounded px-3 py-2 text-[12.5px] leading-relaxed">
+        <p className="finding mt-3 rounded px-3 py-2.5 text-sm leading-relaxed">
           <span className="font-semibold">{view.leader.provider}</span>
           &apos;s {view.leader.model} leads on the Intelligence Index at{" "}
           <span className="font-mono font-bold">{view.leader.intelligence}</span>
@@ -60,7 +60,7 @@ export function FrontierFaceOff({ view }: { view: FaceOffView }) {
       ) : null}
 
       {view.entries.length === 0 ? (
-        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-6 text-[12px] text-muted">
+        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-6 text-sm text-muted">
           No frontier-category vendor currently publishes both a list price and
           an independent index score.
         </p>
@@ -81,7 +81,7 @@ export function FrontierFaceOff({ view }: { view: FaceOffView }) {
                   <th
                     key={label}
                     title={help || undefined}
-                    className="px-3 py-2 font-mono text-[10px] font-medium uppercase tracking-wider text-muted"
+                    className="px-3 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-muted"
                   >
                     {label}
                   </th>
@@ -94,18 +94,18 @@ export function FrontierFaceOff({ view }: { view: FaceOffView }) {
                   key={e.provider}
                   className={i === 0 ? "bg-primary/5" : "hover:bg-base-200/60"}
                 >
-                  <td className="px-3 py-2">
-                    <span className="text-[12.5px] font-bold">
+                  <td className="px-3 py-2.5">
+                    <span className="text-sm font-bold">
                       {e.provider}
                     </span>
                     {i === 0 ? (
-                      <span className="ml-2 rounded bg-primary px-1.5 py-0.5 font-mono text-[8px] font-bold uppercase tracking-wider text-white">
+                      <span className="ml-2 rounded bg-primary px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-white">
                         Leads
                       </span>
                     ) : null}
                   </td>
-                  <td className="px-3 py-2 text-[12px]">{e.model}</td>
-                  <td className="px-3 py-2">
+                  <td className="px-3 py-2.5 text-sm">{e.model}</td>
+                  <td className="px-3 py-2.5">
                     <div className="flex items-center gap-2">
                       <svg
                         width={BAR_W}
@@ -133,36 +133,36 @@ export function FrontierFaceOff({ view }: { view: FaceOffView }) {
                           fill="var(--ag-primary)"
                         />
                       </svg>
-                      <span className="font-mono text-[12px] font-bold">
+                      <span className="font-mono text-sm font-bold">
                         {e.intelligence}
                       </span>
                     </div>
                   </td>
-                  <td className="px-3 py-2 font-mono text-[11.5px]">
+                  <td className="px-3 py-2.5 font-mono text-xs">
                     {e.behindLeader === 0 ? (
                       <span className="text-muted">&mdash;</span>
                     ) : (
                       `-${e.behindLeader}`
                     )}
                   </td>
-                  <td className="px-3 py-2 font-mono text-[11.5px]">
+                  <td className="px-3 py-2.5 font-mono text-xs">
                     ${e.inputPerM}
                   </td>
-                  <td className="px-3 py-2 font-mono text-[11.5px]">
+                  <td className="px-3 py-2.5 font-mono text-xs">
                     {e.throughput === null ? (
                       <span className="text-muted">not published</span>
                     ) : (
                       `${e.throughput} tok/s`
                     )}
                   </td>
-                  <td className="px-3 py-2">
+                  <td className="px-3 py-2.5">
                     {e.frontier ? (
-                      <span className="rounded bg-good-bg px-1.5 py-0.5 font-mono text-[9px] font-bold uppercase tracking-wider text-good">
+                      <span className="rounded bg-good-bg px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-good">
                         On frontier
                       </span>
                     ) : (
                       <span
-                        className="font-mono text-[10.5px] text-muted"
+                        className="font-mono text-xs text-muted"
                         title="A cheaper model matches or beats this one on the index."
                       >
                         dominated

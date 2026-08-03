@@ -32,7 +32,7 @@ const CONFIDENCE_TITLE: Record<string, string> = {
 function EvidenceBadge({ tier }: { tier: string }) {
   return (
     <span
-      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${CONFIDENCE_STYLE[tier] ?? CONFIDENCE_STYLE.seed}`}
+      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider ${CONFIDENCE_STYLE[tier] ?? CONFIDENCE_STYLE.seed}`}
       title={CONFIDENCE_TITLE[tier] ?? tier}
     >
       {tier}
@@ -44,7 +44,7 @@ function TypeChip({ type }: { type: AllianceEdgeView["type"] }) {
   const isInvestment = type === "investment";
   return (
     <span
-      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${
+      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider ${
         isInvestment
           ? "bg-primary/10 text-primary"
           : "border border-base-300 text-muted"
@@ -64,7 +64,7 @@ function PartyName({
   vendorId: string | null;
   bold?: boolean;
 }) {
-  const cls = `text-[13px] ${bold ? "font-bold" : "font-semibold"}`;
+  const cls = `text-sm ${bold ? "font-bold" : "font-semibold"}`;
   if (!vendorId) return <span className={cls}>{label}</span>;
   return (
     <Link href={`/vendor-view/${vendorId}`} className={`${cls} hover:text-primary hover:underline`}>
@@ -89,25 +89,25 @@ function formatDate(iso: string): string {
 
 function EdgeCard({ edge }: { edge: AllianceEdgeView }) {
   return (
-    <article className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <article className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-center gap-1.5">
         <TypeChip type={edge.type} />
         <EvidenceBadge tier={edge.confidence} />
         {edge.estimatedValue ? (
           <span
-            className="font-mono text-[10px] text-base-content/80"
+            className="font-mono text-xs text-base-content/80"
             title="Rough size note as recorded in the dataset, not a measured figure"
           >
             {edge.estimatedValue}
           </span>
         ) : null}
-        <span className="ml-auto font-mono text-[10px] text-muted">
+        <span className="ml-auto font-mono text-xs text-muted">
           Updated {formatDate(edge.dateUpdated)}
         </span>
       </div>
       <div className="mt-2 flex flex-wrap items-center gap-1.5">
         <PartyName label={edge.fromLabel} vendorId={edge.fromVendorId} bold />
-        <span className="text-[11px] text-muted">
+        <span className="text-xs text-muted">
           {edge.type === "investment" ? "invests in" : "partners with"}
         </span>
         <span aria-hidden className="text-muted">
@@ -115,7 +115,7 @@ function EdgeCard({ edge }: { edge: AllianceEdgeView }) {
         </span>
         <PartyName label={edge.toLabel} vendorId={edge.toVendorId} bold />
       </div>
-      <p className="measure mt-1.5 text-[12px] leading-snug text-muted">{edge.summary}</p>
+      <p className="measure mt-1.5 text-sm leading-snug text-muted">{edge.summary}</p>
       <div className="mt-2 flex flex-wrap items-center gap-2">
         <span className="micro-label">Strength</span>
         <div
@@ -127,7 +127,7 @@ function EdgeCard({ edge }: { edge: AllianceEdgeView }) {
             style={{ width: `${Math.round(edge.strengthScore * 100)}%` }}
           />
         </div>
-        <span className="font-mono text-[10px] text-muted">{edge.strengthScore.toFixed(2)}</span>
+        <span className="font-mono text-xs text-muted">{edge.strengthScore.toFixed(2)}</span>
         <span className="ml-auto flex flex-wrap gap-2">
           {edge.sourceUrls.map((url) => (
             <a
@@ -135,7 +135,7 @@ function EdgeCard({ edge }: { edge: AllianceEdgeView }) {
               href={url}
               target="_blank"
               rel="noreferrer"
-              className="text-[10px] text-primary hover:underline"
+              className="text-xs text-primary hover:underline"
             >
               {sourceHost(url)}
             </a>
@@ -182,7 +182,7 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
             ["Companies covered", data.summary.vendorsCovered, "Named companies appearing on at least one alliance edge"],
           ] as const
         ).map(([label, value, tooltip]) => (
-          <div key={label} className="rounded-lg border border-base-300 bg-base-100 p-4">
+          <div key={label} className="rounded-lg border border-base-300 bg-base-100 p-5">
             <div className="flex flex-wrap items-start justify-between gap-2">
               <MicroLabel label={label} tooltip={tooltip} />
               <LaneBadge lane="aie" />
@@ -229,7 +229,7 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
             Seed-tier edges should be treated as hypotheses, not confirmed relationships.
           </p>
         </DerivationDrawer>
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           Latest edge update in the dataset: {formatDate(data.datasetUpdatedLatest)}
         </span>
       </div>
@@ -245,7 +245,7 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
             aria-label="Filter alliances by company"
             value={selected}
             onChange={(e) => setSelected(e.target.value)}
-            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm"
           >
             <option value="all">All companies ({data.summary.total} edges)</option>
             {data.options.map((o) => (
@@ -258,12 +258,12 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
 
         {selected !== "all" ? (
           <div className="mt-3">
-            <h3 className="text-[13px] font-bold">
+            <h3 className="text-sm font-bold">
               {selectedLabel}: {visible.length}{" "}
               {visible.length === 1 ? "alliance edge" : "alliance edges"}
             </h3>
             {visible.length === 0 ? (
-              <p className="mt-2 text-[12px] text-muted">
+              <p className="mt-2 text-sm text-muted">
                 No partnership or investment edges recorded for this company in
                 the dataset.
               </p>
@@ -279,7 +279,7 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
           <div className="mt-3 space-y-4">
             {groups?.map((group) => (
               <div key={group.label}>
-                <h3 className="text-[13px] font-bold">
+                <h3 className="text-sm font-bold">
                   {group.label}{" "}
                   <span className="font-normal text-muted">
                     ({group.edges.length} {group.edges.length === 1 ? "edge" : "edges"})
@@ -300,22 +300,22 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
       <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
         <Link
           href="/ecosystem-navigator"
-          className="rounded-lg border border-base-300 bg-base-100 p-4 transition hover:border-primary"
+          className="rounded-lg border border-base-300 bg-base-100 p-5 transition hover:border-primary"
         >
           <span className="micro-label">Delivery channel</span>
-          <p className="mt-1 text-[13px] font-semibold">AI Ecosystem Navigator</p>
-          <p className="measure mt-0.5 text-[11px] text-muted">
+          <p className="mt-1 text-sm font-semibold">AI Ecosystem Navigator</p>
+          <p className="measure mt-0.5 text-xs text-muted">
             Integrators and delivery partners are tracked separately in the
             labelled delivery and services channel, not mixed into this map.
           </p>
         </Link>
         <Link
           href="/market-watch"
-          className="rounded-lg border border-base-300 bg-base-100 p-4 transition hover:border-primary"
+          className="rounded-lg border border-base-300 bg-base-100 p-5 transition hover:border-primary"
         >
           <span className="micro-label">Related view</span>
-          <p className="mt-1 text-[13px] font-semibold">Market Watch</p>
-          <p className="mt-0.5 text-[11px] text-muted">
+          <p className="mt-1 text-sm font-semibold">Market Watch</p>
+          <p className="mt-0.5 text-xs text-muted">
             Dependency concentration by layer, computed from the same exposure
             map, sits on Market Watch.
           </p>

@@ -162,7 +162,7 @@ export function PulseView({
             aria-label="Spotlight vendor"
             value={selected}
             onChange={(e) => setSelected(e.target.value)}
-            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm"
           >
             <optgroup label="Narrative versus reality read published">
               {withRead.map((v) => (
@@ -211,17 +211,17 @@ export function PulseView({
           {/* The decision, which is the part a buyer actually needs */}
           <div className="@container @4xl:col-span-1">
             {decision ? (
-              <div className="finding-strong rounded-lg p-4">
+              <div className="finding-strong rounded-lg p-5">
                 <MicroLabel
                   label="What to do about it"
                   tooltip="The same composite, stated as an action."
                 />
-                <p className="mt-2 text-[20px] font-bold">{decision.status}</p>
-                <p className="measure mt-1.5 text-[12px] leading-snug">
+                <p className="mt-2 text-xl font-bold">{decision.status}</p>
+                <p className="measure mt-1.5 text-sm leading-snug">
                   {decision.reason}
                 </p>
                 {decision.keyDimensions.length ? (
-                  <p className="measure mt-2 text-[12px] leading-snug text-muted">
+                  <p className="measure mt-2 text-sm leading-snug text-muted">
                     Based on {decision.keyDimensions.join(", ")}.
                   </p>
                 ) : null}

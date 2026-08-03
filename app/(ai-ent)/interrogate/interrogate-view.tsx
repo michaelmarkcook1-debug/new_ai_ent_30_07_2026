@@ -193,14 +193,14 @@ export function InterrogateView() {
         <div className="py-6">
           <div className="flex items-center gap-2">
             <span className="micro-label text-primary">Interrogate</span>
-            <span className="rounded bg-warn-bg px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-warn">
+            <span className="rounded bg-warn-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-warn">
               Scripted sample mode (no API key)
             </span>
           </div>
           <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
             Tell me your situation.
           </h2>
-          <p className="mt-2 measure text-[14px] leading-relaxed text-muted">
+          <p className="mt-2 measure text-base leading-relaxed text-muted">
             One or two sentences: who you are, what you have, and where you
             want to get to with AI. I will ask a few sharp questions, each
             shaped by your last answer, then write a tailored finding grounded
@@ -219,7 +219,7 @@ export function InterrogateView() {
               }}
               rows={3}
               placeholder="Who you are, what you have, where you want to get to..."
-              className="flex-1 resize-none rounded-lg border border-base-300 bg-base-100 px-4 py-3 text-[14px] outline-none focus:border-primary"
+              className="flex-1 resize-none rounded-lg border border-base-300 bg-base-100 px-4 py-3 text-base outline-none focus:border-primary"
             />
           </div>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
@@ -229,7 +229,7 @@ export function InterrogateView() {
                   key={d}
                   type="button"
                   onClick={() => setDepth(d)}
-                  className={`rounded-full px-3 py-1 text-[11px] font-semibold capitalize transition ${depth === d ? "bg-primary text-white" : "text-muted hover:text-base-content"}`}
+                  className={`rounded-full px-3 py-1 text-xs font-semibold capitalize transition ${depth === d ? "bg-primary text-white" : "text-muted hover:text-base-content"}`}
                 >
                   {d === "quick" ? "Quick response" : "Comprehensive"}
                 </button>
@@ -239,7 +239,7 @@ export function InterrogateView() {
               type="button"
               disabled={busy || !input.trim()}
               onClick={() => start(input)}
-              className="rounded-full bg-primary px-6 py-2 text-[13px] font-semibold text-white shadow-sm transition hover:opacity-90 disabled:opacity-50"
+              className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 disabled:opacity-50"
             >
               Start
             </button>
@@ -252,7 +252,7 @@ export function InterrogateView() {
                   key={ex}
                   type="button"
                   onClick={() => start(ex)}
-                  className="rounded-lg border border-base-300 p-3 text-left text-[12px] leading-snug text-base-content/80 transition hover:border-primary hover:text-base-content"
+                  className="rounded-lg border border-base-300 p-4 text-left text-sm leading-snug text-base-content/80 transition hover:border-primary hover:text-base-content"
                 >
                   {ex}
                 </button>
@@ -267,7 +267,7 @@ export function InterrogateView() {
               <div
                 // The finding carries the judgement edge; the questions that
                 // led to it do not, because a question is not a conclusion.
-                className={`max-w-[90%] rounded-lg px-4 py-3 text-[13.5px] leading-relaxed ${
+                className={`max-w-[90%] rounded-lg px-4 py-3 text-sm leading-relaxed ${
                   t.role === "user"
                     ? "bg-primary text-white"
                     : t.kind === "finding"
@@ -292,7 +292,7 @@ export function InterrogateView() {
                       <Link
                         key={l.href}
                         href={l.href}
-                        className="rounded-full border border-primary px-3 py-1 text-[11px] font-semibold text-primary transition hover:bg-primary hover:text-white"
+                        className="rounded-full border border-primary px-3 py-1.5 text-xs font-semibold text-primary transition hover:bg-primary hover:text-white"
                       >
                         {l.label}
                       </Link>
@@ -301,7 +301,7 @@ export function InterrogateView() {
                 ) : null}
                 {t.tiers ? (
                   <div className="mt-2 border-t border-base-300 pt-1.5">
-                    <p className="measure font-mono text-[9.5px] uppercase tracking-wider text-muted">
+                    <p className="measure font-mono text-xs uppercase tracking-wider text-muted">
                       {t.tiers.map((x) => `${x.tier}: ${x.role} (${x.mode})`).join(" · ")}
                       {typeof t.tokens === "number" ? ` · ~${t.tokens} tokens indicative` : ""}
                     </p>
@@ -311,7 +311,7 @@ export function InterrogateView() {
             </div>
           ))}
           {busy ? (
-            <p className="font-mono text-[11px] text-muted">Working through the grounded sources...</p>
+            <p className="font-mono text-xs text-muted">Working through the grounded sources...</p>
           ) : null}
           {phase === "asking" && !busy ? (
             <div className="flex gap-2 pt-2">
@@ -322,13 +322,13 @@ export function InterrogateView() {
                   if (e.key === "Enter") answer(input);
                 }}
                 placeholder="Your answer..."
-                className="flex-1 rounded-full border border-base-300 bg-base-100 px-4 py-2 text-[13px] outline-none focus:border-primary"
+                className="flex-1 rounded-full border border-base-300 bg-base-100 px-4 py-2.5 text-sm outline-none focus:border-primary"
               />
               <button
                 type="button"
                 onClick={() => answer(input)}
                 disabled={!input.trim()}
-                className="rounded-full bg-primary px-5 py-2 text-[12px] font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
+                className="rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
               >
                 Answer
               </button>
@@ -336,7 +336,7 @@ export function InterrogateView() {
                 type="button"
                 onClick={() => void call(situation, answers, true)}
                 title="Skip further questions and write the finding from what you have said so far"
-                className="rounded-full border border-base-300 px-4 py-2 text-[12px] font-semibold text-muted transition hover:border-primary hover:text-primary"
+                className="rounded-full border border-base-300 px-4 py-2.5 text-sm font-semibold text-muted transition hover:border-primary hover:text-primary"
               >
                 Conclude now
               </button>
@@ -347,7 +347,7 @@ export function InterrogateView() {
               <button
                 type="button"
                 onClick={reset}
-                className="rounded-full border border-base-300 px-4 py-2 text-[12px] font-semibold text-muted transition hover:border-primary hover:text-primary"
+                className="rounded-full border border-base-300 px-4 py-2.5 text-sm font-semibold text-muted transition hover:border-primary hover:text-primary"
               >
                 Start a new interrogation
               </button>
@@ -362,7 +362,7 @@ export function InterrogateView() {
         <LaneBadge lane="aie-live" />
         <LaneBadge lane="aie" />
         <LaneBadge lane="sample" />
-        <p className="measure text-[11px] text-muted">
+        <p className="measure text-xs text-muted">
           Findings draw on the AIE live vendor read, the ported AIE dataset,
           the preloaded documents and the Shell fixture, with citations on
           every claim. Tiered routing: Haiku shapes questions, Sonnet writes

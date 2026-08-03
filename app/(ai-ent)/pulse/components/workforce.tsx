@@ -74,7 +74,7 @@ export function Workforce({
   return (
     <section className="grid grid-cols-1 gap-4 @4xl:grid-cols-5">
       {/* Allocation: an assumption, labelled as one */}
-      <div className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-2">
+      <div className="@container rounded-lg border border-base-300 bg-base-100 p-5 @4xl:col-span-2">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <MicroLabel
             label="Model allocation"
@@ -96,10 +96,10 @@ export function Workforce({
               />
               <div className="min-w-0 flex-1">
                 <dt className="flex items-baseline justify-between gap-2">
-                  <span className="text-[13px] font-semibold">{b.label}</span>
-                  <span className="font-mono text-[12px]">{b.percent}%</span>
+                  <span className="text-sm font-semibold">{b.label}</span>
+                  <span className="font-mono text-sm">{b.percent}%</span>
                 </dt>
-                <dd className="measure text-[12px] leading-snug text-muted">
+                <dd className="measure text-sm leading-snug text-muted">
                   {b.work}
                 </dd>
               </div>
@@ -107,7 +107,7 @@ export function Workforce({
           ))}
         </dl>
 
-        <p className="mt-3 rounded border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[12px] leading-snug text-warn">
+        <p className="mt-3 rounded border border-warn/40 bg-warn-bg px-2.5 py-2 text-sm leading-snug text-warn">
           Illustrative allocation, not a measurement. Nothing here measures what
           share of your work is routine against complex. Adjust by industry and
           role.
@@ -164,7 +164,7 @@ export function Workforce({
       </div>
 
       {/* Role recommendation: derived from the real workflow library */}
-      <div className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-3">
+      <div className="@container rounded-lg border border-base-300 bg-base-100 p-5 @4xl:col-span-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-2">
             <MicroLabel
@@ -175,7 +175,7 @@ export function Workforce({
           </div>
           <Link
             href="/market-view"
-            className="text-[12px] font-semibold text-primary hover:underline"
+            className="text-sm font-semibold text-primary hover:underline"
           >
             All workflows →
           </Link>
@@ -183,7 +183,7 @@ export function Workforce({
 
         <div className="mt-3 flex flex-wrap gap-2">
           <label className="flex items-center gap-1.5">
-            <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
+            <span className="font-mono text-sm uppercase tracking-wider text-muted">
               Industry
             </span>
             <select
@@ -192,7 +192,7 @@ export function Workforce({
                 setIndustry(e.target.value);
                 setWorkflowId(undefined);
               }}
-              className="max-w-[11rem] rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+              className="max-w-[11rem] rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm"
             >
               {industries.map((i) => (
                 <option key={i} value={i}>
@@ -202,13 +202,13 @@ export function Workforce({
             </select>
           </label>
           <label className="flex items-center gap-1.5">
-            <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
+            <span className="font-mono text-sm uppercase tracking-wider text-muted">
               Workflow
             </span>
             <select
               value={workflowId ?? workflows[0]?.id ?? ""}
               onChange={(e) => setWorkflowId(e.target.value)}
-              className="max-w-[13rem] rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+              className="max-w-[13rem] rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm"
             >
               {workflows.map((w) => (
                 <option key={w.id} value={w.id}>
@@ -220,33 +220,33 @@ export function Workforce({
         </div>
 
         {rec === null ? (
-          <p className="mt-4 rounded-lg border border-dashed border-base-300 px-3 py-6 text-center text-[12px] text-muted">
+          <p className="mt-4 rounded-lg border border-dashed border-base-300 px-3 py-6 text-center text-sm text-muted">
             No workflow in the catalogue is tagged to this industry, so no
             recommendation is offered rather than a guess.
           </p>
         ) : (
           <>
             <div className="mt-3 flex flex-wrap items-baseline gap-x-2 gap-y-1">
-              <h3 className="text-[15px] font-bold">{rec.workflowLabel}</h3>
-              <span className="text-[12px] text-muted">
+              <h3 className="text-base font-bold">{rec.workflowLabel}</h3>
+              <span className="text-sm text-muted">
                 {rec.industryLabel} · {rec.category}
               </span>
             </div>
 
             <div className="mt-2.5 flex flex-wrap items-center gap-2">
-              <span className="rounded-full bg-primary px-3 py-1 text-[12px] font-semibold text-white">
+              <span className="rounded-full bg-primary px-3 py-1.5 text-sm font-semibold text-white">
                 {rec.tierLabel}
               </span>
-              <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[12px] text-muted">
+              <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-sm text-muted">
                 {rec.riskTier} risk
               </span>
-              <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[12px] text-muted">
+              <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-sm text-muted">
                 {rec.complexity}
               </span>
               {rec.regulatoryFlags.slice(0, 3).map((f) => (
                 <span
                   key={f}
-                  className="rounded-full bg-warn-bg px-2 py-0.5 font-mono text-[12px] text-warn"
+                  className="rounded-full bg-warn-bg px-2 py-0.5 font-mono text-sm text-warn"
                 >
                   {f.replace(/_/g, " ")}
                 </span>
@@ -255,24 +255,24 @@ export function Workforce({
 
             <dl className="mt-3 space-y-2.5">
               <div>
-                <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                <dt className="font-mono text-sm uppercase tracking-wider text-muted">
                   Why
                 </dt>
-                <dd className="measure mt-0.5 text-[13px] leading-snug">{rec.why}</dd>
+                <dd className="measure mt-0.5 text-sm leading-snug">{rec.why}</dd>
               </div>
               <div>
-                <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                <dt className="font-mono text-sm uppercase tracking-wider text-muted">
                   Escalate to a higher tier for
                 </dt>
-                <dd className="measure mt-0.5 text-[13px] leading-snug text-muted">
+                <dd className="measure mt-0.5 text-sm leading-snug text-muted">
                   {rec.escalateFor.join(" · ")}
                 </dd>
               </div>
               <div>
-                <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                <dt className="font-mono text-sm uppercase tracking-wider text-muted">
                   Likely impact
                 </dt>
-                <dd className="measure mt-0.5 text-[13px] leading-snug">
+                <dd className="measure mt-0.5 text-sm leading-snug">
                   {rec.impact}
                 </dd>
               </div>

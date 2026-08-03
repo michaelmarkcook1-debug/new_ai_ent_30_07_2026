@@ -49,7 +49,7 @@ export default async function VendorProfilePage({
         actions={
           <Link
             href="/vendor-view"
-            className="rounded-full border border-base-300 px-3 py-1.5 text-[11px] text-base-content/85 transition hover:border-primary hover:text-primary"
+            className="rounded-full border border-base-300 px-3 py-2 text-xs text-base-content/85 transition hover:border-primary hover:text-primary"
           >
             All vendors
           </Link>

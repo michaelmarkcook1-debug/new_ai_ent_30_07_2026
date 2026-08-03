@@ -41,7 +41,7 @@ function SourceBadge({ state }: { state: FetchState<unknown> }) {
 
 function LoadingNote() {
   return (
-    <p className="py-6 text-center font-mono text-[11px] text-muted">
+    <p className="py-6 text-center font-mono text-xs text-muted">
       Fetching live figures... the first call for a ticker can take several
       seconds while BoardRadar computes.
     </p>
@@ -50,7 +50,7 @@ function LoadingNote() {
 
 function ErrorNote({ code }: { code: string }) {
   return (
-    <p className="py-6 text-center font-mono text-[11px] text-muted">
+    <p className="py-6 text-center font-mono text-xs text-muted">
       Live data unavailable ({code}); no figure shown rather than a guess.
     </p>
   );
@@ -107,7 +107,7 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
             key={t.ticker}
             type="button"
             onClick={() => setSelected(t.ticker)}
-            className={`rounded-full border px-2.5 py-1 font-mono text-[11px] font-semibold transition ${
+            className={`rounded-full border px-2.5 py-1 font-mono text-xs font-semibold transition ${
               selected === t.ticker
                 ? "border-primary bg-primary text-white"
                 : "border-base-300 bg-base-100 text-base-content/75 hover:border-primary hover:text-primary"
@@ -119,7 +119,7 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
         ))}
       </div>
       {selectedMeta?.financialsOnly ? (
-        <p className="measure mt-1.5 text-[11px] text-muted">
+        <p className="measure mt-1.5 text-xs text-muted">
           {selectedMeta.name} is covered for financials only: it is not in the
           wider BoardRadar company universe, so other modules show honest empty
           states for it.
@@ -128,7 +128,7 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
 
       <div className="mt-3 grid grid-cols-1 gap-4 @4xl:grid-cols-5">
         {/* Overview summary card */}
-        <div className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-2">
+        <div className="@container rounded-lg border border-base-300 bg-base-100 p-5 @4xl:col-span-2">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Company overview"
@@ -142,16 +142,16 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
             <ErrorNote code={overview.errorCode} />
           ) : overview.data ? (
             <div className="mt-2">
-              <h3 className="text-[15px] font-bold">
+              <h3 className="text-base font-bold">
                 {overview.data.companyName}
               </h3>
-              <p className="mt-0.5 font-mono text-[10px] text-muted">
+              <p className="mt-0.5 font-mono text-xs text-muted">
                 {overview.data.sector} / {overview.data.industry}
               </p>
-              <p className="measure mt-2 text-[13px] leading-relaxed text-base-content/85">
+              <p className="measure mt-2 text-sm leading-relaxed text-base-content/85">
                 {overview.data.summary}
               </p>
-              <p className="mt-3 font-mono text-[10px] text-muted">
+              <p className="mt-3 font-mono text-xs text-muted">
                 GENERATED{" "}
                 {new Date(overview.data.timestamp).toLocaleDateString("en-GB", {
                   day: "numeric",
@@ -164,7 +164,7 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
         </div>
 
         {/* Quick metrics table */}
-        <div className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-3">
+        <div className="@container rounded-lg border border-base-300 bg-base-100 p-5 @4xl:col-span-3">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Quick metrics"
@@ -178,22 +178,22 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
             <ErrorNote code={metrics.errorCode} />
           ) : metrics.data ? (
             <div className="mt-2 overflow-x-auto">
-              <table className="w-full text-[12.5px]">
+              <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-base-300 text-left">
-                    <th className="micro-label py-1.5 pr-2 font-normal">Metric</th>
-                    <th className="micro-label py-1.5 pr-2 font-normal">Current</th>
-                    <th className="micro-label py-1.5 pr-2 font-normal">Previous</th>
-                    <th className="micro-label py-1.5 pr-2 font-normal">Change</th>
-                    <th className="micro-label py-1.5 font-normal">Period</th>
+                    <th className="micro-label py-2 pr-2 font-normal">Metric</th>
+                    <th className="micro-label py-2 pr-2 font-normal">Current</th>
+                    <th className="micro-label py-2 pr-2 font-normal">Previous</th>
+                    <th className="micro-label py-2 pr-2 font-normal">Change</th>
+                    <th className="micro-label py-2 font-normal">Period</th>
                   </tr>
                 </thead>
                 <tbody>
                   {metrics.data.metrics.map((m) => (
                     <tr key={m.name} className="border-b border-base-300/60">
-                      <td className="py-2 pr-2 font-medium">{m.name}</td>
-                      <td className="py-2 pr-2 font-mono">{m.current}</td>
-                      <td className="py-2 pr-2 font-mono text-muted">
+                      <td className="py-2.5 pr-2 font-medium">{m.name}</td>
+                      <td className="py-2.5 pr-2 font-mono">{m.current}</td>
+                      <td className="py-2.5 pr-2 font-mono text-muted">
                         {m.previous}
                       </td>
                       <td
@@ -201,7 +201,7 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
                       >
                         {m.change}
                       </td>
-                      <td className="py-2 font-mono text-muted">{m.period}</td>
+                      <td className="py-2.5 font-mono text-muted">{m.period}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -222,7 +222,7 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
                     neither is possible the card says so and shows no figure.
                   </p>
                 </DerivationDrawer>
-                <span className="font-mono text-[10px] text-muted">
+                <span className="font-mono text-xs text-muted">
                   GENERATED{" "}
                   {new Date(metrics.data.timestamp).toLocaleDateString("en-GB", {
                     day: "numeric",

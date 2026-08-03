@@ -82,19 +82,19 @@ export default function StartPage() {
           <Link
             key={j.href}
             href={j.href}
-            className="group flex flex-col rounded-lg border border-base-300 bg-base-100 p-4 transition hover:border-primary"
+            className="group flex flex-col rounded-lg border border-base-300 bg-base-100 p-5 transition hover:border-primary"
           >
-            <h2 className="text-[14px] font-bold leading-snug group-hover:text-primary">
+            <h2 className="text-base font-bold leading-snug group-hover:text-primary">
               {j.question}
             </h2>
-            <p className="measure mt-1.5 flex-1 text-[12px] leading-relaxed text-muted">
+            <p className="measure mt-1.5 flex-1 text-sm leading-relaxed text-muted">
               {j.detail}
             </p>
-            <p className="mt-3 flex items-center gap-2 text-[12px] font-semibold text-primary">
+            <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-primary">
               {j.cta}
               <span aria-hidden>&rarr;</span>
               {j.then ? (
-                <span className="ml-auto font-mono text-[9.5px] font-normal text-muted">
+                <span className="ml-auto font-mono text-xs font-normal text-muted">
                   {j.then}
                 </span>
               ) : null}
@@ -103,12 +103,12 @@ export default function StartPage() {
         ))}
       </div>
 
-      <section className="mt-5 rounded-lg border border-base-300 bg-base-200/40 p-4">
+      <section className="mt-5 rounded-lg border border-base-300 bg-base-200/40 p-5">
         <MicroLabel
           label="How to read anything here"
           tooltip="The conventions used across every page."
         />
-        <ul className="mt-2 grid grid-cols-1 gap-1.5 text-[12px] text-muted @xl:grid-cols-2">
+        <ul className="mt-2 grid grid-cols-1 gap-1.5 text-sm text-muted @xl:grid-cols-2">
           <li>
             <span className="font-semibold text-base-content">
               Every figure names its source.

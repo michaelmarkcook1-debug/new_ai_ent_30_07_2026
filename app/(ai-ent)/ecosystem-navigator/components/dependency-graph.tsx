@@ -138,22 +138,22 @@ export function DependencyGraph() {
     !isFocused || focus.includes(e.sourceId) || focus.includes(e.targetId);
 
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <h2 className="text-[15px] font-bold">
+            <h2 className="text-base font-bold">
               AI Ecosystem Navigator: who relies on whom
             </h2>
             <LaneBadge lane="aie" />
           </div>
-          <p className="mt-1 measure text-[12px] text-muted">
+          <p className="mt-1 measure text-sm text-muted">
             Hover a logo to highlight its dependencies. Click to pin (up to
             three). Filter by relationship type or confidence. Every edge here
             is publicly source-backed: seed-confidence edges render dashed and
             require independent verification.
           </p>
-          <p className="mt-1 measure text-[11px] text-muted">
+          <p className="mt-1 measure text-xs text-muted">
             Direction: edges run left to right, from exposure owner to model or
             API provider. Investment and subsidiary indicate ownership or
             control exposure; cloud, hosting, partnership and supply chain
@@ -185,7 +185,7 @@ export function DependencyGraph() {
       </div>
 
       {/* Filters */}
-      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-base-300 py-2">
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 border-y border-base-300 py-2.5">
         <div className="flex flex-wrap items-center gap-1.5">
           <MicroLabel
             label="Relationship"
@@ -206,7 +206,7 @@ export function DependencyGraph() {
                     return next.size === 0 ? new Set(REL_ORDER) : next;
                   })
                 }
-                className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-[10.5px] transition ${
+                className={`inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs transition ${
                   on ? "border-base-300 text-base-content" : "border-base-300 text-muted opacity-45"
                 }`}
               >
@@ -216,7 +216,7 @@ export function DependencyGraph() {
                   aria-hidden
                 />
                 {REL_LABEL[t]}
-                <span className="font-mono text-[9px] text-muted">{count}</span>
+                <span className="font-mono text-xs text-muted">{count}</span>
               </button>
             );
           })}
@@ -240,7 +240,7 @@ export function DependencyGraph() {
                     return next.size === 0 ? new Set(CONFIDENCE_ORDER) : next;
                   })
                 }
-                className={`rounded-full border px-2 py-0.5 font-mono text-[10px] uppercase tracking-wider transition ${
+                className={`rounded-full border px-2 py-0.5 font-mono text-xs uppercase tracking-wider transition ${
                   on ? "border-base-300 text-base-content" : "border-base-300 text-muted opacity-45"
                 }`}
               >
@@ -249,14 +249,14 @@ export function DependencyGraph() {
             );
           })}
         </div>
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           {visibleEdges.length} of {EXPOSURE_EDGES.length} edges
         </span>
         {pinned.length > 0 ? (
           <button
             type="button"
             onClick={() => setPinned([])}
-            className="rounded-full border border-primary px-2 py-0.5 text-[10.5px] font-semibold text-primary"
+            className="rounded-full border border-primary px-2 py-0.5 text-xs font-semibold text-primary"
           >
             Clear {pinned.length} pinned
           </button>
@@ -428,9 +428,9 @@ export function DependencyGraph() {
       </div>
 
       {/* Dossier for the focused node or pins */}
-      <div className="mt-2 rounded border border-base-300 bg-base-200/50 p-3">
+      <div className="mt-2 rounded border border-base-300 bg-base-200/50 p-4">
         {!isFocused ? (
-          <p className="measure text-[11.5px] text-muted">
+          <p className="measure text-xs text-muted">
             Hover a logo to highlight its dependencies. Click to pin it (up to
             three) and keep its edges in view while you compare.
           </p>
@@ -447,7 +447,7 @@ export function DependencyGraph() {
                 return (
                   <span
                     key={id}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-base-300 bg-base-100 px-2 py-0.5 text-[11px]"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-base-300 bg-base-100 px-2 py-0.5 text-xs"
                   >
                     <span
                       className="inline-block h-2 w-2 rounded-full"
@@ -468,7 +468,7 @@ export function DependencyGraph() {
                   </span>
                 );
               })}
-              <span className="font-mono text-[10px] text-muted">
+              <span className="font-mono text-xs text-muted">
                 {focusEdges.length} edge{focusEdges.length === 1 ? "" : "s"}
               </span>
             </div>
@@ -479,32 +479,32 @@ export function DependencyGraph() {
                 return (
                   <li
                     key={e.id}
-                    className="rounded border border-base-300 bg-base-100 px-2.5 py-1.5"
+                    className="rounded border border-base-300 bg-base-100 px-2.5 py-2"
                   >
                     <div className="flex flex-wrap items-center gap-1.5">
-                      <span className="text-[11.5px] font-semibold">{src?.label}</span>
+                      <span className="text-xs font-semibold">{src?.label}</span>
                       <span
-                        className="rounded px-1.5 py-0.5 font-mono text-[8.5px] font-bold uppercase tracking-wider text-white"
+                        className="rounded px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-white"
                         style={{ background: REL_COLOUR[e.relationshipType] }}
                       >
                         {REL_LABEL[e.relationshipType]}
                       </span>
-                      <span className="text-[11.5px] font-semibold">{tgt?.label}</span>
+                      <span className="text-xs font-semibold">{tgt?.label}</span>
                       <span
-                        className="font-mono text-[9px] uppercase tracking-wider text-muted"
+                        className="font-mono text-xs uppercase tracking-wider text-muted"
                         title="The dataset's own evidence tier for this edge"
                       >
                         {e.confidence}
                       </span>
                       {e.estimatedValue ? (
-                        <span className="font-mono text-[9.5px] text-muted">
+                        <span className="font-mono text-xs text-muted">
                           {e.estimatedValue}
                         </span>
                       ) : null}
                     </div>
-                    <p className="measure mt-0.5 text-[11px] leading-snug text-muted">{e.summary}</p>
+                    <p className="measure mt-0.5 text-xs leading-snug text-muted">{e.summary}</p>
                     <div className="mt-1 flex flex-wrap items-center gap-2">
-                      <span className="font-mono text-[9px] text-muted">
+                      <span className="font-mono text-xs text-muted">
                         updated {e.dateUpdated}
                       </span>
                       {e.sourceUrls.map((u) => {
@@ -520,7 +520,7 @@ export function DependencyGraph() {
                             href={u}
                             target="_blank"
                             rel="noreferrer"
-                            className="font-mono text-[9px] text-primary hover:underline"
+                            className="font-mono text-xs text-primary hover:underline"
                           >
                             {host}
                           </a>

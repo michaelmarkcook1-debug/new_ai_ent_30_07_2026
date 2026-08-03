@@ -153,20 +153,20 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
     <div className="grid grid-cols-1 gap-4 @4xl:grid-cols-3">
       {/* Chat column */}
       <section className="@container flex min-h-[480px] flex-col rounded-lg border border-base-300 bg-base-100 @4xl:col-span-2">
-        <div className="flex items-center justify-between border-b border-base-300 px-3 py-2">
+        <div className="flex items-center justify-between border-b border-base-300 px-3 py-2.5">
           <MicroLabel
             label="AI Analyst"
             tooltip="Grounded in your uploads first, then the preloaded documents, the Shell fixture and the AIE dataset. Answers cite their sources and say plainly when the answer is not in the data."
           />
-          <span className="rounded bg-warn-bg px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-warn">
+          <span className="rounded bg-warn-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-warn">
             Scripted sample mode (no API key)
           </span>
         </div>
 
-        <div className="flex-1 space-y-3 overflow-y-auto p-3">
+        <div className="flex-1 space-y-3 overflow-y-auto p-4">
           {messages.length === 0 ? (
             <div className="py-6 text-center">
-              <p className="measure text-[13px] text-muted">
+              <p className="measure text-sm text-muted">
                 Ask about the vendor decision, regulation, talent or delivery.
                 Answers come only from the grounded sources.
               </p>
@@ -176,7 +176,7 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
                     key={q}
                     type="button"
                     onClick={() => ask(q)}
-                    className="rounded-full border border-base-300 px-3 py-2 text-[12px] transition hover:border-primary hover:text-primary"
+                    className="rounded-full border border-base-300 px-3 py-2.5 text-sm transition hover:border-primary hover:text-primary"
                   >
                     {q}
                   </button>
@@ -189,17 +189,17 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
                 <div
                   // The analyst's answer is a finding, so it carries the
                   // judgement edge; the user's own message does not.
-                  className={`max-w-[85%] rounded-lg px-3 py-2 text-[13px] leading-relaxed ${
+                  className={`max-w-[85%] rounded-lg px-3 py-2 text-sm leading-relaxed ${
                     m.role === "user" ? "bg-primary text-white" : "finding"
                   }`}
                 >
                   <p className="whitespace-pre-wrap">{m.text}</p>
                   {m.meta ? (
                     <div className="mt-2 border-t border-base-300 pt-1.5">
-                      <p className="font-mono text-[9.5px] uppercase tracking-wider text-muted">
+                      <p className="font-mono text-xs uppercase tracking-wider text-muted">
                         {m.meta.tiers.map((t) => `${t.tier}: ${t.role} (${t.mode})`).join(" · ")}
                       </p>
-                      <p className="mt-0.5 font-mono text-[9.5px] text-muted">
+                      <p className="mt-0.5 font-mono text-xs text-muted">
                         ~{m.meta.tokens} tokens indicative · mode: {m.meta.mode}
                       </p>
                     </div>
@@ -209,12 +209,12 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
             ))
           )}
           {busy ? (
-            <p className="font-mono text-[11px] text-muted">Analysing grounded sources...</p>
+            <p className="font-mono text-xs text-muted">Analysing grounded sources...</p>
           ) : null}
           <div ref={bottomRef} />
         </div>
 
-        <div className="border-t border-base-300 p-3">
+        <div className="border-t border-base-300 p-4">
           <div className="flex gap-2">
             <input
               value={input}
@@ -223,13 +223,13 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
                 if (e.key === "Enter") void ask(input);
               }}
               placeholder="Ask the AI Analyst..."
-              className="flex-1 rounded-full border border-base-300 bg-base-100 px-4 py-2 text-[13px] outline-none focus:border-primary"
+              className="flex-1 rounded-full border border-base-300 bg-base-100 px-4 py-2.5 text-sm outline-none focus:border-primary"
             />
             <button
               type="button"
               disabled={busy}
               onClick={() => ask(input)}
-              className="rounded-full bg-primary px-4 py-2 text-[12px] font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
+              className="rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
             >
               Ask
             </button>
@@ -238,12 +238,12 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
               disabled={busy || !input.trim()}
               onClick={() => ask(input, true)}
               title="Runs the Opus tier. Never automatic: deep analysis costs materially more per question."
-              className="rounded-full border border-primary px-3 py-2 text-[12px] font-semibold text-primary transition hover:bg-primary hover:text-white disabled:opacity-50"
+              className="rounded-full border border-primary px-3 py-2.5 text-sm font-semibold text-primary transition hover:bg-primary hover:text-white disabled:opacity-50"
             >
               Run deep analysis
             </button>
           </div>
-          <p className="measure mt-1.5 font-mono text-[9.5px] text-muted">
+          <p className="measure mt-1.5 font-mono text-xs text-muted">
             Tiered routing: Haiku classifies and retrieves, Sonnet synthesises,
             Opus only behind the deep-analysis button (cost note applies).
           </p>
@@ -252,11 +252,11 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
 
       {/* Grounding column */}
       <aside className="space-y-3">
-        <div className="rounded-lg border border-base-300 bg-base-100 p-3">
+        <div className="rounded-lg border border-base-300 bg-base-100 p-4">
           <div className="flex items-center justify-between">
             <MicroLabel label="Grounding sources" tooltip="Priority order: your uploads, preloaded documents, the Shell fixture, the AIE dataset." />
           </div>
-          <ol className="mt-2 list-decimal space-y-1 pl-4 text-[12px]">
+          <ol className="mt-2 list-decimal space-y-1 pl-4 text-sm">
             <li>Your uploads ({uploads.length})</li>
             <li>Preloaded documents ({preloaded.length})</li>
             <li>Shell fixture context <LaneBadge lane="sample" /></li>
@@ -264,11 +264,11 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
           </ol>
         </div>
 
-        <div className="rounded-lg border border-base-300 bg-base-100 p-3">
+        <div className="rounded-lg border border-base-300 bg-base-100 p-4">
           <MicroLabel label="Preloaded documents" tooltip="Three sample documents ship with the demo so it works with zero uploads." />
           <ul className="mt-2 space-y-1.5">
             {preloaded.map((d) => (
-              <li key={d} className="flex items-center gap-2 text-[12px]">
+              <li key={d} className="flex items-center gap-2 text-sm">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted"><path d="M14 3v5h5M6 3h9l4 4v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z" /></svg>
                 {d}
               </li>
@@ -276,9 +276,9 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
           </ul>
         </div>
 
-        <div className="rounded-lg border border-base-300 bg-base-100 p-3">
+        <div className="rounded-lg border border-base-300 bg-base-100 p-4">
           <MicroLabel label="Upload documents" tooltip="PDF, DOCX, TXT or MD. Max 10 MB each, max 5 files. Validated server-side, held in memory for this session only." />
-          <label className="mt-2 flex cursor-pointer items-center justify-center rounded border border-dashed border-base-300 px-3 py-4 text-[12px] text-muted transition hover:border-primary hover:text-primary">
+          <label className="mt-2 flex cursor-pointer items-center justify-center rounded border border-dashed border-base-300 px-3 py-4 text-sm text-muted transition hover:border-primary hover:text-primary">
             <input
               type="file"
               multiple
@@ -289,14 +289,14 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
             Choose files (PDF, DOCX, TXT, MD)
           </label>
           {uploadError ? (
-            <p className="mt-1.5 text-[11px] text-error">{uploadError}</p>
+            <p className="mt-1.5 text-xs text-error">{uploadError}</p>
           ) : null}
           {uploads.length > 0 ? (
             <ul className="mt-2 space-y-1">
               {uploads.map((u) => (
-                <li key={u.name} className="flex items-center justify-between text-[11.5px]">
+                <li key={u.name} className="flex items-center justify-between text-xs">
                   <span className="truncate">{u.name}</span>
-                  <span className="ml-2 shrink-0 font-mono text-[9.5px] text-muted">
+                  <span className="ml-2 shrink-0 font-mono text-xs text-muted">
                     {u.parsed ? "parsed" : "listed (parse on live mode)"}
                   </span>
                 </li>

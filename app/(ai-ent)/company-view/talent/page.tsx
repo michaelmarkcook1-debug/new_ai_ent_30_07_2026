@@ -48,12 +48,12 @@ export default async function TalentPage({
   return (
     <CompanyShell company={company}>
     <div className="space-y-4">
-      <section className="finding rounded-lg p-4">
+      <section className="finding rounded-lg p-5">
         <div className="flex items-center justify-between">
           <span className="micro-label text-insight">Talent insight</span>
           <LaneBadge lane="sample" />
         </div>
-        <p className="measure mt-1 text-[13px] leading-relaxed">{t.insight}</p>
+        <p className="measure mt-1 text-sm leading-relaxed">{t.insight}</p>
       </section>
 
       {/* KPI strip mirroring the talent intelligence kpis object */}
@@ -66,17 +66,17 @@ export default async function TalentPage({
           { label: "AVG TENURE", value: `${t.kpis.avgTenureYears} yrs`, sub: t.kpis.avgTenureSource },
           { label: "AI EXPOSURE", value: `${x.avgAiExposurePct}%`, sub: x.avgAiExposureBasis },
         ].map((k) => (
-          <div key={k.label} className="rounded-lg border border-base-300 bg-base-100 p-3">
+          <div key={k.label} className="rounded-lg border border-base-300 bg-base-100 p-4">
             <MicroLabel label={k.label} />
             <p className="mt-1 font-mono text-xl font-bold">{k.value}</p>
-            <p className="text-[10px] text-muted">{k.sub}</p>
+            <p className="text-xs text-muted">{k.sub}</p>
           </div>
         ))}
       </section>
 
       <section className="grid grid-cols-1 gap-4 @2xl:grid-cols-2">
         {/* AI literacy pyramid over time */}
-        <div className="rounded-lg border border-base-300 bg-base-100 p-4">
+        <div className="rounded-lg border border-base-300 bg-base-100 p-5">
           <div className="flex items-center justify-between">
             <MicroLabel label="AI literacy by level" tooltip={t.pyramidMetric} />
             <LaneBadge lane="sample" />
@@ -84,9 +84,9 @@ export default async function TalentPage({
           <div className="mt-3 space-y-2.5">
             {t.pyramid.map((p) => (
               <div key={p.level}>
-                <div className="flex items-center justify-between text-[11.5px]">
+                <div className="flex items-center justify-between text-xs">
                   <span className="font-semibold">{p.level}</span>
-                  <span className="font-mono text-[10px] text-muted">
+                  <span className="font-mono text-xs text-muted">
                     24m {p.previous24m} → 12m {p.previous} → 6m {p.previous6m} → now{" "}
                     <span className="font-bold text-base-content">{p.current}</span>
                   </span>
@@ -109,7 +109,7 @@ export default async function TalentPage({
         </div>
 
         {/* Functional distribution */}
-        <div className="rounded-lg border border-base-300 bg-base-100 p-4">
+        <div className="rounded-lg border border-base-300 bg-base-100 p-5">
           <div className="flex items-center justify-between">
             <MicroLabel label="Workforce by function" tooltip="Share of headcount by functional family, per cent." />
             <LaneBadge lane="sample" />
@@ -117,7 +117,7 @@ export default async function TalentPage({
           <div className="mt-3 space-y-2.5">
             {t.functional.map((fn) => (
               <div key={fn.name}>
-                <div className="flex items-center justify-between text-[11.5px]">
+                <div className="flex items-center justify-between text-xs">
                   <span>{fn.name}</span>
                   <span className="font-mono">{fn.pct}%</span>
                 </div>
@@ -132,31 +132,31 @@ export default async function TalentPage({
 
       {/* AI talent exposure */}
       <section className="rounded-lg border border-base-300 bg-base-100">
-        <div className="flex items-center justify-between border-b border-base-300 px-3 py-2">
+        <div className="flex items-center justify-between border-b border-base-300 px-3 py-2.5">
           <MicroLabel
             label="AI talent exposure"
             tooltip={`Share of each role's tasks that AI changes materially. High exposure threshold: ${x.highExposureThresholdPct} per cent. Coverage: ${x.roleCoveragePct} per cent of headcount.`}
           />
           <LaneBadge lane="sample" />
         </div>
-        <p className="px-3 pt-2 text-[12px] text-muted">{x.summary}</p>
+        <p className="px-3 pt-2 text-sm text-muted">{x.summary}</p>
         <div className="overflow-x-auto">
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-base-300">
-                <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">Role family</th>
-                <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">AI exposure</th>
-                <th className="px-3 py-2 font-mono text-[10px] uppercase tracking-wider text-muted">Direction</th>
+                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">Role family</th>
+                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">AI exposure</th>
+                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">Direction</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-base-300">
               {x.roles.map((r) => (
                 <tr key={r.role} className="hover:bg-base-200/60">
-                  <td className="px-3 py-2 text-[12.5px] font-semibold">{r.role}</td>
-                  <td className="px-3 py-2"><ScorePill score={r.exposurePct} estimated invert /></td>
-                  <td className="px-3 py-2">
+                  <td className="px-3 py-2.5 text-sm font-semibold">{r.role}</td>
+                  <td className="px-3 py-2.5"><ScorePill score={r.exposurePct} estimated invert /></td>
+                  <td className="px-3 py-2.5">
                     <span
-                      className={`font-mono text-[11px] ${r.direction === "growing" ? "text-good" : r.direction === "contracting" ? "text-error" : "text-muted"}`}
+                      className={`font-mono text-xs ${r.direction === "growing" ? "text-good" : r.direction === "contracting" ? "text-error" : "text-muted"}`}
                     >
                       {r.direction === "growing" ? "▲" : r.direction === "contracting" ? "▼" : "▬"} {r.direction}
                     </span>
@@ -169,22 +169,22 @@ export default async function TalentPage({
       </section>
 
       {/* Leadership signals: role-level only, no named individuals in sample data */}
-      <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+      <section className="rounded-lg border border-base-300 bg-base-100 p-5">
         <div className="flex items-center justify-between">
           <MicroLabel label="Leadership signals" tooltip="Public leadership statements about AI, summarised at role level. Sample content carries no named individuals." />
           <LaneBadge lane="sample" />
         </div>
         <div className="mt-2 space-y-2">
           {t.leadership.map((l) => (
-            <div key={l.speaker} className="rounded border border-base-300 p-3">
+            <div key={l.speaker} className="rounded border border-base-300 p-4">
               <div className="flex items-center justify-between">
-                <span className="text-[12px] font-semibold">{l.speaker}</span>
-                <span className={`font-mono text-[10px] uppercase ${l.signal === "high" ? "text-good" : "text-warn"}`}>
+                <span className="text-sm font-semibold">{l.speaker}</span>
+                <span className={`font-mono text-xs uppercase ${l.signal === "high" ? "text-good" : "text-warn"}`}>
                   {l.signal} signal
                 </span>
               </div>
-              <p className="mt-1 text-[12px] text-muted">{l.quote}</p>
-              <p className="mt-1 font-mono text-[10px] text-muted">{l.source} · {l.date}</p>
+              <p className="mt-1 text-sm text-muted">{l.quote}</p>
+              <p className="mt-1 font-mono text-xs text-muted">{l.source} · {l.date}</p>
             </div>
           ))}
         </div>

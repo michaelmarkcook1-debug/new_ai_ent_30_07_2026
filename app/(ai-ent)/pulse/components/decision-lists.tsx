@@ -41,14 +41,14 @@ export function MaterialRisks({
         </div>
         <Link
           href="/trust-rank"
-          className="text-[12px] font-semibold text-primary hover:underline"
+          className="text-sm font-semibold text-primary hover:underline"
         >
           Full governance and risk analysis →
         </Link>
       </div>
 
       {top.length === 0 ? (
-        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-5 text-[12px] text-muted">
+        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-5 text-sm text-muted">
           No high-severity risk is currently open against a tracked vendor.
         </p>
       ) : (
@@ -62,14 +62,14 @@ export function MaterialRisks({
             return (
               <article
                 key={`${r.vendorId}-${r.headline}`}
-                className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-4"
+                className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-5"
               >
                 <div className="flex items-start justify-between gap-2">
-                  <h3 className="text-[13px] font-bold leading-snug">
+                  <h3 className="text-sm font-bold leading-snug">
                     {r.headline}
                   </h3>
                   {r.severity ? (
-                    <span className="shrink-0 rounded-full bg-warn-bg px-2 py-0.5 font-mono text-[12px] uppercase text-warn">
+                    <span className="shrink-0 rounded-full bg-warn-bg px-2 py-0.5 font-mono text-sm uppercase text-warn">
                       {r.severity}
                     </span>
                   ) : null}
@@ -77,19 +77,19 @@ export function MaterialRisks({
 
                 <dl className="mt-2.5 flex-1 space-y-2">
                   <div>
-                    <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                    <dt className="font-mono text-sm uppercase tracking-wider text-muted">
                       Who is affected
                     </dt>
-                    <dd className="measure text-[12px] leading-snug">
+                    <dd className="measure text-sm leading-snug">
                       Buyers with {r.vendorName} in scope, and anyone holding it
                       on a shortlist.
                     </dd>
                   </div>
                   <div>
-                    <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                    <dt className="font-mono text-sm uppercase tracking-wider text-muted">
                       What to do
                     </dt>
-                    <dd className="measure text-[12px] leading-snug">
+                    <dd className="measure text-sm leading-snug">
                       Raise it in the next vendor review and get a dated
                       remediation position before widening commitment.
                     </dd>
@@ -110,7 +110,7 @@ export function MaterialRisks({
           <Accordion title="Further open risks" count={rest.length}>
             <ul className="space-y-1.5">
               {rest.map((r) => (
-                <li key={`${r.vendorId}-${r.headline}`} className="text-[12px]">
+                <li key={`${r.vendorId}-${r.headline}`} className="text-sm">
                   <span className="font-semibold">{r.vendorName}</span>
                   <span className="text-muted"> — {r.headline}</span>
                 </li>
@@ -144,11 +144,11 @@ export function Movers({
     return (
       <div>
         <div className="mb-2 flex flex-wrap items-center gap-2">
-          <h3 className="text-[13px] font-bold">{title}</h3>
+          <h3 className="text-sm font-bold">{title}</h3>
           <LaneBadge lane={lane} />
         </div>
         {top.length === 0 ? (
-          <p className="rounded-lg border border-dashed border-base-300 px-3 py-4 text-[12px] text-muted">
+          <p className="rounded-lg border border-dashed border-base-300 px-3 py-4 text-sm text-muted">
             Nothing classified this way at the moment.
           </p>
         ) : (
@@ -156,21 +156,21 @@ export function Movers({
             {top.map((s) => (
               <li
                 key={`${s.vendorId}-${s.headline}`}
-                className="rounded-lg border border-base-300 bg-base-100 p-3"
+                className="rounded-lg border border-base-300 bg-base-100 p-4"
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <Link
                     href={`/vendor-view/${s.vendorId}`}
-                    className="text-[13px] font-bold hover:text-primary hover:underline"
+                    className="text-sm font-bold hover:text-primary hover:underline"
                   >
                     {s.vendorName}
                   </Link>
                 </div>
-                <p className="measure mt-1 text-[12px] leading-snug text-muted">
+                <p className="measure mt-1 text-sm leading-snug text-muted">
                   {s.headline}
                 </p>
-                <p className="measure mt-1.5 text-[12px] leading-snug">
-                  <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                <p className="measure mt-1.5 text-sm leading-snug">
+                  <span className="font-mono text-sm uppercase tracking-wider text-muted">
                     For buyers
                   </span>
                   <br />
@@ -185,7 +185,7 @@ export function Movers({
             <Accordion title="More in this list" count={rest.length}>
               <ul className="space-y-1">
                 {rest.map((s) => (
-                  <li key={`${s.vendorId}-${s.headline}`} className="text-[12px]">
+                  <li key={`${s.vendorId}-${s.headline}`} className="text-sm">
                     <span className="font-semibold">{s.vendorName}</span>
                     <span className="text-muted"> — {s.headline}</span>
                   </li>
@@ -207,7 +207,7 @@ export function Movers({
         />
         <Link
           href="/vendor-view"
-          className="text-[12px] font-semibold text-primary hover:underline"
+          className="text-sm font-semibold text-primary hover:underline"
         >
           All vendor rankings →
         </Link>
@@ -226,7 +226,7 @@ export function Movers({
             `Worth a dated check before renewing or widening ${v}, rather than an immediate change.`
         )}
       </div>
-      <p className="measure mt-2 text-[12px] text-muted">
+      <p className="measure mt-2 text-sm text-muted">
         Our analysis reports the movement and the reason each vendor is
         classified that way. Where a cause is not published, none is asserted
         here: attributing a reason we cannot evidence would be the least
@@ -255,14 +255,14 @@ export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
         />
         <Link
           href="/news-feed"
-          className="text-[12px] font-semibold text-primary hover:underline"
+          className="text-sm font-semibold text-primary hover:underline"
         >
           All market news →
         </Link>
       </div>
 
       {signals.length === 0 ? (
-        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-5 text-[12px] text-muted">
+        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-5 text-sm text-muted">
           No signal currently carries enough weight to sit behind today&apos;s
           judgement.
         </p>
@@ -271,29 +271,29 @@ export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
           {signals.map((s, i) => (
             <li
               key={s.what}
-              className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-4"
+              className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-5"
             >
               <div className="flex items-center justify-between gap-2">
-                <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                <span className="font-mono text-sm uppercase tracking-wider text-muted">
                   Signal {i + 1}
                 </span>
                 <LaneBadge lane={s.lane} />
               </div>
-              <p className="measure mt-1.5 text-[13px] font-semibold leading-snug">
+              <p className="measure mt-1.5 text-sm font-semibold leading-snug">
                 {s.what}
               </p>
               <dl className="mt-2 flex-1 space-y-2">
                 <div>
-                  <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                  <dt className="font-mono text-sm uppercase tracking-wider text-muted">
                     Why it matters
                   </dt>
-                  <dd className="measure text-[12px] leading-snug">{s.why}</dd>
+                  <dd className="measure text-sm leading-snug">{s.why}</dd>
                 </div>
                 <div>
-                  <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                  <dt className="font-mono text-sm uppercase tracking-wider text-muted">
                     Supports
                   </dt>
-                  <dd className="measure text-[12px] leading-snug text-muted">
+                  <dd className="measure text-sm leading-snug text-muted">
                     {s.supports}
                   </dd>
                 </div>
@@ -302,12 +302,12 @@ export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
                 {s.href ? (
                   <Link
                     href={s.href}
-                    className="text-[12px] font-semibold text-primary hover:underline"
+                    className="text-sm font-semibold text-primary hover:underline"
                   >
                     {s.source} →
                   </Link>
                 ) : (
-                  <span className="font-mono text-[12px] text-muted">
+                  <span className="font-mono text-sm text-muted">
                     {s.source}
                   </span>
                 )}
@@ -340,10 +340,10 @@ export function DeeperAnalysis() {
           <li key={href}>
             <Link
               href={href}
-              className="block rounded-lg border border-base-300 px-3 py-2.5 transition hover:border-primary"
+              className="block rounded-lg border border-base-300 px-3 py-3 transition hover:border-primary"
             >
-              <span className="text-[13px] font-semibold">{title}</span>
-              <span className="measure mt-0.5 block text-[12px] leading-snug text-muted">
+              <span className="text-sm font-semibold">{title}</span>
+              <span className="measure mt-0.5 block text-sm leading-snug text-muted">
                 {blurb}
               </span>
             </Link>

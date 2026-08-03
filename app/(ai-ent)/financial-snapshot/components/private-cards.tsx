@@ -26,9 +26,9 @@ const CATEGORY_LABEL: Partial<Record<SourceCategory, string>> = {
 // and the curated outbound source links from the AIE sourcing manifest.
 function PrivateCard({ card }: { card: PrivateVendorCard }) {
   return (
-    <div className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-4">
+    <div className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
-        <h3 className="text-[15px] font-bold">
+        <h3 className="text-base font-bold">
           <Link
             href={`/vendor-view/${card.id}`}
             className="hover:text-primary hover:underline"
@@ -36,13 +36,13 @@ function PrivateCard({ card }: { card: PrivateVendorCard }) {
             {card.name}
           </Link>
         </h3>
-        <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted">
+        <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-xs uppercase tracking-wider text-muted">
           Private
         </span>
       </div>
       {card.tagline ? (
         <div className="mt-2">
-          <p className="measure text-[12px] leading-snug text-base-content/80">
+          <p className="measure text-sm leading-snug text-base-content/80">
             {card.tagline}
           </p>
           <div className="mt-1">
@@ -72,18 +72,18 @@ function PrivateCard({ card }: { card: PrivateVendorCard }) {
                   href={s.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="truncate text-[12px] text-primary hover:underline"
+                  className="truncate text-sm text-primary hover:underline"
                 >
                   {s.label}
                 </a>
-                <span className="shrink-0 font-mono text-[9px] uppercase tracking-wider text-muted">
+                <span className="shrink-0 font-mono text-xs uppercase tracking-wider text-muted">
                   {CATEGORY_LABEL[s.category] ?? s.category}
                 </span>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="mt-2 text-[11px] text-muted">
+          <p className="mt-2 text-xs text-muted">
             No curated sources in the AIE manifest for this vendor yet.
           </p>
         )}
@@ -96,10 +96,10 @@ export function PrivateCompanyCards({ cards }: { cards: PrivateVendorCard[] }) {
   return (
     <section>
       <div className="flex items-center gap-2">
-        <h2 className="text-[15px] font-bold">Private AI companies</h2>
+        <h2 className="text-base font-bold">Private AI companies</h2>
         <LaneBadge lane="aie" />
       </div>
-      <p className="mt-0.5 measure text-[12px] text-muted">
+      <p className="mt-0.5 measure text-sm text-muted">
         These vendors are not in BoardRadar and publish no audited accounts.
         Cards stay locked to disclosed figures only: qualitative context comes
         from the AIE dataset, and the links go to the curated public sources

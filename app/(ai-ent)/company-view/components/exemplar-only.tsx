@@ -15,10 +15,10 @@ export function ExemplarOnly({
 }) {
   return (
     <section className="rounded-lg border border-dashed border-base-300 bg-base-200/40 px-4 py-6">
-      <h2 className="text-[14px] font-bold">
+      <h2 className="text-base font-bold">
         {tab} has no live source for this company
       </h2>
-      <p className="mt-1 measure text-[12px] text-muted">
+      <p className="mt-1 measure text-sm text-muted">
         {reason ??
           "The BoardRadar API publishes no equivalent of this tab, so there is nothing real to show for the selected company."}{" "}
         The exemplar buyer&apos;s content is not shown here: it describes a
@@ -27,7 +27,7 @@ export function ExemplarOnly({
       </p>
       <Link
         href={pathname}
-        className="mt-3 inline-block rounded-full border border-primary px-3 py-1 text-[12px] font-semibold text-primary"
+        className="mt-3 inline-block rounded-full border border-primary px-3 py-1.5 text-sm font-semibold text-primary"
       >
         Back to the Shell exemplar
       </Link>

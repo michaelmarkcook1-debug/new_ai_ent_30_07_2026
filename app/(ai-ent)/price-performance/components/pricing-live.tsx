@@ -103,14 +103,14 @@ export function PricingSection({
   ).length;
 
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <h2 className="text-[15px] font-bold">Token list pricing</h2>
+            <h2 className="text-base font-bold">Token list pricing</h2>
             <LaneBadge lane={lane} />
           </div>
-          <p className="mt-1 measure text-[12px] text-muted">
+          <p className="mt-1 measure text-sm text-muted">
             {rows.length} model rows across {vendorCount} vendors, USD per 1M
             tokens. Public list price is not the negotiated enterprise price:
             batch APIs commonly list 50 per cent lower, and committed-use,
@@ -124,19 +124,19 @@ export function PricingSection({
               : ""}
           </p>
         </div>
-        <div className="rounded-lg border border-base-300 bg-base-200/60 px-3 py-2">
+        <div className="rounded-lg border border-base-300 bg-base-200/60 px-3 py-2.5">
           <MicroLabel
             label="Generated"
             tooltip="Capture date of this pricing snapshot from the public vendor pricing pages. Token pricing moves quickly, so every figure on this page carries this date."
           />
-          <p className="mt-0.5 font-mono text-[13px] font-bold">
+          <p className="mt-0.5 font-mono text-sm font-bold">
             {fmtStamp(capturedAt)}
           </p>
-          <p className="text-[12px] text-muted">
+          <p className="text-sm text-muted">
             Snapshot of public vendor pricing pages
           </p>
           {usingLive && live.asOf ? (
-            <p className="mt-1 font-mono text-[12px] text-muted">
+            <p className="mt-1 font-mono text-sm text-muted">
               checked {fmtStamp(live.asOf)}
             </p>
           ) : null}

@@ -16,7 +16,7 @@ function DirectionChip({ direction }: { direction: string }) {
   };
   return (
     <span
-      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${styles[direction] ?? styles.neutral}`}
+      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider ${styles[direction] ?? styles.neutral}`}
       title="Signal direction as labelled in the AIE market signals seed"
     >
       {direction}
@@ -27,7 +27,7 @@ function DirectionChip({ direction }: { direction: string }) {
 function StatusChip({ status }: { status: string }) {
   return (
     <span
-      className="inline-flex rounded border border-base-300 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted"
+      className="inline-flex rounded border border-base-300 px-1.5 py-0.5 font-mono text-xs uppercase tracking-wider text-muted"
       title="Native data status label from the AIE dataset (seed entries cannot move centre estimates, they only widen bands)"
     >
       {status}
@@ -45,15 +45,15 @@ export function MarketToday({
   return (
     <section>
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-[15px] font-bold">Market today</h2>
+        <h2 className="text-base font-bold">Market today</h2>
         <LaneBadge lane="aie" />
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           Regime period {formatDate(regime.periodStart)} to {formatDate(regime.periodEnd)}
         </span>
       </div>
 
       {/* Regime strip */}
-      <div className="mt-2 rounded-lg border border-base-300 bg-base-100 p-4">
+      <div className="mt-2 rounded-lg border border-base-300 bg-base-100 p-5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <MicroLabel
             label="Market regime"
@@ -65,9 +65,9 @@ export function MarketToday({
         </div>
         <div className="mt-3 grid grid-cols-2 gap-2 @3xl:grid-cols-3 @4xl:grid-cols-5">
           {regime.facets.map((f) => (
-            <div key={f.label} className="rounded border border-base-300 bg-base-200/40 px-2 py-1.5">
+            <div key={f.label} className="rounded border border-base-300 bg-base-200/40 px-2 py-2">
               <span className="micro-label">{f.label}</span>
-              <p className="mt-0.5 text-[12px] font-semibold capitalize">{f.value}</p>
+              <p className="mt-0.5 text-sm font-semibold capitalize">{f.value}</p>
             </div>
           ))}
         </div>
@@ -92,26 +92,26 @@ export function MarketToday({
       {/* Signal feed */}
       <div className="mt-3 grid grid-cols-1 gap-3 @2xl:grid-cols-2">
         {signals.map((s) => (
-          <article key={s.id} className="rounded-lg border border-base-300 bg-base-100 p-4">
+          <article key={s.id} className="rounded-lg border border-base-300 bg-base-100 p-5">
             <div className="flex flex-wrap items-center gap-1.5">
               <DirectionChip direction={s.direction} />
               <StatusChip status={s.dataStatus} />
               <span
-                className="inline-flex rounded border border-base-300 px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-muted"
+                className="inline-flex rounded border border-base-300 px-1.5 py-0.5 font-mono text-xs uppercase tracking-wider text-muted"
                 title="Evidence grade as labelled in the AIE dataset (E5 strongest, E1 weakest)"
               >
                 {s.evidenceGrade}
               </span>
-              <span className="font-mono text-[10px] text-muted">
+              <span className="font-mono text-xs text-muted">
 
               </span>
-              <span className="ml-auto font-mono text-[10px] text-muted">
+              <span className="ml-auto font-mono text-xs text-muted">
                 {formatDate(s.sourceDate)}
               </span>
             </div>
-            <h3 className="mt-1.5 text-[13px] font-bold leading-snug">{s.title}</h3>
-            <p className="measure mt-1 text-[12px] leading-snug text-muted">{s.summary}</p>
-            <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-muted">
+            <h3 className="mt-1.5 text-sm font-bold leading-snug">{s.title}</h3>
+            <p className="measure mt-1 text-sm leading-snug text-muted">{s.summary}</p>
+            <div className="mt-2 flex flex-wrap items-center gap-2 text-xs text-muted">
               <span className="capitalize">{s.category}</span>
               <span aria-hidden>&middot;</span>
               <span className="capitalize">{s.timeHorizon}</span>
@@ -129,7 +129,7 @@ export function MarketToday({
                 <span>{s.sourceName}</span>
               )}
             </div>
-            <p className="mt-1.5 border-t border-base-300/60 pt-1.5 text-[10px] italic text-muted">
+            <p className="mt-1.5 border-t border-base-300/60 pt-1.5 text-xs italic text-muted">
               {s.uncertaintyNote}
             </p>
           </article>

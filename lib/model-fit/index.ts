@@ -256,15 +256,123 @@ export function functionsFor(industry: string): string[] {
   ).sort((a, b) => a.localeCompare(b));
 }
 
-/** How the choice divides, for the caption under the menu. */
-export function functionCounts(industry: string): { specific: number; common: number } {
+/**
+ * Functions split into the ones this industry adds and the ones every industry
+ * has, so the menu can group them instead of running 23 together in one list.
+ *
+ * A function named by both counts as specific: it is the industry's own version
+ * of the work, and listing it twice would suggest two different choices.
+ */
+export function functionGroups(industry: string): { specific: string[]; common: string[] } {
   const specific = new Set(specificTo(industry).map((r) => r.function));
   const common = new Set(
     commonTo(industry)
       .map((r) => r.function)
       .filter((f) => !specific.has(f))
   );
-  return { specific: specific.size, common: common.size };
+  const sort = (s: Set<string>) => [...s].sort((a, b) => a.localeCompare(b));
+  return { specific: sort(specific), common: sort(common) };
+}
+
+/** How the choice divides, for the caption under the menu. */
+export function functionCounts(industry: string): { specific: number; common: number } {
+  const g = functionGroups(industry);
+  return { specific: g.specific.length, common: g.common.length };
+}
+
+/**
+ * The eighteen cross-industry functions, gathered the way the industries are.
+ *
+ * Eighteen in one alphabetical run puts Finance between Executive Leadership
+ * and Internal Audit, which is not how anyone looks for a function. As with the
+ * sectors, this is a presentation layer of ours: the taxonomy publishes no
+ * function grouping and the engine never sees one.
+ *
+ * Industry-specific functions are not grouped. There are only five to seven of
+ * them in any one industry and they already share a heading that says what they
+ * are.
+ */
+const FUNCTION_GROUPING: { macro: string; functions: string[] }[] = [
+  {
+    macro: "Leadership & strategy",
+    functions: [
+      "Executive Leadership & Corporate Strategy",
+      "Transformation, Projects & Change",
+    ],
+  },
+  {
+    macro: "Finance, risk & legal",
+    functions: ["Finance", "Internal Audit", "Legal", "Risk & Compliance"],
+  },
+  {
+    macro: "Technology & data",
+    functions: [
+      "Cybersecurity & Information Security",
+      "Data, Analytics & AI",
+      "Software Engineering & Product Development",
+      "Technology & IT",
+    ],
+  },
+  {
+    macro: "Commercial & customer",
+    functions: [
+      "Commercial, Sales & Business Development",
+      "Customer Operations & Service",
+      "Marketing & Communications",
+    ],
+  },
+  {
+    macro: "Operations & supply chain",
+    functions: [
+      "Operations & Service Delivery",
+      "Procurement & Supplier Management",
+      "Supply Chain & Logistics",
+    ],
+  },
+  {
+    macro: "People & workplace",
+    functions: ["People & Human Resources", "Workplace, Facilities & Physical Security"],
+  },
+];
+
+export interface FunctionMenuGroup {
+  macro: string;
+  functions: string[];
+  /** True for the industry's own functions, which are not macro-grouped. */
+  specificToIndustry?: boolean;
+}
+
+/**
+ * The Function menu as it should render for one industry: the industry's own
+ * functions under a heading of their own, then the common eighteen under their
+ * macro headings.
+ *
+ * Same guard as the sectors, for the same reason. Every function reachable in
+ * this industry appears exactly once, and anything the grouping has not placed
+ * gets a visible heading rather than dropping out of the menu.
+ */
+export function functionMenu(industry: string): FunctionMenuGroup[] {
+  if (!industry) return [];
+  const { specific, common } = functionGroups(industry);
+  const out: FunctionMenuGroup[] = [];
+  if (specific.length && industry !== CROSS_INDUSTRY) {
+    out.push({ macro: `Specific to ${industry}`, functions: specific, specificToIndustry: true });
+  }
+  // Under cross-industry the "specific" set IS the common eighteen, so it takes
+  // the macro grouping rather than a heading naming an industry.
+  const pool = new Set(industry === CROSS_INDUSTRY ? specific : common);
+  const placed = new Set<string>();
+  for (const g of FUNCTION_GROUPING) {
+    const fns = g.functions.filter((f) => {
+      if (!pool.has(f)) return false;
+      placed.add(f);
+      return true;
+    });
+    if (fns.length) out.push({ macro: g.macro, functions: fns });
+  }
+  const orphans = [...pool].filter((f) => !placed.has(f)).sort((a, b) => a.localeCompare(b));
+  if (orphans.length) out.push({ macro: "Not yet grouped", functions: orphans });
+  return out;
 }
 
 /**

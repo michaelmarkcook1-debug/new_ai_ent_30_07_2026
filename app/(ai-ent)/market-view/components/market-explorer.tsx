@@ -38,7 +38,7 @@ function BandChip({ band }: { band: string }) {
   };
   return (
     <span
-      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider ${styles[band] ?? "bg-base-200 text-muted"}`}
+      className={`inline-flex rounded px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider ${styles[band] ?? "bg-base-200 text-muted"}`}
     >
       {band}
     </span>
@@ -65,7 +65,7 @@ function FilterField({
 }
 
 const selectClass =
-  "rounded border border-base-300 bg-base-100 px-2 py-1.5 text-[12px]";
+  "rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm";
 
 // The Market View explorer: who is using which models, how and where.
 // Filters over the AIE industry archetypes, workflow taxonomy and the
@@ -157,7 +157,7 @@ export function MarketExplorer({
   return (
     <div className="space-y-4">
       {/* Filter bar */}
-      <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+      <section className="rounded-lg border border-base-300 bg-base-100 p-5">
         <div className="flex items-center gap-2">
           <MicroLabel
             label="Explore the market"
@@ -245,7 +245,7 @@ export function MarketExplorer({
             </select>
           </FilterField>
         </div>
-        <p className="measure mt-2 text-[11px] text-muted">
+        <p className="measure mt-2 text-xs text-muted">
           Industry and region are faceted by the live uptake API. Organisation
           size exists only in the ported dataset, so choosing one moves the
           provider panel to that source and says so. The workflow selector
@@ -256,7 +256,7 @@ export function MarketExplorer({
 
       <div className="grid grid-cols-1 gap-4 @4xl:grid-cols-3">
         {/* Who is strong in this slice */}
-        <section className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-2">
+        <section className="@container rounded-lg border border-base-300 bg-base-100 p-5 @4xl:col-span-2">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Model providers in this slice"
@@ -264,8 +264,8 @@ export function MarketExplorer({
             />
             <LaneBadge lane={uptakeLane} />
           </div>
-          <p className="mt-1 text-[11px] text-muted">{sliceLabel}</p>
-          <p className="measure mt-0.5 text-[10.5px] text-muted">
+          <p className="mt-1 text-xs text-muted">{sliceLabel}</p>
+          <p className="measure mt-0.5 text-xs text-muted">
             {usingLive
               ? archetypeId && !liveIndustry
                 ? "Pulled live from the deployed AIE app. This archetype spans several of the engine's industry segments, so the live slice is unfiltered by industry and the filter applies to the panels below."
@@ -278,7 +278,7 @@ export function MarketExplorer({
           {/* The source's own words, not a restatement. A modelled estimate
               under a percentage reads as measurement unless the caveat that
               came with it is on the same screen. */}
-          <p className="measure mt-2 rounded border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[11px] leading-snug">
+          <p className="measure mt-2 rounded border border-warn/40 bg-warn-bg px-2.5 py-2 text-xs leading-snug">
             {usingLive && liveProvenance
               ? liveProvenance
               : "MODELLED ESTIMATE — May 2026 segment-share model; directional, not audited market share"}
@@ -287,7 +287,7 @@ export function MarketExplorer({
           {/* The reason a broad vendor outranks one that leads the largest
               segments. Without it the ranking invites a reading it will not
               support. */}
-          <p className="measure mt-1.5 text-[10.5px] leading-snug text-muted">
+          <p className="measure mt-1.5 text-xs leading-snug text-muted">
             Every {region ? "industry" : "region and industry"} cell in the cut
             is weighted equally before the shares are renormalised, so this
             ranks breadth of presence across segments, not size of business.
@@ -363,7 +363,7 @@ export function MarketExplorer({
         </section>
 
         {/* Industry adoption profile */}
-        <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+        <section className="rounded-lg border border-base-300 bg-base-100 p-5">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Industry adoption profile"
@@ -374,14 +374,14 @@ export function MarketExplorer({
           {archetype ? (
             <div className="mt-2">
               <div className="flex items-center gap-2">
-                <h3 className="text-[13px] font-bold">{archetype.name}</h3>
+                <h3 className="text-sm font-bold">{archetype.name}</h3>
                 <BandChip
                   band={adoptionMaturityBand(industryMaturityScore(archetype))}
                 />
               </div>
               <div className="mt-1 flex items-center gap-2">
                 <ScorePill score={Math.round(industryMaturityScore(archetype))} />
-                <span className="text-[11px] text-muted">maturity, 0 to 100</span>
+                <span className="text-xs text-muted">maturity, 0 to 100</span>
               </div>
               <ul className="mt-3 space-y-1.5">
                 {(
@@ -398,52 +398,52 @@ export function MarketExplorer({
                   ] as [string, number][]
                 ).map(([label, value]) => (
                   <li key={label} className="flex items-center gap-2">
-                    <span className="w-40 shrink-0 text-[11.5px]">{label}</span>
+                    <span className="w-40 shrink-0 text-xs">{label}</span>
                     <span className="h-2 flex-1 overflow-hidden rounded-full bg-base-200">
                       <span
                         className="block h-full rounded-full bg-secondary/60"
                         style={{ width: `${value}%` }}
                       />
                     </span>
-                    <span className="w-16 shrink-0 text-right font-mono text-[10px]">
+                    <span className="w-16 shrink-0 text-right font-mono text-xs">
                       {value} per cent
                     </span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-2 font-mono text-[9px] uppercase tracking-wider text-muted">
+              <p className="mt-2 font-mono text-xs uppercase tracking-wider text-muted">
                 Evidence strictness x{archetype.evidenceStrictness}
               </p>
             </div>
           ) : (
             <div className="mt-2 overflow-x-auto">
-              <table className="w-full min-w-[300px] text-left text-[11.5px]">
+              <table className="w-full min-w-[300px] text-left text-xs">
                 <thead>
-                  <tr className="border-b border-base-300 font-mono text-[9px] uppercase tracking-wider text-muted">
-                    <th className="py-1.5 pr-2 font-medium">Archetype</th>
-                    <th className="px-1 py-1.5 text-right font-medium">Production</th>
-                    <th className="px-1 py-1.5 text-right font-medium">Scaled</th>
-                    <th className="py-1.5 pl-1 text-right font-medium">Band</th>
+                  <tr className="border-b border-base-300 font-mono text-xs uppercase tracking-wider text-muted">
+                    <th className="py-2 pr-2 font-medium">Archetype</th>
+                    <th className="px-1 py-2 text-right font-medium">Production</th>
+                    <th className="px-1 py-2 text-right font-medium">Scaled</th>
+                    <th className="py-2 pl-1 text-right font-medium">Band</th>
                   </tr>
                 </thead>
                 <tbody>
                   {archetypes.map((a) => (
                     <tr key={a.id} className="border-b border-base-300/60">
-                      <td className="py-1.5 pr-2">{a.name}</td>
-                      <td className="px-1 py-1.5 text-right font-mono text-[10px]">
+                      <td className="py-2 pr-2">{a.name}</td>
+                      <td className="px-1 py-2 text-right font-mono text-xs">
                         {a.adoption.productionPct} per cent
                       </td>
-                      <td className="px-1 py-1.5 text-right font-mono text-[10px]">
+                      <td className="px-1 py-2 text-right font-mono text-xs">
                         {a.adoption.scaledPct} per cent
                       </td>
-                      <td className="py-1.5 pl-1 text-right">
+                      <td className="py-2 pl-1 text-right">
                         <BandChip band={adoptionMaturityBand(industryMaturityScore(a))} />
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
-              <p className="mt-2 text-[10px] text-muted">
+              <p className="mt-2 text-xs text-muted">
                 Pick an industry above for its full adoption profile.
               </p>
             </div>
@@ -466,68 +466,68 @@ export function MarketExplorer({
       </div>
 
       {/* Workflows with evidenced impact */}
-      <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+      <section className="rounded-lg border border-base-300 bg-base-100 p-5">
         <div className="flex flex-wrap items-center gap-2">
           <MicroLabel
             label="Workflows with evidenced impact"
             tooltip="The AIE enterprise workflow taxonomy: each record carries native risk, reliability, autonomy, complexity and regulatory fields describing how the workflow is deployed in practice."
           />
           <LaneBadge lane="aie" />
-          <span className="font-mono text-[10px] text-muted">
+          <span className="font-mono text-xs text-muted">
             {USE_CASES.length} workflows in {categories.length} areas
           </span>
         </div>
         {workflow ? (
           <div className="mt-3">
             <div className="flex flex-wrap items-center gap-2">
-              <h3 className="text-[15px] font-bold">{workflow.label}</h3>
+              <h3 className="text-base font-bold">{workflow.label}</h3>
               <SeverityBadge
                 severity={workflow.riskTier.toUpperCase() as Severity}
               />
-              <span className="inline-flex rounded-full border border-base-300 px-2 py-0.5 text-[10px] text-muted">
+              <span className="inline-flex rounded-full border border-base-300 px-2 py-0.5 text-xs text-muted">
                 {workflow.category}
                 {workflow.subcategory ? ` / ${workflow.subcategory}` : ""}
               </span>
             </div>
             {workflow.description ? (
-              <p className="mt-1 measure text-[12.5px] text-base-content/85">
+              <p className="mt-1 measure text-sm text-base-content/85">
                 {workflow.description}
               </p>
             ) : null}
             <div className="mt-3 grid grid-cols-2 gap-3 @3xl:grid-cols-3 @5xl:grid-cols-6">
               <div>
                 <p className="micro-label">Risk tier</p>
-                <p className="mt-1 font-mono text-[12px] font-semibold uppercase">
+                <p className="mt-1 font-mono text-sm font-semibold uppercase">
                   {workflow.riskTier}
                 </p>
               </div>
               <div>
                 <p className="micro-label">Reliability requirement</p>
-                <p className="mt-1 font-mono text-[12px] font-semibold">
+                <p className="mt-1 font-mono text-sm font-semibold">
                   {workflow.reliabilityRequirement} of 5
                 </p>
               </div>
               <div>
                 <p className="micro-label">Autonomy default</p>
-                <p className="mt-1 font-mono text-[12px] font-semibold">
+                <p className="mt-1 font-mono text-sm font-semibold">
                   {pretty(workflow.autonomyDefault)}
                 </p>
               </div>
               <div>
                 <p className="micro-label">Complexity</p>
-                <p className="mt-1 font-mono text-[12px] font-semibold">
+                <p className="mt-1 font-mono text-sm font-semibold">
                   {workflow.complexity ?? "not graded"}
                 </p>
               </div>
               <div>
                 <p className="micro-label">Assessment tier</p>
-                <p className="mt-1 font-mono text-[12px] font-semibold">
+                <p className="mt-1 font-mono text-sm font-semibold">
                   {workflow.tier ?? "advanced"}
                 </p>
               </div>
               <div>
                 <p className="micro-label">Industry tags</p>
-                <p className="mt-1 text-[11px]">
+                <p className="mt-1 text-xs">
                   {workflow.industries && workflow.industries.length > 0
                     ? workflow.industries.map(pretty).join(", ")
                     : "horizontal (all industries)"}
@@ -541,7 +541,7 @@ export function MarketExplorer({
                   {(workflow.commonInputs ?? []).map((c) => (
                     <span
                       key={c}
-                      className="inline-flex rounded-full border border-base-300 px-2 py-0.5 text-[10px] text-muted"
+                      className="inline-flex rounded-full border border-base-300 px-2 py-0.5 text-xs text-muted"
                     >
                       {c}
                     </span>
@@ -555,13 +555,13 @@ export function MarketExplorer({
                     workflow.regulatoryFlags.map((f) => (
                       <span
                         key={f}
-                        className="inline-flex rounded-full bg-warn-bg px-2 py-0.5 font-mono text-[9px] text-warn"
+                        className="inline-flex rounded-full bg-warn-bg px-2 py-0.5 font-mono text-xs text-warn"
                       >
                         {pretty(f)}
                       </span>
                     ))
                   ) : (
-                    <span className="text-[11px] text-muted">none recorded</span>
+                    <span className="text-xs text-muted">none recorded</span>
                   )}
                 </div>
               </div>
@@ -585,13 +585,13 @@ export function MarketExplorer({
                     setCategory(c);
                     setWorkflowId("");
                   }}
-                  className={`rounded-full border px-2.5 py-1 text-[11px] transition hover:border-primary hover:text-primary ${category === c ? "border-primary text-primary" : "border-base-300 text-muted"}`}
+                  className={`rounded-full border px-2.5 py-1 text-xs transition hover:border-primary hover:text-primary ${category === c ? "border-primary text-primary" : "border-base-300 text-muted"}`}
                 >
                   {c} ({byCategory.get(c)?.length ?? 0})
                 </button>
               ))}
             </div>
-            <p className="measure mt-2 text-[11px] text-muted">
+            <p className="measure mt-2 text-xs text-muted">
               Pick a workflow in the filter bar to see its evidenced-impact
               profile: risk tier, reliability requirement, autonomy default,
               complexity and regulatory flags, all native to the taxonomy.

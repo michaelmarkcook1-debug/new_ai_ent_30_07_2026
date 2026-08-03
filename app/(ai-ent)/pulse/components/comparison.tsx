@@ -115,10 +115,10 @@ export function VendorComparisonTable({
 
   return (
     <section className="rounded-lg border border-base-300 bg-base-100">
-      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2">
-        <h2 className="text-[14px] font-bold">Vendor comparison</h2>
+      <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2.5">
+        <h2 className="text-base font-bold">Vendor comparison</h2>
         <div className="flex items-center gap-2">
-          <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[10px] text-muted">
+          <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-xs text-muted">
             {rows.length} in category
           </span>
           <LaneBadge lane={lane} />
@@ -126,13 +126,13 @@ export function VendorComparisonTable({
       </div>
 
       {/* Comparability gate: one market category at a time */}
-      <div className="flex flex-wrap items-center gap-1.5 border-b border-base-300 px-3 py-2">
+      <div className="flex flex-wrap items-center gap-1.5 border-b border-base-300 px-3 py-2.5">
         <span className="micro-label">Comparing within</span>
         <select
           aria-label="Market category"
           value={categoryId}
           onChange={(e) => setCategoryId(e.target.value)}
-          className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px] font-semibold"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm font-semibold"
         >
           {categories.map((c) => (
             <option key={c.id} value={c.id}>
@@ -140,13 +140,13 @@ export function VendorComparisonTable({
             </option>
           ))}
         </select>
-        <p className="ml-1 measure text-[11px] text-muted">
+        <p className="ml-1 measure text-xs text-muted">
           {COMPARABILITY_NOTE}
         </p>
       </div>
 
       {rows.length < 3 ? (
-        <p className="border-b border-base-300 px-3 py-1.5 text-[11px] text-muted">
+        <p className="border-b border-base-300 px-3 py-2 text-xs text-muted">
           {THIN_CATEGORY_NOTE}
         </p>
       ) : null}
@@ -155,15 +155,15 @@ export function VendorComparisonTable({
         <table className="w-full text-left">
           <thead>
             <tr className="border-b border-base-300">
-              <th className="px-3 py-2 font-mono text-[10px] font-medium uppercase tracking-wider text-muted">
+              <th className="px-3 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-muted">
                 Vendor
               </th>
               {COLUMNS.map((c) => (
-                <th key={c.key} className="px-3 py-2" title={c.title}>
+                <th key={c.key} className="px-3 py-2.5" title={c.title}>
                   <button
                     type="button"
                     onClick={() => setSortBy(c.key)}
-                    className={`font-mono text-[10px] font-medium uppercase tracking-wider ${
+                    className={`font-mono text-xs font-medium uppercase tracking-wider ${
                       sortBy === c.key
                         ? "text-primary"
                         : "text-muted hover:text-base-content"
@@ -173,7 +173,7 @@ export function VendorComparisonTable({
                   </button>
                 </th>
               ))}
-              <th className="px-3 py-2" />
+              <th className="px-3 py-2.5" />
             </tr>
           </thead>
           <tbody className="divide-y divide-base-300">
@@ -186,32 +186,32 @@ export function VendorComparisonTable({
                     v.id === primaryId ? "bg-primary/5" : ""
                   }`}
                 >
-                  <td className="px-3 py-2">
+                  <td className="px-3 py-2.5">
                     <button
                       type="button"
                       onClick={() => onSelect(v.id)}
-                      className="flex flex-wrap items-center gap-2 text-left text-[12.5px] font-semibold hover:text-primary"
+                      className="flex flex-wrap items-center gap-2 text-left text-sm font-semibold hover:text-primary"
                     >
                       {v.name}
                       {v.id === primaryId ? (
-                        <span className="rounded bg-primary px-1.5 py-0.5 font-mono text-[8px] font-bold uppercase tracking-wider text-white">
+                        <span className="rounded bg-primary px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-white">
                           Primary
                         </span>
                       ) : null}
                     </button>
                     {v.marketPosition ? (
-                      <div className="text-[10.5px] text-muted">
+                      <div className="text-xs text-muted">
                         {v.marketPosition}
                       </div>
                     ) : null}
                   </td>
-                  <td className="px-3 py-2">
+                  <td className="px-3 py-2.5">
                     <ScorePill score={v.composite} />
                   </td>
-                  <td className="px-3 py-2">
+                  <td className="px-3 py-2.5">
                     {v.momentum === null ? (
                       <span
-                        className="font-mono text-[10px] text-muted"
+                        className="font-mono text-xs text-muted"
                         title="No momentum reading published for this vendor."
                       >
                         not published
@@ -220,13 +220,13 @@ export function VendorComparisonTable({
                       <ScorePill score={v.momentum} />
                     )}
                   </td>
-                  <td className="px-3 py-2">
+                  <td className="px-3 py-2.5">
                     <ScorePill score={v.maturity} />
                   </td>
-                  <td className="px-3 py-2">
+                  <td className="px-3 py-2.5">
                     {v.reputation === null ? (
                       <span
-                        className="font-mono text-[10px] text-muted"
+                        className="font-mono text-xs text-muted"
                         title="This vendor is not covered by the reputation dataset."
                       >
                         not covered
@@ -235,21 +235,21 @@ export function VendorComparisonTable({
                       <ScorePill score={v.reputation} />
                     )}
                   </td>
-                  <td className="px-3 py-2">
+                  <td className="px-3 py-2.5">
                     {share === null ? (
-                      <span className="font-mono text-[10px] text-muted">
+                      <span className="font-mono text-xs text-muted">
                         no estimate
                       </span>
                     ) : (
-                      <span className="font-mono text-[12px] font-semibold">
+                      <span className="font-mono text-sm font-semibold">
                         {share.toFixed(1)}%
                       </span>
                     )}
                   </td>
-                  <td className="px-3 py-2 text-right">
+                  <td className="px-3 py-2.5 text-right">
                     <Link
                       href={`/vendor-view/${v.id}`}
-                      className="text-[11px] text-primary hover:underline"
+                      className="text-xs text-primary hover:underline"
                     >
                       Profile
                     </Link>
@@ -261,7 +261,7 @@ export function VendorComparisonTable({
         </table>
       </div>
 
-      <div className="border-t border-base-300 px-3 py-2">
+      <div className="border-t border-base-300 px-3 py-2.5">
         <DerivationDrawer title="How these columns are derived">
           <p>
             Each column is one named field from the AI Enterprise datasets, not

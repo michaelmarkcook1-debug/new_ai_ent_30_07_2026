@@ -17,13 +17,13 @@ export function ThirdPartySignals({ view }: { view: ThirdPartyView }) {
   return (
     <section className="mt-6 border-t-2 border-dashed border-base-300 pt-4">
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-[15px] font-bold">Third-party signals</h2>
+        <h2 className="text-base font-bold">Third-party signals</h2>
         <LaneBadge lane={view.lane} />
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           {view.sources.length} sources
         </span>
       </div>
-      <p className="mt-1 measure text-[11.5px] text-muted">
+      <p className="mt-1 measure text-xs text-muted">
         The external sources behind the reputation pillars, each named with the
         field it supplies and how far it reaches across the {view.vendorCount}{" "}
         vendors the dataset covers. These sit under this divider only: none of
@@ -32,7 +32,7 @@ export function ThirdPartySignals({ view }: { view: ThirdPartyView }) {
       </p>
 
       {view.sources.length === 0 ? (
-        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-6 text-[12px] text-muted">
+        <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-6 text-sm text-muted">
           No third-party measured signals are available in the current
           reputation payload.
         </p>
@@ -43,58 +43,58 @@ export function ThirdPartySignals({ view }: { view: ThirdPartyView }) {
             return (
               <article
                 key={s.id}
-                className="rounded-lg border border-base-300 bg-base-100 p-4"
+                className="rounded-lg border border-base-300 bg-base-100 p-5"
               >
                 <div className="flex flex-wrap items-start justify-between gap-2">
                   <span className="micro-label">{s.pillar} pillar</span>
-                  <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-[9px] text-muted">
+                  <span className="rounded-full border border-base-300 px-2 py-0.5 font-mono text-xs text-muted">
                     {s.coverage} of {view.vendorCount}
                   </span>
                 </div>
-                <h3 className="mt-2 text-[13px] font-bold leading-snug">
+                <h3 className="mt-2 text-sm font-bold leading-snug">
                   {s.label}
                 </h3>
-                <p className="font-mono text-[9.5px] text-muted">{s.host}</p>
-                <p className="measure mt-1.5 text-[11.5px] leading-snug text-muted">
+                <p className="font-mono text-xs text-muted">{s.host}</p>
+                <p className="measure mt-1.5 text-xs leading-snug text-muted">
                   {s.measures}
                 </p>
 
                 <dl className="mt-2 space-y-0.5 border-t border-base-300 pt-2">
                   {s.examples.map((e) => (
                     <div key={e.vendor} className="flex justify-between gap-2">
-                      <dt className="text-[11px]">{e.vendor}</dt>
-                      <dd className="font-mono text-[11px] font-semibold">
+                      <dt className="text-xs">{e.vendor}</dt>
+                      <dd className="font-mono text-xs font-semibold">
                         {e.value}
                       </dd>
                     </div>
                   ))}
                 </dl>
-                <p className="font-mono text-[9px] text-muted">{s.unit}</p>
+                <p className="font-mono text-xs text-muted">{s.unit}</p>
 
                 <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-base-300 pt-2">
                   {s.verified > 0 ? (
                     <span
-                      className="rounded bg-good-bg px-1.5 py-0.5 font-mono text-[8.5px] font-bold uppercase tracking-wider text-good"
+                      className="rounded bg-good-bg px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-good"
                       title="Cells the dataset marks verified against the source."
                     >
                       {s.verified} verified
                     </span>
                   ) : null}
                   {s.documented > 0 ? (
-                    <span className="rounded bg-base-200 px-1.5 py-0.5 font-mono text-[8.5px] font-bold uppercase tracking-wider text-muted">
+                    <span className="rounded bg-base-200 px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-muted">
                       {s.documented} documented
                     </span>
                   ) : null}
                   {s.seed > 0 ? (
                     <span
-                      className="rounded bg-warn-bg px-1.5 py-0.5 font-mono text-[8.5px] font-bold uppercase tracking-wider text-warn"
+                      className="rounded bg-warn-bg px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-warn"
                       title="Seed cells: recorded but not independently verified."
                     >
                       {s.seed} seed
                     </span>
                   ) : null}
                 </div>
-                <p className="mt-1 font-mono text-[9px] text-muted">
+                <p className="mt-1 font-mono text-xs text-muted">
                   <code>{s.field}</code>
                   {fetched ? ` · fetched ${fetched}` : ""}
                 </p>

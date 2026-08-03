@@ -165,17 +165,17 @@ export function AllianceMap({
     : [];
 
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <h2 className="text-[15px] font-bold">Alliance topology</h2>
+            <h2 className="text-base font-bold">Alliance topology</h2>
             <LaneBadge lane="aie" />
-            <span className="font-mono text-[10px] text-muted">
+            <span className="font-mono text-xs text-muted">
               {shownEdges.length} of {edges.length} edges
             </span>
           </div>
-          <p className="mt-1 measure text-[12px] text-muted">
+          <p className="mt-1 measure text-sm text-muted">
             Who partners with whom across the tracked channel. Model and API
             providers sit on the upper arc, the companies that build on them on
             the lower arc, each ordered by how many alliances it carries. Click
@@ -194,7 +194,7 @@ export function AllianceMap({
               key={k}
               type="button"
               onClick={() => setShow(k)}
-              className={`rounded-full border px-2.5 py-1 text-[11px] font-medium transition ${
+              className={`rounded-full border px-2.5 py-1 text-xs font-medium transition ${
                 show === k
                   ? "border-primary bg-primary text-white"
                   : "border-base-300 text-muted hover:border-primary hover:text-primary"
@@ -207,7 +207,7 @@ export function AllianceMap({
             <button
               type="button"
               onClick={() => setFocus(null)}
-              className="rounded-full border border-primary px-2.5 py-1 text-[11px] font-semibold text-primary"
+              className="rounded-full border border-primary px-2.5 py-1.5 text-xs font-semibold text-primary"
             >
               Clear focus
             </button>
@@ -216,10 +216,10 @@ export function AllianceMap({
       </div>
 
       {/* Legend */}
-      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-y border-base-300 py-2">
+      <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1.5 border-y border-base-300 py-2.5">
         <span className="micro-label">Legend</span>
         {Object.entries(TYPE_LABEL).map(([k, label]) => (
-          <span key={k} className="flex items-center gap-1.5 text-[11px]">
+          <span key={k} className="flex items-center gap-1.5 text-xs">
             <svg width="20" height="8" aria-hidden>
               <line
                 x1="0"
@@ -233,7 +233,7 @@ export function AllianceMap({
             {label}
           </span>
         ))}
-        <span className="flex items-center gap-1.5 text-[11px]">
+        <span className="flex items-center gap-1.5 text-xs">
           <svg width="20" height="8" aria-hidden>
             <line
               x1="0"
@@ -247,11 +247,11 @@ export function AllianceMap({
           </svg>
           Seed confidence, needs verification
         </span>
-        <span className="flex items-center gap-1.5 text-[11px]">
+        <span className="flex items-center gap-1.5 text-xs">
           <span className="inline-block h-2.5 w-2.5 rounded-full bg-primary" />
           Model and API provider
         </span>
-        <span className="flex items-center gap-1.5 text-[11px]">
+        <span className="flex items-center gap-1.5 text-xs">
           <span className="inline-block h-2.5 w-2.5 rounded-full bg-[var(--ag-channel)]" />
           Partner or integrator
         </span>
@@ -354,13 +354,13 @@ export function AllianceMap({
             tooltip="Click a node on the map to see every alliance it carries, with the dataset's own summary, evidence tier and sources."
           />
           {!focus ? (
-            <p className="mt-2 rounded-lg border border-dashed border-base-300 px-3 py-6 text-[11.5px] text-muted">
+            <p className="mt-2 rounded-lg border border-dashed border-base-300 px-3 py-6 text-xs text-muted">
               Click any company on the map to lock its connections and list its
               alliances here.
             </p>
           ) : (
             <div className="mt-2 space-y-2">
-              <p className="text-[13px] font-bold">{byId.get(focus)?.label}</p>
+              <p className="text-sm font-bold">{byId.get(focus)?.label}</p>
               {focusEdges.map((e) => {
                 const other = e.fromId === focus ? e.toLabel : e.fromLabel;
                 return (
@@ -370,17 +370,17 @@ export function AllianceMap({
                   >
                     <div className="flex flex-wrap items-center gap-1.5">
                       <span
-                        className="rounded px-1.5 py-0.5 font-mono text-[8.5px] font-bold uppercase tracking-wider text-white"
+                        className="rounded px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-white"
                         style={{ background: TYPE_COLOUR[e.type] }}
                       >
                         {TYPE_LABEL[e.type] ?? e.type}
                       </span>
-                      <span className="text-[12px] font-semibold">{other}</span>
+                      <span className="text-sm font-semibold">{other}</span>
                     </div>
-                    <p className="measure mt-1 text-[11.5px] leading-snug text-muted">
+                    <p className="measure mt-1 text-xs leading-snug text-muted">
                       {e.summary}
                     </p>
-                    <p className="mt-1 font-mono text-[9px] text-muted">
+                    <p className="mt-1 font-mono text-xs text-muted">
                       {e.confidence} evidence
                       {e.estimatedValue ? ` · ${e.estimatedValue}` : ""} ·
                       updated {e.dateUpdated.slice(0, 10)}
@@ -400,7 +400,7 @@ export function AllianceMap({
                               href={u}
                               target="_blank"
                               rel="noreferrer"
-                              className="font-mono text-[9px] text-primary hover:underline"
+                              className="font-mono text-xs text-primary hover:underline"
                             >
                               {host}
                             </a>

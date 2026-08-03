@@ -26,7 +26,7 @@ export function ScorePill({
   if (score === null || score === undefined) {
     return (
       <span
-        className="inline-flex items-center gap-1 rounded-full bg-base-200 px-2 py-0.5 font-mono text-[11px] text-muted"
+        className="inline-flex items-center gap-1 rounded-full bg-base-200 px-2 py-0.5 font-mono text-xs text-muted"
         title="No disclosure available; AG does not invent figures"
       >
         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -55,7 +55,7 @@ export function ScorePill({
     <Tag
       {...(onClick ? { onClick, type: "button" as const } : {})}
       title={shown === String(score) ? undefined : `Exact value: ${score}`}
-      className={`inline-flex items-center rounded-full px-2 py-0.5 font-mono text-[11px] font-semibold ${styles[band]} ${onClick ? "cursor-pointer hover:ring-1 hover:ring-primary" : ""}`}
+      className={`inline-flex items-center rounded-full px-2 py-0.5 font-mono text-xs font-semibold ${styles[band]} ${onClick ? "cursor-pointer hover:ring-1 hover:ring-primary" : ""}`}
     >
       {shown}
       {estimated ? <span className="ml-0.5 font-normal opacity-75">est.</span> : null}
@@ -96,8 +96,21 @@ export function KpiGauge({
   const r = 26;
   const c = 2 * Math.PI * r;
   const filled = score === null ? 0 : (score / 100) * c;
+  // The band was drawn on the gauge ring and nowhere else, so a card had to be
+  // read before it could be sorted. The border carries it too, which makes a
+  // strip of these scannable at a glance. No band and no score means no colour
+  // claimed: an absent reading is not a neutral one.
+  const BAND_RULE = {
+    good: "border-good/55",
+    warn: "border-warn/55",
+    bad: "border-error/55",
+  } as const;
   return (
-    <div className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <div
+      className={`rounded-lg border-2 bg-base-100 p-5 ${
+        band ? BAND_RULE[band] : "border-base-300"
+      }`}
+    >
       <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel label={label} tooltip={tooltip} />
         {badge}
@@ -123,7 +136,7 @@ export function KpiGauge({
           </div>
           {typeof delta === "number" ? (
             <div
-              className={`mt-1 flex items-center gap-0.5 font-mono text-[11px] ${
+              className={`mt-1 flex items-center gap-0.5 font-mono text-xs ${
                 delta === 0
                   ? "text-muted"
                   : (delta > 0) !== invert
@@ -137,7 +150,7 @@ export function KpiGauge({
           ) : null}
         </div>
       </div>
-      <p className="measure mt-2 text-[11px] leading-snug text-muted">{definition}</p>
+      <p className="measure mt-2 text-xs leading-snug text-muted">{definition}</p>
     </div>
   );
 }
@@ -162,7 +175,7 @@ export function DerivationDrawer({
   const panel = (
     <div className="fixed inset-0 z-50 flex justify-end bg-black/40" onClick={() => setOpen(false)}>
       <aside
-        className="h-full w-full max-w-md overflow-y-auto border-l border-base-300 bg-base-100 p-5 shadow-2xl"
+        className="h-full w-full max-w-md overflow-y-auto border-l border-base-300 bg-base-100 p-6 shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between">
@@ -178,7 +191,7 @@ export function DerivationDrawer({
             </svg>
           </button>
         </div>
-        <div className="mt-3 space-y-3 text-[13px] leading-relaxed">{children}</div>
+        <div className="mt-3 space-y-3 text-sm leading-relaxed">{children}</div>
       </aside>
     </div>
   );
@@ -188,7 +201,7 @@ export function DerivationDrawer({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="inline-flex items-center gap-1 text-[11px] text-primary hover:underline"
+        className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
       >
         {trigger ?? "How this is derived"}
       </button>

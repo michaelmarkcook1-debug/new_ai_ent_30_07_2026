@@ -34,7 +34,7 @@ export function GovernancePostureBlock({
   lane: "aie" | "aie-live";
 }) {
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <div>
           <div className="flex items-center gap-2">
@@ -44,13 +44,13 @@ export function GovernancePostureBlock({
             />
             <LaneBadge lane={lane} />
           </div>
-          <h3 className="mt-1 text-[15px] font-bold">{vendor.name}</h3>
+          <h3 className="mt-1 text-base font-bold">{vendor.name}</h3>
         </div>
         {posture ? (
           <div className="flex flex-wrap items-center gap-2">
             <ScorePill score={posture.maturity} lockedLabel="Not assessed" />
             <span
-              className="font-mono text-[9.5px] uppercase tracking-wider text-muted"
+              className="font-mono text-xs uppercase tracking-wider text-muted"
               title={
                 posture.status
                   ? (STATUS_HELP[posture.status] ?? posture.status)
@@ -79,12 +79,12 @@ export function GovernancePostureBlock({
                 label="Evidence"
                 tooltip="The evidence excerpt the assessment cites for this row, carried across unchanged."
               />
-              <p className="measure mt-0.5 text-[12px] leading-relaxed text-muted">
+              <p className="measure mt-0.5 text-sm leading-relaxed text-muted">
                 {posture.note}
               </p>
             </div>
           ) : (
-            <p className="text-[12px] text-muted">
+            <p className="text-sm text-muted">
               No evidence note is recorded against this assessment.
             </p>
           )}
@@ -99,7 +99,7 @@ export function GovernancePostureBlock({
                 {posture.riskProfile.map((r) => (
                   <li
                     key={r}
-                    className="rounded-full border border-base-300 px-2 py-0.5 text-[11px] text-muted"
+                    className="rounded-full border border-base-300 px-2 py-0.5 text-xs text-muted"
                   >
                     {r}
                   </li>
@@ -109,7 +109,7 @@ export function GovernancePostureBlock({
           ) : null}
 
           <div className="flex flex-wrap items-center justify-between gap-2 border-t border-base-300 pt-2">
-            <span className="font-mono text-[9.5px] text-muted">
+            <span className="font-mono text-xs text-muted">
               {posture.lastVerified
                 ? `verified ${posture.lastVerified.slice(0, 10)}`
                 : "no verification date"}

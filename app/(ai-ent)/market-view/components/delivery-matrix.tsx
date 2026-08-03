@@ -18,7 +18,7 @@ function DepthChip({ depth }: { depth: string }) {
   };
   return (
     <span
-      className={`inline-flex rounded px-1 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wider ${styles[depth] ?? "bg-base-200 text-muted"}`}
+      className={`inline-flex rounded px-1 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider ${styles[depth] ?? "bg-base-200 text-muted"}`}
       title="Integration depth as reported by the endpoint"
     >
       {depth}
@@ -79,14 +79,14 @@ export function DeliveryMatrix() {
           </p>
         </DerivationDrawer>
       </div>
-      <p className="mt-1 text-[11px] text-muted">
+      <p className="mt-1 text-xs text-muted">
         Services channel (integrators), shown as the delivery layer. Not AI
         vendors.
       </p>
 
       <div className="mt-3">
         {loading ? (
-          <p className="py-8 text-center font-mono text-[11px] text-muted">
+          <p className="py-8 text-center font-mono text-xs text-muted">
             Loading the live delivery matrix...
           </p>
         ) : errorCode ? (
@@ -96,21 +96,21 @@ export function DeliveryMatrix() {
           />
         ) : data ? (
           <div className="space-y-3">
-            <div className="delivery-channel-card rounded-lg bg-base-100 p-4">
+            <div className="delivery-channel-card rounded-lg bg-base-100 p-5">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <h3 className="text-[15px] font-bold">
+                <h3 className="text-base font-bold">
                   {data.displayName || data.providerName}
                 </h3>
-                <span className="font-mono text-[10px] text-muted">
+                <span className="font-mono text-xs text-muted">
                   {data.platformCounts.total} platforms:{" "}
                   {data.platformCounts.proprietary} proprietary,{" "}
                   {data.platformCounts.partner} partner
                 </span>
               </div>
-              <p className="measure mt-1 text-[12.5px] leading-relaxed text-base-content/85">
+              <p className="measure mt-1 text-sm leading-relaxed text-base-content/85">
                 {data.intro}
               </p>
-              <p className="mt-2 font-mono text-[9px] uppercase tracking-wider text-muted">
+              <p className="mt-2 font-mono text-xs uppercase tracking-wider text-muted">
                 Generated{" "}
                 {new Date(data.generatedAt).toLocaleDateString("en-GB", {
                   day: "numeric",
@@ -124,26 +124,26 @@ export function DeliveryMatrix() {
               {data.categories.map((cat) => (
                 <div
                   key={cat.id}
-                  className="rounded-lg border border-base-300 bg-base-100 p-4"
+                  className="rounded-lg border border-base-300 bg-base-100 p-5"
                 >
                   <div className="flex flex-wrap items-start justify-between gap-2">
-                    <h4 className="text-[13px] font-bold">{cat.label}</h4>
+                    <h4 className="text-sm font-bold">{cat.label}</h4>
                     <LaneBadge lane={lane} />
                   </div>
                   <ul className="mt-2 space-y-2">
                     {cat.platforms.map((p) => (
                       <li key={`${cat.id}-${p.name}`}>
                         <div className="flex flex-wrap items-center gap-1.5">
-                          <span className="text-[12.5px] font-semibold">
+                          <span className="text-sm font-semibold">
                             {p.name}
                           </span>
                           <DepthChip depth={p.integrationDepth} />
-                          <span className="text-[10px] text-muted">
+                          <span className="text-xs text-muted">
                             {p.vendor ?? "proprietary"}
                           </span>
                           <ProvenanceBadge env={p.provenance} />
                         </div>
-                        <p className="measure mt-0.5 text-[11px] leading-snug text-muted">
+                        <p className="measure mt-0.5 text-xs leading-snug text-muted">
                           {p.description}
                         </p>
                       </li>
@@ -154,7 +154,7 @@ export function DeliveryMatrix() {
                       title={data.highDisplacementLabel}
                       count={cat.highDisplacementRoles.length}
                     >
-                      <ul className="measure list-disc space-y-0.5 pl-4 text-[11px] text-muted">
+                      <ul className="measure list-disc space-y-0.5 pl-4 text-xs text-muted">
                         {cat.highDisplacementRoles.map((r) => (
                           <li key={r}>{r}</li>
                         ))}
@@ -164,7 +164,7 @@ export function DeliveryMatrix() {
                       title={data.partialDisplacementLabel}
                       count={cat.partialDisplacementRoles.length}
                     >
-                      <ul className="measure list-disc space-y-0.5 pl-4 text-[11px] text-muted">
+                      <ul className="measure list-disc space-y-0.5 pl-4 text-xs text-muted">
                         {cat.partialDisplacementRoles.map((r) => (
                           <li key={r}>{r}</li>
                         ))}
@@ -178,7 +178,7 @@ export function DeliveryMatrix() {
             <div className="text-right">
               <Link
                 href="/ecosystem-navigator"
-                className="text-[11px] font-semibold text-primary hover:underline"
+                className="text-xs font-semibold text-primary hover:underline"
               >
                 Who delivers it: Ecosystem Navigator
               </Link>

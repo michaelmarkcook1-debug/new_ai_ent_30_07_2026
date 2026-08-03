@@ -20,22 +20,22 @@ function VendorCard({ item }: { item: AieDashboardVendorRef }) {
   const name = TRACKED_IDS.has(item.vendor.id) ? (
     <Link
       href={`/vendor-view/${item.vendor.id}`}
-      className="text-[13px] font-bold hover:text-primary hover:underline"
+      className="text-sm font-bold hover:text-primary hover:underline"
     >
       {item.vendor.name}
     </Link>
   ) : (
-    <span className="text-[13px] font-bold">{item.vendor.name}</span>
+    <span className="text-sm font-bold">{item.vendor.name}</span>
   );
   return (
-    <div className="rounded-lg border border-base-300 bg-base-100 p-3">
+    <div className="rounded-lg border border-base-300 bg-base-100 p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         {name}
       </div>
       <div className="mt-1">
         <CategoryChip label={item.vendor.category} />
       </div>
-      <p className="measure mt-2 text-[12px] leading-snug text-base-content/85">{item.reason}</p>
+      <p className="measure mt-2 text-sm leading-snug text-base-content/85">{item.reason}</p>
     </div>
   );
 }
@@ -70,10 +70,10 @@ export function WinningLosing() {
     return (
       <section>
         <div className="flex items-center gap-2">
-          <h2 className="text-[15px] font-bold">Who is winning, who is losing</h2>
+          <h2 className="text-base font-bold">Who is winning, who is losing</h2>
           <LaneBadge lane="aie-live" />
         </div>
-        <p className="measure mt-1 text-[12px] text-muted">
+        <p className="measure mt-1 text-sm text-muted">
           The live dashboard read is unavailable and no recorded fixture
           answered; nothing is shown rather than a guess.
         </p>
@@ -85,10 +85,10 @@ export function WinningLosing() {
   return (
     <section>
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-[15px] font-bold">Who is winning, who is losing</h2>
+        <h2 className="text-base font-bold">Who is winning, who is losing</h2>
         <LaneBadge lane={lane} />
         {data ? (
-          <span className="font-mono text-[10px] text-muted">
+          <span className="font-mono text-xs text-muted">
             generated{" "}
             {new Date(data.generatedAt).toLocaleDateString("en-GB", {
               day: "numeric",
@@ -98,13 +98,13 @@ export function WinningLosing() {
           </span>
         ) : null}
       </div>
-      <p className="mt-1 measure text-[11px] text-muted">
+      <p className="mt-1 measure text-xs text-muted">
         The deployed AIE dashboard&apos;s momentum calls, reasons verbatim with
         the reason each call gives; names link into the vendor profiles
         where the vendor is in the tracked roster.
       </p>
       {data === null ? (
-        <p className="mt-3 font-mono text-[11px] text-muted">Loading the live read...</p>
+        <p className="mt-3 font-mono text-xs text-muted">Loading the live read...</p>
       ) : (
         <div className="mt-3 grid grid-cols-1 gap-4 @2xl:grid-cols-2">
           <div>

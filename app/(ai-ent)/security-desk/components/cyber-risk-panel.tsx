@@ -39,24 +39,24 @@ function formatTimestamp(iso: string): string {
 function NarrativeBlock({ label, tooltip, body }: { label: string; tooltip: string; body: string | null }) {
   if (!body) return null;
   return (
-    <div className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <div className="rounded-lg border border-base-300 bg-base-100 p-5">
       <MicroLabel label={label} tooltip={tooltip} />
-      <p className="measure mt-2 text-[12.5px] leading-relaxed">{body}</p>
+      <p className="measure mt-2 text-sm leading-relaxed">{body}</p>
     </div>
   );
 }
 
 function EvidenceList({ label, items, emptyNote }: { label: string; items: string[]; emptyNote: string }) {
   return (
-    <div className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <div className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <h3 className="text-[13px] font-bold">{label}</h3>
-        <span className="font-mono text-[10px] text-muted">{items.length}</span>
+        <h3 className="text-sm font-bold">{label}</h3>
+        <span className="font-mono text-xs text-muted">{items.length}</span>
       </div>
       {items.length === 0 ? (
-        <p className="mt-2 text-[11px] text-muted">{emptyNote}</p>
+        <p className="mt-2 text-xs text-muted">{emptyNote}</p>
       ) : (
-        <ul className="measure mt-2 list-disc space-y-1.5 pl-4 text-[12.5px] leading-relaxed">
+        <ul className="measure mt-2 list-disc space-y-1.5 pl-4 text-sm leading-relaxed">
           {items.map((item) => (
             <li key={item}>{item}</li>
           ))}
@@ -97,7 +97,7 @@ export function CyberRiskPanel() {
   }, [ticker]);
 
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex flex-wrap items-center gap-2">
           <MicroLabel
@@ -108,7 +108,7 @@ export function CyberRiskPanel() {
             aria-label="Vendor ticker"
             value={ticker}
             onChange={(e) => setTicker(e.target.value)}
-            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm"
           >
             {CYBER_LIVE_TICKERS.map((t) => (
               <option key={t.ticker} value={t.ticker}>
@@ -121,11 +121,11 @@ export function CyberRiskPanel() {
       </div>
 
       {loading ? (
-        <p className="py-10 text-center font-mono text-[11px] text-muted">
+        <p className="py-10 text-center font-mono text-xs text-muted">
           Loading live cyber analysis...
         </p>
       ) : errorCode ? (
-        <p className="py-10 text-center font-mono text-[11px] text-muted">
+        <p className="py-10 text-center font-mono text-xs text-muted">
           Live cyber analysis unavailable ({errorCode}). No figure is shown in
           its place.
         </p>
@@ -141,10 +141,10 @@ export function CyberRiskPanel() {
           {/* Header: company, generated stamp, score with derivation */}
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
-              <h2 className="text-[15px] font-bold">
+              <h2 className="text-base font-bold">
                 {data.companyName} ({data.ticker})
               </h2>
-              <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-muted">
+              <p className="mt-0.5 font-mono text-xs uppercase tracking-wider text-muted">
                 Generated {formatTimestamp(data.timestamp)}
               </p>
             </div>
@@ -186,7 +186,7 @@ export function CyberRiskPanel() {
           </div>
 
           {data.summary ? (
-            <p className="measure text-[13px] leading-relaxed">{data.summary}</p>
+            <p className="measure text-sm leading-relaxed">{data.summary}</p>
           ) : null}
 
           {/* Narrative blocks */}
@@ -225,14 +225,14 @@ export function CyberRiskPanel() {
           {/* Findings and recommendations as accordions (house idiom) */}
           <div className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
             <Accordion title="Key findings" count={data.keyFindings.length} defaultOpen>
-              <ul className="measure list-disc space-y-1.5 pl-4 text-[12.5px] leading-relaxed">
+              <ul className="measure list-disc space-y-1.5 pl-4 text-sm leading-relaxed">
                 {data.keyFindings.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
             </Accordion>
             <Accordion title="Recommendations" count={data.recommendations.length}>
-              <ul className="measure list-disc space-y-1.5 pl-4 text-[12.5px] leading-relaxed">
+              <ul className="measure list-disc space-y-1.5 pl-4 text-sm leading-relaxed">
                 {data.recommendations.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
@@ -241,17 +241,17 @@ export function CyberRiskPanel() {
           </div>
 
           {/* Evidence sources, attributed */}
-          <div className="rounded-lg border border-base-300 bg-base-200/50 p-4">
+          <div className="rounded-lg border border-base-300 bg-base-200/50 p-5">
             <MicroLabel
               label="Evidence sources"
               tooltip="The sources BoardRadar cites for this analysis, listed as attributed by the API."
             />
             {data.evidenceSources.length === 0 ? (
-              <p className="mt-2 text-[11px] text-muted">
+              <p className="mt-2 text-xs text-muted">
                 No sources attributed in this analysis.
               </p>
             ) : (
-              <ol className="mt-2 list-decimal space-y-1 pl-5 text-[12px] text-muted">
+              <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-muted">
                 {data.evidenceSources.map((src) => (
                   <li key={src}>{src}</li>
                 ))}

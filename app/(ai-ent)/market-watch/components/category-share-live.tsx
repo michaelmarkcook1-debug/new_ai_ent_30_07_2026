@@ -22,7 +22,7 @@ function DeltaArrow({ changePct }: { changePct: number }) {
   const glyph = changePct > 0 ? "▲" : changePct < 0 ? "▼" : "▬";
   return (
     <span
-      className={`font-mono text-[10px] ${colour}`}
+      className={`font-mono text-xs ${colour}`}
       title="Change versus the engine's previous estimate for this vendor, in per cent"
     >
       {glyph} {changePct > 0 ? "+" : ""}
@@ -40,11 +40,11 @@ function VendorName({
   name: string;
   tracked: boolean;
 }) {
-  if (!tracked) return <span className="text-[12px] font-medium">{name}</span>;
+  if (!tracked) return <span className="text-sm font-medium">{name}</span>;
   return (
     <Link
       href={`/vendor-view/${vendorId}`}
-      className="text-[12px] font-medium hover:text-primary hover:underline"
+      className="text-sm font-medium hover:text-primary hover:underline"
     >
       {name}
     </Link>
@@ -127,13 +127,13 @@ function ShareCards({ categories }: { categories: CategoryShareView[] }) {
     <div className="mt-3 space-y-2">
       {groups.map((g) => (
         <Accordion key={g.id} title={g.label} count={g.members.length}>
-          <p className="mb-2 text-[12px] text-muted">{g.blurb}</p>
+          <p className="mb-2 text-sm text-muted">{g.blurb}</p>
           <div className="grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
             {g.members.map((cat) => (
-        <div key={cat.id} className="rounded-lg border border-base-300 bg-base-100 p-4">
-          <h3 className="text-[13px] font-bold">{cat.name}</h3>
+        <div key={cat.id} className="rounded-lg border border-base-300 bg-base-100 p-5">
+          <h3 className="text-sm font-bold">{cat.name}</h3>
           {cat.description ? (
-            <p className="measure mt-0.5 text-[11px] leading-snug text-muted">{cat.description}</p>
+            <p className="measure mt-0.5 text-xs leading-snug text-muted">{cat.description}</p>
           ) : null}
           <div className="mt-3 space-y-2">
             {cat.rows.map((row) => (
@@ -146,7 +146,7 @@ function ShareCards({ categories }: { categories: CategoryShareView[] }) {
                   />
                   <div className="flex items-baseline gap-2">
                     <DeltaArrow changePct={row.changePct} />
-                    <span className="font-mono text-[11px] font-semibold">
+                    <span className="font-mono text-xs font-semibold">
                       {row.share}%
                       <span className="ml-0.5 font-normal text-muted">est.</span>
                     </span>
@@ -163,7 +163,7 @@ function ShareCards({ categories }: { categories: CategoryShareView[] }) {
               </div>
             ))}
           </div>
-          <p className="mt-3 border-t border-base-300/60 pt-2 text-[10px] text-muted">
+          <p className="mt-3 border-t border-base-300/60 pt-2 text-xs text-muted">
             Named vendors cover {cat.namedShareTotal} per cent of this category
             in the model; the rest is not modelled.
           </p>
@@ -250,20 +250,20 @@ export function CategoryShareLive({
   return (
     <section>
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-[15px] font-bold">The market by category</h2>
+        <h2 className="text-base font-bold">The market by category</h2>
         <LaneBadge lane={lane} />
         {usingLive && payload ? (
           <>
             <span className="micro-label">Generated</span>
-            <span className="font-mono text-[10px] text-muted">{formatDate(payload.asOf)}</span>
+            <span className="font-mono text-xs text-muted">{formatDate(payload.asOf)}</span>
           </>
         ) : (
-          <span className="font-mono text-[10px] text-muted">
+          <span className="font-mono text-xs text-muted">
             {failed ? "Live pull unavailable; showing the ported seed." : "Loading the live estimates..."}
           </span>
         )}
       </div>
-      <p className="mt-1 measure text-[11px] text-muted">
+      <p className="mt-1 measure text-xs text-muted">
         {usingLive && payload
           ? `Native provenance line from the engine: "${payload.provenance}"`
           : `Native estimate label from the dataset: "${methodology}"`}

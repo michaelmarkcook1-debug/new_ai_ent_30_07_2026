@@ -86,7 +86,7 @@ export function AskAiButton() {
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-1.5 text-[12px] font-semibold text-white shadow-sm transition hover:opacity-90"
+        className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
       >
         <svg
           width="12"
@@ -118,13 +118,13 @@ export function AskAiButton() {
           role="menu"
           className="absolute right-0 z-50 mt-1.5 w-80 overflow-hidden rounded-lg border border-base-300 bg-base-100 shadow-lg"
         >
-          <p className="border-b border-base-300 px-3 py-2 text-[11px] text-muted">
+          <p className="border-b border-base-300 px-3 py-2.5 text-xs text-muted">
             Start the AI Analyst on a ready-made question, or open it blank and
             describe your own situation.
           </p>
           {groups.map((g) => (
             <div key={g} className="border-b border-base-300 last:border-b-0">
-              <p className="px-3 pt-2 font-mono text-[9px] uppercase tracking-wider text-muted">
+              <p className="px-3 pt-2 font-mono text-xs uppercase tracking-wider text-muted">
                 {g}
               </p>
               <ul className="pb-1.5">
@@ -134,7 +134,7 @@ export function AskAiButton() {
                       role="menuitem"
                       href={`/interrogate?q=${encodeURIComponent(q.question)}`}
                       onClick={() => setOpen(false)}
-                      className="block px-3 py-1.5 text-[12.5px] leading-snug transition hover:bg-base-200 hover:text-primary"
+                      className="block px-3 py-2 text-sm leading-snug transition hover:bg-base-200 hover:text-primary"
                     >
                       {q.question}
                     </Link>
@@ -147,7 +147,7 @@ export function AskAiButton() {
             role="menuitem"
             href="/interrogate"
             onClick={() => setOpen(false)}
-            className="block bg-base-200/60 px-3 py-2 text-[12px] font-semibold text-primary transition hover:bg-base-200"
+            className="block bg-base-200/60 px-3 py-2.5 text-sm font-semibold text-primary transition hover:bg-base-200"
           >
             Ask something else &rarr;
           </Link>

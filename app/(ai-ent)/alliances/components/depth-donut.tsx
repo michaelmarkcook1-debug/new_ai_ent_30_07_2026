@@ -80,7 +80,7 @@ export function DepthDonut({ edges }: { edges: AllianceEdgeView[] }) {
   });
 
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex items-center gap-2">
         <MicroLabel
           label="Partnership depth"
@@ -90,7 +90,7 @@ export function DepthDonut({ edges }: { edges: AllianceEdgeView[] }) {
       </div>
 
       {total === 0 ? (
-        <p className="mt-3 text-[12px] text-muted">
+        <p className="mt-3 text-sm text-muted">
           No alliance edges are recorded.
         </p>
       ) : (
@@ -154,7 +154,7 @@ export function DepthDonut({ edges }: { edges: AllianceEdgeView[] }) {
               {segments.map((s) => (
                 <li
                   key={s.band.key}
-                  className="flex flex-wrap items-center justify-between gap-2 text-[12px]"
+                  className="flex flex-wrap items-center justify-between gap-2 text-sm"
                   title={s.band.help}
                 >
                   <span className="flex items-center gap-1.5">
@@ -165,7 +165,7 @@ export function DepthDonut({ edges }: { edges: AllianceEdgeView[] }) {
                     />
                     {s.band.label}
                   </span>
-                  <span className="font-mono text-[11.5px] font-semibold">
+                  <span className="font-mono text-xs font-semibold">
                     {s.count}
                     <span className="ml-1 font-normal text-muted">
                       {Math.round(s.share * 100)}%
@@ -174,7 +174,7 @@ export function DepthDonut({ edges }: { edges: AllianceEdgeView[] }) {
                 </li>
               ))}
             </ul>
-            <p className="mt-2 border-t border-base-300 pt-1.5 font-mono text-[10px] text-muted">
+            <p className="mt-2 border-t border-base-300 pt-1.5 font-mono text-xs text-muted">
               {verified} of {total} ({verifiedPct}%) above seed evidence
             </p>
           </div>

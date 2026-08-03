@@ -48,7 +48,7 @@ function StatusChip({ status }: { status: CellStatus }) {
   };
   return (
     <span
-      className={`inline-flex rounded px-1 py-0.5 font-mono text-[8px] font-semibold uppercase tracking-wider ${styles[status]}`}
+      className={`inline-flex rounded px-1 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider ${styles[status]}`}
       title={
         status === "verified"
           ? "Fetched from the named public source"
@@ -74,10 +74,10 @@ function MetricRow({
   note?: string;
 }) {
   return (
-    <li className="flex flex-wrap items-start justify-between gap-2 py-1">
+    <li className="flex flex-wrap items-start justify-between gap-2 py-1.5">
       <div className="min-w-0">
-        <span className="text-[12.5px]">{label}</span>
-        {note ? <p className="measure text-[10px] leading-snug text-muted">{note}</p> : null}
+        <span className="text-sm">{label}</span>
+        {note ? <p className="measure text-xs leading-snug text-muted">{note}</p> : null}
       </div>
       <span className="flex shrink-0 items-center gap-1.5">
         {status ? <StatusChip status={status} /> : null}
@@ -99,12 +99,12 @@ function ThemesAndSources({
   return (
     <div className="mt-3 border-t border-base-300 pt-2">
       <p className="micro-label">{heading}</p>
-      <ul className="measure mt-1 list-disc space-y-0.5 pl-4 text-[11px] text-base-content/85">
+      <ul className="measure mt-1 list-disc space-y-0.5 pl-4 text-xs text-base-content/85">
         {themes.map((t) => (
           <li key={t}>{t}</li>
         ))}
       </ul>
-      <p className="mt-2 font-mono text-[9px] text-muted">
+      <p className="mt-2 font-mono text-xs text-muted">
         Sources: {sources.join(", ")}
       </p>
     </div>
@@ -129,14 +129,14 @@ function PillarCard({
   lane?: "aie" | "aie-live" | "mock";
 }) {
   return (
-    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel label={title} tooltip={tooltip} />
         <LaneBadge lane={lane} />
       </div>
       <div className="mt-2 flex items-center gap-2">
         <span className="font-mono text-2xl font-bold leading-none">{overall}</span>
-        <span className="text-[11px] text-muted">overall, 0 to 100</span>
+        <span className="text-xs text-muted">overall, 0 to 100</span>
       </div>
       <div className="mt-1">
         <DerivationDrawer title={drawerTitle}>{drawerBody}</DerivationDrawer>
@@ -196,14 +196,14 @@ export function AiePillarsSection() {
             ? "Pulled live from the deployed AIE app; identical schema to the ported seed"
             : "Ported seed (the live pull did not answer)"}
         </span>
-        <span className="font-mono text-[10px] text-muted">
+        <span className="font-mono text-xs text-muted">
           {vendorIds.length} vendors tracked
         </span>
         <select
           aria-label="Reputation vendor"
           value={vendorId}
           onChange={(e) => setVendorId(e.target.value)}
-          className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1 text-[12px]"
+          className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm"
         >
           {vendorIds.map((id) => (
             <option key={id} value={id}>
@@ -213,7 +213,7 @@ export function AiePillarsSection() {
         </select>
         <Link
           href={`/vendor-view/${vendorId}`}
-          className="text-[11px] font-semibold text-primary hover:underline"
+          className="text-xs font-semibold text-primary hover:underline"
         >
           Full profile: {nameOf(vendorId)}
         </Link>
@@ -423,11 +423,11 @@ export function AiePillarsSection() {
             }
           >
             <ul className="divide-y divide-base-300/60">
-              <li className="flex flex-wrap items-center justify-between gap-2 py-1">
-                <span className="text-[12.5px]">Average uptime</span>
+              <li className="flex flex-wrap items-center justify-between gap-2 py-1.5">
+                <span className="text-sm">Average uptime</span>
                 <span className="flex items-center gap-1.5">
                   <StatusChip status={cust.dataStatus} />
-                  <span className="font-mono text-[11px] font-semibold">
+                  <span className="font-mono text-xs font-semibold">
                     {cust.averageUptimePct} per cent
                   </span>
                 </span>
