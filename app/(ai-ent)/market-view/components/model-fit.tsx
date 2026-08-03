@@ -30,8 +30,11 @@ import type {
   Assessment,
   DutyOutcome,
   Elimination,
+  ModelRecord,
+  Profile,
   RankedModel,
   Recommendation,
+  RequirementEntry,
   Role,
 } from "@/lib/model-fit";
 import { PriceCapabilityChart } from "./model-fit-chart";
@@ -476,6 +479,14 @@ export function ModelFit() {
   const chosenCost = chosen ? engine.perSeatYear(chosen) : null;
   const saving =
     topCost !== null && chosenCost !== null ? (topCost - chosenCost) * seats : null;
+
+  const eliminatedBy = useMemo(() => {
+    const m = new Map<string, number>();
+    for (const e of detail?.eliminated ?? []) {
+      m.set(e.requirement, (m.get(e.requirement) ?? 0) + 1);
+    }
+    return m;
+  }, [detail]);
 
   const eliminationsByRequirement = useMemo(() => {
     if (!detail) return [];
@@ -1179,24 +1190,25 @@ export function ModelFit() {
                     // null from meets() means the question could not be put to
                     // the model at all: no axis, or no published value. That is
                     // not the same as clearing, and must never read like it.
-                    const met = pick ? engine.meets(pick, cap, meta, detail.shift) : null;
-                    // A Mandatory shortfall eliminates, so a surviving pick can
-                    // only ever fall short on a Desirable requirement. Saying
-                    // "falls short" in red would read as a failure when it is
-                    // the ranking signal doing its job.
-                    const verdict = unassessed
-                      ? "unassessed"
-                      : decided
-                        ? "decided the answer"
-                        : !pick
-                          ? "not reached"
-                          : met === null
-                            ? "not assessable"
-                            : met
-                              ? "pick clears"
-                              : meta.critical === "Mandatory"
-                                ? "pick falls short"
-                                : "desirable shortfall";
+                    const met = pick
+                      ? checkRequirement(engine, pick, cap, meta, detail.shift)
+                      : null;
+                    // One question, asked of the recommended model: did this
+                    // requirement test it, and did it pass. "Unassessed" and
+                    // "not assessable" were two labels for the same fact, and
+                    // "pick clears" was being awarded for requirements that
+                    // asked for nothing.
+                    const verdict = !pick
+                      ? "not reached"
+                      : met === "not-required"
+                        ? "not required"
+                        : met === "unchecked"
+                          ? "not checked"
+                          : met === "cleared"
+                            ? "clears"
+                            : meta.critical === "Mandatory"
+                              ? "falls short"
+                              : "desirable shortfall";
                     return (
                       <tr key={cap} className="border-b border-base-300/60 align-top">
                         <td className="py-1.5 pr-2">
@@ -1256,25 +1268,39 @@ export function ModelFit() {
                             </span>
                           ) : null}
                         </td>
-                        <td className="px-2 py-1.5 font-mono text-[10.5px]">{applied}</td>
+                        <td className="px-2 py-1.5 font-mono text-[10.5px]">
+                          {applied}
+                          {/* Which requirement did the work is a different fact
+                              from whether the pick passed it, so it sits beside
+                              the threshold rather than replacing the verdict. */}
+                          {decided ? (
+                            <span
+                              className="mt-0.5 block text-[9px] uppercase tracking-wider text-warn"
+                              title="This requirement eliminated models from the catalogue."
+                            >
+                              eliminated {eliminatedBy.get(cap) ?? 0} models
+                            </span>
+                          ) : null}
+                        </td>
                         <td className="py-1.5 pl-2">
                           <span
                             title={
-                              verdict === "not assessable"
+                              verdict === "not checked"
                                 ? "No benchmark axis has been ingested for this requirement, or the catalogue publishes no value for this model. Reported as unchecked rather than passed."
-                                : undefined
+                                : verdict === "not required"
+                                  ? "The role asks for nothing here, so there is no test to pass. Counting this as cleared would inflate the tally."
+                                  : undefined
                             }
                             className={`inline-flex rounded px-1.5 py-0.5 font-mono text-[9px] uppercase tracking-wider ${
-                              verdict === "unassessed" ||
-                              verdict === "not assessable" ||
-                              verdict === "not reached"
+                              verdict === "not checked" || verdict === "not reached"
                                 ? "bg-base-200 text-muted"
-                                : verdict === "decided the answer" ||
-                                    verdict === "desirable shortfall"
-                                  ? "bg-warn-bg text-warn"
-                                  : verdict === "pick falls short"
-                                    ? "bg-bad-bg text-error"
-                                    : "bg-good-bg text-good"
+                                : verdict === "not required"
+                                  ? "text-muted/70"
+                                  : verdict === "desirable shortfall"
+                                    ? "bg-warn-bg text-warn"
+                                    : verdict === "falls short"
+                                      ? "bg-bad-bg text-error"
+                                      : "bg-good-bg text-good"
                             }`}
                           >
                             {verdict}
@@ -1524,6 +1550,108 @@ function specRequirement(cap: string, level: number): string {
 }
 
 /**
+ * Does the recommended model clear this requirement, judged by the threshold
+ * the engine actually eliminated on?
+ *
+ * NOT the same question as Engine.meets(), and the difference matters. meets()
+ * exists to rank desirable shortfalls and omits rule 4's overflow and rule 5's
+ * ceiling, because the reference implementation omits them there. The filter
+ * that decides who survives applies both. Asking meets() whether a model
+ * "clears" a requirement can therefore disagree with the reason it survived.
+ *
+ * The engine is left alone — changing meets() would change the ranking and
+ * break parity with the reference — and the display asks the elimination
+ * question directly instead.
+ *
+ * null means the question could not be put: no axis, or no published value.
+ */
+/**
+ * Four states, not three, and the fourth is the one that was wrong.
+ *
+ * A requirement scored at the bottom band asks for nothing: latency band 1 is
+ * "days or weeks are acceptable", which the engine turns into a floor of zero
+ * tokens per second; visual interpretation band 1 short-circuits before it
+ * looks at the model at all; a capability threshold at band 1 is literally 0.
+ * Nothing can fail these. Reporting them as "the pick clears" counted a test
+ * that never took place, and inflated every tally built on top of it.
+ *
+ *   not-required  the role asks nothing here, so there is no test
+ *   cleared       a real bar existed and the model met it
+ *   short         a real bar existed and the model did not
+ *   unchecked     a bar exists in principle, but no axis or no published value
+ */
+type Check = "not-required" | "cleared" | "short" | "unchecked";
+
+function checkRequirement(
+  engine: ReturnType<typeof loadEngine>,
+  model: ModelRecord,
+  cap: string,
+  meta: { score: number },
+  shift: number
+): Check {
+  if (cap in MODALITY) {
+    if (meta.score <= 10) return "not-required";
+    const have = model.input_modalities;
+    if (have === null || have === undefined) return "unchecked";
+    return have.includes(MODALITY[cap]) ? "cleared" : "short";
+  }
+  if (cap in SPEC_NUMERIC) {
+    const need = SPEC_NUMERIC[cap][meta.score];
+    if (!need) return "not-required";
+    const have = (model as unknown as Record<string, number | null | undefined>)[
+      SPEC_FIELD[cap]
+    ];
+    if (have === null || have === undefined) return "unchecked";
+    return have >= need ? "cleared" : "short";
+  }
+  if (cap === "CAP-14" || cap === "CAP-15") {
+    const need = (cap === "CAP-14" ? DATA_REQ : ASSURANCE_REQ)[meta.score];
+    if (!need || need.length === 0) return "not-required";
+    const have = (model as unknown as Record<string, string[] | null | undefined>)[
+      SPEC_FIELD[cap]
+    ];
+    if (have === null || have === undefined) return "unchecked";
+    return need.every((x) => have.includes(x)) ? "cleared" : "short";
+  }
+  const applied = engine.appliedThreshold(cap, meta.score, shift);
+  const field = engine.cal(cap)?.model_field;
+  if (!applied || !field) return "unchecked";
+  if (applied.value <= 0) return "not-required";
+  const have = (model.benchmarks ?? {})[field];
+  if (have === null || have === undefined) return "unchecked";
+  return have >= applied.value ? "cleared" : "short";
+}
+
+/** How the recommended model actually did, requirement by requirement. */
+function scoreCard(
+  engine: ReturnType<typeof loadEngine>,
+  model: ModelRecord,
+  profile: Profile,
+  shift: number
+): { cleared: number; short: string[]; unchecked: number; notRequired: number } {
+  let cleared = 0;
+  let unchecked = 0;
+  let notRequired = 0;
+  const short: string[] = [];
+  for (const cap of Object.keys(profile)) {
+    switch (checkRequirement(engine, model, cap, profile[cap] as RequirementEntry, shift)) {
+      case "not-required":
+        notRequired += 1;
+        break;
+      case "cleared":
+        cleared += 1;
+        break;
+      case "short":
+        short.push(cap);
+        break;
+      default:
+        unchecked += 1;
+    }
+  }
+  return { cleared, short, unchecked, notRequired };
+}
+
+/**
  * The answer, split so the model can be the thing the eye lands on.
  *
  * `model` is the name alone, rendered large and in the accent colour on its own
@@ -1550,16 +1678,46 @@ function headline(
     detail.pick && cost === null
       ? " The catalogue publishes no price for it, so it cannot be costed."
       : "";
-  if (answer.outcome === "supported" && detail.pick) {
+  if (detail.pick && (answer.outcome === "supported" || answer.outcome === "qualified")) {
+    // Counted against the recommended model itself, not against the catalogue.
+    // The old wording read "clears all N requirements that can be checked
+    // today", where N was every requirement minus the ones the CATALOGUE cannot
+    // assess. That said nothing about this model, and was routinely false: a
+    // model can survive because a mandatory axis is too thin to eliminate on,
+    // while visibly falling short on the one axis that does cover the market.
+    const card = scoreCard(engine, detail.pick, role.profile, detail.shift);
+    const tested = card.cleared + card.short.length;
+    const names = card.short.map((c) => CAPABILITY_NAMES[c] ?? c);
+    const one = card.short.length === 1;
+    const shortfall = card.short.length
+      ? ` It falls short on ${names.join(", ")}, ${
+          card.short.every((c) => role.profile[c].critical !== "Mandatory")
+            ? one
+              ? "which ranks but never eliminates"
+              : "which rank but never eliminate"
+            : one
+              ? "which is mandatory, so this needs looking at"
+              : "which are mandatory, so this needs looking at"
+        }.`
+      : "";
+    // Both numbers are stated. A tally of what was tested means nothing without
+    // the count of what could not be, and for most roles the second is larger.
+    const rest = [
+      card.unchecked ? `${card.unchecked} could not be checked against it` : "",
+      card.notRequired ? `${card.notRequired} ask nothing of it` : "",
+    ].filter(Boolean);
+    const remainder = rest.length
+      ? ` Of the ${total} requirements, ${rest.join(" and ")}.`
+      : "";
+    const lead =
+      tested === 0
+        ? `Nothing in this role could actually be tested against it${at}`
+        : card.short.length === 0
+          ? `Clears ${tested === 1 ? "the one requirement" : `all ${tested} requirements`} that actually tested it${at}`
+          : `Clears ${card.cleared} of the ${tested} requirements that actually tested it${at}`;
     return {
       model: shortName(detail.pick.model_id),
-      sentence: `Meets every requirement for this role${at}.${unpriced}`,
-    };
-  }
-  if (answer.outcome === "qualified" && detail.pick) {
-    return {
-      model: shortName(detail.pick.model_id),
-      sentence: `Clears all ${total - u} requirements that can be checked today${at}. ${u} more await benchmark data.${unpriced}`,
+      sentence: `${lead}.${shortfall}${remainder}${unpriced}`,
     };
   }
   if (answer.outcome === "best available") {
