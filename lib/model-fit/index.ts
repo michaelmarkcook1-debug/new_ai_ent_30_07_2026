@@ -105,6 +105,125 @@ export const INDUSTRIES: string[] = [
     .sort((a, b) => a.localeCompare(b)),
 ];
 
+/**
+ * The 36 industries gathered into nine macro sectors.
+ *
+ * A flat alphabetical list of 36 puts Banking next to Biotechnology and
+ * Automotive next to Banking, which is an ordering nobody thinks in. The
+ * grouping is a presentation layer only: the engine never sees it, and a role's
+ * `industry` field is untouched.
+ *
+ * The taxonomy publishes no sector level of its own, so these groupings are
+ * ours and are the obvious reading rather than a standard classification. They
+ * are not SIC or NAICS and should not be cited as either.
+ */
+export interface IndustryGroup {
+  macro: string;
+  industries: string[];
+}
+
+const GROUPING: IndustryGroup[] = [
+  {
+    macro: "Financial services",
+    industries: [
+      "Banking",
+      "Insurance",
+      "Investment Banking & Capital Markets",
+      "Payments & FinTech",
+      "Wealth & Asset Management",
+    ],
+  },
+  {
+    macro: "Health & life sciences",
+    industries: [
+      "Biotechnology",
+      "Healthcare Providers",
+      "Medical Devices",
+      "Pharmaceuticals",
+    ],
+  },
+  {
+    macro: "Technology, media & telecoms",
+    industries: [
+      "Cloud & Digital Infrastructure",
+      "Gaming & Interactive Entertainment",
+      "IT Services & Consulting",
+      "Media & Entertainment",
+      "Software & SaaS",
+      "Telecommunications",
+    ],
+  },
+  {
+    macro: "Manufacturing & industrials",
+    industries: [
+      "Aerospace & Defence",
+      "Automotive",
+      "Construction & Engineering",
+      "Manufacturing",
+    ],
+  },
+  {
+    macro: "Energy, utilities & resources",
+    industries: ["Mining & Metals", "Oil & Gas", "Power & Utilities", "Renewable Energy"],
+  },
+  {
+    macro: "Consumer & retail",
+    industries: [
+      "Agriculture & Food Production",
+      "Consumer Goods",
+      "Retail & E-commerce",
+      "Travel, Hospitality & Leisure",
+    ],
+  },
+  {
+    macro: "Transport & mobility",
+    industries: ["Airlines & Aviation", "Transport & Logistics"],
+  },
+  {
+    macro: "Professional services",
+    industries: [
+      "Accounting & Audit",
+      "Legal Services",
+      "Management Consulting",
+      "Real Estate & Property Services",
+    ],
+  },
+  {
+    macro: "Public sector & education",
+    industries: ["Education", "Higher Education & Research", "Public Sector & Government"],
+  },
+];
+
+/**
+ * The grouping as the menu should render it, with two guarantees enforced here
+ * rather than trusted: every industry in the library appears exactly once, and
+ * nothing appears that the library does not have.
+ *
+ * An industry added to the data and forgotten here would otherwise vanish from
+ * the menu while its roles stayed in the library, which is the failure mode
+ * this whole feature exists to fix.
+ */
+export const INDUSTRY_GROUPS: IndustryGroup[] = (() => {
+  const known = new Set(INDUSTRIES.filter((i) => i !== CROSS_INDUSTRY));
+  const placed = new Set<string>();
+  const groups: IndustryGroup[] = [];
+  for (const g of GROUPING) {
+    const industries = g.industries.filter((i) => {
+      if (!known.has(i)) return false; // named here, absent from the data
+      placed.add(i);
+      return true;
+    });
+    if (industries.length) groups.push({ macro: g.macro, industries });
+  }
+  const orphans = [...known].filter((i) => !placed.has(i)).sort((a, b) => a.localeCompare(b));
+  if (orphans.length) {
+    // Shown, not swallowed. A new industry appears under a visible heading that
+    // says it has not been sorted yet.
+    groups.push({ macro: "Not yet grouped", industries: orphans });
+  }
+  return groups;
+})();
+
 export function industryLabel(industry: string): string {
   return industry === CROSS_INDUSTRY ? CROSS_INDUSTRY_LABEL : industry;
 }

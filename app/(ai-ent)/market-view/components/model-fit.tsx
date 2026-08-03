@@ -12,6 +12,7 @@ import {
   CROSS_INDUSTRY,
   DATA_REQ,
   INDUSTRIES,
+  INDUSTRY_GROUPS,
   MODALITY,
   MODELS,
   RUBRIC,
@@ -549,7 +550,10 @@ export function ModelFit() {
           finds one, and asking for them in order is what makes the third menu
           short enough to read. */}
       <div className="mt-3 flex max-w-md flex-col gap-3">
-        <Field label="1. Industry" note={`${INDUSTRIES.length - 1} industries, plus cross-industry`}>
+        <Field
+          label="1. Industry"
+          note={`${INDUSTRIES.length - 1} industries in ${INDUSTRY_GROUPS.length} sectors, plus cross-industry`}
+        >
           <select
             aria-label="Industry"
             value={industry}
@@ -557,10 +561,17 @@ export function ModelFit() {
             className={selectClass}
           >
             <option value="">Choose an industry…</option>
-            {INDUSTRIES.map((i) => (
-              <option key={i} value={i}>
-                {industryLabel(i)}
-              </option>
+            {/* Cross-industry is not a sector, it is the 99 roles every sector
+                has, so it sits above the grouping rather than inside it. */}
+            <option value={CROSS_INDUSTRY}>{industryLabel(CROSS_INDUSTRY)}</option>
+            {INDUSTRY_GROUPS.map((g) => (
+              <optgroup key={g.macro} label={g.macro}>
+                {g.industries.map((i) => (
+                  <option key={i} value={i}>
+                    {i}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
         </Field>

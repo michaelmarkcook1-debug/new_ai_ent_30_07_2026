@@ -10,6 +10,9 @@ import {
   ROLES,
   CALIBRATION,
   CAPABILITY_NAMES,
+  CROSS_INDUSTRY,
+  INDUSTRIES,
+  INDUSTRY_GROUPS,
 } from "@/lib/model-fit";
 import type { CalibrationTable, ModelRecord, Profile, Role } from "@/lib/model-fit";
 
@@ -58,8 +61,8 @@ const eng = loadEngine();
 
 describe("data", () => {
   it("roles load", () => {
-    // 258 researched profiles plus 36 authored for the seven industries the
-    // package left uncovered. See scripts/author-missing-industries.py.
+    // The package's 258, plus 36 researched for the seven industries it left
+    // uncovered. See scripts/research-missing-industries.py.
     expect(Object.keys(ROLES).length).toBe(294);
   });
 
@@ -89,6 +92,34 @@ describe("data", () => {
       )
     );
     expect(seen.size).toBe(Object.keys(ROLES).length);
+  });
+
+  it("every industry appears in the menu exactly once", () => {
+    // The industry menu groups 36 industries into macro sectors. The grouping
+    // is hand-written, so an industry added to the data and forgotten there
+    // would disappear from the menu while its roles stayed in the library.
+    const grouped = INDUSTRY_GROUPS.flatMap((g) => g.industries);
+    const expected = INDUSTRIES.filter((i) => i !== CROSS_INDUSTRY);
+    expect([...grouped].sort()).toEqual([...expected].sort());
+    expect(new Set(grouped).size).toBe(grouped.length);
+  });
+
+  it("names no industry the library does not have", () => {
+    const known = new Set(INDUSTRIES);
+    for (const g of INDUSTRY_GROUPS) {
+      for (const i of g.industries) expect(known.has(i)).toBe(true);
+    }
+  });
+
+  it("keeps cross-industry out of the sector grouping", () => {
+    // It is not a sector. It is the 99 roles every sector has.
+    expect(INDUSTRY_GROUPS.some((g) => g.industries.includes(CROSS_INDUSTRY))).toBe(false);
+  });
+
+  it("has sorted nothing into the fallback group", () => {
+    // "Not yet grouped" exists so a new industry is visible rather than
+    // swallowed. Anything in it is a prompt to place it properly.
+    expect(INDUSTRY_GROUPS.find((g) => g.macro === "Not yet grouped")).toBeUndefined();
   });
 
   it("models load and are priced", () => {
