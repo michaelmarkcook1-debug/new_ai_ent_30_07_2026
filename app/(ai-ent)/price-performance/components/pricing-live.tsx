@@ -110,7 +110,7 @@ export function PricingSection({
             <h2 className="text-[15px] font-bold">Token list pricing</h2>
             <LaneBadge lane={lane} />
           </div>
-          <p className="mt-1 max-w-3xl text-[12px] text-muted">
+          <p className="mt-1 measure text-[12px] text-muted">
             {rows.length} model rows across {vendorCount} vendors, USD per 1M
             tokens. Public list price is not the negotiated enterprise price:
             batch APIs commonly list 50 per cent lower, and committed-use,
@@ -164,7 +164,7 @@ export function PricingSection({
             under a live badge. This table now takes whichever source has the
             later capture date.
           </p>
-          <ul className="list-disc space-y-1 pl-4 text-muted">
+          <ul className="measure list-disc space-y-1 pl-4 text-muted">
             <li>
               Input, output and cached-input columns are USD per 1M tokens;
               cached-input appears only where the vendor publishes a clean
@@ -180,7 +180,7 @@ export function PricingSection({
               render &quot;Not published&quot; rather than a guess.
             </li>
           </ul>
-          <p className="text-muted">
+          <p className="measure text-muted">
             This area moves fast, so the capture date sits beside the table.
             Treat the snapshot as reference data, not a quote: verify against
             the linked source before relying on any figure.

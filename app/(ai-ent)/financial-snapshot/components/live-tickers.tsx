@@ -119,16 +119,16 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
         ))}
       </div>
       {selectedMeta?.financialsOnly ? (
-        <p className="mt-1.5 text-[11px] text-muted">
+        <p className="measure mt-1.5 text-[11px] text-muted">
           {selectedMeta.name} is covered for financials only: it is not in the
           wider BoardRadar company universe, so other modules show honest empty
           states for it.
         </p>
       ) : null}
 
-      <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-5">
+      <div className="mt-3 grid grid-cols-1 gap-4 @4xl:grid-cols-5">
         {/* Overview summary card */}
-        <div className="rounded-lg border border-base-300 bg-base-100 p-4 lg:col-span-2">
+        <div className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-2">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Company overview"
@@ -148,7 +148,7 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
               <p className="mt-0.5 font-mono text-[10px] text-muted">
                 {overview.data.sector} / {overview.data.industry}
               </p>
-              <p className="mt-2 text-[13px] leading-relaxed text-base-content/85">
+              <p className="measure mt-2 text-[13px] leading-relaxed text-base-content/85">
                 {overview.data.summary}
               </p>
               <p className="mt-3 font-mono text-[10px] text-muted">
@@ -164,7 +164,7 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
         </div>
 
         {/* Quick metrics table */}
-        <div className="rounded-lg border border-base-300 bg-base-100 p-4 lg:col-span-3">
+        <div className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-3">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Quick metrics"
@@ -215,7 +215,7 @@ export function LiveTickers({ tickers }: { tickers: ProbedTicker[] }) {
                     and period labels are rendered exactly as the API returns
                     them; nothing is recalculated or estimated on this page.
                   </p>
-                  <p className="text-muted">
+                  <p className="measure text-muted">
                     A LIVE badge means the figures came from the upstream API on
                     this visit. A Cached sample badge means the live call was
                     unavailable and a recorded response is shown instead. When

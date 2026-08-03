@@ -109,6 +109,24 @@ h1, h2, h3, h4 {
   color: #fff;
 }
 
+/* ---------------------------------------------------------------------------
+   Measure.
+
+   A line of running text stops being readable somewhere past 90 characters:
+   the eye loses the start of the next line on the return sweep. Before the
+   content column was capped, paragraphs here reached 300 characters on a
+   1920px monitor, and the ones that were capped stopped at a different width
+   from their neighbours, so cards read as text hugging the left with dead
+   space to the right.
+
+   One class, used on running copy only. It never widens anything, so it is
+   safe on a paragraph sitting in a narrow card, and it tracks the font size
+   because ch is relative.
+--------------------------------------------------------------------------- */
+@utility measure {
+  max-width: 76ch;
+}
+
 /* Delivery channel: integrators and IT service providers. Any card whose
    subject is the services channel rather than AI vendors carries this edge,
    so the distinction is visible before the copy is read. */

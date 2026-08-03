@@ -200,7 +200,7 @@ export function InterrogateView() {
           <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
             Tell me your situation.
           </h2>
-          <p className="mt-2 max-w-2xl text-[14px] leading-relaxed text-muted">
+          <p className="mt-2 measure text-[14px] leading-relaxed text-muted">
             One or two sentences: who you are, what you have, and where you
             want to get to with AI. I will ask a few sharp questions, each
             shaped by your last answer, then write a tailored finding grounded
@@ -246,7 +246,7 @@ export function InterrogateView() {
           </div>
           <div className="mt-6">
             <p className="micro-label mb-2">Or try an example</p>
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-2 @xl:grid-cols-2">
               {EXAMPLES.map((ex) => (
                 <button
                   key={ex}
@@ -297,7 +297,7 @@ export function InterrogateView() {
                 ) : null}
                 {t.tiers ? (
                   <div className="mt-2 border-t border-base-300 pt-1.5">
-                    <p className="font-mono text-[9.5px] uppercase tracking-wider text-muted">
+                    <p className="measure font-mono text-[9.5px] uppercase tracking-wider text-muted">
                       {t.tiers.map((x) => `${x.tier}: ${x.role} (${x.mode})`).join(" · ")}
                       {typeof t.tokens === "number" ? ` · ~${t.tokens} tokens indicative` : ""}
                     </p>
@@ -358,7 +358,7 @@ export function InterrogateView() {
         <LaneBadge lane="aie-live" />
         <LaneBadge lane="aie" />
         <LaneBadge lane="sample" />
-        <p className="text-[11px] text-muted">
+        <p className="measure text-[11px] text-muted">
           Findings draw on the AIE live vendor read, the ported AIE dataset,
           the preloaded documents and the Shell fixture, with citations on
           every claim. Tiered routing: Haiku shapes questions, Sonnet writes

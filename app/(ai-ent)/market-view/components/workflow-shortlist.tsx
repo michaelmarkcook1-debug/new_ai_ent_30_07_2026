@@ -72,7 +72,7 @@ export function WorkflowShortlistPanel({
           label="Who to shortlist"
           tooltip="Pick a workflow above to see the vendors that serve it."
         />
-        <p className="mt-1 text-[12px] text-muted">
+        <p className="measure mt-1 text-[12px] text-muted">
           Choose a workflow above and this becomes a shortlist: the vendors that
           ship it, and the model providers you would build it on.
         </p>
@@ -84,7 +84,7 @@ export function WorkflowShortlistPanel({
     return (
       <section className="rounded-lg border border-dashed border-base-300 px-4 py-5">
         <MicroLabel label="Who to shortlist" />
-        <p className="mt-1 text-[12px] text-muted">
+        <p className="measure mt-1 text-[12px] text-muted">
           No vendor mapping is defined for this workflow&apos;s category, so no
           shortlist is offered rather than a guess.
         </p>
@@ -130,7 +130,7 @@ export function WorkflowShortlistPanel({
         </p>
       ) : null}
 
-      <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <div className="mt-3 grid grid-cols-1 gap-4 @2xl:grid-cols-2">
         <div>
           <p className="text-[12px] font-bold">Buy it</p>
           <p className="text-[11px] text-muted">
@@ -166,7 +166,7 @@ export function WorkflowShortlistPanel({
             order is the vendor&apos;s own AG score, and a vendor with no score
             sorts last rather than being treated as zero.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Buy and build are kept apart because they are not substitutes:
             ranking a finished application against a raw model in one list would
             compare two different purchases. Neither list is a recommendation,

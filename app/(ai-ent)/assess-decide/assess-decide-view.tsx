@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { ScorePill } from "@/lib/ui/score";
@@ -105,7 +106,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
           />
           <LaneBadge lane="aie" />
         </div>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 @3xl:grid-cols-3">
           {TIERS.map((t) => (
             <button
               key={t.id}
@@ -119,7 +120,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
             >
               <p className="micro-label">{t.label}</p>
               <p className="mt-1 text-[14px] font-bold">{t.question}</p>
-              <p className="mt-1 text-[11.5px] leading-snug text-muted">{t.note}</p>
+              <p className="measure mt-1 text-[11.5px] leading-snug text-muted">{t.note}</p>
               <p className="mt-2 font-mono text-[10px] text-muted">
                 {t.audience} · {t.duration}
               </p>
@@ -146,7 +147,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
             <h2 className="text-[15px] font-bold">{assessment.subject}</h2>
             <LaneBadge lane="sample" />
           </div>
-          <p className="mt-1 text-[12.5px] text-muted">
+          <p className="measure mt-1 text-[12.5px] text-muted">
             Weighted total under the {activeTier.label.toLowerCase()} preset
             and your adjustments. Dimension scores never move with the
             weights: same verified basis, your priorities.
@@ -162,7 +163,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
       </section>
 
       {/* Dimensions with weight sliders */}
-      <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
         {assessment.dimensions.map((d) => (
           <div key={d.id} className="rounded-lg border border-base-300 bg-base-100 p-4">
             <div className="flex flex-wrap items-start justify-between gap-2">
@@ -185,7 +186,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
               className="mt-3 w-full accent-[var(--ag-primary)]"
               aria-label={`Weight for ${d.label}`}
             />
-            <p className="mt-2 text-[12px] leading-snug text-muted">{d.rationale}</p>
+            <p className="measure mt-2 text-[12px] leading-snug text-muted">{d.rationale}</p>
             <button
               type="button"
               onClick={() => setOpenDim(openDim === d.id ? null : d.id)}
@@ -220,7 +221,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
           <LaneBadge lane={pillarSource === "mock" ? "mock" : "aie-live"} />
         </div>
         {pillars ? (
-          <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="mt-3 grid grid-cols-2 gap-2 @3xl:grid-cols-3 @5xl:grid-cols-6">
             {pillars.map((p) => (
               <div key={p.id} className="rounded border border-base-300 p-2.5 text-center">
                 <p className="text-[11.5px] font-semibold leading-tight">{p.label}</p>
@@ -237,7 +238,7 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
               : "Loading the live pillar weights..."}
           </p>
         )}
-        <p className="mt-3 text-[11.5px] text-muted">
+        <p className="measure mt-3 text-[11.5px] text-muted">
           Evidence grading runs E0 (no evidence, weight 0.0) to E5 (independent
           audit, weight 1.0); claims below the strong-evidence bar are
           suppressed rather than shown. The exemplar decision above mirrors
@@ -246,8 +247,11 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
         </p>
       </section>
 
-      {/* Derivation drawer */}
-      {drawerOpen ? (
+      {/* Derivation drawer. Portalled to the body: the content column is a
+          container query root, and container-type carries `contain: layout`,
+          which would otherwise make it the containing block for this fixed
+          overlay and trap the panel inside the column. */}
+      {drawerOpen ? createPortal(
         <div className="fixed inset-0 z-50 flex justify-end bg-black/40" onClick={() => setDrawerOpen(false)}>
           <aside
             className="h-full w-full max-w-md overflow-y-auto border-l border-base-300 bg-base-100 p-5 shadow-2xl"
@@ -301,7 +305,8 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
               </div>
             </div>
           </aside>
-        </div>
+        </div>,
+        document.body
       ) : null}
     </div>
   );

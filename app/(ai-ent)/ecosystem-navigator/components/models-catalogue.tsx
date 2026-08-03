@@ -236,7 +236,7 @@ export function ModelsCatalogue() {
           </div>
         )}
       </div>
-      <p className="mt-1.5 text-[11px] text-muted">
+      <p className="measure mt-1.5 text-[11px] text-muted">
         Evidence labels are the dataset&apos;s own: seed records await live verification against
         each vendor&apos;s model-list endpoint. Nothing in this catalogue is an invented benchmark,
         price or availability claim.

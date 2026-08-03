@@ -190,7 +190,7 @@ export function DepthDonut({ edges }: { edges: AllianceEdgeView[] }) {
             up to 0.75, emerging is below 0.5. The boundaries are stated so the
             banding can be checked rather than taken on trust.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Depth is not confidence. A deep alliance can still be seed-graded if
             the evidence behind it has not been independently verified, which is
             why the verified count is reported separately rather than folded

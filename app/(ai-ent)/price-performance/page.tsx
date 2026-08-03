@@ -47,7 +47,7 @@ export default async function PricePerformancePage() {
             </h2>
             <div className="h-px flex-1 bg-base-300" aria-hidden />
           </div>
-          <p className="mt-1 max-w-3xl text-[12px] text-muted">
+          <p className="mt-1 measure text-[12px] text-muted">
             Benchmark results below are published by {costCapability.benchmarkSource},
             attributed and dated per cell. AG produces no benchmark of its own
             and never blends a third-party score into an AG figure.

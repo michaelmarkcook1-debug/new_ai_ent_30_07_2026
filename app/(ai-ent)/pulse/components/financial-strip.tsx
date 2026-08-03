@@ -54,7 +54,7 @@ export function FinancialStrip({
           "not disclosed" in 17px bold spent most of this section's space, and
           most of its visual weight, on nothing. The absence is still stated:
           it is just no longer the loudest thing here. */}
-      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-3 grid grid-cols-1 gap-3 @xl:grid-cols-2 @6xl:grid-cols-4">
         {measured.map((ind) => (
           <div
             key={ind.label}
@@ -69,7 +69,7 @@ export function FinancialStrip({
             <p className="mt-1.5 text-[24px] font-bold leading-none">
               {ind.value}
             </p>
-            <p className="mt-1.5 text-[13px] leading-snug text-muted">
+            <p className="measure mt-1.5 text-[13px] leading-snug text-muted">
               {ind.detail}
             </p>
           </div>
@@ -77,7 +77,7 @@ export function FinancialStrip({
       </div>
 
       {absent.length > 0 ? (
-        <p className="mt-2 text-[12px] leading-snug text-muted">
+        <p className="measure mt-2 text-[12px] leading-snug text-muted">
           <span className="font-semibold">Not available: </span>
           {absent.map((a) => a.label.toLowerCase()).join(", ")}. Nobody
           publishes these for this vendor set, and no estimate is substituted
@@ -103,7 +103,7 @@ export function FinancialStrip({
             figure is substituted, because presenting a construction as a
             reported fact is the failure this section exists to avoid.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Private vendors file nothing, so they are outside this entirely
             rather than being estimated into it.
             {capturedAt ? ` Filings captured ${capturedAt.slice(0, 10)}.` : ""}

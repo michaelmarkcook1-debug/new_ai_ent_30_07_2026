@@ -241,8 +241,32 @@ export function Shell({
           </nav>
         </aside>
 
-        {/* Main content */}
-        <main className="min-w-0 flex-1 px-5 py-4 pb-12">{children}</main>
+        {/* Main content.
+            Two things happen here, and both are layout-wide.
+
+            The column is capped and centred. Without a cap it ran the full
+            window: 1696px of content on a 1920px monitor, which put some
+            paragraphs at 300 characters a line while their capped siblings
+            stopped at 768px, so cards read as content hugging the left with
+            dead space to the right.
+
+            The cap is also a container query root. Every grid inside it sizes
+            against the space it actually has rather than against the window,
+            which the window never described: the sidebar takes 224px, so a
+            "lg" grid firing at a 1024px window was really laying out three
+            columns into 760px. Querying the container also means collapsing
+            the sidebar reflows the content, which viewport breakpoints could
+            not see at all.
+
+            Anything position-fixed must render outside this div. contain:
+            layout comes with container-type and would make this element the
+            containing block for it. The derivation drawers portal to the body
+            for that reason, and the demo footer is a sibling of the Shell. */}
+        <main className="min-w-0 flex-1 px-4 py-5 pb-12 sm:px-6 xl:px-8">
+          <div className="@container mx-auto w-full max-w-[1440px]">
+            {children}
+          </div>
+        </main>
       </div>
     </div>
     </ShortlistProvider>

@@ -18,7 +18,7 @@ export function ExemplarOnly({
       <h2 className="text-[14px] font-bold">
         {tab} has no live source for this company
       </h2>
-      <p className="mt-1 max-w-2xl text-[12px] text-muted">
+      <p className="mt-1 measure text-[12px] text-muted">
         {reason ??
           "The BoardRadar API publishes no equivalent of this tab, so there is nothing real to show for the selected company."}{" "}
         The exemplar buyer&apos;s content is not shown here: it describes a

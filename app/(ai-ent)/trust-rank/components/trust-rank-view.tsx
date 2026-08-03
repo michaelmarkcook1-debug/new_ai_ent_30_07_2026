@@ -104,7 +104,7 @@ export function TrustRankView({
               infrastructure), taken from the AIE tracked-vendor roster.
             </p>
             <p>The lens applies two simple, honest mappings:</p>
-            <ul className="list-disc space-y-1 pl-4 text-muted">
+            <ul className="measure list-disc space-y-1 pl-4 text-muted">
               <li>
                 Rulings: frontier labs inherit the EU general-purpose AI
                 obligations ruling; infrastructure vendors inherit the US chip
@@ -122,7 +122,7 @@ export function TrustRankView({
                 customer-facing AI.
               </li>
             </ul>
-            <p className="text-muted">
+            <p className="measure text-muted">
               The mapping is analyst-judged and deliberately coarse: it flags
               which rows to read first, it does not score compliance. Rows
               seeded from the AIE legislation material carry the AIE dataset
@@ -130,7 +130,7 @@ export function TrustRankView({
             </p>
           </DerivationDrawer>
         </div>
-        <p className="mt-2 text-[11px] text-muted">
+        <p className="measure mt-2 text-[11px] text-muted">
           Highlighted rows below bear on the {LAYER_LABEL[selected.layer].toLowerCase()} layer.
           The grid itself is jurisdiction-first; the lens only changes emphasis,
           never the content.
@@ -206,7 +206,7 @@ export function TrustRankView({
             rows above still apply; nothing further is asserted.
           </p>
         ) : (
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
             {rulings.map((r) => (
               <div key={r.item} className="rounded-lg border border-base-300 bg-base-100 p-4">
                 <div className="flex flex-wrap items-center justify-between gap-2">
@@ -214,7 +214,7 @@ export function TrustRankView({
                   <LaneBadge lane={r.aieSource ? "aie" : "sample"} />
                 </div>
                 <p className="mt-1 text-[13px] font-semibold">{r.item}</p>
-                <p className="mt-1 text-[12px] leading-snug text-base-content/85">
+                <p className="measure mt-1 text-[12px] leading-snug text-base-content/85">
                   {r.note}
                 </p>
               </div>
@@ -245,7 +245,7 @@ export function TrustRankView({
             </p>
           </DerivationDrawer>
         </div>
-        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
           {events.map((e) => (
             <div key={e.id} className="rounded-lg border border-base-300 bg-base-100 p-4">
               <div className="flex flex-wrap items-center gap-2">
@@ -263,7 +263,7 @@ export function TrustRankView({
               </div>
               {e.signal ? (
                 <>
-                  <p className="mt-2 text-[13px] font-semibold leading-snug">
+                  <p className="measure mt-2 text-[13px] font-semibold leading-snug">
                     {e.signal.title}
                   </p>
                   <p className="mt-1 font-mono text-[10px] text-muted">
@@ -299,7 +299,7 @@ export function TrustRankView({
                     </span>
                   ))}
               </div>
-              <p className="mt-2 text-[11px] leading-snug text-muted">
+              <p className="measure mt-2 text-[11px] leading-snug text-muted">
                 {e.uncertaintyNote}
               </p>
               {e.affectedVendorIds.length > 0 ? (

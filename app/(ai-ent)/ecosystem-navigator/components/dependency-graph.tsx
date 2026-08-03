@@ -147,13 +147,13 @@ export function DependencyGraph() {
             </h2>
             <LaneBadge lane="aie" />
           </div>
-          <p className="mt-1 max-w-3xl text-[12px] text-muted">
+          <p className="mt-1 measure text-[12px] text-muted">
             Hover a logo to highlight its dependencies. Click to pin (up to
             three). Filter by relationship type or confidence. Every edge here
             is publicly source-backed: seed-confidence edges render dashed and
             require independent verification.
           </p>
-          <p className="mt-1 max-w-3xl text-[11px] text-muted">
+          <p className="mt-1 measure text-[11px] text-muted">
             Direction: edges run left to right, from exposure owner to model or
             API provider. Investment and subsidiary indicate ownership or
             control exposure; cloud, hosting, partnership and supply chain
@@ -176,7 +176,7 @@ export function DependencyGraph() {
             edges render dashed because the dataset flags them as needing
             independent verification.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Vertical position carries no meaning: it is the dataset&apos;s own
             node order, not a ranking. Only the left-to-right direction is
             meaningful.
@@ -430,7 +430,7 @@ export function DependencyGraph() {
       {/* Dossier for the focused node or pins */}
       <div className="mt-2 rounded border border-base-300 bg-base-200/50 p-3">
         {!isFocused ? (
-          <p className="text-[11.5px] text-muted">
+          <p className="measure text-[11.5px] text-muted">
             Hover a logo to highlight its dependencies. Click to pin it (up to
             three) and keep its edges in view while you compare.
           </p>
@@ -502,7 +502,7 @@ export function DependencyGraph() {
                         </span>
                       ) : null}
                     </div>
-                    <p className="mt-0.5 text-[11px] leading-snug text-muted">{e.summary}</p>
+                    <p className="measure mt-0.5 text-[11px] leading-snug text-muted">{e.summary}</p>
                     <div className="mt-1 flex flex-wrap items-center gap-2">
                       <span className="font-mono text-[9px] text-muted">
                         updated {e.dateUpdated}

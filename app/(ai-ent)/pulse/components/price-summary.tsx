@@ -40,7 +40,7 @@ export function PriceSummary({
         </Link>
       </div>
 
-      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-3 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
         {picks.map((p) => (
           <div
             key={p.slot}
@@ -54,7 +54,7 @@ export function PriceSummary({
               // An absence is stated, not shouted. Rendering these at the same
               // weight as a finding put four "no data" messages among the
               // thirteen largest items on the page.
-              <p className="mt-2 flex-1 text-[12px] leading-snug text-muted">
+              <p className="measure mt-2 flex-1 text-[12px] leading-snug text-muted">
                 {p.unavailable}
               </p>
             ) : (
@@ -62,10 +62,10 @@ export function PriceSummary({
                 <p className="mt-1.5 text-balance text-[17px] font-bold leading-tight">
                   {p.model}
                 </p>
-                <p className="mt-1.5 text-[13px] leading-snug text-muted">
+                <p className="measure mt-1.5 text-[13px] leading-snug text-muted">
                   {p.reason}
                 </p>
-                <p className="mt-2 flex-1 text-[12px] leading-snug">
+                <p className="measure mt-2 flex-1 text-[12px] leading-snug">
                   <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
                     Enterprise fit
                   </span>
@@ -98,7 +98,7 @@ export function PriceSummary({
             <strong>Priced above evidenced value</strong> is the weakest
             points-per-dollar among models priced at or above the field median.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Input price only. Output tokens are priced separately and the mix
             varies by workload, so a blended figure would imply a workload this
             has not measured. Treat these as a starting shortlist to test

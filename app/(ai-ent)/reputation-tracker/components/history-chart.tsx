@@ -136,7 +136,7 @@ export function ReputationHistoryChart({
               {demoCount > 0 ? `, ${demoCount} illustrative` : ""}
             </span>
           </div>
-          <p className="mt-1 max-w-3xl text-[11.5px] text-muted">
+          <p className="mt-1 measure text-[11.5px] text-muted">
             The customer, developer and employee pillar scores, tracked over
             time. The source publishes current values only, so this history
             starts at the first capture and grows from there.
@@ -197,7 +197,7 @@ export function ReputationHistoryChart({
         // explicit that the line begins once a second capture lands.
         <div className="mt-3">
           <div className="rounded-lg border border-dashed border-base-300 bg-base-200/40 px-3 py-2">
-            <p className="text-[12px]">
+            <p className="measure text-[12px]">
               <span className="font-semibold">Tracking has started.</span> One
               snapshot is held, taken {latest?.capturedAt}. A trend line needs
               two, so the current standing is shown below and the line begins at
@@ -373,7 +373,7 @@ export function ReputationHistoryChart({
                 Move over the chart for the reading at each capture.
               </p>
             ) : (
-              <p className="flex flex-wrap items-center gap-x-3 text-[11.5px]">
+              <p className="measure flex flex-wrap items-center gap-x-3 text-[11.5px]">
                 <span className="font-mono font-bold">
                   {snaps[hover].capturedAt}
                 </span>

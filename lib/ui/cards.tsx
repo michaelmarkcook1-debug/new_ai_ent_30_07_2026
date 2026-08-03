@@ -28,7 +28,7 @@ export function EditorialBanner({
         <span className="font-mono text-[10px] text-muted">{date}</span>
       </div>
       <h2 className="mt-1 text-[15px] font-bold">{title}</h2>
-      <div className="mt-1 text-[13px] leading-relaxed text-base-content/85">
+      <div className="measure mt-1 text-[13px] leading-relaxed text-base-content/85">
         {children}
       </div>
     </section>
@@ -51,9 +51,9 @@ export function InsightCard({ insight }: { insight: Insight }) {
         <SeverityBadge severity={insight.severity} />
         <CategoryChip label={insight.category} />
       </div>
-      <p className="mt-2 text-[13px] font-semibold leading-snug">{insight.title}</p>
+      <p className="measure mt-2 text-[13px] font-semibold leading-snug">{insight.title}</p>
       {insight.detail ? (
-        <p className="mt-1 text-[12px] leading-snug text-muted">{insight.detail}</p>
+        <p className="measure mt-1 text-[12px] leading-snug text-muted">{insight.detail}</p>
       ) : null}
       <div className="mt-2">
         <HorizonTag horizon={insight.horizon} />

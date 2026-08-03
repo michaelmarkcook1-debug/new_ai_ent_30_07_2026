@@ -93,7 +93,7 @@ export function ProviderCapabilityMatrix({
         </div>
       </div>
 
-      <p className="mt-1.5 max-w-3xl text-[11px] text-muted">
+      <p className="mt-1.5 measure text-[11px] text-muted">
         {COMPARABILITY_NOTE}
       </p>
 
@@ -233,7 +233,7 @@ export function ProviderCapabilityMatrix({
               {focusCell.evidenceGrade ? ` · ${focusCell.evidenceGrade}` : ""}
             </span>
           </div>
-          <p className="mt-1.5 text-[11.5px] leading-relaxed text-muted">
+          <p className="measure mt-1.5 text-[11.5px] leading-relaxed text-muted">
             {focusCell.note ?? "No evidence note is recorded for this cell."}
           </p>
           {focusCell.lastVerified ? (
@@ -260,7 +260,7 @@ export function ProviderCapabilityMatrix({
             assessed on, shown with the weakest grade in the row, because a
             mean is only as good as its weakest input.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             This is an intensity grid, not a positioning chart: no axes, no
             quadrants, no composite ranking of providers against each other. A
             dash is an unassessed capability, not a zero.

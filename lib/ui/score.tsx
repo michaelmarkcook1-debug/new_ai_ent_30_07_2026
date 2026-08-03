@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { scoreBand } from "@/lib/provenance";
 import { MicroLabel } from "@/lib/ui/micro";
 
@@ -136,7 +137,7 @@ export function KpiGauge({
           ) : null}
         </div>
       </div>
-      <p className="mt-2 text-[11px] leading-snug text-muted">{definition}</p>
+      <p className="measure mt-2 text-[11px] leading-snug text-muted">{definition}</p>
     </div>
   );
 }
@@ -152,6 +153,36 @@ export function DerivationDrawer({
   trigger?: React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
+
+  // The panel renders into document.body rather than in place. The page's
+  // content column is a container query root, and container-type carries
+  // `contain: layout`, which makes any ancestor of a fixed element its
+  // containing block. Left inline, this drawer would be trapped inside the
+  // centred column instead of covering the viewport.
+  const panel = (
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/40" onClick={() => setOpen(false)}>
+      <aside
+        className="h-full w-full max-w-md overflow-y-auto border-l border-base-300 bg-base-100 p-5 shadow-2xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between">
+          <h3 className="text-base font-bold">{title}</h3>
+          <button
+            type="button"
+            aria-label="Close"
+            onClick={() => setOpen(false)}
+            className="rounded p-1 text-muted hover:bg-base-200"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M18 6 6 18M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div className="mt-3 space-y-3 text-[13px] leading-relaxed">{children}</div>
+      </aside>
+    </div>
+  );
+
   return (
     <>
       <button
@@ -161,29 +192,7 @@ export function DerivationDrawer({
       >
         {trigger ?? "How this is derived"}
       </button>
-      {open ? (
-        <div className="fixed inset-0 z-50 flex justify-end bg-black/40" onClick={() => setOpen(false)}>
-          <aside
-            className="h-full w-full max-w-md overflow-y-auto border-l border-base-300 bg-base-100 p-5 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold">{title}</h3>
-              <button
-                type="button"
-                aria-label="Close"
-                onClick={() => setOpen(false)}
-                className="rounded p-1 text-muted hover:bg-base-200"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M18 6 6 18M6 6l12 12" />
-                </svg>
-              </button>
-            </div>
-            <div className="mt-3 space-y-3 text-[13px] leading-relaxed">{children}</div>
-          </aside>
-        </div>
-      ) : null}
+      {open ? createPortal(panel, document.body) : null}
     </>
   );
 }

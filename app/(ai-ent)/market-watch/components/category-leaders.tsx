@@ -41,7 +41,7 @@ export function CategoryLeaders({
         <h2 className="text-[15px] font-bold">Leaders by category</h2>
         <LaneBadge lane="aie" />
       </div>
-      <p className="mt-1 max-w-3xl text-[11px] text-muted">
+      <p className="mt-1 measure text-[11px] text-muted">
         Leadership here means the highest seed share estimate in each category,
         shown with the dataset&apos;s own composite scores. No
         ranking beyond the dataset&apos;s own fields is applied.
@@ -60,7 +60,7 @@ export function CategoryLeaders({
             label (Leader, Major challenger and so on) is also the dataset&apos;s own
             banding of that score, not a judgement made by this demo.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             No medal or league-table treatment is applied: within a category the
             order is simply the seed share field, and cross-category comparison
             is not meaningful because each category is modelled separately.
@@ -129,11 +129,11 @@ export function CategoryLeaders({
           <h3 className="text-[13px] font-bold">Dataset watchlists</h3>
           <LaneBadge lane="aie" />
         </div>
-        <p className="mt-0.5 text-[11px] text-muted">
+        <p className="measure mt-0.5 text-[11px] text-muted">
           Watchlist groupings defined in the AIE dataset itself, useful cohorts
           for tracking rather than rankings.
         </p>
-        <div className="mt-2 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-2 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
           {watchlists.map((w) => (
             <div key={w.id} className="rounded-lg border border-base-300 bg-base-100 p-3">
               <p className="text-[12px] font-semibold">{w.name}</p>

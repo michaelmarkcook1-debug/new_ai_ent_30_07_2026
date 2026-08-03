@@ -49,7 +49,7 @@ export default async function TrustRankPage({
   return (
     <CompanyShell company={company}>
     <div className="space-y-4">
-      <section className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <section className="grid grid-cols-1 gap-4 @4xl:grid-cols-3">
         <KpiGauge
           label="GOVERNANCE RISK"
           tooltip="0 to 100, higher means more governance risk in AI deployment. Mirrors the live governance-risk composite."
@@ -58,12 +58,12 @@ export default async function TrustRankPage({
           badge={<LaneBadge lane="sample" />}
           invert
         />
-        <div className="rounded-lg border border-base-300 bg-base-100 p-4 lg:col-span-2">
+        <div className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-2">
           <div className="flex items-center justify-between">
             <MicroLabel label="Posture summary" tooltip="Narrative mirror of the live governance-risk summary field." />
             <LaneBadge lane="sample" />
           </div>
-          <p className="mt-2 text-[13px] leading-relaxed">{g.summary}</p>
+          <p className="measure mt-2 text-[13px] leading-relaxed">{g.summary}</p>
           <div className="mt-2">
             <DerivationDrawer title="How the governance score is derived">
               <p>
@@ -77,14 +77,14 @@ export default async function TrustRankPage({
         </div>
       </section>
 
-      <section className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+      <section className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
         <Accordion title="Key Findings" count={g.keyFindings.length} defaultOpen>
-          <ul className="list-disc space-y-1.5 pl-4 text-[12.5px]">
+          <ul className="measure list-disc space-y-1.5 pl-4 text-[12.5px]">
             {g.keyFindings.map((k) => <li key={k}>{k}</li>)}
           </ul>
         </Accordion>
         <Accordion title="Recommendations" count={g.recommendations.length}>
-          <ul className="list-disc space-y-1.5 pl-4 text-[12.5px]">
+          <ul className="measure list-disc space-y-1.5 pl-4 text-[12.5px]">
             {g.recommendations.map((k) => <li key={k}>{k}</li>)}
           </ul>
         </Accordion>
@@ -133,7 +133,7 @@ export default async function TrustRankPage({
         <div className="flex items-center justify-between">
           <MicroLabel label="Vendor-specific rulings and controls" tooltip="Regulatory items that attach to vendors rather than jurisdictions." />
         </div>
-        <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div className="mt-2 grid grid-cols-1 gap-2 @xl:grid-cols-2">
           {f.trustRank.vendorRulings.map((v) => (
             <div key={v.item} className="rounded border border-base-300 p-3">
               <div className="flex flex-wrap items-center justify-between gap-2">

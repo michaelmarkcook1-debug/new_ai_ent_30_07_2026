@@ -52,7 +52,7 @@ export function MaterialRisks({
           No high-severity risk is currently open against a tracked vendor.
         </p>
       ) : (
-        <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-3">
+        <div className="mt-3 grid grid-cols-1 gap-3 @4xl:grid-cols-3">
           {top.map((r) => {
             const meta: RecommendationMeta = {
               horizon: r.severity?.toLowerCase() === "high" ? "Immediate" : "90 days",
@@ -80,7 +80,7 @@ export function MaterialRisks({
                     <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                       Who is affected
                     </dt>
-                    <dd className="text-[12px] leading-snug">
+                    <dd className="measure text-[12px] leading-snug">
                       Buyers with {r.vendorName} in scope, and anyone holding it
                       on a shortlist.
                     </dd>
@@ -89,7 +89,7 @@ export function MaterialRisks({
                     <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                       What to do
                     </dt>
-                    <dd className="text-[12px] leading-snug">
+                    <dd className="measure text-[12px] leading-snug">
                       Raise it in the next vendor review and get a dated
                       remediation position before widening commitment.
                     </dd>
@@ -166,10 +166,10 @@ export function Movers({
                     {s.vendorName}
                   </Link>
                 </div>
-                <p className="mt-1 text-[12px] leading-snug text-muted">
+                <p className="measure mt-1 text-[12px] leading-snug text-muted">
                   {s.headline}
                 </p>
-                <p className="mt-1.5 text-[12px] leading-snug">
+                <p className="measure mt-1.5 text-[12px] leading-snug">
                   <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
                     For buyers
                   </span>
@@ -212,7 +212,7 @@ export function Movers({
           All vendor rankings →
         </Link>
       </div>
-      <div className="mt-3 grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="mt-3 grid grid-cols-1 gap-4 @xl:grid-cols-2">
         {block(
           "Gaining",
           gaining,
@@ -226,7 +226,7 @@ export function Movers({
             `Worth a dated check before renewing or widening ${v}, rather than an immediate change.`
         )}
       </div>
-      <p className="mt-2 text-[12px] text-muted">
+      <p className="measure mt-2 text-[12px] text-muted">
         Our analysis reports the movement and the reason each vendor is
         classified that way. Where a cause is not published, none is asserted
         here: attributing a reason we cannot evidence would be the least
@@ -267,7 +267,7 @@ export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
           judgement.
         </p>
       ) : (
-        <ol className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-3">
+        <ol className="mt-3 grid grid-cols-1 gap-3 @4xl:grid-cols-3">
           {signals.map((s, i) => (
             <li
               key={s.what}
@@ -279,7 +279,7 @@ export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
                 </span>
                 <LaneBadge lane={s.lane} />
               </div>
-              <p className="mt-1.5 text-[13px] font-semibold leading-snug">
+              <p className="measure mt-1.5 text-[13px] font-semibold leading-snug">
                 {s.what}
               </p>
               <dl className="mt-2 flex-1 space-y-2">
@@ -287,13 +287,13 @@ export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
                   <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                     Why it matters
                   </dt>
-                  <dd className="text-[12px] leading-snug">{s.why}</dd>
+                  <dd className="measure text-[12px] leading-snug">{s.why}</dd>
                 </div>
                 <div>
                   <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                     Supports
                   </dt>
-                  <dd className="text-[12px] leading-snug text-muted">
+                  <dd className="measure text-[12px] leading-snug text-muted">
                     {s.supports}
                   </dd>
                 </div>
@@ -335,7 +335,7 @@ export function DeeperAnalysis() {
         label="Go deeper"
         tooltip="The full analysis behind each part of this brief."
       />
-      <ul className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+      <ul className="mt-2 grid grid-cols-1 gap-2 @xl:grid-cols-2 @4xl:grid-cols-3">
         {links.map(([href, title, blurb]) => (
           <li key={href}>
             <Link
@@ -343,7 +343,7 @@ export function DeeperAnalysis() {
               className="block rounded-lg border border-base-300 px-3 py-2.5 transition hover:border-primary"
             >
               <span className="text-[13px] font-semibold">{title}</span>
-              <span className="mt-0.5 block text-[12px] leading-snug text-muted">
+              <span className="measure mt-0.5 block text-[12px] leading-snug text-muted">
                 {blurb}
               </span>
             </Link>

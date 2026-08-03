@@ -27,7 +27,7 @@ export function FrontierFaceOff({ view }: { view: FaceOffView }) {
               {view.entries.length} vendors
             </span>
           </div>
-          <p className="mt-1 max-w-3xl text-[12px] text-muted">
+          <p className="mt-1 measure text-[12px] text-muted">
             Each frontier-lab vendor&apos;s single highest-rated model, on the
             same fields for every one, so they compare like for like. The
             vendor set is the frontier model and API category from the dataset
@@ -204,21 +204,21 @@ export function FrontierFaceOff({ view }: { view: FaceOffView }) {
             model, the proprietary Muse Spark, is not in the capture at all. Its
             position on this table reflects a model two generations old.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             No score is estimated for an unbenchmarked model to correct for
             this, because that would be inventing the measurement the table
             exists to report. The gap is stated instead, and it closes when the
             index publishes.
           </p>
           {view.absent.length > 0 ? (
-            <p className="text-muted">
+            <p className="measure text-muted">
               In the category but absent from this table because they publish no
               model with both a list price and an index score:{" "}
               {view.absent.join(", ")}. They are named rather than dropped, so
               the table is not mistaken for the whole category.
             </p>
           ) : null}
-          <p className="text-muted">
+          <p className="measure text-muted">
             AG produces no benchmark of its own. Scores are third-party,
             attributed and dated; the capture date and freshest benchmark date
             sit beside the heading because both prices and benchmarks move

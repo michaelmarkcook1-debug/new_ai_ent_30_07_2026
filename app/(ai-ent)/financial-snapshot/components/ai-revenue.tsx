@@ -96,7 +96,7 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
           {view.disclosingCount} of {view.totalCount} disclose a figure
         </span>
       </div>
-      <p className="mt-1 max-w-3xl text-[12px] text-muted">
+      <p className="mt-1 measure text-[12px] text-muted">
         No filer reports AI revenue as a segment, so there is no AI line to
         extract and none is estimated here. Two things are shown instead: the
         audited segment split from each company&apos;s own 10-K, which is a
@@ -177,7 +177,7 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
                 />
                 {c.aiStatements.slice(0, 2).map((s) => (
                   <div key={s.url + s.statement.slice(0, 40)} className="mt-1.5">
-                    <p className="text-[12px] leading-relaxed">
+                    <p className="measure text-[12px] leading-relaxed">
                       &ldquo;{s.statement}&rdquo;
                     </p>
                     <a
@@ -193,7 +193,7 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
                 ))}
               </div>
             ) : (
-              <p className="mt-3 text-[11.5px] text-muted">
+              <p className="measure mt-3 text-[11.5px] text-muted">
                 States no quantified AI revenue figure in any 10-K, 10-Q or 8-K.
                 Its AI revenue is not public, and nothing here estimates one.
               </p>
@@ -237,7 +237,7 @@ export function AiRevenuePanel({ view }: { view: RevenueView }) {
             even at the most AI-exposed company, AI is a minority of the
             segment that carries it.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Six of the nine tracked listed AI vendors state no AI revenue
             figure at all. That silence is reported as the finding rather than
             filled with an estimate. Segment data captured{" "}

@@ -23,7 +23,7 @@ export function ThirdPartySignals({ view }: { view: ThirdPartyView }) {
           {view.sources.length} sources
         </span>
       </div>
-      <p className="mt-1 max-w-3xl text-[11.5px] text-muted">
+      <p className="mt-1 measure text-[11.5px] text-muted">
         The external sources behind the reputation pillars, each named with the
         field it supplies and how far it reaches across the {view.vendorCount}{" "}
         vendors the dataset covers. These sit under this divider only: none of
@@ -37,7 +37,7 @@ export function ThirdPartySignals({ view }: { view: ThirdPartyView }) {
           reputation payload.
         </p>
       ) : (
-        <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-3 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
           {view.sources.map((s) => {
             const fetched = fmtDate(s.freshest);
             return (
@@ -55,7 +55,7 @@ export function ThirdPartySignals({ view }: { view: ThirdPartyView }) {
                   {s.label}
                 </h3>
                 <p className="font-mono text-[9.5px] text-muted">{s.host}</p>
-                <p className="mt-1.5 text-[11.5px] leading-snug text-muted">
+                <p className="measure mt-1.5 text-[11.5px] leading-snug text-muted">
                   {s.measures}
                 </p>
 
@@ -121,7 +121,7 @@ export function ThirdPartySignals({ view }: { view: ThirdPartyView }) {
             shown per thousand employees, because a raw count would rank by
             headcount rather than by exposure.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             {view.provenance
               ? `Dataset provenance: ${view.provenance}.`
               : "No provenance line is published with this payload."}

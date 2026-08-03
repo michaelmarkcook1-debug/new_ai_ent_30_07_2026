@@ -53,11 +53,11 @@ export default async function TalentPage({
           <span className="micro-label text-primary">Talent insight</span>
           <LaneBadge lane="sample" />
         </div>
-        <p className="mt-1 text-[13px] leading-relaxed">{t.insight}</p>
+        <p className="measure mt-1 text-[13px] leading-relaxed">{t.insight}</p>
       </section>
 
       {/* KPI strip mirroring the talent intelligence kpis object */}
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-6">
+      <section className="grid grid-cols-2 gap-3 @3xl:grid-cols-3 @5xl:grid-cols-6">
         {[
           { label: "HEADCOUNT", value: fmt.format(t.kpis.headcount), sub: `${t.kpis.headcountYoY > 0 ? "+" : ""}${fmt.format(t.kpis.headcountYoY)} YoY` },
           { label: "ATTRITION", value: `${t.kpis.attritionPct}%`, sub: t.kpis.attritionWindow },
@@ -74,7 +74,7 @@ export default async function TalentPage({
         ))}
       </section>
 
-      <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+      <section className="grid grid-cols-1 gap-4 @2xl:grid-cols-2">
         {/* AI literacy pyramid over time */}
         <div className="rounded-lg border border-base-300 bg-base-100 p-4">
           <div className="flex items-center justify-between">

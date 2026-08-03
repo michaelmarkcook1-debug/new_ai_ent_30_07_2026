@@ -97,11 +97,11 @@ export function PulseHero({
         {headline}
       </h2>
 
-      <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-muted">
+      <p className="mt-3 measure text-[15px] leading-relaxed text-muted">
         {judgement}
       </p>
 
-      <dl className="mt-5 grid grid-cols-1 gap-4 border-t border-base-300 pt-4 sm:grid-cols-3">
+      <dl className="mt-5 grid grid-cols-1 gap-4 border-t border-base-300 pt-4 @3xl:grid-cols-3">
         {(
           [
             ["What changed", changed],
@@ -113,7 +113,7 @@ export function PulseHero({
             <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
               {label}
             </dt>
-            <dd className="mt-1 text-[13px] leading-snug">{body}</dd>
+            <dd className="measure mt-1 text-[13px] leading-snug">{body}</dd>
           </div>
         ))}
       </dl>
@@ -128,7 +128,7 @@ export function PulseHero({
       <div className="mt-3">
         <DerivationDrawer title="What this judgement rests on">
           <p>{evidenceNote}</p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             The headline and the judgement above are an editorial view, badged
             SAMPLE because no dataset publishes an opinion. The scorecard below
             it, and every figure it cites, is computed from the tracked data and
@@ -156,7 +156,7 @@ export function ExecutiveActions({
           from the readings around them. Kept deliberately quiet: three cards at
           the weight of the overall recommendation box would compete with the
           judgement above rather than follow from it. */}
-      <ol className="mt-2 grid grid-cols-1 gap-3 md:grid-cols-3">
+      <ol className="mt-2 grid grid-cols-1 gap-3 @4xl:grid-cols-3">
         {actions.map((a, i) => (
           <li
             key={a.action}
@@ -168,7 +168,7 @@ export function ExecutiveActions({
               </span>
               <h3 className="text-[13.5px] font-bold">{a.action}</h3>
             </div>
-            <p className="mt-1.5 text-[13px] leading-snug text-muted">
+            <p className="measure mt-1.5 text-[13px] leading-snug text-muted">
               {a.detail}
             </p>
             <div className="mt-3 border-t border-base-300/70 pt-2">
@@ -197,12 +197,12 @@ export function Scorecard({
         />
         <LaneBadge lane={lane} />
       </div>
-      <p className="mt-1 max-w-3xl text-[12px] text-muted">
+      <p className="mt-1 measure text-[12px] text-muted">
         Five readings on the market as a whole, not a vendor ranking. Colour
         carries the verdict: green is favourable, amber is watch, red is act.
       </p>
 
-      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-3 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
         {brief.scorecard.map((d) => (
           <div
             key={d.key}
@@ -230,14 +230,14 @@ export function Scorecard({
               <p className="mt-1 text-[12px] text-muted">{d.figureCaption}</p>
             ) : null}
 
-            <p className="mt-2.5 text-[13px] leading-snug text-muted">
+            <p className="measure mt-2.5 text-[13px] leading-snug text-muted">
               {d.meaning}
             </p>
           </div>
         ))}
       </div>
 
-      <p className="mt-2 text-[12px] text-muted">
+      <p className="measure mt-2 text-[12px] text-muted">
         No direction of travel is shown on any reading: the sources publish a
         current value with no prior period, so there is nothing to compare
         against.
@@ -245,7 +245,7 @@ export function Scorecard({
 
       <div className="mt-3 rounded-lg border border-primary/40 bg-primary/5 p-4">
         <MicroLabel label="Overall recommendation" />
-        <p className="mt-1 max-w-3xl text-[13px] leading-snug">
+        <p className="mt-1 measure text-[13px] leading-snug">
           {brief.overall.recommendation}
         </p>
         <div className="mt-2.5">
@@ -255,7 +255,7 @@ export function Scorecard({
 
       <div className="mt-2">
         <DerivationDrawer title="How each reading is calculated">
-          <ul className="list-disc space-y-1.5 pl-4">
+          <ul className="measure list-disc space-y-1.5 pl-4">
             {brief.scorecard.map((d) => (
               <li key={d.key}>
                 <span className="font-semibold text-base-content">{d.name}</span>
@@ -263,7 +263,7 @@ export function Scorecard({
               </li>
             ))}
           </ul>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Direction of travel is not shown. The AIE datasets publish current
             values without a prior period, and the share estimates carry a
             changePct that is zero on every row because each prior estimate is

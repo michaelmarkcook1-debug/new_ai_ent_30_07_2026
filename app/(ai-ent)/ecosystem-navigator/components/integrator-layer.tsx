@@ -93,15 +93,15 @@ export function IntegratorLayer() {
         <h2 className="text-[15px] font-bold">The delivery layer, live</h2>
         <LaneBadge lane={laneFor(providersSource)} />
       </div>
-      <p className="mt-1 text-[12px] text-muted">
+      <p className="measure mt-1 text-[12px] text-muted">
         The services channel: the integrators who would deliver your AI programme, live from the
         BoardRadar provider catalogue. IT services content appears only here, as the labelled
         delivery channel, never blended with AI vendor scores.
       </p>
 
-      <div className="mt-3 grid grid-cols-1 gap-4 xl:grid-cols-5">
+      <div className="mt-3 grid grid-cols-1 gap-4 @4xl:grid-cols-5">
         {/* Provider readiness table */}
-        <div className="delivery-channel-card rounded-lg bg-base-100 p-4 xl:col-span-2">
+        <div className="@container delivery-channel-card rounded-lg bg-base-100 p-4 @4xl:col-span-2">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Integrator readiness"
@@ -178,7 +178,7 @@ export function IntegratorLayer() {
                 Both figures are live BoardRadar values, surfaced exactly as returned and never
                 recomputed by this product.
               </p>
-              <ul className="list-disc space-y-1 pl-4 text-muted">
+              <ul className="measure list-disc space-y-1 pl-4 text-muted">
                 <li>
                   <strong>Assessment</strong>: the provider assessment framework score, a weighted
                   composite of four dimensions with published rationales per provider.
@@ -188,7 +188,7 @@ export function IntegratorLayer() {
                   readiness ranking, published with generation dates.
                 </li>
               </ul>
-              <p className="text-muted">
+              <p className="measure text-muted">
                 Where a provider has no published figure the cell shows the locked no-disclosure
                 state instead of a number.
               </p>
@@ -197,7 +197,7 @@ export function IntegratorLayer() {
         </div>
 
         {/* Integrator by AI-platform matrix */}
-        <div className="delivery-channel-card rounded-lg bg-base-100 p-4 xl:col-span-3">
+        <div className="@container delivery-channel-card rounded-lg bg-base-100 p-4 @4xl:col-span-3">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <div className="flex flex-wrap items-center gap-2">
               <MicroLabel
@@ -237,7 +237,7 @@ export function IntegratorLayer() {
               </p>
             ) : integration ? (
               <>
-                <p className="text-[12px] leading-snug text-muted">{integration.intro}</p>
+                <p className="measure text-[12px] leading-snug text-muted">{integration.intro}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-3">
                   <span className="font-mono text-[10px] text-muted">
                     {integration.platformCounts.total} platforms:{" "}
@@ -305,7 +305,7 @@ export function IntegratorLayer() {
           You have seen the models, the dependencies and the platforms: and here is who delivers
           it.
         </p>
-        <p className="mt-1 text-[12px] text-muted">
+        <p className="measure mt-1 text-[12px] text-muted">
           The integrators above are the delivery layer for every vendor decision in this
           workspace. Services channel only, clearly labelled, never mixed into AI vendor scores.
         </p>

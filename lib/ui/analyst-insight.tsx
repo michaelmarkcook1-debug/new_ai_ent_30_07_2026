@@ -15,6 +15,13 @@ import type { AnalystInsightData } from "@/lib/analyst/insight";
 // answer the useful half of the question: whether a reading is measured or
 // assumed, and how much sits behind it.
 
+// Sources publish dates in two shapes: ISO from the live APIs, and already
+// formatted from the AIE datasets. Slicing ten characters off the second kind
+// printed "31 July 20" on the Price / Performance page, which reads as a
+// clipped year rather than a date.
+const shortDate = (value: string) =>
+  /^\d{4}-\d{2}-\d{2}/.test(value) ? value.slice(0, 10) : value;
+
 const ACTION_TONE: Record<string, string> = {
   Accelerate: "bg-good-bg text-good border-good/40",
   Expand: "bg-good-bg text-good border-good/40",
@@ -62,7 +69,7 @@ export function AnalystInsight({
           <LaneBadge lane={evidence.lane} />
           {evidence.lastUpdated ? (
             <span className="font-mono text-[12px] text-muted">
-              {evidence.lastUpdated.slice(0, 10)}
+              {shortDate(evidence.lastUpdated)}
             </span>
           ) : null}
         </div>
@@ -71,7 +78,7 @@ export function AnalystInsight({
       {insight.insufficient ? (
         // The data will not carry a conclusion, so none is offered. This is a
         // first-class state rather than a softened version of a claim.
-        <p className="mt-3 max-w-3xl text-[14px] leading-relaxed text-muted">
+        <p className="measure mt-3 text-[14px] leading-relaxed text-muted">
           <span className="font-semibold text-base-content">
             Current evidence is insufficient to draw a reliable conclusion.
           </span>{" "}
@@ -83,84 +90,98 @@ export function AnalystInsight({
             {insight.headline}
           </h2>
 
-          <p className="mt-3 max-w-3xl text-[13.5px] leading-relaxed text-muted">
-            {insight.summary}
-          </p>
-
-          {insight.implications.length > 0 ? (
-            <ul className="mt-4 max-w-3xl space-y-1.5 border-t border-base-300/70 pt-3">
-              {insight.implications.slice(0, 3).map((im) => (
-                <li key={im} className="flex gap-2.5 text-[13px] leading-snug">
-                  <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-primary" aria-hidden />
-                  <span>{im}</span>
-                </li>
-              ))}
-            </ul>
-          ) : null}
-
-          {/* The dated item the conclusion should be read against. Selected by
-              the source's own impact score and filtered to this page's subject,
-              so it corroborates the reading rather than decorating it. Absent
-              when nothing recent bears on the page. */}
-          {insight.news ? (
-            <div className="mt-4 rounded-lg border border-base-300 bg-base-100 p-3">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
-                  Latest development
-                </span>
-                {insight.news.publishedAt ? (
-                  <span className="font-mono text-[12px] text-muted">
-                    {insight.news.publishedAt.slice(0, 10)}
-                  </span>
-                ) : null}
-                {insight.news.sentiment ? (
-                  <span
-                    className={`rounded-full px-2 py-0.5 font-mono text-[12px] ${
-                      insight.news.sentiment === "negative"
-                        ? "bg-warn-bg text-warn"
-                        : insight.news.sentiment === "positive"
-                          ? "bg-good-bg text-good"
-                          : "bg-base-200 text-muted"
-                    }`}
-                  >
-                    {insight.news.sentiment}
-                  </span>
-                ) : null}
-              </div>
-              <p className="mt-1.5 text-[13.5px] font-semibold leading-snug">
-                {insight.news.title}
+          {/* Two columns once there is width for them: the reading on the
+              left, the corroborating item and the action on the right. The
+              single column was the source of the worst dead space in the
+              product, because the copy stopped at its measure while the news
+              box below it ran the full width of the card. */}
+          <div className="mt-3 grid grid-cols-1 gap-x-8 gap-y-4 @4xl:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+            <div>
+              <p className="measure text-[13.5px] leading-relaxed text-muted">
+                {insight.summary}
               </p>
-              {insight.news.whyItMatters ? (
-                <p className="mt-1 text-[13px] leading-snug text-muted">
-                  {insight.news.whyItMatters}
-                </p>
-              ) : null}
-              {insight.news.sourceUrl ? (
-                <a
-                  href={insight.news.sourceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-1.5 inline-block text-[12px] font-semibold text-primary hover:underline"
-                >
-                  {insight.news.sourceName ?? "Source"} →
-                </a>
-              ) : insight.news.sourceName ? (
-                <p className="mt-1.5 font-mono text-[12px] text-muted">
-                  {insight.news.sourceName}
-                </p>
+
+              {insight.implications.length > 0 ? (
+                <ul className="measure mt-4 space-y-1.5 border-t border-base-300/70 pt-3">
+                  {insight.implications.slice(0, 3).map((im) => (
+                    <li key={im} className="flex gap-2.5 text-[13px] leading-snug">
+                      <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-primary" aria-hidden />
+                      <span>{im}</span>
+                    </li>
+                  ))}
+                </ul>
               ) : null}
             </div>
-          ) : null}
 
-          <div className="mt-4 flex flex-wrap items-center gap-3 border-t border-base-300/70 pt-3">
-            <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
-              Recommended action
-            </span>
-            <span
-              className={`rounded-full border px-3 py-1 text-[13px] font-semibold ${ACTION_TONE[insight.action] ?? ACTION_TONE.Monitor}`}
-            >
-              {insight.action}
-            </span>
+            <div className="flex flex-col gap-3">
+              {/* The dated item the conclusion should be read against.
+                  Selected by the source's own impact score and filtered to
+                  this page's subject, so it corroborates the reading rather
+                  than decorating it. Absent when nothing recent bears on the
+                  page. */}
+              {insight.news ? (
+                <div className="rounded-lg border border-base-300 bg-base-100 p-3">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                      Latest development
+                    </span>
+                    {insight.news.publishedAt ? (
+                      <span className="font-mono text-[12px] text-muted">
+                        {shortDate(insight.news.publishedAt)}
+                      </span>
+                    ) : null}
+                    {insight.news.sentiment ? (
+                      <span
+                        className={`rounded-full px-2 py-0.5 font-mono text-[12px] ${
+                          insight.news.sentiment === "negative"
+                            ? "bg-warn-bg text-warn"
+                            : insight.news.sentiment === "positive"
+                              ? "bg-good-bg text-good"
+                              : "bg-base-200 text-muted"
+                        }`}
+                      >
+                        {insight.news.sentiment}
+                      </span>
+                    ) : null}
+                  </div>
+                  <p className="measure mt-1.5 text-[13.5px] font-semibold leading-snug">
+                    {insight.news.title}
+                  </p>
+                  {insight.news.whyItMatters ? (
+                    <p className="measure mt-1 text-[13px] leading-snug text-muted">
+                      {insight.news.whyItMatters}
+                    </p>
+                  ) : null}
+                  {insight.news.sourceUrl ? (
+                    <a
+                      href={insight.news.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1.5 inline-block text-[12px] font-semibold text-primary hover:underline"
+                    >
+                      {insight.news.sourceName ?? "Source"} →
+                    </a>
+                  ) : insight.news.sourceName ? (
+                    <p className="mt-1.5 font-mono text-[12px] text-muted">
+                      {insight.news.sourceName}
+                    </p>
+                  ) : null}
+                </div>
+              ) : null}
+
+              {/* Sits at the foot of its column so the action lands in the
+                  same place whether or not there is a news item above it. */}
+              <div className="mt-auto flex flex-wrap items-center gap-3 rounded-lg border border-base-300 bg-base-100 p-3">
+                <span className="font-mono text-[12px] uppercase tracking-wider text-muted">
+                  Recommended action
+                </span>
+                <span
+                  className={`rounded-full border px-3 py-1 text-[13px] font-semibold ${ACTION_TONE[insight.action] ?? ACTION_TONE.Monitor}`}
+                >
+                  {insight.action}
+                </span>
+              </div>
+            </div>
           </div>
         </>
       )}
@@ -190,7 +211,7 @@ export function AnalystInsight({
             held on this page, which is why it cannot drift from the data
             underneath it, and why it says nothing where the data runs out.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             It interprets the page&apos;s own datasets and weights them first.
             It is not general commentary on the AI market, and it does not
             reach for a conclusion the figures here will not carry.

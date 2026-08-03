@@ -72,9 +72,9 @@ export function Workforce({
   );
 
   return (
-    <section className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+    <section className="grid grid-cols-1 gap-4 @4xl:grid-cols-5">
       {/* Allocation: an assumption, labelled as one */}
-      <div className="rounded-lg border border-base-300 bg-base-100 p-4 lg:col-span-2">
+      <div className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-2">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <MicroLabel
             label="Model allocation"
@@ -99,7 +99,7 @@ export function Workforce({
                   <span className="text-[13px] font-semibold">{b.label}</span>
                   <span className="font-mono text-[12px]">{b.percent}%</span>
                 </dt>
-                <dd className="text-[12px] leading-snug text-muted">
+                <dd className="measure text-[12px] leading-snug text-muted">
                   {b.work}
                 </dd>
               </div>
@@ -128,7 +128,7 @@ export function Workforce({
             <p>
               What is measured, and what the argument here actually rests on:
             </p>
-            <ul className="list-disc space-y-1.5 pl-4">
+            <ul className="measure list-disc space-y-1.5 pl-4">
               {ALLOCATION_EVIDENCE.map((e) => (
                 <li key={e.figure}>
                   <strong className="text-base-content">{e.figure}</strong>{" "}
@@ -152,7 +152,7 @@ export function Workforce({
               enterprise does. O*NET occupation data was obtained and rejected
               for the same reason: it counts occupations, not hours.
             </p>
-            <p className="text-muted">
+            <p className="measure text-muted">
               The conclusion holds without the split being true. Capability
               barely degrades across tiers while price moves by an order of
               magnitude, so the burden of proof belongs on using the expensive
@@ -164,7 +164,7 @@ export function Workforce({
       </div>
 
       {/* Role recommendation: derived from the real workflow library */}
-      <div className="rounded-lg border border-base-300 bg-base-100 p-4 lg:col-span-3">
+      <div className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-2">
             <MicroLabel
@@ -258,13 +258,13 @@ export function Workforce({
                 <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                   Why
                 </dt>
-                <dd className="mt-0.5 text-[13px] leading-snug">{rec.why}</dd>
+                <dd className="measure mt-0.5 text-[13px] leading-snug">{rec.why}</dd>
               </div>
               <div>
                 <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                   Escalate to a higher tier for
                 </dt>
-                <dd className="mt-0.5 text-[13px] leading-snug text-muted">
+                <dd className="measure mt-0.5 text-[13px] leading-snug text-muted">
                   {rec.escalateFor.join(" · ")}
                 </dd>
               </div>
@@ -272,7 +272,7 @@ export function Workforce({
                 <dt className="font-mono text-[12px] uppercase tracking-wider text-muted">
                   Likely impact
                 </dt>
-                <dd className="mt-0.5 text-[13px] leading-snug">
+                <dd className="measure mt-0.5 text-[13px] leading-snug">
                   {rec.impact}
                 </dd>
               </div>
@@ -296,7 +296,7 @@ export function Workforce({
                   complexity throughout, because the cost of a wrong answer on a
                   critical task exceeds anything saved on inference.
                 </p>
-                <p className="text-muted">
+                <p className="measure text-muted">
                   This recommends a tier, not a product. Which model fills the
                   tier is a separate question, answered by the price-performance
                   picks above and the full analysis behind them.

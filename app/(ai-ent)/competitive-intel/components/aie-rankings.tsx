@@ -23,12 +23,12 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
         />
         <LaneBadge lane="aie" />
       </div>
-      <p className="mt-1 text-[11px] text-muted">
+      <p className="measure mt-1 text-[11px] text-muted">
         AG's own overall score for each vendor.
         Separate from the live BoardRadar heatmap beside it: the two datasets
         cover different companies on different scales and are never blended.
       </p>
-      <p className="mt-1 text-[11px] text-muted">{COMPARABILITY_NOTE}</p>
+      <p className="measure mt-1 text-[11px] text-muted">{COMPARABILITY_NOTE}</p>
       <div className="mt-3 space-y-3">
         {placeByCategory(rows, (a: AieRankingRow, b: AieRankingRow) => b.overallScore - a.overallScore).map(
           (group) => (
@@ -76,7 +76,7 @@ export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
             intelligence dataset seed, where it is maintained alongside
             per-pillar capability scores and evidence grades.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Scores are derived signals, not analyst medals: claims below the
             strong-evidence bar are suppressed in the source dataset rather
             than scored. Follow a vendor link for the pillar

@@ -83,6 +83,10 @@ export function MarketExplorer({
   const [workflowId, setWorkflowId] = useState("");
   const [live, setLive] = useState<AieUptakeRow[] | null>(null);
   const [liveSource, setLiveSource] = useState<AieSource>("live");
+  // The upstream publishes its own caveat on every response. It used to be
+  // dropped here, which left a bare percentage under a LIVE badge reading as
+  // measured market share when the source itself calls it directional.
+  const [liveProvenance, setLiveProvenance] = useState<string | null>(null);
 
   // The live uptake API expects its own industry display names and rejects
   // anything else, so only mapped archetypes send the filter; the rest run
@@ -94,9 +98,10 @@ export function MarketExplorer({
     const params: Record<string, string> = {};
     if (liveIndustry) params.industry = liveIndustry;
     if (region) params.region = region;
-    aieFetch<{ rows: AieUptakeRow[] }>("uptake", params).then((res) => {
+    aieFetch<{ rows: AieUptakeRow[]; provenance?: string }>("uptake", params).then((res) => {
       if (cancelled) return;
       setLiveSource(res.source);
+      setLiveProvenance(res.ok ? (res.data?.provenance ?? null) : null);
       setLive(res.ok && res.data?.rows ? res.data.rows : null);
     });
     return () => {
@@ -124,7 +129,16 @@ export function MarketExplorer({
   );
   // Live rows carry the same fields (vendor, share as a 0 to 1 fraction,
   // contributingCells, confidence), so the panel renders either source.
-  const usingLive = live !== null;
+  //
+  // Organisation size is the exception. The upstream API facets on industry
+  // and region only, and echoes that back in its scope object, so a size sent
+  // with the request would be ignored: the control looked live and changed
+  // nothing, while the slice label above the chart claimed the cut had been
+  // applied. The ported dataset does carry the size split, from the same
+  // spreadsheet the upstream model was built from, so selecting a size hands
+  // the panel to that dataset and the badge says so.
+  const sizeForcesPorted = size !== "";
+  const usingLive = live !== null && !sizeForcesPorted;
   const rows = usingLive ? live : portedRows;
   const uptakeLane = usingLive
     ? liveSource === "mock"
@@ -151,7 +165,7 @@ export function MarketExplorer({
           />
           <LaneBadge lane="aie" />
         </div>
-        <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-2 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-5">
           <FilterField label="Industry">
             <select
               aria-label="Industry archetype"
@@ -231,16 +245,18 @@ export function MarketExplorer({
             </select>
           </FilterField>
         </div>
-        <p className="mt-2 text-[11px] text-muted">
-          The adoption dataset facets on region, industry and organisation
-          size; the workflow selector drives the evidenced-impact panel below
-          and does not re-rank vendors.
+        <p className="measure mt-2 text-[11px] text-muted">
+          Industry and region are faceted by the live uptake API. Organisation
+          size exists only in the ported dataset, so choosing one moves the
+          provider panel to that source and says so. The workflow selector
+          drives the evidenced-impact panel below and does not re-rank
+          vendors.
         </p>
       </section>
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 @4xl:grid-cols-3">
         {/* Who is strong in this slice */}
-        <section className="rounded-lg border border-base-300 bg-base-100 p-4 lg:col-span-2">
+        <section className="@container rounded-lg border border-base-300 bg-base-100 p-4 @4xl:col-span-2">
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Model providers in this slice"
@@ -249,13 +265,36 @@ export function MarketExplorer({
             <LaneBadge lane={uptakeLane} />
           </div>
           <p className="mt-1 text-[11px] text-muted">{sliceLabel}</p>
-          <p className="mt-0.5 text-[10.5px] text-muted">
+          <p className="measure mt-0.5 text-[10.5px] text-muted">
             {usingLive
               ? archetypeId && !liveIndustry
                 ? "Pulled live from the deployed AIE app. This archetype spans several of the engine's industry segments, so the live slice is unfiltered by industry and the filter applies to the panels below."
-                : "Pulled live from the deployed AIE app, filtered upstream by the selections above."
-              : "The live uptake pull did not answer, so the ported region-by-industry dataset is shown."}
+                : "Pulled live from the deployed AIE app, filtered upstream on industry and region."
+              : sizeForcesPorted
+                ? "Organisation size is not a facet of the live API, so this cut is served from the ported dataset, which carries the size split from the same source spreadsheet."
+                : "The live uptake pull did not answer, so the ported region-by-industry dataset is shown."}
           </p>
+
+          {/* The source's own words, not a restatement. A modelled estimate
+              under a percentage reads as measurement unless the caveat that
+              came with it is on the same screen. */}
+          <p className="measure mt-2 rounded border border-warn/40 bg-warn-bg px-2.5 py-1.5 text-[11px] leading-snug">
+            {usingLive && liveProvenance
+              ? liveProvenance
+              : "MODELLED ESTIMATE — May 2026 segment-share model; directional, not audited market share"}
+          </p>
+
+          {/* The reason a broad vendor outranks one that leads the largest
+              segments. Without it the ranking invites a reading it will not
+              support. */}
+          <p className="measure mt-1.5 text-[10.5px] leading-snug text-muted">
+            Every {region ? "industry" : "region and industry"} cell in the cut
+            is weighted equally before the shares are renormalised, so this
+            ranks breadth of presence across segments, not size of business.
+            A vendor leading the largest segment can still sit below one
+            present in all of them.
+          </p>
+
           <div className="mt-3">
             {rows.length === 0 ? (
               <EmptyState
@@ -273,33 +312,48 @@ export function MarketExplorer({
           <div className="mt-3 border-t border-base-300 pt-2">
             <DerivationDrawer title="How the adoption shares are derived">
               <p>
-                Shares come from the AIE vendor uptake model, pulled live from
-                the deployed app when it answers and from the ported dataset
-                otherwise. The ported dataset is 585 region by
-                industry by vendor rows (5 regions, 9 industry segments, 13
-                model providers), each a fraction normalised within its
-                region-and-industry cell and carrying the dataset's own
-                estimate.
+                <strong>This cut is being served from{" "}
+                {usingLive
+                  ? "the deployed AIE app, live"
+                  : "the ported dataset"}
+                .</strong>{" "}
+                {usingLive
+                  ? "The upstream returns the model's own output for the industry and region asked for. Its provenance line is reproduced above the chart verbatim."
+                  : "585 region by industry by vendor rows (5 regions, 9 industry segments, 13 model providers), each a fraction normalised within its region-and-industry cell and carrying the dataset's own estimate."}
               </p>
-              <ul className="list-disc space-y-1 pl-4 text-muted">
+              <p className="measure text-muted">
+                Both come from the same May 2026 segment-share model, built
+                from a vendor-by-industry-by-region spreadsheet. Live here
+                means freshly fetched, not freshly measured: no figure on this
+                chart was observed after May 2026.
+              </p>
+              <ul className="measure list-disc space-y-1 pl-4 text-muted">
                 <li>
                   Matching cells for the selected slice are averaged per
-                  vendor, optionally re-weighted by the vendor's
-                  large-enterprise or SME propensity, then renormalised so the
-                  slice sums to 100 per cent.
+                  vendor, then renormalised so the slice sums to 100 per cent.
+                  Every cell counts once regardless of how large that segment
+                  is, so the ranking reads as breadth of presence rather than
+                  weight of business.
                 </li>
                 <li>
-                  The eight industry archetypes map onto the dataset's own
+                  Organisation size is not a facet of the live API. Choosing
+                  one moves the panel to the ported dataset, which carries the
+                  large-enterprise and SME split, and the badge changes with
+                  it.
+                </li>
+                <li>
+                  The eight industry archetypes map onto the dataset&apos;s own
                   nine segments (the mapping is shown in the slice label
                   above); the dataset itself is not altered.
                 </li>
                 <li>
-                  Confidence shown per row is the average of the contributing
-                  cells' native labels (Low, Low-Medium, Medium, High). Bars
-                  are scaled to the slice leader for readability.
+                  Cells and confidence are printed against every row.
+                  Confidence is the average of the contributing cells&apos;
+                  native labels (Low, Low-Medium, Medium, High). Bars are
+                  scaled to the slice leader for readability.
                 </li>
               </ul>
-              <p className="text-muted">
+              <p className="measure text-muted">
                 These are directional adoption-share estimates from
                 the dataset, not disclosed vendor revenue or market-share
                 figures.
@@ -436,11 +490,11 @@ export function MarketExplorer({
               </span>
             </div>
             {workflow.description ? (
-              <p className="mt-1 max-w-2xl text-[12.5px] text-base-content/85">
+              <p className="mt-1 measure text-[12.5px] text-base-content/85">
                 {workflow.description}
               </p>
             ) : null}
-            <div className="mt-3 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            <div className="mt-3 grid grid-cols-2 gap-3 @3xl:grid-cols-3 @5xl:grid-cols-6">
               <div>
                 <p className="micro-label">Risk tier</p>
                 <p className="mt-1 font-mono text-[12px] font-semibold uppercase">
@@ -480,7 +534,7 @@ export function MarketExplorer({
                 </p>
               </div>
             </div>
-            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
+            <div className="mt-3 grid grid-cols-1 gap-3 @xl:grid-cols-2">
               <div>
                 <p className="micro-label">Common inputs</p>
                 <div className="mt-1 flex flex-wrap gap-1">
@@ -537,7 +591,7 @@ export function MarketExplorer({
                 </button>
               ))}
             </div>
-            <p className="mt-2 text-[11px] text-muted">
+            <p className="measure mt-2 text-[11px] text-muted">
               Pick a workflow in the filter bar to see its evidenced-impact
               profile: risk tier, reliability requirement, autonomy default,
               complexity and regulatory flags, all native to the taxonomy.
@@ -554,7 +608,7 @@ export function MarketExplorer({
               supervised agent), a complexity grade and the regulatory regimes
               that typically apply.
             </p>
-            <p className="text-muted">
+            <p className="measure text-muted">
               These gradings describe how the workflow is deployed in
               practice; they are taxonomy attributes, not measurements of any
               single vendor, and nothing here is blended into a vendor score.

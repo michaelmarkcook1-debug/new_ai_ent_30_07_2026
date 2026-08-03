@@ -150,9 +150,9 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
   };
 
   return (
-    <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-4 @4xl:grid-cols-3">
       {/* Chat column */}
-      <section className="flex min-h-[480px] flex-col rounded-lg border border-base-300 bg-base-100 lg:col-span-2">
+      <section className="@container flex min-h-[480px] flex-col rounded-lg border border-base-300 bg-base-100 @4xl:col-span-2">
         <div className="flex items-center justify-between border-b border-base-300 px-3 py-2">
           <MicroLabel
             label="AI Analyst"
@@ -166,11 +166,11 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
         <div className="flex-1 space-y-3 overflow-y-auto p-3">
           {messages.length === 0 ? (
             <div className="py-6 text-center">
-              <p className="text-[13px] text-muted">
+              <p className="measure text-[13px] text-muted">
                 Ask about the vendor decision, regulation, talent or delivery.
                 Answers come only from the grounded sources.
               </p>
-              <div className="mx-auto mt-3 grid max-w-lg grid-cols-1 gap-2 sm:grid-cols-2">
+              <div className="mx-auto mt-3 grid max-w-lg grid-cols-1 gap-2 @xl:grid-cols-2">
                 {SUGGESTED.map((q) => (
                   <button
                     key={q}
@@ -243,7 +243,7 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
               Run deep analysis
             </button>
           </div>
-          <p className="mt-1.5 font-mono text-[9.5px] text-muted">
+          <p className="measure mt-1.5 font-mono text-[9.5px] text-muted">
             Tiered routing: Haiku classifies and retrieves, Sonnet synthesises,
             Opus only behind the deep-analysis button (cost note applies).
           </p>

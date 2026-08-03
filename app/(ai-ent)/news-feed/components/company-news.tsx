@@ -214,7 +214,7 @@ export function CompanyNewsSection({ universe }: { universe: UniverseCompany[] }
         />
         <LaneBadge lane={source === "mock" ? "mock" : "live"} />
       </div>
-      <p className="mb-3 max-w-2xl text-[11px] text-muted">
+      <p className="mb-3 measure text-[11px] text-muted">
         These panels cover companies in the BoardRadar universe, which is IT
         services first with the major AI platform players included. Private AI
         labs are not in this universe; their coverage lives in the AI market
@@ -230,7 +230,7 @@ export function CompanyNewsSection({ universe }: { universe: UniverseCompany[] }
           Resolving companies...
         </p>
       ) : (
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 @2xl:grid-cols-2">
           <CompanyNewsPanel
             universe={universe}
             idByTicker={idByTicker}

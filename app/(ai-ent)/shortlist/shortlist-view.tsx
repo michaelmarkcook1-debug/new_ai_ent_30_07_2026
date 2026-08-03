@@ -170,7 +170,7 @@ export function ShortlistView({ vendors }: { vendors: VendorMetrics[] }) {
               developer and employee pillars. Momentum is the rolling 30 day
               reading, published for a subset of vendors only.
             </p>
-            <p className="text-muted">
+            <p className="measure text-muted">
               A vendor the dataset does not reach shows what is missing rather
               than a zero. The shortlist itself lives in this browser and is
               never sent anywhere.
@@ -184,7 +184,7 @@ export function ShortlistView({ vendors }: { vendors: VendorMetrics[] }) {
           label="Take it further"
           tooltip="Where to go next with this set."
         />
-        <ul className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <ul className="mt-2 grid grid-cols-1 gap-2 @xl:grid-cols-2">
           {[
             ["/trust-rank", "Check governance and regulatory exposure"],
             ["/security-desk", "Check security posture and open risks"],

@@ -174,7 +174,7 @@ export function CostCapabilityChart({ view }: { view: CostCapabilityView }) {
               {view.count} priced models
             </span>
           </div>
-          <p className="mt-1 max-w-3xl text-[12px] text-muted">
+          <p className="mt-1 measure text-[12px] text-muted">
             Every tracked model that publishes both a real list price and an
             independent Intelligence Index. The green line is the efficiency
             frontier: models no cheaper peer beats on intelligence, named on the
@@ -496,7 +496,7 @@ export function CostCapabilityChart({ view }: { view: CostCapabilityView }) {
             ) : null}
           </p>
         ) : (
-          <p className="text-[11px] text-muted">
+          <p className="measure text-[11px] text-muted">
             Move over the chart to read the nearest model, its index score and
             its price. Click a provider above to hide or isolate a family.
           </p>
@@ -527,7 +527,7 @@ export function CostCapabilityChart({ view }: { view: CostCapabilityView }) {
             shown as Unattributed rather than guessed into a family. It is a
             grouping aid, not a statement about who owns or hosts the model.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Price is the published list price per 1M input tokens on a log
             scale, so the cheap end stays readable; it is not a negotiated
             enterprise rate. Benchmarks and prices both move quickly, which is

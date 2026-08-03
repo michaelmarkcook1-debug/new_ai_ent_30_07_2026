@@ -58,7 +58,7 @@ export function ProfileFacts({ profile }: { profile: VendorProfile }) {
         />
         <LaneBadge lane="aie" />
       </div>
-      <p className="mt-3 text-[13px] leading-relaxed text-base-content/85">
+      <p className="measure mt-3 text-[13px] leading-relaxed text-base-content/85">
         <span className="micro-label mr-2">Analyst interpretation</span>
         {intel.analystInterpretation}
       </p>
@@ -333,7 +333,7 @@ export function DependencySection({ profile }: { profile: VendorProfile }) {
                   updated {item.edge.dateUpdated}
                 </span>
               </div>
-              <p className="mt-1 text-[12px] leading-snug text-base-content/85">
+              <p className="measure mt-1 text-[12px] leading-snug text-base-content/85">
                 {item.edge.summary}
               </p>
               <div className="mt-1.5 flex flex-wrap items-center gap-2">
@@ -511,7 +511,7 @@ function ReputationCard({
         ))}
       </dl>
       {themes.length > 0 ? (
-        <ul className="mt-2 list-disc space-y-0.5 pl-4 text-[11px] text-base-content/85">
+        <ul className="measure mt-2 list-disc space-y-0.5 pl-4 text-[11px] text-base-content/85">
           {themes.map((t) => (
             <li key={t}>{t}</li>
           ))}
@@ -590,7 +590,7 @@ export function ReputationSection({ profile }: { profile: VendorProfile }) {
           detail={`The AI Enterprise reputation dataset does not cover ${intel.name}.`}
         />
       ) : (
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-3 @4xl:grid-cols-3">
           {developer ? (
             <ReputationCard
               label="Developer"

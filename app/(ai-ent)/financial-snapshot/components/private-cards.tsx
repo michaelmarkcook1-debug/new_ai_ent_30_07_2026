@@ -42,7 +42,7 @@ function PrivateCard({ card }: { card: PrivateVendorCard }) {
       </div>
       {card.tagline ? (
         <div className="mt-2">
-          <p className="text-[12px] leading-snug text-base-content/80">
+          <p className="measure text-[12px] leading-snug text-base-content/80">
             {card.tagline}
           </p>
           <div className="mt-1">
@@ -99,13 +99,13 @@ export function PrivateCompanyCards({ cards }: { cards: PrivateVendorCard[] }) {
         <h2 className="text-[15px] font-bold">Private AI companies</h2>
         <LaneBadge lane="aie" />
       </div>
-      <p className="mt-0.5 max-w-2xl text-[12px] text-muted">
+      <p className="mt-0.5 measure text-[12px] text-muted">
         These vendors are not in BoardRadar and publish no audited accounts.
         Cards stay locked to disclosed figures only: qualitative context comes
         from the AIE dataset, and the links go to the curated public sources
         for each vendor.
       </p>
-      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-3 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
         {cards.map((c) => (
           <PrivateCard key={c.id} card={c} />
         ))}

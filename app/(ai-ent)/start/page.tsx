@@ -77,7 +77,7 @@ export default function StartPage() {
         lanes={["aie-live", "live"]}
       />
 
-      <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
         {JOBS.map((j) => (
           <Link
             key={j.href}
@@ -87,7 +87,7 @@ export default function StartPage() {
             <h2 className="text-[14px] font-bold leading-snug group-hover:text-primary">
               {j.question}
             </h2>
-            <p className="mt-1.5 flex-1 text-[12px] leading-relaxed text-muted">
+            <p className="measure mt-1.5 flex-1 text-[12px] leading-relaxed text-muted">
               {j.detail}
             </p>
             <p className="mt-3 flex items-center gap-2 text-[12px] font-semibold text-primary">
@@ -108,7 +108,7 @@ export default function StartPage() {
           label="How to read anything here"
           tooltip="The conventions used across every page."
         />
-        <ul className="mt-2 grid grid-cols-1 gap-1.5 text-[12px] text-muted sm:grid-cols-2">
+        <ul className="mt-2 grid grid-cols-1 gap-1.5 text-[12px] text-muted @xl:grid-cols-2">
           <li>
             <span className="font-semibold text-base-content">
               Every figure names its source.

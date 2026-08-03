@@ -41,7 +41,7 @@ function NarrativeBlock({ label, tooltip, body }: { label: string; tooltip: stri
   return (
     <div className="rounded-lg border border-base-300 bg-base-100 p-4">
       <MicroLabel label={label} tooltip={tooltip} />
-      <p className="mt-2 text-[12.5px] leading-relaxed">{body}</p>
+      <p className="measure mt-2 text-[12.5px] leading-relaxed">{body}</p>
     </div>
   );
 }
@@ -56,7 +56,7 @@ function EvidenceList({ label, items, emptyNote }: { label: string; items: strin
       {items.length === 0 ? (
         <p className="mt-2 text-[11px] text-muted">{emptyNote}</p>
       ) : (
-        <ul className="mt-2 list-disc space-y-1.5 pl-4 text-[12.5px] leading-relaxed">
+        <ul className="measure mt-2 list-disc space-y-1.5 pl-4 text-[12.5px] leading-relaxed">
           {items.map((item) => (
             <li key={item}>{item}</li>
           ))}
@@ -160,7 +160,7 @@ export function CyberRiskPanel() {
                   rendered here exactly as returned: The Security Desk applies
                   no adjustment, re-weighting or interpretation of its own.
                 </p>
-                <ul className="list-disc space-y-1 pl-4 text-muted">
+                <ul className="measure list-disc space-y-1 pl-4 text-muted">
                   <li>
                     BoardRadar does not publish its weighting formula through
                     the API, so this desk does not restate one.
@@ -176,7 +176,7 @@ export function CyberRiskPanel() {
                     meaning beyond BoardRadar's own summary text.
                   </li>
                 </ul>
-                <p className="text-muted">
+                <p className="measure text-muted">
                   Where BoardRadar has no analysis for a company (hasAnalysis
                   false), no score is invented: the page shows an honest empty
                   state instead.
@@ -186,11 +186,11 @@ export function CyberRiskPanel() {
           </div>
 
           {data.summary ? (
-            <p className="max-w-4xl text-[13px] leading-relaxed">{data.summary}</p>
+            <p className="measure text-[13px] leading-relaxed">{data.summary}</p>
           ) : null}
 
           {/* Narrative blocks */}
-          <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 @4xl:grid-cols-3">
             <NarrativeBlock
               label="Threat landscape"
               tooltip="BoardRadar's read of the adversary pressure this company faces, as returned by the analysis."
@@ -209,7 +209,7 @@ export function CyberRiskPanel() {
           </div>
 
           {/* Vulnerabilities and incidents */}
-          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
             <EvidenceList
               label="Vulnerabilities"
               items={data.vulnerabilities}
@@ -223,16 +223,16 @@ export function CyberRiskPanel() {
           </div>
 
           {/* Findings and recommendations as accordions (house idiom) */}
-          <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+          <div className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
             <Accordion title="Key findings" count={data.keyFindings.length} defaultOpen>
-              <ul className="list-disc space-y-1.5 pl-4 text-[12.5px] leading-relaxed">
+              <ul className="measure list-disc space-y-1.5 pl-4 text-[12.5px] leading-relaxed">
                 {data.keyFindings.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
             </Accordion>
             <Accordion title="Recommendations" count={data.recommendations.length}>
-              <ul className="list-disc space-y-1.5 pl-4 text-[12.5px] leading-relaxed">
+              <ul className="measure list-disc space-y-1.5 pl-4 text-[12.5px] leading-relaxed">
                 {data.recommendations.map((item) => (
                   <li key={item}>{item}</li>
                 ))}

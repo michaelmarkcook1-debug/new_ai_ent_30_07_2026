@@ -48,7 +48,7 @@ export function DependencyByLayer({ view }: { view: DependencyView }) {
           {view.edgeCount} typed edges, {view.nodeCount} counterparties
         </span>
       </div>
-      <p className="mt-1 max-w-3xl text-[11px] text-muted">
+      <p className="mt-1 measure text-[11px] text-muted">
         Which suppliers the ecosystem leans on hardest: the count of inbound
         dependency edges each company carries in the AIE exposure map, split by
         relationship type.
@@ -63,7 +63,7 @@ export function DependencyByLayer({ view }: { view: DependencyView }) {
             or estimated; it is a plain count over the dataset&apos;s hand-curated,
             source-backed edge list.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Edge direction follows the dataset&apos;s own orientation, from the
             exposure holder to the counterparty, so a high count means many
             named companies have a stated relationship into that node. Companies
@@ -71,7 +71,7 @@ export function DependencyByLayer({ view }: { view: DependencyView }) {
             outside the roster group under &quot;Wider ecosystem&quot; rather than being
             guessed into a layer.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             The dataset marks each edge with a confidence tier (high, medium,
             seed). Counts here include all tiers; the per-edge tiers are visible
             on the Alliances page.
@@ -93,7 +93,7 @@ export function DependencyByLayer({ view }: { view: DependencyView }) {
         ))}
       </div>
 
-      <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
+      <div className="mt-3 grid grid-cols-1 gap-3 @2xl:grid-cols-2">
         {view.groups.map((group) => (
           <div key={group.layer} className="rounded-lg border border-base-300 bg-base-100 p-4">
             <h3 className="text-[13px] font-bold">{group.layer}</h3>

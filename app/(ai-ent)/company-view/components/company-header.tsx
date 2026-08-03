@@ -45,7 +45,7 @@ export function CompanyHeader({
         <CompanySelect selected={company.ticker} />
       </div>
       <p className="mt-0.5 font-mono text-[11px] text-muted">{today}</p>
-      <p className="mt-1 max-w-3xl text-[12px] text-muted">
+      <p className="mt-1 measure text-[12px] text-muted">
         {company.live ? (
           <>
             The tailored view a customer sees of their own organisation, run

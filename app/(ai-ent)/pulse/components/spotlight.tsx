@@ -75,7 +75,7 @@ export function SpotlightCard({
                   <span className="w-6 text-right font-mono text-[12px]">{d.reality}</span>
                 </div>
               </div>
-              <p className="mt-1 text-[12px] leading-snug text-muted">{d.caption}</p>
+              <p className="measure mt-1 text-[12px] leading-snug text-muted">{d.caption}</p>
             </div>
           );
         })}
@@ -191,7 +191,7 @@ export function DerivedGapCard({
         </div>
       </div>
 
-      <p className="mt-2 text-[12px] leading-snug text-muted">
+      <p className="measure mt-2 text-[12px] leading-snug text-muted">
         Both are percentiles within the {cohortSize} tracked AI vendors, not
         scores out of 100. Narrative is how far the technical conversation
         carries this vendor; reality is its evidence-weighted capability
@@ -236,7 +236,7 @@ export function DerivedGapCard({
                         </span>
                       )}
                     </div>
-                    <p className="text-[12px] leading-snug text-muted">
+                    <p className="measure text-[12px] leading-snug text-muted">
                       {soft
                         ? `Sits well below this vendor's own standing. If your use case leans on ${c.capability.toLowerCase()}, the headline overstates them.`
                         : `Runs ahead of this vendor's own standing, so it is a genuine strength rather than a halo from the overall score.`}
@@ -279,7 +279,7 @@ export function DerivedGapCard({
           <p className="text-muted">
             <strong>What this does not measure.</strong> {method.bias}
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Compiled {generatedAt.slice(0, 10)} by
             scripts/narrative-reality-gap.mjs. It is a derived reading, not a
             published figure, and not the same thing as the hand-written
@@ -346,7 +346,7 @@ export function VendorSnapshotCard({ vendor }: { vendor: VendorMetrics }) {
           <div key={label} className="flex items-center justify-between gap-3">
             <div className="min-w-0">
               <dt className="text-[12px] font-semibold">{label}</dt>
-              <dd className="text-[12px] leading-snug text-muted">{note}</dd>
+              <dd className="measure text-[12px] leading-snug text-muted">{note}</dd>
             </div>
             {value === null ? (
               <span className="shrink-0 font-mono text-[12px] text-muted">

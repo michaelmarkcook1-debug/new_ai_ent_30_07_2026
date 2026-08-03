@@ -115,7 +115,7 @@ function EdgeCard({ edge }: { edge: AllianceEdgeView }) {
         </span>
         <PartyName label={edge.toLabel} vendorId={edge.toVendorId} bold />
       </div>
-      <p className="mt-1.5 text-[12px] leading-snug text-muted">{edge.summary}</p>
+      <p className="measure mt-1.5 text-[12px] leading-snug text-muted">{edge.summary}</p>
       <div className="mt-2 flex flex-wrap items-center gap-2">
         <span className="micro-label">Strength</span>
         <div
@@ -173,7 +173,7 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
   return (
     <div className="space-y-4">
       {/* Summary strip */}
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 @4xl:grid-cols-4">
         {(
           [
             ["Alliance edges", data.summary.total, "Partnership plus investment edges in the AIE exposure map"],
@@ -193,15 +193,15 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
       </section>
 
       {/* Topology map beside the depth distribution */}
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-4">
-        <div className="xl:col-span-3">
+      <div className="grid grid-cols-1 gap-4 @6xl:grid-cols-4">
+        <div className="@container @6xl:col-span-3">
           <AllianceMap
             edges={data.edges}
             vendorNodeIds={data.vendorNodeIds}
             datasetUpdated={data.datasetUpdatedLatest}
           />
         </div>
-        <div className="xl:col-span-1">
+        <div className="@container @6xl:col-span-1">
           <DepthDonut edges={data.edges} />
         </div>
       </div>
@@ -223,7 +223,7 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
             source URLs. The strength bar is the dataset&apos;s own 0 to 1 strength
             score, where 1.0 is the strongest tie.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Evidence split in this dataset: {data.summary.byConfidence.high} verified,{" "}
             {data.summary.byConfidence.medium} documented, {data.summary.byConfidence.seed} seed.
             Seed-tier edges should be treated as hypotheses, not confirmed relationships.
@@ -268,7 +268,7 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
                 the dataset.
               </p>
             ) : (
-              <div className="mt-2 grid grid-cols-1 gap-3 lg:grid-cols-2">
+              <div className="mt-2 grid grid-cols-1 gap-3 @2xl:grid-cols-2">
                 {visible.map((edge) => (
                   <EdgeCard key={edge.id} edge={edge} />
                 ))}
@@ -285,7 +285,7 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
                     ({group.edges.length} {group.edges.length === 1 ? "edge" : "edges"})
                   </span>
                 </h3>
-                <div className="mt-2 grid grid-cols-1 gap-3 lg:grid-cols-2">
+                <div className="mt-2 grid grid-cols-1 gap-3 @2xl:grid-cols-2">
                   {group.edges.map((edge) => (
                     <EdgeCard key={edge.id} edge={edge} />
                   ))}
@@ -297,14 +297,14 @@ export function AlliancesView({ data }: { data: AlliancesData }) {
       </section>
 
       {/* Cross-links */}
-      <section className="grid grid-cols-1 gap-3 md:grid-cols-2">
+      <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
         <Link
           href="/ecosystem-navigator"
           className="rounded-lg border border-base-300 bg-base-100 p-4 transition hover:border-primary"
         >
           <span className="micro-label">Delivery channel</span>
           <p className="mt-1 text-[13px] font-semibold">AI Ecosystem Navigator</p>
-          <p className="mt-0.5 text-[11px] text-muted">
+          <p className="measure mt-0.5 text-[11px] text-muted">
             Integrators and delivery partners are tracked separately in the
             labelled delivery and services channel, not mixed into this map.
           </p>

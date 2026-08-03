@@ -91,7 +91,7 @@ export default async function AiExposurePage({
   return (
     <CompanyShell company={company} displayName={e.companyName}>
     <div className="space-y-4">
-      <section className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <section className="grid grid-cols-1 gap-3 @3xl:grid-cols-3">
         <KpiGauge
           label="AI OPPORTUNITY"
           tooltip="0 to 100, higher means AI helps this organisation more."
@@ -132,7 +132,7 @@ export default async function AiExposurePage({
       </div>
 
       <section className="rounded-lg border border-base-300 bg-base-100 p-4">
-        <p className="text-[13px] leading-relaxed">{e.summary}</p>
+        <p className="measure text-[13px] leading-relaxed">{e.summary}</p>
       </section>
 
       {e.functionExposure && e.functionExposure.length > 0 ? (
@@ -185,7 +185,7 @@ export default async function AiExposurePage({
         </section>
       ) : company.live ? (
         <section className="rounded-lg border border-dashed border-base-300 px-3 py-4">
-          <p className="text-[11.5px] text-muted">
+          <p className="measure text-[11.5px] text-muted">
             The live endpoint returns no function-level exposure breakdown for
             this company, so no table is shown. Nothing is estimated in its
             place.
@@ -253,20 +253,20 @@ export default async function AiExposurePage({
         )}
       </section>
 
-      <section className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+      <section className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
         <Accordion
           title="Key Findings"
           count={e.keyFindings.length}
           defaultOpen
         >
-          <ul className="list-disc space-y-1.5 pl-4 text-[12.5px]">
+          <ul className="measure list-disc space-y-1.5 pl-4 text-[12.5px]">
             {e.keyFindings.map((k) => (
               <li key={k}>{k}</li>
             ))}
           </ul>
         </Accordion>
         <Accordion title="Recommendations" count={e.recommendations.length}>
-          <ul className="list-disc space-y-1.5 pl-4 text-[12.5px]">
+          <ul className="measure list-disc space-y-1.5 pl-4 text-[12.5px]">
             {e.recommendations.map((k) => (
               <li key={k}>{k}</li>
             ))}

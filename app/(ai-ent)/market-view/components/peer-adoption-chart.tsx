@@ -21,7 +21,11 @@ export interface PeerAdoptionRow {
 
 const W = 720;
 const ROW_H = 30;
-const PAD = { top: 26, right: 116, bottom: 30, left: 168 };
+// Right padding carries the percentage plus the evidence behind it. The chart
+// computed contributingCells and confidence and then printed neither, so every
+// row read as an equally solid figure: at "all industries" a row rests on 45
+// cells, at one region on 9, and the rubric's own confidence runs Low to High.
+const PAD = { top: 26, right: 188, bottom: 30, left: 168 };
 const PLOT_W = W - PAD.left - PAD.right;
 
 export function PeerAdoptionChart({
@@ -137,6 +141,20 @@ export function PeerAdoptionChart({
               >
                 {(r.share * 100).toFixed(1)}%
               </text>
+
+              {/* Anchored to the right edge rather than to the bar, so the
+                  evidence column lines up and stays readable however long
+                  the bars are. */}
+              <text
+                x={W - 6}
+                y={y + ROW_H / 2}
+                textAnchor="end"
+                dominantBaseline="middle"
+                className="fill-[var(--ag-muted)] font-mono"
+                fontSize={9}
+              >
+                {r.contributingCells} cells · {r.confidence.toLowerCase()}
+              </text>
             </g>
           );
         })}
@@ -162,7 +180,7 @@ export function PeerAdoptionChart({
             same percentage off three cells and off forty-five is not the same
             claim, so both are shown rather than the percentage alone.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             {provenance
               ? `Source provenance, carried across verbatim: ${provenance}`
               : "This is a modelled segment estimate, not audited market share."}{" "}

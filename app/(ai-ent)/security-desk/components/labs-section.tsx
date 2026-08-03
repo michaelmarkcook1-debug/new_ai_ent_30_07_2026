@@ -31,7 +31,7 @@ export function LabsSection({ view }: { view: PostureView }) {
           {view.assessedCount} assessed
         </span>
       </div>
-      <p className="mt-1 max-w-3xl text-[12px] text-muted">
+      <p className="mt-1 measure text-[12px] text-muted">
         These labs sit outside the probed BoardRadar universe, so no cyber
         incident analysis exists for them. What is shown instead is the AI
         Enterprise security capability assessment, which does cover them: a
@@ -46,7 +46,7 @@ export function LabsSection({ view }: { view: PostureView }) {
           No security assessment rows are available for these vendors.
         </p>
       ) : (
-        <div className="mt-3 grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-3 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
           {view.rows.map((lab) => (
             <article
               key={lab.vendorId}
@@ -81,7 +81,7 @@ export function LabsSection({ view }: { view: PostureView }) {
                     label="Evidence"
                     tooltip="The evidence excerpt the assessment records for this row, carried across unchanged."
                   />
-                  <p className="mt-0.5 text-[11.5px] leading-relaxed text-muted">
+                  <p className="measure mt-0.5 text-[11.5px] leading-relaxed text-muted">
                     {lab.note}
                   </p>
                 </div>
@@ -131,7 +131,7 @@ export function LabsSection({ view }: { view: PostureView }) {
                     vendors on this page. They stay separate because they
                     measure different things.
                   </p>
-                  <p className="text-muted">
+                  <p className="measure text-muted">
                     A status of inferred means the reading rests on adjacent
                     signals rather than a primary source, so treat it as the
                     weakest basis on the card. No score is invented where the

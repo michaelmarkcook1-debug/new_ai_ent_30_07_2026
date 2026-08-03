@@ -79,7 +79,7 @@ export function LiveTalentExposure({
 
   return (
     <div className="space-y-4">
-      <section className="grid grid-cols-1 gap-3 sm:grid-cols-4">
+      <section className="grid grid-cols-1 gap-3 @4xl:grid-cols-4">
         {[
           {
             label: "WORKFORCE",
@@ -122,7 +122,7 @@ export function LiveTalentExposure({
 
       {str("summary") ? (
         <section className="rounded-lg border border-base-300 bg-base-100 p-4">
-          <p className="text-[13px] leading-relaxed">{str("summary")}</p>
+          <p className="measure text-[13px] leading-relaxed">{str("summary")}</p>
         </section>
       ) : null}
 
@@ -255,7 +255,7 @@ export function LiveTalentExposure({
               it assigns each one. Exposure is banded inverted, because a higher
               share of tasks changed means more disruption to absorb.
             </p>
-            <p className="text-muted">
+            <p className="measure text-muted">
               Coverage can exceed 100 per cent where role headcounts overlap in
               the source; it is shown as returned rather than normalised.
               {source === "mock"
@@ -267,7 +267,7 @@ export function LiveTalentExposure({
       </section>
 
       <section className="rounded-lg border border-dashed border-base-300 px-4 py-3">
-        <p className="text-[11.5px] text-muted">
+        <p className="measure text-[11.5px] text-muted">
           The workforce pyramid, functional readiness and leadership signals
           shown for the exemplar buyer have no per-company equivalent in the
           API, so they are omitted here rather than shown under this

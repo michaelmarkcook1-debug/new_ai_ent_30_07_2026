@@ -188,8 +188,8 @@ export function PulseView({
           </select>
         </div>
 
-        <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-3">
-          <div className="lg:col-span-2">
+        <div className="mt-3 grid grid-cols-1 gap-4 @4xl:grid-cols-3">
+          <div className="@container @4xl:col-span-2">
             {spotlight ? (
               <SpotlightCard
                 vendorId={selected}
@@ -209,7 +209,7 @@ export function PulseView({
           </div>
 
           {/* The decision, which is the part a buyer actually needs */}
-          <div className="lg:col-span-1">
+          <div className="@container @4xl:col-span-1">
             {decision ? (
               <div className="rounded-lg border border-primary/40 bg-primary/5 p-4">
                 <MicroLabel
@@ -217,11 +217,11 @@ export function PulseView({
                   tooltip="The same composite, stated as an action."
                 />
                 <p className="mt-2 text-[20px] font-bold">{decision.status}</p>
-                <p className="mt-1.5 text-[12px] leading-snug">
+                <p className="measure mt-1.5 text-[12px] leading-snug">
                   {decision.reason}
                 </p>
                 {decision.keyDimensions.length ? (
-                  <p className="mt-2 text-[12px] leading-snug text-muted">
+                  <p className="measure mt-2 text-[12px] leading-snug text-muted">
                     Based on {decision.keyDimensions.join(", ")}.
                   </p>
                 ) : null}
@@ -266,7 +266,7 @@ export function PulseView({
         />
 
         <Accordion title="Market averages across the tracked set" count={metrics.kpis.length}>
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3 @xl:grid-cols-2 @6xl:grid-cols-4">
             {metrics.kpis.map((k) => (
               <KpiGauge
                 key={k.label}
@@ -286,7 +286,7 @@ export function PulseView({
                 Each gauge is an aggregate over real AI Enterprise data, naming
                 the field it aggregates and how many records it covers:
               </p>
-              <ul className="list-disc space-y-1 pl-4 text-muted">
+              <ul className="measure list-disc space-y-1 pl-4 text-muted">
                 {metrics.kpis.map((k) => (
                   <li key={k.label}>
                     <span className="font-semibold text-base-content">
@@ -304,7 +304,7 @@ export function PulseView({
                 one. Showing that as a trend would invent a signal the source
                 does not carry.
               </p>
-              <p className="text-muted">
+              <p className="measure text-muted">
                 Open high-severity risks is a count, not a 0 to 100 score, and
                 its band colouring is inverted because fewer is better.
                 {asOf ? ` Generated ${asOf}.` : ""}

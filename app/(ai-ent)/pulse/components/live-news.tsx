@@ -67,7 +67,7 @@ export function PulseLiveNews({
     : fallbackVendor;
 
   return (
-    <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+    <section className="grid grid-cols-1 gap-4 @2xl:grid-cols-2">
       <NewsList
         title="Market news"
         items={market}

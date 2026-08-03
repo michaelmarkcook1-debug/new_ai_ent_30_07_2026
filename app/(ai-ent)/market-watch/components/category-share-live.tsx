@@ -128,12 +128,12 @@ function ShareCards({ categories }: { categories: CategoryShareView[] }) {
       {groups.map((g) => (
         <Accordion key={g.id} title={g.label} count={g.members.length}>
           <p className="mb-2 text-[12px] text-muted">{g.blurb}</p>
-          <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
+          <div className="grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
             {g.members.map((cat) => (
         <div key={cat.id} className="rounded-lg border border-base-300 bg-base-100 p-4">
           <h3 className="text-[13px] font-bold">{cat.name}</h3>
           {cat.description ? (
-            <p className="mt-0.5 text-[11px] leading-snug text-muted">{cat.description}</p>
+            <p className="measure mt-0.5 text-[11px] leading-snug text-muted">{cat.description}</p>
           ) : null}
           <div className="mt-3 space-y-2">
             {cat.rows.map((row) => (
@@ -263,7 +263,7 @@ export function CategoryShareLive({
           </span>
         )}
       </div>
-      <p className="mt-1 max-w-3xl text-[11px] text-muted">
+      <p className="mt-1 measure text-[11px] text-muted">
         {usingLive && payload
           ? `Native provenance line from the engine: "${payload.provenance}"`
           : `Native estimate label from the dataset: "${methodology}"`}
@@ -278,7 +278,7 @@ export function CategoryShareLive({
             and the small &quot;conf&quot; figure is the row&apos;s native
             estimate (0 to 100).
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             These are directional, evidence-graded estimates, not audited
             market shares; the engine&apos;s own provenance line stays visible
             above. When the live pull fails the ported seed renders instead

@@ -63,7 +63,7 @@ export function MarketToday({
 
           </div>
         </div>
-        <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="mt-3 grid grid-cols-2 gap-2 @3xl:grid-cols-3 @4xl:grid-cols-5">
           {regime.facets.map((f) => (
             <div key={f.label} className="rounded border border-base-300 bg-base-200/40 px-2 py-1.5">
               <span className="micro-label">{f.label}</span>
@@ -81,7 +81,7 @@ export function MarketToday({
               listed in the same dataset.
             </p>
             <p className="text-muted">Dataset note: {regime.uncertaintyNote}</p>
-            <p className="text-muted">
+            <p className="measure text-muted">
               Nothing in this strip is measured by this demo; it is the dataset&apos;s own
               source-cited read, re-rendered with its labels intact.
             </p>
@@ -90,7 +90,7 @@ export function MarketToday({
       </div>
 
       {/* Signal feed */}
-      <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-2">
+      <div className="mt-3 grid grid-cols-1 gap-3 @2xl:grid-cols-2">
         {signals.map((s) => (
           <article key={s.id} className="rounded-lg border border-base-300 bg-base-100 p-4">
             <div className="flex flex-wrap items-center gap-1.5">
@@ -110,7 +110,7 @@ export function MarketToday({
               </span>
             </div>
             <h3 className="mt-1.5 text-[13px] font-bold leading-snug">{s.title}</h3>
-            <p className="mt-1 text-[12px] leading-snug text-muted">{s.summary}</p>
+            <p className="measure mt-1 text-[12px] leading-snug text-muted">{s.summary}</p>
             <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-muted">
               <span className="capitalize">{s.category}</span>
               <span aria-hidden>&middot;</span>

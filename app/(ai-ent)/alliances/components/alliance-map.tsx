@@ -167,7 +167,7 @@ export function AllianceMap({
               {shownEdges.length} of {edges.length} edges
             </span>
           </div>
-          <p className="mt-1 max-w-3xl text-[12px] text-muted">
+          <p className="mt-1 measure text-[12px] text-muted">
             Who partners with whom across the tracked channel. Model and API
             providers sit on the upper arc, the companies that build on them on
             the lower arc, each ordered by how many alliances it carries. Click
@@ -249,8 +249,8 @@ export function AllianceMap({
         </span>
       </div>
 
-      <div className="mt-2 grid grid-cols-1 gap-3 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+      <div className="mt-2 grid grid-cols-1 gap-3 @4xl:grid-cols-3">
+        <div className="@container @4xl:col-span-2">
           <svg
             viewBox={`0 0 ${W} ${H}`}
             className="w-full"
@@ -340,7 +340,7 @@ export function AllianceMap({
         </div>
 
         {/* Dossier for the focused node */}
-        <div className="lg:col-span-1">
+        <div className="@container @4xl:col-span-1">
           <MicroLabel
             label={focus ? "Alliance dossier" : "Inspect"}
             tooltip="Click a node on the map to see every alliance it carries, with the dataset's own summary, evidence tier and sources."
@@ -369,7 +369,7 @@ export function AllianceMap({
                       </span>
                       <span className="text-[12px] font-semibold">{other}</span>
                     </div>
-                    <p className="mt-1 text-[11.5px] leading-snug text-muted">
+                    <p className="measure mt-1 text-[11.5px] leading-snug text-muted">
                       {e.summary}
                     </p>
                     <p className="mt-1 font-mono text-[9px] text-muted">
@@ -424,7 +424,7 @@ export function AllianceMap({
             draws the same map. Nothing here is a force simulation, and no
             position implies rank, size or quality.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             An absent edge means the dataset records no public alliance, not
             that none exists. Dataset last updated{" "}
             {datasetUpdated.slice(0, 10)}.

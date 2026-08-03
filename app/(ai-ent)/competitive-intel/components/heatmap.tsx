@@ -135,7 +135,7 @@ export function CompetitiveHeatmap() {
           <LaneBadge lane={source === "live" ? "live" : "mock"} />
         </div>
       </div>
-      <p className="mt-1 text-[11px] text-muted">
+      <p className="measure mt-1 text-[11px] text-muted">
         An intensity grid, not a positioning chart: there are no axes and no
         quadrants. Each cell is the endpoint&apos;s own 0 to 5 score for that
         company on that dimension. The peer group is the one the API returns
@@ -283,7 +283,7 @@ export function CompetitiveHeatmap() {
               <DerivationDrawer title={`How ${meta.label} is derived`}>
                 <p>{meta.methodology?.summary}</p>
                 <p className="text-muted">{meta.methodology?.details}</p>
-                <p className="text-muted">
+                <p className="measure text-muted">
                   Both paragraphs above are the endpoint&apos;s own methodology
                   text, carried through unchanged. Cells with no published
                   score render as a dash rather than a zero, because zero is a
@@ -314,7 +314,7 @@ export function CompetitiveHeatmap() {
                     endpoint, on the same 0 to 5 intensity scale as the grid. It
                     is not recomputed here.
                   </p>
-                  <p className="text-muted">
+                  <p className="measure text-muted">
                     Trend is the endpoint&apos;s own <code>trend</code> field.
                     Where it is zero, no movement is published, which is shown
                     as a dash rather than as a flat arrow implying stability.

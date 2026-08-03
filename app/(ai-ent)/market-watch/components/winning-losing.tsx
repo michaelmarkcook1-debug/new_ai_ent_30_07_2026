@@ -35,7 +35,7 @@ function VendorCard({ item }: { item: AieDashboardVendorRef }) {
       <div className="mt-1">
         <CategoryChip label={item.vendor.category} />
       </div>
-      <p className="mt-2 text-[12px] leading-snug text-base-content/85">{item.reason}</p>
+      <p className="measure mt-2 text-[12px] leading-snug text-base-content/85">{item.reason}</p>
     </div>
   );
 }
@@ -73,7 +73,7 @@ export function WinningLosing() {
           <h2 className="text-[15px] font-bold">Who is winning, who is losing</h2>
           <LaneBadge lane="aie-live" />
         </div>
-        <p className="mt-1 text-[12px] text-muted">
+        <p className="measure mt-1 text-[12px] text-muted">
           The live dashboard read is unavailable and no recorded fixture
           answered; nothing is shown rather than a guess.
         </p>
@@ -98,7 +98,7 @@ export function WinningLosing() {
           </span>
         ) : null}
       </div>
-      <p className="mt-1 max-w-3xl text-[11px] text-muted">
+      <p className="mt-1 measure text-[11px] text-muted">
         The deployed AIE dashboard&apos;s momentum calls, reasons verbatim with
         the reason each call gives; names link into the vendor profiles
         where the vendor is in the tracked roster.
@@ -106,7 +106,7 @@ export function WinningLosing() {
       {data === null ? (
         <p className="mt-3 font-mono text-[11px] text-muted">Loading the live read...</p>
       ) : (
-        <div className="mt-3 grid grid-cols-1 gap-4 lg:grid-cols-2">
+        <div className="mt-3 grid grid-cols-1 gap-4 @2xl:grid-cols-2">
           <div>
             <MicroLabel label="Winning" tooltip="Vendors the dashboard flags with rising momentum, with its stated reason." />
             <div className="mt-2 space-y-2">

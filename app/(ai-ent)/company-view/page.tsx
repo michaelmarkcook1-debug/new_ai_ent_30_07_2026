@@ -45,7 +45,7 @@ export default async function CompanyOverviewPage({
         {f.overview.insight.body}
       </EditorialBanner>
 
-      <section className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2 @6xl:grid-cols-4">
         {f.overview.kpis.map((k) => (
           <KpiGauge
             key={k.label}
@@ -71,7 +71,7 @@ export default async function CompanyOverviewPage({
       </div>
 
 
-      <section className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+      <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
         {TAB_LINKS.map((t) => (
           <Link
             key={t.href}

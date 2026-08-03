@@ -72,7 +72,7 @@ export function DeliveryMatrix() {
             integration-depth grading and its role-displacement lists, with
             each platform's provenance envelope passed through untouched.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Shown as the services channel (the delivery layer for AI
             programmes); it is never blended with the AI-vendor adoption
             content above.
@@ -107,7 +107,7 @@ export function DeliveryMatrix() {
                   {data.platformCounts.partner} partner
                 </span>
               </div>
-              <p className="mt-1 text-[12.5px] leading-relaxed text-base-content/85">
+              <p className="measure mt-1 text-[12.5px] leading-relaxed text-base-content/85">
                 {data.intro}
               </p>
               <p className="mt-2 font-mono text-[9px] uppercase tracking-wider text-muted">
@@ -120,7 +120,7 @@ export function DeliveryMatrix() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
               {data.categories.map((cat) => (
                 <div
                   key={cat.id}
@@ -143,7 +143,7 @@ export function DeliveryMatrix() {
                           </span>
                           <ProvenanceBadge env={p.provenance} />
                         </div>
-                        <p className="mt-0.5 text-[11px] leading-snug text-muted">
+                        <p className="measure mt-0.5 text-[11px] leading-snug text-muted">
                           {p.description}
                         </p>
                       </li>
@@ -154,7 +154,7 @@ export function DeliveryMatrix() {
                       title={data.highDisplacementLabel}
                       count={cat.highDisplacementRoles.length}
                     >
-                      <ul className="list-disc space-y-0.5 pl-4 text-[11px] text-muted">
+                      <ul className="measure list-disc space-y-0.5 pl-4 text-[11px] text-muted">
                         {cat.highDisplacementRoles.map((r) => (
                           <li key={r}>{r}</li>
                         ))}
@@ -164,7 +164,7 @@ export function DeliveryMatrix() {
                       title={data.partialDisplacementLabel}
                       count={cat.partialDisplacementRoles.length}
                     >
-                      <ul className="list-disc space-y-0.5 pl-4 text-[11px] text-muted">
+                      <ul className="measure list-disc space-y-0.5 pl-4 text-[11px] text-muted">
                         {cat.partialDisplacementRoles.map((r) => (
                           <li key={r}>{r}</li>
                         ))}

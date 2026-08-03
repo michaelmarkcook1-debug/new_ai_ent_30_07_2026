@@ -64,7 +64,7 @@ export function RankingsTable({
       {/* Comparability statement, category picker and the ranking basis */}
       <section className="rounded-lg border border-base-300 bg-base-100 p-3">
         <div className="flex flex-wrap items-start justify-between gap-2">
-          <p className="max-w-3xl text-[12px] text-muted">
+          <p className="measure text-[12px] text-muted">
             <span className="micro-label mr-1.5">Comparability</span>
             {COMPARABILITY_NOTE}
           </p>
@@ -249,7 +249,7 @@ export function RankingsTable({
           <h3 className="text-[12.5px] font-bold">
             Tracked but not placed in a market category ({notPlaced.length})
           </h3>
-          <p className="mt-1 max-w-3xl text-[11px] text-muted">{UNPLACED_NOTE}</p>
+          <p className="mt-1 measure text-[11px] text-muted">{UNPLACED_NOTE}</p>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {notPlaced.map((row) => (
               <Link
@@ -264,7 +264,7 @@ export function RankingsTable({
         </section>
       ) : null}
 
-      <p className="font-mono text-[10px] text-muted">
+      <p className="measure font-mono text-[10px] text-muted">
         <span className="micro-label mr-2">Generated</span>
         {generatedOn}. Column labels are the dataset&apos;s own field names.
         Values are AG's own estimates from the AI Enterprise
@@ -284,7 +284,7 @@ function RankingsDerivation() {
         BoardRadar or third-party analyst framework input enters these
         figures.
       </p>
-      <ul className="list-disc space-y-1 pl-4">
+      <ul className="measure list-disc space-y-1 pl-4">
         <li>
           <span className="font-mono text-[12px]">overallScore</span>: the
           composite analyst estimate (0 to 100) recorded per vendor in the
@@ -320,7 +320,7 @@ function RankingsDerivation() {
           </tbody>
         </table>
       </div>
-      <p className="text-muted">
+      <p className="measure text-muted">
         These figures rank evidence, not prestige: there is no quadrant, wave
         or medal treatment anywhere in this module, and the index column is a
         plain position within the current sort.

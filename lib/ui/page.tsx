@@ -25,7 +25,7 @@ export function PageHeader({
           <h1 className="text-2xl font-extrabold tracking-tight">{title}</h1>
           <p className="mt-0.5 font-mono text-[11px] text-muted">{today}</p>
           {subtitle ? (
-            <p className="mt-1 max-w-2xl text-[13px] text-muted">{subtitle}</p>
+            <p className="mt-1 measure text-[13px] text-muted">{subtitle}</p>
           ) : null}
         </div>
         <div className="flex items-center gap-2">{actions}</div>

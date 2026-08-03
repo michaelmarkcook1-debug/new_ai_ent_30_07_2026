@@ -72,7 +72,7 @@ export function NewsList({
                       {n.headline}
                     </a>
                   ) : (
-                    <span className="text-[13px] font-medium leading-snug">{n.headline}</span>
+                    <span className="measure text-[13px] font-medium leading-snug">{n.headline}</span>
                   )}
                   {n.summary ? (
                     <p className="mt-0.5 truncate text-[11px] text-muted">{n.summary}</p>

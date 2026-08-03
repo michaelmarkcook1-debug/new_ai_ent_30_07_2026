@@ -79,7 +79,7 @@ export function GovernancePostureBlock({
                 label="Evidence"
                 tooltip="The evidence excerpt the assessment cites for this row, carried across unchanged."
               />
-              <p className="mt-0.5 text-[12px] leading-relaxed text-muted">
+              <p className="measure mt-0.5 text-[12px] leading-relaxed text-muted">
                 {posture.note}
               </p>
             </div>
@@ -129,7 +129,7 @@ export function GovernancePostureBlock({
                 Those measure different things over different universes, so
                 they are shown separately and never combined into one figure.
               </p>
-              <p className="text-muted">
+              <p className="measure text-muted">
                 A status of inferred means the reading rests on adjacent
                 signals rather than a primary source. Where the dataset has no
                 row for a vendor, this block says so instead of estimating a

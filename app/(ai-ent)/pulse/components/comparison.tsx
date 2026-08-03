@@ -140,7 +140,7 @@ export function VendorComparisonTable({
             </option>
           ))}
         </select>
-        <p className="ml-1 max-w-2xl text-[11px] text-muted">
+        <p className="ml-1 measure text-[11px] text-muted">
           {COMPARABILITY_NOTE}
         </p>
       </div>
@@ -284,7 +284,7 @@ export function VendorComparisonTable({
               ? ""
               : " No movement is published against it yet: every prior estimate in the dataset is identical to the current one, so no change figure is shown rather than a misleading flat zero."}
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             The count under each column heading is how many vendors in this
             category carry that reading. A vendor the dataset does not reach
             shows what is missing and why, never a zero or a filled-in average.

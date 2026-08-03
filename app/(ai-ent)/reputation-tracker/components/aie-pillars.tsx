@@ -77,7 +77,7 @@ function MetricRow({
     <li className="flex flex-wrap items-start justify-between gap-2 py-1">
       <div className="min-w-0">
         <span className="text-[12.5px]">{label}</span>
-        {note ? <p className="text-[10px] leading-snug text-muted">{note}</p> : null}
+        {note ? <p className="measure text-[10px] leading-snug text-muted">{note}</p> : null}
       </div>
       <span className="flex shrink-0 items-center gap-1.5">
         {status ? <StatusChip status={status} /> : null}
@@ -99,7 +99,7 @@ function ThemesAndSources({
   return (
     <div className="mt-3 border-t border-base-300 pt-2">
       <p className="micro-label">{heading}</p>
-      <ul className="mt-1 list-disc space-y-0.5 pl-4 text-[11px] text-base-content/85">
+      <ul className="measure mt-1 list-disc space-y-0.5 pl-4 text-[11px] text-base-content/85">
         {themes.map((t) => (
           <li key={t}>{t}</li>
         ))}
@@ -219,7 +219,7 @@ export function AiePillarsSection() {
         </Link>
       </div>
 
-      <div className="mt-3 grid grid-cols-1 gap-3 lg:grid-cols-3">
+      <div className="mt-3 grid grid-cols-1 gap-3 @4xl:grid-cols-3">
         {/* Developer pillar */}
         {dev ? (
           <PillarCard
@@ -235,7 +235,7 @@ export function AiePillarsSection() {
                   columns: GitHub signal, Reddit reception, forum signal, API
                   reliability and documentation quality.
                 </p>
-                <ul className="list-disc space-y-1 pl-4 text-muted">
+                <ul className="measure list-disc space-y-1 pl-4 text-muted">
                   <li>
                     GitHub: flagship-repo stars plus freshness from the public
                     GitHub API (log-scaled star score weighted 70 per cent,
@@ -259,7 +259,7 @@ export function AiePillarsSection() {
                   </li>
                   <li>Documentation: curated seed until ingestion is wired.</li>
                 </ul>
-                <p className="text-muted">
+                <p className="measure text-muted">
                   Per-cell labels (seed, documented, verified) are the
                   dataset's own and are shown next to each figure.
                 </p>
@@ -341,7 +341,7 @@ export function AiePillarsSection() {
                   metrics: work-life balance, culture, litigation score,
                   career growth, compensation and mission alignment.
                 </p>
-                <ul className="list-disc space-y-1 pl-4 text-muted">
+                <ul className="measure list-disc space-y-1 pl-4 text-muted">
                   <li>
                     Litigation: the raw footprint is the real count of
                     employment-related court records over 24 months from the
@@ -413,7 +413,7 @@ export function AiePillarsSection() {
                   directly as a 0 to 100 value), value for money, customer
                   service, responsiveness and quality of service.
                 </p>
-                <p className="text-muted">
+                <p className="measure text-muted">
                   Values are curated seed from G2, Capterra, TrustRadius and
                   status-page archives until real ingestion is wired; the
                   structure swaps in verified scores per cell without UI

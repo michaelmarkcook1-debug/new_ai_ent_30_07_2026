@@ -127,14 +127,14 @@ export function LiveUnifiedSection() {
             platforms (Glassdoor, Indeed) and the competitive sentiment read
             across social, product, pricing, developer and support signals.
           </p>
-          <p className="text-muted">
+          <p className="measure text-muted">
             Ratings stay on each platform's own scale (out of 5 unless
             stated); AG does not rescale or blend them, and none of these
             figures feeds any AG score.
           </p>
         </DerivationDrawer>
       </div>
-      <p className="mt-1 text-[11px] text-muted">
+      <p className="measure mt-1 text-[11px] text-muted">
         Platform players from the BoardRadar company universe, shown as
         BoardRadar coverage. Where a company is not in the universe, no figure
         is shown.
@@ -159,7 +159,7 @@ export function LiveUnifiedSection() {
                 tooltip="The endpoint's own positioning narrative, shown verbatim."
                 badge={<LaneBadge lane={lane} />}
               >
-                <p className="text-[12.5px] leading-relaxed text-base-content/85">
+                <p className="measure text-[12.5px] leading-relaxed text-base-content/85">
                   {data.overview.description}
                 </p>
                 <p className="mt-2 font-mono text-[9px] uppercase tracking-wider text-muted">
@@ -173,7 +173,7 @@ export function LiveUnifiedSection() {
               </Card>
             ) : null}
 
-            <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+            <div className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
               {/* Customer reviews */}
               {data.customerReviews ? (
                 <Card
@@ -194,7 +194,7 @@ export function LiveUnifiedSection() {
                       </li>
                     ))}
                   </ul>
-                  <div className="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  <div className="mt-2 grid grid-cols-1 gap-2 @xl:grid-cols-2">
                     <div>
                       <p className="micro-label">Most liked</p>
                       <div className="mt-1 flex flex-wrap gap-1">
@@ -228,7 +228,7 @@ export function LiveUnifiedSection() {
                   tooltip="Employee review-platform ratings and category breakdowns, as returned by the endpoint."
                   badge={<LaneBadge lane={lane} />}
                 >
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
                     {glassdoor ? (
                       <div>
                         <div className="flex items-center justify-between">
@@ -266,7 +266,7 @@ export function LiveUnifiedSection() {
 
             {/* Satisfaction comparison tables */}
             {data.comparisonTables && data.comparisonTables.length > 0 ? (
-              <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+              <div className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
                 {data.comparisonTables.map((table) => (
                   <Card
                     key={table.category}

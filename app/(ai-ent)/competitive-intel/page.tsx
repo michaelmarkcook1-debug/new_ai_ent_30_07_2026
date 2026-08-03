@@ -41,11 +41,11 @@ export default async function CompetitiveIntelPage({
         lanes={[matrix.lane, "live"]}
       />
       <AnalystInsight insight={insight} context="competitive" />
-      <div className="grid grid-cols-1 gap-4 xl:grid-cols-3">
-        <div className="xl:col-span-2">
+      <div className="grid grid-cols-1 gap-4 @4xl:grid-cols-3">
+        <div className="@container @4xl:col-span-2">
           <ProviderCapabilityMatrix matrix={matrix} />
         </div>
-        <div className="xl:col-span-1">
+        <div className="@container @4xl:col-span-1">
           <AieRankings rows={rankings} />
         </div>
       </div>
@@ -61,7 +61,7 @@ export default async function CompetitiveIntelPage({
             Delivery channel
           </span>
         </div>
-        <p className="mt-1 max-w-3xl text-[12px] text-muted">
+        <p className="mt-1 measure text-[12px] text-muted">
           The BoardRadar competitive-intelligence heatmap covers listed
           companies, so its peer groups are cloud platforms and the systems
           integrators that deliver AI. It cannot reach OpenAI, Anthropic,

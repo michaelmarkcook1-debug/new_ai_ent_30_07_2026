@@ -93,7 +93,7 @@ export function LiveFeed() {
               (0 to 100). Those labels pass through untouched: nothing here is
               scored by this product.
             </p>
-            <p className="text-muted">
+            <p className="measure text-muted">
               When the live pull fails, the recorded response serves instead
               under a Cached sample badge; the historical seed brief below
               never changes.
@@ -151,7 +151,7 @@ export function LiveFeed() {
 
       <ul className="divide-y divide-base-300">
         {failed ? (
-          <li className="px-3 py-4 text-[12px] text-muted">
+          <li className="measure px-3 py-4 text-[12px] text-muted">
             The live feed is unavailable and no recorded fixture answered; no
             items are shown rather than a guess.
           </li>
@@ -171,7 +171,7 @@ export function LiveFeed() {
                   href={n.sourceUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-[13px] font-semibold leading-snug hover:text-primary"
+                  className="measure text-[13px] font-semibold leading-snug hover:text-primary"
                 >
                   {n.title}
                 </a>
@@ -182,9 +182,9 @@ export function LiveFeed() {
                   Impact {n.impactScore ?? "n/a"}
                 </span>
               </div>
-              <p className="mt-0.5 text-[12px] leading-snug text-base-content/85">{n.summary}</p>
+              <p className="measure mt-0.5 text-[12px] leading-snug text-base-content/85">{n.summary}</p>
               {n.whyItMatters ? (
-                <p className="mt-1 text-[11px] leading-snug text-muted">
+                <p className="measure mt-1 text-[11px] leading-snug text-muted">
                   <span className="font-semibold">Why it matters:</span> {n.whyItMatters}
                 </p>
               ) : null}
@@ -198,7 +198,7 @@ export function LiveFeed() {
                 {sentimentBadge(n.sentiment)}
               </div>
               {n.vendors && n.vendors.length > 0 ? (
-                <p className="mt-1 text-[10px] text-muted">Vendors: {n.vendors.join(", ")}</p>
+                <p className="measure mt-1 text-[10px] text-muted">Vendors: {n.vendors.join(", ")}</p>
               ) : null}
             </li>
           ))

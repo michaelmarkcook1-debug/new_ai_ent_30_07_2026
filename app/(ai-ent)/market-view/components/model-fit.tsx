@@ -53,10 +53,18 @@ import { PriceCapabilityChart } from "./model-fit-chart";
 // tool that hides them while pricing a workforce is asserting a precision it
 // does not have.
 
+// Per MONTH, not per year: the engine multiplies this volume by twelve to reach
+// the annual figure. These labels said "a year" and understated every cost on
+// the panel by a factor of twelve.
 const USAGE_LABEL: Record<string, string> = {
-  light: "Light — 2M tokens a year",
-  moderate: "Moderate — 10M tokens a year",
-  heavy: "Heavy — 40M tokens a year",
+  light: "Light — occasional use, 2M input tokens per person per month",
+  moderate: "Moderate — used through the working day, 10M per person per month",
+  heavy: "Heavy — continuous use, 40M per person per month",
+};
+const USAGE_TOKENS: Record<string, string> = {
+  light: "2M",
+  moderate: "10M",
+  heavy: "40M",
 };
 
 const OUT_MULTIPLE_CHOICES: { value: string; label: string }[] = [
@@ -68,7 +76,8 @@ const OUT_MULTIPLE_CHOICES: { value: string; label: string }[] = [
 ];
 
 const selectClass =
-  "rounded border border-base-300 bg-base-100 px-2 py-1.5 text-[12px]";
+  "rounded border border-base-300 bg-base-100 px-2 py-1.5 text-[12px] " +
+  "disabled:cursor-not-allowed disabled:bg-base-200 disabled:text-muted";
 
 type EvidenceKind = "measured" | "judgement" | "assumption";
 
@@ -104,11 +113,26 @@ function usd(v: number | null | undefined): string {
   return `$${v.toFixed(2)}`;
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({
+  label,
+  children,
+  disabled = false,
+  note,
+}: {
+  label: string;
+  children: React.ReactNode;
+  /** Greys the label alongside its control, so the pair reads as one dead thing. */
+  disabled?: boolean;
+  /** The shape of the choice being made: how many options, and of what kind. */
+  note?: string;
+}) {
   return (
-    <label className="flex flex-col gap-1">
+    <label className={`flex flex-col gap-1 ${disabled ? "opacity-45" : ""}`}>
       <span className="micro-label">{label}</span>
       {children}
+      {note ? (
+        <span className="font-mono text-[10px] leading-snug text-muted">{note}</span>
+      ) : null}
     </label>
   );
 }
@@ -126,7 +150,7 @@ function Fact({
     <div className="border-t border-base-300 px-4 py-3 sm:border-l sm:border-t-0">
       <p className="micro-label">{label}</p>
       <p className="mt-1 text-[15px] font-bold leading-tight">{value}</p>
-      <p className="mt-0.5 text-[10.5px] leading-snug text-muted">{detail}</p>
+      <p className="measure mt-0.5 text-[10.5px] leading-snug text-muted">{detail}</p>
     </div>
   );
 }
@@ -144,7 +168,7 @@ function CostBox({
     <div className="rounded border border-base-300 bg-base-200/40 p-3">
       <p className="micro-label">{label}</p>
       <p className="mt-1 font-mono text-[19px] font-bold leading-none">{value}</p>
-      <p className="mt-1.5 text-[10.5px] leading-snug text-muted">{detail}</p>
+      <p className="measure mt-1.5 text-[10.5px] leading-snug text-muted">{detail}</p>
     </div>
   );
 }
@@ -158,6 +182,126 @@ const OUTCOME_STYLE: Record<string, string> = {
   "cannot assess": "bg-base-200 text-muted border-base-300",
 };
 
+/**
+ * The output before there is one.
+ *
+ * A greyed skeleton of the real panel rather than a line of text, so the shape
+ * of the answer is visible before it exists and the page does not jump when it
+ * arrives. It states which step is outstanding rather than just sitting inert.
+ */
+function WaitingForCompute({
+  industry,
+  fn,
+  roleId,
+}: {
+  industry: string;
+  fn: string;
+  roleId: string;
+}) {
+  const steps: [string, boolean][] = [
+    ["Industry", Boolean(industry)],
+    ["Function", Boolean(fn)],
+    ["Role", Boolean(roleId)],
+  ];
+  const outstanding = steps.find(([, done]) => !done)?.[0];
+  return (
+    <div
+      aria-live="polite"
+      className="mt-4 select-none rounded-lg border border-dashed border-base-300 bg-base-200/40 p-4 opacity-60"
+    >
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="h-5 w-40 rounded bg-base-300/70" aria-hidden />
+        <span className="h-4 w-24 rounded bg-base-300/50" aria-hidden />
+      </div>
+      <div className="mt-3 h-3 w-3/4 rounded bg-base-300/50" aria-hidden />
+      <div className="mt-1.5 h-3 w-1/2 rounded bg-base-300/50" aria-hidden />
+      <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        {Array.from({ length: 5 }, (_, i) => (
+          <div key={i} className="rounded border border-base-300/70 p-3">
+            <div className="h-2.5 w-2/3 rounded bg-base-300/60" aria-hidden />
+            <div className="mt-2 h-4 w-1/2 rounded bg-base-300/70" aria-hidden />
+          </div>
+        ))}
+      </div>
+      <p className="mt-4 text-[12.5px] font-medium text-base-content/70">
+        {outstanding
+          ? `Choose ${outstanding === "Industry" ? "an" : "a"} ${outstanding.toLowerCase()} to continue.`
+          : "Press Compute to work out the answer."}
+      </p>
+      <p className="measure mt-1 text-[11px] text-muted">
+        Nothing is calculated until all three are chosen. The engine is not
+        guessing at a role while you are still picking one.
+      </p>
+    </div>
+  );
+}
+
+/**
+ * Every assumption currently in force, written out and rewritten as the
+ * controls move.
+ *
+ * The panel already carries an ASSUMPTION chip, but a chip only says that
+ * assumptions exist. This says which ones, in the buyer's own terms, and
+ * changes when they do — so the reader can see the moment a number stops
+ * being an assumption they accepted and becomes one they chose.
+ */
+function assumptionNarration(opts: {
+  role: Role;
+  seats: number;
+  seatsOverridden: boolean;
+  usage: string;
+  burn: boolean;
+  outMultiple: string;
+  offset: number;
+  hasPick: boolean;
+}): string[] {
+  const { role, seats, seatsOverridden, usage, burn, outMultiple, offset, hasPick } = opts;
+  const lines: string[] = [];
+
+  if (seatsOverridden) {
+    lines.push(`Headcount is set to ${seats} because you set it.`);
+  } else {
+    const because = [role.seniority?.toLowerCase(), role.authority?.toLowerCase()]
+      .filter(Boolean)
+      .join(" role with ");
+    lines.push(
+      `Headcount defaults to ${seats}${because ? ` because this is ${/^[aeiou]/.test(because) ? "an" : "a"} ${because} authority` : ""}. Override it for your organisation.`
+    );
+  }
+
+  lines.push(
+    `${usage[0].toUpperCase()}${usage.slice(1)} use assumes ${USAGE_TOKENS[usage] ?? "?"} input tokens per person per month, billed over twelve months.`
+  );
+
+  if (!hasPick) {
+    lines.push("No model qualifies for this role, so nothing is costed.");
+  }
+
+  lines.push(
+    burn
+      ? "Cost is adjusted for reasoning-token burn, inferred from each model's effort label rather than measured."
+      : "Token burn is NOT adjusted for reasoning effort, so high-effort variants are understated."
+  );
+
+  lines.push(
+    outMultiple
+      ? `Output tokens are priced at ${outMultiple}× the input price on 15 per cent of volume, because the catalogue publishes no output price.`
+      : "Output tokens are priced at the vendor's own published ratio on 15 per cent of volume, because the catalogue publishes no output price."
+  );
+
+  if (offset !== 0) {
+    lines.push(
+      `Every capability threshold is moved ${offset > 0 ? "up" : "down"} by ${Math.abs(offset)} per cent of its axis range, which you did.`
+    );
+  }
+
+  lines.push(
+    "Figures are in US dollars, matching the catalogue's own pricing, so no exchange rate is applied."
+  );
+  lines.push("Every one of these numbers is an assumption you can change.");
+  return lines;
+}
+
 const OUTCOME_LABEL: Record<string, string> = {
   supported: "Supported",
   qualified: "Qualified",
@@ -168,11 +312,16 @@ const OUTCOME_LABEL: Record<string, string> = {
 };
 
 export function ModelFit() {
-  const [industry, setIndustry] = useState<string>(CROSS_INDUSTRY);
-  const [fn, setFn] = useState<string>(() => functionsFor(CROSS_INDUSTRY)[0] ?? "");
-  const [roleId, setRoleId] = useState<string>(
-    () => rolesFor(CROSS_INDUSTRY, functionsFor(CROSS_INDUSTRY)[0] ?? "")[0]?.role_id ?? ""
-  );
+  // Nothing is preselected, and each menu waits for the one above it. A role
+  // arrived at by three deliberate choices is a question the buyer asked; a
+  // role sitting there by default is one the tool answered on its own.
+  const [industry, setIndustry] = useState<string>("");
+  const [fn, setFn] = useState<string>("");
+  const [roleId, setRoleId] = useState<string>("");
+  // The role the answer on screen belongs to. Held separately from the
+  // selection so that changing a menu retires the old answer rather than
+  // silently replacing it with a new one.
+  const [computedRoleId, setComputedRoleId] = useState<string | null>(null);
   const [usage, setUsage] = useState("moderate");
   const [burn, setBurn] = useState(true);
   const [offset, setOffset] = useState(0);
@@ -182,14 +331,21 @@ export function ModelFit() {
   const [seatsText, setSeatsText] = useState<string | null>(null);
   const [showAllEliminations, setShowAllEliminations] = useState(false);
 
-  const functions = useMemo(() => functionsFor(industry), [industry]);
-  const roles = useMemo(() => rolesFor(industry, fn), [industry, fn]);
-  // roleById returns a fresh object each call, so memoising on roleId is what
-  // stops every unrelated re-render from re-running the whole join.
-  const role: Role | undefined = useMemo(
-    () => (roleId ? roleById(roleId) : undefined),
-    [roleId]
+  const functions = useMemo(() => (industry ? functionsFor(industry) : []), [industry]);
+  const roles = useMemo(
+    () => (industry && fn ? rolesFor(industry, fn) : []),
+    [industry, fn]
   );
+  // Derived from the computed role, not the selected one: the panel below shows
+  // the answer to the question that was asked, not the one being typed.
+  const role: Role | undefined = useMemo(
+    () => (computedRoleId ? roleById(computedRoleId) : undefined),
+    [computedRoleId]
+  );
+  const ready = Boolean(industry && fn && roleId);
+  // Any change to a menu clears the computed role, so this covers both "never
+  // computed" and "computed, then the selection moved on".
+  const needsCompute = ready && computedRoleId !== roleId;
 
   const vendors = useMemo(
     () =>
@@ -227,19 +383,32 @@ export function ModelFit() {
     return engine.assess({ ...role, headcount: seats }, { excluded_vendors: excluded }, false);
   }, [engine, role, seats, excluded]);
 
+  // Choosing higher up the chain clears everything below it, because a function
+  // from the last industry is not a valid choice in this one.
   function selectIndustry(next: string) {
-    const nextFns = functionsFor(next);
-    const nextFn = nextFns[0] ?? "";
     setIndustry(next);
-    setFn(nextFn);
-    setRoleId(rolesFor(next, nextFn)[0]?.role_id ?? "");
+    setFn("");
+    setRoleId("");
+    setComputedRoleId(null);
     setSeatsText(null);
   }
 
   function selectFunction(next: string) {
     setFn(next);
-    setRoleId(rolesFor(industry, next)[0]?.role_id ?? "");
+    setRoleId("");
+    setComputedRoleId(null);
     setSeatsText(null);
+  }
+
+  function selectRole(next: string) {
+    setRoleId(next);
+    setComputedRoleId(null);
+    setSeatsText(null);
+  }
+
+  function compute() {
+    if (!ready) return;
+    setComputedRoleId(roleId);
   }
 
   const detail =
@@ -258,13 +427,13 @@ export function ModelFit() {
     if (!meta || meta.critical !== "Mandatory") return { value: null, label: null };
     const applied = engine.appliedThreshold("CAP-01", meta.score, detail.shift);
     if (!applied) return { value: null, label: null };
-    // The status is read, not asserted. Every threshold is provisional today;
-    // hardcoding that word is how a label keeps claiming it after a calibration
-    // run has replaced the number underneath it.
-    const status = engine.cal("CAP-01")?.status ?? "unavailable";
+    // Plain English on the chart. The band, the status and the arithmetic all
+    // live in the requirements table below, where someone asking "why 60?" is
+    // already looking; on the chart the only useful sentence is what the line
+    // means.
     return {
       value: applied.value,
-      label: `general intelligence, level ${applied.level} · ${applied.value.toFixed(1)} · ${status}`,
+      label: `General intelligence needs ${applied.value.toFixed(0)}`,
     };
   }, [role, detail, engine]);
 
@@ -304,6 +473,17 @@ export function ModelFit() {
     ? Object.values(role.profile).filter((v) => v.critical === "Mandatory").length
     : 0;
 
+  // What the catalogue filter costs, stated where the filter is. A toggle that
+  // silently removes a third of the market is a toggle that lies by omission.
+  const withheldByCn = useMemo(() => {
+    if (!excludeCn) return null;
+    const inPlay = new Set(engine.allowed().map((m) => m.model_id));
+    const gone = MODELS.filter((m) => !inPlay.has(m.model_id));
+    const frontierGone = gone.filter((m) => m.frontier === "On frontier").length;
+    const frontierTotal = MODELS.filter((m) => m.frontier === "On frontier").length;
+    return { gone: gone.length, total: MODELS.length, frontierGone, frontierTotal };
+  }, [excludeCn, engine]);
+
   return (
     <section className="rounded-xl border border-primary/35 bg-primary/[0.04] p-4 sm:p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
@@ -319,16 +499,19 @@ export function ModelFit() {
         </p>
       </div>
 
-      {/* Three dropdowns. Role id alone is sufficient for the engine; industry
-          and function are how a human finds one. */}
-      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
-        <Field label="Industry">
+      {/* Three menus, stacked, each waiting for the one above it. Role id alone
+          is sufficient for the engine; industry and function are how a human
+          finds one, and asking for them in order is what makes the third menu
+          short enough to read. */}
+      <div className="mt-3 flex max-w-md flex-col gap-3">
+        <Field label="1. Industry" note={`${INDUSTRIES.length - 1} industries, plus cross-industry`}>
           <select
             aria-label="Industry"
             value={industry}
             onChange={(e) => selectIndustry(e.target.value)}
             className={selectClass}
           >
+            <option value="">Choose an industry…</option>
             {INDUSTRIES.map((i) => (
               <option key={i} value={i}>
                 {industryLabel(i)}
@@ -336,13 +519,25 @@ export function ModelFit() {
             ))}
           </select>
         </Field>
-        <Field label="Function">
+        <Field
+          label="2. Function"
+          disabled={!industry}
+          note={
+            industry
+              ? `${functions.length} function${functions.length === 1 ? "" : "s"} in this industry`
+              : "waiting on an industry"
+          }
+        >
           <select
             aria-label="Function"
             value={fn}
+            disabled={!industry}
             onChange={(e) => selectFunction(e.target.value)}
             className={selectClass}
           >
+            <option value="">
+              {industry ? "Choose a function…" : "Choose an industry first"}
+            </option>
             {functions.map((f) => (
               <option key={f} value={f}>
                 {f}
@@ -350,16 +545,27 @@ export function ModelFit() {
             ))}
           </select>
         </Field>
-        <Field label="Role">
+        <Field
+          label="3. Role"
+          disabled={!fn}
+          note={
+            fn
+              ? roles.length === 1
+                ? "the only role profiled in this function"
+                : `${roles.length} roles profiled in this function`
+              : "waiting on a function"
+          }
+        >
           <select
             aria-label="Role"
             value={roleId}
-            onChange={(e) => {
-              setRoleId(e.target.value);
-              setSeatsText(null);
-            }}
+            disabled={!fn}
+            onChange={(e) => selectRole(e.target.value)}
             className={selectClass}
           >
+            <option value="">
+              {fn ? "Choose a role…" : "Choose a function first"}
+            </option>
             {roles.map((r) => (
               <option key={r.role_id} value={r.role_id}>
                 {r.name}
@@ -367,9 +573,28 @@ export function ModelFit() {
             ))}
           </select>
         </Field>
+        <div className="flex flex-wrap items-center gap-3">
+          <button
+            type="button"
+            onClick={compute}
+            disabled={!ready}
+            className="rounded bg-primary px-4 py-1.5 text-[13px] font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-40"
+          >
+            Compute
+          </button>
+          {needsCompute ? (
+            <span className="text-[11.5px] text-warn">
+              Ready. Press Compute to work it out.
+            </span>
+          ) : !ready ? (
+            <span className="text-[11.5px] text-muted">
+              Choose all three to enable.
+            </span>
+          ) : null}
+        </div>
       </div>
       {industry === CROSS_INDUSTRY ? (
-        <p className="mt-2 text-[11px] text-muted">
+        <p className="measure mt-2 text-[11px] text-muted">
           Cross-industry roles carry one profile for every sector: a Financial Controller in
           banking and in retail return identical requirements. That is wrong, and the
           specification says so; it is not yet fixable from evidence, so it is labelled rather
@@ -377,16 +602,33 @@ export function ModelFit() {
         </p>
       ) : null}
 
+      {/* The catalogue filter, with its own consequence beside it. */}
+      <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 rounded border border-base-300 bg-base-100 px-3 py-2">
+        <span className="micro-label">Catalogue</span>
+        <label className="inline-flex items-center gap-2 text-[12px]">
+          <input
+            type="checkbox"
+            checked={excludeCn}
+            onChange={(e) => setExcludeCn(e.target.checked)}
+            className="accent-[var(--ag-primary)]"
+          />
+          Exclude China-headquartered vendors
+        </label>
+        <span className="font-mono text-[10.5px] text-warn">
+          {withheldByCn
+            ? `${withheldByCn.gone} of ${withheldByCn.total} models withheld · ${withheldByCn.frontierGone} of the ${withheldByCn.frontierTotal} frontier models are among them`
+            : `all ${MODELS.length} models in play`}
+        </span>
+      </div>
+
       {!role || !answer || !detail ? (
-        <p className="mt-4 rounded border border-base-300 bg-base-100 p-4 text-[13px] text-muted">
-          Pick a role to see the join.
-        </p>
+        <WaitingForCompute industry={industry} fn={fn} roleId={roleId} />
       ) : answer.outcome === "cannot assess" ? (
         <div className="mt-4 rounded border border-error/40 bg-bad-bg p-4">
           <p className="text-[13px] font-semibold text-error">
             This role cannot be assessed: {answer.reason}
           </p>
-          <p className="mt-1 text-[11.5px] text-muted">
+          <p className="measure mt-1 text-[11.5px] text-muted">
             The engine refuses bad input rather than guessing, because a silently wrong
             recommendation is worse than a visible refusal.
           </p>
@@ -439,7 +681,7 @@ export function ModelFit() {
                 </p>
               ) : null}
               {answer.warnings && answer.warnings.length > 0 ? (
-                <ul className="mt-3 list-disc space-y-0.5 pl-4 text-[11px] text-warn">
+                <ul className="measure mt-3 list-disc space-y-0.5 pl-4 text-[11px] text-warn">
                   {answer.warnings.map((w) => (
                     <li key={w}>{w}</li>
                   ))}
@@ -448,7 +690,7 @@ export function ModelFit() {
             </div>
 
             {/* Facts strip */}
-            <dl className="grid grid-cols-1 border-t border-base-300 sm:grid-cols-2 lg:grid-cols-5">
+            <dl className="grid grid-cols-1 border-t border-base-300 @xl:grid-cols-2 @4xl:grid-cols-5">
               <Fact
                 label="Error consequence"
                 value={`Tier ${detail.tier}`}
@@ -514,7 +756,7 @@ export function ModelFit() {
                 <EvidenceChip kind="assumption" label="volumes assumed" />
               </div>
             </div>
-            <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-3 grid grid-cols-1 gap-3 @xl:grid-cols-2 @5xl:grid-cols-4">
               <CostBox
                 label="Per person"
                 value={usd(answer.cost_per_person_year_usd)}
@@ -564,7 +806,7 @@ export function ModelFit() {
                 />
                 <EvidenceChip kind="assumption" />
               </div>
-              <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <div className="mt-2 grid grid-cols-1 gap-3 @xl:grid-cols-2 @5xl:grid-cols-4">
                 <Field label="Usage tier">
                   <select
                     aria-label="Usage tier"
@@ -636,15 +878,6 @@ export function ModelFit() {
                   </span>
                 </label>
                 <label className="inline-flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={excludeCn}
-                    onChange={(e) => setExcludeCn(e.target.checked)}
-                    className="accent-[var(--ag-primary)]"
-                  />
-                  Exclude China-based vendors
-                </label>
-                <label className="inline-flex items-center gap-2">
                   <span className="micro-label">Exclude a vendor</span>
                   <select
                     aria-label="Exclude a vendor"
@@ -677,11 +910,27 @@ export function ModelFit() {
                   </button>
                 ))}
               </div>
-              <p className="mt-2 text-[10.5px] text-muted">
+              {/* Every assumption in force right now, rewritten as they move. */}
+              <p className="measure mt-3 text-[11px] leading-relaxed text-warn">
+                {assumptionNarration({
+                  role,
+                  seats,
+                  seatsOverridden: seatsText !== null && seatsText !== "",
+                  usage,
+                  burn,
+                  outMultiple,
+                  offset,
+                  hasPick: Boolean(pick),
+                }).join(" ")}
+              </p>
+              <p className="measure mt-2 text-[10.5px] text-muted">
                 Buyer constraints eliminate first and are certain. Everything below them is
-                judgement, and the calibration offset moves every capability threshold together
-                as a percentage of its axis range, so you can see how much of the answer rests
-                on numbers nobody has measured.
+                judgement. The calibration offset moves every capability threshold together as a
+                percentage of that axis&apos;s own range, so it means the same on an index
+                topping out at {engine.axisMax("intelligence").toFixed(0)} as on an Elo topping
+                out at {engine.axisMax("briefcase").toFixed(0)}. Thresholds are capped at the
+                best score any model actually achieves, so the slider cannot demand something
+                the market does not sell.
               </p>
             </div>
           </div>
@@ -737,7 +986,7 @@ export function ModelFit() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-2 text-[11px] text-muted">
+              <p className="measure mt-2 text-[11px] text-muted">
                 Supported means a model meets the stated requirements for that duty, with a
                 human still accountable for the output. It does not mean the duty should be
                 removed from a job.
@@ -912,7 +1161,7 @@ export function ModelFit() {
               </span>
             </div>
             {eliminationsByRequirement.length === 0 ? (
-              <p className="mt-2 text-[12px] text-muted">
+              <p className="measure mt-2 text-[12px] text-muted">
                 Nothing was eliminated: every model in the catalogue meets this role&apos;s
                 mandatory requirements at the thresholds applied.
               </p>
@@ -1008,7 +1257,7 @@ export function ModelFit() {
                 </tbody>
               </table>
             </div>
-            <p className="mt-3 text-[11.5px] leading-relaxed text-muted">
+            <p className="measure mt-3 text-[11.5px] leading-relaxed text-muted">
               {SOURCES.note} Twenty roles in the library return no qualifying model. That is a
               finding about the market, not a fault: no model combines frontier capability with
               top-tier factual reliability.
@@ -1080,7 +1329,7 @@ export function ModelFit() {
                   is provisional, so no answer here can rate higher than the requirement
                   evidence allows.
                 </p>
-                <p className="text-muted">
+                <p className="measure text-muted">
                   Benchmark values are never merged into a score of ours. They are compared
                   against a threshold and the comparison is reported, with the third-party
                   number and its source shown separately.

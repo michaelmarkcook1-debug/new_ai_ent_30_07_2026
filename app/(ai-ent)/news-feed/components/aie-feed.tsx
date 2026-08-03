@@ -145,7 +145,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
                 </span>
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
-                    <p className="text-[13px] font-semibold leading-snug">{n.title}</p>
+                    <p className="measure text-[13px] font-semibold leading-snug">{n.title}</p>
                     <span
                       className="shrink-0 font-mono text-[10px] text-muted"
                       title="The dataset's native impact label, 0 to 100. See the derivation drawer above."
@@ -153,10 +153,10 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
                       Impact {n.impactScore}
                     </span>
                   </div>
-                  <p className="mt-0.5 text-[12px] leading-snug text-base-content/85">
+                  <p className="measure mt-0.5 text-[12px] leading-snug text-base-content/85">
                     {n.summary}
                   </p>
-                  <p className="mt-1 text-[11px] leading-snug text-muted">
+                  <p className="measure mt-1 text-[11px] leading-snug text-muted">
                     <span className="font-semibold">Why it matters:</span> {n.whyItMatters}
                   </p>
                   <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
@@ -169,7 +169,7 @@ export function AieFeed({ items, meta }: { items: FeedItem[]; meta: FeedMeta }) 
                     {sentimentBadge(n.sentiment)}
                   </div>
                   {n.vendors.length > 0 ? (
-                    <p className="mt-1 text-[10px] text-muted">
+                    <p className="measure mt-1 text-[10px] text-muted">
                       Vendors: {n.vendors.join(", ")}
                     </p>
                   ) : null}
