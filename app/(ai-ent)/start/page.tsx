@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PageHeader } from "@/lib/ui/page";
 import { MicroLabel } from "@/lib/ui/micro";
 
-export const metadata = { title: "Start here | AI Enterprise" };
+export const metadata = { title: "Explore | AI Enterprise" };
 
 // Orientation for a first-time buyer.
 //
@@ -83,7 +83,7 @@ export default function StartPage() {
   return (
     <>
       <PageHeader
-        title="Start here"
+        title="Explore"
         subtitle="Independent intelligence on the enterprise AI market, for people buying it. Pick the question closest to yours."
         lanes={["aie-live", "live"]}
       />
