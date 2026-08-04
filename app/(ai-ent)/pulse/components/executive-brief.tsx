@@ -74,6 +74,7 @@ export function PulseHero({
   todoTools = [],
   lane,
   asOf,
+  authorship = "computed",
 }: {
   headline: string;
   judgement: string;
@@ -87,6 +88,8 @@ export function PulseHero({
   todoTools?: ToolKey[];
   lane: DataLane;
   asOf: string | null;
+  /** Whether the analyst model wrote this reading or the builder assembled it. */
+  authorship?: "written" | "computed";
 }) {
   return (
     // The Pulse is the single largest judgement in the product and was
@@ -103,6 +106,11 @@ export function PulseHero({
               reports what they are and the date is the data's, not an
               editorial's. */}
           <LaneBadge lane={lane} />
+          {/* Which of the two wrote the sentences below. The figures are the
+              same either way: the model may not introduce one. */}
+          <span className="font-mono text-sm text-muted">
+            {authorship === "written" ? "analyst written" : "computed"}
+          </span>
           <span className="font-mono text-sm text-muted">
             {asOf ?? "date not published"}
           </span>

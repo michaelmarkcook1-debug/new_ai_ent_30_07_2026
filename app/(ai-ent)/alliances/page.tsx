@@ -3,6 +3,7 @@ import { getAlliancesData } from "./data";
 import { AlliancesView } from "./components/alliances-view";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { supplyMapInsight, pickNews } from "@/lib/analyst/insight";
+import { authorInsight } from "@/lib/analyst/author";
 import { analystNews } from "@/lib/analyst/news-source";
 
 // The Analyst Insight is a pure function of this page's data, so it only says
@@ -39,6 +40,9 @@ export default async function AlliancesPage() {
     null
   );
 
+  const written = await authorInsight(insight, "alliance channel");
+
+
   return (
     <>
       <PageHeader
@@ -46,7 +50,11 @@ export default async function AlliancesPage() {
         subtitle="Which firms deliver which AI vendors. An enterprise rarely stands a frontier model up alone, so the integrator carrying a vendor decides who turns up on the engagement, how fast, and in which jurisdictions."
         lanes={["aie"]}
       />
-      <AnalystInsight insight={insight} context="alliance channel" />
+      <AnalystInsight
+        insight={written.value}
+        authorship={written.authorship}
+        context="alliance channel"
+      />
       <AlliancesView
         links={data.links}
         ventures={data.ventures}

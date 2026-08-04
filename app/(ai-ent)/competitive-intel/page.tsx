@@ -6,6 +6,7 @@ import { CompetitiveHeatmap } from "./components/heatmap";
 import { AieRankings } from "./components/aie-rankings";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { competitiveInsight, pickNews } from "@/lib/analyst/insight";
+import { authorInsight } from "@/lib/analyst/author";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
 
@@ -40,6 +41,9 @@ export default async function CompetitiveIntelPage({
     matrix.capabilities.length
   );
 
+  const written = await authorInsight(insight, "competitive");
+
+
   return (
     <>
       <PageHeader
@@ -47,7 +51,11 @@ export default async function CompetitiveIntelPage({
         subtitle="How the model providers compare: evidence-graded capability maturity across one market category at a time, beside the AIE live rankings. Intensity grids, never quadrants."
         lanes={[matrix.lane, "live"]}
       />
-      <AnalystInsight insight={insight} context="competitive" />
+      <AnalystInsight
+        insight={written.value}
+        authorship={written.authorship}
+        context="competitive"
+      />
       <div className="grid grid-cols-1 gap-4 @4xl:grid-cols-3">
         <div className="@container @4xl:col-span-2">
           <ProviderCapabilityMatrix matrix={matrix} />

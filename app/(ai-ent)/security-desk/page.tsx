@@ -4,6 +4,7 @@ import { CyberRiskPanel } from "./components/cyber-risk-panel";
 import { LabsSection } from "./components/labs-section";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { governanceInsight, pickNews } from "@/lib/analyst/insight";
+import { authorInsight } from "@/lib/analyst/author";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
 
@@ -27,6 +28,9 @@ export default async function SecurityDeskPage() {
     "security"
   );
 
+  const written = await authorInsight(insight, "security");
+
+
   return (
     <>
       <PageHeader
@@ -34,7 +38,11 @@ export default async function SecurityDeskPage() {
         subtitle="Cyber risk posture across the AI platform vendors: live BoardRadar incident analysis where coverage exists, honest empty states where it does not, and the AI Enterprise security capability assessment for the private labs BoardRadar does not reach."
         lanes={["live", labs.lane]}
       />
-      <AnalystInsight insight={insight} context="security" />
+      <AnalystInsight
+        insight={written.value}
+        authorship={written.authorship}
+        context="security"
+      />
       <div className="space-y-6">
         <CyberRiskPanel />
         <LabsSection view={labs} />

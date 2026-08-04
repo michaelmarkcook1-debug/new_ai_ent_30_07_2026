@@ -8,6 +8,7 @@ import {
 import { TrustRankView } from "./components/trust-rank-view";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { governanceInsight, pickNews } from "@/lib/analyst/insight";
+import { authorInsight } from "@/lib/analyst/author";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
 
@@ -31,6 +32,9 @@ export default async function TrustRankPage() {
     "governance"
   );
 
+  const written = await authorInsight(insight, "governance");
+
+
   return (
     <>
       <PageHeader
@@ -38,7 +42,11 @@ export default async function TrustRankPage() {
         subtitle="The vendor-oriented view over AI legislation: a jurisdiction grid with a vendor lens, vendor-specific rulings, dated regulatory events, and the evidence-graded governance assessment for the selected vendor."
         lanes={["aie", postures.lane]}
       />
-      <AnalystInsight insight={insight} context="governance" />
+      <AnalystInsight
+        insight={written.value}
+        authorship={written.authorship}
+        context="governance"
+      />
       <TrustRankView
         vendors={loadLensVendors()}
         grid={loadGrid()}

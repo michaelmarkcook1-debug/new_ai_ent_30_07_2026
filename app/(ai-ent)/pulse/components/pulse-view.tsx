@@ -18,7 +18,7 @@ import {
   type PulseSignal,
 } from "./decision-lists";
 import { FinancialStrip, type FinancialIndicator } from "./financial-strip";
-import { pulseJudgement } from "@/lib/pulse/judgement";
+import type { PulseJudgement } from "@/lib/pulse/judgement";
 import type { MarketMetrics } from "@/lib/market-metrics";
 import type { PulseFixture } from "../types";
 import type { NarrativeGap } from "@/lib/narrative-gap";
@@ -56,6 +56,8 @@ export function PulseView({
   decisions,
   verdict,
   sinceLastLook,
+  judgement,
+  authorship = "computed",
 }: {
   fixture: PulseFixture;
   metrics: MarketMetrics;
@@ -78,6 +80,9 @@ export function PulseView({
   };
   /** Server-rendered, passed as a slot so it can sit under the hero. */
   sinceLastLook?: React.ReactNode;
+  /** Computed on the server so the analyst model can author it there. */
+  judgement: PulseJudgement;
+  authorship?: "written" | "computed";
 }) {
   // The spotlight's own dropdown left with it, but this is still live state:
   // the vendor comparison table sets it and the news feed below reads it, so
@@ -90,13 +95,6 @@ export function PulseView({
 
   const asOf = metrics.generatedAt ? metrics.generatedAt.slice(0, 10) : null;
 
-  const judgement = pulseJudgement({
-    gaining: metrics.gaining,
-    slipping: metrics.slipping,
-    risks: metrics.risks,
-    kpis: metrics.kpis,
-    shareMovementPublished: metrics.shareMovementPublished,
-  });
 
   return (
     <div className="space-y-8">
@@ -119,6 +117,7 @@ export function PulseView({
         evidenceNote={`Drawn from ${metrics.kpis.reduce((a, k) => Math.max(a, k.sampleSize), 0)} tracked vendors, ${benchmark.modelCount} priced and benchmarked models, and the open risk and movement classifications published for this period.`}
         lane={metrics.lane}
         asOf={asOf}
+        authorship={authorship}
       />
 
       {/* 2. What has moved since this reader was last here. Directly under

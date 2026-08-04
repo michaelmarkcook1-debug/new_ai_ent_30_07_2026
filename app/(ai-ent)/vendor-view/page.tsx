@@ -3,6 +3,7 @@ import { buildRankingRows, datasetDate, SCORE_COLUMNS } from "./data";
 import { RankingsTable } from "./components/rankings-table";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { vendorViewInsight, pickNews } from "@/lib/analyst/insight";
+import { authorInsight } from "@/lib/analyst/author";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
 
@@ -23,6 +24,9 @@ export default async function VendorViewPage() {
     pickNews(news.items, { categories: ["Market movement", "Product launch"] })
   );
 
+  const written = await authorInsight(insight, "vendor ranking");
+
+
   return (
     <>
       <PageHeader
@@ -30,7 +34,11 @@ export default async function VendorViewPage() {
         subtitle="The tracked enterprise AI vendor set as an evidence table, ranked within each market category and never across one. One named score per column, the derivation one click away, rows open the full vendor profile."
         lanes={["aie"]}
       />
-      <AnalystInsight insight={insight} context="vendor ranking" />
+      <AnalystInsight
+        insight={written.value}
+        authorship={written.authorship}
+        context="vendor ranking"
+      />
       <RankingsTable rows={rows} generatedOn={datasetDate()} columns={SCORE_COLUMNS} />
     </>
   );

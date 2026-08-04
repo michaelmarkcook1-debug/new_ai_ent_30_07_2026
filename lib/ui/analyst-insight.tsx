@@ -38,9 +38,17 @@ export function AnalystInsight({
   insight,
   /** What the page is about, shown as the label. */
   context,
+  /**
+   * Whether the prose was written by the analyst model or assembled by the
+   * deterministic builder. Shown, because a reader is entitled to know which
+   * of the two they are reading. The figures are identical either way: the
+   * model may not introduce one, and is discarded if it tries.
+   */
+  authorship = "computed",
 }: {
   insight: AnalystInsightData;
   context: string;
+  authorship?: "written" | "computed";
 }) {
   const { evidence } = insight;
 

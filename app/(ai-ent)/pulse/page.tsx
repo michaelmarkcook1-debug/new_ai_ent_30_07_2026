@@ -12,6 +12,8 @@ import {
 } from "@/lib/pulse/assemble";
 import type { VendorDecision } from "@/lib/pulse/brief";
 import { SinceLastLook } from "./components/since-last-look";
+import { pulseJudgement } from "@/lib/pulse/judgement";
+import { authorPulse, authorActions, authorSince } from "@/lib/analyst/author";
 import { readWatchState, readChangeLog, buildSinceView } from "@/lib/changes/watchlist";
 
 export const metadata = { title: "Your Pulse | AI Enterprise" };
@@ -77,6 +79,40 @@ export default async function PulsePage() {
     );
   }
 
+  // Today's Pulse, the three actions and the returning-reader panel are all
+  // written by the analyst model over figures computed above. Each falls back
+  // to its computed text when the model is unavailable or caught inventing a
+  // figure, so the page never depends on the call succeeding.
+  const computedJudgement = pulseJudgement({
+    gaining: metrics.gaining,
+    slipping: metrics.slipping,
+    risks: metrics.risks,
+    kpis: metrics.kpis,
+    shareMovementPublished: metrics.shareMovementPublished,
+  });
+  const asOfDay = metrics.generatedAt ? metrics.generatedAt.slice(0, 10) : null;
+
+  const [writtenPulse, writtenActions, writtenSince] = await Promise.all([
+    authorPulse(computedJudgement, {
+      movers: computedJudgement.movement,
+      asOf: asOfDay,
+    }),
+    authorActions(actions, computedJudgement.judgement),
+    authorSince({
+      lastSeen: since.lastSeen,
+      watchedCount: since.watchedCount,
+      changes: (since.watchedCount > 0 ? since.watched : since.everything)
+        .slice(0, 8)
+        .map((c) => `${c.label}: ${c.from} to ${c.to}`),
+    }),
+  ]);
+
+  const authoredActions = actions.map((a, i) => ({
+    ...a,
+    action: writtenActions.value[i]?.action ?? a.action,
+    detail: writtenActions.value[i]?.detail ?? a.detail,
+  }));
+
   return (
     <>
       <PageHeader
@@ -91,18 +127,21 @@ export default async function PulsePage() {
         brief={brief}
         picks={picks}
         signals={signals}
-        actions={actions}
+        actions={authoredActions}
         financial={financial}
         benchmark={{
           source: cost.benchmarkSource,
           modelCount: cost.models.length,
         }}
         decisions={decisions}
+        judgement={writtenPulse.value}
+        authorship={writtenPulse.authorship}
         // Rendered as a slot rather than a sibling so it can sit directly
         // under Today's Pulse: a returning reader wants the judgement first
         // and what has moved since their last visit immediately after it.
         sinceLastLook={
           <SinceLastLook
+            narrative={writtenSince?.value ?? null}
             view={since}
             vendorNames={Object.fromEntries(
               metrics.vendors.map((v) => [v.id, v.name])

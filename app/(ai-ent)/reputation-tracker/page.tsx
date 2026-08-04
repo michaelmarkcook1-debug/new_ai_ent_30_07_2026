@@ -7,6 +7,7 @@ import { LiveUnifiedSection } from "./components/live-unified";
 import { ThirdPartySignals } from "./components/third-party";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { reputationInsight, pickNews } from "@/lib/analyst/insight";
+import { authorInsight } from "@/lib/analyst/author";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
 
@@ -32,6 +33,9 @@ export default async function ReputationTrackerPage() {
     3
   );
 
+  const written = await authorInsight(insight, "reputation");
+
+
   return (
     <>
       <PageHeader
@@ -39,7 +43,11 @@ export default async function ReputationTrackerPage() {
         subtitle="How the AI vendor set is perceived by the people who use it, build on it and work in it: three AIE reputation pillars, the live BoardRadar unified read for the platform players, and clearly separated third-party signals."
         lanes={["aie", "live", thirdParty.lane]}
       />
-      <AnalystInsight insight={insight} context="reputation" />
+      <AnalystInsight
+        insight={written.value}
+        authorship={written.authorship}
+        context="reputation"
+      />
       <div className="space-y-4">
         <ReputationHistoryChart vendorNames={vendorNames} />
         <AiePillarsSection />

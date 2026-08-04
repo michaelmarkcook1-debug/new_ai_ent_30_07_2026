@@ -54,9 +54,16 @@ function ChangeRow({ c, vendorName }: { c: Change; vendorName: string }) {
 export function SinceLastLook({
   view,
   vendorNames,
+  narrative = null,
 }: {
   view: SinceView;
   vendorNames: Record<string, string>;
+  /**
+   * The analyst model's read of what changed since this reader was last here.
+   * Null when the model is unavailable or had nothing to work from, in which
+   * case the list below stands on its own exactly as it did before.
+   */
+  narrative?: { headline: string; body: string } | null;
 }) {
   const name = (id: string) => vendorNames[id] ?? id;
   const hasWatchlist = view.watchedCount > 0;
@@ -78,7 +85,24 @@ export function SinceLastLook({
               : ""
             : `since ${view.lastSeen}`}
         </span>
+        {narrative ? (
+          <span className="font-mono text-xs text-muted">analyst written</span>
+        ) : null}
       </div>
+
+      {/* The model's read of these changes, above the changes themselves. A
+          returning reader wants to know which movement deserves their
+          attention before they are handed the list of all of them. */}
+      {narrative ? (
+        <div className="mt-3">
+          <p className="measure text-base font-bold leading-snug">
+            {narrative.headline}
+          </p>
+          <p className="measure mt-1 text-sm leading-relaxed text-base-content/80">
+            {narrative.body}
+          </p>
+        </div>
+      ) : null}
 
       {rows.length === 0 ? (
         <p className="measure mt-3 text-sm text-muted">

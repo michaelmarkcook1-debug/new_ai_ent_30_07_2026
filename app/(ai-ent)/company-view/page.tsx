@@ -7,6 +7,7 @@ import { CompanyShell } from "./components/company-shell";
 import { ExemplarOnly } from "./components/exemplar-only";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { positionInsight, pickNews } from "@/lib/analyst/insight";
+import { authorInsight } from "@/lib/analyst/author";
 import { analystNews } from "@/lib/analyst/news-source";
 import { loadPulseMetrics } from "@/app/(ai-ent)/pulse/data";
 import { readChangeLog } from "@/lib/changes/watchlist";
@@ -50,10 +51,16 @@ export default async function CompanyOverviewPage({
     { movedSignals, watchedVendors: watch.vendorIds.length },
     pickNews(news.items, { minImpact: 70 })
   );
+  const written = await authorInsight(insight, "market position");
+
   return (
     <CompanyShell company={company}>
     <div className="space-y-4">
-      <AnalystInsight insight={insight} context="market position" />
+      <AnalystInsight
+        insight={written.value}
+        authorship={written.authorship}
+        context="market position"
+      />
 
       <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2 @6xl:grid-cols-4">
         {f.overview.kpis.map((k) => (

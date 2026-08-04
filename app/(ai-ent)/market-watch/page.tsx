@@ -14,6 +14,7 @@ import { DependencyByLayer } from "./components/dependency-by-layer";
 import { CategoryLeaders } from "./components/category-leaders";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { marketWatchInsight, pickNews } from "@/lib/analyst/insight";
+import { authorInsight } from "@/lib/analyst/author";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
 
@@ -43,6 +44,9 @@ export default async function MarketWatchPage() {
     pickNews(news.items, { categories: ["Market movement", "Strategy signal"] })
   );
 
+  const written = await authorInsight(insight, "market");
+
+
   return (
     <>
       <PageHeader
@@ -50,7 +54,11 @@ export default async function MarketWatchPage() {
         subtitle="The enterprise AI market read: today's regime and source-cited signals, live share by category, the live winning and losing read, dependency concentration and category leaders. All figures keep their native evidence labels; news lives on The Pulse and News."
         lanes={["aie-live", "aie"]}
       />
-      <AnalystInsight insight={insight} context="market" />
+      <AnalystInsight
+        insight={written.value}
+        authorship={written.authorship}
+        context="market"
+      />
       <div className="space-y-6">
         <MarketToday regime={regime} signals={signals} />
         <CategoryShareLive fallback={categories} lookups={lookups} />
