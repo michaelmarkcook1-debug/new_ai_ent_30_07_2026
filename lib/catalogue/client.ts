@@ -71,12 +71,29 @@ export interface IngestionRun {
   note: string | null;
 }
 
-async function get<T>(pathAndQuery: string): Promise<T[]> {
+/**
+ * One page from PostgREST, with the true row count alongside it.
+ *
+ * `count=exact` makes the server report the total in Content-Range as
+ * `<from>-<to>/<total>`. That total is the only trustworthy way to know an
+ * answer was cut short: PostgREST enforces its own row ceiling (1,000 on this
+ * project) regardless of the `limit` asked for, so comparing the returned
+ * length against our own limit silently misses it — which it did, returning
+ * 1,000 of 1,252 model observations while reporting nothing was truncated.
+ */
+async function getPage<T>(
+  pathAndQuery: string,
+  offset: number
+): Promise<{ rows: T[]; total: number }> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
   try {
-    const res = await fetch(`${base()}/rest/v1/${pathAndQuery}`, {
-      headers: { apikey: key(), authorization: `Bearer ${key()}` },
+    const res = await fetch(`${base()}/rest/v1/${pathAndQuery}&offset=${offset}`, {
+      headers: {
+        apikey: key(),
+        authorization: `Bearer ${key()}`,
+        prefer: "count=exact",
+      },
       signal: controller.signal,
       cache: "no-store",
     });
@@ -85,10 +102,21 @@ async function get<T>(pathAndQuery: string): Promise<T[]> {
     // in front of the database that should not be, so it is not parsed.
     const type = res.headers.get("content-type") ?? "";
     if (!type.includes("json")) throw new Error(`catalogue returned ${type || "no content-type"}`);
-    return (await res.json()) as T[];
+    const rows = (await res.json()) as T[];
+    const range = res.headers.get("content-range") ?? "";
+    const total = Number(range.split("/")[1]);
+    // A missing or "*" total means the server declined to count; falling back
+    // to the page length would understate it, so treat the page as the floor
+    // and let the caller's paging loop decide.
+    return { rows, total: Number.isFinite(total) ? total : rows.length + offset };
   } finally {
     clearTimeout(timer);
   }
+}
+
+async function get<T>(pathAndQuery: string): Promise<T[]> {
+  const { rows } = await getPage<T>(pathAndQuery, 0);
+  return rows;
 }
 
 /**
@@ -113,18 +141,33 @@ export function observations(
 }
 
 /**
- * The same query, plus whether the cap was hit.
+ * Every observation in a series, paged past the server's row ceiling.
  *
- * A truncated answer is still useful; a truncated answer presented as a
- * complete one is not. `truncated` is true when exactly `limit` rows came
- * back, which is the only signal PostgREST gives without a second count query.
+ * PostgREST caps a single response at 1,000 rows here whatever `limit` says,
+ * so one request cannot return the 1,252-row model series. This pages until it
+ * has them all, and reports `truncated` against the server's own count rather
+ * than against our limit — a truncated answer is still useful, a truncated
+ * answer presented as complete is not.
  */
 export async function observationsWithCap(
   series: Series,
   limit = OBSERVATION_LIMIT
-): Promise<{ rows: Observation[]; truncated: boolean }> {
-  const rows = await observations(series, limit);
-  return { rows, truncated: rows.length >= limit };
+): Promise<{ rows: Observation[]; total: number; truncated: boolean }> {
+  const q = `catalogue_observation?series=eq.${series}&order=observed_at.desc,subject_label.asc&limit=1000`;
+  const all: Observation[] = [];
+  let total = 0;
+
+  while (all.length < limit) {
+    const page = await getPage<Observation>(q, all.length);
+    total = page.total;
+    all.push(...page.rows);
+    // An empty page, or one that already covers the count, means we are done.
+    // The length check also guards against a server that ignores `offset`,
+    // which would otherwise loop forever re-fetching the first page.
+    if (page.rows.length === 0 || all.length >= total) break;
+  }
+
+  return { rows: all, total, truncated: all.length < total };
 }
 
 export function sources(): Promise<CatalogueSource[]> {

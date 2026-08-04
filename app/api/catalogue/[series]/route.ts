@@ -65,7 +65,7 @@ export async function GET(
   }
 
   try {
-    const [{ rows, truncated }, recentRuns] = await Promise.all([
+    const [{ rows, total, truncated }, recentRuns] = await Promise.all([
       observationsWithCap(series as Series),
       runs(5),
     ]);
@@ -84,6 +84,8 @@ export async function GET(
     const body = JSON.stringify({
       series,
       observations: rows.length,
+      // The server's own count, so a short answer is visibly short.
+      observationsInSeries: total,
       // One entry per subject-and-metric pair, not per subject: a model with a
       // price and a throughput reading is two tracked figures, and calling
       // that "one subject" would understate what is being followed.
@@ -97,7 +99,7 @@ export async function GET(
           ? "First observations recorded. Movement appears once a second reading exists, and nothing here is shown as a change until then."
           : `${withComparison} of ${movements.length} tracked figures have two or more observations and can be compared.`,
         truncated
-          ? "This answer hit the query cap, so it is a partial view of the series."
+          ? `Showing ${rows.length} of ${total} observations: this is a partial view of the series.`
           : null,
       ]
         .filter(Boolean)
