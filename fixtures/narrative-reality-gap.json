@@ -1,8 +1,8 @@
 {
- "generatedAt": "2026-08-02T07:21:57.864Z",
+ "generatedAt": "2026-08-04T02:14:36.632Z",
  "windowDays": 365,
  "vendorCount": 43,
- "measuredCount": 31,
+ "measuredCount": 30,
  "method": {
   "reality": "Evidence-weighted mean of AIE capability maturity scores, weighted E5 1.0, E4 0.9, E3 0.75, E2 0.55, E1 0.35, then percentile-ranked within the tracked AI vendor set.",
   "narrative": "Two sources, each percentile-ranked on its own scale and then averaged over whichever have a reading: AIE news items tagged to the vendor, and Hacker News stories whose URL is the vendor's own domain, the latter combined with the points and comments those stories drew at quarter weight and log-scaled. Matching on the domain rather than the name is deliberate: it can miss a vendor but never counts a different one.",
@@ -18,6 +18,209 @@
   "https://hn.algolia.com/api/v1/search"
  ],
  "vendors": [
+  {
+   "vendorId": "moonshot",
+   "name": "Moonshot AI",
+   "perCapability": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 50.43859649122807,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 62.05128205128205,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 59,
+     "evidenceGrade": "E1",
+     "status": "inferred"
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 74,
+     "evidenceGrade": "E2",
+     "status": "documented"
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 40.714285714285715,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 55.41463414634146,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 52.36363636363637,
+     "evidenceGrade": "E5",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 55.294117647058826,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 54,
+     "evidenceGrade": "E1",
+     "status": "inferred"
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 31.615384615384617,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    }
+   ],
+   "category": "Frontier model/API",
+   "marketPosition": "Specialist contender",
+   "reality": 52.4,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E1",
+   "realityWeight": 7.2,
+   "domain": "moonshot.ai",
+   "hn": {
+    "stories": 0,
+    "points": 0,
+    "comments": 0,
+    "sampled": 0
+   },
+   "aieNews": {
+    "items": 6,
+    "positive": 2,
+    "negative": 0
+   },
+   "realityScore": 2.4,
+   "narrativeSources": [
+    "aie-news"
+   ],
+   "narrativeScore": 75.7,
+   "gap": 73.3,
+   "direction": "narrative ahead of reality",
+   "portfolio": [
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 74,
+     "evidenceGrade": "E2",
+     "status": "documented",
+     "percentile": 83.3,
+     "divergence": 80.9,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 62.05128205128205,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 64.3,
+     "divergence": 61.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 52.36363636363637,
+     "evidenceGrade": "E5",
+     "status": "verified",
+     "percentile": 42.9,
+     "divergence": 40.5,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 55.41463414634146,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 35.7,
+     "divergence": 33.3,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 50.43859649122807,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 31,
+     "divergence": 28.6,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 55.294117647058826,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 19,
+     "divergence": 16.6,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 59,
+     "evidenceGrade": "E1",
+     "status": "inferred",
+     "percentile": 17.9,
+     "divergence": 15.5,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 54,
+     "evidenceGrade": "E1",
+     "status": "inferred",
+     "percentile": 14.3,
+     "divergence": 11.9,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 40.714285714285715,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 7.1,
+     "divergence": 4.7,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 31.615384615384617,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 0,
+     "divergence": -2.4,
+     "thinEvidence": false
+    }
+   ]
+  },
   {
    "vendorId": "sakana",
    "name": "Sakana AI",
@@ -175,8 +378,8 @@
      "maturity": 52.1,
      "evidenceGrade": "E3",
      "status": "verified",
-     "percentile": 35.7,
-     "divergence": 30.9,
+     "percentile": 33.3,
+     "divergence": 28.5,
      "thinEvidence": false
     },
     {
@@ -218,209 +421,6 @@
      "percentile": 4.8,
      "divergence": 0,
      "thinEvidence": true
-    }
-   ]
-  },
-  {
-   "vendorId": "moonshot",
-   "name": "Moonshot AI",
-   "perCapability": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 50.18867924528302,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 60.71875,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 59,
-     "evidenceGrade": "E1",
-     "status": "inferred"
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 74,
-     "evidenceGrade": "E2",
-     "status": "documented"
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 40,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 54.66197183098591,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 52,
-     "evidenceGrade": "E5",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 54.79545454545455,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 54,
-     "evidenceGrade": "E1",
-     "status": "inferred"
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 31.48,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    }
-   ],
-   "category": "Frontier model/API",
-   "marketPosition": "Specialist contender",
-   "reality": 51.9,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E1",
-   "realityWeight": 7.2,
-   "domain": "moonshot.ai",
-   "hn": {
-    "stories": 0,
-    "points": 0,
-    "comments": 0,
-    "sampled": 0
-   },
-   "aieNews": {
-    "items": 4,
-    "positive": 3,
-    "negative": 0
-   },
-   "realityScore": 2.4,
-   "narrativeSources": [
-    "aie-news"
-   ],
-   "narrativeScore": 57.8,
-   "gap": 55.4,
-   "direction": "narrative ahead of reality",
-   "portfolio": [
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 74,
-     "evidenceGrade": "E2",
-     "status": "documented",
-     "percentile": 83.3,
-     "divergence": 80.9,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 60.71875,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 61.9,
-     "divergence": 59.5,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 54.66197183098591,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 33.3,
-     "divergence": 30.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 52,
-     "evidenceGrade": "E5",
-     "status": "verified",
-     "percentile": 29.8,
-     "divergence": 27.4,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 50.18867924528302,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 23.8,
-     "divergence": 21.4,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 59,
-     "evidenceGrade": "E1",
-     "status": "inferred",
-     "percentile": 17.9,
-     "divergence": 15.5,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 54.79545454545455,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 16.7,
-     "divergence": 14.3,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 54,
-     "evidenceGrade": "E1",
-     "status": "inferred",
-     "percentile": 14.3,
-     "divergence": 11.9,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 40,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 7.1,
-     "divergence": 4.7,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 31.48,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 0,
-     "divergence": -2.4,
-     "thinEvidence": false
     }
    ]
   },
@@ -507,13 +507,13 @@
    "realityWeight": 6.6,
    "domain": "oracle.com",
    "hn": {
-    "stories": 51,
-    "points": 273,
+    "stories": 52,
+    "points": 276,
     "comments": 111,
-    "sampled": 51
+    "sampled": 52
    },
    "aieNews": {
-    "items": 1,
+    "items": 0,
     "positive": 0,
     "negative": 0
    },
@@ -624,209 +624,6 @@
      "percentile": 9.5,
      "divergence": 1.2,
      "thinEvidence": true
-    }
-   ]
-  },
-  {
-   "vendorId": "mistral",
-   "name": "Mistral",
-   "perCapability": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 48.42424242424242,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 58.22857142857143,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 73,
-     "evidenceGrade": "E2",
-     "status": "documented"
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 43.44444444444444,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 50.34615384615385,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 58.4,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 60.861111111111114,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 59.13953488372093,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 68,
-     "evidenceGrade": "E2",
-     "status": "documented"
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 50.53488372093023,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    }
-   ],
-   "category": "Frontier model/API",
-   "marketPosition": "Specialist contender",
-   "reality": 57,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 6.4,
-   "domain": "mistral.ai",
-   "hn": {
-    "stories": 50,
-    "points": 8788,
-    "comments": 2830,
-    "sampled": 50
-   },
-   "aieNews": {
-    "items": 2,
-    "positive": 1,
-    "negative": 0
-   },
-   "realityScore": 35.7,
-   "narrativeSources": [
-    "hn-domain"
-   ],
-   "narrativeScore": 88.1,
-   "gap": 52.4,
-   "direction": "narrative ahead of reality",
-   "portfolio": [
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 60.861111111111114,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 81,
-     "divergence": 45.3,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 43.44444444444444,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 0,
-     "divergence": -35.7,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 73,
-     "evidenceGrade": "E2",
-     "status": "documented",
-     "percentile": 66.7,
-     "divergence": 31,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 58.4,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 59.5,
-     "divergence": 23.8,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 68,
-     "evidenceGrade": "E2",
-     "status": "documented",
-     "percentile": 59.5,
-     "divergence": 23.8,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 48.42424242424242,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 14.3,
-     "divergence": -21.4,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 59.13953488372093,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 54.8,
-     "divergence": 19.1,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 58.22857142857143,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 50,
-     "divergence": 14.3,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 50.34615384615385,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 23.8,
-     "divergence": -11.9,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 50.53488372093023,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 28.6,
-     "divergence": -7.1,
-     "thinEvidence": false
     }
    ]
   },
@@ -1122,16 +919,17 @@
     "sampled": 57
    },
    "aieNews": {
-    "items": 2,
-    "positive": 2,
-    "negative": 0
+    "items": 5,
+    "positive": 4,
+    "negative": 1
    },
    "realityScore": 17.9,
    "narrativeSources": [
+    "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 69,
-   "gap": 51.1,
+   "narrativeScore": 70,
+   "gap": 52.1,
    "direction": "narrative ahead of reality",
    "portfolio": [
     {
@@ -1325,16 +1123,16 @@
     "sampled": 87
    },
    "aieNews": {
-    "items": 2,
-    "positive": 0,
+    "items": 1,
+    "positive": 1,
     "negative": 0
    },
-   "realityScore": 33.3,
+   "realityScore": 35.7,
    "narrativeSources": [
     "hn-domain"
    ],
    "narrativeScore": 83.3,
-   "gap": 50,
+   "gap": 47.6,
    "direction": "narrative ahead of reality",
    "portfolio": [
     {
@@ -1344,7 +1142,7 @@
      "evidenceGrade": "E4",
      "status": "verified",
      "percentile": 92.9,
-     "divergence": 59.6,
+     "divergence": 57.2,
      "thinEvidence": false
     },
     {
@@ -1354,7 +1152,7 @@
      "evidenceGrade": "E5",
      "status": "verified",
      "percentile": 69,
-     "divergence": 35.7,
+     "divergence": 33.3,
      "thinEvidence": false
     },
     {
@@ -1364,7 +1162,7 @@
      "evidenceGrade": "E2",
      "status": "verified",
      "percentile": 4.8,
-     "divergence": -28.5,
+     "divergence": -30.9,
      "thinEvidence": true
     },
     {
@@ -1374,7 +1172,7 @@
      "evidenceGrade": "E1",
      "status": "verified",
      "percentile": 4.8,
-     "divergence": -28.5,
+     "divergence": -30.9,
      "thinEvidence": true
     },
     {
@@ -1384,27 +1182,7 @@
      "evidenceGrade": "E3",
      "status": "verified",
      "percentile": 9.5,
-     "divergence": -23.8,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 58.791666666666664,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 47.6,
-     "divergence": 14.3,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 53,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 46.4,
-     "divergence": 13.1,
+     "divergence": -26.2,
      "thinEvidence": false
     },
     {
@@ -1414,7 +1192,27 @@
      "evidenceGrade": "E3",
      "status": "verified",
      "percentile": 21.4,
-     "divergence": -11.9,
+     "divergence": -14.3,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 58.791666666666664,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 47.6,
+     "divergence": 11.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 53,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 46.4,
+     "divergence": 10.7,
      "thinEvidence": false
     },
     {
@@ -1423,8 +1221,8 @@
      "maturity": 50.4,
      "evidenceGrade": "E2",
      "status": "verified",
-     "percentile": 31,
-     "divergence": -2.3,
+     "percentile": 28.6,
+     "divergence": -7.1,
      "thinEvidence": true
     },
     {
@@ -1434,210 +1232,7 @@
      "evidenceGrade": "E2",
      "status": "verified",
      "percentile": 31,
-     "divergence": -2.3,
-     "thinEvidence": true
-    }
-   ]
-  },
-  {
-   "vendorId": "nscale",
-   "name": "Nscale",
-   "perCapability": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 56,
-     "evidenceGrade": "E1",
-     "status": "inferred"
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 50.714285714285715,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 56,
-     "evidenceGrade": "E1",
-     "status": "inferred"
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 46,
-     "evidenceGrade": "E1",
-     "status": "inferred"
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 51.5,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 53.9,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 52,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 58.5,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 51,
-     "evidenceGrade": "E1",
-     "status": "inferred"
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 50.333333333333336,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    }
-   ],
-   "category": "AI infrastructure",
-   "marketPosition": "Emerging specialist",
-   "reality": 52.9,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E1",
-   "realityWeight": 4.9,
-   "domain": "nscale.com",
-   "hn": {
-    "stories": 9,
-    "points": 12,
-    "comments": 1,
-    "sampled": 9
-   },
-   "aieNews": {
-    "items": 4,
-    "positive": 3,
-    "negative": 0
-   },
-   "realityScore": 8.3,
-   "narrativeSources": [
-    "aie-news"
-   ],
-   "narrativeScore": 57.8,
-   "gap": 49.5,
-   "direction": "narrative ahead of reality",
-   "portfolio": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 56,
-     "evidenceGrade": "E1",
-     "status": "inferred",
-     "percentile": 71.4,
-     "divergence": 63.1,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 58.5,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 40.5,
-     "divergence": 32.2,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 52,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 29.8,
-     "divergence": 21.5,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 51.5,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 28.6,
-     "divergence": 20.3,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 53.9,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 26.2,
-     "divergence": 17.9,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 50.333333333333336,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 26.2,
-     "divergence": 17.9,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 50.714285714285715,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 19,
-     "divergence": 10.7,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 46,
-     "evidenceGrade": "E1",
-     "status": "inferred",
-     "percentile": 16.7,
-     "divergence": 8.4,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 56,
-     "evidenceGrade": "E1",
-     "status": "inferred",
-     "percentile": 10.7,
-     "divergence": 2.4,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 51,
-     "evidenceGrade": "E1",
-     "status": "inferred",
-     "percentile": 7.1,
-     "divergence": -1.2,
+     "divergence": -4.7,
      "thinEvidence": true
     }
    ]
@@ -1725,23 +1320,23 @@
    "realityWeight": 8.4,
    "domain": "anthropic.com",
    "hn": {
-    "stories": 447,
-    "points": 56637,
-    "comments": 38208,
+    "stories": 446,
+    "points": 56298,
+    "comments": 38095,
     "sampled": 100
    },
    "aieNews": {
-    "items": 27,
-    "positive": 8,
-    "negative": 6
+    "items": 20,
+    "positive": 4,
+    "negative": 5
    },
    "realityScore": 57.1,
    "narrativeSources": [
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 96.8,
-   "gap": 39.7,
+   "narrativeScore": 94.8,
+   "gap": 37.7,
    "direction": "narrative ahead of reality",
    "portfolio": [
     {
@@ -1760,8 +1355,8 @@
      "maturity": 57.592592592592595,
      "evidenceGrade": "E4",
      "status": "verified",
-     "percentile": 31,
-     "divergence": -26.1,
+     "percentile": 33.3,
+     "divergence": -23.8,
      "thinEvidence": false
     },
     {
@@ -1842,6 +1437,210 @@
      "status": "verified",
      "percentile": 54.8,
      "divergence": -2.3,
+     "thinEvidence": false
+    }
+   ]
+  },
+  {
+   "vendorId": "mistral",
+   "name": "Mistral",
+   "perCapability": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 48.138888888888886,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 57.89473684210526,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 73,
+     "evidenceGrade": "E2",
+     "status": "documented"
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 43.44444444444444,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 49.607142857142854,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 57.244897959183675,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 60.58974358974359,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 59.23913043478261,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 68,
+     "evidenceGrade": "E2",
+     "status": "documented"
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 50.40909090909091,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    }
+   ],
+   "category": "Frontier model/API",
+   "marketPosition": "Specialist contender",
+   "reality": 56.7,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 6.4,
+   "domain": "mistral.ai",
+   "hn": {
+    "stories": 50,
+    "points": 8788,
+    "comments": 2830,
+    "sampled": 50
+   },
+   "aieNews": {
+    "items": 3,
+    "positive": 1,
+    "negative": 1
+   },
+   "realityScore": 33.3,
+   "narrativeSources": [
+    "aie-news",
+    "hn-domain"
+   ],
+   "narrativeScore": 69.8,
+   "gap": 36.5,
+   "direction": "narrative ahead of reality",
+   "portfolio": [
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 60.58974358974359,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 78.6,
+     "divergence": 45.3,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 73,
+     "evidenceGrade": "E2",
+     "status": "documented",
+     "percentile": 66.7,
+     "divergence": 33.4,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 43.44444444444444,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 0,
+     "divergence": -33.3,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 68,
+     "evidenceGrade": "E2",
+     "status": "documented",
+     "percentile": 59.5,
+     "divergence": 26.2,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 59.23913043478261,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 54.8,
+     "divergence": 21.5,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 48.138888888888886,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 11.9,
+     "divergence": -21.4,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 57.89473684210526,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 50,
+     "divergence": 16.7,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 57.244897959183675,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 50,
+     "divergence": 16.7,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 49.607142857142854,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 23.8,
+     "divergence": -9.5,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 50.40909090909091,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 28.6,
+     "divergence": -4.7,
      "thinEvidence": false
     }
    ]
@@ -2050,6 +1849,209 @@
    ]
   },
   {
+   "vendorId": "lambda",
+   "name": "Lambda",
+   "perCapability": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 50.1578947368421,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 58.46808510638298,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 66,
+     "evidenceGrade": "E2",
+     "status": "documented"
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 44,
+     "evidenceGrade": "E1",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 52.869565217391305,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 54.083333333333336,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 55.05555555555556,
+     "evidenceGrade": "E5",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 57.30508474576271,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 61,
+     "evidenceGrade": "E1",
+     "status": "inferred"
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 51.77777777777778,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    }
+   ],
+   "category": "AI infrastructure",
+   "marketPosition": "Emerging specialist",
+   "reality": 54.9,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E1",
+   "realityWeight": 7,
+   "domain": "lambdalabs.com",
+   "hn": {
+    "stories": 3,
+    "points": 7,
+    "comments": 0,
+    "sampled": 3
+   },
+   "aieNews": {
+    "items": 3,
+    "positive": 0,
+    "negative": 1
+   },
+   "realityScore": 21.4,
+   "narrativeSources": [
+    "aie-news"
+   ],
+   "narrativeScore": 51.4,
+   "gap": 30,
+   "direction": "narrative ahead of reality",
+   "portfolio": [
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 55.05555555555556,
+     "evidenceGrade": "E5",
+     "status": "verified",
+     "percentile": 59.5,
+     "divergence": 38.1,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 58.46808510638298,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 54.8,
+     "divergence": 33.4,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 66,
+     "evidenceGrade": "E2",
+     "status": "documented",
+     "percentile": 45.2,
+     "divergence": 23.8,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 44,
+     "evidenceGrade": "E1",
+     "status": "verified",
+     "percentile": 2.4,
+     "divergence": -19,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 61,
+     "evidenceGrade": "E1",
+     "status": "inferred",
+     "percentile": 39.3,
+     "divergence": 17.9,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 52.869565217391305,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 33.3,
+     "divergence": 11.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 51.77777777777778,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 33.3,
+     "divergence": 11.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 54.083333333333336,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 31,
+     "divergence": 9.6,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 57.30508474576271,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 28.6,
+     "divergence": 7.2,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 50.1578947368421,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 21.4,
+     "divergence": 0,
+     "thinEvidence": false
+    }
+   ]
+  },
+  {
    "vendorId": "xai",
    "name": "xAI",
    "perCapability": [
@@ -2138,17 +2140,17 @@
     "sampled": 53
    },
    "aieNews": {
-    "items": 5,
-    "positive": 3,
-    "negative": 2
+    "items": 4,
+    "positive": 2,
+    "negative": 1
    },
    "realityScore": 42.9,
    "narrativeSources": [
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 78,
-   "gap": 35.1,
+   "narrativeScore": 70.5,
+   "gap": 27.6,
    "direction": "narrative ahead of reality",
    "portfolio": [
     {
@@ -2338,7 +2340,7 @@
    "hn": {
     "stories": 16,
     "points": 915,
-    "comments": 451,
+    "comments": 452,
     "sampled": 16
    },
    "aieNews": {
@@ -2410,8 +2412,8 @@
      "maturity": 48.333333333333336,
      "evidenceGrade": "E2",
      "status": "verified",
-     "percentile": 11.9,
-     "divergence": -19.1,
+     "percentile": 14.3,
+     "divergence": -16.7,
      "thinEvidence": true
     },
     {
@@ -2450,8 +2452,212 @@
      "maturity": 52.23076923076923,
      "evidenceGrade": "E2",
      "status": "verified",
-     "percentile": 40.5,
-     "divergence": 9.5,
+     "percentile": 38.1,
+     "divergence": 7.1,
+     "thinEvidence": true
+    }
+   ]
+  },
+  {
+   "vendorId": "salesforce",
+   "name": "Salesforce",
+   "perCapability": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 50.2,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 44.25,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 77,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 52.5,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 49.266666666666666,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 50.705882352941174,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 50.73684210526316,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 60,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 72,
+     "evidenceGrade": "E2",
+     "status": "documented"
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 50.75,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    }
+   ],
+   "category": "CRM/customer AI",
+   "marketPosition": "Major challenger",
+   "reality": 56.3,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 6.5,
+   "domain": "salesforce.com",
+   "hn": {
+    "stories": 14,
+    "points": 363,
+    "comments": 244,
+    "sampled": 14
+   },
+   "aieNews": {
+    "items": 3,
+    "positive": 2,
+    "negative": 0
+   },
+   "realityScore": 28.6,
+   "narrativeSources": [
+    "aie-news",
+    "hn-domain"
+   ],
+   "narrativeScore": 49.5,
+   "gap": 20.9,
+   "direction": "narrative ahead of reality",
+   "portfolio": [
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 77,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 73.8,
+     "divergence": 45.2,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 72,
+     "evidenceGrade": "E2",
+     "status": "documented",
+     "percentile": 64.3,
+     "divergence": 35.7,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 60,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 60.7,
+     "divergence": 32.1,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 50.705882352941174,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 9.5,
+     "divergence": -19.1,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 44.25,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 11.9,
+     "divergence": -16.7,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 52.5,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 42.9,
+     "divergence": 14.3,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 49.266666666666666,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 16.7,
+     "divergence": -11.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 50.73684210526316,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 21.4,
+     "divergence": -7.2,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 50.2,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 23.8,
+     "divergence": -4.8,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 50.75,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 31,
+     "divergence": 2.4,
      "thinEvidence": true
     }
    ]
@@ -2638,6 +2844,16 @@
      "thinEvidence": true
     },
     {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 54.78260869565217,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 33.3,
+     "divergence": -4.8,
+     "thinEvidence": false
+    },
+    {
      "capabilityId": "cost_controls",
      "capability": "Cost controls",
      "maturity": 53.46153846153846,
@@ -2646,220 +2862,6 @@
      "percentile": 35.7,
      "divergence": -2.4,
      "thinEvidence": false
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 54.78260869565217,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 35.7,
-     "divergence": -2.4,
-     "thinEvidence": false
-    }
-   ]
-  },
-  {
-   "vendorId": "salesforce",
-   "name": "Salesforce",
-   "perCapability": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 50.2,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 44.25,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 77,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 52.5,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 49.266666666666666,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 50.705882352941174,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 50.73684210526316,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 60,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 72,
-     "evidenceGrade": "E2",
-     "status": "documented"
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 50.75,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    }
-   ],
-   "category": "CRM/customer AI",
-   "marketPosition": "Major challenger",
-   "reality": 56.3,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 6.5,
-   "domain": "salesforce.com",
-   "hn": {
-    "stories": 14,
-    "points": 363,
-    "comments": 244,
-    "sampled": 14
-   },
-   "aieNews": {
-    "items": 3,
-    "positive": 2,
-    "negative": 0
-   },
-   "realityScore": 28.6,
-   "narrativeSources": [
-    "aie-news",
-    "hn-domain"
-   ],
-   "narrativeScore": 47.3,
-   "gap": 18.7,
-   "direction": "narrative ahead of reality",
-   "portfolio": [
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 77,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 73.8,
-     "divergence": 45.2,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 72,
-     "evidenceGrade": "E2",
-     "status": "documented",
-     "percentile": 64.3,
-     "divergence": 35.7,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 60,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 60.7,
-     "divergence": 32.1,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 50.705882352941174,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 9.5,
-     "divergence": -19.1,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 44.25,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 11.9,
-     "divergence": -16.7,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 52.5,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 42.9,
-     "divergence": 14.3,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 49.266666666666666,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 16.7,
-     "divergence": -11.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 50.73684210526316,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 21.4,
-     "divergence": -7.2,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 50.2,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 26.2,
-     "divergence": -2.4,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 50.75,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 31,
-     "divergence": 2.4,
-     "thinEvidence": true
     }
    ]
   },
@@ -2952,17 +2954,17 @@
     "sampled": 100
    },
    "aieNews": {
-    "items": 6,
-    "positive": 5,
-    "negative": 0
+    "items": 10,
+    "positive": 6,
+    "negative": 1
    },
    "realityScore": 71.4,
    "narrativeSources": [
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 88.7,
-   "gap": 17.3,
+   "narrativeScore": 89.3,
+   "gap": 17.9,
    "direction": "narrative ahead of reality",
    "portfolio": [
     {
@@ -2991,8 +2993,8 @@
      "maturity": 52.25,
      "evidenceGrade": "E4",
      "status": "verified",
-     "percentile": 42.9,
-     "divergence": -28.5,
+     "percentile": 40.5,
+     "divergence": -30.9,
      "thinEvidence": false
     },
     {
@@ -3063,6 +3065,209 @@
      "status": "verified",
      "percentile": 73.8,
      "divergence": 2.4,
+     "thinEvidence": false
+    }
+   ]
+  },
+  {
+   "vendorId": "google",
+   "name": "Google",
+   "perCapability": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 51.65934065934066,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 54.705128205128204,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 82,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 83,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 53.96808510638298,
+     "evidenceGrade": "E5",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 60.802547770700635,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 53.9375,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 57.490566037735846,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 82,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 53.23076923076923,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    }
+   ],
+   "category": "Cloud AI platform",
+   "marketPosition": "Major challenger",
+   "reality": 62.8,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 8,
+   "domain": "deepmind.com",
+   "hn": {
+    "stories": 3,
+    "points": 8,
+    "comments": 2,
+    "sampled": 3
+   },
+   "aieNews": {
+    "items": 22,
+    "positive": 9,
+    "negative": 6
+   },
+   "realityScore": 82.1,
+   "narrativeSources": [
+    "aie-news"
+   ],
+   "narrativeScore": 97.1,
+   "gap": 15,
+   "direction": "narrative ahead of reality",
+   "portfolio": [
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 57.490566037735846,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 31,
+     "divergence": -51.1,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 53.96808510638298,
+     "evidenceGrade": "E5",
+     "status": "verified",
+     "percentile": 38.1,
+     "divergence": -44,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 51.65934065934066,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 42.9,
+     "divergence": -39.2,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 54.705128205128204,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 42.9,
+     "divergence": -39.2,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 53.23076923076923,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 47.6,
+     "divergence": -34.5,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 53.9375,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 54.8,
+     "divergence": -27.3,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 83,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 100,
+     "divergence": 17.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 60.802547770700635,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 71.4,
+     "divergence": -10.7,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 82,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 88.1,
+     "divergence": 6,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 82,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 85.7,
+     "divergence": 3.6,
      "thinEvidence": false
     }
    ]
@@ -3156,17 +3361,16 @@
     "sampled": 30
    },
    "aieNews": {
-    "items": 4,
-    "positive": 4,
+    "items": 2,
+    "positive": 2,
     "negative": 0
    },
    "realityScore": 45.2,
    "narrativeSources": [
-    "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 56.3,
-   "gap": 11.1,
+   "narrativeScore": 54.8,
+   "gap": 9.6,
    "direction": "narrative and reality aligned",
    "portfolio": [
     {
@@ -3255,8 +3459,8 @@
      "maturity": 57.9,
      "evidenceGrade": "E4",
      "status": "verified",
-     "percentile": 54.8,
-     "divergence": 9.6,
+     "percentile": 57.1,
+     "divergence": 11.9,
      "thinEvidence": false
     },
     {
@@ -3354,22 +3558,23 @@
    "realityWeight": 6.3,
    "domain": "qwen.ai",
    "hn": {
-    "stories": 40,
-    "points": 9429,
-    "comments": 4139,
-    "sampled": 40
+    "stories": 41,
+    "points": 10485,
+    "comments": 4706,
+    "sampled": 41
    },
    "aieNews": {
-    "items": 1,
-    "positive": 1,
+    "items": 7,
+    "positive": 4,
     "negative": 0
    },
    "realityScore": 75,
    "narrativeSources": [
+    "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 85.7,
-   "gap": 10.7,
+   "narrativeScore": 82.9,
+   "gap": 7.9,
    "direction": "narrative and reality aligned",
    "portfolio": [
     {
@@ -3418,8 +3623,8 @@
      "maturity": 57.714285714285715,
      "evidenceGrade": "E3",
      "status": "verified",
-     "percentile": 52.4,
-     "divergence": -22.6,
+     "percentile": 54.8,
+     "divergence": -20.2,
      "thinEvidence": false
     },
     {
@@ -3471,209 +3676,6 @@
      "percentile": 81,
      "divergence": 6,
      "thinEvidence": true
-    }
-   ]
-  },
-  {
-   "vendorId": "google",
-   "name": "Google",
-   "perCapability": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 51.65934065934066,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 54.705128205128204,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 82,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 83,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 53.96808510638298,
-     "evidenceGrade": "E5",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 60.802547770700635,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 53.9375,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 57.490566037735846,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 82,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 53.23076923076923,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    }
-   ],
-   "category": "Cloud AI platform",
-   "marketPosition": "Major challenger",
-   "reality": 62.8,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 8,
-   "domain": "deepmind.com",
-   "hn": {
-    "stories": 3,
-    "points": 8,
-    "comments": 2,
-    "sampled": 3
-   },
-   "aieNews": {
-    "items": 21,
-    "positive": 10,
-    "negative": 4
-   },
-   "realityScore": 82.1,
-   "narrativeSources": [
-    "aie-news"
-   ],
-   "narrativeScore": 92.2,
-   "gap": 10.1,
-   "direction": "narrative and reality aligned",
-   "portfolio": [
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 57.490566037735846,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 28.6,
-     "divergence": -53.5,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 53.96808510638298,
-     "evidenceGrade": "E5",
-     "status": "verified",
-     "percentile": 38.1,
-     "divergence": -44,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 51.65934065934066,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 42.9,
-     "divergence": -39.2,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 54.705128205128204,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 42.9,
-     "divergence": -39.2,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 53.23076923076923,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 47.6,
-     "divergence": -34.5,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 53.9375,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 54.8,
-     "divergence": -27.3,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 83,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 100,
-     "divergence": 17.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 60.802547770700635,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 71.4,
-     "divergence": -10.7,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 82,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 88.1,
-     "divergence": 6,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 82,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 85.7,
-     "divergence": 3.6,
-     "thinEvidence": false
     }
    ]
   },
@@ -3775,8 +3777,8 @@
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 64.6,
-   "gap": 5.1,
+   "narrativeScore": 66.9,
+   "gap": 7.4,
    "direction": "narrative and reality aligned",
    "portfolio": [
     {
@@ -3882,6 +3884,210 @@
    ]
   },
   {
+   "vendorId": "openai",
+   "name": "OpenAI",
+   "perCapability": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 88,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 66.56043956043956,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 88,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 67.33333333333333,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 58.93577981651376,
+     "evidenceGrade": "E5",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 65.78260869565217,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 60.92063492063492,
+     "evidenceGrade": "E5",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 57.08955223880597,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 83,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 60.234939759036145,
+     "evidenceGrade": "E5",
+     "status": "verified"
+    }
+   ],
+   "category": "Frontier model/API",
+   "marketPosition": "Leader",
+   "reality": 69.2,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E3",
+   "realityWeight": 8.7,
+   "domain": "openai.com",
+   "hn": {
+    "stories": 969,
+    "points": 49666,
+    "comments": 34160,
+    "sampled": 100
+   },
+   "aieNews": {
+    "items": 33,
+    "positive": 9,
+    "negative": 10
+   },
+   "realityScore": 95.2,
+   "narrativeSources": [
+    "aie-news",
+    "hn-domain"
+   ],
+   "narrativeScore": 100,
+   "gap": 4.8,
+   "direction": "narrative and reality aligned",
+   "portfolio": [
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 57.08955223880597,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 26.2,
+     "divergence": -69,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 67.33333333333333,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 73.8,
+     "divergence": -21.4,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 58.93577981651376,
+     "evidenceGrade": "E5",
+     "status": "verified",
+     "percentile": 76.2,
+     "divergence": -19,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 66.56043956043956,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 81,
+     "divergence": -14.2,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 60.92063492063492,
+     "evidenceGrade": "E5",
+     "status": "verified",
+     "percentile": 83.3,
+     "divergence": -11.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 60.234939759036145,
+     "evidenceGrade": "E5",
+     "status": "verified",
+     "percentile": 83.3,
+     "divergence": -11.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 65.78260869565217,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 85.7,
+     "divergence": -9.5,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 88,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 100,
+     "divergence": 4.8,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 83,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 92.9,
+     "divergence": -2.3,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 88,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 95.2,
+     "divergence": 0,
+     "thinEvidence": false
+    }
+   ]
+  },
+  {
    "vendorId": "microsoft",
    "name": "Microsoft",
    "perCapability": [
@@ -3964,23 +4170,23 @@
    "realityWeight": 7.2,
    "domain": "microsoft.com",
    "hn": {
-    "stories": 1820,
+    "stories": 1473,
     "points": 12087,
     "comments": 5565,
     "sampled": 100
    },
    "aieNews": {
-    "items": 21,
-    "positive": 11,
-    "negative": 1
+    "items": 13,
+    "positive": 4,
+    "negative": 2
    },
    "realityScore": 90.5,
    "narrativeSources": [
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 94.9,
-   "gap": 4.4,
+   "narrativeScore": 94.5,
+   "gap": 4,
    "direction": "narrative and reality aligned",
    "portfolio": [
     {
@@ -4176,15 +4382,15 @@
    "aieNews": {
     "items": 5,
     "positive": 2,
-    "negative": 0
+    "negative": 1
    },
    "realityScore": 54.8,
    "narrativeSources": [
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 59,
-   "gap": 4.2,
+   "narrativeScore": 55.8,
+   "gap": 1,
    "direction": "narrative and reality aligned",
    "portfolio": [
     {
@@ -4193,8 +4399,8 @@
      "maturity": 55.09166666666667,
      "evidenceGrade": "E4",
      "status": "verified",
-     "percentile": 19,
-     "divergence": -35.8,
+     "percentile": 16.7,
+     "divergence": -38.1,
      "thinEvidence": false
     },
     {
@@ -4203,8 +4409,8 @@
      "maturity": 60.76,
      "evidenceGrade": "E4",
      "status": "verified",
-     "percentile": 78.6,
-     "divergence": 23.8,
+     "percentile": 81,
+     "divergence": 26.2,
      "thinEvidence": false
     },
     {
@@ -4286,210 +4492,6 @@
      "percentile": 51.2,
      "divergence": -3.6,
      "thinEvidence": true
-    }
-   ]
-  },
-  {
-   "vendorId": "openai",
-   "name": "OpenAI",
-   "perCapability": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 88,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 66.56043956043956,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 88,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 67.33333333333333,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 58.93577981651376,
-     "evidenceGrade": "E5",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 65.78260869565217,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 60.92063492063492,
-     "evidenceGrade": "E5",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 57.08955223880597,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 83,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 60.234939759036145,
-     "evidenceGrade": "E5",
-     "status": "verified"
-    }
-   ],
-   "category": "Frontier model/API",
-   "marketPosition": "Leader",
-   "reality": 69.2,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E3",
-   "realityWeight": 8.7,
-   "domain": "openai.com",
-   "hn": {
-    "stories": 1010,
-    "points": 49260,
-    "comments": 33737,
-    "sampled": 100
-   },
-   "aieNews": {
-    "items": 27,
-    "positive": 3,
-    "negative": 9
-   },
-   "realityScore": 95.2,
-   "narrativeSources": [
-    "aie-news",
-    "hn-domain"
-   ],
-   "narrativeScore": 99.2,
-   "gap": 4,
-   "direction": "narrative and reality aligned",
-   "portfolio": [
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 57.08955223880597,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 26.2,
-     "divergence": -69,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 67.33333333333333,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 73.8,
-     "divergence": -21.4,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 58.93577981651376,
-     "evidenceGrade": "E5",
-     "status": "verified",
-     "percentile": 76.2,
-     "divergence": -19,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 66.56043956043956,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 81,
-     "divergence": -14.2,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 60.92063492063492,
-     "evidenceGrade": "E5",
-     "status": "verified",
-     "percentile": 83.3,
-     "divergence": -11.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 60.234939759036145,
-     "evidenceGrade": "E5",
-     "status": "verified",
-     "percentile": 83.3,
-     "divergence": -11.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 65.78260869565217,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 85.7,
-     "divergence": -9.5,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 88,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 100,
-     "divergence": 4.8,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 83,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 92.9,
-     "divergence": -2.3,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 88,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 95.2,
-     "divergence": 0,
-     "thinEvidence": false
     }
    ]
   },
@@ -4582,8 +4584,8 @@
     "sampled": 17
    },
    "aieNews": {
-    "items": 0,
-    "positive": 0,
+    "items": 2,
+    "positive": 2,
     "negative": 0
    },
    "realityScore": 52.4,
@@ -4697,205 +4699,206 @@
    ]
   },
   {
-   "vendorId": "coreweave",
-   "name": "CoreWeave",
+   "vendorId": "deepseek",
+   "name": "DeepSeek",
    "perCapability": [
     {
      "capabilityId": "agents",
      "capability": "Agents",
-     "maturity": 68,
-     "evidenceGrade": "E2",
-     "status": "documented"
+     "maturity": 80,
+     "evidenceGrade": "E3",
+     "status": "tested"
     },
     {
      "capabilityId": "cost_controls",
      "capability": "Cost controls",
-     "maturity": 55.714285714285715,
-     "evidenceGrade": "E2",
+     "maturity": 48.75,
+     "evidenceGrade": "E3",
      "status": "verified"
     },
     {
      "capabilityId": "deployment_options",
      "capability": "Deployment options",
-     "maturity": 68,
-     "evidenceGrade": "E2",
-     "status": "documented"
+     "maturity": 80,
+     "evidenceGrade": "E3",
+     "status": "tested"
     },
     {
      "capabilityId": "enterprise_assistant",
      "capability": "Enterprise assistant",
-     "maturity": 82,
-     "evidenceGrade": "E4",
+     "maturity": 55,
+     "evidenceGrade": "E2",
      "status": "verified"
     },
     {
      "capabilityId": "governance",
      "capability": "Governance",
-     "maturity": 49.25,
-     "evidenceGrade": "E2",
+     "maturity": 54.5,
+     "evidenceGrade": "E3",
      "status": "verified"
     },
     {
      "capabilityId": "integrations",
      "capability": "Integrations",
-     "maturity": 60.166666666666664,
-     "evidenceGrade": "E4",
+     "maturity": 62.35294117647059,
+     "evidenceGrade": "E3",
      "status": "verified"
     },
     {
      "capabilityId": "models",
      "capability": "Models",
-     "maturity": 48.333333333333336,
-     "evidenceGrade": "E3",
+     "maturity": 68.34285714285714,
+     "evidenceGrade": "E4",
      "status": "verified"
     },
     {
      "capabilityId": "portability",
      "capability": "Portability",
-     "maturity": 69.71428571428571,
+     "maturity": 61.333333333333336,
      "evidenceGrade": "E3",
      "status": "verified"
     },
     {
      "capabilityId": "rag",
      "capability": "RAG / enterprise knowledge",
-     "maturity": 63,
-     "evidenceGrade": "E2",
-     "status": "documented"
+     "maturity": 75,
+     "evidenceGrade": "E3",
+     "status": "tested"
     },
     {
      "capabilityId": "security",
      "capability": "Security",
-     "maturity": 58.36363636363637,
+     "maturity": 42.27272727272727,
      "evidenceGrade": "E4",
      "status": "verified"
     }
    ],
-   "category": "AI infrastructure",
+   "category": "Frontier model/API",
    "marketPosition": "Category leader",
-   "reality": 62.8,
+   "reality": 62.7,
    "realityRows": 10,
    "realityWeakestEvidence": "E2",
-   "realityWeight": 7,
-   "domain": "coreweave.com",
+   "realityWeight": 7.6,
+   "domain": "deepseek.com",
    "hn": {
-    "stories": 5,
-    "points": 11,
-    "comments": 0,
-    "sampled": 5
+    "stories": 20,
+    "points": 4963,
+    "comments": 3097,
+    "sampled": 20
    },
    "aieNews": {
-    "items": 5,
-    "positive": 4,
+    "items": 6,
+    "positive": 3,
     "negative": 0
    },
-   "realityScore": 82.1,
+   "realityScore": 78.6,
    "narrativeSources": [
-    "aie-news"
+    "aie-news",
+    "hn-domain"
    ],
-   "narrativeScore": 75,
-   "gap": -7.1,
+   "narrativeScore": 71.2,
+   "gap": -7.4,
    "direction": "narrative and reality aligned",
    "portfolio": [
     {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 48.333333333333336,
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 42.27272727272727,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 9.5,
+     "divergence": -69.1,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 48.75,
      "evidenceGrade": "E3",
      "status": "verified",
-     "percentile": 4.8,
-     "divergence": -77.3,
+     "percentile": 14.3,
+     "divergence": -64.3,
      "thinEvidence": false
     },
     {
      "capabilityId": "governance",
      "capability": "Governance",
-     "maturity": 49.25,
-     "evidenceGrade": "E2",
+     "maturity": 54.5,
+     "evidenceGrade": "E3",
      "status": "verified",
-     "percentile": 14.3,
-     "divergence": -67.8,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 55.714285714285715,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 47.6,
-     "divergence": -34.5,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 63,
-     "evidenceGrade": "E2",
-     "status": "documented",
-     "percentile": 47.6,
-     "divergence": -34.5,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 68,
-     "evidenceGrade": "E2",
-     "status": "documented",
-     "percentile": 54.8,
-     "divergence": -27.3,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 60.166666666666664,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 64.3,
-     "divergence": -17.8,
+     "percentile": 50,
+     "divergence": -28.6,
      "thinEvidence": false
     },
     {
      "capabilityId": "enterprise_assistant",
      "capability": "Enterprise assistant",
-     "maturity": 82,
+     "maturity": 55,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 57.1,
+     "divergence": -21.5,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 80,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 95.2,
+     "divergence": 16.6,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 68.34285714285714,
      "evidenceGrade": "E4",
      "status": "verified",
-     "percentile": 96.4,
+     "percentile": 92.9,
      "divergence": 14.3,
      "thinEvidence": false
     },
     {
      "capabilityId": "portability",
      "capability": "Portability",
-     "maturity": 69.71428571428571,
+     "maturity": 61.333333333333336,
      "evidenceGrade": "E3",
      "status": "verified",
-     "percentile": 95.2,
-     "divergence": 13.1,
+     "percentile": 69,
+     "divergence": -9.6,
      "thinEvidence": false
     },
     {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 58.36363636363637,
-     "evidenceGrade": "E4",
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 75,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 69,
+     "divergence": -9.6,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 80,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 76.2,
+     "divergence": -2.4,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 62.35294117647059,
+     "evidenceGrade": "E3",
      "status": "verified",
-     "percentile": 71.4,
-     "divergence": -10.7,
+     "percentile": 81,
+     "divergence": 2.4,
      "thinEvidence": false
-    },
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 68,
-     "evidenceGrade": "E2",
-     "status": "documented",
-     "percentile": 90.5,
-     "divergence": 8.4,
-     "thinEvidence": true
     }
    ]
   },
@@ -4982,23 +4985,23 @@
    "realityWeight": 8.1,
    "domain": "nvidia.com",
    "hn": {
-    "stories": 243,
+    "stories": 244,
     "points": 2935,
     "comments": 1799,
     "sampled": 100
    },
    "aieNews": {
-    "items": 10,
+    "items": 11,
     "positive": 6,
-    "negative": 0
+    "negative": 1
    },
    "realityScore": 97.6,
    "narrativeSources": [
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 89,
-   "gap": -8.6,
+   "narrativeScore": 89.6,
+   "gap": -8,
    "direction": "narrative and reality aligned",
    "portfolio": [
     {
@@ -5104,616 +5107,6 @@
    ]
   },
   {
-   "vendorId": "servicenow",
-   "name": "ServiceNow",
-   "perCapability": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 50.285714285714285,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 76,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 81,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 74,
-     "evidenceGrade": "E2",
-     "status": "documented"
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 55.8,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 51.4,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 55,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 52.75,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 76,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 49.57142857142857,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    }
-   ],
-   "category": "ITSM/HR/service AI",
-   "marketPosition": "Category leader",
-   "reality": 63.1,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 6.5,
-   "domain": "servicenow.com",
-   "hn": {
-    "stories": 1,
-    "points": 1,
-    "comments": 0,
-    "sampled": 1
-   },
-   "aieNews": {
-    "items": 5,
-    "positive": 1,
-    "negative": 1
-   },
-   "realityScore": 85.7,
-   "narrativeSources": [
-    "aie-news"
-   ],
-   "narrativeScore": 75,
-   "gap": -10.7,
-   "direction": "narrative and reality aligned",
-   "portfolio": [
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 52.75,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 4.8,
-     "divergence": -80.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 51.4,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 13.1,
-     "divergence": -72.6,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 49.57142857142857,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 23.8,
-     "divergence": -61.9,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 50.285714285714285,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 28.6,
-     "divergence": -57.1,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 55,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 59.5,
-     "divergence": -26.2,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 55.8,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 64.3,
-     "divergence": -21.4,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 76,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 73.8,
-     "divergence": -11.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 76,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 96.4,
-     "divergence": 10.7,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 81,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 79.8,
-     "divergence": -5.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 74,
-     "evidenceGrade": "E2",
-     "status": "documented",
-     "percentile": 83.3,
-     "divergence": -2.4,
-     "thinEvidence": true
-    }
-   ]
-  },
-  {
-   "vendorId": "amd",
-   "name": "AMD",
-   "perCapability": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 75,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 61.333333333333336,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 75,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 58,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 80,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 51.4,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 51.75,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 58,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 70,
-     "evidenceGrade": "E2",
-     "status": "documented"
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 62.666666666666664,
-     "evidenceGrade": "E5",
-     "status": "verified"
-    }
-   ],
-   "category": "AI infrastructure",
-   "marketPosition": "Category leader",
-   "reality": 64,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 7.5,
-   "domain": "amd.com",
-   "hn": {
-    "stories": 61,
-    "points": 966,
-    "comments": 438,
-    "sampled": 61
-   },
-   "aieNews": {
-    "items": 0,
-    "positive": 0,
-    "negative": 0
-   },
-   "realityScore": 88.1,
-   "narrativeSources": [
-    "hn-domain"
-   ],
-   "narrativeScore": 73.8,
-   "gap": -14.3,
-   "direction": "narrative and reality aligned",
-   "portfolio": [
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 51.4,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 13.1,
-     "divergence": -75,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 51.75,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 26.2,
-     "divergence": -61.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 58,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 38.1,
-     "divergence": -50,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 70,
-     "evidenceGrade": "E2",
-     "status": "documented",
-     "percentile": 61.9,
-     "divergence": -26.2,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 61.333333333333336,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 64.3,
-     "divergence": -23.8,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 58,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 64.3,
-     "divergence": -23.8,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 75,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 69,
-     "divergence": -19.1,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 80,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 97.6,
-     "divergence": 9.5,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 75,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 92.9,
-     "divergence": 4.8,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 62.666666666666664,
-     "evidenceGrade": "E5",
-     "status": "verified",
-     "percentile": 92.9,
-     "divergence": 4.8,
-     "thinEvidence": false
-    }
-   ]
-  },
-  {
-   "vendorId": "deepseek",
-   "name": "DeepSeek",
-   "perCapability": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 80,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 48.75,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 80,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 55,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 54.5,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 62.35294117647059,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 68.34285714285714,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 61.333333333333336,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 75,
-     "evidenceGrade": "E3",
-     "status": "tested"
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 42.27272727272727,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    }
-   ],
-   "category": "Frontier model/API",
-   "marketPosition": "Category leader",
-   "reality": 62.7,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E2",
-   "realityWeight": 7.6,
-   "domain": "deepseek.com",
-   "hn": {
-    "stories": 19,
-    "points": 4953,
-    "comments": 3090,
-    "sampled": 19
-   },
-   "aieNews": {
-    "items": 4,
-    "positive": 1,
-    "negative": 1
-   },
-   "realityScore": 78.6,
-   "narrativeSources": [
-    "aie-news",
-    "hn-domain"
-   ],
-   "narrativeScore": 62.3,
-   "gap": -16.3,
-   "direction": "reality ahead of narrative",
-   "portfolio": [
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 42.27272727272727,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 9.5,
-     "divergence": -69.1,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 48.75,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 14.3,
-     "divergence": -64.3,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 54.5,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 50,
-     "divergence": -28.6,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 55,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 57.1,
-     "divergence": -21.5,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 80,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 95.2,
-     "divergence": 16.6,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 68.34285714285714,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 92.9,
-     "divergence": 14.3,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 61.333333333333336,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 69,
-     "divergence": -9.6,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 75,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 69,
-     "divergence": -9.6,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 80,
-     "evidenceGrade": "E3",
-     "status": "tested",
-     "percentile": 76.2,
-     "divergence": -2.4,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 62.35294117647059,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 81,
-     "divergence": 2.4,
-     "thinEvidence": false
-    }
-   ]
-  },
-  {
    "vendorId": "meta",
    "name": "Meta",
    "perCapability": [
@@ -5802,18 +5195,18 @@
     "sampled": 39
    },
    "aieNews": {
-    "items": 5,
-    "positive": 2,
-    "negative": 0
+    "items": 9,
+    "positive": 3,
+    "negative": 2
    },
    "realityScore": 92.9,
    "narrativeSources": [
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 75.6,
-   "gap": -17.3,
-   "direction": "reality ahead of narrative",
+   "narrativeScore": 79.6,
+   "gap": -13.3,
+   "direction": "narrative and reality aligned",
    "portfolio": [
     {
      "capabilityId": "enterprise_assistant",
@@ -5846,16 +5239,6 @@
      "thinEvidence": false
     },
     {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 58,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 57.1,
-     "divergence": -35.8,
-     "thinEvidence": false
-    },
-    {
      "capabilityId": "portability",
      "capability": "Portability",
      "maturity": 59.82142857142857,
@@ -5863,6 +5246,16 @@
      "status": "verified",
      "percentile": 57.1,
      "divergence": -35.8,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 58,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 59.5,
+     "divergence": -33.4,
      "thinEvidence": false
     },
     {
@@ -5914,6 +5307,209 @@
      "percentile": 96.4,
      "divergence": 3.5,
      "thinEvidence": false
+    }
+   ]
+  },
+  {
+   "vendorId": "coreweave",
+   "name": "CoreWeave",
+   "perCapability": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 68,
+     "evidenceGrade": "E2",
+     "status": "documented"
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 55.714285714285715,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 68,
+     "evidenceGrade": "E2",
+     "status": "documented"
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 82,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 49.25,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 60.166666666666664,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 48.333333333333336,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 69.71428571428571,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 63,
+     "evidenceGrade": "E2",
+     "status": "documented"
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 58.36363636363637,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    }
+   ],
+   "category": "AI infrastructure",
+   "marketPosition": "Category leader",
+   "reality": 62.8,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 7,
+   "domain": "coreweave.com",
+   "hn": {
+    "stories": 5,
+    "points": 11,
+    "comments": 0,
+    "sampled": 5
+   },
+   "aieNews": {
+    "items": 5,
+    "positive": 3,
+    "negative": 0
+   },
+   "realityScore": 82.1,
+   "narrativeSources": [
+    "aie-news"
+   ],
+   "narrativeScore": 68.6,
+   "gap": -13.5,
+   "direction": "narrative and reality aligned",
+   "portfolio": [
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 48.333333333333336,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 4.8,
+     "divergence": -77.3,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 49.25,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 14.3,
+     "divergence": -67.8,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 55.714285714285715,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 47.6,
+     "divergence": -34.5,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 63,
+     "evidenceGrade": "E2",
+     "status": "documented",
+     "percentile": 47.6,
+     "divergence": -34.5,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 68,
+     "evidenceGrade": "E2",
+     "status": "documented",
+     "percentile": 54.8,
+     "divergence": -27.3,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 60.166666666666664,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 64.3,
+     "divergence": -17.8,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 82,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 96.4,
+     "divergence": 14.3,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 69.71428571428571,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 95.2,
+     "divergence": 13.1,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 58.36363636363637,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 71.4,
+     "divergence": -10.7,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 68,
+     "evidenceGrade": "E2",
+     "status": "documented",
+     "percentile": 90.5,
+     "divergence": 8.4,
+     "thinEvidence": true
     }
    ]
   },
@@ -6015,8 +5611,8 @@
     "aie-news",
     "hn-domain"
    ],
-   "narrativeScore": 49.2,
-   "gap": -17.5,
+   "narrativeScore": 50.3,
+   "gap": -16.4,
    "direction": "reality ahead of narrative",
    "portfolio": [
     {
@@ -6122,6 +5718,209 @@
    ]
   },
   {
+   "vendorId": "amd",
+   "name": "AMD",
+   "perCapability": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 75,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 61.333333333333336,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 75,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 58,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 80,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 51.4,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 51.75,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 58,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 70,
+     "evidenceGrade": "E2",
+     "status": "documented"
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 62.666666666666664,
+     "evidenceGrade": "E5",
+     "status": "verified"
+    }
+   ],
+   "category": "AI infrastructure",
+   "marketPosition": "Category leader",
+   "reality": 64,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 7.5,
+   "domain": "amd.com",
+   "hn": {
+    "stories": 60,
+    "points": 877,
+    "comments": 327,
+    "sampled": 60
+   },
+   "aieNews": {
+    "items": 1,
+    "positive": 1,
+    "negative": 0
+   },
+   "realityScore": 88.1,
+   "narrativeSources": [
+    "hn-domain"
+   ],
+   "narrativeScore": 69,
+   "gap": -19.1,
+   "direction": "reality ahead of narrative",
+   "portfolio": [
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 51.4,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 13.1,
+     "divergence": -75,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 51.75,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 26.2,
+     "divergence": -61.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 58,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 38.1,
+     "divergence": -50,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 61.333333333333336,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 61.9,
+     "divergence": -26.2,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 70,
+     "evidenceGrade": "E2",
+     "status": "documented",
+     "percentile": 61.9,
+     "divergence": -26.2,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 58,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 64.3,
+     "divergence": -23.8,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 75,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 69,
+     "divergence": -19.1,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 80,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 97.6,
+     "divergence": 9.5,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 75,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 92.9,
+     "divergence": 4.8,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 62.666666666666664,
+     "evidenceGrade": "E5",
+     "status": "verified",
+     "percentile": 92.9,
+     "divergence": 4.8,
+     "thinEvidence": false
+    }
+   ]
+  },
+  {
    "vendorId": "broadcom",
    "name": "Broadcom",
    "perCapability": [
@@ -6210,8 +6009,8 @@
     "sampled": 11
    },
    "aieNews": {
-    "items": 0,
-    "positive": 0,
+    "items": 1,
+    "positive": 1,
     "negative": 0
    },
    "realityScore": 64.3,
@@ -6439,8 +6238,8 @@
      "maturity": 57.666666666666664,
      "evidenceGrade": "E2",
      "status": "verified",
-     "percentile": 50,
-     "divergence": -25,
+     "percentile": 52.4,
+     "divergence": -22.6,
      "thinEvidence": true
     },
     {
@@ -6815,8 +6614,8 @@
     "sampled": 3
    },
    "aieNews": {
-    "items": 2,
-    "positive": 2,
+    "items": 1,
+    "positive": 1,
     "negative": 0
    },
    "realityScore": 61.9,
@@ -6871,8 +6670,8 @@
      "maturity": 52.06896551724138,
      "evidenceGrade": "E4",
      "status": "verified",
-     "percentile": 33.3,
-     "divergence": -28.6,
+     "percentile": 31,
+     "divergence": -30.9,
      "thinEvidence": false
     },
     {
@@ -7016,8 +6815,8 @@
     "sampled": 6
    },
    "aieNews": {
-    "items": 0,
-    "positive": 0,
+    "items": 2,
+    "positive": 2,
     "negative": 0
    },
    "realityScore": 0,
@@ -7464,8 +7263,8 @@
      "maturity": 52.104166666666664,
      "evidenceGrade": "E4",
      "status": "verified",
-     "percentile": 38.1,
-     "divergence": 26.2,
+     "percentile": 35.7,
+     "divergence": 23.8,
      "thinEvidence": false
     },
     {
@@ -7474,8 +7273,8 @@
      "maturity": 57.64705882352941,
      "evidenceGrade": "E4",
      "status": "verified",
-     "percentile": 33.3,
-     "divergence": 21.4,
+     "percentile": 35.7,
+     "divergence": 23.8,
      "thinEvidence": false
     },
     {
@@ -7499,16 +7298,6 @@
      "thinEvidence": false
     },
     {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 49.84375,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 19,
-     "divergence": 7.1,
-     "thinEvidence": false
-    },
-    {
      "capabilityId": "integrations",
      "capability": "Integrations",
      "maturity": 49.38775510204081,
@@ -7519,6 +7308,16 @@
      "thinEvidence": true
     },
     {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 49.84375,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 16.7,
+     "divergence": 4.8,
+     "thinEvidence": false
+    },
+    {
      "capabilityId": "governance",
      "capability": "Governance",
      "maturity": 48.57142857142857,
@@ -7526,207 +7325,6 @@
      "status": "verified",
      "percentile": 11.9,
      "divergence": 0,
-     "thinEvidence": false
-    }
-   ]
-  },
-  {
-   "vendorId": "lambda",
-   "name": "Lambda",
-   "perCapability": [
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 49.285714285714285,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 58.91111111111111,
-     "evidenceGrade": "E2",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 66,
-     "evidenceGrade": "E2",
-     "status": "documented"
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 43.857142857142854,
-     "evidenceGrade": "E1",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 53.05,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 54.42857142857143,
-     "evidenceGrade": "E3",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 54.8,
-     "evidenceGrade": "E5",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 57.836363636363636,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 61,
-     "evidenceGrade": "E1",
-     "status": "inferred"
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 51.68,
-     "evidenceGrade": "E4",
-     "status": "verified"
-    }
-   ],
-   "category": "AI infrastructure",
-   "marketPosition": "Emerging specialist",
-   "reality": 54.9,
-   "realityRows": 10,
-   "realityWeakestEvidence": "E1",
-   "realityWeight": 7,
-   "domain": "lambdalabs.com",
-   "hn": {
-    "stories": 0,
-    "points": 0,
-    "comments": 0,
-    "sampled": 0
-   },
-   "aieNews": {
-    "items": 1,
-    "positive": 0,
-    "negative": 1
-   },
-   "realityScore": 21.4,
-   "narrativeSources": [],
-   "narrativeScore": null,
-   "gap": null,
-   "direction": "not enough narrative signal",
-   "portfolio": [
-    {
-     "capabilityId": "models",
-     "capability": "Models",
-     "maturity": 54.8,
-     "evidenceGrade": "E5",
-     "status": "verified",
-     "percentile": 57.1,
-     "divergence": 35.7,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "cost_controls",
-     "capability": "Cost controls",
-     "maturity": 58.91111111111111,
-     "evidenceGrade": "E2",
-     "status": "verified",
-     "percentile": 54.8,
-     "divergence": 33.4,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "deployment_options",
-     "capability": "Deployment options",
-     "maturity": 66,
-     "evidenceGrade": "E2",
-     "status": "documented",
-     "percentile": 45.2,
-     "divergence": 23.8,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "enterprise_assistant",
-     "capability": "Enterprise assistant",
-     "maturity": 43.857142857142854,
-     "evidenceGrade": "E1",
-     "status": "verified",
-     "percentile": 2.4,
-     "divergence": -19,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "rag",
-     "capability": "RAG / enterprise knowledge",
-     "maturity": 61,
-     "evidenceGrade": "E1",
-     "status": "inferred",
-     "percentile": 39.3,
-     "divergence": 17.9,
-     "thinEvidence": true
-    },
-    {
-     "capabilityId": "portability",
-     "capability": "Portability",
-     "maturity": 57.836363636363636,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 35.7,
-     "divergence": 14.3,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "governance",
-     "capability": "Governance",
-     "maturity": 53.05,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 33.3,
-     "divergence": 11.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "security",
-     "capability": "Security",
-     "maturity": 51.68,
-     "evidenceGrade": "E4",
-     "status": "verified",
-     "percentile": 33.3,
-     "divergence": 11.9,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "integrations",
-     "capability": "Integrations",
-     "maturity": 54.42857142857143,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 31,
-     "divergence": 9.6,
-     "thinEvidence": false
-    },
-    {
-     "capabilityId": "agents",
-     "capability": "Agents",
-     "maturity": 49.285714285714285,
-     "evidenceGrade": "E3",
-     "status": "verified",
-     "percentile": 16.7,
-     "divergence": -4.7,
      "thinEvidence": false
     }
    ]
@@ -7814,10 +7412,10 @@
    "realityWeight": 6.2,
    "domain": "moveworks.com",
    "hn": {
-    "stories": 0,
-    "points": 0,
+    "stories": 1,
+    "points": 2,
     "comments": 0,
-    "sampled": 0
+    "sampled": 1
    },
    "aieNews": {
     "items": 1,
@@ -7928,6 +7526,207 @@
      "status": "verified",
      "percentile": 61.9,
      "divergence": -7.1,
+     "thinEvidence": true
+    }
+   ]
+  },
+  {
+   "vendorId": "nscale",
+   "name": "Nscale",
+   "perCapability": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 56,
+     "evidenceGrade": "E1",
+     "status": "inferred"
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 50.714285714285715,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 56,
+     "evidenceGrade": "E1",
+     "status": "inferred"
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 46,
+     "evidenceGrade": "E1",
+     "status": "inferred"
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 51.5,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 53.9,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 52,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 58.5,
+     "evidenceGrade": "E3",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 51,
+     "evidenceGrade": "E1",
+     "status": "inferred"
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 50.333333333333336,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    }
+   ],
+   "category": "AI infrastructure",
+   "marketPosition": "Emerging specialist",
+   "reality": 52.9,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E1",
+   "realityWeight": 4.9,
+   "domain": "nscale.com",
+   "hn": {
+    "stories": 9,
+    "points": 12,
+    "comments": 1,
+    "sampled": 9
+   },
+   "aieNews": {
+    "items": 1,
+    "positive": 0,
+    "negative": 0
+   },
+   "realityScore": 8.3,
+   "narrativeSources": [],
+   "narrativeScore": null,
+   "gap": null,
+   "direction": "not enough narrative signal",
+   "portfolio": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 56,
+     "evidenceGrade": "E1",
+     "status": "inferred",
+     "percentile": 71.4,
+     "divergence": 63.1,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 58.5,
+     "evidenceGrade": "E3",
+     "status": "verified",
+     "percentile": 40.5,
+     "divergence": 32.2,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 51.5,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 28.6,
+     "divergence": 20.3,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 52,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 28.6,
+     "divergence": 20.3,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 53.9,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 26.2,
+     "divergence": 17.9,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 50.333333333333336,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 26.2,
+     "divergence": 17.9,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 50.714285714285715,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 19,
+     "divergence": 10.7,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 46,
+     "evidenceGrade": "E1",
+     "status": "inferred",
+     "percentile": 16.7,
+     "divergence": 8.4,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 56,
+     "evidenceGrade": "E1",
+     "status": "inferred",
+     "percentile": 10.7,
+     "divergence": 2.4,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 51,
+     "evidenceGrade": "E1",
+     "status": "inferred",
+     "percentile": 7.1,
+     "divergence": -1.2,
      "thinEvidence": true
     }
    ]
@@ -8318,8 +8117,8 @@
      "maturity": 50,
      "evidenceGrade": "E2",
      "status": "verified",
-     "percentile": 21.4,
-     "divergence": 3.5,
+     "percentile": 19,
+     "divergence": 1.1,
      "thinEvidence": true
     },
     {
@@ -8330,6 +8129,207 @@
      "status": "inferred",
      "percentile": 19,
      "divergence": 1.1,
+     "thinEvidence": true
+    }
+   ]
+  },
+  {
+   "vendorId": "servicenow",
+   "name": "ServiceNow",
+   "perCapability": [
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 50.285714285714285,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 76,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 81,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 74,
+     "evidenceGrade": "E2",
+     "status": "documented"
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 55.8,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 51.4,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 55,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 52.75,
+     "evidenceGrade": "E4",
+     "status": "verified"
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 76,
+     "evidenceGrade": "E3",
+     "status": "tested"
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 49.57142857142857,
+     "evidenceGrade": "E2",
+     "status": "verified"
+    }
+   ],
+   "category": "ITSM/HR/service AI",
+   "marketPosition": "Category leader",
+   "reality": 63.1,
+   "realityRows": 10,
+   "realityWeakestEvidence": "E2",
+   "realityWeight": 6.5,
+   "domain": "servicenow.com",
+   "hn": {
+    "stories": 1,
+    "points": 1,
+    "comments": 0,
+    "sampled": 1
+   },
+   "aieNews": {
+    "items": 2,
+    "positive": 0,
+    "negative": 1
+   },
+   "realityScore": 85.7,
+   "narrativeSources": [],
+   "narrativeScore": null,
+   "gap": null,
+   "direction": "not enough narrative signal",
+   "portfolio": [
+    {
+     "capabilityId": "portability",
+     "capability": "Portability",
+     "maturity": 52.75,
+     "evidenceGrade": "E4",
+     "status": "verified",
+     "percentile": 4.8,
+     "divergence": -80.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "integrations",
+     "capability": "Integrations",
+     "maturity": 51.4,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 13.1,
+     "divergence": -72.6,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "security",
+     "capability": "Security",
+     "maturity": 49.57142857142857,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 23.8,
+     "divergence": -61.9,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "agents",
+     "capability": "Agents",
+     "maturity": 50.285714285714285,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 26.2,
+     "divergence": -59.5,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "models",
+     "capability": "Models",
+     "maturity": 55,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 57.1,
+     "divergence": -28.6,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "governance",
+     "capability": "Governance",
+     "maturity": 55.8,
+     "evidenceGrade": "E2",
+     "status": "verified",
+     "percentile": 64.3,
+     "divergence": -21.4,
+     "thinEvidence": true
+    },
+    {
+     "capabilityId": "rag",
+     "capability": "RAG / enterprise knowledge",
+     "maturity": 76,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 73.8,
+     "divergence": -11.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "cost_controls",
+     "capability": "Cost controls",
+     "maturity": 76,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 96.4,
+     "divergence": 10.7,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "deployment_options",
+     "capability": "Deployment options",
+     "maturity": 81,
+     "evidenceGrade": "E3",
+     "status": "tested",
+     "percentile": 79.8,
+     "divergence": -5.9,
+     "thinEvidence": false
+    },
+    {
+     "capabilityId": "enterprise_assistant",
+     "capability": "Enterprise assistant",
+     "maturity": 74,
+     "evidenceGrade": "E2",
+     "status": "documented",
+     "percentile": 83.3,
+     "divergence": -2.4,
      "thinEvidence": true
     }
    ]

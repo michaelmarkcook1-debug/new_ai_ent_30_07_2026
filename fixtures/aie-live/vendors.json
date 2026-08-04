@@ -1547,8 +1547,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 57.3,
-   "confidenceScore": 98.9,
+   "overallScore": 56.9,
+   "confidenceScore": 99,
    "marketPosition": "Emerging specialist",
    "strategy": "Offer NVIDIA capacity (on-demand + reserved) outside the big-three hyperscalers.",
    "productCapabilities": [
@@ -1618,8 +1618,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 53.3,
-   "confidenceScore": 88,
+   "overallScore": 50.4,
+   "confidenceScore": 90.5,
    "marketPosition": "Emerging specialist",
    "strategy": "Deploy sovereign capital at mega-round scale across frontier labs and AI infrastructure.",
    "productCapabilities": [
@@ -1917,7 +1917,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 51.2,
+   "overallScore": 51.1,
    "confidenceScore": 97.7,
    "marketPosition": "Specialist contender",
    "strategy": "Win buyers needing model optionality, European positioning, and flexible deployment.",
@@ -1988,7 +1988,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 58.6,
+   "overallScore": 58.8,
    "confidenceScore": 97.7,
    "marketPosition": "Specialist contender",
    "strategy": "Build a reasoning-and-long-context niche through K2 Thinking and platform.moonshot.ai.",
@@ -3035,7 +3035,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 64.9,
+   "overallScore": 64.4,
    "confidenceScore": 87,
    "marketPosition": "Major challenger",
    "strategy": "Hold the leading-edge process lead and capacity that every fabless AI-chip designer depends on.",

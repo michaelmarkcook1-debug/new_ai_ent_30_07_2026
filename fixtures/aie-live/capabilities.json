@@ -1956,19 +1956,19 @@
    "vendorId": "lambda",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 49.285714285714285,
+   "maturityScore": 50.1578947368421,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T23:37:01.364Z",
-   "notes": "The progression ran from a score of 0, losing in seconds, to clearing lines across the full 30-minute game and peaking at a score of 16. No human intervention. Over two and a half "
+   "lastVerified": "2026-08-02T16:20:09.825Z",
+   "notes": "python -m backend add-backend http://<gpu-3-ip>:8000/v1... Health-check the new backend... Reload Caddy before anything else learns the GPU exists... Inside the orchestrator, a dae"
   },
   {
    "vendorId": "lambda",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 58.91111111111111,
+   "maturityScore": 58.46808510638298,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-30T23:38:56.316Z",
-   "notes": "GPU cloud pricing: rent NVIDIA H100, H200, and B200 | Lambda... Clear, straightforward pricing for Instances, 1-Click Clusters™, and Superclusters. Contact us for reserved capacity"
+   "lastVerified": "2026-08-02T16:19:47.317Z",
+   "notes": "The GPU budget is fixed: at most four NVIDIA HGX H100 GPUs, with one as a starting point and three additional held in reserve, launched dynamically as demand increased throughout t"
   },
   {
    "vendorId": "lambda",
@@ -1983,45 +1983,45 @@
    "vendorId": "lambda",
    "capabilityId": "enterprise_assistant",
    "status": "verified",
-   "maturityScore": 43.857142857142854,
+   "maturityScore": 44,
    "evidenceGrade": "E1",
-   "lastVerified": "2026-07-30T23:24:58.818Z",
-   "notes": "Building at the speed of research: Lambda at CVPR 2026. Every year, CVPR draws the researchers defining what AI can see, understand, and act on. This year in Denver, more than 9,00"
+   "lastVerified": "2026-08-02T16:20:09.825Z",
+   "notes": "Getting started doesn't take much. Grab NCode from Noumena's GitHub, then follow one of our deployment guides to stand up GLM 5.2 or Kimi K2.7 Code on Lambda. Every guide ends with"
   },
   {
    "vendorId": "lambda",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 53.05,
+   "maturityScore": 52.869565217391305,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:38:56.316Z",
+   "lastVerified": "2026-08-02T16:20:09.825Z",
    "notes": "Status: ✓ Certified (Annual audit) Auditor: Independent CPA firm Last Audit: December 2025 Next Audit: December 2026"
   },
   {
    "vendorId": "lambda",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 54.42857142857143,
+   "maturityScore": 54.083333333333336,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T23:38:56.316Z",
+   "lastVerified": "2026-08-02T16:20:23.904Z",
    "notes": "API- and CLI-driven provisioning, and orchestration options that include managed Kubernetes, Slurm, and dstack-based workflows."
   },
   {
    "vendorId": "lambda",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 54.8,
+   "maturityScore": 55.05555555555556,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-07-30T23:24:58.818Z",
+   "lastVerified": "2026-08-02T16:20:23.904Z",
    "notes": "Our MLPerf Inference v5.1 results show Lambda's 1-Click Clusters powered by NVIDIA HGX B200 achieved up to 15.4% performance gains than the previous round's best results."
   },
   {
    "vendorId": "lambda",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 57.836363636363636,
+   "maturityScore": 57.30508474576271,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:38:56.316Z",
+   "lastVerified": "2026-08-02T16:20:23.904Z",
    "notes": "Notable customers, as reported in Lambda materials and analyst summaries, include Apple, MIT, Microsoft, Tencent, Kaiser Permanente, Stanford, Harvard, Caltech, and the Department "
   },
   {
@@ -2037,9 +2037,9 @@
    "vendorId": "lambda",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 51.68,
+   "maturityScore": 51.77777777777778,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:38:56.316Z",
+   "lastVerified": "2026-08-02T16:19:34.734Z",
    "notes": "lambda audit export --start \"2026-01-01\" --end \"2026-01-31\" --format csv ... # Generate compliance report lambda compliance report --standard hipaa --period \"2025-01-01 to 2026-01-"
   },
   {
@@ -2181,27 +2181,27 @@
    "vendorId": "mgx",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 50,
+   "maturityScore": 43.285714285714285,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-06-21T15:41:23.920Z",
+   "lastVerified": "2026-08-03T20:15:15.046Z",
    "notes": "MGX supports integrations like Supabase for backend functionalities and Stripe for payment flows, enabling richer app deployments."
   },
   {
    "vendorId": "mgx",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 36.5,
+   "maturityScore": 31,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-06-21T15:41:23.920Z",
-   "notes": "I regret ever trusting this service, and I would strongly advise others to avoid mgx.dev at all costs... We're truly sorry to hear about your disastrous experience, and we sincerel"
+   "lastVerified": "2026-08-03T20:15:15.046Z",
+   "notes": "The report listed API integration failures, configuration complexity, JSONDecodeError incidents, and documentation gaps that slowed new users."
   },
   {
    "vendorId": "mgx",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 64.66666666666667,
+   "maturityScore": 56.22222222222222,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T03:26:00.973Z",
+   "lastVerified": "2026-08-03T20:15:15.046Z",
    "notes": "MGX closed its Fund I at $49 billion on Wednesday, exceeding an initial target of $45 billion and establishing the Abu Dhabi-based firm as one of the largest dedicated AI investors"
   },
   {
@@ -2217,9 +2217,9 @@
    "vendorId": "mgx",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 35,
+   "maturityScore": 23.333333333333332,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-06-21T15:41:23.920Z",
+   "lastVerified": "2026-08-03T20:15:15.046Z",
    "notes": "MGX is hosted in the United States and is intended for and directed to users in the United States."
   },
   {
@@ -2406,19 +2406,19 @@
    "vendorId": "mistral",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 48.42424242424242,
+   "maturityScore": 48.138888888888886,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-30T23:33:19.538Z",
+   "lastVerified": "2026-08-02T16:17:16.429Z",
    "notes": "Studio · Build, test, and run AI agents and apps."
   },
   {
    "vendorId": "mistral",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 58.22857142857143,
+   "maturityScore": 57.89473684210526,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-30T23:33:19.538Z",
-   "notes": "Mistral API pricing ranges from $0.04 per million tokens for Ministral 3B to $6.00 per million output tokens for Mistral Large 2 and Pixtral Large."
+   "lastVerified": "2026-08-02T16:17:20.154Z",
+   "notes": "Subject to fair usage limits and Mistral's Terms of Service. ... Unlimited (Subject to fair usage limits and Mistral's Terms of Service.)"
   },
   {
    "vendorId": "mistral",
@@ -2442,36 +2442,36 @@
    "vendorId": "mistral",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 50.34615384615385,
+   "maturityScore": 49.607142857142854,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-30T23:33:19.538Z",
+   "lastVerified": "2026-08-02T16:17:16.429Z",
    "notes": "trust@mistral.ai · Privacy PolicyOpens in new tab · ISO 27001 · ISO 27701 · SOC 2 Type II · GDPR · View all"
   },
   {
    "vendorId": "mistral",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 58.4,
+   "maturityScore": 57.244897959183675,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-30T23:33:19.538Z",
+   "lastVerified": "2026-08-02T16:17:20.154Z",
    "notes": "Le Chat Enterprise provides on-premises and private cloud deployment, supporting data residency requirements."
   },
   {
    "vendorId": "mistral",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 60.861111111111114,
+   "maturityScore": 60.58974358974359,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:33:19.538Z",
+   "lastVerified": "2026-08-02T16:17:20.154Z",
    "notes": "GPT-4o achieved the highest accuracy at 93.3%, followed by Llama 3.1 70B (87.5%), Mistral Large 2407 (87.9%)"
   },
   {
    "vendorId": "mistral",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 59.13953488372093,
+   "maturityScore": 59.23913043478261,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T23:33:19.538Z",
+   "lastVerified": "2026-08-02T16:17:20.154Z",
    "notes": "Mistral announced a €1.7 billion Series C round at a €11.7 billion valuation in September 2025. Latest Mistral AI valuation: €11.7 billion ($13.8 billion). ASML took an 11% stake i"
   },
   {
@@ -2487,27 +2487,27 @@
    "vendorId": "mistral",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 50.53488372093023,
+   "maturityScore": 50.40909090909091,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:33:19.538Z",
+   "lastVerified": "2026-08-02T16:17:16.429Z",
    "notes": "Two thirds of harmful prompts succeeded in eliciting unsafe content from the Mistral models. Researchers found the Pixtral models were 60 times more likely to generate child sexual"
   },
   {
    "vendorId": "moonshot",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 50.18867924528302,
+   "maturityScore": 50.43859649122807,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-30T23:39:02.108Z",
-   "notes": "Yes. 9 of 3 models on Moonshot AI support function calling (tool use)... Yes. 9 of 3 models on Moonshot AI support structured output (JSON mode / schema-constrained generation)."
+   "lastVerified": "2026-08-03T20:20:10.773Z",
+   "notes": "kimi-k2.6 supports text, image, and video input, as well as thinking and non-thinking modes, and is suitable for conversation, code generation, visual understanding, and agent task"
   },
   {
    "vendorId": "moonshot",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 60.71875,
+   "maturityScore": 62.05128205128205,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:39:02.108Z",
+   "lastVerified": "2026-08-03T20:20:10.773Z",
    "notes": "At $0.95/$4.00 (K2.6) or $0.60/$3.00 (K2.5) per million tokens, Kimi is one of the cheapest frontier-quality model families on the market."
   },
   {
@@ -2532,36 +2532,36 @@
    "vendorId": "moonshot",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 40,
+   "maturityScore": 40.714285714285715,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-27T03:09:04.480Z",
+   "lastVerified": "2026-08-03T18:35:57.562Z",
    "notes": "OpenAI publicly states that it maintains SOC 2 Type 2, ISO 27001, and ISO 42001 coverage for relevant business and AI offerings. ... AWS states that Bedrock supports encryption, pr"
   },
   {
    "vendorId": "moonshot",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 54.66197183098591,
+   "maturityScore": 55.41463414634146,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:39:02.108Z",
+   "lastVerified": "2026-08-03T20:20:10.773Z",
    "notes": "At $0.95/$4.00 (K2.6) or $0.60/$3.00 (K2.5) per million tokens, Kimi is one of the cheapest frontier-quality model families on the market."
   },
   {
    "vendorId": "moonshot",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 52,
+   "maturityScore": 52.36363636363637,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-07-30T23:39:02.108Z",
+   "lastVerified": "2026-08-03T20:20:10.773Z",
    "notes": "The UK AI Security Institute (AISI) and the US Center for AI Standards and Innovation (CAISI) published a joint preliminary assessment on July 24 showing that Moonshot AI's Kimi K3"
   },
   {
    "vendorId": "moonshot",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 54.79545454545455,
+   "maturityScore": 55.294117647058826,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:39:02.108Z",
+   "lastVerified": "2026-08-03T20:20:10.773Z",
    "notes": "Yes, Kimi K2.5 is open-source under a Modified MIT License. You can download model weights from Hugging Face and deploy on private infrastructure using vLLM, SGLang, or KTransforme"
   },
   {
@@ -2577,9 +2577,9 @@
    "vendorId": "moonshot",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 31.48,
+   "maturityScore": 31.615384615384617,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:39:02.108Z",
+   "lastVerified": "2026-08-03T18:35:56.126Z",
    "notes": "Yi-34B-Chat, MoonShot-v1 and ChatGPT-40 models exhibit superior safety performance across 3 safety abilities."
   },
   {
