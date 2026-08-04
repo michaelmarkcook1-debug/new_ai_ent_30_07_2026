@@ -84,12 +84,6 @@ export default async function PulsePage() {
         subtitle="What changed in the enterprise AI market, why it matters, and what to do about it."
         lanes={[metrics.lane, "derived"]}
       />
-      <SinceLastLook
-        view={since}
-        vendorNames={Object.fromEntries(
-          metrics.vendors.map((v) => [v.id, v.name])
-        )}
-      />
       <PulseView
         fixture={fixture}
         metrics={metrics}
@@ -104,6 +98,17 @@ export default async function PulsePage() {
           modelCount: cost.models.length,
         }}
         decisions={decisions}
+        // Rendered as a slot rather than a sibling so it can sit directly
+        // under Today's Pulse: a returning reader wants the judgement first
+        // and what has moved since their last visit immediately after it.
+        sinceLastLook={
+          <SinceLastLook
+            view={since}
+            vendorNames={Object.fromEntries(
+              metrics.vendors.map((v) => [v.id, v.name])
+            )}
+          />
+        }
         verdict={{
           vendors: cards.vendors.map((v) => ({
             vendorId: v.vendorId,

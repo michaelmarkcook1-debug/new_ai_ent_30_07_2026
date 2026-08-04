@@ -55,6 +55,7 @@ export function PulseView({
   benchmark,
   decisions,
   verdict,
+  sinceLastLook,
 }: {
   fixture: PulseFixture;
   metrics: MarketMetrics;
@@ -75,6 +76,8 @@ export function PulseView({
     coverage: Record<"winning" | "trust" | "durability", number>;
     total: number;
   };
+  /** Server-rendered, passed as a slot so it can sit under the hero. */
+  sinceLastLook?: React.ReactNode;
 }) {
   // The spotlight's own dropdown left with it, but this is still live state:
   // the vendor comparison table sets it and the news feed below reads it, so
@@ -117,7 +120,12 @@ export function PulseView({
         asOf={asOf}
       />
 
-      {/* 2. What to do about it */}
+      {/* 2. What has moved since this reader was last here. Directly under
+             the judgement, because that is the order a returning reader wants
+             them in: what is true today, then what changed since I looked. */}
+      {sinceLastLook}
+
+      {/* 3. What to do about it */}
       <ExecutiveActions actions={actions} />
 
       {/* 3. The readings behind the judgement. This replaced the Enterprise
