@@ -26,6 +26,51 @@ document exists to prevent.
 
 ---
 
+## 0.1 Every page, and what it is badged
+
+Counted from the rendered HTML on 4 August 2026, not from the props. The
+`SAMPLE` column is the number of SAMPLE badges the page actually paints, which
+is the only number that matters to someone deciding whether a page is
+demonstrable.
+
+| Page | What it answers | Data behind it | Lanes shown | SAMPLE | Refresh |
+|---|---|---|---|---:|---|
+| `/start` | Which question is yours | Static card copy | AIE LIVE, LIVE | 0 | Editorial |
+| `/pulse` | What changed today | `market-share`, `reputation`, `capabilities`; judgement derived in `lib/pulse/judgement.ts`; verdict from `lib/vendor/composite-data.ts` | AIE (worst pull), DERIVED | 0 | Fixture sync + ISR 24 h |
+| `/market-watch` | Who leads each category | `market-share.json` (4 Aug 2026) | AIE LIVE, AIE | 0 | `sync-aie-fixtures` |
+| `/ai-adoption` | Who is actually paying | Menlo + Ramp curated figures; peer explorer from AIE uptake | LIVE, AIE LIVE, AIE | 0 | Hand-curated; uptake is a May 2026 seed |
+| `/financial-snapshot` | Vendor financials | BoardRadar live (14 tickers) + `fixtures/sec/*` (31 Jul 2026) + `lib/finance/private-revenue.ts` | LIVE, AIE | 0 | BR live, 300 s cache; SEC on ingest |
+| `/competitive-intel` | Capability comparison | `capabilities.json`, 470 vendor-capability rows | matrix lane, LIVE | 0 | `sync-aie-fixtures` |
+| `/vendor-view`, `/vendor-view/[id]` | One vendor, read properly | `vendors.json`, `capabilities.json`, `reputation.json`, composite | AIE | 0 | `sync-aie-fixtures` |
+| `/reputation-tracker` | How buyers rate vendors | `reputation.json` (29 rows, 4 Aug 2026) + third-party block | AIE, LIVE, third-party lane | **1** | `sync-aie-fixtures` |
+| `/alliances` | Which GSI carries which vendor | `lib/aie/alliances/seed.ts`, 51 channel links | AIE | 0 | Hand-curated |
+| `/market-view` (Model for Role) | Which model per role | `roles.json` (294 roles), `models.json` (330 models) | DERIVED, AIE | 0 | Bundled snapshot, 2 Aug 2026 |
+| `/price-performance` | What capability costs | `models.json` | AIE LIVE, AIE | 0 | Bundled snapshot |
+| `/workflow-shortlist` | Who to buy for a workflow | `lib/aie/use-cases.ts` (75 workflows) + vendor index | AIE LIVE, AIE | 0 | Bundled + proxy |
+| `/trust-rank` | What regulation binds you | Governance postures | AIE, postures lane | **9** | Hand-curated |
+| `/security-desk` | Security posture | Lab postures | LIVE, labs lane | 0 | Hand-curated |
+| `/ecosystem-navigator` | Who depends on whom | Dependency seed | AIE, LIVE | 0 | Hand-curated |
+| `/decision-desk` | The call you must defend | AIE data + scripted analyst | AIE LIVE, AIE, SAMPLE | **5** | Anthropic API if keyed |
+| `/news-feed` | What moved | `/api/news`, 24 h module TTL | AIE LIVE, AIE, LIVE | 0 | 24 h |
+| `/company-view` | Your AI position | **Shell fixture** (`fixtures/sample/shell.json`) | — | **13** | Static sample |
+| `/shortlist` | Saved vendors | Cookie (`ag_shortlist`) | metrics lane | 0 | Per-browser |
+| `/interrogate` | Ask a question | Anthropic API, or scripted when unkeyed | — | 0 | Live per request |
+
+**The four pages a pod must not demo as live.** `/company-view` is the Shell
+sample end to end and is the largest single block of sample data in the
+product. `/trust-rank` and `/decision-desk` carry sample content inside
+otherwise real pages. `/reputation-tracker` has one sample panel. Everything
+else paints no SAMPLE badge at all.
+
+Two things that are real but easy to misread as live. The role and model
+libraries behind Model for Role and Price / Performance are **bundled
+snapshots dated 2 August 2026**: they are genuine published figures, they do
+not refresh, and the pages badge them AIE rather than LIVE for that reason.
+And `uptake` remains a static May 2026 seed, disclosed on-page, superseded by
+the movement catalogue in §1.1.
+
+---
+
 ## 1. First-party — endpoints we own
 
 ### 1.1 Movement catalogue (Postgres)

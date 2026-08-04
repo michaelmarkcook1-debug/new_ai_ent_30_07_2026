@@ -4,7 +4,24 @@ A working demo of AI Enterprise: proven analyst module structure applied to
 the enterprise AI supply side, for buyers deciding which AI models,
 platforms and delivery partners to choose. It carries its own green identity
 rather than the AnalystGenius indigo, so it reads as a distinct product. It
-runs entirely on your machine; nothing is deployed anywhere.
+runs locally, and is also deployed at https://newaient30072026.vercel.app.
+
+## Taking this over
+
+Three documents, written for a team picking this up rather than for the demo:
+
+- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — routes, data flow, the
+  BoardRadar dependency, Supabase, env vars, and the constraints that look
+  arbitrary until you break one.
+- **[docs/DATA-SOURCES.md](docs/DATA-SOURCES.md)** — every dataset behind every
+  page, its vintage, its refresh cadence, and which lane it is badged as.
+  Section 0.1 is the per-page table, including which pages still show SAMPLE.
+- **[docs/MVP-SCOPE.md](docs/MVP-SCOPE.md)** — what is genuinely done, the four
+  pages that are not demonstrable as live, and the backlog to production.
+
+Short version: 24 of 28 pages paint no SAMPLE badge at all. The footer's
+"Demo build" is accurate for `/company-view`, `/trust-rank`, `/decision-desk`
+and one panel of `/reputation-tracker`, and misleading for the rest.
 
 ## What you need first
 
