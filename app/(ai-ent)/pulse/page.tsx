@@ -4,6 +4,7 @@ import { PulseView } from "./components/pulse-view";
 import { loadNarrativeGap } from "@/lib/narrative-gap";
 import { loadCostCapability } from "@/app/(ai-ent)/price-performance/data";
 import { buildScorecard, buildPricePicks, decisionFor } from "@/lib/pulse/brief";
+import { scorecardSet } from "@/lib/vendor/composite-data";
 import {
   buildFinancialIndicators,
   buildSignals,
@@ -34,6 +35,10 @@ export default async function PulsePage() {
 
   const cost = loadCostCapability();
   const brief = buildScorecard(metrics, cost.models);
+
+  // The composite, for the Verdict dial. Only the raw inputs travel: the
+  // weights are adjustable in the browser, so the score is recomputed there.
+  const cards = scorecardSet();
   const picks = buildPricePicks(
     cost.models,
     cost.capturedAtDisplay ?? null,
@@ -99,6 +104,15 @@ export default async function PulsePage() {
           modelCount: cost.models.length,
         }}
         decisions={decisions}
+        verdict={{
+          vendors: cards.vendors.map((v) => ({
+            vendorId: v.vendorId,
+            name: v.name,
+            inputs: v.inputs,
+          })),
+          coverage: cards.coverage,
+          total: cards.total,
+        }}
       />
     </>
   );

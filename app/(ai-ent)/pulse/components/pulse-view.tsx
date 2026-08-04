@@ -7,12 +7,8 @@ import { MicroLabel } from "@/lib/ui/micro";
 import { Accordion } from "@/lib/ui/accordion";
 import { VendorComparisonTable } from "./comparison";
 import { PulseLiveNews } from "./live-news";
-import {
-  PulseHero,
-  ExecutiveActions,
-  Scorecard,
-  MetaRow,
-} from "./executive-brief";
+import { PulseHero, ExecutiveActions, MetaRow } from "./executive-brief";
+import { VerdictDial, type DialVendor } from "./verdict-dial";
 import { PriceSummary } from "./price-summary";
 import {
   MaterialRisks,
@@ -58,6 +54,7 @@ export function PulseView({
   financial,
   benchmark,
   decisions,
+  verdict,
 }: {
   fixture: PulseFixture;
   metrics: MarketMetrics;
@@ -73,6 +70,11 @@ export function PulseView({
   };
   benchmark: { source: string; modelCount: number };
   decisions: Record<string, VendorDecision>;
+  verdict: {
+    vendors: DialVendor[];
+    coverage: Record<"winning" | "trust" | "durability", number>;
+    total: number;
+  };
 }) {
   // The spotlight's own dropdown left with it, but this is still live state:
   // the vendor comparison table sets it and the news feed below reads it, so
@@ -118,8 +120,14 @@ export function PulseView({
       {/* 2. What to do about it */}
       <ExecutiveActions actions={actions} />
 
-      {/* 3. The readings behind the judgement */}
-      <Scorecard brief={brief} lane={metrics.lane} />
+      {/* 3. The readings behind the judgement. This replaced the Enterprise
+             scorecard on 4 August 2026: same job, but it renders the count of
+             inputs it was built from, which the scorecard did not. */}
+      <VerdictDial
+        vendors={verdict.vendors}
+        coverage={verdict.coverage}
+        total={verdict.total}
+      />
 
       {/* 4. What to buy */}
       <PriceSummary

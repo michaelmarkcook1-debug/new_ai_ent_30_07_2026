@@ -1,0 +1,594 @@
+{
+  "note": "Internal. Vendor coverage of the three composite inputs, for the data backlog. Not shipped to users.",
+  "coverage": {
+    "winning": 47,
+    "trust": 28,
+    "durability": 18
+  },
+  "total": 47,
+  "byInputCount": [
+    {
+      "inputs": 0,
+      "vendors": 0
+    },
+    {
+      "inputs": 1,
+      "vendors": 15
+    },
+    {
+      "inputs": 2,
+      "vendors": 18
+    },
+    {
+      "inputs": 3,
+      "vendors": 14
+    }
+  ],
+  "thresholds": {
+    "winning": {
+      "low": 55.58961127582619,
+      "high": 60.074936140925765
+    },
+    "trust": {
+      "low": 75,
+      "high": 78
+    },
+    "durability": {
+      "low": 0,
+      "high": 80
+    }
+  },
+  "vendors": [
+    {
+      "vendorId": "a16z",
+      "name": "Andreessen Horowitz",
+      "winning": 53.561071428571424,
+      "trust": null,
+      "durability": null,
+      "composite": 53.6,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "broadcom",
+      "name": "Broadcom",
+      "winning": 60.09451055806939,
+      "trust": null,
+      "durability": null,
+      "composite": 60.1,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "cerebras",
+      "name": "Cerebras",
+      "winning": 56.43191471571906,
+      "trust": null,
+      "durability": null,
+      "composite": 56.4,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "fireworks",
+      "name": "Fireworks AI",
+      "winning": 56.53553401056308,
+      "trust": null,
+      "durability": null,
+      "composite": 56.5,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "g42",
+      "name": "G42 / Falcon (TII)",
+      "winning": 57.558571428571426,
+      "trust": null,
+      "durability": null,
+      "composite": 57.6,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "groq",
+      "name": "Groq",
+      "winning": 59.031559637916374,
+      "trust": null,
+      "durability": null,
+      "composite": 59,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "humain",
+      "name": "HUMAIN",
+      "winning": 47.74790346907994,
+      "trust": null,
+      "durability": null,
+      "composite": 47.7,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "lambda",
+      "name": "Lambda",
+      "winning": 55.07172964730457,
+      "trust": null,
+      "durability": null,
+      "composite": 55.1,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "mgx",
+      "name": "MGX",
+      "winning": 50.46746031746032,
+      "trust": null,
+      "durability": null,
+      "composite": 50.5,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "nscale",
+      "name": "Nscale",
+      "winning": 52.5947619047619,
+      "trust": null,
+      "durability": null,
+      "composite": 52.6,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "perplexity",
+      "name": "Perplexity",
+      "winning": 59.52897761153575,
+      "trust": null,
+      "durability": null,
+      "composite": 59.5,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "sakana",
+      "name": "Sakana AI",
+      "winning": 52.46174755799757,
+      "trust": null,
+      "durability": null,
+      "composite": 52.5,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "sequoia",
+      "name": "Sequoia Capital",
+      "winning": 50.081944444444446,
+      "trust": null,
+      "durability": null,
+      "composite": 50.1,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "softbank",
+      "name": "SoftBank",
+      "winning": 56.15,
+      "trust": null,
+      "durability": null,
+      "composite": 56.2,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "together",
+      "name": "Together AI",
+      "winning": 57.768741087344026,
+      "trust": null,
+      "durability": null,
+      "composite": 57.8,
+      "confidence": "1 of 3",
+      "missing": [
+        "trust",
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "ai21",
+      "name": "AI21 Labs",
+      "winning": 62.21,
+      "trust": 78.33333333333333,
+      "durability": null,
+      "composite": 69.1,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "amd",
+      "name": "AMD",
+      "winning": 64.315,
+      "trust": null,
+      "durability": 85,
+      "composite": 73.2,
+      "confidence": "2 of 3",
+      "missing": [
+        "trust"
+      ]
+    },
+    {
+      "vendorId": "coreweave",
+      "name": "CoreWeave",
+      "winning": 62.25422077922078,
+      "trust": null,
+      "durability": 85,
+      "composite": 72,
+      "confidence": "2 of 3",
+      "missing": [
+        "trust"
+      ]
+    },
+    {
+      "vendorId": "databricks",
+      "name": "Databricks",
+      "winning": 54.756824407250576,
+      "trust": 79,
+      "durability": null,
+      "composite": 65.1,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "deepseek",
+      "name": "DeepSeek",
+      "winning": 62.75518589253884,
+      "trust": 75.66666666666667,
+      "durability": null,
+      "composite": 68.3,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "glean",
+      "name": "Glean",
+      "winning": 60.03578730663851,
+      "trust": 78.66666666666667,
+      "durability": null,
+      "composite": 68,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "harvey",
+      "name": "Harvey",
+      "winning": 58.49724118010653,
+      "trust": 76.66666666666667,
+      "durability": null,
+      "composite": 66.3,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "hebbia",
+      "name": "Hebbia",
+      "winning": 53.788749249699876,
+      "trust": 78,
+      "durability": null,
+      "composite": 64.2,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "minimax",
+      "name": "MiniMax",
+      "winning": 55.264761904761905,
+      "trust": 71.33333333333333,
+      "durability": null,
+      "composite": 62.2,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "moonshot",
+      "name": "Moonshot AI",
+      "winning": 53.48919370292172,
+      "trust": 74.66666666666667,
+      "durability": null,
+      "composite": 62.6,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "moveworks",
+      "name": "Moveworks",
+      "winning": 61.14232853168338,
+      "trust": 75,
+      "durability": null,
+      "composite": 67.1,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "nvidia",
+      "name": "NVIDIA",
+      "winning": 73.64547619047619,
+      "trust": null,
+      "durability": 85,
+      "composite": 78.5,
+      "confidence": "2 of 3",
+      "missing": [
+        "trust"
+      ]
+    },
+    {
+      "vendorId": "openai",
+      "name": "OpenAI",
+      "winning": 69.58572883244159,
+      "trust": 80.33333333333333,
+      "durability": null,
+      "composite": 74.2,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "rogo",
+      "name": "Rogo",
+      "winning": 58.61688286808976,
+      "trust": 77,
+      "durability": null,
+      "composite": 66.5,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "tsmc",
+      "name": "TSMC",
+      "winning": 75.55,
+      "trust": null,
+      "durability": 85,
+      "composite": 79.6,
+      "confidence": "2 of 3",
+      "missing": [
+        "trust"
+      ]
+    },
+    {
+      "vendorId": "writer",
+      "name": "Writer",
+      "winning": 54.102091600474544,
+      "trust": 77.33333333333333,
+      "durability": null,
+      "composite": 64.1,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "xai",
+      "name": "xAI",
+      "winning": 57.61158333333333,
+      "trust": 69.66666666666667,
+      "durability": null,
+      "composite": 62.8,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "zai",
+      "name": "Z.ai",
+      "winning": 55.51394735749574,
+      "trust": 71.66666666666667,
+      "durability": null,
+      "composite": 62.4,
+      "confidence": "2 of 3",
+      "missing": [
+        "durability"
+      ]
+    },
+    {
+      "vendorId": "alibaba",
+      "name": "Alibaba",
+      "winning": 62.12519841269841,
+      "trust": 75,
+      "durability": 85,
+      "composite": 72.9,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "anthropic",
+      "name": "Anthropic",
+      "winning": 60.27306481009414,
+      "trust": 80,
+      "durability": 55,
+      "composite": 64.6,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "aws",
+      "name": "AWS",
+      "winning": 61.785814083451086,
+      "trust": 76.33333333333333,
+      "durability": 85,
+      "composite": 73.1,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "cohere",
+      "name": "Cohere (incl. Aleph Alpha)",
+      "winning": 59.71393791376819,
+      "trust": 77,
+      "durability": 55,
+      "composite": 63.5,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "google",
+      "name": "Google",
+      "winning": 63.27939370100576,
+      "trust": 80,
+      "durability": 85,
+      "composite": 74.8,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "ibm",
+      "name": "IBM",
+      "winning": 54.987753468470785,
+      "trust": 69.33333333333333,
+      "durability": 85,
+      "composite": 68.3,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "meta",
+      "name": "Meta",
+      "winning": 64.75286295005807,
+      "trust": 78,
+      "durability": 85,
+      "composite": 74.8,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "microsoft",
+      "name": "Microsoft",
+      "winning": 62.221592261298134,
+      "trust": 82,
+      "durability": 85,
+      "composite": 75,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "mistral",
+      "name": "Mistral",
+      "winning": 56.75680759253822,
+      "trust": 80.66666666666667,
+      "durability": 40,
+      "composite": 58.9,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "oracle",
+      "name": "Oracle",
+      "winning": 52.13083333333334,
+      "trust": 70,
+      "durability": 85,
+      "composite": 67.4,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "salesforce",
+      "name": "Salesforce",
+      "winning": 55.740939112487105,
+      "trust": 74.33333333333333,
+      "durability": 85,
+      "composite": 70.1,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "sap",
+      "name": "SAP",
+      "winning": 54.62293667940064,
+      "trust": 68.33333333333333,
+      "durability": 85,
+      "composite": 67.8,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "servicenow",
+      "name": "ServiceNow",
+      "winning": 62.18071428571428,
+      "trust": 75,
+      "durability": 85,
+      "composite": 72.9,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "snowflake",
+      "name": "Snowflake",
+      "winning": 57.35506337960286,
+      "trust": 73.33333333333333,
+      "durability": 85,
+      "composite": 70.4,
+      "confidence": "3 of 3",
+      "missing": []
+    }
+  ]
+}

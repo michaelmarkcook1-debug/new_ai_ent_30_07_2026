@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import { PageHeader } from "@/lib/ui/page";
 import { TRACKED_VENDORS } from "@/lib/aie/vendors";
 import { getVendorProfile } from "../data";
+import { ThreeQuestions } from "@/lib/ui/three-questions";
+import { vendorScorecard } from "@/lib/vendor/composite-data";
 import {
   CapabilitiesSection,
   DependencySection,
@@ -40,6 +42,9 @@ export default async function VendorProfilePage({
   const profile = getVendorProfile(id);
   if (!profile) notFound();
 
+  // The three questions a buyer arrives with, answered before the detail.
+  const card = vendorScorecard(id);
+
   return (
     <>
       <PageHeader
@@ -56,6 +61,7 @@ export default async function VendorProfilePage({
         }
       />
       <div className="space-y-4 pb-8">
+        {card ? <ThreeQuestions card={card} /> : null}
         <ProfileFacts profile={profile} />
         <ScoreBlock profile={profile} />
         <CapabilitiesSection profile={profile} />
