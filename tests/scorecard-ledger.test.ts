@@ -63,7 +63,7 @@ describe("the scorecard ledger", () => {
 
   it("carries a confidence column on every row", () => {
     const l = build();
-    expect(l.vendors.length).toBe(47);
+    expect(l.vendors.length).toBe(43);
     for (const v of l.vendors) {
       expect(v.confidence).toMatch(/^[0-3] of 3$/);
       // The acceptance rule, enforced on the internal artefact too: a

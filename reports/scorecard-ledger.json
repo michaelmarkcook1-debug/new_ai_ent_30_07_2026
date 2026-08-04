@@ -1,11 +1,11 @@
 {
   "note": "Internal. Vendor coverage of the three composite inputs, for the data backlog. Not shipped to users.",
   "coverage": {
-    "winning": 47,
+    "winning": 43,
     "trust": 28,
     "durability": 18
   },
-  "total": 47,
+  "total": 43,
   "byInputCount": [
     {
       "inputs": 0,
@@ -13,7 +13,7 @@
     },
     {
       "inputs": 1,
-      "vendors": 15
+      "vendors": 11
     },
     {
       "inputs": 2,
@@ -26,8 +26,8 @@
   ],
   "thresholds": {
     "winning": {
-      "low": 55.58961127582619,
-      "high": 60.074936140925765
+      "low": 56.43191471571906,
+      "high": 60.27306481009414
     },
     "trust": {
       "low": 75,
@@ -39,19 +39,6 @@
     }
   },
   "vendors": [
-    {
-      "vendorId": "a16z",
-      "name": "Andreessen Horowitz",
-      "winning": 53.561071428571424,
-      "trust": null,
-      "durability": null,
-      "composite": 53.6,
-      "confidence": "1 of 3",
-      "missing": [
-        "trust",
-        "durability"
-      ]
-    },
     {
       "vendorId": "broadcom",
       "name": "Broadcom",
@@ -144,19 +131,6 @@
       ]
     },
     {
-      "vendorId": "mgx",
-      "name": "MGX",
-      "winning": 50.46746031746032,
-      "trust": null,
-      "durability": null,
-      "composite": 50.5,
-      "confidence": "1 of 3",
-      "missing": [
-        "trust",
-        "durability"
-      ]
-    },
-    {
       "vendorId": "nscale",
       "name": "Nscale",
       "winning": 52.5947619047619,
@@ -189,32 +163,6 @@
       "trust": null,
       "durability": null,
       "composite": 52.5,
-      "confidence": "1 of 3",
-      "missing": [
-        "trust",
-        "durability"
-      ]
-    },
-    {
-      "vendorId": "sequoia",
-      "name": "Sequoia Capital",
-      "winning": 50.081944444444446,
-      "trust": null,
-      "durability": null,
-      "composite": 50.1,
-      "confidence": "1 of 3",
-      "missing": [
-        "trust",
-        "durability"
-      ]
-    },
-    {
-      "vendorId": "softbank",
-      "name": "SoftBank",
-      "winning": 56.15,
-      "trust": null,
-      "durability": null,
-      "composite": 56.2,
       "confidence": "1 of 3",
       "missing": [
         "trust",

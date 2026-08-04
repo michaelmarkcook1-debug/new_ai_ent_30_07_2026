@@ -20,10 +20,11 @@ import {
 
 // The three inputs, per vendor, from the sources the product already holds.
 //
-// Coverage, measured 4 August 2026 across the 47 tracked vendors:
-//   winning     47 of 47   every vendor is assessed on at least one capability
-//   trust       28 of 47   reputation is published for a subset
-//   durability  18 of 47   15 listed companies plus 3 disclosed private rounds
+// Coverage, measured 4 August 2026 across the 43 tracked vendors (the 47 in
+// the directory less 4 investors, who are not vendors anyone buys from):
+//   winning     43 of 43   every vendor is assessed on at least one capability
+//   trust       28 of 43   reputation is published for a subset
+//   durability  18 of 43   15 listed companies plus 3 disclosed private rounds
 //
 // So no vendor is 0 of 3 and 14 are 3 of 3. That is worth stating plainly
 // because it sets what the composite can honestly claim: it is always a
@@ -122,8 +123,17 @@ function rawInputs(vendorId: string): CompositeInputs {
  * The cuts are relative by necessity: capability and reputation sit on
  * different scales, so no single absolute threshold reads both correctly.
  */
+// Investors are excluded. "Is it winning, do people trust it, will it still
+// exist in three years" are questions about a vendor you might buy from, and
+// asking them of Sequoia Capital is a category error. They are also absent
+// from /vendor-view for the same reason, so scoring them here offered a
+// verdict on something the rest of the product does not treat as a vendor.
+const INVESTOR_CATEGORY = "AI investor";
+
 export function scorecardSet(weights: Weights = DEFAULT_WEIGHTS): ScorecardSet {
-  const roster = VENDOR_DIRECTORY.map((v) => ({
+  const roster = VENDOR_DIRECTORY.filter(
+    (v) => v.category !== INVESTOR_CATEGORY
+  ).map((v) => ({
     vendorId: v.id,
     name: v.name,
     inputs: rawInputs(v.id),

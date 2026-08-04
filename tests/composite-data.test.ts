@@ -8,8 +8,8 @@ describe("coverage of the three inputs", () => {
   // These are the numbers the product's copy quotes. If one moves, the
   // sentence describing what the composite can claim is wrong.
   it("is what the sources actually publish", () => {
-    expect(SET.total).toBe(47);
-    expect(SET.coverage.winning).toBe(47);
+    expect(SET.total).toBe(43);
+    expect(SET.coverage.winning).toBe(43);
     expect(SET.coverage.trust).toBe(28);
     expect(SET.coverage.durability).toBe(18);
   });
@@ -18,6 +18,14 @@ describe("coverage of the three inputs", () => {
     const none = SET.vendors.filter((v) => v.result.inputsPresent === 0);
     expect(none).toEqual([]);
     expect(SET.vendors.every((v) => v.result.score !== null)).toBe(true);
+  });
+
+  // Investors are not vendors you buy from, and they have no /vendor-view
+  // page either. Offering a verdict on Sequoia Capital was a category error.
+  it("leaves investors out of the scorecard entirely", () => {
+    for (const id of ["a16z", "mgx", "sequoia", "softbank"]) {
+      expect(SET.vendors.find((v) => v.vendorId === id)).toBeUndefined();
+    }
   });
 
   it("has 14 vendors on all three inputs", () => {
