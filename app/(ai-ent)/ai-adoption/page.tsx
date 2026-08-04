@@ -85,14 +85,14 @@ export default function AiAdoptionPage() {
           </div>
           <p className="measure mt-3 rounded border border-warn/40 bg-warn-bg/40 px-3 py-2 text-xs leading-relaxed">
             <b>Read these before the slice below.</b> The peer adoption explorer
-            falls back to a May 2026 segment model when the live pull does not
-            answer, and that model places OpenAI ahead of Anthropic in every
-            slice. Both measurements above disagree with that ordering. The
-            model is kept because the shape of a slice — which vendors appear
-            at all, and how concentrated it is — remains useful, and because
-            deleting the only view of adoption by industry, region and size
-            would cost more than the stale ranking does. The correction travels
-            with the chart.
+            pulls live for every selection, but what it pulls is a modelled
+            estimate dated May 2026, and the endpoint says so itself. Its
+            ordering puts OpenAI ahead of Anthropic; both measurements above,
+            taken later, disagree. This is not a stale copy that a refresh
+            would fix: the upstream route reads a static seed, and the
+            evidence pipeline that would refresh it is not built yet. Read the
+            slice for its shape — which vendors appear at all, and how
+            concentrated it is — and read the figures above for the ranking.
           </p>
           <p className="mt-2 text-xs text-muted">
             Category-level market shares — who leads frontier APIs, enterprise

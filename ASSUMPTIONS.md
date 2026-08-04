@@ -888,3 +888,36 @@ Dates are absolute; the build day is 30 July 2026.
     Verified across four states: first visit, a watchlist with movement, a
     watchlist with a marker ahead of the last capture (the honest quiet state),
     and a single-vendor list.
+
+30. **Peer adoption wired live, and what "live" turns out to mean (4 August
+    2026).** Michael asked to make the tab live, refine the industry naming,
+    add a Global region and drop organisation size. Probing the upstream
+    endpoint first changed what the honest answer was.
+    - **The live endpoint serves the same May 2026 model.** Its own provenance
+      string is "MODELLED ESTIMATE — May 2026 segment-share model; directional,
+      not audited market share", and the ranking-engine route behind it reads
+      the identical 585-row static seed already ported into `lib/aie`, with a
+      comment saying rows migrate to Prisma and refresh via the evidence
+      pipeline "post-spend-cap". `market-share` is the same story: April 2026,
+      "pending live refresh once ingestion is enabled". So there is no fresher
+      adoption data in the ranking engine to wire to. Live here means freshly
+      fetched, not freshly measured, and the panel now says exactly that and
+      renders the endpoint's own provenance verbatim.
+    - **Every selection is now a genuine upstream pull, which it was not
+      before.** The explorer offered eight AIE archetypes mapped onto the
+      engine's nine segments; five of the eight spanned multiple segments, so
+      they could not filter upstream and silently showed an unfiltered slice
+      under a label naming an industry — which is where the unreadable
+      "Commercial Enterprise (mapped to Retail / consumer / ecommerce and
+      Professional services / consulting)" came from. The nine segments are
+      offered directly with tidied display names, all nine verified to filter
+      upstream, and the response's own scope is echoed under the chart so the
+      reader can see the slice was served, not assembled.
+    - **Organisation size was removed because it never worked.** The endpoint
+      ignores `companySize` and `size` entirely — scope returns
+      {industry, region} whatever is sent — so on the live path the control
+      only re-weighted a local copy while the badge said live. A filter that
+      moves the label but not the answer is worse than no filter.
+    - **Global is the absence of a region, not a value.** `region=Global` is
+      rejected upstream; omitting the parameter is what the API calls a scope
+      of "all". It is the default option and sends nothing.

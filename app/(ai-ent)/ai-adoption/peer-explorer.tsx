@@ -1,84 +1,92 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import {
-  REGIONS,
-  COMPANY_SIZES,
-  aggregateUptake,
-  INDUSTRIES as ARCHETYPES,
-} from "@/lib/aie";
-import type { Region, CompanySize } from "@/lib/aie";
+import { useEffect, useState } from "react";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
 import { EmptyState } from "@/lib/ui/page";
 import { PeerAdoptionChart } from "./peer-adoption-chart";
 import { aieFetch, type AieSource, type AieUptakeRow } from "@/lib/aie-live";
-import { ARCHETYPE_TO_LIVE_INDUSTRY, ARCHETYPE_TO_UPTAKE, UPTAKE_VENDOR_ID } from "./data";
+import {
+  ADOPTION_REGIONS,
+  ADOPTION_SEGMENTS,
+  GLOBAL_REGION,
+  UPTAKE_VENDOR_ID,
+} from "./data";
 
-// Peer adoption: who your industry, region and size band is actually buying.
+// Peer adoption: who your industry and region is actually buying.
 //
-// This is the question a CIO asks first — "what are firms like us doing?" —
-// and it belongs here rather than beside a model-fit tool, which is why it
-// moved off FitEngine.
+// Every selection is a live pull. The explorer now speaks the uptake engine's
+// own nine segments, so industry and region both filter upstream and the
+// answer on screen is the answer the API gave for exactly that slice. It used
+// to offer eight AIE archetypes mapped onto those nine segments; five of the
+// eight spanned more than one segment and could not filter upstream at all,
+// so most of the menu quietly showed an unfiltered slice under a label naming
+// an industry.
 //
-// It carries a correction. The ported segment model dates from May 2026 and
-// its ordering has since been overtaken: it has OpenAI ahead of Anthropic in
-// every slice, while Menlo Ventures and the Ramp AI Index both now measure
-// Anthropic ahead on enterprise spend and business adoption. The response is
-// the house rule for the news seed — ship it with its vintage stated and its
-// contradiction named, not silently, and not deleted. The live pull is
-// preferred whenever the deployed app answers, and the relative ordering
-// carries a correction note whenever the ported seed is what you are seeing.
-const SEED_VINTAGE = "May 2026";
+// Two controls were removed rather than fixed, because neither could be made
+// honest:
+//
+//   Organisation size did nothing. The API ignores companySize and size
+//   entirely — its scope comes back {industry, region} whatever you send — so
+//   the control only ever re-weighted a local copy of the data while the
+//   badge said live. A filter that changes the label and not the answer is
+//   worse than no filter.
+//
+//   Global is not an upstream value; region=Global is rejected. Global is the
+//   absence of a region filter, which is what the API calls a scope of "all",
+//   so it is the default option and simply sends no region.
+//
+// What the endpoint returns is a modelled estimate dated May 2026, and it says
+// so itself in a provenance string that is rendered verbatim below. Live here
+// means freshly fetched, not freshly measured, and the interface must not let
+// a green badge imply otherwise.
+
+interface UptakeResponse {
+  provenance?: string;
+  scope?: { industry?: string; region?: string } | null;
+  count?: number;
+  rows: AieUptakeRow[];
+}
 
 export function PeerAdoptionExplorer() {
-  const [archetypeId, setArchetypeId] = useState("");
-  const [region, setRegion] = useState<"" | Region>("");
-  const [size, setSize] = useState<"" | CompanySize>("");
-  const [live, setLive] = useState<AieUptakeRow[] | null>(null);
-  const [liveSource, setLiveSource] = useState<AieSource>("live");
-
-  const archetypes = useMemo(() => Object.values(ARCHETYPES), []);
-  const liveIndustry = archetypeId ? ARCHETYPE_TO_LIVE_INDUSTRY[archetypeId] : undefined;
+  const [segment, setSegment] = useState("");
+  const [region, setRegion] = useState("");
+  const [rows, setRows] = useState<AieUptakeRow[] | null>(null);
+  const [provenance, setProvenance] = useState<string | null>(null);
+  const [scope, setScope] = useState<UptakeResponse["scope"]>(null);
+  const [source, setSource] = useState<AieSource>("live");
+  const [state, setState] = useState<"loading" | "ok" | "failed">("loading");
 
   useEffect(() => {
     let cancelled = false;
+    setState("loading");
     const params: Record<string, string> = {};
-    if (liveIndustry) params.industry = liveIndustry;
+    if (segment) params.industry = segment;
+    // Global sends nothing: the API rejects region=Global and means the same
+    // thing by omitting it.
     if (region) params.region = region;
-    aieFetch<{ rows: AieUptakeRow[] }>("uptake", params).then((res) => {
+    aieFetch<UptakeResponse>("uptake", params).then((res) => {
       if (cancelled) return;
-      setLiveSource(res.source);
-      setLive(res.ok && res.data?.rows ? res.data.rows : null);
+      setSource(res.source);
+      if (res.ok && res.data?.rows?.length) {
+        setRows(res.data.rows);
+        setProvenance(res.data.provenance ?? null);
+        setScope(res.data.scope ?? null);
+        setState("ok");
+      } else {
+        setRows(null);
+        setState("failed");
+      }
     });
     return () => {
       cancelled = true;
     };
-  }, [liveIndustry, region]);
+  }, [segment, region]);
 
-  const portedRows = useMemo(
-    () =>
-      aggregateUptake({
-        regions: region ? [region] : undefined,
-        industries: archetypeId ? ARCHETYPE_TO_UPTAKE[archetypeId] : undefined,
-        companySize: size || null,
-      }),
-    [archetypeId, region, size]
-  );
-
-  const usingLive = live !== null;
-  const rows = usingLive ? live : portedRows;
-  const lane = usingLive ? (liveSource === "mock" ? "mock" : "aie-live") : "aie";
-
-  const sliceLabel = [
-    archetypeId
-      ? `${ARCHETYPES[archetypeId].name} (mapped to ${ARCHETYPE_TO_UPTAKE[archetypeId].join(" and ")})`
-      : "All industries",
-    region || "All regions",
-    size || "All organisation sizes",
-  ].join(" · ");
-
+  const segmentLabel =
+    ADOPTION_SEGMENTS.find((s) => s.apiValue === segment)?.label ?? "All industries";
+  const regionLabel = region || GLOBAL_REGION;
   const select = "rounded border border-base-300 bg-base-100 px-2 py-1.5 text-[12px]";
 
   return (
@@ -86,24 +94,24 @@ export function PeerAdoptionExplorer() {
       <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel
           label="Peer adoption: who firms like yours are buying"
-          tooltip="Share of model-provider adoption within your slice. Shares are normalised inside the slice; the evidence labels are the source's own."
+          tooltip="Share of model-provider adoption within your slice, pulled live from the deployed AI Enterprise app for exactly the industry and region you select."
         />
-        <LaneBadge lane={lane} />
+        <LaneBadge lane={source === "mock" ? "mock" : state === "ok" ? "aie-live" : "aie"} />
       </div>
 
-      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
+      <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-2">
         <label className="flex flex-col gap-1">
           <span className="micro-label">Industry</span>
           <select
             aria-label="Industry"
-            value={archetypeId}
-            onChange={(e) => setArchetypeId(e.target.value)}
+            value={segment}
+            onChange={(e) => setSegment(e.target.value)}
             className={select}
           >
             <option value="">All industries</option>
-            {archetypes.map((a) => (
-              <option key={a.id} value={a.id}>
-                {a.name}
+            {ADOPTION_SEGMENTS.map((s) => (
+              <option key={s.apiValue} value={s.apiValue}>
+                {s.label}
               </option>
             ))}
           </select>
@@ -113,42 +121,38 @@ export function PeerAdoptionExplorer() {
           <select
             aria-label="Region"
             value={region}
-            onChange={(e) => setRegion(e.target.value as "" | Region)}
+            onChange={(e) => setRegion(e.target.value)}
             className={select}
           >
-            <option value="">All regions</option>
-            {REGIONS.map((r) => (
+            <option value="">{GLOBAL_REGION}</option>
+            {ADOPTION_REGIONS.map((r) => (
               <option key={r} value={r}>
                 {r}
               </option>
             ))}
           </select>
         </label>
-        <label className="flex flex-col gap-1">
-          <span className="micro-label">Organisation size</span>
-          <select
-            aria-label="Organisation size"
-            value={size}
-            onChange={(e) => setSize(e.target.value as "" | CompanySize)}
-            className={select}
-          >
-            <option value="">All sizes</option>
-            {COMPANY_SIZES.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
-        </label>
       </div>
 
-      <p className="mt-2 text-[11px] text-muted">{sliceLabel}</p>
+      <p className="mt-2 text-[11px] text-muted">
+        {segmentLabel} · {regionLabel}
+        {scope ? (
+          <span className="ml-1 font-mono text-[10px]">
+            (upstream scope: industry {scope.industry ?? "all"}, region{" "}
+            {scope.region ?? "all"})
+          </span>
+        ) : null}
+      </p>
 
       <div className="mt-3">
-        {rows.length === 0 ? (
+        {state === "loading" ? (
+          <p className="py-8 text-center font-mono text-xs text-muted">
+            Pulling this slice live…
+          </p>
+        ) : state === "failed" || !rows ? (
           <EmptyState
-            title="No adoption rows for this slice"
-            detail="The dataset has no contributing cells here; nothing is shown rather than a guess."
+            title="The live pull did not answer for this slice"
+            detail="Nothing is shown rather than a local approximation dressed as a live figure."
           />
         ) : (
           <PeerAdoptionChart
@@ -159,59 +163,44 @@ export function PeerAdoptionExplorer() {
         )}
       </div>
 
-      {/* The correction travels with the chart, not in a footnote. */}
-      {usingLive ? (
-        <p className="measure mt-3 text-[11px] text-muted">
-          Pulled live from the deployed AIE app
-          {archetypeId && !liveIndustry
-            ? ", unfiltered by industry because this archetype spans several of the engine's segments"
-            : ", filtered upstream by the selections above"}
-          .
-        </p>
-      ) : (
+      {/* The endpoint's own words about its own data, verbatim. */}
+      {provenance ? (
         <p className="measure mt-3 rounded border border-warn/40 bg-warn-bg/40 px-3 py-2 text-[11.5px] leading-relaxed">
-          <b>Ordering is {SEED_VINTAGE} and has since been overtaken.</b> The
-          live pull did not answer, so this is the ported segment model, which
-          places OpenAI ahead of Anthropic in every slice. Two later
-          measurements disagree: Menlo Ventures puts Anthropic at roughly 40 per
-          cent of enterprise LLM spend against OpenAI&apos;s 27, and the Ramp AI
-          Index recorded Anthropic passing OpenAI on business adoption in April
-          2026. Read the shape of the slice — which vendors appear at all, and
-          how concentrated it is — rather than the order of the top two.
+          <b>What the source says about itself:</b>{" "}
+          <span className="font-mono text-[11px]">{provenance}</span>
+          <br />
+          Live means freshly fetched, not freshly measured. This ordering puts
+          OpenAI ahead of Anthropic; the two measurements above, both later,
+          disagree. Read the shape of the slice — which vendors appear at all,
+          and how concentrated it is — rather than the order of the top two.
         </p>
-      )}
+      ) : null}
 
       <div className="mt-3 border-t border-base-300 pt-2">
         <DerivationDrawer title="How the adoption shares are derived">
           <p>
-            Shares come from the AIE vendor uptake model, pulled live from the
-            deployed app when it answers and from the ported dataset otherwise.
-            The ported dataset is 585 region-by-industry-by-vendor rows (5
-            regions, 9 industry segments, 13 model providers), each a fraction
-            normalised within its region-and-industry cell.
+            Every selection is a live call to the deployed AI Enterprise app&apos;s
+            uptake endpoint, filtered upstream by industry and region. The
+            shares are normalised within the returned slice, so they always sum
+            to 100 per cent of that slice rather than of the market.
           </p>
-          <ul className="list-disc space-y-1 pl-4 text-muted">
-            <li>
-              Matching cells are averaged per vendor, optionally re-weighted by
-              the vendor&apos;s large-enterprise or SME propensity, then
-              renormalised so the slice sums to 100 per cent.
-            </li>
-            <li>
-              The eight industry archetypes map onto the dataset&apos;s own nine
-              segments; the mapping is shown in the slice label and the dataset
-              itself is not altered.
-            </li>
-            <li>
-              Confidence per row is the average of the contributing cells&apos;
-              native labels. Two of those labels, &quot;Low-Medium&quot; and
-              &quot;Medium-Low&quot;, share a rank, so a slice made only of
-              Medium-Low cells reports as Low-Medium.
-            </li>
-          </ul>
+          <p>
+            The underlying model is 585 region-by-industry-by-vendor cells (5
+            regions, 9 industry segments, 13 model providers). Confidence per
+            row is the average of the contributing cells&apos; native labels;
+            two of those labels, &quot;Low-Medium&quot; and
+            &quot;Medium-Low&quot;, share a rank, so a slice made only of
+            Medium-Low cells reports as Low-Medium.
+          </p>
+          <p className="text-muted">
+            Two filters were removed rather than repaired. Organisation size was
+            ignored by the endpoint entirely, so it only ever re-weighted a
+            local copy while the badge said live. Global is not an upstream
+            value — it is the absence of a region filter, and is sent that way.
+          </p>
           <p className="text-muted">
             These are directional adoption-share estimates, not disclosed vendor
-            revenue or audited market share, and the ported seed&apos;s ordering
-            of the two largest vendors is contradicted by later measurement.
+            revenue or audited market share.
           </p>
         </DerivationDrawer>
       </div>
