@@ -135,8 +135,16 @@ export function approxTokens(text: string): number {
 // The spec says the analyst key comes from ANTHROPIC_API_KEY in .env.local,
 // supplied by Michael. The shell environment on a developer machine can
 // carry its own key, and Next.js lets shell values win, so reading
-// process.env here could silently spend on a key nobody supplied to this
-// app. Read the file itself instead: .env.local is the single source.
+// process.env there could silently spend on a key nobody supplied to this
+// app. So on a machine that has a .env.local, that file is the only source:
+// if it exists and carries no key, the answer is no key, and the shell is
+// never consulted.
+//
+// Deployed there is no such file. .env.local is gitignored and never ships,
+// so the read throws and the platform's own environment is the only place a
+// key can come from. That branch is what makes the key settable on Vercel at
+// all; without it the analyst and Interrogate are permanently scripted in
+// production however the project is configured.
 let cachedKey: string | null | undefined;
 export async function analystApiKey(): Promise<string | null> {
   if (cachedKey !== undefined) return cachedKey;
@@ -146,7 +154,8 @@ export async function analystApiKey(): Promise<string | null> {
     const value = match?.[1]?.trim() ?? "";
     cachedKey = value.length > 0 ? value : null;
   } catch {
-    cachedKey = null;
+    const fromPlatform = (process.env.ANTHROPIC_API_KEY ?? "").trim();
+    cachedKey = fromPlatform.length > 0 ? fromPlatform : null;
   }
   return cachedKey;
 }
