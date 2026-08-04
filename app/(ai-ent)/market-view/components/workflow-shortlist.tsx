@@ -158,6 +158,20 @@ export function WorkflowShortlistPanel({
         </div>
       </div>
 
+      {/* Buy and build are both "what to run it on". Who actually delivers the
+          programme is a third answer, and it lives on its own page with a
+          chooser across every live provider. */}
+      <p className="mt-3 text-xs text-muted">
+        Neither list is who delivers the programme.{" "}
+        <Link
+          href="/ecosystem-navigator"
+          className="font-semibold text-primary hover:underline"
+        >
+          Integrators and service providers
+        </Link>{" "}
+        are on the Ecosystem Navigator.
+      </p>
+
       <div className="mt-3 border-t border-base-300 pt-2">
         <DerivationDrawer title="How this shortlist is built">
           <p>

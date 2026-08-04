@@ -659,3 +659,13 @@ Dates are absolute; the build day is 30 July 2026.
     Accenture's partner platform, omitting the NVIDIA Business Group, which is
     Accenture's most prominent AI partnership. The app renders what the endpoint
     returns, with provenance attached; the gap is upstream.
+    **The delivery matrix was then removed from this tab entirely.** Michael
+    asked why Accenture appeared here at all, and the honest answer was that the
+    ticker was hardcoded with nothing on screen saying why that provider and not
+    another. It also answered a different question from the rest of the tab, who
+    delivers an AI programme rather than which model suits a role, and the
+    Ecosystem Navigator already answers it with a chooser across every live
+    provider. The panel and its now-unused types file are deleted, the `live`
+    lane is dropped from the page header because no BoardRadar surface remains
+    here, and the route is preserved as a line under the shortlist: neither buy
+    nor build is who delivers the programme.
