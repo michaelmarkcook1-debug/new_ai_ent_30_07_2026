@@ -1136,3 +1136,25 @@ Dates are absolute; the build day is 30 July 2026.
       genuine remaining lever is knowing which surfaces are used at all, which
       is what the usage series now measures: the cheapest tool is the one
       nobody needed and nobody has to maintain.
+34. **Your AI Position gets a real insight (4 August 2026).** Michael reported
+    the Analyst Insight still showing SAMPLE. It did, on one page, and that page
+    was the only one whose insight was never computed at all.
+    `/company-view` opened with an `EditorialBanner` labelled "Analyst Insight"
+    carrying `f.overview.insight` — a paragraph written into the Shell fixture
+    and badged `sample` by hand. So the one tab about the reader's own position
+    held the only insight in the product derived from nothing, dated the day the
+    fixture was written (30 July, five days stale by the time it was reported).
+    The badge was honest; the content was the problem.
+    Replaced with a computed `positionInsight` rendered through the same
+    `AnalystInsight` component every other tab uses. It now reads **AIE live**
+    and carries the current date.
+    **Built from market figures, not company figures, on purpose.** The platform
+    cannot get buyer-level data for a real customer, which is Michael's own
+    constraint from the tab audit, so an insight needing it would work for the
+    exemplar and for nobody else. What the market did is real for every reader
+    and is the half of "your position" this product can evidence. The insight
+    says so on screen: it reads the market, not the estate, and names the
+    sections below as exemplar unless a company with published figures is
+    selected.
+    The other `lane="sample"` badges on that tab's sub-pages are untouched and
+    correct: those panels really are the Shell exemplar.

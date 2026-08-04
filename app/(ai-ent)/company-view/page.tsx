@@ -1,11 +1,16 @@
 import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
-import { EditorialBanner } from "@/lib/ui/cards";
 import { KpiGauge, DerivationDrawer } from "@/lib/ui/score";
 import { loadShellFixture } from "./data";
 import { resolveCompany } from "@/lib/company-source";
 import { CompanyShell } from "./components/company-shell";
 import { ExemplarOnly } from "./components/exemplar-only";
+import { AnalystInsight } from "@/lib/ui/analyst-insight";
+import { positionInsight, pickNews } from "@/lib/analyst/insight";
+import { analystNews } from "@/lib/analyst/news-source";
+import { loadPulseMetrics } from "@/app/(ai-ent)/pulse/data";
+import { readChangeLog } from "@/lib/changes/watchlist";
+import { readWatchState } from "@/lib/changes/watchlist";
 
 export const metadata = { title: "Your AI Position | AI Enterprise" };
 
@@ -33,17 +38,22 @@ export default async function CompanyOverviewPage({
       </CompanyShell>
     );
   }
-  const f = await loadShellFixture();
+  const [f, metrics, news, watch] = await Promise.all([
+    loadShellFixture(),
+    loadPulseMetrics(),
+    analystNews(),
+    readWatchState(),
+  ]);
+  const movedSignals = readChangeLog().changes.length;
+  const insight = positionInsight(
+    metrics,
+    { movedSignals, watchedVendors: watch.vendorIds.length },
+    pickNews(news.items, { minImpact: 70 })
+  );
   return (
     <CompanyShell company={company}>
     <div className="space-y-4">
-      <EditorialBanner
-        title={f.overview.insight.title}
-        date={f.overview.insight.date}
-        badge={<LaneBadge lane="sample" />}
-      >
-        {f.overview.insight.body}
-      </EditorialBanner>
+      <AnalystInsight insight={insight} context="market position" />
 
       <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2 @6xl:grid-cols-4">
         {f.overview.kpis.map((k) => (

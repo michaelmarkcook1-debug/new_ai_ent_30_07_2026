@@ -688,3 +688,75 @@ export function pricePerformanceInsight(
     insufficient: null,
   };
 }
+
+/**
+ * Your AI Position: what the market did, read for a buyer.
+ *
+ * This page used to open with an editorial paragraph written into the Shell
+ * fixture and badged SAMPLE, which meant the one tab about the reader's own
+ * position carried the only insight in the product that was not computed from
+ * anything, and it was dated the day the fixture was written.
+ *
+ * Deliberately built from market figures rather than company figures. The
+ * platform cannot get buyer-level data for a real customer, so an insight that
+ * needed it would work for the exemplar and nobody else. What the market did
+ * is real for every reader, and it is the half of "your position" this product
+ * can actually evidence.
+ */
+export function positionInsight(
+  m: MarketMetrics,
+  opts: { movedSignals: number; watchedVendors: number },
+  news: InsightNews | null
+): AnalystInsightData {
+  const vendors = aiVendors(m);
+  const scored = vendors.filter((v) => typeof v.composite === "number");
+  if (scored.length === 0) {
+    return insufficient(
+      "No tracked vendor currently carries a composite score, so there is no market position to read your own against.",
+      ["AIE vendor scores"],
+      m.lane
+    );
+  }
+
+  const scores = scored
+    .map((v) => v.composite as number)
+    .sort((a, b) => a - b);
+  const median = round1(scores[Math.floor(scores.length / 2)]);
+  const top = round1(scores[scores.length - 1]);
+  const spread = round1(top - scores[0]);
+  const moving = m.gaining.length + m.slipping.length;
+
+  return {
+    headline:
+      spread >= 30
+        ? "The tracked field is spread widely enough that vendor choice still changes the outcome more than execution does."
+        : "The tracked field has converged far enough that execution, not vendor choice, is now the variable you control.",
+    summary: `${scored.length} vendors carry a composite score, with a median of ${median} and a top of ${top}, a spread of ${spread} points. ${moving} moved position in the current period${
+      opts.movedSignals > 0
+        ? `, and ${opts.movedSignals} tracked figures moved since the previous capture`
+        : ""
+    }. ${
+      spread >= 30
+        ? "A spread that wide means the difference between a good and a poor choice is larger than most implementation risk, so diligence on the shortlist repays more than speed does."
+        : "A narrow spread means the vendors at the top of your shortlist are closer than their marketing suggests, and the decision moves to switching cost, governance fit and what your own teams can actually run."
+    } This reads the market, not your estate: nothing on this platform measures your own deployment, and the sections below are the exemplar buyer unless you have selected a company with published figures.`,
+    implications: [
+      `Median composite ${median}, top ${top}, spread ${spread} points across ${scored.length} vendors.`,
+      spread >= 30
+        ? "Vendor choice outweighs execution risk at this spread; spend the diligence."
+        : "Vendors are closer than they claim; decide on switching cost and governance fit.",
+      opts.watchedVendors > 0
+        ? `You are watching ${opts.watchedVendors} of them; the Pulse lists what moved.`
+        : "Add vendors to your shortlist and the Pulse will report what moves against them.",
+    ],
+    action: spread >= 30 ? "Investigate" : "Monitor",
+    news,
+    evidence: {
+      count: scored.length,
+      sources: ["AIE vendor scores", "AIE movement classifications"],
+      lastUpdated: m.generatedAt ?? null,
+      lane: m.lane,
+    },
+    insufficient: null,
+  };
+}
