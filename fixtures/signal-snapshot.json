@@ -1,0 +1,4338 @@
+{
+ "capturedAt": "2026-08-04",
+ "signals": {
+  "vendor_score:ai21": {
+   "key": "vendor_score:ai21",
+   "kind": "vendor_score",
+   "vendorId": "ai21",
+   "label": "overall score",
+   "value": 48.6
+  },
+  "vendor_score:amd": {
+   "key": "vendor_score:amd",
+   "kind": "vendor_score",
+   "vendorId": "amd",
+   "label": "overall score",
+   "value": 56.9
+  },
+  "vendor_score:aws": {
+   "key": "vendor_score:aws",
+   "kind": "vendor_score",
+   "vendorId": "aws",
+   "label": "overall score",
+   "value": 53
+  },
+  "vendor_score:alibaba": {
+   "key": "vendor_score:alibaba",
+   "kind": "vendor_score",
+   "vendorId": "alibaba",
+   "label": "overall score",
+   "value": 62.4
+  },
+  "vendor_score:a16z": {
+   "key": "vendor_score:a16z",
+   "kind": "vendor_score",
+   "vendorId": "a16z",
+   "label": "overall score",
+   "value": 54.9
+  },
+  "vendor_score:anthropic": {
+   "key": "vendor_score:anthropic",
+   "kind": "vendor_score",
+   "vendorId": "anthropic",
+   "label": "overall score",
+   "value": 68.3
+  },
+  "vendor_score:broadcom": {
+   "key": "vendor_score:broadcom",
+   "kind": "vendor_score",
+   "vendorId": "broadcom",
+   "label": "overall score",
+   "value": 58.8
+  },
+  "vendor_score:cerebras": {
+   "key": "vendor_score:cerebras",
+   "kind": "vendor_score",
+   "vendorId": "cerebras",
+   "label": "overall score",
+   "value": 55
+  },
+  "vendor_score:cohere": {
+   "key": "vendor_score:cohere",
+   "kind": "vendor_score",
+   "vendorId": "cohere",
+   "label": "overall score",
+   "value": 50.9
+  },
+  "vendor_score:coreweave": {
+   "key": "vendor_score:coreweave",
+   "kind": "vendor_score",
+   "vendorId": "coreweave",
+   "label": "overall score",
+   "value": 61.9
+  },
+  "vendor_score:databricks": {
+   "key": "vendor_score:databricks",
+   "kind": "vendor_score",
+   "vendorId": "databricks",
+   "label": "overall score",
+   "value": 44
+  },
+  "vendor_score:deepseek": {
+   "key": "vendor_score:deepseek",
+   "kind": "vendor_score",
+   "vendorId": "deepseek",
+   "label": "overall score",
+   "value": 62.7
+  },
+  "vendor_score:fireworks": {
+   "key": "vendor_score:fireworks",
+   "kind": "vendor_score",
+   "vendorId": "fireworks",
+   "label": "overall score",
+   "value": 54.9
+  },
+  "vendor_score:g42": {
+   "key": "vendor_score:g42",
+   "kind": "vendor_score",
+   "vendorId": "g42",
+   "label": "overall score",
+   "value": 42.7
+  },
+  "vendor_score:glean": {
+   "key": "vendor_score:glean",
+   "kind": "vendor_score",
+   "vendorId": "glean",
+   "label": "overall score",
+   "value": 59.2
+  },
+  "vendor_score:google": {
+   "key": "vendor_score:google",
+   "kind": "vendor_score",
+   "vendorId": "google",
+   "label": "overall score",
+   "value": 62.3
+  },
+  "vendor_score:groq": {
+   "key": "vendor_score:groq",
+   "kind": "vendor_score",
+   "vendorId": "groq",
+   "label": "overall score",
+   "value": 63.7
+  },
+  "vendor_score:humain": {
+   "key": "vendor_score:humain",
+   "kind": "vendor_score",
+   "vendorId": "humain",
+   "label": "overall score",
+   "value": 48.6
+  },
+  "vendor_score:harvey": {
+   "key": "vendor_score:harvey",
+   "kind": "vendor_score",
+   "vendorId": "harvey",
+   "label": "overall score",
+   "value": 56.6
+  },
+  "vendor_score:hebbia": {
+   "key": "vendor_score:hebbia",
+   "kind": "vendor_score",
+   "vendorId": "hebbia",
+   "label": "overall score",
+   "value": 54.1
+  },
+  "vendor_score:ibm": {
+   "key": "vendor_score:ibm",
+   "kind": "vendor_score",
+   "vendorId": "ibm",
+   "label": "overall score",
+   "value": 45.2
+  },
+  "vendor_score:lambda": {
+   "key": "vendor_score:lambda",
+   "kind": "vendor_score",
+   "vendorId": "lambda",
+   "label": "overall score",
+   "value": 56.9
+  },
+  "vendor_score:mgx": {
+   "key": "vendor_score:mgx",
+   "kind": "vendor_score",
+   "vendorId": "mgx",
+   "label": "overall score",
+   "value": 50.4
+  },
+  "vendor_score:meta": {
+   "key": "vendor_score:meta",
+   "kind": "vendor_score",
+   "vendorId": "meta",
+   "label": "overall score",
+   "value": 61.7
+  },
+  "vendor_score:microsoft": {
+   "key": "vendor_score:microsoft",
+   "kind": "vendor_score",
+   "vendorId": "microsoft",
+   "label": "overall score",
+   "value": 45
+  },
+  "vendor_score:minimax": {
+   "key": "vendor_score:minimax",
+   "kind": "vendor_score",
+   "vendorId": "minimax",
+   "label": "overall score",
+   "value": 56.4
+  },
+  "vendor_score:mistral": {
+   "key": "vendor_score:mistral",
+   "kind": "vendor_score",
+   "vendorId": "mistral",
+   "label": "overall score",
+   "value": 51.1
+  },
+  "vendor_score:moonshot": {
+   "key": "vendor_score:moonshot",
+   "kind": "vendor_score",
+   "vendorId": "moonshot",
+   "label": "overall score",
+   "value": 58.8
+  },
+  "vendor_score:moveworks": {
+   "key": "vendor_score:moveworks",
+   "kind": "vendor_score",
+   "vendorId": "moveworks",
+   "label": "overall score",
+   "value": 60.6
+  },
+  "vendor_score:nvidia": {
+   "key": "vendor_score:nvidia",
+   "kind": "vendor_score",
+   "vendorId": "nvidia",
+   "label": "overall score",
+   "value": 61.5
+  },
+  "vendor_score:nscale": {
+   "key": "vendor_score:nscale",
+   "kind": "vendor_score",
+   "vendorId": "nscale",
+   "label": "overall score",
+   "value": 57.2
+  },
+  "vendor_score:openai": {
+   "key": "vendor_score:openai",
+   "kind": "vendor_score",
+   "vendorId": "openai",
+   "label": "overall score",
+   "value": 68
+  },
+  "vendor_score:oracle": {
+   "key": "vendor_score:oracle",
+   "kind": "vendor_score",
+   "vendorId": "oracle",
+   "label": "overall score",
+   "value": 53.8
+  },
+  "vendor_score:perplexity": {
+   "key": "vendor_score:perplexity",
+   "kind": "vendor_score",
+   "vendorId": "perplexity",
+   "label": "overall score",
+   "value": 49.5
+  },
+  "vendor_score:rogo": {
+   "key": "vendor_score:rogo",
+   "kind": "vendor_score",
+   "vendorId": "rogo",
+   "label": "overall score",
+   "value": 56.4
+  },
+  "vendor_score:sap": {
+   "key": "vendor_score:sap",
+   "kind": "vendor_score",
+   "vendorId": "sap",
+   "label": "overall score",
+   "value": 56.9
+  },
+  "vendor_score:sakana": {
+   "key": "vendor_score:sakana",
+   "kind": "vendor_score",
+   "vendorId": "sakana",
+   "label": "overall score",
+   "value": 55.9
+  },
+  "vendor_score:salesforce": {
+   "key": "vendor_score:salesforce",
+   "kind": "vendor_score",
+   "vendorId": "salesforce",
+   "label": "overall score",
+   "value": 55.8
+  },
+  "vendor_score:sequoia": {
+   "key": "vendor_score:sequoia",
+   "kind": "vendor_score",
+   "vendorId": "sequoia",
+   "label": "overall score",
+   "value": 53
+  },
+  "vendor_score:servicenow": {
+   "key": "vendor_score:servicenow",
+   "kind": "vendor_score",
+   "vendorId": "servicenow",
+   "label": "overall score",
+   "value": 45.7
+  },
+  "vendor_score:snowflake": {
+   "key": "vendor_score:snowflake",
+   "kind": "vendor_score",
+   "vendorId": "snowflake",
+   "label": "overall score",
+   "value": 46.7
+  },
+  "vendor_score:softbank": {
+   "key": "vendor_score:softbank",
+   "kind": "vendor_score",
+   "vendorId": "softbank",
+   "label": "overall score",
+   "value": 59
+  },
+  "vendor_score:tsmc": {
+   "key": "vendor_score:tsmc",
+   "kind": "vendor_score",
+   "vendorId": "tsmc",
+   "label": "overall score",
+   "value": 64.4
+  },
+  "vendor_score:together": {
+   "key": "vendor_score:together",
+   "kind": "vendor_score",
+   "vendorId": "together",
+   "label": "overall score",
+   "value": 56.1
+  },
+  "vendor_score:writer": {
+   "key": "vendor_score:writer",
+   "kind": "vendor_score",
+   "vendorId": "writer",
+   "label": "overall score",
+   "value": 55.2
+  },
+  "vendor_score:zai": {
+   "key": "vendor_score:zai",
+   "kind": "vendor_score",
+   "vendorId": "zai",
+   "label": "overall score",
+   "value": 60.1
+  },
+  "vendor_score:xai": {
+   "key": "vendor_score:xai",
+   "kind": "vendor_score",
+   "vendorId": "xai",
+   "label": "overall score",
+   "value": 62.2
+  },
+  "capability_score:a16z:agents": {
+   "key": "capability_score:a16z:agents",
+   "kind": "capability_score",
+   "vendorId": "a16z",
+   "label": "agents capability",
+   "value": 55
+  },
+  "capability_score:a16z:cost_controls": {
+   "key": "capability_score:a16z:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "a16z",
+   "label": "cost controls capability",
+   "value": 46
+  },
+  "capability_score:a16z:deployment_options": {
+   "key": "capability_score:a16z:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "a16z",
+   "label": "deployment options capability",
+   "value": 63
+  },
+  "capability_score:a16z:enterprise_assistant": {
+   "key": "capability_score:a16z:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "a16z",
+   "label": "enterprise assistant capability",
+   "value": 54
+  },
+  "capability_score:a16z:governance": {
+   "key": "capability_score:a16z:governance",
+   "kind": "capability_score",
+   "vendorId": "a16z",
+   "label": "governance capability",
+   "value": 43.29
+  },
+  "capability_score:a16z:integrations": {
+   "key": "capability_score:a16z:integrations",
+   "kind": "capability_score",
+   "vendorId": "a16z",
+   "label": "integrations capability",
+   "value": 52
+  },
+  "capability_score:a16z:models": {
+   "key": "capability_score:a16z:models",
+   "kind": "capability_score",
+   "vendorId": "a16z",
+   "label": "models capability",
+   "value": 40.88
+  },
+  "capability_score:a16z:portability": {
+   "key": "capability_score:a16z:portability",
+   "kind": "capability_score",
+   "vendorId": "a16z",
+   "label": "portability capability",
+   "value": 69.2
+  },
+  "capability_score:a16z:rag": {
+   "key": "capability_score:a16z:rag",
+   "kind": "capability_score",
+   "vendorId": "a16z",
+   "label": "rag capability",
+   "value": 58
+  },
+  "capability_score:a16z:security": {
+   "key": "capability_score:a16z:security",
+   "kind": "capability_score",
+   "vendorId": "a16z",
+   "label": "security capability",
+   "value": 54.25
+  },
+  "capability_score:ai21:agents": {
+   "key": "capability_score:ai21:agents",
+   "kind": "capability_score",
+   "vendorId": "ai21",
+   "label": "agents capability",
+   "value": 55
+  },
+  "capability_score:ai21:cost_controls": {
+   "key": "capability_score:ai21:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "ai21",
+   "label": "cost controls capability",
+   "value": 66.6
+  },
+  "capability_score:ai21:deployment_options": {
+   "key": "capability_score:ai21:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "ai21",
+   "label": "deployment options capability",
+   "value": 72
+  },
+  "capability_score:ai21:enterprise_assistant": {
+   "key": "capability_score:ai21:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "ai21",
+   "label": "enterprise assistant capability",
+   "value": 62
+  },
+  "capability_score:ai21:governance": {
+   "key": "capability_score:ai21:governance",
+   "kind": "capability_score",
+   "vendorId": "ai21",
+   "label": "governance capability",
+   "value": 54
+  },
+  "capability_score:ai21:integrations": {
+   "key": "capability_score:ai21:integrations",
+   "kind": "capability_score",
+   "vendorId": "ai21",
+   "label": "integrations capability",
+   "value": 57.67
+  },
+  "capability_score:ai21:models": {
+   "key": "capability_score:ai21:models",
+   "kind": "capability_score",
+   "vendorId": "ai21",
+   "label": "models capability",
+   "value": 67
+  },
+  "capability_score:ai21:portability": {
+   "key": "capability_score:ai21:portability",
+   "kind": "capability_score",
+   "vendorId": "ai21",
+   "label": "portability capability",
+   "value": 64.5
+  },
+  "capability_score:ai21:rag": {
+   "key": "capability_score:ai21:rag",
+   "kind": "capability_score",
+   "vendorId": "ai21",
+   "label": "rag capability",
+   "value": 67
+  },
+  "capability_score:ai21:security": {
+   "key": "capability_score:ai21:security",
+   "kind": "capability_score",
+   "vendorId": "ai21",
+   "label": "security capability",
+   "value": 56.33
+  },
+  "capability_score:alibaba:agents": {
+   "key": "capability_score:alibaba:agents",
+   "kind": "capability_score",
+   "vendorId": "alibaba",
+   "label": "agents capability",
+   "value": 62
+  },
+  "capability_score:alibaba:cost_controls": {
+   "key": "capability_score:alibaba:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "alibaba",
+   "label": "cost controls capability",
+   "value": 39.56
+  },
+  "capability_score:alibaba:deployment_options": {
+   "key": "capability_score:alibaba:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "alibaba",
+   "label": "deployment options capability",
+   "value": 62
+  },
+  "capability_score:alibaba:enterprise_assistant": {
+   "key": "capability_score:alibaba:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "alibaba",
+   "label": "enterprise assistant capability",
+   "value": 77
+  },
+  "capability_score:alibaba:governance": {
+   "key": "capability_score:alibaba:governance",
+   "kind": "capability_score",
+   "vendorId": "alibaba",
+   "label": "governance capability",
+   "value": 54
+  },
+  "capability_score:alibaba:integrations": {
+   "key": "capability_score:alibaba:integrations",
+   "kind": "capability_score",
+   "vendorId": "alibaba",
+   "label": "integrations capability",
+   "value": 57.71
+  },
+  "capability_score:alibaba:models": {
+   "key": "capability_score:alibaba:models",
+   "kind": "capability_score",
+   "vendorId": "alibaba",
+   "label": "models capability",
+   "value": 68.36
+  },
+  "capability_score:alibaba:portability": {
+   "key": "capability_score:alibaba:portability",
+   "kind": "capability_score",
+   "vendorId": "alibaba",
+   "label": "portability capability",
+   "value": 58.63
+  },
+  "capability_score:alibaba:rag": {
+   "key": "capability_score:alibaba:rag",
+   "kind": "capability_score",
+   "vendorId": "alibaba",
+   "label": "rag capability",
+   "value": 82
+  },
+  "capability_score:alibaba:security": {
+   "key": "capability_score:alibaba:security",
+   "kind": "capability_score",
+   "vendorId": "alibaba",
+   "label": "security capability",
+   "value": 60
+  },
+  "capability_score:amd:agents": {
+   "key": "capability_score:amd:agents",
+   "kind": "capability_score",
+   "vendorId": "amd",
+   "label": "agents capability",
+   "value": 75
+  },
+  "capability_score:amd:cost_controls": {
+   "key": "capability_score:amd:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "amd",
+   "label": "cost controls capability",
+   "value": 61.33
+  },
+  "capability_score:amd:deployment_options": {
+   "key": "capability_score:amd:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "amd",
+   "label": "deployment options capability",
+   "value": 75
+  },
+  "capability_score:amd:enterprise_assistant": {
+   "key": "capability_score:amd:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "amd",
+   "label": "enterprise assistant capability",
+   "value": 58
+  },
+  "capability_score:amd:governance": {
+   "key": "capability_score:amd:governance",
+   "kind": "capability_score",
+   "vendorId": "amd",
+   "label": "governance capability",
+   "value": 80
+  },
+  "capability_score:amd:integrations": {
+   "key": "capability_score:amd:integrations",
+   "kind": "capability_score",
+   "vendorId": "amd",
+   "label": "integrations capability",
+   "value": 51.4
+  },
+  "capability_score:amd:models": {
+   "key": "capability_score:amd:models",
+   "kind": "capability_score",
+   "vendorId": "amd",
+   "label": "models capability",
+   "value": 51.75
+  },
+  "capability_score:amd:portability": {
+   "key": "capability_score:amd:portability",
+   "kind": "capability_score",
+   "vendorId": "amd",
+   "label": "portability capability",
+   "value": 58
+  },
+  "capability_score:amd:rag": {
+   "key": "capability_score:amd:rag",
+   "kind": "capability_score",
+   "vendorId": "amd",
+   "label": "rag capability",
+   "value": 70
+  },
+  "capability_score:amd:security": {
+   "key": "capability_score:amd:security",
+   "kind": "capability_score",
+   "vendorId": "amd",
+   "label": "security capability",
+   "value": 62.67
+  },
+  "capability_score:anthropic:agents": {
+   "key": "capability_score:anthropic:agents",
+   "kind": "capability_score",
+   "vendorId": "anthropic",
+   "label": "agents capability",
+   "value": 52.65
+  },
+  "capability_score:anthropic:cost_controls": {
+   "key": "capability_score:anthropic:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "anthropic",
+   "label": "cost controls capability",
+   "value": 66.65
+  },
+  "capability_score:anthropic:deployment_options": {
+   "key": "capability_score:anthropic:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "anthropic",
+   "label": "deployment options capability",
+   "value": 71
+  },
+  "capability_score:anthropic:enterprise_assistant": {
+   "key": "capability_score:anthropic:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "anthropic",
+   "label": "enterprise assistant capability",
+   "value": 54.94
+  },
+  "capability_score:anthropic:governance": {
+   "key": "capability_score:anthropic:governance",
+   "kind": "capability_score",
+   "vendorId": "anthropic",
+   "label": "governance capability",
+   "value": 54.77
+  },
+  "capability_score:anthropic:integrations": {
+   "key": "capability_score:anthropic:integrations",
+   "kind": "capability_score",
+   "vendorId": "anthropic",
+   "label": "integrations capability",
+   "value": 60.48
+  },
+  "capability_score:anthropic:models": {
+   "key": "capability_score:anthropic:models",
+   "kind": "capability_score",
+   "vendorId": "anthropic",
+   "label": "models capability",
+   "value": 59.4
+  },
+  "capability_score:anthropic:portability": {
+   "key": "capability_score:anthropic:portability",
+   "kind": "capability_score",
+   "vendorId": "anthropic",
+   "label": "portability capability",
+   "value": 57.59
+  },
+  "capability_score:anthropic:rag": {
+   "key": "capability_score:anthropic:rag",
+   "kind": "capability_score",
+   "vendorId": "anthropic",
+   "label": "rag capability",
+   "value": 66
+  },
+  "capability_score:anthropic:security": {
+   "key": "capability_score:anthropic:security",
+   "kind": "capability_score",
+   "vendorId": "anthropic",
+   "label": "security capability",
+   "value": 59.23
+  },
+  "capability_score:aws:agents": {
+   "key": "capability_score:aws:agents",
+   "kind": "capability_score",
+   "vendorId": "aws",
+   "label": "agents capability",
+   "value": 56.7
+  },
+  "capability_score:aws:cost_controls": {
+   "key": "capability_score:aws:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "aws",
+   "label": "cost controls capability",
+   "value": 66
+  },
+  "capability_score:aws:deployment_options": {
+   "key": "capability_score:aws:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "aws",
+   "label": "deployment options capability",
+   "value": 92
+  },
+  "capability_score:aws:enterprise_assistant": {
+   "key": "capability_score:aws:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "aws",
+   "label": "enterprise assistant capability",
+   "value": 50.5
+  },
+  "capability_score:aws:governance": {
+   "key": "capability_score:aws:governance",
+   "kind": "capability_score",
+   "vendorId": "aws",
+   "label": "governance capability",
+   "value": 61.77
+  },
+  "capability_score:aws:integrations": {
+   "key": "capability_score:aws:integrations",
+   "kind": "capability_score",
+   "vendorId": "aws",
+   "label": "integrations capability",
+   "value": 66.35
+  },
+  "capability_score:aws:models": {
+   "key": "capability_score:aws:models",
+   "kind": "capability_score",
+   "vendorId": "aws",
+   "label": "models capability",
+   "value": 52.25
+  },
+  "capability_score:aws:portability": {
+   "key": "capability_score:aws:portability",
+   "kind": "capability_score",
+   "vendorId": "aws",
+   "label": "portability capability",
+   "value": 60
+  },
+  "capability_score:aws:rag": {
+   "key": "capability_score:aws:rag",
+   "kind": "capability_score",
+   "vendorId": "aws",
+   "label": "rag capability",
+   "value": 52.7
+  },
+  "capability_score:aws:security": {
+   "key": "capability_score:aws:security",
+   "kind": "capability_score",
+   "vendorId": "aws",
+   "label": "security capability",
+   "value": 59.59
+  },
+  "capability_score:broadcom:agents": {
+   "key": "capability_score:broadcom:agents",
+   "kind": "capability_score",
+   "vendorId": "broadcom",
+   "label": "agents capability",
+   "value": 52.07
+  },
+  "capability_score:broadcom:cost_controls": {
+   "key": "capability_score:broadcom:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "broadcom",
+   "label": "cost controls capability",
+   "value": 51.8
+  },
+  "capability_score:broadcom:deployment_options": {
+   "key": "capability_score:broadcom:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "broadcom",
+   "label": "deployment options capability",
+   "value": 82
+  },
+  "capability_score:broadcom:enterprise_assistant": {
+   "key": "capability_score:broadcom:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "broadcom",
+   "label": "enterprise assistant capability",
+   "value": 57
+  },
+  "capability_score:broadcom:governance": {
+   "key": "capability_score:broadcom:governance",
+   "kind": "capability_score",
+   "vendorId": "broadcom",
+   "label": "governance capability",
+   "value": 60.06
+  },
+  "capability_score:broadcom:integrations": {
+   "key": "capability_score:broadcom:integrations",
+   "kind": "capability_score",
+   "vendorId": "broadcom",
+   "label": "integrations capability",
+   "value": 53.76
+  },
+  "capability_score:broadcom:models": {
+   "key": "capability_score:broadcom:models",
+   "kind": "capability_score",
+   "vendorId": "broadcom",
+   "label": "models capability",
+   "value": 49.75
+  },
+  "capability_score:broadcom:portability": {
+   "key": "capability_score:broadcom:portability",
+   "kind": "capability_score",
+   "vendorId": "broadcom",
+   "label": "portability capability",
+   "value": 60.46
+  },
+  "capability_score:broadcom:rag": {
+   "key": "capability_score:broadcom:rag",
+   "kind": "capability_score",
+   "vendorId": "broadcom",
+   "label": "rag capability",
+   "value": 77
+  },
+  "capability_score:broadcom:security": {
+   "key": "capability_score:broadcom:security",
+   "kind": "capability_score",
+   "vendorId": "broadcom",
+   "label": "security capability",
+   "value": 57.05
+  },
+  "capability_score:cerebras:agents": {
+   "key": "capability_score:cerebras:agents",
+   "kind": "capability_score",
+   "vendorId": "cerebras",
+   "label": "agents capability",
+   "value": 61
+  },
+  "capability_score:cerebras:cost_controls": {
+   "key": "capability_score:cerebras:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "cerebras",
+   "label": "cost controls capability",
+   "value": 53.46
+  },
+  "capability_score:cerebras:deployment_options": {
+   "key": "capability_score:cerebras:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "cerebras",
+   "label": "deployment options capability",
+   "value": 61
+  },
+  "capability_score:cerebras:enterprise_assistant": {
+   "key": "capability_score:cerebras:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "cerebras",
+   "label": "enterprise assistant capability",
+   "value": 76
+  },
+  "capability_score:cerebras:governance": {
+   "key": "capability_score:cerebras:governance",
+   "kind": "capability_score",
+   "vendorId": "cerebras",
+   "label": "governance capability",
+   "value": 35.63
+  },
+  "capability_score:cerebras:integrations": {
+   "key": "capability_score:cerebras:integrations",
+   "kind": "capability_score",
+   "vendorId": "cerebras",
+   "label": "integrations capability",
+   "value": 54.78
+  },
+  "capability_score:cerebras:models": {
+   "key": "capability_score:cerebras:models",
+   "kind": "capability_score",
+   "vendorId": "cerebras",
+   "label": "models capability",
+   "value": 60
+  },
+  "capability_score:cerebras:portability": {
+   "key": "capability_score:cerebras:portability",
+   "kind": "capability_score",
+   "vendorId": "cerebras",
+   "label": "portability capability",
+   "value": 64.45
+  },
+  "capability_score:cerebras:rag": {
+   "key": "capability_score:cerebras:rag",
+   "kind": "capability_score",
+   "vendorId": "cerebras",
+   "label": "rag capability",
+   "value": 56
+  },
+  "capability_score:cerebras:security": {
+   "key": "capability_score:cerebras:security",
+   "kind": "capability_score",
+   "vendorId": "cerebras",
+   "label": "security capability",
+   "value": 42
+  },
+  "capability_score:cohere:agents": {
+   "key": "capability_score:cohere:agents",
+   "kind": "capability_score",
+   "vendorId": "cohere",
+   "label": "agents capability",
+   "value": 51
+  },
+  "capability_score:cohere:cost_controls": {
+   "key": "capability_score:cohere:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "cohere",
+   "label": "cost controls capability",
+   "value": 65.65
+  },
+  "capability_score:cohere:deployment_options": {
+   "key": "capability_score:cohere:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "cohere",
+   "label": "deployment options capability",
+   "value": 67
+  },
+  "capability_score:cohere:enterprise_assistant": {
+   "key": "capability_score:cohere:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "cohere",
+   "label": "enterprise assistant capability",
+   "value": 67.5
+  },
+  "capability_score:cohere:governance": {
+   "key": "capability_score:cohere:governance",
+   "kind": "capability_score",
+   "vendorId": "cohere",
+   "label": "governance capability",
+   "value": 57.31
+  },
+  "capability_score:cohere:integrations": {
+   "key": "capability_score:cohere:integrations",
+   "kind": "capability_score",
+   "vendorId": "cohere",
+   "label": "integrations capability",
+   "value": 57.21
+  },
+  "capability_score:cohere:models": {
+   "key": "capability_score:cohere:models",
+   "kind": "capability_score",
+   "vendorId": "cohere",
+   "label": "models capability",
+   "value": 60.76
+  },
+  "capability_score:cohere:portability": {
+   "key": "capability_score:cohere:portability",
+   "kind": "capability_score",
+   "vendorId": "cohere",
+   "label": "portability capability",
+   "value": 55.09
+  },
+  "capability_score:cohere:rag": {
+   "key": "capability_score:cohere:rag",
+   "kind": "capability_score",
+   "vendorId": "cohere",
+   "label": "rag capability",
+   "value": 58.33
+  },
+  "capability_score:cohere:security": {
+   "key": "capability_score:cohere:security",
+   "kind": "capability_score",
+   "vendorId": "cohere",
+   "label": "security capability",
+   "value": 57.28
+  },
+  "capability_score:coreweave:agents": {
+   "key": "capability_score:coreweave:agents",
+   "kind": "capability_score",
+   "vendorId": "coreweave",
+   "label": "agents capability",
+   "value": 68
+  },
+  "capability_score:coreweave:cost_controls": {
+   "key": "capability_score:coreweave:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "coreweave",
+   "label": "cost controls capability",
+   "value": 55.71
+  },
+  "capability_score:coreweave:deployment_options": {
+   "key": "capability_score:coreweave:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "coreweave",
+   "label": "deployment options capability",
+   "value": 68
+  },
+  "capability_score:coreweave:enterprise_assistant": {
+   "key": "capability_score:coreweave:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "coreweave",
+   "label": "enterprise assistant capability",
+   "value": 82
+  },
+  "capability_score:coreweave:governance": {
+   "key": "capability_score:coreweave:governance",
+   "kind": "capability_score",
+   "vendorId": "coreweave",
+   "label": "governance capability",
+   "value": 49.25
+  },
+  "capability_score:coreweave:integrations": {
+   "key": "capability_score:coreweave:integrations",
+   "kind": "capability_score",
+   "vendorId": "coreweave",
+   "label": "integrations capability",
+   "value": 60.17
+  },
+  "capability_score:coreweave:models": {
+   "key": "capability_score:coreweave:models",
+   "kind": "capability_score",
+   "vendorId": "coreweave",
+   "label": "models capability",
+   "value": 48.33
+  },
+  "capability_score:coreweave:portability": {
+   "key": "capability_score:coreweave:portability",
+   "kind": "capability_score",
+   "vendorId": "coreweave",
+   "label": "portability capability",
+   "value": 69.71
+  },
+  "capability_score:coreweave:rag": {
+   "key": "capability_score:coreweave:rag",
+   "kind": "capability_score",
+   "vendorId": "coreweave",
+   "label": "rag capability",
+   "value": 63
+  },
+  "capability_score:coreweave:security": {
+   "key": "capability_score:coreweave:security",
+   "kind": "capability_score",
+   "vendorId": "coreweave",
+   "label": "security capability",
+   "value": 58.36
+  },
+  "capability_score:databricks:agents": {
+   "key": "capability_score:databricks:agents",
+   "kind": "capability_score",
+   "vendorId": "databricks",
+   "label": "agents capability",
+   "value": 50.67
+  },
+  "capability_score:databricks:cost_controls": {
+   "key": "capability_score:databricks:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "databricks",
+   "label": "cost controls capability",
+   "value": 55.47
+  },
+  "capability_score:databricks:deployment_options": {
+   "key": "capability_score:databricks:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "databricks",
+   "label": "deployment options capability",
+   "value": 82
+  },
+  "capability_score:databricks:enterprise_assistant": {
+   "key": "capability_score:databricks:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "databricks",
+   "label": "enterprise assistant capability",
+   "value": 51.54
+  },
+  "capability_score:databricks:governance": {
+   "key": "capability_score:databricks:governance",
+   "kind": "capability_score",
+   "vendorId": "databricks",
+   "label": "governance capability",
+   "value": 50.51
+  },
+  "capability_score:databricks:integrations": {
+   "key": "capability_score:databricks:integrations",
+   "kind": "capability_score",
+   "vendorId": "databricks",
+   "label": "integrations capability",
+   "value": 54.06
+  },
+  "capability_score:databricks:models": {
+   "key": "capability_score:databricks:models",
+   "kind": "capability_score",
+   "vendorId": "databricks",
+   "label": "models capability",
+   "value": 50.06
+  },
+  "capability_score:databricks:portability": {
+   "key": "capability_score:databricks:portability",
+   "kind": "capability_score",
+   "vendorId": "databricks",
+   "label": "portability capability",
+   "value": 55.74
+  },
+  "capability_score:databricks:rag": {
+   "key": "capability_score:databricks:rag",
+   "kind": "capability_score",
+   "vendorId": "databricks",
+   "label": "rag capability",
+   "value": 45
+  },
+  "capability_score:databricks:security": {
+   "key": "capability_score:databricks:security",
+   "kind": "capability_score",
+   "vendorId": "databricks",
+   "label": "security capability",
+   "value": 52.51
+  },
+  "capability_score:deepseek:agents": {
+   "key": "capability_score:deepseek:agents",
+   "kind": "capability_score",
+   "vendorId": "deepseek",
+   "label": "agents capability",
+   "value": 80
+  },
+  "capability_score:deepseek:cost_controls": {
+   "key": "capability_score:deepseek:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "deepseek",
+   "label": "cost controls capability",
+   "value": 48.75
+  },
+  "capability_score:deepseek:deployment_options": {
+   "key": "capability_score:deepseek:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "deepseek",
+   "label": "deployment options capability",
+   "value": 80
+  },
+  "capability_score:deepseek:enterprise_assistant": {
+   "key": "capability_score:deepseek:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "deepseek",
+   "label": "enterprise assistant capability",
+   "value": 55
+  },
+  "capability_score:deepseek:governance": {
+   "key": "capability_score:deepseek:governance",
+   "kind": "capability_score",
+   "vendorId": "deepseek",
+   "label": "governance capability",
+   "value": 54.5
+  },
+  "capability_score:deepseek:integrations": {
+   "key": "capability_score:deepseek:integrations",
+   "kind": "capability_score",
+   "vendorId": "deepseek",
+   "label": "integrations capability",
+   "value": 62.35
+  },
+  "capability_score:deepseek:models": {
+   "key": "capability_score:deepseek:models",
+   "kind": "capability_score",
+   "vendorId": "deepseek",
+   "label": "models capability",
+   "value": 68.34
+  },
+  "capability_score:deepseek:portability": {
+   "key": "capability_score:deepseek:portability",
+   "kind": "capability_score",
+   "vendorId": "deepseek",
+   "label": "portability capability",
+   "value": 61.33
+  },
+  "capability_score:deepseek:rag": {
+   "key": "capability_score:deepseek:rag",
+   "kind": "capability_score",
+   "vendorId": "deepseek",
+   "label": "rag capability",
+   "value": 75
+  },
+  "capability_score:deepseek:security": {
+   "key": "capability_score:deepseek:security",
+   "kind": "capability_score",
+   "vendorId": "deepseek",
+   "label": "security capability",
+   "value": 42.27
+  },
+  "capability_score:fireworks:agents": {
+   "key": "capability_score:fireworks:agents",
+   "kind": "capability_score",
+   "vendorId": "fireworks",
+   "label": "agents capability",
+   "value": 48.33
+  },
+  "capability_score:fireworks:cost_controls": {
+   "key": "capability_score:fireworks:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "fireworks",
+   "label": "cost controls capability",
+   "value": 63.16
+  },
+  "capability_score:fireworks:deployment_options": {
+   "key": "capability_score:fireworks:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "fireworks",
+   "label": "deployment options capability",
+   "value": 53
+  },
+  "capability_score:fireworks:enterprise_assistant": {
+   "key": "capability_score:fireworks:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "fireworks",
+   "label": "enterprise assistant capability",
+   "value": 68
+  },
+  "capability_score:fireworks:governance": {
+   "key": "capability_score:fireworks:governance",
+   "kind": "capability_score",
+   "vendorId": "fireworks",
+   "label": "governance capability",
+   "value": 54.17
+  },
+  "capability_score:fireworks:integrations": {
+   "key": "capability_score:fireworks:integrations",
+   "kind": "capability_score",
+   "vendorId": "fireworks",
+   "label": "integrations capability",
+   "value": 52.09
+  },
+  "capability_score:fireworks:models": {
+   "key": "capability_score:fireworks:models",
+   "kind": "capability_score",
+   "vendorId": "fireworks",
+   "label": "models capability",
+   "value": 52.23
+  },
+  "capability_score:fireworks:portability": {
+   "key": "capability_score:fireworks:portability",
+   "kind": "capability_score",
+   "vendorId": "fireworks",
+   "label": "portability capability",
+   "value": 52.43
+  },
+  "capability_score:fireworks:rag": {
+   "key": "capability_score:fireworks:rag",
+   "kind": "capability_score",
+   "vendorId": "fireworks",
+   "label": "rag capability",
+   "value": 73
+  },
+  "capability_score:fireworks:security": {
+   "key": "capability_score:fireworks:security",
+   "kind": "capability_score",
+   "vendorId": "fireworks",
+   "label": "security capability",
+   "value": 48.94
+  },
+  "capability_score:g42:agents": {
+   "key": "capability_score:g42:agents",
+   "kind": "capability_score",
+   "vendorId": "g42",
+   "label": "agents capability",
+   "value": 64
+  },
+  "capability_score:g42:cost_controls": {
+   "key": "capability_score:g42:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "g42",
+   "label": "cost controls capability",
+   "value": 65
+  },
+  "capability_score:g42:deployment_options": {
+   "key": "capability_score:g42:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "g42",
+   "label": "deployment options capability",
+   "value": 64
+  },
+  "capability_score:g42:enterprise_assistant": {
+   "key": "capability_score:g42:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "g42",
+   "label": "enterprise assistant capability",
+   "value": 45
+  },
+  "capability_score:g42:governance": {
+   "key": "capability_score:g42:governance",
+   "kind": "capability_score",
+   "vendorId": "g42",
+   "label": "governance capability",
+   "value": 69
+  },
+  "capability_score:g42:integrations": {
+   "key": "capability_score:g42:integrations",
+   "kind": "capability_score",
+   "vendorId": "g42",
+   "label": "integrations capability",
+   "value": 46.3
+  },
+  "capability_score:g42:models": {
+   "key": "capability_score:g42:models",
+   "kind": "capability_score",
+   "vendorId": "g42",
+   "label": "models capability",
+   "value": 62.29
+  },
+  "capability_score:g42:portability": {
+   "key": "capability_score:g42:portability",
+   "kind": "capability_score",
+   "vendorId": "g42",
+   "label": "portability capability",
+   "value": 52
+  },
+  "capability_score:g42:rag": {
+   "key": "capability_score:g42:rag",
+   "kind": "capability_score",
+   "vendorId": "g42",
+   "label": "rag capability",
+   "value": 59
+  },
+  "capability_score:g42:security": {
+   "key": "capability_score:g42:security",
+   "kind": "capability_score",
+   "vendorId": "g42",
+   "label": "security capability",
+   "value": 49
+  },
+  "capability_score:glean:agents": {
+   "key": "capability_score:glean:agents",
+   "kind": "capability_score",
+   "vendorId": "glean",
+   "label": "agents capability",
+   "value": 55.36
+  },
+  "capability_score:glean:cost_controls": {
+   "key": "capability_score:glean:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "glean",
+   "label": "cost controls capability",
+   "value": 43
+  },
+  "capability_score:glean:deployment_options": {
+   "key": "capability_score:glean:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "glean",
+   "label": "deployment options capability",
+   "value": 60
+  },
+  "capability_score:glean:enterprise_assistant": {
+   "key": "capability_score:glean:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "glean",
+   "label": "enterprise assistant capability",
+   "value": 51.93
+  },
+  "capability_score:glean:governance": {
+   "key": "capability_score:glean:governance",
+   "kind": "capability_score",
+   "vendorId": "glean",
+   "label": "governance capability",
+   "value": 54.82
+  },
+  "capability_score:glean:integrations": {
+   "key": "capability_score:glean:integrations",
+   "kind": "capability_score",
+   "vendorId": "glean",
+   "label": "integrations capability",
+   "value": 75
+  },
+  "capability_score:glean:models": {
+   "key": "capability_score:glean:models",
+   "kind": "capability_score",
+   "vendorId": "glean",
+   "label": "models capability",
+   "value": 52.07
+  },
+  "capability_score:glean:portability": {
+   "key": "capability_score:glean:portability",
+   "kind": "capability_score",
+   "vendorId": "glean",
+   "label": "portability capability",
+   "value": 59.07
+  },
+  "capability_score:glean:rag": {
+   "key": "capability_score:glean:rag",
+   "kind": "capability_score",
+   "vendorId": "glean",
+   "label": "rag capability",
+   "value": 90
+  },
+  "capability_score:glean:security": {
+   "key": "capability_score:glean:security",
+   "kind": "capability_score",
+   "vendorId": "glean",
+   "label": "security capability",
+   "value": 59.11
+  },
+  "capability_score:google:agents": {
+   "key": "capability_score:google:agents",
+   "kind": "capability_score",
+   "vendorId": "google",
+   "label": "agents capability",
+   "value": 51.66
+  },
+  "capability_score:google:cost_controls": {
+   "key": "capability_score:google:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "google",
+   "label": "cost controls capability",
+   "value": 54.71
+  },
+  "capability_score:google:deployment_options": {
+   "key": "capability_score:google:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "google",
+   "label": "deployment options capability",
+   "value": 82
+  },
+  "capability_score:google:enterprise_assistant": {
+   "key": "capability_score:google:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "google",
+   "label": "enterprise assistant capability",
+   "value": 83
+  },
+  "capability_score:google:governance": {
+   "key": "capability_score:google:governance",
+   "kind": "capability_score",
+   "vendorId": "google",
+   "label": "governance capability",
+   "value": 53.97
+  },
+  "capability_score:google:integrations": {
+   "key": "capability_score:google:integrations",
+   "kind": "capability_score",
+   "vendorId": "google",
+   "label": "integrations capability",
+   "value": 60.8
+  },
+  "capability_score:google:models": {
+   "key": "capability_score:google:models",
+   "kind": "capability_score",
+   "vendorId": "google",
+   "label": "models capability",
+   "value": 53.94
+  },
+  "capability_score:google:portability": {
+   "key": "capability_score:google:portability",
+   "kind": "capability_score",
+   "vendorId": "google",
+   "label": "portability capability",
+   "value": 57.49
+  },
+  "capability_score:google:rag": {
+   "key": "capability_score:google:rag",
+   "kind": "capability_score",
+   "vendorId": "google",
+   "label": "rag capability",
+   "value": 82
+  },
+  "capability_score:google:security": {
+   "key": "capability_score:google:security",
+   "kind": "capability_score",
+   "vendorId": "google",
+   "label": "security capability",
+   "value": 53.23
+  },
+  "capability_score:groq:agents": {
+   "key": "capability_score:groq:agents",
+   "kind": "capability_score",
+   "vendorId": "groq",
+   "label": "agents capability",
+   "value": 58.29
+  },
+  "capability_score:groq:cost_controls": {
+   "key": "capability_score:groq:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "groq",
+   "label": "cost controls capability",
+   "value": 67.11
+  },
+  "capability_score:groq:deployment_options": {
+   "key": "capability_score:groq:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "groq",
+   "label": "deployment options capability",
+   "value": 51
+  },
+  "capability_score:groq:enterprise_assistant": {
+   "key": "capability_score:groq:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "groq",
+   "label": "enterprise assistant capability",
+   "value": 62
+  },
+  "capability_score:groq:governance": {
+   "key": "capability_score:groq:governance",
+   "kind": "capability_score",
+   "vendorId": "groq",
+   "label": "governance capability",
+   "value": 54
+  },
+  "capability_score:groq:integrations": {
+   "key": "capability_score:groq:integrations",
+   "kind": "capability_score",
+   "vendorId": "groq",
+   "label": "integrations capability",
+   "value": 61.39
+  },
+  "capability_score:groq:models": {
+   "key": "capability_score:groq:models",
+   "kind": "capability_score",
+   "vendorId": "groq",
+   "label": "models capability",
+   "value": 67.65
+  },
+  "capability_score:groq:portability": {
+   "key": "capability_score:groq:portability",
+   "kind": "capability_score",
+   "vendorId": "groq",
+   "label": "portability capability",
+   "value": 67
+  },
+  "capability_score:groq:rag": {
+   "key": "capability_score:groq:rag",
+   "kind": "capability_score",
+   "vendorId": "groq",
+   "label": "rag capability",
+   "value": 46
+  },
+  "capability_score:groq:security": {
+   "key": "capability_score:groq:security",
+   "kind": "capability_score",
+   "vendorId": "groq",
+   "label": "security capability",
+   "value": 55.88
+  },
+  "capability_score:harvey:agents": {
+   "key": "capability_score:harvey:agents",
+   "kind": "capability_score",
+   "vendorId": "harvey",
+   "label": "agents capability",
+   "value": 55.69
+  },
+  "capability_score:harvey:cost_controls": {
+   "key": "capability_score:harvey:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "harvey",
+   "label": "cost controls capability",
+   "value": 51.13
+  },
+  "capability_score:harvey:deployment_options": {
+   "key": "capability_score:harvey:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "harvey",
+   "label": "deployment options capability",
+   "value": 58
+  },
+  "capability_score:harvey:enterprise_assistant": {
+   "key": "capability_score:harvey:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "harvey",
+   "label": "enterprise assistant capability",
+   "value": 46.26
+  },
+  "capability_score:harvey:governance": {
+   "key": "capability_score:harvey:governance",
+   "kind": "capability_score",
+   "vendorId": "harvey",
+   "label": "governance capability",
+   "value": 58.68
+  },
+  "capability_score:harvey:integrations": {
+   "key": "capability_score:harvey:integrations",
+   "kind": "capability_score",
+   "vendorId": "harvey",
+   "label": "integrations capability",
+   "value": 55.55
+  },
+  "capability_score:harvey:models": {
+   "key": "capability_score:harvey:models",
+   "kind": "capability_score",
+   "vendorId": "harvey",
+   "label": "models capability",
+   "value": 53.83
+  },
+  "capability_score:harvey:portability": {
+   "key": "capability_score:harvey:portability",
+   "kind": "capability_score",
+   "vendorId": "harvey",
+   "label": "portability capability",
+   "value": 62.03
+  },
+  "capability_score:harvey:rag": {
+   "key": "capability_score:harvey:rag",
+   "kind": "capability_score",
+   "vendorId": "harvey",
+   "label": "rag capability",
+   "value": 82
+  },
+  "capability_score:harvey:security": {
+   "key": "capability_score:harvey:security",
+   "kind": "capability_score",
+   "vendorId": "harvey",
+   "label": "security capability",
+   "value": 61.8
+  },
+  "capability_score:hebbia:agents": {
+   "key": "capability_score:hebbia:agents",
+   "kind": "capability_score",
+   "vendorId": "hebbia",
+   "label": "agents capability",
+   "value": 49.84
+  },
+  "capability_score:hebbia:cost_controls": {
+   "key": "capability_score:hebbia:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "hebbia",
+   "label": "cost controls capability",
+   "value": 51.44
+  },
+  "capability_score:hebbia:deployment_options": {
+   "key": "capability_score:hebbia:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "hebbia",
+   "label": "deployment options capability",
+   "value": 66
+  },
+  "capability_score:hebbia:enterprise_assistant": {
+   "key": "capability_score:hebbia:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "hebbia",
+   "label": "enterprise assistant capability",
+   "value": 49.06
+  },
+  "capability_score:hebbia:governance": {
+   "key": "capability_score:hebbia:governance",
+   "kind": "capability_score",
+   "vendorId": "hebbia",
+   "label": "governance capability",
+   "value": 48.57
+  },
+  "capability_score:hebbia:integrations": {
+   "key": "capability_score:hebbia:integrations",
+   "kind": "capability_score",
+   "vendorId": "hebbia",
+   "label": "integrations capability",
+   "value": 49.39
+  },
+  "capability_score:hebbia:models": {
+   "key": "capability_score:hebbia:models",
+   "kind": "capability_score",
+   "vendorId": "hebbia",
+   "label": "models capability",
+   "value": 52.1
+  },
+  "capability_score:hebbia:portability": {
+   "key": "capability_score:hebbia:portability",
+   "kind": "capability_score",
+   "vendorId": "hebbia",
+   "label": "portability capability",
+   "value": 57.65
+  },
+  "capability_score:hebbia:rag": {
+   "key": "capability_score:hebbia:rag",
+   "kind": "capability_score",
+   "vendorId": "hebbia",
+   "label": "rag capability",
+   "value": 61
+  },
+  "capability_score:hebbia:security": {
+   "key": "capability_score:hebbia:security",
+   "kind": "capability_score",
+   "vendorId": "hebbia",
+   "label": "security capability",
+   "value": 52.83
+  },
+  "capability_score:humain:agents": {
+   "key": "capability_score:humain:agents",
+   "kind": "capability_score",
+   "vendorId": "humain",
+   "label": "agents capability",
+   "value": 44.2
+  },
+  "capability_score:humain:cost_controls": {
+   "key": "capability_score:humain:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "humain",
+   "label": "cost controls capability",
+   "value": 25
+  },
+  "capability_score:humain:deployment_options": {
+   "key": "capability_score:humain:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "humain",
+   "label": "deployment options capability",
+   "value": 65
+  },
+  "capability_score:humain:enterprise_assistant": {
+   "key": "capability_score:humain:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "humain",
+   "label": "enterprise assistant capability",
+   "value": 55
+  },
+  "capability_score:humain:governance": {
+   "key": "capability_score:humain:governance",
+   "kind": "capability_score",
+   "vendorId": "humain",
+   "label": "governance capability",
+   "value": 45.33
+  },
+  "capability_score:humain:integrations": {
+   "key": "capability_score:humain:integrations",
+   "kind": "capability_score",
+   "vendorId": "humain",
+   "label": "integrations capability",
+   "value": 45.77
+  },
+  "capability_score:humain:models": {
+   "key": "capability_score:humain:models",
+   "kind": "capability_score",
+   "vendorId": "humain",
+   "label": "models capability",
+   "value": 50
+  },
+  "capability_score:humain:portability": {
+   "key": "capability_score:humain:portability",
+   "kind": "capability_score",
+   "vendorId": "humain",
+   "label": "portability capability",
+   "value": 53.18
+  },
+  "capability_score:humain:rag": {
+   "key": "capability_score:humain:rag",
+   "kind": "capability_score",
+   "vendorId": "humain",
+   "label": "rag capability",
+   "value": 60
+  },
+  "capability_score:humain:security": {
+   "key": "capability_score:humain:security",
+   "kind": "capability_score",
+   "vendorId": "humain",
+   "label": "security capability",
+   "value": 34
+  },
+  "capability_score:ibm:agents": {
+   "key": "capability_score:ibm:agents",
+   "kind": "capability_score",
+   "vendorId": "ibm",
+   "label": "agents capability",
+   "value": 50.4
+  },
+  "capability_score:ibm:cost_controls": {
+   "key": "capability_score:ibm:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "ibm",
+   "label": "cost controls capability",
+   "value": 41.78
+  },
+  "capability_score:ibm:deployment_options": {
+   "key": "capability_score:ibm:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "ibm",
+   "label": "deployment options capability",
+   "value": 86
+  },
+  "capability_score:ibm:enterprise_assistant": {
+   "key": "capability_score:ibm:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "ibm",
+   "label": "enterprise assistant capability",
+   "value": 53
+  },
+  "capability_score:ibm:governance": {
+   "key": "capability_score:ibm:governance",
+   "kind": "capability_score",
+   "vendorId": "ibm",
+   "label": "governance capability",
+   "value": 52.86
+  },
+  "capability_score:ibm:integrations": {
+   "key": "capability_score:ibm:integrations",
+   "kind": "capability_score",
+   "vendorId": "ibm",
+   "label": "integrations capability",
+   "value": 53.66
+  },
+  "capability_score:ibm:models": {
+   "key": "capability_score:ibm:models",
+   "kind": "capability_score",
+   "vendorId": "ibm",
+   "label": "models capability",
+   "value": 49.23
+  },
+  "capability_score:ibm:portability": {
+   "key": "capability_score:ibm:portability",
+   "kind": "capability_score",
+   "vendorId": "ibm",
+   "label": "portability capability",
+   "value": 58.79
+  },
+  "capability_score:ibm:rag": {
+   "key": "capability_score:ibm:rag",
+   "kind": "capability_score",
+   "vendorId": "ibm",
+   "label": "rag capability",
+   "value": 46.75
+  },
+  "capability_score:ibm:security": {
+   "key": "capability_score:ibm:security",
+   "kind": "capability_score",
+   "vendorId": "ibm",
+   "label": "security capability",
+   "value": 57.4
+  },
+  "capability_score:lambda:agents": {
+   "key": "capability_score:lambda:agents",
+   "kind": "capability_score",
+   "vendorId": "lambda",
+   "label": "agents capability",
+   "value": 50.16
+  },
+  "capability_score:lambda:cost_controls": {
+   "key": "capability_score:lambda:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "lambda",
+   "label": "cost controls capability",
+   "value": 58.47
+  },
+  "capability_score:lambda:deployment_options": {
+   "key": "capability_score:lambda:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "lambda",
+   "label": "deployment options capability",
+   "value": 66
+  },
+  "capability_score:lambda:enterprise_assistant": {
+   "key": "capability_score:lambda:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "lambda",
+   "label": "enterprise assistant capability",
+   "value": 44
+  },
+  "capability_score:lambda:governance": {
+   "key": "capability_score:lambda:governance",
+   "kind": "capability_score",
+   "vendorId": "lambda",
+   "label": "governance capability",
+   "value": 52.87
+  },
+  "capability_score:lambda:integrations": {
+   "key": "capability_score:lambda:integrations",
+   "kind": "capability_score",
+   "vendorId": "lambda",
+   "label": "integrations capability",
+   "value": 54.08
+  },
+  "capability_score:lambda:models": {
+   "key": "capability_score:lambda:models",
+   "kind": "capability_score",
+   "vendorId": "lambda",
+   "label": "models capability",
+   "value": 55.06
+  },
+  "capability_score:lambda:portability": {
+   "key": "capability_score:lambda:portability",
+   "kind": "capability_score",
+   "vendorId": "lambda",
+   "label": "portability capability",
+   "value": 57.31
+  },
+  "capability_score:lambda:rag": {
+   "key": "capability_score:lambda:rag",
+   "kind": "capability_score",
+   "vendorId": "lambda",
+   "label": "rag capability",
+   "value": 61
+  },
+  "capability_score:lambda:security": {
+   "key": "capability_score:lambda:security",
+   "kind": "capability_score",
+   "vendorId": "lambda",
+   "label": "security capability",
+   "value": 51.78
+  },
+  "capability_score:meta:agents": {
+   "key": "capability_score:meta:agents",
+   "kind": "capability_score",
+   "vendorId": "meta",
+   "label": "agents capability",
+   "value": 50.9
+  },
+  "capability_score:meta:cost_controls": {
+   "key": "capability_score:meta:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "meta",
+   "label": "cost controls capability",
+   "value": 76
+  },
+  "capability_score:meta:deployment_options": {
+   "key": "capability_score:meta:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "meta",
+   "label": "deployment options capability",
+   "value": 81
+  },
+  "capability_score:meta:enterprise_assistant": {
+   "key": "capability_score:meta:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "meta",
+   "label": "enterprise assistant capability",
+   "value": 49
+  },
+  "capability_score:meta:governance": {
+   "key": "capability_score:meta:governance",
+   "kind": "capability_score",
+   "vendorId": "meta",
+   "label": "governance capability",
+   "value": 86
+  },
+  "capability_score:meta:integrations": {
+   "key": "capability_score:meta:integrations",
+   "kind": "capability_score",
+   "vendorId": "meta",
+   "label": "integrations capability",
+   "value": 58
+  },
+  "capability_score:meta:models": {
+   "key": "capability_score:meta:models",
+   "kind": "capability_score",
+   "vendorId": "meta",
+   "label": "models capability",
+   "value": 57.9
+  },
+  "capability_score:meta:portability": {
+   "key": "capability_score:meta:portability",
+   "kind": "capability_score",
+   "vendorId": "meta",
+   "label": "portability capability",
+   "value": 59.82
+  },
+  "capability_score:meta:rag": {
+   "key": "capability_score:meta:rag",
+   "kind": "capability_score",
+   "vendorId": "meta",
+   "label": "rag capability",
+   "value": 76
+  },
+  "capability_score:meta:security": {
+   "key": "capability_score:meta:security",
+   "kind": "capability_score",
+   "vendorId": "meta",
+   "label": "security capability",
+   "value": 52.9
+  },
+  "capability_score:mgx:agents": {
+   "key": "capability_score:mgx:agents",
+   "kind": "capability_score",
+   "vendorId": "mgx",
+   "label": "agents capability",
+   "value": 53.33
+  },
+  "capability_score:mgx:cost_controls": {
+   "key": "capability_score:mgx:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "mgx",
+   "label": "cost controls capability",
+   "value": 52.5
+  },
+  "capability_score:mgx:deployment_options": {
+   "key": "capability_score:mgx:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "mgx",
+   "label": "deployment options capability",
+   "value": 70
+  },
+  "capability_score:mgx:enterprise_assistant": {
+   "key": "capability_score:mgx:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "mgx",
+   "label": "enterprise assistant capability",
+   "value": 60
+  },
+  "capability_score:mgx:governance": {
+   "key": "capability_score:mgx:governance",
+   "kind": "capability_score",
+   "vendorId": "mgx",
+   "label": "governance capability",
+   "value": 50
+  },
+  "capability_score:mgx:integrations": {
+   "key": "capability_score:mgx:integrations",
+   "kind": "capability_score",
+   "vendorId": "mgx",
+   "label": "integrations capability",
+   "value": 43.29
+  },
+  "capability_score:mgx:models": {
+   "key": "capability_score:mgx:models",
+   "kind": "capability_score",
+   "vendorId": "mgx",
+   "label": "models capability",
+   "value": 31
+  },
+  "capability_score:mgx:portability": {
+   "key": "capability_score:mgx:portability",
+   "kind": "capability_score",
+   "vendorId": "mgx",
+   "label": "portability capability",
+   "value": 56.22
+  },
+  "capability_score:mgx:rag": {
+   "key": "capability_score:mgx:rag",
+   "kind": "capability_score",
+   "vendorId": "mgx",
+   "label": "rag capability",
+   "value": 65
+  },
+  "capability_score:mgx:security": {
+   "key": "capability_score:mgx:security",
+   "kind": "capability_score",
+   "vendorId": "mgx",
+   "label": "security capability",
+   "value": 23.33
+  },
+  "capability_score:microsoft:agents": {
+   "key": "capability_score:microsoft:agents",
+   "kind": "capability_score",
+   "vendorId": "microsoft",
+   "label": "agents capability",
+   "value": 47.06
+  },
+  "capability_score:microsoft:cost_controls": {
+   "key": "capability_score:microsoft:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "microsoft",
+   "label": "cost controls capability",
+   "value": 59.07
+  },
+  "capability_score:microsoft:deployment_options": {
+   "key": "capability_score:microsoft:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "microsoft",
+   "label": "deployment options capability",
+   "value": 92
+  },
+  "capability_score:microsoft:enterprise_assistant": {
+   "key": "capability_score:microsoft:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "microsoft",
+   "label": "enterprise assistant capability",
+   "value": 46.67
+  },
+  "capability_score:microsoft:governance": {
+   "key": "capability_score:microsoft:governance",
+   "kind": "capability_score",
+   "vendorId": "microsoft",
+   "label": "governance capability",
+   "value": 55.37
+  },
+  "capability_score:microsoft:integrations": {
+   "key": "capability_score:microsoft:integrations",
+   "kind": "capability_score",
+   "vendorId": "microsoft",
+   "label": "integrations capability",
+   "value": 67.59
+  },
+  "capability_score:microsoft:models": {
+   "key": "capability_score:microsoft:models",
+   "kind": "capability_score",
+   "vendorId": "microsoft",
+   "label": "models capability",
+   "value": 56.62
+  },
+  "capability_score:microsoft:portability": {
+   "key": "capability_score:microsoft:portability",
+   "kind": "capability_score",
+   "vendorId": "microsoft",
+   "label": "portability capability",
+   "value": 58.92
+  },
+  "capability_score:microsoft:rag": {
+   "key": "capability_score:microsoft:rag",
+   "kind": "capability_score",
+   "vendorId": "microsoft",
+   "label": "rag capability",
+   "value": 87
+  },
+  "capability_score:microsoft:security": {
+   "key": "capability_score:microsoft:security",
+   "kind": "capability_score",
+   "vendorId": "microsoft",
+   "label": "security capability",
+   "value": 51.92
+  },
+  "capability_score:minimax:agents": {
+   "key": "capability_score:minimax:agents",
+   "kind": "capability_score",
+   "vendorId": "minimax",
+   "label": "agents capability",
+   "value": 57.33
+  },
+  "capability_score:minimax:cost_controls": {
+   "key": "capability_score:minimax:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "minimax",
+   "label": "cost controls capability",
+   "value": 59.2
+  },
+  "capability_score:minimax:deployment_options": {
+   "key": "capability_score:minimax:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "minimax",
+   "label": "deployment options capability",
+   "value": 63
+  },
+  "capability_score:minimax:enterprise_assistant": {
+   "key": "capability_score:minimax:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "minimax",
+   "label": "enterprise assistant capability",
+   "value": 53
+  },
+  "capability_score:minimax:governance": {
+   "key": "capability_score:minimax:governance",
+   "kind": "capability_score",
+   "vendorId": "minimax",
+   "label": "governance capability",
+   "value": 37.5
+  },
+  "capability_score:minimax:integrations": {
+   "key": "capability_score:minimax:integrations",
+   "kind": "capability_score",
+   "vendorId": "minimax",
+   "label": "integrations capability",
+   "value": 58.43
+  },
+  "capability_score:minimax:models": {
+   "key": "capability_score:minimax:models",
+   "kind": "capability_score",
+   "vendorId": "minimax",
+   "label": "models capability",
+   "value": 51.71
+  },
+  "capability_score:minimax:portability": {
+   "key": "capability_score:minimax:portability",
+   "kind": "capability_score",
+   "vendorId": "minimax",
+   "label": "portability capability",
+   "value": 70.57
+  },
+  "capability_score:minimax:rag": {
+   "key": "capability_score:minimax:rag",
+   "kind": "capability_score",
+   "vendorId": "minimax",
+   "label": "rag capability",
+   "value": 58
+  },
+  "capability_score:minimax:security": {
+   "key": "capability_score:minimax:security",
+   "kind": "capability_score",
+   "vendorId": "minimax",
+   "label": "security capability",
+   "value": 43.9
+  },
+  "capability_score:mistral:agents": {
+   "key": "capability_score:mistral:agents",
+   "kind": "capability_score",
+   "vendorId": "mistral",
+   "label": "agents capability",
+   "value": 48.14
+  },
+  "capability_score:mistral:cost_controls": {
+   "key": "capability_score:mistral:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "mistral",
+   "label": "cost controls capability",
+   "value": 57.89
+  },
+  "capability_score:mistral:deployment_options": {
+   "key": "capability_score:mistral:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "mistral",
+   "label": "deployment options capability",
+   "value": 73
+  },
+  "capability_score:mistral:enterprise_assistant": {
+   "key": "capability_score:mistral:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "mistral",
+   "label": "enterprise assistant capability",
+   "value": 43.44
+  },
+  "capability_score:mistral:governance": {
+   "key": "capability_score:mistral:governance",
+   "kind": "capability_score",
+   "vendorId": "mistral",
+   "label": "governance capability",
+   "value": 49.61
+  },
+  "capability_score:mistral:integrations": {
+   "key": "capability_score:mistral:integrations",
+   "kind": "capability_score",
+   "vendorId": "mistral",
+   "label": "integrations capability",
+   "value": 57.24
+  },
+  "capability_score:mistral:models": {
+   "key": "capability_score:mistral:models",
+   "kind": "capability_score",
+   "vendorId": "mistral",
+   "label": "models capability",
+   "value": 60.59
+  },
+  "capability_score:mistral:portability": {
+   "key": "capability_score:mistral:portability",
+   "kind": "capability_score",
+   "vendorId": "mistral",
+   "label": "portability capability",
+   "value": 59.24
+  },
+  "capability_score:mistral:rag": {
+   "key": "capability_score:mistral:rag",
+   "kind": "capability_score",
+   "vendorId": "mistral",
+   "label": "rag capability",
+   "value": 68
+  },
+  "capability_score:mistral:security": {
+   "key": "capability_score:mistral:security",
+   "kind": "capability_score",
+   "vendorId": "mistral",
+   "label": "security capability",
+   "value": 50.41
+  },
+  "capability_score:moonshot:agents": {
+   "key": "capability_score:moonshot:agents",
+   "kind": "capability_score",
+   "vendorId": "moonshot",
+   "label": "agents capability",
+   "value": 50.44
+  },
+  "capability_score:moonshot:cost_controls": {
+   "key": "capability_score:moonshot:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "moonshot",
+   "label": "cost controls capability",
+   "value": 62.05
+  },
+  "capability_score:moonshot:deployment_options": {
+   "key": "capability_score:moonshot:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "moonshot",
+   "label": "deployment options capability",
+   "value": 59
+  },
+  "capability_score:moonshot:enterprise_assistant": {
+   "key": "capability_score:moonshot:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "moonshot",
+   "label": "enterprise assistant capability",
+   "value": 74
+  },
+  "capability_score:moonshot:governance": {
+   "key": "capability_score:moonshot:governance",
+   "kind": "capability_score",
+   "vendorId": "moonshot",
+   "label": "governance capability",
+   "value": 40.71
+  },
+  "capability_score:moonshot:integrations": {
+   "key": "capability_score:moonshot:integrations",
+   "kind": "capability_score",
+   "vendorId": "moonshot",
+   "label": "integrations capability",
+   "value": 55.41
+  },
+  "capability_score:moonshot:models": {
+   "key": "capability_score:moonshot:models",
+   "kind": "capability_score",
+   "vendorId": "moonshot",
+   "label": "models capability",
+   "value": 52.36
+  },
+  "capability_score:moonshot:portability": {
+   "key": "capability_score:moonshot:portability",
+   "kind": "capability_score",
+   "vendorId": "moonshot",
+   "label": "portability capability",
+   "value": 55.29
+  },
+  "capability_score:moonshot:rag": {
+   "key": "capability_score:moonshot:rag",
+   "kind": "capability_score",
+   "vendorId": "moonshot",
+   "label": "rag capability",
+   "value": 54
+  },
+  "capability_score:moonshot:security": {
+   "key": "capability_score:moonshot:security",
+   "kind": "capability_score",
+   "vendorId": "moonshot",
+   "label": "security capability",
+   "value": 31.62
+  },
+  "capability_score:moveworks:agents": {
+   "key": "capability_score:moveworks:agents",
+   "kind": "capability_score",
+   "vendorId": "moveworks",
+   "label": "agents capability",
+   "value": 47.69
+  },
+  "capability_score:moveworks:cost_controls": {
+   "key": "capability_score:moveworks:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "moveworks",
+   "label": "cost controls capability",
+   "value": 51.09
+  },
+  "capability_score:moveworks:deployment_options": {
+   "key": "capability_score:moveworks:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "moveworks",
+   "label": "deployment options capability",
+   "value": 62
+  },
+  "capability_score:moveworks:enterprise_assistant": {
+   "key": "capability_score:moveworks:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "moveworks",
+   "label": "enterprise assistant capability",
+   "value": 77
+  },
+  "capability_score:moveworks:governance": {
+   "key": "capability_score:moveworks:governance",
+   "kind": "capability_score",
+   "vendorId": "moveworks",
+   "label": "governance capability",
+   "value": 60.03
+  },
+  "capability_score:moveworks:integrations": {
+   "key": "capability_score:moveworks:integrations",
+   "kind": "capability_score",
+   "vendorId": "moveworks",
+   "label": "integrations capability",
+   "value": 77
+  },
+  "capability_score:moveworks:models": {
+   "key": "capability_score:moveworks:models",
+   "kind": "capability_score",
+   "vendorId": "moveworks",
+   "label": "models capability",
+   "value": 55.73
+  },
+  "capability_score:moveworks:portability": {
+   "key": "capability_score:moveworks:portability",
+   "kind": "capability_score",
+   "vendorId": "moveworks",
+   "label": "portability capability",
+   "value": 63.29
+  },
+  "capability_score:moveworks:rag": {
+   "key": "capability_score:moveworks:rag",
+   "kind": "capability_score",
+   "vendorId": "moveworks",
+   "label": "rag capability",
+   "value": 57
+  },
+  "capability_score:moveworks:security": {
+   "key": "capability_score:moveworks:security",
+   "kind": "capability_score",
+   "vendorId": "moveworks",
+   "label": "security capability",
+   "value": 60.58
+  },
+  "capability_score:nscale:agents": {
+   "key": "capability_score:nscale:agents",
+   "kind": "capability_score",
+   "vendorId": "nscale",
+   "label": "agents capability",
+   "value": 56
+  },
+  "capability_score:nscale:cost_controls": {
+   "key": "capability_score:nscale:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "nscale",
+   "label": "cost controls capability",
+   "value": 50.71
+  },
+  "capability_score:nscale:deployment_options": {
+   "key": "capability_score:nscale:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "nscale",
+   "label": "deployment options capability",
+   "value": 56
+  },
+  "capability_score:nscale:enterprise_assistant": {
+   "key": "capability_score:nscale:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "nscale",
+   "label": "enterprise assistant capability",
+   "value": 46
+  },
+  "capability_score:nscale:governance": {
+   "key": "capability_score:nscale:governance",
+   "kind": "capability_score",
+   "vendorId": "nscale",
+   "label": "governance capability",
+   "value": 51.5
+  },
+  "capability_score:nscale:integrations": {
+   "key": "capability_score:nscale:integrations",
+   "kind": "capability_score",
+   "vendorId": "nscale",
+   "label": "integrations capability",
+   "value": 53.9
+  },
+  "capability_score:nscale:models": {
+   "key": "capability_score:nscale:models",
+   "kind": "capability_score",
+   "vendorId": "nscale",
+   "label": "models capability",
+   "value": 52
+  },
+  "capability_score:nscale:portability": {
+   "key": "capability_score:nscale:portability",
+   "kind": "capability_score",
+   "vendorId": "nscale",
+   "label": "portability capability",
+   "value": 58.5
+  },
+  "capability_score:nscale:rag": {
+   "key": "capability_score:nscale:rag",
+   "kind": "capability_score",
+   "vendorId": "nscale",
+   "label": "rag capability",
+   "value": 51
+  },
+  "capability_score:nscale:security": {
+   "key": "capability_score:nscale:security",
+   "kind": "capability_score",
+   "vendorId": "nscale",
+   "label": "security capability",
+   "value": 50.33
+  },
+  "capability_score:nvidia:agents": {
+   "key": "capability_score:nvidia:agents",
+   "kind": "capability_score",
+   "vendorId": "nvidia",
+   "label": "agents capability",
+   "value": 84
+  },
+  "capability_score:nvidia:cost_controls": {
+   "key": "capability_score:nvidia:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "nvidia",
+   "label": "cost controls capability",
+   "value": 53.8
+  },
+  "capability_score:nvidia:deployment_options": {
+   "key": "capability_score:nvidia:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "nvidia",
+   "label": "deployment options capability",
+   "value": 84
+  },
+  "capability_score:nvidia:enterprise_assistant": {
+   "key": "capability_score:nvidia:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "nvidia",
+   "label": "enterprise assistant capability",
+   "value": 45
+  },
+  "capability_score:nvidia:governance": {
+   "key": "capability_score:nvidia:governance",
+   "kind": "capability_score",
+   "vendorId": "nvidia",
+   "label": "governance capability",
+   "value": 61.75
+  },
+  "capability_score:nvidia:integrations": {
+   "key": "capability_score:nvidia:integrations",
+   "kind": "capability_score",
+   "vendorId": "nvidia",
+   "label": "integrations capability",
+   "value": 67.33
+  },
+  "capability_score:nvidia:models": {
+   "key": "capability_score:nvidia:models",
+   "kind": "capability_score",
+   "vendorId": "nvidia",
+   "label": "models capability",
+   "value": 94
+  },
+  "capability_score:nvidia:portability": {
+   "key": "capability_score:nvidia:portability",
+   "kind": "capability_score",
+   "vendorId": "nvidia",
+   "label": "portability capability",
+   "value": 73.57
+  },
+  "capability_score:nvidia:rag": {
+   "key": "capability_score:nvidia:rag",
+   "kind": "capability_score",
+   "vendorId": "nvidia",
+   "label": "rag capability",
+   "value": 79
+  },
+  "capability_score:nvidia:security": {
+   "key": "capability_score:nvidia:security",
+   "kind": "capability_score",
+   "vendorId": "nvidia",
+   "label": "security capability",
+   "value": 94
+  },
+  "capability_score:openai:agents": {
+   "key": "capability_score:openai:agents",
+   "kind": "capability_score",
+   "vendorId": "openai",
+   "label": "agents capability",
+   "value": 88
+  },
+  "capability_score:openai:cost_controls": {
+   "key": "capability_score:openai:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "openai",
+   "label": "cost controls capability",
+   "value": 66.56
+  },
+  "capability_score:openai:deployment_options": {
+   "key": "capability_score:openai:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "openai",
+   "label": "deployment options capability",
+   "value": 88
+  },
+  "capability_score:openai:enterprise_assistant": {
+   "key": "capability_score:openai:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "openai",
+   "label": "enterprise assistant capability",
+   "value": 67.33
+  },
+  "capability_score:openai:governance": {
+   "key": "capability_score:openai:governance",
+   "kind": "capability_score",
+   "vendorId": "openai",
+   "label": "governance capability",
+   "value": 58.94
+  },
+  "capability_score:openai:integrations": {
+   "key": "capability_score:openai:integrations",
+   "kind": "capability_score",
+   "vendorId": "openai",
+   "label": "integrations capability",
+   "value": 65.78
+  },
+  "capability_score:openai:models": {
+   "key": "capability_score:openai:models",
+   "kind": "capability_score",
+   "vendorId": "openai",
+   "label": "models capability",
+   "value": 60.92
+  },
+  "capability_score:openai:portability": {
+   "key": "capability_score:openai:portability",
+   "kind": "capability_score",
+   "vendorId": "openai",
+   "label": "portability capability",
+   "value": 57.09
+  },
+  "capability_score:openai:rag": {
+   "key": "capability_score:openai:rag",
+   "kind": "capability_score",
+   "vendorId": "openai",
+   "label": "rag capability",
+   "value": 83
+  },
+  "capability_score:openai:security": {
+   "key": "capability_score:openai:security",
+   "kind": "capability_score",
+   "vendorId": "openai",
+   "label": "security capability",
+   "value": 60.23
+  },
+  "capability_score:oracle:agents": {
+   "key": "capability_score:oracle:agents",
+   "kind": "capability_score",
+   "vendorId": "oracle",
+   "label": "agents capability",
+   "value": 44.7
+  },
+  "capability_score:oracle:cost_controls": {
+   "key": "capability_score:oracle:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "oracle",
+   "label": "cost controls capability",
+   "value": 49.3
+  },
+  "capability_score:oracle:deployment_options": {
+   "key": "capability_score:oracle:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "oracle",
+   "label": "deployment options capability",
+   "value": 56
+  },
+  "capability_score:oracle:enterprise_assistant": {
+   "key": "capability_score:oracle:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "oracle",
+   "label": "enterprise assistant capability",
+   "value": 54
+  },
+  "capability_score:oracle:governance": {
+   "key": "capability_score:oracle:governance",
+   "kind": "capability_score",
+   "vendorId": "oracle",
+   "label": "governance capability",
+   "value": 57.85
+  },
+  "capability_score:oracle:integrations": {
+   "key": "capability_score:oracle:integrations",
+   "kind": "capability_score",
+   "vendorId": "oracle",
+   "label": "integrations capability",
+   "value": 50.63
+  },
+  "capability_score:oracle:models": {
+   "key": "capability_score:oracle:models",
+   "kind": "capability_score",
+   "vendorId": "oracle",
+   "label": "models capability",
+   "value": 37.94
+  },
+  "capability_score:oracle:portability": {
+   "key": "capability_score:oracle:portability",
+   "kind": "capability_score",
+   "vendorId": "oracle",
+   "label": "portability capability",
+   "value": 53.37
+  },
+  "capability_score:oracle:rag": {
+   "key": "capability_score:oracle:rag",
+   "kind": "capability_score",
+   "vendorId": "oracle",
+   "label": "rag capability",
+   "value": 62
+  },
+  "capability_score:oracle:security": {
+   "key": "capability_score:oracle:security",
+   "kind": "capability_score",
+   "vendorId": "oracle",
+   "label": "security capability",
+   "value": 55.52
+  },
+  "capability_score:perplexity:agents": {
+   "key": "capability_score:perplexity:agents",
+   "kind": "capability_score",
+   "vendorId": "perplexity",
+   "label": "agents capability",
+   "value": 55.73
+  },
+  "capability_score:perplexity:cost_controls": {
+   "key": "capability_score:perplexity:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "perplexity",
+   "label": "cost controls capability",
+   "value": 69.03
+  },
+  "capability_score:perplexity:deployment_options": {
+   "key": "capability_score:perplexity:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "perplexity",
+   "label": "deployment options capability",
+   "value": 59
+  },
+  "capability_score:perplexity:enterprise_assistant": {
+   "key": "capability_score:perplexity:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "perplexity",
+   "label": "enterprise assistant capability",
+   "value": 74
+  },
+  "capability_score:perplexity:governance": {
+   "key": "capability_score:perplexity:governance",
+   "kind": "capability_score",
+   "vendorId": "perplexity",
+   "label": "governance capability",
+   "value": 49.29
+  },
+  "capability_score:perplexity:integrations": {
+   "key": "capability_score:perplexity:integrations",
+   "kind": "capability_score",
+   "vendorId": "perplexity",
+   "label": "integrations capability",
+   "value": 64.19
+  },
+  "capability_score:perplexity:models": {
+   "key": "capability_score:perplexity:models",
+   "kind": "capability_score",
+   "vendorId": "perplexity",
+   "label": "models capability",
+   "value": 53.71
+  },
+  "capability_score:perplexity:portability": {
+   "key": "capability_score:perplexity:portability",
+   "kind": "capability_score",
+   "vendorId": "perplexity",
+   "label": "portability capability",
+   "value": 54.35
+  },
+  "capability_score:perplexity:rag": {
+   "key": "capability_score:perplexity:rag",
+   "kind": "capability_score",
+   "vendorId": "perplexity",
+   "label": "rag capability",
+   "value": 55
+  },
+  "capability_score:perplexity:security": {
+   "key": "capability_score:perplexity:security",
+   "kind": "capability_score",
+   "vendorId": "perplexity",
+   "label": "security capability",
+   "value": 61
+  },
+  "capability_score:rogo:agents": {
+   "key": "capability_score:rogo:agents",
+   "kind": "capability_score",
+   "vendorId": "rogo",
+   "label": "agents capability",
+   "value": 52.13
+  },
+  "capability_score:rogo:cost_controls": {
+   "key": "capability_score:rogo:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "rogo",
+   "label": "cost controls capability",
+   "value": 53.67
+  },
+  "capability_score:rogo:deployment_options": {
+   "key": "capability_score:rogo:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "rogo",
+   "label": "deployment options capability",
+   "value": 69
+  },
+  "capability_score:rogo:enterprise_assistant": {
+   "key": "capability_score:rogo:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "rogo",
+   "label": "enterprise assistant capability",
+   "value": 55
+  },
+  "capability_score:rogo:governance": {
+   "key": "capability_score:rogo:governance",
+   "kind": "capability_score",
+   "vendorId": "rogo",
+   "label": "governance capability",
+   "value": 56.2
+  },
+  "capability_score:rogo:integrations": {
+   "key": "capability_score:rogo:integrations",
+   "kind": "capability_score",
+   "vendorId": "rogo",
+   "label": "integrations capability",
+   "value": 55.52
+  },
+  "capability_score:rogo:models": {
+   "key": "capability_score:rogo:models",
+   "kind": "capability_score",
+   "vendorId": "rogo",
+   "label": "models capability",
+   "value": 59.15
+  },
+  "capability_score:rogo:portability": {
+   "key": "capability_score:rogo:portability",
+   "kind": "capability_score",
+   "vendorId": "rogo",
+   "label": "portability capability",
+   "value": 64.44
+  },
+  "capability_score:rogo:rag": {
+   "key": "capability_score:rogo:rag",
+   "kind": "capability_score",
+   "vendorId": "rogo",
+   "label": "rag capability",
+   "value": 64
+  },
+  "capability_score:rogo:security": {
+   "key": "capability_score:rogo:security",
+   "kind": "capability_score",
+   "vendorId": "rogo",
+   "label": "security capability",
+   "value": 57.06
+  },
+  "capability_score:sakana:agents": {
+   "key": "capability_score:sakana:agents",
+   "kind": "capability_score",
+   "vendorId": "sakana",
+   "label": "agents capability",
+   "value": 58.32
+  },
+  "capability_score:sakana:cost_controls": {
+   "key": "capability_score:sakana:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "sakana",
+   "label": "cost controls capability",
+   "value": 58.23
+  },
+  "capability_score:sakana:deployment_options": {
+   "key": "capability_score:sakana:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "sakana",
+   "label": "deployment options capability",
+   "value": 42
+  },
+  "capability_score:sakana:enterprise_assistant": {
+   "key": "capability_score:sakana:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "sakana",
+   "label": "enterprise assistant capability",
+   "value": 47
+  },
+  "capability_score:sakana:governance": {
+   "key": "capability_score:sakana:governance",
+   "kind": "capability_score",
+   "vendorId": "sakana",
+   "label": "governance capability",
+   "value": 39.25
+  },
+  "capability_score:sakana:integrations": {
+   "key": "capability_score:sakana:integrations",
+   "kind": "capability_score",
+   "vendorId": "sakana",
+   "label": "integrations capability",
+   "value": 61.56
+  },
+  "capability_score:sakana:models": {
+   "key": "capability_score:sakana:models",
+   "kind": "capability_score",
+   "vendorId": "sakana",
+   "label": "models capability",
+   "value": 52.1
+  },
+  "capability_score:sakana:portability": {
+   "key": "capability_score:sakana:portability",
+   "kind": "capability_score",
+   "vendorId": "sakana",
+   "label": "portability capability",
+   "value": 58.78
+  },
+  "capability_score:sakana:rag": {
+   "key": "capability_score:sakana:rag",
+   "kind": "capability_score",
+   "vendorId": "sakana",
+   "label": "rag capability",
+   "value": 62
+  },
+  "capability_score:sakana:security": {
+   "key": "capability_score:sakana:security",
+   "kind": "capability_score",
+   "vendorId": "sakana",
+   "label": "security capability",
+   "value": 45.38
+  },
+  "capability_score:salesforce:agents": {
+   "key": "capability_score:salesforce:agents",
+   "kind": "capability_score",
+   "vendorId": "salesforce",
+   "label": "agents capability",
+   "value": 50.2
+  },
+  "capability_score:salesforce:cost_controls": {
+   "key": "capability_score:salesforce:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "salesforce",
+   "label": "cost controls capability",
+   "value": 44.25
+  },
+  "capability_score:salesforce:deployment_options": {
+   "key": "capability_score:salesforce:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "salesforce",
+   "label": "deployment options capability",
+   "value": 77
+  },
+  "capability_score:salesforce:enterprise_assistant": {
+   "key": "capability_score:salesforce:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "salesforce",
+   "label": "enterprise assistant capability",
+   "value": 52.5
+  },
+  "capability_score:salesforce:governance": {
+   "key": "capability_score:salesforce:governance",
+   "kind": "capability_score",
+   "vendorId": "salesforce",
+   "label": "governance capability",
+   "value": 49.27
+  },
+  "capability_score:salesforce:integrations": {
+   "key": "capability_score:salesforce:integrations",
+   "kind": "capability_score",
+   "vendorId": "salesforce",
+   "label": "integrations capability",
+   "value": 50.71
+  },
+  "capability_score:salesforce:models": {
+   "key": "capability_score:salesforce:models",
+   "kind": "capability_score",
+   "vendorId": "salesforce",
+   "label": "models capability",
+   "value": 50.74
+  },
+  "capability_score:salesforce:portability": {
+   "key": "capability_score:salesforce:portability",
+   "kind": "capability_score",
+   "vendorId": "salesforce",
+   "label": "portability capability",
+   "value": 60
+  },
+  "capability_score:salesforce:rag": {
+   "key": "capability_score:salesforce:rag",
+   "kind": "capability_score",
+   "vendorId": "salesforce",
+   "label": "rag capability",
+   "value": 72
+  },
+  "capability_score:salesforce:security": {
+   "key": "capability_score:salesforce:security",
+   "kind": "capability_score",
+   "vendorId": "salesforce",
+   "label": "security capability",
+   "value": 50.75
+  },
+  "capability_score:sap:agents": {
+   "key": "capability_score:sap:agents",
+   "kind": "capability_score",
+   "vendorId": "sap",
+   "label": "agents capability",
+   "value": 50
+  },
+  "capability_score:sap:cost_controls": {
+   "key": "capability_score:sap:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "sap",
+   "label": "cost controls capability",
+   "value": 51.54
+  },
+  "capability_score:sap:deployment_options": {
+   "key": "capability_score:sap:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "sap",
+   "label": "deployment options capability",
+   "value": 60
+  },
+  "capability_score:sap:enterprise_assistant": {
+   "key": "capability_score:sap:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "sap",
+   "label": "enterprise assistant capability",
+   "value": 45.44
+  },
+  "capability_score:sap:governance": {
+   "key": "capability_score:sap:governance",
+   "kind": "capability_score",
+   "vendorId": "sap",
+   "label": "governance capability",
+   "value": 60.23
+  },
+  "capability_score:sap:integrations": {
+   "key": "capability_score:sap:integrations",
+   "kind": "capability_score",
+   "vendorId": "sap",
+   "label": "integrations capability",
+   "value": 55.45
+  },
+  "capability_score:sap:models": {
+   "key": "capability_score:sap:models",
+   "kind": "capability_score",
+   "vendorId": "sap",
+   "label": "models capability",
+   "value": 52.75
+  },
+  "capability_score:sap:portability": {
+   "key": "capability_score:sap:portability",
+   "kind": "capability_score",
+   "vendorId": "sap",
+   "label": "portability capability",
+   "value": 60.59
+  },
+  "capability_score:sap:rag": {
+   "key": "capability_score:sap:rag",
+   "kind": "capability_score",
+   "vendorId": "sap",
+   "label": "rag capability",
+   "value": 55
+  },
+  "capability_score:sap:security": {
+   "key": "capability_score:sap:security",
+   "kind": "capability_score",
+   "vendorId": "sap",
+   "label": "security capability",
+   "value": 55.23
+  },
+  "capability_score:sequoia:agents": {
+   "key": "capability_score:sequoia:agents",
+   "kind": "capability_score",
+   "vendorId": "sequoia",
+   "label": "agents capability",
+   "value": 62.5
+  },
+  "capability_score:sequoia:cost_controls": {
+   "key": "capability_score:sequoia:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "sequoia",
+   "label": "cost controls capability",
+   "value": 42
+  },
+  "capability_score:sequoia:deployment_options": {
+   "key": "capability_score:sequoia:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "sequoia",
+   "label": "deployment options capability",
+   "value": 67
+  },
+  "capability_score:sequoia:enterprise_assistant": {
+   "key": "capability_score:sequoia:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "sequoia",
+   "label": "enterprise assistant capability",
+   "value": 35
+  },
+  "capability_score:sequoia:governance": {
+   "key": "capability_score:sequoia:governance",
+   "kind": "capability_score",
+   "vendorId": "sequoia",
+   "label": "governance capability",
+   "value": 52
+  },
+  "capability_score:sequoia:integrations": {
+   "key": "capability_score:sequoia:integrations",
+   "kind": "capability_score",
+   "vendorId": "sequoia",
+   "label": "integrations capability",
+   "value": 17.5
+  },
+  "capability_score:sequoia:models": {
+   "key": "capability_score:sequoia:models",
+   "kind": "capability_score",
+   "vendorId": "sequoia",
+   "label": "models capability",
+   "value": 45
+  },
+  "capability_score:sequoia:portability": {
+   "key": "capability_score:sequoia:portability",
+   "kind": "capability_score",
+   "vendorId": "sequoia",
+   "label": "portability capability",
+   "value": 64.38
+  },
+  "capability_score:sequoia:rag": {
+   "key": "capability_score:sequoia:rag",
+   "kind": "capability_score",
+   "vendorId": "sequoia",
+   "label": "rag capability",
+   "value": 62
+  },
+  "capability_score:sequoia:security": {
+   "key": "capability_score:sequoia:security",
+   "kind": "capability_score",
+   "vendorId": "sequoia",
+   "label": "security capability",
+   "value": 53.44
+  },
+  "capability_score:servicenow:agents": {
+   "key": "capability_score:servicenow:agents",
+   "kind": "capability_score",
+   "vendorId": "servicenow",
+   "label": "agents capability",
+   "value": 50.29
+  },
+  "capability_score:servicenow:cost_controls": {
+   "key": "capability_score:servicenow:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "servicenow",
+   "label": "cost controls capability",
+   "value": 76
+  },
+  "capability_score:servicenow:deployment_options": {
+   "key": "capability_score:servicenow:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "servicenow",
+   "label": "deployment options capability",
+   "value": 81
+  },
+  "capability_score:servicenow:enterprise_assistant": {
+   "key": "capability_score:servicenow:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "servicenow",
+   "label": "enterprise assistant capability",
+   "value": 74
+  },
+  "capability_score:servicenow:governance": {
+   "key": "capability_score:servicenow:governance",
+   "kind": "capability_score",
+   "vendorId": "servicenow",
+   "label": "governance capability",
+   "value": 55.8
+  },
+  "capability_score:servicenow:integrations": {
+   "key": "capability_score:servicenow:integrations",
+   "kind": "capability_score",
+   "vendorId": "servicenow",
+   "label": "integrations capability",
+   "value": 51.4
+  },
+  "capability_score:servicenow:models": {
+   "key": "capability_score:servicenow:models",
+   "kind": "capability_score",
+   "vendorId": "servicenow",
+   "label": "models capability",
+   "value": 55
+  },
+  "capability_score:servicenow:portability": {
+   "key": "capability_score:servicenow:portability",
+   "kind": "capability_score",
+   "vendorId": "servicenow",
+   "label": "portability capability",
+   "value": 52.75
+  },
+  "capability_score:servicenow:rag": {
+   "key": "capability_score:servicenow:rag",
+   "kind": "capability_score",
+   "vendorId": "servicenow",
+   "label": "rag capability",
+   "value": 76
+  },
+  "capability_score:servicenow:security": {
+   "key": "capability_score:servicenow:security",
+   "kind": "capability_score",
+   "vendorId": "servicenow",
+   "label": "security capability",
+   "value": 49.57
+  },
+  "capability_score:snowflake:agents": {
+   "key": "capability_score:snowflake:agents",
+   "kind": "capability_score",
+   "vendorId": "snowflake",
+   "label": "agents capability",
+   "value": 42.06
+  },
+  "capability_score:snowflake:cost_controls": {
+   "key": "capability_score:snowflake:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "snowflake",
+   "label": "cost controls capability",
+   "value": 42.58
+  },
+  "capability_score:snowflake:deployment_options": {
+   "key": "capability_score:snowflake:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "snowflake",
+   "label": "deployment options capability",
+   "value": 76
+  },
+  "capability_score:snowflake:enterprise_assistant": {
+   "key": "capability_score:snowflake:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "snowflake",
+   "label": "enterprise assistant capability",
+   "value": 59
+  },
+  "capability_score:snowflake:governance": {
+   "key": "capability_score:snowflake:governance",
+   "kind": "capability_score",
+   "vendorId": "snowflake",
+   "label": "governance capability",
+   "value": 55.64
+  },
+  "capability_score:snowflake:integrations": {
+   "key": "capability_score:snowflake:integrations",
+   "kind": "capability_score",
+   "vendorId": "snowflake",
+   "label": "integrations capability",
+   "value": 57.9
+  },
+  "capability_score:snowflake:models": {
+   "key": "capability_score:snowflake:models",
+   "kind": "capability_score",
+   "vendorId": "snowflake",
+   "label": "models capability",
+   "value": 48.85
+  },
+  "capability_score:snowflake:portability": {
+   "key": "capability_score:snowflake:portability",
+   "kind": "capability_score",
+   "vendorId": "snowflake",
+   "label": "portability capability",
+   "value": 62.32
+  },
+  "capability_score:snowflake:rag": {
+   "key": "capability_score:snowflake:rag",
+   "kind": "capability_score",
+   "vendorId": "snowflake",
+   "label": "rag capability",
+   "value": 76
+  },
+  "capability_score:snowflake:security": {
+   "key": "capability_score:snowflake:security",
+   "kind": "capability_score",
+   "vendorId": "snowflake",
+   "label": "security capability",
+   "value": 53.2
+  },
+  "capability_score:softbank:agents": {
+   "key": "capability_score:softbank:agents",
+   "kind": "capability_score",
+   "vendorId": "softbank",
+   "label": "agents capability",
+   "value": 59
+  },
+  "capability_score:softbank:cost_controls": {
+   "key": "capability_score:softbank:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "softbank",
+   "label": "cost controls capability",
+   "value": 60
+  },
+  "capability_score:softbank:deployment_options": {
+   "key": "capability_score:softbank:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "softbank",
+   "label": "deployment options capability",
+   "value": 59
+  },
+  "capability_score:softbank:enterprise_assistant": {
+   "key": "capability_score:softbank:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "softbank",
+   "label": "enterprise assistant capability",
+   "value": 78
+  },
+  "capability_score:softbank:governance": {
+   "key": "capability_score:softbank:governance",
+   "kind": "capability_score",
+   "vendorId": "softbank",
+   "label": "governance capability",
+   "value": 48
+  },
+  "capability_score:softbank:integrations": {
+   "key": "capability_score:softbank:integrations",
+   "kind": "capability_score",
+   "vendorId": "softbank",
+   "label": "integrations capability",
+   "value": 45
+  },
+  "capability_score:softbank:models": {
+   "key": "capability_score:softbank:models",
+   "kind": "capability_score",
+   "vendorId": "softbank",
+   "label": "models capability",
+   "value": 45
+  },
+  "capability_score:softbank:portability": {
+   "key": "capability_score:softbank:portability",
+   "kind": "capability_score",
+   "vendorId": "softbank",
+   "label": "portability capability",
+   "value": 55
+  },
+  "capability_score:softbank:rag": {
+   "key": "capability_score:softbank:rag",
+   "kind": "capability_score",
+   "vendorId": "softbank",
+   "label": "rag capability",
+   "value": 54
+  },
+  "capability_score:softbank:security": {
+   "key": "capability_score:softbank:security",
+   "kind": "capability_score",
+   "vendorId": "softbank",
+   "label": "security capability",
+   "value": 58.5
+  },
+  "capability_score:together:agents": {
+   "key": "capability_score:together:agents",
+   "kind": "capability_score",
+   "vendorId": "together",
+   "label": "agents capability",
+   "value": 51.8
+  },
+  "capability_score:together:cost_controls": {
+   "key": "capability_score:together:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "together",
+   "label": "cost controls capability",
+   "value": 65.06
+  },
+  "capability_score:together:deployment_options": {
+   "key": "capability_score:together:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "together",
+   "label": "deployment options capability",
+   "value": 72
+  },
+  "capability_score:together:enterprise_assistant": {
+   "key": "capability_score:together:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "together",
+   "label": "enterprise assistant capability",
+   "value": 45
+  },
+  "capability_score:together:governance": {
+   "key": "capability_score:together:governance",
+   "kind": "capability_score",
+   "vendorId": "together",
+   "label": "governance capability",
+   "value": 53.25
+  },
+  "capability_score:together:integrations": {
+   "key": "capability_score:together:integrations",
+   "kind": "capability_score",
+   "vendorId": "together",
+   "label": "integrations capability",
+   "value": 60.73
+  },
+  "capability_score:together:models": {
+   "key": "capability_score:together:models",
+   "kind": "capability_score",
+   "vendorId": "together",
+   "label": "models capability",
+   "value": 46.47
+  },
+  "capability_score:together:portability": {
+   "key": "capability_score:together:portability",
+   "kind": "capability_score",
+   "vendorId": "together",
+   "label": "portability capability",
+   "value": 62.35
+  },
+  "capability_score:together:rag": {
+   "key": "capability_score:together:rag",
+   "kind": "capability_score",
+   "vendorId": "together",
+   "label": "rag capability",
+   "value": 67
+  },
+  "capability_score:together:security": {
+   "key": "capability_score:together:security",
+   "kind": "capability_score",
+   "vendorId": "together",
+   "label": "security capability",
+   "value": 54.03
+  },
+  "capability_score:tsmc:agents": {
+   "key": "capability_score:tsmc:agents",
+   "kind": "capability_score",
+   "vendorId": "tsmc",
+   "label": "agents capability",
+   "value": 55
+  },
+  "capability_score:tsmc:cost_controls": {
+   "key": "capability_score:tsmc:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "tsmc",
+   "label": "cost controls capability",
+   "value": 87
+  },
+  "capability_score:tsmc:deployment_options": {
+   "key": "capability_score:tsmc:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "tsmc",
+   "label": "deployment options capability",
+   "value": 67
+  },
+  "capability_score:tsmc:enterprise_assistant": {
+   "key": "capability_score:tsmc:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "tsmc",
+   "label": "enterprise assistant capability",
+   "value": 82
+  },
+  "capability_score:tsmc:governance": {
+   "key": "capability_score:tsmc:governance",
+   "kind": "capability_score",
+   "vendorId": "tsmc",
+   "label": "governance capability",
+   "value": 72
+  },
+  "capability_score:tsmc:integrations": {
+   "key": "capability_score:tsmc:integrations",
+   "kind": "capability_score",
+   "vendorId": "tsmc",
+   "label": "integrations capability",
+   "value": 82
+  },
+  "capability_score:tsmc:models": {
+   "key": "capability_score:tsmc:models",
+   "kind": "capability_score",
+   "vendorId": "tsmc",
+   "label": "models capability",
+   "value": 77
+  },
+  "capability_score:tsmc:portability": {
+   "key": "capability_score:tsmc:portability",
+   "kind": "capability_score",
+   "vendorId": "tsmc",
+   "label": "portability capability",
+   "value": 69.5
+  },
+  "capability_score:tsmc:rag": {
+   "key": "capability_score:tsmc:rag",
+   "kind": "capability_score",
+   "vendorId": "tsmc",
+   "label": "rag capability",
+   "value": 87
+  },
+  "capability_score:tsmc:security": {
+   "key": "capability_score:tsmc:security",
+   "kind": "capability_score",
+   "vendorId": "tsmc",
+   "label": "security capability",
+   "value": 77
+  },
+  "capability_score:writer:agents": {
+   "key": "capability_score:writer:agents",
+   "kind": "capability_score",
+   "vendorId": "writer",
+   "label": "agents capability",
+   "value": 52.27
+  },
+  "capability_score:writer:cost_controls": {
+   "key": "capability_score:writer:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "writer",
+   "label": "cost controls capability",
+   "value": 52.04
+  },
+  "capability_score:writer:deployment_options": {
+   "key": "capability_score:writer:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "writer",
+   "label": "deployment options capability",
+   "value": 66
+  },
+  "capability_score:writer:enterprise_assistant": {
+   "key": "capability_score:writer:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "writer",
+   "label": "enterprise assistant capability",
+   "value": 45.37
+  },
+  "capability_score:writer:governance": {
+   "key": "capability_score:writer:governance",
+   "kind": "capability_score",
+   "vendorId": "writer",
+   "label": "governance capability",
+   "value": 55.49
+  },
+  "capability_score:writer:integrations": {
+   "key": "capability_score:writer:integrations",
+   "kind": "capability_score",
+   "vendorId": "writer",
+   "label": "integrations capability",
+   "value": 51.43
+  },
+  "capability_score:writer:models": {
+   "key": "capability_score:writer:models",
+   "kind": "capability_score",
+   "vendorId": "writer",
+   "label": "models capability",
+   "value": 49.68
+  },
+  "capability_score:writer:portability": {
+   "key": "capability_score:writer:portability",
+   "kind": "capability_score",
+   "vendorId": "writer",
+   "label": "portability capability",
+   "value": 53.93
+  },
+  "capability_score:writer:rag": {
+   "key": "capability_score:writer:rag",
+   "kind": "capability_score",
+   "vendorId": "writer",
+   "label": "rag capability",
+   "value": 52
+  },
+  "capability_score:writer:security": {
+   "key": "capability_score:writer:security",
+   "kind": "capability_score",
+   "vendorId": "writer",
+   "label": "security capability",
+   "value": 62.81
+  },
+  "capability_score:xai:agents": {
+   "key": "capability_score:xai:agents",
+   "kind": "capability_score",
+   "vendorId": "xai",
+   "label": "agents capability",
+   "value": 54.57
+  },
+  "capability_score:xai:cost_controls": {
+   "key": "capability_score:xai:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "xai",
+   "label": "cost controls capability",
+   "value": 67.42
+  },
+  "capability_score:xai:deployment_options": {
+   "key": "capability_score:xai:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "xai",
+   "label": "deployment options capability",
+   "value": 54
+  },
+  "capability_score:xai:enterprise_assistant": {
+   "key": "capability_score:xai:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "xai",
+   "label": "enterprise assistant capability",
+   "value": 46.75
+  },
+  "capability_score:xai:governance": {
+   "key": "capability_score:xai:governance",
+   "kind": "capability_score",
+   "vendorId": "xai",
+   "label": "governance capability",
+   "value": 49.3
+  },
+  "capability_score:xai:integrations": {
+   "key": "capability_score:xai:integrations",
+   "kind": "capability_score",
+   "vendorId": "xai",
+   "label": "integrations capability",
+   "value": 61
+  },
+  "capability_score:xai:models": {
+   "key": "capability_score:xai:models",
+   "kind": "capability_score",
+   "vendorId": "xai",
+   "label": "models capability",
+   "value": 53.15
+  },
+  "capability_score:xai:portability": {
+   "key": "capability_score:xai:portability",
+   "kind": "capability_score",
+   "vendorId": "xai",
+   "label": "portability capability",
+   "value": 61.93
+  },
+  "capability_score:xai:rag": {
+   "key": "capability_score:xai:rag",
+   "kind": "capability_score",
+   "vendorId": "xai",
+   "label": "rag capability",
+   "value": 80
+  },
+  "capability_score:xai:security": {
+   "key": "capability_score:xai:security",
+   "kind": "capability_score",
+   "vendorId": "xai",
+   "label": "security capability",
+   "value": 48
+  },
+  "capability_score:zai:agents": {
+   "key": "capability_score:zai:agents",
+   "kind": "capability_score",
+   "vendorId": "zai",
+   "label": "agents capability",
+   "value": 50.5
+  },
+  "capability_score:zai:cost_controls": {
+   "key": "capability_score:zai:cost_controls",
+   "kind": "capability_score",
+   "vendorId": "zai",
+   "label": "cost controls capability",
+   "value": 65.67
+  },
+  "capability_score:zai:deployment_options": {
+   "key": "capability_score:zai:deployment_options",
+   "kind": "capability_score",
+   "vendorId": "zai",
+   "label": "deployment options capability",
+   "value": 60
+  },
+  "capability_score:zai:enterprise_assistant": {
+   "key": "capability_score:zai:enterprise_assistant",
+   "kind": "capability_score",
+   "vendorId": "zai",
+   "label": "enterprise assistant capability",
+   "value": 50
+  },
+  "capability_score:zai:governance": {
+   "key": "capability_score:zai:governance",
+   "kind": "capability_score",
+   "vendorId": "zai",
+   "label": "governance capability",
+   "value": 65
+  },
+  "capability_score:zai:integrations": {
+   "key": "capability_score:zai:integrations",
+   "kind": "capability_score",
+   "vendorId": "zai",
+   "label": "integrations capability",
+   "value": 56.51
+  },
+  "capability_score:zai:models": {
+   "key": "capability_score:zai:models",
+   "kind": "capability_score",
+   "vendorId": "zai",
+   "label": "models capability",
+   "value": 55.94
+  },
+  "capability_score:zai:portability": {
+   "key": "capability_score:zai:portability",
+   "kind": "capability_score",
+   "vendorId": "zai",
+   "label": "portability capability",
+   "value": 56.86
+  },
+  "capability_score:zai:rag": {
+   "key": "capability_score:zai:rag",
+   "kind": "capability_score",
+   "vendorId": "zai",
+   "label": "rag capability",
+   "value": 55
+  },
+  "capability_score:zai:security": {
+   "key": "capability_score:zai:security",
+   "kind": "capability_score",
+   "vendorId": "zai",
+   "label": "security capability",
+   "value": 39.67
+  },
+  "market_share:anthropic:agent_platform": {
+   "key": "market_share:anthropic:agent_platform",
+   "kind": "market_share",
+   "vendorId": "anthropic",
+   "label": "share of agent platform",
+   "value": 20.7
+  },
+  "market_share:openai:agent_platform": {
+   "key": "market_share:openai:agent_platform",
+   "kind": "market_share",
+   "vendorId": "openai",
+   "label": "share of agent platform",
+   "value": 20.5
+  },
+  "market_share:aws:agent_platform": {
+   "key": "market_share:aws:agent_platform",
+   "kind": "market_share",
+   "vendorId": "aws",
+   "label": "share of agent platform",
+   "value": 18.6
+  },
+  "market_share:microsoft:agent_platform": {
+   "key": "market_share:microsoft:agent_platform",
+   "kind": "market_share",
+   "vendorId": "microsoft",
+   "label": "share of agent platform",
+   "value": 17.8
+  },
+  "market_share:salesforce:agent_platform": {
+   "key": "market_share:salesforce:agent_platform",
+   "kind": "market_share",
+   "vendorId": "salesforce",
+   "label": "share of agent platform",
+   "value": 11.7
+  },
+  "market_share:servicenow:agent_platform": {
+   "key": "market_share:servicenow:agent_platform",
+   "kind": "market_share",
+   "vendorId": "servicenow",
+   "label": "share of agent platform",
+   "value": 10.7
+  },
+  "market_share:google:ai_cloud_compute": {
+   "key": "market_share:google:ai_cloud_compute",
+   "kind": "market_share",
+   "vendorId": "google",
+   "label": "share of ai cloud compute",
+   "value": 24.8
+  },
+  "market_share:aws:ai_cloud_compute": {
+   "key": "market_share:aws:ai_cloud_compute",
+   "kind": "market_share",
+   "vendorId": "aws",
+   "label": "share of ai cloud compute",
+   "value": 22.1
+  },
+  "market_share:microsoft:ai_cloud_compute": {
+   "key": "market_share:microsoft:ai_cloud_compute",
+   "kind": "market_share",
+   "vendorId": "microsoft",
+   "label": "share of ai cloud compute",
+   "value": 21.4
+  },
+  "market_share:oracle:ai_cloud_compute": {
+   "key": "market_share:oracle:ai_cloud_compute",
+   "kind": "market_share",
+   "vendorId": "oracle",
+   "label": "share of ai cloud compute",
+   "value": 18.7
+  },
+  "market_share:alibaba:ai_cloud_compute": {
+   "key": "market_share:alibaba:ai_cloud_compute",
+   "kind": "market_share",
+   "vendorId": "alibaba",
+   "label": "share of ai cloud compute",
+   "value": 3.5
+  },
+  "market_share:coreweave:ai_cloud_compute": {
+   "key": "market_share:coreweave:ai_cloud_compute",
+   "kind": "market_share",
+   "vendorId": "coreweave",
+   "label": "share of ai cloud compute",
+   "value": 3.3
+  },
+  "market_share:g42:ai_cloud_compute": {
+   "key": "market_share:g42:ai_cloud_compute",
+   "kind": "market_share",
+   "vendorId": "g42",
+   "label": "share of ai cloud compute",
+   "value": 3.3
+  },
+  "market_share:humain:ai_cloud_compute": {
+   "key": "market_share:humain:ai_cloud_compute",
+   "kind": "market_share",
+   "vendorId": "humain",
+   "label": "share of ai cloud compute",
+   "value": 2.9
+  },
+  "market_share:broadcom:ai_silicon": {
+   "key": "market_share:broadcom:ai_silicon",
+   "kind": "market_share",
+   "vendorId": "broadcom",
+   "label": "share of ai silicon",
+   "value": 31
+  },
+  "market_share:cerebras:ai_silicon": {
+   "key": "market_share:cerebras:ai_silicon",
+   "kind": "market_share",
+   "vendorId": "cerebras",
+   "label": "share of ai silicon",
+   "value": 24.1
+  },
+  "market_share:nvidia:ai_silicon": {
+   "key": "market_share:nvidia:ai_silicon",
+   "kind": "market_share",
+   "vendorId": "nvidia",
+   "label": "share of ai silicon",
+   "value": 16
+  },
+  "market_share:amd:ai_silicon": {
+   "key": "market_share:amd:ai_silicon",
+   "kind": "market_share",
+   "vendorId": "amd",
+   "label": "share of ai silicon",
+   "value": 15.6
+  },
+  "market_share:tsmc:ai_silicon": {
+   "key": "market_share:tsmc:ai_silicon",
+   "kind": "market_share",
+   "vendorId": "tsmc",
+   "label": "share of ai silicon",
+   "value": 13.2
+  },
+  "market_share:google:cloud_ai_platform": {
+   "key": "market_share:google:cloud_ai_platform",
+   "kind": "market_share",
+   "vendorId": "google",
+   "label": "share of cloud ai platform",
+   "value": 22.9
+  },
+  "market_share:aws:cloud_ai_platform": {
+   "key": "market_share:aws:cloud_ai_platform",
+   "kind": "market_share",
+   "vendorId": "aws",
+   "label": "share of cloud ai platform",
+   "value": 20.4
+  },
+  "market_share:databricks:cloud_ai_platform": {
+   "key": "market_share:databricks:cloud_ai_platform",
+   "kind": "market_share",
+   "vendorId": "databricks",
+   "label": "share of cloud ai platform",
+   "value": 20.1
+  },
+  "market_share:microsoft:cloud_ai_platform": {
+   "key": "market_share:microsoft:cloud_ai_platform",
+   "kind": "market_share",
+   "vendorId": "microsoft",
+   "label": "share of cloud ai platform",
+   "value": 19.7
+  },
+  "market_share:snowflake:cloud_ai_platform": {
+   "key": "market_share:snowflake:cloud_ai_platform",
+   "kind": "market_share",
+   "vendorId": "snowflake",
+   "label": "share of cloud ai platform",
+   "value": 16.9
+  },
+  "market_share:microsoft:crm_customer_ai": {
+   "key": "market_share:microsoft:crm_customer_ai",
+   "kind": "market_share",
+   "vendorId": "microsoft",
+   "label": "share of crm customer ai",
+   "value": 41.1
+  },
+  "market_share:oracle:crm_customer_ai": {
+   "key": "market_share:oracle:crm_customer_ai",
+   "kind": "market_share",
+   "vendorId": "oracle",
+   "label": "share of crm customer ai",
+   "value": 34.1
+  },
+  "market_share:salesforce:crm_customer_ai": {
+   "key": "market_share:salesforce:crm_customer_ai",
+   "kind": "market_share",
+   "vendorId": "salesforce",
+   "label": "share of crm customer ai",
+   "value": 24.9
+  },
+  "market_share:anthropic:developer_coding_agent": {
+   "key": "market_share:anthropic:developer_coding_agent",
+   "kind": "market_share",
+   "vendorId": "anthropic",
+   "label": "share of developer coding agent",
+   "value": 26
+  },
+  "market_share:google:developer_coding_agent": {
+   "key": "market_share:google:developer_coding_agent",
+   "kind": "market_share",
+   "vendorId": "google",
+   "label": "share of developer coding agent",
+   "value": 25.9
+  },
+  "market_share:openai:developer_coding_agent": {
+   "key": "market_share:openai:developer_coding_agent",
+   "kind": "market_share",
+   "vendorId": "openai",
+   "label": "share of developer coding agent",
+   "value": 25.6
+  },
+  "market_share:microsoft:developer_coding_agent": {
+   "key": "market_share:microsoft:developer_coding_agent",
+   "kind": "market_share",
+   "vendorId": "microsoft",
+   "label": "share of developer coding agent",
+   "value": 22.5
+  },
+  "market_share:anthropic:enterprise_assistant": {
+   "key": "market_share:anthropic:enterprise_assistant",
+   "kind": "market_share",
+   "vendorId": "anthropic",
+   "label": "share of enterprise assistant",
+   "value": 22.4
+  },
+  "market_share:openai:enterprise_assistant": {
+   "key": "market_share:openai:enterprise_assistant",
+   "kind": "market_share",
+   "vendorId": "openai",
+   "label": "share of enterprise assistant",
+   "value": 22.1
+  },
+  "market_share:microsoft:enterprise_assistant": {
+   "key": "market_share:microsoft:enterprise_assistant",
+   "kind": "market_share",
+   "vendorId": "microsoft",
+   "label": "share of enterprise assistant",
+   "value": 19.4
+  },
+  "market_share:glean:enterprise_assistant": {
+   "key": "market_share:glean:enterprise_assistant",
+   "kind": "market_share",
+   "vendorId": "glean",
+   "label": "share of enterprise assistant",
+   "value": 18.2
+  },
+  "market_share:writer:enterprise_assistant": {
+   "key": "market_share:writer:enterprise_assistant",
+   "kind": "market_share",
+   "vendorId": "writer",
+   "label": "share of enterprise assistant",
+   "value": 18.1
+  },
+  "market_share:anthropic:frontier_model_api": {
+   "key": "market_share:anthropic:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "anthropic",
+   "label": "share of frontier model api",
+   "value": 15
+  },
+  "market_share:google:frontier_model_api": {
+   "key": "market_share:google:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "google",
+   "label": "share of frontier model api",
+   "value": 15
+  },
+  "market_share:openai:frontier_model_api": {
+   "key": "market_share:openai:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "openai",
+   "label": "share of frontier model api",
+   "value": 14.8
+  },
+  "market_share:cohere:frontier_model_api": {
+   "key": "market_share:cohere:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "cohere",
+   "label": "share of frontier model api",
+   "value": 13.4
+  },
+  "market_share:mistral:frontier_model_api": {
+   "key": "market_share:mistral:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "mistral",
+   "label": "share of frontier model api",
+   "value": 12.1
+  },
+  "market_share:snowflake:frontier_model_api": {
+   "key": "market_share:snowflake:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "snowflake",
+   "label": "share of frontier model api",
+   "value": 11.2
+  },
+  "market_share:moonshot:frontier_model_api": {
+   "key": "market_share:moonshot:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "moonshot",
+   "label": "share of frontier model api",
+   "value": 3.1
+  },
+  "market_share:xai:frontier_model_api": {
+   "key": "market_share:xai:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "xai",
+   "label": "share of frontier model api",
+   "value": 2.9
+  },
+  "market_share:meta:frontier_model_api": {
+   "key": "market_share:meta:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "meta",
+   "label": "share of frontier model api",
+   "value": 2.6
+  },
+  "market_share:zai:frontier_model_api": {
+   "key": "market_share:zai:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "zai",
+   "label": "share of frontier model api",
+   "value": 2.3
+  },
+  "market_share:deepseek:frontier_model_api": {
+   "key": "market_share:deepseek:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "deepseek",
+   "label": "share of frontier model api",
+   "value": 2.2
+  },
+  "market_share:alibaba:frontier_model_api": {
+   "key": "market_share:alibaba:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "alibaba",
+   "label": "share of frontier model api",
+   "value": 2.1
+  },
+  "market_share:minimax:frontier_model_api": {
+   "key": "market_share:minimax:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "minimax",
+   "label": "share of frontier model api",
+   "value": 2
+  },
+  "market_share:ai21:frontier_model_api": {
+   "key": "market_share:ai21:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "ai21",
+   "label": "share of frontier model api",
+   "value": 1.2
+  },
+  "market_share:microsoft:itsm_hr_service_ai": {
+   "key": "market_share:microsoft:itsm_hr_service_ai",
+   "kind": "market_share",
+   "vendorId": "microsoft",
+   "label": "share of itsm hr service ai",
+   "value": 42.4
+  },
+  "market_share:moveworks:itsm_hr_service_ai": {
+   "key": "market_share:moveworks:itsm_hr_service_ai",
+   "kind": "market_share",
+   "vendorId": "moveworks",
+   "label": "share of itsm hr service ai",
+   "value": 35.4
+  },
+  "market_share:servicenow:itsm_hr_service_ai": {
+   "key": "market_share:servicenow:itsm_hr_service_ai",
+   "kind": "market_share",
+   "vendorId": "servicenow",
+   "label": "share of itsm hr service ai",
+   "value": 22.3
+  },
+  "market_share:lambda:neocloud_inference": {
+   "key": "market_share:lambda:neocloud_inference",
+   "kind": "market_share",
+   "vendorId": "lambda",
+   "label": "share of neocloud inference",
+   "value": 24.4
+  },
+  "market_share:fireworks:neocloud_inference": {
+   "key": "market_share:fireworks:neocloud_inference",
+   "kind": "market_share",
+   "vendorId": "fireworks",
+   "label": "share of neocloud inference",
+   "value": 18.1
+  },
+  "market_share:together:neocloud_inference": {
+   "key": "market_share:together:neocloud_inference",
+   "kind": "market_share",
+   "vendorId": "together",
+   "label": "share of neocloud inference",
+   "value": 17.7
+  },
+  "market_share:groq:neocloud_inference": {
+   "key": "market_share:groq:neocloud_inference",
+   "kind": "market_share",
+   "vendorId": "groq",
+   "label": "share of neocloud inference",
+   "value": 17.5
+  },
+  "market_share:coreweave:neocloud_inference": {
+   "key": "market_share:coreweave:neocloud_inference",
+   "kind": "market_share",
+   "vendorId": "coreweave",
+   "label": "share of neocloud inference",
+   "value": 11.5
+  },
+  "market_share:nscale:neocloud_inference": {
+   "key": "market_share:nscale:neocloud_inference",
+   "kind": "market_share",
+   "vendorId": "nscale",
+   "label": "share of neocloud inference",
+   "value": 10.8
+  },
+  "market_share:google:rag_enterprise_search": {
+   "key": "market_share:google:rag_enterprise_search",
+   "kind": "market_share",
+   "vendorId": "google",
+   "label": "share of rag enterprise search",
+   "value": 23.8
+  },
+  "market_share:cohere:rag_enterprise_search": {
+   "key": "market_share:cohere:rag_enterprise_search",
+   "kind": "market_share",
+   "vendorId": "cohere",
+   "label": "share of rag enterprise search",
+   "value": 21.1
+  },
+  "market_share:glean:rag_enterprise_search": {
+   "key": "market_share:glean:rag_enterprise_search",
+   "kind": "market_share",
+   "vendorId": "glean",
+   "label": "share of rag enterprise search",
+   "value": 19
+  },
+  "market_share:hebbia:rag_enterprise_search": {
+   "key": "market_share:hebbia:rag_enterprise_search",
+   "kind": "market_share",
+   "vendorId": "hebbia",
+   "label": "share of rag enterprise search",
+   "value": 18.5
+  },
+  "market_share:snowflake:rag_enterprise_search": {
+   "key": "market_share:snowflake:rag_enterprise_search",
+   "kind": "market_share",
+   "vendorId": "snowflake",
+   "label": "share of rag enterprise search",
+   "value": 17.5
+  },
+  "market_share:cohere:regulated_industry_ai": {
+   "key": "market_share:cohere:regulated_industry_ai",
+   "kind": "market_share",
+   "vendorId": "cohere",
+   "label": "share of regulated industry ai",
+   "value": 35.1
+  },
+  "market_share:harvey:regulated_industry_ai": {
+   "key": "market_share:harvey:regulated_industry_ai",
+   "kind": "market_share",
+   "vendorId": "harvey",
+   "label": "share of regulated industry ai",
+   "value": 23.5
+  },
+  "market_share:ibm:regulated_industry_ai": {
+   "key": "market_share:ibm:regulated_industry_ai",
+   "kind": "market_share",
+   "vendorId": "ibm",
+   "label": "share of regulated industry ai",
+   "value": 22.2
+  },
+  "market_share:rogo:regulated_industry_ai": {
+   "key": "market_share:rogo:regulated_industry_ai",
+   "kind": "market_share",
+   "vendorId": "rogo",
+   "label": "share of regulated industry ai",
+   "value": 19.2
+  },
+  "market_share:sap:workflow_automation_ai": {
+   "key": "market_share:sap:workflow_automation_ai",
+   "kind": "market_share",
+   "vendorId": "sap",
+   "label": "share of workflow automation ai",
+   "value": 29.6
+  },
+  "market_share:moveworks:workflow_automation_ai": {
+   "key": "market_share:moveworks:workflow_automation_ai",
+   "kind": "market_share",
+   "vendorId": "moveworks",
+   "label": "share of workflow automation ai",
+   "value": 28.2
+  },
+  "market_share:servicenow:workflow_automation_ai": {
+   "key": "market_share:servicenow:workflow_automation_ai",
+   "kind": "market_share",
+   "vendorId": "servicenow",
+   "label": "share of workflow automation ai",
+   "value": 21.7
+  },
+  "market_share:salesforce:workflow_automation_ai": {
+   "key": "market_share:salesforce:workflow_automation_ai",
+   "kind": "market_share",
+   "vendorId": "salesforce",
+   "label": "share of workflow automation ai",
+   "value": 20.5
+  },
+  "narrative_gap:moonshot": {
+   "key": "narrative_gap:moonshot",
+   "kind": "narrative_gap",
+   "vendorId": "moonshot",
+   "label": "narrative versus reality gap",
+   "value": 73.3
+  },
+  "narrative_gap:sakana": {
+   "key": "narrative_gap:sakana",
+   "kind": "narrative_gap",
+   "vendorId": "sakana",
+   "label": "narrative versus reality gap",
+   "value": 59.5
+  },
+  "narrative_gap:oracle": {
+   "key": "narrative_gap:oracle",
+   "kind": "narrative_gap",
+   "vendorId": "oracle",
+   "label": "narrative versus reality gap",
+   "value": 53.6
+  },
+  "narrative_gap:zai": {
+   "key": "narrative_gap:zai",
+   "kind": "narrative_gap",
+   "vendorId": "zai",
+   "label": "narrative versus reality gap",
+   "value": 52.4
+  },
+  "narrative_gap:databricks": {
+   "key": "narrative_gap:databricks",
+   "kind": "narrative_gap",
+   "vendorId": "databricks",
+   "label": "narrative versus reality gap",
+   "value": 52.1
+  },
+  "narrative_gap:ibm": {
+   "key": "narrative_gap:ibm",
+   "kind": "narrative_gap",
+   "vendorId": "ibm",
+   "label": "narrative versus reality gap",
+   "value": 47.6
+  },
+  "narrative_gap:anthropic": {
+   "key": "narrative_gap:anthropic",
+   "kind": "narrative_gap",
+   "vendorId": "anthropic",
+   "label": "narrative versus reality gap",
+   "value": 37.7
+  },
+  "narrative_gap:mistral": {
+   "key": "narrative_gap:mistral",
+   "kind": "narrative_gap",
+   "vendorId": "mistral",
+   "label": "narrative versus reality gap",
+   "value": 36.5
+  },
+  "narrative_gap:minimax": {
+   "key": "narrative_gap:minimax",
+   "kind": "narrative_gap",
+   "vendorId": "minimax",
+   "label": "narrative versus reality gap",
+   "value": 35.7
+  },
+  "narrative_gap:lambda": {
+   "key": "narrative_gap:lambda",
+   "kind": "narrative_gap",
+   "vendorId": "lambda",
+   "label": "narrative versus reality gap",
+   "value": 30
+  },
+  "narrative_gap:xai": {
+   "key": "narrative_gap:xai",
+   "kind": "narrative_gap",
+   "vendorId": "xai",
+   "label": "narrative versus reality gap",
+   "value": 27.6
+  },
+  "narrative_gap:fireworks": {
+   "key": "narrative_gap:fireworks",
+   "kind": "narrative_gap",
+   "vendorId": "fireworks",
+   "label": "narrative versus reality gap",
+   "value": 21.4
+  },
+  "narrative_gap:salesforce": {
+   "key": "narrative_gap:salesforce",
+   "kind": "narrative_gap",
+   "vendorId": "salesforce",
+   "label": "narrative versus reality gap",
+   "value": 20.9
+  },
+  "narrative_gap:cerebras": {
+   "key": "narrative_gap:cerebras",
+   "kind": "narrative_gap",
+   "vendorId": "cerebras",
+   "label": "narrative versus reality gap",
+   "value": 19
+  },
+  "narrative_gap:aws": {
+   "key": "narrative_gap:aws",
+   "kind": "narrative_gap",
+   "vendorId": "aws",
+   "label": "narrative versus reality gap",
+   "value": 17.9
+  },
+  "narrative_gap:google": {
+   "key": "narrative_gap:google",
+   "kind": "narrative_gap",
+   "vendorId": "google",
+   "label": "narrative versus reality gap",
+   "value": 15
+  },
+  "narrative_gap:snowflake": {
+   "key": "narrative_gap:snowflake",
+   "kind": "narrative_gap",
+   "vendorId": "snowflake",
+   "label": "narrative versus reality gap",
+   "value": 9.6
+  },
+  "narrative_gap:alibaba": {
+   "key": "narrative_gap:alibaba",
+   "kind": "narrative_gap",
+   "vendorId": "alibaba",
+   "label": "narrative versus reality gap",
+   "value": 7.9
+  },
+  "narrative_gap:perplexity": {
+   "key": "narrative_gap:perplexity",
+   "kind": "narrative_gap",
+   "vendorId": "perplexity",
+   "label": "narrative versus reality gap",
+   "value": 7.4
+  },
+  "narrative_gap:openai": {
+   "key": "narrative_gap:openai",
+   "kind": "narrative_gap",
+   "vendorId": "openai",
+   "label": "narrative versus reality gap",
+   "value": 4.8
+  },
+  "narrative_gap:microsoft": {
+   "key": "narrative_gap:microsoft",
+   "kind": "narrative_gap",
+   "vendorId": "microsoft",
+   "label": "narrative versus reality gap",
+   "value": 4
+  },
+  "narrative_gap:cohere": {
+   "key": "narrative_gap:cohere",
+   "kind": "narrative_gap",
+   "vendorId": "cohere",
+   "label": "narrative versus reality gap",
+   "value": 1
+  },
+  "narrative_gap:together": {
+   "key": "narrative_gap:together",
+   "kind": "narrative_gap",
+   "vendorId": "together",
+   "label": "narrative versus reality gap",
+   "value": -2.4
+  },
+  "narrative_gap:deepseek": {
+   "key": "narrative_gap:deepseek",
+   "kind": "narrative_gap",
+   "vendorId": "deepseek",
+   "label": "narrative versus reality gap",
+   "value": -7.4
+  },
+  "narrative_gap:nvidia": {
+   "key": "narrative_gap:nvidia",
+   "kind": "narrative_gap",
+   "vendorId": "nvidia",
+   "label": "narrative versus reality gap",
+   "value": -8
+  },
+  "narrative_gap:meta": {
+   "key": "narrative_gap:meta",
+   "kind": "narrative_gap",
+   "vendorId": "meta",
+   "label": "narrative versus reality gap",
+   "value": -13.3
+  },
+  "narrative_gap:coreweave": {
+   "key": "narrative_gap:coreweave",
+   "kind": "narrative_gap",
+   "vendorId": "coreweave",
+   "label": "narrative versus reality gap",
+   "value": -13.5
+  },
+  "narrative_gap:groq": {
+   "key": "narrative_gap:groq",
+   "kind": "narrative_gap",
+   "vendorId": "groq",
+   "label": "narrative versus reality gap",
+   "value": -16.4
+  },
+  "narrative_gap:amd": {
+   "key": "narrative_gap:amd",
+   "kind": "narrative_gap",
+   "vendorId": "amd",
+   "label": "narrative versus reality gap",
+   "value": -19.1
+  },
+  "narrative_gap:broadcom": {
+   "key": "narrative_gap:broadcom",
+   "kind": "narrative_gap",
+   "vendorId": "broadcom",
+   "label": "narrative versus reality gap",
+   "value": -19.1
+  }
+ }
+}

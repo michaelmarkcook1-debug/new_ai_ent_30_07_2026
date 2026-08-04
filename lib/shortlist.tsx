@@ -17,10 +17,39 @@ import {
 //
 // Deliberately localStorage and not a backend: this is the user's working set,
 // it belongs to them, and a demo should not require an account to make a list.
-// It also means the list survives a reload but never leaves the machine.
+//
+// It is also mirrored into a cookie, which is the whole reason "since you last
+// looked" can be rendered on the server. localStorage is invisible to a server
+// component, so a watchlist held only there can personalise nothing above the
+// fold: the page would have to ship every change and filter after hydration,
+// which is both slower and a flash of the wrong content.
+//
+// The cookie is the watchlist, not an identity. There is no account here and
+// no server-side store, so the list lives on this browser and nowhere else:
+// it survives a reload and a restart, and it does not follow the user to
+// another machine, and nothing can be posted to them because nothing knows
+// who they are. That is the honest limit of a watchlist without a login.
 
 const KEY = "ag_shortlist";
 const MAX = 12;
+
+/** Read by the server to personalise. Same value, readable in a request. */
+export const SHORTLIST_COOKIE = "ag_shortlist";
+/** When this browser last opened the Pulse, so changes can be "since". */
+export const LAST_SEEN_COOKIE = "ag_last_seen";
+
+const COOKIE_MAX_AGE = 60 * 60 * 24 * 180;
+
+function writeCookie(name: string, value: string) {
+  try {
+    // Lax rather than Strict: a link from the digest into the app should still
+    // arrive with the watchlist attached.
+    document.cookie = `${name}=${encodeURIComponent(value)}; path=/; max-age=${COOKIE_MAX_AGE}; samesite=lax`;
+  } catch {
+    // Cookies can be refused. The in-memory list still works; only the
+    // server-rendered personalisation degrades.
+  }
+}
 
 interface ShortlistState {
   ids: string[];
@@ -47,7 +76,11 @@ export function ShortlistProvider({ children }: { children: React.ReactNode }) {
       if (raw) {
         const parsed = JSON.parse(raw);
         if (Array.isArray(parsed)) {
-          setIds(parsed.filter((x) => typeof x === "string").slice(0, MAX));
+          const clean = parsed.filter((x) => typeof x === "string").slice(0, MAX);
+          setIds(clean);
+          // Re-seed the cookie for anyone who built a list before it existed,
+          // otherwise their watchlist stays invisible to the server forever.
+          writeCookie(SHORTLIST_COOKIE, JSON.stringify(clean));
         }
       }
     } catch {
@@ -87,6 +120,8 @@ export function ShortlistProvider({ children }: { children: React.ReactNode }) {
       } catch {
         // Private browsing can refuse writes. The in-memory list still works.
       }
+      // Mirrored so the server can read it on the next request.
+      writeCookie(SHORTLIST_COOKIE, JSON.stringify(next));
       return next;
     });
   }, []);

@@ -10,6 +10,8 @@ import {
   buildActions,
 } from "@/lib/pulse/assemble";
 import type { VendorDecision } from "@/lib/pulse/brief";
+import { SinceLastLook } from "./components/since-last-look";
+import { readWatchState, readChangeLog, buildSinceView } from "@/lib/changes/watchlist";
 
 export const metadata = { title: "The Pulse | AI Enterprise" };
 
@@ -23,6 +25,12 @@ export default async function PulsePage() {
     loadNarrativeGap(),
     buildFinancialIndicators(),
   ]);
+
+  // The watchlist comes off a cookie, so this has to be per-request rather
+  // than statically rendered: two readers with different shortlists must not
+  // be served each other's page.
+  const watch = await readWatchState();
+  const since = buildSinceView(readChangeLog(), watch);
 
   const cost = loadCostCapability();
   const brief = buildScorecard(metrics, cost.models);
@@ -70,6 +78,12 @@ export default async function PulsePage() {
         title="The Pulse"
         subtitle="What changed in the enterprise AI market, why it matters, and what to do about it."
         lanes={[metrics.lane, "derived", "sample"]}
+      />
+      <SinceLastLook
+        view={since}
+        vendorNames={Object.fromEntries(
+          metrics.vendors.map((v) => [v.id, v.name])
+        )}
       />
       <PulseView
         fixture={fixture}

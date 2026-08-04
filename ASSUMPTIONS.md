@@ -838,3 +838,53 @@ Dates are absolute; the build day is 30 July 2026.
     - **Model 4 Role is now one tool answering one question** — which model
       fits this role and what it costs — and the Start page's workflow card
       points at the new shortlist tab.
+31. **Change memory, a watchlist, and "since you last looked" (4 August 2026).**
+    Steps one to three of the daily-habit plan. The audit found that exactly one
+    dataset moves every day (news) and the rest move occasionally or not at all,
+    so nothing in the product gave a reader a reason to return. Worse, every
+    sync overwrote its fixtures: after a refresh the only record that a score
+    had changed was the git diff, and the app itself could not answer "what
+    changed since Tuesday".
+    **1. The snapshot and diff store.** `lib/changes/snapshot.ts` flattens the
+    watched figures into 619 keyed signals (vendor scores, vendor-capability
+    scores, category share, narrative gap) and diffs two captures.
+    `scripts/snapshot-signals.mjs` runs after the sync and appends the moves to
+    `fixtures/signal-changes.json`.
+    News is deliberately not snapshotted: it carries its own dates and is 250KB.
+    What needs a snapshot is anything that is a bare number today with no record
+    of yesterday.
+    The upstream's own change tracking cannot be used. Its market-share rows
+    ship `previousEstimate` and `changePct`, and `changePct` is zero on every
+    row because each prior estimate is a copy of the current one.
+    The baseline was seeded from the pre-ingest fixtures in git rather than
+    starting empty, so the log opens with real movement: 70 changes between
+    2026-08-02 and 2026-08-04, which matches the manual ingest audit exactly
+    (21 gaps, 26 capabilities, 18 shares, 5 vendor scores).
+    Arrivals and departures are not reported as changes. An arrival has nothing
+    to have moved from, and a departure usually means the source stopped
+    publishing rather than that anything happened.
+    **2. The watchlist.** The shortlist already persisted in localStorage, which
+    a Server Component cannot read, so a watchlist held only there can
+    personalise nothing above the fold. It is now mirrored into a cookie and
+    re-seeded on load for anyone whose list predates it.
+    **This is not the login the plan asked for.** There is no auth and no
+    server-side store here, and adding both would change what this demo is. So
+    the watchlist is a browser, not a person: it survives a reload and a
+    restart, it does not follow the user to another machine, and nothing can be
+    posted to them because nothing knows who they are. That last point blocks
+    step four, the digest, which needs an identity to send to.
+    **3. The panel.** `SinceLastLook` sits at the top of the Pulse, above the
+    judgement, because it is the only surface with a reason to be opened daily.
+    It is dated against the reader's own previous visit and filtered to the
+    vendors they chose. A reader with no shortlist gets the largest moves in the
+    market and an invitation to build one: an empty panel on a first visit
+    teaches somebody the feature is broken rather than unfilled.
+    The marker advances on the client after render, not on the server. A Server
+    Component cannot set a cookie during render, and advancing it in a route
+    handler would move it before the reader had seen anything.
+    The Pulse is now a dynamic route. Reading a cookie forces per-request
+    rendering, which is required: two readers with different shortlists must not
+    be served each other's page.
+    Verified across four states: first visit, a watchlist with movement, a
+    watchlist with a marker ahead of the last capture (the honest quiet state),
+    and a single-vendor list.
