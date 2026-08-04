@@ -229,6 +229,11 @@ export function InterrogateView() {
                   key={d}
                   type="button"
                   onClick={() => setDepth(d)}
+                  title={
+                    d === "quick"
+                      ? "One question, then the finding written by Sonnet."
+                      : "Up to three questions, and the finding written by Opus."
+                  }
                   className={`rounded-full px-3 py-1 text-xs font-semibold capitalize transition ${depth === d ? "bg-primary text-white" : "text-muted hover:text-base-content"}`}
                 >
                   {d === "quick" ? "Quick response" : "Comprehensive"}
@@ -365,8 +370,9 @@ export function InterrogateView() {
         <p className="measure text-xs text-muted">
           Findings draw on the AIE live vendor read, the ported AIE dataset,
           the preloaded documents and the Shell fixture, with citations on
-          every claim. Tiered routing: Haiku shapes questions, Sonnet writes
-          the finding, Opus never runs without an explicit deep request.
+          every claim. Tiered routing: Haiku shapes the questions, and the
+          finding is written by Sonnet on a quick response or by Opus on a
+          comprehensive one. Opus never runs unless you ask for it.
         </p>
       </div>
     </div>

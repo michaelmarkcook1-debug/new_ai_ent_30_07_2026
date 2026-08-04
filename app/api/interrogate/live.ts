@@ -1,19 +1,41 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { retrieve } from "../analyst/lib";
 import {
+  detectFacets,
   interrogateCorpus,
   nextQuestion,
   type InterrogateState,
 } from "./lib";
 
-// Live Interrogate (runs only when ANTHROPIC_API_KEY is set in .env.local).
-// Haiku decides whether another sharp question is needed and writes it;
-// Sonnet writes the tailored finding, streamed as SSE, grounded only in the
-// cited chunks. The same grounding rule as the analyst applies: no figure
-// or claim outside the sources.
+// Live Interrogate. Haiku decides whether another sharp question is needed
+// and writes it; the finding is streamed as SSE, grounded only in the cited
+// chunks. The same grounding rule as the analyst applies: no figure or claim
+// outside the sources.
 
 const HAIKU = "claude-haiku-4-5";
 const SONNET = "claude-sonnet-5";
+const OPUS = "claude-opus-5";
+
+// What this workspace can actually answer.
+//
+// The question phase used to see the situation and the answers and nothing
+// else, so it was shaping questions without knowing what the product could do
+// with them. A sharper model asking into ground the corpus does not cover is
+// still a wasted turn, which is why this list matters more than the tier that
+// reads it.
+//
+// Deliberately not the corpus itself. Loading it here would put an upstream
+// fetch in front of the one screen the user is actively waiting on; the
+// finding phase already pays that cost, where streaming hides it.
+const WORKSPACE_COVERS = [
+  "vendor capability scores, evidence-graded, comparable only within a market category",
+  "AI regulation by jurisdiction, including the EU AI Act, with the obligations that bind a given deployment",
+  "published model prices against independent benchmark scores, and the efficiency frontier",
+  "security posture and open risks per vendor",
+  "reputation across customer, developer and employee pillars",
+  "supply and partnership dependencies across the stack",
+  "role and workflow to model-tier fit, with the cost of running it",
+].join("; ");
 
 export async function liveInterrogate(
   apiKey: string,
@@ -27,6 +49,22 @@ export async function liveInterrogate(
   // Question phase: Haiku, JSON response, bounded by the depth setting.
   if (!conclude && state.answers.length < maxQuestions) {
     const scriptedFallback = nextQuestion(state);
+    // What the buyer has already told us, so the question never asks again.
+    // Cheap and local: string matching over what they typed, no model call.
+    const facets = detectFacets([state.situation, ...state.answers].join("\n"));
+    const known = [
+      facets.industry ? `industry: ${facets.industry}` : null,
+      facets.scale ? "scale: stated" : null,
+      facets.constraint ? `binding constraint: ${facets.constraint}` : null,
+      facets.stack.length > 0 ? `existing stack: ${facets.stack.join(", ")}` : null,
+    ].filter(Boolean);
+    const missing = [
+      facets.industry ? null : "industry and regulatory context",
+      facets.scale ? null : "scale of the deployment",
+      facets.constraint ? null : "the binding constraint",
+      facets.stack.length > 0 ? null : "what is already in the estate",
+    ].filter(Boolean);
+
     try {
       const res = await client.messages.create({
         model: HAIKU,
@@ -34,7 +72,20 @@ export async function liveInterrogate(
         messages: [
           {
             role: "user",
-            content: `You are interrogating an enterprise AI buyer to shape a tailored finding. Their situation: "${state.situation}". Their answers so far: ${JSON.stringify(state.answers)}. If one more sharp, nuanced question would materially improve the finding, return {"ask": "<the question>"}. If you have enough, return {"ask": null}. JSON only. The question must be specific to what they said, never generic.`,
+            content: [
+              `You are interrogating an enterprise AI buyer to shape a tailored finding.`,
+              ``,
+              `Their situation: "${state.situation}"`,
+              `Their answers so far: ${JSON.stringify(state.answers)}`,
+              ``,
+              `Already established, do not ask again: ${known.length ? known.join("; ") : "nothing yet"}.`,
+              `Still unknown: ${missing.length ? missing.join("; ") : "nothing material"}.`,
+              ``,
+              `The finding will be written only from what this workspace holds: ${WORKSPACE_COVERS}.`,
+              `So ask about something that changes which of those the finding draws on, or how it reads them. A question whose answer the workspace cannot act on is a wasted turn.`,
+              ``,
+              `If one more sharp, nuanced question would materially improve the finding, return {"ask": "<the question>"}. If you have enough, return {"ask": null}. JSON only. The question must be specific to what they said, never generic.`,
+            ].join("\n"),
           },
         ],
       });
@@ -79,6 +130,18 @@ export async function liveInterrogate(
     .map((h, i) => `<chunk index="${i + 1}" source="${h.chunk.source}">${h.chunk.text}</chunk>`)
     .join("\n");
 
+  // The finding is the output a buyer actually reads and judges, so it is the
+  // one place a stronger model earns its cost. Comprehensive gets Opus.
+  //
+  // Tied to the depth control rather than always on, for two reasons. The
+  // product's stated rule is that Opus never runs without an explicit deep
+  // request, and Comprehensive is that request, chosen by the reader. And the
+  // demo is a public URL spending a single key, so the expensive path should
+  // be the one somebody asked for rather than the default on every click.
+  const deep = state.depth === "comprehensive";
+  const synthModel = deep ? OPUS : SONNET;
+  const synthTier = deep ? "Opus" : "Sonnet";
+
   const encoder = new TextEncoder();
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
@@ -90,7 +153,7 @@ export async function liveInterrogate(
           citations: hits.map((h) => ({ source: h.chunk.source, kind: h.chunk.sourceKind })),
         });
         const synth = client.messages.stream({
-          model: SONNET,
+          model: synthModel,
           max_tokens: 2048,
           system: `You are the Interrogate engine in the AI Enterprise demo: you write a tailored, source-cited finding for an enterprise AI buyer. Ground EVERY claim in the chunks provided, citing the source name in brackets after the claim. Where the chunks do not cover something, say so plainly rather than guessing; never invent a figure. Structure: a one-paragraph reading of their situation, then the finding with citations, then one line pointing to the vendor rankings, Trust Rank, and Assess and Decide pages in this workspace. British English. No em-dashes: use commas, colons or parentheses.`,
           messages: [
@@ -112,7 +175,7 @@ export async function liveInterrogate(
           tiers: [
             { tier: "Haiku", role: "question shaping", mode: "live" },
             {
-              tier: "Sonnet",
+              tier: synthTier,
               role: "finding synthesis",
               mode: "live",
               tokens: final.usage.input_tokens + final.usage.output_tokens,
