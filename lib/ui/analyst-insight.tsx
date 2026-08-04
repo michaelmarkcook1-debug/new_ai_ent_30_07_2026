@@ -1,5 +1,6 @@
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
+import { DoItHere } from "@/lib/ui/do-it-here";
 import { DerivationDrawer } from "@/lib/ui/score";
 import type { AnalystInsightData } from "@/lib/analyst/insight";
 
@@ -176,15 +177,20 @@ export function AnalystInsight({
                   action answers a different question from the colour of the
                   box around it. Purple says AG concluded this, green, amber
                   and red say what the conclusion is. */}
-              <div className="finding-strong mt-auto flex flex-wrap items-center gap-3 rounded-lg p-4">
-                <span className="font-mono text-sm uppercase tracking-wider text-insight">
-                  Recommended action
-                </span>
-                <span
-                  className={`rounded-full border px-3 py-1 text-sm font-semibold ${ACTION_TONE[insight.action] ?? ACTION_TONE.Monitor}`}
-                >
-                  {insight.action}
-                </span>
+              <div className="finding-strong mt-auto rounded-lg p-4">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="font-mono text-sm uppercase tracking-wider text-insight">
+                    Recommended action
+                  </span>
+                  <span
+                    className={`rounded-full border px-3 py-1 text-sm font-semibold ${ACTION_TONE[insight.action] ?? ACTION_TONE.Monitor}`}
+                  >
+                    {insight.action}
+                  </span>
+                </div>
+                {/* A recommendation that names the page which does the thing
+                    is worth more than one that leaves the reader to find it. */}
+                <DoItHere tools={insight.tools ?? []} label="Do this in" />
               </div>
             </div>
           </div>

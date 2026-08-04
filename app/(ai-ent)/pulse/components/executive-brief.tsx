@@ -1,4 +1,6 @@
 import { LaneBadge } from "@/lib/ui/badges";
+import { DoItHere } from "@/lib/ui/do-it-here";
+import type { ToolKey } from "@/lib/ui/tools";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
 import type {
@@ -69,6 +71,7 @@ export function PulseHero({
   action,
   meta,
   evidenceNote,
+  todoTools = [],
   lane,
   asOf,
 }: {
@@ -80,6 +83,8 @@ export function PulseHero({
   action: string;
   meta: RecommendationMeta;
   evidenceNote: string;
+  /** Tools that let a reader act on the "what to do" immediately. */
+  todoTools?: ToolKey[];
   lane: DataLane;
   asOf: string | null;
 }) {
@@ -126,7 +131,12 @@ export function PulseHero({
             <dt className="font-mono text-sm uppercase tracking-wider text-muted">
               {label}
             </dt>
-            <dd className="measure mt-1 text-sm leading-snug">{body}</dd>
+            <dd className="measure mt-1 text-sm leading-snug">
+              {body}
+              {label === "What to do" ? (
+                <DoItHere tools={todoTools} label="Start with" />
+              ) : null}
+            </dd>
           </div>
         ))}
       </dl>
@@ -160,7 +170,12 @@ export function PulseHero({
 export function ExecutiveActions({
   actions,
 }: {
-  actions: { action: string; detail: string; meta: RecommendationMeta }[];
+  actions: {
+    action: string;
+    detail: string;
+    tools?: ToolKey[];
+    meta: RecommendationMeta;
+  }[];
 }) {
   // The heading promises three, so the code enforces three. A section that
   // says "do these three things" over four cards is a small lie that costs
@@ -189,6 +204,7 @@ export function ExecutiveActions({
             <p className="measure mt-1.5 text-sm leading-snug text-muted">
               {a.detail}
             </p>
+            <DoItHere tools={a.tools ?? []} />
             <div className="mt-3 border-t border-base-300/70 pt-2">
               <MetaRow meta={a.meta} />
             </div>

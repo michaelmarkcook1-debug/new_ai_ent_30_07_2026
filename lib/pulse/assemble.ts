@@ -3,6 +3,7 @@ import path from "path";
 import type { MarketMetrics } from "@/lib/market-metrics";
 import type { FinancialIndicator } from "@/app/(ai-ent)/pulse/components/financial-strip";
 import type { PulseSignal } from "@/app/(ai-ent)/pulse/components/decision-lists";
+import type { ToolKey } from "@/lib/ui/tools";
 
 // Server-side assembly for the Pulse brief: the pieces that need the
 // filesystem or that stitch several sources together.
@@ -175,12 +176,15 @@ export function buildSignals(
  * scorecard so the brief cannot recommend one thing while the scorecard says
  * another.
  */
+// Each action names the tool that does the thing it is asking for. The
+// mapping lives beside the advice rather than in the component, so a new
+// action cannot be written without someone deciding where it sends the reader.
 export function buildActions(
   priceRatio: number | null,
   highRisks: number | null,
   readiness: number | null,
   lastUpdated: string | null
-): { action: string; detail: string; meta: { horizon: "Immediate" | "30 days" | "90 days" | "12 months"; lane: "derived"; lastUpdated: string | null } }[] {
+): { action: string; detail: string; tools: ToolKey[]; meta: { horizon: "Immediate" | "30 days" | "90 days" | "12 months"; lane: "derived"; lastUpdated: string | null } }[] {
   return [
     {
       action: "Tier your model spend",
@@ -188,6 +192,7 @@ export function buildActions(
         priceRatio !== null && priceRatio >= 2
           ? `The top model costs ${priceRatio}x the cheapest one reaching 80 per cent of its score. Map workloads to tiers before renewal and reserve the top tier for complex or regulated work.`
           : "Map workloads to model tiers before renewal, and check the price spread against your own token mix rather than list rates.",
+      tools: ["modelForRole", "pricePerformance"],
       meta: {
         horizon: "90 days",
         lane: "derived",
@@ -198,6 +203,7 @@ export function buildActions(
       action: "Re-open closed shortlists",
       detail:
         "Capability across the tracked set moves faster than most procurement cycles. Any shortlist older than two quarters should be re-checked against current rankings before it is signed.",
+      tools: ["workflowShortlist", "competitiveIntel"],
       meta: {
         horizon: "30 days",
         lane: "derived",
@@ -214,6 +220,7 @@ export function buildActions(
           ? `${highRisks} high-severity ${highRisks === 1 ? "risk is" : "risks are"} open against tracked vendors. Get a dated remediation position on each before expanding scope.`
           : "No high-severity risk is currently open. Keep the review cadence rather than standing it down, since readiness is uneven across the set" +
             (readiness !== null ? ` (typical capability maturity ${readiness}).` : "."),
+      tools: ["trustRank", "securityDesk"],
       meta: {
         horizon: highRisks !== null && highRisks > 0 ? "Immediate" : "90 days",
         lane: "derived",

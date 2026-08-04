@@ -115,6 +115,7 @@ export function PulseView({
         todo="Tier your model spend before the next renewal, re-open any shortlist older than two quarters, and clear open governance risks before widening scope."
         action={`Recommended action: ${brief.overall.action}`}
         meta={brief.overall.meta}
+        todoTools={["modelForRole", "workflowShortlist", "trustRank"]}
         evidenceNote={`Drawn from ${metrics.kpis.reduce((a, k) => Math.max(a, k.sampleSize), 0)} tracked vendors, ${benchmark.modelCount} priced and benchmarked models, and the open risk and movement classifications published for this period.`}
         lane={metrics.lane}
         asOf={asOf}

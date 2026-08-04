@@ -1,5 +1,6 @@
 import type { DataLane } from "@/lib/provenance";
 import type { MarketMetrics, VendorMetrics } from "@/lib/market-metrics";
+import type { ToolKey } from "@/lib/ui/tools";
 
 // The Analyst Insight that opens every page.
 //
@@ -131,6 +132,12 @@ export interface AnalystInsightData {
   implications: string[];
   action: AnalystAction;
   /**
+   * The tools that let a reader act on this insight now. A recommendation
+   * that names the page which does the thing is worth more than one that
+   * leaves the reader to find it. Never includes the page it renders on.
+   */
+  tools?: ToolKey[];
+  /**
    * A dated, sourced item to read the conclusion against. Null when nothing
    * recent bears on this page, which is a normal state rather than a gap.
    */
@@ -225,6 +232,7 @@ export function marketWatchInsight(
       "Share is an estimate per category, so it supports a direction of travel rather than a precise ranking.",
     ],
     action: tight ? "Investigate" : "Monitor",
+    tools: ["competitiveIntel", "vendorView", "modelForRole"],
     news,
     evidence: {
       count: m.shares.length,
@@ -273,6 +281,7 @@ export function financialInsight(
       "Private vendors are outside this entirely, so absence here is not a signal about them either way.",
     ],
     action: undisclosed > disclosure.disclosing ? "Investigate" : "Monitor",
+    tools: ["vendorView", "competitiveIntel"],
     news,
     evidence: {
       count: disclosure.total + segmentTotal,
@@ -329,6 +338,7 @@ export function competitiveInsight(
       "Comparison holds within a market category only; scores do not transfer across categories.",
     ],
     action: narrow ? "Renegotiate" : "Shortlist",
+    tools: ["modelForRole", "workflowShortlist"],
     news,
     evidence: {
       count: providerCount * capabilityCount,
@@ -388,6 +398,7 @@ export function reputationInsight(
         : "The trend is real but short; a direction will not be reliable for several more captures.",
     ],
     action: spread > 25 ? "Shortlist" : "Monitor",
+    tools: ["vendorView", "decisionDesk"],
     news,
     evidence: {
       count: vendors.length,
@@ -441,6 +452,7 @@ export function vendorViewInsight(
         : "Momentum is published across the scored set.",
     ],
     action: strongButRisky.length > 0 ? "Investigate" : "Shortlist",
+    tools: ["competitiveIntel", "workflowShortlist", "modelForRole"],
     news,
     evidence: {
       count: scored.length,
@@ -488,6 +500,7 @@ export function governanceInsight(
         : "Posture assessments are per-vendor and carry their own evidence state.",
     ],
     action: highSeverity > 0 ? "Investigate" : "Monitor",
+    tools: ["securityDesk", "vendorView"],
     news,
     evidence: {
       count: openRisks + jurisdictions,
@@ -544,6 +557,7 @@ export function supplyMapInsight(
       "Check whether your own critical path passes through the same organisation more than once.",
     ],
     action: thin ? "Investigate" : "Monitor",
+    tools: ["workflowShortlist", "vendorView"],
     news,
     evidence: {
       count: edges,
@@ -589,6 +603,7 @@ export function workflowInsight(
       "Tier follows recorded risk and complexity, not vendor strength.",
     ],
     action: riskShare >= 40 ? "Investigate" : "Accelerate",
+    tools: ["modelForRole", "competitiveIntel"],
     news,
     evidence: {
       count: workflows,
@@ -634,6 +649,7 @@ export function newsInsight(
       "Where news and assessment disagree, the assessment is usually right and the news usually earlier.",
     ],
     action: negShare >= 25 ? "Monitor" : "Monitor",
+    tools: ["marketWatch", "vendorView"],
     news: pickNews(items, { minImpact: 75 }),
     evidence: {
       count: items.length,
@@ -678,6 +694,7 @@ export function pricePerformanceInsight(
       "Input price only, so test against your own token mix before committing.",
     ],
     action: wide ? "Renegotiate" : "Monitor",
+    tools: ["modelForRole", "workflowShortlist"],
     news,
     evidence: {
       count: models,
@@ -750,6 +767,7 @@ export function positionInsight(
         : "Add vendors to your shortlist and the Pulse will report what moves against them.",
     ],
     action: spread >= 30 ? "Investigate" : "Monitor",
+    tools: ["decisionDesk", "workflowShortlist", "modelForRole"],
     news,
     evidence: {
       count: scored.length,

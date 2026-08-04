@@ -2,6 +2,7 @@ import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { Accordion } from "@/lib/ui/accordion";
+import { DoItHere } from "@/lib/ui/do-it-here";
 import { MetaRow } from "./executive-brief";
 import type { MarketSignal } from "@/lib/market-metrics";
 import type { RecommendationMeta } from "@/lib/pulse/brief";
@@ -105,6 +106,9 @@ export function MaterialRisks({
                     <dd className="measure text-sm leading-snug">
                       Raise it in the next vendor review and get a dated
                       remediation position before widening commitment.
+                      <DoItHere
+                        tools={["trustRank", "securityDesk", "vendorView"]}
+                      />
                     </dd>
                   </div>
                 </dl>
