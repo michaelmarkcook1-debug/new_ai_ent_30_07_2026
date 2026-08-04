@@ -69,8 +69,8 @@ export function VerdictDial({
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex flex-wrap items-center gap-2">
           <MicroLabel
-            label="Verdict"
-            tooltip="Capability, reputation and financial disclosure in one number, with the count of inputs behind it."
+            label="Vendor Resiliency"
+            tooltip="Whether a vendor is winning, trusted and financially durable, in one number, with the count of inputs behind it."
           />
           <LaneBadge lane="derived" />
         </div>
@@ -148,8 +148,8 @@ export function VerdictDial({
             Three inputs, weighted and combined. Across the {total} tracked
             vendors, capability is published for {coverage.winning}, reputation
             for {coverage.trust} and financial disclosure for{" "}
-            {coverage.durability}, so most verdicts are built from two of three
-            and the ring always states how many.
+            {coverage.durability}, so most resiliency scores are built from two
+            of three and the ring always states how many.
           </p>
           <p>
             Weights are renormalised over the inputs that are present. Scoring
@@ -183,7 +183,7 @@ function Ring({
   return (
     <div className="flex flex-col items-center">
       <svg width="132" height="132" viewBox="0 0 132 132" role="img"
-        aria-label={`Verdict ${result.score ?? "unavailable"}, ${compositeCaveat(result)}`}>
+        aria-label={`Vendor Resiliency ${result.score ?? "unavailable"}, ${compositeCaveat(result)}`}>
         <circle cx="66" cy="66" r={R} fill="none" stroke="currentColor" opacity={0.12} strokeWidth="11" />
         <circle
           cx="66"
