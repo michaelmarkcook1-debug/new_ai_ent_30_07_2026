@@ -798,3 +798,33 @@ Dates are absolute; the build day is 30 July 2026.
     Every figure carries a publisher, a date and the quote it was read from.
     Treat the output as an order of magnitude: it answers whether a vendor is a
     hundred-million or a ten-billion business and will not settle anything finer.
+
+28. **Model 4 Role unbundled, and the adoption model retired (4 August 2026).**
+    Michael's critique, and it was right: the tab held three unrelated things —
+    a fit tool, an adoption model of doubtful accuracy, and a workflow selector
+    that rendered its answer three panels away from the control.
+    - **The adoption vendor-share model failed its sanity check and is
+      withdrawn.** The May 2026 segment-share model claimed OpenAI led adoption
+      in every slice and held 59 per cent of SMEs. Menlo Ventures (mid-2026)
+      puts Anthropic at ~40 per cent of enterprise LLM spend against OpenAI's
+      ~27, and the Ramp AI Index recorded Anthropic passing OpenAI in overall
+      business adoption in April 2026 (34.4 against 32.3 per cent of
+      businesses). A modelled figure contradicted by two independent
+      measurements is wrong, not directional, so it is removed from the
+      interface rather than relabelled. The engine cannot regenerate the model
+      (no pipeline, and inventing shares would break the zero-fabrication
+      rule), so the replacement is the measured data itself: /ai-adoption
+      quotes the Menlo and Ramp figures with source, date and links, states the
+      retirement in an amber panel, keeps the industry maturity profiles (a
+      different, uncontradicted dataset), and points to Market Watch for the
+      category-share estimates, which are a separate AIE dataset with per-row
+      source, confidence and methodology. The ported uptake seed stays in
+      lib/aie for provenance, unreferenced by any interface.
+    - **The workflow tool got its own tab, built as a tool.** /workflow-shortlist
+      under Vendor Assessment: pick an area, pick a workflow, and the risk and
+      deployment profile plus the buy/build shortlist render directly beneath
+      the control. The old placement, a selector at the end of an unrelated
+      filter bar with the result three panels down, is why it read as broken.
+    - **Model 4 Role is now one tool answering one question** — which model
+      fits this role and what it costs — and the Start page's workflow card
+      points at the new shortlist tab.
