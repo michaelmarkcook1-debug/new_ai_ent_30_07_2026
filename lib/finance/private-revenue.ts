@@ -27,6 +27,14 @@
 
 export type DisclosureState = "closed" | "reported" | "in_talks";
 
+/**
+ * Calibration regime. A valuation multiple observed on a data platform says
+ * nothing about how a frontier lab is priced, so pairs only ever calibrate the
+ * band for their own class. Mixing them would smuggle Databricks' economics
+ * into an Anthropic estimate under cover of arithmetic.
+ */
+export type VendorClass = "frontier_lab" | "data_platform" | "other";
+
 export interface Citation {
   publisher: string;
   asOf: string;
@@ -37,6 +45,7 @@ export interface Citation {
 export interface ValuationRecord {
   vendorId: string;
   vendorName: string;
+  vendorClass: VendorClass;
   /** Post-money, in USD millions. */
   valuationUsdM: number;
   /** Set when the source stated another currency, so the rate is visible. */
@@ -47,87 +56,41 @@ export interface ValuationRecord {
 
 export interface RevenueRecord {
   vendorId: string;
+  vendorClass: VendorClass;
   /** USD millions. A floor when the source says "above" or "more than". */
   revenueUsdM: number;
   isFloor: boolean;
-  basis: "run_rate" | "annual" | "arr";
+  /**
+   * What kind of figure the source stated. A projection is carried in the
+   * record because it is on the record, but it never becomes "the figure":
+   * the disclosed lane only ever serves non-projection bases.
+   */
+  basis: "run_rate" | "annual" | "arr" | "projection";
   state: DisclosureState;
   citation: Citation;
+  /** Gross-vs-net, consumer-vs-enterprise, conversion — what a reader must know. */
+  caveats?: string;
+  sourceUrl?: string;
 }
 
 // ---------------------------------------------------------------- the record
 //
-// Transcribed from the AIE live news feed, which carries the publisher and the
-// date for each. Nothing here is entered without a source, and nothing is
-// carried forward from memory.
+// The record itself lives in data/private-figures.json so the catalogue
+// ingestion script (plain Node, no TypeScript runner) can read the same file
+// this module types. Nothing here is entered without a source, and nothing is
+// carried forward from memory; the tests hold every row to that.
 
-export const VALUATIONS: ValuationRecord[] = [
-  {
-    vendorId: "anthropic",
-    vendorName: "Anthropic",
-    valuationUsdM: 380_000,
-    state: "closed",
-    citation: {
-      publisher: "TechCrunch",
-      asOf: "2026-02-12",
-      quote:
-        "On February 12, 2026 Anthropic raised a $30B Series G at a $380B post-money valuation, co-led by GIC and Coatue.",
-    },
-  },
-  {
-    vendorId: "cohere",
-    vendorName: "Cohere",
-    valuationUsdM: 6_800,
-    state: "closed",
-    citation: {
-      publisher: "Constellation Research",
-      asOf: "2026-08-01",
-      quote:
-        "Cohere raised $500 million in venture funding, achieving a $6.8 billion valuation, led by Radical Ventures and Inovia Capital.",
-    },
-  },
-  {
-    vendorId: "mistral",
-    vendorName: "Mistral",
-    // The source states euros. The rate is an assumption of this product, not
-    // of the source, so it is carried on the record rather than folded away.
-    valuationUsdM: 21_600,
-    statedCurrency: { code: "EUR", amount: 20_000, usdPerUnit: 1.08 },
-    state: "in_talks",
-    citation: {
-      publisher: "Bloomberg",
-      asOf: "2026-08-01",
-      quote:
-        "Mistral is reportedly in talks to raise ~EUR3B at a ~EUR20B valuation, following a $830M debt facility (Mar 2026) and its ASML-led EUR1.7B Series C.",
-    },
-  },
-];
+import figures from "./data/private-figures.json";
 
-export const REVENUES: RevenueRecord[] = [
-  {
-    vendorId: "mistral",
-    revenueUsdM: 400,
-    isFloor: true,
-    basis: "run_rate",
-    state: "reported",
-    citation: {
-      publisher: "Bloomberg",
-      asOf: "2026-08-01",
-      quote: "…with run-rate revenue reported above $400M.",
-    },
-  },
-];
+export const VALUATIONS: ValuationRecord[] =
+  figures.valuations as ValuationRecord[];
+
+export const REVENUES: RevenueRecord[] = figures.revenues as RevenueRecord[];
 
 // Things that look like a valuation and are not. Recorded so the next person
 // to read the feed does not make the mistake this note exists to prevent.
 export const NOT_VALUATIONS: { vendorId: string; what: string; why: string }[] =
-  [
-    {
-      vendorId: "openai",
-      what: "$110B in funding involving Amazon, Microsoft and Nvidia, including a $100B expansion of an AWS deal over eight years (Yahoo Finance, 2026-07-31)",
-      why: "A compute and infrastructure commitment, not an equity round. It says nothing about what the company is worth or what it earns, and dividing it by a multiple would be meaningless.",
-    },
-  ];
+  figures.notValuations;
 
 // ------------------------------------------------------------- the estimate
 
@@ -148,24 +111,71 @@ export interface MultipleBand {
  */
 export const DEFAULT_BAND: MultipleBand = { low: 30, high: 90 };
 
-/** The multiple implied by the one pair where both figures are on the record. */
+export interface ObservedPair {
+  vendorId: string;
+  vendorClass: VendorClass;
+  multiple: number;
+  /** True when the revenue was a floor, so the true multiple is at most this. */
+  isFloorDerived: boolean;
+  /** Days between the valuation and revenue citations. A wide gap weakens the pair. */
+  daysApart: number;
+}
+
+/**
+ * Every pair where both a valuation and a revenue figure are on the record for
+ * the same vendor. These are the only multiples this product can observe, and
+ * the only thing the band may be calibrated from.
+ *
+ * Projections are excluded on principle: dividing a real valuation by a hoped-
+ * for revenue produces a multiple for a company that does not exist yet.
+ * Where a vendor has several revenue records, the one closest in time to the
+ * valuation is used — a 2024 revenue under a 2026 valuation would overstate
+ * the multiple by however much the company grew in between.
+ */
+export function observedMultiples(cls?: VendorClass): ObservedPair[] {
+  const out: ObservedPair[] = [];
+  for (const v of VALUATIONS) {
+    if (cls && v.vendorClass !== cls) continue;
+    const candidates = REVENUES.filter(
+      (r) =>
+        r.vendorId === v.vendorId && r.basis !== "projection" && r.revenueUsdM > 0
+    );
+    if (candidates.length === 0) continue;
+    const vDate = Date.parse(v.citation.asOf);
+    const nearest = candidates.reduce((a, b) =>
+      Math.abs(Date.parse(a.citation.asOf) - vDate) <=
+      Math.abs(Date.parse(b.citation.asOf) - vDate)
+        ? a
+        : b
+    );
+    out.push({
+      vendorId: v.vendorId,
+      vendorClass: v.vendorClass,
+      // Rounded to one decimal; the inputs do not support more.
+      multiple: Math.round((v.valuationUsdM / nearest.revenueUsdM) * 10) / 10,
+      isFloorDerived: nearest.isFloor,
+      daysApart: Math.round(
+        Math.abs(Date.parse(nearest.citation.asOf) - vDate) / 86_400_000
+      ),
+    });
+  }
+  return out.sort((a, b) => a.multiple - b.multiple);
+}
+
+/** The first frontier-lab pair, kept for callers that want a single anchor. */
 export function observedMultiple(): {
   vendorId: string;
   multiple: number;
   isFloorDerived: boolean;
 } | null {
-  for (const r of REVENUES) {
-    const v = VALUATIONS.find((x) => x.vendorId === r.vendorId);
-    if (!v || r.revenueUsdM <= 0) continue;
-    return {
-      vendorId: r.vendorId,
-      // The revenue is a floor ("above $400M"), so the true multiple is at
-      // most this. Rounded to one decimal; the inputs do not support more.
-      multiple: Math.round((v.valuationUsdM / r.revenueUsdM) * 10) / 10,
-      isFloorDerived: r.isFloor,
-    };
-  }
-  return null;
+  const pairs = observedMultiples("frontier_lab");
+  if (pairs.length === 0) return null;
+  const p = pairs[0];
+  return {
+    vendorId: p.vendorId,
+    multiple: p.multiple,
+    isFloorDerived: p.isFloorDerived,
+  };
 }
 
 export type EstimateBasis =
@@ -179,6 +189,12 @@ export interface RevenueEstimate {
   basis: EstimateBasis;
   /** Present only when basis is "disclosed". */
   disclosed: RevenueRecord | null;
+  /**
+   * Every dated revenue record for the vendor, oldest first, projections
+   * included. The trajectory is often more informative than the point: a
+   * company reported at $1B and later at $4B has told you its slope.
+   */
+  series: RevenueRecord[];
   /** Present only when basis is "implied_from_valuation". */
   valuation: ValuationRecord | null;
   /** USD millions. Null unless implied. */
@@ -197,9 +213,29 @@ export function estimateRevenue(
   vendorName: string,
   band: MultipleBand = DEFAULT_BAND
 ): RevenueEstimate {
-  const base = { vendorId, vendorName, disclosed: null, valuation: null, lowUsdM: null, highUsdM: null, absence: null };
+  const series = REVENUES.filter((r) => r.vendorId === vendorId).sort(
+    (a, b) => Date.parse(a.citation.asOf) - Date.parse(b.citation.asOf)
+  );
+  const base = {
+    vendorId,
+    vendorName,
+    series,
+    disclosed: null,
+    valuation: null,
+    lowUsdM: null,
+    highUsdM: null,
+    absence: null,
+  };
 
-  const disclosed = REVENUES.find((r) => r.vendorId === vendorId);
+  // The latest figure the company or a named publisher has actually put on
+  // the record. Latest, because these companies' revenues move fast enough
+  // that a year-old figure presented as current would be wrong by design; and
+  // never a projection, because "expects to reach" is a hope with a date on
+  // it, not a figure. A vendor whose only record is a projection falls
+  // through to the valuation lane rather than wearing the projection as fact.
+  const disclosed = [...series]
+    .reverse()
+    .find((r) => r.basis !== "projection");
   if (disclosed) {
     return { ...base, basis: "disclosed", disclosed };
   }

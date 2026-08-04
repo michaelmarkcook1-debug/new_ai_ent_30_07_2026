@@ -26,9 +26,12 @@ export const PROBED_TICKERS: ProbedTicker[] = [
   { ticker: "NVDA", name: "NVIDIA", financialsOnly: true },
 ];
 
-// Private AI companies shown as disclosed-figures-only cards. No financial
-// figures are rendered for these vendors, only the locked empty state, the
-// AIE seed tagline, and the curated outbound source links.
+// The private AI companies. Their cards carry the AIE seed tagline and
+// curated outbound source links; their figures come exclusively from the
+// evidence record in lib/finance/private-figures — reported figures and
+// valuation-implied ranges, never an invented number. (An earlier version of
+// this comment said no figures were rendered at all; the disclosure ladder
+// and revenue panel have since given these vendors evidence-graded figures.)
 const PRIVATE_VENDOR_IDS = [
   "anthropic",
   "openai",

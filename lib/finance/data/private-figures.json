@@ -1,0 +1,64 @@
+{
+  "comment": "The evidence record for private AI company figures. One file, two readers: lib/finance/private-revenue.ts types and serves it to the financial snapshot; scripts/ingest-catalogue.mjs mines it for dated catalogue observations. Nothing enters without publisher, date and verbatim quote — tests/private-revenue.test.ts enforces that. vendorClass separates calibration regimes: a data platform's valuation multiple must never calibrate a frontier lab's band.",
+  "valuations": [
+    {
+      "vendorId": "anthropic",
+      "vendorName": "Anthropic",
+      "vendorClass": "frontier_lab",
+      "valuationUsdM": 380000,
+      "state": "closed",
+      "citation": {
+        "publisher": "TechCrunch",
+        "asOf": "2026-02-12",
+        "quote": "On February 12, 2026 Anthropic raised a $30B Series G at a $380B post-money valuation, co-led by GIC and Coatue."
+      }
+    },
+    {
+      "vendorId": "cohere",
+      "vendorName": "Cohere",
+      "vendorClass": "frontier_lab",
+      "valuationUsdM": 6800,
+      "state": "closed",
+      "citation": {
+        "publisher": "Constellation Research",
+        "asOf": "2026-08-01",
+        "quote": "Cohere raised $500 million in venture funding, achieving a $6.8 billion valuation, led by Radical Ventures and Inovia Capital."
+      }
+    },
+    {
+      "vendorId": "mistral",
+      "vendorName": "Mistral",
+      "vendorClass": "frontier_lab",
+      "valuationUsdM": 21600,
+      "statedCurrency": { "code": "EUR", "amount": 20000, "usdPerUnit": 1.08 },
+      "state": "in_talks",
+      "citation": {
+        "publisher": "Bloomberg",
+        "asOf": "2026-08-01",
+        "quote": "Mistral is reportedly in talks to raise ~EUR3B at a ~EUR20B valuation, following a $830M debt facility (Mar 2026) and its ASML-led EUR1.7B Series C."
+      }
+    }
+  ],
+  "revenues": [
+    {
+      "vendorId": "mistral",
+      "vendorClass": "frontier_lab",
+      "revenueUsdM": 400,
+      "isFloor": true,
+      "basis": "run_rate",
+      "state": "reported",
+      "citation": {
+        "publisher": "Bloomberg",
+        "asOf": "2026-08-01",
+        "quote": "…with run-rate revenue reported above $400M."
+      }
+    }
+  ],
+  "notValuations": [
+    {
+      "vendorId": "openai",
+      "what": "$110B in funding involving Amazon, Microsoft and Nvidia, including a $100B expansion of an AWS deal over eight years (Yahoo Finance, 2026-07-31)",
+      "why": "A compute and infrastructure commitment, not an equity round. It says nothing about what the company is worth or what it earns, and dividing it by a multiple would be meaningless."
+    }
+  ]
+}

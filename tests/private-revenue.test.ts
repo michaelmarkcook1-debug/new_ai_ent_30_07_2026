@@ -5,6 +5,7 @@ import {
   formatUsdM,
   NOT_VALUATIONS,
   observedMultiple,
+  observedMultiples,
   REVENUES,
   VALUATIONS,
 } from "@/lib/finance/private-revenue";
@@ -18,6 +19,17 @@ describe("the record", () => {
       expect(r.citation.publisher.trim()).not.toBe("");
       expect(r.citation.asOf).toMatch(/^\d{4}-\d{2}-\d{2}$/);
       expect(r.citation.quote.trim().length).toBeGreaterThan(20);
+    }
+  });
+
+  it("assigns every record a calibration class and a legal basis", () => {
+    // The class keeps a data platform's multiple out of a frontier lab's
+    // band; a record without one would silently calibrate the wrong regime.
+    const classes = ["frontier_lab", "data_platform", "other"];
+    for (const v of VALUATIONS) expect(classes).toContain(v.vendorClass);
+    for (const r of REVENUES) {
+      expect(classes).toContain(r.vendorClass);
+      expect(["run_rate", "arr", "annual", "projection"]).toContain(r.basis);
     }
   });
 
@@ -95,6 +107,92 @@ describe("estimateRevenue", () => {
   it("marks an unclosed round rather than presenting it as fact", () => {
     const mistral = VALUATIONS.find((v) => v.vendorId === "mistral")!;
     expect(mistral.state).toBe("in_talks");
+  });
+});
+
+describe("observedMultiples", () => {
+  it("pairs each valuation with the nearest-in-time non-projection revenue", () => {
+    const pairs = observedMultiples();
+    const mistral = pairs.find((p) => p.vendorId === "mistral");
+    expect(mistral).toBeDefined();
+    expect(mistral!.vendorClass).toBe("frontier_lab");
+    // Both Mistral citations are dated 2026-08-01, so the gap is zero days.
+    expect(mistral!.daysApart).toBe(0);
+  });
+
+  it("never derives a multiple from a projection", () => {
+    // A real valuation over a hoped-for revenue prices a company that does
+    // not exist yet. If a projection record ever sneaks into the pairing,
+    // this fails.
+    for (const p of observedMultiples()) {
+      const revs = REVENUES.filter(
+        (r) => r.vendorId === p.vendorId && r.basis === "projection"
+      );
+      for (const r of revs) {
+        const v = VALUATIONS.find((x) => x.vendorId === p.vendorId)!;
+        const projectionMultiple =
+          Math.round((v.valuationUsdM / r.revenueUsdM) * 10) / 10;
+        // The published multiple must not equal one derived from a projection
+        // unless a genuine non-projection record happens to coincide.
+        const nonProjection = REVENUES.some(
+          (x) =>
+            x.vendorId === p.vendorId &&
+            x.basis !== "projection" &&
+            Math.round((v.valuationUsdM / x.revenueUsdM) * 10) / 10 ===
+              projectionMultiple
+        );
+        if (!nonProjection) expect(p.multiple).not.toBe(projectionMultiple);
+      }
+    }
+  });
+
+  it("filters by class, so no cross-regime calibration is possible", () => {
+    for (const p of observedMultiples("frontier_lab")) {
+      expect(p.vendorClass).toBe("frontier_lab");
+    }
+    for (const p of observedMultiples("data_platform")) {
+      expect(p.vendorClass).toBe("data_platform");
+    }
+  });
+});
+
+describe("the dated series", () => {
+  it("serves the LATEST non-projection figure as the disclosed one", () => {
+    // With one record this is trivially true; the test is here for the day a
+    // second, older figure lands and the find() would otherwise grab it.
+    for (const v of new Set(REVENUES.map((r) => r.vendorId))) {
+      const e = estimateRevenue(v, v);
+      if (e.basis !== "disclosed") continue;
+      const nonProjections = REVENUES.filter(
+        (r) => r.vendorId === v && r.basis !== "projection"
+      );
+      const latest = nonProjections.reduce((a, b) =>
+        Date.parse(a.citation.asOf) >= Date.parse(b.citation.asOf) ? a : b
+      );
+      expect(e.disclosed!.citation.asOf).toBe(latest.citation.asOf);
+    }
+  });
+
+  it("returns the full series oldest-first, projections included", () => {
+    const e = estimateRevenue("mistral", "Mistral");
+    expect(e.series.length).toBeGreaterThan(0);
+    for (let i = 1; i < e.series.length; i++) {
+      expect(
+        Date.parse(e.series[i].citation.asOf)
+      ).toBeGreaterThanOrEqual(Date.parse(e.series[i - 1].citation.asOf));
+    }
+  });
+
+  it("never lets a projection become the figure", () => {
+    // A vendor whose only record is a projection must fall through to the
+    // valuation lane or to no basis — never to "disclosed".
+    for (const v of new Set(REVENUES.map((r) => r.vendorId))) {
+      const records = REVENUES.filter((r) => r.vendorId === v);
+      if (records.every((r) => r.basis === "projection")) {
+        const e = estimateRevenue(v, v);
+        expect(e.basis).not.toBe("disclosed");
+      }
+    }
   });
 });
 

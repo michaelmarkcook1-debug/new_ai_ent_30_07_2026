@@ -25,6 +25,11 @@
 //           appears on the second run, or sooner where a vendor's published
 //           price differs from the snapshot's.
 //   market  One observation per refresh of the AIE estimate.
+//   finance Reported revenue and valuation figures for the private AI
+//           companies, read from lib/finance/data/private-figures.json —
+//           the same file the financial snapshot serves. Each record is
+//           already dated by its citation, so the series carries real
+//           movement as soon as two dated figures exist for a vendor.
 //   usage   Not ingested. It accumulates from the app as people use it.
 
 import { readFileSync } from "node:fs";
@@ -253,12 +258,82 @@ function ingestMarket() {
   return { rows, attempted: estimates.length, failures: [] };
 }
 
+
+// ── finance series (private-company reported figures) ──────────────────────
+
+/**
+ * One metric per kind of figure, so movement only ever compares like with
+ * like. A run-rate annualises one month; GAAP annual revenue is a different
+ * quantity; a projection is a hope with a date on it; an in-talks valuation
+ * is a rumour. Each gets its own metric, and none is ever diffed against
+ * another.
+ */
+function financeMetric(rec, kind) {
+  if (kind === "valuation") {
+    return rec.state === "in_talks"
+      ? "valuation_in_talks_usd_m"
+      : "valuation_post_money_usd_m";
+  }
+  return {
+    run_rate: "revenue_run_rate_usd_m",
+    arr: "revenue_arr_usd_m",
+    annual: "revenue_annual_usd_m",
+    projection: "revenue_projection_usd_m",
+  }[rec.basis] ?? null;
+}
+
+function ingestFinance() {
+  const file = path.join(process.cwd(), "lib", "finance", "data", "private-figures.json");
+  let raw;
+  try {
+    raw = JSON.parse(readFileSync(file, "utf8"));
+  } catch (e) {
+    return { rows: [], attempted: 0, failures: [{ subject: "private-figures.json", reason: String(e.message ?? e) }] };
+  }
+
+  const rows = [];
+  const failures = [];
+  const push = (rec, kind, valueUsdM, label) => {
+    const metric = financeMetric(rec, kind);
+    if (!metric) {
+      failures.push({ subject: `${rec.vendorId} ${kind}`, reason: `unmapped basis ${rec.basis ?? rec.state}` });
+      return;
+    }
+    rows.push({
+      series: "vendor",
+      subject_kind: "vendor",
+      subject_id: rec.vendorId,
+      subject_label: label,
+      metric,
+      value_num: valueUsdM,
+      unit: "USD millions",
+      // The citation's date is when the figure was true — not today.
+      observed_at: `${rec.citation.asOf}T00:00:00Z`,
+      source_id: "press_reported_figures",
+      vintage: `${kind === "valuation" ? rec.state : rec.basis}${rec.isFloor ? ", floor" : ""} — ${rec.citation.publisher}, ${rec.citation.asOf}`,
+      provenance:
+        `${rec.citation.quote} (${rec.citation.publisher}, ${rec.citation.asOf}.)` +
+        (rec.caveats ? ` Caveats: ${rec.caveats}` : "") +
+        (rec.isFloor ? " Reported as a floor: the true figure is at least this." : ""),
+    });
+  };
+
+  const names = new Map((raw.valuations ?? []).map((v) => [v.vendorId, v.vendorName]));
+  for (const v of raw.valuations ?? []) push(v, "valuation", v.valuationUsdM, v.vendorName);
+  for (const r of raw.revenues ?? [])
+    push(r, "revenue", r.revenueUsdM,
+      names.get(r.vendorId) ?? r.vendorId.charAt(0).toUpperCase() + r.vendorId.slice(1));
+
+  return { rows, attempted: (raw.valuations?.length ?? 0) + (raw.revenues?.length ?? 0), failures };
+}
+
 // ── main ───────────────────────────────────────────────────────────────────
 
 const SERIES = {
   model: { label: "Model movement", run: async () => ingestModels() },
   vendor: { label: "Vendor movement", run: ingestVendors },
   market: { label: "Market movement", run: async () => ingestMarket() },
+  finance: { label: "Private-company figures", run: async () => ingestFinance() },
 };
 
 /** Quote a value for the SQL-emitting mode. */
