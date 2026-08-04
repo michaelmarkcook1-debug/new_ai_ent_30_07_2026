@@ -131,7 +131,7 @@ export function buildSignals(
     signals.push({
       what: `The top-scoring model costs ${priceRatio} times more than the cheapest model that reaches 80 per cent of its benchmark score.`,
       why: "The last increment of capability is priced far above the rest of the curve. Most enterprise work does not need it, so paying for it everywhere is the largest avoidable line in a deployment.",
-      supports: "Price efficiency, and the model allocation below it.",
+      supports: "Price efficiency.",
       source: `Across ${modelCount} priced and benchmarked models`,
       href: "/price-performance",
       lane: "derived",

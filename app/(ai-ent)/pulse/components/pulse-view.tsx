@@ -15,7 +15,6 @@ import {
   MetaRow,
 } from "./executive-brief";
 import { PriceSummary } from "./price-summary";
-import { Workforce } from "./workforce";
 import {
   MaterialRisks,
   Movers,
@@ -58,8 +57,6 @@ export function PulseView({
   actions,
   financial,
   benchmark,
-  industries,
-  complexityMix,
   decisions,
 }: {
   fixture: PulseFixture;
@@ -75,14 +72,6 @@ export function PulseView({
     disclosure: { disclosing: number; total: number } | null;
   };
   benchmark: { source: string; modelCount: number };
-  industries: string[];
-  complexityMix: {
-    complex: number;
-    moderate: number;
-    simple: number;
-    counted: number;
-    total: number;
-  };
   decisions: Record<string, VendorDecision>;
 }) {
   const spotlightIds = Object.keys(fixture.spotlights);
@@ -145,9 +134,6 @@ export function PulseView({
         benchmarkSource={benchmark.source}
         modelCount={benchmark.modelCount}
       />
-
-      {/* 5 and 6. Where to spend it, and on which work */}
-      <Workforce industries={industries} complexityMix={complexityMix} />
 
       {/* 7. One vendor, read properly */}
       <section>

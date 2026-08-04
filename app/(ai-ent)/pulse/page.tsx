@@ -9,10 +9,6 @@ import {
   buildSignals,
   buildActions,
 } from "@/lib/pulse/assemble";
-import {
-  catalogueComplexityMix,
-  industriesWithWorkflows,
-} from "@/lib/pulse/allocation";
 import type { VendorDecision } from "@/lib/pulse/brief";
 
 export const metadata = { title: "The Pulse | AI Enterprise" };
@@ -88,8 +84,6 @@ export default async function PulsePage() {
           source: cost.benchmarkSource,
           modelCount: cost.models.length,
         }}
-        industries={industriesWithWorkflows()}
-        complexityMix={catalogueComplexityMix()}
         decisions={decisions}
       />
     </>
