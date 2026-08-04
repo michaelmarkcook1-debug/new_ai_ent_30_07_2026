@@ -34,8 +34,9 @@ interface Movement {
 interface Payload {
   series: string;
   observations: number;
-  subjects: number;
+  tracked: number;
   comparable: number;
+  truncated: boolean;
   note: string;
   movements: Movement[];
   lastRuns: {

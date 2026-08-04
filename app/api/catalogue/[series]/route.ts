@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
   catalogueConfigured,
-  observations,
+  observationsWithCap,
   runs,
   toMovements,
   type Series,
@@ -65,8 +65,8 @@ export async function GET(
   }
 
   try {
-    const [rows, recentRuns] = await Promise.all([
-      observations(series as Series),
+    const [{ rows, truncated }, recentRuns] = await Promise.all([
+      observationsWithCap(series as Series),
       runs(5),
     ]);
     const movements = toMovements(rows);
@@ -84,13 +84,24 @@ export async function GET(
     const body = JSON.stringify({
       series,
       observations: rows.length,
-      subjects: movements.length,
+      // One entry per subject-and-metric pair, not per subject: a model with a
+      // price and a throughput reading is two tracked figures, and calling
+      // that "one subject" would understate what is being followed.
+      tracked: movements.length,
       comparable: withComparison,
+      // Never let a capped query read as a complete one.
+      truncated,
       // Said plainly rather than left for the reader to infer from nulls.
-      note:
+      note: [
         withComparison === 0
           ? "First observations recorded. Movement appears once a second reading exists, and nothing here is shown as a change until then."
-          : `${withComparison} of ${movements.length} subjects have two or more observations and can be compared.`,
+          : `${withComparison} of ${movements.length} tracked figures have two or more observations and can be compared.`,
+        truncated
+          ? "This answer hit the query cap, so it is a partial view of the series."
+          : null,
+      ]
+        .filter(Boolean)
+        .join(" "),
       movements,
       lastRuns: recentRuns.map((r) => ({
         startedAt: r.started_at,

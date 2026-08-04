@@ -91,11 +91,40 @@ async function get<T>(pathAndQuery: string): Promise<T[]> {
   }
 }
 
-/** Every observation in a series, newest first. */
-export function observations(series: Series, limit = 500): Promise<Observation[]> {
+/**
+ * Every observation in a series, newest first.
+ *
+ * The limit exists to bound a runaway query, not to sample. It is set above
+ * the current row count on purpose — the model series alone holds 1,252
+ * observations, and a 500-row default silently returned an alphabetical
+ * fraction of it while the response still read as complete. The caller is told
+ * when the cap is reached (see `observationsWithCap`) rather than being handed
+ * a truncated set that looks whole.
+ */
+export const OBSERVATION_LIMIT = 5000;
+
+export function observations(
+  series: Series,
+  limit = OBSERVATION_LIMIT
+): Promise<Observation[]> {
   return get<Observation>(
     `catalogue_observation?series=eq.${series}&order=observed_at.desc,subject_label.asc&limit=${limit}`
   );
+}
+
+/**
+ * The same query, plus whether the cap was hit.
+ *
+ * A truncated answer is still useful; a truncated answer presented as a
+ * complete one is not. `truncated` is true when exactly `limit` rows came
+ * back, which is the only signal PostgREST gives without a second count query.
+ */
+export async function observationsWithCap(
+  series: Series,
+  limit = OBSERVATION_LIMIT
+): Promise<{ rows: Observation[]; truncated: boolean }> {
+  const rows = await observations(series, limit);
+  return { rows, truncated: rows.length >= limit };
 }
 
 export function sources(): Promise<CatalogueSource[]> {
