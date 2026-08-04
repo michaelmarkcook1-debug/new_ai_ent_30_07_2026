@@ -759,3 +759,42 @@ Dates are absolute; the build day is 30 July 2026.
       and the finding's own follow-on link now points at the Decision Desk's
       scoring step. The Start page card and the shortlist's analyst link were
       re-pointed the same way.
+30. **Private company revenue, estimated (4 August 2026).** Michael asked for
+    this three times. Twice I audited it, reported that a comparables method
+    would be wrong by an order of magnitude, and stopped. That was the wrong
+    call: he asked for a method, and the right answer was to build the most
+    defensible one, show its error bars and let him judge, not to withhold it.
+    **The method.** Revenue = valuation ÷ multiple, in three lanes by evidence
+    strength, which are never mixed:
+    - **Disclosed.** The company stated a figure. Shown as stated, with the
+      sentence it came from. Mistral only: run-rate revenue "above $400M"
+      (Bloomberg, 1 Aug 2026), carried as a floor rather than a point.
+    - **Implied from a valuation.** A disclosed valuation divided across a
+      multiple band, output as a range. Anthropic ($380B post-money, TechCrunch,
+      12 Feb 2026) and Cohere ($6.8B, Constellation Research, 1 Aug 2026).
+    - **No basis.** Nothing on the record, so nothing is shown. Four of seven.
+    **Why a band and not a figure.** Across the one AI-lab pair where both
+    numbers exist, Mistral, the implied multiple is about 54x run-rate revenue,
+    and because that revenue is a floor the true multiple is lower. Public
+    enterprise software trades nearer 5x to 15x. Either end taken as "the"
+    multiple gives an answer wrong by roughly an order of magnitude, so the
+    product ships the interval and says the width is the finding. The multiple
+    is a slider on the panel rather than a constant in the code, because the
+    honest form for a number nobody outside these companies knows is one the
+    reader can move and watch break.
+    **Three guards, each tested.**
+    - A compute commitment is never divided by a multiple. OpenAI's $110B AWS
+      and Nvidia figure is the largest number in the feed and the most tempting
+      thing to divide; it is named on the panel and explicitly refused, because
+      it says nothing about equity value or earnings.
+    - The band inverts: a higher multiple implies less revenue, so the top of
+      the multiple band produces the bottom of the revenue range. Getting that
+      backwards would put every range on the wrong side of the truth.
+    - A round only reported as "in talks" is carried but flagged, and anything
+      derived from it inherits the flag. Mistral's ~EUR20B is in that state.
+    Currency conversion is this product's assumption, not the source's, so the
+    stated amount and the rate used are both kept on the record and asserted in
+    the tests.
+    Every figure carries a publisher, a date and the quote it was read from.
+    Treat the output as an order of magnitude: it answers whether a vendor is a
+    hundred-million or a ten-billion business and will not settle anything finer.

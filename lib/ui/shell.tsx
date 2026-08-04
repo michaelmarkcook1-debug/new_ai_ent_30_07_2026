@@ -50,6 +50,7 @@ export const NAV_GROUPS: NavGroup[] = [
       { label: "Start here", href: "/start", icon: "pulse", hint: "Orientation: pick the question closest to yours" },
       { label: "The Pulse", href: "/pulse", icon: "pulse", hint: "Today's market read: averages, risks and who is moving" },
       { label: "Market Watch", href: "/market-watch", icon: "watch", hint: "Category shares, leaders and the winning/losing read" },
+      { label: "AI Adoption", href: "/ai-adoption", icon: "watch", hint: "Who is actually paying for AI, measured and attributed, and how far each industry has got" },
       { label: "Financial Snapshot", href: "/financial-snapshot", icon: "finance", hint: "Vendor financials, segment revenue and what AI they disclose" },
       { label: "Competitive Intel", href: "/competitive-intel", icon: "intel", hint: "Compare model providers across ten assessed capabilities" },
       { label: "Reputation Tracker", href: "/reputation-tracker", icon: "reputation", hint: "How buyers, developers and staff rate each vendor" },
@@ -75,6 +76,7 @@ export const NAV_GROUPS: NavGroup[] = [
     label: "Vendor Assessment",
     items: [
       { label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", icon: "navigator", hint: "Who depends on whom across the AI stack" },
+      { label: "Workflow Shortlist", href: "/workflow-shortlist", icon: "intel", hint: "Pick a workflow, get the vendors to buy from and the models to build on" },
       { label: "Price / Performance", href: "/price-performance", icon: "price", hint: "What capability costs, and the efficiency frontier" },
       { label: "The Security Desk", href: "/security-desk", icon: "security", hint: "Security posture and open risks per vendor" },
       { label: "Trust Rank", href: "/trust-rank", icon: "trust", hint: "What AI regulation binds you, by jurisdiction" },

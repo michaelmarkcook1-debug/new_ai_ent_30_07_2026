@@ -1,30 +1,24 @@
 import { PageHeader } from "@/lib/ui/page";
-import { MarketExplorer } from "./components/market-explorer";
-import { loadWorkflowVendorIndex } from "@/lib/workflow-vendors";
 import { ModelFit } from "./components/model-fit";
 
 export const metadata = { title: "Model 4 Role | AI Enterprise" };
 
-// The Service Providers delivery matrix used to sit at the foot of this page,
-// hardcoded to Accenture with nothing on screen saying why that ticker and not
-// another. It answered a different question from the rest of the tab — who
-// delivers an AI programme, rather than which model suits a role — and the
-// Ecosystem Navigator already answers it properly, with a chooser across every
-// live provider rather than one fixed example. The panel is gone from here and
-// the shortlist still links through to it.
-export default async function MarketViewPage() {
-  const { byCategory } = await loadWorkflowVendorIndex();
+// Model 4 Role is one tool now (4 August 2026). It used to carry three: the
+// fit engine, an adoption explorer and a workflow selector. The adoption
+// explorer's vendor-share model failed an external sanity check and was
+// retired (what survived lives on /ai-adoption, with measured figures in its
+// place); the workflow selector rendered its answer three panels away from
+// the control and is now a working tool of its own at /workflow-shortlist.
+// One tab, one question: which model fits this role, and what does it cost.
+export default function MarketViewPage() {
   return (
     <>
       <PageHeader
         title="Model 4 Role"
-        subtitle="Which model for which role, and what it costs: pick a role and the engine returns the cheapest model meeting its requirements, with the reasoning visible. Underneath, who is using which models, how and where."
-        lanes={["derived", "aie-live", "aie"]}
+        subtitle="Pick a role and the engine returns the cheapest model meeting its requirements, with the reasoning, the eliminations and the cost all visible."
+        lanes={["derived", "aie"]}
       />
-      <div className="space-y-4">
-        <ModelFit />
-        <MarketExplorer workflowVendors={byCategory} />
-      </div>
+      <ModelFit />
     </>
   );
 }
