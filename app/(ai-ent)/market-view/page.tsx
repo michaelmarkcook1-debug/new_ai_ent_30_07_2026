@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { PageHeader } from "@/lib/ui/page";
 import { ModelFit } from "./components/model-fit";
+import { WorkforceChart } from "./components/workforce-chart";
+import { workforcePayload } from "@/lib/model-fit/workforce-payload";
 
 export const metadata = { title: "Model for Role | AI Enterprise" };
 
@@ -26,6 +28,12 @@ export default function MarketViewPage() {
         lanes={["derived", "aie"]}
       />
       <ModelFit />
+
+      {/* The distribution behind the single answer above: the whole reference
+          workforce at once, so a buyer can see how much of it the expensive
+          tier actually applies to. Computed on the server because roles.json
+          is 697KB and the chart needs five figures per industry. */}
+      <WorkforceChart payload={workforcePayload()} />
 
       {/* Price / Performance asks this same question from the other side: this
           page starts from a role and returns a model, that one starts from the
