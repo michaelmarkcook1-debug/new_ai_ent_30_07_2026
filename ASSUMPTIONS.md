@@ -966,3 +966,48 @@ Dates are absolute; the build day is 30 July 2026.
     - **The ingestion refuses to fabricate.** A vendor whose lookup fails is
       recorded in `failed` with the reason, never rendered as zero adoption,
       and a run where every vendor failed refuses to overwrite a good snapshot.
+32. **The July port removed, and the figures reconciled with the source
+    (4 August 2026).** Michael reported that much of the ranking-engine data
+    did not match what New AI.Ent showed. It did not, and the cause was
+    structural rather than a bug.
+    `lib/aie/intelligence/` was a copy of the AI Enterprise source taken on
+    8 July 2026 and frozen into TypeScript. `fixtures/aie-live/` is the same
+    source re-fetched daily. Six tabs rendered both vintages on one page, and
+    Vendor View printed the frozen figure under the field name the live one
+    uses: **Anthropic overallScore 88, where the source publishes 68.3**.
+    Every one of the 37 overlapping vendors scored higher in the copy, by a
+    mean of 18.4 points and by 46 for Microsoft, and not one scored lower. A
+    gap that size in one direction on every vendor without exception is a
+    different scale, not drift, so no reconciliation was possible: one had to
+    go, and the one still being published won.
+    **What changed.** `lib/aie/live-vendors.ts` reads the fixtures server-side
+    and is now the only source of a vendor's published figures.
+    `lib/aie/vendor-directory.ts` is generated from the same fixture and holds
+    the roster and scores as plain data, because three client components need a
+    name or a score and a module that reads the filesystem cannot enter a
+    browser bundle: webpack fails on `node:fs`. That trap was hit once during
+    this change, on the rankings table, and the columns are passed as props now.
+    **The pillar scores are gone.** Upstream publishes none: the six numbers
+    under every vendor were computed by the frozen copy, so there was nothing
+    current to refresh them against. Vendor View shows the ten capability scores
+    the source does publish, each with its evidence grade and the date it was
+    last verified.
+    **Vendor identity had drifted both ways.** The port carried five vendors
+    under ids the source no longer uses (`alibaba-qwen`, `fireworks-ai`,
+    `moonshot-kimi`, `together-ai`, `zhipu-glm`), so every join against live
+    data dropped them silently and the panel showed a vendor with no figures
+    rather than an error. It also lacked five the source tracks (`ai21`,
+    `glean`, `hebbia`, `minimax`, `sap`), which appeared nowhere in the
+    product. Aliases are held as data in both modules, so an old id in a saved
+    URL still resolves.
+    **Why it survived so long.** Nothing failed when the copy drifted. There
+    are now 12 tests that do: score parity against the fixture on every vendor,
+    name parity, roster parity, alias resolution, and that the rankings table
+    shows the source's figure for every row and drops a vendor the source has
+    stopped scoring rather than showing a stale one.
+    The sync script regenerates the directory and the signal snapshot whenever
+    fixtures move, and reports it loudly if either fails, because both go stale
+    silently and that is exactly how the port drifted.
+    Scores across the product fall by about 18 points on average as a result.
+    That is not a regression; it is the first time these numbers have matched
+    what the ranking engine publishes.
