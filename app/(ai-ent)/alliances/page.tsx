@@ -3,7 +3,13 @@ import { getAlliancesData } from "./data";
 import { AlliancesView } from "./components/alliances-view";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { supplyMapInsight, pickNews } from "@/lib/analyst/insight";
-import newsFixture from "@/fixtures/aie-live/news.json";
+import { analystNews } from "@/lib/analyst/news-source";
+
+// The Analyst Insight is a pure function of this page's data, so it only says
+// something new when an input changes. News is the input that moves daily, and
+// it is now fetched at render rather than baked in, so the page is regenerated
+// once a day to pick it up.
+export const revalidate = 86400;
 
 export const metadata = { title: "Alliances | AI Enterprise" };
 
@@ -15,6 +21,7 @@ export const metadata = { title: "Alliances | AI Enterprise" };
 // which integrator carries which vendor decides who actually turns up on the
 // engagement. This maps that channel.
 export default async function AlliancesPage() {
+  const news = await analystNews();
   const data = getAlliancesData();
   const named = data.links.filter((l) => l.tier === "direct_named").length;
 
@@ -26,7 +33,7 @@ export default async function AlliancesPage() {
       nodes: data.partnerCount,
       label: "alliance",
     },
-    pickNews(newsFixture.news, {
+    pickNews(news.items, {
       categories: ["Partnership", "Strategy signal"],
     }),
     null

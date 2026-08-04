@@ -5,13 +5,18 @@ import { CompanyNewsSection } from "./components/company-news";
 import { LiveFeed } from "./components/live-feed";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { newsInsight } from "@/lib/analyst/insight";
-import newsFixture from "@/fixtures/aie-live/news.json";
+import { analystNews } from "@/lib/analyst/news-source";
+
+// News is the fastest-moving input in the product, so this page and its
+// insight are regenerated once a day rather than baked at build time.
+export const revalidate = 86400;
 
 export const metadata = { title: "News | AI Enterprise" };
 
 export default async function NewsFeedPage() {
+  const news = await analystNews();
   const { items, meta } = loadFeed();
-  const insight = newsInsight(newsFixture.news, null);
+  const insight = newsInsight(news.items, null);
 
   return (
     <>

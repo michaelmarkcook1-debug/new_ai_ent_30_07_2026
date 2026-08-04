@@ -1052,3 +1052,32 @@ Dates are absolute; the build day is 30 July 2026.
     ingestion runs in-request and commits its fallback. Its warning that Vercel
     Cron would be 401'd by this app's own Basic-auth middleware is correct and
     worth keeping for whenever a cron is added.
+33. **The Analyst Insight refreshes daily (4 August 2026).** Michael asked for
+    the insight on each tab to re-run every 24 hours.
+    It could not re-run at all. The insight is a pure function of its inputs,
+    and every one of the nine pages carrying one did
+    `import newsFixture from "@/fixtures/aie-live/news.json"`. A static import
+    resolves at build time and the deployed filesystem is immutable, so the
+    "Latest development" on nine tabs was frozen at whatever the news said on
+    the day of the last deploy. Re-rendering the page would have recomputed the
+    same answer from the same constant: revalidation alone would have been
+    theatre.
+    News is the input worth refreshing. The last sync replaced 104 of 200
+    stories, while vendor scores moved on 5 of 47 and reputation on none.
+    `lib/analyst/news-source.ts` fetches it at render instead, and the nine
+    pages carry `export const revalidate = 86400`.
+    **Two things the shared server fetcher could not do.** The upstream ignores
+    `?limit` and returns its entire archive whatever is asked for: 2,865 items
+    and 3.28MB, measured rather than assumed. So the payload is trimmed to the
+    newest 300 immediately after parsing and only the trimmed set is held; the
+    insight shows one item. And the refresh interval is a day rather than the
+    shared fetcher's five minutes, because pulling 3.28MB every five minutes
+    per instance to re-pick one headline is not a trade worth making.
+    Falls back to the recorded fixture when upstream does not answer, and
+    reports which happened, so a degraded render shows real but dated news
+    rather than a blank card or an invented one.
+    Verified: lane `aie-live`, 300 items kept of 2,865, newest story
+    2026-08-27, 900ms cold and 0ms warm.
+    Three of the nine pages are static with a one-day revalidate; the other six
+    were already dynamic for other reasons and so re-render on every request,
+    which is more often than daily rather than less.

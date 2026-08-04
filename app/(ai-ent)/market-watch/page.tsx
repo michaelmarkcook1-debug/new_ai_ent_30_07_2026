@@ -15,7 +15,13 @@ import { CategoryLeaders } from "./components/category-leaders";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { marketWatchInsight, pickNews } from "@/lib/analyst/insight";
 import { loadMarketMetrics } from "@/lib/market-metrics";
-import newsFixture from "@/fixtures/aie-live/news.json";
+import { analystNews } from "@/lib/analyst/news-source";
+
+// The Analyst Insight is a pure function of this page's data, so it only says
+// something new when an input changes. News is the input that moves daily, and
+// it is now fetched at render rather than baked in, so the page is regenerated
+// once a day to pick it up.
+export const revalidate = 86400;
 
 export const metadata = { title: "Market Watch | AI Enterprise" };
 
@@ -23,6 +29,7 @@ export const metadata = { title: "Market Watch | AI Enterprise" };
 // winning/losing read now pull live from the deployed AIE app; the ported
 // seed stays as the explicit fallback and everything else remains PORT lane.
 export default async function MarketWatchPage() {
+  const news = await analystNews();
   const { regime, signals } = getMarketToday();
   const categories = getCategoryShares();
   const lookups = getShareLookups();
@@ -33,7 +40,7 @@ export default async function MarketWatchPage() {
   const metricsForInsight = await loadMarketMetrics();
   const insight = marketWatchInsight(
     metricsForInsight,
-    pickNews(newsFixture.news, { categories: ["Market movement", "Strategy signal"] })
+    pickNews(news.items, { categories: ["Market movement", "Strategy signal"] })
   );
 
   return (

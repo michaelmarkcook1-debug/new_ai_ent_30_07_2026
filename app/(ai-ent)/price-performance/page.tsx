@@ -9,11 +9,18 @@ import { FrontierFaceOff } from "./components/frontier-faceoff";
 import { PricingDisclosure } from "./components/pricing-disclosure";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { pricePerformanceInsight, pickNews } from "@/lib/analyst/insight";
-import newsFixture from "@/fixtures/aie-live/news.json";
+import { analystNews } from "@/lib/analyst/news-source";
+
+// The Analyst Insight is a pure function of this page's data, so it only says
+// something new when an input changes. News is the input that moves daily, and
+// it is now fetched at render rather than baked in, so the page is regenerated
+// once a day to pick it up.
+export const revalidate = 86400;
 
 export const metadata = { title: "Price / Performance | AI Enterprise" };
 
 export default async function PricePerformancePage() {
+  const news = await analystNews();
   const pricing = loadPricingDataset();
   const costCapability = loadCostCapability();
   const faceOff = loadFrontierFaceOff();
@@ -25,7 +32,7 @@ export default async function PricePerformancePage() {
       ratio: 25,
       adequate: 29,
     },
-    pickNews(newsFixture.news, { categories: ["Pricing", "Product launch"] }),
+    pickNews(news.items, { categories: ["Pricing", "Product launch"] }),
     ccForInsight.capturedAtDisplay ?? null
   );
 

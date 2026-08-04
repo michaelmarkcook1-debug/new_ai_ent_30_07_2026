@@ -7,7 +7,13 @@ import { AieRankings } from "./components/aie-rankings";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { competitiveInsight, pickNews } from "@/lib/analyst/insight";
 import { loadMarketMetrics } from "@/lib/market-metrics";
-import newsFixture from "@/fixtures/aie-live/news.json";
+import { analystNews } from "@/lib/analyst/news-source";
+
+// The Analyst Insight is a pure function of this page's data, so it only says
+// something new when an input changes. News is the input that moves daily, and
+// it is now fetched at render rather than baked in, so the page is regenerated
+// once a day to pick it up.
+export const revalidate = 86400;
 
 export const metadata = { title: "Competitive Intel | AI Enterprise" };
 
@@ -16,6 +22,7 @@ export default async function CompetitiveIntelPage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
+  const news = await analystNews();
   const params = await searchParams;
   const raw = params.category;
   const categoryId = Array.isArray(raw) ? raw[0] : raw;
@@ -27,7 +34,7 @@ export default async function CompetitiveIntelPage({
   const m = await loadMarketMetrics();
   const insight = competitiveInsight(
     m,
-    pickNews(newsFixture.news, { categories: ["Product launch", "Market movement"] }),
+    pickNews(news.items, { categories: ["Product launch", "Market movement"] }),
     matrix.categoryName,
     matrix.rows.length,
     matrix.capabilities.length
