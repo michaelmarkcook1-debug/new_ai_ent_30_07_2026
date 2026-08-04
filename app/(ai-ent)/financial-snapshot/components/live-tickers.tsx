@@ -13,14 +13,15 @@ import type {
 
 interface FetchState<T> {
   loading: boolean;
-  source: BrSource;
+  /** null until the call answers: an unanswered call has no provenance yet. */
+  source: BrSource | null;
   data: T | null;
   errorCode: string | null;
 }
 
 const idle = <T,>(): FetchState<T> => ({
   loading: true,
-  source: "live",
+  source: null,
   data: null,
   errorCode: null,
 });
@@ -34,16 +35,21 @@ function fromResult<T>(res: BrResult<T>): FetchState<T> {
   };
 }
 
+// A lane badge states where a figure came from. While the call is in flight
+// there is no figure and no answer, so there is nothing to state: badging it
+// LIVE here claimed a live pull that had not happened and, when BoardRadar
+// stalled, never would. The panel went on to render the recorded fixture under
+// the LIVE badge the spinner had already shown. No badge until the call lands.
 function SourceBadge({ state }: { state: FetchState<unknown> }) {
-  if (state.loading) return <LaneBadge lane="live" />;
+  if (state.loading || state.source === null) return null;
   return <LaneBadge lane={state.source === "mock" ? "mock" : "live"} />;
 }
 
 function LoadingNote() {
   return (
     <p className="py-6 text-center font-mono text-xs text-muted">
-      Fetching live figures... the first call for a ticker can take several
-      seconds while BoardRadar computes.
+      Checking BoardRadar for this ticker. If it does not answer within eight
+      seconds the panel falls back to the last recorded figures and says so.
     </p>
   );
 }

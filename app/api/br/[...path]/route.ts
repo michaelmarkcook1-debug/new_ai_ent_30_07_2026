@@ -33,7 +33,11 @@ const ALLOWED_PREFIXES = [
 ];
 
 const CACHE_TTL_MS = 300_000;
-const TIMEOUT_MS = 12_000;
+// Was 12s with an unconditional retry, so a stalling upstream cost 24s of dead
+// air before the fixture appeared. Measured 4 Aug 2026: a ticker BoardRadar
+// answers at all comes back in 1.3-1.5s, so 8s is far beyond a slow success
+// and only ever truncates a hang.
+const TIMEOUT_MS = 8_000;
 const RATE_LIMIT_PER_MIN = 60;
 
 type CacheEntry = { body: string; status: number; at: number; source: string };
@@ -84,15 +88,25 @@ async function readFixture(
   return null;
 }
 
+/** Thrown when the upstream ran past TIMEOUT_MS rather than failing outright. */
+class UpstreamTimeout extends Error {}
+
 async function fetchWithTimeout(url: string): Promise<Response> {
   const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  let timedOut = false;
+  const timer = setTimeout(() => {
+    timedOut = true;
+    controller.abort();
+  }, TIMEOUT_MS);
   try {
     return await fetch(url, {
       headers: { "X-API-Key": process.env.ANALYSTGENIUS_API_KEY ?? "" },
       signal: controller.signal,
       cache: "no-store",
     });
+  } catch (err) {
+    if (timedOut) throw new UpstreamTimeout();
+    throw err;
   } finally {
     clearTimeout(timer);
   }
@@ -168,8 +182,12 @@ export async function GET(
             },
           });
         }
-      } catch {
-        // timeout or network failure; one retry, then fixtures
+      } catch (err) {
+        // An upstream that did not answer inside the window is stalling, not
+        // flickering, so a second full window buys nothing and doubles the time
+        // the user spends watching a spinner. Give up and serve the fixture.
+        // A fast network failure still gets its one retry.
+        if (err instanceof UpstreamTimeout) break;
       }
     }
   }
