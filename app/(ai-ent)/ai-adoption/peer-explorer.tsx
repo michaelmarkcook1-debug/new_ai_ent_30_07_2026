@@ -14,6 +14,32 @@ import {
   UPTAKE_VENDOR_ID,
 } from "./data";
 
+// The two places that measure this directly, rather than modelling it. Both
+// are later than the May 2026 model and both contradict its top-two ordering,
+// which is why they are linked from inside the chart's own disclosure rather
+// than left further up the page for a reader to find on their own.
+const LIVE_SOURCES = [
+  {
+    label: "Menlo Ventures, mid-2026 LLM market update",
+    url: "https://finance.yahoo.com/news/enterprise-llm-spend-reaches-8-130000140.html",
+    says: "Anthropic ~40% of enterprise LLM spend against OpenAI ~27%",
+  },
+  {
+    label: "Ramp AI Index, April 2026",
+    url: "https://www.axios.com/2026/05/13/anthropic-openai-workplace-ai-adoption",
+    says: "Anthropic passed OpenAI in business adoption, 34.4% against 32.3%",
+  },
+  {
+    label: "The uptake endpoint itself",
+    url: "https://ranking-engine-red.vercel.app/api/uptake",
+    says: "the modelled figures above, exactly as this chart receives them",
+  },
+];
+
+// Months between the model's vintage (May 2026) and the build date. Stated
+// rather than left as a date the reader has to subtract from today.
+const MODEL_AGE_MONTHS = 3;
+
 // Peer adoption: who your industry and region is actually buying.
 //
 // Every selection is a live pull. The explorer now speaks the uptake engine's
@@ -163,17 +189,48 @@ export function PeerAdoptionExplorer() {
         )}
       </div>
 
-      {/* The endpoint's own words about its own data, verbatim. */}
+      {/* The endpoint's own words about its own data, verbatim, then the age
+          of the model in months and the places that measure this directly.
+          Re-probed 4 August 2026: the upstream still serves the same May 2026
+          model, so there is no fresher pull to make. Saying how old it is
+          beats printing a date and leaving the reader to do the arithmetic. */}
       {provenance ? (
-        <p className="measure mt-3 rounded border border-warn/40 bg-warn-bg/40 px-3 py-2 text-[11.5px] leading-relaxed">
-          <b>What the source says about itself:</b>{" "}
-          <span className="font-mono text-[11px]">{provenance}</span>
-          <br />
-          Live means freshly fetched, not freshly measured. This ordering puts
-          OpenAI ahead of Anthropic; the two measurements above, both later,
-          disagree. Read the shape of the slice — which vendors appear at all,
-          and how concentrated it is — rather than the order of the top two.
-        </p>
+        <div className="measure mt-3 rounded border border-warn/40 bg-warn-bg/40 px-3 py-2 text-[11.5px] leading-relaxed">
+          <p>
+            <b>What the source says about itself:</b>{" "}
+            <span className="font-mono text-[11px]">{provenance}</span>
+          </p>
+          <p className="mt-1.5">
+            <b>That model is {MODEL_AGE_MONTHS} months old</b> and has not been
+            re-run: the endpoint was re-probed on 4 August 2026 and returned the
+            same May 2026 model, so a refresh here fetches the same figures
+            again. Live means freshly fetched, not freshly measured.
+          </p>
+          <p className="mt-1.5">
+            This ordering puts OpenAI ahead of Anthropic; the two measurements
+            below, both later than the model, disagree. Read the shape of the
+            slice — which vendors appear at all, and how concentrated it is —
+            rather than the order of the top two.
+          </p>
+          <p className="mt-2 border-t border-warn/30 pt-2">
+            <b>Measured directly, and more recently:</b>
+          </p>
+          <ul className="mt-1 space-y-1">
+            {LIVE_SOURCES.map((s) => (
+              <li key={s.url}>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-primary hover:underline"
+                >
+                  {s.label}
+                </a>
+                <span className="text-muted"> — {s.says}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
       ) : null}
 
       <div className="mt-3 border-t border-base-300 pt-2">
