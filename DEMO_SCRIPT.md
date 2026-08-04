@@ -16,17 +16,17 @@ Spotlight between vendors: narrative bars versus reality bars. The
 the bottom are AIE live, current to today, with the selected vendor's own
 feed beside the market feed.
 
-## 2. Interrogate: the hero piece (2.5 min)
+## 2. Decision Desk, step one — the cited finding (2.5 min)
 
-Type a situation into the hero (or click an example on /interrogate):
+Type a situation into the hero (or click an example on /decision-desk):
 "We are a European bank exploring agentic AI for onboarding, worried about
 the EU AI Act." Interrogate asks a sharp question shaped by what you have
 not yet said; answer it, and it writes a tailored finding in which every
 claim carries a citation, with the tier routing shown underneath (Haiku
 shapes questions, Sonnet writes the finding). Close on the three
-follow-on buttons: rankings, Trust Rank, Assess and Decide.
+follow-on buttons: rankings, Trust Rank, and the Decision Desk's own weighted scoring as step two.
 
-## 3. Company View: Shell, the exemplar buyer (1 min)
+## 3. Your AI Position: the exemplar buyer (1 min)
 
 Open **Company View: Shell**. The header says it plainly: Shell is not in
 the coverage universe, so every figure is SAMPLE shaped exactly like the

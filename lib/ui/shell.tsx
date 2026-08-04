@@ -57,13 +57,18 @@ export const NAV_GROUPS: NavGroup[] = [
       { label: "Alliances", href: "/alliances", icon: "alliance", hint: "Who partners with whom, and how deep the tie is" },
     ],
   },
+  // Recomposed 3 August 2026 from four tabs into three, ordered as the
+  // CIO's journey: where do we stand, what fits and what does it cost,
+  // and what call do we make. Interrogate and Assess and Decide were two
+  // halves of the third question, so they share the Decision Desk now;
+  // "Company View: Shell" was named after its fixture, which is a build
+  // detail no buyer should have to decode.
   {
     label: "AI and Your Company",
     items: [
-      { label: "Interrogate", href: "/interrogate", icon: "interrogate", hint: "Describe your situation, get a cited finding" },
-      { label: "Model 4 Role", href: "/market-view", icon: "market", hint: "Pick a workflow, get the model tier and vendors that serve it" },
-      { label: "Company View: Shell", href: "/company-view", icon: "company", hint: "The tailored view of your own organisation" },
-      { label: "Assess and Decide", href: "/assess-decide", icon: "assess", hint: "Score a decision against your own weights" },
+      { label: "Your AI Position", href: "/company-view", icon: "company", hint: "Where AI helps or threatens you: exposure, readiness, obligations, and an analyst over your own documents" },
+      { label: "Model 4 Role", href: "/market-view", icon: "market", hint: "Pick a role, get the cheapest model that meets its requirements and what it costs" },
+      { label: "Decision Desk", href: "/decision-desk", icon: "assess", hint: "A cited finding and a weighted score for the call you must defend" },
     ],
   },
   {

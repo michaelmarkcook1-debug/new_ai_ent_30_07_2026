@@ -669,3 +669,58 @@ Dates are absolute; the build day is 30 July 2026.
     lane is dropped from the page header because no BoardRadar surface remains
     here, and the route is preserved as a line under the shortlist: neither buy
     nor build is who delivers the programme.
+29. **Alliances rebuilt as the AI × GSI Alliance Explorer (4 August 2026).**
+    Michael judged the tab irrelevant to the original design and pointed at the
+    deployed AIE app's /alliances page as the reference.
+    The old tab mapped partnership and investment edges between AI companies,
+    which is a different question from the one a buyer arrives with. Nobody
+    stands a frontier model up alone: they buy through an integrator, and which
+    integrator carries which vendor decides who turns up on the engagement.
+    The map is bipartite for that reason, vendors against the firms that
+    deliver them.
+    **Where the data came from.** The reference renders its dataset into its own
+    React payload and publishes no API for it: `/api/alliances` and five
+    neighbouring paths all 404. The rows were extracted from the payload and
+    ported to `lib/aie/alliances/seed.ts` with an origin header, the same
+    pattern as the rest of `lib/aie/`. Re-read the page to refresh them.
+    Two details of the extraction are worth recording. The payload dedupes
+    repeated arrays into pointer strings (`$c:props:...:rows:4:areas`), so 41
+    industry, region and area lists arrive as references and had to be resolved
+    against the rows they point at; taken literally they would have rendered as
+    raw pointer text. And the chunks must be decoded as JSON strings rather than
+    with a unicode escape pass, or every `×` and en dash arrives mojibaked.
+    **A gap in the source, carried but corrected.** Two of its fourteen cited
+    alliances, EY × Microsoft and Capgemini × Mistral, are hard-coded markup
+    rather than rows in its own dataset. EY is therefore absent from its own
+    map while appearing in its dossier list, and Capgemini × Mistral is written
+    up but never drawn. Both are ported here as ordinary links so the map and
+    the dossier list agree, flagged `portedFromMarkup`, and the discrepancy is
+    stated on the affected cards rather than silently smoothed over. That takes
+    the map to 51 links across 22 partners, against the source's 49 and 21.
+    **The graphic.** Hand-rolled force simulation on a canvas: repulsion between
+    every pair, springs along the edges weighted so named alliances pull
+    tighter than inferred ones, weak centring, heavy damping. No dependency
+    added. Node starting positions come from a seeded generator rather than
+    Math.random, so the same data always lays out the same way and a screenshot
+    in a report still matches the product later. Nodes are draggable and rejoin
+    the simulation on release; clicking one locks its connections and opens its
+    links.
+    `prefers-reduced-motion` solves the layout without animating and draws once.
+    The canvas also paints synchronously on mount and on `visibilitychange`,
+    not only inside the animation loop: `requestAnimationFrame` does not fire in
+    a hidden document, so a canvas mounting in a background tab was left at the
+    300x150 HTML default and drew nothing. Switching to the directory view and
+    back is enough to hit that.
+    **What is not asserted by the browser.** The graph builder lives in
+    `lib/aie/alliances/graph.ts` rather than the component so it can be tested
+    without a DOM. Ten tests cover the bipartite invariant, unique keys, every
+    cited alliance carrying a publisher, a https url, a date and at least one
+    proof point, degree matching the edges that actually touch a node, platform
+    hybrids keeping their own kind, deterministic layout, and no NaN
+    coordinates.
+    Four views on one dataset because the same links answer four questions:
+    where the topology concentrates, what an individual link says, how two
+    vendors' channels compare, and how thinly the evidence is spread. The last
+    is the honest one: 23 of 51 links are alliances both sides have named, and
+    the rest are breadth signals the source itself calls directional and
+    confidence-tiered, never audited fact.

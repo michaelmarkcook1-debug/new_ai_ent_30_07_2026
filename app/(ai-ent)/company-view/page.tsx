@@ -7,13 +7,13 @@ import { resolveCompany } from "@/lib/company-source";
 import { CompanyShell } from "./components/company-shell";
 import { ExemplarOnly } from "./components/exemplar-only";
 
-export const metadata = { title: "Company View | AI Enterprise" };
+export const metadata = { title: "Your AI Position | AI Enterprise" };
 
 const TAB_LINKS = [
   { href: "/company-view/ai-exposure", title: "AI Exposure", blurb: "Where AI helps or threatens each function of the business." },
   { href: "/company-view/talent", title: "Talent Intelligence", blurb: "Workforce readiness, AI literacy by level, role exposure." },
-  { href: "/company-view/trust-rank", title: "Trust Rank", blurb: "Governance posture and the regulatory grid across ten jurisdictions." },
-  { href: "/assess-decide", title: "Assess and Decide", blurb: "Now its own tab: depth tiers, your weights, and the worked derivation." },
+  { href: "/company-view/trust-rank", title: "Governance & Obligations", blurb: "Your governance posture and the regulatory grid across ten jurisdictions: what binds you, where." },
+  { href: "/decision-desk", title: "Decision Desk", blurb: "When the position is clear: a cited finding and a weighted, derivable score for the decision itself." },
 ];
 
 export default async function CompanyOverviewPage({

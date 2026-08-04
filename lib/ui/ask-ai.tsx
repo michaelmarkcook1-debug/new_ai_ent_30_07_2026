@@ -11,7 +11,7 @@ import Link from "next/link";
 // affordance in two places. Holding them here puts them one click away from
 // anywhere in the app and leaves each page to its own subject.
 //
-// Every question routes to /interrogate?q=..., which starts the adaptive
+// Every question routes to /decision-desk?q=..., which starts the adaptive
 // interview already primed. Interrogate reads the parameter on mount.
 
 export interface SuggestedQuestion {
@@ -132,7 +132,7 @@ export function AskAiButton() {
                   <li key={q.question}>
                     <Link
                       role="menuitem"
-                      href={`/interrogate?q=${encodeURIComponent(q.question)}`}
+                      href={`/decision-desk?tool=finding&q=${encodeURIComponent(q.question)}`}
                       onClick={() => setOpen(false)}
                       className="block px-3 py-2 text-sm leading-snug transition hover:bg-base-200 hover:text-primary"
                     >
@@ -145,7 +145,7 @@ export function AskAiButton() {
           ))}
           <Link
             role="menuitem"
-            href="/interrogate"
+            href="/decision-desk"
             onClick={() => setOpen(false)}
             className="block bg-base-200/60 px-3 py-2.5 text-sm font-semibold text-primary transition hover:bg-base-200"
           >

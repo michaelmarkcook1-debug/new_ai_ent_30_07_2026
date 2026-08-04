@@ -189,7 +189,7 @@ export function ShortlistView({ vendors }: { vendors: VendorMetrics[] }) {
             ["/trust-rank", "Check governance and regulatory exposure"],
             ["/security-desk", "Check security posture and open risks"],
             ["/price-performance", "Compare what capability costs"],
-            ["/interrogate", "Ask the analyst about this shortlist"],
+            ["/decision-desk", "Ask the analyst about this shortlist"],
           ].map(([href, label]) => (
             <li key={href}>
               <Link

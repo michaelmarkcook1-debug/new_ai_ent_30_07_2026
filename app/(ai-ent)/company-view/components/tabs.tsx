@@ -7,10 +7,13 @@ const TABS = [
   { label: "Overview", href: "/company-view" },
   { label: "AI Exposure", href: "/company-view/ai-exposure" },
   { label: "Talent Intelligence", href: "/company-view/talent" },
-  { label: "Trust Rank", href: "/company-view/trust-rank" },
-  // Assess and Decide is its own top-level tab now; this entry jumps there.
-  { label: "Assess and Decide", href: "/assess-decide" },
+  // Renamed from "Trust Rank": a vendor-facing tab of that name already
+  // exists under Vendor Assessment, and the two answer different questions.
+  // This one is what binds YOUR organisation, not how a vendor scores.
+  { label: "Governance & Obligations", href: "/company-view/trust-rank" },
   { label: "AI Analyst", href: "/company-view/analyst" },
+  // The decision itself lives on the Decision Desk; this entry jumps there.
+  { label: "Decision Desk", href: "/decision-desk" },
 ];
 
 // The selected company travels with the tab links, so switching tabs keeps

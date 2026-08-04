@@ -185,7 +185,7 @@ export async function liveInterrogate(
           links: [
             { label: "Vendor rankings", href: "/vendor-view" },
             { label: "Trust Rank", href: "/trust-rank" },
-            { label: "Assess and Decide", href: "/assess-decide" },
+            { label: "Decision Desk: score it against your weights", href: "/decision-desk?tool=assess" },
           ],
         });
       } catch (err) {

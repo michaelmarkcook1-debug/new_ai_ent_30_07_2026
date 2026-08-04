@@ -30,9 +30,9 @@ const JOBS: {
     question: "Just tell me what to do in our situation.",
     detail:
       "Describe the situation in your own words. You get a few sharp questions, then a tailored finding where every claim carries a citation. The fastest route if you are not sure where to look.",
-    href: "/interrogate",
+    href: "/decision-desk",
     cta: "Describe your situation",
-    then: "Interrogate",
+    then: "Decision Desk",
   },
   {
     question: "Who are the serious vendors, and how do they compare?",

@@ -7,31 +7,44 @@ import newsFixture from "@/fixtures/aie-live/news.json";
 
 export const metadata = { title: "Alliances | AI Enterprise" };
 
-// Alliances: the AIE alliances map. PORT lane; every edge is a native
-// exposure-map record with its confidence tier and public sources.
+// The AI x GSI Alliance Explorer.
+//
+// The previous page mapped partnership and investment edges between AI
+// companies, which is a different question from the one a buyer arrives with.
+// Nobody stands a frontier model up alone: they buy through an integrator, and
+// which integrator carries which vendor decides who actually turns up on the
+// engagement. This maps that channel.
 export default async function AlliancesPage() {
   const data = getAlliancesData();
+  const named = data.links.filter((l) => l.tier === "direct_named").length;
+
   const insight = supplyMapInsight(
     {
-      edges: data.edges.length,
-      verified: data.summary.byConfidence.high,
-      seed: data.summary.byConfidence.seed,
-      nodes: data.summary.vendorsCovered,
+      edges: data.links.length,
+      verified: named,
+      seed: data.links.length - named,
+      nodes: data.partnerCount,
       label: "alliance",
     },
-    pickNews(newsFixture.news, { categories: ["Partnership", "Strategy signal"] }),
+    pickNews(newsFixture.news, {
+      categories: ["Partnership", "Strategy signal"],
+    }),
     null
   );
 
   return (
     <>
       <PageHeader
-        title="Alliances"
-        subtitle="Who backs whom and who partners with whom across the AI supply side: the partnership and investment edges of the AIE exposure map, each with its native evidence tier, value note and public sources."
+        title="AI × GSI Alliance Explorer"
+        subtitle="Which firms deliver which AI vendors. An enterprise rarely stands a frontier model up alone, so the integrator carrying a vendor decides who turns up on the engagement, how fast, and in which jurisdictions."
         lanes={["aie"]}
       />
-      <AnalystInsight insight={insight} context="alliance" />
-      <AlliancesView data={data} />
+      <AnalystInsight insight={insight} context="alliance channel" />
+      <AlliancesView
+        links={data.links}
+        ventures={data.ventures}
+        industries={data.industries}
+      />
     </>
   );
 }
