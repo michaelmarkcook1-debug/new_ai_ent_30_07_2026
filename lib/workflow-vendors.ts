@@ -27,6 +27,13 @@ export interface WorkflowVendor {
   marketCategoryName: string;
   score: number | null;
   marketPosition: string | null;
+  /**
+   * The vendor specialises in a different regulated domain from this workflow:
+   * a finance platform reached through a legal workflow, or the reverse. Ranked
+   * below the rest and labelled, rather than dropped, because "regulated" is
+   * still a real part of why it was reached.
+   */
+  offDomain?: string;
 }
 
 export interface WorkflowShortlist {
@@ -91,7 +98,27 @@ interface RawVendor {
   category: string;
   overallScore: number | null;
   marketPosition: string | null;
+  supportedUseCases?: string[];
 }
+
+/**
+ * "Regulated-industry AI" is one market category holding specialists in
+ * different regulated domains, so a legal workflow reached Rogo, a finance
+ * research platform, and ranked it third for contract review, above vendors
+ * that actually do contract review.
+ *
+ * The vendor records draw the distinction the category does not: Harvey
+ * declares "Legal AI", Rogo and Hebbia declare "Financial services AI". Those
+ * are the only two domain tags in the catalogue, so this map is complete rather
+ * than a sample, and it demotes on a declared mismatch only. A vendor with no
+ * domain tag is not demoted, because saying nothing is not the same as saying
+ * something else.
+ */
+const DOMAIN_TAG: Record<string, string> = {
+  Legal: "Legal AI",
+  "Financial Services": "Financial services AI",
+};
+const ALL_DOMAIN_TAGS = new Set(Object.values(DOMAIN_TAG));
 
 /** Every workflow category this mapping covers, for disclosure in the UI. */
 export const WORKFLOW_CATEGORY_MAP = CATEGORY_MAP;
@@ -105,7 +132,8 @@ export async function loadWorkflowVendorIndex(): Promise<{
     (res.data?.vendors ?? []).map((v) => [v.id, v])
   );
 
-  const resolve = (categoryIds: string[]): WorkflowVendor[] => {
+  const resolve = (categoryIds: string[], workflowCategory?: string): WorkflowVendor[] => {
+    const wanted = workflowCategory ? DOMAIN_TAG[workflowCategory] : undefined;
     const seen = new Set<string>();
     const out: WorkflowVendor[] = [];
     for (const cid of categoryIds) {
@@ -114,6 +142,13 @@ export async function loadWorkflowVendorIndex(): Promise<{
         const v = vendors.get(vid);
         if (!v) continue;
         seen.add(vid);
+        const tags = v.supportedUseCases ?? [];
+        // Only a vendor that names a different domain and not this one counts
+        // as off-domain. Silence is not a mismatch.
+        const otherDomain =
+          wanted && !tags.includes(wanted)
+            ? tags.find((t) => ALL_DOMAIN_TAGS.has(t) && t !== wanted)
+            : undefined;
         out.push({
           vendorId: vid,
           name: v.name,
@@ -122,11 +157,18 @@ export async function loadWorkflowVendorIndex(): Promise<{
           marketCategoryName: CATEGORY_NAME.get(cid) ?? cid,
           score: v.overallScore ?? null,
           marketPosition: v.marketPosition ?? null,
+          ...(otherDomain ? { offDomain: otherDomain } : {}),
         });
       }
     }
-    // Strongest first, unscored last rather than treated as zero.
-    return out.sort((a, b) => (b.score ?? -1) - (a.score ?? -1));
+    // Strongest first, unscored last rather than treated as zero, and a vendor
+    // built for a different regulated domain below all of them whatever it
+    // scores: the score measures the vendor, not its fit for this job.
+    return out.sort(
+      (a, b) =>
+        Number(Boolean(a.offDomain)) - Number(Boolean(b.offDomain)) ||
+        (b.score ?? -1) - (a.score ?? -1)
+    );
   };
 
   const build = resolve([BUILD_CATEGORY]);
@@ -137,7 +179,9 @@ export async function loadWorkflowVendorIndex(): Promise<{
     // avoid the same name appearing twice under two different arguments.
     const buildIds = new Set(build.map((v) => v.vendorId));
     byCategory[workflowCategory] = {
-      buy: resolve(categoryIds).filter((v) => !buildIds.has(v.vendorId)),
+      buy: resolve(categoryIds, workflowCategory).filter(
+        (v) => !buildIds.has(v.vendorId)
+      ),
       build,
       mappedCategories: categoryIds.map((id) => ({
         id,

@@ -605,3 +605,57 @@ Dates are absolute; the build day is 30 July 2026.
       sorted by value then pushed apart to a 13px minimum, which keeps the
       vertical order a reader matches against the lines. Verified: 11 labels,
       minimum gap 13px, zero collisions.
+
+26. **Audit of the rest of Model 4 Role (3 August 2026).** Michael asked for
+    everything on the tab except Workforce Model Fit to be tested: logic, live
+    status, and every figure sanity-checked, against the web where possible.
+    Three defects found and fixed, all of the same family: a number on screen
+    that a reader cannot reconcile with what is next to it.
+    - **Four of the eight industry archetypes silently showed the wrong slice.**
+      The live uptake API filters on a single industry name, and four archetypes
+      map to more than one segment, so those selections were sent unfiltered.
+      The chart came back as all industries while the slice label above it named
+      the cut, and the contributing-cell count quietly said 45 rather than 10.
+      For Legal & Professional Advisory this was not cosmetic: the real slice
+      puts Harvey second at 18 per cent, which is the entire reason to filter to
+      legal, and the unfiltered view buried it at 5 per cent in twelfth place.
+      Those archetypes now use the ported dataset, which holds every segment and
+      can express them exactly, with the badge and the note saying so. Same
+      resolution as the organisation-size filter fixed earlier.
+    - **The delivery matrix printed "3 platforms" above eight rows.** The
+      endpoint counts distinct platforms and the grid lists each once per service
+      line it appears in, so Accenture's three platforms across five lines render
+      as eight rows. Both figures are now stated: "3 distinct platforms across 5
+      service lines". The upstream number was right; the label made it look wrong.
+    - **A finance platform ranked third for contract review.** "Regulated-industry
+      AI" is one market category holding specialists in different regulated
+      domains, so the Legal shortlist reached Rogo, whose own record declares
+      Financial services AI and no legal capability, and ranked it above vendors
+      that do contract review. The vendor records draw the distinction the
+      category does not (Harvey declares Legal AI; Rogo and Hebbia declare
+      Financial services AI, and those are the only two domain tags in the
+      catalogue). Vendors declaring a different domain are now ranked last and
+      labelled, not dropped, and the rule is symmetric: Harvey falls to fifth on
+      a KYC/AML workflow. A vendor with no domain tag is not demoted, because
+      saying nothing is not the same as saying something else.
+    **What was verified and found correct.** Both live paths are genuinely live
+    (`x-eai-source: live`), not cached fixtures. The uptake seed is internally
+    sound: 585 rows, exactly 5 regions x 9 industries x 13 vendors, and all 45
+    cells sum to 1.000. The live API and the ported dataset agree to 0.000
+    percentage points on every vendor, and an independent reimplementation of the
+    aggregation in Python matches both, for the unfiltered slice, the APAC slice
+    (9 cells per vendor) and the Financial services slice (5 cells). The
+    large-enterprise reweighting reproduces exactly (Anthropic 45.1, OpenAI 27.1,
+    Google DeepMind 23.6). All eight industry maturity scores and bands recompute
+    exactly from the published formula. The workflow taxonomy is 75 workflows
+    with 75 unique ids in 15 areas, and the area chips sum to 75, matching the
+    counter. Glean's shortlist score of 59.2 matches the live vendor record.
+    Externally: Rogo confirmed as a finance platform, and Accenture AI Refinery
+    confirmed as a real proprietary platform, correctly marked proprietary.
+    **Two limitations found that are not ours to fix.** The confidence maps are
+    lossy in one direction: "Medium-Low" and "Low-Medium" both rank 2 and rank 2
+    prints as "Low-Medium", so a slice of entirely Medium-Low cells displays as
+    Low-Medium. And the live integration endpoint lists only Google Cloud as
+    Accenture's partner platform, omitting the NVIDIA Business Group, which is
+    Accenture's most prominent AI partnership. The app renders what the endpoint
+    returns, with provenance attached; the gap is upstream.

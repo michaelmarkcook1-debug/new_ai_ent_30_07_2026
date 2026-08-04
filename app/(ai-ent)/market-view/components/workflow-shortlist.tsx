@@ -46,6 +46,17 @@ function VendorList({
           {v.marketPosition ? (
             <span className="text-xs text-muted">{v.marketPosition}</span>
           ) : null}
+          {/* Reached through a shared "regulated industry" category but built
+              for a different regulated domain. Ranked last and said so, rather
+              than quietly sitting mid-list on the strength of its score. */}
+          {v.offDomain ? (
+            <span
+              className="rounded-full bg-warn-bg px-2 py-0.5 text-xs text-warn"
+              title={`This vendor declares ${v.offDomain}, not this workflow's domain. It is reached through the shared regulated-industry category and ranked below vendors built for this job.`}
+            >
+              {v.offDomain}, not this domain
+            </span>
+          ) : null}
           <span className="ml-auto flex items-center gap-1.5">
             <ScorePill score={v.score} />
             <ShortlistButton vendorId={v.vendorId} name={v.name} size="xs" />

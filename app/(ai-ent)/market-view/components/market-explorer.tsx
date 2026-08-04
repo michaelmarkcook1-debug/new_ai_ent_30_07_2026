@@ -138,7 +138,19 @@ export function MarketExplorer({
   // spreadsheet the upstream model was built from, so selecting a size hands
   // the panel to that dataset and the badge says so.
   const sizeForcesPorted = size !== "";
-  const usingLive = live !== null && !sizeForcesPorted;
+  // Four of the eight archetypes span more than one upstream segment, and the
+  // live API filters on a single industry name, so those selections were sent
+  // unfiltered and the chart came back as all industries while the slice label
+  // above it named the cut. For Legal & Professional Advisory that was not a
+  // cosmetic difference: the real slice puts Harvey second at 18 per cent,
+  // which is the whole point of filtering to legal, and the unfiltered view
+  // buried it at 5 per cent in twelfth place.
+  //
+  // The ported dataset holds every segment, so it can express the archetype
+  // exactly. Same resolution as organisation size: hand the panel to the data
+  // that can answer the question, and say which one answered.
+  const industryForcesPorted = archetypeId !== "" && !liveIndustry;
+  const usingLive = live !== null && !sizeForcesPorted && !industryForcesPorted;
   const rows = usingLive ? live : portedRows;
   const uptakeLane = usingLive
     ? liveSource === "mock"
@@ -267,12 +279,12 @@ export function MarketExplorer({
           <p className="mt-1 text-xs text-muted">{sliceLabel}</p>
           <p className="measure mt-0.5 text-xs text-muted">
             {usingLive
-              ? archetypeId && !liveIndustry
-                ? "Pulled live from the deployed AIE app. This archetype spans several of the engine's industry segments, so the live slice is unfiltered by industry and the filter applies to the panels below."
-                : "Pulled live from the deployed AIE app, filtered upstream on industry and region."
-              : sizeForcesPorted
-                ? "Organisation size is not a facet of the live API, so this cut is served from the ported dataset, which carries the size split from the same source spreadsheet."
-                : "The live uptake pull did not answer, so the ported region-by-industry dataset is shown."}
+              ? "Pulled live from the deployed AIE app, filtered upstream on industry and region."
+              : industryForcesPorted
+                ? "This archetype spans more than one of the engine's industry segments, and the live API filters on a single one, so the cut is served from the ported dataset, which holds every segment and can express it exactly."
+                : sizeForcesPorted
+                  ? "Organisation size is not a facet of the live API, so this cut is served from the ported dataset, which carries the size split from the same source spreadsheet."
+                  : "The live uptake pull did not answer, so the ported region-by-industry dataset is shown."}
           </p>
 
           {/* The source's own words, not a restatement. A modelled estimate

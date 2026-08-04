@@ -101,10 +101,16 @@ export function DeliveryMatrix() {
                 <h3 className="text-base font-bold">
                   {data.displayName || data.providerName}
                 </h3>
+                {/* The endpoint counts DISTINCT platforms, and the grid below
+                    lists each one once per service line it appears in: three
+                    platforms across five lines renders as eight rows. Printing
+                    a bare "3 platforms" above eight of them reads as an error
+                    in one number or the other, so both are stated. */}
                 <span className="font-mono text-xs text-muted">
-                  {data.platformCounts.total} platforms:{" "}
+                  {data.platformCounts.total} distinct platforms (
                   {data.platformCounts.proprietary} proprietary,{" "}
-                  {data.platformCounts.partner} partner
+                  {data.platformCounts.partner} partner) across{" "}
+                  {data.categories.length} service lines
                 </span>
               </div>
               <p className="measure mt-1 text-sm leading-relaxed text-base-content/85">
