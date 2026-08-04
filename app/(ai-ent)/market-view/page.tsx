@@ -2,7 +2,9 @@ import Link from "next/link";
 import { PageHeader } from "@/lib/ui/page";
 import { ModelFit } from "./components/model-fit";
 import { WorkforceChart } from "./components/workforce-chart";
+import { PricePerformanceChart } from "./components/price-performance-chart";
 import { workforcePayload } from "@/lib/model-fit/workforce-payload";
+import { priceModels } from "@/lib/model-fit/price-payload";
 
 export const metadata = { title: "Model for Role | AI Enterprise" };
 
@@ -35,28 +37,22 @@ export default function MarketViewPage() {
           is 697KB and the chart needs five figures per industry. */}
       <WorkforceChart payload={workforcePayload()} />
 
-      {/* Price / Performance asks this same question from the other side: this
-          page starts from a role and returns a model, that one starts from the
-          models and shows what capability costs across all of them. It left
-          the nav on 4 August 2026 and lives here now. */}
-      <section className="mt-6 rounded-lg border border-base-300 bg-base-200/40 p-4">
-        <h2 className="text-sm font-semibold">
-          Coming at it from the other side
-        </h2>
-        <p className="measure mt-1 text-sm text-base-content/75">
-          This page starts from a role and returns one model. Price /
-          Performance starts from the models and shows what capability costs
-          across all of them, with the efficiency frontier picked out: the
-          models no cheaper option beats.
-        </p>
+      {/* The same question from the other side: this page starts from a role
+          and returns one model, this chart starts from the models and shows
+          what capability costs across all of them. Folded in from
+          /price-performance on 4 August 2026, which keeps its route and its
+          fuller treatment. */}
+      <PricePerformanceChart models={priceModels()} />
+
+      <p className="mt-4 text-sm">
         <Link
           href="/price-performance"
-          className="mt-2.5 inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline"
+          className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline"
         >
-          See price against capability
+          The full price-performance analysis
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 6 6 6-6 6" /></svg>
         </Link>
-      </section>
+      </p>
     </>
   );
 }
