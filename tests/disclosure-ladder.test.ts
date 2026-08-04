@@ -142,28 +142,47 @@ describe("the private ladder", () => {
     expect(priv("mistral").stated!.isFloor).toBe(true);
   });
 
-  it("derives Anthropic and Cohere from their disclosed rounds", () => {
-    for (const id of ["anthropic", "cohere"]) {
+  it("never shows a derived range where a reported figure exists", () => {
+    // Anthropic, Cohere, Databricks and OpenAI all carry reported revenue
+    // now, so every one of them must sit on STATED — a valuation-implied
+    // range shown over a real figure would be an invention wearing a badge.
+    for (const id of ["anthropic", "cohere", "databricks", "openai"]) {
       const row = priv(id);
-      expect(row.rung).toBe("derived");
-      expect(row.derived!.lowUsd).toBeGreaterThan(0);
-      expect(row.derived!.highUsd).toBeGreaterThan(row.derived!.lowUsd);
-      expect(row.derived!.basis).toContain("multiple band");
+      expect(row.rung).toBe("stated");
+      expect(row.stated!.valueUsd).toBeGreaterThan(0);
+      expect(row.derived).toBeUndefined();
     }
   });
 
-  it("refuses to score OpenAI off a compute commitment", () => {
+  it("serves the latest figure on the verified timeline", () => {
+    // Anthropic's dated series runs $9B (Dec 2025) to $30B (Apr) to $47B
+    // (Jun). The dates were verified against primary reporting — the feed's
+    // July re-report of the April figure would otherwise have put $30B on
+    // top. The latest verified figure is the June floor.
+    const a = priv("anthropic");
+    expect(a.stated!.valueUsd).toBe(47_000 * 1_000_000);
+    expect(a.stated!.isFloor).toBe(true);
+  });
+
+  it("scores OpenAI off its reported range floor, never the compute deals", () => {
+    // The $110B and $300B infrastructure commitments are the biggest numbers
+    // attached to OpenAI, and neither may reach the ladder. What reaches it
+    // is the floor of the reported $25-33B annualized range.
     const o = priv("openai");
-    expect(o.rung).toBe("not_estimable");
-    expect(o.notEstimable).toMatch(/not a valuation/i);
+    expect(o.rung).toBe("stated");
+    expect(o.stated!.valueUsd).toBe(25_000 * 1_000_000);
+    // "Approximately $25B", per two aggregators — not a floor.
+    expect(o.stated!.isFloor).toBe(false);
   });
 
   it("leaves the rest not estimable rather than guessing", () => {
-    for (const id of ["xai", "databricks", "together"]) {
+    for (const id of ["xai", "together"]) {
       expect(priv(id).rung).toBe("not_estimable");
       expect(priv(id).derived).toBeUndefined();
       expect(priv(id).stated).toBeUndefined();
     }
+    // xAI's absence names the contracted compute stream it refuses to count.
+    expect(priv("xai").notEstimable).toMatch(/contracted/i);
   });
 
   it("names every private vendor rather than showing an id", () => {

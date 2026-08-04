@@ -12,11 +12,12 @@
 // exposed as a control rather than buried as a constant, and the output is
 // always a range across a multiple band, never a point.
 //
-// Why a band and not a best guess. Across the one AI-lab pair where both
-// numbers are on the record (Mistral, below) the implied multiple is about 54x
-// run-rate revenue. Public enterprise software trades nearer 5x to 15x. Picking
-// either as "the" multiple would produce a number wrong by roughly an order of
-// magnitude in one direction or the other, so the product shows the whole
+// Why a band and not a best guess. Across the pairs where both numbers are on
+// the record, fresh frontier-lab multiples run from about 20x to 54x run-rate
+// revenue — and the 54x divides a revenue floor, so it is itself a ceiling.
+// Public enterprise software trades nearer 5x to 15x. Picking any point in
+// that spread as "the" multiple would produce a number wrong by a large
+// factor in one direction or the other, so the product shows the whole
 // interval and says plainly that the width is the finding: outside these
 // companies, nobody knows, and anyone quoting a single figure is guessing.
 //
@@ -40,6 +41,8 @@ export interface Citation {
   asOf: string;
   /** What the source actually says, so a reader can check the reading. */
   quote: string;
+  /** A URL, or "aie-news-feed" when the feed itself is the citation. */
+  sourceUrl?: string;
 }
 
 export interface ValuationRecord {
@@ -59,6 +62,8 @@ export interface RevenueRecord {
   vendorClass: VendorClass;
   /** USD millions. A floor when the source says "above" or "more than". */
   revenueUsdM: number;
+  /** Set when the source stated another currency, so the rate is visible. */
+  statedCurrency?: { code: string; amount: number; usdPerUnit: number };
   isFloor: boolean;
   /**
    * What kind of figure the source stated. A projection is carried in the
@@ -92,6 +97,37 @@ export const REVENUES: RevenueRecord[] = figures.revenues as RevenueRecord[];
 export const NOT_VALUATIONS: { vendorId: string; what: string; why: string }[] =
   figures.notValuations;
 
+// ---------------------------------------------------------- the cross-check
+
+export interface CrossCheck {
+  vendorId: string;
+  sharePct: number;
+  marketUsdM: number;
+  marketMeasure: string;
+  citation: Citation;
+}
+
+export const CROSS_CHECKS: CrossCheck[] = (figures as { crossChecks?: CrossCheck[] })
+  .crossChecks ?? [];
+
+/**
+ * What an independently measured market implies for ONE SLICE of a vendor's
+ * revenue: share x measured market. A separate lane, never blended into the
+ * reported figure, because the two measure different things — and when they
+ * differ by an order of magnitude, that gap is the finding. Menlo's measure
+ * covers enterprise model-API spend; a vendor whose reported total towers
+ * over its implied API slice earns most of its revenue somewhere that
+ * measure cannot see (consumer subscriptions, coding tools, compute resale),
+ * and the display's job is to say so rather than reconcile it away.
+ */
+export function marketSlice(
+  vendorId: string
+): { sliceUsdM: number; check: CrossCheck } | null {
+  const check = CROSS_CHECKS.find((c) => c.vendorId === vendorId);
+  if (!check) return null;
+  return { sliceUsdM: (check.marketUsdM * check.sharePct) / 100, check };
+}
+
 // ------------------------------------------------------------- the estimate
 
 /** The multiple band, in turns of annual run-rate revenue. */
@@ -101,15 +137,26 @@ export interface MultipleBand {
 }
 
 /**
+ * A pair whose two citations are more than a quarter apart is measuring two
+ * different companies: these vendors' revenues move fast enough that a
+ * February valuation over a June revenue understates the multiple by however
+ * much the company grew in between. Stale pairs are kept and shown — dropping
+ * them silently would hide evidence — but they are flagged, and they do not
+ * anchor the default band.
+ */
+export const STALE_PAIR_DAYS = 90;
+
+/**
  * The default band.
  *
- * The low end is the one multiple this product can actually observe: Mistral's
- * reported valuation over its reported run-rate revenue. The high end is twice
- * that, which is not a measurement and is labelled as such; it is here so the
- * interval spans the range these companies have plausibly been priced at
- * rather than implying the single observable pair is the market.
+ * Anchored by the fresh frontier-lab pairs on the record (each valuation over
+ * the nearest-in-time reported revenue, within a quarter): roughly 20x to 54x
+ * at the time of writing, with the top pair derived from a revenue floor and
+ * therefore itself a ceiling. The band extends beyond the observed span on
+ * both sides because a handful of pairs is not the market; the width is the
+ * finding, and the tests assert every fresh frontier pair sits inside it.
  */
-export const DEFAULT_BAND: MultipleBand = { low: 30, high: 90 };
+export const DEFAULT_BAND: MultipleBand = { low: 15, high: 90 };
 
 export interface ObservedPair {
   vendorId: string;
@@ -119,6 +166,11 @@ export interface ObservedPair {
   isFloorDerived: boolean;
   /** Days between the valuation and revenue citations. A wide gap weakens the pair. */
   daysApart: number;
+  /** True when the citations are more than STALE_PAIR_DAYS apart. */
+  stale: boolean;
+  /** The valuation the pair divides, so the display can name it. */
+  valuationUsdM: number;
+  revenueUsdM: number;
 }
 
 /**
@@ -148,34 +200,39 @@ export function observedMultiples(cls?: VendorClass): ObservedPair[] {
         ? a
         : b
     );
+    const daysApart = Math.round(
+      Math.abs(Date.parse(nearest.citation.asOf) - vDate) / 86_400_000
+    );
     out.push({
       vendorId: v.vendorId,
       vendorClass: v.vendorClass,
       // Rounded to one decimal; the inputs do not support more.
       multiple: Math.round((v.valuationUsdM / nearest.revenueUsdM) * 10) / 10,
       isFloorDerived: nearest.isFloor,
-      daysApart: Math.round(
-        Math.abs(Date.parse(nearest.citation.asOf) - vDate) / 86_400_000
-      ),
+      daysApart,
+      stale: daysApart > STALE_PAIR_DAYS,
+      valuationUsdM: v.valuationUsdM,
+      revenueUsdM: nearest.revenueUsdM,
     });
   }
   return out.sort((a, b) => a.multiple - b.multiple);
 }
 
-/** The first frontier-lab pair, kept for callers that want a single anchor. */
-export function observedMultiple(): {
-  vendorId: string;
-  multiple: number;
-  isFloorDerived: boolean;
-} | null {
-  const pairs = observedMultiples("frontier_lab");
-  if (pairs.length === 0) return null;
-  const p = pairs[0];
-  return {
-    vendorId: p.vendorId,
-    multiple: p.multiple,
-    isFloorDerived: p.isFloorDerived,
-  };
+/**
+ * The implied-range arithmetic, extracted so it stays testable while no live
+ * vendor exercises it: every vendor with a valuation currently also has a
+ * reported revenue, so the disclosed lane wins everywhere. The lane stays,
+ * because the next vendor to raise before reporting revenue will need it.
+ *
+ * The band inverts on purpose: a higher multiple implies less revenue for the
+ * same valuation, so the top of the multiple band produces the bottom of the
+ * revenue range.
+ */
+export function impliedRange(
+  valuationUsdM: number,
+  band: MultipleBand
+): { lowUsdM: number; highUsdM: number } {
+  return { lowUsdM: valuationUsdM / band.high, highUsdM: valuationUsdM / band.low };
 }
 
 export type EstimateBasis =
@@ -240,18 +297,20 @@ export function estimateRevenue(
     return { ...base, basis: "disclosed", disclosed };
   }
 
-  const valuation = VALUATIONS.find((v) => v.vendorId === vendorId);
+  // Latest valuation wins, for the same reason the latest revenue does:
+  // these companies re-price within months, and an old round presented as
+  // current would be wrong by design.
+  const valuation = VALUATIONS.filter((v) => v.vendorId === vendorId).sort(
+    (a, b) => Date.parse(b.citation.asOf) - Date.parse(a.citation.asOf)
+  )[0];
   if (valuation) {
-    // A higher multiple implies LESS revenue for the same valuation, so the
-    // band inverts: the top of the multiple band is the bottom of the revenue
-    // range. Getting this backwards would put the range on the wrong side of
-    // the truth, which is why it is asserted in the tests.
+    const range = impliedRange(valuation.valuationUsdM, band);
     return {
       ...base,
       basis: "implied_from_valuation",
       valuation,
-      lowUsdM: valuation.valuationUsdM / band.high,
-      highUsdM: valuation.valuationUsdM / band.low,
+      lowUsdM: range.lowUsdM,
+      highUsdM: range.highUsdM,
     };
   }
 

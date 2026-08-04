@@ -270,9 +270,11 @@ function ingestMarket() {
  */
 function financeMetric(rec, kind) {
   if (kind === "valuation") {
-    return rec.state === "in_talks"
-      ? "valuation_in_talks_usd_m"
-      : "valuation_post_money_usd_m";
+    return {
+      closed: "valuation_post_money_usd_m",
+      reported: "valuation_reported_usd_m",
+      in_talks: "valuation_in_talks_usd_m",
+    }[rec.state] ?? null;
   }
   return {
     run_rate: "revenue_run_rate_usd_m",

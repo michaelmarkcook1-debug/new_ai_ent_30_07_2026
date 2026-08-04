@@ -3,7 +3,7 @@
   "coverage": {
     "winning": 43,
     "trust": 28,
-    "durability": 18
+    "durability": 20
   },
   "total": 43,
   "byInputCount": [
@@ -17,11 +17,11 @@
     },
     {
       "inputs": 2,
-      "vendors": 18
+      "vendors": 16
     },
     {
       "inputs": 3,
-      "vendors": 14
+      "vendors": 16
     }
   ],
   "thresholds": {
@@ -219,18 +219,6 @@
       ]
     },
     {
-      "vendorId": "databricks",
-      "name": "Databricks",
-      "winning": 54.756824407250576,
-      "trust": 79,
-      "durability": null,
-      "composite": 65.1,
-      "confidence": "2 of 3",
-      "missing": [
-        "durability"
-      ]
-    },
-    {
       "vendorId": "deepseek",
       "name": "DeepSeek",
       "winning": 62.75518589253884,
@@ -327,18 +315,6 @@
       ]
     },
     {
-      "vendorId": "openai",
-      "name": "OpenAI",
-      "winning": 69.58572883244159,
-      "trust": 80.33333333333333,
-      "durability": null,
-      "composite": 74.2,
-      "confidence": "2 of 3",
-      "missing": [
-        "durability"
-      ]
-    },
-    {
       "vendorId": "rogo",
       "name": "Rogo",
       "winning": 58.61688286808976,
@@ -413,8 +389,8 @@
       "name": "Anthropic",
       "winning": 60.27306481009414,
       "trust": 80,
-      "durability": 55,
-      "composite": 64.6,
+      "durability": 60,
+      "composite": 66.1,
       "confidence": "3 of 3",
       "missing": []
     },
@@ -433,8 +409,18 @@
       "name": "Cohere (incl. Aleph Alpha)",
       "winning": 59.71393791376819,
       "trust": 77,
-      "durability": 55,
-      "composite": 63.5,
+      "durability": 60,
+      "composite": 65,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "databricks",
+      "name": "Databricks",
+      "winning": 54.756824407250576,
+      "trust": 79,
+      "durability": 60,
+      "composite": 63.6,
       "confidence": "3 of 3",
       "missing": []
     },
@@ -485,6 +471,16 @@
       "trust": 80.66666666666667,
       "durability": 40,
       "composite": 58.9,
+      "confidence": "3 of 3",
+      "missing": []
+    },
+    {
+      "vendorId": "openai",
+      "name": "OpenAI",
+      "winning": 69.58572883244159,
+      "trust": 80.33333333333333,
+      "durability": 60,
+      "composite": 69.9,
       "confidence": "3 of 3",
       "missing": []
     },

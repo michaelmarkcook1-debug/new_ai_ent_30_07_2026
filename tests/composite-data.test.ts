@@ -11,7 +11,10 @@ describe("coverage of the three inputs", () => {
     expect(SET.total).toBe(43);
     expect(SET.coverage.winning).toBe(43);
     expect(SET.coverage.trust).toBe(28);
-    expect(SET.coverage.durability).toBe(18);
+    // 20, up from 18 on 5 August 2026: the verified evidence record gave
+    // OpenAI a closed valuation and revenue on the record, and Databricks a
+    // closed December round, so both now score instead of reading Unknown.
+    expect(SET.coverage.durability).toBe(20);
   });
 
   it("leaves no vendor with nothing at all", () => {
@@ -28,9 +31,11 @@ describe("coverage of the three inputs", () => {
     }
   });
 
-  it("has 14 vendors on all three inputs", () => {
+  it("has 16 vendors on all three inputs", () => {
     const full = SET.vendors.filter((v) => v.result.inputsPresent === 3);
-    expect(full.length).toBe(14);
+    // 16, up from 14, for the same reason durability coverage rose: more
+    // disclosure on the record, not a change in what counts as evidence.
+    expect(full.length).toBe(16);
   });
 });
 
@@ -66,8 +71,9 @@ describe("durability is read off disclosure, not invented", () => {
     const anthropic = vendorScorecard("anthropic");
     const mistral = vendorScorecard("mistral");
     expect(msft!.inputs.durability).toBe(85);
-    // Closed round, and Anthropic publishes no revenue figure.
-    expect(anthropic!.inputs.durability).toBe(55);
+    // Closed round AND reported revenue on the record now, so the disclosure
+    // nudge applies: 60, not the 55 of the round-only era.
+    expect(anthropic!.inputs.durability).toBe(60);
     // Reported but not closed, so it sits below a closed round.
     expect(mistral!.inputs.durability).toBe(40);
   });
@@ -90,12 +96,18 @@ describe("durability is read off disclosure, not invented", () => {
     expect(nos).toEqual([]);
   });
 
-  it("gives OpenAI no durability score, because it discloses none", () => {
-    // Its $110B figure is a compute commitment, recorded in NOT_VALUATIONS
-    // precisely so it is never mistaken for a valuation.
-    const openai = vendorScorecard("openai");
-    expect(openai!.inputs.durability).toBeNull();
-    expect(openai!.verdicts.durability).toBe("unknown");
+  it("scores OpenAI off its now-disclosed record, and xAI still reads Unknown", () => {
+    // Until August 2026 OpenAI disclosed nothing and scored null. The
+    // verified record now carries a closed valuation (aggregator consensus,
+    // caveated in the record) and reported revenue, so the disclosure ladder
+    // scores it like any other funded, revenue-reporting private company.
+    const o = vendorScorecard("openai");
+    expect(o!.inputs.durability).toBe(60);
+    // xAI remains the vendor with nothing on the record: its only
+    // revenue-scale figure is a contracted compute stream, which the record
+    // refuses to count. Unknown, not No.
+    const x = vendorScorecard("xai");
+    expect(x?.inputs.durability ?? null).toBeNull();
   });
 });
 

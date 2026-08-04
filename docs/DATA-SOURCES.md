@@ -105,6 +105,19 @@ the refresh.
 | `market` | 72 | 0 | AIE category share, one refresh |
 | `usage` | accumulating | — | Written by the app, never ingested |
 
+The vendor series also carries **private-company reported figures** (source
+`press_reported_figures`, evidence class D): dated revenue and valuation
+observations mined from the AIE news feed and named-publisher reporting,
+verified against primary sources before entry — one metric per basis
+(`revenue_run_rate_usd_m`, `revenue_arr_usd_m`, `revenue_annual_usd_m`,
+`revenue_projection_usd_m`, `valuation_post_money_usd_m`,
+`valuation_reported_usd_m`, `valuation_in_talks_usd_m`) so a run-rate is
+never diffed against a GAAP annual figure, a projection, or a rumour. The
+record itself lives in `lib/finance/data/private-figures.json` (one file, two
+readers: the financial snapshot and the catalogue ingestion). Lanes,
+refusals and the verification worked example:
+[REVENUE_METHODOLOGY.md](REVENUE_METHODOLOGY.md).
+
 **Key design points a developer needs to know**
 
 - `observed_at` (when the fact was true) ≠ `ingested_at` (when we recorded it).
@@ -353,4 +366,9 @@ npm run ingest:catalogue -- --sql # emit SQL instead, no key needed
 - [ ] A second model snapshot, so the model series becomes comparable
 - [ ] UK/EU regulatory source to sit beside Federal Register (ONS, Eurostat,
       EU AI Act) — Eurostat is JSON-stat and keyless; ONS BICS is xlsx-only
-- [ ] Decide whether Menlo / Ramp figures stay hand-curated or get a source row
+- [x] ~~Decide whether Menlo / Ramp figures stay hand-curated or get a source row~~
+      Menlo's enterprise-LLM-spend measure now feeds the financial snapshot's
+      cross-check lane with its scope declared; both stay hand-curated with
+      citations on /ai-adoption.
+- [ ] A second refresh of the private-figures record, so the revenue series
+      keeps accruing movement

@@ -1158,3 +1158,58 @@ Dates are absolute; the build day is 30 July 2026.
     selected.
     The other `lane="sample"` badges on that tab's sub-pages are untouched and
     correct: those panels really are the Shell exemplar.
+
+34. **Estimating undisclosed vendor revenues (5 August 2026).** Michael asked
+    for a methodology to estimate non-disclosed vendor revenues, fed into the
+    financial snapshot. This is the single easiest place for the product to
+    break its zero-fabrication rule while appearing not to, because arithmetic
+    launders assumptions into numbers — so the methodology is built to make
+    every assumption visible at the point of use.
+    - **Four lanes in evidence order, never blended: REPORTED (a named
+      publisher put the figure on the record, latest non-projection wins,
+      floors stay floors), IMPLIED (valuation ÷ multiple band, always a range,
+      the width is the finding), CROSS-CHECK (share of an independently
+      measured market, covering only the slice that measure can see), and NO
+      BASIS (absence reported as absence).** Refused outright: compute
+      commitments as valuations, projections as current figures, point
+      estimates, cross-class multiple calibration, headcount x
+      revenue-per-employee, undated figures. docs/REVENUE_METHODOLOGY.md holds
+      the full statement; the rules are enforced in code and tests, not
+      aspirations.
+    - **The evidence record went from 4 rows to 24.** Mined from the AIE news
+      feed (2,865 items), then each load-bearing figure reality-checked
+      against independent reporting before entry. Verification changed real
+      things: Anthropic's "$30B vs $47B contradiction" dissolved into a dated
+      trajectory ($9B Dec 2025 → $30B Apr → $47B Jun) once the figures were
+      dated to when they were true rather than when the feed re-reported them;
+      a Databricks "$4B Series K" feed item was discarded as garbled against
+      the company's own PRs; the $188B Databricks round was downgraded from
+      closed to a signed term sheet; a "Cohere Technologies" DoD contract was
+      excluded as a different company entirely; and xAI's "$40B revenue"
+      headline was refused as a contracted compute stream sold to one
+      customer. Every exclusion is recorded in the file with its reason so it
+      cannot be transcribed back in.
+    - **Calibration is classed and staleness-aware.** Eight observed
+      valuation/revenue pairs now anchor the band (frontier labs 20.5x-54x
+      fresh; Databricks 25.4x-27.9x in its own data_platform class). A pair
+      whose citations are more than a quarter apart is flagged stale rather
+      than dropped or trusted — Anthropic's February valuation over June
+      revenue would imply 8.1x for a company that never existed.
+    - **The cross-check gap is displayed as the finding.** A 40% share of
+      Menlo's measured $8.4B enterprise LLM spend implies ~$3.4B for
+      Anthropic's API slice, against a reported $47B total: the panel says
+      most reported revenue sits outside what that measure can see, rather
+      than reconciling the two or letting one look wrong.
+    - **The catalogue gained 21 dated finance observations** (metric per
+      basis, so run-rate never diffs against GAAP annual, projections and
+      in-talks valuations get their own metrics), giving the vendor series
+      real revenue movement: Anthropic 30000 → 47000, Databricks 4800 → 6900.
+    - **The research workflow died to infrastructure; the method survived.**
+      45 of 45 subagent results returned null across repeated retries during
+      an evening of API instability, so the mining, verification and critique
+      were done inline instead — same checks, same refusals, and the worked
+      example in the methodology doc records what each check caught.
+    - Downstream, the composite scorecard's durability coverage rose 18 → 20
+      and Anthropic 55 → 60 purely because the module reads disclosure off
+      the record and the record now discloses more — its own comment
+      anticipated exactly this movement.

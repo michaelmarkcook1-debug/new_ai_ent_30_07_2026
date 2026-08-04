@@ -1,5 +1,5 @@
 {
-  "comment": "The evidence record for private AI company figures. One file, two readers: lib/finance/private-revenue.ts types and serves it to the financial snapshot; scripts/ingest-catalogue.mjs mines it for dated catalogue observations. Nothing enters without publisher, date and verbatim quote — tests/private-revenue.test.ts enforces that. vendorClass separates calibration regimes: a data platform's valuation multiple must never calibrate a frontier lab's band.",
+  "comment": "The evidence record for private AI company figures. One file, two readers: lib/finance/private-revenue.ts types and serves it to the financial snapshot; scripts/ingest-catalogue.mjs mines it for dated catalogue observations. Every row was mined from the AIE news feed or named-publisher reporting and then reality-checked against independent web sources before entry — publisher, date and verbatim quote required, tests enforce it, nothing carried from memory. asOf is when the figure was TRUE, not when it was republished. vendorClass separates calibration regimes: a data platform's multiple must never calibrate a frontier lab's band. Rows that failed verification did not enter: a feed item crediting Databricks with a '$4B run-rate Series K' in June 2026 contradicted both the company's own December PR ($4.8B, Series L) and CNBC's June figure ($6.9B), and was discarded as garbled.",
   "valuations": [
     {
       "vendorId": "anthropic",
@@ -8,10 +8,39 @@
       "valuationUsdM": 380000,
       "state": "closed",
       "citation": {
-        "publisher": "TechCrunch",
+        "publisher": "CNBC",
         "asOf": "2026-02-12",
-        "quote": "On February 12, 2026 Anthropic raised a $30B Series G at a $380B post-money valuation, co-led by GIC and Coatue."
+        "quote": "Anthropic raised $30 billion in a Series G round at a $380 billion post-money valuation, led by GIC and Coatue with D. E. Shaw Ventures, Dragoneer, and Founders Fund, as run-rate revenue surged.",
+        "sourceUrl": "aie-news-feed"
       }
+    },
+    {
+      "vendorId": "anthropic",
+      "vendorName": "Anthropic",
+      "vendorClass": "frontier_lab",
+      "valuationUsdM": 965000,
+      "state": "closed",
+      "citation": {
+        "publisher": "Anthropic newsroom",
+        "asOf": "2026-06-15",
+        "quote": "Anthropic raises $65B in Series H funding at $965B post-money valuation.",
+        "sourceUrl": "https://www.anthropic.com/news/series-h"
+      },
+      "caveats": "Led by Altimeter, Dragoneer, Greenoaks and Sequoia per the company's announcement."
+    },
+    {
+      "vendorId": "openai",
+      "vendorName": "OpenAI",
+      "vendorClass": "frontier_lab",
+      "valuationUsdM": 852000,
+      "state": "closed",
+      "citation": {
+        "publisher": "Sacra / GetLatka / ValueAddVC (consensus)",
+        "asOf": "2026-07-14",
+        "quote": "OpenAI Valuation 2026: $852B, a 34x Revenue Multiple — after the $122B raise.",
+        "sourceUrl": "https://valueaddvc.com/blog/openai-valuation-2026-852-billion-after-the-122b-raise"
+      },
+      "caveats": "No primary company statement is in the record; three aggregators corroborate the figure, and the AIE feed independently carried a proposed 5% federal stake valued at $42.6B, which implies the same $852B. OpenAI filed confidentially on 2026-06-08 for an IPO reportedly targeting above $1 trillion."
     },
     {
       "vendorId": "cohere",
@@ -22,7 +51,8 @@
       "citation": {
         "publisher": "Constellation Research",
         "asOf": "2026-08-01",
-        "quote": "Cohere raised $500 million in venture funding, achieving a $6.8 billion valuation, led by Radical Ventures and Inovia Capital."
+        "quote": "Cohere raised $500 million in venture funding, achieving a $6.8 billion valuation, led by Radical Ventures and Inovia Capital.",
+        "sourceUrl": "aie-news-feed"
       }
     },
     {
@@ -30,16 +60,193 @@
       "vendorName": "Mistral",
       "vendorClass": "frontier_lab",
       "valuationUsdM": 21600,
-      "statedCurrency": { "code": "EUR", "amount": 20000, "usdPerUnit": 1.08 },
+      "statedCurrency": {
+        "code": "EUR",
+        "amount": 20000,
+        "usdPerUnit": 1.08
+      },
       "state": "in_talks",
       "citation": {
         "publisher": "Bloomberg",
         "asOf": "2026-08-01",
-        "quote": "Mistral is reportedly in talks to raise ~EUR3B at a ~EUR20B valuation, following a $830M debt facility (Mar 2026) and its ASML-led EUR1.7B Series C."
+        "quote": "Mistral is reportedly in talks to raise ~EUR3B at a ~EUR20B valuation, following a $830M debt facility (Mar 2026) and its ASML-led EUR1.7B Series C.",
+        "sourceUrl": "aie-news-feed"
       }
+    },
+    {
+      "vendorId": "databricks",
+      "vendorName": "Databricks",
+      "vendorClass": "data_platform",
+      "valuationUsdM": 134000,
+      "state": "closed",
+      "citation": {
+        "publisher": "Databricks newsroom",
+        "asOf": "2025-12-15",
+        "quote": "Databricks Grows >55% YoY, Surpasses $4.8B Revenue Run-Rate, and is Raising >$4B Series L at $134B Valuation — led by Insight Partners, Fidelity Management & Research Company, and J.P. Morgan Asset Management.",
+        "sourceUrl": "https://www.databricks.com/company/newsroom/press-releases/databricks-surpasses-4-8b-revenue-run-rate-growing-55-year-over-year"
+      },
+      "caveats": "The PR announced the round while raising; subsequent reporting carries the Series L as closed at $134B in December 2025."
+    },
+    {
+      "vendorId": "databricks",
+      "vendorName": "Databricks",
+      "vendorClass": "data_platform",
+      "valuationUsdM": 175000,
+      "state": "in_talks",
+      "citation": {
+        "publisher": "The Information (via Tech Insider)",
+        "asOf": "2026-06-09",
+        "quote": "Databricks is in talks to raise a new funding round at a valuation between $165 billion and $175 billion, as first reported by The Information on June 9, 2026.",
+        "sourceUrl": "aie-news-feed"
+      },
+      "caveats": "Reported as a $165-175B range while in talks; the top of the range is carried. Superseded within weeks by the $188B term sheet."
+    },
+    {
+      "vendorId": "databricks",
+      "vendorName": "Databricks",
+      "vendorClass": "data_platform",
+      "valuationUsdM": 188000,
+      "state": "reported",
+      "citation": {
+        "publisher": "Databricks newsroom / TechCrunch",
+        "asOf": "2026-07-17",
+        "quote": "Databricks is Raising a Strategic Round of Funding at a $188 Billion Valuation — the company has signed a term sheet led by existing investor Coatue and expects the round to close later in summer 2026.",
+        "sourceUrl": "https://www.databricks.com/company/newsroom/press-releases/databricks-raising-strategic-round-funding-188-billion-valuation"
+      },
+      "caveats": "A signed term sheet, not a closed round. Everything derived from it inherits that."
     }
   ],
   "revenues": [
+    {
+      "vendorId": "anthropic",
+      "vendorClass": "frontier_lab",
+      "revenueUsdM": 9000,
+      "isFloor": false,
+      "basis": "run_rate",
+      "state": "reported",
+      "citation": {
+        "publisher": "VentureBeat (Amodei revenue walk)",
+        "asOf": "2025-12-31",
+        "quote": "Dario Amodei's revenue walk showed progression from $9 billion in December 2025, $14 billion in February 2026, $19 billion in March, $30 billion in April, and $44 billion in early May 2026.",
+        "sourceUrl": "https://venturebeat.com/technology/anthropic-says-it-hit-a-30-billion-revenue-run-rate-after-crazy-80x-growth"
+      },
+      "caveats": "One point on a company-narrated trajectory; the intermediate February, March and May points are in the same source."
+    },
+    {
+      "vendorId": "anthropic",
+      "vendorClass": "frontier_lab",
+      "revenueUsdM": 30000,
+      "isFloor": true,
+      "basis": "run_rate",
+      "state": "reported",
+      "citation": {
+        "publisher": "VentureBeat",
+        "asOf": "2026-04-30",
+        "quote": "Anthropic says it hit a $30 billion revenue run rate after 'crazy' 80x growth — run-rate revenue surpassed $30 billion in April 2026.",
+        "sourceUrl": "https://venturebeat.com/technology/anthropic-says-it-hit-a-30-billion-revenue-run-rate-after-crazy-80x-growth"
+      },
+      "caveats": "The AIE feed re-reported this figure on 2026-07-02 alongside the Google/Broadcom compute announcement; the figure was true in April. Dating it to the re-report would have misplaced it on the timeline."
+    },
+    {
+      "vendorId": "anthropic",
+      "vendorClass": "frontier_lab",
+      "revenueUsdM": 47000,
+      "isFloor": true,
+      "basis": "run_rate",
+      "state": "reported",
+      "citation": {
+        "publisher": "Anthropic newsroom",
+        "asOf": "2026-06-01",
+        "quote": "Run-rate revenue crossed a reported $47 billion earlier in the month, as the company took its first formal step toward an IPO via an S-1 filing with the SEC.",
+        "sourceUrl": "https://www.anthropic.com/news/series-h"
+      },
+      "caveats": "Some secondary coverage recharacterised this figure as 'projected'; the company's own Series H announcement frames it as crossed. The December-to-June points ($9B, $30B, $47B) are a trajectory, not conflicting claims — earlier drafts of this record carried them as an unresolved discrepancy before the dates were verified. Claude Code alone was separately reported above a $2.5B run-rate (Anthropic, 2026-07-13)."
+    },
+    {
+      "vendorId": "openai",
+      "vendorClass": "frontier_lab",
+      "revenueUsdM": 21400,
+      "isFloor": false,
+      "basis": "run_rate",
+      "state": "reported",
+      "citation": {
+        "publisher": "Sacra",
+        "asOf": "2025-12-31",
+        "quote": "OpenAI reached approximately $25 billion in annualized revenue by mid-2026, up from $21.4 billion at the end of 2025.",
+        "sourceUrl": "https://sacra.com/c/openai/"
+      },
+      "caveats": "Third-party estimate, not a company statement."
+    },
+    {
+      "vendorId": "openai",
+      "vendorClass": "frontier_lab",
+      "revenueUsdM": 25000,
+      "isFloor": false,
+      "basis": "arr",
+      "state": "reported",
+      "citation": {
+        "publisher": "Sacra / ValueAddVC",
+        "asOf": "2026-06-30",
+        "quote": "OpenAI reached approximately $25 billion in annualized revenue by mid-2026 — about $17 billion from ChatGPT subscriptions, $6.5 billion from API consumption, and $1.5 billion from Sora video and licensing.",
+        "sourceUrl": "https://valueaddvc.com/blog/openai-revenue-2026-25b-arr-2b-month-and-the-path-to-profitability"
+      },
+      "caveats": "Consumer-dominant mix: roughly two-thirds is ChatGPT subscriptions, so enterprise-spend market measures cover only the API slice. The AIE feed's Fortune item framed the same period as a $25-33B range. Reported operating margin is deeply negative (~-122%), so revenue here says nothing about profit."
+    },
+    {
+      "vendorId": "openai",
+      "vendorClass": "frontier_lab",
+      "revenueUsdM": 30000,
+      "isFloor": false,
+      "basis": "projection",
+      "state": "reported",
+      "citation": {
+        "publisher": "Sacra",
+        "asOf": "2026-12-31",
+        "quote": "Internally, OpenAI has told investors it's targeting $30 billion in revenue for full-year 2026.",
+        "sourceUrl": "https://sacra.com/c/openai/"
+      },
+      "caveats": "An internal target reported to investors. Projections never become the disclosed figure and never calibrate a multiple."
+    },
+    {
+      "vendorId": "mistral",
+      "vendorClass": "frontier_lab",
+      "revenueUsdM": 216,
+      "isFloor": false,
+      "basis": "annual",
+      "state": "reported",
+      "statedCurrency": {
+        "code": "EUR",
+        "amount": 200,
+        "usdPerUnit": 1.08
+      },
+      "citation": {
+        "publisher": "Tech Funding News",
+        "asOf": "2025-12-31",
+        "quote": "…targeting EUR1B in 2026 revenue (up from EUR200M in 2025).",
+        "sourceUrl": "aie-news-feed"
+      },
+      "caveats": "Dated to the year it covers (2025 full-year revenue), reported in June 2026. Converted from EUR200M at 1.08, this product's rate."
+    },
+    {
+      "vendorId": "mistral",
+      "vendorClass": "frontier_lab",
+      "revenueUsdM": 1080,
+      "isFloor": false,
+      "basis": "projection",
+      "state": "reported",
+      "statedCurrency": {
+        "code": "EUR",
+        "amount": 1000,
+        "usdPerUnit": 1.08
+      },
+      "citation": {
+        "publisher": "Tech Funding News",
+        "asOf": "2026-12-31",
+        "quote": "…targeting EUR1B in 2026 revenue (up from EUR200M in 2025).",
+        "sourceUrl": "aie-news-feed"
+      },
+      "caveats": "A target for full-year 2026, not a result. Projections never become the disclosed figure and never calibrate a multiple."
+    },
     {
       "vendorId": "mistral",
       "vendorClass": "frontier_lab",
@@ -50,15 +257,112 @@
       "citation": {
         "publisher": "Bloomberg",
         "asOf": "2026-08-01",
-        "quote": "…with run-rate revenue reported above $400M."
+        "quote": "…with run-rate revenue reported above $400M.",
+        "sourceUrl": "aie-news-feed"
+      },
+      "caveats": "TechTimes (2026-07-07) corroborates the same figure framed as ARR: 'Mistral reports over $400M in ARR'."
+    },
+    {
+      "vendorId": "cohere",
+      "vendorClass": "frontier_lab",
+      "revenueUsdM": 240,
+      "isFloor": false,
+      "basis": "arr",
+      "state": "reported",
+      "citation": {
+        "publisher": "CNBC",
+        "asOf": "2026-02-13",
+        "quote": "An investor memo reported by CNBC in February 2026 showed Cohere reached roughly $240 million in annual recurring revenue, beating its $200 million target, with gross margins around 70%.",
+        "sourceUrl": "aie-news-feed"
+      },
+      "caveats": "Corroborated by BetaKit (2026-06-22) and a Klover.ai synthesis (2026-06-03), both citing the same CNBC memo — one underlying source, not three."
+    },
+    {
+      "vendorId": "databricks",
+      "vendorClass": "data_platform",
+      "revenueUsdM": 4800,
+      "isFloor": true,
+      "basis": "run_rate",
+      "state": "reported",
+      "citation": {
+        "publisher": "Databricks newsroom",
+        "asOf": "2025-12-15",
+        "quote": "Databricks Grows >55% YoY, Surpasses $4.8B Revenue Run-Rate, and is Raising >$4B Series L at $134B Valuation.",
+        "sourceUrl": "https://www.databricks.com/company/newsroom/press-releases/databricks-surpasses-4-8b-revenue-run-rate-growing-55-year-over-year"
+      },
+      "caveats": "Sacra independently placed end-of-2025 annualized revenue at $5.2B, consistent with this floor. AI products were separately reported at a $1.4B run-rate in Q4 2025, about 26% of total."
+    },
+    {
+      "vendorId": "databricks",
+      "vendorClass": "data_platform",
+      "revenueUsdM": 5400,
+      "isFloor": false,
+      "basis": "arr",
+      "state": "reported",
+      "citation": {
+        "publisher": "The Information (via Tech Insider), corroborated by CNBC and Sacra",
+        "asOf": "2026-01-31",
+        "quote": "Databricks hit $6.9B in annualized revenue in June 2026, up from $5.4B in January 2026 and $5.2B at the end of 2025.",
+        "sourceUrl": "https://sacra.com/c/databricks/"
       }
+    },
+    {
+      "vendorId": "databricks",
+      "vendorClass": "data_platform",
+      "revenueUsdM": 6900,
+      "isFloor": false,
+      "basis": "run_rate",
+      "state": "reported",
+      "citation": {
+        "publisher": "CNBC",
+        "asOf": "2026-06-16",
+        "quote": "Databricks revenue growth tops 80% to $6.9 billion annualized.",
+        "sourceUrl": "https://www.cnbc.com/2026/06/16/databricks-revenue-growth-tops-80percent-to-6point9-billion-annualized.html"
+      },
+      "caveats": "Reported directly by CNBC and matched by Sacra's independent estimate for the same month — company statement and third-party estimate agree here."
     }
   ],
   "notValuations": [
     {
       "vendorId": "openai",
-      "what": "$110B in funding involving Amazon, Microsoft and Nvidia, including a $100B expansion of an AWS deal over eight years (Yahoo Finance, 2026-07-31)",
-      "why": "A compute and infrastructure commitment, not an equity round. It says nothing about what the company is worth or what it earns, and dividing it by a multiple would be meaningless."
+      "what": "$110B in funding involving Amazon, Microsoft and Nvidia, including a $100B expansion of an AWS deal over eight years (Yahoo Finance, 2026-07-31), and the ~$300B Oracle compute agreement of September 2025",
+      "why": "Compute and infrastructure commitments, not equity rounds. They say nothing about what the company is worth or what it earns, and dividing them by a multiple would be meaningless."
+    },
+    {
+      "vendorId": "xai",
+      "what": "The sale of Colossus 1's entire ~300 MW output to Anthropic at about $1.25B per month through 2029, reported as 'potentially over $40 billion in revenue' (TechCrunch, 2026-05-20)",
+      "why": "A contracted future stream from a single customer, not reported run-rate revenue and not a valuation. It says the data centre is sold out; it does not say what xAI currently earns, so it is carried as context rather than as a figure."
+    },
+    {
+      "vendorId": "cohere",
+      "what": "A merger arrangement with Germany's Aleph Alpha 'tied to a combined valuation near $20B' (TechCrunch, 2026-04-25), and a $28M U.S. DoD contract won by 'Cohere Technologies' (The Mobile Network, 2026-07-03)",
+      "why": "The $20B figure prices the combined entity, not Cohere alone. The DoD contract belongs to Cohere Technologies, a wireless OTFS company that is a different business entirely — carried here so nobody transcribes it into this record again."
+    }
+  ],
+  "crossChecks": [
+    {
+      "vendorId": "anthropic",
+      "sharePct": 40,
+      "marketUsdM": 8400,
+      "marketMeasure": "enterprise LLM spend (model-API spend measured across enterprises)",
+      "citation": {
+        "publisher": "Menlo Ventures, mid-2026 LLM market update",
+        "asOf": "2026-06-30",
+        "quote": "Enterprise LLM spend reached $8.4B, up from $3.5B in November 2024. Share of enterprise LLM spend: Anthropic ~40%, OpenAI ~27%, Google ~21%.",
+        "sourceUrl": "https://finance.yahoo.com/news/enterprise-llm-spend-reaches-8-130000140.html"
+      }
+    },
+    {
+      "vendorId": "openai",
+      "sharePct": 27,
+      "marketUsdM": 8400,
+      "marketMeasure": "enterprise LLM spend (model-API spend measured across enterprises)",
+      "citation": {
+        "publisher": "Menlo Ventures, mid-2026 LLM market update",
+        "asOf": "2026-06-30",
+        "quote": "Enterprise LLM spend reached $8.4B, up from $3.5B in November 2024. Share of enterprise LLM spend: Anthropic ~40%, OpenAI ~27%, Google ~21%.",
+        "sourceUrl": "https://finance.yahoo.com/news/enterprise-llm-spend-reaches-8-130000140.html"
+      }
     }
   ]
 }

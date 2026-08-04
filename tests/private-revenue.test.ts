@@ -3,10 +3,11 @@ import {
   DEFAULT_BAND,
   estimateRevenue,
   formatUsdM,
+  impliedRange,
   NOT_VALUATIONS,
-  observedMultiple,
   observedMultiples,
   REVENUES,
+  STALE_PAIR_DAYS,
   VALUATIONS,
 } from "@/lib/finance/private-revenue";
 
@@ -36,56 +37,62 @@ describe("the record", () => {
   it("keeps the stated currency and rate visible when it converted one", () => {
     for (const v of VALUATIONS) {
       if (!v.statedCurrency) continue;
-      const implied =
-        v.statedCurrency.amount * v.statedCurrency.usdPerUnit;
+      const implied = v.statedCurrency.amount * v.statedCurrency.usdPerUnit;
       // The USD figure must actually be the stated amount at the stated rate,
       // or the conversion note is decoration.
       expect(Math.abs(implied - v.valuationUsdM)).toBeLessThan(1);
+    }
+    for (const r of REVENUES) {
+      if (!r.statedCurrency) continue;
+      const implied = r.statedCurrency.amount * r.statedCurrency.usdPerUnit;
+      expect(Math.abs(implied - r.revenueUsdM)).toBeLessThan(1);
     }
   });
 });
 
 describe("estimateRevenue", () => {
-  it("prefers a stated revenue over anything inferred", () => {
-    // Mistral has both a valuation and a reported revenue.
-    const e = estimateRevenue("mistral", "Mistral");
-    expect(e.basis).toBe("disclosed");
-    expect(e.disclosed?.revenueUsdM).toBe(400);
-    expect(e.lowUsdM).toBeNull();
-    expect(e.highUsdM).toBeNull();
-  });
-
-  it("infers a range, never a point, from a valuation alone", () => {
-    const e = estimateRevenue("anthropic", "Anthropic");
-    expect(e.basis).toBe("implied_from_valuation");
-    expect(e.lowUsdM).not.toBeNull();
-    expect(e.highUsdM).not.toBeNull();
-    expect(e.highUsdM!).toBeGreaterThan(e.lowUsdM!);
+  it("prefers a stated revenue over anything inferred, for every vendor that has both", () => {
+    // Every vendor holding a valuation currently also has a reported revenue,
+    // so the disclosed lane must win across the board — a valuation-implied
+    // range shown where a real figure exists would be an invention.
+    for (const v of new Set(VALUATIONS.map((x) => x.vendorId))) {
+      const e = estimateRevenue(v, v);
+      expect(e.basis).toBe("disclosed");
+      expect(e.lowUsdM).toBeNull();
+      expect(e.highUsdM).toBeNull();
+    }
+    expect(estimateRevenue("mistral", "Mistral").disclosed?.revenueUsdM).toBe(400);
+    expect(estimateRevenue("anthropic", "Anthropic").disclosed?.revenueUsdM).toBe(47000);
+    expect(estimateRevenue("databricks", "Databricks").disclosed?.revenueUsdM).toBe(6900);
+    // OpenAI's latest-dated record is a full-year 2026 target — a projection —
+    // so the disclosed figure must step back to the mid-year ARR.
+    expect(estimateRevenue("openai", "OpenAI").disclosed?.revenueUsdM).toBe(25000);
   });
 
   it("inverts the band: a higher multiple must imply less revenue", () => {
     // The easiest way to get this backwards is to divide by the wrong end,
-    // which would put the whole range on the wrong side of the truth.
-    const e = estimateRevenue("anthropic", "Anthropic", { low: 30, high: 90 });
-    const v = VALUATIONS.find((x) => x.vendorId === "anthropic")!;
-    expect(e.lowUsdM).toBeCloseTo(v.valuationUsdM / 90, 6);
-    expect(e.highUsdM).toBeCloseTo(v.valuationUsdM / 30, 6);
+    // which would put the whole range on the wrong side of the truth. No live
+    // vendor exercises the implied lane right now, so the arithmetic is held
+    // directly.
+    const r = impliedRange(380_000, { low: 30, high: 90 });
+    expect(r.lowUsdM).toBeCloseTo(380_000 / 90, 6);
+    expect(r.highUsdM).toBeCloseTo(380_000 / 30, 6);
   });
 
   it("widens the range as the band widens, and never crosses over", () => {
-    const narrow = estimateRevenue("cohere", "Cohere", { low: 40, high: 50 });
-    const wide = estimateRevenue("cohere", "Cohere", { low: 10, high: 120 });
-    expect(wide.highUsdM! - wide.lowUsdM!).toBeGreaterThan(
-      narrow.highUsdM! - narrow.lowUsdM!
+    const narrow = impliedRange(6_800, { low: 40, high: 50 });
+    const wide = impliedRange(6_800, { low: 10, high: 120 });
+    expect(wide.highUsdM - wide.lowUsdM).toBeGreaterThan(
+      narrow.highUsdM - narrow.lowUsdM
     );
-    for (const e of [narrow, wide]) {
-      expect(e.lowUsdM!).toBeLessThanOrEqual(e.highUsdM!);
-      expect(e.lowUsdM!).toBeGreaterThan(0);
+    for (const r of [narrow, wide]) {
+      expect(r.lowUsdM).toBeLessThanOrEqual(r.highUsdM);
+      expect(r.lowUsdM).toBeGreaterThan(0);
     }
   });
 
   it("refuses to estimate where nothing is on the record", () => {
-    for (const id of ["xai", "databricks", "together"]) {
+    for (const id of ["xai", "together"]) {
       const e = estimateRevenue(id, id);
       expect(e.basis).toBe("no_basis");
       expect(e.lowUsdM).toBeNull();
@@ -94,14 +101,21 @@ describe("estimateRevenue", () => {
     }
   });
 
-  it("never treats a compute commitment as a valuation", () => {
-    // OpenAI's $110B infrastructure figure is the single largest number in the
-    // feed and the most tempting thing to divide. It must produce no estimate.
-    const e = estimateRevenue("openai", "OpenAI");
-    expect(e.basis).toBe("no_basis");
-    expect(e.lowUsdM).toBeNull();
-    expect(e.absence).toMatch(/not a valuation/i);
+  it("never lets a compute commitment or contracted stream into the record", () => {
+    // The largest numbers in the feed attach to OpenAI (infrastructure
+    // commitments) and xAI (a contracted compute sale). Neither is a
+    // valuation or a revenue, and both must stay in the exclusions with the
+    // reason attached.
     expect(NOT_VALUATIONS.some((n) => n.vendorId === "openai")).toBe(true);
+    expect(NOT_VALUATIONS.some((n) => n.vendorId === "xai")).toBe(true);
+    // No valuation record may carry the commitment figures.
+    for (const v of VALUATIONS) {
+      expect([110_000, 100_000, 300_000]).not.toContain(v.valuationUsdM);
+    }
+    // xAI's contracted stream must not appear as revenue.
+    expect(REVENUES.some((r) => r.vendorId === "xai")).toBe(false);
+    // And its absence message carries the exclusion.
+    expect(estimateRevenue("xai", "xAI").absence).toMatch(/not/i);
   });
 
   it("marks an unclosed round rather than presenting it as fact", () => {
@@ -116,8 +130,30 @@ describe("observedMultiples", () => {
     const mistral = pairs.find((p) => p.vendorId === "mistral");
     expect(mistral).toBeDefined();
     expect(mistral!.vendorClass).toBe("frontier_lab");
-    // Both Mistral citations are dated 2026-08-01, so the gap is zero days.
+    // Both Mistral citations are dated 2026-08-01, so the gap is zero days —
+    // and the pairing must pick the same-day $400M floor over the 2025 annual.
     expect(mistral!.daysApart).toBe(0);
+    expect(mistral!.multiple).toBeCloseTo(54, 1);
+    expect(mistral!.isFloorDerived).toBe(true);
+  });
+
+  it("flags stale pairs instead of dropping them or trusting them", () => {
+    const pairs = observedMultiples();
+    for (const p of pairs) {
+      expect(p.stale).toBe(p.daysApart > STALE_PAIR_DAYS);
+    }
+    // Cohere is the canonical stale pair: an August valuation over February
+    // revenue, 169 days apart. The 28x it implies prices two different
+    // moments of the company. It must be carried, and it must be flagged.
+    const cohere = pairs.find((p) => p.vendorId === "cohere");
+    expect(cohere).toBeDefined();
+    expect(cohere!.stale).toBe(true);
+    // And with the dates verified, every Anthropic pair is fresh: the
+    // February valuation pairs with December revenue (43 days), the June
+    // valuation with June revenue (14 days).
+    for (const p of pairs.filter((x) => x.vendorId === "anthropic")) {
+      expect(p.stale).toBe(false);
+    }
   });
 
   it("never derives a multiple from a projection", () => {
@@ -196,22 +232,25 @@ describe("the dated series", () => {
   });
 });
 
-describe("observedMultiple", () => {
-  it("derives the anchor from the one pair that has both figures", () => {
-    const m = observedMultiple();
-    expect(m).not.toBeNull();
-    expect(m!.vendorId).toBe("mistral");
-    // 21,600 / 400 = 54
-    expect(m!.multiple).toBeCloseTo(54, 1);
-    // The revenue was reported as a floor, so the real multiple is lower and
-    // the interface has to say so.
-    expect(m!.isFloorDerived).toBe(true);
+describe("the default band", () => {
+  it("contains every fresh frontier-lab pair, so the default is not arbitrary", () => {
+    const fresh = observedMultiples("frontier_lab").filter((p) => !p.stale);
+    expect(fresh.length).toBeGreaterThan(0);
+    for (const p of fresh) {
+      expect(p.multiple).toBeGreaterThanOrEqual(DEFAULT_BAND.low);
+      expect(p.multiple).toBeLessThanOrEqual(DEFAULT_BAND.high);
+    }
   });
 
-  it("sits inside the default band, so the default is not arbitrary", () => {
-    const m = observedMultiple()!;
-    expect(m.multiple).toBeGreaterThanOrEqual(DEFAULT_BAND.low);
-    expect(m.multiple).toBeLessThanOrEqual(DEFAULT_BAND.high);
+  it("keeps the data platforms in their own calibration class", () => {
+    const platforms = observedMultiples("data_platform");
+    expect(platforms.length).toBeGreaterThan(0);
+    for (const p of platforms) {
+      expect(p.vendorId).toBe("databricks");
+    }
+    // And none of them leaks into the frontier set.
+    const frontier = observedMultiples("frontier_lab");
+    expect(frontier.some((p) => p.vendorId === "databricks")).toBe(false);
   });
 });
 

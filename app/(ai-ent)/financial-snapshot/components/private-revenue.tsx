@@ -8,7 +8,8 @@ import {
   DEFAULT_BAND,
   estimateRevenue,
   formatUsdM,
-  observedMultiple,
+  marketSlice,
+  observedMultiples,
   type MultipleBand,
 } from "@/lib/finance/private-revenue";
 
@@ -25,7 +26,7 @@ export function PrivateRevenuePanel({
   vendors: { id: string; name: string }[];
 }) {
   const [band, setBand] = useState<MultipleBand>(DEFAULT_BAND);
-  const observed = observedMultiple();
+  const pairs = observedMultiples();
 
   const rows = useMemo(
     () => vendors.map((v) => estimateRevenue(v.id, v.name, band)),
@@ -90,19 +91,41 @@ export function PrivateRevenuePanel({
             </label>
           ))}
         </div>
-        {observed ? (
-          <p className="measure mt-2 text-xs text-muted">
-            For scale: the one AI lab where both a valuation and a revenue
-            figure are on the record implies{" "}
-            <strong className="text-base-content">
-              about {observed.multiple}×
-            </strong>
-            {observed.isFloorDerived
-              ? ", and because that revenue was reported as a floor the true multiple is lower"
-              : ""}
-            . Public enterprise software trades nearer 5× to 15×. That gap is
-            why this is a range and not a number.
-          </p>
+        {pairs.length > 0 ? (
+          <div className="mt-2">
+            <p className="measure text-xs text-muted">
+              For scale, the multiples this product can actually observe — each
+              a cited valuation over the nearest-in-time cited revenue:
+            </p>
+            <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-0.5">
+              {pairs.map((p) => (
+                <li
+                  key={`${p.vendorId}-${p.valuationUsdM}`}
+                  className="font-mono text-xs text-muted"
+                >
+                  <span className="font-semibold text-base-content">
+                    {p.vendorId}
+                  </span>{" "}
+                  {p.isFloorDerived ? "≤" : "~"}
+                  {p.multiple}×
+                  {p.stale ? (
+                    <span
+                      className="ml-1 rounded bg-warn-bg px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-warn"
+                      title={`The valuation and revenue citations are ${p.daysApart} days apart — this pair prices two different moments of the company and does not anchor the band.`}
+                    >
+                      stale
+                    </span>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+            <p className="measure mt-1 text-xs text-muted">
+              Floor-derived multiples (≤) are ceilings, and stale pairs divide
+              citations from different quarters. Public enterprise software
+              trades nearer 5× to 15×. That spread is why this is a band and
+              not a number.
+            </p>
+          </div>
         ) : null}
       </div>
 
@@ -133,13 +156,69 @@ export function PrivateRevenuePanel({
             </div>
 
             {r.basis === "disclosed" && r.disclosed ? (
-              <p className="measure mt-1 text-sm text-muted">
-                Stated {r.disclosed.basis.replace("_", "-")} revenue.{" "}
-                <span className="italic">
-                  &ldquo;{r.disclosed.citation.quote}&rdquo;
-                </span>{" "}
-                {r.disclosed.citation.publisher}, {r.disclosed.citation.asOf}.
-              </p>
+              <div>
+                <p className="measure mt-1 text-sm text-muted">
+                  Reported {r.disclosed.basis.replace(/_/g, "-")} revenue.{" "}
+                  <span className="italic">
+                    &ldquo;{r.disclosed.citation.quote}&rdquo;
+                  </span>{" "}
+                  {r.disclosed.citation.publisher}, {r.disclosed.citation.asOf}.
+                </p>
+                {r.series.length > 1 ? (
+                  <p className="mt-1 font-mono text-xs text-muted">
+                    {r.series
+                      .map(
+                        (x) =>
+                          `${x.citation.asOf.slice(0, 7)}: ${x.isFloor ? "above " : ""}${formatUsdM(x.revenueUsdM)}${x.basis === "projection" ? " (target)" : ""}`
+                      )
+                      .join(" → ")}
+                  </p>
+                ) : null}
+                {r.disclosed.caveats ? (
+                  <p className="measure mt-1 text-xs text-warn">
+                    {r.disclosed.caveats}
+                  </p>
+                ) : null}
+                {(() => {
+                  // The cross-check lane: what an independently measured
+                  // market implies for one slice of this vendor's revenue.
+                  // Never blended with the reported figure — when the two
+                  // differ by an order of magnitude, the gap is the finding.
+                  const slice = marketSlice(r.vendorId);
+                  if (!slice || !r.disclosed) return null;
+                  const ratio = r.disclosed.revenueUsdM / slice.sliceUsdM;
+                  return (
+                    <p className="measure mt-2 rounded border border-base-300 bg-base-200/40 px-2 py-1.5 text-xs text-muted">
+                      <span className="font-mono text-[10px] font-semibold uppercase tracking-wider">
+                        Cross-check
+                      </span>{" "}
+                      A {slice.check.sharePct}% share of the{" "}
+                      {formatUsdM(slice.check.marketUsdM)}{" "}
+                      {slice.check.marketMeasure} that{" "}
+                      {slice.check.citation.publisher} measured implies{" "}
+                      <strong className="text-base-content">
+                        ~{formatUsdM(slice.sliceUsdM)}
+                      </strong>{" "}
+                      for that slice alone
+                      {ratio > 2 ? (
+                        <>
+                          {" "}
+                          — a fraction of the reported total, which says most
+                          of this vendor&apos;s revenue sits outside what that
+                          measure can see (consumer subscriptions, coding
+                          tools, licensing). The two are different quantities
+                          and are never combined.
+                        </>
+                      ) : (
+                        <>
+                          . Measured slice and reported total are the same
+                          order of magnitude here.
+                        </>
+                      )}
+                    </p>
+                  );
+                })()}
+              </div>
             ) : r.basis === "implied_from_valuation" && r.valuation ? (
               <p className="measure mt-1 text-sm text-muted">
                 Inferred from a{" "}
