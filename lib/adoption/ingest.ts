@@ -16,6 +16,17 @@ import type { DisclosureRow, DisclosureSnapshot } from "./types";
 
 const THROTTLE_MS = 250;
 
+/**
+ * The whole run's budget.
+ *
+ * The per-request timeout bounds one call, not the run: eight vendors each
+ * allowed 12 seconds can hold a browser-facing request open for over ninety
+ * seconds. One deadline covers all eight, and vendors not reached inside it
+ * are recorded as failures like any other, so a slow SEC degrades to a partial
+ * answer rather than a hung page.
+ */
+const RUN_BUDGET_MS = 20_000;
+
 const MEASURES =
   "Registrants naming each vendor in the stated SEC filing type, within the stated window. A count of disclosures, not of customers and not market share.";
 
@@ -40,15 +51,26 @@ export interface IngestReport {
  */
 export async function ingestDisclosure(
   formType = "10-K",
-  windowDays = WINDOW_DAYS
+  windowDays = WINDOW_DAYS,
+  budgetMs = RUN_BUDGET_MS
 ): Promise<IngestReport> {
   const startedAt = Date.now();
   const rows: DisclosureRow[] = [];
   const failed: { vendor: string; reason: string }[] = [];
 
+  const deadline = new AbortController();
+  const deadlineTimer = setTimeout(() => deadline.abort(), budgetMs);
+
+  try {
   for (const [i, v] of TRACKED_VENDORS.entries()) {
     if (i > 0) await sleep(THROTTLE_MS);
-    const out = await fetchDisclosure(v.term, v.vendor, formType, windowDays);
+    const out = await fetchDisclosure(
+      v.term,
+      v.vendor,
+      formType,
+      windowDays,
+      deadline.signal
+    );
     if (out.ok && out.records[0]) {
       rows.push(out.records[0]);
     } else {
@@ -57,6 +79,9 @@ export async function ingestDisclosure(
         reason: out.error ?? `status ${out.status}`,
       });
     }
+  }
+  } finally {
+    clearTimeout(deadlineTimer);
   }
 
   if (rows.length === 0) {

@@ -77,12 +77,20 @@ function filingUrl(id: string, cik: string): string | null {
  */
 const DEFAULT_WINDOW_DAYS = 365;
 
-/** One vendor's disclosure footprint for one form type, within a window. */
+/**
+ * One vendor's disclosure footprint for one form type, within a window.
+ *
+ * `deadline` is a signal shared across a whole ingestion run. Without it, eight
+ * vendors each with their own 12-second timeout can hold a browser-facing
+ * request open for over ninety seconds — the per-request timeout bounds one
+ * call, not the run. The route passes one deadline for all eight.
+ */
 export async function fetchDisclosure(
   term: string,
   vendor: string,
   formType = "10-K",
-  windowDays = DEFAULT_WINDOW_DAYS
+  windowDays = DEFAULT_WINDOW_DAYS,
+  deadline?: AbortSignal
 ): Promise<FetchOutcome<DisclosureRow>> {
   const params = new URLSearchParams();
   // The quotes matter: an unquoted multi-word term matches either word and
@@ -100,7 +108,21 @@ export async function fetchDisclosure(
 
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  // A run-level deadline aborts this call too, so one slow vendor cannot
+  // consume the whole budget and leave the rest queued behind it.
+  const onDeadline = () => controller.abort();
+  deadline?.addEventListener("abort", onDeadline, { once: true });
   try {
+    if (deadline?.aborted) {
+      return {
+        ok: false,
+        status: "error",
+        records: [],
+        fetchedAt,
+        sourceUrl: url,
+        error: "run deadline reached before this vendor was queried",
+      };
+    }
     const res = await fetch(url, {
       signal: controller.signal,
       headers: { "user-agent": userAgent(), accept: "application/json" },
@@ -124,6 +146,21 @@ export async function fetchDisclosure(
         fetchedAt,
         sourceUrl: url,
         error: `HTTP ${res.status}`,
+      };
+    }
+    // Only a JSON answer counts as data. SEC serves an HTML interstitial with
+    // a 200 to traffic it does not like, and res.ok alone would let that
+    // through to be parsed as an empty result and rendered as zero adoption.
+    // The same rule the BoardRadar proxy already enforces (ASSUMPTIONS #20).
+    const contentType = res.headers.get("content-type") ?? "";
+    if (!contentType.includes("json")) {
+      return {
+        ok: false,
+        status: "error",
+        records: [],
+        fetchedAt,
+        sourceUrl: url,
+        error: `Expected JSON, got ${contentType || "no content-type"} — SEC may be refusing this User-Agent`,
       };
     }
     const body = (await res.json()) as EftsResponse;
@@ -165,6 +202,7 @@ export async function fetchDisclosure(
     };
   } finally {
     clearTimeout(timer);
+    deadline?.removeEventListener("abort", onDeadline);
   }
 }
 

@@ -1011,3 +1011,44 @@ Dates are absolute; the build day is 30 July 2026.
     Scores across the product fall by about 18 points on average as a result.
     That is not a regression; it is the first time these numbers have matched
     what the ranking engine publishes.
+
+32. **Adversarial review of the adoption layer, and four real fixes (4 August
+    2026).** A review briefed to find what was wrong with the shipped
+    first-party endpoints found four genuine defects. All are fixed; the
+    review's other findings were about a design that was never built.
+    - **The route could hang for ninety seconds.** `ingestDisclosure` ran eight
+      vendors sequentially, each with its own 12-second timeout, on a
+      browser-facing route whose comment claimed "about two seconds". A
+      per-request timeout bounds one call, not a run. There is now one shared
+      20-second deadline across the run: vendors not reached inside it are
+      recorded as failures like any other, so a slow SEC degrades to a partial
+      answer instead of a hung page. Tested against a stubbed fetch that never
+      answers.
+    - **The committed snapshot would not have shipped to production.** Next
+      traces the files a route needs by static analysis, and every fixture read
+      in this app builds its path from a variable — `disclosure-${form}.json`,
+      `${apiPath}.json` — which cannot be resolved. The fallback would have
+      been absent from the deployed function, and the honesty discipline would
+      have hidden it: each read is wrapped in a catch returning null, so a
+      missing file degrades to a clean "no data" state that reads as a data gap
+      rather than a deploy bug. `outputFileTracingIncludes` in `next.config.ts`
+      now covers `data/adoption`, `fixtures/aie-live` and `fixtures/br`;
+      verified by finding the snapshot in the route's `.nft.json` trace.
+    - **`res.ok` was not enough to trust a body.** SEC answers undeclared
+      automated traffic with an HTML interstitial and a 200, which would have
+      parsed to zero hits and rendered as zero adoption — a fabricated figure
+      by omission. Only a JSON content-type now counts as data, which is the
+      rule ASSUMPTIONS #20 already established for the BoardRadar proxy, and
+      the error names the likely cause so an operator can act on it.
+    - **The route fanned out eight SEC requests per miss with no limiter.**
+      Added at 10/min per IP, on misses only. Worth stating accurately: the
+      cache is the real protection, not the limiter. With five form types and a
+      five-minute TTL one instance costs the SEC at most forty requests per
+      five minutes however much traffic arrives — measured, twelve rapid
+      requests produced two misses and ten warm serves. The limiter earns its
+      place only against a single caller cycling form types on a cold instance.
+    Not adopted from the review: its storage recommendations (Vercel Blob with
+    a cron trigger) answer a question this build does not have, since the
+    ingestion runs in-request and commits its fallback. Its warning that Vercel
+    Cron would be 401'd by this app's own Basic-auth middleware is correct and
+    worth keeping for whenever a cron is added.
