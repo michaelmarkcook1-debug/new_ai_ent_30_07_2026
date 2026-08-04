@@ -10,18 +10,36 @@ import { MicroLabel } from "@/lib/ui/micro";
 import type { AieRankingRow } from "../types";
 import { ShortlistButton } from "@/lib/ui/shortlist-button";
 
-// AIE vendor rankings block: the seed roster's overall scores with their
-// evidence grades, linking through to each vendor's view. Plain
-// scored list, no medal or league-table styling.
-export function AieRankings({ rows }: { rows: AieRankingRow[] }) {
+// AIE live rankings: the ranking engine's own overall scores, fetched at
+// render, linking through to each vendor's view. Plain scored list, no medal
+// or league-table styling.
+//
+// The badge pulses only when the fetch actually reached the engine. An
+// animation that says "living data" over a dated file would be the most
+// persuasive lie in the product, so it is driven by the same lane the badge
+// prints rather than switched on for effect.
+export function AieRankings({
+  rows,
+  lane = "aie",
+}: {
+  rows: AieRankingRow[];
+  lane?: "aie-live" | "aie";
+}) {
+  const isLive = lane === "aie-live";
   return (
     <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel
-          label="AIE vendor rankings"
-          tooltip="AG's own overall score per vendor from the AI Enterprise intelligence dataset. Investors are excluded."
+          label={isLive ? "AIE Live Rankings" : "AIE Rankings"}
+          tooltip={
+            isLive
+              ? "AG's own overall score per vendor, fetched from the ranking engine on this render. Investors are excluded."
+              : "AG's own overall score per vendor. The ranking engine did not answer on this render, so these are the last recorded figures. Investors are excluded."
+          }
         />
-        <LaneBadge lane="aie" />
+        <span className={isLive ? "lane-live" : undefined}>
+          <LaneBadge lane={lane} />
+        </span>
       </div>
       <p className="measure mt-1 text-xs text-muted">
         AG's own overall score for each vendor.

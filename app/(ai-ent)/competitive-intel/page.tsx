@@ -44,7 +44,7 @@ export default async function CompetitiveIntelPage({
     <>
       <PageHeader
         title="Competitive Intel"
-        subtitle="How the model providers compare: evidence-graded capability maturity across one market category at a time, beside the AIE vendor rankings. Intensity grids, never quadrants."
+        subtitle="How the model providers compare: evidence-graded capability maturity across one market category at a time, beside the AIE live rankings. Intensity grids, never quadrants."
         lanes={[matrix.lane, "live"]}
       />
       <AnalystInsight insight={insight} context="competitive" />
@@ -53,7 +53,7 @@ export default async function CompetitiveIntelPage({
           <ProviderCapabilityMatrix matrix={matrix} />
         </div>
         <div className="@container @4xl:col-span-1">
-          <AieRankings rows={rankings} />
+          <AieRankings rows={rankings.rows} lane={rankings.lane} />
         </div>
       </div>
 

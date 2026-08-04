@@ -240,3 +240,35 @@ h1, h2, h3, h4 {
     scroll-behavior: auto !important;
   }
 }
+
+/* A living-data pulse for a lane badge that really did reach its source on
+   this render. Applied by the component only when the lane is "aie-live", so
+   the animation carries the same claim the badge text does.
+
+   Deliberately slow and shallow: a two-second breath reads as "connected",
+   where a fast blink reads as an alert and would pull the eye away from the
+   figures the badge is describing. The glow is drawn with box-shadow rather
+   than transform so it cannot shift the layout of the row it sits in. */
+@keyframes ag-live-pulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--ag-live, #15803d) 40%, transparent);
+  }
+  50% {
+    opacity: 0.82;
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--ag-live, #15803d) 0%, transparent);
+  }
+}
+
+.lane-live > * {
+  animation: ag-live-pulse 2s ease-in-out infinite;
+  border-radius: 9999px;
+}
+
+/* Someone who has asked the system for less motion gets none of it. The badge
+   still says LIVE, which was always the part carrying the meaning. */
+@media (prefers-reduced-motion: reduce) {
+  .lane-live > * {
+    animation: none;
+  }
+}

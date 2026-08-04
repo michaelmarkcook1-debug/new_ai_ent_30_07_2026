@@ -37,7 +37,7 @@ const ICONS: Record<string, React.ReactNode> = {
   alliance: <><circle cx="7" cy="12" r="3.5" /><circle cx="17" cy="12" r="3.5" /><path d="M10.5 12h3" /></>,
   market: <><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c2.5 2.5 3.7 5.6 3.7 9S14.5 18.5 12 21c-2.5-2.5-3.7-5.6-3.7-9S9.5 5.5 12 3Z" /></>,
   company: <><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16" /><path d="M14 9h5a1 1 0 0 1 1 1v11" /><path d="M4 21h16" /><path d="M7.5 8h2M7.5 12h2M7.5 16h2M17 13h1M17 17h1" /></>,
-  // A compass. Used by Explore: "Start here" and "The Pulse" both drew the
+  // A compass. Used by Explore: "Start here" and the Pulse row both drew the
   // same waveform, so the two rows at the top of the sidebar were
   // indistinguishable at a glance.
   navigator: <><circle cx="12" cy="12" r="9" /><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z" /></>,
@@ -62,7 +62,7 @@ export const NAV_GROUPS: NavGroup[] = [
     label: "Market Intelligence",
     items: [
       { label: "Explore", href: "/start", icon: "navigator", hint: "Pick the question closest to yours" },
-      { label: "The Pulse", href: "/pulse", icon: "pulse", hint: "Today's market read: averages, risks and who is moving" },
+      { label: "Your Pulse", href: "/pulse", icon: "pulse", hint: "Today's market read: averages, risks and who is moving" },
       // Directly under The Pulse: the highest-intent question on the site,
       // which until now sat second in the second of three groups.
       {

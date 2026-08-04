@@ -14,7 +14,7 @@ import type { VendorDecision } from "@/lib/pulse/brief";
 import { SinceLastLook } from "./components/since-last-look";
 import { readWatchState, readChangeLog, buildSinceView } from "@/lib/changes/watchlist";
 
-export const metadata = { title: "The Pulse | AI Enterprise" };
+export const metadata = { title: "Your Pulse | AI Enterprise" };
 
 // Everything derived is computed here, on the server, from the same selectors
 // the rest of the app uses. The view renders; it does not calculate.
@@ -80,7 +80,7 @@ export default async function PulsePage() {
   return (
     <>
       <PageHeader
-        title="The Pulse"
+        title="Your Pulse"
         subtitle="What changed in the enterprise AI market, why it matters, and what to do about it."
         lanes={[metrics.lane, "derived"]}
       />

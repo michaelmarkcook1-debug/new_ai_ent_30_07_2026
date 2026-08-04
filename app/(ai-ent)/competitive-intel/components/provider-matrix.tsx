@@ -66,7 +66,7 @@ export function ProviderCapabilityMatrix({
         <div>
           <div className="flex flex-wrap items-center gap-2">
             <MicroLabel
-              label="Model provider capability matrix"
+              label="Business Fit"
               tooltip="Rows are the providers in the selected market category, columns are the ten assessed capabilities, darker means a stronger evidence-graded maturity score."
             />
             <LaneBadge lane={matrix.lane} />
@@ -132,9 +132,6 @@ export function ProviderCapabilityMatrix({
                     </span>
                   </th>
                 ))}
-                <th className="px-1 py-1.5 text-center align-bottom">
-                  <span className="micro-label">Mean</span>
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -180,19 +177,6 @@ export function ProviderCapabilityMatrix({
                       </td>
                     );
                   })}
-                  <td className="p-0">
-                    <div
-                      className="flex h-9 min-w-[3.2rem] items-center justify-center rounded border border-base-300 font-mono text-xs font-bold"
-                      title={
-                        r.weakestGrade
-                          ? `Mean over ${r.assessed} assessed capabilities. Weakest evidence grade in the row: ${r.weakestGrade}.`
-                          : undefined
-                      }
-                    >
-                      {r.mean === null ? "–" : Math.round(r.mean)}
-                    </div>
-
-                  </td>
                 </tr>
               ))}
             </tbody>
@@ -255,10 +239,13 @@ export function ProviderCapabilityMatrix({
           </p>
           <p>
             Rows are the providers the taxonomy places in the selected market
-            category, and comparison never crosses a category boundary. The row
-            mean is taken over the capabilities that provider is actually
-            assessed on, shown with the weakest grade in the row, because a
-            mean is only as good as its weakest input.
+            category, and comparison never crosses a category boundary. No row
+            average is shown: averaging ten capabilities a buyer weighs
+            differently produces a number that reads like a ranking and answers
+            nobody&apos;s question. Read the row for the capabilities that
+            matter to your workload. Rows are still ordered strongest-first by
+            that average, so the order is a starting point rather than an
+            arbitrary one, but it is not a score and is not printed as one.
           </p>
           <p className="measure text-muted">
             This is an intensity grid, not a positioning chart: no axes, no
