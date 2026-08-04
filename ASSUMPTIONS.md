@@ -724,3 +724,38 @@ Dates are absolute; the build day is 30 July 2026.
     is the honest one: 23 of 51 links are alliances both sides have named, and
     the rest are breadth signals the source itself calls directional and
     confidence-tiered, never audited fact.
+
+27. **"AI and Your Company" recomposed from four tabs into three (3 August
+    2026).** Michael asked for the four tabs to be deeply analysed and then
+    recomposed into tabs that follow the CIO's sourcing decision rather than
+    the build history. The inventory found four tabs carrying six tools:
+    Interrogate (adaptive questions to a source-cited finding, with model-tier
+    routing and follow-on links); Model 4 Role (the Workforce Model Fit engine
+    plus market context and workflow vendor shortlists); Company View: Shell
+    (overview KPIs, AI Exposure, Talent Intelligence, a company-side Trust
+    Rank, and the grounded AI Analyst, with live data for BoardRadar-covered
+    companies and the Shell exemplar as the badged sample); and Assess and
+    Decide (three depth tiers, six-pillar weights, the derivation drawer).
+    The recomposition, and the reasoning:
+    - **The four tabs were organised by build history, not by question.**
+      "Company View: Shell" was named after its fixture, which is a build
+      detail no buyer should have to decode. Interrogate and Assess and Decide
+      are two halves of one moment — converging on a call that must survive a
+      board or a procurement committee — and as separate tabs each looked like
+      a product rather than a step.
+    - **The new tabs follow the journey: where do we stand, what fits, what do
+      we decide.** "Your AI Position" (/company-view unchanged) holds exposure,
+      talent, governance and the analyst; its "Trust Rank" sub-tab is renamed
+      "Governance & Obligations" because a vendor-facing Trust Rank already
+      exists under Vendor Assessment and the two answer different questions.
+      "Model 4 Role" is untouched. "Decision Desk" (/decision-desk, new) holds
+      Interrogate and Assess and Decide as numbered steps — the cited finding,
+      then the weighted score — both mounted so switching tools never discards
+      a conversation in progress.
+    - **No tool was rebuilt and none was lost.** The two view components moved
+      files; their internals are byte-identical. /interrogate and
+      /assess-decide redirect with query strings intact, so the Ask AI menu,
+      the demo script's paths and any bookmarked link still land correctly,
+      and the finding's own follow-on link now points at the Decision Desk's
+      scoring step. The Start page card and the shortlist's analyst link were
+      re-pointed the same way.
