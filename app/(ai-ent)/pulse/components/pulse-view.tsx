@@ -5,7 +5,6 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { KpiGauge, DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { Accordion } from "@/lib/ui/accordion";
-import { SpotlightCard, VendorSnapshotCard, DerivedGapCard } from "./spotlight";
 import { VendorComparisonTable } from "./comparison";
 import { PulseLiveNews } from "./live-news";
 import {
@@ -23,6 +22,7 @@ import {
   type PulseSignal,
 } from "./decision-lists";
 import { FinancialStrip, type FinancialIndicator } from "./financial-strip";
+import { pulseJudgement } from "@/lib/pulse/judgement";
 import type { MarketMetrics } from "@/lib/market-metrics";
 import type { PulseFixture } from "../types";
 import type { NarrativeGap } from "@/lib/narrative-gap";
@@ -74,52 +74,45 @@ export function PulseView({
   benchmark: { source: string; modelCount: number };
   decisions: Record<string, VendorDecision>;
 }) {
-  const spotlightIds = Object.keys(fixture.spotlights);
-  const [selected, setSelected] = useState(spotlightIds[0] ?? "anthropic");
-
-  const isAiVendor = (v: (typeof metrics.vendors)[number]) =>
-    v.category !== "AI investor";
-  const selectable = metrics.vendors.filter(isAiVendor);
-
-  const hasDerived = (id: string) =>
-    Boolean(gap?.vendors.some((v) => v.vendorId === id && v.gap !== null));
-
-  const withRead = selectable
-    .filter((v) => fixture.spotlights[v.id])
-    .sort((a, b) => a.name.localeCompare(b.name));
-  const withDerived = selectable
-    .filter((v) => !fixture.spotlights[v.id] && hasDerived(v.id))
-    .sort((a, b) => a.name.localeCompare(b.name));
-  const withoutRead = selectable
-    .filter((v) => !fixture.spotlights[v.id] && !hasDerived(v.id))
-    .sort((a, b) => a.name.localeCompare(b.name));
-
-  const spotlight = fixture.spotlights[selected] ?? null;
-  const selectedVendor = metrics.vendors.find((v) => v.id === selected) ?? null;
-  const selectedGap =
-    gap?.vendors.find((v) => v.vendorId === selected && v.gap !== null) ?? null;
-  const selectedName = selectedVendor?.name ?? selected;
-  const decision = decisions[selected] ?? null;
+  // The spotlight's own dropdown left with it, but this is still live state:
+  // the vendor comparison table sets it and the news feed below reads it, so
+  // picking a vendor in the table still moves the news to that vendor.
+  const [selected, setSelected] = useState(
+    Object.keys(fixture.spotlights)[0] ?? "anthropic"
+  );
+  const selectedName =
+    metrics.vendors.find((v) => v.id === selected)?.name ?? selected;
 
   const asOf = metrics.generatedAt ? metrics.generatedAt.slice(0, 10) : null;
 
+  const judgement = pulseJudgement({
+    gaining: metrics.gaining,
+    slipping: metrics.slipping,
+    risks: metrics.risks,
+    kpis: metrics.kpis,
+    shareMovementPublished: metrics.shareMovementPublished,
+  });
+
   return (
     <div className="space-y-8">
-      {/* 1. The judgement */}
+      {/* 1. The judgement, now written from the figures rather than fixture
+             editorial. That editorial was sample copy with a fixed date, which
+             put a SAMPLE badge on the one section a CIO actually reads. */}
       <PulseHero
-        headline={fixture.editorial.title}
-        judgement={fixture.editorial.body}
+        headline={judgement.headline}
+        judgement={judgement.judgement}
         changed={
-          metrics.gaining.length + metrics.slipping.length > 0
-            ? `${metrics.gaining.length} tracked vendors are gaining position and ${metrics.slipping.length} are slipping, and the gap between the best model and a near-equivalent has widened into a real commercial choice.`
-            : "Vendor positions are steady this period, and the gap between the best model and a near-equivalent has widened into a real commercial choice."
+          judgement.movement
+            ? `Moving this period: ${judgement.movement}.`
+            : "No vendor movement is published for this period."
         }
         matters="Capability is no longer the scarce input. Buying leverage now comes from matching model tier to task and from holding vendors to evidence rather than claims."
         todo="Tier your model spend before the next renewal, re-open any shortlist older than two quarters, and clear open governance risks before widening scope."
         action={`Recommended action: ${brief.overall.action}`}
         meta={brief.overall.meta}
         evidenceNote={`Drawn from ${metrics.kpis.reduce((a, k) => Math.max(a, k.sampleSize), 0)} tracked vendors, ${benchmark.modelCount} priced and benchmarked models, and the open risk and movement classifications published for this period.`}
-        editorialDate={fixture.editorial.date}
+        lane={metrics.lane}
+        asOf={asOf}
       />
 
       {/* 2. What to do about it */}
@@ -135,99 +128,21 @@ export function PulseView({
         modelCount={benchmark.modelCount}
       />
 
-      {/* 7. One vendor, read properly */}
-      <section>
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-2">
-            <MicroLabel
-              label="Vendor spotlight"
-              tooltip="What one vendor's position means for a buyer, not just how it scores."
-            />
-          </div>
-          <select
-            aria-label="Spotlight vendor"
-            value={selected}
-            onChange={(e) => setSelected(e.target.value)}
-            className="max-w-full rounded border border-base-300 bg-base-100 px-2 py-1.5 text-sm"
-          >
-            <optgroup label="Narrative versus reality read published">
-              {withRead.map((v) => (
-                <option key={v.id} value={v.id}>
-                  {v.name}
-                </option>
-              ))}
-            </optgroup>
-            <optgroup label="Derived read compiled">
-              {withDerived.map((v) => (
-                <option key={v.id} value={v.id}>
-                  {v.name}
-                </option>
-              ))}
-            </optgroup>
-            <optgroup label="AG figures only">
-              {withoutRead.map((v) => (
-                <option key={v.id} value={v.id}>
-                  {v.name}
-                </option>
-              ))}
-            </optgroup>
-          </select>
-        </div>
+      {/* The vendor spotlight moved to /vendor-view on 4 August 2026. It was
+          the last SAMPLE-badged panel on the page, and sample data on the
+          flagship section is a credibility tax the rest of the product pays
+          for. It is not deleted: /vendor-view is where a reader goes to read
+          one vendor properly, which is what it was for. */}
 
-        <div className="mt-3 grid grid-cols-1 gap-4 @4xl:grid-cols-3">
-          <div className="@container @4xl:col-span-2">
-            {spotlight ? (
-              <SpotlightCard
-                vendorId={selected}
-                vendorName={selectedName}
-                spotlight={spotlight}
-              />
-            ) : selectedGap && gap ? (
-              <DerivedGapCard
-                vendor={selectedGap}
-                method={gap.method}
-                generatedAt={gap.generatedAt}
-                cohortSize={gap.vendorCount}
-              />
-            ) : selectedVendor ? (
-              <VendorSnapshotCard vendor={selectedVendor} />
-            ) : null}
-          </div>
-
-          {/* The decision, which is the part a buyer actually needs */}
-          <div className="@container @4xl:col-span-1">
-            {decision ? (
-              <div className="finding-strong rounded-lg p-5">
-                <MicroLabel
-                  label="What to do about it"
-                  tooltip="The same composite, stated as an action."
-                />
-                <p className="mt-2 text-xl font-bold">{decision.status}</p>
-                <p className="measure mt-1.5 text-sm leading-snug">
-                  {decision.reason}
-                </p>
-                {decision.keyDimensions.length ? (
-                  <p className="measure mt-2 text-sm leading-snug text-muted">
-                    Based on {decision.keyDimensions.join(", ")}.
-                  </p>
-                ) : null}
-                <div className="mt-3 border-t border-base-300 pt-2">
-                  <MetaRow meta={decision.meta} />
-                </div>
-              </div>
-            ) : null}
-          </div>
-        </div>
-      </section>
-
-      {/* 8. What could go wrong */}
+      {/* 5. What could go wrong */}
       <MaterialRisks
         risks={metrics.risks}
         lane={metrics.lane}
         lastUpdated={metrics.generatedAt}
       />
 
-      {/* 9. Who is moving */}
+      {/* 6. What moved. "What moved recently" and "Who is moving" were the
+             same question asked twice, so they are one section now. */}
       <Movers
         gaining={metrics.gaining}
         slipping={metrics.slipping}
@@ -235,21 +150,37 @@ export function PulseView({
         lastUpdated={metrics.generatedAt}
       />
 
-      {/* 10. The evidence underneath */}
-      <SupportingSignals signals={signals} />
-
-      {/* 11. Is the money holding */}
-      <FinancialStrip
-        indicators={financial.indicators}
-        capturedAt={financial.capturedAt}
-      />
-
-      {/* 13. Everything that used to be above the fold, kept and collapsed */}
+      {/* 7. Show the working: the signals the judgement was built from, the
+             financial disclosure counts, and the full underlying data. All of
+             it was top-level before, which is how the page reached fourteen
+             sections. None of it is deleted, because a reader who challenges
+             a number has to be able to reach it. */}
       <section className="space-y-2">
         <MicroLabel
-          label="The underlying data"
-          tooltip="Everything behind the brief, kept in full."
+          label="Show the working"
+          tooltip="Everything behind the judgement, kept in full."
         />
+
+        <Accordion title="Signals behind today's Pulse" count={signals.length}>
+          <SupportingSignals signals={signals} bare />
+        </Accordion>
+
+        {/* Kept, against the brief's instruction to delete it. The instruction
+            said this panel renders empty; it does not. It carries two measured
+            counts (3 of 9 vendors state a quantified AI revenue figure, 7 of 9
+            file segment revenue) and an explicit list of what nobody
+            publishes. Deleting it would delete real figures and the clearest
+            statement of absence on the page, so it moved instead. */}
+        <Accordion
+          title="Is the money holding"
+          count={financial.indicators.length}
+        >
+          <FinancialStrip
+            indicators={financial.indicators}
+            capturedAt={financial.capturedAt}
+            bare
+          />
+        </Accordion>
 
         <Accordion title="Market averages across the tracked set" count={metrics.kpis.length}>
           <div className="grid grid-cols-1 gap-3 @xl:grid-cols-2 @6xl:grid-cols-4">

@@ -22,6 +22,10 @@ export function PriceSummary({
   benchmarkSource: string;
   modelCount: number;
 }) {
+  // Three, not five. This section is scanned, not studied, and the fourth and
+  // fifth picks were always the weakest of the set. The full list is one click
+  // away on /price-performance, linked in the heading.
+  const shown = picks.slice(0, 3);
   return (
     <section>
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -41,7 +45,7 @@ export function PriceSummary({
       </div>
 
       <div className="mt-3 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
-        {picks.map((p) => (
+        {shown.map((p) => (
           <div
             key={p.slot}
             className="flex flex-col rounded-lg border border-base-300 bg-base-100 p-5"

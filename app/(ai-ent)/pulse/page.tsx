@@ -77,7 +77,7 @@ export default async function PulsePage() {
       <PageHeader
         title="The Pulse"
         subtitle="What changed in the enterprise AI market, why it matters, and what to do about it."
-        lanes={[metrics.lane, "derived", "sample"]}
+        lanes={[metrics.lane, "derived"]}
       />
       <SinceLastLook
         view={since}

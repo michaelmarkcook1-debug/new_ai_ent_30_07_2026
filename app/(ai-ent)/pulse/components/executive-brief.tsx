@@ -10,9 +10,12 @@ import type { DataLane } from "@/lib/provenance";
 
 // The executive brief: hero, three actions, five-dimension scorecard.
 //
-// The judgement text is editorial and stays SAMPLE-badged, because no dataset
-// publishes an opinion. Everything under it is computed from figures the app
-// already holds, and each dimension carries the numbers it came from.
+// The judgement text used to be fixture editorial, SAMPLE-badged on the
+// grounds that no dataset publishes an opinion. That put the page's only
+// sample panel on its most-read section. It is now written from the tracked
+// figures by lib/pulse/judgement.ts, so it carries the data's own lane.
+// Everything under it is computed from figures the app already holds, and
+// each dimension carries the numbers it came from.
 
 // Metadata sits quietly under a recommendation. Horizon and evidence state
 // only: confidence labels are gone from the platform and do not belong here.
@@ -66,7 +69,8 @@ export function PulseHero({
   action,
   meta,
   evidenceNote,
-  editorialDate,
+  lane,
+  asOf,
 }: {
   headline: string;
   judgement: string;
@@ -76,7 +80,8 @@ export function PulseHero({
   action: string;
   meta: RecommendationMeta;
   evidenceNote: string;
-  editorialDate: string;
+  lane: DataLane;
+  asOf: string | null;
 }) {
   return (
     // The Pulse is the single largest judgement in the product and was
@@ -88,18 +93,24 @@ export function PulseHero({
           tooltip="One judgement on the enterprise AI market, with what to do about it."
         />
         <div className="flex items-center gap-2">
-          <LaneBadge lane="sample" />
+          {/* Was lane="sample" over a fixed fixture date. The headline and
+              judgement are now computed from the tracked figures, so the badge
+              reports what they are and the date is the data's, not an
+              editorial's. */}
+          <LaneBadge lane={lane} />
           <span className="font-mono text-sm text-muted">
-            {editorialDate}
+            {asOf ?? "date not published"}
           </span>
         </div>
       </div>
 
-      <h2 className="mt-3 max-w-3xl text-balance text-xl font-bold leading-tight sm:text-3xl">
+      {/* This is the product. It is the first thing read and the only thing
+          some readers read, so it carries the largest type on the page. */}
+      <h2 className="mt-3 max-w-3xl text-balance text-2xl font-bold leading-tight sm:text-4xl">
         {headline}
       </h2>
 
-      <p className="mt-3 measure text-base leading-relaxed text-muted">
+      <p className="mt-4 measure text-lg leading-relaxed text-base-content/80">
         {judgement}
       </p>
 
@@ -134,10 +145,11 @@ export function PulseHero({
         <DerivationDrawer title="What this judgement rests on">
           <p>{evidenceNote}</p>
           <p className="measure text-muted">
-            The headline and the judgement above are an editorial view, badged
-            SAMPLE because no dataset publishes an opinion. The scorecard below
-            it, and every figure it cites, is computed from the tracked data and
-            carries its own source.
+            The headline and the judgement above are written from those same
+            figures: which vendors gained and slipped, the tracked average that
+            moved furthest, and the count of published risks. No opinion is
+            added on top of them, and where an input has no prior reading the
+            sentence says so rather than implying a direction.
           </p>
         </DerivationDrawer>
       </div>
@@ -150,6 +162,10 @@ export function ExecutiveActions({
 }: {
   actions: { action: string; detail: string; meta: RecommendationMeta }[];
 }) {
+  // The heading promises three, so the code enforces three. A section that
+  // says "do these three things" over four cards is a small lie that costs
+  // the reader their trust in the larger ones.
+  const three = actions.slice(0, 3);
   return (
     <section>
       <MicroLabel
@@ -162,7 +178,7 @@ export function ExecutiveActions({
           strong as the overall recommendation box would compete with the
           judgement above rather than follow from it. */}
       <ol className="mt-2 grid grid-cols-1 gap-3 @4xl:grid-cols-3">
-        {actions.map((a, i) => (
+        {three.map((a, i) => (
           <li key={a.action} className="finding rounded-lg p-5">
             <div className="flex items-baseline gap-2.5">
               <span className="finding-figure font-mono text-sm font-bold">

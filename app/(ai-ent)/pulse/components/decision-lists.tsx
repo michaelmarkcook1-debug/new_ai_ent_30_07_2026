@@ -47,12 +47,25 @@ export function MaterialRisks({
         </Link>
       </div>
 
+      {/* Collapsed by default. Risk is the section a reader opens when they
+          have a reason to, not one they should have to scroll past on the way
+          to the judgement. The count stays on the closed row, so an unopened
+          section still tells them whether there is anything to open it for. */}
       {top.length === 0 ? (
         <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-5 text-sm text-muted">
           No high-severity risk is currently open against a tracked vendor.
         </p>
       ) : (
-        <div className="mt-3 grid grid-cols-1 gap-3 @4xl:grid-cols-3">
+        <div className="mt-2">
+        <Accordion
+          title={
+            top.some((r) => (r.severity ?? "").toLowerCase() === "high")
+              ? "Open risks, including high severity"
+              : "Open risks against tracked vendors"
+          }
+          count={risks.length}
+        >
+        <div className="grid grid-cols-1 gap-3 @4xl:grid-cols-3">
           {top.map((r) => {
             const meta: RecommendationMeta = {
               horizon: r.severity?.toLowerCase() === "high" ? "Immediate" : "90 days",
@@ -102,6 +115,8 @@ export function MaterialRisks({
               </article>
             );
           })}
+        </div>
+        </Accordion>
         </div>
       )}
 
@@ -202,7 +217,7 @@ export function Movers({
     <section>
       <div className="flex flex-wrap items-center justify-between gap-2">
         <MicroLabel
-          label="Who is moving"
+          label="What moved"
           tooltip="Vendors changing position, and what that means for a shortlist."
         />
         <Link
@@ -245,21 +260,31 @@ export interface PulseSignal {
   lane: DataLane;
 }
 
-export function SupportingSignals({ signals }: { signals: PulseSignal[] }) {
+// `bare` drops the section's own heading for when it is rendered inside an
+// accordion that already names it, so the title is not printed twice.
+export function SupportingSignals({
+  signals,
+  bare = false,
+}: {
+  signals: PulseSignal[];
+  bare?: boolean;
+}) {
   return (
     <section>
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <MicroLabel
-          label="Signals behind today's Pulse"
-          tooltip="The evidence the judgement above rests on."
-        />
-        <Link
-          href="/news-feed"
-          className="text-sm font-semibold text-primary hover:underline"
-        >
-          All market news →
-        </Link>
-      </div>
+      {!bare ? (
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <MicroLabel
+            label="Signals behind today's Pulse"
+            tooltip="The evidence the judgement above rests on."
+          />
+          <Link
+            href="/news-feed"
+            className="text-sm font-semibold text-primary hover:underline"
+          >
+            All market news →
+          </Link>
+        </div>
+      ) : null}
 
       {signals.length === 0 ? (
         <p className="mt-3 rounded-lg border border-dashed border-base-300 px-3 py-5 text-sm text-muted">

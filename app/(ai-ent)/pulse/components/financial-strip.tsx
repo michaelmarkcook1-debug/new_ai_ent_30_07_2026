@@ -21,33 +21,39 @@ export interface FinancialIndicator {
   isAbsence?: boolean;
 }
 
+// `bare` drops this section's own heading for when it is rendered inside an
+// accordion that already names it.
 export function FinancialStrip({
   indicators,
   capturedAt,
+  bare = false,
 }: {
   indicators: FinancialIndicator[];
   capturedAt: string | null;
+  bare?: boolean;
 }) {
   const measured = indicators.filter((i) => !i.isAbsence);
   const absent = indicators.filter((i) => i.isAbsence);
 
   return (
     <section>
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="flex flex-wrap items-center gap-2">
-          <MicroLabel
-            label="Is the money holding"
-            tooltip="Four indicators on the financial footing behind the vendor set."
-          />
-          <LaneBadge lane="aie" />
+      {!bare ? (
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <MicroLabel
+              label="Is the money holding"
+              tooltip="Four indicators on the financial footing behind the vendor set."
+            />
+            <LaneBadge lane="aie" />
+          </div>
+          <Link
+            href="/financial-snapshot"
+            className="text-sm font-semibold text-primary hover:underline"
+          >
+            Full financial snapshot →
+          </Link>
         </div>
-        <Link
-          href="/financial-snapshot"
-          className="text-sm font-semibold text-primary hover:underline"
-        >
-          Full financial snapshot →
-        </Link>
-      </div>
+      ) : null}
 
       {/* Indicators that carry a figure get a card. Ones that carry an absence
           get a single shared line underneath, because four cards each saying
