@@ -12,7 +12,18 @@ import { ShortlistIndicator } from "@/lib/ui/shortlist-indicator";
 // sidebar with ALL-CAPS group labels, icons, active item as a solid primary
 // rounded rectangle (anatomy verified against the live portal, spec S3).
 
-type NavItem = { label: string; href: string; icon: string; hint?: string };
+// `also` is a second page that answers the same question from the other side.
+// It shares its partner's row and only appears as its own link once that part
+// of the site is open, so eighteen resting items became thirteen without a
+// single route being dropped or a page being orphaned.
+type NavPartner = { label: string; href: string; hint?: string };
+type NavItem = {
+  label: string;
+  href: string;
+  icon: string;
+  hint?: string;
+  also?: NavPartner;
+};
 type NavGroup = { label: string; items: NavItem[] };
 
 // Minimal inline icon set keyed by name.
@@ -49,13 +60,38 @@ export const NAV_GROUPS: NavGroup[] = [
     items: [
       { label: "Start here", href: "/start", icon: "pulse", hint: "Orientation: pick the question closest to yours" },
       { label: "The Pulse", href: "/pulse", icon: "pulse", hint: "Today's market read: averages, risks and who is moving" },
-      { label: "Market Watch", href: "/market-watch", icon: "watch", hint: "Category shares, leaders and the winning/losing read" },
-      { label: "AI Adoption", href: "/ai-adoption", icon: "watch", hint: "Who is actually paying for AI, measured and attributed, and how far each industry has got" },
+      // Directly under The Pulse: the highest-intent question on the site,
+      // which until now sat second in the second of three groups.
+      {
+        label: "Model for Role",
+        href: "/market-view",
+        icon: "market",
+        hint: "Pick a role, get the cheapest model that meets its requirements and what it costs",
+        also: { label: "Price / Performance", href: "/price-performance", hint: "What capability costs, and the efficiency frontier" },
+      },
+      {
+        label: "Market Watch",
+        href: "/market-watch",
+        icon: "watch",
+        hint: "Category shares, leaders and the winning/losing read",
+        also: { label: "AI Adoption", href: "/ai-adoption", hint: "Who is actually paying for AI, measured and attributed, and how far each industry has got" },
+      },
       { label: "Financial Snapshot", href: "/financial-snapshot", icon: "finance", hint: "Vendor financials, segment revenue and what AI they disclose" },
       { label: "Competitive Intel", href: "/competitive-intel", icon: "intel", hint: "Compare model providers across ten assessed capabilities" },
-      { label: "Reputation Tracker", href: "/reputation-tracker", icon: "reputation", hint: "How buyers, developers and staff rate each vendor" },
-      { label: "Vendor View", href: "/vendor-view", icon: "vendor", hint: "Full profile and rankings for every tracked vendor" },
-      { label: "Alliances", href: "/alliances", icon: "alliance", hint: "Who partners with whom, and how deep the tie is" },
+      {
+        label: "Vendor View",
+        href: "/vendor-view",
+        icon: "vendor",
+        hint: "Full profile and rankings for every tracked vendor",
+        also: { label: "Reputation Tracker", href: "/reputation-tracker", hint: "How buyers, developers and staff rate each vendor" },
+      },
+      {
+        label: "Alliances",
+        href: "/alliances",
+        icon: "alliance",
+        hint: "Who partners with whom, and how deep the tie is",
+        also: { label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", hint: "Who depends on whom across the AI stack" },
+      },
     ],
   },
   // Recomposed 3 August 2026 from four tabs into three, ordered as the
@@ -68,18 +104,20 @@ export const NAV_GROUPS: NavGroup[] = [
     label: "AI and Your Company",
     items: [
       { label: "Your AI Position", href: "/company-view", icon: "company", hint: "Where AI helps or threatens you: exposure, readiness, obligations, and an analyst over your own documents" },
-      { label: "FitEngine", href: "/market-view", icon: "market", hint: "Pick a role, get the cheapest model that meets its requirements and what it costs" },
       { label: "Decision Desk", href: "/decision-desk", icon: "assess", hint: "A cited finding and a weighted score for the call you must defend" },
     ],
   },
   {
     label: "Vendor Assessment",
     items: [
-      { label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", icon: "navigator", hint: "Who depends on whom across the AI stack" },
       { label: "Workflow Shortlist", href: "/workflow-shortlist", icon: "intel", hint: "Pick a workflow, get the vendors to buy from and the models to build on" },
-      { label: "Price / Performance", href: "/price-performance", icon: "price", hint: "What capability costs, and the efficiency frontier" },
-      { label: "The Security Desk", href: "/security-desk", icon: "security", hint: "Security posture and open risks per vendor" },
-      { label: "Trust Rank", href: "/trust-rank", icon: "trust", hint: "What AI regulation binds you, by jurisdiction" },
+      {
+        label: "Trust Rank",
+        href: "/trust-rank",
+        icon: "trust",
+        hint: "What AI regulation binds you, by jurisdiction",
+        also: { label: "The Security Desk", href: "/security-desk", hint: "Security posture and open risks per vendor" },
+      },
       { label: "News", href: "/news-feed", icon: "news" },
     ],
   },
@@ -194,9 +232,15 @@ export function Shell({
                   )}
                   <ul className="space-y-0.5">
                     {group.items.map((item) => {
-                      const active =
-                        pathname === item.href ||
-                        pathname.startsWith(`${item.href}/`);
+                      const on = (href: string) =>
+                        pathname === href || pathname.startsWith(`${href}/`);
+                      const alsoActive = item.also ? on(item.also.href) : false;
+                      const active = on(item.href);
+                      // The partner gets its own row only while this part of
+                      // the site is open, so it is always one click from where
+                      // it is relevant and never adds to the resting count.
+                      const showAlso =
+                        item.also && !collapsed && (active || alsoActive);
                       return (
                         <li key={item.href}>
                           <Link
@@ -205,7 +249,9 @@ export function Shell({
                             className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium transition ${
                               active
                                 ? "bg-primary text-white shadow-sm"
-                                : "text-base-content/75 hover:bg-base-300/50 hover:text-base-content"
+                                : alsoActive
+                                  ? "bg-base-300/40 text-base-content"
+                                  : "text-base-content/75 hover:bg-base-300/50 hover:text-base-content"
                             }`}
                           >
                             <Icon name={item.icon} />
@@ -215,6 +261,19 @@ export function Shell({
                               </span>
                             ) : null}
                           </Link>
+                          {showAlso && item.also ? (
+                            <Link
+                              href={item.also.href}
+                              title={item.also.hint ?? item.also.label}
+                              className={`mt-0.5 ml-[1.4rem] hidden items-center rounded-md border-l border-base-300 py-1 pl-3 text-xs transition md:flex ${
+                                alsoActive
+                                  ? "font-medium text-primary"
+                                  : "text-base-content/70 hover:text-base-content"
+                              }`}
+                            >
+                              <span className="truncate">{item.also.label}</span>
+                            </Link>
+                          ) : null}
                         </li>
                       );
                     })}

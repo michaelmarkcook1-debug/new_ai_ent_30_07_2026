@@ -60,7 +60,7 @@ mode: extractive quotes with citations, clearly badged. To go live, put a
 key in `.env.local` under `ANTHROPIC_API_KEY=` and restart. The key is
 read only from that file, so a key elsewhere on the machine is never spent.
 
-## Workforce Model Fit (FitEngine)
+## Workforce Model Fit (Model for Role)
 
 Pick an industry, a function and a role, and the engine returns the
 cheapest model that meets that role's requirements, with the reasoning
@@ -68,7 +68,7 @@ and the cost on screen: which requirements decided it, which models were
 eliminated and by what number, what it costs per person and for the whole
 role, and what the same people would cost on the top model instead.
 
-It sits on the FitEngine tab, above the adoption explorer. 258 roles
+It sits on the Model for Role tab (route /market-view). 258 roles
 across 29 industries against 330 priced models.
 
 What it does **not** claim matters as much as what it does. Model prices

@@ -18,6 +18,17 @@ const JOBS: {
   cta: string;
   then?: string;
 }[] = [
+  // First card, added 4 August 2026. This is the highest-intent question on
+  // the site and until now had no front door: all six cards pointed elsewhere
+  // and the tool sat second in the second of three nav groups.
+  {
+    question: "Which AI model should each of my people actually get?",
+    detail:
+      "Pick an industry, a function and a role. You get the cheapest model that meets that role's requirements, which requirements decided it, which models were eliminated and by what number, and the cost per person and for the whole role. 258 roles across 29 industries against 330 priced models.",
+    href: "/market-view",
+    cta: "Pick a role",
+    then: "Model for Role",
+  },
   {
     question: "We want AI for a specific workflow. Who should we shortlist?",
     detail:
