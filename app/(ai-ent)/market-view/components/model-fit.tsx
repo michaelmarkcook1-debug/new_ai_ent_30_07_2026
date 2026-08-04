@@ -40,6 +40,7 @@ import type {
   Role,
 } from "@/lib/model-fit";
 import { PriceCapabilityChart } from "./model-fit-chart";
+import { recordUsage } from "@/lib/catalogue/client";
 
 // Workforce Model Fit: pick an industry, a function and a role, and the engine
 // returns the cheapest model meeting that role's requirements, with the
@@ -448,6 +449,10 @@ export function ModelFit() {
   function compute() {
     if (!ready) return;
     setComputedRoleId(roleId);
+    // Anonymous: which role was costed, never who costed it. Deliberately not
+    // awaited — a telemetry write must never delay the answer the reader
+    // pressed the button for, and it swallows its own failures.
+    void recordUsage("fitengine", "compute", roleId);
   }
 
   const detail =

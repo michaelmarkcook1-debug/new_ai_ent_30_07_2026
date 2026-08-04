@@ -3,6 +3,7 @@ import { MicroLabel } from "@/lib/ui/micro";
 import { AdoptionMaturity } from "./adoption-view";
 import { PeerAdoptionExplorer } from "./peer-explorer";
 import { DisclosurePanel } from "./disclosure-panel";
+import { MovementPanel } from "./movement-panel";
 
 export const metadata = { title: "AI Adoption | AI Enterprise" };
 
@@ -106,6 +107,7 @@ export default function AiAdoptionPage() {
           </p>
         </section>
 
+        <MovementPanel />
         <DisclosurePanel />
         <PeerAdoptionExplorer />
         <AdoptionMaturity />

@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest run",
-    "ingest:adoption": "node scripts/ingest-adoption.mjs"
+    "ingest:adoption": "node scripts/ingest-adoption.mjs",
+    "ingest:catalogue": "node scripts/ingest-catalogue.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

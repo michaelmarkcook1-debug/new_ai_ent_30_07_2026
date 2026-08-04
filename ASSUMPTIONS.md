@@ -1081,3 +1081,58 @@ Dates are absolute; the build day is 30 July 2026.
     Three of the nine pages are static with a one-day revalidate; the other six
     were already dynamic for other reasons and so re-render on every request,
     which is more often than daily rather than less.
+
+33. **A database, and what "movement" honestly means (4 August 2026).** Michael
+    asked for a database holding an ongoing catalogue of model, user, market
+    and vendor movement, and for the app to be as cost-efficient as possible
+    without losing quality.
+    - **Which database.** Two paused Supabase projects already existed in the
+      Vercel-managed org. Michael chose `ag-vendor-intake` (eu-west-2). It held
+      two empty tables, `public.vendors` and `public.submissions`; everything
+      new went into a separate `aie` schema so nothing existing was touched.
+    - **One observation table, not one per series.** Movement is the same
+      question in every series — what was this figure last time, what is it now
+      — so `aie.observation` answers it once and a new series costs an
+      ingestion rather than a migration. `observed_at` (when the fact was true)
+      is deliberately distinct from `ingested_at` (when we recorded it): a May
+      2026 seed read today has a May `observed_at`, and collapsing the two
+      would date every historical figure to the day we happened to fetch it.
+    - **A first reading is not a movement of zero.** The API returns `change:
+      null` where a subject has one observation, and the panel prints "no
+      prior" rather than drawing a flat line. 72 market subjects currently sit
+      in exactly that state and the page says so — "movement appears once a
+      second reading exists" — instead of showing 72 zeros.
+    - **Vendor movement is real on the first run.** SEC EDGAR is queried for two
+      consecutive twelve-month windows, each dated at its own end, so the pair
+      is two genuine measurements rather than one measurement and an
+      assumption. Anthropic 13 → 36 filings, OpenAI 47 → 83, Palantir 20 → 36,
+      against flat hyperscalers. The panel states that growth here tracks
+      attention and materiality, not revenue, and that percentages on small
+      bases flatter the labs.
+    - **What was deliberately not recorded.** The upstream market dataset
+      carries `previousEstimate` and `changePct`, but no date for the earlier
+      reading. An observation without a time cannot be placed on a timeline, so
+      those fields were dropped rather than given an invented date to make the
+      first run look richer.
+    - **Usage is anonymous by construction, not by policy.** `aie.usage_event`
+      has no column for an IP address, session identifier, user agent, or
+      anything a visitor typed — there is nothing to remove later because there
+      is nothing to collect. It is written through a `security definer`
+      function taking five checked arguments, so the writable surface is not a
+      table, and `occurred_at` is the database clock rather than caller-
+      supplied. Row-level security makes it write-only from outside: the public
+      key may insert and has no policy permitting a read. Verified against the
+      live project — reading the catalogue returns 200, reading usage fails,
+      writing an observation is refused with `permission denied`.
+    - **Cost: measured, and mostly already right.** Prompt caching was
+      considered and rejected on measurement, not taste: the system prompts are
+      111 and 146 tokens against a minimum cacheable prefix of 512 on Opus 5,
+      1,024 on Sonnet 5 and 4,096 on Haiku 4.5, so a `cache_control` marker
+      would have cost the write premium and never produced a read. Model
+      routing was already the product's own thesis applied to itself — Haiku
+      for classification, Sonnet by default, Opus only on an explicit
+      comprehensive request. The news fetch that pulls 3.28MB to keep one
+      headline already had its TTL raised to 24 hours for this reason. The
+      genuine remaining lever is knowing which surfaces are used at all, which
+      is what the usage series now measures: the cheapest tool is the one
+      nobody needed and nobody has to maintain.
