@@ -1,5 +1,5 @@
 import { PageHeader } from "@/lib/ui/page";
-import { buildRankingRows, datasetDate } from "./data";
+import { buildRankingRows, datasetDate, SCORE_COLUMNS } from "./data";
 import { RankingsTable } from "./components/rankings-table";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { vendorViewInsight, pickNews } from "@/lib/analyst/insight";
@@ -24,7 +24,7 @@ export default async function VendorViewPage() {
         lanes={["aie"]}
       />
       <AnalystInsight insight={insight} context="vendor ranking" />
-      <RankingsTable rows={rows} generatedOn={datasetDate()} />
+      <RankingsTable rows={rows} generatedOn={datasetDate()} columns={SCORE_COLUMNS} />
     </>
   );
 }

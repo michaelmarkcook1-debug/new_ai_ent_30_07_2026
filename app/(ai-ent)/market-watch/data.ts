@@ -3,6 +3,7 @@
 // intelligence vendor roster, exposure map). Derived values are simple counts
 // over those rows and each derivation is documented in a DerivationDrawer.
 
+import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import {
   EXPOSURE_EDGES,
   EXPOSURE_NODES,
@@ -114,7 +115,7 @@ export interface CategoryShareView {
   methodology: string;
 }
 
-const VENDOR_NAME = new Map(INTELLIGENCE_VENDORS.map((v) => [v.id, v.name]));
+const VENDOR_NAME = new Map(VENDOR_DIRECTORY.map((v) => [v.id, v.name]));
 const TRACKED_IDS = new Set(TRACKED_VENDORS.map((v) => v.id));
 
 export function getCategoryShares(): CategoryShareView[] {
@@ -329,7 +330,7 @@ export interface WatchlistView {
 }
 
 export function getCategoryLeaders(): LeaderView[] {
-  const vendorById = new Map(INTELLIGENCE_VENDORS.map((v) => [v.id, v]));
+  const vendorById = new Map(VENDOR_DIRECTORY.map((v) => [v.id, v]));
   return getCategoryShares()
     .filter((cat) => cat.rows.length > 0)
     .map((cat) => {

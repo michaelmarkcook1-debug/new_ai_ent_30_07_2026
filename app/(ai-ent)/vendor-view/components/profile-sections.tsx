@@ -46,9 +46,9 @@ export function ProfileFacts({ profile }: { profile: VendorProfile }) {
     <section className="rounded-lg border border-base-300 bg-base-100 p-5">
       <div className="flex flex-wrap items-center gap-1.5">
         <CategoryChip label={`Layer: ${vendor.layer}`} />
-        <CategoryChip label={intel.category} />
-        <CategoryChip label={intel.marketPosition} />
-        {intel.headquarters ? <CategoryChip label={intel.headquarters} /> : null}
+        <CategoryChip label={intel.category ?? "not stated"} />
+        <CategoryChip label={intel.marketPosition ?? "not stated"} />
+        {intel.headquarters ? <CategoryChip label={intel.headquarters ?? "not stated"} /> : null}
         <CategoryChip
           label={
             vendor.isPublic
@@ -60,7 +60,7 @@ export function ProfileFacts({ profile }: { profile: VendorProfile }) {
       </div>
       <p className="measure mt-3 text-sm leading-relaxed text-base-content/85">
         <span className="micro-label mr-2">Analyst interpretation</span>
-        {intel.analystInterpretation}
+        {intel.analystInterpretation ?? "No interpretation published."}
       </p>
     </section>
   );
@@ -69,53 +69,31 @@ export function ProfileFacts({ profile }: { profile: VendorProfile }) {
 // ---------- Score block ----------
 
 export function ScoreBlock({ profile }: { profile: VendorProfile }) {
-  const { intel, pillarScores } = profile;
-  const pillarByField = new Map(pillarScores.map((p) => [p.pillar, p]));
+  const { intel, liveCapabilities } = profile;
 
   const drawer = (
     <DerivationDrawer title={`How ${intel.name}'s scores are derived`}>
       <p>
-        These values are carried unchanged from the AI Enterprise dataset.{" "}
-        <span className="font-mono text-sm">overallScore</span> and{" "}
-        is AG&apos;s own overall score for the vendor;
-        each pillar row is that pillar&apos;s{" "}
-        <span className="font-mono text-sm">capabilityScore</span> with its
-        evidence grade (E1 to E5). Values are derived signals, and claims
-        below the
-        strong-evidence bar are suppressed at source rather than presented as
-        verified.
+        Carried unchanged from the AI Enterprise source.{" "}
+        <span className="font-mono text-sm">overallScore</span> is the score
+        that source publishes for the vendor, and each capability row is its{" "}
+        <span className="font-mono text-sm">maturityScore</span> with the
+        evidence grade (E1 to E5) and the date it was last verified.
       </p>
-      <div className="space-y-3">
-        {PILLARS.map((pillar) => {
-          const row = pillarByField.get(pillar.id);
-          if (!row) return null;
-          return (
-            <div key={pillar.id}>
-              <p className="font-semibold">
-                {pillar.label}{" "}
-                <span className="font-mono text-xs text-muted">
-                  {pillar.id} · {row.evidenceGrade}
-                </span>
-              </p>
-              {row.strengths.length > 0 ? (
-                <p className="text-sm">
-                  Strengths: {row.strengths.join(" ")}
-                </p>
-              ) : null}
-              {row.risks.length > 0 ? (
-                <p className="text-sm text-muted">
-                  Risks noted: {row.risks.join("; ")}
-                </p>
-              ) : null}
-              {row.missingEvidence.length > 0 ? (
-                <p className="text-sm text-warn">
-                  Missing evidence: {row.missingEvidence.join(" ")}
-                </p>
-              ) : null}
-            </div>
-          );
-        })}
-      </div>
+      <p className="measure text-muted">
+        These figures used to come from a copy of the source taken on 8 July
+        2026 and frozen into this app. That copy had drifted: it scored every
+        one of 37 overlapping vendors higher than the live source, by 18 points
+        on average and by 46 for Microsoft. The copy is gone and this reads the
+        published figures directly, so a number here now matches the number
+        upstream.
+      </p>
+      <p className="measure text-muted">
+        The six pillar scores that used to sit here are gone with it. Upstream
+        publishes no pillar scores: they were computed by the frozen copy, so
+        there was nothing current to refresh them against. The ten capabilities
+        below are what the source actually publishes per vendor.
+      </p>
     </DerivationDrawer>
   );
 
@@ -129,50 +107,55 @@ export function ScoreBlock({ profile }: { profile: VendorProfile }) {
           </div>
         </div>
         <div>
-          <span className="micro-label">marketPosition</span>
-          <div className="mt-1 font-mono text-sm">
-            {intel.marketPosition}
+          <span className="micro-label">confidenceScore</span>
+          <div className="mt-1">
+            <ScorePill score={intel.confidenceScore} />
           </div>
         </div>
+        <div>
+          <span className="micro-label">marketPosition</span>
+          <div className="mt-1 font-mono text-sm">{intel.marketPosition ?? "not stated"}</div>
+        </div>
       </div>
-      {pillarScores.length > 0 ? (
+      {liveCapabilities.length > 0 ? (
         <div className="mt-4 overflow-x-auto">
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-base-300">
-                <th className={TH_CLASS}>Pillar</th>
-                <th className={TH_CLASS}>capabilityScore</th>
+                <th className={TH_CLASS}>Capability</th>
+                <th className={TH_CLASS}>maturityScore</th>
+                <th className={TH_CLASS}>status</th>
                 <th className={TH_CLASS}>evidenceGrade</th>
+                <th className={TH_CLASS}>lastVerified</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-base-300">
-              {PILLARS.map((pillar) => {
-                const row = pillarByField.get(pillar.id);
-                if (!row) return null;
-                return (
-                  <tr key={pillar.id}>
-                    <td className="px-2 py-2">
-                      <span className="font-mono text-xs">{pillar.id}</span>
-                      <span className="ml-2 text-xs text-muted">
-                        {pillar.label}
-                      </span>
-                    </td>
-                    <td className="px-2 py-2">
-                      <ScorePill score={row.capabilityScore} />
-                    </td>
-                    <td className="px-2 py-2 font-mono text-xs">
-                      {row.evidenceGrade}
-                    </td>
-                  </tr>
-                );
-              })}
+              {liveCapabilities.map((c) => (
+                <tr key={c.capabilityId}>
+                  <td className="px-2 py-2">
+                    <span className="font-mono text-xs">{c.capabilityId}</span>
+                  </td>
+                  <td className="px-2 py-2">
+                    <ScorePill score={c.maturityScore} />
+                  </td>
+                  <td className="px-2 py-2 font-mono text-xs text-muted">
+                    {c.status ?? "not stated"}
+                  </td>
+                  <td className="px-2 py-2 font-mono text-xs">
+                    {c.evidenceGrade ?? "not graded"}
+                  </td>
+                  <td className="px-2 py-2 font-mono text-xs text-muted">
+                    {c.lastVerified ? c.lastVerified.slice(0, 10) : "not stated"}
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
       ) : (
         <EmptyState
-          title="No pillar scores recorded"
-          detail="The AI Enterprise dataset holds no per-pillar scores for this vendor."
+          title="No capability scores published"
+          detail="The AI Enterprise source publishes no capability breakdown for this vendor."
         />
       )}
     </Section>

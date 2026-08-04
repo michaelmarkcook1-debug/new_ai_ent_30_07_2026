@@ -116,3 +116,30 @@ for (const [file, how] of Object.entries(NO_ENDPOINT)) {
 console.error(
   `\n${changed} updated, ${same} unchanged, ${refused} refused as older, ${failed} failed${DRY ? "  (dry run, nothing written)" : ""}`
 );
+
+// Two artefacts are derived from the fixtures and go stale silently if they
+// are not rebuilt with them. That is exactly how the July port drifted into
+// showing 88 for a vendor the source scored 68.3, so they are regenerated
+// here rather than left to be remembered.
+if (!DRY && changed > 0) {
+  const { execFileSync } = await import("node:child_process");
+  for (const script of [
+    "scripts/generate-vendor-directory.mjs",
+    "scripts/snapshot-signals.mjs",
+  ]) {
+    try {
+      const out = execFileSync("node", [script], { encoding: "utf8" });
+      console.error(`\n  ran ${script}`);
+      console.error(
+        out.trim().split("\n").map((l) => `    ${l}`).join("\n")
+      );
+    } catch (err) {
+      console.error(
+        `\n  FAILED ${script}: ${err instanceof Error ? err.message.split("\n")[0] : String(err)}`
+      );
+      console.error(
+        "    The fixtures moved but a derived artefact did not. Run it before trusting the app."
+      );
+    }
+  }
+}

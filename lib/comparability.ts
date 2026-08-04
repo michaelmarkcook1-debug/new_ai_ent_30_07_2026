@@ -16,6 +16,7 @@
 // Thin categories are called out rather than hidden: where a category holds
 // only one or two placements, the order is a tier, not a rank.
 
+import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import {
   MARKET_CATEGORIES,
   MARKET_SHARE_ESTIMATES,
@@ -128,7 +129,7 @@ export function vendorIdsInCategory(categoryId: string): string[] {
 }
 
 // Display name lookup, for surfaces that only carry vendor ids.
-const VENDOR_NAME = new Map(INTELLIGENCE_VENDORS.map((v) => [v.id, v.name]));
+const VENDOR_NAME = new Map(VENDOR_DIRECTORY.map((v) => [v.id, v.name]));
 
 export function vendorName(id: string): string {
   return VENDOR_NAME.get(id) ?? id;

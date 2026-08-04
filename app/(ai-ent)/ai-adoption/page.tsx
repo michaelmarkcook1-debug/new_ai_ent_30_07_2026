@@ -2,6 +2,7 @@ import { PageHeader } from "@/lib/ui/page";
 import { MicroLabel } from "@/lib/ui/micro";
 import { AdoptionMaturity } from "./adoption-view";
 import { PeerAdoptionExplorer } from "./peer-explorer";
+import { DisclosurePanel } from "./disclosure-panel";
 
 export const metadata = { title: "AI Adoption | AI Enterprise" };
 
@@ -45,8 +46,8 @@ export default function AiAdoptionPage() {
     <>
       <PageHeader
         title="AI Adoption"
-        subtitle="Who is actually paying for AI, and how far each industry has got: measured third-party adoption figures with their sources, and the AIE dataset's industry maturity profiles."
-        lanes={["aie"]}
+        subtitle="Who is actually adopting AI, measured three ways: what companies disclose in their own SEC filings, what independent measurement firms report, and how far each industry has progressed."
+        lanes={["live", "aie-live", "aie"]}
       />
       <div className="space-y-4">
         {/* Measured figures, attributed and dated. Never blended. */}
@@ -105,6 +106,7 @@ export default function AiAdoptionPage() {
           </p>
         </section>
 
+        <DisclosurePanel />
         <PeerAdoptionExplorer />
         <AdoptionMaturity />
       </div>

@@ -1,5 +1,5 @@
+import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import { PageHeader } from "@/lib/ui/page";
-import { INTELLIGENCE_VENDORS } from "@/lib/aie";
 import { loadThirdPartySignals } from "./third-party-data";
 import { AiePillarsSection } from "./components/aie-pillars";
 import { ReputationHistoryChart } from "./components/history-chart";
@@ -15,7 +15,7 @@ export const metadata = { title: "Reputation Tracker | AI Enterprise" };
 export default async function ReputationTrackerPage() {
   const thirdParty = await loadThirdPartySignals();
   const vendorNames = Object.fromEntries(
-    INTELLIGENCE_VENDORS.map((v) => [v.id, v.name]),
+    VENDOR_DIRECTORY.map((v) => [v.id, v.name]),
   );
   const m = await loadMarketMetrics();
   const insight = reputationInsight(

@@ -5,7 +5,7 @@ import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
 import { Accordion } from "@/lib/ui/accordion";
 import { DerivationDrawer, ScorePill } from "@/lib/ui/score";
-import { EVIDENCE_MODIFIER, PILLARS } from "@/lib/aie/types";
+import { EVIDENCE_MODIFIER } from "@/lib/aie/types";
 import {
   COMPARABILITY_NOTE,
   THIN_CATEGORY_NOTE,
@@ -14,23 +14,24 @@ import {
   placeByCategory,
   unplaced,
 } from "@/lib/comparability";
-import {
-  SCORE_COLUMNS,
-  type RankingRow,
-  type ScoreSortKey,
-} from "../data";
+// Types only. The data module reads the fixtures from disk now, so importing
+// a value from it would drag node:fs into this client bundle; the columns
+// arrive as a prop from the server instead.
+import type { RankingRow, ScoreSortKey } from "../data";
 
-const PILLAR_LABEL = new Map(PILLARS.map((p) => [p.id as string, p.label]));
+export interface ScoreColumn {
+  key: ScoreSortKey;
+  label: string;
+  help: string;
+}
 
 function scoreFor(row: RankingRow, key: ScoreSortKey): number | null {
   if (key === "overallScore") return row.overallScore;
   if (key === "confidenceScore") return row.confidenceScore;
-  return row.pillars[key]?.score ?? null;
+  return row.capabilities[key]?.score ?? null;
 }
 
-function headerHelp(key: ScoreSortKey): string {
-  return PILLAR_LABEL.get(key) ?? "Vendor record field";
-}
+
 
 // Rankings surface: an evidence table ranked WITHIN each market category,
 // never across one. Sorting reorders vendors inside their own category only,
@@ -38,9 +39,11 @@ function headerHelp(key: ScoreSortKey): string {
 export function RankingsTable({
   rows,
   generatedOn,
+  columns,
 }: {
   rows: RankingRow[];
   generatedOn: string;
+  columns: ScoreColumn[];
 }) {
   const [sortBy, setSortBy] = useState<ScoreSortKey>("overallScore");
   const [only, setOnly] = useState<string | null>(null);
@@ -101,12 +104,12 @@ export function RankingsTable({
         </div>
         <div className="mt-2 flex flex-wrap items-center gap-1.5 border-t border-base-300 pt-2">
           <span className="micro-label">Rank within category by</span>
-          {SCORE_COLUMNS.map((col) => (
+          {columns.map((col) => (
             <button
               key={col.key}
               type="button"
               onClick={() => setSortBy(col.key)}
-              title={`${headerHelp(col.key)}. ${col.help}`}
+              title={`${col.label}. ${col.help}`}
               className={`rounded border px-1.5 py-0.5 font-mono text-xs transition ${
                 sortBy === col.key
                   ? "border-primary text-primary"
@@ -168,12 +171,12 @@ export function RankingsTable({
                   <th className="px-3 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-muted">
                     Vendor
                   </th>
-                  {SCORE_COLUMNS.map((col) => (
+                  {columns.map((col) => (
                     <th key={col.key} className="px-3 py-2.5">
                       <button
                         type="button"
                         onClick={() => setSortBy(col.key)}
-                        title={`${headerHelp(col.key)}. ${col.help} Click to rank this category by it.`}
+                        title={`${col.label}. ${col.help} Click to rank this category by it.`}
                         className={`whitespace-nowrap font-mono text-xs font-medium tracking-wide ${
                           sortBy === col.key ? "text-primary" : "text-muted hover:text-base-content"
                         }`}
@@ -217,7 +220,7 @@ export function RankingsTable({
                         ) : null}
                       </div>
                     </td>
-                    {SCORE_COLUMNS.map((col) => {
+                    {columns.map((col) => {
                       const value = scoreFor(row, col.key);
                       return (
                         <td key={col.key} className="px-3 py-2.5">

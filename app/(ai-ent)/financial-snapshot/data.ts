@@ -1,4 +1,4 @@
-import { INTELLIGENCE_VENDORS } from "@/lib/aie";
+import { liveVendor } from "@/lib/aie/live-vendors";
 import { manifestForVendor } from "@/lib/aie/sourcing/manifest";
 import type { PrivateVendorCard, ProbedTicker } from "./types";
 
@@ -41,7 +41,7 @@ const PRIVATE_VENDOR_IDS = [
 
 export function privateVendorCards(): PrivateVendorCard[] {
   return PRIVATE_VENDOR_IDS.map((id) => {
-    const seed = INTELLIGENCE_VENDORS.find((v) => v.id === id);
+    const seed = liveVendor(id);
     // The sourcing manifest keys vendors as "vendor_<id>".
     const sources = manifestForVendor(`vendor_${id}`).map((entry) => ({
       label: entry.label,

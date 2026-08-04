@@ -1,0 +1,675 @@
+{
+ "measures": "Registrants naming each vendor in the stated SEC filing type, within the stated window. A count of disclosures, not of customers and not market share.",
+ "formType": "10-K",
+ "window": "last 365 days",
+ "fetchedAt": "2026-08-04T09:45:46.461Z",
+ "rows": [
+  {
+   "vendor": "Google Cloud",
+   "filings": 142,
+   "bySic": [
+    {
+     "sic": "7372",
+     "label": "Prepackaged software",
+     "filings": 46
+    },
+    {
+     "sic": "7370",
+     "label": "Computer services",
+     "filings": 10
+    },
+    {
+     "sic": "7374",
+     "label": "Data processing and hosting",
+     "filings": 9
+    },
+    {
+     "sic": "6199",
+     "label": "Finance services",
+     "filings": 8
+    },
+    {
+     "sic": "7373",
+     "label": "SIC 7373",
+     "filings": 7
+    },
+    {
+     "sic": "3663",
+     "label": "SIC 3663",
+     "filings": 4
+    },
+    {
+     "sic": "6221",
+     "label": "SIC 6221",
+     "filings": 4
+    },
+    {
+     "sic": "7389",
+     "label": "Business services",
+     "filings": 4
+    }
+   ],
+   "examples": [
+    {
+     "company": "Alphabet Inc. (GOOG, GOOGL) (CIK 0001652044)",
+     "cik": "0001652044",
+     "filedOn": "2026-02-05",
+     "sic": "7370",
+     "url": "https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/goog-20251231.htm"
+    },
+    {
+     "company": "Planet Labs PBC (PL) (CIK 0001836833)",
+     "cik": "0001836833",
+     "filedOn": "2026-06-05",
+     "sic": "3663",
+     "url": "https://www.sec.gov/Archives/edgar/data/1836833/000119312526258284/pl-20260131.htm"
+    },
+    {
+     "company": "CME GROUP INC. (CME) (CIK 0001156375)",
+     "cik": "0001156375",
+     "filedOn": "2026-02-26",
+     "sic": "6200",
+     "url": "https://www.sec.gov/Archives/edgar/data/1156375/000115637526000009/cme-20251231.htm"
+    },
+    {
+     "company": "C3.ai, Inc. (AI) (CIK 0001577526)",
+     "cik": "0001577526",
+     "filedOn": "2026-06-24",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1577526/000157752626000078/ai-20260430.htm"
+    },
+    {
+     "company": "Healthcare Triangle, Inc. (HCTI) (CIK 0001839285)",
+     "cik": "0001839285",
+     "filedOn": "2026-04-15",
+     "sic": "7373",
+     "url": "https://www.sec.gov/Archives/edgar/data/1839285/000121390026044078/ea0284191-10k_healthcare.htm"
+    }
+   ],
+   "query": "\"Google Cloud\" in 10-K, filed 2025-08-04 to 2026-08-04"
+  },
+  {
+   "vendor": "Microsoft Azure",
+   "filings": 109,
+   "bySic": [
+    {
+     "sic": "7372",
+     "label": "Prepackaged software",
+     "filings": 41
+    },
+    {
+     "sic": "7370",
+     "label": "Computer services",
+     "filings": 7
+    },
+    {
+     "sic": "7374",
+     "label": "Data processing and hosting",
+     "filings": 7
+    },
+    {
+     "sic": "7373",
+     "label": "SIC 7373",
+     "filings": 6
+    },
+    {
+     "sic": "7389",
+     "label": "Business services",
+     "filings": 5
+    },
+    {
+     "sic": "6221",
+     "label": "SIC 6221",
+     "filings": 4
+    },
+    {
+     "sic": "3576",
+     "label": "SIC 3576",
+     "filings": 3
+    },
+    {
+     "sic": "6199",
+     "label": "Finance services",
+     "filings": 3
+    }
+   ],
+   "examples": [
+    {
+     "company": "Skkynet Cloud Systems, Inc. (SKKY) (CIK 0001546853)",
+     "cik": "0001546853",
+     "filedOn": "2026-01-27",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1546853/000147793226000435/skky_10k.htm"
+    },
+    {
+     "company": "American Picture House Corp (APHP) (CIK 0001771995)",
+     "cik": "0001771995",
+     "filedOn": "2026-03-30",
+     "sic": "7900",
+     "url": "https://www.sec.gov/Archives/edgar/data/1771995/000149315226013430/ex10-15.htm"
+    },
+    {
+     "company": "TERADATA CORP /DE/ (TDC) (CIK 0000816761)",
+     "cik": "0000816761",
+     "filedOn": "2026-02-27",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/816761/000162828026012671/tdc-20251231.htm"
+    },
+    {
+     "company": "NetApp, Inc. (NTAP) (CIK 0001002047)",
+     "cik": "0001002047",
+     "filedOn": "2026-06-05",
+     "sic": "3572",
+     "url": "https://www.sec.gov/Archives/edgar/data/1002047/000119312526259683/ntap-20260424.htm"
+    },
+    {
+     "company": "Nexscient, Inc. (NXNT) (CIK 0001976663)",
+     "cik": "0001976663",
+     "filedOn": "2025-09-30",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1976663/000147793225007240/nexscient_ex107.htm"
+    }
+   ],
+   "query": "\"Microsoft Azure\" in 10-K, filed 2025-08-04 to 2026-08-04"
+  },
+  {
+   "vendor": "OpenAI",
+   "filings": 83,
+   "bySic": [
+    {
+     "sic": "7372",
+     "label": "Prepackaged software",
+     "filings": 27
+    },
+    {
+     "sic": "6282",
+     "label": "SIC 6282",
+     "filings": 5
+    },
+    {
+     "sic": "7370",
+     "label": "Computer services",
+     "filings": 5
+    },
+    {
+     "sic": "3674",
+     "label": "Semiconductors",
+     "filings": 4
+    },
+    {
+     "sic": "7389",
+     "label": "Business services",
+     "filings": 4
+    },
+    {
+     "sic": "6531",
+     "label": "SIC 6531",
+     "filings": 3
+    },
+    {
+     "sic": "6770",
+     "label": "Blank cheques and holding companies",
+     "filings": 3
+    },
+    {
+     "sic": "6798",
+     "label": "Real estate investment trusts",
+     "filings": 3
+    }
+   ],
+   "examples": [
+    {
+     "company": "Nexscient, Inc. (NXNT) (CIK 0001976663)",
+     "cik": "0001976663",
+     "filedOn": "2025-09-30",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1976663/000147793225007240/nexscient_ex107.htm"
+    },
+    {
+     "company": "MICROSOFT CORP (MSFT) (CIK 0000789019)",
+     "cik": "0000789019",
+     "filedOn": "2026-07-29",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/msft-20260630.htm"
+    },
+    {
+     "company": "ADVANCED MICRO DEVICES INC (AMD) (CIK 0000002488)",
+     "cik": "0000002488",
+     "filedOn": "2026-02-04",
+     "sic": "3674",
+     "url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000021/amd-20251227.htm"
+    },
+    {
+     "company": "CoreWeave, Inc. (CRWV) (CIK 0001769628)",
+     "cik": "0001769628",
+     "filedOn": "2026-03-02",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000104/ex10311.htm"
+    },
+    {
+     "company": "Eightco Holdings Inc. (ORBS) (CIK 0001892492)",
+     "cik": "0001892492",
+     "filedOn": "2026-04-15",
+     "sic": "6153",
+     "url": "https://www.sec.gov/Archives/edgar/data/1892492/000149315226016664/form10-k.htm"
+    }
+   ],
+   "query": "\"OpenAI\" in 10-K, filed 2025-08-04 to 2026-08-04"
+  },
+  {
+   "vendor": "Snowflake",
+   "filings": 39,
+   "bySic": [
+    {
+     "sic": "7372",
+     "label": "Prepackaged software",
+     "filings": 24
+    },
+    {
+     "sic": "4911",
+     "label": "Electric services",
+     "filings": 2
+    },
+    {
+     "sic": "7370",
+     "label": "Computer services",
+     "filings": 2
+    },
+    {
+     "sic": "2621",
+     "label": "SIC 2621",
+     "filings": 1
+    },
+    {
+     "sic": "2834",
+     "label": "Pharmaceutical preparations",
+     "filings": 1
+    },
+    {
+     "sic": "2836",
+     "label": "Biological products",
+     "filings": 1
+    },
+    {
+     "sic": "3571",
+     "label": "SIC 3571",
+     "filings": 1
+    },
+    {
+     "sic": "3825",
+     "label": "SIC 3825",
+     "filings": 1
+    }
+   ],
+   "examples": [
+    {
+     "company": "Snowflake Inc. (SNOW) (CIK 0001640147)",
+     "cik": "0001640147",
+     "filedOn": "2026-03-20",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1640147/000164014726000008/ex-191snowflakefy2026q4.htm"
+    },
+    {
+     "company": "Snowflake Inc. (SNOW) (CIK 0001640147)",
+     "cik": "0001640147",
+     "filedOn": "2026-03-20",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1640147/000164014726000008/ex-211snowflakefy2026q4.htm"
+    },
+    {
+     "company": "Snowflake Inc. (SNOW) (CIK 0001640147)",
+     "cik": "0001640147",
+     "filedOn": "2026-03-20",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1640147/000164014726000008/snow-20260131.htm"
+    },
+    {
+     "company": "Snowflake Inc. (SNOW) (CIK 0001640147)",
+     "cik": "0001640147",
+     "filedOn": "2026-03-20",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1640147/000164014726000008/ex-106snowflakefy2026q4.htm"
+    },
+    {
+     "company": "Snowflake Inc. (SNOW) (CIK 0001640147)",
+     "cik": "0001640147",
+     "filedOn": "2026-03-20",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1640147/000164014726000008/ex-321snowflakefy2026q4.htm"
+    }
+   ],
+   "query": "\"Snowflake\" in 10-K, filed 2025-08-04 to 2026-08-04"
+  },
+  {
+   "vendor": "Databricks",
+   "filings": 37,
+   "bySic": [
+    {
+     "sic": "7372",
+     "label": "Prepackaged software",
+     "filings": 9
+    },
+    {
+     "sic": "3825",
+     "label": "SIC 3825",
+     "filings": 1
+    },
+    {
+     "sic": "6211",
+     "label": "SIC 6211",
+     "filings": 1
+    },
+    {
+     "sic": "6552",
+     "label": "SIC 6552",
+     "filings": 1
+    },
+    {
+     "sic": "6798",
+     "label": "Real estate investment trusts",
+     "filings": 1
+    },
+    {
+     "sic": "7310",
+     "label": "SIC 7310",
+     "filings": 1
+    },
+    {
+     "sic": "7363",
+     "label": "SIC 7363",
+     "filings": 1
+    },
+    {
+     "sic": "7370",
+     "label": "Computer services",
+     "filings": 1
+    }
+   ],
+   "examples": [
+    {
+     "company": "Apollo Origination II (UL) Capital Trust (CIK 0002052153)",
+     "cik": "0002052153",
+     "filedOn": "2026-03-13",
+     "sic": "",
+     "url": "https://www.sec.gov/Archives/edgar/data/2052153/000119312526104513/ck0002052153-20251231.htm"
+    },
+    {
+     "company": "Apollo Origination II (Levered) Capital Trust (CIK 0002052152)",
+     "cik": "0002052152",
+     "filedOn": "2026-03-13",
+     "sic": "",
+     "url": "https://www.sec.gov/Archives/edgar/data/2052152/000119312526104533/none-20251231.htm"
+    },
+    {
+     "company": "Silver Point Specialty Lending Fund (CIK 0001646614)",
+     "cik": "0001646614",
+     "filedOn": "2026-03-18",
+     "sic": "",
+     "url": "https://www.sec.gov/Archives/edgar/data/1646614/000119312526114381/ck0001646614-20251231.htm"
+    },
+    {
+     "company": "PIMCO Capital Solutions BDC Corp. (CIK 0001905824)",
+     "cik": "0001905824",
+     "filedOn": "2026-03-24",
+     "sic": "",
+     "url": "https://www.sec.gov/Archives/edgar/data/1905824/000119312526121195/d66183d10k.htm"
+    },
+    {
+     "company": "New Mountain Guardian IV BDC, L.L.C. (CIK 0001925531)",
+     "cik": "0001925531",
+     "filedOn": "2026-03-04",
+     "sic": "",
+     "url": "https://www.sec.gov/Archives/edgar/data/1925531/000192553126000003/nmg4-20251231.htm"
+    }
+   ],
+   "query": "\"Databricks\" in 10-K, filed 2025-08-04 to 2026-08-04"
+  },
+  {
+   "vendor": "Anthropic",
+   "filings": 36,
+   "bySic": [
+    {
+     "sic": "7372",
+     "label": "Prepackaged software",
+     "filings": 10
+    },
+    {
+     "sic": "7371",
+     "label": "Computer programming services",
+     "filings": 4
+    },
+    {
+     "sic": "7374",
+     "label": "Data processing and hosting",
+     "filings": 3
+    },
+    {
+     "sic": "6282",
+     "label": "SIC 6282",
+     "filings": 2
+    },
+    {
+     "sic": "6770",
+     "label": "Blank cheques and holding companies",
+     "filings": 2
+    },
+    {
+     "sic": "7370",
+     "label": "Computer services",
+     "filings": 2
+    },
+    {
+     "sic": "7389",
+     "label": "Business services",
+     "filings": 2
+    },
+    {
+     "sic": "2731",
+     "label": "SIC 2731",
+     "filings": 1
+    }
+   ],
+   "examples": [
+    {
+     "company": "AMAZON COM INC (AMZN) (CIK 0001018724)",
+     "cik": "0001018724",
+     "filedOn": "2026-02-06",
+     "sic": "5961",
+     "url": "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+    },
+    {
+     "company": "Digital Brand Media & Marketing Group, Inc. (DBMM) (CIK 0001127475)",
+     "cik": "0001127475",
+     "filedOn": "2025-11-28",
+     "sic": "7389",
+     "url": "https://www.sec.gov/Archives/edgar/data/1127475/000118518525001887/dbmm10k083125.htm"
+    },
+    {
+     "company": "JOHN WILEY & SONS, INC. (WLY, WLYB) (CIK 0000107140)",
+     "cik": "0000107140",
+     "filedOn": "2026-06-24",
+     "sic": "2731",
+     "url": "https://www.sec.gov/Archives/edgar/data/107140/000162828026045111/jwa-20260430.htm"
+    },
+    {
+     "company": "Glidelogic Corp. (GDLG) (CIK 0001848672)",
+     "cik": "0001848672",
+     "filedOn": "2026-04-27",
+     "sic": "7371",
+     "url": "https://www.sec.gov/Archives/edgar/data/1848672/000109690626000615/gdlg-20260131_10k.htm"
+    },
+    {
+     "company": "Zoom Communications, Inc. (ZM) (CIK 0001585521)",
+     "cik": "0001585521",
+     "filedOn": "2026-02-27",
+     "sic": "7370",
+     "url": "https://www.sec.gov/Archives/edgar/data/1585521/000158552126000030/zm-20260131.htm"
+    }
+   ],
+   "query": "\"Anthropic\" in 10-K, filed 2025-08-04 to 2026-08-04"
+  },
+  {
+   "vendor": "Palantir",
+   "filings": 36,
+   "bySic": [
+    {
+     "sic": "7372",
+     "label": "Prepackaged software",
+     "filings": 9
+    },
+    {
+     "sic": "4522",
+     "label": "SIC 4522",
+     "filings": 4
+    },
+    {
+     "sic": "6770",
+     "label": "Blank cheques and holding companies",
+     "filings": 4
+    },
+    {
+     "sic": "3760",
+     "label": "SIC 3760",
+     "filings": 2
+    },
+    {
+     "sic": "6199",
+     "label": "Finance services",
+     "filings": 2
+    },
+    {
+     "sic": "2834",
+     "label": "Pharmaceutical preparations",
+     "filings": 1
+    },
+    {
+     "sic": "3663",
+     "label": "SIC 3663",
+     "filings": 1
+    },
+    {
+     "sic": "3711",
+     "label": "SIC 3711",
+     "filings": 1
+    }
+   ],
+   "examples": [
+    {
+     "company": "Palantir Technologies Inc. (PLTR) (CIK 0001321655)",
+     "cik": "0001321655",
+     "filedOn": "2026-02-17",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1321655/000132165526000011/a2025fyexhibit211.htm"
+    },
+    {
+     "company": "Palantir Technologies Inc. (PLTR) (CIK 0001321655)",
+     "cik": "0001321655",
+     "filedOn": "2026-02-17",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1321655/000132165526000011/a2025q4exhibit321.htm"
+    },
+    {
+     "company": "Palantir Technologies Inc. (PLTR) (CIK 0001321655)",
+     "cik": "0001321655",
+     "filedOn": "2026-02-17",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1321655/000132165526000011/a2025q4exhibit231.htm"
+    },
+    {
+     "company": "Palantir Technologies Inc. (PLTR) (CIK 0001321655)",
+     "cik": "0001321655",
+     "filedOn": "2026-02-17",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1321655/000132165526000011/pltr-20251231.htm"
+    },
+    {
+     "company": "SURF AIR MOBILITY INC. (SRFM) (CIK 0001936224)",
+     "cik": "0001936224",
+     "filedOn": "2026-03-12",
+     "sic": "4522",
+     "url": "https://www.sec.gov/Archives/edgar/data/1936224/000119312526104468/srfm-ex4_1.htm"
+    }
+   ],
+   "query": "\"Palantir\" in 10-K, filed 2025-08-04 to 2026-08-04"
+  },
+  {
+   "vendor": "Hugging Face",
+   "filings": 6,
+   "bySic": [
+    {
+     "sic": "7372",
+     "label": "Prepackaged software",
+     "filings": 3
+    },
+    {
+     "sic": "3674",
+     "label": "Semiconductors",
+     "filings": 1
+    },
+    {
+     "sic": "6199",
+     "label": "Finance services",
+     "filings": 1
+    },
+    {
+     "sic": "6411",
+     "label": "SIC 6411",
+     "filings": 1
+    }
+   ],
+   "examples": [
+    {
+     "company": "JFrog Ltd (FROG) (CIK 0001800667)",
+     "cik": "0001800667",
+     "filedOn": "2026-02-13",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1800667/000119312526051382/frog-20251231.htm"
+    },
+    {
+     "company": "ProCap Financial, Inc. (BRR, BRRWW) (CIK 0002076163)",
+     "cik": "0002076163",
+     "filedOn": "2026-02-18",
+     "sic": "6199",
+     "url": "https://www.sec.gov/Archives/edgar/data/2076163/000149315226007352/form10-k.htm"
+    },
+    {
+     "company": "INTEL CORP (INTC) (CIK 0000050863)",
+     "cik": "0000050863",
+     "filedOn": "2026-01-23",
+     "sic": "3674",
+     "url": "https://www.sec.gov/Archives/edgar/data/50863/000005086326000011/intc-20251227.htm"
+    },
+    {
+     "company": "Roadzen Inc. (RDZN, RDZNW) (CIK 0001868640)",
+     "cik": "0001868640",
+     "filedOn": "2026-06-29",
+     "sic": "6411",
+     "url": "https://www.sec.gov/Archives/edgar/data/1868640/000149315226031069/form10-k.htm"
+    },
+    {
+     "company": "Elastic N.V. (ESTC) (CIK 0001707753)",
+     "cik": "0001707753",
+     "filedOn": "2026-06-08",
+     "sic": "7372",
+     "url": "https://www.sec.gov/Archives/edgar/data/1707753/000170775326000018/estc-20260430.htm"
+    }
+   ],
+   "query": "\"Hugging Face\" in 10-K, filed 2025-08-04 to 2026-08-04"
+  }
+ ],
+ "failed": [],
+ "source": {
+  "id": "sec_edgar_fts",
+  "name": "SEC EDGAR full-text search",
+  "homepage": "https://efts.sec.gov/LATEST/search-index?q=%22artificial+intelligence%22",
+  "apiDocs": "https://www.sec.gov/edgar/search/efts-faq.html",
+  "requiresKey": false,
+  "envVars": [
+   "SEC_USER_AGENT"
+  ],
+  "evidenceClass": "A",
+  "measures": "How many SEC registrants name a vendor in a given filing type, with the industry (SIC) and filing date of each.",
+  "cannotSupport": "Whether the registrant is a customer. A filing may name a vendor as a competitor, investor, supplier or partner, and does not say which. It is also US registrants only, so private and non-US adoption is invisible.",
+  "licence": "US government work, public domain. SEC fair-access policy requires a declared User-Agent and asks for under 10 requests per second."
+ }
+}

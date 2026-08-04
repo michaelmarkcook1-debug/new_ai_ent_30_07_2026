@@ -921,3 +921,48 @@ Dates are absolute; the build day is 30 July 2026.
     - **Global is the absence of a region, not a value.** `region=Global` is
       rejected upstream; omitting the parameter is what the API calls a scope
       of "all". It is the default option and sends nothing.
+
+31. **First-party adoption endpoints and an ingestion function (4 August
+    2026).** Michael asked for endpoints of our own, separate from the ranking
+    engine, plus a backend ingestion — then, seeing the research, to copy the
+    functional data sources the ranking engine already uses.
+    - **What the ranking engine actually has.** Thirteen registered connectors,
+      of which eight need an API key this machine does not hold (FRED, BLS,
+      BEA, EIA, Congress, AlphaVantage, GitHub, and a vendor-docs reader
+      needing an Anthropic key). The keyless, working ones are GDELT, Federal
+      Register, Fiscal Data, Yahoo Finance, Stooq and SEC EDGAR — SEC's "key"
+      being only a User-Agent string its fair-access policy asks for, not a
+      secret. Its `lib/evidence/source-registry.ts` pattern was copied
+      wholesale: a controlled list where every source declares its licence and
+      whether redisplay is allowed.
+    - **The source that changed the answer: SEC EDGAR full-text search.** It
+      answers "which registrants name this vendor in this filing type" and
+      returns, per hit, the company, CIK, filing date, state and SIC industry
+      code, plus a native aggregation over SIC. That is measured adoption
+      evidence, disclosed by the companies themselves, class A on this
+      product's own evidence rubric — and a categorically better answer than
+      the modelled share estimate it sits beside.
+    - **The window is the honesty control.** EDGAR indexes back to 2001, and an
+      unbounded count measures "ever mentioned" rather than "named in a current
+      annual report": the first unbounded Google Cloud example returned was a
+      2018 filing. Bounded to twelve months, Anthropic's 10-K count falls from
+      56 to 36 and the whole ordering changes. Everything is bounded, and the
+      window is rendered with the figures.
+    - **What it is not, said twice on screen.** Counts favour vendors embedded
+      in other companies' products, which is why Google Cloud (142) and
+      Microsoft Azure (109) sit above OpenAI (83) and Anthropic (36) here and
+      would not on a spend measure. A filing may name a vendor as competitor,
+      investor or supplier rather than customer, and it is US registrants only.
+      Every row opens to named filings with links to sec.gov so any count can
+      be checked; the exact re-runnable query is printed under each.
+    - **Storage.** The Vercel filesystem is read-only at runtime, so the
+      committed snapshot in `data/adoption/` is the only fallback that survives
+      a deploy. `npm run ingest:adoption` refreshes it; the route prefers a
+      live call (eight throttled requests, about two seconds, cached five
+      minutes) and falls back to the snapshot badged as such. The script
+      duplicates a little of `lib/adoption` because the repo has no TypeScript
+      runner, and `tests/adoption-ingest.test.ts` parses the committed snapshot
+      as the TypeScript type the app consumes so the two cannot drift silently.
+    - **The ingestion refuses to fabricate.** A vendor whose lookup fails is
+      recorded in `failed` with the reason, never rendered as zero adoption,
+      and a run where every vendor failed refuses to overwrite a good snapshot.

@@ -44,7 +44,7 @@ export default async function VendorProfilePage({
     <>
       <PageHeader
         title={profile.intel.name}
-        subtitle={profile.intel.description}
+        subtitle={profile.intel.description ?? undefined}
         lanes={["aie"]}
         actions={
           <Link

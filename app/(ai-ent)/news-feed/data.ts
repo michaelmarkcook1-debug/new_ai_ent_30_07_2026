@@ -1,4 +1,5 @@
-import { INTELLIGENCE_VENDORS, NEWS_ITEMS } from "@/lib/aie";
+import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
+import { NEWS_ITEMS } from "@/lib/aie";
 
 // Module data adapter: the News feed is PORT lane (the structured AIE seed
 // news dataset, 30 items) plus a probed LIVE section (per-company BoardRadar
@@ -29,7 +30,7 @@ export interface FeedMeta {
   topics: { tag: string; count: number }[];
 }
 
-const VENDOR_NAME_BY_ID = new Map(INTELLIGENCE_VENDORS.map((v) => [v.id, v.name]));
+const VENDOR_NAME_BY_ID = new Map(VENDOR_DIRECTORY.map((v) => [v.id, v.name]));
 
 // Seed news rows reference vendors as "vendor_<id>"; resolve the display
 // name from the canonical roster, falling back to a capitalized id.

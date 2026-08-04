@@ -1,5 +1,6 @@
 "use client";
 
+import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
@@ -30,7 +31,7 @@ interface LiveReputationRow {
 // Vendor display names come from the intelligence seed spine; the one
 // reputation-only id (aleph) gets a local fallback so nothing renders raw.
 const NAME_FALLBACK: Record<string, string> = { aleph: "Aleph Alpha" };
-const VENDOR_NAME = new Map(INTELLIGENCE_VENDORS.map((v) => [v.id, v.name]));
+const VENDOR_NAME = new Map(VENDOR_DIRECTORY.map((v) => [v.id, v.name]));
 
 function nameOf(id: string): string {
   return VENDOR_NAME.get(id) ?? NAME_FALLBACK[id] ?? id;

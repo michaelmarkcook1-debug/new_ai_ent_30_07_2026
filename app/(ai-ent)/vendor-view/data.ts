@@ -13,7 +13,14 @@ import type {
   VendorPillarScore,
   VendorCapability,
 } from "@/lib/aie/intelligence/types";
-import { PILLARS, type EvidenceGrade, type PillarId } from "@/lib/aie/types";
+import {
+  canonicalVendorId,
+  liveCapabilities,
+  liveVendorCapabilities,
+  liveVendors,
+  liveVendorsAsOf,
+  type LiveVendor,
+} from "@/lib/aie/live-vendors";
 import {
   CAPABILITIES,
   VENDOR_CAPABILITIES,
@@ -41,13 +48,14 @@ import {
 
 // ---------- Rankings surface ----------
 
-export interface PillarCell {
-  score: number;
-  grade: EvidenceGrade;
-  confidence: number;
+export interface CapabilityCell {
+  score: number | null;
+  grade: string | null;
+  status: string | null;
+  lastVerified: string | null;
 }
 
-export type ScoreSortKey = "overallScore" | "confidenceScore" | PillarId;
+export type ScoreSortKey = "overallScore" | "confidenceScore" | string;
 
 export interface RankingRow {
   id: string;
@@ -59,58 +67,62 @@ export interface RankingRow {
   ticker: string | null;
   overallScore: number;
   confidenceScore: number;
-  pillars: Record<PillarId, PillarCell>;
+  capabilities: Record<string, CapabilityCell>;
 }
 
 // Column labels are the dataset's real field names on purpose: the rankings
 // table shows exactly which named score it is sorting on, nothing renamed.
-export const SCORE_COLUMNS: { key: ScoreSortKey; help: string }[] = [
+export const SCORE_COLUMNS: { key: ScoreSortKey; label: string; help: string }[] = [
   {
     key: "overallScore",
-    help: "AG's own overall score for the vendor, from the AI Enterprise intelligence seed (0 to 100).",
+    label: "Overall score",
+    help: "The vendor's overallScore as published by the AI Enterprise source (0 to 100).",
   },
-  ...PILLARS.map((p) => ({
-    key: p.id as ScoreSortKey,
-    help: `${p.label}: the capabilityScore for this pillar from VENDOR_PILLAR_SCORES, with its evidence grade.`,
+  ...liveCapabilities().map((c) => ({
+    key: c.id as ScoreSortKey,
+    label: c.name,
+    help: `The maturityScore the source publishes for this capability, with its evidence grade and the date it was last verified.`,
   })),
 ];
 
-const INTEL_BY_ID = new Map(INTELLIGENCE_VENDORS.map((v) => [v.id, v]));
+const LIVE_BY_ID = new Map(liveVendors().map((v) => [v.id, v]));
 
-const PILLAR_ROWS_BY_VENDOR = new Map<string, VendorPillarScore[]>();
-for (const row of VENDOR_PILLAR_SCORES) {
-  const list = PILLAR_ROWS_BY_VENDOR.get(row.vendorId) ?? [];
-  list.push(row);
-  PILLAR_ROWS_BY_VENDOR.set(row.vendorId, list);
-}
-
+// The capability breakdown replaces the pillar scores.
+//
+// Pillars were a construct of the July port: upstream publishes no such
+// scores, so the six numbers under every vendor were computed by the seed and
+// then frozen. The live source does publish a capability breakdown, ten
+// scores per vendor with an evidence grade and a verification date on each,
+// and those are the figures the ranking engine itself shows.
 export function buildRankingRows(): RankingRow[] {
   return TRACKED_VENDORS.flatMap((vendor) => {
-    const intel = INTEL_BY_ID.get(vendor.id);
-    if (!intel) return [];
-    const pillarRows = PILLAR_ROWS_BY_VENDOR.get(vendor.id) ?? [];
-    const pillars = Object.fromEntries(
-      pillarRows.map((p) => [
-        p.pillar,
+    const live = LIVE_BY_ID.get(canonicalVendorId(vendor.id));
+    // A vendor the live source has dropped is dropped here too, rather than
+    // falling back to a July figure that would look current.
+    if (!live || live.overallScore === null) return [];
+    const caps = Object.fromEntries(
+      liveVendorCapabilities(vendor.id).map((c) => [
+        c.capabilityId,
         {
-          score: p.capabilityScore,
-          grade: p.evidenceGrade,
-          confidence: p.confidence,
+          score: c.maturityScore,
+          grade: c.evidenceGrade,
+          status: c.status,
+          lastVerified: c.lastVerified,
         },
       ])
-    ) as Record<PillarId, PillarCell>;
+    ) as Record<string, CapabilityCell>;
     return [
       {
         id: vendor.id,
-        name: intel.name,
+        name: live.name,
         layer: vendor.layer,
-        category: intel.category,
-        marketPosition: intel.marketPosition,
+        category: live.category ?? "not stated",
+        marketPosition: live.marketPosition ?? "not stated",
         isPublic: vendor.isPublic,
         ticker: vendor.ticker,
-        overallScore: intel.overallScore,
-        confidenceScore: intel.confidenceScore,
-        pillars,
+        overallScore: live.overallScore,
+        confidenceScore: live.confidenceScore ?? 0,
+        capabilities: caps,
       },
     ];
   });
@@ -118,7 +130,7 @@ export function buildRankingRows(): RankingRow[] {
 
 // Dataset refresh stamp, taken from the seed's own lastUpdated field.
 export function datasetDate(): string {
-  const iso = INTELLIGENCE_VENDORS[0]?.lastUpdated;
+  const iso = liveVendorsAsOf() ?? liveVendors()[0]?.lastUpdated;
   if (!iso) return "unknown";
   return new Date(iso).toLocaleDateString("en-GB", {
     day: "numeric",
@@ -198,8 +210,8 @@ export interface CapabilityItem {
 
 export interface VendorProfile {
   vendor: TrackedVendor;
-  intel: IntelligenceVendor;
-  pillarScores: VendorPillarScore[];
+  intel: LiveVendor;
+  liveCapabilities: ReturnType<typeof liveVendorCapabilities>;
   capabilities: CapabilityItem[];
   edges: DependencyEdgeItem[];
   models: CommercialModel[];
@@ -218,7 +230,7 @@ const CONFIDENCE_ORDER: Record<string, number> = { high: 0, medium: 1, seed: 2 }
 
 export function getVendorProfile(id: string): VendorProfile | null {
   const vendor = TRACKED_VENDORS.find((v) => v.id === id);
-  const intel = INTEL_BY_ID.get(id);
+  const intel = LIVE_BY_ID.get(canonicalVendorId(id));
   if (!vendor || !intel) return null;
 
   // Capability matrix keys vendors as "vendor_<id>".
@@ -273,7 +285,7 @@ export function getVendorProfile(id: string): VendorProfile | null {
   return {
     vendor,
     intel,
-    pillarScores: PILLAR_ROWS_BY_VENDOR.get(id) ?? [],
+    liveCapabilities: liveVendorCapabilities(id),
     capabilities,
     edges,
     models,

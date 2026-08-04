@@ -32,6 +32,7 @@
 // seed data (exposure-map-data.ts nodes plus the previously probed roster);
 // public companies without a ticker in that data keep ticker: null.
 
+import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import { INTELLIGENCE_VENDORS } from "./intelligence/seed";
 
 export interface TrackedVendor {
@@ -116,21 +117,28 @@ function tickerFor(id: string): string | null {
   return TICKER_BY_ID[id] ?? null;
 }
 
-export const TRACKED_VENDORS: TrackedVendor[] = INTELLIGENCE_VENDORS.filter(
+// Built from the live directory, not the 8 July port.
+//
+// The port's roster had drifted in both directions: it carried five vendors
+// under ids the source no longer uses (alibaba-qwen for alibaba, and four
+// like it), so every join against live data silently dropped them, and it was
+// missing five the source now tracks (ai21, glean, hebbia, minimax, sap),
+// which simply never appeared anywhere in this product.
+export const TRACKED_VENDORS: TrackedVendor[] = VENDOR_DIRECTORY.filter(
   (v) => v.category !== INVESTOR_CATEGORY,
 ).map((v) => {
   const ticker = tickerFor(v.id);
   return {
     id: v.id,
     name: v.name,
-    layer: layerFor(v.id, v.category),
+    layer: layerFor(v.id, v.category ?? ""),
     isPublic: v.ownershipType === "public",
     ticker,
     brTicker: ticker !== null && BR_TICKERS.has(ticker) ? ticker : null,
   };
 });
 
-export const ECOSYSTEM_ONLY: EcosystemVendor[] = INTELLIGENCE_VENDORS.filter(
+export const ECOSYSTEM_ONLY: EcosystemVendor[] = VENDOR_DIRECTORY.filter(
   (v) => v.category === INVESTOR_CATEGORY,
 ).map((v) => ({
   id: v.id,
