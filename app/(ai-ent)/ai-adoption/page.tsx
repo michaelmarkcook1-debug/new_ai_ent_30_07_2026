@@ -1,6 +1,7 @@
 import { PageHeader } from "@/lib/ui/page";
 import { MicroLabel } from "@/lib/ui/micro";
 import { AdoptionMaturity } from "./adoption-view";
+import { PeerAdoptionExplorer } from "./peer-explorer";
 
 export const metadata = { title: "AI Adoption | AI Enterprise" };
 
@@ -83,13 +84,15 @@ export default function AiAdoptionPage() {
             ))}
           </div>
           <p className="measure mt-3 rounded border border-warn/40 bg-warn-bg/40 px-3 py-2 text-xs leading-relaxed">
-            <b>A vendor-share model was retired from this page.</b> The May 2026
-            segment-share model (585 modelled cells by region, industry and
-            company size) claimed OpenAI led adoption in every slice and held
-            59 per cent of SMEs. Both sources above, measured rather than
-            modelled, contradict that ordering, so the model is withdrawn
-            rather than shown with a caveat. Its industry maturity profiles
-            below are a different dataset and stand.
+            <b>Read these before the slice below.</b> The peer adoption explorer
+            falls back to a May 2026 segment model when the live pull does not
+            answer, and that model places OpenAI ahead of Anthropic in every
+            slice. Both measurements above disagree with that ordering. The
+            model is kept because the shape of a slice — which vendors appear
+            at all, and how concentrated it is — remains useful, and because
+            deleting the only view of adoption by industry, region and size
+            would cost more than the stale ranking does. The correction travels
+            with the chart.
           </p>
           <p className="mt-2 text-xs text-muted">
             Category-level market shares — who leads frontier APIs, enterprise
@@ -102,6 +105,7 @@ export default function AiAdoptionPage() {
           </p>
         </section>
 
+        <PeerAdoptionExplorer />
         <AdoptionMaturity />
       </div>
     </>

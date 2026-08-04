@@ -43,6 +43,7 @@ export const ARCHETYPE_TO_UPTAKE: Record<string, Industry[]> = {
   ],
 };
 
+// Moved here from FitEngine with the peer adoption explorer, 4 August 2026.
 // Uptake vendor display names mapped to the intelligence-seed vendor ids so
 // result rows can link into /vendor-view/<id>.
 export const UPTAKE_VENDOR_ID: Record<string, string> = {

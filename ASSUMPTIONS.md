@@ -803,6 +803,16 @@ Dates are absolute; the build day is 30 July 2026.
     Michael's critique, and it was right: the tab held three unrelated things —
     a fit tool, an adoption model of doubtful accuracy, and a workflow selector
     that rendered its answer three panels away from the control.
+    - **CORRECTED 4 August 2026: the vendor-share model was wrongly deleted
+      and is restored.** The paragraph below described removing it entirely.
+      That conflated a stale figure with a worthless tool. Adoption by
+      industry, region and organisation size is exactly what a CIO wants to
+      see, and the house rule for stale data is the one the news seed already
+      follows: ship it with its vintage stated and its contradiction named.
+      The peer adoption explorer is back, on /ai-adoption where it belongs,
+      with the live pull preferred and a correction note travelling with the
+      chart whenever the ported seed is what is on screen. What follows is the
+      original, wrong reasoning, kept so the mistake is legible.
     - **The adoption vendor-share model failed its sanity check and is
       withdrawn.** The May 2026 segment-share model claimed OpenAI led adoption
       in every slice and held 59 per cent of SMEs. Menlo Ventures (mid-2026)
