@@ -4,7 +4,7 @@ import { AdoptionMaturity } from "./adoption-view";
 
 export const metadata = { title: "AI Adoption | AI Enterprise" };
 
-// AI Adoption (4 August 2026). What remains of the old Model 4 Role market
+// AI Adoption (4 August 2026). What remains of the old FitEngine market
 // explorer after a sanity check against current public data, and what
 // replaced the part that failed it.
 //

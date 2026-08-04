@@ -68,7 +68,7 @@ export const NAV_GROUPS: NavGroup[] = [
     label: "AI and Your Company",
     items: [
       { label: "Your AI Position", href: "/company-view", icon: "company", hint: "Where AI helps or threatens you: exposure, readiness, obligations, and an analyst over your own documents" },
-      { label: "Model 4 Role", href: "/market-view", icon: "market", hint: "Pick a role, get the cheapest model that meets its requirements and what it costs" },
+      { label: "FitEngine", href: "/market-view", icon: "market", hint: "Pick a role, get the cheapest model that meets its requirements and what it costs" },
       { label: "Decision Desk", href: "/decision-desk", icon: "assess", hint: "A cited finding and a weighted score for the call you must defend" },
     ],
   },

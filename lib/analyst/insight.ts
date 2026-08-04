@@ -555,7 +555,7 @@ export function supplyMapInsight(
   };
 }
 
-/** Model 4 Role: whether the workflow catalogue can answer a buying question. */
+/** FitEngine: whether the workflow catalogue can answer a buying question. */
 export function workflowInsight(
   opts: { workflows: number; categories: number; mapped: number; highRisk: number },
   news: InsightNews | null,

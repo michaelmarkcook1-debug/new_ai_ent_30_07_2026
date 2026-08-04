@@ -1,9 +1,10 @@
 import { PageHeader } from "@/lib/ui/page";
 import { ModelFit } from "./components/model-fit";
 
-export const metadata = { title: "Model 4 Role | AI Enterprise" };
+export const metadata = { title: "FitEngine | AI Enterprise" };
 
-// Model 4 Role is one tool now (4 August 2026). It used to carry three: the
+// FitEngine is one tool now (4 August 2026), and was called Model 4 Role
+// until it was renamed. It used to carry three things: the
 // fit engine, an adoption explorer and a workflow selector. The adoption
 // explorer's vendor-share model failed an external sanity check and was
 // retired (what survived lives on /ai-adoption, with measured figures in its
@@ -14,7 +15,7 @@ export default function MarketViewPage() {
   return (
     <>
       <PageHeader
-        title="Model 4 Role"
+        title="FitEngine"
         subtitle="Pick a role and the engine returns the cheapest model meeting its requirements, with the reasoning, the eliminations and the cost all visible."
         lanes={["derived", "aie"]}
       />

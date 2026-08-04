@@ -18,7 +18,7 @@ function pretty(token: string): string {
 
 // The workflow picker as a tool, not a filter.
 //
-// This selector used to sit at the end of Model 4 Role's filter bar, where
+// This selector used to sit at the end of FitEngine's filter bar, where
 // choosing a workflow changed nothing the eye could see: the result rendered
 // three panels further down, below an adoption chart it had nothing to do
 // with. A tool whose output is somewhere else is a tool that does not work.

@@ -309,13 +309,13 @@ export function IntegratorLayer() {
           The integrators above are the delivery layer for every vendor decision in this
           workspace. Services channel only, clearly labelled, never mixed into AI vendor scores.
         </p>
+        {/* The link that used to sit here sent a reader to Model 4 Role for a
+            delivery matrix that tab no longer has: the matrix was removed on
+            4 August because it called the integration endpoint with one
+            hardcoded provider, and this page answers the same question from
+            the live provider list. Pointing away from the page that answers it
+            was worse than not linking at all. */}
         <div className="mt-2 flex flex-wrap gap-3">
-          <Link
-            href="/market-view"
-            className="text-sm font-semibold text-primary hover:underline"
-          >
-            Open the delivery matrix in Model 4 Role
-          </Link>
           <Link
             href="/vendor-view"
             className="text-sm font-semibold text-primary hover:underline"
