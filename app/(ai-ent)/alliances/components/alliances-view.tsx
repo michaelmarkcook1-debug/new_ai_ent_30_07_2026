@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useShortlist } from "@/lib/shortlist";
 import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
@@ -76,11 +77,36 @@ export function AlliancesView({
   const [industry, setIndustry] = useState<string | null>(null);
   const [selected, setSelected] = useState<string | null>(null);
 
-  const filtered = useMemo(
-    () =>
-      industry ? links.filter((l) => l.industries.includes(industry)) : links,
-    [links, industry]
-  );
+  // Drill the whole tab to the vendors this reader actually runs.
+  //
+  // The filter folds into `filtered`, which every view reads, so the map, the
+  // directory, the comparison and the statistics narrow together. A toggle
+  // that only changed one of the four would be worse than none: a reader
+  // would trust a coverage figure computed over the whole market while
+  // looking at their own slice.
+  const { ids: shortlist, ready: shortlistReady } = useShortlist();
+  const [onlyMine, setOnlyMine] = useState(false);
+
+  const filtered = useMemo(() => {
+    let out = industry
+      ? links.filter((l) => l.industries.includes(industry))
+      : links;
+    if (onlyMine && shortlist.length > 0) {
+      const mine = new Set(shortlist);
+      out = out.filter((l) => mine.has(l.vendorId));
+    }
+    return out;
+  }, [links, industry, onlyMine, shortlist]);
+
+  // Which shortlisted vendors this dataset actually covers. Only eight of the
+  // tracked vendors appear in the channel data at all, so a reader can
+  // shortlist five and match one. Saying which are missing is the difference
+  // between "no integrator carries them" and "we hold no record either way".
+  const shortlistCoverage = useMemo(() => {
+    const inData = new Set(links.map((l) => l.vendorId));
+    const covered = shortlist.filter((v) => inData.has(v));
+    return { covered, uncovered: shortlist.filter((v) => !inData.has(v)) };
+  }, [links, shortlist]);
 
   // Which node ids stay at full strength on the map. Search and the category
   // buttons narrow it; a selected node narrows it to itself and its partners.
@@ -189,6 +215,87 @@ export function AlliancesView({
         ))}
       </div>
 
+      {/* The shortlist drill, above the other controls because it changes the
+          question the whole tab answers rather than what it emphasises.
+
+          Rendered inert until the browser value has been read: the shortlist
+          lives in localStorage, so drawing an enabled switch during SSR would
+          flash the wrong state and could hand a reader a filtered view they
+          did not ask for. */}
+      <section
+        className={`rounded-lg border p-4 transition ${
+          onlyMine
+            ? "border-primary bg-primary/10"
+            : "border-base-300 bg-base-100"
+        }`}
+      >
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-[15px] font-bold">
+              Drill this tab to your shortlist
+            </p>
+            <p className="measure mt-0.5 text-[12.5px] leading-relaxed text-muted">
+              {!shortlistReady
+                ? "Reading your shortlist…"
+                : shortlist.length === 0
+                  ? "No vendors shortlisted yet. Star the vendors you actually run and this narrows the map, directory, comparison and statistics to them together."
+                  : `Narrows the map, directory, comparison and statistics to the ${shortlist.length} ${shortlist.length === 1 ? "vendor" : "vendors"} on your shortlist.`}
+            </p>
+          </div>
+
+          {shortlistReady && shortlist.length === 0 ? (
+            <Link
+              href="/vendor-view"
+              className="shrink-0 rounded-full border border-primary px-4 py-1.5 text-sm font-semibold text-primary hover:bg-primary/10"
+            >
+              Pick your vendors
+            </Link>
+          ) : (
+            <button
+              type="button"
+              role="switch"
+              aria-checked={onlyMine}
+              aria-label="Drill this tab to your shortlist"
+              disabled={!shortlistReady || shortlist.length === 0}
+              onClick={() => setOnlyMine((v) => !v)}
+              className={`relative inline-flex h-7 w-14 shrink-0 items-center rounded-full border transition disabled:opacity-40 ${
+                onlyMine
+                  ? "border-primary bg-primary"
+                  : "border-base-300 bg-base-200"
+              }`}
+            >
+              <span
+                className={`inline-block h-5 w-5 rounded-full bg-white shadow transition-transform ${
+                  onlyMine ? "translate-x-8" : "translate-x-1"
+                }`}
+              />
+            </button>
+          )}
+        </div>
+
+        {onlyMine ? (
+          <p className="measure mt-2 border-t border-primary/30 pt-2 text-[12px] leading-relaxed">
+            Showing <b>{filtered.length}</b> of {links.length} channel links.
+            {shortlistCoverage.uncovered.length > 0 ? (
+              <>
+                {" "}
+                <b>{shortlistCoverage.uncovered.length}</b> of your shortlisted
+                vendors appear nowhere in the channel data, so their absence
+                here is missing coverage rather than a finding that no
+                integrator carries them.
+              </>
+            ) : null}
+            {filtered.length === 0 ? (
+              <>
+                {" "}
+                Nothing matched, so every view below is empty by your filter
+                and not because the market is.
+              </>
+            ) : null}
+          </p>
+        ) : null}
+      </section>
+
       {/* Filters, shared by every view */}
       <section className="rounded-lg border border-base-300 bg-base-100 p-5">
         <MicroLabel
@@ -242,7 +349,7 @@ export function AlliancesView({
               {label}
             </button>
           ))}
-          {(selected || industry || query || category !== "all") && (
+          {(selected || industry || query || category !== "all" || onlyMine) && (
             <button
               type="button"
               onClick={() => {
@@ -250,6 +357,10 @@ export function AlliancesView({
                 setIndustry(null);
                 setQuery("");
                 setCategory("all");
+                // Clear releases the shortlist drill too. A reader who cannot
+                // see why the tab is empty reaches for Clear, and leaving the
+                // strongest filter on would confirm that the page is broken.
+                setOnlyMine(false);
               }}
               className="rounded-full border border-base-300 px-3 py-1 text-xs font-semibold text-muted transition hover:text-base-content"
             >
