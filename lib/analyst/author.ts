@@ -63,7 +63,14 @@ export async function authorInsight(
    * reading can name them: an analyst who says "two providers lead" when the
    * data names them is withholding the useful half of the sentence.
    */
-  entities: readonly string[] = []
+  entities: readonly string[] = [],
+  /**
+   * Facts about a specific subject the reading should be about, rather than
+   * about the market in general. Used by Your AI Position, where the question
+   * is what this market means for the company the reader named, not what the
+   * market is doing on its own.
+   */
+  subject: { label: string; facts: string[] } | null = null
 ): Promise<Written<AnalystInsightData>> {
   if (!llmAvailable() || computed.insufficient) return asComputed(computed);
 
@@ -84,6 +91,8 @@ export async function authorInsight(
     entities.length > 0
       ? `Vendors and models this page covers, and the only ones you may name: ${entities.join(", ")}`
       : null,
+    subject ? `\nTHE SUBJECT OF THIS READING: ${subject.label}` : null,
+    ...(subject?.facts ?? []).map((f) => `- ${f}`),
   ]);
 
   const draft = await authored<InsightDraft>(
@@ -99,6 +108,11 @@ Return JSON: {"headline": string, "summary": string, "implications": [string, st
 
 Name the specific vendors and models the data covers wherever it sharpens the point. "Two providers lead on agentic capability" is worth far less to a buyer than naming which two. You may only name entities from the list above; naming any other company, including one you know of, causes the answer to be discarded.
 
+${
+      subject
+        ? `\nThis reading is about ${subject.label}, not about the market in general. Every sentence should connect what the market data shows to what it means for them specifically: where their position is exposed, where it is defensible, and what they should do about it. A paragraph that would read identically for any company has failed. Where the retrieved facts about them are thin, say what cannot be judged rather than filling it.\n`
+        : ""
+    }
 The computed versions above are a floor, not a template. Say something a reader could not have got by reading the numbers themselves.`,
     // 900 truncated the longest fact sheets mid-JSON, which read as a silent
     // failure rather than as the over-long answer it was.

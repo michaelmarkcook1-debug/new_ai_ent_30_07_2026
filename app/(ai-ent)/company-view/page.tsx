@@ -22,8 +22,12 @@ export const metadata = { title: "Your AI Position | AI Enterprise" };
 // It now takes a company name and researches it: public sources retrieved at
 // the moment of asking, read by the analyst model, every statement carrying
 // the link it came from. Where the sources say nothing, the page says nothing.
-// The market reading underneath is unchanged and still comes from the tracked
-// dataset, because that part was never about the reader's own company.
+//
+// The analyst reading follows the same rule. It renders only once a company is
+// named, and when it does it is about that company against the tracked market
+// rather than about the market alone: a market-position piece under the title
+// "Your AI Position" was a reading of the industry that knew nothing about the
+// reader.
 
 const TAB_LINKS = [
   { href: "/company-view/ai-exposure", title: "AI Exposure", blurb: "Where AI helps or threatens each function of the business." },
@@ -40,30 +44,49 @@ export default async function CompanyOverviewPage({
   const raw = (await searchParams).company;
   const typed = (Array.isArray(raw) ? raw[0] : raw)?.trim() ?? "";
 
-  const [metrics, news, watch] = await Promise.all([
-    loadPulseMetrics(),
-    analystNews(),
-    readWatchState(),
-  ]);
-  const movedSignals = readChangeLog().changes.length;
-  const insight = positionInsight(
-    metrics,
-    { movedSignals, watchedVendors: watch.vendorIds.length },
-    pickNews(news.items, { minImpact: 70 })
-  );
-  const written = await authorInsight(
-    insight,
-    "market position",
-    metrics.vendors.slice(0, 12).map((v) => v.name)
-  );
-
   const research = typed.length > 1 ? await researchCompany(typed) : null;
+
+  // The analyst reading is about the company the reader named, so there is
+  // nothing to read until they name one. It used to render a market-position
+  // piece regardless, which was a reading of the market wearing the title
+  // "Your AI Position" while knowing nothing about the reader at all.
+  const subject = research?.profile
+    ? {
+        label: `${research.profile.name} (${research.profile.industry})`,
+        facts: [
+          research.profile.what,
+          ...research.findings.map((f) => f.statement),
+          ...research.aiFindings.map((f) => f.statement),
+        ].filter(Boolean),
+      }
+    : null;
+
+  let written = null;
+  if (subject) {
+    const [metrics, news, watch] = await Promise.all([
+      loadPulseMetrics(),
+      analystNews(),
+      readWatchState(),
+    ]);
+    const movedSignals = readChangeLog().changes.length;
+    const insight = positionInsight(
+      metrics,
+      { movedSignals, watchedVendors: watch.vendorIds.length },
+      pickNews(news.items, { minImpact: 70 })
+    );
+    written = await authorInsight(
+      insight,
+      "market position",
+      metrics.vendors.slice(0, 12).map((v) => v.name),
+      subject
+    );
+  }
 
   return (
     <>
       <PageHeader
         title="Your AI Position"
-        subtitle="Name your company and its public sources are retrieved and read now, with every statement carrying the link it came from. Underneath, the market reading you are positioning against."
+        subtitle="Name your company and its public sources are retrieved and read now, with every statement carrying the link it came from. The analyst reading then sets what was found against the tracked AI market: where the position is exposed, where it is defensible."
         lanes={["live", "aie-live"]}
       />
 
@@ -86,11 +109,13 @@ export default async function CompanyOverviewPage({
           </section>
         )}
 
-        <AnalystInsight
-          insight={written.value}
-          authorship={written.authorship}
-          context="market position"
-        />
+        {written ? (
+          <AnalystInsight
+            insight={written.value}
+            authorship={written.authorship}
+            context={`${research?.profile?.name ?? "this company"} against the AI market`}
+          />
+        ) : null}
 
         <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
           {TAB_LINKS.map((t) => (
