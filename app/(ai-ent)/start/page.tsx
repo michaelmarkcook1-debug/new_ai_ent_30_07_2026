@@ -1,4 +1,9 @@
 import Link from "next/link";
+import {
+  MODELS,
+  LIBRARY_ROLE_COUNT,
+  LIBRARY_INDUSTRY_COUNT,
+} from "@/lib/model-fit";
 import { PageHeader } from "@/lib/ui/page";
 import { MicroLabel } from "@/lib/ui/micro";
 
@@ -24,7 +29,8 @@ const JOBS: {
   {
     question: "Which AI model should each of my people actually get?",
     detail:
-      "Pick an industry, a function and a role. You get the cheapest model that meets that role's requirements, which requirements decided it, which models were eliminated and by what number, and the cost per person and for the whole role. 258 roles across 29 industries against 330 priced models.",
+      "Pick an industry, a function and a role. You get the cheapest model that meets that role's requirements, which requirements decided it, which models were eliminated and by what number, and the cost per person and for the whole role. " +
+      `${LIBRARY_ROLE_COUNT} roles across ${LIBRARY_INDUSTRY_COUNT} industries against ${MODELS.length} priced models.`,
     href: "/market-view",
     cta: "Pick a role",
     then: "ModelEngine",

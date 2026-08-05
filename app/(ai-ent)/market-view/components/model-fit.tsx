@@ -27,6 +27,8 @@ import {
   roleById,
   rolesFor,
   shortName,
+  LIBRARY_ROLE_COUNT,
+  LIBRARY_INDUSTRY_COUNT,
 } from "@/lib/model-fit";
 import type {
   Assessment,
@@ -560,7 +562,8 @@ export function ModelFit() {
           <LaneBadge lane="derived" />
         </div>
         <p className="font-mono text-xs text-muted">
-          258 roles · 29 industries · {MODELS.length} models
+          {LIBRARY_ROLE_COUNT} roles · {LIBRARY_INDUSTRY_COUNT} industries ·{" "}
+          {MODELS.length} models
         </p>
       </div>
 

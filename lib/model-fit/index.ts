@@ -8,8 +8,12 @@
 //                              to wire this to the live price/performance
 //                              catalogue instead; the snapshot ships first so the
 //                              engine can be checked against its reference.
-//   roles.json                 258 roles across 29 industries, 18 requirements
-//                              each. Static by design and correct to ship as data.
+//   roles.json                 the role library, 18 requirements each. Static by
+//                              design and correct to ship as data. Counts are not
+//                              written here: LIBRARY_ROLE_COUNT and
+//                              LIBRARY_INDUSTRY_COUNT below derive them, because a
+//                              number in a comment goes stale the first time the
+//                              file grows and nobody notices.
 //   axes-and-calibration.json  requirement-to-axis map and the provisional
 //                              thresholds.
 //
@@ -224,6 +228,20 @@ export const INDUSTRY_GROUPS: IndustryGroup[] = (() => {
   return groups;
 })();
 
+/**
+ * The library's size, derived rather than written down.
+ *
+ * Two user-facing strings quoted "258 roles across 29 industries" for weeks
+ * after the library grew to 294 across 36 — the counts were literals in copy,
+ * and adding roles did not touch them. Anything that states a size now reads
+ * these.
+ */
+export const LIBRARY_ROLE_COUNT = ROLE_INDEX.length;
+export const LIBRARY_INDUSTRY_COUNT = INDUSTRY_GROUPS.reduce(
+  (n, g) => n + g.industries.length,
+  0
+);
+
 export function industryLabel(industry: string): string {
   return industry === CROSS_INDUSTRY ? CROSS_INDUSTRY_LABEL : industry;
 }
@@ -232,7 +250,7 @@ export function industryLabel(industry: string): string {
  * Cross-industry roles are not a category a buyer picks: they are roles that
  * exist in every sector. A bank employs a Financial Controller and a Chief
  * Information Officer just as a hospital does, and the library files them once
- * rather than 29 times.
+ * rather than once per industry.
  *
  * So choosing an industry has to return that industry's specialist roles AND
  * the 99 common ones. Filtering on `industry === chosen` alone hides 99 of the
