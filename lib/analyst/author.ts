@@ -100,7 +100,9 @@ Return JSON: {"headline": string, "summary": string, "implications": [string, st
 Name the specific vendors and models the data covers wherever it sharpens the point. "Two providers lead on agentic capability" is worth far less to a buyer than naming which two. You may only name entities from the list above; naming any other company, including one you know of, causes the answer to be discarded.
 
 The computed versions above are a floor, not a template. Say something a reader could not have got by reading the numbers themselves.`,
-    900,
+    // 900 truncated the longest fact sheets mid-JSON, which read as a silent
+    // failure rather than as the over-long answer it was.
+    1400,
     ROSTER
   );
 

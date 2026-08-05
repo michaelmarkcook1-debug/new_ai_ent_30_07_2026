@@ -215,14 +215,26 @@ TASK:
 ${instruction}`;
 
   for (let attempt = 0; attempt < 2; attempt++) {
-    const raw = await callModel(
-      attempt === 0 ? base : `${base}\n\nCORRECTION: your previous answer used ${lastInvented.join(", ")}, which ${lastInvented.length === 1 ? "is" : "are"} not in the data. Rewrite it without ${lastInvented.length === 1 ? "that figure" : "those figures"}.`,
-      maxTokens
-    );
+    const correction =
+      lastInvented.length > 0
+        ? `\n\nCORRECTION: your previous answer used ${lastInvented.join(", ")}, which ${lastInvented.length === 1 ? "is" : "are"} not in the data. Rewrite it without ${lastInvented.length === 1 ? "that" : "those"}.`
+        : attempt === 0
+          ? ""
+          : "\n\nCORRECTION: your previous answer was not valid JSON, most likely because it ran long. Answer again, shorter, as a single JSON object.";
+
+    const raw = await callModel(base + correction, maxTokens);
     if (!raw) return null;
 
     const parsed = parseJson<T>(raw);
-    if (!parsed) return null;
+    if (!parsed) {
+      // A truncated response is unparseable JSON, and returning here used to
+      // end the attempt silently: no retry, no log, and a page quietly back on
+      // its computed text with nothing to explain why.
+      console.warn(
+        `[analyst-llm] ${attempt === 0 ? "retrying" : "discarded"} ${kind}: response was not valid JSON`
+      );
+      continue;
+    }
 
     // The check that makes this safe to ship. Every string the model produced
     // is tested against the figures it was given.
