@@ -67,29 +67,14 @@ export async function buildCorpus(sid: string): Promise<Chunk[]> {
       chunks.push({ source: d.label, sourceKind: "document", text: p });
     }
   }
-  // Shell fixture context
-  try {
-    const shell = JSON.parse(
-      await fs.readFile(path.join(process.cwd(), "fixtures", "sample", "shell.json"), "utf8")
-    );
-    const lines: string[] = [
-      shell.aiExposure?.summary,
-      ...(shell.aiExposure?.keyFindings ?? []),
-      ...(shell.aiExposure?.recommendations ?? []),
-      shell.talent?.insight,
-      shell.talent?.aiTalentExposure?.summary,
-      shell.trustRank?.governance?.summary,
-      ...(shell.trustRank?.regulatoryGrid ?? []).map(
-        (r: { jurisdiction: string; regime: string; status: string; note: string }) =>
-          `${r.jurisdiction} (${r.regime}, ${r.status}): ${r.note}`
-      ),
-    ].filter(Boolean);
-    for (const l of lines) {
-      chunks.push({ source: "Shell company fixture (SAMPLE)", sourceKind: "shell-fixture", text: l });
-    }
-  } catch {
-    // fixture missing is survivable; corpus just has fewer chunks
-  }
+  // The Shell fixture used to be injected here, so a cited finding could rest
+  // on one exemplar company's invented figures while the reader was asking
+  // about their own. It left with the fixture from Company View: a citation
+  // reading "Shell company fixture (SAMPLE)" under a decision someone has to
+  // defend is worse than one fewer source.
+  //
+  // What a reader's own documents contribute is above, and is the right way
+  // for company-specific fact to enter this corpus: they uploaded it.
   // AIE dataset facts (real dataset content, qualitative only)
   for (const v of TRACKED_VENDORS) {
     chunks.push({

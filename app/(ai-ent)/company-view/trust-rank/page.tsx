@@ -1,152 +1,47 @@
-import { LaneBadge } from "@/lib/ui/badges";
-import { Accordion } from "@/lib/ui/accordion";
-import { DerivationDrawer, KpiGauge } from "@/lib/ui/score";
-import { MicroLabel } from "@/lib/ui/micro";
-import { loadShellFixture } from "../data";
-import { resolveCompany } from "@/lib/company-source";
-import { CompanyShell } from "../components/company-shell";
-import { ExemplarOnly } from "../components/exemplar-only";
+import { PageHeader } from "@/lib/ui/page";
+import { CompanyEntry } from "../components/company-entry";
+import { ResearchedCompany } from "../components/researched-company";
+import { researchTopic } from "@/lib/research/company";
 
-export const metadata = { title: "Trust Rank | AI Enterprise" };
+export const metadata = { title: "Governance and Obligations | AI Enterprise" };
 
-function StatusChip({ status }: { status: string }) {
-  const inForce = status.toLowerCase().includes("in force") || status.toLowerCase().includes("enacted");
-  const guidance = status.toLowerCase().includes("guidance") || status.toLowerCase().includes("evolving");
-  return (
-    <span
-      className={`inline-flex whitespace-nowrap rounded-full px-2 py-0.5 font-mono text-xs font-semibold ${
-        inForce ? "bg-bad-bg text-error" : guidance ? "bg-base-200 text-muted" : "bg-warn-bg text-warn"
-      }`}
-      title={inForce ? "Binding obligations apply" : guidance ? "Non-binding or evolving" : "Enacted, application phasing in"}
-    >
-      {status}
-    </span>
-  );
-}
-
-// Governance posture (mirrors /governance-risk) plus the regulatory grid
-// seeded from AIE legislation material (spec Section 5). One of the two
-// moments that sell the product; the grid answers "what binds us, where".
-export default async function TrustRankPage({
+// This page carried the Shell fixture's own figures for whoever was reading.
+// None of that was retrievable per company, so it reports what the open
+// sources say about the named company and leaves the rest empty rather than
+// shaped like data.
+export default async function Page({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  const company = resolveCompany((await searchParams).company);
-  if (company.live) {
-    return (
-      <CompanyShell company={company}>
-        <ExemplarOnly
-          tab="Trust Rank"
-          pathname="/company-view/trust-rank"
-          reason="The jurisdiction grid and governance posture here are written for the exemplar buyer. The market-wide Trust Rank module covers the vendor set on real data."
-        />
-      </CompanyShell>
-    );
-  }
-  const f = await loadShellFixture();
-  const g = f.trustRank.governance;
+  const raw = (await searchParams).company;
+  const typed = (Array.isArray(raw) ? raw[0] : raw)?.trim() ?? "";
+  const research = typed.length > 1 ? await researchTopic(typed, "governance") : null;
+
   return (
-    <CompanyShell company={company}>
-    <div className="space-y-4">
-      <section className="grid grid-cols-1 gap-4 @4xl:grid-cols-3">
-        <KpiGauge
-          label="GOVERNANCE RISK"
-          tooltip="0 to 100, higher means more governance risk in AI deployment. Mirrors the live governance-risk composite."
-          score={g.riskScore}
-          definition="0 to 100, lower is better. AI governance risk for this organisation."
-          badge={<LaneBadge lane="sample" />}
-          invert
-        />
-        <div className="@container rounded-lg border border-base-300 bg-base-100 p-5 @4xl:col-span-2">
-          <div className="flex items-center justify-between">
-            <MicroLabel label="Posture summary" tooltip="Narrative mirror of the live governance-risk summary field." />
-            <LaneBadge lane="sample" />
-          </div>
-          <p className="measure mt-2 text-sm leading-relaxed">{g.summary}</p>
-          <div className="mt-2">
-            <DerivationDrawer title="How the governance score is derived">
-              <p>
-                Mirrors GET /governance-risk: a 0 to 100 composite over control
-                effectiveness, disclosure quality, litigation exposure and
-                AI-specific assurance gaps. SAMPLE
-                for the exemplar buyer.
-              </p>
-            </DerivationDrawer>
-          </div>
-        </div>
-      </section>
-
-      <section className="grid grid-cols-1 gap-3 @2xl:grid-cols-2">
-        <Accordion title="Key Findings" count={g.keyFindings.length} defaultOpen>
-          <ul className="measure list-disc space-y-1.5 pl-4 text-sm">
-            {g.keyFindings.map((k) => <li key={k}>{k}</li>)}
-          </ul>
-        </Accordion>
-        <Accordion title="Recommendations" count={g.recommendations.length}>
-          <ul className="measure list-disc space-y-1.5 pl-4 text-sm">
-            {g.recommendations.map((k) => <li key={k}>{k}</li>)}
-          </ul>
-        </Accordion>
-      </section>
-
-      {/* The regulatory grid */}
-      <section className="rounded-lg border border-base-300 bg-base-100">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2.5">
-          <MicroLabel
-            label="Regulatory grid"
-            tooltip="AI regulation by jurisdiction and what it means for this organisation's deployments. Rows seeded from the AIE legislation material are badged AIE dataset; the rest are SAMPLE."
-          />
-          <div className="flex items-center gap-1.5">
-            <LaneBadge lane="aie" />
-            <LaneBadge lane="sample" />
-          </div>
-        </div>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left">
-            <thead>
-              <tr className="border-b border-base-300">
-                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">Jurisdiction</th>
-                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">Regime</th>
-                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">Status</th>
-                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">What it means here</th>
-                <th className="px-3 py-2.5 font-mono text-xs uppercase tracking-wider text-muted">Source</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-base-300">
-              {f.trustRank.regulatoryGrid.map((r) => (
-                <tr key={r.jurisdiction} className="align-top hover:bg-base-200/60">
-                  <td className="px-3 py-3 text-sm font-bold whitespace-nowrap">{r.jurisdiction}</td>
-                  <td className="px-3 py-3 text-sm">{r.regime}</td>
-                  <td className="px-3 py-3"><StatusChip status={r.status} /></td>
-                  <td className="px-3 py-3 max-w-md text-sm text-muted">{r.note}</td>
-                  <td className="px-3 py-3"><LaneBadge lane={r.aieSource ? "aie" : "sample"} /></td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      {/* Vendor-specific rulings */}
-      <section className="rounded-lg border border-base-300 bg-base-100 p-5">
-        <div className="flex items-center justify-between">
-          <MicroLabel label="Vendor-specific rulings and controls" tooltip="Regulatory items that attach to vendors rather than jurisdictions." />
-        </div>
-        <div className="mt-2 grid grid-cols-1 gap-2 @xl:grid-cols-2">
-          {f.trustRank.vendorRulings.map((v) => (
-            <div key={v.item} className="rounded border border-base-300 p-4">
-              <div className="flex flex-wrap items-center justify-between gap-2">
-                <span className="text-sm font-semibold">{v.vendor}</span>
-                <LaneBadge lane={v.aieSource ? "aie" : "sample"} />
-              </div>
-              <p className="mt-0.5 text-sm font-medium text-primary">{v.item}</p>
-              <p className="mt-1 text-xs text-muted">{v.note}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-    </div>
-    </CompanyShell>
+    <>
+      <PageHeader
+        title="Governance and Obligations"
+        subtitle="The regulatory and compliance obligations this company operates under."
+        lanes={["live"]}
+      />
+      <div className="space-y-4">
+        <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+          <CompanyEntry />
+        </section>
+        {research ? (
+          <ResearchedCompany research={research} />
+        ) : (
+          <section className="rounded-lg border border-dashed border-base-300 bg-base-200/40 p-6">
+            <h2 className="text-base font-bold">Name a company to begin</h2>
+            <p className="measure mt-1.5 text-sm text-muted">
+              Public sources are retrieved when you ask, and every statement
+              carries the link behind it. Where the sources are silent, so is
+              this page.
+            </p>
+          </section>
+        )}
+      </div>
+    </>
   );
 }
