@@ -98,13 +98,19 @@ export async function authorInsight(
   const draft = await authored<InsightDraft>(
     `insight:${context}`,
     facts,
-    `Rewrite this analyst reading for a CIO.
+    `Write the analyst reading for this page, for a CIO.
 
 Return JSON: {"headline": string, "summary": string, "implications": [string, string, string]}
 
 - headline: one sentence, under 15 words, carrying a judgement rather than a measurement. Not a restatement of the numbers.
-- summary: 90 to 140 words. What the figures mean for someone buying, and what they should be sceptical of. Reuse only the figures above.
+- summary: 90 to 140 words, and it must do all three of the things in your brief: what this data shows as a judgement, what changes for this reader's buying decision, and what this is an instance of in the wider market. Reuse only the figures above.
 - implications: exactly three, each one short sentence, each a distinct consequence for a buyer. No number needs to appear in these.
+
+The summary is the paragraph that has to earn the page. A reader who already
+looked at the chart should still learn something from it. If your draft reads
+as a description of what is on screen, or as an account of how much data sits
+behind it, you have written the wrong paragraph: what does this pattern usually
+mean, and what should they do differently this quarter because of it?
 
 Name the specific vendors and models the data covers wherever it sharpens the point. "Two providers lead on agentic capability" is worth far less to a buyer than naming which two. You may only name entities from the list above; naming any other company, including one you know of, causes the answer to be discarded.
 
@@ -248,7 +254,7 @@ export async function authorActions(
   const facts = factSheet([
     `Market context: ${context}`,
     "Computed actions:",
-    ...computed.map((a, i) => `${i + 1}. ${a.action} — ${a.detail}`),
+    ...computed.map((a, i) => `${i + 1}. ${a.action}: ${a.detail}`),
   ]);
 
   const draft = await authored<{ actions: ActionDraft[] }>(

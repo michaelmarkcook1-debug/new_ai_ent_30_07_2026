@@ -185,7 +185,7 @@ export interface MarketTake {
 /**
  * An analyst's read of who is where, named.
  *
- * The insights used to describe the instrument — how to read the table, what
+ * The insights used to describe the instrument: how to read the table, what
  * the composite does not net off, which columns are comparable. All true, and
  * all of it answered a question the reader had not asked. Somebody arriving at
  * a vendor page wants to know who is ahead and whether the lead means anything,
@@ -390,7 +390,7 @@ export function financialInsight(
         : "A majority of tracked vendors now quantify AI revenue in their filings, which makes their commercial claims checkable.",
     summary: `Of ${disclosure.total} tracked public vendors, ${disclosure.disclosing} state a quantified AI revenue figure in their filings and ${undisclosed} state none. ${segmentTotal > 0 ? `${segmentsFiled} of ${segmentTotal} break revenue down by segment, which is as close as most get to showing where AI money actually lands. ` : ""}That ${share} per cent disclosure rate is the useful number here, and it is low enough to change how a vendor's commercial claims should be treated in a sales cycle: a growth figure quoted in a pitch that does not appear in a filing has not been audited by anyone, and for a multi-year commitment that distinction matters more than the figure itself. ${
       privateSide
-        ? `On the private side, ${privateSide.stated} companies state a figure themselves and ${privateSide.notEstimable} give nothing to work from. Where a private company is silent but a dated valuation exists, this page shows a revenue band derived from the ${privateSide.band.low}x to ${privateSide.band.high}x range observed across comparable disclosed pairs — shown as a band, never as a point, and never mixed into a filed figure. A band is an argument about magnitude, not a measurement, and it is labelled as one.`
+        ? `On the private side, ${privateSide.stated} companies state a figure themselves and ${privateSide.notEstimable} give nothing to work from. Where a private company is silent but a dated valuation exists, this page shows a revenue band derived from the ${privateSide.band.low}x to ${privateSide.band.high}x range observed across comparable disclosed pairs, shown as a band, never as a point, and never mixed into a filed figure. A band is an argument about magnitude, not a measurement, and it is labelled as one.`
         : "Private vendors file nothing and sit outside this entirely rather than being estimated into it."
     }`,
     implications: [
@@ -519,10 +519,18 @@ export function reputationInsight(
   const strongest = [...pillars].sort((a, b) => b[1].mean - a[1].mean)[0] ?? null;
 
   return {
-    headline: `${sorted[0].name} carries the strongest reputation of the ${vendors.length} vendors read${weakest && strongest && weakest[0] !== strongest[0] ? `, and the set is weakest on the ${weakest[0]} pillar` : ""}.`,
+    // A judgement, not a league-table position. Who leads is in the
+    // implications, where a reader can act on it; the headline is for what the
+    // set as a whole says about buying in this market.
+    headline:
+      weakest && strongest && weakest[0] !== strongest[0]
+        ? `This market is strongest on ${strongest[0]} experience and weakest on ${weakest[0]}, the pillar that bites after signature.`
+        : spread > 25
+          ? "Reputation separates these vendors further than capability does, and it moves too slowly to correct inside a procurement cycle."
+          : "Reputation is banded too tightly here to rank vendors, though it will still disqualify one.",
     summary: `${vendors.length} vendors carry a reputation reading, averaging ${mean} across the customer, developer and employee pillars, with ${spread} points between the highest and lowest. ${nameList(top)} sit at the top of the set; ${nameList(bottom)} sit at the bottom${
       pillars.length === 3
-        ? `. Read by pillar, the set scores ${pillars.map(([k, v]) => `${v.mean} on ${k}`).join(", ")} — so ${weakest ? `${weakest[0]} experience is where this market is collectively weakest, and the pillar most likely to bite after signature` : "no single pillar stands out"}`
+        ? `. Read by pillar, the set scores ${pillars.map(([k, v]) => `${v.mean} on ${k}`).join(", ")}, so ${weakest ? `${weakest[0]} experience is where this market is collectively weakest, and the pillar most likely to bite after signature` : "no single pillar stands out"}`
         : ""
     }. ${
       spread > 25
@@ -536,7 +544,7 @@ export function reputationInsight(
     implications: [
       `${sorted[0].name} leads on reputation at ${round1(sorted[0].reputation ?? 0)}; ${sorted[sorted.length - 1].name} trails at ${round1(sorted[sorted.length - 1].reputation ?? 0)}.`,
       weakest
-        ? `The set is weakest on ${weakest[0]} (${weakest[1].mean} mean) — the pillar most likely to bite after signature.`
+        ? `The set is weakest on ${weakest[0]} (${weakest[1].mean} mean), the pillar most likely to bite after signature.`
         : "The pillars measure post-contract experience, which no capability score captures.",
       realSnapshots < 2
         ? "Only one real capture exists, so treat this as a point reading and not a trend."
@@ -614,7 +622,7 @@ export function vendorViewInsight(
         ? `${widest.leader} leads ${widest.category} by ${widest.gap} points; expect incumbent pricing there.`
         : "No category has a decisive leader; leverage exists in all of them.",
       tightest
-        ? `${tightest.leader} and ${tightest.runnerUp} are within ${tightest.gap} points in ${tightest.category} — decide on fit, not score.`
+        ? `${tightest.leader} and ${tightest.runnerUp} are within ${tightest.gap} points in ${tightest.category}, so decide on fit, not score.`
         : "Scores compare within a market category only, never across one.",
       strongButRisky.length > 0
         ? `A high composite does not clear a vendor: ${nameList(strongButRisky.map((v) => v.name), 2)} carry open risks.`
@@ -696,38 +704,65 @@ export function supplyMapInsight(
     seed: number;
     nodes: number;
     label: "alliance" | "dependency";
+    /**
+     * How many distinct delivery partners carry each vendor, widest first.
+     * This is the finding on this page. An earlier version of this insight
+     * reported our own verification rate instead, which told a reader how much
+     * data we hold rather than what the channel does to their options.
+     */
+    breadth?: { vendor: string; partners: number }[];
+    /** The partner carrying the most vendors, which is where the channel narrows. */
+    busiest?: { partner: string; vendors: number } | null;
   },
   news: InsightNews | null,
   lastUpdated: string | null
 ): AnalystInsightData {
-  const { edges, verified, seed, nodes, label } = opts;
+  const { edges, verified, nodes, label, breadth = [], busiest = null } = opts;
   if (edges === 0) {
     return insufficient(
-      `No ${label} edges are currently recorded, so nothing can be said about how the supply side connects.`,
+      `No ${label} links are currently recorded, so nothing can be said about who would actually deliver these vendors.`,
       ["AIE exposure map"],
       "aie"
     );
   }
+
   const verifiedPct = pct(verified, edges);
-  const thin = verifiedPct < 50;
+  const widest = breadth[0] ?? null;
+  const soleSourced = breadth.filter((b) => b.partners === 1);
+  const narrow = soleSourced.length > 0;
+
+  // The caveat, carried as a clause rather than as the subject. Our confidence
+  // in the map is a footnote to what the map says.
+  const caution =
+    verifiedPct < 50
+      ? ` Under half of these links are confirmed directly by the parties, so treat the thinner end of this list as a question for procurement rather than a finding.`
+      : ` Most of these links are confirmed directly by the parties, so the shape is firm enough to plan against.`;
 
   return {
-    headline: thin
-      ? `Most of the ${label} map is still seed evidence, so it shows where to look rather than what to conclude.`
-      : `Most of the ${label} map is verified, which makes concentration in it worth acting on.`,
-    summary: `${edges} ${label} edges connect ${nodes} organisations, ${verified} of them verified and ${seed} still seed. ${
-      thin
-        ? `At ${verifiedPct} per cent verified this map is a research starting point, not a basis for a supplier decision. Seed edges are recorded because a relationship was reported somewhere, not because it was confirmed, and the two look identical on a diagram unless the rendering separates them, which is why seed edges are drawn dashed here.`
-        : `At ${verifiedPct} per cent verified the shape of this map is reliable enough to plan against. Concentration in a supply graph is a different risk from concentration in a market: it shows up as correlated failure rather than as weak pricing, and it does not appear anywhere in a vendor score.`
-    } The useful question is not who has the most connections but whether your own critical path runs through one organisation more than once.`,
+    headline: narrow
+      ? `Choosing some of these vendors also chooses who delivers them, because only one firm does that work.`
+      : `Every tracked vendor here has more than one firm able to deliver it, so delivery is not the constraint.`,
+    summary: `${nodes} delivery firms carry the ${edges} vendor relationships tracked here.${
+      widest
+        ? ` ${widest.vendor} is carried by ${widest.partners}, the widest channel of any vendor on this page.`
+        : ""
+    }${
+      narrow
+        ? ` ${soleSourced.length === 1 ? `One vendor has` : `${soleSourced.length} vendors have`} a single firm carrying them, which converts a software decision into a supplier decision: the commercial terms you negotiate with the vendor are not the terms you will get on the engagement, because there is no second bidder for the work.`
+        : ` No vendor here depends on a single firm, which keeps implementation competitive and is the condition under which vendor pricing power actually transfers to you.`
+    }${
+      busiest
+        ? ` ${busiest.partner} carries ${busiest.vendors} of them, so a shortlist drawn on capability alone can arrive at several vendors and one delivery team.`
+        : ""
+    } This is the layer buyers price last and discover first: an enterprise rarely stands a frontier model up alone, and the scarce input in this market has moved from the model to the people who can deploy it.${caution}`,
     implications: [
-      thin
-        ? `${verifiedPct} per cent of edges are verified; treat the rest as leads rather than facts.`
-        : `${verifiedPct} per cent of edges are verified, so the map's shape can be planned against.`,
-      "Supply concentration shows up as correlated failure, which no vendor score captures.",
-      "Check whether your own critical path passes through the same organisation more than once.",
+      narrow
+        ? "Check whether your preferred vendor has a second firm able to deliver it before you negotiate."
+        : "Run implementation as its own competitive process, not as an extension of the vendor selection.",
+      "A capability shortlist can converge on one delivery team without anyone noticing.",
+      "Delivery concentration shows up as correlated delay, which no vendor score captures.",
     ],
-    action: thin ? "Investigate" : "Monitor",
+    action: narrow ? "Investigate" : "Monitor",
     tools: ["workflowShortlist", "vendorView"],
     news,
     evidence: {
@@ -797,7 +832,7 @@ export function workflowInsight(
  * An empty watchlist is a normal first visit, not a gap. The reader is told
  * what the cycle is doing and invited to build a list, because an empty
  * "affects you" panel teaches somebody the feature is broken rather than
- * unfilled — the same rule the Pulse follows.
+ * unfilled, the same rule the Pulse follows.
  */
 export function newsInsight(
   items: NewsItemRaw[],
@@ -842,7 +877,7 @@ export function newsInsight(
     .map(([id, n]) => [vendorName(id), n] as const);
 
   // Does any of it bear on this reader. Matching is on the vendor ids the feed
-  // carries, so a watched vendor the feed never names simply does not appear —
+  // carries, so a watched vendor the feed never names simply does not appear,
   // which is a true "nothing this cycle", not a miss.
   const watched = new Set(watchedVendorIds);
   const mine = watched.size
@@ -868,9 +903,9 @@ export function newsInsight(
       : mine.length === 0
         ? "Nothing in the current cycle names a vendor on your list, which is a quiet fortnight for your shortlist rather than a gap in the feed."
         : mineNegative > 0
-          ? `${mine.length} items name vendors on your list, and ${mineNegative} of them ${mineNegative === 1 ? "is" : "are"} negative — worth reading before your next review.`
+          ? `${mine.length} items name vendors on your list, and ${mineNegative} of them ${mineNegative === 1 ? "is" : "are"} negative, worth reading before your next review.`
           : `${mine.length} items name vendors on your list and none of them are negative.`,
-    summary: `${items.length} items in the current window. The cycle is running on ${themeText}, with ${loudest.length ? `${nameList(loudest.map(([v]) => v))} named most often` : "coverage spread thinly across vendors"}. Sentiment is ${pos} positive against ${neg} negative, ${highImpact} items scored at high impact and ${risky} classified as risk events — a negative share of ${negShare} per cent, ${
+    summary: `${items.length} items in the current window. The cycle is running on ${themeText}, with ${loudest.length ? `${nameList(loudest.map(([v]) => v))} named most often` : "coverage spread thinly across vendors"}. Sentiment is ${pos} positive against ${neg} negative, ${highImpact} items scored at high impact and ${risky} classified as risk events, a negative share of ${negShare} per cent, ${
       negShare >= 25
         ? "high enough to read rather than dismiss"
         : "within the range of ordinary product and funding cycles"
@@ -886,7 +921,7 @@ export function newsInsight(
         ? `The cycle is led by ${themes[0][0].toLowerCase()}: ${themes[0][1]} of ${items.length} items.`
         : `${negShare} per cent of current items are negative.`,
       watched.size === 0
-        ? "Nothing is filtered to your vendors yet — build a shortlist to make this panel yours."
+        ? "Nothing is filtered to your vendors yet: build a shortlist to make this panel yours."
         : mine.length === 0
           ? `No item names your ${watched.size} watched ${watched.size === 1 ? "vendor" : "vendors"} this window.`
           : `${mine.length} items touch your list${mineNegative > 0 ? `, ${mineNegative} negative` : ""}.`,
@@ -1033,8 +1068,8 @@ export function positionInsight(
  * and an insight that repeated the ordering as a finding would lend it
  * authority the data does not have.
  *
- * So it leads on the thing that is solid — what firms in a sector actually run
- * AI for, from the workflow library — and states the limit of the vendor slice
+ * So it leads on the thing that is solid, what firms in a sector actually run
+ * AI for, from the workflow library, and states the limit of the vendor slice
  * plainly.
  */
 export function peerInsight(
@@ -1068,12 +1103,12 @@ export function peerInsight(
         : "Industry-specific workflows outnumber the common ones here, so a general-purpose shortlist will miss most of what your sector needs.",
     summary: `The workflow library holds ${workflows} enterprise AI workflows across ${categories} areas, mapped to ${segments} industry segments. ${horizontal} of them (${horizontalShare} per cent) run in every industry and ${specific} are tagged to particular sectors, with ${segmentsWithSpecific} of the ${segments} segments carrying at least one workflow of their own. ${
       horizontalShare >= 60
-        ? "That balance is the useful finding: the bulk of enterprise AI work — summarisation, drafting, retrieval, support deflection — is the same everywhere, so the sector-specific list is where the genuine difference sits and is worth reading first even though it is shorter."
+        ? "That balance is the useful finding: the bulk of enterprise AI work (summarisation, drafting, retrieval, support deflection) is the same everywhere, so the sector-specific list is where the genuine difference sits and is worth reading first even though it is shorter."
         : "The sector-specific list is the longer one here, so a shortlist built from general-purpose capability will under-serve the work your industry actually does."
-    } These are workflow types, not observed deployments: the library says contract review is common in legal, never which firms run it, and this product holds no such record. The vendor slice on this page is a different kind of claim again — a modelled estimate dated May 2026, whose top-two ordering two independent later measurements contradict. Read that slice for its shape, which vendors appear in your segment at all and how concentrated it is, and not for its ranking.`,
+    } These are workflow types, not observed deployments: the library says contract review is common in legal, never which firms run it, and this product holds no such record. The vendor slice on this page is a different kind of claim again: a modelled estimate dated May 2026, whose top-two ordering two independent later measurements contradict. Read that slice for its shape, which vendors appear in your segment at all and how concentrated it is, and not for its ranking.`,
     implications: [
       `${horizontal} of ${workflows} workflows run in every industry; ${specific} are sector-specific.`,
-      `${segmentsWithSpecific} of ${segments} segments have workflows tagged specifically to them — a thin list means thin curation, not a sector that does nothing distinctive.`,
+      `${segmentsWithSpecific} of ${segments} segments have workflows tagged specifically to them: a thin list means thin curation, not a sector that does nothing distinctive.`,
       "The vendor slice is a modelled May 2026 estimate: read it for shape, not for ranking.",
     ],
     action: "Investigate",

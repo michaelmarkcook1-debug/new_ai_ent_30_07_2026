@@ -26,6 +26,28 @@ export default async function AlliancesPage() {
   const data = getAlliancesData();
   const named = data.links.filter((l) => l.tier === "direct_named").length;
 
+  // How many distinct firms could actually deliver each vendor, and which firm
+  // carries the most vendors. This is what the channel does to a buyer's
+  // options, and it is the thing this page knows that no other page does.
+  const partnersPerVendor = new Map<string, Set<string>>();
+  const vendorsPerPartner = new Map<string, Set<string>>();
+  for (const l of data.links) {
+    (partnersPerVendor.get(l.vendorName) ??
+      partnersPerVendor.set(l.vendorName, new Set()).get(l.vendorName)!).add(
+      l.partnerId
+    );
+    (vendorsPerPartner.get(l.partnerName) ??
+      vendorsPerPartner.set(l.partnerName, new Set()).get(l.partnerName)!).add(
+      l.vendorId
+    );
+  }
+  const breadth = [...partnersPerVendor.entries()]
+    .map(([vendor, set]) => ({ vendor, partners: set.size }))
+    .sort((a, b) => b.partners - a.partners);
+  const busiestEntry = [...vendorsPerPartner.entries()].sort(
+    (a, b) => b[1].size - a[1].size
+  )[0];
+
   const insight = supplyMapInsight(
     {
       edges: data.links.length,
@@ -33,6 +55,10 @@ export default async function AlliancesPage() {
       seed: data.links.length - named,
       nodes: data.partnerCount,
       label: "alliance",
+      breadth,
+      busiest: busiestEntry
+        ? { partner: busiestEntry[0], vendors: busiestEntry[1].size }
+        : null,
     },
     pickNews(news.items, {
       categories: ["Partnership", "Strategy signal"],
