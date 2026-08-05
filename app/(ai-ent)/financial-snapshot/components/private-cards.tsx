@@ -155,19 +155,38 @@ export function PrivateCompanyCards({
       </div>
       <p className="mt-0.5 measure text-sm text-muted">
         These vendors are not in BoardRadar and publish no audited accounts.
-        Cards stay locked to what is disclosed or derivable from named sources:
-        a stated revenue where one exists, a range where a disclosed round
-        implies one, and nothing at all where neither does. The links go to the
+        Only those carrying a figure appear: a stated revenue where one exists,
+        or a range where a disclosed round implies one. The links go to the
         curated public sources for each vendor.
       </p>
+      {(() => {
+        // Named, not silently dropped. A private company publishing nothing is
+        // the normal case and worth saying once.
+        const silent = cards.filter((c) => {
+          const e = ladder.find((x) => x.key === c.id);
+          return !e || e.rung === "not_estimable";
+        });
+        return silent.length > 0 ? (
+          <p className="measure mt-2 text-sm text-muted">
+            No card for {silent.map((c) => c.name).join(", ")}: no revenue is
+            stated and no disclosed round supports a range.
+          </p>
+        ) : null;
+      })()}
+
       <div className="mt-3 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
-        {cards.map((c) => (
-          <PrivateCard
-            key={c.id}
-            card={c}
-            entry={ladder.find((e) => e.key === c.id)}
-          />
-        ))}
+        {cards
+          .filter((c) => {
+            const e = ladder.find((x) => x.key === c.id);
+            return e && e.rung !== "not_estimable";
+          })
+          .map((c) => (
+            <PrivateCard
+              key={c.id}
+              card={c}
+              entry={ladder.find((e) => e.key === c.id)}
+            />
+          ))}
       </div>
     </section>
   );

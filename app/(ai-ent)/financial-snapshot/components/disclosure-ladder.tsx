@@ -75,7 +75,13 @@ export function DisclosureLadder({
     }
   }, [overrides, loaded]);
 
-  const rows = [...publicRows, ...privateRows];
+  // Only vendors carrying a figure: a stated one, a hard bound, or a derived
+  // range. The eleven that publish nothing are counted below rather than
+  // listed, because eleven consecutive rows reading "nothing published" told
+  // the reader the same thing eleven times and buried the ten that did.
+  const all = [...publicRows, ...privateRows];
+  const rows = all.filter((r) => r.rung !== "not_estimable");
+  const silent = all.filter((r) => r.rung === "not_estimable");
   // One scale across every row, so bar lengths are comparable.
   const max = Math.max(
     ...rows.map((r) =>
@@ -130,6 +136,21 @@ export function DisclosureLadder({
           />
         ))}
       </ol>
+
+      {/* The absence still gets reported, once, with the names. Dropping these
+          rows without saying so would turn "we do not know" into "there is
+          nothing to know", which is the one substitution this page exists to
+          prevent. */}
+      {silent.length > 0 ? (
+        <p className="measure mt-3 rounded-lg border border-dashed border-base-300 px-3 py-2 text-sm text-muted">
+          <span className="font-semibold text-base-content">
+            {silent.length} more are not listed
+          </span>{" "}
+          because nothing about their AI revenue is published or inferable:{" "}
+          {silent.map((r) => r.name).join(", ")}. That silence is a finding
+          about disclosure, not a gap in this page.
+        </p>
+      ) : null}
 
       <Key />
 
