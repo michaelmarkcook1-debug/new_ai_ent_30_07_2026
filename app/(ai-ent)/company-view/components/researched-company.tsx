@@ -10,7 +10,8 @@ import type { CompanyResearch } from "@/lib/research/company";
 // to travel together. A finding a reader cannot open is an assertion.
 
 export function ResearchedCompany({ research }: { research: CompanyResearch }) {
-  const { profile, findings, aiFindings, sources, absence } = research;
+  const { profile, metrics, findings, aiFindings, recommendations, sources, absence } =
+    research;
 
   if (absence) {
     return (
@@ -49,6 +50,51 @@ export function ResearchedCompany({ research }: { research: CompanyResearch }) {
         </p>
       </section>
 
+      {/* The figure row this tab used to open with. Every card is a number a
+          source states outright, shown in the currency and wording it used,
+          with the source one click away. No card is a score of ours: where the
+          old page computed a readiness or exposure index for an exemplar, this
+          shows what is actually published and nothing else. */}
+      {metrics.length > 0 ? (
+        <section>
+          <MicroLabel
+            label="What the sources state"
+            tooltip="Figures quoted exactly as the source gives them. Never converted, computed or estimated."
+          />
+          <div className="mt-2 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
+            {metrics.map((m, i) => {
+              const src = sources[m.sourceIndex];
+              return (
+                <div
+                  key={`${m.label}-${i}`}
+                  className="rounded-lg border border-base-300 bg-base-100 p-4"
+                >
+                  <p className="micro-label">{m.label}</p>
+                  <p className="mt-1 text-xl font-bold leading-tight">
+                    {m.value}
+                  </p>
+                  {src ? (
+                    <a
+                      href={src.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-1 inline-block font-mono text-sm text-primary hover:underline"
+                    >
+                      [{m.sourceIndex + 1}] {hostOf(src.url)}
+                    </a>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        <p className="measure rounded-lg border border-dashed border-base-300 px-3 py-4 text-sm text-muted">
+          No source stated a figure outright for this company, so no figure
+          cards are shown. The findings below are what the passages support.
+        </p>
+      )}
+
       <FindingList
         label="What the sources say"
         tooltip="The company's size, position and direction, as the retrieved passages report them."
@@ -64,6 +110,25 @@ export function ResearchedCompany({ research }: { research: CompanyResearch }) {
         sources={sources}
         empty="Nothing in the retrieved sources describes this company's use of AI. That silence is the finding: it is not evidence of absence, but there is no public account to read."
       />
+
+      {recommendations.length > 0 ? (
+        <section className="finding rounded-xl p-5">
+          <MicroLabel
+            label="What to do about it"
+            tooltip="What follows for a buyer evaluating AI for this company, from what was found."
+          />
+          <ol className="mt-2 space-y-2">
+            {recommendations.map((r, i) => (
+              <li key={r} className="flex gap-2.5">
+                <span className="finding-figure font-mono text-sm font-bold">
+                  {i + 1}
+                </span>
+                <span className="measure text-sm leading-snug">{r}</span>
+              </li>
+            ))}
+          </ol>
+        </section>
+      ) : null}
 
       <SourceList sources={sources} />
 

@@ -27,6 +27,13 @@ export interface CompanyFinding {
   sourceIndex: number;
 }
 
+/** A figure a source actually states, for the headline row of cards. */
+export interface CompanyMetric {
+  label: string;
+  value: string;
+  sourceIndex: number;
+}
+
 export interface CompanyResearch {
   query: string;
   /** Null when nothing was retrieved and no profile could be established. */
@@ -35,9 +42,13 @@ export interface CompanyResearch {
     what: string;
     industry: string;
   } | null;
+  /** Stated figures, rendered as cards. Never a score we computed. */
+  metrics: CompanyMetric[];
   findings: CompanyFinding[];
   /** AI-specific findings, kept apart because that is what this product is for. */
   aiFindings: CompanyFinding[];
+  /** What a buyer should do, drawn from what was found. */
+  recommendations: string[];
   sources: SearchHit[];
   /** Why the result is thin or empty, in the product's own language. */
   absence: string | null;
@@ -48,8 +59,10 @@ export interface CompanyResearch {
 const empty = (query: string, absence: string): CompanyResearch => ({
   query,
   profile: null,
+  metrics: [],
   findings: [],
   aiFindings: [],
+  recommendations: [],
   sources: [],
   absence,
   written: false,
@@ -59,8 +72,33 @@ interface Draft {
   name?: string;
   what?: string;
   industry?: string;
+  metrics?: { label?: string; value?: string; source?: number }[];
   findings?: { statement?: string; source?: number }[];
   aiFindings?: { statement?: string; source?: number }[];
+  recommendations?: string[];
+}
+
+/** Figures kept only where they cite a passage we retrieved. */
+function citedMetrics(
+  raw: { label?: string; value?: string; source?: number }[] | undefined,
+  sourceCount: number
+): CompanyMetric[] {
+  return (raw ?? [])
+    .filter(
+      (m): m is { label: string; value: string; source: number } =>
+        typeof m?.label === "string" &&
+        typeof m?.value === "string" &&
+        m.label.trim().length > 0 &&
+        m.value.trim().length > 0 &&
+        typeof m.source === "number" &&
+        m.source >= 1 &&
+        m.source <= sourceCount
+    )
+    .map((m) => ({
+      label: m.label.trim(),
+      value: m.value.trim(),
+      sourceIndex: m.source - 1,
+    }));
 }
 
 /** Keeps only claims that point at a source we actually retrieved. */
@@ -161,12 +199,16 @@ export async function researchCompany(
 
 Return JSON:
 {"name": string, "what": string, "industry": string,
+ "metrics": [{"label": string, "value": string, "source": number}],
  "findings": [{"statement": string, "source": number}],
- "aiFindings": [{"statement": string, "source": number}]}
+ "aiFindings": [{"statement": string, "source": number}],
+ "recommendations": [string]}
 
 - name: the company's name as the sources give it.
 - what: one sentence on what the company does.
 - industry: the sector, in two or three words.
+- metrics: up to 6 figures the passages actually state, as cards. Label is two or three words ("Revenue", "Employees", "Listed as", "Founded"). Value is the figure exactly as the source gives it, currency and all. Only include a figure a passage states outright; never convert, never compute, never estimate. Each cites its passage.
+- recommendations: up to 3. What a buyer evaluating AI for this company should do next, following from what was found. No figures needed. If the sources are too thin to justify advice, return an empty array.
 - findings: up to ${attempt.findings}. What a buyer should know about the company's size, position and direction. Each cites the passage number it came from.
 - aiFindings: up to ${attempt.findings}. What the sources say about this company's use of, or exposure to, AI. Each cites its passage number. If the passages say nothing about AI, return an empty array rather than inferring.
 
@@ -186,8 +228,12 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
           what: draft.what ?? "",
           industry: draft.industry ?? "not stated",
         },
+        metrics: citedMetrics(draft.metrics, attempt.hits.length),
         findings: cited(draft.findings, attempt.hits.length),
         aiFindings: cited(draft.aiFindings, attempt.hits.length),
+        recommendations: (draft.recommendations ?? [])
+          .filter((r) => typeof r === "string" && r.trim().length > 0)
+          .slice(0, 3),
         sources: attempt.hits,
         absence: null,
         written: true,
@@ -302,8 +348,10 @@ Before you say two sources disagree, check whether they are the same quantity ex
       what: draft.what ?? "",
       industry: draft.industry ?? "not stated",
     },
+    metrics: citedMetrics(draft.metrics, found.hits.length),
     findings: cited(draft.findings, found.hits.length),
     aiFindings: [],
+    recommendations: [],
     sources: found.hits,
     absence: null,
     written: true,
