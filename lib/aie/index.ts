@@ -121,7 +121,9 @@ export {
 } from "./reputation/seed";
 export type { DeveloperReputation, EmployeeReputation, CustomerReputation } from "./reputation/seed";
 
-// Enterprise AI workflow taxonomy (85 records, tiered).
+// Enterprise AI workflow taxonomy (75 records, tiered, in 15 areas).
+// WORKFLOW_LIBRARY_SIZE derives this; the copy that states it reads that
+// rather than a number typed here. The 85 this once claimed was never right.
 export {
   USE_CASES,
   workflowTierOf,

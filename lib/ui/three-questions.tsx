@@ -13,7 +13,7 @@ import type { VendorScorecard } from "@/lib/vendor/composite-data";
 // The three questions, answered in the words a CIO would use.
 //
 // This format exists because of the data, not in spite of it. Financial
-// disclosure covers 18 of 47 vendors and reputation 28 of 47, so any single
+// disclosure covers 18 of 47 vendors and reputation 29 of 47, so any single
 // fused number is mostly a reading of capability wearing the authority of a
 // three-part assessment. Asking three questions separately lets Unknown be an
 // answer rather than a hole: "no AI revenue disclosed" is itself a finding
