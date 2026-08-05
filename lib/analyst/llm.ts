@@ -85,8 +85,39 @@ export function guard(output: string, allowed: string): boolean {
  * correction instead of silently costing the page its analyst voice.
  */
 export function invented(output: string, allowed: string): string[] {
-  const permitted = numbersIn(allowed);
-  return [...numbersIn(output)].filter((n) => !permitted.has(n));
+  // Quantities and dates are checked separately, because a number harvested
+  // from a date is not a licence to state a count.
+  //
+  // "Only 2026 captures are held so far" shipped to production. The input said
+  // "2 real captures" and carried an ISO date; 2026 was therefore in the
+  // permitted set, and the guard — which only asks whether a number appeared —
+  // waved through a figure that is both wrong and absurd. The rule the product
+  // actually needs is that a year may be used as a year and not as a quantity.
+  const permittedQuantities = numbersIn(withoutDates(allowed));
+  const permittedDates = datesIn(allowed);
+
+  const bad = [...numbersIn(withoutDates(output))].filter(
+    (n) => !permittedQuantities.has(n)
+  );
+  for (const d of datesIn(output)) if (!permittedDates.has(d)) bad.push(d);
+  return bad;
+}
+
+/** ISO dates, and long-form dates a model is likely to write. */
+const DATE_RE =
+  /\d{4}-\d{2}-\d{2}|\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}\b|\bQ[1-4]\s*\d{4}\b/gi;
+
+function datesIn(text: string): Set<string> {
+  return new Set((text.match(DATE_RE) ?? []).map((d) => d.toLowerCase()));
+}
+
+/**
+ * The text with dates removed, so the numbers inside them cannot be reused as
+ * quantities. A bare year outside a date still counts as a quantity, which is
+ * the strict reading and the right one: "2026 vendors" should fail.
+ */
+function withoutDates(text: string): string {
+  return text.replace(DATE_RE, " ");
 }
 
 /**
