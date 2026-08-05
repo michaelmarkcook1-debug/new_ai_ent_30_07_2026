@@ -7,13 +7,33 @@ import { useState } from "react";
 export function MicroLabel({
   label,
   tooltip,
+  heading = false,
 }: {
   label: string;
   tooltip?: string;
+  /**
+   * Render as a section heading rather than a micro-label.
+   *
+   * The micro-label is the house idiom for the line above a figure, and it is
+   * deliberately quiet. A panel that is the first thing a returning reader
+   * meets is not that: it is the page's own headline, and setting it in 0.7rem
+   * muted mono made it read as a caption for the list underneath.
+   *
+   * This also makes it an actual `h2`. The micro-label is a `span`, so a panel
+   * titled this way had no heading in the document at all.
+   */
+  heading?: boolean;
 }) {
   const [open, setOpen] = useState(false);
+  const Tag = heading ? "h2" : "span";
   return (
-    <span className="micro-label relative inline-flex items-center gap-1">
+    <Tag
+      className={
+        heading
+          ? "relative inline-flex items-center gap-1.5 text-xl font-extrabold tracking-tight"
+          : "micro-label relative inline-flex items-center gap-1"
+      }
+    >
       {label}
       {tooltip ? (
         <button
@@ -35,6 +55,6 @@ export function MicroLabel({
           ) : null}
         </button>
       ) : null}
-    </span>
+    </Tag>
   );
 }

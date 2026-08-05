@@ -29,6 +29,10 @@ describe("axis coverage", () => {
     expect(axisView(MODELS, "gpqa").scored.length).toBe(56);
     expect(axisView(MODELS, "briefcase").scored.length).toBe(44);
     expect(axisView(MODELS, "throughput").scored.length).toBe(262);
+    // CAP-11, live in axes-and-calibration.json and scored on more models
+    // than either GPQA or Briefcase, had no tab until 5 August 2026. A
+    // benchmark the catalogue holds and does not show is one nobody can use.
+    expect(axisView(MODELS, "accuracy").scored.length).toBe(145);
     expect(axisView(MODELS, "intelligence").total).toBe(330);
   });
 

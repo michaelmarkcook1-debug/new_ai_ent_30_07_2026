@@ -66,6 +66,20 @@ export const AXES: Axis[] = [
     unit: "BriefcaseBench",
   },
   {
+    // Added 5 August 2026. CAP-11 is marked live in
+    // axes-and-calibration.json and scored on 145 of the 330 models in this
+    // catalogue — better coverage than either GPQA (56) or Briefcase (44),
+    // both of which already had a tab. It was simply never given one, so a
+    // benchmark the product holds and paid to ingest was invisible.
+    id: "accuracy",
+    label: "Accuracy",
+    cap: "CAP-11",
+    field: "reliability",
+    location: "benchmarks",
+    status: "live",
+    unit: "AA-Omniscience non-hallucination rate",
+  },
+  {
     id: "throughput",
     label: "Latency and speed",
     cap: "CAP-13",

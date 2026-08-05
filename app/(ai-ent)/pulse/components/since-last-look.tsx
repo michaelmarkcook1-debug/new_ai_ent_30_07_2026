@@ -77,6 +77,7 @@ export function SinceLastLook({
         <MicroLabel
           label={firstVisit ? "What moved recently" : "Since you last looked"}
           tooltip="Figures that changed between data captures. Everything here is a movement, not a level."
+          heading
         />
         <span className="font-mono text-xs text-muted">
           {firstVisit
