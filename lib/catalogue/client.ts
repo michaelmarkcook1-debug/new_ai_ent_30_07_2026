@@ -179,6 +179,55 @@ export function runs(limit = 20): Promise<IngestionRun[]> {
 }
 
 /**
+ * How many observations a series holds, without fetching them. One row is
+ * requested purely so PostgREST reports the exact total in Content-Range;
+ * the row itself is discarded.
+ */
+export async function seriesCount(series: Series): Promise<number> {
+  const { total } = await getPage<Observation>(
+    `catalogue_observation?series=eq.${series}&order=observed_at.desc&limit=1`,
+    0
+  );
+  return total;
+}
+
+export interface UsageSummaryRow {
+  surface: string;
+  action: string;
+  events: number;
+  last_at: string;
+}
+
+/**
+ * Aggregate usage counts, via an RPC that returns GROUP BY totals only.
+ *
+ * The usage table itself stays unreadable from outside — no select policy —
+ * and that is not weakened here: the function returns which surface, which
+ * action, how many, and when last. Nothing row-shaped ever leaves.
+ */
+export async function usageSummary(): Promise<UsageSummaryRow[]> {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+  try {
+    const res = await fetch(`${base()}/rest/v1/rpc/usage_summary`, {
+      method: "POST",
+      headers: {
+        apikey: key(),
+        authorization: `Bearer ${key()}`,
+        "content-type": "application/json",
+      },
+      body: "{}",
+      signal: controller.signal,
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error(`usage summary HTTP ${res.status}`);
+    return (await res.json()) as UsageSummaryRow[];
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+/**
  * One subject's movement on one metric: the two most recent observations, and
  * the change between them.
  *

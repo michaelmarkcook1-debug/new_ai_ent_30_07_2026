@@ -124,6 +124,17 @@ export const NAV_GROUPS: NavGroup[] = [
       { label: "News", href: "/news-feed", icon: "news" },
     ],
   },
+  {
+    label: "Operations",
+    items: [
+      {
+        label: "Admin",
+        href: "/admin",
+        icon: "watch",
+        hint: "Ingestion runs and what each costs, catalogue counts, connector health, usage in aggregate",
+      },
+    ],
+  },
 ];
 
 function ThemeToggle() {

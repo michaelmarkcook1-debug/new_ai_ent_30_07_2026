@@ -1213,3 +1213,35 @@ Dates are absolute; the build day is 30 July 2026.
       and Anthropic 55 → 60 purely because the module reads disclosure off
       the record and the record now discloses more — its own comment
       anticipated exactly this movement.
+
+35. **The admin page, and what an ingestion run costs (5 August 2026).**
+    Michael asked for a straightforward admin page with estimated pricing for
+    ingestion runs. One page at /admin, one fetch, four sections in the order
+    an operator asks the questions: did the ingestions run (every recorded run
+    with its failures — a failed run is a row, not a silence), what does a run
+    cost, what is in the catalogue, and is anyone using the tools.
+    - **The pricing is measured quantities times cited unit prices, and the
+      headline is stated plainly: on the plans this product actually runs on,
+      every run costs $0.** Vercel Hobby and Supabase Free are hard-capped
+      rather than metered, and every upstream API is free. The priced column
+      is list-price arithmetic — Vercel Pro's published $0.60/M invocations,
+      $0.128/hr active CPU and $0.0106/GB-hr memory against each run's
+      measured requests, bytes, wall seconds and rows — showing what a run
+      would cost if the caps were outgrown: the dearest run (vendor, 16 SEC
+      queries) prices at $0.000051, and running every series daily would come
+      to about $0.0039 a month. The drawer records how each quantity was
+      measured and names the active-CPU seconds as the least certain figure,
+      safe to publish because a 2x error moves no total past a hundredth of a
+      cent.
+    - **Usage stays write-only from outside.** The page shows usage through a
+      new security-definer function returning GROUP BY totals only (surface,
+      action, count, last seen); the raw table remains unreadable by the
+      public key, and holds nothing identifying anyway.
+    - **Public by design.** The rest of the site shows its provenance; the
+      operations page being the one closed door would sit oddly. Nothing is
+      served that the public endpoints and views do not already expose, and
+      the page footer says so. The basic-auth middleware still covers /admin
+      the day DEMO_USER/DEMO_PASS are ever set.
+    - The catalogue counts section deliberately omits the usage series:
+      usage lives in its own table, and "0 observations" beside a non-zero
+      events list would read as a contradiction rather than a schema fact.
