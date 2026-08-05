@@ -3,8 +3,10 @@
 Written for a team taking this over. Current as of **5 August 2026**, verified
 against the running build rather than from memory.
 
-Companion documents: [DATA-SOURCES.md](DATA-SOURCES.md) for every dataset and
-its vintage, [MVP-SCOPE.md](MVP-SCOPE.md) for what production would take.
+Companion documents: [API.md](API.md) for endpoint and schema contracts,
+[DATA-SOURCES.md](DATA-SOURCES.md) for every dataset and its vintage,
+[RUNBOOK.md](RUNBOOK.md) for operating it, [MVP-SCOPE.md](MVP-SCOPE.md) for
+what production would take.
 
 ---
 

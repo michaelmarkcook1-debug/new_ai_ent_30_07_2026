@@ -5,6 +5,7 @@ it at 6pm on a Friday, so it leads with the commands and puts the reasoning
 underneath.
 
 Current as of **5 August 2026**. Companion documents:
+[API.md](API.md) for endpoint and schema contracts,
 [ARCHITECTURE.md](ARCHITECTURE.md) for how it is built,
 [DATA-SOURCES.md](DATA-SOURCES.md) for what is behind each page,
 [MVP-SCOPE.md](MVP-SCOPE.md) for what production would still take.

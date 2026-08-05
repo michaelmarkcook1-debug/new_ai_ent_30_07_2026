@@ -21,6 +21,9 @@ Three documents, written for a team picking this up rather than for the demo:
 - **[docs/RUNBOOK.md](docs/RUNBOOK.md)** — how to run, refresh, ship and check
   it: the four gates, the deploy that needs a retry, what an ingestion costs,
   and the two traps that have already cost us a day each.
+- **[docs/API.md](docs/API.md)** — the contracts: every endpoint's real
+  response shape, the error envelope, the Postgres schema, the RLS policies
+  and the source register. Captured from production, not written from types.
 
 Short version: four pages paint SAMPLE badges and the rest paint none. The
 footer's "Demo build" is accurate for `/company-view` (13 badges),

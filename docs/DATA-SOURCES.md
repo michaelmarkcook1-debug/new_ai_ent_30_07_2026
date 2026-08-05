@@ -149,9 +149,14 @@ refusals and the verification worked example:
 
 ### 1.3 Catalogue API — `/api/catalogue/{series}`
 
-Series: `model` · `vendor` · `market` · `usage`. Returns movements with
-`change: null` where only one observation exists, plus `truncated` measured
-against the server's own count.
+Series: `model` · `vendor` · `market`. Returns movements with `change: null`
+where only one observation exists, plus `truncated` measured against the
+server's own count. Full contract in [API.md](API.md#2-apicatalogueseries).
+
+`usage` is **not** a series and returns 400. It was one until 5 August 2026
+and answered an empty 200, because usage is written as events to
+`aie.usage_event` and never reaches `aie.observation`. The aggregate is on
+`/api/admin/overview`.
 
 ### 1.4 Adoption status — `/api/adoption/status`
 
@@ -293,6 +298,52 @@ No network. Each is a snapshot and is labelled with its vintage.
 | `fixtures/aie-live/*.json` | ~1.1 MB | 11 files | Proxy fallbacks |
 | `fixtures/br/*.json` | ~500 KB | 6 files | Proxy fallbacks |
 | `data/adoption/disclosure-10-K.json` | 20 KB | 8 vendors | Regenerate: `npm run ingest:adoption` |
+
+### 4.1 Hand-curated third-party figures, and where each one comes from
+
+Figures typed into page code from a named publication rather than fetched.
+They were the least traceable data in the product: real, attributed on screen,
+and absent from this register until 5 August 2026.
+
+| Figure | Publisher | Link | Used on |
+|---|---|---|---|
+| Anthropic ~40% of enterprise LLM spend vs OpenAI ~27% | Menlo Ventures, mid-2026 LLM market update | https://finance.yahoo.com/news/enterprise-llm-spend-reaches-8-130000140.html | `/peer-insights`, `/ai-adoption` |
+| Anthropic passed OpenAI in business adoption, 34.4% vs 32.3% | Ramp AI Index, April 2026 data (via Axios) | https://www.axios.com/2026/05/13/anthropic-openai-workplace-ai-adoption | `/peer-insights`, `/ai-adoption` |
+
+Both **contradict the uptake model's ordering**, and that is why they are shown
+above the slice on Peer Insights rather than beneath it. They are later and
+measured; the model is a May 2026 estimate. A reader who meets the caveat after
+the figures has already been misled.
+
+### 4.2 The private-company evidence record
+
+`lib/finance/data/private-figures.json` — 26 rows in four groups. The 23
+evidence rows each carry a `citation` with `publisher`, `asOf` (when the figure
+was **true**, not when it was republished), a verbatim `quote`, and
+`sourceUrl`.
+
+| Group | Rows | Resolvable URL | `aie-news-feed` token |
+|---|---:|---:|---:|
+| `valuations` | 8 | 4 | 4 |
+| `revenues` | 13 | 9 | 4 |
+| `crossChecks` | 2 | 2 | 0 |
+| `notValuations` | 3 | — | — |
+
+**15 of the 23 cited rows carry a resolvable URL; the other 8 carry the token
+`aie-news-feed`**, meaning the figure arrived through the app's own news module
+rather than from a link captured at the time. Those eight are attributed and
+quoted but not independently clickable — a weaker position than the rest of the
+record, stated here rather than left for a reader to find. The token is never
+rendered as an anchor, so it produces no broken link. Capturing real URLs for
+them is open work.
+
+`notValuations` rows carry `what` and `why` instead of a citation, and having
+no source is correct for them: they exist to say what a widely-quoted number is
+**not** — that a funding total is not a valuation, for instance — which is an
+argument about a figure rather than a figure of its own.
+
+Methodology, including how an undisclosed revenue is banded from these:
+[REVENUE_METHODOLOGY.md](REVENUE_METHODOLOGY.md).
 | `lib/aie/vendor-directory.ts` | — | 43 vendors | `VENDOR_DIRECTORY_AS_OF` = 7 May 2026 |
 
 ---
