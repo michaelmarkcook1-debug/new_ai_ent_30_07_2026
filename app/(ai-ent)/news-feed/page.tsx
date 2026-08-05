@@ -7,17 +7,24 @@ import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { newsInsight } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
 import { analystNews } from "@/lib/analyst/news-source";
+import { readWatchState } from "@/lib/changes/watchlist";
 
-// News is the fastest-moving input in the product, so this page and its
-// insight are regenerated once a day rather than baked at build time.
-export const revalidate = 86400;
-
+// News is the fastest-moving input in the product, and the insight now reads
+// the reader's watchlist to say which of the cycle touches them.
+//
+// Reading a cookie opts this route into dynamic rendering, so the daily
+// `revalidate` it used to declare no longer applies and has been removed
+// rather than left to imply a caching behaviour that is not happening. The
+// expensive part is unaffected: analystNews() holds its own 24-hour cache, so
+// per-request work is the render, not the 3.28MB pull. The Pulse made the same
+// trade for the same reason.
 export const metadata = { title: "News | AI Enterprise" };
 
 export default async function NewsFeedPage() {
   const news = await analystNews();
   const { items, meta } = loadFeed();
-  const insight = newsInsight(news.items, null);
+  const watch = await readWatchState();
+  const insight = newsInsight(news.items, null, watch.vendorIds);
 
   const written = await authorInsight(
     insight,

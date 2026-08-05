@@ -1,6 +1,13 @@
 import { PageHeader } from "@/lib/ui/page";
 import { MicroLabel } from "@/lib/ui/micro";
 import { PeerInsightsView } from "./peer-insights-view";
+import { AnalystInsight } from "@/lib/ui/analyst-insight";
+import { peerInsight, pickNews } from "@/lib/analyst/insight";
+import { authorInsight } from "@/lib/analyst/author";
+import { analystNews } from "@/lib/analyst/news-source";
+import { ADOPTION_SEGMENTS } from "./data";
+import { USE_CASES } from "@/lib/aie";
+import { workflowsForSegment } from "@/lib/peer/industry-workflows";
 
 export const metadata = { title: "Peer Insights | AI Enterprise" };
 
@@ -41,13 +48,37 @@ const MEASURED_AGAINST = [
 // rather than freshly measured, and the two measurements that contradict its
 // ordering are named on this page rather than left on the one it came from.
 
-export default function PeerInsightsPage() {
+export default async function PeerInsightsPage() {
+  const news = await analystNews();
+  const horizontal = USE_CASES.filter(
+    (u) => !u.industries || u.industries.length === 0
+  ).length;
+  const insight = peerInsight(
+    {
+      segments: ADOPTION_SEGMENTS.length,
+      workflows: USE_CASES.length,
+      horizontal,
+      categories: new Set(USE_CASES.map((u) => u.category)).size,
+      segmentsWithSpecific: ADOPTION_SEGMENTS.filter(
+        (seg) => workflowsForSegment(seg.label).specific.length > 0
+      ).length,
+    },
+    pickNews(news.items, { categories: ["Market movement"], minImpact: 70 }),
+    null
+  );
+  const written = await authorInsight(insight, "peer", []);
+
   return (
     <>
       <PageHeader
         title="Peer Insights"
         subtitle="What firms like yours are buying, and what they are buying it for: pick your industry and see both the vendors that show up in that slice and the workflows your sector runs AI on."
         lanes={["aie-live", "aie"]}
+      />
+      <AnalystInsight
+        insight={written.value}
+        authorship={written.authorship}
+        context="peer"
       />
       <div className="space-y-4">
         <section className="rounded-lg border border-warn/40 bg-warn-bg/40 p-4">

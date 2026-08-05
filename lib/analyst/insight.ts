@@ -1,6 +1,7 @@
 import type { DataLane } from "@/lib/provenance";
 import type { MarketMetrics, VendorMetrics } from "@/lib/market-metrics";
 import type { ToolKey } from "@/lib/ui/tools";
+import { vendorName } from "@/lib/aie/vendor-directory";
 
 // The Analyst Insight that opens every page.
 //
@@ -158,6 +159,101 @@ const pct = (a: number, b: number) => (b === 0 ? 0 : Math.round((a / b) * 100));
 export const aiVendors = (m: MarketMetrics): VendorMetrics[] =>
   m.vendors.filter((v) => v.category !== "AI investor");
 
+/** A category leader and how defensible the lead looks. */
+export interface CategoryLead {
+  category: string;
+  leader: string;
+  score: number;
+  /** The runner-up, so a lead can be described rather than just asserted. */
+  runnerUp: string | null;
+  gap: number | null;
+  /** How many scored vendors the category holds, so a lead of one is visible. */
+  contested: number;
+}
+
+export interface MarketTake {
+  leads: CategoryLead[];
+  /** Leads with a runner-up within three points: genuinely open categories. */
+  close: CategoryLead[];
+  /** Leads clear by ten points or more. */
+  clear: CategoryLead[];
+  gaining: string[];
+  slipping: string[];
+  strongButRisky: VendorMetrics[];
+}
+
+/**
+ * An analyst's read of who is where, named.
+ *
+ * The insights used to describe the instrument — how to read the table, what
+ * the composite does not net off, which columns are comparable. All true, and
+ * all of it answered a question the reader had not asked. Somebody arriving at
+ * a vendor page wants to know who is ahead and whether the lead means anything,
+ * and got a methodology note instead.
+ *
+ * This computes the substance so the copy can lead with it. The cautions are
+ * still carried, underneath, where a caution belongs once the finding is made.
+ *
+ * Every figure here is read off the scored set. Nothing is inferred about a
+ * vendor that carries no score, and a category with one scored vendor reports
+ * `runnerUp: null` rather than implying a contest that has one entrant.
+ */
+export function marketTake(m: MarketMetrics): MarketTake {
+  const scored = aiVendors(m).filter((v) => v.composite !== null);
+
+  const byCategory = new Map<string, VendorMetrics[]>();
+  for (const v of scored) {
+    const list = byCategory.get(v.category) ?? [];
+    list.push(v);
+    byCategory.set(v.category, list);
+  }
+
+  const leads: CategoryLead[] = [];
+  for (const [category, list] of byCategory) {
+    const ranked = [...list].sort((a, b) => (b.composite ?? 0) - (a.composite ?? 0));
+    const top = ranked[0];
+    const second = ranked[1] ?? null;
+    leads.push({
+      category,
+      leader: top.name,
+      score: round1(top.composite ?? 0),
+      runnerUp: second?.name ?? null,
+      gap: second ? round1((top.composite ?? 0) - (second.composite ?? 0)) : null,
+      contested: ranked.length,
+    });
+  }
+  // Widest lead first: the most defensible position is the most useful thing
+  // to say first, and the closest races are the most useful thing to say last.
+  leads.sort((a, b) => (b.gap ?? -1) - (a.gap ?? -1));
+
+  const withRisk = new Set(m.risks.map((r) => r.vendorId));
+
+  return {
+    leads,
+    close: leads.filter((l) => l.gap !== null && l.gap <= 3),
+    clear: leads.filter((l) => l.gap !== null && l.gap >= 10),
+    gaining: m.gaining.map((s) => s.vendorName),
+    slipping: m.slipping.map((s) => s.vendorName),
+    strongButRisky: scored.filter(
+      (v) => (v.composite ?? 0) >= 60 && withRisk.has(v.id)
+    ),
+  };
+}
+
+/** "A, B and C", or "A and B", or "A". British English list. */
+export function nameList(names: string[], max = 3): string {
+  const shown = names.slice(0, max);
+  if (shown.length === 0) return "";
+  if (shown.length === 1) return shown[0];
+  const over = names.length - max;
+  // "1 others" shipped once. Singular and plural both matter in copy a reader
+  // is meant to trust with figures.
+  if (over > 0) {
+    return `${shown.join(", ")} and ${over} ${over === 1 ? "other" : "others"}`;
+  }
+  return `${shown.slice(0, -1).join(", ")} and ${shown[shown.length - 1]}`;
+}
+
 function insufficient(
   reason: string,
   sources: string[],
@@ -257,7 +353,25 @@ export function financialInsight(
   disclosure: { disclosing: number; total: number } | null,
   segmentsFiled: number,
   segmentTotal: number,
-  capturedAt: string | null
+  capturedAt: string | null,
+  /**
+   * The private side, when the page holds it. Omitted, the insight says
+   * nothing about private vendors rather than guessing at them.
+   *
+   * This parameter exists because the original copy stated that no range and
+   * no modelled figure was ever substituted for a silent vendor. That was true
+   * when written and stopped being true when the private-revenue estimator
+   * shipped: the page now shows a band for private companies. An insight that
+   * denies what the panel beneath it is doing is worse than no insight.
+   */
+  privateSide?: {
+    /** Private vendors stating a figure themselves. */
+    stated: number;
+    /** Private vendors with nothing to state and no basis to estimate from. */
+    notEstimable: number;
+    /** The revenue multiple band the estimator will quote, low to high. */
+    band: { low: number; high: number };
+  }
 ): AnalystInsightData {
   if (!disclosure || disclosure.total === 0) {
     return insufficient(
@@ -274,11 +388,17 @@ export function financialInsight(
       undisclosed > disclosure.disclosing
         ? "Most of the AI market's revenue claims are not in anyone's filings, which is a procurement problem before it is a finance one."
         : "A majority of tracked vendors now quantify AI revenue in their filings, which makes their commercial claims checkable.",
-    summary: `Of ${disclosure.total} tracked public vendors, ${disclosure.disclosing} state a quantified AI revenue figure in their filings and ${undisclosed} state none. ${segmentTotal > 0 ? `${segmentsFiled} of ${segmentTotal} break revenue down by segment, which is as close as most get to showing where AI money actually lands.` : ""} That ${share} per cent disclosure rate is the useful number here, and it is low enough to change how a vendor's commercial claims should be treated in a sales cycle. A growth figure quoted in a pitch that does not appear in a filing has not been audited by anyone, and for a multi-year commitment that distinction matters more than the figure itself. Private vendors file nothing at all and sit outside this entirely rather than being estimated into it. No range, no modelled figure and no analyst override is substituted where a vendor is silent.`,
+    summary: `Of ${disclosure.total} tracked public vendors, ${disclosure.disclosing} state a quantified AI revenue figure in their filings and ${undisclosed} state none. ${segmentTotal > 0 ? `${segmentsFiled} of ${segmentTotal} break revenue down by segment, which is as close as most get to showing where AI money actually lands. ` : ""}That ${share} per cent disclosure rate is the useful number here, and it is low enough to change how a vendor's commercial claims should be treated in a sales cycle: a growth figure quoted in a pitch that does not appear in a filing has not been audited by anyone, and for a multi-year commitment that distinction matters more than the figure itself. ${
+      privateSide
+        ? `On the private side, ${privateSide.stated} companies state a figure themselves and ${privateSide.notEstimable} give nothing to work from. Where a private company is silent but a dated valuation exists, this page shows a revenue band derived from the ${privateSide.band.low}x to ${privateSide.band.high}x range observed across comparable disclosed pairs — shown as a band, never as a point, and never mixed into a filed figure. A band is an argument about magnitude, not a measurement, and it is labelled as one.`
+        : "Private vendors file nothing and sit outside this entirely rather than being estimated into it."
+    }`,
     implications: [
       `${undisclosed} of ${disclosure.total} tracked vendors publish no AI revenue figure, so their traction claims are unverifiable from public sources.`,
       "Treat vendor-supplied growth and scale numbers as unaudited unless the filing carries them.",
-      "Private vendors are outside this entirely, so absence here is not a signal about them either way.",
+      privateSide
+        ? `Private revenue is banded from observed multiples, never filed: read the ${privateSide.band.low}x-${privateSide.band.high}x range as magnitude, not measurement.`
+        : "Private vendors are outside this entirely, so absence here is not a signal about them either way.",
     ],
     action: undisclosed > disclosure.disclosing ? "Investigate" : "Monitor",
     tools: ["vendorView", "competitiveIntel"],
@@ -374,12 +494,37 @@ export function reputationInsight(
   const spread = round1((sorted[0].reputation ?? 0) - (sorted[sorted.length - 1].reputation ?? 0));
   const realSnapshots = snapshotCount - syntheticCount;
 
+  // Who is actually where, and on which pillar. The reading averaged three
+  // pillars into one number and reported the spread; a reader wanting to know
+  // whether their vendor has a support problem got a statistic about the set.
+  const top = sorted.slice(0, 3).map((v) => v.name);
+  const bottom = sorted.slice(-3).reverse().map((v) => v.name);
+
+  const pillarMean = (k: "customer" | "developer" | "employee") => {
+    const vals = vendors
+      .map((v) => v.reputationPillars?.[k])
+      .filter((n): n is number => typeof n === "number");
+    return vals.length
+      ? { mean: round1(vals.reduce((a, b) => a + b, 0) / vals.length), n: vals.length }
+      : null;
+  };
+  const pillars = (
+    [
+      ["customer", pillarMean("customer")],
+      ["developer", pillarMean("developer")],
+      ["employee", pillarMean("employee")],
+    ] as const
+  ).filter((p): p is readonly [typeof p[0], { mean: number; n: number }] => p[1] !== null);
+  const weakest = [...pillars].sort((a, b) => a[1].mean - b[1].mean)[0] ?? null;
+  const strongest = [...pillars].sort((a, b) => b[1].mean - a[1].mean)[0] ?? null;
+
   return {
-    headline:
-      spread > 25
-        ? "Reputation separates the vendor set more sharply than capability does, which makes it the more useful shortlist filter of the two."
-        : "Reputation sits in a narrow band across the vendor set, so it will not separate a shortlist on its own.",
-    summary: `${vendors.length} vendors carry a reputation reading, averaging ${mean} across the customer, developer and employee pillars, with ${spread} points between the highest and lowest. ${
+    headline: `${sorted[0].name} carries the strongest reputation of the ${vendors.length} vendors read${weakest && strongest && weakest[0] !== strongest[0] ? `, and the set is weakest on the ${weakest[0]} pillar` : ""}.`,
+    summary: `${vendors.length} vendors carry a reputation reading, averaging ${mean} across the customer, developer and employee pillars, with ${spread} points between the highest and lowest. ${nameList(top)} sit at the top of the set; ${nameList(bottom)} sit at the bottom${
+      pillars.length === 3
+        ? `. Read by pillar, the set scores ${pillars.map(([k, v]) => `${v.mean} on ${k}`).join(", ")} — so ${weakest ? `${weakest[0]} experience is where this market is collectively weakest, and the pillar most likely to bite after signature` : "no single pillar stands out"}`
+        : ""
+    }. ${
       spread > 25
         ? "A spread that wide is worth acting on: it reflects sustained differences in support quality, documentation and how vendors behave after the contract is signed, none of which appear in a capability score. Reputation is also the slowest of the tracked measures to move, so a low reading is unlikely to correct inside a procurement cycle."
         : "A band this narrow means reputation is better used to disqualify than to rank. It will flag a vendor with a genuine support or documentation problem, but it will not tell you which of two strong vendors to pick."
@@ -389,10 +534,10 @@ export function reputationInsight(
         : `${realSnapshots} real captures are now held, so a trend is beginning to form, though it is still too short to read confidently.`
     }${syntheticCount > 0 ? ` The chart also carries ${syntheticCount} illustrative quarters, drawn dashed and badged, which are not measurements.` : ""}`,
     implications: [
-      spread > 25
-        ? "Reputation separates this vendor set more than capability does; use it as a primary filter."
-        : "Reputation is narrow across the set; use it to disqualify rather than to rank.",
-      "The pillars measure post-contract experience, which no capability score captures.",
+      `${sorted[0].name} leads on reputation at ${round1(sorted[0].reputation ?? 0)}; ${sorted[sorted.length - 1].name} trails at ${round1(sorted[sorted.length - 1].reputation ?? 0)}.`,
+      weakest
+        ? `The set is weakest on ${weakest[0]} (${weakest[1].mean} mean) — the pillar most likely to bite after signature.`
+        : "The pillars measure post-contract experience, which no capability score captures.",
       realSnapshots < 2
         ? "Only one real capture exists, so treat this as a point reading and not a trend."
         : "The trend is real but short; a direction will not be reliable for several more captures.",
@@ -426,30 +571,56 @@ export function vendorViewInsight(
       m.lane
     );
   }
-  const withRisk = new Set(m.risks.map((r) => r.vendorId));
-  const strongButRisky = scored.filter(
-    (v) => (v.composite ?? 0) >= 60 && withRisk.has(v.id)
-  );
+  const take = marketTake(m);
+  const { strongButRisky, clear, close } = take;
   const noMomentum = scored.filter((v) => v.momentum === null).length;
+  const categories = new Set(vendors.map((v) => v.category)).size;
+
+  // The widest and the tightest category, named. These are the two facts a
+  // reader can act on: where the incumbent is unassailable and where a second
+  // quote is worth getting.
+  const widest = clear[0] ?? null;
+  const tightest = close[close.length - 1] ?? null;
 
   return {
-    headline:
+    headline: widest
+      ? `${widest.leader} holds the clearest position of any vendor tracked, and ${close.length > 0 ? `${close.length} other categories are close enough to contest` : "no category is close enough to contest"}.`
+      : close.length > 0
+        ? `No vendor holds a decisive lead in its category, and ${close.length} categories are within three points at the top.`
+        : "Category positions are settled enough that no lead is currently being contested.",
+    summary: `${scored.length} vendors carry a composite score across ${categories} market categories. ${
+      widest
+        ? `The most defensible position is ${widest.leader} in ${widest.category}, scoring ${widest.score} with ${widest.runnerUp} ${widest.gap} points behind. A gap that size is not closed in a quarter, and a buyer in that category is negotiating with an incumbent rather than choosing between options. `
+        : ""
+    }${
+      tightest
+        ? `The closest contest is ${tightest.category}, where ${tightest.leader} leads ${tightest.runnerUp} by ${tightest.gap}: inside the margin the evidence can carry, so treat those two as equivalent on score and decide on fit, governance and price. `
+        : ""
+    }${
+      take.gaining.length > 0 || take.slipping.length > 0
+        ? `${take.gaining.length > 0 ? `${nameList(take.gaining)} ${take.gaining.length === 1 ? "is" : "are"} gaining position` : ""}${take.gaining.length > 0 && take.slipping.length > 0 ? ", and " : ""}${take.slipping.length > 0 ? `${nameList(take.slipping)} ${take.slipping.length === 1 ? "is" : "are"} slipping` : ""}. `
+        : ""
+    }${
       strongButRisky.length > 0
-        ? "Several vendors scoring well enough to shortlist also carry an open high-severity risk, which the composite does not reflect."
-        : "No vendor currently combines a shortlist-grade score with an open high-severity risk.",
-    summary: `${scored.length} vendors carry a composite score across ${new Set(vendors.map((v) => v.category)).size} market categories. ${
-      strongButRisky.length > 0
-        ? `${strongButRisky.length} of them score 60 or above while carrying an open high-severity risk: ${strongButRisky.slice(0, 3).map((v) => v.name).join(", ")}. The composite is a capability and standing measure and does not net off governance exposure, so a vendor can rank well and still be the wrong commitment this quarter. Read the two together rather than in sequence.`
+        ? `${nameList(strongButRisky.map((v) => v.name))} score 60 or above while carrying an open high-severity risk. The composite measures capability and standing and does not net off governance exposure, so those vendors rank well and may still be the wrong commitment this quarter.`
         : "No vendor combines a shortlist-grade score with an open high-severity risk, so the ranking can be read at face value this period."
-    } ${noMomentum > 0 ? `Momentum is published for only ${scored.length - noMomentum} of the ${scored.length} scored vendors, so ${noMomentum} show no movement reading rather than a flat one.` : ""} Scores are comparable inside a market category and not across one, which is why the table groups rather than producing a single league table.`,
-    implications: [
-      strongButRisky.length > 0
-        ? "A high composite does not clear a vendor: check open risks before shortlisting."
-        : "Rankings can be read at face value this period; no strong vendor carries an open high-severity risk.",
-      "Scores compare within a market category only, never across one.",
+    }${
       noMomentum > 0
-        ? `${noMomentum} vendors publish no momentum reading, which is an absence rather than a flat trend.`
-        : "Momentum is published across the scored set.",
+        ? ` Momentum is published for ${scored.length - noMomentum} of the ${scored.length} scored vendors, so ${noMomentum} show no movement reading rather than a flat one.`
+        : ""
+    } Every comparison above is inside a market category and never across one, which is why the table groups rather than producing a single ranking.`,
+    implications: [
+      widest
+        ? `${widest.leader} leads ${widest.category} by ${widest.gap} points; expect incumbent pricing there.`
+        : "No category has a decisive leader; leverage exists in all of them.",
+      tightest
+        ? `${tightest.leader} and ${tightest.runnerUp} are within ${tightest.gap} points in ${tightest.category} — decide on fit, not score.`
+        : "Scores compare within a market category only, never across one.",
+      strongButRisky.length > 0
+        ? `A high composite does not clear a vendor: ${nameList(strongButRisky.map((v) => v.name), 2)} carry open risks.`
+        : noMomentum > 0
+          ? `${noMomentum} vendors publish no momentum reading, which is an absence rather than a flat trend.`
+          : "Momentum is published across the scored set.",
     ],
     action: strongButRisky.length > 0 ? "Investigate" : "Shortlist",
     tools: ["competitiveIntel", "workflowShortlist", "modelForRole"],
@@ -616,9 +787,22 @@ export function workflowInsight(
 }
 
 /** News: what the flow of events is actually telling a buyer. */
+/**
+ * What the news cycle is about, and whether it touches this reader.
+ *
+ * `watchedVendorIds` is the shortlist mirrored into a cookie by
+ * lib/shortlist.tsx. It is a browser, not an identity: there is no account
+ * here, so this personalises a page and can post to nobody.
+ *
+ * An empty watchlist is a normal first visit, not a gap. The reader is told
+ * what the cycle is doing and invited to build a list, because an empty
+ * "affects you" panel teaches somebody the feature is broken rather than
+ * unfilled — the same rule the Pulse follows.
+ */
 export function newsInsight(
   items: NewsItemRaw[],
-  lastUpdated: string | null
+  lastUpdated: string | null,
+  watchedVendorIds: string[] = []
 ): AnalystInsightData {
   if (items.length < 10) {
     return insufficient(
@@ -633,22 +817,82 @@ export function newsInsight(
   const negShare = pct(neg, items.length);
   const risky = items.filter((n) => (n.categories ?? []).includes("Risk event")).length;
 
+  // What the cycle is *about*. Counting sentiment says whether the mood moved;
+  // it never says what happened. The source tags every item with categories
+  // and vendors, and reading those is the difference between "the flow is 14
+  // per cent negative" and "this fortnight is product launches and funding".
+  const themeCount = new Map<string, number>();
+  for (const n of items)
+    for (const c of n.categories ?? [])
+      themeCount.set(c, (themeCount.get(c) ?? 0) + 1);
+  const themes = [...themeCount.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3);
+
+  const vendorCount = new Map<string, number>();
+  for (const n of items)
+    for (const v of n.vendors ?? [])
+      vendorCount.set(v, (vendorCount.get(v) ?? 0) + 1);
+  // The feed carries vendor ids. Printing "openai" to a reader who has only
+  // ever seen "OpenAI" reads as a leaked internal key, so names are resolved
+  // through the directory, which falls back to the id rather than to blank.
+  const loudest = [...vendorCount.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([id, n]) => [vendorName(id), n] as const);
+
+  // Does any of it bear on this reader. Matching is on the vendor ids the feed
+  // carries, so a watched vendor the feed never names simply does not appear —
+  // which is a true "nothing this cycle", not a miss.
+  const watched = new Set(watchedVendorIds);
+  const mine = watched.size
+    ? items.filter((n) => (n.vendors ?? []).some((v) => watched.has(v)))
+    : [];
+  const mineNames = [
+    ...new Set(
+      mine.flatMap((n) => (n.vendors ?? []).filter((v) => watched.has(v)))
+    ),
+  ].map(vendorName);
+  const mineNegative = mine.filter((n) => n.sentiment === "negative").length;
+  const mineHigh = mine
+    .filter((n) => (n.impactScore ?? 0) >= 75)
+    .sort((a, b) => (b.impactScore ?? 0) - (a.impactScore ?? 0))[0];
+
+  const themeText = themes.length
+    ? themes.map(([t, n]) => `${t.toLowerCase()} (${n})`).join(", ")
+    : "no dominant theme";
+
   return {
-    headline:
+    headline: watched.size === 0
+      ? `This cycle is mostly ${themes[0]?.[0].toLowerCase() ?? "mixed reporting"}, and ${loudest.length ? `${loudest[0][0]} is named more than any other vendor` : "no vendor dominates the coverage"}.`
+      : mine.length === 0
+        ? "Nothing in the current cycle names a vendor on your list, which is a quiet fortnight for your shortlist rather than a gap in the feed."
+        : mineNegative > 0
+          ? `${mine.length} items name vendors on your list, and ${mineNegative} of them ${mineNegative === 1 ? "is" : "are"} negative — worth reading before your next review.`
+          : `${mine.length} items name vendors on your list and none of them are negative.`,
+    summary: `${items.length} items in the current window. The cycle is running on ${themeText}, with ${loudest.length ? `${nameList(loudest.map(([v]) => v))} named most often` : "coverage spread thinly across vendors"}. Sentiment is ${pos} positive against ${neg} negative, ${highImpact} items scored at high impact and ${risky} classified as risk events — a negative share of ${negShare} per cent, ${
       negShare >= 25
-        ? "The news flow has turned materially more negative, which usually precedes a change in vendor behaviour rather than following one."
-        : "The news flow remains net positive, so nothing in the current cycle argues for changing a vendor position on sentiment alone.",
-    summary: `${items.length} items in the current window, ${pos} positive and ${neg} negative, with ${highImpact} scored at high impact and ${risky} classified as risk events. ${
-      negShare >= 25
-        ? `A negative share of ${negShare} per cent is high enough to be worth reading rather than dismissing. News moves faster than any assessment in this platform, so it is the earliest signal available, but it is also the least verified: a single well-covered incident can move the mix without changing anything structural.`
-        : `A negative share of ${negShare} per cent is within the range where the flow reflects ordinary product and funding cycles rather than stress. News is the earliest signal here and the least verified, so it belongs as a prompt to check something rather than as a reason to act.`
-    } Treat this section as an early-warning surface: the scored assessments elsewhere in the platform are slower and better evidenced, and where the two disagree the assessment is usually right and the news is usually earlier.`,
+        ? "high enough to read rather than dismiss"
+        : "within the range of ordinary product and funding cycles"
+    }. ${
+      watched.size === 0
+        ? "Nothing here is filtered to you yet. Add vendors to your shortlist and this panel will tell you which of the cycle actually touches them, rather than leaving you to scan the feed for names you recognise."
+        : mine.length === 0
+          ? `None of the ${watched.size} vendors on your list ${watched.size === 1 ? "is" : "are"} named in the current window. That is a real absence rather than a filtering failure: the feed names vendors explicitly, so silence here means the cycle went elsewhere.`
+          : `${mine.length} of those items name ${nameList(mineNames)} from your list${mineNegative > 0 ? `, ${mineNegative} of them negative` : ", none of them negative"}.${mineHigh ? ` The highest-impact one is "${mineHigh.title}".` : ""}`
+    } News is the earliest signal in this platform and the least verified: a single well-covered incident moves the mix without changing anything structural. Where it disagrees with a scored assessment, the assessment is usually right and the news is usually earlier.`,
     implications: [
-      `${negShare} per cent of current items are negative, against ${pct(pos, items.length)} per cent positive.`,
-      "News leads the scored assessments but is the least verified signal in the platform.",
+      themes.length
+        ? `The cycle is led by ${themes[0][0].toLowerCase()}: ${themes[0][1]} of ${items.length} items.`
+        : `${negShare} per cent of current items are negative.`,
+      watched.size === 0
+        ? "Nothing is filtered to your vendors yet — build a shortlist to make this panel yours."
+        : mine.length === 0
+          ? `No item names your ${watched.size} watched ${watched.size === 1 ? "vendor" : "vendors"} this window.`
+          : `${mine.length} items touch your list${mineNegative > 0 ? `, ${mineNegative} negative` : ""}.`,
       "Where news and assessment disagree, the assessment is usually right and the news usually earlier.",
     ],
-    action: negShare >= 25 ? "Monitor" : "Monitor",
+    action: mineNegative > 0 || negShare >= 25 ? "Investigate" : "Monitor",
     tools: ["marketWatch", "vendorView"],
     news: pickNews(items, { minImpact: 75 }),
     evidence: {
@@ -774,6 +1018,72 @@ export function positionInsight(
       sources: ["AIE vendor scores", "AIE movement classifications"],
       lastUpdated: m.generatedAt ?? null,
       lane: m.lane,
+    },
+    insufficient: null,
+  };
+}
+
+/**
+ * Peer Insights: what the sector view can and cannot settle.
+ *
+ * The page's own data is fetched per selection in the browser, so this is
+ * deliberately about the shape of the answer rather than about one segment's
+ * numbers. Asserting a ranking here would be worse than silent: the slice is a
+ * modelled May 2026 estimate whose ordering two later measurements contradict,
+ * and an insight that repeated the ordering as a finding would lend it
+ * authority the data does not have.
+ *
+ * So it leads on the thing that is solid — what firms in a sector actually run
+ * AI for, from the workflow library — and states the limit of the vendor slice
+ * plainly.
+ */
+export function peerInsight(
+  opts: {
+    segments: number;
+    workflows: number;
+    horizontal: number;
+    categories: number;
+    /** Segments with at least one workflow tagged specifically to them. */
+    segmentsWithSpecific: number;
+  },
+  news: InsightNews | null,
+  lastUpdated: string | null
+): AnalystInsightData {
+  const { segments, workflows, horizontal, categories, segmentsWithSpecific } =
+    opts;
+  if (workflows === 0) {
+    return insufficient(
+      "The workflow library is empty, so nothing can be said about what any sector runs AI for.",
+      ["AIE workflow taxonomy"],
+      "aie"
+    );
+  }
+  const specific = workflows - horizontal;
+  const horizontalShare = pct(horizontal, workflows);
+
+  return {
+    headline:
+      horizontalShare >= 60
+        ? "Most of what your sector runs AI for is what every sector runs it for, and the difference is smaller than vendor pitches imply."
+        : "Industry-specific workflows outnumber the common ones here, so a general-purpose shortlist will miss most of what your sector needs.",
+    summary: `The workflow library holds ${workflows} enterprise AI workflows across ${categories} areas, mapped to ${segments} industry segments. ${horizontal} of them (${horizontalShare} per cent) run in every industry and ${specific} are tagged to particular sectors, with ${segmentsWithSpecific} of the ${segments} segments carrying at least one workflow of their own. ${
+      horizontalShare >= 60
+        ? "That balance is the useful finding: the bulk of enterprise AI work — summarisation, drafting, retrieval, support deflection — is the same everywhere, so the sector-specific list is where the genuine difference sits and is worth reading first even though it is shorter."
+        : "The sector-specific list is the longer one here, so a shortlist built from general-purpose capability will under-serve the work your industry actually does."
+    } These are workflow types, not observed deployments: the library says contract review is common in legal, never which firms run it, and this product holds no such record. The vendor slice on this page is a different kind of claim again — a modelled estimate dated May 2026, whose top-two ordering two independent later measurements contradict. Read that slice for its shape, which vendors appear in your segment at all and how concentrated it is, and not for its ranking.`,
+    implications: [
+      `${horizontal} of ${workflows} workflows run in every industry; ${specific} are sector-specific.`,
+      `${segmentsWithSpecific} of ${segments} segments have workflows tagged specifically to them — a thin list means thin curation, not a sector that does nothing distinctive.`,
+      "The vendor slice is a modelled May 2026 estimate: read it for shape, not for ranking.",
+    ],
+    action: "Investigate",
+    tools: ["workflowShortlist", "modelForRole"],
+    news,
+    evidence: {
+      count: workflows,
+      sources: ["AIE workflow taxonomy", "AIE uptake model"],
+      lastUpdated,
+      lane: "aie",
     },
     insufficient: null,
   };
