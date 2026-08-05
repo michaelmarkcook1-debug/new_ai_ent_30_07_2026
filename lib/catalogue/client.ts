@@ -30,7 +30,17 @@ export function catalogueConfigured(): boolean {
   return Boolean(base() && key());
 }
 
-export type Series = "model" | "vendor" | "market" | "usage";
+/**
+ * The series held in `aie.observation`.
+ *
+ * `usage` was once a member and should not be re-added. Usage is written as
+ * events to `aie.usage_event` and read through the `usage_summary` function,
+ * never as observations — so a `usage` series resolved to a valid query over
+ * an empty table, which is the worst kind of wrong: it answered successfully
+ * and said nothing was there yet. Keeping it out of the type makes that a
+ * compile error rather than an empty 200.
+ */
+export type Series = "model" | "vendor" | "market";
 
 export interface Observation {
   id: number;

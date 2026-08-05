@@ -20,7 +20,18 @@ import {
 // would invent a trend from one data point.
 
 const CACHE_TTL_MS = 300_000;
-const ALLOWED = new Set<Series>(["model", "vendor", "market", "usage"]);
+
+// The three series that are observations. `usage` is deliberately absent.
+//
+// It was listed here and answered 200 with an empty movement set and the note
+// "First observations recorded" — which read as a pipeline that had started
+// and would fill up, when in fact nothing can ever land there. Usage is
+// recorded as events in `aie.usage_event`, aggregated by the `usage_summary`
+// function, and served by /api/admin/overview. It is not an observation and
+// never passes through `aie.observation`, so asking this endpoint for it was
+// always going to return nothing. A 400 naming the real home is a truer answer
+// than an empty 200.
+const ALLOWED = new Set<Series>(["model", "vendor", "market"]);
 
 type CacheEntry = { body: string; at: number };
 const cache = new Map<string, CacheEntry>();
@@ -34,7 +45,10 @@ export async function GET(
     return NextResponse.json(
       {
         success: false,
-        error: `Unknown series: ${series}`,
+        error:
+          series === "usage"
+            ? "Usage is recorded as events, not observations, so it has no movement series. The aggregate is on /api/admin/overview."
+            : `Unknown series: ${series}`,
         code: "SERIES_NOT_ALLOWED",
         supported: [...ALLOWED],
       },
@@ -95,9 +109,16 @@ export async function GET(
       truncated,
       // Said plainly rather than left for the reader to infer from nulls.
       note: [
-        withComparison === 0
-          ? "First observations recorded. Movement appears once a second reading exists, and nothing here is shown as a change until then."
-          : `${withComparison} of ${movements.length} tracked figures have two or more observations and can be compared.`,
+        // An empty series and a young one are different findings and must not
+        // share a sentence. "First observations recorded" over zero rows says
+        // the pipeline has started when it has not, which is the more
+        // misleading of the two by far: it turns a silent failure into a
+        // progress report.
+        total === 0
+          ? "No observations in this series yet. Nothing has been recorded, so there is nothing to compare — this is an empty series rather than a young one."
+          : withComparison === 0
+            ? "First observations recorded. Movement appears once a second reading exists, and nothing here is shown as a change until then."
+            : `${withComparison} of ${movements.length} tracked figures have two or more observations and can be compared.`,
         truncated
           ? `Showing ${rows.length} of ${total} observations: this is a partial view of the series.`
           : null,
