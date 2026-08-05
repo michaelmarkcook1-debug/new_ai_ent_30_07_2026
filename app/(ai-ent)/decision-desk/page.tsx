@@ -64,7 +64,13 @@ export default async function DecisionDeskPage({
         </p>
       </section>
 
-      <DecisionDeskView assessment={f.assess.assessment} initialTool={initialTool} />
+      <DecisionDeskView
+        assessment={{
+          ...f.assess.assessment,
+          subject: "An enterprise AI adoption decision",
+        }}
+        initialTool={initialTool}
+      />
     </>
   );
 }
