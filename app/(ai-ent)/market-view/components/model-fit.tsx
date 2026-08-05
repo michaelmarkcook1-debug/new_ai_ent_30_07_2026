@@ -770,7 +770,12 @@ export function ModelFit() {
                   {role.authority ? ` · ${role.authority} authority` : ""}
                 </span>
               </div>
-              <ShortlistOverlay survivors={detail?.live ?? []} pick={pick} />
+              <ShortlistOverlay
+                survivors={detail?.live ?? []}
+                pick={pick}
+                engine={engine}
+                seats={seats}
+              />
 
               {/* The model is the answer, so it gets the size and the colour.
                   The reasoning sits under it at reading size. */}
@@ -1806,25 +1811,29 @@ function headline(
 }
 
 
-// The shortlist, laid over the engine's answer.
+// The approved-vendor constraint, applied to the engine's answer.
 //
-// The engine picks on requirements and price and knows nothing about who a
-// reader has already decided to consider. A buyer who has shortlisted three
-// vendors on the Decision Desk wants to know whether the cheapest model that
-// meets the role comes from one of them, and if not, what the nearest one that
-// does would be.
+// The Decision Desk assesses vendors for an enterprise and produces the list
+// it is allowed to buy from. This page then picks a model from a vendor for a
+// role. So the two are one pipeline, not two views: an enterprise that has
+// approved three vendors cannot act on a recommendation naming a fourth,
+// however cheap it is.
 //
-// The overlay never changes the recommendation. Filtering the engine to a
-// shortlist would produce the cheapest model among vendors the reader happened
-// to pick, presented with the same authority as the cheapest model that meets
-// the role, and those are different claims. So the answer stands and this
-// says how it sits against the shortlist.
+// Switching this on therefore re-runs the choice inside the approved set and
+// shows what that constraint costs. Both answers stay on screen, because the
+// gap between them is the number a reader takes back to whoever set the list:
+// the unconstrained pick is what the role needs, the constrained pick is what
+// they may actually buy, and the difference is the price of the policy.
 function ShortlistOverlay({
   survivors,
   pick,
+  engine,
+  seats,
 }: {
   survivors: RankedModel[];
   pick: RankedModel | null;
+  engine: ReturnType<typeof loadEngine> | null;
+  seats: number;
 }) {
   const { ids } = useShortlist();
   const [on, setOn] = useState(false);
@@ -1833,32 +1842,45 @@ function ShortlistOverlay({
     () => new Set(ids.map((id) => vendorName(id).toLowerCase())),
     [ids]
   );
-  const isShortlisted = (m: RankedModel) =>
-    Boolean(m.vendor && names.has(m.vendor.toLowerCase()));
 
-  const matching = useMemo(
-    () => survivors.filter(isShortlisted),
+  // Survivors are already ordered by the engine, so the first from an approved
+  // vendor is the cheapest that meets the role within the constraint.
+  const approvedPick = useMemo(
+    () =>
+      survivors.find((m) => m.vendor && names.has(m.vendor.toLowerCase())) ??
+      null,
     [survivors, names]
   );
-  const pickMatches = pick ? isShortlisted(pick) : false;
-  const nearest = matching[0] ?? null;
+
+  const cost = (m: RankedModel | null) =>
+    m && engine ? engine.perSeatYear(m) : null;
+  const openCost = cost(pick);
+  const approvedCost = cost(approvedPick);
+  const premium =
+    openCost !== null && approvedCost !== null
+      ? (approvedCost - openCost) * seats
+      : null;
+  const sameAnswer =
+    pick && approvedPick && pick.model_id === approvedPick.model_id;
 
   return (
     <div className="mt-4 rounded-lg border-2 border-base-300 p-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <span className="micro-label block">Overlay your shortlist</span>
+          <span className="micro-label block">
+            Restrict to your approved vendors
+          </span>
           <span className="text-sm text-muted">
             {ids.length === 0
-              ? "Nothing shortlisted yet"
-              : `${ids.length} vendor${ids.length === 1 ? "" : "s"} shortlisted`}
+              ? "No vendors approved yet"
+              : `${ids.length} vendor${ids.length === 1 ? "" : "s"} approved on the Decision Desk`}
           </span>
         </div>
         <button
           type="button"
           role="switch"
           aria-checked={on}
-          aria-label="Overlay your shortlisted vendors"
+          aria-label="Restrict the recommendation to your approved vendors"
           disabled={ids.length === 0}
           onClick={() => setOn((v) => !v)}
           className={`relative h-7 w-12 shrink-0 rounded-full transition ${
@@ -1879,42 +1901,63 @@ function ShortlistOverlay({
 
       {ids.length === 0 ? (
         <p className="measure mt-2 text-sm text-muted">
-          Shortlist vendors on the Decision Desk or any vendor page and this
-          will show whether the recommendation below comes from one of them.
+          Approve vendors on the Decision Desk, or shortlist them from any
+          vendor page, and this will pick the best model your enterprise is
+          actually allowed to buy.
         </p>
       ) : on ? (
         <div className="mt-3 border-t border-base-300 pt-3">
-          {pickMatches ? (
+          {!approvedPick ? (
+            <p className="measure text-sm">
+              <span className="font-semibold text-warn">
+                No approved vendor has a model that meets this role.
+              </span>{" "}
+              Every model from the {ids.length} vendors your enterprise approved
+              was eliminated by a requirement above. The role cannot be served
+              inside the current vendor policy, which is a finding about the
+              policy rather than about this role.
+            </p>
+          ) : sameAnswer ? (
             <p className="measure text-sm">
               <span className="font-semibold text-good">
-                The recommendation is on your shortlist.
+                The recommendation is already inside your approved set.
               </span>{" "}
-              {pick?.vendor} is one of the {ids.length} vendors you are
-              considering, so the cheapest model that meets this role and your
-              shortlist are the same answer.
-            </p>
-          ) : matching.length === 0 ? (
-            <p className="measure text-sm">
-              <span className="font-semibold text-warn">
-                No shortlisted vendor has a model that meets this role.
-              </span>{" "}
-              Every model from the {ids.length} vendors you shortlisted was
-              eliminated by a requirement above. That is a finding about the
-              shortlist rather than about the engine, and it is worth taking
-              back to whoever set it.
+              {pick?.vendor} is approved, so the best model for this role and
+              the best model you are allowed to buy are the same. The vendor
+              policy costs nothing here.
             </p>
           ) : (
-            <p className="measure text-sm">
-              <span className="font-semibold text-warn">
-                The recommendation is not on your shortlist.
-              </span>{" "}
-              {matching.length} model{matching.length === 1 ? "" : "s"} from your
-              shortlisted vendors also meet this role, the closest being{" "}
-              <span className="font-semibold">{nearest?.model_id}</span> from{" "}
-              {nearest?.vendor}. The recommendation above is unchanged: it is
-              still the cheapest model that meets the requirements, and
-              narrowing it to a shortlist would answer a different question.
-            </p>
+            <>
+              <p className="measure text-sm">
+                <span className="font-semibold">
+                  Inside your approved vendors, the answer is{" "}
+                  {approvedPick.model_id}
+                </span>{" "}
+                from {approvedPick.vendor}. The open answer, {pick?.model_id}{" "}
+                from {pick?.vendor}, comes from a vendor your enterprise has not
+                approved.
+              </p>
+              {premium !== null && premium > 0 ? (
+                <p className="measure mt-2 text-sm">
+                  Staying inside the policy costs{" "}
+                  <span className="finding-figure font-semibold">
+                    {usd(premium)}
+                  </span>{" "}
+                  a year across {seats.toLocaleString("en-GB")} people. That is
+                  the price of the vendor list, and it is the number to take
+                  back to whoever set it.
+                </p>
+              ) : premium !== null && premium < 0 ? (
+                <p className="measure mt-2 text-sm">
+                  The approved model is also{" "}
+                  <span className="finding-figure font-semibold">
+                    {usd(Math.abs(premium))}
+                  </span>{" "}
+                  a year cheaper across {seats.toLocaleString("en-GB")} people,
+                  so the policy costs nothing and saves something.
+                </p>
+              ) : null}
+            </>
           )}
         </div>
       ) : null}
