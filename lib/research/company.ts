@@ -80,8 +80,16 @@ function cited(
     .map((f) => ({ statement: f.statement.trim(), sourceIndex: f.source - 1 }));
 }
 
+export type ResearchStage =
+  | "searching-business"
+  | "searching-ai"
+  | "reading"
+  | "reading-retry";
+
 export async function researchCompany(
-  query: string
+  query: string,
+  /** Called as each stage begins, so a caller can show real progress. */
+  onStage: (stage: ResearchStage) => void = () => {}
 ): Promise<CompanyResearch> {
   const name = query.trim();
   if (name.length < 2) return empty(name, "Enter a company name to research.");
@@ -101,10 +109,16 @@ export async function researchCompany(
   // truncated JSON, which is why the topic pages read fine while this one fell
   // back. It also widens the number-space the guard checks against, so a single
   // stray figure discarded ten findings rather than five.
-  const [general, ai] = await Promise.all([
-    webSearch(`${name} company overview revenue employees industry`, 4),
-    webSearch(`${name} artificial intelligence strategy adoption deployment`, 4),
-  ]);
+  onStage("searching-business");
+  const general = await webSearch(
+    `${name} company overview revenue employees industry`,
+    4
+  );
+  onStage("searching-ai");
+  const ai = await webSearch(
+    `${name} artificial intelligence strategy adoption deployment`,
+    4
+  );
 
   const sources = [...general.hits, ...ai.hits];
   if (sources.length === 0) {
@@ -139,6 +153,7 @@ export async function researchCompany(
   ];
 
   for (const [i, attempt] of attempts.entries()) {
+    onStage(i === 0 ? "reading" : "reading-retry");
     const draft = await authored<Draft>(
       `company:${name.toLowerCase()}:${i}`,
       groundingBlock(attempt.hits),

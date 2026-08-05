@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { PageHeader } from "@/lib/ui/page";
 import { CompanyEntry } from "./components/company-entry";
-import { ResearchedCompany } from "./components/researched-company";
-import { researchCompany } from "@/lib/research/company";
+import { ResearchRunner } from "./components/research-runner";
+import { getJobForCompany } from "@/lib/research/jobs";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { positionInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
@@ -44,7 +44,14 @@ export default async function CompanyOverviewPage({
   const raw = (await searchParams).company;
   const typed = (Array.isArray(raw) ? raw[0] : raw)?.trim() ?? "";
 
-  const research = typed.length > 1 ? await researchCompany(typed) : null;
+  // The page no longer waits for the research. It renders at once and the
+  // runner watches the job, so the tab is usable while the work happens and a
+  // reader who leaves rejoins the same run on return.
+  //
+  // A run that already finished on this instance is picked up here, so the
+  // analyst reading below can be written on the server without a second wait.
+  const finished = typed.length > 1 ? getJobForCompany(typed) : null;
+  const research = finished?.result ?? null;
 
   // The analyst reading is about the company the reader named, so there is
   // nothing to read until they name one. It used to render a market-position
@@ -95,8 +102,8 @@ export default async function CompanyOverviewPage({
           <CompanyEntry />
         </section>
 
-        {research ? (
-          <ResearchedCompany research={research} />
+        {typed.length > 1 ? (
+          <ResearchRunner company={typed} />
         ) : (
           <section className="rounded-lg border border-dashed border-base-300 bg-base-200/40 p-6">
             <h2 className="text-base font-bold">Name a company to begin</h2>
