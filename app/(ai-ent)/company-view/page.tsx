@@ -2,6 +2,7 @@ import Link from "next/link";
 import { PageHeader } from "@/lib/ui/page";
 import { CompanyEntry } from "./components/company-entry";
 import { ResearchRunner } from "./components/research-runner";
+import { Assumptions } from "./components/assumptions";
 
 export const metadata = { title: "Your AI Position | AI Enterprise" };
 
@@ -55,7 +56,13 @@ export default async function CompanyOverviewPage({
         </section>
 
         {typed.length > 1 ? (
-          <ResearchRunner company={typed} />
+          <>
+            <ResearchRunner company={typed} />
+            {/* The figures no source holds, left to the reader rather than
+                estimated. Below the retrieved findings on purpose: what is
+                cited comes first, what is assumed comes after and is marked. */}
+            <Assumptions company={typed} />
+          </>
         ) : (
           <section className="rounded-lg border border-dashed border-base-300 bg-base-200/40 p-6">
             <h2 className="text-base font-bold">Name a company to begin</h2>
