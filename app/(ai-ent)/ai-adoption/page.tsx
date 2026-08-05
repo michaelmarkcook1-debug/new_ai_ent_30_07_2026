@@ -1,15 +1,22 @@
 import { PageHeader } from "@/lib/ui/page";
 import { MicroLabel } from "@/lib/ui/micro";
 import { AdoptionMaturity } from "./adoption-view";
-import { PeerAdoptionExplorer } from "./peer-explorer";
 import { DisclosurePanel } from "./disclosure-panel";
 import { MovementPanel } from "./movement-panel";
 
 export const metadata = { title: "AI Adoption | AI Enterprise" };
 
-// AI Adoption (4 August 2026). What remains of the old FitEngine market
-// explorer after a sanity check against current public data, and what
-// replaced the part that failed it.
+// AI Adoption (4 August 2026, peer slice split out 5 August). What remains of
+// the old FitEngine market explorer after a sanity check against current
+// public data, and what replaced the part that failed it.
+//
+// The peer-adoption slice now lives on /peer-insights. It answered a narrower
+// question than the rest of this page — "who are firms like mine buying"
+// rather than "how far has the market got" — and it was the one panel here
+// reading a modelled estimate rather than a measurement. The caveat that used
+// to sit above it travelled with it; what remains below is a pointer, because
+// a warning about a slice that is no longer on the page would be worse than
+// no warning at all.
 //
 // The vendor-share model (585 modelled cells, May 2026) claimed OpenAI led
 // adoption in every slice and dominated SMEs 59/23. Two independent current
@@ -47,7 +54,7 @@ export default function AiAdoptionPage() {
     <>
       <PageHeader
         title="AI Adoption"
-        subtitle="Who is actually adopting AI, measured three ways: what companies disclose in their own SEC filings, what independent measurement firms report, and how far each industry has progressed."
+        subtitle="Who is actually adopting AI, measured three ways: what companies disclose in their own SEC filings, what independent measurement firms report, and how far each industry has progressed. What firms like yours are buying now lives on Peer Insights."
         lanes={["live", "aie-live", "aie"]}
       />
       <div className="space-y-4">
@@ -86,15 +93,20 @@ export default function AiAdoptionPage() {
             ))}
           </div>
           <p className="measure mt-3 rounded border border-warn/40 bg-warn-bg/40 px-3 py-2 text-xs leading-relaxed">
-            <b>Read these before the slice below.</b> The peer adoption explorer
-            pulls live for every selection, but what it pulls is a modelled
-            estimate dated May 2026, and the endpoint says so itself. Its
-            ordering puts OpenAI ahead of Anthropic; both measurements above,
-            taken later, disagree. This is not a stale copy that a refresh
-            would fix: the upstream route reads a static seed, and the
-            evidence pipeline that would refresh it is not built yet. Read the
-            slice for its shape — which vendors appear at all, and how
-            concentrated it is — and read the figures above for the ranking.
+            <b>Read these before any modelled slice.</b> The figures above are
+            measured. The peer slice on{" "}
+            <a
+              href="/peer-insights"
+              className="font-semibold text-primary hover:underline"
+            >
+              Peer Insights
+            </a>{" "}
+            is not: it pulls live for every selection, but what it pulls is a
+            modelled estimate dated May 2026 whose ordering puts OpenAI ahead
+            of Anthropic, which both measurements above, taken later,
+            contradict. Read that slice for its shape — which vendors appear
+            at all, and how concentrated it is — and read these figures for
+            the ranking.
           </p>
           <p className="mt-2 text-xs text-muted">
             Category-level market shares — who leads frontier APIs, enterprise
@@ -109,7 +121,6 @@ export default function AiAdoptionPage() {
 
         <MovementPanel />
         <DisclosurePanel />
-        <PeerAdoptionExplorer />
         <AdoptionMaturity />
       </div>
     </>

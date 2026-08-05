@@ -94,6 +94,10 @@ export const NAV_GROUPS: NavGroup[] = [
         hint: "Full profile and rankings for every tracked vendor",
         also: { label: "Reputation Tracker", href: "/reputation-tracker", hint: "How buyers, developers and staff rate each vendor" },
       },
+      // Last in the group on purpose: it answers the narrowest question here
+      // ("who are firms like mine buying"), which is the one a reader reaches
+      // for after the market-wide views, not before them.
+      { label: "Peer Insights", href: "/peer-insights", icon: "company", hint: "What firms in your industry and region are actually buying" },
     ],
   },
   {

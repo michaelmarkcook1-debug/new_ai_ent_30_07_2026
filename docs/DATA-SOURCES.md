@@ -38,7 +38,8 @@ demonstrable.
 | `/start` | Which question is yours | Static card copy | AIE LIVE, LIVE | 0 | Editorial |
 | `/pulse` | What changed today | `market-share`, `reputation`, `capabilities`; judgement derived in `lib/pulse/judgement.ts`; verdict from `lib/vendor/composite-data.ts` | AIE (worst pull), DERIVED | 0 | Fixture sync + ISR 24 h |
 | `/market-watch` | Who leads each category | `market-share.json` (4 Aug 2026) | AIE LIVE, AIE | 0 | `sync-aie-fixtures` |
-| `/ai-adoption` | Who is actually paying | Menlo + Ramp curated figures; peer explorer from AIE uptake | LIVE, AIE LIVE, AIE | 0 | Hand-curated; uptake is a May 2026 seed |
+| `/ai-adoption` | Who is actually paying | Menlo + Ramp curated figures; SEC disclosure counts; catalogue movement; AIE maturity | LIVE, AIE LIVE, AIE | 0 | Hand-curated + SEC live |
+| `/peer-insights` | What firms like mine are buying | AIE `uptake` (9 segments x 5 regions, filtered upstream) | AIE LIVE | 0 | Live pull per selection; **the data behind it is a May 2026 seed** |
 | `/financial-snapshot` | Vendor financials | BoardRadar live (14 tickers) + `fixtures/sec/*` (31 Jul 2026) + `lib/finance/private-revenue.ts` | LIVE, AIE | 0 | BR live, 300 s cache; SEC on ingest |
 | `/competitive-intel` | Capability comparison | `capabilities.json`, 470 vendor-capability rows | matrix lane, LIVE | 0 | `sync-aie-fixtures` |
 | `/vendor-view`, `/vendor-view/[id]` | One vendor, read properly | `vendors.json`, `capabilities.json`, `reputation.json`, composite | AIE | 0 | `sync-aie-fixtures` |

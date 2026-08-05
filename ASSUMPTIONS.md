@@ -1245,3 +1245,30 @@ Dates are absolute; the build day is 30 July 2026.
     - The catalogue counts section deliberately omits the usage series:
       usage lives in its own table, and "0 observations" beside a non-zero
       events list would read as a contradiction rather than a schema fact.
+
+36. **Peer Insights split into its own tab (5 August 2026).** Michael asked
+    for the peer insights functionality to be separated into its own tab at
+    the bottom of Market Intelligence.
+    - **The split is clean because the code already was.** `peer-explorer.tsx`,
+      `peer-adoption-chart.tsx` and `data.ts` were imported by nothing but each
+      other, so all three moved wholesale to `app/(ai-ent)/peer-insights/` with
+      `git mv` — history preserved, no import rewiring, no shared module left
+      straddling two pages.
+    - **The move would have orphaned a warning, and that was the real work.**
+      AI Adoption opened with the Menlo and Ramp measured figures under a
+      caution reading "Read these before the slice below" — a sentence that
+      only worked while the slice sat directly underneath. Moving the explorer
+      out would have left a warning pointing at nothing. So the caveat now
+      exists in two forms: a fuller version on Peer Insights, above the
+      explorer where the figures it qualifies actually are (the slice is a
+      modelled May 2026 estimate; read it for shape, not for ranking; here are
+      the two later measurements that put the top two the other way round),
+      and a shorter pointer on AI Adoption naming the new tab.
+    - **Placed last in Market Intelligence deliberately.** It answers the
+      narrowest question in that group — "who are firms like mine buying"
+      rather than "how has the market moved" — which is what a reader reaches
+      for after the market-wide views, not before them.
+    - Stale cross-references were swept rather than left: the AI Adoption page
+      comment, its subtitle (which counted panels), and the page table in
+      docs/DATA-SOURCES.md, which now carries `/peer-insights` as its own row
+      with the May 2026 seed flagged in bold.
