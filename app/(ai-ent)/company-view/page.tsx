@@ -2,13 +2,6 @@ import Link from "next/link";
 import { PageHeader } from "@/lib/ui/page";
 import { CompanyEntry } from "./components/company-entry";
 import { ResearchRunner } from "./components/research-runner";
-import { getJobForCompany } from "@/lib/research/jobs";
-import { AnalystInsight } from "@/lib/ui/analyst-insight";
-import { positionInsight, pickNews } from "@/lib/analyst/insight";
-import { authorInsight } from "@/lib/analyst/author";
-import { analystNews } from "@/lib/analyst/news-source";
-import { loadPulseMetrics } from "@/app/(ai-ent)/pulse/data";
-import { readChangeLog, readWatchState } from "@/lib/changes/watchlist";
 
 export const metadata = { title: "Your AI Position | AI Enterprise" };
 
@@ -44,50 +37,9 @@ export default async function CompanyOverviewPage({
   const raw = (await searchParams).company;
   const typed = (Array.isArray(raw) ? raw[0] : raw)?.trim() ?? "";
 
-  // The page no longer waits for the research. It renders at once and the
-  // runner watches the job, so the tab is usable while the work happens and a
-  // reader who leaves rejoins the same run on return.
-  //
-  // A run that already finished on this instance is picked up here, so the
-  // analyst reading below can be written on the server without a second wait.
-  const finished = typed.length > 1 ? getJobForCompany(typed) : null;
-  const research = finished?.result ?? null;
-
-  // The analyst reading is about the company the reader named, so there is
-  // nothing to read until they name one. It used to render a market-position
-  // piece regardless, which was a reading of the market wearing the title
-  // "Your AI Position" while knowing nothing about the reader at all.
-  const subject = research?.profile
-    ? {
-        label: `${research.profile.name} (${research.profile.industry})`,
-        facts: [
-          research.profile.what,
-          ...research.findings.map((f) => f.statement),
-          ...research.aiFindings.map((f) => f.statement),
-        ].filter(Boolean),
-      }
-    : null;
-
-  let written = null;
-  if (subject) {
-    const [metrics, news, watch] = await Promise.all([
-      loadPulseMetrics(),
-      analystNews(),
-      readWatchState(),
-    ]);
-    const movedSignals = readChangeLog().changes.length;
-    const insight = positionInsight(
-      metrics,
-      { movedSignals, watchedVendors: watch.vendorIds.length },
-      pickNews(news.items, { minImpact: 70 })
-    );
-    written = await authorInsight(
-      insight,
-      "market position",
-      metrics.vendors.slice(0, 12).map((v) => v.name),
-      subject
-    );
-  }
+  // No research and no reading on the server. Both happen in one streamed
+  // request the browser drives, so the tab is usable while it runs and the
+  // wheel reports real stages rather than an animation.
 
   return (
     <>
@@ -116,13 +68,6 @@ export default async function CompanyOverviewPage({
           </section>
         )}
 
-        {written ? (
-          <AnalystInsight
-            insight={written.value}
-            authorship={written.authorship}
-            context={`${research?.profile?.name ?? "this company"} against the AI market`}
-          />
-        ) : null}
 
         <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
           {TAB_LINKS.map((t) => (

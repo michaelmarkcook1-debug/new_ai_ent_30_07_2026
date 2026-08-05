@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { ResearchedCompany } from "./researched-company";
+import { AnalystInsight } from "@/lib/ui/analyst-insight";
+import type { AnalystInsightData } from "@/lib/analyst/insight";
 import type { CompanyResearch } from "@/lib/research/company";
 
 // The wheel, and the reason a reader can walk away from it.
@@ -22,63 +23,98 @@ interface Status {
   label?: string;
   done?: boolean;
   result?: CompanyResearch | null;
+  insight?: { data: AnalystInsightData; authorship: "written" | "computed" } | null;
   elapsedMs?: number;
 }
 
 export function ResearchRunner({ company }: { company: string }) {
   const [status, setStatus] = useState<Status | null>(null);
-  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const refreshed = useRef(false);
-  const router = useRouter();
 
   useEffect(() => {
     let cancelled = false;
 
-    const poll = async (jobId?: string) => {
-      const url = jobId
-        ? `/api/research?job=${encodeURIComponent(jobId)}`
-        : `/api/research?company=${encodeURIComponent(company)}`;
-      const res = await fetch(url).then((r) => r.json()).catch(() => null);
-      if (cancelled) return;
-
-      if (!res?.found) {
-        // Nothing running here, so start one.
-        const started = await fetch("/api/research", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ company }),
-        })
-          .then((r) => r.json())
-          .catch(() => null);
-        if (cancelled || !started?.id) return;
-        setStatus(started);
-        timer.current = setTimeout(() => poll(started.id), 1500);
+    // A finished run for this company, held by the browser. This is what makes
+    // leaving the tab safe: coming back reads the answer rather than paying
+    // for the research again.
+    try {
+      const saved = window.sessionStorage.getItem(`ag_research:${company}`);
+      if (saved) {
+        setStatus({ ...JSON.parse(saved), done: true });
         return;
       }
+    } catch {
+      // A blocked store just means the research runs again.
+    }
 
-      setStatus(res);
-      if (!res.done) {
-        timer.current = setTimeout(() => poll(res.id), 1500);
-      } else if (!refreshed.current) {
-        // The analyst reading is written on the server from the finished job,
-        // so the page is re-rendered once the run lands. Without this the
-        // findings would appear and the reading that interprets them would
-        // not, until the reader happened to reload.
-        refreshed.current = true;
-        router.refresh();
+    const run = async () => {
+      const res = await fetch("/api/research", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ company }),
+      }).catch(() => null);
+      if (!res?.body || cancelled) return;
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+
+      while (!cancelled) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buffer += decoder.decode(value, { stream: true });
+        // Server-sent events arrive as "data: {...}\n\n", and a chunk can
+        // carry several or half of one.
+        const parts = buffer.split("\n\n");
+        buffer = parts.pop() ?? "";
+        for (const part of parts) {
+          const line = part.replace(/^data: /, "").trim();
+          if (!line) continue;
+          let msg: Status;
+          try {
+            msg = JSON.parse(line) as Status;
+          } catch {
+            continue;
+          }
+          if (cancelled) return;
+          setStatus(msg);
+          if (msg.done) {
+            if (msg.result) {
+              try {
+                window.sessionStorage.setItem(
+                  `ag_research:${company}`,
+                  JSON.stringify(msg)
+                );
+              } catch {
+                // Not storable; the reading is still on screen.
+              }
+            }
+          }
+        }
       }
     };
 
     setStatus(null);
-    void poll();
+    void run();
     return () => {
       cancelled = true;
-      if (timer.current) clearTimeout(timer.current);
     };
   }, [company]);
 
   if (status?.done && status.result) {
-    return <ResearchedCompany research={status.result} />;
+    return (
+      <div className="space-y-4">
+        <ResearchedCompany research={status.result} />
+        {/* Blank until a company is named, and then about that company against
+            the market rather than about the market on its own. */}
+        {status.insight ? (
+          <AnalystInsight
+            insight={status.insight.data}
+            authorship={status.insight.authorship}
+            context={`${status.result.profile?.name ?? "this company"} against the AI market`}
+          />
+        ) : null}
+      </div>
+    );
   }
 
   const pct = status?.percent ?? 0;
@@ -98,8 +134,9 @@ export function ResearchRunner({ company }: { company: string }) {
           {/* The reason this panel exists rather than a spinner: the reader is
               free to go, and needs telling so. */}
           <p className="measure mt-2 text-sm text-muted">
-            This takes up to a minute. You can move to another tab and come
-            back: the run keeps going and this page rejoins it.
+            This takes up to a minute. Once it lands the answer is held for
+            this session, so you can move between tabs and come back to it
+            without waiting again.
           </p>
         </div>
       </div>
