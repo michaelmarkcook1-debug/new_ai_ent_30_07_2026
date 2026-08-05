@@ -250,7 +250,7 @@ export function RankingsTable({
       {notPlaced.length > 0 && !only ? (
         <section className="rounded-lg border border-dashed border-base-300 bg-base-200/40 p-4">
           <h3 className="text-sm font-bold">
-            Tracked but not placed in a market category ({notPlaced.length})
+            Tracked, but outside the ranked categories ({notPlaced.length})
           </h3>
           <p className="mt-1 measure text-xs text-muted">{UNPLACED_NOTE}</p>
           <div className="mt-2 flex flex-wrap gap-1.5">

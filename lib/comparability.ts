@@ -41,14 +41,41 @@ const CATEGORY_INDEX = new Map(
 // Vendor membership, straight from the dataset's own category placements.
 const CATEGORIES_BY_VENDOR = new Map<string, string[]>();
 const VENDORS_BY_CATEGORY = new Map<string, string[]>();
-for (const e of MARKET_SHARE_ESTIMATES) {
-  const cats = CATEGORIES_BY_VENDOR.get(e.vendorId) ?? [];
-  if (!cats.includes(e.categoryId)) cats.push(e.categoryId);
-  CATEGORIES_BY_VENDOR.set(e.vendorId, cats);
 
-  const vendors = VENDORS_BY_CATEGORY.get(e.categoryId) ?? [];
-  if (!vendors.includes(e.vendorId)) vendors.push(e.vendorId);
-  VENDORS_BY_CATEGORY.set(e.categoryId, vendors);
+function place(vendorId: string, categoryId: string): void {
+  const cats = CATEGORIES_BY_VENDOR.get(vendorId) ?? [];
+  if (!cats.includes(categoryId)) cats.push(categoryId);
+  CATEGORIES_BY_VENDOR.set(vendorId, cats);
+
+  const vendors = VENDORS_BY_CATEGORY.get(categoryId) ?? [];
+  if (!vendors.includes(vendorId)) vendors.push(vendorId);
+  VENDORS_BY_CATEGORY.set(categoryId, vendors);
+}
+
+for (const e of MARKET_SHARE_ESTIMATES) place(e.vendorId, e.categoryId);
+
+// Second pass, from each vendor's own declared category.
+//
+// Membership used to come from the share estimates alone, so a vendor the
+// dataset does categorise but publishes no share figure for fell out entirely
+// and the interface said "the dataset places them in no market category".
+// That was untrue of MiniMax and Z.ai (Frontier model/API) and Perplexity
+// (Enterprise assistant): all three carry a category on their own record, and
+// the ranking sorts on overall score rather than share, so there was never a
+// reason to exclude them.
+//
+// Matched on the taxonomy's own names, so a vendor whose declared category is
+// not a market category stays out rather than being forced into the nearest
+// one. Sakana AI is the case in point: "Sovereign/regional AI" is a real
+// description of the company and is not one of the thirteen categories share
+// is measured in.
+const CATEGORY_ID_BY_NAME = new Map(
+  MARKET_CATEGORY_LIST.map((c) => [c.name.toLowerCase(), c.id])
+);
+for (const v of INTELLIGENCE_VENDORS) {
+  if ((CATEGORIES_BY_VENDOR.get(v.id) ?? []).length > 0) continue;
+  const id = CATEGORY_ID_BY_NAME.get((v.category ?? "").toLowerCase());
+  if (id) place(v.id, id);
 }
 
 // Below this count the order is a tier, not a precise rank.
@@ -61,7 +88,7 @@ export const THIN_CATEGORY_NOTE =
   "Only a small number of tracked vendors compete in this category, so treat the order as a tier rather than a precise rank.";
 
 export const UNPLACED_NOTE =
-  "These vendors are tracked but the dataset places them in no market category, so they are listed rather than ranked. Ranking them against a category they do not compete in would be a false comparison.";
+  "These vendors carry a category on their own record, but not one of the market categories share is measured in, so there is no comparable set to rank them against. They are listed rather than forced into the nearest category, which would be a false comparison.";
 
 export interface CategoryGroup<T> {
   category: MarketCategory;
