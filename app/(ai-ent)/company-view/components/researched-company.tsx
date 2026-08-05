@@ -95,6 +95,18 @@ export function ResearchedCompany({ research }: { research: CompanyResearch }) {
         </p>
       )}
 
+      <EvidenceGraphic
+        sources={sources.length}
+        used={
+          new Set(
+            [...findings, ...aiFindings].map((f) => f.sourceIndex)
+          ).size
+        }
+        business={findings.length}
+        ai={aiFindings.length}
+        figures={metrics.length}
+      />
+
       <FindingList
         label="What the sources say"
         tooltip="The company's size, position and direction, as the retrieved passages report them."
@@ -152,6 +164,121 @@ export function ResearchedCompany({ research }: { research: CompanyResearch }) {
           here has the standing of a filing.
         </p>
       </DerivationDrawer>
+    </div>
+  );
+}
+
+// How much of what was retrieved actually carried something.
+//
+// The old tab opened with gauges scoring an exemplar's readiness and exposure.
+// Those cannot be computed for an arbitrary company without inventing them, so
+// this measures the thing that is genuinely measurable here: how much evidence
+// was found, how much of it bore on AI specifically, and how many passages
+// went unused. A reader can see the weight behind the reading before they
+// read it, and a thin bar is itself the finding.
+function EvidenceGraphic({
+  sources,
+  used,
+  business,
+  ai,
+  figures,
+}: {
+  sources: number;
+  used: number;
+  business: number;
+  ai: number;
+  figures: number;
+}) {
+  const total = Math.max(business + ai, 1);
+  const aiPct = Math.round((ai / total) * 100);
+  const usedPct = sources > 0 ? Math.round((used / sources) * 100) : 0;
+
+  return (
+    <section className="rounded-lg border border-base-300 bg-base-100 p-5">
+      <MicroLabel
+        label="Weight of evidence"
+        tooltip="Counts of what was retrieved and what it supported. Not a score: nothing here is judged, only counted."
+      />
+
+      <div className="mt-3 grid grid-cols-1 gap-4 @2xl:grid-cols-[1fr_auto]">
+        <div>
+          {/* Business versus AI evidence. The split matters because a company
+              can be well documented and still have no public AI account, and
+              that is the case this product most needs to show. */}
+          <div className="flex h-6 overflow-hidden rounded-full bg-base-300/60">
+            <div
+              className="h-full bg-primary/70"
+              style={{ width: `${100 - aiPct}%` }}
+              title={`${business} findings about the business`}
+            />
+            <div
+              className="h-full bg-[var(--ag-insight)]"
+              style={{ width: `${aiPct}%` }}
+              title={`${ai} findings about its AI`}
+            />
+          </div>
+          <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 text-sm">
+            <span className="flex items-center gap-1.5">
+              <span className="inline-block h-2.5 w-2.5 rounded-full bg-primary/70" />
+              {business} on the business
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="inline-block h-2.5 w-2.5 rounded-full bg-[var(--ag-insight)]" />
+              {ai} on its AI
+            </span>
+          </div>
+          <p className="measure mt-2 text-sm text-muted">
+            {ai === 0
+              ? "No retrieved passage described this company's use of AI. On this product that absence is the headline, not a gap in the search."
+              : `${usedPct} per cent of the ${sources} passages retrieved carried something worth reporting, and ${figures} stated a figure outright.`}
+          </p>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <Dial label="passages used" value={used} of={sources} />
+          <Dial label="stated figures" value={figures} of={sources} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Dial({
+  label,
+  value,
+  of,
+}: {
+  label: string;
+  value: number;
+  of: number;
+}) {
+  const R = 22;
+  const C = 2 * Math.PI * R;
+  const pct = of > 0 ? Math.min(1, value / of) : 0;
+  return (
+    <div className="flex flex-col items-center">
+      <svg width="60" height="60" viewBox="0 0 60 60" role="img" aria-label={`${value} of ${of} ${label}`}>
+        <circle cx="30" cy="30" r={R} fill="none" stroke="currentColor" opacity={0.15} strokeWidth="6" />
+        <circle
+          cx="30"
+          cy="30"
+          r={R}
+          fill="none"
+          stroke="var(--ag-insight)"
+          strokeWidth="6"
+          strokeLinecap="round"
+          strokeDasharray={`${pct * C} ${C}`}
+          transform="rotate(-90 30 30)"
+        />
+        <text x="30" y="35" textAnchor="middle" className="fill-current font-mono text-[13px] font-bold">
+          {value}
+        </text>
+      </svg>
+      <span className="mt-1 text-center font-mono text-sm text-muted">
+        {label}
+        <br />
+        of {of}
+      </span>
     </div>
   );
 }
