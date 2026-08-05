@@ -172,6 +172,8 @@ Return JSON:
 
 Every statement must be supported by the passage it cites. Do not carry in anything you know about this company that the passages do not contain, and do not smooth over a disagreement between two sources: say they disagree.
 
+Before you say two sources disagree, check whether they are the same quantity expressed differently. A figure in pounds and a figure in dollars, or a group total against a subsidiary's, or a headcount at two different dates, are not conflicts. Convert or align them first, and where they reconcile say so, because a reconciliation is a stronger finding than a contradiction. Reserve "they disagree" for figures that genuinely cannot both be true, and say which quantity the disagreement is about rather than lumping several into one sentence.
+
 Keep every statement to one sentence. A long answer that runs past its limit arrives as broken JSON and is discarded whole.`,
       attempt.tokens
     );
@@ -278,7 +280,9 @@ Return JSON:
 - industry: the sector in two or three words.
 - findings: up to 5, each citing the passage number behind it. Return an empty array rather than inferring from silence.
 
-Do not carry in anything you know about this company that the passages do not contain. Where two sources disagree, say they disagree.`,
+Do not carry in anything you know about this company that the passages do not contain. Where two sources disagree, say they disagree.
+
+Before you say two sources disagree, check whether they are the same quantity expressed differently. A figure in pounds and a figure in dollars, or a group total against a subsidiary's, or a headcount at two different dates, are not conflicts. Convert or align them first, and where they reconcile say so, because a reconciliation is a stronger finding than a contradiction. Reserve "they disagree" for figures that genuinely cannot both be true, and say which quantity the disagreement is about rather than lumping several into one sentence.`,
     1400
   );
 
