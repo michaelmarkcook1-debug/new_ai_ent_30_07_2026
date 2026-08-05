@@ -96,9 +96,14 @@ export async function researchCompany(
   // Two passes: what the company is, and what it is doing with AI. Asked
   // separately because a single blended query returns a homepage summary and
   // buries the AI evidence this product exists to surface.
+  // Four each rather than six. Twelve advanced passages made a grounding block
+  // large enough that the answer ran past its token budget and came back as
+  // truncated JSON, which is why the topic pages read fine while this one fell
+  // back. It also widens the number-space the guard checks against, so a single
+  // stray figure discarded ten findings rather than five.
   const [general, ai] = await Promise.all([
-    webSearch(`${name} company overview revenue employees industry`, 6),
-    webSearch(`${name} artificial intelligence strategy adoption deployment`, 6),
+    webSearch(`${name} company overview revenue employees industry`, 4),
+    webSearch(`${name} artificial intelligence strategy adoption deployment`, 4),
   ]);
 
   const sources = [...general.hits, ...ai.hits];
@@ -135,11 +140,13 @@ Return JSON:
 - name: the company's name as the sources give it.
 - what: one sentence on what the company does.
 - industry: the sector, in two or three words.
-- findings: up to 5. What a buyer should know about the company's size, position and direction. Each cites the passage number it came from.
-- aiFindings: up to 5. What the sources say about this company's use of, or exposure to, AI. Each cites its passage number. If the passages say nothing about AI, return an empty array rather than inferring.
+- findings: up to 4. What a buyer should know about the company's size, position and direction. Each cites the passage number it came from.
+- aiFindings: up to 4. What the sources say about this company's use of, or exposure to, AI. Each cites its passage number. If the passages say nothing about AI, return an empty array rather than inferring.
 
-Every statement must be supported by the passage it cites. Do not carry in anything you know about this company that the passages do not contain, and do not smooth over a disagreement between two sources: say they disagree.`,
-    1600
+Every statement must be supported by the passage it cites. Do not carry in anything you know about this company that the passages do not contain, and do not smooth over a disagreement between two sources: say they disagree.
+
+Keep every statement to one sentence. A long answer that runs past its limit arrives as broken JSON and is discarded whole.`,
+    2400
   );
 
   if (!draft?.name) {
