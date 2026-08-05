@@ -76,6 +76,14 @@ export function AnalystInsight({
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <LaneBadge lane={evidence.lane} />
+          {/* Which of the two wrote the sentences below. The prop existed and
+              was never rendered, so this panel accepted the distinction and
+              then kept it from the reader, which is the opposite of the
+              point. The figures are identical either way: the model may not
+              introduce one and is discarded if it tries. */}
+          <span className="font-mono text-sm text-muted">
+            {authorship === "written" ? "analyst written" : "computed"}
+          </span>
           {evidence.lastUpdated ? (
             <span className="font-mono text-sm text-muted">
               {shortDate(evidence.lastUpdated)}
