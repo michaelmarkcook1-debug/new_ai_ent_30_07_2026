@@ -1,6 +1,6 @@
 import { PageHeader } from "@/lib/ui/page";
 import { MicroLabel } from "@/lib/ui/micro";
-import { PeerAdoptionExplorer } from "./peer-explorer";
+import { PeerInsightsView } from "./peer-insights-view";
 
 export const metadata = { title: "Peer Insights | AI Enterprise" };
 
@@ -46,8 +46,8 @@ export default function PeerInsightsPage() {
     <>
       <PageHeader
         title="Peer Insights"
-        subtitle="What firms like yours are buying: pick your industry segment and region, and see which vendors show up in that slice. Every selection is a live pull, and what it pulls is a modelled estimate — read the caveat below before the ordering."
-        lanes={["aie-live"]}
+        subtitle="What firms like yours are buying, and what they are buying it for: pick your industry and see both the vendors that show up in that slice and the workflows your sector runs AI on."
+        lanes={["aie-live", "aie"]}
       />
       <div className="space-y-4">
         <section className="rounded-lg border border-warn/40 bg-warn-bg/40 p-4">
@@ -98,7 +98,7 @@ export default function PeerInsightsPage() {
           </p>
         </section>
 
-        <PeerAdoptionExplorer />
+        <PeerInsightsView />
       </div>
     </>
   );

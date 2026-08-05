@@ -32,7 +32,7 @@ const JOBS: {
   {
     question: "We want AI for a specific workflow. Who should we shortlist?",
     detail:
-      "Pick your industry and the workflow itself, from 146 tracked workflows. You get its risk tier, reliability bar and regulatory flags, then the vendors that ship it and the model providers you would build it on.",
+      "Pick your industry and the workflow itself, from 75 tracked workflows. You get its risk tier, reliability bar and regulatory flags, then the vendors that ship it and the model providers you would build it on.",
     href: "/workflow-shortlist",
     cta: "Start with your workflow",
     then: "Workflow Shortlist",

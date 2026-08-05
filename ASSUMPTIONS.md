@@ -1272,3 +1272,44 @@ Dates are absolute; the build day is 30 July 2026.
       comment, its subtitle (which counted panels), and the page table in
       docs/DATA-SOURCES.md, which now carries `/peer-insights` as its own row
       with the May 2026 seed flagged in bold.
+
+37. **Enterprise AI examples in Peer Insights, and a 72% overstatement found
+    on the way (5 August 2026).** Michael asked where the case studies went
+    and said unnamed examples are fine provided they carry an industry or
+    region classifier.
+    - **There were never any case studies.** Searched this repo (no files, no
+      code, nothing case-study-shaped in the full deletion history across all
+      branches) and the ranking engine. In the ranking engine "case study" is
+      a *grading criterion*, not data: E4 = "production customer reference /
+      case study with named org", and its own rule says a claim without a URL
+      is E1. The 23 rows its seed grades E4 are generic prose — "top-tier
+      banks", "AmLaw 100 references" — with `sourceUrl: undefined`, so they
+      fail the repo's own E4 test. The live `/api/vendor/{id}/evidence`
+      returns 500; the database was never provisioned. Nothing to port, and
+      porting it would have imported a grading error.
+    - **What did exist was the workflow library, read in only one direction.**
+      75 enterprise AI workflows, each carrying risk tier, reliability bar,
+      default autonomy, regulatory flags, complexity and common inputs — and
+      an industry classification: 25 tagged to specific industries, 50
+      explicitly horizontal. Workflow Shortlist has always read it
+      workflow-to-vendors. Peer Insights now reads it industry-to-workflow,
+      which is the question its reader is already asking and which nothing
+      answered.
+    - **The segment-to-industry join is editorial and declared in full**
+      (`lib/peer/industry-workflows.ts`), because the uptake engine's nine
+      segments and the library's fifteen tags were built for different
+      purposes. Two segments legitimately span two tags each, with the reason
+      written next to them and shown in the drawer.
+    - **The panel says what the rows are not.** They are workflow types, not
+      observed deployments: the library says contract review is common in
+      legal, not which firms run it. Where a sector has one or zero tagged
+      workflows (legal, professional services) the panel says the tagging is
+      thin rather than implying the sector does nothing distinctive.
+    - **The 146 claim was wrong, and so was my first correction.** Product
+      copy claimed "146 tracked workflows" in three places against an array
+      of 75 — a 72% overstatement quoted to buyers as a measure of coverage.
+      My first fix wrote 85, from a regex that counted `id:` occurrences
+      outside the array as well. The test I had just written caught it before
+      it shipped, which is the argument for writing the test at the same time
+      as the fix rather than after it. Now 75 everywhere, asserted against
+      `USE_CASES.length` in every file that quotes a count.

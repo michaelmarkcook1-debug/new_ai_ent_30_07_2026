@@ -4,7 +4,7 @@ import { MARKET_CATEGORY_LIST, vendorIdsInCategory } from "@/lib/comparability";
 // Which vendors to shortlist for a given workflow.
 //
 // The datasets do not join these directly: vendors carry 36 coarse
-// supportedUseCases ("CRM/customer AI"), the workflow library carries 146
+// supportedUseCases ("CRM/customer AI"), the workflow library carries 75
 // granular entries ("Customer Service Agent"), and the overlap between them is
 // exactly zero. So picking a workflow produced a risk profile and no vendors,
 // which is a dead end for the one question this product exists to answer.

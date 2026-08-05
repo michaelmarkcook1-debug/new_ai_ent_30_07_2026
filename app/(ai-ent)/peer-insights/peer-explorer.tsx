@@ -75,7 +75,17 @@ interface UptakeResponse {
   rows: AieUptakeRow[];
 }
 
-export function PeerAdoptionExplorer() {
+/**
+ * `onSegmentChange` lets the page mirror the industry choice into the panel
+ * below without a second selector. The explorer still owns the state — a
+ * fully controlled component would have meant lifting the live-fetch effect
+ * out with it, and the fetch belongs next to the chart it fills.
+ */
+export function PeerAdoptionExplorer({
+  onSegmentChange,
+}: {
+  onSegmentChange?: (apiValue: string) => void;
+} = {}) {
   const [segment, setSegment] = useState("");
   const [region, setRegion] = useState("");
   const [rows, setRows] = useState<AieUptakeRow[] | null>(null);
@@ -131,7 +141,10 @@ export function PeerAdoptionExplorer() {
           <select
             aria-label="Industry"
             value={segment}
-            onChange={(e) => setSegment(e.target.value)}
+            onChange={(e) => {
+              setSegment(e.target.value);
+              onSegmentChange?.(e.target.value);
+            }}
             className={select}
           >
             <option value="">All industries</option>

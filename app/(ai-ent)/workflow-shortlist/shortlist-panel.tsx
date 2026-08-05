@@ -176,7 +176,7 @@ export function WorkflowShortlistPanel({
         <DerivationDrawer title="How this shortlist is built">
           <p>
             The datasets do not join workflows to vendors. Vendors carry coarse
-            use-case tags, the workflow library carries 146 granular entries,
+            use-case tags, the workflow library carries 75 granular entries,
             and the overlap between the two vocabularies is zero. So the bridge
             is the workflow&apos;s own category:{" "}
             <strong>{shortlist.workflowCategory}</strong> maps to{" "}
