@@ -174,6 +174,15 @@ export function Shell({
 }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  // The row the reader just clicked, held until the new route lands.
+  //
+  // Pages carrying an analyst reading take seconds to render, and a click that
+  // changes nothing on screen reads as a click that missed. This marks the
+  // target immediately, so the wait is visibly the product working rather
+  // than the interface ignoring them.
+  const [pending, setPending] = useState<string | null>(null);
+
+  useEffect(() => setPending(null), [pathname]);
 
   return (
     <ShortlistProvider>
@@ -257,15 +266,35 @@ export function Shell({
                           <Link
                             href={item.href}
                             title={item.hint ?? item.label}
+                            onClick={() => setPending(item.href)}
+                            aria-busy={pending === item.href && !active}
                             className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium transition ${
                               active
                                 ? "bg-primary text-white shadow-sm"
-                                : alsoActive
-                                  ? "bg-base-300/40 text-base-content"
-                                  : "text-base-content/75 hover:bg-base-300/50 hover:text-base-content"
+                                : pending === item.href
+                                  ? "bg-primary/25 text-base-content ring-1 ring-primary/50"
+                                  : alsoActive
+                                    ? "bg-base-300/40 text-base-content"
+                                    : "text-base-content/75 hover:bg-base-300/50 hover:text-base-content"
                             }`}
                           >
-                            <Icon name={item.icon} />
+                            {pending === item.href && !active ? (
+                              <svg
+                                width="15"
+                                height="15"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2.4"
+                                strokeLinecap="round"
+                                className="animate-spin"
+                                aria-hidden
+                              >
+                                <path d="M12 3a9 9 0 1 0 9 9" />
+                              </svg>
+                            ) : (
+                              <Icon name={item.icon} />
+                            )}
                             {!collapsed ? (
                               <span className="hidden truncate md:inline">
                                 {item.label}
@@ -278,10 +307,14 @@ export function Shell({
                                   key={p.href}
                                   href={p.href}
                                   title={p.hint ?? p.label}
+                                  onClick={() => setPending(p.href)}
+                                  aria-busy={pending === p.href && !on(p.href)}
                                   className={`mt-0.5 ml-[1.4rem] hidden items-center rounded-md border-l border-base-300 py-1 pl-3 text-xs transition md:flex ${
                                     on(p.href)
                                       ? "font-medium text-primary"
-                                      : "text-base-content/70 hover:text-base-content"
+                                      : pending === p.href
+                                        ? "bg-primary/20 font-medium text-base-content"
+                                        : "text-base-content/70 hover:text-base-content"
                                   }`}
                                 >
                                   <span className="truncate">{p.label}</span>
