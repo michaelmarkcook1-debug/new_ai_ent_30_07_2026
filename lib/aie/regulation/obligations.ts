@@ -374,6 +374,74 @@ export const OBLIGATIONS: Obligation[] = [
       evidenceClass: "B",
     },
   },
+
+  // ─────────────────────────────────────────────────── United Kingdom
+  //
+  // There is no UK AI Act, and that is a policy choice rather than a gap
+  // waiting to be filled: existing regulators apply existing law within their
+  // remits. So the UK obligations that bite are data-protection ones, and they
+  // land on the deployer almost without exception. A buyer told "the UK has
+  // not regulated AI yet" has been misled — three duties came into force in
+  // the first half of 2026.
+  {
+    id: "uk_duaa_s80_adm",
+    jurisdiction: "United Kingdom",
+    regime: "Data (Use and Access) Act 2025, section 80",
+    provision: "UK GDPR Articles 22A\u201322D",
+    requires:
+      "Replaces UK GDPR Article 22 on automated decision-making, setting new conditions and safeguards for decisions taken about people without meaningful human involvement.",
+    effectiveDate: "2026-02-05",
+    binds: "deployer",
+    soWhat:
+      "The live UK AI obligation today, and it is yours. Any automated decision affecting a person \u2014 credit, hiring, pricing, eligibility \u2014 now runs under a rewritten Article 22, so a lawful basis established before February 2026 needs rechecking.",
+    affectedVendorIds: [],
+    source: {
+      name: "Bratby Law, 'Is There a UK AI Act? UK AI Regulation in 2026'",
+      url: "https://bratby.law/uk-ai-regulation-what-the-law-says",
+      published: "2026-07-01",
+      evidenceClass: "B",
+    },
+  },
+  {
+    id: "uk_si_2026_425_ico_code",
+    jurisdiction: "United Kingdom",
+    regime: "DPA 2018 (Code of Practice on AI and ADM) Regulations 2026, SI 2026/425",
+    provision: null,
+    requires:
+      "Places a statutory duty on the Information Commissioner to prepare a code of practice covering personal data in AI development and use, automated decision-making, and children's data.",
+    effectiveDate: "2026-05-12",
+    binds: "deployer",
+    soWhat:
+      "The duty is in force; the code is not written. Watch for it rather than plan against it \u2014 when it lands it becomes the benchmark the ICO measures you by, and it is expected to reach past data protection into how AI is built.",
+    affectedVendorIds: [],
+    source: {
+      name: "Vorp Labs, UK AI regulatory tracker \u2014 SI 2026/425",
+      url: "https://vorplabs.com/ai-regulatory-updates/united-kingdom",
+      published: "2026-07-22",
+      evidenceClass: "C",
+    },
+    caveat:
+      "Made 16 April 2026, in force 12 May 2026. The code itself is unpublished and expected in 2027; ICO final guidance on automated decision-making was expected in summer 2026 after a consultation that closed 29 May 2026.",
+  },
+  {
+    id: "uk_dpa_s164a_complaints",
+    jurisdiction: "United Kingdom",
+    regime: "Data Protection Act 2018, section 164A",
+    provision: null,
+    requires:
+      "A statutory complaint-handling duty on controllers, with a route for data subjects to complain directly and a duty to respond.",
+    effectiveDate: "2026-06-19",
+    binds: "deployer",
+    soWhat:
+      "An operational duty, not a paperwork one. If an AI-driven decision goes against someone they now have a statutory complaint route into you, so somebody has to own the response path before the first one arrives.",
+    affectedVendorIds: [],
+    source: {
+      name: "1Digit, 'The 2026 AI Regulation Map: EU & UK'",
+      url: "https://1digit.co.uk/insights/the-2026-ai-regulation-map",
+      published: "2026-07-01",
+      evidenceClass: "C",
+    },
+  },
 ];
 
 /** In force as of `asOf`, most recent first. */

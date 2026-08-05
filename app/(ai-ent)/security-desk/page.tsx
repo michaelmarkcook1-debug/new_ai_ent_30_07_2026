@@ -1,56 +1,15 @@
-import { PageHeader } from "@/lib/ui/page";
-import { loadLabPostures } from "./data";
-import { CyberRiskPanel } from "./components/cyber-risk-panel";
-import { LabsSection } from "./components/labs-section";
-import { AnalystInsight } from "@/lib/ui/analyst-insight";
-import { governanceInsight, pickNews } from "@/lib/analyst/insight";
-import { authorInsight } from "@/lib/analyst/author";
-import { loadMarketMetrics } from "@/lib/market-metrics";
-import { analystNews } from "@/lib/analyst/news-source";
+import { redirect } from "next/navigation";
 
-// The Analyst Insight is a pure function of this page's data, so it only says
-// something new when an input changes. News is the input that moves daily, and
-// it is now fetched at render rather than baked in, so the page is regenerated
-// once a day to pick it up.
-export const revalidate = 86400;
-
-export const metadata = { title: "The Security Desk | AI Enterprise" };
-
-export default async function SecurityDeskPage() {
-  const news = await analystNews();
-  const labs = await loadLabPostures();
-  const m = await loadMarketMetrics();
-  const insight = governanceInsight(
-    m,
-    pickNews(news.items, { categories: ["Risk event", "Enterprise control"] }),
-    0,
-    0,
-    "security"
-  );
-
-  const written = await authorInsight(
-    insight,
-    "security",
-    m.vendors.slice(0, 12).map((v) => v.name)
-  );
-
-
-  return (
-    <>
-      <PageHeader
-        title="The Security Desk"
-        subtitle="Cyber risk posture across the AI platform vendors: live BoardRadar incident analysis where coverage exists, honest empty states where it does not, and the AI Enterprise security capability assessment for the private labs BoardRadar does not reach."
-        lanes={["live", labs.lane]}
-      />
-      <AnalystInsight
-        insight={written.value}
-        authorship={written.authorship}
-        context="security"
-      />
-      <div className="space-y-6">
-        <CyberRiskPanel />
-        <LabsSection view={labs} />
-      </div>
-    </>
-  );
+// The Security Desk was folded into Trust Rank on 5 August 2026.
+//
+// Security posture and regulatory exposure answer one question for a buyer —
+// "can I defend this choice" — and splitting them across two tabs meant a
+// reader answering it had to know to visit both. The cyber-risk panel and the
+// lab postures now render inside the daily brief.
+//
+// This redirect stays rather than the route being deleted: the page was linked
+// from the shortlist, from Trust Rank itself and from anything a reader
+// bookmarked, and a 404 is a worse answer than the content they were after.
+export default function SecurityDeskPage() {
+  redirect("/trust-rank");
 }

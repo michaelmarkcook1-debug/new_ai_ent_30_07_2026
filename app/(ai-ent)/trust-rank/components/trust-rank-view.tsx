@@ -321,7 +321,7 @@ export function TrustRankView({
 
       <div className="text-right">
         <Link
-          href="/security-desk"
+          href="/trust-rank"
           className="text-xs font-semibold text-primary hover:underline"
         >
           Cyber posture: The Security Desk

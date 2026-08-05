@@ -122,7 +122,6 @@ export const NAV_GROUPS: NavGroup[] = [
         href: "/trust-rank",
         icon: "trust",
         hint: "What AI regulation binds you, by jurisdiction",
-        also: [{ label: "The Security Desk", href: "/security-desk", hint: "Security posture and open risks per vendor" }],
       },
       {
         // Named for what these firms do for a buyer. "Alliances" described the

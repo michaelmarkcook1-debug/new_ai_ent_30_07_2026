@@ -187,7 +187,7 @@ export function ShortlistView({ vendors }: { vendors: VendorMetrics[] }) {
         <ul className="mt-2 grid grid-cols-1 gap-2 @xl:grid-cols-2">
           {[
             ["/trust-rank", "Check governance and regulatory exposure"],
-            ["/security-desk", "Check security posture and open risks"],
+            ["/trust-rank", "Check what regulation binds you and which vendors carry open risk"],
             ["/price-performance", "Compare what capability costs"],
             ["/decision-desk", "Ask the analyst about this shortlist"],
           ].map(([href, label]) => (

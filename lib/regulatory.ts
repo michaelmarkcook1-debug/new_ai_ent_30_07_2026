@@ -20,7 +20,14 @@ export interface VendorRuling {
 }
 
 export const REGULATORY_GRID: RegulatoryRow[] = [
-  { jurisdiction: "European Union", regime: "EU AI Act", status: "In force, phased application", note: "General-purpose AI obligations apply from August 2025; high-risk system requirements phase in through 2026 and 2027. Safety-critical industrial use cases likely qualify as high-risk.", aieSource: true },
+  // Corrected 5 August 2026. This said high-risk requirements "phase in
+  // through 2026 and 2027", which was the pre-Omnibus timetable and had been
+  // wrong since 27 July. Regulation (EU) 2026/1744 moved standalone Annex III
+  // high-risk to 2 December 2027 and product-embedded Annex I to 2 August
+  // 2028. A buyer planning to August 2026 was planning to a date that had
+  // moved sixteen months. Dates now live in lib/aie/regulation/obligations.ts,
+  // each with its source, so there is one place to correct rather than several.
+  { jurisdiction: "European Union", regime: "EU AI Act", status: "In force, phased application", note: "General-purpose AI obligations have applied since August 2025 and Article 50 transparency since 2 August 2026. High-risk requirements were deferred by the Digital Omnibus (Regulation (EU) 2026/1744, in force 27 July 2026): standalone Annex III systems now 2 December 2027, product-embedded Annex I systems 2 August 2028. Safety-critical industrial use cases likely qualify as high-risk.", aieSource: true },
   { jurisdiction: "United Kingdom", regime: "Principles-based, regulator-led approach", status: "Guidance", note: "No horizontal statute; sector regulators apply five cross-cutting principles. Financial trading AI falls under existing conduct rules.", aieSource: false },
   { jurisdiction: "United States (federal)", regime: "Executive action plus sector rules", status: "Evolving", note: "No comprehensive federal statute; export controls on advanced chips shape infrastructure choices. Sector agencies police claims and safety.", aieSource: true },
   { jurisdiction: "California", regime: "State AI statutes", status: "In force, partial", note: "Transparency and safety-disclosure obligations for large model developers affect vendor selection more than deployment.", aieSource: false },
