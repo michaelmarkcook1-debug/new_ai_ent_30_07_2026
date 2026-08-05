@@ -366,13 +366,15 @@ export function InterrogateView() {
         <span className="micro-label">Grounding</span>
         <LaneBadge lane="aie-live" />
         <LaneBadge lane="aie" />
-        <LaneBadge lane="sample" />
         <p className="measure text-xs text-muted">
           Findings draw on the AIE live vendor read, the ported AIE dataset,
-          the preloaded documents and the Shell fixture, with citations on
-          every claim. Tiered routing: Haiku shapes the questions, and the
-          finding is written by Sonnet on a quick response or by Opus on a
-          comprehensive one. Opus never runs unless you ask for it.
+          the preloaded documents and any documents you upload, with citations
+          on every claim. Your own documents rank above every other source in
+          that corpus. The Shell exemplar was removed from it, so no finding
+          rests on one sample company's figures. Tiered routing: Haiku shapes
+          the questions, and the finding is written by Sonnet on a quick
+          response or by Opus on a comprehensive one. Opus never runs unless
+          you ask for it.
         </p>
       </div>
     </div>
