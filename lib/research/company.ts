@@ -125,12 +125,24 @@ export async function researchCompany(
     };
   }
 
-  const grounding = groundingBlock(sources);
+  // Two attempts at decreasing scope rather than one at full scope.
+  //
+  // A single ask is all-or-nothing: any figure the guard rejects, or any
+  // answer that runs long, costs the reader the entire reading even though
+  // eight good passages were sitting there. So a failure narrows the ask
+  // instead of ending it. Fewer passages means a smaller number-space for the
+  // guard to reject on and a shorter answer to produce, and a reading of four
+  // sources is worth incomparably more than an apology about eight.
+  const attempts: { hits: SearchHit[]; findings: number; tokens: number }[] = [
+    { hits: sources, findings: 4, tokens: 2400 },
+    { hits: sources.slice(0, 4), findings: 3, tokens: 1800 },
+  ];
 
-  const draft = await authored<Draft>(
-    `company:${name.toLowerCase()}`,
-    grounding,
-    `Read these retrieved passages about ${name} and report what they support.
+  for (const [i, attempt] of attempts.entries()) {
+    const draft = await authored<Draft>(
+      `company:${name.toLowerCase()}:${i}`,
+      groundingBlock(attempt.hits),
+      `Read these retrieved passages about ${name} and report what they support.
 
 Return JSON:
 {"name": string, "what": string, "industry": string,
@@ -140,36 +152,42 @@ Return JSON:
 - name: the company's name as the sources give it.
 - what: one sentence on what the company does.
 - industry: the sector, in two or three words.
-- findings: up to 4. What a buyer should know about the company's size, position and direction. Each cites the passage number it came from.
-- aiFindings: up to 4. What the sources say about this company's use of, or exposure to, AI. Each cites its passage number. If the passages say nothing about AI, return an empty array rather than inferring.
+- findings: up to ${attempt.findings}. What a buyer should know about the company's size, position and direction. Each cites the passage number it came from.
+- aiFindings: up to ${attempt.findings}. What the sources say about this company's use of, or exposure to, AI. Each cites its passage number. If the passages say nothing about AI, return an empty array rather than inferring.
 
 Every statement must be supported by the passage it cites. Do not carry in anything you know about this company that the passages do not contain, and do not smooth over a disagreement between two sources: say they disagree.
 
 Keep every statement to one sentence. A long answer that runs past its limit arrives as broken JSON and is discarded whole.`,
-    2400
-  );
+      attempt.tokens
+    );
 
-  if (!draft?.name) {
-    return {
-      ...empty(name, ""),
-      sources,
-      absence:
-        "The retrieved sources did not support a reading that passed our checks, so the links are shown without one.",
-    };
+    if (draft?.name) {
+      return {
+        query: name,
+        profile: {
+          name: draft.name,
+          what: draft.what ?? "",
+          industry: draft.industry ?? "not stated",
+        },
+        findings: cited(draft.findings, attempt.hits.length),
+        aiFindings: cited(draft.aiFindings, attempt.hits.length),
+        sources: attempt.hits,
+        absence: null,
+        written: true,
+      };
+    }
+    console.warn(
+      `[research] ${name}: attempt ${i + 1} of ${attempts.length} produced no usable reading`
+    );
   }
 
+  // Both attempts failed. The sources are still real and still worth the
+  // reader's time, so they are shown with the reason rather than withheld.
   return {
-    query: name,
-    profile: {
-      name: draft.name,
-      what: draft.what ?? "",
-      industry: draft.industry ?? "not stated",
-    },
-    findings: cited(draft.findings, sources.length),
-    aiFindings: cited(draft.aiFindings, sources.length),
+    ...empty(name, ""),
     sources,
-    absence: null,
-    written: true,
+    absence:
+      "The retrieved sources did not support a reading that passed our checks, on two attempts. The sources themselves are below and are worth reading directly.",
   };
 }
 

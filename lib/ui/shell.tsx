@@ -12,17 +12,17 @@ import { ShortlistIndicator } from "@/lib/ui/shortlist-indicator";
 // sidebar with ALL-CAPS group labels, icons, active item as a solid primary
 // rounded rectangle (anatomy verified against the live portal, spec S3).
 
-// `also` is a second page that answers the same question from the other side.
-// It shares its partner's row and only appears as its own link once that part
-// of the site is open, so eighteen resting items became thirteen without a
-// single route being dropped or a page being orphaned.
+// `also` holds the pages that answer the same question from another side.
+// They share their parent's row and only appear as their own links once that
+// part of the site is open, so the resting count stays short without a single
+// route being dropped or a page being orphaned.
 type NavPartner = { label: string; href: string; hint?: string };
 type NavItem = {
   label: string;
   href: string;
   icon: string;
   hint?: string;
-  also?: NavPartner;
+  also?: NavPartner[];
 };
 type NavGroup = { label: string; items: NavItem[] };
 
@@ -59,19 +59,10 @@ function Icon({ name }: { name: string }) {
 
 export const NAV_GROUPS: NavGroup[] = [
   {
-    // Where a reader starts and what they came to decide. Kept apart from the
-    // market reading below it, which is reference rather than a starting point.
     label: "Start here",
     items: [
       { label: "Explore", href: "/start", icon: "navigator", hint: "Pick the question closest to yours" },
       { label: "Your Pulse", href: "/pulse", icon: "pulse", hint: "Today's market read: averages, risks and who is moving" },
-      {
-        label: "ModelEngine",
-        href: "/market-view",
-        icon: "market",
-        hint: "Pick a role, get the cheapest model that meets its requirements and what it costs",
-        also: { label: "Price / Performance", href: "/price-performance", hint: "What capability costs, and the efficiency frontier" },
-      },
     ],
   },
   {
@@ -83,7 +74,7 @@ export const NAV_GROUPS: NavGroup[] = [
         href: "/market-watch",
         icon: "watch",
         hint: "Category shares, leaders and the winning/losing read",
-        also: { label: "AI Adoption", href: "/ai-adoption", hint: "Who is actually paying for AI, measured and attributed, and how far each industry has got" },
+        also: [{ label: "AI Adoption", href: "/ai-adoption", hint: "Who is actually paying for AI, measured and attributed, and how far each industry has got" }],
       },
       { label: "Competitive Intel", href: "/competitive-intel", icon: "intel", hint: "Compare model providers across ten assessed capabilities" },
       { label: "Financial Snapshot", href: "/financial-snapshot", icon: "finance", hint: "Vendor financials, segment revenue and what AI they disclose" },
@@ -92,38 +83,45 @@ export const NAV_GROUPS: NavGroup[] = [
         href: "/vendor-view",
         icon: "vendor",
         hint: "Full profile and rankings for every tracked vendor",
-        also: { label: "Reputation Tracker", href: "/reputation-tracker", hint: "How buyers, developers and staff rate each vendor" },
+        also: [{ label: "Reputation Tracker", href: "/reputation-tracker", hint: "How buyers, developers and staff rate each vendor" }],
       },
-      // Last in the group on purpose: it answers the narrowest question here
-      // ("who are firms like mine buying"), which is the one a reader reaches
-      // for after the market-wide views, not before them.
       { label: "Peer Insights", href: "/peer-insights", icon: "company", hint: "What firms in your industry and region are actually buying" },
     ],
   },
   {
+    // The reader's own decisions, in the order they make them: where do we
+    // stand, what should each person get and what does it cost, what call do
+    // we make, what binds us, and who would deliver it.
     label: "AI and Your Company",
     items: [
-      { label: "Your AI Position", href: "/company-view", icon: "company", hint: "Where AI helps or threatens you: exposure, readiness, obligations, and an analyst over your own documents" },
+      { label: "Your AI Position", href: "/company-view", icon: "company", hint: "Name your company and its public sources are researched and read against the AI market" },
+      {
+        label: "ModelEngine",
+        href: "/market-view",
+        icon: "market",
+        hint: "Pick a role, get the cheapest model that meets its requirements and what it costs",
+        also: [
+          { label: "Workflow Shortlist", href: "/workflow-shortlist", hint: "Pick a workflow, get the vendors to buy from and the models to build on" },
+          { label: "Price / Performance", href: "/price-performance", hint: "What capability costs, and the efficiency frontier" },
+        ],
+      },
       { label: "Decision Desk", href: "/decision-desk", icon: "assess", hint: "A cited finding and a weighted score for the call you must defend" },
-    ],
-  },
-  {
-    label: "Vendor Assessment",
-    items: [
-      { label: "Workflow Shortlist", href: "/workflow-shortlist", icon: "intel", hint: "Pick a workflow, get the vendors to buy from and the models to build on" },
       {
         label: "Trust Rank",
         href: "/trust-rank",
         icon: "trust",
         hint: "What AI regulation binds you, by jurisdiction",
-        also: { label: "The Security Desk", href: "/security-desk", hint: "Security posture and open risks per vendor" },
+        also: [{ label: "The Security Desk", href: "/security-desk", hint: "Security posture and open risks per vendor" }],
       },
       {
-        label: "Alliances",
+        // Named for what these firms do for a buyer. "Alliances" described the
+        // relationships between vendors; a buyer cares which integrator would
+        // actually turn up on their engagement.
+        label: "Integrators",
         href: "/alliances",
         icon: "alliance",
-        hint: "Who partners with whom, and how deep the tie is",
-        also: { label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", hint: "Who depends on whom across the AI stack" },
+        hint: "Which firms deliver which AI vendors, and how deep the tie is",
+        also: [{ label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", hint: "Who depends on whom across the AI stack" }],
       },
     ],
   },
@@ -240,13 +238,14 @@ export function Shell({
                     {group.items.map((item) => {
                       const on = (href: string) =>
                         pathname === href || pathname.startsWith(`${href}/`);
-                      const alsoActive = item.also ? on(item.also.href) : false;
+                      const partners = item.also ?? [];
+                      const alsoActive = partners.some((p) => on(p.href));
                       const active = on(item.href);
                       // The partner gets its own row only while this part of
                       // the site is open, so it is always one click from where
                       // it is relevant and never adds to the resting count.
                       const showAlso =
-                        item.also && !collapsed && (active || alsoActive);
+                        partners.length > 0 && !collapsed && (active || alsoActive);
                       return (
                         <li key={item.href}>
                           <Link
@@ -267,19 +266,22 @@ export function Shell({
                               </span>
                             ) : null}
                           </Link>
-                          {showAlso && item.also ? (
-                            <Link
-                              href={item.also.href}
-                              title={item.also.hint ?? item.also.label}
-                              className={`mt-0.5 ml-[1.4rem] hidden items-center rounded-md border-l border-base-300 py-1 pl-3 text-xs transition md:flex ${
-                                alsoActive
-                                  ? "font-medium text-primary"
-                                  : "text-base-content/70 hover:text-base-content"
-                              }`}
-                            >
-                              <span className="truncate">{item.also.label}</span>
-                            </Link>
-                          ) : null}
+                          {showAlso
+                            ? partners.map((p) => (
+                                <Link
+                                  key={p.href}
+                                  href={p.href}
+                                  title={p.hint ?? p.label}
+                                  className={`mt-0.5 ml-[1.4rem] hidden items-center rounded-md border-l border-base-300 py-1 pl-3 text-xs transition md:flex ${
+                                    on(p.href)
+                                      ? "font-medium text-primary"
+                                      : "text-base-content/70 hover:text-base-content"
+                                  }`}
+                                >
+                                  <span className="truncate">{p.label}</span>
+                                </Link>
+                              ))
+                            : null}
                         </li>
                       );
                     })}

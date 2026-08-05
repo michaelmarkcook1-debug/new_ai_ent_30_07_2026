@@ -12,7 +12,7 @@ import { analystNews } from "@/lib/analyst/news-source";
 // once a day to pick it up.
 export const revalidate = 86400;
 
-export const metadata = { title: "Alliances | AI Enterprise" };
+export const metadata = { title: "Integrators | AI Enterprise" };
 
 // The AI x GSI Alliance Explorer.
 //
@@ -50,7 +50,7 @@ export default async function AlliancesPage() {
   return (
     <>
       <PageHeader
-        title="AI × GSI Alliance Explorer"
+        title="Integrators"
         subtitle="Which firms deliver which AI vendors. An enterprise rarely stands a frontier model up alone, so the integrator carrying a vendor decides who turns up on the engagement, how fast, and in which jurisdictions."
         lanes={["aie"]}
       />
