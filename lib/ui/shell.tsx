@@ -102,6 +102,11 @@ export const NAV_GROUPS: NavGroup[] = [
     label: "AI and Your Company",
     items: [
       { label: "Your AI Position", href: "/company-view", icon: "company", hint: "Name your company and its public sources are researched and read against the AI market" },
+      // Before ModelEngine, because that is the order the work happens in: the
+      // Decision Desk assesses vendors and produces the list an enterprise may
+      // buy from, and ModelEngine then picks a model from one of them for a
+      // role. The nav read the two the other way round.
+      { label: "Decision Desk", href: "/decision-desk", icon: "assess", hint: "A cited finding and a weighted score for the call you must defend" },
       {
         label: "ModelEngine",
         href: "/market-view",
@@ -112,7 +117,6 @@ export const NAV_GROUPS: NavGroup[] = [
           { label: "Price / Performance", href: "/price-performance", hint: "What capability costs, and the efficiency frontier" },
         ],
       },
-      { label: "Decision Desk", href: "/decision-desk", icon: "assess", hint: "A cited finding and a weighted score for the call you must defend" },
       {
         label: "Trust Rank",
         href: "/trust-rank",
