@@ -182,8 +182,8 @@ export function DailyBrief({
           already in force and land on you rather than on your vendor.
         </b>{" "}
         {next.length} more are dated and coming, across{" "}
-        {jurisdictions.join(", ")}. The column that matters is who carries each
-        one: most AI regulation binds the organisation deploying, not the
+        {`${jurisdictions.join(", ")}.`} The column that matters is who carries
+        each one: most AI regulation binds the organisation deploying, not the
         model provider, and a brief that lists dates without saying so leaves
         the reader assuming their vendor has it covered.
       </p>
