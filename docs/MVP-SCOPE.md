@@ -1,4 +1,4 @@
-# AI Enterprise — what production would take
+# AI Enterprise: what production would take
 
 For a pod picking this up. Written **4 August 2026** against the running
 build. Companions: [ARCHITECTURE.md](ARCHITECTURE.md),
@@ -61,7 +61,7 @@ illustrative and 24 of them are not.
 Ordered by what unblocks the most. Severity is about the product's promise,
 not code health.
 
-### Data coverage — the real constraint
+### Data coverage: the real constraint
 
 | # | Gap | Severity | Notes |
 |---|---|---|---|
@@ -90,7 +90,7 @@ not code health.
 | # | Question |
 |---|---|
 | 15 | **The "regulated industry AI" error does not reproduce.** Both interaction paths were driven with error traps armed and produced nothing; all 75 workflows carry complete data and every vendor link resolves. Needs the console text or a screenshot to pin down |
-| 16 | **Four investor entries 404 on `/vendor-view`** (a16z, MGX, Sequoia, SoftBank). By design — they are filtered from `TRACKED_VENDORS` — but a 404 is a poor way to express "not a vendor" |
+| 16 | **Four investor entries 404 on `/vendor-view`** (a16z, MGX, Sequoia, SoftBank). By design: they are filtered from `TRACKED_VENDORS`, but a 404 is a poor way to express "not a vendor" |
 | 17 | **Two Amazon/IBM/NVIDIA "AI revenue" figures are not AI revenue.** IBM's is a book of business, NVIDIA's is a segment line. Rendered with the company's own words. A real AI-revenue series would need a different source |
 
 ---
@@ -115,7 +115,7 @@ Those tests will look pedantic to a new team. They are the product.
 
 **A specific warning.** The temptation with items 1–8 is to fill gaps with
 estimates so the pages look complete. Two places in this codebase already
-refuse to do that on purpose — OpenAI's $110B compute commitment is recorded
+refuse to do that on purpose: OpenAI's $110B compute commitment is recorded
 in `NOT_VALUATIONS` precisely so it is never mistaken for a valuation, and the
 durability input cannot return "No" because no vendor discloses distress.
 Filling those in would make the product look finished and be worth less than

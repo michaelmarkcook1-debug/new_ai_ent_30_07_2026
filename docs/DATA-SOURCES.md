@@ -1,4 +1,4 @@
-# AI Enterprise — data sources
+# AI Enterprise: data sources
 
 **Working document.** Expect additions. Last verified against live endpoints:
 **5 August 2026**.
@@ -15,10 +15,10 @@ Sources fall into four tiers, and the distinction matters more than the list:
 
 | Tier | Meaning | Can it move? |
 |---|---|---|
-| **First-party live** | We own the endpoint and the data behind it | Yes — we control refresh |
-| **Third-party live** | Someone else's API, fetched at request time | Yes — but on their cadence |
+| **First-party live** | We own the endpoint and the data behind it | Yes: we control refresh |
+| **Third-party live** | Someone else's API, fetched at request time | Yes, but on their cadence |
 | **Proxied** | Someone else's API behind our whitelist + cache | Only as fast as they refresh |
-| **Bundled** | A dated file in the repo | No — a snapshot, and labelled as one |
+| **Bundled** | A dated file in the repo | No: a snapshot, and labelled as one |
 
 The product's rule is that a figure carries its tier and its vintage wherever
 it is shown. A bundled figure presented as live is the failure mode this
@@ -53,9 +53,9 @@ demonstrable.
 | `/ecosystem-navigator` | Who depends on whom | Dependency seed | AIE, LIVE | 0 | Hand-curated |
 | `/decision-desk` | The call you must defend | AIE data + scripted analyst | AIE LIVE, AIE, SAMPLE | **5** | Anthropic API if keyed |
 | `/news-feed` | What moved | `/api/news`, 24 h module TTL | AIE LIVE, AIE, LIVE | 0 | 24 h |
-| `/company-view` | Your AI position | **Shell fixture** (`fixtures/sample/shell.json`) | — | **13** | Static sample |
+| `/company-view` | Your AI position | **Shell fixture** (`fixtures/sample/shell.json`) | none | **13** | Static sample |
 | `/shortlist` | Saved vendors | Cookie (`ag_shortlist`) | metrics lane | 0 | Per-browser |
-| `/interrogate` | Ask a question | Anthropic API, or scripted when unkeyed | — | 0 | Live per request |
+| `/interrogate` | Ask a question | Anthropic API, or scripted when unkeyed | none | 0 | Live per request |
 | `/admin` | What the catalogue holds and what it cost | `catalogue_observation`, `catalogue_run`, `usage_summary` RPC, `lib/admin/cost-model.ts` | LIVE, DERIVED | 0 | Live per load |
 
 **The four pages a pod must not demo as live.** `/company-view` is the Shell
@@ -73,7 +73,7 @@ the movement catalogue in §1.1.
 
 ---
 
-## 1. First-party — endpoints we own
+## 1. First-party: endpoints we own
 
 ### 1.1 Movement catalogue (Postgres)
 
@@ -85,7 +85,7 @@ the refresh.
 | **Host** | `https://lmptnwqthldbficddtfn.supabase.co` |
 | **Project** | `ag-vendor-intake` (Supabase, eu-west-2) |
 | **Schema** | `aie` (private) exposed via `public.catalogue_*` views |
-| **Auth** | Publishable key (read). Service key (write) — `SUPABASE_SERVICE_ROLE_KEY` |
+| **Auth** | Publishable key (read). Service key (write): `SUPABASE_SERVICE_ROLE_KEY` |
 | **Status** | ✅ Live. **1,340 observations** as at 4 Aug 2026 |
 | **Verified** | `content-range: 0-0/1340` |
 
@@ -103,14 +103,14 @@ the refresh.
 | Series | Observations | Comparable | Notes |
 |---|---:|---:|---|
 | `model` | 1,252 | 0 | 330 models × price/throughput/intelligence/vendor. One snapshot, so no movement yet |
-| `vendor` | 16 | 8 | Two dated 12-month windows — real movement on first run |
+| `vendor` | 16 | 8 | Two dated 12-month windows: real movement on first run |
 | `market` | 72 | 0 | AIE category share, one refresh |
-| `usage` | accumulating | — | Written by the app, never ingested |
+| `usage` | accumulating | no | Written by the app, never ingested |
 
 The vendor series also carries **private-company reported figures** (source
 `press_reported_figures`, evidence class D): dated revenue and valuation
 observations mined from the AIE news feed and named-publisher reporting,
-verified against primary sources before entry — one metric per basis
+verified against primary sources before entry: one metric per basis
 (`revenue_run_rate_usd_m`, `revenue_arr_usd_m`, `revenue_annual_usd_m`,
 `revenue_projection_usd_m`, `valuation_post_money_usd_m`,
 `valuation_reported_usd_m`, `valuation_in_talks_usd_m`) so a run-rate is
@@ -127,7 +127,7 @@ refusals and the verification worked example:
   re-ingestion idempotent.
 - **PostgREST caps responses at 1,000 rows** regardless of `limit`. The client
   pages using `Prefer: count=exact` and `Content-Range`. Do not trust
-  `rows.length < limit` as a truncation check — it silently missed 252 rows.
+  `rows.length < limit` as a truncation check: it silently missed 252 rows.
 
 **RLS posture** (verified live)
 
@@ -137,7 +137,7 @@ refusals and the verification worked example:
 | Read `usage_event` | not exposed | ✅ write-only from outside |
 | Insert `observation` | `permission denied` | ✅ writes need service key |
 
-### 1.2 Adoption disclosure — `/api/adoption/disclosure`
+### 1.2 Adoption disclosure: `/api/adoption/disclosure`
 
 | | |
 |---|---|
@@ -147,7 +147,7 @@ refusals and the verification worked example:
 | **Fallback** | `data/adoption/disclosure-10-K.json` (shipped via `outputFileTracingIncludes`) |
 | **Status** | ✅ Live |
 
-### 1.3 Catalogue API — `/api/catalogue/{series}`
+### 1.3 Catalogue API: `/api/catalogue/{series}`
 
 Series: `model` · `vendor` · `market`. Returns movements with `change: null`
 where only one observation exists, plus `truncated` measured against the
@@ -158,13 +158,13 @@ and answered an empty 200, because usage is written as events to
 `aie.usage_event` and never reaches `aie.observation`. The aggregate is on
 `/api/admin/overview`.
 
-### 1.4 Adoption status — `/api/adoption/status`
+### 1.4 Adoption status: `/api/adoption/status`
 
 Connector health and the licence position of each source.
 
 ---
 
-## 2. Third-party live — fetched at request time
+## 2. Third-party live: fetched at request time
 
 ### 2.1 SEC EDGAR full-text search ⭐
 
@@ -175,13 +175,13 @@ themselves, and citable per row.
 |---|---|
 | **Endpoint** | `https://efts.sec.gov/LATEST/search-index` |
 | **Params** | `q` (quoted), `forms`, `startdt`, `enddt` |
-| **Auth** | None. `User-Agent` required by fair-access policy — `SEC_USER_AGENT` |
+| **Auth** | None. `User-Agent` required by fair-access policy: `SEC_USER_AGENT` |
 | **Rate limit** | <10 req/s |
 | **Licence** | US government work, public domain |
 | **Evidence class** | **A** (regulatory/statutory) |
 | **Status** | ✅ `200`, ~2.3 s, 34 KB |
 
-**Returns per hit:** company, CIK, filing date, **SIC industry code**, state —
+**Returns per hit:** company, CIK, filing date, **SIC industry code**, state,
 plus a native `sic_filter` aggregation, which is the industry breakdown without
 us bucketing anything.
 
@@ -189,10 +189,10 @@ us bucketing anything.
 vendor as competitor, investor, supplier or partner. US registrants only.
 
 **Gotchas**
-- Quote multi-word terms — unquoted `Google Cloud` matches either word.
+- Quote multi-word terms: unquoted `Google Cloud` matches either word.
 - The index reaches back to **2001**. Unbounded counts measure "ever
   mentioned": Anthropic is 56 all-time vs 36 in the last year.
-- Returns **HTML with a 200** to traffic it dislikes — check `content-type`,
+- Returns **HTML with a 200** to traffic it dislikes: check `content-type`,
   not just `res.ok`.
 
 ### 2.2 Federal Register
@@ -205,7 +205,7 @@ vendor as competitor, investor, supplier or partner. US registrants only.
 | **Evidence class** | **A** |
 | **Status** | ✅ `200`, 0.37 s. ~1,521 AI documents |
 
-**Cannot support:** anything outside US federal rulemaking — no EU AI Act, no
+**Cannot support:** anything outside US federal rulemaking: no EU AI Act, no
 UK regulators, no state law.
 
 ### 2.3 Google favicon service
@@ -213,10 +213,10 @@ UK regulators, no state law.
 | | |
 |---|---|
 | **Endpoint** | `https://www.google.com/s2/favicons?domain=…&sz=32` |
-| **Status** | ⚠️ `301` redirect — works, but follows a redirect |
+| **Status** | ⚠️ `301` redirect: works, but follows a redirect |
 | **Used by** | `/api/favicon` |
 
-### 2.4 Clearbit logo — ❌ **DEAD**
+### 2.4 Clearbit logo: ❌ **DEAD**
 
 | | |
 |---|---|
@@ -224,20 +224,20 @@ UK regulators, no state law.
 | **Status** | ❌ **DNS does not resolve** (`Could not resolve host`) |
 | **Used by** | `/api/logo/[domain]` |
 | **Impact** | Low. DNS failure returns in ~19 ms (no timeout wait), the route catches it, caches the negative result for 24 h, and serves a 1×1 blank SVG with `x-eai-logo: unreachable` |
-| **Action** | Replace or remove at leisure. Not urgent — it fails fast, fails once per domain per day, and fails silently by design |
+| **Action** | Replace or remove at leisure. Not urgent: it fails fast, fails once per domain per day, and fails silently by design |
 
 > The one genuine breakage found while compiling this document. Clearbit's
 > logo API was retired after the HubSpot acquisition.
 >
 > Worth noting the failure handling is doing exactly its job: an upstream
 > disappeared entirely and no page broke. The cost is a missing logo, not an
-> error — which is also why nobody noticed until someone probed the host.
+> error, which is also why nobody noticed until someone probed the host.
 
 ---
 
-## 3. Proxied — someone else's API behind our whitelist
+## 3. Proxied: someone else's API behind our whitelist
 
-### 3.1 Ranking Engine (AIE) — `/api/aie/[...path]`
+### 3.1 Ranking Engine (AIE): `/api/aie/[...path]`
 
 | | |
 |---|---|
@@ -246,35 +246,35 @@ UK regulators, no state law.
 | **Cache** | 5 min in-process, 12 s timeout, 1 retry, fixture fallback |
 | **Status** | ✅ All probed paths `200` |
 
-**Whitelist (10 paths)** — anything else is `403`:
+**Whitelist (10 paths)**: anything else is `403`:
 
 | Path | Live size | Fixture | Notes |
 |---|---|---|---|
 | `vendors` | 75 KB | `vendors.json` (47) | |
 | `market-share` | 48 KB | `market-share.json` (72) | Modelled estimate, not measured |
-| `uptake` | 1.4 KB | `uptake.json` | **Static May 2026 seed** — see warning |
+| `uptake` | 1.4 KB | `uptake.json` | **Static May 2026 seed**: see warning |
 | `news` | **3.28 MB** | `news.json` (200) | Ignores `?limit`. See §5 |
-| `model-inventory` | — | `model-inventory.json` (100) | |
-| `reputation` | — | `reputation.json` (29) | |
-| `pricing` | — | `pricing.json` | |
-| `capabilities` | — | `capabilities.json` | |
-| `market-dashboard` | — | `market-dashboard.json` | |
-| `metadata` | — | `metadata.json` (49) | |
+| `model-inventory` | none | `model-inventory.json` (100) | |
+| `reputation` | none | `reputation.json` (29) | |
+| `pricing` | none | `pricing.json` | |
+| `capabilities` | none | `capabilities.json` | |
+| `market-dashboard` | none | `market-dashboard.json` | |
+| `metadata` | none | `metadata.json` (49) | |
 
 > ⚠️ **`uptake` is not live data.** The upstream route reads a static May 2026
 > seed and its own provenance string calls it a modelled estimate. Its ordering
 > (OpenAI ahead of Anthropic) is contradicted by both Menlo Ventures and the
-> Ramp AI Index. Proxying it harder cannot make it fresher — there is nothing
+> Ramp AI Index. Proxying it harder cannot make it fresher: there is nothing
 > fresher behind it. This is why §1.1 exists.
 
-### 3.2 AnalystGenius (BoardRadar) — `/api/br/[...path]`
+### 3.2 AnalystGenius (BoardRadar): `/api/br/[...path]`
 
 | | |
 |---|---|
 | **Upstream** | `https://ag-api-prod-calm-seastar-79.fly.dev/api/v1` |
-| **Auth** | `X-API-Key` — `ANALYSTGENIUS_API_KEY` |
+| **Auth** | `X-API-Key`: `ANALYSTGENIUS_API_KEY` |
 | **Cache** | 5 min, 12 s timeout, 1 retry, 60 req/min per IP |
-| **Status** | ✅ `200` with key (135 KB), `401` without — auth working correctly |
+| **Status** | ✅ `200` with key (135 KB), `401` without: auth working correctly |
 
 **Whitelist (23 prefixes):** `companies`, `providers`, `pulse`, `financial`,
 `financial-snapshot`, `talent`, `ai-exposure`, `reputation-tracker`,
@@ -283,11 +283,11 @@ UK regulators, no state law.
 `edgar`, `peer-financials`, `fx`, `narrative-reality-gap`, `market-signals`.
 
 > `userId` is deliberately stripped before forwarding, so responses carry
-> public/estimated values — correct for a public demo.
+> public/estimated values: correct for a public demo.
 
 ---
 
-## 4. Bundled — dated files in the repo
+## 4. Bundled: dated files in the repo
 
 No network. Each is a snapshot and is labelled with its vintage.
 
@@ -317,7 +317,7 @@ the figures has already been misled.
 
 ### 4.2 The private-company evidence record
 
-`lib/finance/data/private-figures.json` — 26 rows in four groups. The 23
+`lib/finance/data/private-figures.json`: 26 rows in four groups. The 23
 evidence rows each carry a `citation` with `publisher`, `asOf` (when the figure
 was **true**, not when it was republished), a verbatim `quote`, and
 `sourceUrl`.
@@ -327,24 +327,24 @@ was **true**, not when it was republished), a verbatim `quote`, and
 | `valuations` | 8 | 4 | 4 |
 | `revenues` | 13 | 9 | 4 |
 | `crossChecks` | 2 | 2 | 0 |
-| `notValuations` | 3 | — | — |
+| `notValuations` | 3 | none | none |
 
 **15 of the 23 cited rows carry a resolvable URL; the other 8 carry the token
 `aie-news-feed`**, meaning the figure arrived through the app's own news module
 rather than from a link captured at the time. Those eight are attributed and
-quoted but not independently clickable — a weaker position than the rest of the
+quoted but not independently clickable: a weaker position than the rest of the
 record, stated here rather than left for a reader to find. The token is never
 rendered as an anchor, so it produces no broken link. Capturing real URLs for
 them is open work.
 
 `notValuations` rows carry `what` and `why` instead of a citation, and having
 no source is correct for them: they exist to say what a widely-quoted number is
-**not** — that a funding total is not a valuation, for instance — which is an
+**not**: that a funding total is not a valuation, for instance, which is an
 argument about a figure rather than a figure of its own.
 
 Methodology, including how an undisclosed revenue is banded from these:
 [REVENUE_METHODOLOGY.md](REVENUE_METHODOLOGY.md).
-| `lib/aie/vendor-directory.ts` | — | 43 vendors | `VENDOR_DIRECTORY_AS_OF` = 7 May 2026 |
+| `lib/aie/vendor-directory.ts` | n/a | 43 vendors | `VENDOR_DIRECTORY_AS_OF` = 7 May 2026 |
 
 ---
 
@@ -353,10 +353,10 @@ Methodology, including how an undisclosed revenue is banded from these:
 | | |
 |---|---|
 | **Auth** | `ANTHROPIC_API_KEY` |
-| **Status** | ⚪ **Not set** (0 chars) — the app runs in scripted mode, £0 LLM spend |
+| **Status** | ⚪ **Not set** (0 chars): the app runs in scripted mode, £0 LLM spend |
 | **Used by** | `/api/interrogate`, `/api/analyst` |
 
-**Model routing** — cheapest model that meets the bar, which is the product's
+**Model routing**: cheapest model that meets the bar, which is the product's
 own thesis applied to itself:
 
 | Model | Role |
@@ -380,13 +380,13 @@ own thesis applied to itself:
 | `ANALYSTGENIUS_API_BASE` | Yes (BR) | BoardRadar upstream |
 | `ANALYSTGENIUS_API_KEY` | Yes (BR) | `X-API-Key` |
 | `NEXT_PUBLIC_SUPABASE_URL` | Defaulted | Catalogue host |
-| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Defaulted | Publishable key — **not a secret** |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY` | Defaulted | Publishable key: **not a secret** |
 | `SUPABASE_SERVICE_ROLE_KEY` | Ingestion only | Catalogue writes |
 | `SEC_USER_AGENT` | Courtesy | SEC fair access; has a working default |
 | `ANTHROPIC_API_KEY` | Optional | Unset ⇒ scripted mode |
 | `AIE_BASE` | Optional | Overrides ranking-engine base |
 | `MOCK_MODE` | Optional | `true` forces fixtures everywhere |
-| `DEMO_USER` / `DEMO_PASS` | Optional | Basic auth. **Deliberately unset in production** — the site is public by design |
+| `DEMO_USER` / `DEMO_PASS` | Optional | Basic auth. **Deliberately unset in production**: the site is public by design |
 
 ---
 
@@ -394,10 +394,10 @@ own thesis applied to itself:
 
 | # | Issue | Severity | Status |
 |---|---|---|---|
-| 1 | `logo.clearbit.com` does not resolve | Low — fails in 19 ms, cached 24 h, blank SVG | ❌ Open — replace at leisure |
-| 2 | `/api/news` returns 3.28 MB and ignores `?limit` | Medium (bandwidth) | ⚠️ Mitigated — 24 h module TTL |
+| 1 | `logo.clearbit.com` does not resolve | Low: fails in 19 ms, cached 24 h, blank SVG | ❌ Open: replace at leisure |
+| 2 | `/api/news` returns 3.28 MB and ignores `?limit` | Medium (bandwidth) | ⚠️ Mitigated: 24 h module TTL |
 | 3 | `uptake` is a static May 2026 seed | High (misleading) | ⚠️ Disclosed on-page; superseded by §1.1 |
-| 4 | PostgREST 1,000-row ceiling | Medium (silent truncation) | ✅ Fixed — paging + `count=exact` |
+| 4 | PostgREST 1,000-row ceiling | Medium (silent truncation) | ✅ Fixed: paging + `count=exact` |
 | 5 | Model series has one observation | Expected | ✅ Reports `comparable: 0` |
 
 ---
@@ -418,7 +418,7 @@ npm run ingest:catalogue -- --sql # emit SQL instead, no key needed
 - [ ] Replace or remove the Clearbit logo source
 - [ ] A second model snapshot, so the model series becomes comparable
 - [ ] UK/EU regulatory source to sit beside Federal Register (ONS, Eurostat,
-      EU AI Act) — Eurostat is JSON-stat and keyless; ONS BICS is xlsx-only
+      EU AI Act): Eurostat is JSON-stat and keyless; ONS BICS is xlsx-only
 - [x] ~~Decide whether Menlo / Ramp figures stay hand-curated or get a source row~~
       Menlo's enterprise-LLM-spend measure now feeds the financial snapshot's
       cross-check lane with its scope declared; both stay hand-curated with

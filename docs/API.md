@@ -1,4 +1,4 @@
-# AI Enterprise — API and data contracts
+# AI Enterprise: API and data contracts
 
 The reference a developer needs to call this app's endpoints or change its
 store, as opposed to the narrative in [ARCHITECTURE.md](ARCHITECTURE.md) and
@@ -23,7 +23,7 @@ thing that drives a lane badge in the UI:
 | Value | Means |
 |---|---|
 | `live` | Reached the upstream this request |
-| `mock` | Served a recorded fixture — upstream failed, or `MOCK_MODE=true` |
+| `mock` | Served a recorded fixture: upstream failed, or `MOCK_MODE=true` |
 | `error` | Neither worked |
 
 Some routes also send `x-eai-cache: hit` when answering from the in-process
@@ -41,7 +41,7 @@ Every error response, on every route, is the same shape:
 ```
 
 `code` is the thing to branch on; `error` is for a person. Some errors add a
-field to help the caller recover — `supported` on `SERIES_NOT_ALLOWED`, for
+field to help the caller recover: `supported` on `SERIES_NOT_ALLOWED`, for
 instance. Codes in use:
 
 | Code | Route | Meaning |
@@ -63,10 +63,10 @@ instance. Codes in use:
 
 | Route | Cache | Rate limit |
 |---|---|---|
-| `/api/catalogue/{series}` | 300 s in-process | — |
+| `/api/catalogue/{series}` | 300 s in-process | none |
 | `/api/adoption/disclosure` | 300 s in-process, then committed snapshot | 10/min per IP, **on misses only** |
 | `/api/br/*` | 300 s in-process | 60/min per IP |
-| `/api/aie/*` | per-module TTL | — |
+| `/api/aie/*` | per-module TTL | none |
 
 Rate limiting misses rather than requests is deliberate: a cached answer costs
 nothing upstream, so charging a caller for it would punish the good case.
@@ -77,7 +77,7 @@ nothing upstream, so charging a caller for it would punish the good case.
 
 `GET`. Series: **`model`**, **`vendor`**, **`market`**. No parameters.
 
-`usage` is not a series and returns 400 — see §7.
+`usage` is not a series and returns 400, see §7.
 
 ```json
 {
@@ -157,7 +157,7 @@ not-yet-comparable last, for the same reason.
 }
 ```
 
-`failed` lists vendors whose lookup did not complete — a partial answer is
+`failed` lists vendors whose lookup did not complete: a partial answer is
 returned rather than a 500, and the caller is told which parts are missing.
 
 **A filing naming a vendor is not a customer relationship.** It may name it as
@@ -180,7 +180,7 @@ stalled upstream turned one run into ~98 seconds of hanging.
 ```
 
 A connector carries `id`, `label`, `status` and a `message` that states the
-remediation rather than just the fault — for example that `SEC_USER_AGENT` is
+remediation rather than just the fault, for example that `SEC_USER_AGENT` is
 unset and running on a default.
 
 ---
@@ -207,7 +207,7 @@ unset and running on a default.
 `aie.observation`. This is the only route that reads usage at all.
 
 Costs are list-price arithmetic from `lib/admin/cost-model.ts`, carried at full
-float precision — format at the edge with `formatUsd`, which shows enough
+float precision: format at the edge with `formatUsd`, which shows enough
 decimals to see the first significant figure instead of rounding every run to
 `$0.00`.
 
@@ -218,7 +218,7 @@ decimals to see the first significant figure instead of rounding every run to
 Supabase project `lmptnwqthldbficddtfn` (`ag-vendor-intake`), region
 `eu-west-2`. Read over PostgREST with plain `fetch`; no client library.
 
-### `aie.observation` — the catalogue
+### `aie.observation`: the catalogue
 
 | Column | Type | Null | Notes |
 |---|---|---|---|
@@ -232,7 +232,7 @@ Supabase project `lmptnwqthldbficddtfn` (`ag-vendor-intake`), region
 | `value_text` | text | yes | |
 | `unit` | text | yes | |
 | `observed_at` | timestamptz | no | **when the figure was true** |
-| `ingested_at` | timestamptz | no | `now()` — when we learned it |
+| `ingested_at` | timestamptz | no | `now()`: when we learned it |
 | `source_id` | text | no | → `aie.source.id` |
 | `provenance` | text | no | shown verbatim to readers |
 | `vintage` | text | yes | |
@@ -248,11 +248,11 @@ Constraints, read from `pg_constraint`:
 
 `observation_unique` makes ingestion idempotent: re-running a snapshot updates
 rather than duplicates. `observation_has_value` means a row must measure
-something — there is no way to record an observation that observed nothing.
+something: there is no way to record an observation that observed nothing.
 
 > **Known drift, 5 August 2026.** `observation_series_check` still permits
-> `'usage'`. The application no longer does — it is out of the `Series` type
-> and out of the route's allowlist — so nothing writes it, and the table holds
+> `'usage'`. The application no longer does: it is out of the `Series` type
+> and out of the route's allowlist, so nothing writes it, and the table holds
 > zero such rows. But the database would still accept one, which means the
 > guarantee currently rests on the code alone. Tightening the constraint to
 > the three real series is a one-line migration and is **not** applied here,
@@ -264,7 +264,7 @@ is the classic error here. A figure published in June about February is
 `observed_at` February. Sorting a trajectory by `ingested_at` reorders history
 by when we happened to read it.
 
-### `aie.source` — the register
+### `aie.source`: the register
 
 `id`, `name`, `url` (nullable), `licence`, `evidence_class` (char, `CHECK` in
 `A`–`E`), `measures`, `cannot_support`, `created_at`.
@@ -276,14 +276,14 @@ state what it fails to support does not go in. Current register:
 |---|---|---|
 | `federal_register` | A | https://www.federalregister.gov/api/v1 |
 | `sec_edgar_fts` | A | https://efts.sec.gov/LATEST/search-index |
-| `vendor_pricing_page` | A | — (published per vendor) |
-| `aie_model_catalogue` | D | — (assembled) |
-| `aie_workspace_usage` | D | — (first-party) |
-| `press_reported_figures` | D | — (per-figure publisher and URL in `lib/finance/data/private-figures.json`) |
-| `aie_market_share` | E | — (modelled) |
+| `vendor_pricing_page` | A | none (published per vendor) |
+| `aie_model_catalogue` | D | none (assembled) |
+| `aie_workspace_usage` | D | none (first-party) |
+| `press_reported_figures` | D | none (per-figure publisher and URL in `lib/finance/data/private-figures.json`) |
+| `aie_market_share` | E | none (modelled) |
 
 A null `url` means the source is assembled or first-party and has no single
-upstream address, not that provenance is missing — per-row provenance lives on
+upstream address, not that provenance is missing: per-row provenance lives on
 the observation.
 
 ### `aie.ingestion_run`
@@ -295,11 +295,11 @@ with its failures rather than discarded.
 ### `aie.usage_event`
 
 `id`, `occurred_at`, `surface`, `action`, `subject_id` (nullable),
-`detail jsonb`. Both label columns are constrained rather than free text —
+`detail jsonb`. Both label columns are constrained rather than free text:
 `surface IN ('fitengine','shortlist','adoption','decision-desk','interrogate')`
-and `action IN ('compute','add','remove','view','export')` — so the aggregate
+and `action IN ('compute','add','remove','view','export')`, so the aggregate
 cannot be polluted by a typo'd surface name that silently becomes a new
-category. **No IP, session id, user agent or visitor text** — there is
+category. **No IP, session id, user agent or visitor text**: there is
 nothing in this table to leak, by construction rather than by policy. It is
 also why usage can never be an observation series.
 
@@ -338,7 +338,7 @@ PostgREST caps a response at 1,000 rows **regardless of the `limit` asked
 for**. `lib/catalogue/client.ts` pages with `offset` and sends
 `Prefer: count=exact`, comparing what arrived against `Content-Range`.
 
-This bug is invisible in the code — it lives in the server's behaviour — and a
+This bug is invisible in the code: it lives in the server's behaviour, and a
 first fix that raised the limit from 500 to 5,000 looked correct in review and
 changed nothing. **If you touch the paging, verify against the running
 database, not the diff.**
@@ -355,7 +355,7 @@ anything and reported "First observations recorded" over nothing.
 
 **A new source.** Insert into `aie.source` with `measures` **and**
 `cannot_support` filled in, and an honest `evidence_class`. Then add it to
-DATA-SOURCES.md — the register and the document are both meant to be complete,
+DATA-SOURCES.md: the register and the document are both meant to be complete,
 and only one of them is enforced by a NOT NULL.
 
 **A new endpoint.** Emit `x-eai-source`, use the error envelope in §1, and

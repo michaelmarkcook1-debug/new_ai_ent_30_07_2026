@@ -1,4 +1,4 @@
-# AI Enterprise — runbook
+# AI Enterprise: runbook
 
 How to run, refresh, ship and check this thing. Written for whoever is holding
 it at 6pm on a Friday, so it leads with the commands and puts the reasoning
@@ -17,15 +17,15 @@ Current as of **5 August 2026**. Companion documents:
 Four gates. All four, in this order, every time.
 
 ```bash
-npx tsc --noEmit     # types — strict; fastest signal, run it first
+npx tsc --noEmit     # types: strict; fastest signal, run it first
 npm test             # 322 tests across 21 files
-npm run lint         # ESLint — expect 0 errors, ~39 warnings
+npm run lint         # ESLint: expect 0 errors, ~39 warnings
 npm run build        # 84 pages
 ```
 
 **Never run `npm run build` while `npm run dev` is running in the same
 folder.** They share `.next` and will corrupt each other's output. If you need
-to verify a build while a dev server is up — including someone else's — use a
+to verify a build while a dev server is up, including someone else's, use a
 throwaway worktree:
 
 ```bash
@@ -48,7 +48,7 @@ Errors are a different matter and there should never be any.
 npx vercel --prod --yes
 ```
 
-There is **no git remote** — deploys go through the Vercel CLI directly from
+There is **no git remote**: deploys go through the Vercel CLI directly from
 this folder. `git push` will fail, and that is expected, not a broken setup.
 
 **The deploy fails intermittently on upload.** On 5 August 2026 the first
@@ -60,7 +60,7 @@ broken.
 
 ### Checking a deploy actually landed
 
-Do not trust the CLI's "ready" alone — check what the site says:
+Do not trust the CLI's "ready" alone: check what the site says:
 
 ```bash
 curl -s https://newaient30072026.vercel.app/start | grep -o '[0-9]* roles across [0-9]* industries'
@@ -69,7 +69,7 @@ curl -s https://newaient30072026.vercel.app/api/catalogue/vendor | head -c 200
 ```
 
 The three catalogue series must all report `truncated: false`. If one reports
-`true`, the paging in `lib/catalogue/client.ts` has regressed — see §5.
+`true`, the paging in `lib/catalogue/client.ts` has regressed, see §5.
 
 ### The site is public on purpose
 
@@ -112,13 +112,13 @@ List prices, from `lib/admin/cost-model.ts`, measured rather than estimated:
 | News feed cache refill | $0.000026 |
 
 Every series, refreshed every day, for a month: **$0.0039**. Cost is not a
-reason to refresh less often. Rate limits and source courtesy are — the SEC
+reason to refresh less often. Rate limits and source courtesy are: the SEC
 fair-access header (`SEC_USER_AGENT`) is a real obligation, and the adoption
 ingest holds all eight vendors to a single shared 20-second budget so a stalled
 upstream cannot turn one run into 98 seconds of hanging.
 
 `/admin` shows all of this live: what the catalogue holds, the last runs with
-their failures, and the priced cost of each. It is not in the sidebar — type
+their failures, and the priced cost of each. It is not in the sidebar: type
 the URL.
 
 ---
@@ -128,7 +128,7 @@ the URL.
 | Symptom | Likely cause | What to do |
 |---|---|---|
 | A page shows "no data" where data should be | A fixture did not ship | Check `outputFileTracingIncludes` in `next.config.ts` and the route's `.nft.json` in `.next/server` |
-| Every request 500s with `MIDDLEWARE_INVOCATION_FAILED` | Something was imported into `middleware.ts` | Revert it. See ARCHITECTURE §7 — that file imports nothing, deliberately |
+| Every request 500s with `MIDDLEWARE_INVOCATION_FAILED` | Something was imported into `middleware.ts` | Revert it. See ARCHITECTURE §7: that file imports nothing, deliberately |
 | A vendor page 200s for a company that does not exist | BoardRadar returns `success: true` for unknown tickers | Never treat a 200 as proof a company is real |
 | A LIVE badge over stale-looking numbers | `uptake` is a May 2026 seed; live means freshly fetched, not freshly measured | Correct as-is. Peer Insights says so on-page |
 | Catalogue series reports `truncated: true` | PostgREST's 1,000-row ceiling | See §5 |
@@ -138,7 +138,7 @@ the URL.
 
 Every proxied response carries `x-eai-source`: `live`, `mock` or `error`. The
 UI badge is driven by that header and nothing else. If a badge looks wrong,
-check the header before checking the component — the component is almost never
+check the header before checking the component: the component is almost never
 where the bug is.
 
 ---
@@ -149,14 +149,14 @@ where the bug is.
 for.** The catalogue client pages with `offset` and requests `count=exact`,
 comparing what came back against the server's own total. This was fixed twice:
 the first fix raised the limit from 500 to 5,000 and looked correct in review,
-because the bug is invisible in the code — it lives in the server's behaviour.
+because the bug is invisible in the code: it lives in the server's behaviour.
 Only querying live exposed it. If you change `lib/catalogue/client.ts`, verify
 against the running database, not by reading the diff.
 
 **A query that is valid over an empty table answers successfully.** The `usage`
 series returned 200 with an empty movement set and a note saying "First
 observations recorded", which reads like a pipeline that has started and will
-fill. Nothing could ever land there — usage lives in `aie.usage_event`, never
+fill. Nothing could ever land there: usage lives in `aie.usage_event`, never
 in `aie.observation`. It is now out of the `Series` type so re-adding it is a
 compile error. When adding a series, confirm rows actually arrive before
 trusting a 200.
