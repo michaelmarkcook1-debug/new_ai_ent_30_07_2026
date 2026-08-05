@@ -6,13 +6,11 @@ import { PricePerformanceChart } from "./components/price-performance-chart";
 import { workforcePayload } from "@/lib/model-fit/workforce-payload";
 import { priceModels } from "@/lib/model-fit/price-payload";
 
-export const metadata = { title: "Model for Role | AI Enterprise" };
+export const metadata = { title: "ModelEngine | AI Enterprise" };
 
-// Model for Role is one tool now (4 August 2026). It was called Model 4 Role,
-// briefly FitEngine, and is back to naming the question it answers: a product
-// name a CIO has to be taught is worse than a sentence they already
-// understand. The route stays /market-view so existing links keep working;
-// /model-for-role redirects here.
+// ModelEngine is one tool now (4 August 2026). It has been Model 4 Role,
+// FitEngine and Model for Role; the route stays /market-view throughout so no
+// link ever breaks on a rename, and /model-for-role redirects here.
 //
 // It used to carry three things: the fit engine, an adoption explorer and a
 // workflow selector. The adoption explorer's vendor-share model failed an
@@ -25,7 +23,7 @@ export default function MarketViewPage() {
   return (
     <>
       <PageHeader
-        title="Model for Role"
+        title="ModelEngine"
         subtitle="Pick a role and the engine returns the cheapest model meeting its requirements, with the reasoning, the eliminations and the cost all visible."
         lanes={["derived", "aie"]}
       />

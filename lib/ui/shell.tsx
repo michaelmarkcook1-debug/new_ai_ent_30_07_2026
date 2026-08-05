@@ -59,19 +59,25 @@ function Icon({ name }: { name: string }) {
 
 export const NAV_GROUPS: NavGroup[] = [
   {
-    label: "Market Intelligence",
+    // Where a reader starts and what they came to decide. Kept apart from the
+    // market reading below it, which is reference rather than a starting point.
+    label: "Start here",
     items: [
       { label: "Explore", href: "/start", icon: "navigator", hint: "Pick the question closest to yours" },
       { label: "Your Pulse", href: "/pulse", icon: "pulse", hint: "Today's market read: averages, risks and who is moving" },
-      // Directly under The Pulse: the highest-intent question on the site,
-      // which until now sat second in the second of three groups.
       {
-        label: "Model for Role",
+        label: "ModelEngine",
         href: "/market-view",
         icon: "market",
         hint: "Pick a role, get the cheapest model that meets its requirements and what it costs",
         also: { label: "Price / Performance", href: "/price-performance", hint: "What capability costs, and the efficiency frontier" },
       },
+    ],
+  },
+  {
+    label: "Market Intelligence",
+    items: [
+      { label: "News", href: "/news-feed", icon: "news", hint: "What moved, and which vendors it bears on" },
       {
         label: "Market Watch",
         href: "/market-watch",
@@ -79,8 +85,8 @@ export const NAV_GROUPS: NavGroup[] = [
         hint: "Category shares, leaders and the winning/losing read",
         also: { label: "AI Adoption", href: "/ai-adoption", hint: "Who is actually paying for AI, measured and attributed, and how far each industry has got" },
       },
-      { label: "Financial Snapshot", href: "/financial-snapshot", icon: "finance", hint: "Vendor financials, segment revenue and what AI they disclose" },
       { label: "Competitive Intel", href: "/competitive-intel", icon: "intel", hint: "Compare model providers across ten assessed capabilities" },
+      { label: "Financial Snapshot", href: "/financial-snapshot", icon: "finance", hint: "Vendor financials, segment revenue and what AI they disclose" },
       {
         label: "Vendor View",
         href: "/vendor-view",
@@ -88,21 +94,8 @@ export const NAV_GROUPS: NavGroup[] = [
         hint: "Full profile and rankings for every tracked vendor",
         also: { label: "Reputation Tracker", href: "/reputation-tracker", hint: "How buyers, developers and staff rate each vendor" },
       },
-      {
-        label: "Alliances",
-        href: "/alliances",
-        icon: "alliance",
-        hint: "Who partners with whom, and how deep the tie is",
-        also: { label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", hint: "Who depends on whom across the AI stack" },
-      },
     ],
   },
-  // Recomposed 3 August 2026 from four tabs into three, ordered as the
-  // CIO's journey: where do we stand, what fits and what does it cost,
-  // and what call do we make. Interrogate and Assess and Decide were two
-  // halves of the third question, so they share the Decision Desk now;
-  // "Company View: Shell" was named after its fixture, which is a build
-  // detail no buyer should have to decode.
   {
     label: "AI and Your Company",
     items: [
@@ -121,17 +114,12 @@ export const NAV_GROUPS: NavGroup[] = [
         hint: "What AI regulation binds you, by jurisdiction",
         also: { label: "The Security Desk", href: "/security-desk", hint: "Security posture and open risks per vendor" },
       },
-      { label: "News", href: "/news-feed", icon: "news" },
-    ],
-  },
-  {
-    label: "Operations",
-    items: [
       {
-        label: "Admin",
-        href: "/admin",
-        icon: "watch",
-        hint: "Ingestion runs and what each costs, catalogue counts, connector health, usage in aggregate",
+        label: "Alliances",
+        href: "/alliances",
+        icon: "alliance",
+        hint: "Who partners with whom, and how deep the tie is",
+        also: { label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", hint: "Who depends on whom across the AI stack" },
       },
     ],
   },

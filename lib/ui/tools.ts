@@ -18,7 +18,7 @@ export interface Tool {
 
 export const TOOLS = {
   modelForRole: {
-    label: "Model for Role",
+    label: "ModelEngine",
     href: "/market-view",
     does: "pick a role and see the cheapest model that meets its requirements",
   },

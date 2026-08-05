@@ -27,7 +27,7 @@ const JOBS: {
       "Pick an industry, a function and a role. You get the cheapest model that meets that role's requirements, which requirements decided it, which models were eliminated and by what number, and the cost per person and for the whole role. 258 roles across 29 industries against 330 priced models.",
     href: "/market-view",
     cta: "Pick a role",
-    then: "Model for Role",
+    then: "ModelEngine",
   },
   {
     question: "We want AI for a specific workflow. Who should we shortlist?",
