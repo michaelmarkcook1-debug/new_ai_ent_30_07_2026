@@ -327,3 +327,96 @@ the pricing endpoint answers on request but serves a 2 June 2026 capture
 whatever day you ask — and regenerates the two derived artefacts afterwards,
 because forgetting to do that is how the July port drifted into showing 88 for
 a vendor the source scored 68.3.
+
+---
+
+## 10. The analyst model, and the guards on it
+
+Added 4-5 August 2026. Opus 5 writes the analyst voice on every insight
+surface, on Today's Pulse, Since you last looked and Do these three things.
+
+The division of labour is the design and is not negotiable:
+
+| owns | what |
+|---|---|
+| **Code** | every number. The deterministic builders still compute the facts |
+| **The model** | the prose only: wording, emphasis, what a figure means for a buyer |
+| **Two validators** | the trust |
+
+`lib/analyst/llm.ts` holds both guards, and they are why model-written prose is
+allowed in a product whose promise is that nothing is invented.
+
+- **`invented()`** returns any figure in the output that is not in the input.
+  Deliberately strict: a *rounded* version of a real figure fails, because on a
+  page promising exact sourced numbers a quiet rounding is where the problem
+  starts.
+- **`foreignEntities()`** catches what the numeric guard cannot. "OpenAI leads
+  here" on a page whose data never mentions OpenAI is a fabricated claim
+  assembled entirely from real words, and every figure in it can be
+  legitimate. Checked against the vendor roster on word boundaries, so "Meta"
+  does not fire inside "metadata".
+
+A rejection is a correction, not an ending: the model is told which figure it
+invented and asked again, twice, before the surface falls back to computed
+text. Unparseable output retries the same way. Every surface says whether it
+was `analyst written` or `computed`.
+
+Two things are kept away from the model on purpose: the recommended action
+(letting it choose between Accelerate and Pause moves the one element that
+reads as a decision) and the tools each recommendation points at.
+
+---
+
+## 11. Company research
+
+`lib/research/`. Your AI Position takes a company name and researches it
+rather than rendering a fixture.
+
+- **`search.ts`** — provider-agnostic web search, Tavily or Brave, whichever
+  key is present. Returns passages with their URLs and nothing else: it does
+  not summarise or rank.
+- **`company.ts`** — two searches per company (the business, then its AI),
+  then the analyst model reads the passages under the same guards. Two
+  attempts at decreasing scope: a failure narrows the ask rather than ending
+  it, because a reading of four sources beats an apology about eight.
+
+The distinction that makes it shippable is **retrieval, not recall**. The model
+is never asked what it knows about a company; it is handed passages fetched
+seconds earlier and every figure is checked back against them. Findings citing
+a passage we did not retrieve are dropped.
+
+Progress streams down the request doing the work (`app/api/research/route.ts`),
+so the wheel reports stages as they begin rather than animating. The finished
+answer is held in the browser for the session.
+
+**Known limit, in the code as well as here.** Leaving mid-run restarts it,
+because the work lives in the request. An earlier version held jobs in a
+module-level Map and polled them; on Vercel that fails totally, since every
+poll lands on whichever instance is free and the job is never found. Surviving
+a mid-run departure means putting jobs in Postgres, which the catalogue
+already uses.
+
+---
+
+## 12. Latency, measured
+
+Production, 5 August 2026, cold then warm:
+
+| page | cold | warm |
+|---|---|---|
+| `/start`, `/price-performance` | 0.5-0.6s | 0.2s |
+| `/news-feed` | 7.4s | 0.35s |
+| `/pulse` | 15.8s | 0.54s |
+| `/vendor-view` | 17.1s | 0.33s |
+| `/competitive-intel` | 25.5s | 0.34s |
+| `/market-watch` | 26.4s | 33.1s |
+| `/trust-rank` | 37.8s | 14.3s |
+
+The slow pages are exactly the ones carrying an Analyst Insight; the two fast
+ones have none. The cause is that the Opus call sits in the render path and
+its cache is per-instance, so most visits pay the full round trip.
+
+The fix, not yet made: move the insight out of the render path and stream it,
+as company research already does, or share the cache across instances via
+Postgres or Edge Config. Until then the sidebar marks the clicked tab and
+spins its icon, which makes the wait legible without making it shorter.
