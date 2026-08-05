@@ -9,7 +9,6 @@ import {
 } from "./data";
 import { MarketToday } from "./components/market-today";
 import { CategoryShareLive } from "./components/category-share-live";
-import { WinningLosing } from "./components/winning-losing";
 import { DependencyByLayer } from "./components/dependency-by-layer";
 import { CategoryLeaders } from "./components/category-leaders";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
@@ -66,7 +65,6 @@ export default async function MarketWatchPage() {
       <div className="space-y-6">
         <MarketToday regime={regime} signals={signals} />
         <CategoryShareLive fallback={categories} lookups={lookups} />
-        <WinningLosing />
         <DependencyByLayer view={dependency} />
         <CategoryLeaders leaders={leaders} watchlists={watchlists} />
       </div>
