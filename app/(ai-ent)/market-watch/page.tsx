@@ -1,16 +1,13 @@
 import { PageHeader } from "@/lib/ui/page";
 import {
-  getCategoryLeaders,
   getCategoryShares,
   getDependencyByLayer,
   getMarketToday,
   getShareLookups,
-  getWatchlists,
 } from "./data";
 import { MarketToday } from "./components/market-today";
 import { CategoryShareLive } from "./components/category-share-live";
 import { DependencyByLayer } from "./components/dependency-by-layer";
-import { CategoryLeaders } from "./components/category-leaders";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { marketWatchInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
@@ -34,8 +31,6 @@ export default async function MarketWatchPage() {
   const categories = getCategoryShares();
   const lookups = getShareLookups();
   const dependency = getDependencyByLayer();
-  const leaders = getCategoryLeaders();
-  const watchlists = getWatchlists();
 
   const metricsForInsight = await loadMarketMetrics();
   const insight = marketWatchInsight(
@@ -66,7 +61,6 @@ export default async function MarketWatchPage() {
         <MarketToday regime={regime} signals={signals} />
         <CategoryShareLive fallback={categories} lookups={lookups} />
         <DependencyByLayer view={dependency} />
-        <CategoryLeaders leaders={leaders} watchlists={watchlists} />
       </div>
     </>
   );
