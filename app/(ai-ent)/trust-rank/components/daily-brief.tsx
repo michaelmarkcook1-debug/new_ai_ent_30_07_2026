@@ -82,61 +82,88 @@ function ObligationRow({
   const mine = o.affectedVendorIds.filter((v) => watched.has(v));
 
   return (
-    <li className="border-b border-base-300/60 py-3 last:border-b-0">
-      <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-        <span
-          className={`rounded border px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider ${BINDS_TONE[o.binds]}`}
-        >
-          {BINDS_LABEL[o.binds]}
-        </span>
-        <span className="text-[13px] font-semibold">{o.regime}</span>
-        {o.provision ? (
-          <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
-            {o.provision}
+    <li className="border-b border-base-300/60 last:border-b-0">
+      {/* Collapsed by default. Sixteen obligations rendered open is a wall a
+          reader scrolls past rather than reads, and the summary line carries
+          what they scan for: who it binds, which regime, and when.
+
+          Native details/summary rather than a state hook, so this stays a
+          server component and costs no client JavaScript. The two things a
+          reader must not have to open a row to discover — that a date moved,
+          and that it lands on a vendor they watch — are flagged in the
+          summary itself. */}
+      <details className="group py-3">
+        <summary className="flex cursor-pointer list-none flex-wrap items-baseline gap-x-2 gap-y-1">
+          <span className="font-mono text-[10px] text-muted transition-transform group-open:rotate-90">
+            ▸
           </span>
-        ) : null}
-        <span className="ml-auto font-mono text-[10px] uppercase tracking-wider text-muted">
-          {shortDate(o.effectiveDate)} · {countdown(days)}
-        </span>
-      </div>
+          <span
+            className={`rounded border px-1.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider ${BINDS_TONE[o.binds]}`}
+          >
+            {BINDS_LABEL[o.binds]}
+          </span>
+          <span className="text-[13px] font-semibold">{o.regime}</span>
+          {o.provision ? (
+            <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
+              {o.provision}
+            </span>
+          ) : null}
+          {o.moved ? (
+            <span className="rounded border border-warn/50 bg-warn-bg/60 px-1 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-warn">
+              date moved
+            </span>
+          ) : null}
+          {mine.length > 0 ? (
+            <span className="rounded border border-primary/40 bg-primary/10 px-1 py-0.5 font-mono text-[9px] font-semibold uppercase tracking-wider text-primary">
+              on your list
+            </span>
+          ) : null}
+          <span className="ml-auto font-mono text-[10px] uppercase tracking-wider text-muted">
+            {shortDate(o.effectiveDate)} · {countdown(days)}
+          </span>
+        </summary>
 
-      <p className="measure mt-1 text-[12.5px] leading-relaxed text-muted">
-        {o.requires}
-      </p>
+        <div className="mt-2 pl-4">
 
-      {/* The point of the row. */}
-      <p className="measure mt-1.5 text-[12.5px] font-medium leading-relaxed">
-        {o.soWhat}
-      </p>
+          <p className="measure mt-1 text-[12.5px] leading-relaxed text-muted">
+            {o.requires}
+          </p>
 
-      {mine.length > 0 ? (
-        <p className="mt-1.5 rounded border border-primary/40 bg-primary/10 px-2 py-1 text-[11.5px] font-semibold text-primary">
-          On your list: {mine.map(vendorName).join(", ")}
-        </p>
-      ) : null}
+          {/* The point of the row. */}
+          <p className="measure mt-1.5 text-[12.5px] font-medium leading-relaxed">
+            {o.soWhat}
+          </p>
 
-      {o.moved ? (
-        <p className="measure mt-1.5 text-[11.5px] leading-relaxed text-warn">
-          <b>This date moved.</b> It was {shortDate(o.moved.from)}, changed by{" "}
-          {o.moved.by}. Anything planned against the old date needs rereading.
-        </p>
-      ) : null}
+          {mine.length > 0 ? (
+            <p className="mt-1.5 rounded border border-primary/40 bg-primary/10 px-2 py-1 text-[11.5px] font-semibold text-primary">
+              On your list: {mine.map(vendorName).join(", ")}
+            </p>
+          ) : null}
 
-      {o.caveat ? (
-        <p className="measure mt-1 text-[11.5px] leading-relaxed text-muted">
-          {o.caveat}
-        </p>
-      ) : null}
+          {o.moved ? (
+            <p className="measure mt-1.5 text-[11.5px] leading-relaxed text-warn">
+              <b>This date moved.</b> It was {shortDate(o.moved.from)}, changed by{" "}
+              {o.moved.by}. Anything planned against the old date needs rereading.
+            </p>
+          ) : null}
 
-      <a
-        href={o.source.url}
-        target="_blank"
-        rel="noreferrer"
-        className="mt-1.5 inline-block font-mono text-[10px] uppercase tracking-wider text-primary hover:underline"
-      >
-        {o.source.name} · {shortDate(o.source.published)} · class{" "}
-        {o.source.evidenceClass} →
-      </a>
+          {o.caveat ? (
+            <p className="measure mt-1 text-[11.5px] leading-relaxed text-muted">
+              {o.caveat}
+            </p>
+          ) : null}
+
+          <a
+            href={o.source.url}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-1.5 inline-block font-mono text-[10px] uppercase tracking-wider text-primary hover:underline"
+          >
+            {o.source.name} · {shortDate(o.source.published)} · class{" "}
+            {o.source.evidenceClass} →
+          </a>
+        </div>
+      </details>
     </li>
   );
 }
@@ -220,7 +247,8 @@ export function DailyBrief({
 
       <div className="mt-4">
         <p className="micro-label">
-          Coming — {next.length} dated, soonest first
+          Coming — {next.length} dated, soonest first · open a row for the
+          detail and its source
         </p>
         <ul className="mt-1">
           {next.map((o) => (
@@ -234,15 +262,10 @@ export function DailyBrief({
           Already in force — {live.length}, most recent first
         </p>
         <ul className="mt-1">
-          {live.slice(0, 5).map((o) => (
+          {live.map((o) => (
             <ObligationRow key={o.id} o={o} asOf={asOf} watched={watched} />
           ))}
         </ul>
-        {live.length > 5 ? (
-          <p className="mt-1 font-mono text-[10px] text-muted">
-            Showing the 5 most recent of {live.length} in force.
-          </p>
-        ) : null}
       </div>
 
       <p className="measure mt-4 rounded border border-warn/40 bg-warn-bg/40 px-3 py-2 text-[11.5px] leading-relaxed">
