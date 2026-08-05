@@ -298,6 +298,7 @@ No network. Each is a snapshot and is labelled with its vintage.
 | `fixtures/aie-live/*.json` | ~1.1 MB | 11 files | Proxy fallbacks |
 | `fixtures/br/*.json` | ~500 KB | 6 files | Proxy fallbacks |
 | `data/adoption/disclosure-10-K.json` | 20 KB | 8 vendors | Regenerate: `npm run ingest:adoption` |
+| `lib/aie/vendor-directory.ts` | n/a | 43 vendors | `VENDOR_DIRECTORY_AS_OF` = 7 May 2026 |
 
 ### 4.1 Hand-curated third-party figures, and where each one comes from
 
@@ -344,7 +345,6 @@ argument about a figure rather than a figure of its own.
 
 Methodology, including how an undisclosed revenue is banded from these:
 [REVENUE_METHODOLOGY.md](REVENUE_METHODOLOGY.md).
-| `lib/aie/vendor-directory.ts` | n/a | 43 vendors | `VENDOR_DIRECTORY_AS_OF` = 7 May 2026 |
 
 ---
 
@@ -353,8 +353,8 @@ Methodology, including how an undisclosed revenue is banded from these:
 | | |
 |---|---|
 | **Auth** | `ANTHROPIC_API_KEY` |
-| **Status** | ⚪ **Not set** (0 chars): the app runs in scripted mode, £0 LLM spend |
-| **Used by** | `/api/interrogate`, `/api/analyst` |
+| **Status** | ✅ **Set in Vercel production** as of 4 August 2026. Unset locally means scripted mode and £0 LLM spend, which is still the default for a fresh checkout |
+| **Used by** | `/api/interrogate`, `/api/analyst`, `/api/research`, and every Analyst Insight surface |
 
 **Model routing**: cheapest model that meets the bar, which is the product's
 own thesis applied to itself:
@@ -364,6 +364,11 @@ own thesis applied to itself:
 | `claude-haiku-4-5` | Query classification, chunk selection |
 | `claude-sonnet-5` | Default synthesis |
 | `claude-opus-5` | Only on an explicit "comprehensive" request |
+
+The **analyst voice is a separate path and does not route**: `lib/analyst/llm.ts`
+pins `claude-opus-5` for every insight surface, Today's Pulse, Since you last
+looked and Do these three things, under the two guards in
+[RULES-AND-CALCULATIONS.md](RULES-AND-CALCULATIONS.md).
 
 > **Prompt caching does not apply here** and should not be added. The system
 > prompts are 111 and 146 tokens against a minimum cacheable prefix of 512

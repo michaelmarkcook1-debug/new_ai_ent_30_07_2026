@@ -23,7 +23,7 @@ live endpoint, or by reading the rendered HTML.
 | BoardRadar integration | 14 tickers probed live, key server-side only, 8 s timeout, fixture fallback, honest badging |
 | Model for Role | 294 roles × 330 priced models, engine at parity with the Python reference |
 | Workforce distribution | Two-panel figure, 14.8% / 0.7% pinned by test |
-| Price / performance | Four axes with data, unscored models kept in a gutter, denominators printed |
+| Price / performance | Five axes with data (Accuracy added 5 Aug 2026), unscored models kept in a gutter, denominators printed |
 | Composite metric | Three Questions + Verdict dial, never a score without its input count |
 | Disclosure ladder | Five rungs, 7 of 9 filers with a stated figure or hard bound, zero invented numbers |
 | Movement catalogue | Postgres over PostgREST, paging past the 1,000-row ceiling |
