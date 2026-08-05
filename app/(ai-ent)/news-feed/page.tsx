@@ -19,7 +19,11 @@ export default async function NewsFeedPage() {
   const { items, meta } = loadFeed();
   const insight = newsInsight(news.items, null);
 
-  const written = await authorInsight(insight, "news");
+  const written = await authorInsight(
+    insight,
+    "news",
+    [...new Set(news.items.flatMap((n) => n.vendors ?? []))].slice(0, 14)
+  );
 
 
   return (

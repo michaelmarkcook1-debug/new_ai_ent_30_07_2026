@@ -40,7 +40,11 @@ export default async function AlliancesPage() {
     null
   );
 
-  const written = await authorInsight(insight, "alliance channel");
+  const written = await authorInsight(
+    insight,
+    "alliance channel",
+    [...new Set(data.links.flatMap((l) => [l.vendorName, l.partnerName]))].slice(0, 14)
+  );
 
 
   return (

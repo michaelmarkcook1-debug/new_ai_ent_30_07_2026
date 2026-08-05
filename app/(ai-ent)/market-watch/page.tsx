@@ -44,7 +44,11 @@ export default async function MarketWatchPage() {
     pickNews(news.items, { categories: ["Market movement", "Strategy signal"] })
   );
 
-  const written = await authorInsight(insight, "market");
+  const written = await authorInsight(
+    insight,
+    "market",
+    metricsForInsight.vendors.slice(0, 12).map((v) => v.name)
+  );
 
 
   return (

@@ -37,7 +37,11 @@ export default async function PricePerformancePage() {
     ccForInsight.capturedAtDisplay ?? null
   );
 
-  const written = await authorInsight(insight, "price and capability");
+  const written = await authorInsight(
+    insight,
+    "price and capability",
+    ccForInsight.models.slice(0, 14).map((x) => x.model)
+  );
 
 
   return (

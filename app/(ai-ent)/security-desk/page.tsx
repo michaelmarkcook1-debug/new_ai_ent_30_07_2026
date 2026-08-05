@@ -28,7 +28,11 @@ export default async function SecurityDeskPage() {
     "security"
   );
 
-  const written = await authorInsight(insight, "security");
+  const written = await authorInsight(
+    insight,
+    "security",
+    m.vendors.slice(0, 12).map((v) => v.name)
+  );
 
 
   return (

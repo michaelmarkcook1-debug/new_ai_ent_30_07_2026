@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { guard, invented, numbersIn } from "@/lib/analyst/llm";
+import { foreignEntities, guard, invented, numbersIn } from "@/lib/analyst/llm";
 
 // The guard is the reason a model may write this product's prose at all.
 // A prompt asking a model not to fabricate is a request; this is a check.
@@ -81,5 +81,51 @@ describe("invented", () => {
   it("is empty when the output is clean, which is what guard reads", () => {
     expect(invented("58.7 across 47 vendors", facts)).toEqual([]);
     expect(guard("58.7 across 47 vendors", facts)).toBe(true);
+  });
+});
+
+describe("foreignEntities", () => {
+  const roster = ["OpenAI", "Anthropic", "Harvey", "Meta", "Cohere"];
+  const facts = "Vendors this page covers: Harvey, Cohere. Harvey leads.";
+
+  // The failure the numeric guard cannot see. "OpenAI leads here" on a page
+  // whose data never mentions OpenAI is a fabricated claim built entirely out
+  // of real words, and every number in it can still be legitimate.
+  it("catches a real vendor that this page's data never mentioned", () => {
+    expect(
+      foreignEntities("OpenAI leads on capability.", facts, roster)
+    ).toEqual(["OpenAI"]);
+  });
+
+  it("allows the vendors the page actually covers", () => {
+    expect(
+      foreignEntities("Harvey leads, with Cohere behind.", facts, roster)
+    ).toEqual([]);
+  });
+
+  // Ordinary prose must not trip it, or the guard becomes noise and the
+  // pages lose their analyst voice for no gain.
+  it("does not fire on ordinary capitalised words", () => {
+    expect(
+      foreignEntities("European buyers should act. Buyers win.", facts, roster)
+    ).toEqual([]);
+  });
+
+  // "Meta" inside "metadata" is the obvious way a naive check goes wrong.
+  it("matches on word boundaries only", () => {
+    expect(
+      foreignEntities("The metadata is incomplete.", facts, roster)
+    ).toEqual([]);
+    expect(foreignEntities("Meta is winning.", facts, roster)).toEqual(["Meta"]);
+  });
+
+  it("is case insensitive in both directions", () => {
+    expect(foreignEntities("openai leads.", facts, roster)).toEqual(["OpenAI"]);
+  });
+
+  it("reports every offender", () => {
+    expect(
+      foreignEntities("OpenAI and Anthropic lead.", facts, roster).sort()
+    ).toEqual(["Anthropic", "OpenAI"]);
   });
 });

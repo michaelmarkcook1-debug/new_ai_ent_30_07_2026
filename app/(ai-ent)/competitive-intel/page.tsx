@@ -41,7 +41,11 @@ export default async function CompetitiveIntelPage({
     matrix.capabilities.length
   );
 
-  const written = await authorInsight(insight, "competitive");
+  const written = await authorInsight(
+    insight,
+    "competitive",
+    m.vendors.slice(0, 12).map((v) => v.name)
+  );
 
 
   return (

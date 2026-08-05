@@ -33,7 +33,11 @@ export default async function ReputationTrackerPage() {
     3
   );
 
-  const written = await authorInsight(insight, "reputation");
+  const written = await authorInsight(
+    insight,
+    "reputation",
+    m.vendors.slice(0, 12).map((v) => v.name)
+  );
 
 
   return (

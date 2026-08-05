@@ -51,7 +51,11 @@ export default async function CompanyOverviewPage({
     { movedSignals, watchedVendors: watch.vendorIds.length },
     pickNews(news.items, { minImpact: 70 })
   );
-  const written = await authorInsight(insight, "market position");
+  const written = await authorInsight(
+    insight,
+    "market position",
+    metrics.vendors.slice(0, 12).map((v) => v.name)
+  );
 
   return (
     <CompanyShell company={company}>

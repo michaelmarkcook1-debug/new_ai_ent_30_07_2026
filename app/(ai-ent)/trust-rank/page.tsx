@@ -32,7 +32,11 @@ export default async function TrustRankPage() {
     "governance"
   );
 
-  const written = await authorInsight(insight, "governance");
+  const written = await authorInsight(
+    insight,
+    "governance",
+    m.vendors.slice(0, 12).map((v) => v.name)
+  );
 
 
   return (

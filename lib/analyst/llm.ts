@@ -89,6 +89,38 @@ export function invented(output: string, allowed: string): string[] {
   return [...numbersIn(output)].filter((n) => !permitted.has(n));
 }
 
+/**
+ * Vendor names the model named but this page's data did not mention.
+ *
+ * The numeric guard cannot catch this. Asked to name vendors, a model will
+ * reach for the ones it knows about the market rather than the ones on the
+ * page, and "OpenAI leads here" on a page whose data never mentions OpenAI is
+ * a fabricated claim made entirely out of real words.
+ *
+ * Checked against the known roster rather than against every capitalised word,
+ * so ordinary prose ("European buyers", "Buyers should") cannot trip it. The
+ * residual risk is a wholly invented company name, which the system prompt
+ * forbids and which a grounded model given an explicit roster does not
+ * produce.
+ */
+export function foreignEntities(
+  output: string,
+  facts: string,
+  roster: readonly string[]
+): string[] {
+  const said = output.toLowerCase();
+  const grounded = facts.toLowerCase();
+  const out: string[] = [];
+  for (const name of roster) {
+    const n = name.toLowerCase();
+    if (n.length < 3) continue;
+    // Word-boundary match, so "Meta" does not fire on "metadata".
+    const re = new RegExp(`\\b${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`);
+    if (re.test(said) && !re.test(grounded)) out.push(name);
+  }
+  return out;
+}
+
 // ------------------------------------------------------------------ client
 
 const SYSTEM = `You are the senior analyst voice of AI Enterprise, a buyer-intelligence product for enterprise AI purchasing.
@@ -152,7 +184,9 @@ export async function authored<T extends object>(
   kind: string,
   facts: string,
   instruction: string,
-  maxTokens = 900
+  maxTokens = 900,
+  /** Every vendor the product knows, used to catch a name off this page. */
+  roster: readonly string[] = []
 ): Promise<T | null> {
   if (!llmAvailable()) return null;
 
@@ -193,7 +227,10 @@ ${instruction}`;
     // The check that makes this safe to ship. Every string the model produced
     // is tested against the figures it was given.
     const emitted = JSON.stringify(parsed);
-    const bad = invented(emitted, facts);
+    const bad = [
+      ...invented(emitted, facts),
+      ...foreignEntities(emitted, facts, roster),
+    ];
     if (bad.length === 0) {
       cache.set(cacheKey, { value: parsed, at: Date.now() });
       return parsed;

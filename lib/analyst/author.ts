@@ -1,4 +1,5 @@
 import { authored, llmAvailable, type Authorship } from "./llm";
+import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import type { AnalystInsightData } from "./insight";
 import type { PulseJudgement } from "@/lib/pulse/judgement";
 import type { ToolKey } from "@/lib/ui/tools";
@@ -27,6 +28,12 @@ const asComputed = <T>(value: T): Written<T> => ({
   authorship: "computed",
 });
 
+// Every vendor the product knows. Used only as the guard's roster: a name in
+// here that is not in the page's own facts means the model reached past its
+// data for a vendor it happens to know about, which is a fabricated claim
+// assembled from real words.
+const ROSTER: readonly string[] = VENDOR_DIRECTORY.map((v) => v.name);
+
 /** Only what the model is permitted to see, and therefore to reuse. */
 function factSheet(lines: (string | null | undefined)[]): string {
   return lines.filter(Boolean).join("\n");
@@ -50,7 +57,13 @@ interface InsightDraft {
  */
 export async function authorInsight(
   computed: AnalystInsightData,
-  context: string
+  context: string,
+  /**
+   * The vendors and models this page's data actually covers. Supplied so the
+   * reading can name them: an analyst who says "two providers lead" when the
+   * data names them is withholding the useful half of the sentence.
+   */
+  entities: readonly string[] = []
 ): Promise<Written<AnalystInsightData>> {
   if (!llmAvailable() || computed.insufficient) return asComputed(computed);
 
@@ -68,6 +81,9 @@ export async function authorInsight(
     computed.news
       ? `Dated item: "${computed.news.title}" (${computed.news.sourceName ?? "source not stated"}, ${computed.news.publishedAt ?? "date not stated"})`
       : "No dated item bears on this page.",
+    entities.length > 0
+      ? `Vendors and models this page covers, and the only ones you may name: ${entities.join(", ")}`
+      : null,
   ]);
 
   const draft = await authored<InsightDraft>(
@@ -81,8 +97,11 @@ Return JSON: {"headline": string, "summary": string, "implications": [string, st
 - summary: 90 to 140 words. What the figures mean for someone buying, and what they should be sceptical of. Reuse only the figures above.
 - implications: exactly three, each one short sentence, each a distinct consequence for a buyer. No number needs to appear in these.
 
+Name the specific vendors and models the data covers wherever it sharpens the point. "Two providers lead on agentic capability" is worth far less to a buyer than naming which two. You may only name entities from the list above; naming any other company, including one you know of, causes the answer to be discarded.
+
 The computed versions above are a floor, not a template. Say something a reader could not have got by reading the numbers themselves.`,
-    900
+    900,
+    ROSTER
   );
 
   if (!draft?.headline || !draft?.summary) return asComputed(computed);
@@ -129,8 +148,11 @@ Return JSON: {"headline": string, "judgement": string}
 - headline: one sentence, under 14 words. The single thing that is true of this market today. It may use a figure from the data, but a headline that is only a figure is a wasted headline.
 - judgement: 2 to 3 sentences. What the movement means and what a buyer should do differently because of it. Reuse only the figures above.
 
+Name the vendors that moved, where the data names them. A reader wants to know who, not how many. You may only name vendors that appear above.
+
 This is the most-read text in the product. If it could have been written last month, it is wrong.`,
-    600
+    600,
+    ROSTER
   );
 
   if (!draft?.headline || !draft?.judgement) return asComputed(computed);
@@ -178,8 +200,11 @@ Return JSON: {"headline": string, "body": string}
 - headline: one sentence, under 12 words. The thing they would most want to know first.
 - body: 2 to 3 sentences. Which of these changes actually matters and why, and which is noise. Reuse only the figures above.
 
+Name the vendors involved, using only the names that appear above.
+
 Do not list the changes back: they are already rendered beneath this. Say which one deserves their attention.`,
-    500
+    500,
+    ROSTER
   );
 
   if (!draft?.headline || !draft?.body) return null;
@@ -220,8 +245,11 @@ Return JSON: {"actions": [{"action": string, "detail": string}, ...]} with exact
 - action: an imperative under 6 words. What to do, not what to consider.
 - detail: 1 to 2 sentences saying why now, and what happens if it waits. Reuse only the figures above.
 
+Where the context names a vendor or model, name it. You may only name entities that appear above.
+
 These are the only things on the page a reader is meant to act on. Vague advice here costs more than none.`,
-    800
+    800,
+    ROSTER
   );
 
   const actions = draft?.actions;

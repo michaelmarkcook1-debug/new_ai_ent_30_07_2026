@@ -24,7 +24,11 @@ export default async function VendorViewPage() {
     pickNews(news.items, { categories: ["Market movement", "Product launch"] })
   );
 
-  const written = await authorInsight(insight, "vendor ranking");
+  const written = await authorInsight(
+    insight,
+    "vendor ranking",
+    m.vendors.slice(0, 12).map((v) => v.name)
+  );
 
 
   return (
