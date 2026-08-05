@@ -74,7 +74,14 @@ export const NAV_GROUPS: NavGroup[] = [
         href: "/market-watch",
         icon: "watch",
         hint: "Category shares, leaders and the winning/losing read",
-        also: [{ label: "AI Adoption", href: "/ai-adoption", hint: "Who is actually paying for AI, measured and attributed, and how far each industry has got" }],
+        also: [
+          { label: "AI Adoption", href: "/ai-adoption", hint: "Who is actually paying for AI, measured and attributed, and how far each industry has got" },
+          // Moved here from Integrators, 5 August 2026. The navigator maps who
+          // depends on whom across the stack, which is a question about the
+          // shape of the market rather than about who would deliver an
+          // engagement. It sat under Integrators because both are graphs.
+          { label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", hint: "Who depends on whom across the AI stack" },
+        ],
       },
       { label: "Competitive Intel", href: "/competitive-intel", icon: "intel", hint: "Compare model providers across ten assessed capabilities" },
       { label: "Financial Snapshot", href: "/financial-snapshot", icon: "finance", hint: "Vendor financials, segment revenue and what AI they disclose" },
@@ -121,7 +128,6 @@ export const NAV_GROUPS: NavGroup[] = [
         href: "/alliances",
         icon: "alliance",
         hint: "Which firms deliver which AI vendors, and how deep the tie is",
-        also: [{ label: "AI Ecosystem Navigator", href: "/ecosystem-navigator", hint: "Who depends on whom across the AI stack" }],
       },
     ],
   },

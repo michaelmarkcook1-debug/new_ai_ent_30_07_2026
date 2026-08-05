@@ -3,6 +3,7 @@ import { resolveCompany } from "@/lib/company-source";
 import { CompanyShell } from "../components/company-shell";
 import { ExemplarOnly } from "../components/exemplar-only";
 import { AnalystView } from "./analyst-view";
+import { analystKeyConfigured } from "@/app/api/analyst/lib";
 
 export const metadata = { title: "AI Analyst | AI Enterprise" };
 
@@ -28,7 +29,7 @@ export default async function AnalystPage({
         />
       ) : (
         <Suspense>
-          <AnalystView preloaded={PRELOADED} />
+          <AnalystView preloaded={PRELOADED} liveKey={await analystKeyConfigured()} />
         </Suspense>
       )}
     </CompanyShell>

@@ -58,6 +58,14 @@ export default function AiAdoptionPage() {
         lanes={["live", "aie-live", "aie"]}
       />
       <div className="space-y-4">
+        {/* How far each industry has got. Moved to the top on 5 August 2026:
+            it is the question a reader arrives on this page holding, and it
+            was sitting fourth behind three panels that answer narrower ones.
+            The measured third-party figures follow directly, so the caveat
+            about reading measurement before any modelled slice still lands
+            before the reader reaches Peer Insights. */}
+        <AdoptionMaturity />
+
         {/* Measured figures, attributed and dated. Never blended. */}
         <section className="rounded-lg border border-base-300 bg-base-100 p-4">
           <div className="flex flex-wrap items-center gap-2">
@@ -121,7 +129,6 @@ export default function AiAdoptionPage() {
 
         <MovementPanel />
         <DisclosurePanel />
-        <AdoptionMaturity />
       </div>
     </>
   );

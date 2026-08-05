@@ -2,7 +2,7 @@ import { PageHeader } from "@/lib/ui/page";
 import { loadShellFixture } from "@/lib/shell-fixture";
 import { DecisionDeskView } from "./decision-desk-view";
 import { cookies } from "next/headers";
-import { getUploads } from "@/app/api/analyst/lib";
+import { getUploads, analystKeyConfigured } from "@/app/api/analyst/lib";
 import Link from "next/link";
 
 export const metadata = { title: "Decision Desk | AI Enterprise" };
@@ -70,6 +70,7 @@ export default async function DecisionDeskPage({
           subject: "An enterprise AI adoption decision",
         }}
         initialTool={initialTool}
+        liveKey={await analystKeyConfigured()}
       />
     </>
   );

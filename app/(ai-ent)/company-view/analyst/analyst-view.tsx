@@ -31,7 +31,13 @@ const SUGGESTED = [
   "Where are our readiness gaps?",
 ];
 
-export function AnalystView({ preloaded }: { preloaded: string[] }) {
+export function AnalystView({
+  preloaded,
+  liveKey = false,
+}: {
+  preloaded: string[];
+  liveKey?: boolean;
+}) {
   const params = useSearchParams();
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
@@ -158,9 +164,15 @@ export function AnalystView({ preloaded }: { preloaded: string[] }) {
             label="AI Analyst"
             tooltip="Grounded in your uploads first, then the preloaded documents, the Shell fixture and the AIE dataset. Answers cite their sources and say plainly when the answer is not in the data."
           />
-          <span className="rounded bg-warn-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-warn">
-            Scripted sample mode (no API key)
-          </span>
+          {liveKey ? (
+            <span className="rounded bg-ok-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-ok">
+              Live analyst
+            </span>
+          ) : (
+            <span className="rounded bg-warn-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-warn">
+              Scripted sample mode (no API key)
+            </span>
+          )}
         </div>
 
         <div className="flex-1 space-y-3 overflow-y-auto p-4">

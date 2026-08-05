@@ -19,9 +19,13 @@ type Tool = "finding" | "assess";
 export function DecisionDeskView({
   assessment,
   initialTool,
+  liveKey = false,
 }: {
   assessment: ShellFixture["assess"]["assessment"];
   initialTool: Tool;
+  /** Whether a live analyst key is configured. Read on the server; the key
+      itself never crosses this boundary. */
+  liveKey?: boolean;
 }) {
   const [tool, setTool] = useState<Tool>(initialTool);
 
@@ -60,7 +64,7 @@ export function DecisionDeskView({
 
       <div className={tool === "finding" ? "" : "hidden"}>
         <Suspense>
-          <InterrogateView />
+          <InterrogateView liveKey={liveKey} />
         </Suspense>
       </div>
       <div className={tool === "assess" ? "" : "hidden"}>

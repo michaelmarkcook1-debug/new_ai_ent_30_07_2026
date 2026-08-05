@@ -144,3 +144,18 @@ export async function analystApiKey(): Promise<string | null> {
   }
   return cachedKey;
 }
+
+/**
+ * Whether a live analyst key is configured, as a boolean and nothing more.
+ *
+ * The two panels that run on this key each carried a hardcoded "Scripted
+ * sample mode (no API key)" badge. It was a literal, not a reading: it said
+ * "no API key" on production where the key was set, and it said it before any
+ * request had been made, which is the same mistake the lane badges exist to
+ * prevent — never assert a mode before you know it.
+ *
+ * Returns only whether a key exists. The value never leaves the server.
+ */
+export async function analystKeyConfigured(): Promise<boolean> {
+  return (await analystApiKey()) !== null;
+}

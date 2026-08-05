@@ -32,7 +32,7 @@ const EXAMPLES = [
   "Energy company piloting maintenance AI; the board wants to know who delivers it and what it costs.",
 ];
 
-export function InterrogateView() {
+export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
   const params = useSearchParams();
   const [depth, setDepth] = useState<"quick" | "comprehensive">("quick");
   const [situation, setSituation] = useState("");
@@ -193,9 +193,15 @@ export function InterrogateView() {
         <div className="py-6">
           <div className="flex items-center gap-2">
             <span className="micro-label text-primary">Interrogate</span>
-            <span className="rounded bg-warn-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-warn">
-              Scripted sample mode (no API key)
-            </span>
+            {liveKey ? (
+              <span className="rounded bg-ok-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-ok">
+                Live analyst
+              </span>
+            ) : (
+              <span className="rounded bg-warn-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider text-warn">
+                Scripted sample mode (no API key)
+              </span>
+            )}
           </div>
           <h2 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
             Tell me your situation.
