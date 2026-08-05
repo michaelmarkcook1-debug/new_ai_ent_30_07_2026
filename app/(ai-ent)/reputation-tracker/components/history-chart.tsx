@@ -86,8 +86,18 @@ export function ReputationHistoryChart({
     return DEFAULT_VENDORS.filter((id) => ids.has(id));
   }, [latest]);
 
-  const shown = covered.filter((id) => !muted.has(id));
+  // Memoized because the min/max pass below depends on it. As a bare filter it
+  // was a new array on every render, so the useMemo that listed it never once
+  // reused a result — it recomputed the full min/max sweep every render while
+  // reading as though it did not.
+  const shown = useMemo(
+    () => covered.filter((id) => !muted.has(id)),
+    [covered, muted]
+  );
 
+  // Reads `pillar`, which is why `pillar` is a dependency of the sweep below.
+  // The function identity changing each render is not: its output depends only
+  // on its arguments and `pillar`, and all three are declared.
   const valueFor = (snap: Snapshot, id: string): number | null =>
     snap.vendors.find((v) => v.vendorId === id)?.[pillar] ?? null;
 
