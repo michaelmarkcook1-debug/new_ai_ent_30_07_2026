@@ -1,6 +1,6 @@
 # AI Enterprise — architecture
 
-Written for a team taking this over. Current as of **4 August 2026**, verified
+Written for a team taking this over. Current as of **5 August 2026**, verified
 against the running build rather than from memory.
 
 Companion documents: [DATA-SOURCES.md](DATA-SOURCES.md) for every dataset and
@@ -39,16 +39,23 @@ it. There is no client-side call to a keyed API anywhere in the app.
 
 ### Pages — `app/(ai-ent)/`
 
-A single route group. 28 page routes, grouped in the sidebar as 13 resting
-items (`lib/ui/shell.tsx` → `NAV_GROUPS`); paired pages share a row and expand
-when that part of the site is open.
+A single route group: 29 fixed page routes plus `/vendor-view/[id]`. The
+sidebar shows 13 resting items in three groups (`lib/ui/shell.tsx` →
+`NAV_GROUPS`); paired pages share a row and expand when that part of the site
+is open, which is how 13 rows reach 19 destinations.
 
 | Group | Routes |
 |---|---|
-| Market Intelligence | `/start`, `/pulse`, `/market-view` (+`/price-performance`), `/market-watch` (+`/ai-adoption`), `/financial-snapshot`, `/competitive-intel`, `/vendor-view` (+`/reputation-tracker`), `/alliances` (+`/ecosystem-navigator`) |
-| AI and Your Company | `/company-view` (+ 5 sub-routes), `/decision-desk` |
-| Vendor Assessment | `/workflow-shortlist`, `/trust-rank` (+`/security-desk`), `/news-feed` |
-| Other | `/vendor-view/[id]` (SSG, 43 vendors), `/shortlist`, `/model-for-role` (redirect), `/interrogate` (redirect), `/assess-decide` |
+| Start here | `/start`, `/pulse` |
+| Market Intelligence | `/news-feed`, `/market-watch` (+`/ai-adoption`), `/competitive-intel`, `/financial-snapshot`, `/vendor-view` (+`/reputation-tracker`), `/peer-insights` |
+| AI and Your Company | `/company-view` (+ 5 sub-routes), `/market-view` (+`/workflow-shortlist`, `/price-performance`), `/decision-desk`, `/trust-rank` (+`/security-desk`), `/alliances` (+`/ecosystem-navigator`) |
+| Not in the nav | `/admin` (operator view), `/vendor-view/[id]` (SSG, 43 vendors), `/shortlist`, `/assess-decide`, `/model-for-role` and `/interrogate` (redirects) |
+
+`/admin` is deliberately unlinked rather than protected — it reads the
+catalogue and the run history and shows the priced cost of each ingestion. It
+holds nothing a reader of the public site could not derive, so hiding it from
+the nav is a tidiness decision, not a security control. If that stops being
+true it needs a real gate.
 
 Rendering modes matter for cost and freshness:
 
@@ -68,11 +75,23 @@ Rendering modes matter for cost and freshness:
 |---|---|---|
 | `br/[...path]` | BoardRadar proxy | Injects `X-API-Key` server-side |
 | `aie/[...path]` | Ranking Engine proxy | None needed upstream |
-| `catalogue/[series]` | Movement catalogue | Publishable key + RLS |
+| `catalogue/[series]` | Movement catalogue — `model`, `vendor`, `market` only | Publishable key + RLS |
+| `admin/overview` | Catalogue totals, run history, usage aggregate | Publishable key + RLS |
 | `adoption/disclosure`, `adoption/status` | SEC-derived adoption | None |
+| `research` | Company research | None |
 | `analyst`, `analyst/upload` | Document analyst | `ANTHROPIC_API_KEY` |
 | `interrogate` | Question answering | `ANTHROPIC_API_KEY` |
 | `favicon`, `logo/[domain]` | Icon proxy | None |
+
+**`catalogue/[series]` takes three series, not four.** `usage` was a member
+until 5 August 2026 and answered 200 with an empty movement set and the note
+"First observations recorded" — which reads as a pipeline that has started and
+will fill. Nothing could ever land there: usage is written as events to
+`aie.usage_event` and aggregated by the `usage_summary` function, and never
+passes through `aie.observation`. It is now absent from the `Series` type, so
+re-adding it is a compile error, and asking for it returns 400 naming
+`admin/overview`. The lesson generalises: a query that is valid over an empty
+table is the worst kind of wrong, because it answers successfully.
 
 ---
 
@@ -116,10 +135,16 @@ than `@supabase/supabase-js`: the whole surface used is two GETs and one RPC.
 
 | Object | Kind | Use |
 |---|---|---|
-| `catalogue_observation` | table | The movement catalogue: one row per observed metric, with `observed_at`, `source_id`, `provenance`, `vintage` |
-| `catalogue_source` | table | Source register, ordered by evidence class |
-| `catalogue_run` | table | Ingestion run history |
-| `record_usage` | RPC | Usage counter |
+| `catalogue_observation` | view | The movement catalogue: one row per observed metric, with `observed_at`, `source_id`, `provenance`, `vintage` |
+| `catalogue_source` | view | Source register, ordered by evidence class |
+| `catalogue_run` | view | Ingestion run history |
+| `record_usage` | RPC | Usage counter — write-only from outside |
+| `usage_summary` | RPC | Aggregated usage, the only way to read it |
+
+The three `catalogue_*` views are `security_invoker` views over an `aie`
+schema that is not itself exposed. Both functions are `security definer`.
+Usage events carry no IP, session, user agent or free text — there is nothing
+in that table to leak, by design rather than by policy.
 
 **Key model.** `NEXT_PUBLIC_SUPABASE_ANON_KEY` is a *publishable* key and is
 designed to ship to browsers. What protects the data is row-level security,
@@ -209,10 +234,13 @@ Web-standard `Request`/`Response` are enough to check a header. Leave it alone.
 
 ## 8. Testing
 
-`npm test` runs Vitest. 271 tests across 16 files, all passing as of 4 August
+`npm test` runs Vitest. 322 tests across 21 files, all passing as of 5 August
 2026. `tests/**/*.test.ts` only — **Vitest cannot parse JSX here**, so pure
 logic must live in `.ts` for it to be testable. That constraint is why the
-chart maths sits in `lib/` and the components only draw.
+chart maths sits in `lib/` and the components only draw. It also means a test
+cannot render a page: an attempt to assert rendered copy by importing a page
+component fails at transform. Assert against built HTML instead, or against
+the values the copy reads.
 
 The tests worth understanding before changing anything:
 
@@ -222,12 +250,43 @@ The tests worth understanding before changing anything:
 | `price-performance.test.ts` | Axis denominators (330/56/44/262) and that the recomputed intelligence frontier reproduces the catalogue's own 10 |
 | `disclosure-ladder.test.ts` | Every STATED phrase appears verbatim in the filing text held in the fixture |
 | `composite.test.ts`, `composite-data.test.ts` | That no composite is ever returned without its input count, and that durability cannot return "No" |
-| `live-vendor-parity.test.ts`, `model-fit-parity.test.ts` | Parity against the upstream and the Python reference |
+| `live-vendor-parity.test.ts`, `model-fit-parity.test.ts` | Parity against the upstream and the Python reference — all 294 roles under four control settings |
 | `scorecard-ledger.test.ts` | The committed internal report matches what the code produces |
+| `library-counts.test.ts` | That no file states a library size as a literal |
 
 Several assert **specific published figures**. That is intentional: if a
 fixture sync moves a number the product quotes in prose, the build fails rather
 than the page quietly changing what it claims.
+
+`library-counts.test.ts` guards the inverse failure and is worth understanding
+before adding copy. Two pages stated "258 roles across 29 industries" for a
+fortnight after the library reached 294 across 36. Nothing broke and no test
+failed, because the counts were literals typed into prose and growing the data
+never touched them. The fix was to derive them at the point of render; the test
+fails if anyone writes one down again, which is the only way the drift returns.
+
+### The other three gates
+
+```bash
+npx tsc --noEmit     # types — strict, and the first thing to run
+npm run lint         # ESLint, Next preset — 0 errors expected
+npm run build        # 84 pages
+```
+
+**Do not build while `npm run dev` is running in the same folder.** They share
+`.next`. If you must verify a build while a dev server is up, do it in a git
+worktree with `node_modules` symlinked — that is how the 5 August audit
+verified file tracing without disturbing a running session.
+
+The lint gate is new as of 5 August 2026 and had never run before then:
+`npm run lint` called `next lint` with no ESLint installed, so it prompted for
+an interactive install and hung. Types and tests had been doing all the work it
+was credited with. Two rule decisions in `eslint.config.mjs` are deliberate and
+should not be "fixed" without reading the comments there: the ignore globs are
+`**/`-anchored because a stale worktree under `.claude` carries its own built
+`.next` and drowned the real findings 200:1, and `no-unescaped-entities` is
+scoped to `>` and `}` because the apostrophes it otherwise flags are British
+English prose, not defects.
 
 ---
 
@@ -241,6 +300,25 @@ npm run ingest:adoption                    # SEC → data/adoption/*.json
 npm run ingest:catalogue                   # all series → Postgres
 WRITE_LEDGER=1 npx vitest run tests/scorecard-ledger.test.ts  # regenerate the ledger
 ```
+
+### Build configuration worth knowing
+
+`next.config.ts` carries two settings that both exist to stop a **silent**
+failure, which is why neither is obvious from the code they protect.
+
+`outputFileTracingIncludes` lists three fixture directories explicitly. Next
+traces the files a route needs by reading the code, and every fixture read in
+this app builds its path from a variable (`disclosure-${form}`,
+`${apiPath}.json`) that static analysis cannot resolve. Without the includes
+none of them ship. The failure is invisible by design: each read is wrapped in
+a catch returning null, so a missing file degrades to a clean "no data" state
+that looks like a data gap rather than a deploy bug.
+
+`outputFileTracingRoot` pins the root to this project. Next infers it by
+walking up for a lockfile, and a stray `package-lock.json` in the home
+directory made it choose `/Users/michaelcook` — every traced path resolved
+against the wrong base, with a warning on every build. The fixtures still
+shipped, but by luck rather than design.
 
 `sync-aie-fixtures` refuses to overwrite a newer capture with an older one —
 the pricing endpoint answers on request but serves a 2 June 2026 capture

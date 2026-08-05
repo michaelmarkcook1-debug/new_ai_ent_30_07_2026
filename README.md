@@ -18,10 +18,16 @@ Three documents, written for a team picking this up rather than for the demo:
   Section 0.1 is the per-page table, including which pages still show SAMPLE.
 - **[docs/MVP-SCOPE.md](docs/MVP-SCOPE.md)** — what is genuinely done, the four
   pages that are not demonstrable as live, and the backlog to production.
+- **[docs/RUNBOOK.md](docs/RUNBOOK.md)** — how to run, refresh, ship and check
+  it: the four gates, the deploy that needs a retry, what an ingestion costs,
+  and the two traps that have already cost us a day each.
 
-Short version: 24 of 28 pages paint no SAMPLE badge at all. The footer's
-"Demo build" is accurate for `/company-view`, `/trust-rank`, `/decision-desk`
-and one panel of `/reputation-tracker`, and misleading for the rest.
+Short version: four pages paint SAMPLE badges and the rest paint none. The
+footer's "Demo build" is accurate for `/company-view` (13 badges),
+`/trust-rank` (9), `/decision-desk` (5) and one panel of
+`/reputation-tracker` (1), and misleading for everything else. The per-page
+count is section 0.1 of DATA-SOURCES.md, taken from rendered HTML rather
+than from props.
 
 ## What you need first
 
@@ -44,8 +50,21 @@ Then open http://localhost:3000 in your browser. A sign-in box appears:
 enter the demo username and password from `.env.local` (`DEMO_USER` and
 `DEMO_PASS`; the defaults are `eai` and `change-me`).
 
-The app opens on The Pulse. The left sidebar mirrors the three groups:
-Market Intelligence, AI and Your Company, Vendor Assessment.
+The **deployed site is deliberately open** — neither variable is set in
+Vercel, and the gate in `middleware.ts` opens when either is missing. That
+is a decision, not an oversight: the demo is meant to be shareable by link.
+Setting either variable in Vercel would close it.
+
+The app opens on The Pulse. The left sidebar carries three groups: **Start
+here** (Explore, Your Pulse), **Market Intelligence** (News, Market Watch,
+Competitive Intel, Financial Snapshot, Vendor View, Peer Insights) and **AI
+and Your Company** (Your AI Position, ModelEngine, Decision Desk, Trust
+Rank, Integrators). Paired pages share a row and expand when that part of
+the site is open.
+
+`/admin` is not in the sidebar and is reached by typing the URL. It is the
+operator's view — catalogue contents, ingestion-run history and the priced
+cost of each run — not part of the buyer journey.
 
 ## Reading the badges (this matters)
 
@@ -85,8 +104,12 @@ and the cost on screen: which requirements decided it, which models were
 eliminated and by what number, what it costs per person and for the whole
 role, and what the same people would cost on the top model instead.
 
-It sits on the Model for Role tab (route /market-view). 258 roles
-across 29 industries against 330 priced models.
+It sits on the ModelEngine tab (route /market-view). 294 roles across 36
+industries against 330 priced models. Those figures are derived from the
+data at render time (`LIBRARY_ROLE_COUNT`, `LIBRARY_INDUSTRY_COUNT`), not
+typed into the copy — this sentence said "258 across 29" for a fortnight
+after the library grew, because it was a literal and growing the data never
+touched it.
 
 What it does **not** claim matters as much as what it does. Model prices
 and benchmark scores are real and attributed. Role requirement profiles
@@ -100,8 +123,45 @@ unassessed, never quietly passed.
 The engine is a port of the integration package's reference
 implementation and is checked against it: run
 `python3 scripts/model-fit-baseline.py` (it reads the reference from
-`~/Downloads/pkg`) and then `npm test`, which replays all 258 roles under
+`~/Downloads/pkg`) and then `npm test`, which replays all 294 roles under
 four control settings and fails on any disagreement.
+
+## Peer Insights
+
+What firms in your industry are buying, and what they are buying it for.
+Pick a segment and you get two things: the vendors that show up in that
+slice of the uptake model, and the workflows your sector runs AI on.
+
+The second half is a reverse lookup nothing else in the product offers. The
+workflow library has always been read workflow-to-vendors on Workflow
+Shortlist; here it is read industry-to-workflow, split into what is specific
+to your sector and what every sector runs.
+
+Read the slice for its **shape**, not its ranking. The uptake data is a
+modelled estimate dated May 2026, and two later measurements (Menlo
+Ventures, Ramp) put the top two vendors the other way round. Both are named
+and linked at the top of the page rather than buried under the chart,
+because a caveat a reader meets after the figures has already failed.
+
+## Checking your work
+
+Four gates, all of which must pass before a deploy:
+
+```
+npx tsc --noEmit     # types
+npm test             # 322 tests across 21 files
+npm run lint         # ESLint, Next preset — 0 errors
+npm run build        # 84 pages
+```
+
+Do not run `npm run build` while `npm run dev` is running in the same
+folder — they share `.next` and will fight.
+
+`npm run lint` was wired to a linter that had never been installed until 5
+August 2026, so it prompted for an interactive install and hung. If you see
+a large warning count, check the ignore globs in `eslint.config.mjs` before
+believing it: the first honest run reported 8,065 problems, almost all from
+a stale agent worktree that carried its own built `.next`.
 
 ## The demo walkthrough
 
@@ -116,3 +176,6 @@ market read to "and here is who delivers it".
 - `AIE_REUSE_MAP.md`: every file re-used from the ranking-engine repository
   and where it came from.
 - `ASSUMPTIONS.md`: every assumption made during the build.
+- `docs/REVENUE_METHODOLOGY.md`: how undisclosed vendor revenue is
+  estimated, and the band it is honest to quote.
+- `docs/MODULE_GUIDE.md`: what each module does, one paragraph each.

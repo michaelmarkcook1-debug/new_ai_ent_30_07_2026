@@ -27,8 +27,11 @@ live endpoint, or by reading the rendered HTML.
 | Composite metric | Three Questions + Verdict dial, never a score without its input count |
 | Disclosure ladder | Five rungs, 7 of 9 filers with a stated figure or hard bound, zero invented numbers |
 | Movement catalogue | Postgres over PostgREST, paging past the 1,000-row ceiling |
-| Test suite | 271 tests, 16 files, green |
+| Test suite | 322 tests, 21 files, green |
 | Typecheck | Clean |
+| Lint | ESLint + Next preset, 0 errors (gate added 5 Aug 2026; it had never run before) |
+| Peer Insights | Industry→workflow reverse lookup on the 75-workflow library |
+| Admin view | `/admin`: catalogue contents, run history, priced cost per run |
 
 **The honest summary:** the product's data discipline is its strongest asset
 and is genuinely built. What is thin is coverage, freshness automation, and

@@ -14,7 +14,7 @@ import baseline from "./fixtures/model-fit-python-baseline.json";
 //
 // The reference is the specification in executable form, so "does the port
 // behave identically" is the only question worth asking of it. The baseline is
-// every one of the 258 roles assessed under four control configurations, plus
+// every one of the 294 roles assessed under four control configurations, plus
 // six synthetic profiles that reach shift and overflow combinations no real
 // role happens to hit. Regenerate with:
 //
@@ -208,7 +208,7 @@ describe("the port matches the reference implementation", () => {
         expect(engine.warnings).toEqual(cfg.warnings);
       });
 
-      it("assesses all 258 roles identically", () => {
+      it("assesses all 294 roles identically", () => {
         const answerFaults: string[] = [];
         const detailFaults: string[] = [];
         for (const [roleId, want] of Object.entries(cfg.rows)) {

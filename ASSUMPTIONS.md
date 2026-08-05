@@ -3,6 +3,13 @@
 Assumptions and decisions logged instead of stopping to ask (spec rule 8).
 Dates are absolute; the build day is 30 July 2026.
 
+Append-only. Numbers 24 to 31 each appear twice, from entries added on 3
+August without checking the last number in the file. They have deliberately
+**not** been renumbered: `lib/adoption/edgar.ts` cites `ASSUMPTIONS #20` in a
+code comment and one entry cites another by number, so renumbering would
+silently invalidate live references. Where a duplicate number is cited, the
+intended entry is the nearer one.
+
 1. **Repository location.** "Create the new-ai-ent-demo repository here"
    was read as: initialise git in the working directory
    `~/new ai ent 30_07_2026` (which was empty) with the package named
@@ -1313,3 +1320,73 @@ Dates are absolute; the build day is 30 July 2026.
       it shipped, which is the argument for writing the test at the same time
       as the fix rather than after it. Now 75 everywhere, asserted against
       `USE_CASES.length` in every file that quotes a count.
+38. **Full app test and audit, and four defects it found (5 August 2026).**
+    Michael asked for a full test and audit. The four static gates, a sweep of
+    every route and API on production, a console check and a security review
+    were run; the findings below were fixed and shipped rather than reported
+    and left.
+    - **The app understated itself.** `/start` and the ModelEngine footer said
+      "258 roles across 29 industries". The library holds 294 across 36 and
+      has since the researched roles were added. This was my own drift: I grew
+      the data and never touched the copy quoting it, because the counts were
+      literals. They are now derived (`LIBRARY_ROLE_COUNT`,
+      `LIBRARY_INDUSTRY_COUNT`) and `tests/library-counts.test.ts` fails if
+      anyone writes one down again. The models figure was already derived from
+      `MODELS.length`, which is exactly why it alone stayed correct — that is
+      the argument for deriving, in one line.
+    - **A dead API endpoint reported progress.** `/api/catalogue/usage`
+      answered 200 with zero observations and the note "First observations
+      recorded. Movement appears once a second reading exists", which reads as
+      a pipeline that has started and will fill. Nothing could ever land
+      there: usage is written as events to `aie.usage_event` and read through
+      `usage_summary`, never through `aie.observation`, so the query was valid
+      and the table empty by construction. **A query that is valid over an
+      empty table is the worst kind of wrong, because it answers
+      successfully.** Removed from the `Series` type so re-adding it is a
+      compile error, and no series now claims first observations over zero
+      rows.
+    - **The lint gate had never run.** `npm run lint` called `next lint` with
+      no ESLint installed, so it prompted for an interactive install and hung;
+      types and tests had been doing all the work it was credited with. The
+      first honest run reported 8,065 problems, of which almost all came from
+      a stale agent worktree under `.claude` carrying its own built `.next` —
+      the ignore globs were anchored to the top level. Scoped properly: 39
+      warnings, zero errors. Two rule decisions are deliberate.
+      `no-unescaped-entities` now forbids only `>` and `}`; the eight it
+      flagged were apostrophes in British English prose, and rewriting copy to
+      suit a linter is the wrong way round. The `exhaustive-deps` warning in
+      `history-chart.tsx` was a genuine find: `shown` was a fresh array each
+      render, so the `useMemo` listing it recomputed every time and memoized
+      nothing.
+    - **The build root was wrong.** A stray `package-lock.json` in the home
+      directory (13 June) made Next infer `/Users/michaelcook` as the
+      workspace root. The adoption snapshot still shipped, but by luck rather
+      than design — and a fixture that fails to ship reads as an empty data
+      state, not an error. Pinned with `outputFileTracingRoot` rather than by
+      touching anything in Michael's home directory.
+    - **Verification without credentials.** Local dev enforces basic auth from
+      `.env.local`, so the browser could not read the rendered copy and I will
+      not type a password into a field. Vitest cannot transform JSX here, so a
+      render test was not available either. The build's own static HTML was
+      the conclusive check: `294 roles across 36 industries against 330 priced
+      models`. Recorded because the instinct to reach for the credential is
+      the wrong one and there was a better answer available.
+39. **Documentation brought current (5 August 2026).** Michael asked to
+    proceed with all needed documentation. Two kinds of work, kept separate.
+    - **Staleness fixed against verified ground truth**, not from memory:
+      README (the 258/29 counts, the parity test's role count, the "24 of 28
+      pages" claim), ARCHITECTURE (nav restructure to three groups, 29 fixed
+      routes, the API table, 322 tests across 21 files, catalogue now three
+      series not four), MVP-SCOPE (test counts), AIE_REUSE_MAP (85 workflow
+      records → 75, the same regex error recorded at entry 37), and the parity
+      test's own comments, which said 258 while the fixture and the assertion
+      both used 294.
+    - **`docs/RUNBOOK.md` written**, because the gap was operational rather
+      than architectural: how to run the four gates, why a build must not run
+      beside a dev server and the worktree trick when it must, the deploy that
+      fails intermittently on upload and needs one retry, what each ingestion
+      costs at list prices ($0.0039 to refresh every series daily for a
+      month), and the two traps that have already cost a day each — the
+      PostgREST 1,000-row ceiling and the empty-table 200. Every command and
+      file reference in it was executed or resolved before it was written
+      down.

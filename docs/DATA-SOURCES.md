@@ -1,7 +1,7 @@
 # AI Enterprise — data sources
 
 **Working document.** Expect additions. Last verified against live endpoints:
-**4 August 2026**.
+**5 August 2026**.
 
 Every status in this file was probed, not assumed. Where something is broken it
 says so, because a source register that lists a dead upstream as healthy is
@@ -56,6 +56,7 @@ demonstrable.
 | `/company-view` | Your AI position | **Shell fixture** (`fixtures/sample/shell.json`) | — | **13** | Static sample |
 | `/shortlist` | Saved vendors | Cookie (`ag_shortlist`) | metrics lane | 0 | Per-browser |
 | `/interrogate` | Ask a question | Anthropic API, or scripted when unkeyed | — | 0 | Live per request |
+| `/admin` | What the catalogue holds and what it cost | `catalogue_observation`, `catalogue_run`, `usage_summary` RPC, `lib/admin/cost-model.ts` | LIVE, DERIVED | 0 | Live per load |
 
 **The four pages a pod must not demo as live.** `/company-view` is the Shell
 sample end to end and is the largest single block of sample data in the
