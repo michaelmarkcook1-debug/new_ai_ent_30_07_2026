@@ -41,6 +41,8 @@ import type {
   RequirementEntry,
   Role,
 } from "@/lib/model-fit";
+import { useShortlist } from "@/lib/shortlist";
+import { vendorName } from "@/lib/aie/vendor-directory";
 import { PriceCapabilityChart } from "./model-fit-chart";
 import { recordUsage } from "@/lib/catalogue/client";
 
@@ -768,6 +770,8 @@ export function ModelFit() {
                   {role.authority ? ` · ${role.authority} authority` : ""}
                 </span>
               </div>
+              <ShortlistOverlay survivors={detail?.live ?? []} pick={pick} />
+
               {/* The model is the answer, so it gets the size and the colour.
                   The reasoning sits under it at reading size. */}
               {(() => {
@@ -1799,4 +1803,121 @@ function headline(
       answer.blocked_by?.length ? `. Blocked by ${answer.blocked_by.join(", ")}` : ""
     }. That is a real answer about the market, not a failure to find one.`,
   };
+}
+
+
+// The shortlist, laid over the engine's answer.
+//
+// The engine picks on requirements and price and knows nothing about who a
+// reader has already decided to consider. A buyer who has shortlisted three
+// vendors on the Decision Desk wants to know whether the cheapest model that
+// meets the role comes from one of them, and if not, what the nearest one that
+// does would be.
+//
+// The overlay never changes the recommendation. Filtering the engine to a
+// shortlist would produce the cheapest model among vendors the reader happened
+// to pick, presented with the same authority as the cheapest model that meets
+// the role, and those are different claims. So the answer stands and this
+// says how it sits against the shortlist.
+function ShortlistOverlay({
+  survivors,
+  pick,
+}: {
+  survivors: RankedModel[];
+  pick: RankedModel | null;
+}) {
+  const { ids } = useShortlist();
+  const [on, setOn] = useState(false);
+
+  const names = useMemo(
+    () => new Set(ids.map((id) => vendorName(id).toLowerCase())),
+    [ids]
+  );
+  const isShortlisted = (m: RankedModel) =>
+    Boolean(m.vendor && names.has(m.vendor.toLowerCase()));
+
+  const matching = useMemo(
+    () => survivors.filter(isShortlisted),
+    [survivors, names]
+  );
+  const pickMatches = pick ? isShortlisted(pick) : false;
+  const nearest = matching[0] ?? null;
+
+  return (
+    <div className="mt-4 rounded-lg border-2 border-base-300 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span className="micro-label block">Overlay your shortlist</span>
+          <span className="text-sm text-muted">
+            {ids.length === 0
+              ? "Nothing shortlisted yet"
+              : `${ids.length} vendor${ids.length === 1 ? "" : "s"} shortlisted`}
+          </span>
+        </div>
+        <button
+          type="button"
+          role="switch"
+          aria-checked={on}
+          aria-label="Overlay your shortlisted vendors"
+          disabled={ids.length === 0}
+          onClick={() => setOn((v) => !v)}
+          className={`relative h-7 w-12 shrink-0 rounded-full transition ${
+            ids.length === 0
+              ? "cursor-not-allowed bg-base-300/60"
+              : on
+                ? "bg-[var(--ag-insight)]"
+                : "bg-base-300"
+          }`}
+        >
+          <span
+            className={`absolute top-1 h-5 w-5 rounded-full bg-white shadow transition-all ${
+              on ? "left-6" : "left-1"
+            }`}
+          />
+        </button>
+      </div>
+
+      {ids.length === 0 ? (
+        <p className="measure mt-2 text-sm text-muted">
+          Shortlist vendors on the Decision Desk or any vendor page and this
+          will show whether the recommendation below comes from one of them.
+        </p>
+      ) : on ? (
+        <div className="mt-3 border-t border-base-300 pt-3">
+          {pickMatches ? (
+            <p className="measure text-sm">
+              <span className="font-semibold text-good">
+                The recommendation is on your shortlist.
+              </span>{" "}
+              {pick?.vendor} is one of the {ids.length} vendors you are
+              considering, so the cheapest model that meets this role and your
+              shortlist are the same answer.
+            </p>
+          ) : matching.length === 0 ? (
+            <p className="measure text-sm">
+              <span className="font-semibold text-warn">
+                No shortlisted vendor has a model that meets this role.
+              </span>{" "}
+              Every model from the {ids.length} vendors you shortlisted was
+              eliminated by a requirement above. That is a finding about the
+              shortlist rather than about the engine, and it is worth taking
+              back to whoever set it.
+            </p>
+          ) : (
+            <p className="measure text-sm">
+              <span className="font-semibold text-warn">
+                The recommendation is not on your shortlist.
+              </span>{" "}
+              {matching.length} model{matching.length === 1 ? "" : "s"} from your
+              shortlisted vendors also meet this role, the closest being{" "}
+              <span className="font-semibold">{nearest?.model_id}</span> from{" "}
+              {nearest?.vendor}. The recommendation above is unchanged: it is
+              still the cheapest model that meets the requirements, and
+              narrowing it to a shortlist would answer a different question.
+            </p>
+          )}
+        </div>
+      ) : null}
+    </div>
+  );
 }
