@@ -76,11 +76,17 @@ export function numbersIn(text: string): Set<string> {
  * tidy-up.
  */
 export function guard(output: string, allowed: string): boolean {
+  return invented(output, allowed).length === 0;
+}
+
+/**
+ * The figures the output contains that the input did not. Returned rather
+ * than just counted, so a rejection can be handed back to the model as a
+ * correction instead of silently costing the page its analyst voice.
+ */
+export function invented(output: string, allowed: string): string[] {
   const permitted = numbersIn(allowed);
-  for (const n of numbersIn(output)) {
-    if (!permitted.has(n)) return false;
-  }
-  return true;
+  return [...numbersIn(output)].filter((n) => !permitted.has(n));
 }
 
 // ------------------------------------------------------------------ client
@@ -154,27 +160,52 @@ export async function authored<T extends object>(
   const hit = cache.get(cacheKey);
   if (hit && Date.now() - hit.at < TTL_MS) return hit.value as T;
 
-  const raw = await callModel(
-    `DATA (the only figures you may use):\n${facts}\n\nTASK:\n${instruction}`,
-    maxTokens
-  );
-  if (!raw) return null;
+  let lastInvented: string[] = [];
 
-  const parsed = parseJson<T>(raw);
-  if (!parsed) return null;
+  // The permitted figures, listed rather than left to be inferred from prose.
+  // Measured in production: Opus reaches for a plausible number when the
+  // constraint is stated only as a rule, and stops when the whitelist is in
+  // front of it.
+  const allowList = [...numbersIn(facts)].sort((a, b) => Number(a) - Number(b));
+  const base = `DATA (the only source of figures):
+${facts}
 
-  // The check that makes this safe to ship. Every string the model produced is
-  // tested against the figures it was given.
-  const emitted = JSON.stringify(parsed);
-  if (!guard(emitted, facts)) {
-    // Silent by design at render time, but never silent in the log: a model
-    // inventing figures is the one failure that must be visible to us.
-    console.warn(
-      `[analyst-llm] discarded ${kind}: output contained a figure absent from the data`
+THE ONLY NUMBERS YOU MAY WRITE: ${allowList.join(", ") || "none: write no figures at all"}
+
+Any other number, including a rounded or approximated one, causes your answer
+to be discarded in full. If a sentence needs a figure that is not on that list,
+write the sentence without the figure. A sentence that makes its point
+qualitatively is worth far more than one that is thrown away.
+
+TASK:
+${instruction}`;
+
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const raw = await callModel(
+      attempt === 0 ? base : `${base}\n\nCORRECTION: your previous answer used ${lastInvented.join(", ")}, which ${lastInvented.length === 1 ? "is" : "are"} not in the data. Rewrite it without ${lastInvented.length === 1 ? "that figure" : "those figures"}.`,
+      maxTokens
     );
-    return null;
+    if (!raw) return null;
+
+    const parsed = parseJson<T>(raw);
+    if (!parsed) return null;
+
+    // The check that makes this safe to ship. Every string the model produced
+    // is tested against the figures it was given.
+    const emitted = JSON.stringify(parsed);
+    const bad = invented(emitted, facts);
+    if (bad.length === 0) {
+      cache.set(cacheKey, { value: parsed, at: Date.now() });
+      return parsed;
+    }
+
+    lastInvented = bad;
+    // Never silent in the log: a model inventing figures is the one failure
+    // that must stay visible to us even though the reader never sees it.
+    console.warn(
+      `[analyst-llm] ${attempt === 0 ? "retrying" : "discarded"} ${kind}: invented ${bad.join(", ")}`
+    );
   }
 
-  cache.set(cacheKey, { value: parsed, at: Date.now() });
-  return parsed;
+  return null;
 }

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { guard, numbersIn } from "@/lib/analyst/llm";
+import { guard, invented, numbersIn } from "@/lib/analyst/llm";
 
 // The guard is the reason a model may write this product's prose at all.
 // A prompt asking a model not to fabricate is a request; this is a check.
@@ -62,5 +62,24 @@ describe("guard", () => {
 
   it("allows small counts through even when absent from the data", () => {
     expect(guard("There are 3 things to do.", facts)).toBe(true);
+  });
+});
+
+describe("invented", () => {
+  const facts = "capability 58.7, 47 vendors, 14.8%";
+
+  // Returned rather than merely counted, so a rejection can be handed back to
+  // the model as a correction instead of costing the page its analyst voice.
+  it("names the figures that were not in the data", () => {
+    expect(invented("58.7 rose to 61.2 across 47", facts)).toEqual(["61.2"]);
+  });
+
+  it("returns every offender, not just the first", () => {
+    expect(invented("61.2 then 99.9", facts).sort()).toEqual(["61.2", "99.9"]);
+  });
+
+  it("is empty when the output is clean, which is what guard reads", () => {
+    expect(invented("58.7 across 47 vendors", facts)).toEqual([]);
+    expect(guard("58.7 across 47 vendors", facts)).toBe(true);
   });
 });
