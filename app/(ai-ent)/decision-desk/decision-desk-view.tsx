@@ -3,10 +3,15 @@
 import { Suspense, useState } from "react";
 import { InterrogateView } from "./interrogate-view";
 import { AssessDecideView } from "./assess-decide-view";
-import { SourcingView } from "./sourcing-view";
 import type { ShellFixture } from "@/lib/shell-fixture";
 
-type Tool = "finding" | "assess" | "sourcing";
+// A third step, the sourcing shortlist, briefly sat here (6 August 2026) and
+// moved to Trust Rank the same day with the rest of the Security Desk
+// material. It ranks vendors on their published contract terms, which is the
+// Trust Rank question; these two steps are about the reader's own situation
+// and their own weights.
+
+type Tool = "finding" | "assess";
 
 // The Decision Desk holds the two converging tools that used to be separate
 // tabs: Interrogate (a situation in, a source-cited finding out) and Assess
@@ -50,7 +55,7 @@ export function DecisionDeskView({
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
         {pill(
           "finding",
           "1 · The cited finding",
@@ -61,11 +66,6 @@ export function DecisionDeskView({
           "2 · The weighted score",
           "Set the weights to your priorities and read the score with its full derivation. The scores never move, only your weights do."
         )}
-        {pill(
-          "sourcing",
-          "3 · The sourcing shortlist",
-          "Set hard requirements, get the vendors you may buy from ranked on their own contract terms, and the reason every other one was dropped."
-        )}
       </div>
 
       <div className={tool === "finding" ? "" : "hidden"}>
@@ -75,9 +75,6 @@ export function DecisionDeskView({
       </div>
       <div className={tool === "assess" ? "" : "hidden"}>
         <AssessDecideView assessment={assessment} />
-      </div>
-      <div className={tool === "sourcing" ? "" : "hidden"}>
-        <SourcingView />
       </div>
     </div>
   );

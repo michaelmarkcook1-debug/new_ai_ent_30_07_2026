@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import {
@@ -37,9 +38,10 @@ import { useDeskProfile } from "@/lib/desk/profile";
 export function IndustryEntry({
   onPick,
 }: {
-  /** Called with the chosen workflow's category and id, which drives the
-   *  picker below rather than duplicating its rendering. */
-  onPick: (category: string, workflowId: string) => void;
+  /** Optional. On Workflow Shortlist this drove the picker below it; on Trust
+   *  Rank there is no picker to drive, so the workflows read as the taxonomy
+   *  they are and clicking one links out to the tool that acts on it. */
+  onPick?: (category: string, workflowId: string) => void;
 }) {
   const { profile, ready, save } = useDeskProfile();
   const set = useMemo(
@@ -105,15 +107,8 @@ export function IndustryEntry({
             </p>
           ) : (
             <div className="mt-2.5 flex flex-wrap gap-1.5">
-              {set!.specific.map((w) => (
-                <button
-                  key={w.id}
-                  type="button"
-                  onClick={() => onPick(w.category, w.id)}
-                  title={w.description || w.label}
-                  className="rounded border border-base-300 bg-base-200/40 px-2 py-1 text-[12px] transition hover:border-primary/50"
-                >
-                  {w.label}
+              {set!.specific.map((w) => {
+                const risk = (
                   <span
                     className={`ml-1.5 font-mono text-[9px] uppercase tracking-wider ${
                       w.riskTier === "critical" || w.riskTier === "high"
@@ -123,8 +118,32 @@ export function IndustryEntry({
                   >
                     {w.riskTier}
                   </span>
-                </button>
-              ))}
+                );
+                const cls =
+                  "rounded border border-base-300 bg-base-200/40 px-2 py-1 text-[12px] transition hover:border-primary/50";
+                return onPick ? (
+                  <button
+                    key={w.id}
+                    type="button"
+                    onClick={() => onPick(w.category, w.id)}
+                    title={w.description || w.label}
+                    className={cls}
+                  >
+                    {w.label}
+                    {risk}
+                  </button>
+                ) : (
+                  <Link
+                    key={w.id}
+                    href="/workflow-shortlist"
+                    title={w.description || w.label}
+                    className={cls}
+                  >
+                    {w.label}
+                    {risk}
+                  </Link>
+                );
+              })}
             </div>
           )}
 

@@ -51,6 +51,32 @@ interface Payload {
 const shortDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-GB", { month: "short", year: "numeric" });
 
+// The catalogue's grain is one row per SUBJECT AND METRIC, stated in
+// app/api/catalogue/[series]/route.ts:103. This panel keyed on the subject
+// alone, which broke four things at once: React saw duplicate keys, opening
+// one row opened every other row for the same vendor, three different figures
+// all rendered as the bare word "Anthropic", and the bars were scaled against
+// a single maximum across every metric, so a count of 36 filings sat on the
+// same axis as a valuation of 965,000 and rendered as an invisible sliver.
+//
+// The identity is the pair. Everything below follows from saying so once.
+const rowId = (m: { subject_id: string; metric: string }) =>
+  `${m.subject_id}::${m.metric}`;
+
+// Acronyms the humaniser must not sentence-case into nonsense.
+const ACRONYM: Record<string, string> = { arr: "ARR", "10k": "10-K" };
+
+/** A metric token as a reader's phrase. The unit lives in `unit` and is shown
+ *  separately, so the trailing unit suffix is dropped rather than repeated. */
+function metricLabel(metric: string): string {
+  const words = metric
+    .replace(/_usd_m$/, "")
+    .split("_")
+    .map((w) => ACRONYM[w] ?? w);
+  const phrase = words.join(" ");
+  return phrase.charAt(0).toUpperCase() + phrase.slice(1);
+}
+
 export function MovementPanel() {
   const [data, setData] = useState<Payload | null>(null);
   const [state, setState] = useState<"loading" | "ok" | "failed">("loading");
@@ -78,14 +104,20 @@ export function MovementPanel() {
   }, []);
 
   const rows = data?.movements ?? [];
-  const maxVal = Math.max(...rows.map((r) => r.latest), 1);
+  // Scale each bar against the largest value FOR ITS OWN METRIC. A single
+  // maximum across every metric put dollars and document counts on one axis,
+  // which made every non-financial row read as zero.
+  const maxByMetric = new Map<string, number>();
+  for (const r of rows) {
+    maxByMetric.set(r.metric, Math.max(maxByMetric.get(r.metric) ?? 1, r.latest));
+  }
 
   return (
     <section className="rounded-lg border border-base-300 bg-base-100 p-4">
       <div className="flex flex-wrap items-start justify-between gap-2">
         <MicroLabel
-          label="What moved: disclosure year on year"
-          tooltip="Two consecutive twelve-month windows of SEC 10-K filings, held as separate dated observations in the catalogue. The change is the difference between them, not a figure anyone entered."
+          label="What moved, by vendor and measure"
+          tooltip="Each row is one vendor and one measure: valuations, revenue run rates and 10-K disclosure counts are held as separate dated observations in the catalogue. A change is the difference between two recorded observations, not a figure anyone entered. Bars are scaled within a measure, never across them."
         />
         <LaneBadge lane={state === "ok" ? "live" : "aie"} />
       </div>
@@ -104,24 +136,40 @@ export function MovementPanel() {
           <>
             <ul className="space-y-1.5">
               {rows.map((r) => {
-                const isOpen = open === r.subject_id;
+                const id = rowId(r);
+                const isOpen = open === id;
                 const up = (r.change ?? 0) > 0;
                 const flat = r.change === 0;
+                const max = maxByMetric.get(r.metric) ?? 1;
                 return (
-                  <li key={r.subject_id} className="border-b border-base-300/60 pb-1.5">
+                  <li key={id} className="border-b border-base-300/60 pb-1.5">
                     <button
                       type="button"
-                      onClick={() => setOpen(isOpen ? null : r.subject_id)}
+                      onClick={() => setOpen(isOpen ? null : id)}
                       className="flex w-full items-center gap-2 text-left"
                       aria-expanded={isOpen}
                     >
-                      <span className="w-36 shrink-0 text-[12.5px] font-semibold">
-                        {r.subject_label}
+                      {/* Vendor and metric together. A vendor appears once per
+                          metric it has an observation for, so the name alone
+                          is not an identity a reader can act on. */}
+                      <span className="w-36 shrink-0">
+                        <span className="block truncate text-[12.5px] font-semibold">
+                          {r.subject_label}
+                        </span>
+                        <span
+                          className="block truncate font-mono text-[9.5px] uppercase tracking-wider text-muted"
+                          title={`${metricLabel(r.metric)}${r.unit ? ` (${r.unit})` : ""}`}
+                        >
+                          {metricLabel(r.metric)}
+                        </span>
                       </span>
-                      <span className="h-3 flex-1 overflow-hidden rounded-full bg-base-200">
+                      <span
+                        className="h-3 flex-1 overflow-hidden rounded-full bg-base-200"
+                        title={`Scaled against the largest ${metricLabel(r.metric).toLowerCase()} in this list, not across metrics.`}
+                      >
                         <span
                           className="block h-full rounded-full bg-primary/70"
-                          style={{ width: `${(r.latest / maxVal) * 100}%` }}
+                          style={{ width: `${(r.latest / max) * 100}%` }}
                         />
                       </span>
                       <span className="w-16 shrink-0 text-right font-mono text-[11px]">

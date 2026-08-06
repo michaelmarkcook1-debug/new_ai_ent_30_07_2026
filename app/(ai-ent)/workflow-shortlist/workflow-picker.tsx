@@ -10,7 +10,6 @@ import { LaneBadge, SeverityBadge, type Severity } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
 import { WorkflowShortlistPanel } from "./shortlist-panel";
-import { IndustryEntry } from "./industry-entry";
 import type { WorkflowShortlist } from "@/lib/workflow-vendors";
 
 function pretty(token: string): string {
@@ -42,17 +41,9 @@ export function WorkflowPicker({
 
   return (
     <div className="space-y-4">
-      {/* Step 0: the industry way in. Added 6 August 2026, because the only
-          way into this page was by workflow area, and a reader who knows they
-          run a bank rather than that they want "Document Processing" had
-          nowhere to start. Picking here sets both controls below, so there is
-          one flow rather than two. */}
-      <IndustryEntry
-        onPick={(cat, id) => {
-          setCategory(cat);
-          setWorkflowId(id);
-        }}
-      />
+      {/* An industry way in briefly sat here (6 August 2026) and moved to
+          Trust Rank the same day, with the rest of the Security Desk material.
+          It reads the desk profile, which is a Trust Rank concept now. */}
 
       {/* Step 1: the area chips */}
       <section className="rounded-lg border border-base-300 bg-base-100 p-4">
