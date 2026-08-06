@@ -95,12 +95,15 @@ export function AnalystInsight({
       {insight.insufficient ? (
         // The data will not carry a conclusion, so none is offered. This is a
         // first-class state rather than a softened version of a claim.
-        <p className="measure mt-3 text-base leading-relaxed text-muted">
-          <span className="font-semibold text-base-content">
-            Current evidence is insufficient to draw a reliable conclusion.
-          </span>{" "}
-          {insight.insufficient}
-        </p>
+        <>
+          <p className="measure mt-3 text-base leading-relaxed text-muted">
+            <span className="font-semibold text-base-content">
+              Current evidence is insufficient to draw a reliable conclusion.
+            </span>{" "}
+            {insight.insufficient}
+          </p>
+          <AskYourAnalyst exhausted />
+        </>
       ) : (
         <>
           <h2 className="mt-3 max-w-3xl text-balance text-lg font-bold leading-snug sm:text-xl">
@@ -210,6 +213,12 @@ export function AnalystInsight({
               </div>
             </div>
           </div>
+
+          {/* A conclusion was drawn, and its basis is genuinely limited. The
+              limit is named by the builder rather than guessed here, and the
+              offer is made at the point the reader meets the ceiling rather
+              than buried in the derivation drawer below. */}
+          {insight.thin ? <AskYourAnalyst reason={insight.thin} /> : null}
         </>
       )}
 
@@ -233,10 +242,13 @@ export function AnalystInsight({
               : " No update date is published for these sources."}
           </p>
           <p>
-            This reading is assembled from figures rather than written by a
-            language model. Every sentence above is constructed from a value
-            held on this page, which is why it cannot drift from the data
-            underneath it, and why it says nothing where the data runs out.
+            Every figure above is computed here, and the prose is written over
+            those figures by the analyst model where the badge says analyst
+            written. The model may choose the words and the emphasis; it may
+            not introduce a number or a vendor, and any answer that does is
+            discarded and rewritten rather than shown. That is why the reading
+            cannot drift from the data underneath it, and why it says nothing
+            where the data runs out.
           </p>
           <p className="measure text-muted">
             It interprets the page&apos;s own datasets and weights them first.
@@ -246,5 +258,69 @@ export function AnalystInsight({
         </DerivationDrawer>
       </div>
     </section>
+  );
+}
+
+/**
+ * The offer made at the point the dataset stops.
+ *
+ * Two states, because they are different admissions. `exhausted` is "this page
+ * cannot draw a conclusion at all", and the reason is already printed above it,
+ * so it is not repeated. The default is "here is the conclusion, and here is
+ * precisely what limits it", where naming the limit is the whole value: a
+ * reader who knows the reading rests on unconfirmed links asks a different
+ * question from one who does not.
+ *
+ * Deliberately not a generic "contact us" that appears on every panel. It
+ * renders only where a builder has declared its own ceiling, so it stays a
+ * signal rather than furniture. No contact route is invented here: the product
+ * holds no analyst address or booking link, and inventing one would be the same
+ * class of error as inventing a figure.
+ */
+function AskYourAnalyst({
+  reason,
+  exhausted = false,
+}: {
+  reason?: string;
+  exhausted?: boolean;
+}) {
+  return (
+    <div className="finding mt-4 rounded-lg p-4">
+      <div className="flex flex-wrap items-center gap-2">
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-insight"
+          aria-hidden
+        >
+          <path d="M21 11.5a8.4 8.4 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5 8.4 8.4 0 0 1 8.5 8.5Z" />
+        </svg>
+        <span className="font-mono text-sm uppercase tracking-wider text-insight">
+          Ask your AG Analyst
+        </span>
+      </div>
+      <p className="measure mt-1.5 text-sm leading-snug">
+        {exhausted ? (
+          <>
+            This page will not close the question on its own, and saying so is
+            the honest answer rather than a softened one. Your AG Analyst can go
+            and ask what no dataset here can settle.
+          </>
+        ) : (
+          <>
+            The reading above stands, but it has a ceiling:{" "}
+            <span className="font-semibold text-base-content">{reason}</span>.
+            Your AG Analyst can take it past that, on your shortlist and your
+            timetable.
+          </>
+        )}
+      </p>
+    </div>
   );
 }

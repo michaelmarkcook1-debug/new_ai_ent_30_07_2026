@@ -150,6 +150,21 @@ export interface AnalystInsightData {
    * the wording of a claim it should not be making.
    */
   insufficient: string | null;
+  /**
+   * Set when a conclusion IS drawn but its basis is genuinely limited, naming
+   * the specific limit in one clause: unconfirmed links, a single capture with
+   * no trend, a benchmark that covers a fraction of the catalogue.
+   *
+   * Declared by the builder rather than inferred by the component, because
+   * only the builder knows what its own floor is. `evidence.count` means a
+   * different thing on every page (vendors, edges, workflows, models), so a
+   * single count threshold in the UI would be an arbitrary rule dressed as a
+   * measurement.
+   *
+   * Where this is set the panel offers the reader their AG Analyst, which is
+   * the honest answer to a question the dataset cannot close on its own.
+   */
+  thin?: string | null;
 }
 
 const round1 = (n: number) => Math.round(n * 10) / 10;
@@ -340,6 +355,9 @@ export function marketWatchInsight(
       lane: m.lane,
     },
     insufficient: null,
+    // The source is an estimate by its own account: lib/aie market share is
+    // modelled from ingested signals, not measured revenue.
+    thin: "category share here is a modelled estimate rather than a measured figure",
   };
 }
 
@@ -410,6 +428,13 @@ export function financialInsight(
       lane: "aie",
     },
     insufficient: null,
+    // Most of the market files no figure at all, so the strongest thing on
+    // this page is an absence. An absence is a finding, and it is also the
+    // point at which a reader needs someone who can go and ask.
+    thin:
+      undisclosed > disclosure.disclosing
+        ? `${undisclosed} of ${disclosure.total} tracked vendors put no AI revenue figure in any filing`
+        : null,
   };
 }
 
@@ -467,6 +492,9 @@ export function competitiveInsight(
       lane: m.lane,
     },
     insufficient: null,
+    // Every score is capped by the weakest evidence grade behind it, which
+    // the summary already states as the honest ceiling on a vendor mean.
+    thin: "each capability score is capped by its weakest evidence grade, and that grade differs by vendor",
   };
 }
 
@@ -560,6 +588,13 @@ export function reputationInsight(
       lane: m.lane,
     },
     insufficient: null,
+    // One capture is a position, not a direction, and reputation is the
+    // slowest measure here to move. A reader deciding on it needs the
+    // trajectory, which no amount of reading this page will supply.
+    thin:
+      realSnapshots < 2
+        ? "only one real capture is held, so this is a point reading with no trend behind it"
+        : null,
   };
 }
 
@@ -640,6 +675,9 @@ export function vendorViewInsight(
       lane: m.lane,
     },
     insufficient: null,
+    // Coverage differs by vendor, because the composite renormalises over
+    // whichever of the three inputs a vendor actually discloses.
+    thin: "the composite scores only the inputs each vendor discloses, so coverage differs from vendor to vendor",
   };
 }
 
@@ -688,6 +726,9 @@ export function governanceInsight(
       lane: m.lane,
     },
     insufficient: null,
+    // Lagging by construction: an empty register is weaker evidence than a
+    // populated one, and the copy above says so.
+    thin: "risk registers lag by construction, so an absent finding is weaker evidence than a recorded one",
   };
 }
 
@@ -772,6 +813,14 @@ export function supplyMapInsight(
       lane: "aie",
     },
     insufficient: null,
+    // Under half the links confirmed by the parties themselves. The shape is
+    // worth acting on; a specific vendor's delivery options are not settled by
+    // it, and that is exactly the question an analyst can close and a seed
+    // record cannot.
+    thin:
+      verifiedPct < 50
+        ? "under half of these delivery links are confirmed by the parties themselves"
+        : null,
   };
 }
 
@@ -818,6 +867,9 @@ export function workflowInsight(
       lane: "aie",
     },
     insufficient: null,
+    // Types, not deployments. Which firms actually run a workflow is not in
+    // the catalogue and cannot be derived from it.
+    thin: "this catalogue holds workflow types rather than observed deployments",
   };
 }
 
@@ -937,6 +989,13 @@ export function newsInsight(
       lane: "aie-live",
     },
     insufficient: null,
+    // A quiet window for this reader's list is a real absence rather than a
+    // filtering failure, and it is also the moment the feed stops being able
+    // to help them.
+    thin:
+      watched.size > 0 && mine.length === 0
+        ? "nothing in the current window names a vendor on your list"
+        : null,
   };
 }
 
@@ -982,6 +1041,9 @@ export function pricePerformanceInsight(
       lane: "derived",
     },
     insufficient: null,
+    // Input tokens only. A real workload's blend of input and output moves
+    // the answer, and the catalogue holds no output prices to compute it.
+    thin: "this prices input tokens only, and the blend a real workload runs at is not in the catalogue",
   };
 }
 
@@ -1055,6 +1117,9 @@ export function positionInsight(
       lane: m.lane,
     },
     insufficient: null,
+    // The composite renormalises over whichever inputs a vendor discloses,
+    // so a spread is partly a statement about coverage.
+    thin: "the composite scores only the inputs each vendor discloses, so this spread reflects coverage as well as position",
   };
 }
 
@@ -1121,5 +1186,9 @@ export function peerInsight(
       lane: "aie",
     },
     insufficient: null,
+    // Workflow types, not observed deployments. Which firms in a sector
+    // actually run a workflow is exactly the question this library cannot
+    // answer and an analyst can.
+    thin: "these are workflow types rather than observed deployments, so nothing here says which firms in your sector actually run them",
   };
 }

@@ -119,6 +119,56 @@ describe("an empty map says so rather than inventing a channel", () => {
   });
 });
 
+describe("thin analysis offers the reader their AG Analyst", () => {
+  // The panel makes the offer wherever `thin` is set. The point of declaring it
+  // on the builder rather than inferring it in the component is that only the
+  // builder knows its own floor: evidence.count means vendors on one page,
+  // edges on another, and a single threshold in the UI would be an arbitrary
+  // rule wearing a measurement's clothes.
+
+  const build = (verified: number, edges: number) =>
+    supplyMapInsight(
+      {
+        edges,
+        verified,
+        seed: edges - verified,
+        nodes: 22,
+        label: "alliance",
+        breadth: BREADTH,
+        busiest: { partner: "Partner X", vendors: 9 },
+      },
+      NEWS,
+      null
+    );
+
+  it("declares its ceiling when most links are unconfirmed", () => {
+    const thin = build(23, 51).thin;
+    expect(thin).toBeTruthy();
+    expect(thin).toContain("confirmed");
+  });
+
+  it("declares no ceiling when most links are confirmed", () => {
+    expect(build(40, 51).thin).toBeNull();
+  });
+
+  it("names the limit rather than gesturing at it", () => {
+    // "Ask an analyst" with no reason is furniture. A reader who knows the
+    // reading rests on unconfirmed links asks a different question from one
+    // who does not.
+    const thin = build(23, 51).thin!;
+    expect(thin.length).toBeGreaterThan(20);
+    expect(thin).not.toMatch(/^(insufficient|limited|thin)\.?$/i);
+  });
+
+  it("keeps the ceiling separate from the conclusion", () => {
+    // The reading still stands. `thin` qualifies it; it does not replace it.
+    const i = build(23, 51);
+    expect(i.insufficient).toBeNull();
+    expect(i.headline.length).toBeGreaterThan(0);
+    expect(i.summary.length).toBeGreaterThan(0);
+  });
+});
+
 describe("no em-dashes reach a reader", () => {
   // The standing rule, checked where the prose is actually generated rather
   // than only in the documentation.
