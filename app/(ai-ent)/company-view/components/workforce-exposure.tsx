@@ -153,6 +153,32 @@ export function WorkforceExposure({
             <p className="measure mt-2 text-sm text-muted">{workforce.absence}</p>
           ) : null}
 
+          {/* Third parties' counts, kept visibly apart from anything the
+              company said. Searching a private company's headcount returns
+              several vendors with several different numbers and no disclosure
+              behind any of them, and promoting one of those into the block
+              above would manufacture a disclosure out of real sources. */}
+          {workforce.estimates.length > 0 ? (
+            <div className="mt-3 rounded-lg border border-dashed border-base-300 p-3">
+              <MicroLabel
+                label="Third-party estimates, not disclosure"
+                tooltip="Counts other organisations arrived at. Shown with who published each, and never merged into a single figure."
+              />
+              <ul className="mt-1.5 space-y-1">
+                {workforce.estimates.map((e, i) => (
+                  <li key={`${e.publisher}-${i}`} className="text-sm">
+                    <span className="font-mono font-bold">{e.value}</span>{" "}
+                    <span className="text-muted">
+                      per {e.publisher}
+                      {e.asOf ? `, ${e.asOf}` : ""}
+                    </span>{" "}
+                    <Cite hit={workforce.sources[e.sourceIndex]} n={e.sourceIndex} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
           {workforce.total || workforce.splits.length > 0 ? (
             <p className="measure mt-2 text-sm text-muted">
               Read against the reach figures below rather than multiplied by

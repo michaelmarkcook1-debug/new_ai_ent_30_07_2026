@@ -1502,3 +1502,29 @@ overview. Both ran a third search against the same company and printed the
 passages back, which is less than the overview now says from a derivation plus
 a cited disclosure. Both addresses redirect and carry the company with them, so
 an existing link lands on the reader's company rather than an empty box.
+
+## Headcount attribution, found by running the search (6 August 2026)
+
+The workforce read shipped assuming a targeted search would return company
+disclosures. Running the real query showed it does not, and the correction was
+substantial enough to record.
+
+For Tata Consultancy Services the search returned the annual-report figure of
+584,519 as of March 2026, and alongside it 1,461,354 and 1,384,926 from data
+vendors, wrong by a factor of about 2.4. For Anthropic, which publishes no
+headcount at all, it returned roughly 2,500, 3,000, 3,830 and 5,000 from four
+vendors and nothing from the company. The absence path would never have fired,
+and a vendor's estimate would have rendered under the heading "what this
+company publishes".
+
+**Corrected:** attribution now decides the field, not recency and not
+confidence. A figure the passage attributes to the company is a disclosure; a
+figure from a data platform is an estimate carrying its publisher's name, in
+its own lane, never promoted. Where estimates disagree the spread is reported
+as the finding rather than resolved into one number. This is the same
+separation `lib/finance/disclosure-ladder.ts` already makes for revenue, and it
+should have been applied here from the start.
+
+**Assumption that failed:** that a query weighted toward "annual report" and
+"investor relations" would filter out aggregators. It does not, so the read
+classifies rather than trusting the query.

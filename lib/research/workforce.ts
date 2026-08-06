@@ -34,11 +34,39 @@ export interface WorkforceSplit {
   sourceIndex: number;
 }
 
+/** A headcount somebody other than the company arrived at. */
+export interface WorkforceEstimate {
+  value: string;
+  /** Who published it, so a reader can weigh it. */
+  publisher: string;
+  asOf: string | null;
+  sourceIndex: number;
+}
+
 export interface WorkforceDisclosure {
-  /** Total headcount, as a source states it. */
+  /**
+   * Total headcount where the COMPANY states it: an annual report, a filing,
+   * its own newsroom. Never a third party's count of it.
+   */
   total: { value: string; asOf: string | null; sourceIndex: number } | null;
   /** Splits the company publishes, by segment, function or geography. */
   splits: WorkforceSplit[];
+  /**
+   * Third-party estimates, kept in their own lane and never promoted into
+   * `total`.
+   *
+   * This separation is the whole point of the module. Searching a private
+   * company's headcount returns four aggregators with four different numbers
+   * and no disclosure behind any of them: Anthropic publishes nothing and the
+   * open web will still offer 2,500, 3,000, 3,830 and 5,000. Rendering any of
+   * those under "what this company publishes" would be a fabricated
+   * disclosure assembled from real sources, which is the exact failure the
+   * disclosure ladder exists to prevent for revenue.
+   *
+   * The spread is also the finding. Four estimates a factor of two apart say
+   * the number is not known, which is more useful than any one of them.
+   */
+  estimates: WorkforceEstimate[];
   sources: SearchHit[];
   /** Why there is nothing, when there is nothing. */
   absence: string | null;
@@ -47,12 +75,19 @@ export interface WorkforceDisclosure {
 export interface Draft {
   total?: { value?: string; asOf?: string; source?: number } | null;
   splits?: { label?: string; value?: string; source?: number }[];
+  estimates?: {
+    value?: string;
+    publisher?: string;
+    asOf?: string;
+    source?: number;
+  }[];
   none?: string;
 }
 
 const NOTHING = (absence: string, sources: SearchHit[] = []): WorkforceDisclosure => ({
   total: null,
   splits: [],
+  estimates: [],
   sources,
   absence,
 });
@@ -60,8 +95,12 @@ const NOTHING = (absence: string, sources: SearchHit[] = []): WorkforceDisclosur
 /** The search half, kept separate so the read can overlap the main reading. */
 export async function searchWorkforce(name: string) {
   if (!searchAvailable()) return null;
+  // Weighted toward the company's own filings, because the open web answers
+  // this question mostly with data vendors. It does not get us primary sources
+  // on its own, which is why the read classifies every figure it finds by who
+  // published it rather than trusting the query to have filtered them out.
   return webSearch(
-    `${name} total number of employees headcount annual report workforce`,
+    `${name} number of employees annual report investor relations "as of"`,
     4
   );
 }
@@ -93,26 +132,34 @@ export async function readWorkforce(
   const draft = await authored<Draft>(
     `workforce:${name.toLowerCase()}`,
     groundingBlock(hits),
-    `Read these passages and report only what they state about ${name}'s workforce size.
+    `Read these passages and report what they say about ${name}'s workforce size.
+
+The single thing that matters here is WHO said a number. A company stating its
+own headcount and a data vendor estimating it are different kinds of fact and
+must never be mixed.
 
 Return JSON:
 {"total": {"value": string, "asOf": string, "source": number} | null,
  "splits": [{"label": string, "value": string, "source": number}],
+ "estimates": [{"value": string, "publisher": string, "asOf": string, "source": number}],
  "none": string}
 
-- total: the company's total headcount, exactly as a passage states it ("606,000", "approximately 350,000"). asOf is the date or period the passage attaches to it, or "not stated". Null if no passage states a total.
-- splits: up to 6 breakdowns a passage actually publishes, by business segment, function or geography. Label is the company's own wording for the group. Value is the figure as stated. Never derive a split by subtracting one figure from another, and never distribute a total across groups.
-- none: when no passage states a headcount at all, one sentence saying so. Empty string otherwise.
+- total: ONLY where the passage attributes the figure to the company itself: its annual report, a regulatory filing, its own newsroom, or an executive quoted directly. Value exactly as stated. Null when no passage carries a company-stated figure, which is the normal case for a private company.
+- splits: up to 6 breakdowns the COMPANY publishes, by segment, function or geography. Company-stated only, same rule.
+- estimates: up to 5 headcounts attributed to anyone else. A data platform, a research firm, a news outlet's own count, a recruiting profile. publisher is who arrived at the figure. These are never the company's disclosure, however confident the passage sounds.
+- none: one sentence when no passage carries any headcount at all. Empty string otherwise.
 
-Rules that matter more than completeness here:
+Rules, in order of importance:
 
-Quote, do not compute. A headcount you arrived at by adding, subtracting or scaling is not a disclosure and must not be returned. If a passage gives a percentage of the workforce rather than a count, report the percentage in the label and value as given.
+Attribution decides the field. Not recency, not confidence, not how round the number looks. A 2024 figure in an annual report is a company disclosure; a 2026 figure on a data platform is an estimate. If a passage does not say where its number came from, it is an estimate.
 
-Do not carry a figure across dates. A 2024 headcount is not this year's, and if that is all a passage offers, say so in asOf rather than presenting it as current.
+Quote, do not compute. A headcount you arrived at by adding, subtracting or scaling is not in these passages. Never derive a split by subtraction and never distribute a total across groups.
 
-If two passages state different totals, return the one whose date is most recent and state the date. Different dates are not a contradiction.
+Do not reconcile estimates. Where several sources give different numbers, return all of them with their publishers. The disagreement is the finding, and averaging it into one number destroys the only useful thing about it.
 
-Return null and a "none" sentence rather than reaching for a figure you know about this company from anywhere other than these passages.`,
+Carry the date. A figure from an earlier year keeps that year in asOf rather than being presented as current. Use "not stated" where a passage gives none.
+
+Return nothing rather than reaching for a figure you know about this company from outside these passages.`,
     900
   );
 
@@ -175,15 +222,65 @@ export function normaliseWorkforce(
       sourceIndex: s.source - 1,
     }));
 
+  const estimates: WorkforceEstimate[] = (draft.estimates ?? [])
+    .filter(
+      (e): e is { value: string; publisher: string; asOf?: string; source: number } =>
+        typeof e?.value === "string" &&
+        e.value.trim().length > 0 &&
+        typeof e?.publisher === "string" &&
+        e.publisher.trim().length > 0 &&
+        inRange(e.source)
+    )
+    .slice(0, 5)
+    .map((e) => ({
+      value: e.value.trim(),
+      publisher: e.publisher.trim(),
+      asOf:
+        typeof e.asOf === "string" &&
+        e.asOf.trim().length > 0 &&
+        e.asOf.trim().toLowerCase() !== "not stated"
+          ? e.asOf.trim()
+          : null,
+      sourceIndex: e.source - 1,
+    }));
+
   return {
     total,
     splits,
+    estimates,
     sources: hits,
-    absence:
-      total || splits.length > 0
-        ? null
-        : typeof draft.none === "string" && draft.none.trim().length > 0
-          ? draft.none.trim()
-          : `No retrieved source states a headcount for ${name}. Private companies rarely publish one, and this is the normal case rather than a gap in the search.`,
+    absence: absenceFor(name, total, splits.length, estimates, draft.none),
   };
+}
+
+/**
+ * What to say when the company itself has said nothing.
+ *
+ * Three different states, and collapsing them would lose the useful one. No
+ * figures at all is a thin search. Estimates with no disclosure behind them is
+ * a private company, which is normal and worth saying plainly. Estimates that
+ * disagree widely is the strongest reading available: the number is not known,
+ * and the spread proves it.
+ */
+function absenceFor(
+  name: string,
+  total: WorkforceDisclosure["total"],
+  splitCount: number,
+  estimates: WorkforceEstimate[],
+  none: string | undefined
+): string | null {
+  if (total || splitCount > 0) return null;
+  if (estimates.length > 0) {
+    const who = [...new Set(estimates.map((e) => e.publisher))];
+    return `${name} does not state a headcount in any retrieved source. The ${
+      estimates.length === 1 ? "figure" : `${estimates.length} figures`
+    } below ${estimates.length === 1 ? "is" : "are"} ${who.length === 1 ? "one third party's estimate" : `${who.length} third parties' estimates`}, shown as such rather than as a disclosure${
+      estimates.length > 1
+        ? ", and where they disagree the spread is the finding rather than a number to pick from"
+        : ""
+    }.`;
+  }
+  return typeof none === "string" && none.trim().length > 0
+    ? none.trim()
+    : `No retrieved source carries a headcount for ${name}. Private companies rarely publish one, and this is the normal case rather than a gap in the search.`;
 }

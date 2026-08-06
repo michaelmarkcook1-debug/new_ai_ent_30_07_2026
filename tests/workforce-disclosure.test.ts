@@ -38,7 +38,7 @@ describe("a stated total", () => {
       "Acme"
     );
     expect(w.total).toBeNull();
-    expect(w.absence).toContain("No retrieved source states a headcount");
+    expect(w.absence).toContain("No retrieved source carries a headcount");
   });
 
   it("treats an unstated date as absent rather than printing the words", () => {
@@ -81,6 +81,72 @@ describe("published splits", () => {
       source: 1,
     }));
     expect(normaliseWorkforce({ splits: many }, hits, "Acme").splits).toHaveLength(6);
+  });
+});
+
+describe("a third party's count is never a disclosure", () => {
+  // The defect this test exists for was found by running the real search.
+  // Anthropic publishes no headcount, and the open web still returns roughly
+  // 2,500, 3,000, 3,830 and 5,000 from four data vendors. Promoting any of
+  // those into the company's own block would manufacture a disclosure out of
+  // genuine sources, which is the failure the revenue disclosure ladder
+  // already exists to prevent.
+  it("keeps estimates out of the company-stated total", () => {
+    const w = normaliseWorkforce(
+      {
+        total: null,
+        estimates: [
+          { value: "3,830", publisher: "Revelio Labs", asOf: "March 2026", source: 1 },
+          { value: "~5,000", publisher: "Tracxn", asOf: "March 2026", source: 2 },
+        ],
+      },
+      hits,
+      "Anthropic"
+    );
+    expect(w.total).toBeNull();
+    expect(w.estimates).toHaveLength(2);
+    expect(w.estimates[0].publisher).toBe("Revelio Labs");
+  });
+
+  it("says the disagreement is the finding when they disagree", () => {
+    const w = normaliseWorkforce(
+      {
+        total: null,
+        estimates: [
+          { value: "3,830", publisher: "Revelio Labs", source: 1 },
+          { value: "~5,000", publisher: "Tracxn", source: 2 },
+        ],
+      },
+      hits,
+      "Anthropic"
+    );
+    expect(w.absence).toContain("does not state a headcount");
+    expect(w.absence).toContain("spread is the finding");
+  });
+
+  it("drops an estimate with no publisher, since who said it is the point", () => {
+    const w = normaliseWorkforce(
+      { total: null, estimates: [{ value: "5,000", publisher: "", source: 1 }] },
+      hits,
+      "Anthropic"
+    );
+    expect(w.estimates).toHaveLength(0);
+  });
+
+  it("still reports a company figure when one exists alongside estimates", () => {
+    const w = normaliseWorkforce(
+      {
+        total: { value: "584,519", asOf: "March 2026", source: 1 },
+        estimates: [{ value: "1,461,354", publisher: "an aggregator", source: 2 }],
+      },
+      hits,
+      "TCS"
+    );
+    // The real search returned a figure 2.4x the true one from an aggregator.
+    // The company's own number holds the total; the outlier stays labelled.
+    expect(w.total?.value).toBe("584,519");
+    expect(w.estimates[0].value).toBe("1,461,354");
+    expect(w.absence).toBeNull();
   });
 });
 
