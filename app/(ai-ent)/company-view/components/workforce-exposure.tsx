@@ -2,6 +2,7 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
 import { matchIndustryIn, type ExposurePayload } from "@/lib/exposure/payload";
+import type { WorkforceDisclosure } from "@/lib/research/workforce";
 
 // Which of a company's functions AI has already reached.
 //
@@ -42,10 +43,13 @@ export function WorkforceExposure({
   payload,
   industry,
   companyName,
+  workforce = null,
 }: {
   payload: ExposurePayload;
   industry: string | null;
   companyName: string;
+  /** What the company itself publishes about its headcount, where it does. */
+  workforce?: WorkforceDisclosure | null;
 }) {
   const matched = matchIndustryIn(industry, payload.industries);
   const pool = matched
@@ -105,6 +109,60 @@ export function WorkforceExposure({
         <Stat label="Frontier only" value={String(frontier)} note="Capability still binds" />
         <Stat label="Roles read" value={String(rows.length)} note={matched ?? "All sectors"} />
       </div>
+
+      {/* What the company itself publishes, in its own words and with the link.
+          Kept in its own block above the derivation and never combined with
+          it: headcount times exposure would read as a count of jobs and is
+          arithmetic on an assumption nobody has measured. */}
+      {workforce ? (
+        <div className="mt-4 rounded-lg border border-base-300 bg-base-200/40 p-4">
+          <div className="flex flex-wrap items-center gap-2">
+            <MicroLabel
+              label={`What ${companyName} publishes`}
+              tooltip="Quoted from the company's own disclosures. Never converted, summed or carried across dates."
+            />
+            <LaneBadge lane="live" />
+          </div>
+
+          {workforce.total ? (
+            <p className="mt-2 text-sm">
+              <span className="font-mono text-2xl font-bold">
+                {workforce.total.value}
+              </span>{" "}
+              <span className="text-muted">
+                total workforce
+                {workforce.total.asOf ? `, ${workforce.total.asOf}` : ""}
+              </span>{" "}
+              <Cite hit={workforce.sources[workforce.total.sourceIndex]} n={workforce.total.sourceIndex} />
+            </p>
+          ) : null}
+
+          {workforce.splits.length > 0 ? (
+            <ul className="mt-2 space-y-1">
+              {workforce.splits.map((s, i) => (
+                <li key={`${s.label}-${i}`} className="text-sm">
+                  <span className="font-semibold">{s.value}</span>{" "}
+                  <span className="text-muted">{s.label}</span>{" "}
+                  <Cite hit={workforce.sources[s.sourceIndex]} n={s.sourceIndex} />
+                </li>
+              ))}
+            </ul>
+          ) : null}
+
+          {workforce.absence ? (
+            <p className="measure mt-2 text-sm text-muted">{workforce.absence}</p>
+          ) : null}
+
+          {workforce.total || workforce.splits.length > 0 ? (
+            <p className="measure mt-2 text-sm text-muted">
+              Read against the reach figures below rather than multiplied by
+              them. A headcount times a reach percentage would read as a count
+              of exposed jobs, and it would assume this company&apos;s role mix
+              matches the sector archetype, which nobody has measured.
+            </p>
+          ) : null}
+        </div>
+      ) : null}
 
       <div className="mt-4 overflow-x-auto">
         <table className="w-full min-w-[42rem] text-sm">
@@ -205,6 +263,33 @@ export function WorkforceExposure({
         </DerivationDrawer>
       </div>
     </section>
+  );
+}
+
+/** The link behind a published figure. A figure a reader cannot open is an assertion. */
+function Cite({
+  hit,
+  n,
+}: {
+  hit: { url: string; title: string } | undefined;
+  n: number;
+}) {
+  if (!hit) return null;
+  let host = hit.url;
+  try {
+    host = new URL(hit.url).hostname.replace(/^www\./, "");
+  } catch {
+    // A malformed URL still gets shown, just not prettified.
+  }
+  return (
+    <a
+      href={hit.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="font-mono text-sm text-primary hover:underline"
+    >
+      [{n + 1}] {host}
+    </a>
   );
 }
 

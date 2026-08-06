@@ -1481,3 +1481,24 @@ all 294 roles at 68 per cent, discriminating nothing. Comparing the role's band
 to the Intelligence Index directly put every demanding role at 0 per cent,
 because a band (10 to 90) and an index (0 to about 61) are different scales.
 The second is now guarded by a test.
+
+## Published headcount, and folding two tabs (6 August 2026)
+
+**Assumed:** that a listed company's own headcount disclosure is worth
+retrieving and quoting, and that a private company's silence is a normal state
+rather than a gap. The workforce read runs as its own search and its own model
+call rather than being added to the company read, because twelve passages in
+one grounding block already produced truncated JSON once and adding a third
+topic would walk back into it. It is started before the main read and awaited
+after, so it costs no extra wall-clock.
+
+**Refused:** headcount multiplied by exposure. Both figures are real and the
+product of them would still be an invention, because it assumes an employer's
+role mix matches the sector archetype and nobody has measured that. The two sit
+side by side with a sentence saying why they are not combined.
+
+**Folded:** `/company-view/ai-exposure` and `/company-view/talent` into the
+overview. Both ran a third search against the same company and printed the
+passages back, which is less than the overview now says from a derivation plus
+a cited disclosure. Both addresses redirect and carry the company with them, so
+an existing link lands on the reader's company rather than an empty box.

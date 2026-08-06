@@ -136,6 +136,7 @@ export function ResearchRunner({
             payload={exposure}
             industry={status.result.profile.industry}
             companyName={status.result.profile.name}
+            workforce={status.result.workforce}
           />
         ) : null}
       </div>

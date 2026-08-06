@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation";
 
 const TABS = [
   { label: "Overview", href: "/company-view" },
-  { label: "AI Exposure", href: "/company-view/ai-exposure" },
-  { label: "Talent Intelligence", href: "/company-view/talent" },
+  // AI Exposure and Talent Intelligence folded into Overview on 6 August
+  // 2026: both re-searched the same company to print fewer conclusions than
+  // the overview now draws. Their addresses still redirect here.
   // Renamed from "Trust Rank": a vendor-facing tab of that name already
   // exists under Vendor Assessment, and the two answer different questions.
   // This one is what binds YOUR organisation, not how a vendor scores.

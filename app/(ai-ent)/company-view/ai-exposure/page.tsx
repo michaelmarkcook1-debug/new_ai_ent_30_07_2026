@@ -1,47 +1,23 @@
-import { PageHeader } from "@/lib/ui/page";
-import { CompanyEntry } from "../components/company-entry";
-import { ResearchedCompany } from "../components/researched-company";
-import { researchTopic } from "@/lib/research/company";
+import { redirect } from "next/navigation";
 
-export const metadata = { title: "AI Exposure | AI Enterprise" };
-
-// This page carried the Shell fixture's own figures for whoever was reading.
-// None of that was retrievable per company, so it reports what the open
-// sources say about the named company and leaves the rest empty rather than
-// shaped like data.
-export default async function Page({
+// Folded into Your AI Position on 6 August 2026.
+//
+// This tab ran a third search on the same company and printed the passages it
+// got back. What a reader wanted from it, which of their functions AI has
+// already reached, is now answered on the overview by a derivation over the
+// role library rather than by a second pile of links. Keeping a tab that
+// re-searched the same company to say less was costing a reader a click and a
+// minute to arrive somewhere thinner.
+//
+// The address still resolves, because a link a reader already has should not
+// break, and the company travels with it so the redirect lands on their
+// company rather than on an empty box.
+export default async function AiExposureRedirect({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
   const raw = (await searchParams).company;
-  const typed = (Array.isArray(raw) ? raw[0] : raw)?.trim() ?? "";
-  const research = typed.length > 1 ? await researchTopic(typed, "exposure") : null;
-
-  return (
-    <>
-      <PageHeader
-        title="AI Exposure"
-        subtitle="Where AI helps or threatens this company, from its own public sources."
-        lanes={["live"]}
-      />
-      <div className="space-y-4">
-        <section className="rounded-lg border border-base-300 bg-base-100 p-4">
-          <CompanyEntry />
-        </section>
-        {research ? (
-          <ResearchedCompany research={research} />
-        ) : (
-          <section className="rounded-lg border border-dashed border-base-300 bg-base-200/40 p-6">
-            <h2 className="text-base font-bold">Name a company to begin</h2>
-            <p className="measure mt-1.5 text-sm text-muted">
-              Public sources are retrieved when you ask, and every statement
-              carries the link behind it. Where the sources are silent, so is
-              this page.
-            </p>
-          </section>
-        )}
-      </div>
-    </>
-  );
+  const company = (Array.isArray(raw) ? raw[0] : raw)?.trim() ?? "";
+  redirect(company ? `/company-view?company=${encodeURIComponent(company)}` : "/company-view");
 }

@@ -1,4 +1,9 @@
 import { webSearch, groundingBlock, searchAvailable, type SearchHit } from "./search";
+import {
+  searchWorkforce,
+  readWorkforce,
+  type WorkforceDisclosure,
+} from "./workforce";
 import { authored, llmAvailable } from "@/lib/analyst/llm";
 
 // Research a company the product does not already track.
@@ -54,6 +59,12 @@ export interface CompanyResearch {
   absence: string | null;
   /** True when a model wrote the statements; false when nothing was written. */
   written: boolean;
+  /**
+   * What the company publishes about its own workforce size. Null until the
+   * read completes, and carrying its own absence when a company publishes
+   * nothing, which is the normal case outside the listed majors.
+   */
+  workforce: WorkforceDisclosure | null;
 }
 
 const empty = (query: string, absence: string): CompanyResearch => ({
@@ -65,6 +76,7 @@ const empty = (query: string, absence: string): CompanyResearch => ({
   recommendations: [],
   sources: [],
   absence,
+  workforce: null,
   written: false,
 });
 
@@ -153,19 +165,28 @@ export async function researchCompany(
     4
   );
   onStage("searching-ai");
-  const ai = await webSearch(
-    `${name} artificial intelligence strategy adoption deployment`,
-    4
-  );
+  // Fired together, because they are independent and the workforce read is
+  // what lets the exposure panel say how much work an employer actually has.
+  const [ai, work] = await Promise.all([
+    webSearch(`${name} artificial intelligence strategy adoption deployment`, 4),
+    searchWorkforce(name),
+  ]);
+
+  // Started now and awaited at the end, so it overlaps the main reading rather
+  // than adding its own minute to a run that already takes one.
+  const workforcePromise = readWorkforce(name, work?.hits ?? []);
 
   const sources = [...general.hits, ...ai.hits];
   if (sources.length === 0) {
-    return empty(
-      name,
-      general.unavailable ??
-        ai.unavailable ??
-        "Nothing was retrieved for this company, so no profile is shown rather than an assumed one."
-    );
+    return {
+      ...empty(
+        name,
+        general.unavailable ??
+          ai.unavailable ??
+          "Nothing was retrieved for this company, so no profile is shown rather than an assumed one."
+      ),
+      workforce: await workforcePromise,
+    };
   }
 
   if (!llmAvailable()) {
@@ -174,6 +195,7 @@ export async function researchCompany(
       sources,
       absence:
         "Sources were retrieved but no analyst model is configured to read them, so the links are shown without a written reading.",
+      workforce: await workforcePromise,
     };
   }
 
@@ -237,6 +259,7 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
         sources: attempt.hits,
         absence: null,
         written: true,
+        workforce: await workforcePromise,
       };
     }
     console.warn(
@@ -251,6 +274,9 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
     sources,
     absence:
       "The retrieved sources did not support a reading that passed our checks, on two attempts. The sources themselves are below and are worth reading directly.",
+    // The workforce read is independent, so a failed company reading does not
+    // discard a headcount that was retrieved and checked successfully.
+    workforce: await workforcePromise,
   };
 }
 
@@ -355,5 +381,9 @@ Before you say two sources disagree, check whether they are the same quantity ex
     sources: found.hits,
     absence: null,
     written: true,
+    // Topic research asks one narrow question and does not run the workforce
+    // pass. Null here means "not asked", which the panel reads differently
+    // from a disclosure that was asked for and not found.
+    workforce: null,
   };
 }
