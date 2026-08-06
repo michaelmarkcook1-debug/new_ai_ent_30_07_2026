@@ -30,10 +30,20 @@ export interface ProvenancedValue<T = number> extends ProvenanceEnvelope {
 // is computed by us from named inputs that can be re-fetched and checked. The
 // existing lanes would have forced it into a badge that lied in one direction
 // or the other.
+//
+// "cited" was added 5 August 2026 for the Privacy & IP Shield, and for the same
+// reason. A Shield mark is a sentence quoted out of a vendor's own published
+// terms, carrying the URL it was read from and the date a human read it. That
+// is not live, because legal terms have no feed to poll. It is not derived,
+// because nothing was computed: the vendor wrote the words. It is not the AIE
+// dataset, and calling real quoted terms "sample" would be a lie in the
+// direction that matters most. The badge a reader needs here is the one that
+// says: this is the vendor's own wording, and here is where to check it.
 export type DataLane =
   | "live"
   | "aie"
   | "aie-live"
+  | "cited"
   | "derived"
   | "sample"
   | "mock"
@@ -43,6 +53,7 @@ export const LANE_LABEL: Record<DataLane, string> = {
   live: "LIVE",
   aie: "AIE dataset",
   "aie-live": "AIE live",
+  cited: "CITED",
   derived: "DERIVED",
   sample: "SAMPLE",
   mock: "Cached sample",

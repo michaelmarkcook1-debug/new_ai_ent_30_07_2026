@@ -12,8 +12,8 @@ import { EmptyState } from "@/lib/ui/page";
 // figure here is a count of real filings, and every count can be opened: each
 // row carries named registrants with a link to the document on sec.gov.
 //
-// What it is NOT is market share, and the panel says so twice — once in the
-// heading, once in the caveat — because a bar chart of vendor names invites
+// What it is NOT is market share, and the panel says so twice (once in the
+// heading, once in the caveat) because a bar chart of vendor names invites
 // exactly that misreading, and this source cannot support it.
 
 interface SicBucket {

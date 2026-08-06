@@ -205,7 +205,7 @@ function Ring({
           textAnchor="middle"
           className="fill-current text-[26px] font-bold"
         >
-          {result.score === null ? "—" : result.score.toFixed(0)}
+          {result.score === null ? "n/a" : result.score.toFixed(0)}
         </text>
         {/* The denominator, inside the ring. Not a footnote. */}
         <text

@@ -39,7 +39,7 @@ const MEASURED_AGAINST = [
 //
 // The split also cleans up a genuine problem. AI Adoption opened with two
 // measured third-party sources and a warning that read "read these before the
-// slice below" — a warning that only worked while the slice sat directly
+// slice below": a warning that only worked while the slice sat directly
 // underneath. Moving the explorer to its own page would have orphaned it, so
 // the caveat travels here, where the figures it qualifies actually are.
 //
@@ -88,14 +88,14 @@ export default async function PeerInsightsPage() {
           />
           <p className="measure mt-2 text-[12.5px] leading-relaxed">
             Every selection below is a genuine live pull, and what it pulls is
-            a <b>modelled estimate dated May 2026</b> — the endpoint says so
+            a <b>modelled estimate dated May 2026</b>: the endpoint says so
             itself, and its provenance string is printed verbatim under the
             chart. This is not a stale copy a refresh would fix: the upstream
             route reads a static seed, and the evidence pipeline that would
             refresh it is not built.
           </p>
           <p className="measure mt-2 text-[12.5px] leading-relaxed">
-            <b>Read the slice for its shape</b> — which vendors appear in your
+            <b>Read the slice for its shape</b>, which vendors appear in your
             segment at all, and how concentrated it is. <b>Do not read it for
             the ranking.</b> Two independent measurements taken later put the
             top two the other way round:
@@ -111,7 +111,7 @@ export default async function PeerInsightsPage() {
                 >
                   {m.source}
                 </a>
-                {" — "}
+                {" · "}
                 {m.says}
               </li>
             ))}

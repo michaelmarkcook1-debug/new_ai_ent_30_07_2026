@@ -5,8 +5,8 @@
 // segments; five of the eight mapped to more than one segment, so they could
 // not filter upstream at all and silently showed an unfiltered slice under a
 // label that named an industry. That produced the label a reader could not
-// parse — "Commercial Enterprise (mapped to Retail / consumer / ecommerce and
-// Professional services / consulting)" — and quietly broke the live path for
+// parse , "Commercial Enterprise (mapped to Retail / consumer / ecommerce and
+// Professional services / consulting)", and quietly broke the live path for
 // most of the menu.
 //
 // The engine's nine segments are now offered directly, with display names
@@ -37,7 +37,7 @@ export const ADOPTION_SEGMENTS: AdoptionSegment[] = [
  *
  * There is no "Global" value upstream: passing region=Global is rejected
  * outright. Global is the absence of a region filter, so it is offered as the
- * default option and simply omits the parameter — which is what the API means
+ * default option and simply omits the parameter, which is what the API means
  * by its own scope of "all".
  */
 export const ADOPTION_REGIONS: string[] = [

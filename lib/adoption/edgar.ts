@@ -3,7 +3,7 @@
 // The one source in this build that measures adoption rather than modelling
 // it. EDGAR's full-text index answers "which registrants name this vendor in
 // this form type", and returns, per hit, the company, its CIK, the filing
-// date, its SIC industry code and its state — plus a native aggregation over
+// date, its SIC industry code and its state: plus a native aggregation over
 // SIC, which is the industry breakdown this product wants without us having
 // to bucket anything ourselves.
 //
@@ -11,7 +11,7 @@
 // Anthropic returned 56 filings, top industry 7372 (prepackaged software)
 // with 17; OpenAI returned 181; Google Cloud 877. Those differences are real
 // and mostly reflect how long each vendor has existed and how deeply it is
-// embedded in other people's products — which is why this is published as a
+// embedded in other people's products, which is why this is published as a
 // disclosure count with that caveat attached, and never as market share.
 
 import { SEC_EDGAR, sicLabel } from "./sources";
@@ -82,7 +82,7 @@ const DEFAULT_WINDOW_DAYS = 365;
  *
  * `deadline` is a signal shared across a whole ingestion run. Without it, eight
  * vendors each with their own 12-second timeout can hold a browser-facing
- * request open for over ninety seconds — the per-request timeout bounds one
+ * request open for over ninety seconds: the per-request timeout bounds one
  * call, not the run. The route passes one deadline for all eight.
  */
 export async function fetchDisclosure(
@@ -160,7 +160,7 @@ export async function fetchDisclosure(
         records: [],
         fetchedAt,
         sourceUrl: url,
-        error: `Expected JSON, got ${contentType || "no content-type"} — SEC may be refusing this User-Agent`,
+        error: `Expected JSON, got ${contentType || "no content-type"}: SEC may be refusing this User-Agent`,
       };
     }
     const body = (await res.json()) as EftsResponse;

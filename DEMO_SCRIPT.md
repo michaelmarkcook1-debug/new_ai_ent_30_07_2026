@@ -16,7 +16,7 @@ Spotlight between vendors: narrative bars versus reality bars. The
 the bottom are AIE live, current to today, with the selected vendor's own
 feed beside the market feed.
 
-## 2. Decision Desk, step one — the cited finding (2.5 min)
+## 2. Decision Desk, step one: the cited finding (2.5 min)
 
 Type a situation into the hero (or click an example on /decision-desk):
 "We are a European bank exploring agentic AI for onboarding, worried about

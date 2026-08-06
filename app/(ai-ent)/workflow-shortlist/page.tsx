@@ -5,7 +5,7 @@ import { WorkflowPicker } from "./workflow-picker";
 export const metadata = { title: "Workflow Shortlist | AI Enterprise" };
 
 // Workflow Shortlist (4 August 2026). This tool used to be the tail of Model
-// 4 Role's filter bar, rendering its answer three panels below the control —
+// 4 Role's filter bar, rendering its answer three panels below the control:
 // a tool whose output is somewhere else is a tool that does not work. It is
 // now its own tab under Vendor Assessment, because "who should we shortlist
 // for this workflow" is a vendor question, not a model-fit question.

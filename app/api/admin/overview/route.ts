@@ -14,8 +14,8 @@ import { allRunCosts, monthlyUsd, UNIT_PRICES } from "@/lib/admin/cost-model";
 //
 // Everything the admin page shows, in one request: recent ingestion runs with
 // their list-price cost estimates, catalogue counts per series, connector
-// health, and aggregate usage. The page is public like the rest of the site —
-// an open kitchen suits a product whose whole thesis is provenance — and
+// health, and aggregate usage. The page is public like the rest of the site ,
+// an open kitchen suits a product whose whole thesis is provenance, and
 // nothing served here could not already be derived from the public endpoints
 // and the public database views.
 //
@@ -51,7 +51,7 @@ export async function GET() {
   }));
 
   // Each section fails independently. A dead database should not take the
-  // cost model down with it — the costs are arithmetic, not data.
+  // cost model down with it: the costs are arithmetic, not data.
   const [runsResult, countsResult, usageResult] = await Promise.allSettled([
     catalogueConfigured() ? runs(20) : Promise.resolve([]),
     Promise.all(SERIES.map(async (s) => ({ series: s, count: await seriesCount(s) }))),
@@ -77,7 +77,7 @@ export async function GET() {
       monthlyIfDailyUsd: monthlyUsd(1),
       unitPrices: UNIT_PRICES,
       note:
-        "On the plans this product runs on (Vercel Hobby, Supabase Free) the marginal cost of every run is $0 — both are hard-capped, not metered, and every upstream API is free. The figures here are list-price arithmetic: measured quantities multiplied by the published paid-tier unit prices, showing what a run would cost if the caps were outgrown.",
+        "On the plans this product runs on (Vercel Hobby, Supabase Free) the marginal cost of every run is $0: both are hard-capped, not metered, and every upstream API is free. The figures here are list-price arithmetic: measured quantities multiplied by the published paid-tier unit prices, showing what a run would cost if the caps were outgrown.",
     },
     runs:
       runsResult.status === "fulfilled"

@@ -68,7 +68,7 @@ export const AXES: Axis[] = [
   {
     // Added 5 August 2026. CAP-11 is marked live in
     // axes-and-calibration.json and scored on 145 of the 330 models in this
-    // catalogue — better coverage than either GPQA (56) or Briefcase (44),
+    // catalogue: better coverage than either GPQA (56) or Briefcase (44),
     // both of which already had a tab. It was simply never given one, so a
     // benchmark the product holds and paid to ingest was invisible.
     id: "accuracy",
@@ -97,7 +97,7 @@ export const AXES: Axis[] = [
     status: "identified",
     unit: "",
     // A named gap is a roadmap. A hidden one is a lie.
-    gap: "No data in the catalogue. CAP-04 is status: identified — source known (Artificial Analysis: Coding Index, SciCode, Terminal-Bench), nothing ingested yet.",
+    gap: "No data in the catalogue. CAP-04 is status: identified: source known (Artificial Analysis: Coding Index, SciCode, Terminal-Bench), nothing ingested yet.",
   },
 ];
 
@@ -197,7 +197,7 @@ export function axisView(models: ModelRecord[], axisId: string): AxisView {
   };
 }
 
-/** "Agentic — 44 of 330 scored", for the y-axis label. */
+/** "Agentic: 44 of 330 scored", for the y-axis label. */
 export function axisDenominator(view: AxisView): string {
-  return `${view.axis.label} — ${view.scored.length} of ${view.total} scored`;
+  return `${view.axis.label}: ${view.scored.length} of ${view.total} scored`;
 }

@@ -4,7 +4,7 @@
 //     npm run ingest:adoption
 //
 // Writes data/adoption/disclosure-10-K.json, which the API serves when the
-// live EDGAR call cannot be made — on a cold start, behind a firewall, or
+// live EDGAR call cannot be made: on a cold start, behind a firewall, or
 // when the SEC is rate-limiting. Committing the result is deliberate: the
 // Vercel filesystem is read-only at runtime, so a snapshot that ships with
 // the deploy is the only fallback that survives one.
@@ -154,7 +154,7 @@ async function main() {
   const out = path.join(OUT_DIR, `disclosure-${FORM}.json`);
   await writeFile(out, `${JSON.stringify(snapshot, null, 1)}\n`);
   console.log(
-    `\nWrote ${path.relative(process.cwd(), out)} — ${rows.length} vendors, ${failed.length} failed.`
+    `\nWrote ${path.relative(process.cwd(), out)}: ${rows.length} vendors, ${failed.length} failed.`
   );
   if (failed.length) console.log("Failures are recorded in the snapshot, not hidden.");
 }

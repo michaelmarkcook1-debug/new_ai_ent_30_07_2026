@@ -5,7 +5,7 @@ import { FlatCompat } from "@eslint/eslintrc";
 // The lint gate.
 //
 // Until now `npm run lint` called `next lint` with no ESLint installed, so it
-// prompted for an interactive install and hung — a gate that could never run
+// prompted for an interactive install and hung: a gate that could never run
 // and had therefore never caught anything. TypeScript strict mode and the test
 // suite were doing all the real work.
 //
@@ -44,7 +44,7 @@ export default [
       // `**/` matters on all of these. Scoping them to the top level only let
       // the first run report 8,065 problems, of which the overwhelming
       // majority came from a stale agent worktree under .claude that carries
-      // its own built .next — generated code, in a directory that is not the
+      // its own built .next: generated code, in a directory that is not the
       // project, drowning the few hundred findings that were actually ours.
       "**/.next/**",
       "**/node_modules/**",

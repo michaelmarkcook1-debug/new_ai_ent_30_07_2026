@@ -131,7 +131,7 @@ export function MaterialRisks({
               {rest.map((r) => (
                 <li key={`${r.vendorId}-${r.headline}`} className="text-sm">
                   <span className="font-semibold">{r.vendorName}</span>
-                  <span className="text-muted"> — {r.headline}</span>
+                  <span className="text-muted">: {r.headline}</span>
                 </li>
               ))}
             </ul>
@@ -206,7 +206,7 @@ export function Movers({
                 {rest.map((s) => (
                   <li key={`${s.vendorId}-${s.headline}`} className="text-sm">
                     <span className="font-semibold">{s.vendorName}</span>
-                    <span className="text-muted"> — {s.headline}</span>
+                    <span className="text-muted">: {s.headline}</span>
                   </li>
                 ))}
               </ul>

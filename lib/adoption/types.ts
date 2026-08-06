@@ -13,7 +13,7 @@
 // Anthropic in its 10-K might be a customer, a competitor, an investor or a
 // partner, and the filing does not say which. What the count does establish,
 // with a citation to a real document, is that the vendor is material enough to
-// appear in an annual report — which is a fact, dated, auditable, and nobody's
+// appear in an annual report, which is a fact, dated, auditable, and nobody's
 // model.
 //
 // The rule this layer exists to honour: prefer a narrow measured fact with a

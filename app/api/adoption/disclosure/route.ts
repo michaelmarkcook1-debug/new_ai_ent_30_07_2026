@@ -34,7 +34,7 @@ const cache = new Map<string, CacheEntry>();
  * The cache is the real protection and this is the backstop, which is worth
  * being accurate about: with five allowed form types and a five-minute TTL,
  * one instance can cost the SEC at most forty requests per five minutes no
- * matter how much traffic arrives. Measured — twelve rapid requests produced
+ * matter how much traffic arrives. Measured: twelve rapid requests produced
  * only two misses, the rest served warm. The limiter earns its place only
  * against a single caller cycling form types on a cold instance, and against
  * many instances it does nothing, because both the cache and the bucket are

@@ -10,7 +10,7 @@ export const metadata = { title: "Admin | AI Enterprise" };
 // Public on purpose. The rest of the site shows its provenance; hiding the
 // operations page would be the one closed door in an open kitchen. Nothing
 // here is served that could not already be derived from the public endpoints
-// and the public catalogue views — the usage numbers come through an
+// and the public catalogue views: the usage numbers come through an
 // aggregate-only function, and the raw usage table stays unreadable from
 // outside by row-level security.
 

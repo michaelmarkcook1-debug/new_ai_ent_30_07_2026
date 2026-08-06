@@ -1,4 +1,4 @@
-// Workforce Model Fit — data layer and loader.
+// Workforce Model Fit: data layer and loader.
 //
 // The three JSON files under data/ are the integration package's bundled
 // snapshot, copied verbatim on 2 August 2026 from ~/Downloads/pkg/01_data:
@@ -232,7 +232,7 @@ export const INDUSTRY_GROUPS: IndustryGroup[] = (() => {
  * The library's size, derived rather than written down.
  *
  * Two user-facing strings quoted "258 roles across 29 industries" for weeks
- * after the library grew to 294 across 36 — the counts were literals in copy,
+ * after the library grew to 294 across 36: the counts were literals in copy,
  * and adding roles did not touch them. Anything that states a size now reads
  * these.
  */

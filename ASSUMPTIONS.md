@@ -324,8 +324,8 @@ intended entry is the nearer one.
       says plainly what happened. Account Executive is the default selection, so
       this is the first thing a demo sees.
     - **Data lanes.** Engine output carries `derived`; the model catalogue
-      carries `aie`. Role profiles fit no existing lane — they are neither a
-      measurement nor an illustrative sample but authored judgement — so the
+      carries `aie`. Role profiles fit no existing lane , they are neither a
+      measurement nor an illustrative sample but authored judgement, so the
       panel carries its own MEASURED / JUDGEMENT / ASSUMPTION chips and
       reproduces the package's own measured-versus-judged table in full.
     - **One pre-existing fix taken in passing.** `peer-adoption-chart.tsx` gave
@@ -411,7 +411,7 @@ intended entry is the nearer one.
     (3 August 2026).** Michael did not buy the output of the provider
     adoption chart on Model 4 Role. Four faults, all found in the wiring:
     - **The source's own caveat was dropped.** Every response carries
-      `provenance: "MODELLED ESTIMATE — May 2026 segment-share model;
+      `provenance: "MODELLED ESTIMATE: May 2026 segment-share model;
       directional, not audited market share"`. The panel discarded it and
       showed a bare percentage under a LIVE badge, which reads as measurement.
       It is now reproduced verbatim above the chart.
@@ -458,7 +458,7 @@ intended entry is the nearer one.
     current job descriptions", produced by a four-stage research pipeline that
     read those descriptions. These were authored against the same rubric and the
     same five anchored bands, reasoned from each role's function definition,
-    seniority, decision authority and O*NET occupational analogue — but no job
+    seniority, decision authority and O*NET occupational analogue, but no job
     advert was read and no SME has reviewed them, which is the definition of
     class E. The rubric says class E is legitimate and often necessary, and says
     equally plainly that it must never be dressed as A to D.
@@ -747,8 +747,8 @@ intended entry is the nearer one.
     - **The four tabs were organised by build history, not by question.**
       "Company View: Shell" was named after its fixture, which is a build
       detail no buyer should have to decode. Interrogate and Assess and Decide
-      are two halves of one moment — converging on a call that must survive a
-      board or a procurement committee — and as separate tabs each looked like
+      are two halves of one moment , converging on a call that must survive a
+      board or a procurement committee, and as separate tabs each looked like
       a product rather than a step.
     - **The new tabs follow the journey: where do we stand, what fits, what do
       we decide.** "Your AI Position" (/company-view unchanged) holds exposure,
@@ -756,8 +756,8 @@ intended entry is the nearer one.
       "Governance & Obligations" because a vendor-facing Trust Rank already
       exists under Vendor Assessment and the two answer different questions.
       "Model 4 Role" is untouched. "Decision Desk" (/decision-desk, new) holds
-      Interrogate and Assess and Decide as numbered steps — the cited finding,
-      then the weighted score — both mounted so switching tools never discards
+      Interrogate and Assess and Decide as numbered steps (the cited finding,
+      then the weighted score) both mounted so switching tools never discards
       a conversation in progress.
     - **No tool was rebuilt and none was lost.** The two view components moved
       files; their internals are byte-identical. /interrogate and
@@ -807,7 +807,7 @@ intended entry is the nearer one.
     hundred-million or a ten-billion business and will not settle anything finer.
 
 28. **Model 4 Role unbundled, and the adoption model retired (4 August 2026).**
-    Michael's critique, and it was right: the tab held three unrelated things —
+    Michael's critique, and it was right: the tab held three unrelated things:
     a fit tool, an adoption model of doubtful accuracy, and a workflow selector
     that rendered its answer three panels away from the control.
     - **CORRECTED 4 August 2026: the vendor-share model was wrongly deleted
@@ -842,8 +842,8 @@ intended entry is the nearer one.
       deployment profile plus the buy/build shortlist render directly beneath
       the control. The old placement, a selector at the end of an unrelated
       filter bar with the result three panels down, is why it read as broken.
-    - **Model 4 Role is now one tool answering one question** — which model
-      fits this role and what it costs — and the Start page's workflow card
+    - **Model 4 Role is now one tool answering one question** , which model
+      fits this role and what it costs, and the Start page's workflow card
       points at the new shortlist tab.
 31. **Change memory, a watchlist, and "since you last looked" (4 August 2026).**
     Steps one to three of the daily-habit plan. The audit found that exactly one
@@ -901,7 +901,7 @@ intended entry is the nearer one.
     add a Global region and drop organisation size. Probing the upstream
     endpoint first changed what the honest answer was.
     - **The live endpoint serves the same May 2026 model.** Its own provenance
-      string is "MODELLED ESTIMATE — May 2026 segment-share model; directional,
+      string is "MODELLED ESTIMATE: May 2026 segment-share model; directional,
       not audited market share", and the ranking-engine route behind it reads
       the identical 585-row static seed already ported into `lib/aie`, with a
       comment saying rows migrate to Prisma and refresh via the evidence
@@ -914,15 +914,15 @@ intended entry is the nearer one.
       before.** The explorer offered eight AIE archetypes mapped onto the
       engine's nine segments; five of the eight spanned multiple segments, so
       they could not filter upstream and silently showed an unfiltered slice
-      under a label naming an industry — which is where the unreadable
+      under a label naming an industry, which is where the unreadable
       "Commercial Enterprise (mapped to Retail / consumer / ecommerce and
       Professional services / consulting)" came from. The nine segments are
       offered directly with tidied display names, all nine verified to filter
       upstream, and the response's own scope is echoed under the chart so the
       reader can see the slice was served, not assembled.
     - **Organisation size was removed because it never worked.** The endpoint
-      ignores `companySize` and `size` entirely — scope returns
-      {industry, region} whatever is sent — so on the live path the control
+      ignores `companySize` and `size` entirely (scope returns
+      {industry, region} whatever is sent) so on the live path the control
       only re-weighted a local copy while the badge said live. A filter that
       moves the label but not the answer is worse than no filter.
     - **Global is the absence of a region, not a value.** `region=Global` is
@@ -931,13 +931,13 @@ intended entry is the nearer one.
 
 31. **First-party adoption endpoints and an ingestion function (4 August
     2026).** Michael asked for endpoints of our own, separate from the ranking
-    engine, plus a backend ingestion — then, seeing the research, to copy the
+    engine, plus a backend ingestion: then, seeing the research, to copy the
     functional data sources the ranking engine already uses.
     - **What the ranking engine actually has.** Thirteen registered connectors,
       of which eight need an API key this machine does not hold (FRED, BLS,
       BEA, EIA, Congress, AlphaVantage, GitHub, and a vendor-docs reader
       needing an Anthropic key). The keyless, working ones are GDELT, Federal
-      Register, Fiscal Data, Yahoo Finance, Stooq and SEC EDGAR — SEC's "key"
+      Register, Fiscal Data, Yahoo Finance, Stooq and SEC EDGAR: SEC's "key"
       being only a User-Agent string its fair-access policy asks for, not a
       secret. Its `lib/evidence/source-registry.ts` pattern was copied
       wholesale: a controlled list where every source declares its licence and
@@ -947,7 +947,7 @@ intended entry is the nearer one.
       returns, per hit, the company, CIK, filing date, state and SIC industry
       code, plus a native aggregation over SIC. That is measured adoption
       evidence, disclosed by the companies themselves, class A on this
-      product's own evidence rubric — and a categorically better answer than
+      product's own evidence rubric, and a categorically better answer than
       the modelled share estimate it sits beside.
     - **The window is the honesty control.** EDGAR indexes back to 2001, and an
       unbounded count measures "ever mentioned" rather than "named in a current
@@ -1033,8 +1033,8 @@ intended entry is the nearer one.
       answers.
     - **The committed snapshot would not have shipped to production.** Next
       traces the files a route needs by static analysis, and every fixture read
-      in this app builds its path from a variable — `disclosure-${form}.json`,
-      `${apiPath}.json` — which cannot be resolved. The fallback would have
+      in this app builds its path from a variable: `disclosure-${form}.json`,
+      `${apiPath}.json`, which cannot be resolved. The fallback would have
       been absent from the deployed function, and the honesty discipline would
       have hidden it: each read is wrapped in a catch returning null, so a
       missing file degrades to a clean "no data" state that reads as a data gap
@@ -1043,7 +1043,7 @@ intended entry is the nearer one.
       verified by finding the snapshot in the route's `.nft.json` trace.
     - **`res.ok` was not enough to trust a body.** SEC answers undeclared
       automated traffic with an HTML interstitial and a 200, which would have
-      parsed to zero hits and rendered as zero adoption — a fabricated figure
+      parsed to zero hits and rendered as zero adoption: a fabricated figure
       by omission. Only a JSON content-type now counts as data, which is the
       rule ASSUMPTIONS #20 already established for the BoardRadar proxy, and
       the error names the likely cause so an operator can act on it.
@@ -1051,7 +1051,7 @@ intended entry is the nearer one.
       Added at 10/min per IP, on misses only. Worth stating accurately: the
       cache is the real protection, not the limiter. With five form types and a
       five-minute TTL one instance costs the SEC at most forty requests per
-      five minutes however much traffic arrives — measured, twelve rapid
+      five minutes however much traffic arrives: measured, twelve rapid
       requests produced two misses and ten warm serves. The limiter earns its
       place only against a single caller cycling form types on a cold instance.
     Not adopted from the review: its storage recommendations (Vercel Blob with
@@ -1098,8 +1098,7 @@ intended entry is the nearer one.
       two empty tables, `public.vendors` and `public.submissions`; everything
       new went into a separate `aie` schema so nothing existing was touched.
     - **One observation table, not one per series.** Movement is the same
-      question in every series — what was this figure last time, what is it now
-      — so `aie.observation` answers it once and a new series costs an
+      question in every series (what was this figure last time, what is it now) so `aie.observation` answers it once and a new series costs an
       ingestion rather than a migration. `observed_at` (when the fact was true)
       is deliberately distinct from `ingested_at` (when we recorded it): a May
       2026 seed read today has a May `observed_at`, and collapsing the two
@@ -1107,8 +1106,8 @@ intended entry is the nearer one.
     - **A first reading is not a movement of zero.** The API returns `change:
       null` where a subject has one observation, and the panel prints "no
       prior" rather than drawing a flat line. 72 market subjects currently sit
-      in exactly that state and the page says so — "movement appears once a
-      second reading exists" — instead of showing 72 zeros.
+      in exactly that state and the page says so , "movement appears once a
+      second reading exists", instead of showing 72 zeros.
     - **Vendor movement is real on the first run.** SEC EDGAR is queried for two
       consecutive twelve-month windows, each dated at its own end, so the pair
       is two genuine measurements rather than one measurement and an
@@ -1123,20 +1122,20 @@ intended entry is the nearer one.
       first run look richer.
     - **Usage is anonymous by construction, not by policy.** `aie.usage_event`
       has no column for an IP address, session identifier, user agent, or
-      anything a visitor typed — there is nothing to remove later because there
+      anything a visitor typed: there is nothing to remove later because there
       is nothing to collect. It is written through a `security definer`
       function taking five checked arguments, so the writable surface is not a
       table, and `occurred_at` is the database clock rather than caller-
       supplied. Row-level security makes it write-only from outside: the public
       key may insert and has no policy permitting a read. Verified against the
-      live project — reading the catalogue returns 200, reading usage fails,
+      live project: reading the catalogue returns 200, reading usage fails,
       writing an observation is refused with `permission denied`.
     - **Cost: measured, and mostly already right.** Prompt caching was
       considered and rejected on measurement, not taste: the system prompts are
       111 and 146 tokens against a minimum cacheable prefix of 512 on Opus 5,
       1,024 on Sonnet 5 and 4,096 on Haiku 4.5, so a `cache_control` marker
       would have cost the write premium and never produced a read. Model
-      routing was already the product's own thesis applied to itself — Haiku
+      routing was already the product's own thesis applied to itself: Haiku
       for classification, Sonnet by default, Opus only on an explicit
       comprehensive request. The news fetch that pulls 3.28MB to keep one
       headline already had its TTL raised to 24 hours for this reason. The
@@ -1147,7 +1146,7 @@ intended entry is the nearer one.
     the Analyst Insight still showing SAMPLE. It did, on one page, and that page
     was the only one whose insight was never computed at all.
     `/company-view` opened with an `EditorialBanner` labelled "Analyst Insight"
-    carrying `f.overview.insight` — a paragraph written into the Shell fixture
+    carrying `f.overview.insight`: a paragraph written into the Shell fixture
     and badged `sample` by hand. So the one tab about the reader's own position
     held the only insight in the product derived from nothing, dated the day the
     fixture was written (30 July, five days stale by the time it was reported).
@@ -1170,7 +1169,7 @@ intended entry is the nearer one.
     for a methodology to estimate non-disclosed vendor revenues, fed into the
     financial snapshot. This is the single easiest place for the product to
     break its zero-fabrication rule while appearing not to, because arithmetic
-    launders assumptions into numbers — so the methodology is built to make
+    launders assumptions into numbers, so the methodology is built to make
     every assumption visible at the point of use.
     - **Four lanes in evidence order, never blended: REPORTED (a named
       publisher put the figure on the record, latest non-projection wins,
@@ -1200,7 +1199,7 @@ intended entry is the nearer one.
       valuation/revenue pairs now anchor the band (frontier labs 20.5x-54x
       fresh; Databricks 25.4x-27.9x in its own data_platform class). A pair
       whose citations are more than a quarter apart is flagged stale rather
-      than dropped or trusted — Anthropic's February valuation over June
+      than dropped or trusted: Anthropic's February valuation over June
       revenue would imply 8.1x for a company that never existed.
     - **The cross-check gap is displayed as the finding.** A 40% share of
       Menlo's measured $8.4B enterprise LLM spend implies ~$3.4B for
@@ -1214,26 +1213,26 @@ intended entry is the nearer one.
     - **The research workflow died to infrastructure; the method survived.**
       45 of 45 subagent results returned null across repeated retries during
       an evening of API instability, so the mining, verification and critique
-      were done inline instead — same checks, same refusals, and the worked
+      were done inline instead: same checks, same refusals, and the worked
       example in the methodology doc records what each check caught.
     - Downstream, the composite scorecard's durability coverage rose 18 → 20
       and Anthropic 55 → 60 purely because the module reads disclosure off
-      the record and the record now discloses more — its own comment
+      the record and the record now discloses more: its own comment
       anticipated exactly this movement.
 
 35. **The admin page, and what an ingestion run costs (5 August 2026).**
     Michael asked for a straightforward admin page with estimated pricing for
     ingestion runs. One page at /admin, one fetch, four sections in the order
     an operator asks the questions: did the ingestions run (every recorded run
-    with its failures — a failed run is a row, not a silence), what does a run
+    with its failures: a failed run is a row, not a silence), what does a run
     cost, what is in the catalogue, and is anyone using the tools.
     - **The pricing is measured quantities times cited unit prices, and the
       headline is stated plainly: on the plans this product actually runs on,
       every run costs $0.** Vercel Hobby and Supabase Free are hard-capped
       rather than metered, and every upstream API is free. The priced column
-      is list-price arithmetic — Vercel Pro's published $0.60/M invocations,
+      is list-price arithmetic (Vercel Pro's published $0.60/M invocations,
       $0.128/hr active CPU and $0.0106/GB-hr memory against each run's
-      measured requests, bytes, wall seconds and rows — showing what a run
+      measured requests, bytes, wall seconds and rows) showing what a run
       would cost if the caps were outgrown: the dearest run (vendor, 16 SEC
       queries) prices at $0.000051, and running every series daily would come
       to about $0.0039 a month. The drawer records how each quantity was
@@ -1259,11 +1258,11 @@ intended entry is the nearer one.
     - **The split is clean because the code already was.** `peer-explorer.tsx`,
       `peer-adoption-chart.tsx` and `data.ts` were imported by nothing but each
       other, so all three moved wholesale to `app/(ai-ent)/peer-insights/` with
-      `git mv` — history preserved, no import rewiring, no shared module left
+      `git mv`: history preserved, no import rewiring, no shared module left
       straddling two pages.
     - **The move would have orphaned a warning, and that was the real work.**
       AI Adoption opened with the Menlo and Ramp measured figures under a
-      caution reading "Read these before the slice below" — a sentence that
+      caution reading "Read these before the slice below": a sentence that
       only worked while the slice sat directly underneath. Moving the explorer
       out would have left a warning pointing at nothing. So the caveat now
       exists in two forms: a fuller version on Peer Insights, above the
@@ -1272,8 +1271,8 @@ intended entry is the nearer one.
       the two later measurements that put the top two the other way round),
       and a shorter pointer on AI Adoption naming the new tab.
     - **Placed last in Market Intelligence deliberately.** It answers the
-      narrowest question in that group — "who are firms like mine buying"
-      rather than "how has the market moved" — which is what a reader reaches
+      narrowest question in that group , "who are firms like mine buying"
+      rather than "how has the market moved", which is what a reader reaches
       for after the market-wide views, not before them.
     - Stale cross-references were swept rather than left: the AI Adoption page
       comment, its subtitle (which counted panels), and the page table in
@@ -1289,14 +1288,14 @@ intended entry is the nearer one.
       branches) and the ranking engine. In the ranking engine "case study" is
       a *grading criterion*, not data: E4 = "production customer reference /
       case study with named org", and its own rule says a claim without a URL
-      is E1. The 23 rows its seed grades E4 are generic prose — "top-tier
-      banks", "AmLaw 100 references" — with `sourceUrl: undefined`, so they
+      is E1. The 23 rows its seed grades E4 are generic prose ("top-tier
+      banks", "AmLaw 100 references") with `sourceUrl: undefined`, so they
       fail the repo's own E4 test. The live `/api/vendor/{id}/evidence`
       returns 500; the database was never provisioned. Nothing to port, and
       porting it would have imported a grading error.
     - **What did exist was the workflow library, read in only one direction.**
       75 enterprise AI workflows, each carrying risk tier, reliability bar,
-      default autonomy, regulatory flags, complexity and common inputs — and
+      default autonomy, regulatory flags, complexity and common inputs: and
       an industry classification: 25 tagged to specific industries, 50
       explicitly horizontal. Workflow Shortlist has always read it
       workflow-to-vendors. Peer Insights now reads it industry-to-workflow,
@@ -1314,7 +1313,7 @@ intended entry is the nearer one.
       thin rather than implying the sector does nothing distinctive.
     - **The 146 claim was wrong, and so was my first correction.** Product
       copy claimed "146 tracked workflows" in three places against an array
-      of 75 — a 72% overstatement quoted to buyers as a measure of coverage.
+      of 75: a 72% overstatement quoted to buyers as a measure of coverage.
       My first fix wrote 85, from a regex that counted `id:` occurrences
       outside the array as well. The test I had just written caught it before
       it shipped, which is the argument for writing the test at the same time
@@ -1332,7 +1331,7 @@ intended entry is the nearer one.
       literals. They are now derived (`LIBRARY_ROLE_COUNT`,
       `LIBRARY_INDUSTRY_COUNT`) and `tests/library-counts.test.ts` fails if
       anyone writes one down again. The models figure was already derived from
-      `MODELS.length`, which is exactly why it alone stayed correct — that is
+      `MODELS.length`, which is exactly why it alone stayed correct: that is
       the argument for deriving, in one line.
     - **A dead API endpoint reported progress.** `/api/catalogue/usage`
       answered 200 with zero observations and the note "First observations
@@ -1349,7 +1348,7 @@ intended entry is the nearer one.
       no ESLint installed, so it prompted for an interactive install and hung;
       types and tests had been doing all the work it was credited with. The
       first honest run reported 8,065 problems, of which almost all came from
-      a stale agent worktree under `.claude` carrying its own built `.next` —
+      a stale agent worktree under `.claude` carrying its own built `.next`:
       the ignore globs were anchored to the top level. Scoped properly: 39
       warnings, zero errors. Two rule decisions are deliberate.
       `no-unescaped-entities` now forbids only `>` and `}`; the eight it
@@ -1361,7 +1360,7 @@ intended entry is the nearer one.
     - **The build root was wrong.** A stray `package-lock.json` in the home
       directory (13 June) made Next infer `/Users/michaelcook` as the
       workspace root. The adoption snapshot still shipped, but by luck rather
-      than design — and a fixture that fails to ship reads as an empty data
+      than design, and a fixture that fails to ship reads as an empty data
       state, not an error. Pinned with `outputFileTracingRoot` rather than by
       touching anything in Michael's home directory.
     - **Verification without credentials.** Local dev enforces basic auth from
@@ -1386,7 +1385,7 @@ intended entry is the nearer one.
       beside a dev server and the worktree trick when it must, the deploy that
       fails intermittently on upload and needs one retry, what each ingestion
       costs at list prices ($0.0039 to refresh every series daily for a
-      month), and the two traps that have already cost a day each — the
+      month), and the two traps that have already cost a day each: the
       PostgREST 1,000-row ceiling and the empty-table 200. Every command and
       file reference in it was executed or resolved before it was written
       down.

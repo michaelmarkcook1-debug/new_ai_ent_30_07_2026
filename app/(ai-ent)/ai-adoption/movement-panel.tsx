@@ -13,7 +13,7 @@ import { EmptyState } from "@/lib/ui/page";
 // point in time, so a change here is the difference between two recorded
 // observations rather than a number somebody typed.
 //
-// A subject with only one observation shows no change at all — not a zero, not
+// A subject with only one observation shows no change at all, not a zero, not
 // a flat line. That distinction is the whole reason the API returns null there.
 
 interface Movement {
@@ -206,7 +206,7 @@ export function MovementPanel() {
         <DerivationDrawer title="How movement is derived">
           <p>
             The catalogue stores one row per fact per point in time: a subject,
-            a metric, a value, and the date the value was true — which is not
+            a metric, a value, and the date the value was true, which is not
             the date we recorded it. Movement is then just the difference
             between the two most recent rows for a subject, computed by the API
             so the figure on screen is the one the endpoint stands behind.

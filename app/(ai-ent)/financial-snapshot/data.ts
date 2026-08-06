@@ -28,7 +28,7 @@ export const PROBED_TICKERS: ProbedTicker[] = [
 
 // The private AI companies. Their cards carry the AIE seed tagline and
 // curated outbound source links; their figures come exclusively from the
-// evidence record in lib/finance/private-figures — reported figures and
+// evidence record in lib/finance/private-figures: reported figures and
 // valuation-implied ranges, never an invented number. (An earlier version of
 // this comment said no figures were rendered at all; the disclosure ladder
 // and revenue panel have since given these vendors evidence-graded figures.)

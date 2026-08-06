@@ -28,7 +28,7 @@ A note on duplicates: the repo contains Finder-style duplicate files ("seed 2.ts
 
 ### 1.2 Assessment engine data
 
-- lib/use-cases.ts (918 lines, 75 workflow records — this said 85 until 5 August 2026, from a regex that counted `id:` occurrences outside the array; the ported file holds 75 in 15 categories). The enterprise AI workflow taxonomy: workflows tiered quick, guided, advanced, with industries, commonInputs, regulatoryFlags, and complexity. Recommendation: PORT as-is if the demo includes any assessment flow; the taxonomy is reusable on its own.
+- lib/use-cases.ts (918 lines, 75 workflow records: this said 85 until 5 August 2026, from a regex that counted `id:` occurrences outside the array; the ported file holds 75 in 15 categories). The enterprise AI workflow taxonomy: workflows tiered quick, guided, advanced, with industries, commonInputs, regulatoryFlags, and complexity. Recommendation: PORT as-is if the demo includes any assessment flow; the taxonomy is reusable on its own.
 
 - lib/industries.ts (116 lines). 8 industry archetypes with pillar weight profiles and fatal-blocker domains (e.g. regulated_financial weights enterprise_control at 35 percent). Recommendation: PORT as-is.
 

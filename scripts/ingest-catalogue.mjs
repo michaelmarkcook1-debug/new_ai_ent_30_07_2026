@@ -5,7 +5,7 @@
 //     npm run ingest:catalogue model    one series
 //
 // Writes observations to Postgres. Needs SUPABASE_SERVICE_ROLE_KEY, because
-// anonymous callers may read the catalogue and may not write to it — that
+// anonymous callers may read the catalogue and may not write to it: that
 // asymmetry is the point of the row-level security, so the ingestion is the
 // one thing that holds a privileged key.
 //
@@ -26,7 +26,7 @@
 //           price differs from the snapshot's.
 //   market  One observation per refresh of the AIE estimate.
 //   finance Reported revenue and valuation figures for the private AI
-//           companies, read from lib/finance/data/private-figures.json —
+//           companies, read from lib/finance/data/private-figures.json:
 //           the same file the financial snapshot serves. Each record is
 //           already dated by its citation, so the series carries real
 //           movement as soon as two dated figures exist for a vendor.
@@ -111,7 +111,7 @@ function ingestModels() {
   const raw = JSON.parse(readFileSync(file, "utf8"));
   const models = Array.isArray(raw) ? raw : (raw.models ?? []);
 
-  // The snapshot was copied on 2 August 2026 and is a snapshot, not a feed —
+  // The snapshot was copied on 2 August 2026 and is a snapshot, not a feed:
   // so observed_at is that date, not today. Recording it as today would claim
   // the prices were verified today, which they were not.
   const observedAt = "2026-08-02T00:00:00Z";
@@ -244,9 +244,9 @@ function ingestMarket() {
       source_id: "aie_market_share",
       vintage: `${raw.label ?? "AIE category share estimate"}, confidence ${e.confidence ?? "unstated"}`,
       // Each row carries its own source and methodology upstream, and those
-      // are more specific than the dataset-level string — so the row's own
+      // are more specific than the dataset-level string, so the row's own
       // wording is what travels with the figure.
-      provenance: [e.source, e.methodology].filter(Boolean).join(" — ") ||
+      provenance: [e.source, e.methodology].filter(Boolean).join(": ") ||
         raw.provenance || "AI Enterprise category share estimate.",
     });
     // `previousEstimate` and `changePct` exist upstream but carry no date for
@@ -309,10 +309,10 @@ function ingestFinance() {
       metric,
       value_num: valueUsdM,
       unit: "USD millions",
-      // The citation's date is when the figure was true — not today.
+      // The citation's date is when the figure was true, not today.
       observed_at: `${rec.citation.asOf}T00:00:00Z`,
       source_id: "press_reported_figures",
-      vintage: `${kind === "valuation" ? rec.state : rec.basis}${rec.isFloor ? ", floor" : ""} — ${rec.citation.publisher}, ${rec.citation.asOf}`,
+      vintage: `${kind === "valuation" ? rec.state : rec.basis}${rec.isFloor ? ", floor" : ""}: ${rec.citation.publisher}, ${rec.citation.asOf}`,
       provenance:
         `${rec.citation.quote} (${rec.citation.publisher}, ${rec.citation.asOf}.)` +
         (rec.caveats ? ` Caveats: ${rec.caveats}` : "") +
@@ -389,7 +389,7 @@ async function main() {
   if (!SERVICE_KEY) {
     console.error(
       "SUPABASE_SERVICE_ROLE_KEY is not set.\n" +
-        "The catalogue is readable without it, but writing needs the service key —\n" +
+        "The catalogue is readable without it, but writing needs the service key: \n" +
         "anonymous callers deliberately cannot write. Set it in the environment and re-run."
     );
     process.exit(1);

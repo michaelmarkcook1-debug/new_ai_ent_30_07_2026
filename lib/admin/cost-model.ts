@@ -2,7 +2,7 @@
 //
 // The honest headline first: at current scale, on the plans this product
 // actually runs on (Vercel Hobby, Supabase Free), the marginal cost of every
-// ingestion run is $0.00 — both plans are hard-capped rather than metered,
+// ingestion run is $0.00: both plans are hard-capped rather than metered,
 // and every upstream API is free. The priced column on the admin page is
 // therefore LIST-PRICE ARITHMETIC: measured quantities multiplied by the
 // platforms' published paid-tier unit prices, showing what a run would cost
@@ -20,7 +20,7 @@
  * Vercel (Pro list prices; Hobby is $0 within hard caps):
  *   invocations $0.60 per million, Active CPU $0.128/hour (base region),
  *   provisioned memory $0.0106/GB-hour. Fluid compute bills CPU only while
- *   code executes — not during I/O waits — but provisioned memory accrues on
+ *   code executes , not during I/O waits, but provisioned memory accrues on
  *   wall time. Source: vercel.com/docs/functions/usage-and-pricing.
  *
  * Supabase (Free tier: 500MB database, 5GB egress, unlimited API requests;
@@ -49,7 +49,7 @@ export interface RunProfile {
   bytesIn: number;
   /**
    * Seconds the CPU is actually executing. Estimated from measured wall time
-   * minus network waits and deliberate throttle sleeps — fluid compute does
+   * minus network waits and deliberate throttle sleeps: fluid compute does
    * not bill the waits, but this is the least certain number here and is
    * labelled an estimate wherever it is shown.
    */
@@ -133,7 +133,7 @@ export const RUN_PROFILES: RunProfile[] = [
     wallSeconds: 1.5,
     rowsWritten: 0,
     measured:
-      "One 3.28MB fetch from the ranking-engine feed (it ignores ?limit — measured, not assumed), trimmed in memory, held 24 hours per instance.",
+      "One 3.28MB fetch from the ranking-engine feed (it ignores ?limit: measured, not assumed), trimmed in memory, held 24 hours per instance.",
   },
 ];
 
@@ -175,7 +175,7 @@ export function allRunCosts(): RunCost[] {
 }
 
 /**
- * What a refresh cadence would cost per month at list prices — every series,
+ * What a refresh cadence would cost per month at list prices: every series,
  * every day, would still round to under a cent. Saying that with arithmetic
  * beats saying it with adjectives.
  */

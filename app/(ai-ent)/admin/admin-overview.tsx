@@ -63,7 +63,7 @@ const when = (iso: string) =>
   });
 
 const kb = (bytes: number) =>
-  bytes === 0 ? "—" : bytes >= 1_000_000 ? `${(bytes / 1_000_000).toFixed(2)}MB` : `${Math.round(bytes / 1000)}KB`;
+  bytes === 0 ? "0" : bytes >= 1_000_000 ? `${(bytes / 1_000_000).toFixed(2)}MB` : `${Math.round(bytes / 1000)}KB`;
 
 export function AdminOverview() {
   const [data, setData] = useState<Payload | null>(null);
@@ -111,12 +111,12 @@ export function AdminOverview() {
 
   return (
     <div className="space-y-4">
-      {/* 1 — Did the ingestions run, and what did each cost? */}
+      {/* 1: Did the ingestions run, and what did each cost? */}
       <section className="rounded-lg border border-base-300 bg-base-100 p-4">
         <div className="flex flex-wrap items-start justify-between gap-2">
           <MicroLabel
             label="Ingestion runs, most recent first"
-            tooltip="Every run the catalogue has recorded, successful or not — a failed run is a row, not a silence. The cost column prices each run's measured quantities at published paid-tier unit prices."
+            tooltip="Every run the catalogue has recorded, successful or not: a failed run is a row, not a silence. The cost column prices each run's measured quantities at published paid-tier unit prices."
           />
           <LaneBadge lane={runsOk ? "live" : "aie"} />
         </div>
@@ -153,7 +153,7 @@ export function AdminOverview() {
                       </td>
                       <td className="py-1.5 pr-3 text-right font-mono">{r.rows_written}</td>
                       <td className="py-1.5 pr-3 text-right font-mono">
-                        {cost ? formatUsd(cost.totalUsd) : "—"}
+                        {cost ? formatUsd(cost.totalUsd) : "n/a"}
                       </td>
                     </tr>
                   );
@@ -170,7 +170,7 @@ export function AdminOverview() {
         )}
       </section>
 
-      {/* 2 — What does a run cost, and why is the answer nothing? */}
+      {/* 2: What does a run cost, and why is the answer nothing? */}
       <section className="rounded-lg border border-base-300 bg-base-100 p-4">
         <MicroLabel
           label="What a run costs"
@@ -179,7 +179,7 @@ export function AdminOverview() {
         <p className="measure mt-2 rounded border border-ok/40 bg-ok-bg/30 px-3 py-2 text-sm">
           <b>On the plans this product runs on, every run costs $0.</b> Vercel
           Hobby and Supabase Free are hard-capped, not metered, and every
-          upstream API — SEC EDGAR, the Federal Register, the AIE feed — is
+          upstream API (SEC EDGAR, the Federal Register, the AIE feed) is
           free. The column below prices what a run <i>would</i> cost at paid
           list rates: running every series daily would come to about{" "}
           <b>{formatUsd(data.costs.monthlyIfDailyUsd)}/month</b>.
@@ -203,10 +203,10 @@ export function AdminOverview() {
                     <span className="font-semibold">{c.series}</span>{" "}
                     <span className="text-muted">{c.label}</span>
                   </td>
-                  <td className="py-1.5 pr-3 text-right font-mono">{c.requests || "—"}</td>
+                  <td className="py-1.5 pr-3 text-right font-mono">{c.requests || 0}</td>
                   <td className="py-1.5 pr-3 text-right font-mono">{kb(c.bytesIn)}</td>
                   <td className="py-1.5 pr-3 text-right font-mono">{c.wallSeconds}s</td>
-                  <td className="py-1.5 pr-3 text-right font-mono">{c.rowsWritten || "—"}</td>
+                  <td className="py-1.5 pr-3 text-right font-mono">{c.rowsWritten || 0}</td>
                   <td className="py-1.5 pr-3 text-right font-mono font-bold">
                     {formatUsd(c.totalUsd)}
                   </td>
@@ -233,7 +233,7 @@ export function AdminOverview() {
               ))}
             </ul>
             <p className="text-muted">
-              The active-CPU second counts are the least certain figures here —
+              The active-CPU second counts are the least certain figures here:
               estimated from measured wall time minus network waits and the
               deliberate SEC throttle sleeps. They could be out by a factor of
               two without moving any total past a hundredth of a cent, which is
@@ -243,12 +243,12 @@ export function AdminOverview() {
         </div>
       </section>
 
-      {/* 3 — What is in the catalogue, and are the connectors up? */}
+      {/* 3: What is in the catalogue, and are the connectors up? */}
       <div className="grid grid-cols-1 gap-4 @2xl:grid-cols-2">
         <section className="rounded-lg border border-base-300 bg-base-100 p-4">
           <MicroLabel
             label="Catalogue"
-            tooltip="Observation counts per series, from the database's own count — the same figure the movement API checks its answers against."
+            tooltip="Observation counts per series, from the database's own count: the same figure the movement API checks its answers against."
           />
           {countsOk ? (
             <ul className="mt-2 space-y-1">
@@ -287,7 +287,7 @@ export function AdminOverview() {
         </section>
       </div>
 
-      {/* 4 — Is anyone using the tools? */}
+      {/* 4: Is anyone using the tools? */}
       <section className="rounded-lg border border-base-300 bg-base-100 p-4">
         <MicroLabel
           label="Usage, in aggregate"
@@ -328,7 +328,7 @@ export function AdminOverview() {
 
       <p className="font-mono text-[10px] text-muted">
         Generated {when(data.generatedAt)} · cached five minutes · this page is
-        public by design — it shows nothing the public endpoints do not already
+        public by design: it shows nothing the public endpoints do not already
         serve.
       </p>
     </div>

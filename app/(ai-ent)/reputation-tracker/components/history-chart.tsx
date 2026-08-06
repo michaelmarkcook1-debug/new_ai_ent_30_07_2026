@@ -88,7 +88,7 @@ export function ReputationHistoryChart({
 
   // Memoized because the min/max pass below depends on it. As a bare filter it
   // was a new array on every render, so the useMemo that listed it never once
-  // reused a result — it recomputed the full min/max sweep every render while
+  // reused a result: it recomputed the full min/max sweep every render while
   // reading as though it did not.
   const shown = useMemo(
     () => covered.filter((id) => !muted.has(id)),

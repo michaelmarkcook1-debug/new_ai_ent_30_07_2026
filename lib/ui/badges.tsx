@@ -11,6 +11,10 @@ export function LaneBadge({ lane }: { lane: DataLane }) {
     aie: "bg-aie-bg text-aie border-aie/30",
     // AIE content pulled live: the dataset's blue, with the live green ring.
     "aie-live": "bg-aie-bg text-aie border-good/60",
+    // Quoted from the source's own document. Given the same neutral treatment
+    // as derived, because both are honest about not being a live feed, and a
+    // green badge on a legal term read three weeks ago would overstate it.
+    cited: "bg-base-200 text-secondary border-secondary/40",
     // Computed by us, from real inputs. Neutral rather than green or amber,
     // because it is neither someone else's published figure nor an invented one.
     derived: "bg-base-200 text-secondary border-secondary/40",
@@ -29,7 +33,9 @@ export function LaneBadge({ lane }: { lane: DataLane }) {
             ? "Real AI Enterprise dataset content, re-used from the ranking-engine repository"
             : lane === "aie-live"
               ? "Current AI Enterprise content, pulled live from the deployed app's public API through our proxy"
-              : lane === "derived"
+              : lane === "cited"
+                ? "Quoted from the vendor's own published document, carrying the URL it was read from and the date a human read it. Legal terms have no feed to poll, so the honest claim is the citation and its age, not a live badge"
+                : lane === "derived"
                 ? "Computed by AG from named inputs that can be re-fetched and checked. No source publishes this figure directly, and nothing in it is invented"
                 : lane === "mock"
                 ? "Recorded response served because live data was unavailable"

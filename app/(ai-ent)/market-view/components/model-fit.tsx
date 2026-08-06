@@ -68,9 +68,9 @@ import { recordUsage } from "@/lib/catalogue/client";
 // the annual figure. These labels said "a year" and understated every cost on
 // the panel by a factor of twelve.
 const USAGE_LABEL: Record<string, string> = {
-  light: "Light — occasional use, 2M input tokens per person per month",
-  moderate: "Moderate — used through the working day, 10M per person per month",
-  heavy: "Heavy — continuous use, 40M per person per month",
+  light: "Light: occasional use, 2M input tokens per person per month",
+  moderate: "Moderate: used through the working day, 10M per person per month",
+  heavy: "Heavy: continuous use, 40M per person per month",
 };
 const USAGE_TOKENS: Record<string, string> = {
   light: "2M",
@@ -130,7 +130,7 @@ function EvidenceChip({ kind, label }: { kind: EvidenceKind; label?: string }) {
 }
 
 function usd(v: number | null | undefined): string {
-  if (v === null || v === undefined) return "—";
+  if (v === null || v === undefined) return "n/a";
   if (v >= 1000) return `$${Math.round(v).toLocaleString("en-GB")}`;
   return `$${v.toFixed(2)}`;
 }
@@ -264,7 +264,7 @@ function WaitingForCompute({
  *
  * The panel already carries an ASSUMPTION chip, but a chip only says that
  * assumptions exist. This says which ones, in the buyer's own terms, and
- * changes when they do — so the reader can see the moment a number stops
+ * changes when they do, so the reader can see the moment a number stops
  * being an assumption they accepted and becomes one they chose.
  */
 function assumptionNarration(opts: {
@@ -454,7 +454,7 @@ export function ModelFit() {
     if (!ready) return;
     setComputedRoleId(roleId);
     // Anonymous: which role was costed, never who costed it. Deliberately not
-    // awaited — a telemetry write must never delay the answer the reader
+    // awaited: a telemetry write must never delay the answer the reader
     // pressed the button for, and it swallows its own failures.
     void recordUsage("fitengine", "compute", roleId);
   }
@@ -934,13 +934,13 @@ export function ModelFit() {
               />
               <Fact
                 label="Next option up"
-                value={nextUp ? shortName(nextUp.model_id) : "—"}
+                value={nextUp ? shortName(nextUp.model_id) : "none"}
                 detail={
                   nextUp && pick
                     ? `+${(
                         (engine.costPerMillion(nextUp) ?? 0) -
                         (engine.costPerMillion(pick) ?? 0)
-                      ).toFixed(2)} per 1M — the price of headroom, shown rather than assumed`
+                      ).toFixed(2)} per 1M: the price of headroom, shown rather than assumed`
                     : "Nothing above the recommendation"
                 }
               />
@@ -987,7 +987,7 @@ export function ModelFit() {
               />
               <CostBox
                 label="Difference"
-                value={saving !== null && saving !== 0 ? usd(Math.abs(saving)) : "—"}
+                value={saving !== null && saving !== 0 ? usd(Math.abs(saving)) : "none"}
                 detail={
                   saving === null
                     ? "no qualifying model to compare"
@@ -1419,7 +1419,7 @@ export function ModelFit() {
                     <ul className="mt-1 space-y-0.5">
                       {list.slice(0, 3).map((e) => (
                         <li key={e.model} className="text-xs text-muted">
-                          <span className="font-mono">{shortName(e.model)}</span> — {e.reason}
+                          <span className="font-mono">{shortName(e.model)}</span>: {e.reason}
                         </li>
                       ))}
                       {list.length > 3 ? (
@@ -1505,7 +1505,7 @@ export function ModelFit() {
                 </p>
                 <ol className="list-decimal space-y-1 pl-4 text-muted">
                   <li>
-                    Buyer constraints — excluded vendors and price ceiling — eliminate first.
+                    Buyer constraints , excluded vendors and price ceiling, eliminate first.
                     Certain.
                   </li>
                   <li>
@@ -1527,8 +1527,8 @@ export function ModelFit() {
                     axis.
                   </li>
                   <li>
-                    Specification filters — context window, throughput, data handling, assurance,
-                    input modalities — eliminate absolutely and need no calibration.
+                    Specification filters (context window, throughput, data handling, assurance,
+                    input modalities) eliminate absolutely and need no calibration.
                   </li>
                   <li>
                     Capability filters apply the calibration threshold for the shifted level. A
@@ -1618,8 +1618,8 @@ function specRequirement(cap: string, level: number): string {
  * that decides who survives applies both. Asking meets() whether a model
  * "clears" a requirement can therefore disagree with the reason it survived.
  *
- * The engine is left alone — changing meets() would change the ranking and
- * break parity with the reference — and the display asks the elimination
+ * The engine is left alone: changing meets() would change the ranking and
+ * break parity with the reference, and the display asks the elimination
  * question directly instead.
  *
  * null means the question could not be put: no axis, or no published value.
@@ -1725,8 +1725,8 @@ function scoreCard(
  * The answer, split so the model can be the thing the eye lands on.
  *
  * `model` is the name alone, rendered large and in the accent colour on its own
- * line; `sentence` is everything else. Where there is no single model — a role
- * decomposed into duties, or one nothing clears — `model` is null and the
+ * line; `sentence` is everything else. Where there is no single model: a role
+ * decomposed into duties, or one nothing clears: `model` is null and the
  * sentence carries the whole answer, because inventing something to put in the
  * big type would be the one place this panel must not overstate.
  */

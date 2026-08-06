@@ -152,7 +152,7 @@ export async function analystApiKey(): Promise<string | null> {
  * sample mode (no API key)" badge. It was a literal, not a reading: it said
  * "no API key" on production where the key was set, and it said it before any
  * request had been made, which is the same mistake the lane badges exist to
- * prevent — never assert a mode before you know it.
+ * prevent, never assert a mode before you know it.
  *
  * Returns only whether a key exists. The value never leaves the server.
  */

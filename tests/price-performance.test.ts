@@ -47,7 +47,7 @@ describe("axis coverage", () => {
 
   it("prints the denominator the way the axis label needs it", () => {
     expect(axisDenominator(axisView(MODELS, "briefcase"))).toBe(
-      "Agentic — 44 of 330 scored"
+      "Agentic: 44 of 330 scored"
     );
   });
 

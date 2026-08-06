@@ -9,7 +9,7 @@ import {
 } from "@/lib/admin/cost-model";
 
 // The admin page publishes prices, so the tests hold the arithmetic to the
-// measured profiles and the cited unit prices — a cost figure that cannot be
+// measured profiles and the cited unit prices: a cost figure that cannot be
 // recomputed from its inputs would be a vibe wearing a currency symbol.
 
 describe("the cost model", () => {

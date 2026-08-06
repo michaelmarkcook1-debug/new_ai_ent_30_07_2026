@@ -12,7 +12,7 @@ import {
 // These assertions are deliberately about structure and internal consistency
 // rather than about the law itself: a test cannot verify that a statute says
 // what a law firm reported it says. What it can do is stop the set drifting
-// into the failure modes this product actually has — an undated row, a claim
+// into the failure modes this product actually has: an undated row, a claim
 // with no source, or a date that moved without saying so.
 
 const AS_OF = new Date("2026-08-05T00:00:00Z");

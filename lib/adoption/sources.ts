@@ -90,7 +90,7 @@ export function sicLabel(code: string): string {
  * unambiguous: a search term that collides with ordinary English would count
  * filings that have nothing to do with the vendor.
  *
- * "OpenAI" and "Anthropic" are safe — they are coined names. "Google Cloud"
+ * "OpenAI" and "Anthropic" are safe: they are coined names. "Google Cloud"
  * and "Microsoft Azure" are used rather than "Google" and "Microsoft", which
  * would match almost every technology filing ever written and measure nothing.
  * Mistral is excluded: it collides with the wind and with several unrelated

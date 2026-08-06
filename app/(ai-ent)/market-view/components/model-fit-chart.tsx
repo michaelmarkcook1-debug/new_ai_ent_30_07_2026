@@ -15,7 +15,7 @@ import { burnOf, shortName, type ModelRecord, type RankedModel } from "@/lib/mod
 // The x axis is EFFECTIVE cost, not list price. A reasoning model at max effort
 // burns several times the tokens of a non-reasoning one on the same task, so
 // comparing their per-token prices compares nothing. Multiplying by the burn
-// figure is the only way the axis means anything — and it is an assumption, so
+// figure is the only way the axis means anything, and it is an assumption, so
 // it can be switched off.
 //
 // Models whose burn is unknown are WITHHELD from the burn-adjusted view rather
@@ -325,7 +325,7 @@ export function PriceCapabilityChart({
               onMouseEnter={() => setHovered(p.model.model_id)}
               onMouseLeave={() => setHovered(null)}
             >
-              <title>{`${p.model.model_id} — eliminated`}</title>
+              <title>{`${p.model.model_id}: eliminated`}</title>
             </circle>
           ))}
         {points
@@ -343,7 +343,7 @@ export function PriceCapabilityChart({
               onMouseEnter={() => setHovered(p.model.model_id)}
               onMouseLeave={() => setHovered(null)}
             >
-              <title>{`${p.model.model_id} — qualifies for this role`}</title>
+              <title>{`${p.model.model_id}: qualifies for this role`}</title>
             </circle>
           ))}
         {points
@@ -368,7 +368,7 @@ export function PriceCapabilityChart({
                 r="4.5"
                 fill="var(--ag-insight)"
               >
-                <title>{`${p.model.model_id} — the recommendation`}</title>
+                <title>{`${p.model.model_id}: the recommendation`}</title>
               </circle>
             </g>
           ))}

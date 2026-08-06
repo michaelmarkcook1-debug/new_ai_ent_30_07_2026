@@ -81,7 +81,7 @@ export default async function PricePerformancePage() {
             the five scored axes.
 
             It lived only on ModelEngine until 5 August 2026, which is the
-            wrong place for it to live alone — a reader on the page named
+            wrong place for it to live alone: a reader on the page named
             Price / Performance is the one asking the question it answers. */}
         <PricePerformanceChart models={priceModels()} />
 

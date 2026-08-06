@@ -13,7 +13,7 @@ import { fetchDisclosure } from "@/lib/adoption/edgar";
 //
 //   res.ok alone is not enough to trust a body. SEC answers undeclared
 //   automated traffic with an HTML interstitial and a 200, which would parse
-//   to an empty result and render as zero adoption — a fabricated figure by
+//   to an empty result and render as zero adoption: a fabricated figure by
 //   omission, which is the one thing this product must never do.
 //
 // Both are tested against a stubbed fetch so the suite stays offline.

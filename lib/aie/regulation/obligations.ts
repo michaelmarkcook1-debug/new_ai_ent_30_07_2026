@@ -11,7 +11,7 @@
 //
 // RESEARCHED 5 AUGUST 2026. Every row carries the source it was read from and
 // the date that source was published. Where two sources disagreed the conflict
-// is recorded on the row rather than silently resolved — see Colorado, where
+// is recorded on the row rather than silently resolved, see Colorado, where
 // two trackers still described a law that had been repealed three months
 // earlier.
 //
@@ -90,7 +90,7 @@ export const OBLIGATIONS: Obligation[] = [
     effectiveDate: "2025-08-02",
     binds: "provider",
     soWhat:
-      "This one lands on your vendor, not on you. It is why frontier providers now publish model documentation you can ask for — request it in procurement rather than accepting a datasheet written for marketing.",
+      "This one lands on your vendor, not on you. It is why frontier providers now publish model documentation you can ask for: request it in procurement rather than accepting a datasheet written for marketing.",
     affectedVendorIds: FRONTIER,
     source: {
       name: "Regulation (EU) 2024/1689 (EU AI Act), Chapter V",
@@ -102,14 +102,14 @@ export const OBLIGATIONS: Obligation[] = [
   {
     id: "eu_digital_omnibus_in_force",
     jurisdiction: "European Union",
-    regime: "Digital Omnibus on AI — Regulation (EU) 2026/1744",
+    regime: "Digital Omnibus on AI: Regulation (EU) 2026/1744",
     provision: null,
     requires:
       "Amends the AI Act: defers the standalone high-risk deadline, defers product-embedded high-risk, and adds two prohibited practices.",
     effectiveDate: "2026-07-27",
     binds: "both",
     soWhat:
-      "The AI Act is no longer the 2024 text. Any readiness plan written before August 2026 is planning to dates that have moved — reread it against the amended timetable rather than assuming your deadline held.",
+      "The AI Act is no longer the 2024 text. Any readiness plan written before August 2026 is planning to dates that have moved: reread it against the amended timetable rather than assuming your deadline held.",
     affectedVendorIds: [],
     source: {
       name: "Orrick, 'EU AI Act Update: Digital Omnibus Finalizes 8 Compliance Changes'",
@@ -130,7 +130,7 @@ export const OBLIGATIONS: Obligation[] = [
     effectiveDate: "2026-08-02",
     binds: "deployer",
     soWhat:
-      "Already live, and it binds you rather than your vendor. Every customer-facing assistant, generated image and synthetic voice in your estate needs a disclosure — this is the obligation most likely to be quietly breached today.",
+      "Already live, and it binds you rather than your vendor. Every customer-facing assistant, generated image and synthetic voice in your estate needs a disclosure: this is the obligation most likely to be quietly breached today.",
     affectedVendorIds: [],
     source: {
       name: "Regulation (EU) 2024/1689, Article 50, as amended",
@@ -202,7 +202,7 @@ export const OBLIGATIONS: Obligation[] = [
     regime: "EU AI Act",
     provision: "Annex III (standalone high-risk)",
     requires:
-      "Risk management, data governance, technical documentation, human oversight, conformity assessment and post-market monitoring for standalone high-risk systems — hiring, credit, education, law enforcement.",
+      "Risk management, data governance, technical documentation, human oversight, conformity assessment and post-market monitoring for standalone high-risk systems: hiring, credit, education, law enforcement.",
     effectiveDate: "2027-12-02",
     binds: "both",
     soWhat:
@@ -222,7 +222,7 @@ export const OBLIGATIONS: Obligation[] = [
     regime: "EU AI Act",
     provision: "Annex I (product-embedded high-risk)",
     requires:
-      "The same high-risk obligations, for AI embedded as a safety component in products already regulated by EU harmonisation law — medical devices, machinery, vehicles.",
+      "The same high-risk obligations, for AI embedded as a safety component in products already regulated by EU harmonisation law: medical devices, machinery, vehicles.",
     effectiveDate: "2028-08-02",
     binds: "both",
     soWhat:
@@ -240,7 +240,7 @@ export const OBLIGATIONS: Obligation[] = [
   // ─────────────────────────────────────────────────── United States
   {
     id: "us_ca_sb53_frontier",
-    jurisdiction: "United States — California",
+    jurisdiction: "United States / California",
     regime: "Transparency in Frontier AI Act (SB 53)",
     provision: null,
     requires:
@@ -248,10 +248,10 @@ export const OBLIGATIONS: Obligation[] = [
     effectiveDate: "2026-01-01",
     binds: "provider",
     soWhat:
-      "Your frontier vendor now publishes a safety framework by law. Read it — it is the first document in this market that a provider is legally exposed for misstating.",
+      "Your frontier vendor now publishes a safety framework by law. Read it: it is the first document in this market that a provider is legally exposed for misstating.",
     affectedVendorIds: FRONTIER,
     source: {
-      name: "White & Case, AI Watch: Global regulatory tracker — United States",
+      name: "White & Case, AI Watch: Global regulatory tracker: United States",
       url: "https://www.whitecase.com/insight-our-thinking/ai-watch-global-regulatory-tracker-united-states",
       published: "2026-07-01",
       evidenceClass: "B",
@@ -259,7 +259,7 @@ export const OBLIGATIONS: Obligation[] = [
   },
   {
     id: "us_ca_ab2013_training_data",
-    jurisdiction: "United States — California",
+    jurisdiction: "United States / California",
     regime: "Generative AI Training Data Transparency (AB 2013)",
     provision: null,
     requires:
@@ -270,7 +270,7 @@ export const OBLIGATIONS: Obligation[] = [
       "Gives you a documented answer to the training-data question your legal team asks in every AI procurement. Ask for the published summary by name rather than accepting a verbal assurance.",
     affectedVendorIds: FRONTIER,
     source: {
-      name: "White & Case, AI Watch: Global regulatory tracker — United States",
+      name: "White & Case, AI Watch: Global regulatory tracker: United States",
       url: "https://www.whitecase.com/insight-our-thinking/ai-watch-global-regulatory-tracker-united-states",
       published: "2026-07-01",
       evidenceClass: "B",
@@ -278,7 +278,7 @@ export const OBLIGATIONS: Obligation[] = [
   },
   {
     id: "us_tx_traiga",
-    jurisdiction: "United States — Texas",
+    jurisdiction: "United States / Texas",
     regime: "TRAIGA (HB 149)",
     provision: null,
     requires:
@@ -289,7 +289,7 @@ export const OBLIGATIONS: Obligation[] = [
       "The safe harbour is the useful part: adopting the NIST AI Risk Management Framework satisfies Texas and most of what the other states ask for. One framework, several jurisdictions.",
     affectedVendorIds: [],
     source: {
-      name: "White & Case, AI Watch: Global regulatory tracker — United States",
+      name: "White & Case, AI Watch: Global regulatory tracker: United States",
       url: "https://www.whitecase.com/insight-our-thinking/ai-watch-global-regulatory-tracker-united-states",
       published: "2026-07-01",
       evidenceClass: "B",
@@ -297,7 +297,7 @@ export const OBLIGATIONS: Obligation[] = [
   },
   {
     id: "us_il_hb3773_employment",
-    jurisdiction: "United States — Illinois",
+    jurisdiction: "United States / Illinois",
     regime: "HB 3773 (Illinois Human Rights Act amendment)",
     provision: null,
     requires:
@@ -308,7 +308,7 @@ export const OBLIGATIONS: Obligation[] = [
       "Squarely yours, not your vendor's. If AI touches sifting, scoring or scheduling in hiring, the notice requirement applies now and the discrimination exposure sits with you as employer.",
     affectedVendorIds: [],
     source: {
-      name: "White & Case, AI Watch: Global regulatory tracker — United States",
+      name: "White & Case, AI Watch: Global regulatory tracker: United States",
       url: "https://www.whitecase.com/insight-our-thinking/ai-watch-global-regulatory-tracker-united-states",
       published: "2026-07-01",
       evidenceClass: "B",
@@ -316,7 +316,7 @@ export const OBLIGATIONS: Obligation[] = [
   },
   {
     id: "us_co_sb189_admt",
-    jurisdiction: "United States — Colorado",
+    jurisdiction: "United States / Colorado",
     regime: "SB 26-189 (automated decision-making technology)",
     provision: null,
     requires:
@@ -324,7 +324,7 @@ export const OBLIGATIONS: Obligation[] = [
     effectiveDate: "2027-01-01",
     binds: "both",
     soWhat:
-      "Much narrower than the law it replaced: the duty of care, impact assessments and mandatory risk programmes are gone. If you built a Colorado AI Act programme in 2025, most of it is no longer required — check before you spend another quarter on it.",
+      "Much narrower than the law it replaced: the duty of care, impact assessments and mandatory risk programmes are gone. If you built a Colorado AI Act programme in 2025, most of it is no longer required: check before you spend another quarter on it.",
     affectedVendorIds: [],
     moved: { from: "2026-06-30", by: "SB 189, signed 14 May 2026, repealing SB 24-205" },
     source: {
@@ -338,7 +338,7 @@ export const OBLIGATIONS: Obligation[] = [
   },
   {
     id: "us_ny_raise_act",
-    jurisdiction: "United States — New York",
+    jurisdiction: "United States / New York",
     regime: "RAISE Act",
     provision: null,
     requires:
@@ -349,7 +349,7 @@ export const OBLIGATIONS: Obligation[] = [
       "New York following California means frontier-model transparency is becoming the US default rather than one state's experiment. Expect the published safety framework to become a standard procurement artefact.",
     affectedVendorIds: FRONTIER,
     source: {
-      name: "White & Case, AI Watch: Global regulatory tracker — United States",
+      name: "White & Case, AI Watch: Global regulatory tracker: United States",
       url: "https://www.whitecase.com/insight-our-thinking/ai-watch-global-regulatory-tracker-united-states",
       published: "2026-07-01",
       evidenceClass: "B",
@@ -357,7 +357,7 @@ export const OBLIGATIONS: Obligation[] = [
   },
   {
     id: "us_ca_ccpa_admt",
-    jurisdiction: "United States — California",
+    jurisdiction: "United States / California",
     regime: "CCPA automated decision-making regulations",
     provision: null,
     requires:
@@ -368,7 +368,7 @@ export const OBLIGATIONS: Obligation[] = [
       "The opt-out is the operationally hard part. A consumer right to refuse automated decisioning has to be built into the product, not bolted on as a policy, so this belongs in a roadmap now rather than in a compliance review in 2027.",
     affectedVendorIds: [],
     source: {
-      name: "White & Case, AI Watch: Global regulatory tracker — United States",
+      name: "White & Case, AI Watch: Global regulatory tracker: United States",
       url: "https://www.whitecase.com/insight-our-thinking/ai-watch-global-regulatory-tracker-united-states",
       published: "2026-07-01",
       evidenceClass: "B",
@@ -381,7 +381,7 @@ export const OBLIGATIONS: Obligation[] = [
   // waiting to be filled: existing regulators apply existing law within their
   // remits. So the UK obligations that bite are data-protection ones, and they
   // land on the deployer almost without exception. A buyer told "the UK has
-  // not regulated AI yet" has been misled — three duties came into force in
+  // not regulated AI yet" has been misled: three duties came into force in
   // the first half of 2026.
   {
     id: "uk_duaa_s80_adm",
@@ -452,7 +452,7 @@ export function inForce(asOf: Date): Obligation[] {
   );
 }
 
-/** Not yet in force, soonest first — the countdown list. */
+/** Not yet in force, soonest first: the countdown list. */
 export function upcoming(asOf: Date): Obligation[] {
   const iso = asOf.toISOString().slice(0, 10);
   return OBLIGATIONS.filter((o) => o.effectiveDate > iso).sort((a, b) =>

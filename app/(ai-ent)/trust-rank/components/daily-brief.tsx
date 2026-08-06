@@ -89,8 +89,8 @@ function ObligationRow({
 
           Native details/summary rather than a state hook, so this stays a
           server component and costs no client JavaScript. The two things a
-          reader must not have to open a row to discover — that a date moved,
-          and that it lands on a vendor they watch — are flagged in the
+          reader must not have to open a row to discover (that a date moved,
+          and that it lands on a vendor they watch) are flagged in the
           summary itself. */}
       <details className="group py-3">
         <summary className="flex cursor-pointer list-none flex-wrap items-baseline gap-x-2 gap-y-1">
@@ -189,7 +189,7 @@ export function DailyBrief({
   const onYouLive = onYou.filter((o) => daysUntil(o, asOf) <= 0);
 
   const jurisdictions = [
-    ...new Set(OBLIGATIONS.map((o) => o.jurisdiction.split(" — ")[0])),
+    ...new Set(OBLIGATIONS.map((o) => o.jurisdiction.split(" / ")[0])),
   ];
 
   return (
@@ -220,7 +220,7 @@ export function DailyBrief({
         <p className="measure mt-3 rounded border border-base-300 bg-base-200/40 px-3 py-2 text-[12.5px] leading-relaxed">
           <b>Nothing here is filtered to you yet.</b> Shortlist the vendors you
           actually run and this becomes a verdict on yours rather than the
-          market&apos;s — the obligations landing on your providers get called
+          market&apos;s: the obligations landing on your providers get called
           out by name.{" "}
           <Link
             href="/vendor-view"
@@ -247,7 +247,7 @@ export function DailyBrief({
 
       <div className="mt-4">
         <p className="micro-label">
-          Coming — {next.length} dated, soonest first · open a row for the
+          Coming: {next.length} dated, soonest first · open a row for the
           detail and its source
         </p>
         <ul className="mt-1">
@@ -259,7 +259,7 @@ export function DailyBrief({
 
       <div className="mt-5">
         <p className="micro-label">
-          Already in force — {live.length}, most recent first
+          Already in force: {live.length}, most recent first
         </p>
         <ul className="mt-1">
           {live.map((o) => (
@@ -271,7 +271,7 @@ export function DailyBrief({
       <p className="measure mt-4 rounded border border-warn/40 bg-warn-bg/40 px-3 py-2 text-[11.5px] leading-relaxed">
         <b>This is a research summary, not legal advice.</b> Every row links the
         source it was read from and the date that source was published, because
-        this area moves and secondary commentary goes stale fast — two public
+        this area moves and secondary commentary goes stale fast: two public
         trackers still described a Colorado law that had been repealed three
         months earlier. Researched {shortDate(OBLIGATIONS_RESEARCHED_AT)}. Check
         the primary instrument before you commit budget to a date.

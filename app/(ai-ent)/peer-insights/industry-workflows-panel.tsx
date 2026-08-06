@@ -88,7 +88,7 @@ export function IndustryWorkflowsPanel({ segment }: { segment: string }) {
           Pick an industry above and this narrows to the workflows tagged to
           it. Until then, these are the{" "}
           <b className="text-base-content">{set.horizontal.length}</b>{" "}
-          workflows run across every industry — the common ground, out of{" "}
+          workflows run across every industry: the common ground, out of{" "}
           {WORKFLOW_LIBRARY_SIZE} in the library.
         </p>
       ) : (
@@ -102,7 +102,7 @@ export function IndustryWorkflowsPanel({ segment }: { segment: string }) {
           {set.specific.length > 0 && set.specific.length < 3 ? (
             <>
               {" "}
-              That specific list is thin — the industry tagging is editorial
+              That specific list is thin: the industry tagging is editorial
               and this sector has had little of it, so read the absence as
               missing curation rather than a sector that does nothing
               distinctive.
@@ -124,7 +124,7 @@ export function IndustryWorkflowsPanel({ segment }: { segment: string }) {
         <p className="measure mt-3 rounded border border-base-300 bg-base-200/40 px-3 py-2 text-[12px] text-muted">
           No workflow in the library is tagged to {segmentLabel} specifically.
           That is a gap in the library rather than a finding about the
-          industry — the tagging is editorial, and an untagged sector means
+          industry: the tagging is editorial, and an untagged sector means
           nobody has curated it yet, not that its firms run nothing distinctive.
         </p>
       ) : null}
@@ -183,7 +183,7 @@ export function IndustryWorkflowsPanel({ segment }: { segment: string }) {
           ) : null}
           <p>
             A workflow with no industry tag, or an explicitly empty one, is
-            horizontal — it runs anywhere. That is a deliberate value in the
+            horizontal: it runs anywhere. That is a deliberate value in the
             library and not missing data, which is why those{" "}
             {set.horizontal.length} entries are shown as common ground rather
             than hidden.

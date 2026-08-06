@@ -11,8 +11,8 @@ export const metadata = { title: "AI Adoption | AI Enterprise" };
 // public data, and what replaced the part that failed it.
 //
 // The peer-adoption slice now lives on /peer-insights. It answered a narrower
-// question than the rest of this page — "who are firms like mine buying"
-// rather than "how far has the market got" — and it was the one panel here
+// question than the rest of this page , "who are firms like mine buying"
+// rather than "how far has the market got", and it was the one panel here
 // reading a modelled estimate rather than a measurement. The caveat that used
 // to sit above it travelled with it; what remains below is a pointer, because
 // a warning about a slice that is no longer on the page would be worse than
@@ -112,13 +112,13 @@ export default function AiAdoptionPage() {
             is not: it pulls live for every selection, but what it pulls is a
             modelled estimate dated May 2026 whose ordering puts OpenAI ahead
             of Anthropic, which both measurements above, taken later,
-            contradict. Read that slice for its shape — which vendors appear
-            at all, and how concentrated it is — and read these figures for
+            contradict. Read that slice for its shape (which vendors appear
+            at all, and how concentrated it is) and read these figures for
             the ranking.
           </p>
           <p className="mt-2 text-xs text-muted">
-            Category-level market shares — who leads frontier APIs, enterprise
-            assistants, coding agents — are a separate AIE dataset with its own
+            Category-level market shares (who leads frontier APIs, enterprise
+            assistants, coding agents) are a separate AIE dataset with its own
             per-row source, confidence and methodology, and live on{" "}
             <a href="/market-watch" className="font-semibold text-primary hover:underline">
               Market Watch

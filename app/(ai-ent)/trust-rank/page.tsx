@@ -14,12 +14,25 @@ import { analystNews } from "@/lib/analyst/news-source";
 import { DailyBrief } from "./components/daily-brief";
 import { readWatchState } from "@/lib/changes/watchlist";
 // Folded in from /security-desk, 5 August 2026. Security posture and
-// regulatory exposure are one question for a buyer — "can I defend this
-// choice" — and splitting them across two tabs meant a reader answering it
+// regulatory exposure are one question for a buyer , "can I defend this
+// choice", and splitting them across two tabs meant a reader answering it
 // had to know to visit both.
 import { CyberRiskPanel } from "../security-desk/components/cyber-risk-panel";
 import { LabsSection } from "../security-desk/components/labs-section";
 import { loadLabPostures } from "../security-desk/data";
+// Ported from The Security Desk, 5 August 2026. Trust Rank answered what the
+// law binds you to and how each vendor's governance is assessed; it did not
+// answer the question a buyer asks first, which is what this vendor's own
+// contract says it may do with our data. That answer exists, quoted, and now
+// sits above the assessment rather than in a second product.
+import { PrivacyIpShield } from "./components/privacy-ip-shield";
+import { SovereigntyLens } from "./components/sovereignty-lens";
+import { SHIELD_VERSION } from "@/lib/shield/data";
+import { shieldFreshness } from "@/lib/shield/freshness";
+import {
+  shieldSlugsOnList,
+  unmappedShieldSlugs,
+} from "@/lib/shield/vendor-map";
 
 // The Analyst Insight is a pure function of this page's data, so it only says
 // something new when an input changes. News is the input that moves daily and
@@ -57,19 +70,35 @@ export default async function TrustRankPage() {
     m.vendors.slice(0, 12).map((v) => v.name)
   );
 
+  // The Shield's own clock, read against the same `asOf` as every other
+  // countdown on the page.
+  const freshness = shieldFreshness(SHIELD_VERSION, asOf);
+  const shieldOnList = [...shieldSlugsOnList(watch.vendorIds)];
 
   return (
     <>
       <PageHeader
         title="Trust Rank"
-        subtitle="The vendor-oriented view over AI legislation: a jurisdiction grid with a vendor lens, vendor-specific rulings, dated regulatory events, and the evidence-graded governance assessment for the selected vendor."
-        lanes={["aie", postures.lane]}
+        subtitle="What each vendor's own contract says it may do with your data, quoted from their published terms; whose government can reach it; what AI legislation binds you rather than them; and the evidence-graded governance assessment underneath."
+        lanes={["cited", "aie", postures.lane]}
       />
       <AnalystInsight
         insight={written.value}
         authorship={written.authorship}
         context="governance"
       />
+      {/* The contract question comes before the compliance question. A reader
+          asking "can I defend this choice" needs to know what the vendor has
+          committed to in writing before they need to know which statute lands
+          on them, and until now this page only answered the second. */}
+      <div className="mt-4 space-y-4">
+        <PrivacyIpShield
+          freshness={freshness}
+          onList={shieldOnList}
+          unmapped={unmappedShieldSlugs()}
+        />
+        <SovereigntyLens onList={shieldOnList} />
+      </div>
       <div className="mt-4">
         <DailyBrief asOf={asOf} watchedVendorIds={watch.vendorIds} />
       </div>

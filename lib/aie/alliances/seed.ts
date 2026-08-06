@@ -674,7 +674,7 @@ export const CHANNEL_LINKS: ChannelLink[] = [
     ],
     "spotlight": {
       "relationship": "Firm-wide Claude rollout",
-      "summary": "Anthropic’s largest deployment — Claude across Deloitte’s ~470,000 people, with 15,000 to be certified.",
+      "summary": "Anthropic’s largest deployment: Claude across Deloitte’s ~470,000 people, with 15,000 to be certified.",
       "proofPoints": [
         {
           "label": "Scale",
@@ -1191,7 +1191,7 @@ export const CHANNEL_LINKS: ChannelLink[] = [
     ],
     "spotlight": {
       "relationship": "First LLM-provider partnership",
-      "summary": "McKinsey’s first LLM-provider partnership, run through QuantumBlack — a defensible “first management-consulting LLM partnership.”",
+      "summary": "McKinsey’s first LLM-provider partnership, run through QuantumBlack: a defensible “first management-consulting LLM partnership.”",
       "proofPoints": [
         {
           "label": "Firsts",
@@ -1412,7 +1412,7 @@ export const CHANNEL_LINKS: ChannelLink[] = [
     ],
     "spotlight": {
       "relationship": "First ChatGPT Enterprise reseller",
-      "summary": "ChatPwC deployed to staff worldwide, and PwC is OpenAI’s first ChatGPT Enterprise reseller — one of the largest single ChatGPT Enterprise footprints.",
+      "summary": "ChatPwC deployed to staff worldwide, and PwC is OpenAI’s first ChatGPT Enterprise reseller: one of the largest single ChatGPT Enterprise footprints.",
       "proofPoints": [
         {
           "label": "Users",
@@ -1719,7 +1719,7 @@ export const CHANNEL_LINKS: ChannelLink[] = [
       "proofPoints": [
         {
           "label": "Platform",
-          "value": "RAISE — Mistral-powered, sovereign EU deployment"
+          "value": "RAISE: Mistral-powered, sovereign EU deployment"
         },
         {
           "label": "Industrial anchor",
@@ -1740,7 +1740,7 @@ export const ALLIANCE_VENTURES: AllianceVenture[] = [
     "vendorId": "openai",
     "vendorName": "OpenAI",
     "title": "The OpenAI Deployment Company",
-    "summary": "A PE-backed venture that embeds forward-deployed engineers to stand OpenAI up inside enterprises — OpenAI building its own delivery arm rather than leaning only on the GSIs.",
+    "summary": "A PE-backed venture that embeds forward-deployed engineers to stand OpenAI up inside enterprises: OpenAI building its own delivery arm rather than leaning only on the GSIs.",
     "proofPoints": [
       {
         "label": "Capital raised",
@@ -1765,7 +1765,7 @@ export const ALLIANCE_VENTURES: AllianceVenture[] = [
     "vendorId": "anthropic",
     "vendorName": "Anthropic",
     "title": "Anthropic × Goldman Sachs, Blackstone & Hellman & Friedman JV",
-    "summary": "A $1.5B enterprise-AI-services joint venture (each backer ~$300M) targeting mid-size and PE-owned firms — capital-backed Claude delivery aimed at the mid-market.",
+    "summary": "A $1.5B enterprise-AI-services joint venture (each backer ~$300M) targeting mid-size and PE-owned firms: capital-backed Claude delivery aimed at the mid-market.",
     "proofPoints": [
       {
         "label": "Size",

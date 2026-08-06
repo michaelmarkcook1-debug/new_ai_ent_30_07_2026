@@ -54,7 +54,7 @@ const MODEL_AGE_MONTHS = 3;
 // honest:
 //
 //   Organisation size did nothing. The API ignores companySize and size
-//   entirely — its scope comes back {industry, region} whatever you send — so
+//   entirely (its scope comes back {industry, region} whatever you send) so
 //   the control only ever re-weighted a local copy of the data while the
 //   badge said live. A filter that changes the label and not the answer is
 //   worse than no filter.
@@ -77,7 +77,7 @@ interface UptakeResponse {
 
 /**
  * `onSegmentChange` lets the page mirror the industry choice into the panel
- * below without a second selector. The explorer still owns the state — a
+ * below without a second selector. The explorer still owns the state: a
  * fully controlled component would have meant lifting the live-fetch effect
  * out with it, and the fetch belongs next to the chart it fills.
  */
@@ -222,7 +222,7 @@ export function PeerAdoptionExplorer({
           <p className="mt-1.5">
             This ordering puts OpenAI ahead of Anthropic; the two measurements
             below, both later than the model, disagree. Read the shape of the
-            slice — which vendors appear at all, and how concentrated it is —
+            slice (which vendors appear at all, and how concentrated it is)
             rather than the order of the top two.
           </p>
           <p className="mt-2 border-t border-warn/30 pt-2">
@@ -239,7 +239,7 @@ export function PeerAdoptionExplorer({
                 >
                   {s.label}
                 </a>
-                <span className="text-muted"> — {s.says}</span>
+                <span className="text-muted">: {s.says}</span>
               </li>
             ))}
           </ul>
@@ -266,7 +266,7 @@ export function PeerAdoptionExplorer({
             Two filters were removed rather than repaired. Organisation size was
             ignored by the endpoint entirely, so it only ever re-weighted a
             local copy while the badge said live. Global is not an upstream
-            value — it is the absence of a region filter, and is sent that way.
+            value: it is the absence of a region filter, and is sent that way.
           </p>
           <p className="text-muted">
             These are directional adoption-share estimates, not disclosed vendor

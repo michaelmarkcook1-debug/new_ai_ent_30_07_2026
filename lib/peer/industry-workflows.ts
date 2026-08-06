@@ -7,7 +7,7 @@ import type { IndustryTag } from "@/lib/aie/use-cases";
 // uptake model. This answers the question a reader asks immediately after,
 // which nothing in the product currently does: what are firms like mine
 // using AI FOR. The workflow library has carried the answer since it was
-// ported — every entry is tagged with the industries it is common in — but
+// ported , every entry is tagged with the industries it is common in, but
 // the library has only ever been read in one direction, workflow to vendors,
 // on Workflow Shortlist. This is the reverse lookup.
 //
@@ -47,7 +47,7 @@ export const MAPPING_NOTES: Record<string, string> = {
   "Financial services":
     "Includes insurance: the uptake engine treats them as one segment, and their AI workflows overlap heavily on claims, underwriting and fraud.",
   "Healthcare / life sciences":
-    "Spans care delivery and pharma. Their workflows differ sharply — clinical documentation against drug discovery — so both sets are shown rather than one standing in for the other.",
+    "Spans care delivery and pharma. Their workflows differ sharply , clinical documentation against drug discovery, so both sets are shown rather than one standing in for the other.",
   "Manufacturing / industrials":
     "Includes energy and utilities, which the uptake engine does not separate and which share predictive-maintenance and asset-monitoring workflows.",
   "Retail / consumer / ecommerce":

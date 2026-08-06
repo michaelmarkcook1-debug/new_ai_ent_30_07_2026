@@ -144,7 +144,7 @@ describe("the private ladder", () => {
 
   it("never shows a derived range where a reported figure exists", () => {
     // Anthropic, Cohere, Databricks and OpenAI all carry reported revenue
-    // now, so every one of them must sit on STATED — a valuation-implied
+    // now, so every one of them must sit on STATED: a valuation-implied
     // range shown over a real figure would be an invention wearing a badge.
     for (const id of ["anthropic", "cohere", "databricks", "openai"]) {
       const row = priv(id);
@@ -156,7 +156,7 @@ describe("the private ladder", () => {
 
   it("serves the latest figure on the verified timeline", () => {
     // Anthropic's dated series runs $9B (Dec 2025) to $30B (Apr) to $47B
-    // (Jun). The dates were verified against primary reporting — the feed's
+    // (Jun). The dates were verified against primary reporting: the feed's
     // July re-report of the April figure would otherwise have put $30B on
     // top. The latest verified figure is the June floor.
     const a = priv("anthropic");
@@ -171,7 +171,7 @@ describe("the private ladder", () => {
     const o = priv("openai");
     expect(o.rung).toBe("stated");
     expect(o.stated!.valueUsd).toBe(25_000 * 1_000_000);
-    // "Approximately $25B", per two aggregators — not a floor.
+    // "Approximately $25B", per two aggregators, not a floor.
     expect(o.stated!.isFloor).toBe(false);
   });
 

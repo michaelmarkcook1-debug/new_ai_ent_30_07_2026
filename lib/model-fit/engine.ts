@@ -1,4 +1,4 @@
-// Workforce Model Fit — the join engine, ported from the integration package's
+// Workforce Model Fit: the join engine, ported from the integration package's
 // reference implementation (pkg/02_engine/engine.py, 2 August 2026).
 //
 // The port is deliberately literal. The Python file is the reference and the two
@@ -348,8 +348,8 @@ function formatScore(v: number, integralAxis: boolean): string {
  * The reference interpolates a Python list into the reason string, so a model
  * short on assurance reads `missing ['audit_logging', 'certifications']`.
  * JSON.stringify produces double quotes and no spaces, which is a different
- * string. Nothing in the current catalogue reaches this line — data handling
- * and assurance are null for all 330 models — but it fires the day the
+ * string. Nothing in the current catalogue reaches this line: data handling
+ * and assurance are null for all 330 models, but it fires the day the
  * catalogue publishes those columns, which is the point of matching it now.
  */
 function formatMissing(items: string[]): string {

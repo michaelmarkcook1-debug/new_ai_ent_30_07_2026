@@ -18,7 +18,7 @@ import { join } from "node:path";
 // them.
 //
 // The fix was to derive the counts at the point of render. This test is the
-// other half of that fix — it fails if anyone reintroduces a hardcoded count,
+// other half of that fix: it fails if anyone reintroduces a hardcoded count,
 // which is the only way the drift can come back.
 
 const ROOT = join(__dirname, "..");
@@ -38,7 +38,7 @@ describe("derived library counts", () => {
   });
 
   it("has grown past the counts the stale copy quoted", () => {
-    // Not asserting exact values — the library is meant to grow, and a test
+    // Not asserting exact values: the library is meant to grow, and a test
     // that pins it would have to be edited every time it does, which is the
     // same failure mode in a different place. These are floors.
     expect(LIBRARY_ROLE_COUNT).toBeGreaterThanOrEqual(294);
@@ -48,8 +48,8 @@ describe("derived library counts", () => {
 
   it("states no library size as a literal in user-facing copy", () => {
     // The specific pair that went stale. "258 roles" and "29 industries" are
-    // now only allowed to appear as provenance — the 258 that shipped with the
-    // package, as distinct from the researched additions — never as the
+    // now only allowed to appear as provenance (the 258 that shipped with the
+    // package, as distinct from the researched additions) never as the
     // library's current size.
     for (const rel of COPY_FILES) {
       const src = readFileSync(join(ROOT, rel), "utf8");

@@ -14,7 +14,7 @@ import { ADOPTION_SEGMENTS } from "@/app/(ai-ent)/peer-insights/data";
 describe("segment to industry mapping", () => {
   it("covers every segment the explorer can select", () => {
     // A segment with no mapping would silently show only horizontal
-    // workflows while the heading named the industry — the same class of
+    // workflows while the heading named the industry: the same class of
     // bug that killed the old archetype menu.
     for (const s of ADOPTION_SEGMENTS) {
       expect(
@@ -29,7 +29,7 @@ describe("segment to industry mapping", () => {
     // Held against the declared IndustryTag union rather than the tags that
     // happen to have records. "Professional services / consulting" maps to
     // professional_services, which is the right tag and which no record
-    // currently carries — a gap in the library, not an error in the mapping,
+    // currently carries: a gap in the library, not an error in the mapping,
     // and the panel says exactly that on screen rather than showing an empty
     // list under an industry heading.
     const declared = new Set(
@@ -120,7 +120,7 @@ describe("workflowsForSegment", () => {
 
 describe("the library size quoted to readers", () => {
   // Regression. The copy claimed 146 granular entries in three places while
-  // the array held 85 — an overstatement of 72% quoted at buyers as a
+  // the array held 85: an overstatement of 72% quoted at buyers as a
   // measure of coverage. Any file naming a count must name the real one.
   it("matches the array in every file that quotes it", () => {
     expect(WORKFLOW_LIBRARY_SIZE).toBe(USE_CASES.length);

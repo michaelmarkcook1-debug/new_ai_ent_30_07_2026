@@ -24,7 +24,7 @@ const CACHE_TTL_MS = 300_000;
 // The three series that are observations. `usage` is deliberately absent.
 //
 // It was listed here and answered 200 with an empty movement set and the note
-// "First observations recorded" — which read as a pipeline that had started
+// "First observations recorded", which read as a pipeline that had started
 // and would fill up, when in fact nothing can ever land there. Usage is
 // recorded as events in `aie.usage_event`, aggregated by the `usage_summary`
 // function, and served by /api/admin/overview. It is not an observation and
@@ -84,7 +84,7 @@ export async function GET(
       runs(5),
     ]);
     const movements = toMovements(rows);
-    // Biggest movers first, and subjects with no comparison yet at the end —
+    // Biggest movers first, and subjects with no comparison yet at the end:
     // they are not "no change", they are "not yet comparable", and sorting
     // them among the flat ones would blur that.
     movements.sort((a, b) => {
@@ -115,7 +115,7 @@ export async function GET(
         // misleading of the two by far: it turns a silent failure into a
         // progress report.
         total === 0
-          ? "No observations in this series yet. Nothing has been recorded, so there is nothing to compare — this is an empty series rather than a young one."
+          ? "No observations in this series yet. Nothing has been recorded, so there is nothing to compare: this is an empty series rather than a young one."
           : withComparison === 0
             ? "First observations recorded. Movement appears once a second reading exists, and nothing here is shown as a change until then."
             : `${withComparison} of ${movements.length} tracked figures have two or more observations and can be compared.`,

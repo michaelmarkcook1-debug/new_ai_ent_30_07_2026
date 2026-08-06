@@ -94,7 +94,7 @@ export function PrivateRevenuePanel({
         {pairs.length > 0 ? (
           <div className="mt-2">
             <p className="measure text-xs text-muted">
-              For scale, the multiples this product can actually observe — each
+              For scale, the multiples this product can actually observe: each
               a cited valuation over the nearest-in-time cited revenue:
             </p>
             <ul className="mt-1 flex flex-wrap gap-x-4 gap-y-0.5">
@@ -111,7 +111,7 @@ export function PrivateRevenuePanel({
                   {p.stale ? (
                     <span
                       className="ml-1 rounded bg-warn-bg px-1 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-warn"
-                      title={`The valuation and revenue citations are ${p.daysApart} days apart — this pair prices two different moments of the company and does not anchor the band.`}
+                      title={`The valuation and revenue citations are ${p.daysApart} days apart: this pair prices two different moments of the company and does not anchor the band.`}
                     >
                       stale
                     </span>
@@ -182,7 +182,7 @@ export function PrivateRevenuePanel({
                 {(() => {
                   // The cross-check lane: what an independently measured
                   // market implies for one slice of this vendor's revenue.
-                  // Never blended with the reported figure — when the two
+                  // Never blended with the reported figure: when the two
                   // differ by an order of magnitude, the gap is the finding.
                   const slice = marketSlice(r.vendorId);
                   if (!slice || !r.disclosed) return null;
@@ -203,7 +203,7 @@ export function PrivateRevenuePanel({
                       {ratio > 2 ? (
                         <>
                           {" "}
-                          — a fraction of the reported total, which says most
+: a fraction of the reported total, which says most
                           of this vendor&apos;s revenue sits outside what that
                           measure can see (consumer subscriptions, coding
                           tools, licensing). The two are different quantities

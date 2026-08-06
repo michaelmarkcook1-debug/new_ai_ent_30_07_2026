@@ -10,7 +10,7 @@ type Tool = "finding" | "assess";
 // The Decision Desk holds the two converging tools that used to be separate
 // tabs: Interrogate (a situation in, a source-cited finding out) and Assess
 // and Decide (your weights in, a derivable score out). They are two halves of
-// the same moment — the call a CIO has to defend — and separating them made
+// the same moment , the call a CIO has to defend, and separating them made
 // each look like a destination rather than a step.
 //
 // Both stay mounted and the inactive one is hidden, not unmounted: the

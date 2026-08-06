@@ -35,7 +35,7 @@ export function catalogueConfigured(): boolean {
  *
  * `usage` was once a member and should not be re-added. Usage is written as
  * events to `aie.usage_event` and read through the `usage_summary` function,
- * never as observations — so a `usage` series resolved to a valid query over
+ * never as observations, so a `usage` series resolved to a valid query over
  * an empty table, which is the worst kind of wrong: it answered successfully
  * and said nothing was there yet. Keeping it out of the type makes that a
  * compile error rather than an empty 200.
@@ -88,7 +88,7 @@ export interface IngestionRun {
  * `<from>-<to>/<total>`. That total is the only trustworthy way to know an
  * answer was cut short: PostgREST enforces its own row ceiling (1,000 on this
  * project) regardless of the `limit` asked for, so comparing the returned
- * length against our own limit silently misses it — which it did, returning
+ * length against our own limit silently misses it, which it did, returning
  * 1,000 of 1,252 model observations while reporting nothing was truncated.
  */
 async function getPage<T>(
@@ -133,7 +133,7 @@ async function get<T>(pathAndQuery: string): Promise<T[]> {
  * Every observation in a series, newest first.
  *
  * The limit exists to bound a runaway query, not to sample. It is set above
- * the current row count on purpose — the model series alone holds 1,252
+ * the current row count on purpose: the model series alone holds 1,252
  * observations, and a 500-row default silently returned an alphabetical
  * fraction of it while the response still read as complete. The caller is told
  * when the cap is reached (see `observationsWithCap`) rather than being handed
@@ -156,7 +156,7 @@ export function observations(
  * PostgREST caps a single response at 1,000 rows here whatever `limit` says,
  * so one request cannot return the 1,252-row model series. This pages until it
  * has them all, and reports `truncated` against the server's own count rather
- * than against our limit — a truncated answer is still useful, a truncated
+ * than against our limit: a truncated answer is still useful, a truncated
  * answer presented as complete is not.
  */
 export async function observationsWithCap(
@@ -211,7 +211,7 @@ export interface UsageSummaryRow {
 /**
  * Aggregate usage counts, via an RPC that returns GROUP BY totals only.
  *
- * The usage table itself stays unreadable from outside — no select policy —
+ * The usage table itself stays unreadable from outside , no select policy,
  * and that is not weakened here: the function returns which surface, which
  * action, how many, and when last. Nothing row-shaped ever leaves.
  */

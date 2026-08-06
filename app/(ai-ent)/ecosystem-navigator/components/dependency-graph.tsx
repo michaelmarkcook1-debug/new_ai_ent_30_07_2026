@@ -354,7 +354,7 @@ export function DependencyGraph() {
               <g
                 key={n.id}
                 transform={`translate(${p.x}, ${p.y})`}
-                aria-label={`${n.label} — ${n.category}`}
+                aria-label={`${n.label}: ${n.category}`}
                 onMouseEnter={() => setHovered(n.id)}
                 onClick={() => togglePin(n.id)}
                 style={{

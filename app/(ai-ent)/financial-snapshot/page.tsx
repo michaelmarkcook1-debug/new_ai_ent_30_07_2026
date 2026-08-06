@@ -28,8 +28,8 @@ export default async function FinancialSnapshotPage() {
   const privateRows = privateLadder();
 
   // The insight this page never had. financialInsight() was authored for it
-  // and wired to nothing, so the strongest finding on the page — that most AI
-  // revenue claims are in nobody's filings — was sitting in dead code.
+  // and wired to nothing, so the strongest finding on the page , that most AI
+  // revenue claims are in nobody's filings, was sitting in dead code.
   const news = await analystNews();
   const insight = financialInsight(
     pickNews(news.items, {

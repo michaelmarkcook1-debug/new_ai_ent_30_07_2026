@@ -53,7 +53,7 @@ describe("the record", () => {
 describe("estimateRevenue", () => {
   it("prefers a stated revenue over anything inferred, for every vendor that has both", () => {
     // Every vendor holding a valuation currently also has a reported revenue,
-    // so the disclosed lane must win across the board — a valuation-implied
+    // so the disclosed lane must win across the board: a valuation-implied
     // range shown where a real figure exists would be an invention.
     for (const v of new Set(VALUATIONS.map((x) => x.vendorId))) {
       const e = estimateRevenue(v, v);
@@ -64,7 +64,7 @@ describe("estimateRevenue", () => {
     expect(estimateRevenue("mistral", "Mistral").disclosed?.revenueUsdM).toBe(400);
     expect(estimateRevenue("anthropic", "Anthropic").disclosed?.revenueUsdM).toBe(47000);
     expect(estimateRevenue("databricks", "Databricks").disclosed?.revenueUsdM).toBe(6900);
-    // OpenAI's latest-dated record is a full-year 2026 target — a projection —
+    // OpenAI's latest-dated record is a full-year 2026 target , a projection,
     // so the disclosed figure must step back to the mid-year ARR.
     expect(estimateRevenue("openai", "OpenAI").disclosed?.revenueUsdM).toBe(25000);
   });
@@ -130,7 +130,7 @@ describe("observedMultiples", () => {
     const mistral = pairs.find((p) => p.vendorId === "mistral");
     expect(mistral).toBeDefined();
     expect(mistral!.vendorClass).toBe("frontier_lab");
-    // Both Mistral citations are dated 2026-08-01, so the gap is zero days —
+    // Both Mistral citations are dated 2026-08-01, so the gap is zero days:
     // and the pairing must pick the same-day $400M floor over the 2025 annual.
     expect(mistral!.daysApart).toBe(0);
     expect(mistral!.multiple).toBeCloseTo(54, 1);
@@ -221,7 +221,7 @@ describe("the dated series", () => {
 
   it("never lets a projection become the figure", () => {
     // A vendor whose only record is a projection must fall through to the
-    // valuation lane or to no basis — never to "disclosed".
+    // valuation lane or to no basis, never to "disclosed".
     for (const v of new Set(REVENUES.map((r) => r.vendorId))) {
       const records = REVENUES.filter((r) => r.vendorId === v);
       if (records.every((r) => r.basis === "projection")) {

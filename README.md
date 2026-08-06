@@ -10,18 +10,18 @@ runs locally, and is also deployed at https://newaient30072026.vercel.app.
 
 Three documents, written for a team picking this up rather than for the demo:
 
-- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** — routes, data flow, the
+- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)**: routes, data flow, the
   BoardRadar dependency, Supabase, env vars, and the constraints that look
   arbitrary until you break one.
-- **[docs/DATA-SOURCES.md](docs/DATA-SOURCES.md)** — every dataset behind every
+- **[docs/DATA-SOURCES.md](docs/DATA-SOURCES.md)**: every dataset behind every
   page, its vintage, its refresh cadence, and which lane it is badged as.
   Section 0.1 is the per-page table, including which pages still show SAMPLE.
-- **[docs/MVP-SCOPE.md](docs/MVP-SCOPE.md)** — what is genuinely done, the four
+- **[docs/MVP-SCOPE.md](docs/MVP-SCOPE.md)**: what is genuinely done, the four
   pages that are not demonstrable as live, and the backlog to production.
-- **[docs/RUNBOOK.md](docs/RUNBOOK.md)** — how to run, refresh, ship and check
+- **[docs/RUNBOOK.md](docs/RUNBOOK.md)**: how to run, refresh, ship and check
   it: the four gates, the deploy that needs a retry, what an ingestion costs,
   and the two traps that have already cost us a day each.
-- **[docs/API.md](docs/API.md)** — the contracts: every endpoint's real
+- **[docs/API.md](docs/API.md)**: the contracts: every endpoint's real
   response shape, the error envelope, the Postgres schema, the RLS policies
   and the source register. Captured from production, not written from types.
 
@@ -53,7 +53,7 @@ Then open http://localhost:3000 in your browser. A sign-in box appears:
 enter the demo username and password from `.env.local` (`DEMO_USER` and
 `DEMO_PASS`; the defaults are `eai` and `change-me`).
 
-The **deployed site is deliberately open** — neither variable is set in
+The **deployed site is deliberately open**: neither variable is set in
 Vercel, and the gate in `middleware.ts` opens when either is missing. That
 is a decision, not an oversight: the demo is meant to be shareable by link.
 Setting either variable in Vercel would close it.
@@ -66,8 +66,8 @@ Rank, Integrators). Paired pages share a row and expand when that part of
 the site is open.
 
 `/admin` is not in the sidebar and is reached by typing the URL. It is the
-operator's view — catalogue contents, ingestion-run history and the priced
-cost of each run — not part of the buyer journey.
+operator's view (catalogue contents, ingestion-run history and the priced
+cost of each run) not part of the buyer journey.
 
 ## Reading the badges (this matters)
 
@@ -110,7 +110,7 @@ role, and what the same people would cost on the top model instead.
 It sits on the ModelEngine tab (route /market-view). 294 roles across 36
 industries against 330 priced models. Those figures are derived from the
 data at render time (`LIBRARY_ROLE_COUNT`, `LIBRARY_INDUSTRY_COUNT`), not
-typed into the copy — this sentence said "258 across 29" for a fortnight
+typed into the copy: this sentence said "258 across 29" for a fortnight
 after the library grew, because it was a literal and growing the data never
 touched it.
 
@@ -153,12 +153,12 @@ Four gates, all of which must pass before a deploy:
 ```
 npx tsc --noEmit     # types
 npm test             # 322 tests across 21 files
-npm run lint         # ESLint, Next preset — 0 errors
+npm run lint         # ESLint, Next preset: 0 errors
 npm run build        # 84 pages
 ```
 
 Do not run `npm run build` while `npm run dev` is running in the same
-folder — they share `.next` and will fight.
+folder: they share `.next` and will fight.
 
 `npm run lint` was wired to a linter that had never been installed until 5
 August 2026, so it prompted for an interactive install and hung. If you see

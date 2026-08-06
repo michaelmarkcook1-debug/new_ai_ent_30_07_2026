@@ -183,7 +183,7 @@ export function composite(
 
 /**
  * The sentence that must appear wherever the composite appears.
- * "74 — from 2 of 3 inputs. Financial durability not disclosed."
+ * "74: from 2 of 3 inputs. Financial durability not disclosed."
  */
 export function compositeCaveat(result: CompositeResult): string {
   if (result.score === null) {

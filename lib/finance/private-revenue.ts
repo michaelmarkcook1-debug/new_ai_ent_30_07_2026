@@ -14,7 +14,7 @@
 //
 // Why a band and not a best guess. Across the pairs where both numbers are on
 // the record, fresh frontier-lab multiples run from about 20x to 54x run-rate
-// revenue — and the 54x divides a revenue floor, so it is itself a ceiling.
+// revenue, and the 54x divides a revenue floor, so it is itself a ceiling.
 // Public enterprise software trades nearer 5x to 15x. Picking any point in
 // that spread as "the" multiple would produce a number wrong by a large
 // factor in one direction or the other, so the product shows the whole
@@ -73,7 +73,7 @@ export interface RevenueRecord {
   basis: "run_rate" | "annual" | "arr" | "projection";
   state: DisclosureState;
   citation: Citation;
-  /** Gross-vs-net, consumer-vs-enterprise, conversion — what a reader must know. */
+  /** Gross-vs-net, consumer-vs-enterprise, conversion: what a reader must know. */
   caveats?: string;
   sourceUrl?: string;
 }
@@ -113,7 +113,7 @@ export const CROSS_CHECKS: CrossCheck[] = (figures as { crossChecks?: CrossCheck
 /**
  * What an independently measured market implies for ONE SLICE of a vendor's
  * revenue: share x measured market. A separate lane, never blended into the
- * reported figure, because the two measure different things — and when they
+ * reported figure, because the two measure different things, and when they
  * differ by an order of magnitude, that gap is the finding. Menlo's measure
  * covers enterprise model-API spend; a vendor whose reported total towers
  * over its implied API slice earns most of its revenue somewhere that
@@ -140,8 +140,8 @@ export interface MultipleBand {
  * A pair whose two citations are more than a quarter apart is measuring two
  * different companies: these vendors' revenues move fast enough that a
  * February valuation over a June revenue understates the multiple by however
- * much the company grew in between. Stale pairs are kept and shown — dropping
- * them silently would hide evidence — but they are flagged, and they do not
+ * much the company grew in between. Stale pairs are kept and shown: dropping
+ * them silently would hide evidence, but they are flagged, and they do not
  * anchor the default band.
  */
 export const STALE_PAIR_DAYS = 90;
@@ -181,7 +181,7 @@ export interface ObservedPair {
  * Projections are excluded on principle: dividing a real valuation by a hoped-
  * for revenue produces a multiple for a company that does not exist yet.
  * Where a vendor has several revenue records, the one closest in time to the
- * valuation is used — a 2024 revenue under a 2026 valuation would overstate
+ * valuation is used: a 2024 revenue under a 2026 valuation would overstate
  * the multiple by however much the company grew in between.
  */
 export function observedMultiples(cls?: VendorClass): ObservedPair[] {
