@@ -288,26 +288,55 @@ export async function authored<T extends object>(
   //
   // The in-process Map above was the only cache until 5 August 2026, and it
   // made the app feel broken once the key went live. Measured on production:
-  // a page whose instance held the answer returned in 0.2s; a page that
-  // landed on a fresh instance took 8 to 19 seconds, because it paid for a
-  // full Opus call before sending a byte. Browsing hits fresh instances
-  // constantly, so most page loads were the slow one.
+  // a page whose instance held the answer returned in 0.2s; one that landed on
+  // a fresh instance took 8 to 19 seconds, because it paid for a full Opus
+  // call before sending a byte. Browsing hits fresh instances constantly.
   //
-  // Failures are deliberately not cached. `generate` throws when the model is
-  // unavailable or its output was discarded for inventing a figure, and a
-  // throw is not stored, so a bad minute cannot freeze a page into computed
-  // mode for a day. The cost of that choice is retrying a genuinely broken
-  // call, which is the right way round.
+  // `cachedGenerate` is built once at module scope and takes everything it
+  // needs as arguments. The first attempt at this built it inside the request
+  // and captured `facts` in a closure, which changes the derived key on every
+  // call: it cached nothing, and back-to-back requests hid that because L1 was
+  // answering them. Arguments become part of the key; closures are not a
+  // reliable way to vary it.
+  //
+  // Failures are deliberately not cached. `generate` throws rather than
+  // returning null, and a throw is not stored, so a model that is unavailable
+  // or whose answer was discarded for inventing a figure cannot freeze a page
+  // into computed mode for a day.
   try {
-    return (await unstable_cache(
-      () => generate<T>(kind, facts, instruction, maxTokens, roster, cacheKey),
-      ["analyst-insight", cacheKey],
-      { revalidate: TTL_MS / 1000 }
-    )()) as T;
+    const value = await cachedGenerate(
+      kind,
+      facts,
+      instruction,
+      maxTokens,
+      roster as string[],
+      cacheKey
+    );
+    cache.set(cacheKey, { value, at: Date.now() });
+    return value as T;
   } catch {
     return null;
   }
 }
+
+/**
+ * The cached wrapper, created once.
+ *
+ * Every input is an argument so that all of them land in the cache key. The
+ * key parts array only namespaces it.
+ */
+const cachedGenerate = unstable_cache(
+  async (
+    kind: string,
+    facts: string,
+    instruction: string,
+    maxTokens: number,
+    roster: string[],
+    cacheKey: string
+  ) => generate(kind, facts, instruction, maxTokens, roster, cacheKey),
+  ["analyst-insight"],
+  { revalidate: TTL_MS / 1000 }
+);
 
 /** The uncached call. Throws rather than returning null so nothing caches a failure. */
 async function generate<T extends object>(
