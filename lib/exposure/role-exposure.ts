@@ -105,169 +105,87 @@ export function allRoleExposure(): RoleExposure[] {
   return out;
 }
 
-/** How the role set was arrived at, so the panel can say which it used. */
-export type MatchBasis = "industry" | "macro" | "cross-industry";
+/** A function, and how far the catalogue has reached into its roles. */
+export interface FunctionExposure {
+  function: string;
+  roles: RoleExposure[];
+  /** Mean reach across the roles in it. */
+  meanReach: number;
+  /** The most reached role in the function, which is where a buyer looks first. */
+  leader: RoleExposure;
+}
 
 export interface ExposureView {
-  /** Roles, most reachable first: the ones AI has already got to. */
+  /** Roles, most reachable first. */
   roles: RoleExposure[];
-  /** Mean reach across the roles shown. */
+  /** The same roles grouped the way an organisation is actually arranged. */
+  functions: FunctionExposure[];
   meanReach: number;
-  /** Roles whose demand the majority of the catalogue already meets. */
+  /** Roles the majority of the catalogue already reaches. */
   highExposure: number;
-  /** Roles only the frontier reaches, where capability is still the constraint. */
+  /** Roles only the frontier reaches, where capability still binds. */
   frontierOnly: number;
-  /** The industry matched, when one was. */
-  industry: string | null;
-  /** The macro sector matched, when the industry did not resolve. */
-  macro: string | null;
-  basis: MatchBasis;
-  /** Sector-specific roles in the set. */
-  specific: number;
-  /** Roles that run in every sector, and are part of every employer's mix. */
-  common: number;
-  /**
-   * The two means, kept apart.
-   *
-   * Blending them destroys the only sector signal there is. Specialist means
-   * run from about 19 per cent to about 55 per cent across the library, while
-   * the 99 common roles sit at one figure for everybody. Folding five or six
-   * specialists into ninety-nine common roles therefore returns roughly the
-   * same number for every sector on earth, which reads as a finding and is an
-   * artefact of the averaging.
-   */
-  specificMean: number;
-  commonMean: number;
   total: number;
   modelsScored: number;
 }
 
-/** The industries a macro sector covers, from ModelEngine's own grouping. */
-export function industriesInMacro(macro: string): string[] {
-  const g = INDUSTRY_GROUPS.find(
-    (x) => x.macro.toLowerCase() === macro.toLowerCase()
-  );
-  return g ? g.industries : [];
-}
-
-export function macroSectors(): string[] {
-  return INDUSTRY_GROUPS.map((g) => g.macro);
-}
-
 /**
- * The exposure picture for a company's sector.
+ * Where AI has reached the work every employer has.
  *
- * Two corrections over the first version of this, and both change the numbers
- * materially.
+ * Built from the 99 multi-industry roles alone, and this is the whole design
+ * rather than a limitation of it.
  *
- * FIRST: the 99 cross-industry roles are always included. They carry `*` as
- * their industry because one profile serves every sector, and they are the
- * finance, legal, HR, IT support and administrative work that every employer
- * has regardless of what it sells. Filtering to "Banking" and showing only the
- * six banking specialists described a bank with no back office, which
- * understated the reachable share of its work by leaving out precisely the
- * functions models have reached furthest into.
+ * The library carries 294 roles, of which 99 are marked `*`: one profile that
+ * serves every sector, covering 18 functions from finance and legal to
+ * cybersecurity and executive leadership. The other 195 are sector
+ * specialists, five to seven per industry.
  *
- * SECOND: an unmatched industry falls back to its macro sector before it falls
- * back to everything. ModelEngine already groups the 36 industries into nine
- * macro sectors, so a company we cannot place exactly can still be placed
- * approximately, and a grocer reads against retail rather than against the
- * whole economy.
+ * Reading a company against its sector meant three things that all went wrong.
+ * It needed the company placed in a taxonomy, which can be got wrong and then
+ * silently reads a grocer against banking. It rested a mean on five to seven
+ * roles. And once the multi-industry roles were correctly included alongside
+ * them, ninety-nine swamped six and every sector returned about the same
+ * number anyway.
+ *
+ * The multi-industry roles need none of that. They apply to a bank, a grocer
+ * and a shipyard equally, because every employer has finance, legal, HR, IT
+ * support and a leadership team. They span all five capability bands, reach
+ * from 2 per cent to 100 per cent, and rest on ninety-nine observations rather
+ * than six. Nothing has to be guessed about the company for the reading to be
+ * true of it.
  */
-export function exposureFor(
-  industry: string | null,
-  macro: string | null = null
-): ExposureView {
-  const all = allRoleExposure();
-  const common = all.filter((r) => r.industry === CROSS_INDUSTRY);
-  const sectorOnly = all.filter((r) => r.industry !== CROSS_INDUSTRY);
+export function exposureView(): ExposureView {
+  const roles = allRoleExposure()
+    .filter((r) => r.industry === CROSS_INDUSTRY)
+    .sort((a, b) => b.reachPct - a.reachPct || a.name.localeCompare(b.name));
 
-  const exact = industry
-    ? sectorOnly.filter(
-        (r) => r.industry.toLowerCase() === industry.toLowerCase()
-      )
-    : [];
-
-  let specific = exact;
-  let basis: MatchBasis = "industry";
-  let matchedIndustry: string | null = exact.length > 0 ? industry : null;
-  let matchedMacro: string | null = null;
-
-  if (specific.length === 0 && macro) {
-    const peers = industriesInMacro(macro).map((s) => s.toLowerCase());
-    if (peers.length > 0) {
-      specific = sectorOnly.filter((r) =>
-        peers.includes(r.industry.toLowerCase())
-      );
-      if (specific.length > 0) {
-        basis = "macro";
-        matchedMacro = macro;
-      }
-    }
-  }
-
-  if (specific.length === 0) {
-    // Nothing placed it, so the honest view is every sector, said out loud.
-    specific = sectorOnly;
-    basis = "cross-industry";
-    matchedIndustry = null;
-    matchedMacro = null;
-  }
-
-  const roles = [...specific, ...common];
   const meanOf = (xs: RoleExposure[]) =>
     xs.length === 0
       ? 0
       : Math.round(xs.reduce((a, r) => a + r.reachPct, 0) / xs.length);
-  const meanReach = meanOf(roles);
+
+  const byFunction = new Map<string, RoleExposure[]>();
+  for (const r of roles) {
+    const key = r.function || "Other";
+    byFunction.set(key, [...(byFunction.get(key) ?? []), r]);
+  }
+
+  const functions: FunctionExposure[] = [...byFunction.entries()]
+    .map(([fn, rs]) => ({
+      function: fn,
+      roles: rs,
+      meanReach: meanOf(rs),
+      leader: rs[0],
+    }))
+    .sort((a, b) => b.meanReach - a.meanReach || a.function.localeCompare(b.function));
 
   return {
-    roles: [...roles].sort(
-      (a, b) => b.reachPct - a.reachPct || a.name.localeCompare(b.name)
-    ),
-    meanReach,
-    // Over half the catalogue can work at this level, so capability is no
-    // longer what is holding the work in place.
+    roles,
+    functions,
+    meanReach: meanOf(roles),
     highExposure: roles.filter((r) => r.reachPct >= 50).length,
-    // Only the top of the catalogue reaches it, which is where capability
-    // genuinely still constrains what can be attempted.
     frontierOnly: roles.filter((r) => r.reachPct <= 11).length,
-    industry: matchedIndustry,
-    macro: matchedMacro,
-    basis,
-    specific: specific.length,
-    common: common.length,
-    specificMean: meanOf(specific),
-    commonMean: meanOf(common),
     total: roles.length,
     modelsScored: scoredIndexes().length,
   };
-}
-
-/** The industries the library carries, for matching a researched company to one. */
-export function industriesWithRoles(): string[] {
-  return [...new Set(allRoleExposure().map((r) => r.industry))]
-    .filter(Boolean)
-    .sort();
-}
-
-/**
- * Best-effort match from a researched company's stated industry to one the
- * library carries. Returns null rather than guessing when nothing matches:
- * a wrong industry would put a reader's functions against another sector's
- * role mix, which is worse than showing the cross-industry picture and
- * saying so.
- */
-export function matchIndustry(stated: string | null | undefined): string | null {
-  if (!stated) return null;
-  const s = stated.toLowerCase();
-  const known = industriesWithRoles();
-  const exact = known.find((k) => k.toLowerCase() === s);
-  if (exact) return exact;
-  // Contained either way, longest first, so "Software" does not beat
-  // "Software & SaaS" on a company that stated the longer name.
-  const partial = known
-    .filter((k) => s.includes(k.toLowerCase()) || k.toLowerCase().includes(s))
-    .sort((a, b) => b.length - a.length);
-  return partial[0] ?? null;
 }

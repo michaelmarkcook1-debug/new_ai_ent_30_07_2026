@@ -1,50 +1,60 @@
 import { MODELS } from "@/lib/model-fit";
+import { exposureView, reachForBand, BANDS } from "./role-exposure";
 import {
-  allRoleExposure,
-  reachForBand,
-  BANDS,
-  macroSectors,
-  industriesInMacro,
-} from "./role-exposure";
+  verticalLens,
+  taggedIndustries,
+  TAG_LABEL,
+  AUTONOMY_LABEL,
+  type VerticalLens,
+} from "./vertical";
 
-// The server-computed payload, so the browser never receives the role library.
+// The server-computed payload, so the browser never receives the source data.
 //
-// This is the third instance of the pattern ARCHITECTURE section 5 describes:
-// roles.json is 684 KB and importing it into a client component ships all of
-// it to every reader. The exposure panel needs four fields per role plus two
-// five-entry lookups, which is about 30 KB, so the flattening happens on the
-// server and the component receives only what it draws.
+// The pattern ARCHITECTURE section 5 describes. roles.json is 684 KB and the
+// workflow catalogue is another module again; this panel renders inside a
+// client component and needs a few fields per role plus a small lookup, so the
+// flattening happens here.
 //
-// Reach depends on the band alone, not on the role, so it travels as one small
-// table rather than being repeated 294 times.
+// Smaller than it was, because the panel now reads the 99 multi-industry roles
+// rather than all 294.
 
 export interface ExposureRole {
   /** Role name. */
   n: string;
-  /** Industry, as the library records it. */
-  i: string;
-  /** Function. */
+  /** Function, which is how the panel groups them. */
   f: string;
   /** CAP-01 band the work demands. */
   b: number;
 }
 
+export interface ExposureFunction {
+  /** Function name. */
+  f: string;
+  /** Mean reach across its roles. */
+  mean: number;
+  roles: ExposureRole[];
+}
+
 export interface ExposurePayload {
   roles: ExposureRole[];
+  functions: ExposureFunction[];
   /** Band to the share of the scored catalogue reaching it. */
   reachByBand: Record<number, number>;
   /** Band to the minimum Intelligence Index it requires. */
   indexByBand: Record<number, number>;
+  meanReach: number;
+  widelyReached: number;
+  frontierOnly: number;
   /** Models carrying a measured index: the denominator behind every figure. */
   modelsScored: number;
-  /** Industries the library carries, for matching without shipping the roles. */
-  industries: string[];
   /**
-   * ModelEngine's own grouping of those industries into nine macro sectors.
-   * Carried so a company we cannot place exactly can still be placed
-   * approximately, against its sector rather than against the whole economy.
+   * The assurance profile of each vertical the workflow catalogue carries, so
+   * the same role can be read differently in banking and in retail without
+   * inventing a capability difference the library does not record.
    */
-  macroGroups: { macro: string; industries: string[] }[];
+  verticals: Record<string, VerticalLens>;
+  tagLabels: Record<string, string>;
+  autonomyLabels: Record<string, string>;
 }
 
 const MODELS_SCORED = MODELS.filter(
@@ -52,45 +62,35 @@ const MODELS_SCORED = MODELS.filter(
 ).length;
 
 export function exposurePayload(): ExposurePayload {
-  const all = allRoleExposure();
+  const view = exposureView();
   const reachByBand: Record<number, number> = {};
   const indexByBand: Record<number, number> = {};
   for (const b of BANDS) {
     reachByBand[b] = reachForBand(b);
-    indexByBand[b] = all.find((r) => r.band === b)?.indexNeeded ?? 0;
+    indexByBand[b] = view.roles.find((r) => r.band === b)?.indexNeeded ?? 0;
   }
+
+  const verticals: Record<string, VerticalLens> = {};
+  for (const tag of taggedIndustries()) {
+    const lens = verticalLens(tag);
+    if (lens) verticals[tag] = lens;
+  }
+
   return {
-    roles: all.map((r) => ({ n: r.name, i: r.industry, f: r.function, b: r.band })),
+    roles: view.roles.map((r) => ({ n: r.name, f: r.function, b: r.band })),
+    functions: view.functions.map((fn) => ({
+      f: fn.function,
+      mean: fn.meanReach,
+      roles: fn.roles.map((r) => ({ n: r.name, f: r.function, b: r.band })),
+    })),
     reachByBand,
     indexByBand,
+    meanReach: view.meanReach,
+    widelyReached: view.highExposure,
+    frontierOnly: view.frontierOnly,
     modelsScored: MODELS_SCORED,
-    industries: [...new Set(all.map((r) => r.industry))].filter(Boolean).sort(),
-    macroGroups: macroSectors().map((macro) => ({
-      macro,
-      industries: industriesInMacro(macro),
-    })),
+    verticals,
+    tagLabels: TAG_LABEL,
+    autonomyLabels: AUTONOMY_LABEL,
   };
-}
-
-/**
- * Match a researched company's stated industry to one the library carries.
- *
- * Duplicated from role-exposure rather than imported, because this half runs
- * in the browser against the payload's industry list and that half reads the
- * role library. Returns null rather than guessing: a wrong industry puts a
- * reader's functions against another sector's role mix, which is worse than
- * the labelled cross-industry view.
- */
-export function matchIndustryIn(
-  stated: string | null | undefined,
-  known: string[]
-): string | null {
-  if (!stated) return null;
-  const s = stated.toLowerCase();
-  const exact = known.find((k) => k.toLowerCase() === s);
-  if (exact) return exact;
-  const partial = known
-    .filter((k) => s.includes(k.toLowerCase()) || k.toLowerCase().includes(s))
-    .sort((a, b) => b.length - a.length);
-  return partial[0] ?? null;
 }

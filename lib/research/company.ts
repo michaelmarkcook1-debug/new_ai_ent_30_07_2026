@@ -1,6 +1,6 @@
 import { webSearch, groundingBlock, searchAvailable, type SearchHit } from "./search";
 import { authored, llmAvailable } from "@/lib/analyst/llm";
-import { INDUSTRY_GROUPS } from "@/lib/model-fit";
+import { TAG_LABEL } from "@/lib/exposure/vertical";
 
 // Research a company the product does not already track.
 //
@@ -44,15 +44,16 @@ export interface CompanyResearch {
     /** The sector in the sources' own words. */
     industry: string;
     /**
-     * The company placed in ModelEngine's own taxonomy, so the exposure panel
-     * reads it against the right role set.
+     * The company placed in the sector taxonomy the workflow catalogue carries
+     * assurance data for, so the exposure panel can say what this vertical is
+     * permitted to deploy rather than only what models can reach.
      *
      * Classified by the model against the fixed list rather than string-matched
      * from the free text above, because "Online grocery retail and technology"
-     * matches no library industry by substring and places perfectly by
-     * judgement. Both fields are null when nothing fits, which is a real answer.
+     * matches nothing by substring and places by judgement. Null when nothing
+     * fits, which is a real answer.
      */
-    sector: { industry: string | null; macro: string | null };
+    sector: { tag: string | null };
   } | null;
   /** Stated figures, rendered as cards. Never a score we computed. */
   metrics: CompanyMetric[];
@@ -84,8 +85,7 @@ interface Draft {
   name?: string;
   what?: string;
   industry?: string;
-  sectorIndustry?: string;
-  sectorMacro?: string;
+  sectorTag?: string;
   metrics?: { label?: string; value?: string; source?: number }[];
   findings?: { statement?: string; source?: number }[];
   aiFindings?: { statement?: string; source?: number }[];
@@ -132,31 +132,22 @@ function cited(
     .map((f) => ({ statement: f.statement.trim(), sourceIndex: f.source - 1 }));
 }
 
-// ModelEngine's grouping, rendered for the prompt. Built from the same constant
-// the picker uses, so a new industry reaches the classifier automatically.
-const TAXONOMY = INDUSTRY_GROUPS.map(
-  (g) => `${g.macro}: ${g.industries.join(", ")}`
-).join("\n");
-const KNOWN_INDUSTRIES = new Set(
-  INDUSTRY_GROUPS.flatMap((g) => g.industries.map((s) => s.toLowerCase()))
-);
-const KNOWN_MACROS = new Set(
-  INDUSTRY_GROUPS.map((g) => g.macro.toLowerCase())
-);
+// The sectors the workflow catalogue carries assurance data for. Classifying
+// into these rather than into the 36-industry list, because these are the ones
+// that change what the panel can say: each carries its own risk tier,
+// reliability bar and safe autonomy default.
+const SECTOR_LIST = Object.entries(TAG_LABEL)
+  .map(([tag, label]) => `${tag} (${label})`)
+  .join(", ");
+const KNOWN_TAGS = new Set(Object.keys(TAG_LABEL));
 
-/** Only a classification into the taxonomy we actually hold. */
-function placeSector(d: Draft): { industry: string | null; macro: string | null } {
-  const industry =
-    typeof d.sectorIndustry === "string" &&
-    KNOWN_INDUSTRIES.has(d.sectorIndustry.trim().toLowerCase())
-      ? d.sectorIndustry.trim()
+/** Only a classification into a sector we hold assurance data for. */
+function placeSector(d: Draft): { tag: string | null } {
+  const tag =
+    typeof d.sectorTag === "string" && KNOWN_TAGS.has(d.sectorTag.trim())
+      ? d.sectorTag.trim()
       : null;
-  const macro =
-    typeof d.sectorMacro === "string" &&
-    KNOWN_MACROS.has(d.sectorMacro.trim().toLowerCase())
-      ? d.sectorMacro.trim()
-      : null;
-  return { industry, macro };
+  return { tag };
 }
 
 export type ResearchStage =
@@ -242,7 +233,7 @@ export async function researchCompany(
 
 Return JSON:
 {"name": string, "what": string, "industry": string,
- "sectorIndustry": string, "sectorMacro": string,
+ "sectorTag": string,
  "metrics": [{"label": string, "value": string, "source": number}],
  "findings": [{"statement": string, "source": number}],
  "aiFindings": [{"statement": string, "source": number}],
@@ -251,10 +242,9 @@ Return JSON:
 - name: the company's name as the sources give it.
 - what: one sentence on what the company does.
 - industry: the sector in the sources' own words, two or three words.
-- sectorIndustry and sectorMacro: place this company in the taxonomy below. sectorIndustry must be copied EXACTLY from the list, or left as an empty string when none of them fits. sectorMacro is the group that industry sits in, and may be given on its own when you are confident of the group but not the specific industry. Do not invent a category and do not stretch one to fit: an empty string is a real answer and is better than a wrong placement, which would read this company against another sector's roles.
+- sectorTag: place this company in one of the sectors below, copying the identifier EXACTLY (the part before the bracket). Leave it as an empty string when none fits. An empty string is a real answer and better than a wrong placement, which would read this company against another sector's assurance bar.
 
-TAXONOMY:
-${TAXONOMY}
+SECTORS: ${SECTOR_LIST}
 - metrics: up to 6 figures the passages actually state, as cards. Label is two or three words ("Revenue", "Employees", "Listed as", "Founded"). Value is the figure exactly as the source gives it, currency and all. Only include a figure a passage states outright; never convert, never compute, never estimate. Each cites its passage.
 - recommendations: up to 3. What a buyer evaluating AI for this company should do next, following from what was found. No figures needed. If the sources are too thin to justify advice, return an empty array.
 - findings: up to ${attempt.findings}. What a buyer should know about the company's size, position and direction. Each cites the passage number it came from.
@@ -368,7 +358,7 @@ export async function researchTopic(
 
 Return JSON:
 {"name": string, "what": string, "industry": string,
- "sectorIndustry": string, "sectorMacro": string,
+ "sectorTag": string,
  "findings": [{"statement": string, "source": number}]}
 
 - name: the company as the sources give it.

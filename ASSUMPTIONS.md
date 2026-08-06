@@ -1562,3 +1562,35 @@ the same question. Three corrections:
 **Assumed:** that a sector-specific mean over five to seven roles is worth
 showing. It is thin, and the panel prints the count it rests on so a reader can
 weigh it.
+
+## The multi-industry roles, and a vertical lens on them (6 August 2026)
+
+**Simplified onto the 99 multi-industry roles.** The library carries 294; 99
+are marked `*`, meaning one profile serves every sector, across 18 functions
+from finance and legal to cybersecurity and executive leadership. Reading a
+company against its own sector needed it placed in a taxonomy that can be got
+wrong, rested a mean on five to seven roles, and once the multi-industry roles
+were correctly included beside them, ninety-nine swamped six and every sector
+returned about the same number. The 99 apply to a bank, a grocer and a shipyard
+equally, span all five bands, and reach from 2 to 100 per cent. Nothing has to
+be guessed about the company for the reading to hold.
+
+**The vertical lens is about assurance, not capability.** A customer care agent
+in investment banking is not one in retail, and the library cannot say so: its
+cross-industry profiles are shared, which `lib/model-fit/index.ts` records as
+wrong per join_specification section 6 and not yet fixable from evidence.
+
+**Refused:** a per-sector capability multiplier. There is no evidence for one
+and it would be a fabricated number sitting under a real-looking percentage.
+
+**Used instead:** what the workflow catalogue actually records per sector.
+Financial services runs its tagged workflows at mean risk 3.3 of 4 and a
+reliability bar of 5.0 of 5; technology at 2.3 and 4.3. So the same work is
+reachable in both and only one may run it as a supervised agent, which is the
+difference a buyer feels.
+
+**Stated limit:** only 25 of the 75 catalogued workflows carry industry tags,
+and several sectors rest on one or two. Those are flagged on the page as a hint
+rather than a profile, and a sector with nothing tagged returns null rather
+than falling back to the catalogue average, which would look like a fact about
+banking and be a fact about everything.

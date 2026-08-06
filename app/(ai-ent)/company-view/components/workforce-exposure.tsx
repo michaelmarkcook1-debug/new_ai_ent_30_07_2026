@@ -1,28 +1,31 @@
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
-import { matchIndustryIn, type ExposurePayload } from "@/lib/exposure/payload";
-import { poolFor } from "@/lib/exposure/match";
+import type { ExposurePayload } from "@/lib/exposure/payload";
 
-// Which of a company's functions AI has already reached.
+// Where AI has already reached the work every employer has.
 //
-// Modelled on a workforce-exposure view from another AnalystGenius product,
-// with the columns it cannot honestly fill left out rather than filled.
+// Two decisions shape this panel, and both were arrived at by trying the
+// alternative first.
 //
-// That product shows, per role: estimated headcount, an exposure percentage, a
-// hiring trend and a layoff signal. For an employer whose workforce has
-// actually been studied, all four are answerable. For any company a reader
-// types into a box, three of them are not. Nobody publishes a role-by-role
-// headcount split, a per-function hiring delta or a layoff signal for an
-// arbitrary employer, and generating them would be the easiest way to break
-// this product's promise while looking authoritative.
+// IT READS THE 99 MULTI-INDUSTRY ROLES, not a sector's specialists. The library
+// holds 294 roles; 99 carry one profile that serves every sector, across 18
+// functions from finance and legal to cybersecurity and executive leadership.
+// Reading a company against its own sector needed the company placed in a
+// taxonomy, which can be got wrong; rested a mean on five to seven roles; and
+// once the multi-industry roles were correctly included beside them, ninety-nine
+// swamped six and every sector returned the same number anyway. These 99 apply
+// to a bank, a grocer and a shipyard alike, so nothing has to be guessed about
+// the company for the reading to be true of it.
 //
-// So this draws the column that is genuinely computable, and the drawer names
-// the three that are missing and what they would need. The gap is on the page
-// rather than in a comment.
-//
-// Takes a server-computed payload rather than importing the role library:
-// roles.json is 684 KB and this renders inside a client component.
+// THE VERTICAL LENS IS ABOUT ASSURANCE, NOT CAPABILITY. A customer care agent in
+// investment banking is not one in retail, and the role library cannot say so:
+// its cross-industry profiles are shared, which the specification itself records
+// as a known gap. Inventing a per-sector capability multiplier would be exactly
+// the fabrication this product refuses. What genuinely differs, and is recorded
+// per workflow, is the risk tier, the reliability bar and the autonomy it is
+// safe to default to. So the same work is reachable in both sectors and only one
+// of them can let it run supervised, which is the difference a buyer feels.
 
 const BAND_LABEL: Record<number, string> = {
   10: "Routine",
@@ -42,27 +45,16 @@ function reachTone(pct: number): { label: string; cls: string } {
 export function WorkforceExposure({
   payload,
   sector,
-  industryText,
   companyName,
 }: {
   payload: ExposurePayload;
-  /** Where the analyst model placed this company in ModelEngine's taxonomy. */
-  sector: { industry: string | null; macro: string | null };
-  /** The sector in the sources' own words, as a last resort. */
-  industryText?: string | null;
+  /** Where the analyst model placed this company, when it could. */
+  sector: { tag: string | null };
   companyName: string;
 }) {
-  // The classification first, because it is a judgement against the real list.
-  // A substring match on the free text only runs when that returned nothing,
-  // and it still refuses to guess: a wrong industry reads this company against
-  // another sector's roles, which is worse than the labelled cross-industry
-  // view.
-  const industry =
-    sector.industry ?? matchIndustryIn(industryText, payload.industries);
-  const pooled = poolFor(payload, industry, sector.macro);
-  const { roles: rows, widely, frontier } = pooled;
-  if (rows.length === 0) return null;
-  const shown = rows.slice(0, 18);
+  if (payload.roles.length === 0) return null;
+  const lens = sector.tag ? payload.verticals[sector.tag] : null;
+  const sectorName = sector.tag ? payload.tagLabels[sector.tag] : null;
 
   return (
     <section className="rounded-lg border border-base-300 bg-base-100 p-5">
@@ -80,67 +72,77 @@ export function WorkforceExposure({
       </div>
 
       <p className="measure mt-2 text-sm text-muted">
-        {pooled.basis === "industry" ? (
-          <>
-            {companyName} placed in{" "}
-            <span className="font-semibold text-base-content">
-              {pooled.industry}
-            </span>
-            : {pooled.specific} roles specific to that sector, plus the{" "}
-            {pooled.common} that run in every sector and that any employer has
-            regardless of what it sells.
-          </>
-        ) : pooled.basis === "macro" ? (
-          <>
-            No single industry fitted {companyName} exactly, so this reads
-            against its macro sector,{" "}
-            <span className="font-semibold text-base-content">
-              {pooled.macro}
-            </span>
-            : {pooled.specific} roles across the industries in that group, plus
-            the {pooled.common} common to every sector.
-          </>
-        ) : (
-          <>
-            {companyName} could not be placed in the library&apos;s taxonomy, so
-            this is the cross-industry picture: all {pooled.specific}{" "}
-            sector-specific roles plus the {pooled.common} common ones. Read it
-            as the shape of the economy rather than of this company.
-          </>
-        )}
+        The {payload.roles.length} roles every employer has, across{" "}
+        {payload.functions.length} functions, whatever it sells. Nothing here is
+        specific to {companyName}, and nothing had to be guessed about them for
+        it to hold.
       </p>
 
       <div className="mt-4 grid grid-cols-2 gap-3 @2xl:grid-cols-4">
-        {/* The sector figure leads, because it is the one that differs between
-            companies. The common figure is the same for everybody and is shown
-            beside it so a reader can see which half of their workforce the
-            number is describing. */}
-        <Stat
-          label={pooled.basis === "cross-industry" ? "All sector work" : "Sector work"}
-          value={`${pooled.specificMean}%`}
-          note={`${pooled.specific} roles`}
-        />
-        <Stat
-          label="Common functions"
-          value={`${pooled.commonMean}%`}
-          note={`${pooled.common} roles, every sector`}
-        />
-        <Stat label="Widely reached" value={String(widely)} note="Over half the catalogue" />
-        <Stat label="Frontier only" value={String(frontier)} note="Capability still binds" />
+        <Stat label="Mean reach" value={`${payload.meanReach}%`} note="Across all 18 functions" />
+        <Stat label="Widely reached" value={String(payload.widelyReached)} note="Over half the catalogue" />
+        <Stat label="Frontier only" value={String(payload.frontierOnly)} note="Capability still binds" />
+        <Stat label="Functions" value={String(payload.functions.length)} note="Finance to cyber" />
       </div>
 
+      {/* The vertical difference, drawn from the workflow catalogue rather than
+          from a capability adjustment the library cannot support. */}
+      {lens && sectorName ? (
+        <div className="mt-4 rounded-lg border border-base-300 bg-base-200/40 p-4">
+          <MicroLabel
+            label={`What ${sectorName} does to the same work`}
+            tooltip="Risk tier, reliability bar and safe autonomy, from the workflows the catalogue tags to this sector."
+          />
+          <p className="measure mt-2 text-sm">
+            The capability these roles demand is recorded once and reads the
+            same in every sector. What your sector changes is what you are
+            permitted to do with it.{" "}
+            <span className="font-semibold">
+              {sectorName} runs its catalogued workflows at a mean risk of{" "}
+              {lens.meanRisk} out of 4 and a reliability bar of{" "}
+              {lens.meanReliability} out of 5
+            </span>
+            {lens.vsAll.risk !== 0 ? (
+              <>
+                , {lens.vsAll.risk > 0 ? "above" : "below"} the catalogue average
+                by {Math.abs(lens.vsAll.risk)} on risk
+              </>
+            ) : null}
+            . {lens.highRisk} of its {lens.workflows} tagged workflows sit at
+            high or critical risk, and the most constrained autonomy any of them
+            defaults to is{" "}
+            <span className="font-semibold">
+              {payload.autonomyLabels[lens.tightestAutonomy] ??
+                lens.tightestAutonomy}
+            </span>
+            . So work a model reaches in both sectors may run supervised in one
+            and only with a person in the loop in the other.
+          </p>
+          {lens.thin ? (
+            <p className="measure mt-2 text-sm text-muted">{lens.thin}.</p>
+          ) : null}
+        </div>
+      ) : (
+        <p className="measure mt-4 rounded-lg border border-dashed border-base-300 px-3 py-3 text-sm text-muted">
+          {companyName} was not placed in a sector the workflow catalogue covers,
+          so the reach figures stand on their own. A sector reading would add
+          what that vertical permits: its risk tier, its reliability bar and the
+          autonomy it can safely default to.
+        </p>
+      )}
+
       <div className="mt-4 overflow-x-auto">
-        <table className="w-full min-w-[42rem] text-sm">
+        <table className="w-full min-w-[38rem] text-sm">
           <thead>
             <tr className="border-b border-base-300 text-left">
               <th className="pb-2 pr-3 font-mono text-sm font-normal uppercase tracking-wider text-muted">
-                Role
+                Function
               </th>
               <th className="pb-2 pr-3 font-mono text-sm font-normal uppercase tracking-wider text-muted">
-                What the work demands
+                Most reached role in it
               </th>
               <th className="pb-2 pr-3 text-right font-mono text-sm font-normal uppercase tracking-wider text-muted">
-                Catalogue reach
+                Mean reach
               </th>
               <th className="pb-2 font-mono text-sm font-normal uppercase tracking-wider text-muted">
                 Reading
@@ -148,29 +150,34 @@ export function WorkforceExposure({
             </tr>
           </thead>
           <tbody>
-            {shown.map((r) => {
-              const tone = reachTone(r.reach);
+            {payload.functions.map((fn) => {
+              const tone = reachTone(fn.mean);
+              const top = fn.roles[0];
               return (
-                <tr key={`${r.n}-${r.f}`} className="border-b border-base-300/60">
+                <tr key={fn.f} className="border-b border-base-300/60">
                   <td className="py-2 pr-3">
-                    <span className="font-semibold">{r.n}</span>
-                    {r.f ? (
-                      <span className="block text-sm text-muted">{r.f}</span>
-                    ) : null}
+                    <span className="font-semibold">{fn.f}</span>
+                    <span className="block text-sm text-muted">
+                      {fn.roles.length}{" "}
+                      {fn.roles.length === 1 ? "role" : "roles"}
+                    </span>
                   </td>
                   <td className="py-2 pr-3 text-muted">
-                    {BAND_LABEL[r.b] ?? `Band ${r.b}`}
-                    <span className="block font-mono text-sm">index {r.need}+</span>
+                    {top?.n}
+                    <span className="block font-mono text-sm">
+                      {BAND_LABEL[top?.b] ?? ""} · index{" "}
+                      {payload.indexByBand[top?.b] ?? 0}+
+                    </span>
                   </td>
                   <td className="py-2 pr-3 text-right">
                     <div className="flex items-center justify-end gap-2">
                       <span className="h-1.5 w-16 overflow-hidden rounded-full bg-base-200">
                         <span
                           className="block h-full rounded-full bg-insight"
-                          style={{ width: `${r.reach}%` }}
+                          style={{ width: `${fn.mean}%` }}
                         />
                       </span>
-                      <span className="font-mono font-bold">{r.reach}%</span>
+                      <span className="font-mono font-bold">{fn.mean}%</span>
                     </div>
                   </td>
                   <td className="py-2">
@@ -185,45 +192,45 @@ export function WorkforceExposure({
         </table>
       </div>
 
-      {rows.length > shown.length ? (
-        <p className="mt-2 font-mono text-sm text-muted">
-          Showing {shown.length} of {rows.length}, most reached first.
-        </p>
-      ) : null}
-
       <div className="mt-3">
         <DerivationDrawer
-          title="How this is derived, and the three columns that are missing"
+          title="How this is derived, and what it deliberately does not claim"
           trigger="How this is derived"
         >
           <p>
-            Every role in the library records what its work demands on a
-            capability band from 10 to 90. That band converts to a minimum
-            Intelligence Index through a table pinned by test, and{" "}
-            {payload.modelsScored} models in the catalogue carry a measured
-            index. Reach is the share of those models at or above the level the
-            role demands, so a role high on this list is work most of the market
-            can already perform at the level required.
+            Every role records what its work demands on a capability band from
+            10 to 90. That band converts to a minimum Intelligence Index through
+            a table pinned by test, and {payload.modelsScored} models carry a
+            measured index. Reach is the share of those models at or above the
+            level the role demands, so a function high on this list is work most
+            of the market can already perform at the level required.
           </p>
           <p>
             <strong className="text-base-content">Reach is not displacement.</strong>{" "}
             A model working at the level a role requires is a precondition for
             automating that work, not proof it will be: cost, integration,
-            regulation and appetite all sit in between. This says where
-            capability has arrived, and nothing about anyone&apos;s job.
+            regulation and appetite all sit in between.
           </p>
           <p>
             <strong className="text-base-content">
-              This is not a reading of {companyName}&apos;s staff.
+              The same role reads the same in every sector, and that is a known
+              gap.
             </strong>{" "}
-            The library holds role archetypes by sector, not an employer&apos;s
-            headcount. Three columns a full workforce study would carry are
-            deliberately absent, because no public source publishes them per
-            company and computing them would mean inventing them: estimated
-            headcount per role, the hiring trend in each function, and a layoff
-            signal. Those need the company&apos;s own disclosures. Where a
-            figure is stated in its sources it appears in the findings above,
-            and where you hold one yourself the assumptions panel takes it.
+            These 99 roles carry one shared profile each, which the role
+            library&apos;s own specification records as wrong and not yet
+            fixable from evidence. A customer care agent in investment banking
+            does harder work than one in retail, and the capability figures here
+            cannot see the difference. Rather than invent a per-sector
+            multiplier, the sector reading above uses what is actually recorded:
+            the risk tier, reliability bar and safe autonomy of the workflows
+            that sector runs.
+          </p>
+          <p className="text-muted">
+            This is not a reading of {companyName}&apos;s staff. It describes
+            the functions every employer has, not how many people they put in
+            each. Headcount per role, hiring trend and layoff signal would need
+            the company&apos;s own disclosures and are not shown rather than
+            being modelled.
           </p>
         </DerivationDrawer>
       </div>
