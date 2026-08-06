@@ -1389,3 +1389,95 @@ intended entry is the nearer one.
       PostgREST 1,000-row ceiling and the empty-table 200. Every command and
       file reference in it was executed or resolved before it was written
       down.
+40. **The Security Desk ported into six tabs (5 to 6 August 2026).** Michael
+    picked sixteen elements off a per-room inventory of
+    `~/Documents/Dev Projects/the-desk`. That repository was read only and is
+    untouched. Decisions taken without asking, because each had an answer the
+    project's own rules already imply:
+    - **A new `cited` lane.** A Shield mark is a sentence quoted from a
+      vendor's published terms with the URL and the date a human read it. It is
+      not `live` (legal terms have no feed), not `derived` (nothing was
+      computed), and calling real quoted terms `sample` would be a lie in the
+      direction that matters most. Styled neutral like `derived`, because a
+      green badge over a term read three weeks ago overstates it.
+    - **The quoted spans are pinned, not trusted.** Editorial text around each
+      quotation was repunctuated for the house no-em-dash rule, which is
+      exactly the edit that can walk into a quotation unnoticed. All 43 spans
+      were extracted from the source at port time into a fixture and are
+      asserted byte-identical, in both directions, by `tests/shield-quotes`.
+    - **The brief reads this repository's regulation register, not the
+      source's.** The source carries two EU milestones; this holds sixteen
+      dated obligations across several jurisdictions with a binds column.
+      Porting the weaker set alongside the stronger would have given the
+      product two regulatory answers that could disagree.
+    - **The industry use-case taxonomy was NOT ported.** The source has ten
+      industries of five workflows; this repository already holds 75 workflows
+      across 15 industry tags, risk-graded and segment-mapped. The two
+      vocabularies share two labels out of sixty-three, measured rather than
+      guessed. The gap was never the taxonomy, it was the entry point: Workflow
+      Shortlist could only be entered by workflow area. That is what was built.
+      The 50 industry-specific pilot probes go with the unported list and are
+      noted as absent rather than dropped silently.
+    - **No peer-adoption tiebreak in the sourcing ranking.** The source breaks
+      ties on disclosed adoptions in the buyer's industry. There is no
+      server-side disclosed-adoption set here to join on, and inventing that
+      join would put a number in a board pack that nothing supports. Ties break
+      alphabetically.
+    - **The Decision Pack exports HTML, not PPTX.** The source uses
+      `pptxgenjs`, dynamically imported. **A dependency was not added because
+      another session was concurrently editing `package.json` and
+      `package-lock.json`** (HEAD moved from `6c54a2a` to `70510d8` mid-build,
+      with about sixty files modified in the working tree that were not mine).
+      Adding a package to a tree somebody else is editing is the change most
+      likely to collide. `packToHtml` renders a self-contained print-ready
+      document from the identical spec, so a `.pptx` renderer later is a new
+      function over the same object. **This one is worth reversing when the
+      tree is quiet, if a real PowerPoint is wanted.**
+    - **The desk profile asks two questions, not three.** The source asks
+      industry, region and company size. Nothing in the uptake data behind Peer
+      Insights varies by size, and a control that pretends to personalise is
+      worse than no control. Said on screen.
+    - **The `live` lane tooltip was corrected, not redefined.** It claimed
+      "Live from the BoardRadar API" while `/ai-adoption` had been badging SEC
+      EDGAR live for some time. It now describes what the badge means: the
+      round trip happened on this request.
+    - **Verification again ran without credentials.** Local dev is behind basic
+      auth and a password is not something to type into a field. Every touched
+      tab was checked by requesting it with the header built from `.env.local`
+      inside the command, never handled directly, and the rendered text
+      extracted and read. No screenshot was taken and that is stated rather
+      than worked around.
+
+## Workforce AI exposure on Your AI Position (6 August 2026)
+
+Replicating the AI Talent Exposure view from the other AnalystGenius product.
+That view carries four columns per role: estimated headcount, an exposure
+percentage, a hiring trend and a layoff signal. For an employer whose workforce
+has been studied, all four are answerable. For a company a reader types into a
+box, three of them are not.
+
+**Assumed:** that "AI exposure" for a role is honestly expressible as the share
+of the tracked model catalogue already reaching the capability level that
+role's work demands. Both halves are real and already in the product: the role
+library records a CAP-01 band per role, `CAP01_THRESHOLDS` converts a band to a
+minimum Intelligence Index and is pinned by test, and 330 catalogue models
+carry a measured index. So the figure is computed from published benchmarks
+rather than estimated.
+
+**Not assumed, and deliberately absent:** per-role headcount, hiring trend and
+layoff signal for a named company. No public source publishes them per
+employer. They are named on the page as missing, with what they would need,
+rather than modelled.
+
+**Stated limits, on the page rather than here:** reach is a precondition for
+automation and not a forecast of it, and the library holds role archetypes by
+sector rather than any employer's actual staff. Per-industry coverage is thin,
+about 7 roles for IT Services & Consulting against the 16 the other product
+shows, so the panel prints the count it is working from.
+
+**Rejected:** two candidate metrics were probed and discarded before this one.
+The share of the catalogue qualifying for a role through the full engine scored
+all 294 roles at 68 per cent, discriminating nothing. Comparing the role's band
+to the Intelligence Index directly put every demanding role at 0 per cent,
+because a band (10 to 90) and an index (0 to about 61) are different scales.
+The second is now guarded by a test.

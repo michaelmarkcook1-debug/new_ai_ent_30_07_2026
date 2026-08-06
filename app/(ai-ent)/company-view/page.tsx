@@ -3,6 +3,7 @@ import { PageHeader } from "@/lib/ui/page";
 import { CompanyEntry } from "./components/company-entry";
 import { ResearchRunner } from "./components/research-runner";
 import { Assumptions } from "./components/assumptions";
+import { exposurePayload } from "@/lib/exposure/payload";
 
 export const metadata = { title: "Your AI Position | AI Enterprise" };
 
@@ -57,7 +58,7 @@ export default async function CompanyOverviewPage({
 
         {typed.length > 1 ? (
           <>
-            <ResearchRunner company={typed} />
+            <ResearchRunner company={typed} exposure={exposurePayload()} />
             {/* The figures no source holds, left to the reader rather than
                 estimated. Below the retrieved findings on purpose: what is
                 cited comes first, what is assumed comes after and is marked. */}

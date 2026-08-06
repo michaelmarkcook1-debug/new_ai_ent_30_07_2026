@@ -1,10 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ResearchedCompany } from "./researched-company";
+import { WorkforceExposure } from "./workforce-exposure";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import type { AnalystInsightData } from "@/lib/analyst/insight";
 import type { CompanyResearch } from "@/lib/research/company";
+import type { ExposurePayload } from "@/lib/exposure/payload";
 
 // The wheel, and the reason a reader can walk away from it.
 //
@@ -27,7 +29,18 @@ interface Status {
   elapsedMs?: number;
 }
 
-export function ResearchRunner({ company }: { company: string }) {
+export function ResearchRunner({
+  company,
+  exposure,
+}: {
+  company: string;
+  /**
+   * Computed on the server so the 684 KB role library never reaches the
+   * browser. Rendered here rather than on the page because the industry to
+   * match against is only known once the research lands.
+   */
+  exposure: ExposurePayload;
+}) {
   const [status, setStatus] = useState<Status | null>(null);
 
   useEffect(() => {
@@ -111,6 +124,18 @@ export function ResearchRunner({ company }: { company: string }) {
             insight={status.insight.data}
             authorship={status.insight.authorship}
             context={`${status.result.profile?.name ?? "this company"} against the AI market`}
+          />
+        ) : null}
+        {/* Where AI has already reached this sector's work. Derived from the
+            role library rather than retrieved, so it renders whether or not
+            the sources said anything about their workforce, and it is badged
+            and captioned so it can never read as a measurement of their
+            actual staff. */}
+        {status.result.profile ? (
+          <WorkforceExposure
+            payload={exposure}
+            industry={status.result.profile.industry}
+            companyName={status.result.profile.name}
           />
         ) : null}
       </div>
