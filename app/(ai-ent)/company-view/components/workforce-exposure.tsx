@@ -2,7 +2,7 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
 import { matchIndustryIn, type ExposurePayload } from "@/lib/exposure/payload";
-import type { WorkforceDisclosure } from "@/lib/research/workforce";
+import { poolFor } from "@/lib/exposure/match";
 
 // Which of a company's functions AI has already reached.
 //
@@ -41,35 +41,27 @@ function reachTone(pct: number): { label: string; cls: string } {
 
 export function WorkforceExposure({
   payload,
-  industry,
+  sector,
+  industryText,
   companyName,
-  workforce = null,
 }: {
   payload: ExposurePayload;
-  industry: string | null;
+  /** Where the analyst model placed this company in ModelEngine's taxonomy. */
+  sector: { industry: string | null; macro: string | null };
+  /** The sector in the sources' own words, as a last resort. */
+  industryText?: string | null;
   companyName: string;
-  /** What the company itself publishes about its headcount, where it does. */
-  workforce?: WorkforceDisclosure | null;
 }) {
-  const matched = matchIndustryIn(industry, payload.industries);
-  const pool = matched
-    ? payload.roles.filter((r) => r.i === matched)
-    : payload.roles;
-  if (pool.length === 0) return null;
-
-  const rows = pool
-    .map((r) => ({
-      ...r,
-      reach: payload.reachByBand[r.b] ?? 0,
-      need: payload.indexByBand[r.b] ?? 0,
-    }))
-    .sort((a, b) => b.reach - a.reach || a.n.localeCompare(b.n));
-
-  const meanReach = Math.round(
-    rows.reduce((a, r) => a + r.reach, 0) / rows.length
-  );
-  const widely = rows.filter((r) => r.reach >= 50).length;
-  const frontier = rows.filter((r) => r.reach <= 11).length;
+  // The classification first, because it is a judgement against the real list.
+  // A substring match on the free text only runs when that returned nothing,
+  // and it still refuses to guess: a wrong industry reads this company against
+  // another sector's roles, which is worse than the labelled cross-industry
+  // view.
+  const industry =
+    sector.industry ?? matchIndustryIn(industryText, payload.industries);
+  const pooled = poolFor(payload, industry, sector.macro);
+  const { roles: rows, widely, frontier } = pooled;
+  if (rows.length === 0) return null;
   const shown = rows.slice(0, 18);
 
   return (
@@ -88,107 +80,54 @@ export function WorkforceExposure({
       </div>
 
       <p className="measure mt-2 text-sm text-muted">
-        {matched ? (
+        {pooled.basis === "industry" ? (
           <>
-            The {rows.length} roles the library carries for{" "}
-            <span className="font-semibold text-base-content">{matched}</span>,
-            the sector {companyName} was matched to.
+            {companyName} placed in{" "}
+            <span className="font-semibold text-base-content">
+              {pooled.industry}
+            </span>
+            : {pooled.specific} roles specific to that sector, plus the{" "}
+            {pooled.common} that run in every sector and that any employer has
+            regardless of what it sells.
+          </>
+        ) : pooled.basis === "macro" ? (
+          <>
+            No single industry fitted {companyName} exactly, so this reads
+            against its macro sector,{" "}
+            <span className="font-semibold text-base-content">
+              {pooled.macro}
+            </span>
+            : {pooled.specific} roles across the industries in that group, plus
+            the {pooled.common} common to every sector.
           </>
         ) : (
           <>
-            The full {rows.length}-role library across every sector. No industry
-            the library carries matched {companyName}, so this is the
-            cross-industry picture rather than a sector one.
+            {companyName} could not be placed in the library&apos;s taxonomy, so
+            this is the cross-industry picture: all {pooled.specific}{" "}
+            sector-specific roles plus the {pooled.common} common ones. Read it
+            as the shape of the economy rather than of this company.
           </>
         )}
       </p>
 
       <div className="mt-4 grid grid-cols-2 gap-3 @2xl:grid-cols-4">
-        <Stat label="Mean reach" value={`${meanReach}%`} note="Across the roles below" />
+        {/* The sector figure leads, because it is the one that differs between
+            companies. The common figure is the same for everybody and is shown
+            beside it so a reader can see which half of their workforce the
+            number is describing. */}
+        <Stat
+          label={pooled.basis === "cross-industry" ? "All sector work" : "Sector work"}
+          value={`${pooled.specificMean}%`}
+          note={`${pooled.specific} roles`}
+        />
+        <Stat
+          label="Common functions"
+          value={`${pooled.commonMean}%`}
+          note={`${pooled.common} roles, every sector`}
+        />
         <Stat label="Widely reached" value={String(widely)} note="Over half the catalogue" />
         <Stat label="Frontier only" value={String(frontier)} note="Capability still binds" />
-        <Stat label="Roles read" value={String(rows.length)} note={matched ?? "All sectors"} />
       </div>
-
-      {/* What the company itself publishes, in its own words and with the link.
-          Kept in its own block above the derivation and never combined with
-          it: headcount times exposure would read as a count of jobs and is
-          arithmetic on an assumption nobody has measured. */}
-      {workforce ? (
-        <div className="mt-4 rounded-lg border border-base-300 bg-base-200/40 p-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <MicroLabel
-              label={`What ${companyName} publishes`}
-              tooltip="Quoted from the company's own disclosures. Never converted, summed or carried across dates."
-            />
-            <LaneBadge lane="live" />
-          </div>
-
-          {workforce.total ? (
-            <p className="mt-2 text-sm">
-              <span className="font-mono text-2xl font-bold">
-                {workforce.total.value}
-              </span>{" "}
-              <span className="text-muted">
-                total workforce
-                {workforce.total.asOf ? `, ${workforce.total.asOf}` : ""}
-              </span>{" "}
-              <Cite hit={workforce.sources[workforce.total.sourceIndex]} n={workforce.total.sourceIndex} />
-            </p>
-          ) : null}
-
-          {workforce.splits.length > 0 ? (
-            <ul className="mt-2 space-y-1">
-              {workforce.splits.map((s, i) => (
-                <li key={`${s.label}-${i}`} className="text-sm">
-                  <span className="font-semibold">{s.value}</span>{" "}
-                  <span className="text-muted">{s.label}</span>{" "}
-                  <Cite hit={workforce.sources[s.sourceIndex]} n={s.sourceIndex} />
-                </li>
-              ))}
-            </ul>
-          ) : null}
-
-          {workforce.absence ? (
-            <p className="measure mt-2 text-sm text-muted">{workforce.absence}</p>
-          ) : null}
-
-          {/* Third parties' counts, kept visibly apart from anything the
-              company said. Searching a private company's headcount returns
-              several vendors with several different numbers and no disclosure
-              behind any of them, and promoting one of those into the block
-              above would manufacture a disclosure out of real sources. */}
-          {workforce.estimates.length > 0 ? (
-            <div className="mt-3 rounded-lg border border-dashed border-base-300 p-3">
-              <MicroLabel
-                label="Third-party estimates, not disclosure"
-                tooltip="Counts other organisations arrived at. Shown with who published each, and never merged into a single figure."
-              />
-              <ul className="mt-1.5 space-y-1">
-                {workforce.estimates.map((e, i) => (
-                  <li key={`${e.publisher}-${i}`} className="text-sm">
-                    <span className="font-mono font-bold">{e.value}</span>{" "}
-                    <span className="text-muted">
-                      per {e.publisher}
-                      {e.asOf ? `, ${e.asOf}` : ""}
-                    </span>{" "}
-                    <Cite hit={workforce.sources[e.sourceIndex]} n={e.sourceIndex} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ) : null}
-
-          {workforce.total || workforce.splits.length > 0 ? (
-            <p className="measure mt-2 text-sm text-muted">
-              Read against the reach figures below rather than multiplied by
-              them. A headcount times a reach percentage would read as a count
-              of exposed jobs, and it would assume this company&apos;s role mix
-              matches the sector archetype, which nobody has measured.
-            </p>
-          ) : null}
-        </div>
-      ) : null}
 
       <div className="mt-4 overflow-x-auto">
         <table className="w-full min-w-[42rem] text-sm">
@@ -289,33 +228,6 @@ export function WorkforceExposure({
         </DerivationDrawer>
       </div>
     </section>
-  );
-}
-
-/** The link behind a published figure. A figure a reader cannot open is an assertion. */
-function Cite({
-  hit,
-  n,
-}: {
-  hit: { url: string; title: string } | undefined;
-  n: number;
-}) {
-  if (!hit) return null;
-  let host = hit.url;
-  try {
-    host = new URL(hit.url).hostname.replace(/^www\./, "");
-  } catch {
-    // A malformed URL still gets shown, just not prettified.
-  }
-  return (
-    <a
-      href={hit.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="font-mono text-sm text-primary hover:underline"
-    >
-      [{n + 1}] {host}
-    </a>
   );
 }
 

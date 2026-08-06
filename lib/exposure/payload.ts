@@ -1,5 +1,11 @@
 import { MODELS } from "@/lib/model-fit";
-import { allRoleExposure, reachForBand, BANDS } from "./role-exposure";
+import {
+  allRoleExposure,
+  reachForBand,
+  BANDS,
+  macroSectors,
+  industriesInMacro,
+} from "./role-exposure";
 
 // The server-computed payload, so the browser never receives the role library.
 //
@@ -33,6 +39,12 @@ export interface ExposurePayload {
   modelsScored: number;
   /** Industries the library carries, for matching without shipping the roles. */
   industries: string[];
+  /**
+   * ModelEngine's own grouping of those industries into nine macro sectors.
+   * Carried so a company we cannot place exactly can still be placed
+   * approximately, against its sector rather than against the whole economy.
+   */
+  macroGroups: { macro: string; industries: string[] }[];
 }
 
 const MODELS_SCORED = MODELS.filter(
@@ -53,6 +65,10 @@ export function exposurePayload(): ExposurePayload {
     indexByBand,
     modelsScored: MODELS_SCORED,
     industries: [...new Set(all.map((r) => r.industry))].filter(Boolean).sort(),
+    macroGroups: macroSectors().map((macro) => ({
+      macro,
+      industries: industriesInMacro(macro),
+    })),
   };
 }
 

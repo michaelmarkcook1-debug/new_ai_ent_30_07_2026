@@ -1,10 +1,6 @@
 import { webSearch, groundingBlock, searchAvailable, type SearchHit } from "./search";
-import {
-  searchWorkforce,
-  readWorkforce,
-  type WorkforceDisclosure,
-} from "./workforce";
 import { authored, llmAvailable } from "@/lib/analyst/llm";
+import { INDUSTRY_GROUPS } from "@/lib/model-fit";
 
 // Research a company the product does not already track.
 //
@@ -45,7 +41,18 @@ export interface CompanyResearch {
   profile: {
     name: string;
     what: string;
+    /** The sector in the sources' own words. */
     industry: string;
+    /**
+     * The company placed in ModelEngine's own taxonomy, so the exposure panel
+     * reads it against the right role set.
+     *
+     * Classified by the model against the fixed list rather than string-matched
+     * from the free text above, because "Online grocery retail and technology"
+     * matches no library industry by substring and places perfectly by
+     * judgement. Both fields are null when nothing fits, which is a real answer.
+     */
+    sector: { industry: string | null; macro: string | null };
   } | null;
   /** Stated figures, rendered as cards. Never a score we computed. */
   metrics: CompanyMetric[];
@@ -59,12 +66,6 @@ export interface CompanyResearch {
   absence: string | null;
   /** True when a model wrote the statements; false when nothing was written. */
   written: boolean;
-  /**
-   * What the company publishes about its own workforce size. Null until the
-   * read completes, and carrying its own absence when a company publishes
-   * nothing, which is the normal case outside the listed majors.
-   */
-  workforce: WorkforceDisclosure | null;
 }
 
 const empty = (query: string, absence: string): CompanyResearch => ({
@@ -76,7 +77,6 @@ const empty = (query: string, absence: string): CompanyResearch => ({
   recommendations: [],
   sources: [],
   absence,
-  workforce: null,
   written: false,
 });
 
@@ -84,6 +84,8 @@ interface Draft {
   name?: string;
   what?: string;
   industry?: string;
+  sectorIndustry?: string;
+  sectorMacro?: string;
   metrics?: { label?: string; value?: string; source?: number }[];
   findings?: { statement?: string; source?: number }[];
   aiFindings?: { statement?: string; source?: number }[];
@@ -130,6 +132,33 @@ function cited(
     .map((f) => ({ statement: f.statement.trim(), sourceIndex: f.source - 1 }));
 }
 
+// ModelEngine's grouping, rendered for the prompt. Built from the same constant
+// the picker uses, so a new industry reaches the classifier automatically.
+const TAXONOMY = INDUSTRY_GROUPS.map(
+  (g) => `${g.macro}: ${g.industries.join(", ")}`
+).join("\n");
+const KNOWN_INDUSTRIES = new Set(
+  INDUSTRY_GROUPS.flatMap((g) => g.industries.map((s) => s.toLowerCase()))
+);
+const KNOWN_MACROS = new Set(
+  INDUSTRY_GROUPS.map((g) => g.macro.toLowerCase())
+);
+
+/** Only a classification into the taxonomy we actually hold. */
+function placeSector(d: Draft): { industry: string | null; macro: string | null } {
+  const industry =
+    typeof d.sectorIndustry === "string" &&
+    KNOWN_INDUSTRIES.has(d.sectorIndustry.trim().toLowerCase())
+      ? d.sectorIndustry.trim()
+      : null;
+  const macro =
+    typeof d.sectorMacro === "string" &&
+    KNOWN_MACROS.has(d.sectorMacro.trim().toLowerCase())
+      ? d.sectorMacro.trim()
+      : null;
+  return { industry, macro };
+}
+
 export type ResearchStage =
   | "searching-business"
   | "searching-ai"
@@ -165,16 +194,10 @@ export async function researchCompany(
     4
   );
   onStage("searching-ai");
-  // Fired together, because they are independent and the workforce read is
-  // what lets the exposure panel say how much work an employer actually has.
-  const [ai, work] = await Promise.all([
-    webSearch(`${name} artificial intelligence strategy adoption deployment`, 4),
-    searchWorkforce(name),
-  ]);
-
-  // Started now and awaited at the end, so it overlaps the main reading rather
-  // than adding its own minute to a run that already takes one.
-  const workforcePromise = readWorkforce(name, work?.hits ?? []);
+  const ai = await webSearch(
+    `${name} artificial intelligence strategy adoption deployment`,
+    4
+  );
 
   const sources = [...general.hits, ...ai.hits];
   if (sources.length === 0) {
@@ -185,7 +208,6 @@ export async function researchCompany(
           ai.unavailable ??
           "Nothing was retrieved for this company, so no profile is shown rather than an assumed one."
       ),
-      workforce: await workforcePromise,
     };
   }
 
@@ -195,7 +217,6 @@ export async function researchCompany(
       sources,
       absence:
         "Sources were retrieved but no analyst model is configured to read them, so the links are shown without a written reading.",
-      workforce: await workforcePromise,
     };
   }
 
@@ -221,6 +242,7 @@ export async function researchCompany(
 
 Return JSON:
 {"name": string, "what": string, "industry": string,
+ "sectorIndustry": string, "sectorMacro": string,
  "metrics": [{"label": string, "value": string, "source": number}],
  "findings": [{"statement": string, "source": number}],
  "aiFindings": [{"statement": string, "source": number}],
@@ -228,7 +250,11 @@ Return JSON:
 
 - name: the company's name as the sources give it.
 - what: one sentence on what the company does.
-- industry: the sector, in two or three words.
+- industry: the sector in the sources' own words, two or three words.
+- sectorIndustry and sectorMacro: place this company in the taxonomy below. sectorIndustry must be copied EXACTLY from the list, or left as an empty string when none of them fits. sectorMacro is the group that industry sits in, and may be given on its own when you are confident of the group but not the specific industry. Do not invent a category and do not stretch one to fit: an empty string is a real answer and is better than a wrong placement, which would read this company against another sector's roles.
+
+TAXONOMY:
+${TAXONOMY}
 - metrics: up to 6 figures the passages actually state, as cards. Label is two or three words ("Revenue", "Employees", "Listed as", "Founded"). Value is the figure exactly as the source gives it, currency and all. Only include a figure a passage states outright; never convert, never compute, never estimate. Each cites its passage.
 - recommendations: up to 3. What a buyer evaluating AI for this company should do next, following from what was found. No figures needed. If the sources are too thin to justify advice, return an empty array.
 - findings: up to ${attempt.findings}. What a buyer should know about the company's size, position and direction. Each cites the passage number it came from.
@@ -249,6 +275,7 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
           name: draft.name,
           what: draft.what ?? "",
           industry: draft.industry ?? "not stated",
+          sector: placeSector(draft),
         },
         metrics: citedMetrics(draft.metrics, attempt.hits.length),
         findings: cited(draft.findings, attempt.hits.length),
@@ -259,8 +286,7 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
         sources: attempt.hits,
         absence: null,
         written: true,
-        workforce: await workforcePromise,
-      };
+        };
     }
     console.warn(
       `[research] ${name}: attempt ${i + 1} of ${attempts.length} produced no usable reading`
@@ -274,9 +300,6 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
     sources,
     absence:
       "The retrieved sources did not support a reading that passed our checks, on two attempts. The sources themselves are below and are worth reading directly.",
-    // The workforce read is independent, so a failed company reading does not
-    // discard a headcount that was retrieved and checked successfully.
-    workforce: await workforcePromise,
   };
 }
 
@@ -345,6 +368,7 @@ export async function researchTopic(
 
 Return JSON:
 {"name": string, "what": string, "industry": string,
+ "sectorIndustry": string, "sectorMacro": string,
  "findings": [{"statement": string, "source": number}]}
 
 - name: the company as the sources give it.
@@ -373,6 +397,7 @@ Before you say two sources disagree, check whether they are the same quantity ex
       name: draft.name,
       what: draft.what ?? "",
       industry: draft.industry ?? "not stated",
+      sector: placeSector(draft),
     },
     metrics: citedMetrics(draft.metrics, found.hits.length),
     findings: cited(draft.findings, found.hits.length),
@@ -381,9 +406,5 @@ Before you say two sources disagree, check whether they are the same quantity ex
     sources: found.hits,
     absence: null,
     written: true,
-    // Topic research asks one narrow question and does not run the workforce
-    // pass. Null here means "not asked", which the panel reads differently
-    // from a disclosure that was asked for and not found.
-    workforce: null,
   };
 }

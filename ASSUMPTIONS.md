@@ -1528,3 +1528,37 @@ should have been applied here from the start.
 **Assumption that failed:** that a query weighted toward "annual report" and
 "investor relations" would filter out aggregators. It does not, so the read
 classifies rather than trusting the query.
+
+## Placing a company in the role library (6 August 2026)
+
+The published-headcount block came off the front end. For Ocado it rendered
+"869 (average monthly number of employees, Ocado Retail Limited)", a subsidiary
+figure that is accurate and says nothing about the group's workforce, and the
+whole block earned less than the space it took.
+
+**Replaced by** ModelEngine's own taxonomy, which is a better instrument for
+the same question. Three corrections:
+
+1. **The 99 cross-industry roles are now always included.** They carry `*`
+   because one profile serves every sector, and they are the finance, legal,
+   HR, IT support and administrative work every employer has. Filtering to
+   "Banking" and showing six specialists described a bank with no back office.
+   Banking went from 6 roles at 44 per cent to 105 roles, and the two halves
+   are now reported separately.
+
+2. **The two means are never blended.** Specialist means run 19 per cent
+   (Accounting & Audit, IT Services) to 55 per cent (Transport & Logistics),
+   while the common 99 sit at one figure for everyone. Averaging five
+   specialists into ninety-nine common roles returns roughly 33 per cent for
+   every sector on earth, which reads as a finding and is an artefact. A test
+   pins the difference.
+
+3. **The company is classified by the model against the fixed list**, not
+   matched by substring. "Online grocery retail and technology" matches no
+   library industry by substring and places in Retail & E-commerce by
+   judgement. An unplaceable company falls back to its macro sector before it
+   falls back to the whole economy, and says which basis it used.
+
+**Assumed:** that a sector-specific mean over five to seven roles is worth
+showing. It is thin, and the panel prints the count it rests on so a reader can
+weigh it.

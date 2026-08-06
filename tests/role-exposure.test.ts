@@ -6,6 +6,8 @@ import {
   matchIndustry,
   industriesWithRoles,
 } from "@/lib/exposure/role-exposure";
+import { exposurePayload } from "@/lib/exposure/payload";
+import { poolFor } from "@/lib/exposure/match";
 import { CAP01_THRESHOLDS } from "@/lib/model-fit/workforce-curve";
 
 // Exposure is a derivation, so these tests pin the derivation rather than the
@@ -81,40 +83,108 @@ describe("the library reads end to end", () => {
   });
 });
 
-describe("an industry view", () => {
-  it("narrows to the industry when the library carries it", () => {
-    const known = industriesWithRoles()[0];
-    const v = exposureFor(known);
-    expect(v.industry).toBe(known);
-    expect(v.roles.every((r) => r.industry === known)).toBe(true);
-    expect(v.total).toBe(v.roles.length);
+describe("a sector is its specialists plus everyone's back office", () => {
+  // The correction that changed the numbers most. 99 of the 294 roles carry
+  // "*" as their industry, meaning one profile serves every sector: finance,
+  // legal, HR, IT support, administration. Filtering to "Banking" and showing
+  // only the six banking specialists described a bank with no back office, and
+  // understated reach by dropping exactly the functions models have got
+  // furthest into.
+  it("includes the cross-industry roles alongside the sector's own", () => {
+    const v = exposureFor("Banking");
+    expect(v.basis).toBe("industry");
+    expect(v.industry).toBe("Banking");
+    expect(v.specific).toBeGreaterThan(0);
+    expect(v.common).toBe(99);
+    expect(v.total).toBe(v.specific + v.common);
+    // Six specialists alone would have been the old answer.
+    expect(v.total).toBeGreaterThan(50);
   });
 
-  it("falls back to the whole library rather than showing nothing", () => {
-    // A reader who named a sector we do not carry is better served by the
-    // cross-industry picture, labelled as such, than by a blank panel.
-    const v = exposureFor("Deep Sea Mining");
+  it("never treats the cross-industry marker as an industry", () => {
+    // "*" sorts first in the industry list and is not a sector anyone is in.
+    const v = exposureFor("*");
+    expect(v.basis).toBe("cross-industry");
     expect(v.industry).toBeNull();
-    expect(v.roles.length).toBe(294);
+  });
+
+  it("falls back to the macro sector before falling back to everything", () => {
+    // A company we cannot place exactly is still better read against its own
+    // sector than against the whole economy.
+    const v = exposureFor("Retail Banking In Wales", "Financial services");
+    expect(v.basis).toBe("macro");
+    expect(v.macro).toBe("Financial services");
+    expect(v.industry).toBeNull();
+    expect(v.specific).toBeGreaterThan(0);
+    // Narrower than the whole library, which is the point of the fallback.
+    expect(v.specific).toBeLessThan(195);
+  });
+
+  it("says so plainly when nothing places the company", () => {
+    const v = exposureFor("Deep Sea Mining", "Nothing That Exists");
+    expect(v.basis).toBe("cross-industry");
+    expect(v.industry).toBeNull();
+    expect(v.macro).toBeNull();
+    expect(v.total).toBe(294);
   });
 
   it("sorts most reachable first, which is the order a buyer reads in", () => {
-    const v = exposureFor(null);
+    const v = exposureFor("Banking");
     for (let i = 1; i < v.roles.length; i++) {
       expect(v.roles[i - 1].reachPct).toBeGreaterThanOrEqual(v.roles[i].reachPct);
     }
   });
 
-  it("counts the two ends without overlapping them", () => {
-    const v = exposureFor(null);
-    expect(v.highExposure).toBeGreaterThan(0);
-    expect(v.frontierOnly).toBeGreaterThan(0);
-    expect(v.highExposure + v.frontierOnly).toBeLessThanOrEqual(v.total);
+  it("carries the denominator every figure rests on", () => {
+    expect(exposureFor("Banking").modelsScored).toBe(330);
   });
 
-  it("carries the denominator every figure rests on", () => {
-    expect(exposureFor(null).modelsScored).toBe(330);
+  it("keeps the sector signal instead of averaging it away", () => {
+    // The reason the two means are reported separately. Specialist work varies
+    // widely by sector; the 99 common roles do not vary at all. Blending five
+    // or six specialists into ninety-nine common roles returns near enough the
+    // same figure for every sector, which reads as a finding and is an
+    // artefact of the averaging.
+    const logistics = exposureFor("Transport & Logistics");
+    const audit = exposureFor("Accounting & Audit");
+
+    // The common half is identical, because it is the same 99 roles.
+    expect(logistics.commonMean).toBe(audit.commonMean);
+
+    // The sector half is not, and by a wide margin.
+    expect(logistics.specificMean - audit.specificMean).toBeGreaterThan(20);
+
+    // Blended, that difference all but disappears, which is the bug this
+    // guards against.
+    expect(Math.abs(logistics.meanReach - audit.meanReach)).toBeLessThan(5);
   });
+});
+
+describe("the browser half agrees with the library half", () => {
+  // poolFor runs against the 27 KB payload and exposureFor against the 684 KB
+  // library. They implement the same rule twice, so this is the test that
+  // stops them drifting apart.
+  const payload = exposurePayload();
+  for (const [industry, macro] of [
+    ["Banking", null],
+    ["Software & SaaS", null],
+    [null, "Financial services"],
+    ["Deep Sea Mining", null],
+  ] as [string | null, string | null][]) {
+    it(`agrees for ${industry ?? "no industry"} / ${macro ?? "no macro"}`, () => {
+      const a = exposureFor(industry, macro);
+      const b = poolFor(payload, industry, macro);
+      expect(b.basis).toBe(a.basis);
+      expect(b.roles.length).toBe(a.total);
+      expect(b.meanReach).toBe(a.meanReach);
+      expect(b.widely).toBe(a.highExposure);
+      expect(b.frontier).toBe(a.frontierOnly);
+      expect(b.specific).toBe(a.specific);
+      expect(b.common).toBe(a.common);
+      expect(b.specificMean).toBe(a.specificMean);
+      expect(b.commonMean).toBe(a.commonMean);
+    });
+  }
 });
 
 describe("matching a researched company to an industry", () => {

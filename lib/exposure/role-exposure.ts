@@ -1,4 +1,10 @@
-import { ROLES, MODELS, type Role } from "@/lib/model-fit";
+import {
+  ROLES,
+  MODELS,
+  INDUSTRY_GROUPS,
+  CROSS_INDUSTRY,
+  type Role,
+} from "@/lib/model-fit";
 import { CAP01_THRESHOLDS } from "@/lib/model-fit/workforce-curve";
 
 // Role-level AI exposure, derived rather than asserted.
@@ -99,6 +105,9 @@ export function allRoleExposure(): RoleExposure[] {
   return out;
 }
 
+/** How the role set was arrived at, so the panel can say which it used. */
+export type MatchBasis = "industry" | "macro" | "cross-industry";
+
 export interface ExposureView {
   /** Roles, most reachable first: the ones AI has already got to. */
   roles: RoleExposure[];
@@ -108,32 +117,109 @@ export interface ExposureView {
   highExposure: number;
   /** Roles only the frontier reaches, where capability is still the constraint. */
   frontierOnly: number;
-  /** The industry this view was built for, or null for the whole library. */
+  /** The industry matched, when one was. */
   industry: string | null;
-  /** How many roles the library holds for that industry. */
+  /** The macro sector matched, when the industry did not resolve. */
+  macro: string | null;
+  basis: MatchBasis;
+  /** Sector-specific roles in the set. */
+  specific: number;
+  /** Roles that run in every sector, and are part of every employer's mix. */
+  common: number;
+  /**
+   * The two means, kept apart.
+   *
+   * Blending them destroys the only sector signal there is. Specialist means
+   * run from about 19 per cent to about 55 per cent across the library, while
+   * the 99 common roles sit at one figure for everybody. Folding five or six
+   * specialists into ninety-nine common roles therefore returns roughly the
+   * same number for every sector on earth, which reads as a finding and is an
+   * artefact of the averaging.
+   */
+  specificMean: number;
+  commonMean: number;
   total: number;
-  /** Scored models behind every figure here. */
   modelsScored: number;
 }
 
+/** The industries a macro sector covers, from ModelEngine's own grouping. */
+export function industriesInMacro(macro: string): string[] {
+  const g = INDUSTRY_GROUPS.find(
+    (x) => x.macro.toLowerCase() === macro.toLowerCase()
+  );
+  return g ? g.industries : [];
+}
+
+export function macroSectors(): string[] {
+  return INDUSTRY_GROUPS.map((g) => g.macro);
+}
+
 /**
- * The exposure picture for one industry, or for the whole library when the
- * industry is unknown or not carried.
+ * The exposure picture for a company's sector.
  *
- * Returns the whole library rather than an empty view when an industry has no
- * roles, because a reader who named a sector we do not carry is better served
- * by the cross-industry picture, clearly labelled, than by a blank panel.
+ * Two corrections over the first version of this, and both change the numbers
+ * materially.
+ *
+ * FIRST: the 99 cross-industry roles are always included. They carry `*` as
+ * their industry because one profile serves every sector, and they are the
+ * finance, legal, HR, IT support and administrative work that every employer
+ * has regardless of what it sells. Filtering to "Banking" and showing only the
+ * six banking specialists described a bank with no back office, which
+ * understated the reachable share of its work by leaving out precisely the
+ * functions models have reached furthest into.
+ *
+ * SECOND: an unmatched industry falls back to its macro sector before it falls
+ * back to everything. ModelEngine already groups the 36 industries into nine
+ * macro sectors, so a company we cannot place exactly can still be placed
+ * approximately, and a grocer reads against retail rather than against the
+ * whole economy.
  */
-export function exposureFor(industry: string | null): ExposureView {
+export function exposureFor(
+  industry: string | null,
+  macro: string | null = null
+): ExposureView {
   const all = allRoleExposure();
-  const matched = industry
-    ? all.filter((r) => r.industry.toLowerCase() === industry.toLowerCase())
+  const common = all.filter((r) => r.industry === CROSS_INDUSTRY);
+  const sectorOnly = all.filter((r) => r.industry !== CROSS_INDUSTRY);
+
+  const exact = industry
+    ? sectorOnly.filter(
+        (r) => r.industry.toLowerCase() === industry.toLowerCase()
+      )
     : [];
-  const roles = matched.length > 0 ? matched : all;
-  const meanReach =
-    roles.length === 0
+
+  let specific = exact;
+  let basis: MatchBasis = "industry";
+  let matchedIndustry: string | null = exact.length > 0 ? industry : null;
+  let matchedMacro: string | null = null;
+
+  if (specific.length === 0 && macro) {
+    const peers = industriesInMacro(macro).map((s) => s.toLowerCase());
+    if (peers.length > 0) {
+      specific = sectorOnly.filter((r) =>
+        peers.includes(r.industry.toLowerCase())
+      );
+      if (specific.length > 0) {
+        basis = "macro";
+        matchedMacro = macro;
+      }
+    }
+  }
+
+  if (specific.length === 0) {
+    // Nothing placed it, so the honest view is every sector, said out loud.
+    specific = sectorOnly;
+    basis = "cross-industry";
+    matchedIndustry = null;
+    matchedMacro = null;
+  }
+
+  const roles = [...specific, ...common];
+  const meanOf = (xs: RoleExposure[]) =>
+    xs.length === 0
       ? 0
-      : Math.round(roles.reduce((a, r) => a + r.reachPct, 0) / roles.length);
+      : Math.round(xs.reduce((a, r) => a + r.reachPct, 0) / xs.length);
+  const meanReach = meanOf(roles);
 
   return {
     roles: [...roles].sort(
@@ -146,7 +232,13 @@ export function exposureFor(industry: string | null): ExposureView {
     // Only the top of the catalogue reaches it, which is where capability
     // genuinely still constrains what can be attempted.
     frontierOnly: roles.filter((r) => r.reachPct <= 11).length,
-    industry: matched.length > 0 ? industry : null,
+    industry: matchedIndustry,
+    macro: matchedMacro,
+    basis,
+    specific: specific.length,
+    common: common.length,
+    specificMean: meanOf(specific),
+    commonMean: meanOf(common),
     total: roles.length,
     modelsScored: scoredIndexes().length,
   };

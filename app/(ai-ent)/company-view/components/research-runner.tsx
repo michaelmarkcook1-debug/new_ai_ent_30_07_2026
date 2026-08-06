@@ -134,9 +134,10 @@ export function ResearchRunner({
         {status.result.profile ? (
           <WorkforceExposure
             payload={exposure}
-            industry={status.result.profile.industry}
+            // A result cached before this field existed carries no sector.
+            sector={status.result.profile.sector ?? { industry: null, macro: null }}
+            industryText={status.result.profile.industry}
             companyName={status.result.profile.name}
-            workforce={status.result.workforce}
           />
         ) : null}
       </div>
