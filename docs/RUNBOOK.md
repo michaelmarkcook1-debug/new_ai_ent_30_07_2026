@@ -48,6 +48,19 @@ Errors are a different matter and there should never be any.
 npx vercel --prod --yes
 ```
 
+Then warm the analyst cache, which the deploy just emptied:
+
+```bash
+node scripts/warm-insights.mjs
+```
+
+The authored insight is cached in Vercel's Data Cache, shared across
+instances, but the key includes the build id. Every deploy therefore clears
+it, and without this the next person to open a page waits for a full Opus call
+before the first byte: measured between 8 and 30 seconds. The script walks the
+eleven pages that author a reading and absorbs that cost on our side. It takes
+a couple of minutes and is safe to run twice.
+
 There is **no git remote**: deploys go through the Vercel CLI directly from
 this folder. `git push` will fail, and that is expected, not a broken setup.
 
