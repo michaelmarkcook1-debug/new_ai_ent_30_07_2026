@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { TRACKED_VENDORS } from "@/lib/aie/vendors";
+import { citedChunks } from "@/lib/desk/corpus";
 
 // Grounding corpus for the AI Analyst (spec Section 8). Priority order:
 // user uploads, then the preloaded sample documents, then the Shell fixture
@@ -9,7 +10,12 @@ import { TRACKED_VENDORS } from "@/lib/aie/vendors";
 
 export interface Chunk {
   source: string;
-  sourceKind: "upload" | "document" | "shell-fixture" | "aie-dataset";
+  sourceKind:
+    | "upload"
+    | "document"
+    | "shell-fixture"
+    | "aie-dataset"
+    | "cited";
   text: string;
 }
 
@@ -75,6 +81,19 @@ export async function buildCorpus(sid: string): Promise<Chunk[]> {
   //
   // What a reader's own documents contribute is above, and is the right way
   // for company-specific fact to enter this corpus: they uploaded it.
+  // The cited material: vendor terms quoted from their own documents, the
+  // sovereignty read derived from them, dated model retirements, and the
+  // encroachment receipts. Added 6 August 2026.
+  //
+  // This is the strongest evidence in the product and it was not reachable by
+  // the analyst at all. Without it, a question like "can OpenAI train on our
+  // data" retrieved a one-line vendor description and the model answered from
+  // memory, which is exactly the failure the figure and vendor-name guards
+  // cannot catch: the sentence is fluent, names a real vendor, contains no
+  // number, and may still be wrong about a contract somebody is about to sign.
+  for (const c of citedChunks()) {
+    chunks.push({ source: c.source, sourceKind: "cited", text: c.text });
+  }
   // AIE dataset facts (real dataset content, qualitative only)
   for (const v of TRACKED_VENDORS) {
     chunks.push({
@@ -102,9 +121,22 @@ export function retrieve(corpus: Chunk[], question: string, k = 4): { chunk: Chu
     for (const t of terms) {
       if (hay.includes(t)) score += 1;
     }
-    // uploads outrank documents outrank fixtures at equal keyword score
+    // At equal keyword score: the reader's own documents first, then material
+    // quoted from a vendor's published terms, then the sample documents, then
+    // fixtures. Cited sits above `document` because a sentence lifted out of
+    // the contract that governs the reader beats a sample memo about contracts
+    // in general, and below `upload` because the reader's own agreement beats
+    // the public one every time.
     const kindBoost =
-      chunk.sourceKind === "upload" ? 0.3 : chunk.sourceKind === "document" ? 0.2 : chunk.sourceKind === "shell-fixture" ? 0.1 : 0;
+      chunk.sourceKind === "upload"
+        ? 0.3
+        : chunk.sourceKind === "cited"
+          ? 0.25
+          : chunk.sourceKind === "document"
+            ? 0.2
+            : chunk.sourceKind === "shell-fixture"
+              ? 0.1
+              : 0;
     return { chunk, score: score + (score > 0 ? kindBoost : 0) };
   });
   return scored

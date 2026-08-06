@@ -8,6 +8,10 @@ import { newsInsight } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
 import { analystNews } from "@/lib/analyst/news-source";
 import { readWatchState } from "@/lib/changes/watchlist";
+// Ported from The Security Desk, 6 August 2026. The three feeds below all run
+// on a weekly-ish clock or are keyed to a ticker; none of them answers what
+// broke in the last few hours, which is the beat a CIO is asked about first.
+import { DeskWire } from "./components/desk-wire";
 
 // News is the fastest-moving input in the product, and the insight now reads
 // the reader's watchlist to say which of the cycle touches them.
@@ -37,8 +41,8 @@ export default async function NewsFeedPage() {
     <>
       <PageHeader
         title="News"
-        subtitle="The live AI-market feed from the deployed AIE pipeline, the historical seed brief, and live per-company news for the BoardRadar universe."
-        lanes={["aie-live", "aie", "live"]}
+        subtitle="Security and AI press read on this request, the live AI-market feed from the deployed AIE pipeline, the historical seed brief, and live per-company news for the BoardRadar universe."
+        lanes={["live", "aie-live", "aie"]}
       />
       <AnalystInsight
         insight={written.value}
@@ -46,6 +50,8 @@ export default async function NewsFeedPage() {
         context="news"
       />
       <div className="space-y-5">
+        {/* Fastest clock first. */}
+        <DeskWire />
         <LiveFeed />
         <AieFeed items={items} meta={meta} />
         <CompanyNewsSection universe={UNIVERSE_TICKERS} />

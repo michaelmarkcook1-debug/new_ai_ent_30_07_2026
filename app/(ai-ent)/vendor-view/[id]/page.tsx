@@ -14,6 +14,11 @@ import {
   ScoreBlock,
   SourcesSection,
 } from "../components/profile-sections";
+// Ported from The Security Desk, 6 August 2026. The profile joined every AIE
+// dataset and could not reach the one a buyer asks about first: what this
+// vendor's own contract permits.
+import { ContractPostureSection } from "../components/contract-posture";
+import { buildDossier } from "@/lib/desk/dossier";
 
 export function generateStaticParams() {
   return TRACKED_VENDORS.map((vendor) => ({ id: vendor.id }));
@@ -44,6 +49,8 @@ export default async function VendorProfilePage({
 
   // The three questions a buyer arrives with, answered before the detail.
   const card = vendorScorecard(id);
+  // What this vendor's own documents say, joined across the ported surfaces.
+  const dossier = buildDossier(id, new Date());
 
   return (
     <>
@@ -63,6 +70,11 @@ export default async function VendorProfilePage({
       <div className="space-y-4 pb-8">
         {card ? <ThreeQuestions card={card} /> : null}
         <ProfileFacts profile={profile} />
+        {/* The vendor's own words, before our assessment of them. */}
+        <ContractPostureSection
+          dossier={dossier}
+          vendorName={profile.intel.name}
+        />
         <ScoreBlock profile={profile} />
         <CapabilitiesSection profile={profile} />
         <DependencySection profile={profile} />

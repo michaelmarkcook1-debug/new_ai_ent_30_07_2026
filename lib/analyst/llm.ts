@@ -1,4 +1,5 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { unstable_cache } from "next/cache";
 
 // The analyst voice, written by Opus 5 over figures it is not allowed to
 // invent.
@@ -38,6 +39,8 @@ export const llmAvailable = (): boolean => llmKey() !== null;
 /** How a piece of analyst text on the page was produced. */
 export type Authorship = "written" | "computed";
 
+// L1: this instance's own memory. Free and instant, and useless on the next
+// instance.
 const cache = new Map<string, { value: unknown; at: number }>();
 
 function keyOf(kind: string, payload: unknown): string {
@@ -281,6 +284,41 @@ export async function authored<T extends object>(
   const hit = cache.get(cacheKey);
   if (hit && Date.now() - hit.at < TTL_MS) return hit.value as T;
 
+  // L2: Vercel's Data Cache, shared by every instance.
+  //
+  // The in-process Map above was the only cache until 5 August 2026, and it
+  // made the app feel broken once the key went live. Measured on production:
+  // a page whose instance held the answer returned in 0.2s; a page that
+  // landed on a fresh instance took 8 to 19 seconds, because it paid for a
+  // full Opus call before sending a byte. Browsing hits fresh instances
+  // constantly, so most page loads were the slow one.
+  //
+  // Failures are deliberately not cached. `generate` throws when the model is
+  // unavailable or its output was discarded for inventing a figure, and a
+  // throw is not stored, so a bad minute cannot freeze a page into computed
+  // mode for a day. The cost of that choice is retrying a genuinely broken
+  // call, which is the right way round.
+  try {
+    return (await unstable_cache(
+      () => generate<T>(kind, facts, instruction, maxTokens, roster, cacheKey),
+      ["analyst-insight", cacheKey],
+      { revalidate: TTL_MS / 1000 }
+    )()) as T;
+  } catch {
+    return null;
+  }
+}
+
+/** The uncached call. Throws rather than returning null so nothing caches a failure. */
+async function generate<T extends object>(
+  kind: string,
+  facts: string,
+  instruction: string,
+  maxTokens: number,
+  roster: readonly string[],
+  cacheKey: string
+): Promise<T> {
+
   let lastInvented: string[] = [];
 
   // The permitted figures, listed rather than left to be inferred from prose.
@@ -310,7 +348,8 @@ ${instruction}`;
           : "\n\nCORRECTION: your previous answer was not valid JSON, most likely because it ran long. Answer again, shorter, as a single JSON object.";
 
     const raw = await callModel(base + correction, maxTokens);
-    if (!raw) return null;
+    // Throw rather than return: a failed call must not be cached for a day.
+    if (!raw) throw new Error(`[analyst-llm] ${kind}: no response`);
 
     const parsed = parseJson<T>(raw);
     if (!parsed) {
@@ -343,5 +382,8 @@ ${instruction}`;
     );
   }
 
-  return null;
+  // Both attempts produced a figure the data did not contain. The caller falls
+  // back to the computed text, and because this throws rather than returning,
+  // the discard is not cached and the next reader gets a fresh attempt.
+  throw new Error(`[analyst-llm] ${kind}: discarded after retry`);
 }

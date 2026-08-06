@@ -15,6 +15,17 @@ import { SinceLastLook } from "./components/since-last-look";
 import { pulseJudgement } from "@/lib/pulse/judgement";
 import { authorPulse, authorActions, authorSince } from "@/lib/analyst/author";
 import { readWatchState, readChangeLog, buildSinceView } from "@/lib/changes/watchlist";
+// Ported from The Security Desk, 6 August 2026. The Pulse read the market
+// well and answered nothing about today: it had no way to say that a provider
+// is down while you are looking at the page, and no line that paired a fact
+// with what to do about it. Those are the daily habit, and they belong on the
+// surface a reader opens first.
+import { fetchStatuses, STATUS_SOURCE_COUNT } from "@/lib/desk/status";
+import { fetchDeskNews } from "@/lib/desk/news";
+import { assembleBrief } from "@/lib/desk/brief";
+import { TodaysBrief } from "./components/todays-brief";
+import { TheTape } from "./components/the-tape";
+import { FirmsLikeYours } from "./components/firms-like-yours";
 
 export const metadata = { title: "Your Pulse | AI Enterprise" };
 
@@ -113,13 +124,43 @@ export default async function PulsePage() {
     detail: writtenActions.value[i]?.detail ?? a.detail,
   }));
 
+  // Today's spine. Both fetches are safe-fail by construction, so a dark
+  // source costs the brief a section rather than costing the reader the page.
+  // One clock reading for the whole render, so every countdown agrees.
+  const asOf = new Date();
+  const [statuses, deskNews] = await Promise.all([
+    fetchStatuses(),
+    fetchDeskNews(8),
+  ]);
+  const todaysBrief = assembleBrief(
+    statuses,
+    STATUS_SOURCE_COUNT,
+    deskNews,
+    watch.vendorIds,
+    asOf
+  );
+
   return (
     <>
       <PageHeader
         title="Your Pulse"
-        subtitle="What changed in the enterprise AI market, why it matters, and what to do about it."
-        lanes={[metrics.lane, "derived"]}
+        subtitle="What changed overnight and what it means for you, then what changed in the market, why it matters, and what to do about it."
+        lanes={["live", metrics.lane, "derived"]}
       />
+      {/* The daily habit sits above the market read, because a reader opening
+          this page in the morning wants "is anything on fire" answered before
+          "how is the market trending". */}
+      <div className="mb-4 space-y-4">
+        <TodaysBrief brief={todaysBrief} />
+        <div className="grid gap-4 lg:grid-cols-2">
+          <TheTape
+            statuses={statuses}
+            attempted={STATUS_SOURCE_COUNT}
+            watchedVendorIds={watch.vendorIds}
+          />
+          <FirmsLikeYours />
+        </div>
+      </div>
       <PulseView
         fixture={fixture}
         metrics={metrics}

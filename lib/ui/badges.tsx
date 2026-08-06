@@ -28,7 +28,7 @@ export function LaneBadge({ lane }: { lane: DataLane }) {
       className={`inline-flex items-center rounded px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wider border ${styles[lane]}`}
       title={
         lane === "live"
-          ? "Live from the BoardRadar API"
+          ? "Fetched from the publisher's own endpoint on this request. BoardRadar, SEC EDGAR, and the provider status pages are all live sources; the badge means the round trip happened, not which API answered it"
           : lane === "aie"
             ? "Real AI Enterprise dataset content, re-used from the ranking-engine repository"
             : lane === "aie-live"

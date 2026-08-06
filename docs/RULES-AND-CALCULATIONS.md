@@ -15,21 +15,37 @@ Companion documents, which carry the other two legs:
 
 Verified against the working tree at commit `82e20da`, 5 August 2026.
 
+Sections 8.1 to 8.10 (everything ported from The Security Desk) were verified
+against the working tree at commit `1ef3bfa`, on 5 and 6 August 2026, and are
+uncommitted at the time of writing. Every line number and count in those
+sections was read from the files rather than recalled, and re-read after the
+last edit and again after `1ef3bfa` landed.
+
 ---
 
 ## 1. Provenance: the lane rules
 
-`lib/provenance.ts:33` defines seven lanes and no eighth:
+`lib/provenance.ts:42` defines eight lanes and no ninth:
 
-| Lane | Badge (`LANE_LABEL`, `lib/provenance.ts:42`) |
+| Lane | Badge (`LANE_LABEL`, `lib/provenance.ts:52`) |
 |---|---|
 | `live` | LIVE |
 | `aie` | AIE dataset |
 | `aie-live` | AIE live |
+| `cited` | CITED |
 | `derived` | DERIVED |
 | `sample` | SAMPLE |
 | `mock` | Cached sample |
 | `stub` | In development |
+
+`cited` was added 5 August 2026 (`lib/provenance.ts:46`) for the Privacy & IP
+Shield. A Shield mark is a sentence quoted out of a vendor's published terms,
+carrying the URL it was read from and the date a human read it. That is not
+`live`, because legal terms have no feed to poll; not `derived`, because
+nothing was computed; and badging real quoted terms `sample` would be a lie in
+the direction that matters most. Styled the same neutral as `derived`
+(`lib/ui/badges.tsx`), deliberately: a green badge over a term read three weeks
+ago would overstate it.
 
 Two rules govern their use, and both exist because breaking either produces a
 screen that lies quietly:
@@ -265,6 +281,310 @@ that was never a revenue multiple in the first place. `NOT_VALUATIONS`
 - `lib/comparability.ts` decides whether two figures may be set against each
   other at all. **Scores compare within a market category, never across it:** a
   chip maker and a CRM assistant do not compete for the same budget.
+
+### 8.1 The Shield's freshness clock
+
+`lib/shield/freshness.ts`. A separate mechanism from the evidence grading
+above, because it answers a different question: not "how good is this source"
+but "how long since a human last opened it".
+
+| Constant | Value | Line |
+|---|---|---|
+| `FRESH_DAYS` | `30` | `lib/shield/freshness.ts:29` |
+| `DUE_DAYS` | `60` | `lib/shield/freshness.ts:30` |
+
+Banding at line 50: `daysAgo <= FRESH_DAYS ? "fresh" : daysAgo <= DUE_DAYS ?
+"due" : "overdue"`. The date is parsed off `SHIELD_VERSION` by
+`versionDate()` (line 35), which slices the first ten characters, because the
+version carries a same-day-pass letter (`"2026-07-14b"`).
+
+Computed against the real current date on every request, so it ages without
+manual upkeep. **It never re-derives a legal fact.** It only reports the age of
+one. This is what the CITED lane means in practice.
+
+---
+
+## 8.2 The Privacy & IP Shield
+
+`lib/shield/data.ts`. Ported 5 August 2026 from The Security Desk
+(`the-desk`, `lib/shield-data.ts`, commit `b9bb51c`), recorded in
+`SHIELD_ORIGIN` at `lib/shield/data.ts:35`. The source repository is read-only
+from here and was not modified.
+
+14 model providers (`SHIELD`, line 71), four marks each, `SHIELD_VERSION =
+"2026-07-14b"` (line 32), every mark stamped `verified 2026-07-14` (`V`, line
+66). Scope is model providers only: cloud hosts reselling these models do not
+change whose terms govern the data, so they belong on the Ecosystem Navigator.
+
+**Mark states and their weights.** `MARK_WEIGHT`, `lib/shield/data.ts:677`,
+duplicated in `shieldScore()` at line 601:
+
+| State | Weight | Meaning |
+|---|---|---|
+| `protective` | `1` | Protective fact, verified in the vendor's own words |
+| `conditional` | `0.5` | Protection exists but is gated |
+| `adverse` | `0` | Verified fact working against the customer |
+| `unverified` | `0` | No receipt obtained |
+
+**`unverified` scores zero deliberately** (line 597 comment): under-claiming
+beats over-claiming when the receipt is missing. That makes raw score
+ambiguous, so `shieldCoverage()` (line 618) counts how many of the four marks
+carry a determination and the screen prints it as `n/4`. A 2.0 built from two
+adverse marks is a different fact from a 2.0 built from two blanks, and
+collapsing them would penalise a vendor for our own missing receipts. Current
+state: **6 of 56 marks unverified**, **10 of 14 providers read on all four**.
+
+**Buyer weighting.** `shieldScoreWeighted()` (line 686) multiplies the same
+per-mark 0 / 0.5 / 1 by a buyer-supplied dimension weight, 0 to 3 on the
+control. `DEFAULT_SHIELD_WEIGHTS` (line 643) is 1 across all four and
+reproduces `rankedShield()` order exactly, asserted in
+`tests/shield-quotes.test.ts`. `rankedShieldWeighted()` (line 701) returns
+`max` alongside each score so a bar reads against what is achievable under
+*those* weights. Weighting changes priority, never a fact: an all-adverse
+vendor scores zero at any weight, also asserted.
+
+**The quotes are load-bearing and are pinned.** Every determined mark's `note`
+contains at least one span in curly quotes lifted from the vendor's document.
+Editorial text around those spans was repunctuated on port for the house
+no-em-dash rule, which is exactly the edit that can walk into a quotation
+unnoticed. `scripts/extract-shield-quotes.mjs` extracted all **43 spans** from
+the source at port time into `tests/fixtures/shield-quotes.json`;
+`tests/shield-quotes.test.ts` asserts each appears byte-identical in the port,
+*and* that the port introduces no quotation the source did not carry. Re-run
+the script only when the ledger is re-verified and re-ported.
+
+Two further guards in the same file: a determined mark must carry an `https://`
+source whose name matches `verified YYYY-MM-DD`, and an `unverified` mark must
+carry **no** source, because a half-cited blank reads as a receipt that does
+not exist.
+
+### 8.3 The Sovereignty Lens
+
+`lib/shield/sovereignty.ts`. Lane `derived`: a pure projection of `SHIELD`
+plus one public-record field per vendor, never a second dataset that could
+drift from the first.
+
+Three flags, ordered by `FLAG_ORDER` at line 149: `hard-stop` (0),
+`consideration` (1), `none` (2). Rows sort by flag then alphabetically
+(`sovereigntyRows()`, line 163). Current counts, from `sovereigntyCounts()`
+(line 184): **1 hard-stop, 3 consideration, 10 none**.
+
+`hard-stop` is reserved for a vendor whose own document rules out a residency
+choice. At present that is DeepSeek alone, and only because DeepSeek says so in
+writing. `consideration` is where documented hosting and corporate parentage
+disagree, currently Alibaba, Z.ai and Moonshot: each hosts in Singapore under a
+Chinese parent. Country of incorporation carries no vendor citation because it
+is public record; where the Shield already fetched a parent-company fact, that
+fetched fact is the one shown rather than a re-derived one.
+
+### 8.4 Joining the Shield to the shortlist
+
+`lib/shield/vendor-map.ts`. Shield slugs (`openai-api`) and vendor-directory
+ids (`openai`) are reconciled in exactly one table, `SLUG_TO_VENDOR_ID`, so
+neither dataset needs to know about the other. **13 of the 14 map.** Reka has
+no vendor-directory entry and therefore can never be marked "on your list";
+`unmappedShieldSlugs()` surfaces that on screen as a stated limit. Inventing an
+id for it would put a vendor on somebody's shortlist that they never chose.
+
+---
+
+## 8.5 The live spine: status and the wire
+
+`lib/desk/status.ts` and `lib/desk/news.ts`. Both ported 6 August 2026 from
+The Security Desk (`the-desk`, `lib/today.ts` and `lib/news.ts`, commit
+`b9bb51c`). Both are genuinely live: the round trip happens on the request, so
+both carry the LIVE lane.
+
+**Provider status.** Six pages (`STATUS_PAGES`, `lib/desk/status.ts:40`),
+surfaced as `STATUS_SOURCE_COUNT` at line 75: OpenAI, Anthropic, Google Cloud,
+Cohere, Groq, DeepSeek. `STATUS_REVALIDATE = 900` (line 79).
+
+Three schemas, not two. Atlassian Statuspage v2 (`status.indicator === "none"`
+means up) and Instatus (`page.status === "UP"`) are both handled by
+`readStatus()`; Google Cloud publishes an incidents **array** and is parsed
+separately (`kind: "gcp"`, line 55), where an incident with `end == null` is
+open. **A page that returns anything else yields null and the row does not
+render at all.** Not "operational", not stale, not an error card. As of
+6 August 2026, five of six answer and DeepSeek's does not, which is the case
+this rule exists for. Both the Tape and the brief print `n of 6 answered` so a
+short strip cannot be misread as a healthy market.
+
+**The wire.** Four RSS feeds (`FEEDS`, `lib/desk/news.ts:43`) plus Hacker News,
+so `NEWS_SOURCE_COUNT = FEEDS.length + 1` (line 71). `NEWS_REVALIDATE = 900`
+(line 73). Four filters, all regexes in the same file: `AI_SIGNAL`,
+`ENTERPRISE_SIGNAL`, `NOISE`, `SECURITY_SIGNAL`. Security press must clear
+`AI_SIGNAL`; a vendor newsroom must clear `ENTERPRISE_SIGNAL` or be security.
+Anything older than 14 days is dropped (line 169), as is anything undated.
+Ranking (line 260): security first, then primary sources over community
+(`kindRank` puts `vendor` and `security` at 0, `community` at 1), then
+freshest. Deduped on a 60-character normalised title.
+
+Two sources are deliberately absent and documented as such in the file header:
+Anthropic publishes no public RSS feed, and BleepingComputer sits behind a bot
+challenge that is not worked around.
+
+## 8.6 Today's Brief and the portfolio verdict
+
+`lib/desk/brief.ts`. Lane `derived`: the verdict is AG's conclusion from named
+inputs, none of which it publishes itself.
+
+| Threshold | Value | Line |
+|---|---|---|
+| `URGENT_DAYS` | `30` | `lib/desk/brief.ts:72` |
+| `SOON_DAYS` | `90` | `lib/desk/brief.ts:74` |
+| `WEAK_SHIELD` | `2` | `lib/desk/brief.ts:76` |
+| `REG_URGENT_DAYS` | `30` | `lib/desk/brief.ts:78` |
+
+**Health, in order of precedence.** No shortlist gives `unset`. Then `red` for
+a live incident or a retirement inside `URGENT_DAYS`, **on a shortlisted vendor
+only**. Then `amber` for a retirement in `URGENT_DAYS` to `SOON_DAYS`, a Shield
+score at or below `WEAK_SHIELD`, or a deployer-side obligation inside
+`REG_URGENT_DAYS`. Otherwise `green`. The reason string is built from the same
+booleans that chose the colour, so it cannot describe a different verdict.
+
+**Only deployer-side obligations can turn the page amber** (`onMe`, line 116:
+`binds === "deployer" || binds === "both"`). An obligation binding the model
+provider is the vendor's duty, and colouring the reader's portfolio for it
+would be telling them to act on somebody else's problem.
+
+**The regulation leg reads this repository's own register**
+(`lib/aie/regulation/obligations.ts`), not the source's two EU milestones.
+Porting the weaker dataset alongside the stronger would have given the product
+two regulatory answers that could disagree.
+
+**A section with no lines is omitted, never rendered empty**, asserted in
+`tests/desk-brief.test.ts`.
+
+### 8.6.1 Ported reference data behind the brief
+
+- `lib/desk/deprecations.ts`, `DEPRECATIONS_VERSION = "2026-07-13"`. Seven firm
+  retirements transcribed from OpenAI's and Anthropic's own deprecation pages.
+  `upcomingDeprecations()` filters `daysAway >= 0` **at read time** rather than
+  deleting rows, so the ledger stays a faithful record of what those pages said
+  on the verification date. The repository's own model inventory carries one
+  dated deprecation in total, which is why this is ported rather than derived.
+- `lib/desk/encroachment.ts`, `ENCROACHMENT_VERSION = "2026-07-14"`. Four
+  cited entries. Structural risk, never breaking news.
+- `lib/desk/vendor-map.ts` is the **single** table reconciling the names each
+  source uses ("Google Cloud", "AWS", "Amazon") with directory ids. An unmapped
+  name returns null and is never marked as the reader's, which is the safe
+  direction: a missed prompt beats a false alarm about their own portfolio.
+  Tests assert every party in both ported datasets resolves.
+
+## 8.7 The sourcing shortlist, the pilot and the Decision Pack
+
+`lib/desk/sourcing.ts`, `lib/desk/pilot.ts`, `lib/desk/pack.ts`,
+`lib/desk/pack-html.ts`. All ported 6 August 2026 from `the-desk`
+(`lib/decide.ts`, `lib/pilot.ts`, `lib/deck.ts`, `lib/render-pptx.ts`).
+
+**It ranks on the Shield and on nothing else.** `MARK_VALUE`
+(`lib/desk/sourcing.ts:64`) is the same 1 / 0.5 / 0 / 0 as the Shield itself.
+`rankVendors()` (line 147) sorts passing vendors first, then by weighted score,
+then alphabetically.
+
+**Two deliberate departures from the source, both in the file header.** The
+source breaks ties on disclosed peer adoption; there is no server-side
+disclosed-adoption set here to join on, so ties break alphabetically rather
+than on an invented join. And the source's ten-industry use-case list is not
+ported: see 8.8.
+
+**Five constraints** (`CONSTRAINTS`, line 82). An unverified indemnity **fails**
+`require_indemnity`, because no receipt is not a yes. Every dropped vendor
+carries a `failReason`, asserted for all five constraints in
+`tests/desk-sourcing.test.ts`.
+
+**`topPriorities()` (line 184) returns null when the buyer raised nothing.** At
+equal weights, naming the first two dimensions would tell a board that those
+were prioritised when no preference was expressed. Callers print "weighted
+equally" instead. This was a real defect caught in render: the panel read
+"Ranked on will not train on our data and retention" under default weights.
+
+**The pilot is methodology, never results.** `PILOT_STEPS`
+(`lib/desk/pilot.ts:36`), seven ordered steps. `USE_CASE_PROBES` (line 76), 13
+probes, one for each of the 13 use cases the flow offers. A test asserts no
+vendor is named anywhere in the pilot text.
+
+**One spec drives both outputs.** `buildPack()` (`lib/desk/pack.ts:65`) returns
+a `PackSpec`; the screen and `packToHtml()` both render that same object, so a
+figure cannot differ between what the reader saw and what they downloaded.
+Tests assert the pack's shortlist row count equals the ranking's passing count,
+that every rejection appears with its reason, and that the scope section states
+the tool does not rank capability.
+
+**The export is a self-contained HTML document, not PPTX.** The source renders
+to `.pptx` via `pptxgenjs`, imported on click. That dependency was **not** added
+here: another session was mid-flight in `package.json` and `package-lock.json`
+when this was built. `packToHtml()` produces a print-ready page with inline
+styles, no external fonts or scripts and no network dependency, and escapes
+every interpolated value. Swapping in a `.pptx` renderer later is a new
+function over the same `PackSpec` and changes nothing above it.
+
+## 8.8 What was deliberately not ported
+
+**The source's industry use-case taxonomy.** It carries ten industries of five
+workflows. This repository already holds **75 workflows across 15 industry
+tags** in `lib/aie/use-cases.ts`, each with risk tier, reliability requirement,
+autonomy default and regulatory flags, plus a declared segment mapping in
+`lib/peer/industry-workflows.ts`. The two vocabularies share **two labels out
+of sixty-three**, measured rather than estimated. Porting the smaller one
+alongside the larger would have given the product two workflow taxonomies that
+disagree, and this register would then have to document both.
+
+The gap was never the taxonomy: it was the **entry point**. Workflow Shortlist
+could only be entered by workflow area, so a reader who knows they run a bank
+had nowhere to start. `app/(ai-ent)/workflow-shortlist/industry-entry.tsx` adds
+that over the library that was already there, reading the desk profile so a
+reader is not asked twice.
+
+**The source's 50 industry-specific pilot probes** go with that list and are
+not reachable without it, so only the 13 horizontal probes came across. Noted
+in the header of `lib/desk/pilot.ts` rather than dropped silently.
+
+## 8.9 The desk profile
+
+`lib/desk/profile.tsx` (browser) and `lib/desk/profile-server.ts` (request).
+Cookie `ag_desk_profile`, 180-day max age, mirrored from localStorage exactly
+as the shortlist is, so the server can personalise above the fold.
+
+**Two fields, not three.** The source asks industry, region and company size.
+This asks industry and region only, because those are the two dimensions the
+uptake data behind Peer Insights is actually cut by, and the values are
+`ADOPTION_SEGMENTS` and `ADOPTION_REGIONS` themselves rather than a second,
+prettier list. A size selector that changed nothing on screen would be a
+control that pretends to personalise. The panel says so.
+
+Not an identity: no account, no server-side store, so it lives on one browser
+and nothing can be sent to the reader because nothing knows who they are.
+
+## 8.10 The analyst's cited corpus
+
+`lib/desk/corpus.ts`, wired into `buildCorpus()` in `app/api/analyst/lib.ts`.
+`citedChunks()` (`lib/desk/corpus.ts:52`) emits **81 chunks**: 56 Shield marks
+(14 vendors x 4), 14 sovereignty rows, 7 deprecations, 4 encroachments.
+
+Chunks are built as **sentences, not records**, because the retriever scores on
+term overlap with the reader's question. A JSON blob retrieves badly and reads
+worse when quoted back.
+
+**Retrieval precedence** (`app/api/analyst/lib.ts:133`):
+
+| Kind | Boost |
+|---|---|
+| `upload` | `0.3` |
+| `cited` | `0.25` |
+| `document` | `0.2` |
+| `shell-fixture` | `0.1` |
+| `aie-dataset` | `0` |
+
+`cited` sits above `document` because a sentence lifted out of the contract
+that governs the reader beats a sample memo about contracts in general, and
+below `upload` because the reader's own agreement beats the public one.
+
+Why this matters more than it looks: the figure guard and the vendor-name guard
+cannot catch the failure this fixes. Asked "can OpenAI train on our data", the
+analyst previously retrieved a one-line vendor description and answered from
+memory. That sentence is fluent, names a real vendor, contains no number, and
+may still be wrong about a contract somebody is about to sign.
 
 ---
 
