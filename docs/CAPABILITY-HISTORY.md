@@ -17,6 +17,68 @@ than a gap.
 
 ## 6 August 2026
 
+**Your AI Position can now tell a bank's customer service job from a shop's,
+and show you the rule that makes them different.**
+
+Until today the product could not. The role library holds one profile per
+cross-industry job, so a customer care agent read identically in investment
+banking and in retail, which is plainly wrong and which the library's own
+specification already recorded as a known gap.
+
+A first piece of research closes it for the six customer operations roles:
+support advisor, complaints manager, contact centre manager, service quality
+analyst, operations director and customer success manager. Six sectors were
+researched against the regulators' own published rules. Where a sector changes
+what a job demands, the panel now says which requirement moved, by how much,
+and links the statute or regulator rule it read that from.
+
+Two things are worth knowing about what came back.
+
+**Retail turned out to be the baseline, and that is a finding rather than a
+blank.** No sector regulator imposes a complaint timetable, an approved code or
+compulsory dispute resolution on general retail. Banking, telecoms, healthcare,
+energy and aviation all do. That gap is the difference you feel.
+
+**The sectors move the front line hardest.** A complaints manager is already
+held to strict procedure and heavy assurance wherever they work, so there is
+little left for a regulator to add. A front-line advisor moving from a shop to
+a bank is the job that changes most.
+
+Every claim carries a grade for the evidence behind it: a statute you can open,
+something that follows from one, job descriptions, or judgement alone. The
+reading takes the grade of its weakest input, the same way the lane badges work
+everywhere else. Nothing here rests on judgement alone, and the nine sectors
+not yet researched say so rather than showing an average.
+
+The research turned up two live facts worth acting on. Ofcom cut the window
+before a telecoms complaint can be escalated from eight weeks to six, on
+8 April 2026, so any process still built on eight is out of date. And the EU AI
+Act's transparency duty started on 2 August 2026, while the high-risk duties
+were pushed back to December 2027 and August 2028 by an amendment in force on
+27 July. A plan written against the original dates is now wrong in both
+directions at once.
+
+**Everything from The Security Desk now lives on Trust Rank, in one place.**
+It was briefly spread across six tabs, which was the wrong call: split up it
+was six additions to six products, and together it is a product. Trust Rank
+asks whether you can defend a vendor choice, and every part of it answers some
+piece of that. Your Pulse, News, Decision Desk, Workflow Shortlist and the
+vendor profiles are back exactly as they were.
+
+Trust Rank is now four steps rather than one long page, because it holds
+sixteen things and a page where everything is present is a page where nothing
+is findable. **Today** is what changed overnight and whether the labs are up.
+**The terms** is what each vendor's contract permits and who can reach your
+data. **Source** is who you may therefore buy from, and the pilot that proves
+what the ranking cannot. **Obligations** is what the law puts on you rather
+than on them, with the security posture underneath.
+
+Your Pulse keeps Today's Pulse as its single headline judgement. A second
+brief above it was competing for the same job.
+
+---
+
+
 **Your Pulse now answers what happened overnight.** It read the market well
 and could tell you nothing about today. Above the market read there is now a
 brief where every line pairs something that happened with what to do about it,

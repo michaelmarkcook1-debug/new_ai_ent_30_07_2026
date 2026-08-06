@@ -7,6 +7,7 @@ import {
   AUTONOMY_LABEL,
   type VerticalLens,
 } from "./vertical";
+import { lensRole, verticalsCovered, pilotRoleIds } from "./role-vertical";
 
 // The server-computed payload, so the browser never receives the source data.
 //
@@ -55,6 +56,50 @@ export interface ExposurePayload {
   verticals: Record<string, VerticalLens>;
   tagLabels: Record<string, string>;
   autonomyLabels: Record<string, string>;
+  /**
+   * The Customer Operations & Service pilot: what a named sector demonstrably
+   * changes about the same job, requirement by requirement, each with the rule
+   * behind it.
+   *
+   * This is a different KIND of claim from `verticals` above and the two should
+   * not be conflated. That one reads the assurance profile of the workflows a
+   * sector runs, which says nothing about any particular role. This one says a
+   * front-line advisor in a bank is held to a different standard than one in a
+   * shop, and names the rule that makes it so.
+   *
+   * Keyed by sector tag and carrying every sector the pilot reached, because
+   * the payload is built before the company is classified. Nine of the fifteen
+   * tags the classifier can emit are absent, and a missing key means the sector
+   * has not been researched rather than that it has no regime.
+   */
+  rolePilots: Record<string, RolePilotPayload>;
+  /** Sectors the pilot has and has not reached, so the gap is stated. */
+  pilotCoverage: { researched: number; total: number };
+}
+
+export interface RolePilotRole {
+  roleId: string;
+  name: string;
+  /** Requirements the sector speaks to, base and lensed. */
+  moved: {
+    cap: string;
+    name: string;
+    base: number;
+    lensed: number;
+    class: string;
+    why: string;
+    sourceTitle: string | null;
+    sourceUrl: string | null;
+  }[];
+  confidence: string | null;
+}
+
+export interface RolePilotPayload {
+  vertical: string;
+  label: string;
+  regime: string;
+  scopeNote: string | null;
+  roles: RolePilotRole[];
 }
 
 const MODELS_SCORED = MODELS.filter(
@@ -92,5 +137,55 @@ export function exposurePayload(): ExposurePayload {
     verticals,
     tagLabels: TAG_LABEL,
     autonomyLabels: AUTONOMY_LABEL,
+    rolePilots: rolePilotPayload(),
+    pilotCoverage: {
+      researched: verticalsCovered().length,
+      total: Object.keys(TAG_LABEL).length,
+    },
   };
+}
+
+/**
+ * The pilot, flattened for the browser.
+ *
+ * Only the requirements a sector speaks to travel. Sending all eighteen per
+ * role would quadruple the payload to carry the fourteen the sector leaves
+ * alone, which the base panel already shows.
+ */
+function rolePilotPayload(): Record<string, RolePilotPayload> {
+  const out: Record<string, RolePilotPayload> = {};
+  for (const tag of verticalsCovered()) {
+    const roles: RolePilotRole[] = [];
+    for (const roleId of pilotRoleIds()) {
+      const lens = lensRole(roleId, tag);
+      if (!lens || lens.movedRequirements.length === 0) continue;
+      roles.push({
+        roleId: lens.roleId,
+        name: lens.name,
+        confidence: lens.confidence,
+        moved: lens.movedRequirements.map((r) => ({
+          cap: r.cap,
+          name: r.name,
+          base: r.base,
+          lensed: r.lensed,
+          class: r.class,
+          why: r.why,
+          sourceTitle: r.source?.title ?? null,
+          sourceUrl: r.source?.url ?? null,
+        })),
+      });
+    }
+    // A sector with nothing to say about any of the six roles is still a
+    // result, and retail is exactly that: the baseline the others are read
+    // against. It carries an empty role list rather than being dropped.
+    const first = lensRole(pilotRoleIds()[0], tag)!;
+    out[tag] = {
+      vertical: tag,
+      label: first.verticalLabel,
+      regime: first.regime,
+      scopeNote: first.scopeNote,
+      roles,
+    };
+  }
+  return out;
 }

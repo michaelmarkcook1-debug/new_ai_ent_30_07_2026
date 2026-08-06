@@ -388,6 +388,37 @@ id for it would put a vendor on somebody's shortlist that they never chose.
 
 ---
 
+## 8.4a Where all of it lives
+
+**Every Security Desk element renders on `/trust-rank` and nowhere else**
+(6 August 2026). The first build spread them across six tabs; they were
+consolidated the same day. Your Pulse, News, Decision Desk, Workflow Shortlist
+and the vendor profile are back to their prior state, each carrying a comment
+recording what briefly sat there and where it went.
+
+`app/(ai-ent)/trust-rank/components/desk/desk-view.tsx` is a client component
+holding four steps. Inactive steps are **hidden, not unmounted**, the same rule
+Decision Desk follows: the sourcing flow holds weights and constraints a reader
+has set, and switching step must not discard them.
+
+| Step | Panels |
+|---|---|
+| 1 Today | Today's brief and portfolio verdict, the Tape, the wire, For firms like yours |
+| 2 The terms | Privacy & IP Shield with re-weighting and freshness, Sovereignty Lens, per-vendor dossier |
+| 3 Source | Industry entry, sourcing shortlist, constraints, pilot, Decision Pack |
+| 4 Obligations | The regulatory brief, cyber-risk panel, lab postures, the jurisdiction lens |
+
+The **per-vendor dossier** moved off the vendor profile and takes a selector
+here instead. Dossiers are built on the server for the 13 Shield vendors the
+directory also carries; Reka has no directory entry so it is not offered,
+rather than being given an invented id.
+
+The **industry entry** takes an optional `onPick`. On Workflow Shortlist it
+drove the picker beneath it; here there is no picker to drive, so each workflow
+links out to that tool instead.
+
+---
+
 ## 8.5 The live spine: status and the wire
 
 `lib/desk/status.ts` and `lib/desk/news.ts`. Both ported 6 August 2026 from
@@ -585,6 +616,121 @@ cannot catch the failure this fixes. Asked "can OpenAI train on our data", the
 analyst previously retrieved a one-line vendor description and answered from
 memory. That sentence is fluent, names a real vendor, contains no number, and
 may still be wrong about a contract somebody is about to sign.
+
+---
+
+## 8.11 The role-vertical pilot: Customer Operations & Service
+
+Closes a gap the role library records against itself. `lib/model-fit/data/roles.json`
+holds 294 roles, of which 99 carry `industry: "*"` and ONE shared profile each,
+so a Customer Support Advisor scored identically in investment banking and in
+retail. This is the first evidence-backed correction, scoped to the six roles in
+Customer Operations & Service.
+
+**Dataset**: `data/role-verticals/customer-operations.json`. **Reader**:
+`lib/exposure/role-vertical.ts`. **Tests**: `tests/role-vertical.test.ts`, 23.
+
+### It stores deltas, not profiles
+
+An entry says a requirement moves from X to Y and names the rule. A requirement
+with no entry reads at its base value. This makes the absence of evidence
+visible instead of burying it inside a plausible-looking full profile, and keeps
+the library the single source of the unlensed score.
+
+### Evidence class is per requirement, not per role
+
+Inherited from `scripts/research-missing-industries.py` and its rule, *"Never
+fill a field from general knowledge alone."*
+
+| Class | Meaning |
+|---|---|
+| A | Statute, statutory instrument, regulator rule or licence condition that states the requirement |
+| B | Professional body framework, or a requirement following directly from a class A rule |
+| D | Job descriptions |
+| E | Reasoned judgement, nothing else |
+
+`CLASS_RANK` (`lib/exposure/role-vertical.ts:36`) orders them worst-last, and
+`lensRole()` sets a reading's confidence to the WORST class among the deltas
+that moved it. Same principle as the lane badging in section 1.
+
+### What the pilot produced
+
+Six sectors, six roles. Counted by `coverage()` and pinned by the final test
+block: **class A is over 60 per cent of all deltas and class E is exactly
+zero.** If either stops holding, the dataset has drifted toward judgement and
+needs re-reading.
+
+| Sector tag | Governing regime | Source class |
+|---|---|---|
+| `financial_services` | FCA DISP 1.6.2R, eight-week final response; Consumer Duty | A |
+| `telecom_media` | Ofcom General Condition C4 and annexed approved code | A |
+| `healthcare` | SI 2009/309, three working days to acknowledge, six-month period | A |
+| `energy_utilities` | Ofgem SLC 0 Standards of Conduct, SLC 26 Priority Services Register | A |
+| `transport_logistics` | UK261, assimilated Regulation (EC) 261/2004 | A |
+| `retail_consumer` | No sector regime found. The documented baseline | E |
+
+Nine of the fifteen tags in `TAG_LABEL` (`lib/exposure/vertical.ts:131`) are
+unresearched and named in `meta.verticalsUnresearched`. `lensRole()` returns
+null for them rather than falling back.
+
+### Three guards, each pinned by test
+
+1. **`baseDrift()`** compares every delta's recorded `from` against the live
+   library score. Non-empty means the library was re-scored and the research was
+   reasoned from a profile that no longer exists. This is the most important
+   test in the file.
+2. **Tag alignment.** The first cut of the dataset invented its own sector names;
+   four of six were wrong, so the lens would have silently never fired. Tests now
+   assert every tag is in `TAG_LABEL` and that researched plus unresearched
+   equals the full vocabulary.
+3. **`scopeNote`** where the app's bucket is wider than the evidence. UK261 is
+   passenger aviation and `transport_logistics` also holds freight; GC C4 binds
+   communications providers and `telecom_media` also holds broadcasters. Both
+   render as a warning rather than being applied silently.
+
+### A delta may record a rule change without moving a band
+
+`to === from` is a deliberate record, not a no-op. Ofcom cut the ADR escalation
+window from eight weeks to six on **8 April 2026**; CAP-13 stays at 90 and the
+deadline still changed. `movedRequirements` filters on the delta's existence,
+not on band movement, so this cannot vanish.
+
+### Two dated facts the pilot depends on
+
+Both were verified by search on 6 August 2026 and both contradict what a model
+answers from recall:
+
+- **Ofcom ADR window: six weeks, from 8 April 2026.** Eight is the long-standing
+  figure and is now wrong.
+- **EU AI Act.** Article 50 transparency applies from **2 August 2026**. The AI
+  Omnibus, in force **27 July 2026**, moved Annex III high-risk to **2 December
+  2027** and Annex I to **2 August 2028**. Recorded in `crossCutting.eu_ai_act`.
+
+### The pipeline for the remaining sectors
+
+`scripts/research-role-verticals.mjs`. Retrieval on `claude-haiku-4-5`, scoring
+on `claude-sonnet-5`, both overridable. It writes a PROPOSAL to
+`data/role-verticals/proposed/` and never into the pilot file. It rejects a
+delta whose `from` disagrees with the library, and demotes a class A or B claim
+carrying no source URL to class E.
+
+**It has not been run.** `ANTHROPIC_API_KEY` is present but empty in
+`.env.local` and no search key is set on this machine; both live in the deployed
+environment. The six pilot sectors were therefore researched by hand, exactly as
+`scripts/research-missing-industries.py` records for its own seven industries.
+
+### Cost, if the full job is ever run
+
+Measured scope: 99 multi-industry roles, 18 functions, 15 sector tags. Six roles
+in this function. At roughly $0.05 per profile with Sonnet 5 scoring, the
+remaining nine sectors of this pilot are about **$3**, and all 99 roles across
+15 sectors is about **$50 to $95** depending on the scoring model. Web search is
+NOT modelled in `lib/admin/cost-model.ts` and is additional.
+
+The API spend is not the cost. 99 roles across 15 sectors is roughly 23,000
+requirement-level evidence claims, and because confidence floors at the worst
+class among the deciding requirements, a claim graded A that is really E
+propagates a wrong number onto the screen.
 
 ---
 

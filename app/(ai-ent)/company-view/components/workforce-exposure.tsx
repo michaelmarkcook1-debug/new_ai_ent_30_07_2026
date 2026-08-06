@@ -55,6 +55,7 @@ export function WorkforceExposure({
   if (payload.roles.length === 0) return null;
   const lens = sector.tag ? payload.verticals[sector.tag] : null;
   const sectorName = sector.tag ? payload.tagLabels[sector.tag] : null;
+  const pilot = sector.tag ? (payload.rolePilots[sector.tag] ?? null) : null;
 
   return (
     <section className="rounded-lg border border-base-300 bg-base-100 p-5">
@@ -130,6 +131,26 @@ export function WorkforceExposure({
           autonomy it can safely default to.
         </p>
       )}
+
+      {/* The pilot. A stronger claim than the block above and a narrower one:
+          not what the sector's workflows look like in aggregate, but what its
+          rules demand of these six jobs, requirement by requirement. */}
+      {pilot ? (
+        <RoleVerticalPilot
+          pilot={pilot}
+          coverage={payload.pilotCoverage}
+          companyName={companyName}
+        />
+      ) : sector.tag ? (
+        <p className="measure mt-4 rounded-lg border border-dashed border-base-300 px-3 py-3 text-sm text-muted">
+          The role-level sector research has not reached{" "}
+          {sectorName ?? "this sector"} yet. It covers{" "}
+          {payload.pilotCoverage.researched} of {payload.pilotCoverage.total}{" "}
+          sectors so far, all of them in customer operations, and says what a
+          sector&apos;s own rules demand of a specific job rather than what its
+          workflows look like in aggregate.
+        </p>
+      ) : null}
 
       <div className="mt-4 overflow-x-auto">
         <table className="w-full min-w-[38rem] text-sm">
@@ -235,6 +256,128 @@ export function WorkforceExposure({
         </DerivationDrawer>
       </div>
     </section>
+  );
+}
+
+/** Class A is a rule you can open and read. Class E is somebody's opinion. */
+const CLASS_TONE: Record<string, { cls: string; label: string }> = {
+  A: { cls: "bg-good-bg text-good", label: "Statute or regulator rule" },
+  B: { cls: "bg-base-200 text-base-content", label: "Follows from a rule" },
+  D: { cls: "bg-warn-bg text-warn", label: "Job descriptions" },
+  E: { cls: "bg-bad-bg text-error", label: "Judgement only" },
+};
+
+function RoleVerticalPilot({
+  pilot,
+  coverage,
+  companyName,
+}: {
+  pilot: NonNullable<ExposurePayload["rolePilots"][string]>;
+  coverage: { researched: number; total: number };
+  companyName: string;
+}) {
+  return (
+    <div className="mt-4 rounded-lg border border-base-300 bg-base-200/40 p-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <MicroLabel
+          label={`What ${pilot.label} demands of the same job`}
+          tooltip="Requirement by requirement, with the statute or regulator rule behind each change. Customer operations roles only."
+        />
+        <LaneBadge lane="cited" />
+      </div>
+
+      <p className="measure mt-2 text-sm">{pilot.regime}</p>
+
+      {pilot.scopeNote ? (
+        <p className="measure mt-2 rounded border border-warn/30 bg-warn-bg/40 px-3 py-2 text-sm text-warn">
+          {pilot.scopeNote}
+        </p>
+      ) : null}
+
+      {pilot.roles.length === 0 ? (
+        <p className="measure mt-3 text-sm text-muted">
+          No sector regulator imposes a complaint timetable, an approved code or
+          compulsory dispute resolution on this sector, so these roles read at
+          their base requirement. That is a finding rather than a gap: it is the
+          baseline the regulated sectors are measured against.
+        </p>
+      ) : (
+        <div className="mt-3 space-y-3">
+          {pilot.roles.map((role) => (
+            <div
+              key={role.roleId}
+              className="rounded-lg border border-base-300 bg-base-100 p-3"
+            >
+              <div className="flex flex-wrap items-baseline justify-between gap-2">
+                <p className="font-semibold">{role.name}</p>
+                <span className="font-mono text-sm text-muted">
+                  {role.moved.length} of 18 requirements
+                </span>
+              </div>
+              <ul className="mt-2 space-y-2">
+                {role.moved.map((m) => {
+                  const tone = CLASS_TONE[m.class] ?? CLASS_TONE.E;
+                  const shifted = m.lensed !== m.base;
+                  return (
+                    <li key={m.cap} className="text-sm">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-mono text-sm text-muted">
+                          {m.cap}
+                        </span>
+                        <span className="font-semibold">{m.name}</span>
+                        {shifted ? (
+                          <span className="font-mono">
+                            <span className="text-muted">{m.base}</span>
+                            <span className="text-muted"> to </span>
+                            <span className="font-bold text-insight">
+                              {m.lensed}
+                            </span>
+                          </span>
+                        ) : (
+                          <span className="font-mono text-sm text-muted">
+                            stays {m.base}, rule changed
+                          </span>
+                        )}
+                        <span
+                          className={`rounded-full px-2 py-0.5 font-mono text-sm ${tone.cls}`}
+                          title={tone.label}
+                        >
+                          {m.class}
+                        </span>
+                      </div>
+                      <p className="measure mt-0.5 text-muted">{m.why}</p>
+                      {m.sourceTitle ? (
+                        <p className="mt-0.5 text-sm">
+                          {m.sourceUrl ? (
+                            <a
+                              className="text-insight underline underline-offset-2"
+                              href={m.sourceUrl}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {m.sourceTitle}
+                            </a>
+                          ) : (
+                            <span className="text-muted">{m.sourceTitle}</span>
+                          )}
+                        </p>
+                      ) : null}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+      <p className="measure mt-3 text-sm text-muted">
+        Researched for customer operations across {coverage.researched} of{" "}
+        {coverage.total} sectors. Requirements not listed have no
+        sector-specific evidence and read the same for {companyName} as
+        anywhere else.
+      </p>
+    </div>
   );
 }
 

@@ -1,0 +1,258 @@
+{
+  "meta": {
+    "pilot": "Customer Operations & Service",
+    "researched": "2026-08-06",
+    "method": "hand-researched against named sources, scored against lib/model-fit/rubric.ts",
+    "note": "Deltas only. The base profile in the role library is unchanged and still carries evidence class D. A requirement with no entry here has no sector-specific evidence and reads at its base value.",
+    "roles": [
+      "ROLE-0044",
+      "ROLE-0045",
+      "ROLE-0046",
+      "ROLE-0047",
+      "ROLE-0048",
+      "ROLE-0049"
+    ],
+    "verticalsResearched": 6,
+    "verticalsUnresearched": [
+      "insurance",
+      "pharma_life_sciences",
+      "legal",
+      "professional_services",
+      "technology_software",
+      "manufacturing",
+      "public_sector",
+      "education",
+      "real_estate"
+    ],
+    "tagVocabulary": "lib/exposure/vertical.ts TAG_LABEL, so a sector reading keys off the same tag the company classifier emits"
+  },
+
+  "sources": {
+    "fca-disp-1-6-2r": {
+      "title": "FCA Handbook DISP 1.6.2R, complaints time limit rules",
+      "cite": "A firm must send a final response, or a written response explaining why it cannot yet do so, by the end of eight weeks after receiving the complaint.",
+      "url": "https://handbook.fca.org.uk/handbook/disp1/disp1s6",
+      "class": "A"
+    },
+    "fca-disp-1": {
+      "title": "FCA Handbook DISP 1, Treating complainants fairly",
+      "cite": "Prescribes acknowledgement, investigation, final response content and referral rights for FCA-authorised firms handling eligible complainants.",
+      "url": "https://handbook.fca.org.uk/handbook/disp1",
+      "class": "A"
+    },
+    "ofcom-gc-c4": {
+      "title": "Ofcom General Condition C4 and its annexed approved complaints code of practice",
+      "cite": "Providers must have and comply with complaints procedures meeting the minimum standards set out in the Ofcom approved complaints code of practice for customer service and complaints handling, and must be a member of an approved ADR scheme (C4.3).",
+      "url": "https://www.ofcom.org.uk/siteassets/resources/documents/advice-for-businesses/ofcom-approved-complaints-code-of-practice",
+      "class": "A"
+    },
+    "ofcom-adr-six-weeks": {
+      "title": "Ofcom statement, review of ADR in the telecoms sector, 8 July 2025",
+      "cite": "The period a consumer must wait to access ADR falls from eight weeks to six weeks, in effect from 8 April 2026.",
+      "url": "https://www.ofcom.org.uk/phones-and-broadband/service-quality/quicker-complaints-resolution-for-telecoms-customers-under-new-ofcom-rules",
+      "class": "A"
+    },
+    "si-2009-309": {
+      "title": "The Local Authority Social Services and National Health Service Complaints (England) Regulations 2009, SI 2009/309",
+      "cite": "The responsible body must acknowledge the complaint not later than 3 working days after the day on which it receives it. The relevant period for response is 6 months from receipt unless a longer period is agreed.",
+      "url": "https://www.legislation.gov.uk/uksi/2009/309",
+      "class": "A"
+    },
+    "ofgem-slc-0": {
+      "title": "Ofgem electricity and gas supply standard licence conditions, SLC 0, Standards of Conduct",
+      "cite": "Suppliers must treat domestic customers fairly, including those in vulnerable situations, and satisfy themselves that their actions result in vulnerable consumers being treated fairly.",
+      "url": "https://www.ofgem.gov.uk/sites/default/files/2025-08/Electricity-Supply-Standard-Consolidated-Licence-Conditions.pdf",
+      "class": "A"
+    },
+    "ofgem-slc-26": {
+      "title": "Ofgem supply standard licence conditions, SLC 26, Priority Services Register",
+      "cite": "Duty on the supplier to establish a Priority Services Register, share information and offer additional support to customers on it, taking all reasonable steps to identify customers in vulnerable situations.",
+      "url": "https://www.ofgem.gov.uk/sites/default/files/2025-08/Electricity-Supply-Standard-Consolidated-Licence-Conditions.pdf",
+      "class": "A"
+    },
+    "uk261": {
+      "title": "Assimilated Regulation (EC) No 261/2004, UK261",
+      "cite": "Establishes compensation and assistance rights on denied boarding, cancellation and long delay, including duties of care during disruption.",
+      "url": "https://www.legislation.gov.uk/eur/2004/261",
+      "class": "A"
+    },
+    "caa-adr": {
+      "title": "UK Civil Aviation Authority, making a claim",
+      "cite": "A passenger dissatisfied with the airline's final response, or waiting more than eight weeks for one, may escalate to an approved ADR provider or to the CAA's Passenger Advice and Complaints Team.",
+      "url": "https://www.caa.co.uk/passengers-and-public/resolving-travel-problems/delays-and-cancellations/making-a-claim/am-i-entitled-to-compensation/",
+      "class": "A"
+    },
+    "eu-ai-act-art-50": {
+      "title": "EU AI Act Article 50, transparency obligations",
+      "cite": "Obligations under Article 50 apply from 2 August 2026, including informing individuals that they are interacting with an AI system.",
+      "url": "https://artificialintelligenceact.eu/high-level-summary/",
+      "class": "A"
+    },
+    "eu-ai-act-omnibus": {
+      "title": "EU AI Act Omnibus, political agreement 7 May 2026, in force 27 July 2026",
+      "cite": "Annex III high-risk use cases extended to 2 December 2027 and Annex I embedded high-risk systems to 2 August 2028.",
+      "url": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+      "class": "A"
+    },
+    "retail-baseline": {
+      "title": "No sector-specific statutory complaint-handling regime identified for general retail",
+      "cite": "General consumer law applies. No regulator-mandated complaint timetable, approved code or ADR membership duty of the kind Ofcom, the FCA, Ofgem and the CAA impose was found for general retail.",
+      "url": null,
+      "class": "E"
+    }
+  },
+
+  "verticals": {
+    "financial_services": {
+      "label": "Financial services",
+      "regime": "FCA DISP plus Consumer Duty. A complaint carries a statutory clock, a prescribed final response and a right of referral to the Financial Ombudsman Service.",
+      "deltas": {
+        "ROLE-0045": {
+          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "fca-disp-1", "why": "DISP prescribes acknowledgement, timetable and the referral wording a final response must carry. Deviation is a rule breach with external consequence, which is the band 90 anchor." },
+          "CAP-15": { "from": 30, "to": 70, "class": "A", "source": "fca-disp-1", "why": "Complaint files are subject to FCA supervision and firms report complaints data, so the work carries a formal audit trail open to regulator inspection." },
+          "CAP-11": { "from": 50, "to": 70, "class": "A", "source": "fca-disp-1-6-2r", "why": "A missed eight-week deadline is itself a breach, so an undetected error draws regulatory attention rather than only requiring correction." },
+          "CAP-08": { "from": 30, "to": 50, "class": "D", "why": "Where an advisor drafts the final response it is a binding external document. Firms vary in whether the front line drafts it, so this is scored from job descriptions rather than from the rules." }
+        },
+        "ROLE-0047": {
+          "CAP-03": { "from": 50, "to": 70, "class": "A", "source": "fca-disp-1", "why": "Requires knowing why the rules exist and where exceptions apply, not only recognising standard cases: eligibility, jurisdiction and time bars are all judgement calls under DISP." },
+          "CAP-11": { "from": 70, "to": 90, "class": "B", "source": "fca-disp-1", "why": "An FOS determination is binding on the firm, so a mishandled complaint creates legal liability rather than reputational damage alone. Scored from the ombudsman's binding power rather than from a rule that states the consequence." }
+        },
+        "ROLE-0048": {
+          "CAP-15": { "from": 50, "to": 70, "class": "A", "source": "fca-disp-1", "why": "Contact centre quality assurance forms part of the evidence a firm shows the FCA on complaint handling, so the work is inspected rather than internally signed off." },
+          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "fca-disp-1", "why": "The procedures the manager enforces are themselves prescribed by DISP." }
+        },
+        "ROLE-0049": {
+          "CAP-15": { "from": 70, "to": 90, "class": "B", "source": "fca-disp-1", "why": "Complaints reporting is submitted to the regulator and attested, so assurance work is externally assured rather than internally audited. Scored from the reporting duty rather than from a rule naming the analyst." }
+        },
+        "ROLE-0044": {
+          "CAP-15": { "from": 70, "to": 90, "class": "B", "source": "fca-disp-1", "why": "Consumer Duty places individual accountability on a named senior manager, which is the band 90 anchor. Scored from the Duty's accountability structure rather than from a rule naming this job title." }
+        },
+        "ROLE-0046": {}
+      }
+    },
+
+    "telecom_media": {
+      "label": "Telecoms and media",
+      "regime": "Ofcom General Condition C4 and its annexed approved complaints code, with compulsory ADR membership. The escalation window fell from eight weeks to six on 8 April 2026.",
+      "scopeNote": "The evidence is telecoms-specific. General Condition C4 binds communications providers serving residential, small business and not-for-profit customers. A media business in this sector that is not a communications provider is not covered by it, and this lens overstates its position.",
+      "deltas": {
+        "ROLE-0045": {
+          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "ofcom-gc-c4", "why": "The approved code is a minimum standard annexed to a general condition, so departure from it is a breach of the provider's authorisation." },
+          "CAP-15": { "from": 30, "to": 70, "class": "A", "source": "ofcom-gc-c4", "why": "Ofcom has run enforcement programmes into complaints handling, so the work is subject to regulator inspection." },
+          "CAP-13": { "from": 90, "to": 90, "class": "A", "source": "ofcom-adr-six-weeks", "why": "No change to the band, recorded because the escalation window shortened from eight weeks to six on 8 April 2026 and any timetable built on the old figure is now wrong." }
+        },
+        "ROLE-0047": {
+          "CAP-10": { "from": 90, "to": 90, "class": "A", "source": "ofcom-adr-six-weeks", "why": "No change to the band. Recorded because the six-week ADR trigger replaced the eight-week one on 8 April 2026 and the deadline the role works to has moved." },
+          "CAP-03": { "from": 50, "to": 70, "class": "B", "source": "ofcom-gc-c4", "why": "The code sets out when ADR letters are due and to whom the rules apply, which turns on customer classification: residential, small business and not-for-profit are in scope and others are not." }
+        },
+        "ROLE-0048": {
+          "CAP-15": { "from": 50, "to": 70, "class": "A", "source": "ofcom-gc-c4", "why": "Compliance with the annexed code is inspected by Ofcom rather than signed off internally." }
+        },
+        "ROLE-0049": {},
+        "ROLE-0044": {},
+        "ROLE-0046": {}
+      }
+    },
+
+    "healthcare": {
+      "label": "Healthcare",
+      "regime": "SI 2009/309 sets a statutory complaints procedure for NHS bodies and local authority social care, with a three working day acknowledgement and a six month relevant period.",
+      "deltas": {
+        "ROLE-0045": {
+          "CAP-14": { "from": 70, "to": 90, "class": "A", "source": "si-2009-309", "why": "Health records are special-category data and their exposure causes serious harm, which is the band 90 anchor rather than the band 70 one the base profile carries." },
+          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "si-2009-309", "why": "The acknowledgement deadline is set by statutory instrument, so missing it is a breach of regulation and not an internal service failure." },
+          "CAP-15": { "from": 30, "to": 70, "class": "A", "source": "si-2009-309", "why": "Complaint handling is inspected by the Care Quality Commission and reviewable by the Parliamentary and Health Service Ombudsman." }
+        },
+        "ROLE-0047": {
+          "CAP-13": { "from": 30, "to": 50, "class": "A", "source": "si-2009-309", "why": "Three working days to acknowledge is a same-week statutory obligation rather than the same-day norm the base profile assumes, and the clock starts on receipt anywhere in the body." },
+          "CAP-03": { "from": 50, "to": 70, "class": "A", "source": "si-2009-309", "why": "The regulations require the body to offer to agree the handling and response period at acknowledgement, which is a judgement about scope made against the statute." }
+        },
+        "ROLE-0048": {
+          "CAP-14": { "from": 70, "to": 90, "class": "A", "source": "si-2009-309", "why": "Oversight of a contact centre handling patient records reaches the same special-category data as the front line." }
+        },
+        "ROLE-0049": {
+          "CAP-14": { "from": 70, "to": 90, "class": "A", "source": "si-2009-309", "why": "Quality sampling reads the case files themselves, so the analyst holds the same records." }
+        },
+        "ROLE-0044": {
+          "CAP-15": { "from": 70, "to": 90, "class": "B", "source": "si-2009-309", "why": "The regulations place the duty on the responsible body and require an annual report, which is external assurance. Scored from the body-level duty rather than from a rule naming this job title." }
+        },
+        "ROLE-0046": {}
+      }
+    },
+
+    "energy_utilities": {
+      "label": "Energy and utilities",
+      "regime": "Ofgem standard licence conditions. SLC 0 requires fair treatment of customers in vulnerable situations and SLC 26 establishes the Priority Services Register.",
+      "deltas": {
+        "ROLE-0045": {
+          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "ofgem-slc-26", "why": "Identifying a customer in a vulnerable situation and registering them is a licence obligation, so failing to act on the signs is a breach of the supply licence." },
+          "CAP-15": { "from": 30, "to": 70, "class": "A", "source": "ofgem-slc-0", "why": "Ofgem has opened investigations into supplier compliance with SLC 0 and SLC 26, so day to day conduct is subject to regulator inspection." },
+          "CAP-11": { "from": 50, "to": 70, "class": "A", "source": "ofgem-slc-0", "why": "A missed vulnerability signal reaches a customer who may be at risk and draws regulatory attention, which is the band 70 anchor." },
+          "CAP-14": { "from": 70, "to": 90, "class": "B", "source": "ofgem-slc-26", "why": "Priority Services Register entries record health conditions and disability, which is special-category data held under a licence duty. Scored from what the register contains rather than from a data protection rule naming it." }
+        },
+        "ROLE-0047": {},
+        "ROLE-0048": {
+          "CAP-15": { "from": 50, "to": 70, "class": "A", "source": "ofgem-slc-0", "why": "Ofgem has issued guidance on its expectations for consumers to be able to contact their supplier, making contact centre performance a licence matter open to inspection." }
+        },
+        "ROLE-0049": {},
+        "ROLE-0044": {
+          "CAP-15": { "from": 70, "to": 90, "class": "B", "source": "ofgem-slc-0", "why": "SLC 0 requires the supplier to satisfy itself that its actions result in fair treatment, which is a standing attestation rather than a periodic audit. Scored from the licence wording rather than from a rule naming this job title." }
+        },
+        "ROLE-0046": {}
+      }
+    },
+
+    "transport_logistics": {
+      "label": "Transport and logistics",
+      "regime": "UK261 sets compensation and duty of care on delay, cancellation and denied boarding. The CAA takes escalation after eight weeks or an unsatisfactory final response.",
+      "scopeNote": "The evidence is passenger aviation only. UK261 confers rights on air passengers and says nothing about freight, shipping or road logistics, which sit in this sector and have no equivalent regime. For a business that does not carry passengers by air this lens overstates its position and should be read as not yet researched.",
+      "deltas": {
+        "ROLE-0045": {
+          "CAP-02": { "from": 30, "to": 50, "class": "A", "source": "uk261", "why": "Entitlement depends on a chain: distance band, delay at destination, notice given, and whether the cause was within the airline's control. An early error changes the answer, which is the band 50 anchor." },
+          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "uk261", "why": "Duty of care during disruption is a regulatory entitlement, not a service gesture, and withholding it is a breach." },
+          "CAP-15": { "from": 30, "to": 70, "class": "A", "source": "caa-adr", "why": "The CAA runs a UK261 compliance programme into air passenger rights, so handling is subject to regulator inspection." }
+        },
+        "ROLE-0047": {
+          "CAP-02": { "from": 50, "to": 70, "class": "A", "source": "uk261", "why": "The extraordinary circumstances defence, re-routing obligations and compensation bands interact, so the reasoning branches rather than running to a single conclusion." },
+          "CAP-03": { "from": 50, "to": 70, "class": "A", "source": "uk261", "why": "Knowing when the extraordinary circumstances defence holds is expert knowledge of why the rule exists, not recognition of a standard case." }
+        },
+        "ROLE-0048": {
+          "CAP-13": { "from": 70, "to": 90, "class": "B", "source": "uk261", "why": "Duty of care during live disruption is owed while passengers are waiting at the airport, so delay in standing up the response causes the harm the rule addresses. Scored from the nature of the duty rather than from a stated response time." }
+        },
+        "ROLE-0049": {},
+        "ROLE-0044": {},
+        "ROLE-0046": {}
+      }
+    },
+
+    "retail_consumer": {
+      "label": "Retail and consumer",
+      "regime": "General consumer law only. No sector regulator imposes a complaint timetable, an approved code or compulsory ADR membership, which is why this vertical is the baseline the others are read against.",
+      "deltas": {
+        "ROLE-0044": {},
+        "ROLE-0045": {},
+        "ROLE-0046": {},
+        "ROLE-0047": {},
+        "ROLE-0048": {},
+        "ROLE-0049": {}
+      }
+    }
+  },
+
+  "crossCutting": {
+    "eu_ai_act": {
+      "appliesTo": "Any vertical deploying an AI system in customer service within the EU.",
+      "live": {
+        "since": "2026-08-02",
+        "source": "eu-ai-act-art-50",
+        "effect": "Article 50 transparency obligations are in force. A customer must be told they are interacting with an AI system."
+      },
+      "deferred": {
+        "annexIII": "2027-12-02",
+        "annexI": "2028-08-02",
+        "source": "eu-ai-act-omnibus",
+        "effect": "The AI Omnibus, in force 27 July 2026, postponed the high-risk obligations. A deployment plan written against the original 2 August 2026 high-risk date is now working to the wrong deadline in both directions: transparency arrived, high-risk did not."
+      }
+    }
+  }
+}
