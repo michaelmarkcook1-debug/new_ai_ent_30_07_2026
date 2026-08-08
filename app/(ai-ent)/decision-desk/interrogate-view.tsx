@@ -4,6 +4,15 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { LaneBadge } from "@/lib/ui/badges";
+import { PositionChip } from "@/lib/position/save-position";
+import {
+  latestPosition,
+  matchPosition,
+  openingLine,
+  toContext,
+  type PositionContext,
+  type SavedPosition,
+} from "@/lib/position/store";
 
 interface Tier {
   tier: string;
@@ -43,18 +52,37 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
   const [phase, setPhase] = useState<"start" | "asking" | "done">("start");
   const bottomRef = useRef<HTMLDivElement>(null);
   const started = useRef(false);
+  // The saved position offered in the start panel, and the one actually
+  // attached to the running interrogation. They are not the same thing: the
+  // offer is whatever was researched last, and the attachment is whichever
+  // saved company the reader's own words turned out to name.
+  const [offered, setOffered] = useState<SavedPosition | null>(null);
+  const [attached, setAttached] = useState<PositionContext | null>(null);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [turns]);
 
-  const call = async (sit: string, ans: string[], conclude = false) => {
+  const call = async (
+    sit: string,
+    ans: string[],
+    conclude = false,
+    /** Passed explicitly on the first call, because setAttached has not
+        committed by then. Later calls read it from state. */
+    ctx: PositionContext | null = attached
+  ) => {
     setBusy(true);
     try {
       const res = await fetch("/api/interrogate", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ situation: sit, answers: ans, depth, conclude }),
+        body: JSON.stringify({
+          situation: sit,
+          answers: ans,
+          depth,
+          conclude,
+          position: ctx,
+        }),
       });
 
       if (res.headers.get("content-type")?.includes("text/event-stream") && res.body) {
@@ -150,11 +178,18 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
   const start = (text: string) => {
     const sit = text.trim();
     if (!sit || busy) return;
+    // Whether this situation is about a company already researched. Matched on
+    // the reader's own words rather than on the prefill, so typing "Ocado are
+    // rolling out agents" reaches the same research as clicking through from
+    // Your AI Position did. Nothing is attached when nothing matches.
+    const hit = matchPosition(sit);
+    const ctx = hit ? toContext(hit) : null;
+    setAttached(ctx);
     setSituation(sit);
     setAnswers([]);
     setTurns([{ role: "user", kind: "situation", text: sit }]);
     setInput("");
-    void call(sit, []);
+    void call(sit, [], false, ctx);
   };
 
   const answer = (text: string) => {
@@ -179,12 +214,36 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params]);
 
+  // Open with the last company researched in Your AI Position already named.
+  //
+  // It writes PART of the situation and stops: who they are, which the research
+  // established, leaving what they are trying to decide, which only the reader
+  // knows. Filling the whole box would get submitted unread and answer a
+  // question nobody asked.
+  //
+  // A ?q= link is an explicit instruction from wherever the reader came from
+  // and wins, which is why this runs after that effect and defers to
+  // started.current. It also never overwrites typing already in progress.
+  useEffect(() => {
+    if (started.current) return;
+    const p = latestPosition();
+    if (!p) return;
+    setOffered(p);
+    setInput((cur) => (cur.trim() ? cur : openingLine(p)));
+    // Once, on mount. Re-running would re-fill a box the reader had cleared.
+  }, []);
+
   const reset = () => {
     setPhase("start");
     setTurns([]);
     setAnswers([]);
     setSituation("");
-    setInput("");
+    setAttached(null);
+    // Starting over offers the saved position again, since the reader is back
+    // at the same blank box they first met.
+    const p = latestPosition();
+    setOffered(p);
+    setInput(p ? openingLine(p) : "");
   };
 
   return (
@@ -213,6 +272,25 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
             only in cited sources. Where the data is thin, I say so rather
             than guess.
           </p>
+          {/* Shown whenever the box was opened for them, so a prefilled
+              situation is never mistaken for something they typed. */}
+          {offered ? (
+            <div className="mt-4">
+              <PositionChip
+                position={offered}
+                onClear={() => {
+                  setOffered(null);
+                  setInput("");
+                }}
+              />
+              <p className="measure mt-2 text-sm text-muted">
+                Finish the sentence with what you are trying to decide. A
+                question naming {offered.name} is answered against what the
+                sources in Your AI Position actually said about them, and that
+                is stated in the finding rather than blended in.
+              </p>
+            </div>
+          ) : null}
           <div className="mt-4 flex gap-2">
             <textarea
               value={input}
@@ -273,6 +351,30 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
         </div>
       ) : (
         <div className="space-y-3 py-4">
+          {/* What the engine was given beyond what the reader typed.
+              Matching a company name is string work and cannot tell a firm
+              called Apple from apple juice, so the safeguard is that a wrong
+              match is visible here rather than silent, and starting over drops
+              it. */}
+          {attached ? (
+            <div className="flex flex-wrap items-center gap-2 rounded-lg border border-insight/30 bg-insight/[0.06] px-3 py-2">
+              <span className="micro-label text-insight">
+                Answering with your research on
+              </span>
+              <span className="text-sm font-semibold">{attached.name}</span>
+              <span className="text-sm text-muted">
+                from Your AI Position, kept separate from this workspace&apos;s
+                own sources in the finding
+              </span>
+              <button
+                type="button"
+                onClick={reset}
+                className="ml-auto rounded-full px-2 py-0.5 text-sm text-muted underline underline-offset-2 hover:text-base-content"
+              >
+                Not this company
+              </button>
+            </div>
+          ) : null}
           {turns.map((t, i) => (
             <div key={i} className={t.role === "user" ? "flex justify-end" : "flex justify-start"}>
               <div

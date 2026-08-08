@@ -15,6 +15,52 @@ than a gap.
 
 ---
 
+## 8 August 2026
+
+**Research a company once, and the Decision Desk knows who you are.**
+
+Until today the two tools did not speak. You could research your company on Your
+AI Position, read what its sources said, then go to the Decision Desk and be
+asked to describe that same company from scratch, including which industry you
+are in, which the research had just established. Three changes close that.
+
+**The outcome can now be saved.** A finished research result gets a "Save this
+position" button. It is offered rather than automatic: it is your company and
+your browser, and a tool that quietly keeps what you typed is a different
+product from one that asks. Saving tells you what it does, which is that the
+Decision Desk will open with that company already named.
+
+**The Decision Desk opens with part of the sentence written.** It fills in who
+you are, which the research established, and stops at the point only you know:
+what you are actually trying to decide. Writing the whole thing would get it
+submitted unread and answer a question nobody asked. The box says where the
+words came from and clears in one click.
+
+**Ask about a company you have researched, and the finding uses that research.**
+Type a question naming them, whether or not you used the prefill, and what their
+sources said is carried into the answer. The most visible effect is that the
+engine stops asking what sector you are in when it has already been told.
+
+Two things worth knowing about how this behaves.
+
+**It is kept separate in the answer.** Your research came from web pages about
+your company; the rest of the finding comes from this workspace's own tracked
+sources. The finding says "your own research on X found ..." rather than
+folding the two together and citing them alike, because they are not the same
+kind of evidence and reading them as one would be the quiet sort of wrong.
+
+**Saved positions live in this browser.** There is no sign-in here, so a
+shared store would mean your saved company was whichever one the last person
+looked up. That is stated on screen: clearing site data removes them, and they
+do not follow you to another machine.
+
+One known limit, and it is on screen rather than hidden. Matching your question
+to a saved company is done on the name, so a company called Apple will match a
+sentence about apple juice. The interface names the research it attached and
+offers to drop it, so a wrong match is visible and one click from undone.
+
+---
+
 ## 6 August 2026
 
 **Your AI Position can now tell a bank's customer service job from a shop's,

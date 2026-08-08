@@ -734,6 +734,108 @@ propagates a wrong number onto the screen.
 
 ---
 
+## 8.12 Saved positions: Your AI Position into the Decision Desk
+
+Carries a finished company research result from `/company-view` to the
+Interrogate step of `/decision-desk`.
+
+**Store**: `lib/position/store.ts`. **UI**: `lib/position/save-position.tsx`.
+**Tests**: `tests/position-store.test.ts` (21), `tests/interrogate-position.test.ts` (4).
+
+### Where it lives, and why not Postgres
+
+`localStorage`, key `ag_positions_v1` (`lib/position/store.ts:22`), capped at
+`MAX = 8` (line 24). There is no user identity in this product beyond a shared
+demo credential, so a server-side store would be one drawer every reader writes
+into: your saved position would be whoever was researched last. Per-browser is
+the honest scope and the UI states it.
+
+Distinct from the `sessionStorage` cache in `research-runner.tsx` (`ag_research:${company}`),
+which stops a tab revisit paying for the research twice. That is a per-tab cache
+nobody asked for; this is a save the reader chooses. Deliberately not merged.
+
+### Matching a situation to a saved company
+
+`matchPosition()`. `normaliseName()` lowercases, strips `. ,` and the legal
+suffixes `ltd limited plc inc incorporated corp corporation llc llp gmbh sa nv ag co`,
+then collapses whitespace. Matching is on a **word boundary** against the
+normalised text, longest name wins, and names under **3 characters** are never
+matched.
+
+| Case | Result | Why |
+|---|---|---|
+| "Ocado Retail Ltd." vs "ocado retail" | match | suffix and case stripped |
+| "Ocado" vs "Ocado Retail" | distinct | collapsing lets a subsidiary answer for its parent |
+| "pineapple", "applesauce" vs "Apple" | no match | word boundary, not substring |
+| "apple juice" vs "Apple" | **match** | known limit, see below |
+| "BP" | never matched | two-letter initialisms collide with ordinary words |
+
+**The known limit is deliberate and mitigated on screen, not in code.** String
+matching cannot tell a company called Apple from the fruit, and inferring it
+from context would fail silently, which is worse. The interface names the
+attached position and offers "Not this company", so a wrong match is visible and
+one click from undone. Pinned by the test named *"still fires on a standalone
+common word, which is a known limit"*.
+
+### The prefill is deliberately partial
+
+`openingLine()` returns `We are ${name}, ${what}. ` and stops. A complete
+pre-written situation gets submitted unread and the finding answers a question
+nobody asked. Pinned by *"stops before the part only the reader knows"*, and by
+a round-trip test asserting the prefill matches itself, without which a reader
+who accepts the offer and types nothing else would get no research attached.
+
+### Clamps, on both sides of the wire
+
+`toContext()` (client) and `sanitisePosition()` (`app/api/interrogate/route.ts:27`)
+apply the same limits. The server's is the one that counts: this text is pasted
+into a model prompt.
+
+| Field | Limit |
+|---|---|
+| `name` | 120 chars, required, else the whole position is dropped |
+| `industry` | 200 |
+| `what` | 400 |
+| `aiFindings`, `findings` | 6 items, 400 chars each |
+
+Fields are taken one at a time rather than spread, and anything unrecognised is
+dropped rather than forwarded.
+
+### It is prior research, not grounding, and the prompt says so
+
+`InterrogateState.position` (`app/api/interrogate/lib.ts`) reaches the model
+through `positionBlock()` in `live.ts` as a **separately labelled, fenced block**
+after the grounded chunks, never merged with them.
+
+The distinction is not cosmetic. The chunks are this workspace's own corpus and
+are citable; these statements came from retrieved web pages about one company.
+Merging them would let the finding hand the reader's own research back as an
+independently sourced claim, which is the laundering the grounding rule exists
+to prevent. The system prompt instructs attribution as *"your own research on X
+found ..."* and forbids bracket citation.
+
+The block is fenced with `<<<PRIOR_RESEARCH` / `PRIOR_RESEARCH` and the system
+prompt states it is untrusted third-party page text: data to weigh, never
+instructions. It originates in retrieved web pages, so it is treated as such.
+
+### What actually changes in the engine
+
+`nextQuestion()` (`lib.ts`) skips the industry question when
+`state.position.industry` is non-empty, because `detectFacets()` is string
+matching and will not find "Online grocery retail and technology" in a sentence
+that does not contain it. `live.ts` folds the same fact into `known` for the
+question model. Verified against the running server:
+
+| Request | First question |
+|---|---|
+| "We are Ocado. Should we buy Copilot..." | "Which industry and regulatory context..." |
+| Same, with the position attached | "Roughly what scale are we planning for..." |
+
+An empty `industry` is not treated as an answer. A reader who never used Your AI
+Position sees no change at all, which is the common case and is pinned by test.
+
+---
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

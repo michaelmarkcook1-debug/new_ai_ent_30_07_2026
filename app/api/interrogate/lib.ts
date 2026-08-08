@@ -13,6 +13,23 @@ export interface InterrogateState {
   situation: string;
   answers: string[];
   depth: "quick" | "comprehensive";
+  /**
+   * A company the reader already researched in Your AI Position, when their
+   * situation names it. Null is the normal case and the engine works exactly as
+   * it did before when it is.
+   *
+   * Statements here came from retrieved web pages and were cited on that page.
+   * They are the reader's own prior research, not grounding this engine
+   * retrieved, and live.ts keeps that distinction in the prompt so the finding
+   * cannot pass them off as its own sourced claims.
+   */
+  position: {
+    name: string;
+    industry: string;
+    what: string;
+    aiFindings: string[];
+    findings: string[];
+  } | null;
 }
 
 interface Facets {
@@ -97,7 +114,15 @@ export function nextQuestion(state: InterrogateState): string | null {
   const maxQuestions = state.depth === "quick" ? 1 : 3;
   if (state.answers.length >= maxQuestions) return null;
 
-  if (!facets.industry) {
+  // A saved position already establishes the sector, so asking for it would
+  // make a reader who just researched their own company answer a question the
+  // product could see the answer to. detectFacets works by string matching and
+  // will not find "Online grocery retail and technology" in a sentence that
+  // does not contain it, which is why this is checked separately rather than
+  // by appending the position to `combined`.
+  const industryKnown = Boolean(facets.industry || state.position?.industry);
+
+  if (!industryKnown) {
     return "Which industry and regulatory context does your organisation operate in? That decides which regimes and reference deployments matter.";
   }
   if (!facets.scale) {

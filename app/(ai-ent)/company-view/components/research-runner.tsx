@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ResearchedCompany } from "./researched-company";
 import { WorkforceExposure } from "./workforce-exposure";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
+import { SavePosition } from "@/lib/position/save-position";
 import type { AnalystInsightData } from "@/lib/analyst/insight";
 import type { CompanyResearch } from "@/lib/research/company";
 import type { ExposurePayload } from "@/lib/exposure/payload";
@@ -117,6 +118,11 @@ export function ResearchRunner({
     return (
       <div className="space-y-4">
         <ResearchedCompany research={status.result} />
+        {/* Offered as soon as there is something to save, above the analyst
+            reading rather than at the foot of the page: a reader who has seen
+            the profile and the findings has seen enough to decide, and the
+            panels below are depth rather than new grounds for the decision. */}
+        <SavePosition research={status.result} />
         {/* Blank until a company is named, and then about that company against
             the market rather than about the market on its own. */}
         {status.insight ? (
