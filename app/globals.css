@@ -135,6 +135,16 @@ h1, h2, h3, h4 {
   color: var(--ag-muted);
 }
 
+/* A micro-label that titles a section rather than captioning a figure.
+   At 0.7rem the label sat well below the body copy underneath it and read as
+   fine print for the list rather than as its title. This keeps the mono
+   uppercase idiom and only takes the size up, so a page carrying both stays
+   one typographic family. Must follow .micro-label: equal specificity, later
+   wins. */
+.micro-label-lg {
+  font-size: 0.875rem;
+}
+
 ::selection {
   background: var(--ag-primary);
   color: #fff;

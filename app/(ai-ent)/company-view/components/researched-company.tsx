@@ -298,7 +298,11 @@ function FindingList({
 }) {
   return (
     <section>
-      <MicroLabel label={label} tooltip={tooltip} />
+      {/* Titles a list of findings rather than captioning a figure, so it is
+          set larger than the house micro-label. Both call sites are the two
+          finding lists, which is why the size is set here rather than passed
+          in per call. */}
+      <MicroLabel label={label} tooltip={tooltip} size="large" />
       {findings.length === 0 ? (
         <p className="measure mt-2 rounded-lg border border-dashed border-base-300 px-3 py-4 text-sm text-muted">
           {empty}

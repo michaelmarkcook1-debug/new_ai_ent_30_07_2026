@@ -8,9 +8,21 @@ export function MicroLabel({
   label,
   tooltip,
   heading = false,
+  size = "default",
 }: {
   label: string;
   tooltip?: string;
+  /**
+   * Size of the micro-label, for one that titles a section rather than
+   * captioning a figure.
+   *
+   * Distinct from `heading`, which drops the mono uppercase idiom entirely for
+   * a sans-serif h2. That is right for a panel that is the page's own headline,
+   * and wrong for a section sitting among siblings still set as micro-labels:
+   * making one of them a sans-serif heading leaves the others looking like its
+   * captions. This keeps the family and only changes the size.
+   */
+  size?: "default" | "large";
   /**
    * Render as a section heading rather than a micro-label.
    *
@@ -31,7 +43,7 @@ export function MicroLabel({
       className={
         heading
           ? "relative inline-flex items-center gap-1.5 text-xl font-extrabold tracking-tight"
-          : "micro-label relative inline-flex items-center gap-1"
+          : `micro-label${size === "large" ? " micro-label-lg" : ""} relative inline-flex items-center gap-1`
       }
     >
       {label}
@@ -44,7 +56,15 @@ export function MicroLabel({
           onMouseLeave={() => setOpen(false)}
           onClick={() => setOpen((v) => !v)}
         >
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          {/* Scales with the label, or a larger title gets a pinhead icon. */}
+          <svg
+            width={size === "large" ? 13 : 11}
+            height={size === "large" ? 13 : 11}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
             <circle cx="12" cy="12" r="9" />
             <path d="M12 16v-5M12 8h.01" />
           </svg>
