@@ -5,6 +5,7 @@ import { WorkforceChart } from "./components/workforce-chart";
 import { PricePerformanceChart } from "./components/price-performance-chart";
 import { workforcePayload } from "@/lib/model-fit/workforce-payload";
 import { priceModels } from "@/lib/model-fit/price-payload";
+import { CompanyContextBar } from "@/lib/position/context-bar";
 
 export const metadata = { title: "ModelEngine | AI Enterprise" };
 
@@ -27,6 +28,7 @@ export default function MarketViewPage() {
         subtitle="Pick a role and the engine returns the cheapest model meeting its requirements, with the reasoning, the eliminations and the cost all visible."
         lanes={["derived", "aie"]}
       />
+      <CompanyContextBar here="engine" />
       <ModelFit />
 
       {/* The distribution behind the single answer above: the whole reference

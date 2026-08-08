@@ -5,6 +5,7 @@ import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { supplyMapInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
 import { analystNews } from "@/lib/analyst/news-source";
+import { CompanyContextBar } from "@/lib/position/context-bar";
 
 // The Analyst Insight is a pure function of this page's data, so it only says
 // something new when an input changes. News is the input that moves daily, and
@@ -80,6 +81,7 @@ export default async function AlliancesPage() {
         subtitle="Which firms deliver which AI vendors. An enterprise rarely stands a frontier model up alone, so the integrator carrying a vendor decides who turns up on the engagement, how fast, and in which jurisdictions."
         lanes={["aie"]}
       />
+      <CompanyContextBar here="integrators" />
       <AnalystInsight
         insight={written.value}
         authorship={written.authorship}

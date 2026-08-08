@@ -43,6 +43,7 @@ import { fetchDeskNews } from "@/lib/desk/news";
 import { assembleBrief } from "@/lib/desk/brief";
 import { buildDossier, type VendorDossier } from "@/lib/desk/dossier";
 import { vendorName } from "@/lib/aie/vendor-directory";
+import { CompanyContextBar } from "@/lib/position/context-bar";
 
 // The Analyst Insight is a pure function of this page's data, so it only says
 // something new when an input changes. News is the input that moves daily and
@@ -100,6 +101,7 @@ export default async function TrustRankPage() {
         subtitle="Whether you can defend a vendor choice: what changed overnight, what each vendor's own contract permits with your data, who you may therefore buy from, and what the law puts on you rather than on them."
         lanes={["live", "cited", "aie", postures.lane]}
       />
+      <CompanyContextBar here="trust" />
       {/* Today's brief leads the page. It answers what changed overnight and
           what to do about it, which is what a reader opens Trust Rank for. The
           analyst reading that used to sit here summarised the same governance

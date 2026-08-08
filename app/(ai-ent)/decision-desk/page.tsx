@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { getUploads, analystKeyConfigured } from "@/app/api/analyst/lib";
 import { shortlistPayload } from "@/lib/desk/shortlist-payload";
 import Link from "next/link";
+import { CompanyContextBar } from "@/lib/position/context-bar";
 
 export const metadata = { title: "Decision Desk | AI Enterprise" };
 
@@ -40,6 +41,7 @@ export default async function DecisionDeskPage({
         subtitle="Converge on a call you can defend: describe your situation for a source-cited finding, score the decision against your own weights with the derivation open, then leave with three vendors to look at and the sequence that tests them. Nothing here invents a figure."
         lanes={["aie-live", "aie", "sample"]}
       />
+      <CompanyContextBar here="desk" />
       <section className="mb-4 rounded-lg border border-base-300 bg-base-100 p-4">
         <p className="measure text-sm">
           {uploads.length > 0 ? (

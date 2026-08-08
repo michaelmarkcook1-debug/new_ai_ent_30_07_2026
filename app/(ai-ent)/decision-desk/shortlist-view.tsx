@@ -5,6 +5,7 @@ import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
+import { useShortlist } from "@/lib/shortlist";
 import type { ShortlistPayload } from "@/lib/desk/shortlist-payload";
 
 // Step 3: the three names, and what to do about them.
@@ -22,11 +23,29 @@ import type { ShortlistPayload } from "@/lib/desk/shortlist-payload";
 export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
   const [category, setCategory] = useState(payload.defaultCategory);
   const [done, setDone] = useState<Set<number>>(new Set());
+  // The shortlist the rest of the product already reads. ModelEngine, Trust
+  // Rank and Integrators all watch it, so putting these three on it is what
+  // carries this decision into the tabs that come after it.
+  const { ids, has, toggle: toggleVendor, ready, full } = useShortlist();
 
   const list = payload.byCategory[category];
   const cats = payload.categories;
 
-  const toggle = (i: number) =>
+  const shortlisted = list
+    ? list.entries.filter((e) => ids.includes(e.vendorId)).length
+    : 0;
+  const allOn = list ? shortlisted === list.entries.length : false;
+
+  const takeAll = () => {
+    if (!list) return;
+    for (const e of list.entries) {
+      // toggle() would remove the ones already on, which is the opposite of
+      // what a button called "take all three" should do.
+      if (!has(e.vendorId)) toggleVendor(e.vendorId);
+    }
+  };
+
+  const toggleStep = (i: number) =>
     setDone((prev) => {
       const next = new Set(prev);
       if (next.has(i)) next.delete(i);
@@ -90,6 +109,43 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
             </p>
           ) : null}
 
+          {/* Taking these forward is what makes the rest of the section about
+              them. Said in those terms rather than "add to shortlist", because
+              the useful fact is what happens on the next four tabs, not that a
+              list somewhere grew. */}
+          {ready && list.entries.length > 0 ? (
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-base-300 bg-base-100 px-4 py-3">
+              <p className="measure text-sm">
+                {shortlisted === 0 ? (
+                  <>
+                    Take these forward and the rest of this section follows
+                    them: ModelEngine prices them for a role, Trust Rank reads
+                    their contracts and tells you what changed overnight, and
+                    Integrators shows who would actually deliver them.
+                  </>
+                ) : (
+                  <>
+                    <span className="font-semibold">
+                      {shortlisted} of {list.entries.length} taken forward.
+                    </span>{" "}
+                    ModelEngine, Trust Rank and Integrators are now about{" "}
+                    {shortlisted === 1 ? "this vendor" : "these vendors"}.
+                  </>
+                )}
+              </p>
+              <button
+                type="button"
+                onClick={takeAll}
+                disabled={allOn || full}
+                className="shrink-0 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 disabled:opacity-50"
+              >
+                {allOn
+                  ? "All taken forward"
+                  : `Take all ${list.entries.length} forward`}
+              </button>
+            </div>
+          ) : null}
+
           <div className="grid grid-cols-1 gap-3 @4xl:grid-cols-3">
             {list.entries.map((e) => (
               <article
@@ -128,12 +184,33 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
                   {e.limit}
                 </p>
 
-                <Link
-                  href={`/vendor-view/${e.vendorId}`}
-                  className="mt-3 inline-block text-sm font-semibold text-insight underline underline-offset-2"
-                >
-                  See the full profile and every input
-                </Link>
+                <div className="mt-3 flex flex-wrap items-center gap-3">
+                  {ready ? (
+                    <button
+                      type="button"
+                      onClick={() => toggleVendor(e.vendorId)}
+                      aria-pressed={has(e.vendorId)}
+                      disabled={!has(e.vendorId) && full}
+                      className={`rounded-full px-3 py-1.5 text-sm font-semibold transition disabled:opacity-50 ${
+                        has(e.vendorId)
+                          ? "bg-good-bg text-good"
+                          : "bg-primary text-white hover:opacity-90"
+                      }`}
+                    >
+                      {has(e.vendorId) ? "On your shortlist" : "Take forward"}
+                    </button>
+                  ) : (
+                    // Reserve the height so the card does not jump once the
+                    // stored list has been read.
+                    <span className="inline-block h-8" aria-hidden />
+                  )}
+                  <Link
+                    href={`/vendor-view/${e.vendorId}`}
+                    className="text-sm font-semibold text-insight underline underline-offset-2"
+                  >
+                    Full profile
+                  </Link>
+                </div>
               </article>
             ))}
           </div>
@@ -163,7 +240,7 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
             <li key={s.title}>
               <button
                 type="button"
-                onClick={() => toggle(i)}
+                onClick={() => toggleStep(i)}
                 aria-pressed={done.has(i)}
                 className={`w-full rounded-lg border p-3 text-left transition ${
                   done.has(i)

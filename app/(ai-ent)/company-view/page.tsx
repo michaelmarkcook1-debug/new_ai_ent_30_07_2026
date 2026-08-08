@@ -4,6 +4,7 @@ import { CompanyEntry } from "./components/company-entry";
 import { ResearchRunner } from "./components/research-runner";
 import { Assumptions } from "./components/assumptions";
 import { exposurePayload } from "@/lib/exposure/payload";
+import { CompanyContextBar } from "@/lib/position/context-bar";
 
 export const metadata = { title: "Your AI Position | AI Enterprise" };
 
@@ -48,6 +49,7 @@ export default async function CompanyOverviewPage({
         subtitle="Name your company and its public sources are retrieved and read now, with every statement carrying the link it came from. The analyst reading then sets what was found against the tracked AI market: where the position is exposed, where it is defensible."
         lanes={["live", "aie-live"]}
       />
+      <CompanyContextBar here="position" />
 
       <div className="space-y-4">
         <section className="rounded-lg border border-base-300 bg-base-100 p-4">

@@ -921,6 +921,56 @@ interface says so.
 
 ---
 
+## 8.14 What carries across "AI and Your Company"
+
+Five tabs in `lib/ui/shell.tsx:102`: Your AI Position, Decision Desk,
+ModelEngine, Trust Rank, Integrators. **Two** stores carry between them, and
+they are deliberately separate because they are written at different moments by
+different acts.
+
+| What | Store | Written by | Read by |
+|---|---|---|---|
+| Company and sector | `localStorage` `ag_positions_v1` (`lib/position/store.ts:22`) | Your AI Position, on save | The context bar on all five |
+| Vendors taken forward | `localStorage` `ag_shortlist` **plus a cookie** (`lib/shortlist.tsx:33`) | Decision Desk step 3 | ModelEngine, Integrators (client), Trust Rank (server, via the cookie) |
+
+### The vendor half needed almost no new code
+
+`lib/shortlist.tsx` already existed and was already read by
+`market-view/components/model-fit.tsx:1838`,
+`alliances/components/alliances-view.tsx:87`, and server-side by
+`lib/changes/watchlist.ts` through `SHORTLIST_COOKIE`. `model-fit.tsx:1876` was
+already captioned *"vendors approved on the Decision Desk"* while nothing on the
+Decision Desk could approve one. The readers and the store were built; the
+writer was missing. Step 3 now calls `useShortlist().toggle()`.
+
+The cookie mirror is what lets Trust Rank personalise on the **server**, since
+`readWatchState()` runs in a Server Component and cannot see `localStorage`.
+
+### `CompanyContextBar`
+
+`lib/position/context-bar.tsx`, on all five tabs directly under `PageHeader`.
+
+- Renders **nothing** when nothing is carried. A strip reading "no company
+  selected" on every page is a standing apology for an unused feature.
+- Resolves after mount, because `localStorage` does not exist during the server
+  render and reading it while rendering is a hydration mismatch.
+- `here` names the current tab so it never offers to send you where you are.
+
+### Two things checked and deliberately not built
+
+**Integrators' industry filter was not pre-selected from the sector.**
+`AlliancesView` takes `industries` and `CHANNEL_LINKS` supplies them, but every
+`industries` array in `lib/aie/alliances/seed.ts` is empty. Syncing the sector
+into it would drive a control with nothing behind it.
+
+**ModelEngine does not change its model pick from the sector.** The role library
+holds one profile per cross-industry role, so the sector cannot alter which
+model fits a role. Section 8.11 is the evidence-backed exception and covers
+customer operations only. The context bar states the company on that tab without
+implying it moved the answer.
+
+---
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

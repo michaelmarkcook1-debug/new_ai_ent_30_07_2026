@@ -17,6 +17,34 @@ than a gap.
 
 ## 8 August 2026
 
+**The five tabs under "AI and Your Company" now carry your answers between
+them.**
+
+They were always meant to be read in order: where do we stand, what call do we
+make, what does it cost for a role, what binds us, and who would deliver it.
+Each one asked its question in isolation, so anyone who named their company on
+the first tab had to remember it themselves on the other four.
+
+Two things now travel, and a strip at the top of every one of the five says
+what is being carried, so it is never a hidden setting.
+
+**Your company**, once you save it on Your AI Position. Every tab after it
+knows who you are and what sector you are in.
+
+**The vendors you take forward** from the Decision Desk. A button on each of
+the three cards, and one that takes all three at once. From that moment
+ModelEngine prices those vendors for a role, Trust Rank reads their contracts
+and tells you what changed overnight about them, and Integrators shows who
+would actually deliver them.
+
+The second half needed almost nothing new. Those three tabs already watched a
+shortlist and had done for weeks: ModelEngine's own caption reads "vendors
+approved on the Decision Desk", written before anything on the Decision Desk
+could approve one. The list existed, the readers existed, and the step that
+produced it did not. That is now connected.
+
+---
+
 **The Decision Desk now ends with three vendors and a plan, not with a score.**
 
 It could tell you what your situation was and how to weigh the call, and then
