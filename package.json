@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "test": "vitest run",
     "ingest:adoption": "node scripts/ingest-adoption.mjs",
-    "ingest:catalogue": "node scripts/ingest-catalogue.mjs"
+    "ingest:catalogue": "node scripts/ingest-catalogue.mjs",
+    "deploy": "vercel --prod --yes && node scripts/warm-insights.mjs",
+    "warm": "node scripts/warm-insights.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

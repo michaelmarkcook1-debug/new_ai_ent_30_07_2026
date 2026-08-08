@@ -45,13 +45,19 @@ Errors are a different matter and there should never be any.
 ## 2. Deploying
 
 ```bash
-npx vercel --prod --yes
+npm run deploy
 ```
 
-Then warm the analyst cache, which the deploy just emptied:
+That deploys and then warms the analyst cache, which the deploy just emptied.
+They are one operation and were two commands until 8 August 2026, which is how
+the second one gets skipped: the deploy that morning went out unwarmed, and a
+cold sweep nine hours later still paid 35s on /vendor-view and 23s on
+/competitive-intel because no reader had filled those entries.
+
+To warm without deploying, after a cache expiry or a slow report:
 
 ```bash
-node scripts/warm-insights.mjs
+npm run warm
 ```
 
 The authored insight is cached in Vercel's Data Cache, shared across
