@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 // The reader's desk: two taps, no account, no uploads.
 //
@@ -63,39 +63,145 @@ function writeCookie(value: string | null) {
   }
 }
 
-/** Read the profile in the browser, and write it. Mirrors the shortlist's
- *  contract, including `ready` so first paint and SSR agree. */
+// ONE store, not one per caller.
+//
+// This hook shipped holding the profile in its own `useState`, which meant
+// every component calling it got a private copy. Two of them render on Trust
+// Rank at once, so setting your desk in "For firms like yours" left "Start
+// from your industry" still asking for it, and neither knew about a second
+// browser window. That is the bug Michael reported as "data does not persist
+// across tabs", and it was both kinds of tab at once.
+//
+// The shortlist solved the same problem with a context provider. A provider
+// would work here too but has to be threaded through the shell, and these
+// panels can appear anywhere. An external store does the same job with no
+// wrapper: every caller subscribes to one value, and `useSyncExternalStore` is
+// React's own answer for state that lives outside the tree.
+//
+// The `storage` event carries the other half. It fires in every OTHER document
+// on the origin, so a desk set in one window reaches the rest without either
+// side polling.
+
+let store: DeskProfile | null = null;
+let initialised = false;
+const listeners = new Set<() => void>();
+
+function emit() {
+  for (const l of listeners) l();
+}
+
+function readStorage(): DeskProfile | null {
+  try {
+    return parseProfile(localStorage.getItem(KEY) ?? undefined);
+  } catch {
+    // Private browsing can refuse reads. Start empty rather than break.
+    return null;
+  }
+}
+
+/** Idempotent, and safe to call during render: it only reads. */
+function ensureInit() {
+  if (initialised || typeof window === "undefined") return;
+  initialised = true;
+  store = readStorage();
+  // Re-seed the cookie for anyone who set a desk before it existed, otherwise
+  // their profile stays invisible to the server forever.
+  if (store) writeCookie(JSON.stringify(store));
+}
+
+function onStorage(e: StorageEvent) {
+  if (e.key !== null && e.key !== KEY) return;
+  const next = readStorage();
+  // Compare by value: a fresh object with identical fields would otherwise
+  // re-render every subscriber on every unrelated storage write.
+  if (
+    next?.industry === store?.industry &&
+    next?.region === store?.region
+  ) {
+    return;
+  }
+  store = next;
+  emit();
+}
+
+/** Subscribe to profile changes. Exported because the store is the real API
+ *  here and the hook below is a thin React binding over it: that keeps the
+ *  sharing behaviour testable without a DOM library, which is what the
+ *  original bug needed and did not have. */
+export function subscribeToDeskProfile(cb: () => void): () => void {
+  ensureInit();
+  listeners.add(cb);
+  if (listeners.size === 1) window.addEventListener("storage", onStorage);
+  return () => {
+    listeners.delete(cb);
+    if (listeners.size === 0) window.removeEventListener("storage", onStorage);
+  };
+}
+
+/** The current profile. Returns the cached object rather than a new one, so
+ *  the snapshot is referentially stable and React does not loop. */
+export function readDeskProfileNow(): DeskProfile | null {
+  ensureInit();
+  return store;
+}
+
+/** Write the profile and tell every subscriber, in this document and others. */
+export function saveDeskProfile(next: DeskProfile | null): void {
+  store = next;
+  initialised = true;
+  try {
+    if (next === null) localStorage.removeItem(KEY);
+    else localStorage.setItem(KEY, JSON.stringify(next));
+  } catch {
+    // Private browsing can refuse writes. The in-memory value still works.
+  }
+  writeCookie(next === null ? null : JSON.stringify(next));
+  // localStorage does not fire `storage` in the document that wrote it, so
+  // this document's own subscribers are notified here, and the other windows
+  // by the event.
+  emit();
+}
+
+/** Reset the module store. Tests only: a module-level store survives between
+ *  test cases, and a leaked profile would make the next case pass for the
+ *  wrong reason. */
+export function __resetDeskProfileForTests(): void {
+  store = null;
+  initialised = false;
+  listeners.clear();
+}
+
+const subscribe = subscribeToDeskProfile;
+const getSnapshot = readDeskProfileNow;
+
+/** Null on the server: there is no localStorage there, and the cookie is read
+ *  by `profile-server.ts` for anything that has to render server-side. */
+function getServerSnapshot(): DeskProfile | null {
+  return null;
+}
+
+const subscribeReady = (cb: () => void) => subscribe(cb);
+
+/** Read the profile in the browser, and write it. Every caller sees the same
+ *  value, and a change in one window reaches the others. */
 export function useDeskProfile() {
-  const [profile, setProfile] = useState<DeskProfile | null>(null);
-  const [ready, setReady] = useState(false);
+  const profile = useSyncExternalStore(
+    subscribe,
+    getSnapshot,
+    getServerSnapshot
+  );
+  // False during SSR and hydration, true once mounted, so a panel does not
+  // flash "no desk set" at a reader who has one.
+  const ready = useSyncExternalStore(
+    subscribeReady,
+    () => true,
+    () => false
+  );
 
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(KEY);
-      if (raw) {
-        const parsed = parseProfile(raw);
-        if (parsed) {
-          setProfile(parsed);
-          // Re-seed the cookie for anyone who set a desk before it existed.
-          writeCookie(JSON.stringify(parsed));
-        }
-      }
-    } catch {
-      // Start empty rather than break.
-    }
-    setReady(true);
-  }, []);
-
-  const save = useCallback((next: DeskProfile | null) => {
-    setProfile(next);
-    try {
-      if (next === null) localStorage.removeItem(KEY);
-      else localStorage.setItem(KEY, JSON.stringify(next));
-    } catch {
-      // Private browsing can refuse writes.
-    }
-    writeCookie(next === null ? null : JSON.stringify(next));
-  }, []);
+  const save = useCallback(
+    (next: DeskProfile | null) => saveDeskProfile(next),
+    []
+  );
 
   return { profile, ready, save };
 }
