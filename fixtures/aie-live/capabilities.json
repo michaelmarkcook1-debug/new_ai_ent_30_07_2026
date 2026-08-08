@@ -255,9 +255,9 @@
    "vendorId": "alibaba",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 39.55555555555556,
+   "maturityScore": 40.1,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-01T23:06:27.037Z",
+   "lastVerified": "2026-08-07T18:33:29.790Z",
    "notes": "Qwen3-235B-A22B-Instruct-2507 1416... Qwen3-30B-A3B-Instruct-2507 1382... Qwen3-32B 1342 Alibaba Apache 2.0"
   },
   {
@@ -291,27 +291,27 @@
    "vendorId": "alibaba",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 57.714285714285715,
+   "maturityScore": 58.93333333333333,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T19:18:47.291Z",
+   "lastVerified": "2026-08-07T18:33:29.790Z",
    "notes": "Qwen3.5-397B-A17B 1450 1463 69 87.8 5 Alibaba Apache 2.0"
   },
   {
    "vendorId": "alibaba",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 68.35714285714286,
+   "maturityScore": 68.72727272727273,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T19:18:47.291Z",
-   "notes": "Qwen-VL-Max-2025-08-13 and Qwen3-VL-235B-A22B-Instruct (1429 Arena Elo) both listed; Qwen2.5-VL-32B (1149) and Qwen2.5-VL-72B (1104) shown on vision leaderboard."
+   "lastVerified": "2026-08-07T18:33:29.790Z",
+   "notes": "Qwen3.7-Max 1486 1505 1289 53 89.6 Alibaba Proprietary — ranked #23 in Arena Elo (1486), Coding (1505), Vision (1289), AAII (53), MMLU-Pro (89.6)"
   },
   {
    "vendorId": "alibaba",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 58.625,
+   "maturityScore": 59.1764705882353,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T19:18:47.291Z",
+   "lastVerified": "2026-08-07T18:33:29.790Z",
    "notes": "Qwen3.7-Max 1486... Qwen3.6-Plus 1456... Qwen3.5-Max 1466... Qwen3.5-397B-A17B... Qwen3-Max 1443... Qwen3-235B-A22B... Qwen3-Next-80B... Qwen3-32B 1342... Qwen3-30B 1320... Qwen2.5"
   },
   {
@@ -1416,19 +1416,19 @@
    "vendorId": "google",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 51.65934065934066,
+   "maturityScore": 51.416666666666664,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:18:16.496Z",
+   "lastVerified": "2026-08-07T18:33:02.650Z",
    "notes": "Wonderful uses Gemini and Vertex AI to overcome the global AI language gap, helping large local enterprises automate customer and business interactions across languages and regions"
   },
   {
    "vendorId": "google",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 54.705128205128204,
+   "maturityScore": 54.8375,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-31T01:18:27.665Z",
-   "notes": "Google Cloud's pay-as-you-go pricing offers automatic savings based on monthly usage and discounted rates for prepaid resources."
+   "lastVerified": "2026-08-07T18:33:02.650Z",
+   "notes": "Provisioned Throughput overview, Supported models, Calculate Provisioned Throughput requirements, PayGo (Standard PayGo, Priority PayGo, Flex PayGo), Monitor cost using custom meta"
   },
   {
    "vendorId": "google",
@@ -1452,36 +1452,36 @@
    "vendorId": "google",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 53.96808510638298,
+   "maturityScore": 53.75257731958763,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-07-31T01:18:27.665Z",
+   "lastVerified": "2026-08-07T18:33:02.650Z",
    "notes": "Google maintains a FedRAMP Authorization to Operate (ATO) for Google Workspace and Google Cloud Platform."
   },
   {
    "vendorId": "google",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 60.802547770700635,
+   "maturityScore": 60.72049689440994,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:18:27.665Z",
+   "lastVerified": "2026-08-07T18:33:02.650Z",
    "notes": "Wonderful uses Gemini and Vertex AI to overcome the global AI language gap, helping large local enterprises automate customer and business interactions across languages and regions"
   },
   {
    "vendorId": "google",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 53.9375,
+   "maturityScore": 53.84146341463415,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-31T01:18:27.665Z",
+   "lastVerified": "2026-08-07T18:33:02.650Z",
    "notes": "In this blinded study with patient actors, specialist physicians compared AMIE with 21 primary care doctors. AMIE matched clinicians in overall management reasoning and scored sign"
   },
   {
    "vendorId": "google",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 57.490566037735846,
+   "maturityScore": 57.70909090909091,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-31T01:18:17.974Z",
+   "lastVerified": "2026-08-07T18:33:02.650Z",
    "notes": "Over 100 services managed across: Compute (GKE, Compute Engine, Cloud Functions, Cloud Run), Storage (Cloud Storage, Bigtable, Firestore, Spanner), Analytics (BigQuery, Dataflow, D"
   },
   {
@@ -1497,9 +1497,9 @@
    "vendorId": "google",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 53.23076923076923,
+   "maturityScore": 53.15126050420168,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:18:27.665Z",
+   "lastVerified": "2026-08-07T18:33:02.650Z",
    "notes": "Google has both SOC 2 and SOC 3 reports for Google Cloud Platform and Google Workspace."
   },
   {
@@ -2091,27 +2091,27 @@
    "vendorId": "meta",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 58,
+   "maturityScore": 58.48275862068966,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T23:37:30.534Z",
-   "notes": "Models across 50+ organizations (Anthropic, OpenAI, Google, Meta, xAI, DeepSeek, Alibaba, Mistral, Nvidia, Amazon) ranked on standardized metrics: Arena Elo, Coding, Vision, AAII, "
+   "lastVerified": "2026-08-07T18:33:55.199Z",
+   "notes": "300+ models listed across 25+ vendor organizations including Anthropic, OpenAI, Google (Gemini), Alibaba (Qwen), Meta (Llama, Muse), DeepSeek, xAI, Moonshot, Baidu (ERNIE), Tencent"
   },
   {
    "vendorId": "meta",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 57.90243902439025,
+   "maturityScore": 59.36363636363637,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:37:30.534Z",
+   "lastVerified": "2026-08-07T18:33:55.199Z",
    "notes": "Our evaluation delivered surprising results: the highly anticipated Llama 4 significantly underperformed compared to its predecessor, Llama 3, and fell notably behind specialized c"
   },
   {
    "vendorId": "meta",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 59.82142857142857,
+   "maturityScore": 60,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:37:30.534Z",
+   "lastVerified": "2026-08-07T18:33:55.199Z",
    "notes": "We anticipate 2026 capital expenditures, including principal payments on finance leases, to be in the range of $115-135 billion, with year-over-year growth driven by increased inve"
   },
   {
@@ -2136,18 +2136,18 @@
    "vendorId": "mgx",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 53.333333333333336,
+   "maturityScore": 50,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-06-21T15:41:23.920Z",
+   "lastVerified": "2026-08-07T18:13:30.620Z",
    "notes": "MGX (MetaGPT X) is a next-generation AI platform that works as a fully autonomous software development team consisting of specialized agents... Automates the full software developm"
   },
   {
    "vendorId": "mgx",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 52.5,
+   "maturityScore": 46.666666666666664,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-06-21T15:41:23.920Z",
+   "lastVerified": "2026-08-07T18:13:30.620Z",
    "notes": "MGX is currently free and open-source. There are no license fees, usage costs, or subscriptions required to use the core platform."
   },
   {
@@ -2181,27 +2181,27 @@
    "vendorId": "mgx",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 43.285714285714285,
+   "maturityScore": 45.90909090909091,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-08-03T20:15:15.046Z",
-   "notes": "MGX supports integrations like Supabase for backend functionalities and Stripe for payment flows, enabling richer app deployments."
+   "lastVerified": "2026-08-07T18:13:30.620Z",
+   "notes": "MGX supports multiple foundation models, including OpenAI GPT-4, Anthropic Claude, Google Gemini, and local models via LM Studio or Ollama."
   },
   {
    "vendorId": "mgx",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 31,
+   "maturityScore": 28.25,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-08-03T20:15:15.046Z",
-   "notes": "The report listed API integration failures, configuration complexity, JSONDecodeError incidents, and documentation gaps that slowed new users."
+   "lastVerified": "2026-08-07T18:13:30.620Z",
+   "notes": "The report listed API integration failures, configuration complexity, JSONDecodeError incidents, and documentation gaps that slowed new users. The high volume of issues and repeate"
   },
   {
    "vendorId": "mgx",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 56.22222222222222,
+   "maturityScore": 58.45454545454545,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-03T20:15:15.046Z",
+   "lastVerified": "2026-08-07T18:13:30.620Z",
    "notes": "MGX closed its Fund I at $49 billion on Wednesday, exceeding an initial target of $45 billion and establishing the Abu Dhabi-based firm as one of the largest dedicated AI investors"
   },
   {
@@ -2217,9 +2217,9 @@
    "vendorId": "mgx",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 23.333333333333332,
+   "maturityScore": 26.25,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-08-03T20:15:15.046Z",
+   "lastVerified": "2026-08-07T18:13:30.620Z",
    "notes": "MGX is hosted in the United States and is intended for and directed to users in the United States."
   },
   {
@@ -2865,9 +2865,9 @@
    "vendorId": "openai",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 66.56043956043956,
+   "maturityScore": 67.67676767676768,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T23:40:32.975Z",
+   "lastVerified": "2026-08-07T18:37:05.955Z",
    "notes": "Implementing monitoring is the foundation of cost control with OpenAI services. Developers and organizations should use OpenAI's usage dashboards, billing APIs, and third-party obs"
   },
   {
@@ -2892,19 +2892,19 @@
    "vendorId": "openai",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 58.93577981651376,
+   "maturityScore": 59.439655172413794,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-07-30T23:40:32.975Z",
+   "lastVerified": "2026-08-07T18:34:13.396Z",
    "notes": "Our products are covered in our SOC 2 Type 2 report and have been evaluated by an independent third-party auditor to confirm that our controls align with industry standards for sec"
   },
   {
    "vendorId": "openai",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 65.78260869565217,
+   "maturityScore": 66.21917808219177,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T23:40:32.975Z",
-   "notes": "The API is metered per token, while products like ChatGPT Enterprise may use per-seat pricing. Deployment type: Different pricing models exist depending on how you use the product."
+   "lastVerified": "2026-08-07T18:37:05.955Z",
+   "notes": "Vision column tracks performance: Claude Opus 5 (61), GPT-5.6 Sol (59), Gemini-3.1-Pro (54). Separate vision model rows: Llama-3.2-90B-Vision-Instruct (67.1), Pixtral-Large-2411 (7"
   },
   {
    "vendorId": "openai",
@@ -2919,9 +2919,9 @@
    "vendorId": "openai",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 57.08955223880597,
+   "maturityScore": 57.72,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:40:32.975Z",
+   "lastVerified": "2026-08-07T18:37:05.955Z",
    "notes": "OpenAI's run rate is now roughly $25 billion, and the company filed its confidential S-1 on June 8, 2026. OpenAI closed a $122 billion funding round at an $852 billion post-money v"
   },
   {
@@ -2937,9 +2937,9 @@
    "vendorId": "openai",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 60.234939759036145,
+   "maturityScore": 60.264367816091955,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-07-30T23:40:32.975Z",
+   "lastVerified": "2026-08-07T18:37:05.955Z",
    "notes": "Our products are also ISO 27001, 27017, 27018, and 27701 certified. ... Control implementation also conforms to additional control sets of ISO/IEC 27017:2015 and ISO/IEC 27018:2019"
   },
   {

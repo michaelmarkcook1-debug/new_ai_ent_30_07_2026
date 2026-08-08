@@ -248,8 +248,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 62.4,
-   "confidenceScore": 95.7,
+   "overallScore": 62.7,
+   "confidenceScore": 95.9,
    "marketPosition": "Major challenger",
    "strategy": "Distribute Qwen via Alibaba Cloud and open-weight release; lead non-English benchmarks.",
    "productCapabilities": [
@@ -1618,8 +1618,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 50.4,
-   "confidenceScore": 90.5,
+   "overallScore": 48.5,
+   "confidenceScore": 93.1,
    "marketPosition": "Emerging specialist",
    "strategy": "Deploy sovereign capital at mega-round scale across frontier labs and AI infrastructure.",
    "productCapabilities": [
@@ -1687,7 +1687,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 61.7,
+   "overallScore": 62.1,
    "confidenceScore": 97.8,
    "marketPosition": "Major challenger",
    "strategy": "Lead open-weights ecosystem while running Meta AI as a consumer assistant; deepen developer reach via Llama API.",
@@ -2281,7 +2281,7 @@
     "vpc"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 68,
+   "overallScore": 68.5,
    "confidenceScore": 97.8,
    "marketPosition": "Leader",
    "strategy": "Lead with model quality, agent runtime, enterprise controls, and ecosystem distribution through strategic partners.",
@@ -3035,7 +3035,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 64.4,
+   "overallScore": 64.3,
    "confidenceScore": 87,
    "marketPosition": "Major challenger",
    "strategy": "Hold the leading-edge process lead and capacity that every fabless AI-chip designer depends on.",

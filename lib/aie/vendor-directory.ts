@@ -49,8 +49,8 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "Alibaba",
     "category": "Frontier model/API",
     "ownershipType": "public",
-    "overallScore": 62.4,
-    "confidenceScore": 95.7,
+    "overallScore": 62.7,
+    "confidenceScore": 95.9,
     "marketPosition": "Major challenger"
   },
   {
@@ -229,7 +229,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "Meta",
     "category": "Frontier model/API",
     "ownershipType": "public",
-    "overallScore": 61.7,
+    "overallScore": 62.1,
     "confidenceScore": 97.8,
     "marketPosition": "Major challenger"
   },
@@ -238,8 +238,8 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "MGX",
     "category": "AI investor",
     "ownershipType": "public",
-    "overallScore": 50.4,
-    "confidenceScore": 90.5,
+    "overallScore": 48.5,
+    "confidenceScore": 93.1,
     "marketPosition": "Emerging specialist"
   },
   {
@@ -310,7 +310,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "OpenAI",
     "category": "Frontier model/API",
     "ownershipType": "private",
-    "overallScore": 68,
+    "overallScore": 68.5,
     "confidenceScore": 97.8,
     "marketPosition": "Leader"
   },
@@ -418,7 +418,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "TSMC",
     "category": "AI infrastructure",
     "ownershipType": "public",
-    "overallScore": 64.4,
+    "overallScore": 64.3,
     "confidenceScore": 87,
     "marketPosition": "Major challenger"
   },

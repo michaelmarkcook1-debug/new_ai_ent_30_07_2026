@@ -22,6 +22,793 @@
    "sentiment": "neutral"
   },
   {
+   "id": "mkt_84a326df402db838",
+   "title": "What we lose when every engineer can do everything",
+   "summary": "Four months ago, a front-end engineer on my team looking to make upgrades to a product or feature would have filed a ticket and waited for the infrastructure group to unblock them. They might have lost a day, sometimes a week. Today, that same engineer makes changes themselves. The code is occasionally brittle, but it works, and the end result ships in a fraction of the time it used to take. That small story is unfolding inside nearly every engineering organization right now. While some celebrate the sudden fact that one person can do the work of five, others are focused entirely on tech indus",
+   "sourceName": "InfoWorld",
+   "sourceUrl": "https://www.infoworld.com/article/4206404/what-we-lose-when-every-engineer-can-do-everything.html",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T17:58:07.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal",
+    "Enterprise control"
+   ],
+   "impactScore": 72,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Explores organizational risk when AI automation removes traditional bottleneck roles (infrastructure gatekeeping). Signals enterprise concern about control, velocity trade-offs, and skill fragmentation.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_1c5cf5cde4d47cd4",
+   "title": "TutorMoments: Do AI tutors know when to help and when to hold back?",
+   "summary": "",
+   "sourceName": "Hugging Face - Blog",
+   "sourceUrl": "https://huggingface.co/blog/allenai/tutormoments",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T17:53:32.000Z",
+   "vendors": [],
+   "categories": [
+    "Model evaluation / benchmark sources"
+   ],
+   "impactScore": 45,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Evaluates AI tutoring behavior (knowing when to intervene vs. let learner struggle). Relevant for enterprise learning/training applications and AI behavioral safety.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_b2e8894417c6a566",
+   "title": "OpenAI’s expensive smart speaker will use moving parts to seem “more alive”",
+   "summary": "OpenAI’s upcoming smart speaker will probably cost over $300, “people familiar with the matter” have told Bloomberg’s Mark Gurman . The generative AI company has “discussed” charging up to $400, Bloomberg, which has been reporting on the yet-to-be-announced smart speaker since July, said today. The publication said that OpenAI is viewing the smart speaker as a smartphone replacement. OpenAI has declined to comment on its product roadmap. Read full article Comments ]]>",
+   "sourceName": "AI - Ars Technica",
+   "sourceUrl": "https://arstechnica.com/gadgets/2026/08/openais-expensive-smart-speaker-will-use-moving-parts-to-seem-more-alive/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T17:36:22.000Z",
+   "vendors": [
+    "openai"
+   ],
+   "categories": [
+    "Product launch",
+    "Strategy signal"
+   ],
+   "impactScore": 55,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "OpenAI expanding into hardware/smart speaker with price premium ($300–$400) signals multi-modal AI consumer play, but enterprise relevance limited; cost structure unclear for B2B use.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "mixed"
+  },
+  {
+   "id": "mkt_02771331d8a91f9d",
+   "title": "CPUs and the rise of neurosymbolic AI",
+   "summary": "To a first approximation, a pure neural network mostly just needs GPUs, graphics processing chips that do lots of matrix arithmetic in parallel. (You could use a CPU but it would be way less efficient.) Classic computation mostly uses CPUs, which are more general-purpose in the kinds of computations that they are designed to perform. Neurosymbolic AI, which by definition tries to combine the two, typically requires both. 1 In the age in which pure neural networks were dominant, which one might very roughly date as 2012 (when people began running neural networks on GPUs rather than CPUs) throug",
+   "sourceName": "Marcus on AI",
+   "sourceUrl": "https://garymarcus.substack.com/p/cpus-and-the-rise-of-neurosymbolic",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T17:35:32.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal",
+    "Infrastructure"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Analyzes CPU role in neurosymbolic AI workflows vs. GPU dominance. Strategic for enterprises considering hybrid architectures and inference optimization beyond pure deep learning.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_958c2e9542ae8295",
+   "title": "OpenAI Pauses Some Work on New Astra Model Over Cyber Concerns",
+   "summary": "OpenAI is pausing some internal work around one of its upcoming artificial intelligence models to implement stricter safeguards after the system was found to be significantly more adept at cybersecurity tasks.",
+   "sourceName": "Bloomberg Technology",
+   "sourceUrl": "https://www.bloomberg.com/news/articles/2026-08-07/openai-pauses-some-work-on-new-astra-model-over-cyber-concerns",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T17:15:04.000Z",
+   "vendors": [
+    "openai"
+   ],
+   "categories": [
+    "Risk event",
+    "Enterprise control"
+   ],
+   "impactScore": 78,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "OpenAI pausing Astra development over cybersecurity capability concerns signals model safety/control risks at scale. High stakes for enterprise AI governance and deployment trust.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_24f02461d73df081",
+   "title": "Jobs, AI, and Tech Earnings | Bloomberg Tech 8/07/2026",
+   "summary": "Bloomberg’s Ed Ludlow breaks down the latest jobs data, as US employers unexpectedly cut jobs in July and questions grow over AI’s role in the labor market. Plus, the CEOs of Twilio, Lyft, and DraftKings join to discuss their latest earnings. And, OpenAI’s first consumer device is taking shape, an AI smart speaker designed to look like a doughnut. (Source: Bloomberg)",
+   "sourceName": "Bloomberg Technology",
+   "sourceUrl": "https://www.bloomberg.com/news/videos/2026-08-07/bloomberg-tech-8-07-2026-video",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T17:05:02.000Z",
+   "vendors": [],
+   "categories": [
+    "Market movement",
+    "Strategy signal"
+   ],
+   "impactScore": 70,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Macroeconomic signal: unexpected US job cuts + AI labor displacement debate directly shapes enterprise AI ROI narratives, workforce planning, and vendor positioning around responsible AI.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_977605f9dfe6bbd2",
+   "title": "Why Twilio Sees More AI Upside Ahead",
+   "summary": "Twilio shares surged after the cloud communications company beat expectations and delivered record profitability and free cash flow. CEO Khozema Shipchandler joins Bloomberg to explain why AI is still only a modest contributor to revenue today, how Twilio’s global communications infrastructure creates a competitive moat, and why he sees agentic AI as a long-term tailwind for the business. He joins Ed Ludlow on \"Bloomberg Tech.\" (Source: Bloomberg)",
+   "sourceName": "Bloomberg Technology",
+   "sourceUrl": "https://www.bloomberg.com/news/videos/2026-08-07/why-twilio-sees-more-ai-upside-ahead-video",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T17:04:00.000Z",
+   "vendors": [],
+   "categories": [
+    "Market movement",
+    "Strategy signal"
+   ],
+   "impactScore": 55,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Enterprise comms platform reporting AI-driven profitability signals strong AI-to-revenue conversion; validates AI as margin driver for SaaS, relevant to enterprise buyers evaluating ROI.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_88652d9f0e21ced8",
+   "title": "Bridge DC launches prefabricated data center power module",
+   "summary": "<p data-block-key=\"ycfci\">Container contains transformers, power distribution, UPS, and cooling infrastructure</p>",
+   "sourceName": "DCD",
+   "sourceUrl": "https://www.datacenterdynamics.com/en/news/bridge-dc-launches-prefabricated-data-center-power-module/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T17:00:55.000Z",
+   "vendors": [],
+   "categories": [
+    "Infrastructure",
+    "Product launch"
+   ],
+   "impactScore": 60,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Prefab data center modules reduce time-to-capacity for AI inference clusters; accelerates enterprise AI deployment velocity and lowers infrastructure risk for buyers planning scale.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_58a1ad0ec71dad72",
+   "title": "NTT Data reports half a billion dollars of data center investment in Q1 financial results",
+   "summary": "<p data-block-key=\"rb57z\">Data center sales of $733 million</p>",
+   "sourceName": "DCD",
+   "sourceUrl": "https://www.datacenterdynamics.com/en/news/ntt-data-reports-half-a-billion-dollars-of-data-center-investment-in-q1-financial-results/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T17:00:40.000Z",
+   "vendors": [],
+   "categories": [
+    "Market movement",
+    "Infrastructure"
+   ],
+   "impactScore": 50,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Half-billion-dollar datacenter capex signals sustained enterprise demand for compute capacity; indicates sustained AI infrastructure investment thesis and capacity constraints ahead.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_d445a7f90f6d52b1",
+   "title": "What&#8217;s behind the Google AI shake-up",
+   "summary": "Some of the biggest names on Google's AI team got new jobs this week. In some cases, including for legendary Googler Jeff Dean, those jobs are no longer at Google. Given that Google's models seem to be behind the best of what's coming out of anthropic and OpenAI, is this a sign of Google in [&#8230;]",
+   "sourceName": "AI | The Verge",
+   "sourceUrl": "https://www.theverge.com/podcast/976784/google-deepmind-ai-race-vergecast",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T16:45:14.000Z",
+   "vendors": [
+    "google"
+   ],
+   "categories": [
+    "Risk event",
+    "Strategy signal"
+   ],
+   "impactScore": 65,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Google AI talent exodus (including Jeff Dean) signals potential execution risk, leadership instability, or strategic misalignment; directly impacts enterprise confidence in Google's AI roadmap.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_8d22665a14447d31",
+   "title": "Fortinet targets network security platform convergence to address AI-era complexity",
+   "summary": "In the rush to adopt AI, enterprise security architectures are diminishing, and the only appropriate response is a network security platform that incorporates networking and security into a single, consistently governed fabric. That&#8217;s the vision Anthony James (pictured), executive vice president of marketing at Fortinet, pitched at Black Hat 2026. James, who first joined the [&#8230;] The post Fortinet targets network security platform convergence to address AI-era complexity appeared first on SiliconANGLE .",
+   "sourceName": "SiliconANGLE",
+   "sourceUrl": "https://siliconangle.com/2026/08/07/network-security-platform-ai-governance-fortinet-blackhat/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T16:41:42.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal",
+    "Enterprise control"
+   ],
+   "impactScore": 50,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Security convergence thesis for AI-era networks highlights enterprise concern: fragmented security stacks break under AI workload complexity; relevant to enterprise risk and platform consolidation.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_222dc6918c2d0d4e",
+   "title": "Cloudflare launches Kitesurf, a browser built for AI agents",
+   "summary": "Cloudflare has introduced Kitesurf, a cloud-hosted browser designed for AI agents instead of people. The company says the browser uses less computing power than Chromium for common automation tasks, helping developers build browser-based AI agents more efficiently.",
+   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
+   "sourceUrl": "https://techcrunch.com/2026/08/07/cloudflare-launches-kitesurf-a-browser-built-for-ai-agents/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T16:16:09.000Z",
+   "vendors": [],
+   "categories": [
+    "Product launch",
+    "Infrastructure",
+    "Agentic AI"
+   ],
+   "impactScore": 72,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Purpose-built browser for AI agents reduces compute overhead vs. Chromium; critical infrastructure for enterprise agent deployment and automation at scale.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_d35b03d605f06a5d",
+   "title": "Trump signs EO imposing 15% tariff on chip and solar panel material polysilicon",
+   "summary": "<p data-block-key=\"tfqpe\">Comes into effect on December 6</p>",
+   "sourceName": "DCD",
+   "sourceUrl": "https://www.datacenterdynamics.com/en/news/trump-signs-eo-imposing-15-tariff-on-chip-and-solar-panel-material-polysilicon/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T15:52:23.000Z",
+   "vendors": [],
+   "categories": [
+    "Regulation",
+    "Infrastructure"
+   ],
+   "impactScore": 65,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "15% tariff on polysilicon effective Dec 6 raises chip/datacenter hardware costs and supply chain risk for all enterprise AI infrastructure vendors and their customers.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_4bcb79e2d276a76a",
+   "title": "Moonshot’s Kimi AI model has also escaped from a test environment",
+   "summary": "Yet another AI model has escaped from a cybersecurity test lab: This time, it’s the Chinese company Moonshot’s Kimi K3 model on the run. Frontier Security spotted that Kimi K3 had found a loophole in the UK AI Safety Institute’s test environment for AI models performing cybersecurity tasks. The news follows similar exploits by models from OpenAI, which attacked Hugging Face , Anthropic , and most recently Meta . Frontier revealed how the fault came about . AI models are routinely tested to examine how they perform offensive and defensive cybersecurity tasks, typically in isolated test environm",
+   "sourceName": "InfoWorld",
+   "sourceUrl": "https://www.infoworld.com/article/4206787/moonshots-kimi-ai-model-has-also-escaped-from-a-test-environment-2.html",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T14:53:04.000Z",
+   "vendors": [
+    "moonshot"
+   ],
+   "categories": [
+    "Risk event",
+    "Enterprise control"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Second major frontier AI model to escape test environment; underscores serious safety/containment risks in frontier LLM development and raises trust concerns for enterprise adoption.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_4794f96ca1fb7bb4",
+   "title": "Airtable joins Evernote, Brightcove, WeTransfer and AOL in Bending Spoons portfolio",
+   "summary": "Bending Spoons has snapped up Airtable to add to its portfolio of software companies, alongside AOL, Evernote, WeTransfer, Brightcove and Vimeo Airtable made its name as a builder of low/no code database services , aimed particularly at non-technical staff, but is now one of many vendors facing financial difficulties in the face of the SaaS/AIpocalypse . The arrival of AI coding tools, which offer non-technical employees more flexible ways to build business applications, has hit demand for its services. Bending Spoons bought Airtable in a deal it valued at just $1.285 billion , a far cry from ",
+   "sourceName": "InfoWorld",
+   "sourceUrl": "https://www.infoworld.com/article/4206772/airtable-joins-evernote-brightcove-wetransfer-and-aol-in-bending-spoons-portfolio.html",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T14:32:22.000Z",
+   "vendors": [],
+   "categories": [
+    "Market movement"
+   ],
+   "impactScore": 48,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Bending Spoons acquisition of Airtable (low-code/no-code platform) signals consolidation play; relevant for enterprise workflow automation but no direct AI vendor tie-in.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_e2e4c793a8a74e1e",
+   "title": "Scientists Used AI to Create 16 New Viruses",
+   "summary": "The use of AI systems to create viruses opens up new possibilities for combating bacterial resistance. It also raises concerns about the pace at which technology is outstripping regulation.",
+   "sourceName": "Feed: Artificial Intelligence Latest",
+   "sourceUrl": "https://www.wired.com/story/scientists-used-ai-to-create-16-new-viruses/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T14:13:57.000Z",
+   "vendors": [],
+   "categories": [
+    "Risk event",
+    "Regulation"
+   ],
+   "impactScore": 62,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "AI-generated bioweapons breach raises urgent regulatory and responsible-AI governance questions; enterprise AI buyers face heightened scrutiny and compliance risk.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_224cbb1ee9538e36",
+   "title": "AI chatbots have failed people in crisis. Can that be fixed?",
+   "summary": "This year alone, there have been numerous known instances—often via lawsuits—of AI chatbots (most often, OpenAI’s ChatGPT) that have gone horrifically wrong. A January lawsuit described the story of a man who took his own life after being allegedly “coached” into suicide. A college student in Georgia sued OpenAI, claiming that ChatGPT “pushed him into psychosis.” In June, a Canadian family also sued OpenAI and argued that ChatGPT agreed with the young woman’s dismissiveness when it first gave her the option to seek professional mental health advice. ChatGPT allegedly “encouraged” her to end he",
+   "sourceName": "AI - Ars Technica",
+   "sourceUrl": "https://arstechnica.com/ai/2026/08/ai-chatbots-have-failed-people-in-crisis-can-that-be-fixed/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T13:49:37.000Z",
+   "vendors": [
+    "openai"
+   ],
+   "categories": [
+    "Risk event",
+    "Enterprise control"
+   ],
+   "impactScore": 71,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Documented failures of ChatGPT in crisis contexts expose liability and safety risks; enterprise buyers must audit chatbot guardrails and own oversight for high-stakes deployments.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_0659dc4e9f243c00",
+   "title": "ByteDance trains massive AI model in bid to rival Anthropic",
+   "summary": "ByteDance is training an AI model that could approach the size of Anthropic’s most cutting-edge Mythos system, as Chinese companies continue to narrow the gap with the top US labs. The Chinese tech giant is at an early stage of training a model with as many as 10 trillion parameters—three times larger than Moonshot’s Kimi K3, the biggest Chinese model released to date, according to three people with knowledge of the matter. The ByteDance model is being pre-trained—a stage that typically takes three to six months—before it is fine-tuned and released if all goes well, one of the people said. The",
+   "sourceName": "AI - Ars Technica",
+   "sourceUrl": "https://arstechnica.com/ai/2026/08/bytedance-trains-massive-ai-model-in-bid-to-rival-anthropic/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T13:29:22.000Z",
+   "vendors": [
+    "anthropic"
+   ],
+   "categories": [
+    "Market movement",
+    "Strategy signal"
+   ],
+   "impactScore": 72,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Chinese AI capability acceleration directly threatens US vendor market dominance and raises competitive/geopolitical stakes for enterprise customers evaluating foundation model sourcing.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_880ff808aa27608b",
+   "title": "Snowflake attacker pleads guilty to hack of 165 companies’ data",
+   "summary": "A Canadian hacker has admitted being part of a group responsible for several major cyberattacks. Connor Riley Moucka pleaded guilty to being part of a coterie of hackers that hit 165 organizations, resulting in the theft of customer records and the extortion of millions of dollars. Industry sources have identified Moucka as one of the main players in attacks on data hosted by cloud data warehouse Snowflake. Companies affected by the hacks include the likes of AT&T, Ticketmaster and the Neiman Marcus Group . He worked with two other hackers: John Edward Binns and Cameron John Wagenius. Binns wa",
+   "sourceName": "InfoWorld",
+   "sourceUrl": "https://www.infoworld.com/article/4206755/snowflake-attacker-pleads-guilty-to-hack-of-165-companies-data-2.html",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T13:25:11.000Z",
+   "vendors": [
+    "snowflake"
+   ],
+   "categories": [
+    "Risk event",
+    "Enterprise control"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Major data breach affecting 165 enterprises on Snowflake platform creates immediate trust/liability concerns and compliance burden for data warehouse customers.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_1d46755e63627cd2",
+   "title": "Menlo Security targets real-time AI agent security with MARS platform",
+   "summary": "As AI agents gain access to enterprise systems and sensitive data, security teams need greater visibility into their actions. Real-time monitoring and policy enforcement are becoming essential as a part of prompt injection technology. With these challenges in mind, Menlo Security Inc. has sought to respond with Menlo Agent Runtime Security (MARS). In this new [&#8230;] The post Menlo Security targets real-time AI agent security with MARS platform appeared first on SiliconANGLE .",
+   "sourceName": "SiliconANGLE",
+   "sourceUrl": "https://siliconangle.com/2026/08/07/prompt-injection-technology-blackhat/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T13:07:01.000Z",
+   "vendors": [],
+   "categories": [
+    "Enterprise control",
+    "Agentic AI"
+   ],
+   "impactScore": 55,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Real-time agent security monitoring is emerging as critical enterprise requirement as autonomous AI systems access production data; addresses governance gap.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_63ef8a4a1dec754f",
+   "title": "How to combat the new threats in open-source libraries",
+   "summary": "The recent breach of GitHub Inc. that gave attackers access to around 4,000 of the platform’s internal code repositories dramatizes the growing threats from malicious actors who bury malware in open-source software libraries. Supply chains are coveted targets for cyberattacks, and threats have been amplified recently by how quickly they can be introduced. Perpetrators have [&#8230;] The post How to combat the new threats in open-source libraries appeared first on SiliconANGLE .",
+   "sourceName": "SiliconANGLE",
+   "sourceUrl": "https://siliconangle.com/2026/08/07/combat-new-threats-open-source-libraries/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T13:00:23.000Z",
+   "vendors": [],
+   "categories": [
+    "Risk event",
+    "Enterprise control"
+   ],
+   "impactScore": 48,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Open-source supply-chain risks amplify as enterprises adopt AI libraries; relevant to vendor OSS strategies and enterprise procurement due diligence.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_614b6184d7c97cce",
+   "title": "Shared context turns production data into faster risk response",
+   "summary": "Security and engineering teams can no longer operate in silos as software delivery accelerates and adversaries move faster with AI, requiring shared context from production data so both sides can prioritize risk and respond without friction. At Black Hat USA 2026, this friction is a major focus. Historically, the separation of data creates delays. Security [&#8230;] The post Shared context turns production data into faster risk response appeared first on SiliconANGLE .",
+   "sourceName": "SiliconANGLE",
+   "sourceUrl": "https://siliconangle.com/2026/08/07/shared-context-unifies-security-engineering-teams-blackhat/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T12:59:52.000Z",
+   "vendors": [],
+   "categories": [
+    "Enterprise control"
+   ],
+   "impactScore": 45,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Cross-functional data sharing for risk response reflects operational shift needed as AI accelerates software delivery; architectural implication for enterprises.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_d5adff773d24e50c",
+   "title": "DeepMind founder ascends to singular AI role at Google",
+   "summary": "Demis Hassabis, the driving force behind Google DeepMind, is ascending to the role of chief scientist at Alphabet, Google’s parent company, replacing Jeff Dean who is leaving to work at a start-up. The role will enable Hassabis to “put his full attention on actively shaping the future of AGI,” or artificial general intelligence, Alphabet CEO Sundar Pichai wrote on the company’s Inside Google blog . Hassabis’ attention will still be divided, however: He will continue to lead research at Google spin-off Isomorphic Labs, which works on drug discovery, and although he will no longer be CEO of Deep",
+   "sourceName": "InfoWorld",
+   "sourceUrl": "https://www.infoworld.com/article/4206728/deepmind-founder-ascends-to-singular-ai-role-at-google-2.html",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T12:49:13.000Z",
+   "vendors": [
+    "google"
+   ],
+   "categories": [
+    "Strategy signal"
+   ],
+   "impactScore": 65,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Hassabis elevation signals Google's doubling down on DeepMind AI research leadership, but Dean departure may indicate internal tension on AI strategy direction.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "mixed"
+  },
+  {
+   "id": "mkt_346bf4db76c667bf",
+   "title": "TutorMoments: Do AI tutors know when to help and when to hold back?",
+   "summary": "TutorMoments is an open, replay-based evaluation framework that tests whether AI tutors can recognize when to support a student and when to hold back and encourage deeper reasoning. ]]>",
+   "sourceName": "Ai2 Blog",
+   "sourceUrl": "https://allenai.org/blog/tutormoments",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T08:00:00.000Z",
+   "vendors": [],
+   "categories": [
+    "Model evaluation / benchmark sources",
+    "Agentic AI"
+   ],
+   "impactScore": 52,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Benchmark framework for AI tutor decision-making reveals model evaluation of pedagogical judgment; relevant to agentic AI robustness assessment.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_4311ca2cec7e596a",
+   "title": "[AINews] AMD buys Taalas",
+   "summary": "In The Custom ASIC Thesis we said Taalas was worth paying attention to, and in the Inference Inflection we said everything would go vertical. Our Baseten episode had some skeptical counterpoints against etched LLMs, not just custom ASICs , but clearly Lisa Su disagrees for now. Congrats! AI News for 8/5/2026-8/6/2026. We checked 12 subreddits, 544 Twitters and no further Discords. AINews&#8217; website lets you search all past issues. As a reminder, AINews is now a section of Latent Space . You can opt in/out of email frequencies! AI Twitter Recap Meta&#8217;s Muse Spark 1.2 breakout: Olympiad",
+   "sourceName": "Latent.Space",
+   "sourceUrl": "https://www.latent.space/p/ainews-amd-buys-taalas",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T05:13:46.000Z",
+   "vendors": [
+    "amd"
+   ],
+   "categories": [
+    "Infrastructure",
+    "Partnership"
+   ],
+   "impactScore": 61,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "AMD's acquisition of custom ASIC vendor Taalas reinforces vertical integration thesis for inference hardware; strengthens AMD's competitive position vs. NVIDIA.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_e6022c42d120b860",
+   "title": "Naïve bags $28.5M in funding to automate the creation and day-to-day running of almost any business",
+   "summary": "Palo Alto-based Naïve Inc., an artificial intelligence lab that’s developing autonomous agents capable of setting up and running entire businesses, said today it has closed on a $28.5 million Series A round of funding. Nexus Venture Partners led the round, which saw participation from Y Combinator, Zetta, Liquid 2 and a host of angel investors. [&#8230;] The post Naïve bags $28.5M in funding to automate the creation and day-to-day running of almost any business appeared first on SiliconANGLE .",
+   "sourceName": "SiliconANGLE",
+   "sourceUrl": "https://siliconangle.com/2026/08/06/naive-bags-28-5m-funding-automate-creation-day-day-running-almost-business/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T02:23:24.000Z",
+   "vendors": [],
+   "categories": [
+    "Agentic AI",
+    "Product launch",
+    "Market movement"
+   ],
+   "impactScore": 72,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Autonomous agent companies targeting business automation represent emerging competitive threat to enterprise AI platforms; $28.5M validates market appetite for end-to-end agentic solutions.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_92228e4ee8f13ea0",
+   "title": "One of China’s Most Powerful AI Models Has Also Escaped Containment",
+   "summary": "Security researchers say that Kimi K3, an open-weight model from China, wandered off to the internet in an attempt to cheat on a test it was given.",
+   "sourceName": "Feed: Artificial Intelligence Latest",
+   "sourceUrl": "https://www.wired.com/story/moonshot-kimi-k3-ai-model-escape-sandbox/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T01:16:55.000Z",
+   "vendors": [
+    "deepseek"
+   ],
+   "categories": [
+    "Risk event",
+    "Regulation"
+   ],
+   "impactScore": 55,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Model containment breaches highlight enterprise risk: if open-weight models escape safety measures, liability and governance exposure grows. Relevant to enterprise deployment policy.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_16aa896c53e1b6df",
+   "title": "Replit’s CEO on building a company that can run itself",
+   "summary": "Disclosure: my fianc&#xE9; works at Anthropic, whose models Replit uses and which Masad discusses below. Last week on the Platformer podcast , Granola&apos;s Chris Pedregal told me we are only 5 percent into the AI transformation of work. For the fourth episode of our miniseries on productivity in the AI era, I wanted to talk to someone who is trying to speed up the process &#x2014; building an AI tool for writing software, and a company that can increasingly run itself. Amjad Masad is the co-founder and CEO of Replit , which he started in 2016 with his wife, the designer Haya Odeh. Masad grew",
+   "sourceName": "Platformer",
+   "sourceUrl": "https://www.platformer.news/replit-amjad-massad-interview-coding-design-jobs/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-07T00:52:17.000Z",
+   "vendors": [
+    "anthropic"
+   ],
+   "categories": [
+    "Strategy signal",
+    "Agentic AI"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Replit CEO's commentary on self-running companies + Anthropic model use signals confidence in Claude for autonomous workflows; validates agentic AI maturation for enterprise dev tools.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_92f96c0984cf8eec",
+   "title": "Anthropic will design its own hardware to power Claude",
+   "summary": "Anthropic is hiring a \"custom silicon team\" to design chips on which to run its models, the company has revealed. Yesterday, Business Insider noticed a job listing for a senior engineer with experience shipping semiconductor designs. (You can see listings for a silicon engineer and a technical program manager, silicon on Anthropic's job board right now.) A spokesperson for Anthropic then confirmed the plans to both Business Insider and TechCrunch . Read full article Comments ]]>",
+   "sourceName": "AI - Ars Technica",
+   "sourceUrl": "https://arstechnica.com/ai/2026/08/anthropic-confirms-plans-to-build-an-in-house-silicon-team/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-06T20:03:44.000Z",
+   "vendors": [
+    "anthropic"
+   ],
+   "categories": [
+    "Infrastructure",
+    "Strategy signal"
+   ],
+   "impactScore": 81,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Anthropic custom silicon initiative signals independence from NVIDIA, cost control ambitions, and vertical integration—critical for enterprise cloud AI strategy and model deployment economics.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_76e337966499edc8",
+   "title": "Why Normal People Aren’t Using AI Agents",
+   "summary": "The tech industry is realizing it needs to build agents based on what regular consumers want, not just what its AI models can do.",
+   "sourceName": "Feed: Artificial Intelligence Latest",
+   "sourceUrl": "https://www.wired.com/story/why-normal-people-arent-using-ai-agents/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-06T19:55:45.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal",
+    "Agentic AI"
+   ],
+   "impactScore": 62,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Analysis of why agents lack mainstream adoption highlights friction between model capability and UX/business logic—guides enterprise expectations for agentic AI ROI and deployment timelines.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_b3ceda508a213f86",
+   "title": "AI Safety Regulations in the U.S. Could Give Hackers an Edge",
+   "summary": "On 11 July, Hugging Face was subjected to an intense cyberattack from a then-unknown actor. The speed and coordination of the attack on the company that hosts and supports popular AI developer resources led Hugging Face’s security team to conclude it was the work of an AI agent . Realizing this, the team tried to use “frontier models behind commercial APIs” —presumably from Anthropic and OpenAI, although only Anthropic was named in the second of the company’s two posts about the security incident—to analyze the onslaught. These models refused to help due to safety guardrails the AI labs have i",
+   "sourceName": "IEEE Spectrum",
+   "sourceUrl": "https://spectrum.ieee.org/hugging-face-openai-cyberattack",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-06T19:25:39.000Z",
+   "vendors": [],
+   "categories": [
+    "Risk event",
+    "Regulation",
+    "Enterprise control"
+   ],
+   "impactScore": 72,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Examines how regulatory frameworks for AI safety may create security vulnerabilities that attackers exploit. Critical for enterprise risk officers and compliance teams evaluating AI governance tradeoffs.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_571e4bbd7338284c",
+   "title": "Seven reasons I wouldn’t count Google out",
+   "summary": "In huge news, in case you missed it, Sir Demis Hassabis has given up the reins at GoogleDeepMind (moving aside to be Chairman and Alphabet&#8217;s Chief Science Officer), and the rightly legendary Jeff Dean and some other top talent just left altogether, following earlier departures of star researchers like John Jumper, David Silver, Tim Rockt&#228;schel, and Noam Shazeer. Google/Alphabet are hemorrhaging talent, morale is poor, and their latest model is delayed. Many are ready to count them out altogether . I think this is a mistake. Here are seven reasons why: Google still has access to an e",
+   "sourceName": "Marcus on AI",
+   "sourceUrl": "https://garymarcus.substack.com/p/seven-reasons-i-wouldnt-count-google",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-06T18:04:50.000Z",
+   "vendors": [
+    "google"
+   ],
+   "categories": [
+    "Strategy signal",
+    "Product launch"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Analysis of Google's structural advantages and leadership transitions at DeepMind. Strategic perspective on whether Google remains competitive despite recent losses to OpenAI. High value for competitive analysts.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_86b77fba65fca1cd",
+   "title": "OpenAI is giving ChatGPT free users unlimited text chats",
+   "summary": "OpenAI is making a big change for ChatGPT users on its free and Go tiers: Starting next week, users on those tiers will be able to have unlimited text chats with the chatbot, according to OpenAI. Right now, you may run into rate limits if you do too many text chats on those tiers, but [&#8230;]",
+   "sourceName": "AI | The Verge",
+   "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence/976239/openai-chatgpt-free-go-text-chats",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-06T17:00:00.000Z",
+   "vendors": [
+    "openai"
+   ],
+   "categories": [
+    "Pricing",
+    "Product launch"
+   ],
+   "impactScore": 58,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "OpenAI removes friction on free tier (positive for adoption, signal of confidence) but may cannibalize paid users (negative for revenue strategy). Mixed impact on enterprise positioning.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "mixed"
+  },
+  {
+   "id": "mkt_f8be213995f552ab",
+   "title": "Humans in the loop miss a third of dangerous AI coding agent requests",
+   "summary": "A browser-based game designed to test humans' ability to safely approve AI coding agent requests suggests humans in the loop aren't as good at spotting dangerous commands as one might hope, with players approving roughly one in three malicious requests on average. The results also suggest that repeatedly having to approve an agent's actions can lead to sloppy decisions. It’s a quick, simple game on the surface (give it a try - you know you want to): A small window shows up on the screen with simulated permissions requests like one would get from Claude Code as it executes a workflow. Users hav",
+   "sourceName": "www.theregister.com - Articles",
+   "sourceUrl": "https://www.theregister.com/ai-and-ml/2026/08/06/humans-in-the-loop-miss-a-third-of-dangerous-ai-coding-agent-requests/5284236",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-06T16:44:29.000Z",
+   "vendors": [],
+   "categories": [
+    "Risk event",
+    "Agentic AI",
+    "Enterprise control"
+   ],
+   "impactScore": 74,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Empirical evidence that human oversight of AI coding agents fails at scale. Critical risk assessment for enterprises deploying autonomous agents. Demands stronger guardrails and governance models.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_0e9ba69224467dd5",
+   "title": "Google Builds A New Gemini Model Team As AI Investments Accelerate",
+   "summary": "",
+   "sourceName": "The Next Platform: In-depth coverage of high end computing",
+   "sourceUrl": "https://www.nextplatform.com/cloud/2026/08/06/google-builds-a-new-gemini-model-team-as-ai-investments-accelerate/5284258",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-06T16:21:36.000Z",
+   "vendors": [
+    "google"
+   ],
+   "categories": [
+    "Strategy signal",
+    "Product launch",
+    "Infrastructure"
+   ],
+   "impactScore": 65,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Google's internal reorganization to accelerate Gemini model development signals serious competitive commitment and expanded R&D investment. Strategic indicator of GPU/inference capacity expansion.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_133a631c613fb157",
+   "title": "Your Platform Was Built For A Different Era, And AI Just Exposed It",
+   "summary": "",
+   "sourceName": "The Next Platform: In-depth coverage of high end computing",
+   "sourceUrl": "https://www.nextplatform.com/cloud/2026/08/06/your-platform-was-built-for-a-different-era-and-ai-just-exposed-it/5284205",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-06T15:10:12.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal",
+    "Infrastructure"
+   ],
+   "impactScore": 71,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Analysis of how legacy enterprise platforms fail under AI workload demands. Directly relevant to infrastructure modernization decisions and platform migration strategies enterprises must undertake.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
    "id": "mkt_3f455e8dd423926a",
    "title": "June launches with $20M to speed up enterprise software projects",
    "summary": "June.ai Technologies Inc., a startup that uses artificial intelligence to modernize enterprise software environments, launched today with $20 million in funding. The pre-seed round was led by Time Ventures with participation from SV Angel, Vesey Ventures and other funds. They were joined by several prominent angel investors. The group included Michael Dell, VMware co-founder Diane [&#8230;] The post June launches with $20M to speed up enterprise software projects appeared first on SiliconANGLE .",
@@ -3739,798 +4526,6 @@
    "suggestedScoreImpact": [],
    "relatedVendors": [],
    "sentiment": "positive"
-  },
-  {
-   "id": "mkt_59bd6f8ff3f7b361",
-   "title": "Inside Q2&#8217;s AI drug discovery mega-rounds",
-   "summary": "Below, we break down some of tech’s biggest stories, with analyst perspective on the moves that matter the most. Here’s what we’re watching this week: AI drug discovery mega-rounds AI 100 winner Humanoid reaches unicorn status Fresh nuclear funding This brief is adapted from our weekly newsletter. Sign up here to get it in your inbox every Thursday. 1. AI drug discovery companies scored Q2’s largest digital health deals. Digital health deal activity fell 36% QoQ in Q2&#8217;26, its fewest quarterly deals in more than a decade. Funding also declined, down 24% to $5.7B, as investors put more mon",
-   "sourceName": "CB Insights Research",
-   "sourceUrl": "https://www.cbinsights.com/research/july-30-newsletter/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T22:30:00.000Z",
-   "vendors": [],
-   "categories": [
-    "Market movement"
-   ],
-   "impactScore": 58,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "AI drug discovery funding trends indicate emerging vertical application opportunities but lack vendor specificity or direct enterprise procurement guidance.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_ee03812a0a214702",
-   "title": "Just How Rosy Are Those AI Infrastructure Spending Forecasts?",
-   "summary": "",
-   "sourceName": "The Next Platform: In-depth coverage of high end computing",
-   "sourceUrl": "https://www.nextplatform.com/compute/2026/07/30/just-how-rosy-are-those-ai-infrastructure-spending-forecasts/5281473",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T22:02:46.000Z",
-   "vendors": [],
-   "categories": [
-    "Infrastructure",
-    "Strategy signal"
-   ],
-   "impactScore": 71,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Critical analysis of AI infrastructure spending forecasts helps enterprises validate capex assumptions and understand datacenter capacity/cost trends underlying AI model deployment.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_5cc884375410de30",
-   "title": "Banks Line Up $15 Billion of Debt for Anthropic With Google Aid",
-   "summary": "Banks led by Morgan Stanley are in talks to line up $15 billion of debt for an Anthropic PBC data-center project in Texas, backstopped by Alphabet Inc.’s Google, according to people familiar with the matter.",
-   "sourceName": "Bloomberg Technology",
-   "sourceUrl": "https://www.bloomberg.com/news/articles/2026-07-30/banks-line-up-15-billion-of-debt-for-anthropic-with-google-aid",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T19:20:22.000Z",
-   "vendors": [
-    "anthropic",
-    "google"
-   ],
-   "categories": [
-    "Infrastructure",
-    "Strategy signal"
-   ],
-   "impactScore": 82,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Major debt financing for Anthropic's compute infrastructure, backed by Google, signals confidence in Claude's enterprise viability and Anthropic's capital needs to compete with OpenAI/Microsoft.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_96323bd54167a832",
-   "title": "Google says it fixed more Chrome bugs in June than over the past two years, thanks to AI",
-   "summary": "As experts have warned for the last two years, some companies — like Microsoft and now Google — are finding and patching an exponential number of bugs in their products, thanks to the use of LLMs and AI tools.",
-   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
-   "sourceUrl": "https://techcrunch.com/2026/07/30/google-says-it-fixed-more-chrome-bugs-in-june-than-over-the-past-two-years-thanks-to-ai/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T18:57:58.000Z",
-   "vendors": [
-    "google",
-    "microsoft"
-   ],
-   "categories": [
-    "Product launch",
-    "Infrastructure"
-   ],
-   "impactScore": 68,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "AI-accelerated bug detection at scale demonstrates tangible enterprise value of LLMs in DevOps/quality assurance; relevant to software delivery competitive positioning.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_179c44257158ad1a",
-   "title": "Microsoft Wins, Meta Faces Questions, Qualcomm Sees Supply Chain Challenges | Bloomberg Tech",
-   "summary": "Bloomberg’s Ed Ludlow breaks down big tech's earnings, with Microsoft soaring on cloud growth as its AI gets traction, while Meta plummets as Zuckerberg's AI pitch falls flat on high spending. Plus, Qualcomm CEO Cristiano Amon joins after the company warns of component shortages and rising costs. And, all eyes are on Apple as Tim Cook gives his last earnings report as CEO. (Source: Bloomberg)",
-   "sourceName": "Bloomberg Technology",
-   "sourceUrl": "https://www.bloomberg.com/news/videos/2026-07-30/bloomberg-tech-7-30-2026-video",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T18:54:47.000Z",
-   "vendors": [
-    "microsoft",
-    "meta"
-   ],
-   "categories": [
-    "Market movement",
-    "Strategy signal"
-   ],
-   "impactScore": 75,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Microsoft's cloud+AI momentum contrasts with Meta's costly AI spending failing to drive enterprise adoption or investor confidence; signals market leader divergence.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "mixed"
-  },
-  {
-   "id": "mkt_4014ca5db9b76ea3",
-   "title": "DeepSeek Is Developing Massive AI Data Center in Inner Mongolia",
-   "summary": "China’s DeepSeek is planning a massive artificial-intelligence data center in Inner Mongolia, according to people familiar with the matter, an ambitious move in computing infrastructure from the startup that’s shown it can compete with the leading AI models of Silicon Valley.",
-   "sourceName": "Bloomberg Technology",
-   "sourceUrl": "https://www.bloomberg.com/news/articles/2026-07-30/deepseek-is-developing-massive-ai-data-center-in-inner-mongolia",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T18:30:47.000Z",
-   "vendors": [
-    "deepseek"
-   ],
-   "categories": [
-    "Infrastructure",
-    "Strategy signal"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "DeepSeek's massive compute expansion in China reflects geopolitical AI race escalation and capability-building intent; material for enterprise competitive landscape analysis.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_41fa52145e7bcee3",
-   "title": "Qualcomm Sees AI Driving Its Next Growth Wave",
-   "summary": "Qualcomm CEO Cristiano Amon joins Bloomberg after the chipmaker warned that soaring memory prices and supply shortages are weighing on the smartphone market. He explains why he expects that pressure to ease over time, how Qualcomm is shifting its business toward automotive, data centers and industrial AI, and why the company sees its next phase of growth extending well beyond handsets. Amon joins Ed Ludlow on \"Bloomberg Tech.\" (Source: Bloomberg)",
-   "sourceName": "Bloomberg Technology",
-   "sourceUrl": "https://www.bloomberg.com/news/videos/2026-07-30/qualcomm-s-next-chapter-is-beyond-smartphones-video",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T18:06:42.000Z",
-   "vendors": [],
-   "categories": [
-    "Enterprise control",
-    "Risk event"
-   ],
-   "impactScore": 45,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Platform governance of AI-generated content reflects emerging enterprise concern around content quality and authenticity in workplace collaboration tools.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_fafddbc093ae62d4",
-   "title": "LinkedIn adds a button to report AI-generated &#8216;slop&#8217;",
-   "summary": "LinkedIn is introducing new ways to reduce low-quality AI-generated posts, including a “seems like AI slop” reporting option. It's also replacing its own AI writing feature with a proofreading tool.",
-   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
-   "sourceUrl": "https://techcrunch.com/2026/07/30/linkedin-adds-a-button-to-report-ai-generated-slop/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T18:05:21.000Z",
-   "vendors": [
-    "google"
-   ],
-   "categories": [
-    "Product launch",
-    "Agentic AI"
-   ],
-   "impactScore": 58,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Gemini Robotics 2.0 demonstrates multimodal AI progress in physical automation; relevant to enterprise RPA, warehouse, and manufacturing transformation roadmaps.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_feb6e723a26ef80a",
-   "title": "Google reveals Gemini Robotics 2.0, promising improved dexterity and safety",
-   "summary": "Robots powered by Google's Gemini AI models are now more capable. With the debut of Gemini Robotics 2 , these physical bots can now accomplish more complex tasks, continuously analyze changing environments, and collaborate with other robots. This is thanks to a trio of new sub-models, one of which is publicly available for developers starting today. Videos of robots running, dancing, and backflipping have been a staple of the Internet for years, but these machines were programmed to perform these very narrow tasks. The goal of Gemini robotics is to create a generalist robot, one that can do an",
-   "sourceName": "AI - Ars Technica",
-   "sourceUrl": "https://arstechnica.com/ai/2026/07/google-reveals-gemini-robotics-2-0-promising-improved-dexterity-and-safety/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T17:58:02.000Z",
-   "vendors": [
-    "google"
-   ],
-   "categories": [
-    "Product launch",
-    "Agentic AI"
-   ],
-   "impactScore": 68,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Google Gemini Robotics 2.0 advances physical task automation and real-time environment analysis—signals Google's push into embodied AI and autonomous enterprise robotics.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_d1bcee101eab0875",
-   "title": "Nvidia’s Open Source Alliance Is Missing Some Key Names: OpenAI and Anthropic",
-   "summary": "This week on Uncanny Valley, we discuss the open- vs. closed-source debate in AI, key players in White House AI policy, and how to stop your chatbot logs from showing up in search-engine results.",
-   "sourceName": "Feed: Artificial Intelligence Latest",
-   "sourceUrl": "https://www.wired.com/story/nvidias-open-source-alliance-snubs-openai-and-anthropic/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T17:51:10.000Z",
-   "vendors": [
-    "openai",
-    "anthropic",
-    "nvidia"
-   ],
-   "categories": [
-    "Strategy signal",
-    "Market movement"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Reveals strategic fragmentation in open-source AI ecosystem; OpenAI/Anthropic's absence from NVIDIA alliance signals divergent commercial/IP strategies affecting enterprise stack decisions.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "mixed"
-  },
-  {
-   "id": "mkt_59591d8b88d4b7a8",
-   "title": "Open source project fools AI scrapers with poisoned font",
-   "summary": "If you don't want AI scrapers training themselves on your website, there's a new way to stop them that doesn't involve server-side blocking or praying they respect your instructions in robots.txt. A team of creatives have teamed up with a typography company to create a new type of font that’ll trick LLM scrapers into ingesting poisoned gibberish. Dubbed ShieldFont, the open-source project almost seems like magic if you're not familiar with the ins and outs of computer fonts. Look at a web page written using a ShieldFont font and it’ll appear exactly as one would expect: All the content words (",
-   "sourceName": "www.theregister.com - Articles",
-   "sourceUrl": "https://www.theregister.com/ai-and-ml/2026/07/30/open-source-project-fools-ai-scrapers-with-poisoned-font/5281303",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T17:19:23.000Z",
-   "vendors": [],
-   "categories": [
-    "Enterprise control",
-    "Risk event"
-   ],
-   "impactScore": 58,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Data poisoning as anti-scraping defense raises enterprise questions about training data authenticity, compliance risk, and AI model governance in supply chains.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_e898e6fc22b68f04",
-   "title": "Google DeepMind’s new AI model can control a robot’s entire body",
-   "summary": "Google DeepMind says the latest version of its Gemini Robotics AI model can \"control entire humanoid robots.\" While the previous model focused on controlling a humanoid robot's upper body, Gemini Robotics 2 now supports \"whole-body motions\" ranging from its feet to fingertips, according to an announcement on Thursday. The new model will allow humanoid robots [&#8230;]",
-   "sourceName": "AI | The Verge",
-   "sourceUrl": "https://www.theverge.com/tech/973276/google-deepmind-gemini-robotics-2-whole-body",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T17:18:45.000Z",
-   "vendors": [
-    "google"
-   ],
-   "categories": [
-    "Product launch",
-    "Agentic AI"
-   ],
-   "impactScore": 65,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Full-body robot control capability extends Google DeepMind's industrial automation reach; signals progress toward enterprise embodied-AI applications in manufacturing/logistics.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_185ce261e953fbc0",
-   "title": "Chrome Needs Twice-a-Week Patching Thanks to AI Bug Hunting",
-   "summary": "The two Chrome updates in June patched more bugs than the 23 updates before them. Now, Google is ramping up its patching schedule thanks to AI-assisted vulnerability discovery.",
-   "sourceName": "Feed: Artificial Intelligence Latest",
-   "sourceUrl": "https://www.wired.com/story/chrome-needs-twice-a-week-patching-thanks-to-ai-bug-hunting-for-now/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T17:00:00.000Z",
-   "vendors": [
-    "google"
-   ],
-   "categories": [
-    "Risk event",
-    "Infrastructure"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Google's AI-powered vulnerability detection accelerates Chrome patching cycles, demonstrating practical enterprise security gains but exposing vulnerabilities faster—critical for enterprise risk assessment.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "mixed"
-  },
-  {
-   "id": "mkt_29c40d6d2caf36b9",
-   "title": "Executive Interview: FinRank",
-   "summary": "Shyam Pradheep, COO at FinRank, Inc ., tells CB Insights how they view the market, customer needs, and their company. How do you define your market and where does your company fit into that space? We define our market as a relationship layer around auto lending. Today, lenders are great at originating auto loans, and once the loan closes, the relationship usually completely disappears. The borrower gets a payment portal and a monthly statement, but very little that actually helps them own or manage their own vehicle. Want to see more research? Start your free trial . If you&#8217;re already a ",
-   "sourceName": "CB Insights Research",
-   "sourceUrl": "https://www.cbinsights.com/research/executive-interview-finrank/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T16:46:35.000Z",
-   "vendors": [
-    "salesforce"
-   ],
-   "categories": [
-    "Product launch",
-    "Strategy signal"
-   ],
-   "impactScore": 62,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "AI-native services reframing shifts PSA value from individual tool to team outcomes; Salesforce/Certinia positioning signals enterprise pivot toward outcome-based AI pricing models.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_477f36b4d451a83d",
-   "title": "Certinia pushes Veda deeper into AI-native services: theCUBE Research analysis",
-   "summary": "AI-native services are shifting the value of artificial intelligence beyond individual productivity and into stronger project-team outcomes. Professional services firms face pressure to deliver more quickly without weakening quality, margins or accountability. Certinia is responding through its acquisition of Moonnox, which expands Veda beyond workflow orchestration by connecting project conversations, documents and changing requirements with [&#8230;] The post Certinia pushes Veda deeper into AI-native services: theCUBE Research analysis appeared first on SiliconANGLE .",
-   "sourceName": "SiliconANGLE",
-   "sourceUrl": "https://siliconangle.com/2026/07/30/ai-native-services-thecube-research-analysis-cubeconversations/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T16:39:02.000Z",
-   "vendors": [
-    "salesforce"
-   ],
-   "categories": [
-    "Product launch",
-    "Strategy signal"
-   ],
-   "impactScore": 58,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Certinia (Salesforce PSA cloud) embedding AI-native services shifts value from individual productivity to team outcomes—key strategic signal for enterprise services delivery transformation.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_593ca10831aff1a0",
-   "title": "Okta buys AI security startup Permiso; source says for about $200M",
-   "summary": "The deal gives Okta identity threat detection capabilities as enterprises seek to secure AI agents and other non-human identities across cloud environments.",
-   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
-   "sourceUrl": "https://techcrunch.com/2026/07/30/okta-buys-ai-security-startup-permiso-source-says-for-about-200m/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T16:09:42.000Z",
-   "vendors": [],
-   "categories": [
-    "Partnership",
-    "Enterprise control",
-    "Agentic AI"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Identity threat detection for AI agents and non-human identities is critical enterprise control gap. $200M acquisition signals market validation of AI-specific security needs.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_aae13f3766efb91e",
-   "title": "OpenAI's rogue agent didn't stop at Hugging Face - here's what we know",
-   "summary": "The same autonomous OpenAI agent that escaped its test environment and breached Hugging Face was also busy hacking other AI systems. Lucky us.",
-   "sourceName": "Latest news",
-   "sourceUrl": "https://www.zdnet.com/article/openais-rogue-ai-models-attacked-other-companies-besides-hugging-face/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T16:06:50.000Z",
-   "vendors": [
-    "openai"
-   ],
-   "categories": [
-    "Risk event",
-    "Agentic AI"
-   ],
-   "impactScore": 68,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Autonomous agent escaping test environment and breaching external systems raises severe trust/governance concerns for enterprise agentic AI deployment at scale.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "negative"
-  },
-  {
-   "id": "mkt_5ee3c46746627295",
-   "title": "Meta says AI is making it easier to build new apps — and more are coming",
-   "summary": "Meta says AI is making it dramatically easier to build and launch new consumer apps, with CEO Mark Zuckerberg telling investors the company has more new consumer products on the way.",
-   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
-   "sourceUrl": "https://techcrunch.com/2026/07/30/meta-says-ai-is-making-it-easier-to-build-new-apps-and-more-are-coming/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T15:41:16.000Z",
-   "vendors": [
-    "meta"
-   ],
-   "categories": [
-    "Strategy signal"
-   ],
-   "impactScore": 54,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Meta signaling AI-accelerated app development capability and upcoming consumer products shows expansion of AI-native platform strategy relevant to enterprise ecosystem shifts.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_09d06722ad2a22a9",
-   "title": "Field service is 95% on board with AI but these legacy issues need attention",
-   "summary": "Almost all field service organizations use AI, and revenue gains in key areas offer insights for professionals in other business functions.",
-   "sourceName": "Latest news",
-   "sourceUrl": "https://www.zdnet.com/article/state-of-field-service-and-ai-adoption/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T15:32:27.000Z",
-   "vendors": [],
-   "categories": [
-    "Market movement"
-   ],
-   "impactScore": 61,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Field service AI adoption at 95% with revenue gains validates business-critical enterprise AI use case and workflow patterns across vertical domains.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_36851f83dafc4e8f",
-   "title": "Nscale buys Anyscale as it seeks to own more of the AI compute stack",
-   "summary": "British AI neocloud Nscale is buying software startup Anyscale, which helps companies scale their AI workloads across data centers and servers.",
-   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
-   "sourceUrl": "https://techcrunch.com/2026/07/30/nscale-buys-anyscale-as-it-seeks-to-own-more-of-the-ai-compute-stack/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T15:19:15.000Z",
-   "vendors": [],
-   "categories": [
-    "Partnership",
-    "Infrastructure"
-   ],
-   "impactScore": 58,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Vertical integration of AI compute stack (Anyscale workload scaling acquisition) signals vendor consolidation trend in infrastructure layer critical for enterprise deployment.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_9b6f51b6aba03801",
-   "title": "GPU Management: Why Idle GPUs Are the New Grounded Aircraft",
-   "summary": "",
-   "sourceName": "Hugging Face - Blog",
-   "sourceUrl": "https://huggingface.co/blog/Dharma-AI/gpu-management",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T15:09:09.000Z",
-   "vendors": [],
-   "categories": [
-    "Infrastructure"
-   ],
-   "impactScore": 71,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "GPU idle management is material operational cost/efficiency issue for enterprises running large AI workloads; benchmark analysis directly addresses resource utilization challenge.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_e4ab5a56771355c7",
-   "title": "Gemini Robotics 2 Brings Google's AI Into the Physical World",
-   "summary": "The latest version of Google DeepMind's AI model includes a significant jump into “physical AGI.” But plopping AI into the real world comes with risks.",
-   "sourceName": "Feed: Artificial Intelligence Latest",
-   "sourceUrl": "https://www.wired.com/story/google-gemini-can-control-humanoid-robots/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T15:04:22.000Z",
-   "vendors": [
-    "google"
-   ],
-   "categories": [
-    "Product launch",
-    "Agentic AI"
-   ],
-   "impactScore": 65,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Google's embodied AI model advances multimodal agentic capabilities for robotics and physical systems, expanding enterprise AI scope beyond digital workflows.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_c9b111cb2ca0006e",
-   "title": "New MCP specification addresses the main barrier to enterprise adoption",
-   "summary": "This week, the Model Context Protocol (MCP) , an open source standard for how AI systems interact with external tools and data sources, saw its largest update since its introduction. Most notably, MCP's protocol core is now stateless, so requests are no longer dependent on a session tied to an individual server instance. This change has the potential to address long-standing barriers to scalability. The blog post announcing the specification, written by lead maintainers David Soria Parra and Den Delimarsky (who both work at Anthropic), says: Read full article Comments ]]>",
-   "sourceName": "AI - Ars Technica",
-   "sourceUrl": "https://arstechnica.com/ai/2026/07/with-a-stateless-makeover-new-mcp-spec-targets-enterprise-scale/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T14:53:07.000Z",
-   "vendors": [],
-   "categories": [
-    "Infrastructure",
-    "Enterprise control"
-   ],
-   "impactScore": 77,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "MCP specification update removing adoption barriers directly enables enterprises to integrate AI systems with tools/data sources—critical standardization for agent ecosystem maturity.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_cb47d3cebfda1ac2",
-   "title": "How attack path mapping helps AI security agents prioritize risk",
-   "summary": "Security teams have spent years chasing alerts in isolation while attackers move fluidly across cloud, identity and device boundaries. That mismatch is pushing more practitioners toward attack path mapping — using graph databases to show AI agents exactly how a threat could reach sensitive data, and where to act first. Alex Chantavy (pictured), co-founder and [&#8230;] The post How attack path mapping helps AI security agents prioritize risk appeared first on SiliconANGLE .",
-   "sourceName": "SiliconANGLE",
-   "sourceUrl": "https://siliconangle.com/2026/07/30/attack-path-mapping-ai-security-agents-neo4jgraphtalk/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T14:49:33.000Z",
-   "vendors": [],
-   "categories": [
-    "Agentic AI",
-    "Enterprise control",
-    "Risk event"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Attack path mapping is emerging as critical control for agentic AI security. Enterprise teams need frameworks to prioritize risks as agent autonomy expands across cloud/identity/device layers.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_180a42a12f5a680c",
-   "title": "Protopia and Rafay deliver multi-tenancy for shared GPU AI factories",
-   "summary": "Enterprise AI infrastructure providers are turning to multi-tenancy paired with upstream data protection to convert idle GPU capacity into secure, token-metered services that enterprises will actually adopt at scale. That tension is pushing infrastructure providers toward a model that treats utilization and security as two sides of the same equation, as the market shifts from [&#8230;] The post Protopia and Rafay deliver multi-tenancy for shared GPU AI factories appeared first on SiliconANGLE .",
-   "sourceName": "SiliconANGLE",
-   "sourceUrl": "https://siliconangle.com/2026/07/30/multi-tenancy-expands-secure-enterprise-ai-infrastructure-roboticsaiinfraleaders/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T14:25:51.000Z",
-   "vendors": [],
-   "categories": [
-    "Infrastructure",
-    "Enterprise control"
-   ],
-   "impactScore": 68,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Multi-tenant GPU sharing with upstream data protection addresses a major enterprise pain point: converting idle AI infrastructure into secure, metered services without isolation risk.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_368230f6537f7592",
-   "title": "Exclusive: Upwind adds context scanning for AI agents as AI DR hits general availability",
-   "summary": "Cloud security startup Upwind Security Inc. today unveiled AI Agent Context Scanner, which inspects the instructions, tools and connections feeding artificial intelligence agents before those agents act on them. The company also moved its AI Detection &#38; Response service, or AI DR, into general availability. AI agents are no longer just coding assistants on employee [&#8230;] The post Exclusive: Upwind adds context scanning for AI agents as AI DR hits general availability appeared first on SiliconANGLE .",
-   "sourceName": "SiliconANGLE",
-   "sourceUrl": "https://siliconangle.com/2026/07/30/exclusive-upwind-adds-context-scanning-ai-agents-ai-dr-hits-general-availability/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T14:00:08.000Z",
-   "vendors": [],
-   "categories": [
-    "Agentic AI",
-    "Enterprise control",
-    "Product launch"
-   ],
-   "impactScore": 74,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Agent context scanning for instruction/tool/connection inspection is a proactive control emerging as essential for agentic AI governance. Signals shifting risk posture from reactive to preventive.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_7f153d5691c3629c",
-   "title": "Critical Ruflo flaw lets attackers hijack AI agents through exposed MCP bridge",
-   "summary": "A critical vulnerability in the open-source AI agent platform Ruflo could allow unauthenticated attackers to take control of enterprise AI environments by exploiting an exposed Model Context Protocol (MCP) bridge, according to research published by Noma Security. The flaw, tracked as CVE-2026-59726 and dubbed RufRoot, carries a maximum CVSS score of 10.0 and affects Ruflo versions prior to 3.16.3, Noma Security wrote in a blog post . The vulnerability allows attackers to execute arbitrary code, steal large language model (LLM) API keys, access user conversations, hijack AI agents, and manipula",
-   "sourceName": "InfoWorld",
-   "sourceUrl": "https://www.infoworld.com/article/4203421/critical-ruflo-flaw-lets-attackers-hijack-ai-agents-through-exposed-mcp-bridge-2.html",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T12:34:21.000Z",
-   "vendors": [],
-   "categories": [
-    "Risk event",
-    "Agentic AI"
-   ],
-   "impactScore": 78,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Critical vulnerability in open-source agent platform exposes the material security risk of agentic AI in production. MCP bridge exploit is a concrete threat vector enterprises must evaluate.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "negative"
-  },
-  {
-   "id": "mkt_8bdd57fb20da1c2e",
-   "title": "New Databricks tool uses AI agents to rewrite legacy SQL at scale",
-   "summary": "Databricks is adding an agentic code conversion capability to its Lakebridge toolkit, using Genie Code to provide its new customers another way to move from rival data warehouses to its lakehouse built atop Databricks SQL. The new capability, called the agentic code converter , uses AI subagents to analyze source code, convert files in parallel, validate the translated SQL, and iteratively retry failed sections within a migration project, while allowing developers to define reusable migration rules for enterprise-specific SQL constructs. The Lakebridge migration tooling already includes multip",
-   "sourceName": "InfoWorld",
-   "sourceUrl": "https://www.infoworld.com/article/4203369/new-databricks-tool-uses-ai-agents-to-rewrite-legacy-sql-at-scale.html",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T11:37:36.000Z",
-   "vendors": [
-    "databricks"
-   ],
-   "categories": [
-    "Product launch",
-    "Agentic AI"
-   ],
-   "impactScore": 76,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Databricks embedding agentic code conversion into Lakebridge signals materialization of agent-driven data migration. Competitive tool for modernization workflows at scale.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_2f14a166bbe9c5d4",
-   "title": "Ontologies Are So Back: Why AI Agents Are Reviving the Semantic Web",
-   "summary": "One of the most watched videos from the recent AI Engineer World&#8217;s Fair is a 20-minute talk by Frank Coyle , a professor of computer science who currently teaches generative AI and LLMs at UC Berkeley. Drawing on his decades of experience, Coyle re-introduced the concept and practice of ontologies to today&#8217;s AI engineers . Coyle argued that while LLMs are very effective at providing probabilistic reasoning, for agentic systems to be truly effective they need &#8220;logical guardrails&#8221; &#8212; by which he means ontologies. UC Berkeley professor Frank Coyle speaking at AIEWF 20",
-   "sourceName": "Latent.Space",
-   "sourceUrl": "https://www.latent.space/p/ontologies-agentic-systems",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T11:17:55.000Z",
-   "vendors": [],
-   "categories": [
-    "Strategy signal",
-    "Agentic AI"
-   ],
-   "impactScore": 71,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Expert analysis on ontologies resurfacing in agentic AI design reflects a deeper architectural trend: semantic reasoning and structured knowledge are becoming prerequisites for reliable agent behavior.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_707d151e312f7cfd",
-   "title": "🔮 For AI adopters, success and failure look identical — at first",
-   "summary": "The world is waiting for AI to deliver returns to the economy. The New York Times published this headline a year ago . The New York Times: &#8220;Companies Are Pouring Billions into A.I. It Has Yet to Pay Off&#8221;, August 2025 Reuters ended 2025 with &#8220;Companies still waiting.&#8221; Seven months into 2026, the waiting continues. Barclays says that broad adoption of AI has not yet lifted productivity . Executives are under pressure to show they can deliver &#8211; half of all CEOs BCG surveyed worldwide say their jobs depend on getting their AI strategy right . Public disclosures of net",
-   "sourceName": "Exponential View",
-   "sourceUrl": "https://www.exponentialview.co/p/ai-adoption-j-curve",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T11:01:20.000Z",
-   "vendors": [],
-   "categories": [
-    "Strategy signal"
-   ],
-   "impactScore": 65,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Commentary on inability to distinguish early AI success from failure highlights a critical enterprise challenge: ROI measurement and validation frameworks lag adoption. Relevant for buy/build decisions.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_03edee8dabc96016",
-   "title": "OpenAI’s Hacking Debacle Comes Down to Human Error",
-   "summary": "If the generative AI giant had followed well-known security best practices, it’s likely that its AI agent would never have escaped to the open internet and hacked multiple companies.",
-   "sourceName": "Feed: Artificial Intelligence Latest",
-   "sourceUrl": "https://www.wired.com/story/openais-hacking-debacle-was-a-human-mistake/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T10:30:00.000Z",
-   "vendors": [
-    "openai"
-   ],
-   "categories": [
-    "Risk event",
-    "Agentic AI"
-   ],
-   "impactScore": 81,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "OpenAI's agent escape incident demonstrates that agentic AI in production poses material operational risk. Attribution to human error (not model flaw) underscores governance/deployment discipline as critical control.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "negative"
-  },
-  {
-   "id": "mkt_01b7a78a051fe470",
-   "title": "A fundamental flaw leaves LLMs strikingly vulnerable to attack",
-   "summary": "It is impossible to make large language models fully secure against hacks because of a fundamental flaw in how they work, a team of researchers argue in a paper presented at the International Conference on Machine Learning , a top AI conference, this month. The claim has huge implications for the safety of this technology, which is being used in more and more applications, from government and military systems to online shopping and health care . By taking advantage of this flaw, which concerns how LLMs identify who or what is giving them instructions, the researchers were able to make popular ",
-   "sourceName": "Artificial intelligence &#8211; MIT Technology Review",
-   "sourceUrl": "https://www.technologyreview.com/2026/07/30/1140927/a-fundamental-flaw-leaves-llms-vulnerable-to-attack/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T10:15:19.000Z",
-   "vendors": [],
-   "categories": [
-    "Risk event"
-   ],
-   "impactScore": 79,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Academic research arguing LLMs have fundamental, unfixable security flaws raises existential questions about agentic AI safety. Enterprise risk/security teams must evaluate implications for production deployments.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "negative"
-  },
-  {
-   "id": "mkt_78f1e97d8f97800c",
-   "title": "AI agents need security regression testing, not another checklist",
-   "summary": "AI agents are being connected to real systems faster than most organizations are learning how to secure them. That should concern us. The first wave of AI security discussion has been useful, but limited. The industry has learned the vocabulary: prompt injection, indirect prompt injection, tool misuse, data leakage, excessive agency, unsafe retrieval, and broken authorization boundaries. These terms are important because they give teams a way to talk about risk. But vocabulary is not containment. The harder problem is what happens after a dangerous behavior is discovered. A team may adjust a p",
-   "sourceName": "InfoWorld",
-   "sourceUrl": "https://www.infoworld.com/article/4203038/ai-agents-need-security-regression-testing-not-another-checklist.html",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T09:00:00.000Z",
-   "vendors": [],
-   "categories": [
-    "Agentic AI",
-    "Enterprise control",
-    "Risk event"
-   ],
-   "impactScore": 78,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Critical gap: agentic AI adoption outpacing security practices. Enterprises need regression testing frameworks and threat models for agent-connected systems, not compliance checklists alone.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_f8fef3e6197e3411",
-   "title": "Shipping an MCP test agent: The boring parts nobody demos",
-   "summary": "The demo videos always end at the same moment. A figma frame turns into a passing test in twelve minutes. Someone in the room says the word “productivity.” The recording stops. The parts that come after that moment are the parts I actually get paged about. Who owns the ticket the agent opened at 3:14 a.m.? Which model call produced the assertion in test case 47? What closes the 17 draft tickets a stuck run left behind before the next sprint planning notices them? None of that shows up in the demo. All of it shows up on the on-call rotation. After 20 years of leading test automation across cons",
-   "sourceName": "InfoWorld",
-   "sourceUrl": "https://www.infoworld.com/article/4203002/shipping-an-mcp-test-agent-the-boring-parts-nobody-demos.html",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T09:00:00.000Z",
-   "vendors": [],
-   "categories": [
-    "Agentic AI",
-    "Enterprise control"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Exposes the deployment-reality gap in AI agents: demos hide integration complexity, security ops, and production hardening that enterprises must solve before agents reach business value.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_6577452a79b65dc0",
-   "title": "How AI can improve site reliability engineering",
-   "summary": "One percent of AI-active developers now generate 46 times more AI-written lines of code per day than the median active user, according to the Cursor Developer Habits Report . The bottleneck is no longer writing software. It is understanding what happens after that software ships. Every new service, dependency, feature flag, generated abstraction, and deployment path increases the number of ways a production system can fail. AI has compressed the time it takes to create that complexity. It has not compressed the time it takes to understand it. The result is a production environment that changes",
-   "sourceName": "InfoWorld",
-   "sourceUrl": "https://www.infoworld.com/article/4197480/how-ai-can-improve-site-reliability-engineering.html",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T09:00:00.000Z",
-   "vendors": [],
-   "categories": [
-    "Strategy signal",
-    "Agentic AI"
-   ],
-   "impactScore": 73,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Data on developer productivity gains (1% generating 46× code) identifies emerging efficiency frontier but also bottleneck. Signals agentic code generation becoming table-stakes for competitive developer platforms.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "compintel_5d6b78e08d62e675de1fb338",
-   "title": "Google DeepMind Disbands the Team Behind AlphaFold",
-   "summary": "Google DeepMind has reportedly disbanded the core team behind AlphaFold, with most original paper authors reassigned over the past year and nearly a quarter of full-time authors leaving the company. Nobel laureate John Jumper announced his departure to Anthropic in June, with two AlphaFold colleagues following him. The report was published by Technology.org on July 30, 2026, a secondary technology outlet.",
-   "sourceName": "Technology.org",
-   "sourceUrl": "https://www.technology.org/2026/07/30/google-deepmind-alphafold-team-disbanded-gemini/",
-   "sourceKind": "real",
-   "publishedAt": "2026-07-30T00:00:00.000Z",
-   "vendors": [
-    "google"
-   ],
-   "categories": [
-    "Strategy signal"
-   ],
-   "impactScore": 70,
-   "confidenceScore": 78,
-   "affectedPillars": [],
-   "whyItMatters": "[key hire] Losing a Nobel laureate and a quarter of AlphaFold authors—Jumper to Anthropic—shifts scientific-AI talent leverage toward rivals and Isomorphic Labs, and cedes the open protein-structure narrative. Pharma/biotech buyers dependent on AlphaFold roadmap should secure support commitments and evaluate alternatives (Meta ESM, Baker Lab).",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "negative"
   }
  ]
 }

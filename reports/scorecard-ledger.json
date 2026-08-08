@@ -377,10 +377,10 @@
     {
       "vendorId": "alibaba",
       "name": "Alibaba",
-      "winning": 62.12519841269841,
+      "winning": 62.39370766488414,
       "trust": 75,
       "durability": 85,
-      "composite": 72.9,
+      "composite": 73,
       "confidence": "3 of 3",
       "missing": []
     },
@@ -427,7 +427,7 @@
     {
       "vendorId": "google",
       "name": "Google",
-      "winning": 63.27939370100576,
+      "winning": 63.2429055708591,
       "trust": 80,
       "durability": 85,
       "composite": 74.8,
@@ -447,10 +447,10 @@
     {
       "vendorId": "meta",
       "name": "Meta",
-      "winning": 64.75286295005807,
+      "winning": 64.9651156889088,
       "trust": 78,
       "durability": 85,
-      "composite": 74.8,
+      "composite": 74.9,
       "confidence": "3 of 3",
       "missing": []
     },
@@ -477,10 +477,10 @@
     {
       "vendorId": "openai",
       "name": "OpenAI",
-      "winning": 69.58572883244159,
+      "winning": 69.85739370014335,
       "trust": 80.33333333333333,
       "durability": 60,
-      "composite": 69.9,
+      "composite": 70,
       "confidence": "3 of 3",
       "missing": []
     },

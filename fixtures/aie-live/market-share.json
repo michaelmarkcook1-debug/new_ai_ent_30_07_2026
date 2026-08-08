@@ -1,30 +1,30 @@
 {
  "label": "Market Share Est.",
  "provenance": "Directional estimate — derived from real cited signals (reviewed evidence, dependencies, adoption, momentum), normalised within category and recalculated each refresh. NOT measured revenue or audited market share. See each row's source + methodology.",
- "asOf": "2026-08-04T02:10:50.906Z",
+ "asOf": "2026-08-08T03:11:02.629Z",
  "count": 72,
  "estimates": [
   {
    "vendorId": "anthropic",
    "categoryId": "agent_platform",
-   "estimatedShare": 20.7,
+   "estimatedShare": 20.8,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 20.7,
-   "changePct": 0
+   "previousEstimate": 20.9,
+   "changePct": -0.5
   },
   {
    "vendorId": "openai",
    "categoryId": "agent_platform",
-   "estimatedShare": 20.5,
+   "estimatedShare": 20.7,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 20.5,
-   "changePct": 0
+   "changePct": 1
   },
   {
    "vendorId": "aws",
@@ -32,54 +32,54 @@
    "estimatedShare": 18.6,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 18.6,
-   "changePct": 0
+   "previousEstimate": 18.7,
+   "changePct": -0.5
   },
   {
    "vendorId": "microsoft",
    "categoryId": "agent_platform",
-   "estimatedShare": 17.8,
+   "estimatedShare": 17.9,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 17.8,
+   "previousEstimate": 17.9,
    "changePct": 0
   },
   {
    "vendorId": "salesforce",
    "categoryId": "agent_platform",
-   "estimatedShare": 11.7,
+   "estimatedShare": 11.2,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 11.7,
+   "previousEstimate": 11.2,
    "changePct": 0
   },
   {
    "vendorId": "servicenow",
    "categoryId": "agent_platform",
-   "estimatedShare": 10.7,
+   "estimatedShare": 10.8,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 10.7,
+   "previousEstimate": 10.8,
    "changePct": 0
   },
   {
    "vendorId": "google",
    "categoryId": "ai_cloud_compute",
-   "estimatedShare": 24.8,
+   "estimatedShare": 25,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 24.9,
-   "changePct": -0.4
+   "changePct": 0.4
   },
   {
    "vendorId": "aws",
@@ -87,31 +87,31 @@
    "estimatedShare": 22.1,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 22.1,
-   "changePct": 0
+   "previousEstimate": 22.2,
+   "changePct": -0.5
   },
   {
    "vendorId": "microsoft",
    "categoryId": "ai_cloud_compute",
-   "estimatedShare": 21.4,
+   "estimatedShare": 21.5,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 21.5,
-   "changePct": -0.5
+   "changePct": 0
   },
   {
    "vendorId": "oracle",
    "categoryId": "ai_cloud_compute",
-   "estimatedShare": 18.7,
+   "estimatedShare": 18.3,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 18.7,
+   "previousEstimate": 18.3,
    "changePct": 0
   },
   {
@@ -120,20 +120,9 @@
    "estimatedShare": 3.5,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 3.5,
-   "changePct": 0
-  },
-  {
-   "vendorId": "coreweave",
-   "categoryId": "ai_cloud_compute",
-   "estimatedShare": 3.3,
-   "confidence": 95,
-   "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
-   "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 3.3,
    "changePct": 0
   },
   {
@@ -142,7 +131,18 @@
    "estimatedShare": 3.3,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
+   "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
+   "previousEstimate": 3.4,
+   "changePct": -2.9
+  },
+  {
+   "vendorId": "coreweave",
+   "categoryId": "ai_cloud_compute",
+   "estimatedShare": 3.3,
+   "confidence": 95,
+   "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 3.3,
    "changePct": 0
@@ -150,13 +150,13 @@
   {
    "vendorId": "humain",
    "categoryId": "ai_cloud_compute",
-   "estimatedShare": 2.9,
+   "estimatedShare": 3,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 2.6,
-   "changePct": 11.5
+   "previousEstimate": 3,
+   "changePct": 0
   },
   {
    "vendorId": "broadcom",
@@ -164,10 +164,10 @@
    "estimatedShare": 31,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 29.4,
-   "changePct": 5.4
+   "previousEstimate": 31,
+   "changePct": 0
   },
   {
    "vendorId": "cerebras",
@@ -175,10 +175,10 @@
    "estimatedShare": 24.1,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 23.3,
-   "changePct": 3.4
+   "previousEstimate": 24.1,
+   "changePct": 0
   },
   {
    "vendorId": "nvidia",
@@ -186,10 +186,10 @@
    "estimatedShare": 16,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 16.8,
-   "changePct": -4.8
+   "previousEstimate": 16,
+   "changePct": 0
   },
   {
    "vendorId": "amd",
@@ -197,10 +197,10 @@
    "estimatedShare": 15.6,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 16.4,
-   "changePct": -4.9
+   "previousEstimate": 15.6,
+   "changePct": 0
   },
   {
    "vendorId": "tsmc",
@@ -208,32 +208,32 @@
    "estimatedShare": 13.2,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 14.1,
-   "changePct": -6.4
+   "previousEstimate": 13.2,
+   "changePct": 0
   },
   {
    "vendorId": "google",
    "categoryId": "cloud_ai_platform",
-   "estimatedShare": 22.9,
+   "estimatedShare": 23,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 22.9,
-   "changePct": 0
+   "changePct": 0.4
   },
   {
    "vendorId": "aws",
    "categoryId": "cloud_ai_platform",
-   "estimatedShare": 20.4,
+   "estimatedShare": 20.3,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 20.4,
-   "changePct": 0
+   "changePct": -0.5
   },
   {
    "vendorId": "databricks",
@@ -241,7 +241,7 @@
    "estimatedShare": 20.1,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 20.1,
    "changePct": 0
@@ -252,7 +252,7 @@
    "estimatedShare": 19.7,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 19.7,
    "changePct": 0
@@ -263,7 +263,7 @@
    "estimatedShare": 16.9,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 16.9,
    "changePct": 0
@@ -271,134 +271,156 @@
   {
    "vendorId": "microsoft",
    "categoryId": "crm_customer_ai",
-   "estimatedShare": 41.1,
+   "estimatedShare": 41.8,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 41.1,
+   "previousEstimate": 41.8,
    "changePct": 0
   },
   {
    "vendorId": "oracle",
    "categoryId": "crm_customer_ai",
-   "estimatedShare": 34.1,
+   "estimatedShare": 33.8,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 34.1,
+   "previousEstimate": 33.8,
    "changePct": 0
   },
   {
    "vendorId": "salesforce",
    "categoryId": "crm_customer_ai",
-   "estimatedShare": 24.9,
+   "estimatedShare": 24.3,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 24.9,
+   "previousEstimate": 24.3,
    "changePct": 0
   },
   {
-   "vendorId": "anthropic",
+   "vendorId": "google",
    "categoryId": "developer_coding_agent",
    "estimatedShare": 26,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 26,
    "changePct": 0
   },
   {
-   "vendorId": "google",
+   "vendorId": "anthropic",
    "categoryId": "developer_coding_agent",
    "estimatedShare": 25.9,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 25.9,
-   "changePct": 0
+   "previousEstimate": 26,
+   "changePct": -0.4
   },
   {
    "vendorId": "openai",
    "categoryId": "developer_coding_agent",
-   "estimatedShare": 25.6,
+   "estimatedShare": 25.7,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 25.6,
-   "changePct": 0
+   "changePct": 0.4
   },
   {
    "vendorId": "microsoft",
    "categoryId": "developer_coding_agent",
-   "estimatedShare": 22.5,
+   "estimatedShare": 22.4,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 22.5,
-   "changePct": 0
+   "changePct": -0.4
   },
   {
    "vendorId": "anthropic",
    "categoryId": "enterprise_assistant",
-   "estimatedShare": 22.4,
+   "estimatedShare": 22.3,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 22.4,
-   "changePct": 0
+   "changePct": -0.4
   },
   {
    "vendorId": "openai",
    "categoryId": "enterprise_assistant",
-   "estimatedShare": 22.1,
+   "estimatedShare": 22.2,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 22.1,
-   "changePct": 0
+   "previousEstimate": 22,
+   "changePct": 0.9
   },
   {
    "vendorId": "microsoft",
    "categoryId": "enterprise_assistant",
-   "estimatedShare": 19.4,
+   "estimatedShare": 19.3,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 19.4,
-   "changePct": 0
+   "changePct": -0.5
   },
   {
    "vendorId": "glean",
    "categoryId": "enterprise_assistant",
-   "estimatedShare": 18.2,
+   "estimatedShare": 18.1,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 18.2,
-   "changePct": 0
+   "changePct": -0.5
   },
   {
    "vendorId": "writer",
    "categoryId": "enterprise_assistant",
-   "estimatedShare": 18.1,
+   "estimatedShare": 18,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 18.1,
+   "changePct": -0.6
+  },
+  {
+   "vendorId": "google",
+   "categoryId": "frontier_model_api",
+   "estimatedShare": 15.1,
+   "confidence": 95,
+   "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
+   "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
+   "previousEstimate": 15.1,
    "changePct": 0
+  },
+  {
+   "vendorId": "openai",
+   "categoryId": "frontier_model_api",
+   "estimatedShare": 15,
+   "confidence": 95,
+   "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
+   "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
+   "previousEstimate": 14.8,
+   "changePct": 1.4
   },
   {
    "vendorId": "anthropic",
@@ -406,42 +428,20 @@
    "estimatedShare": 15,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 15,
-   "changePct": 0
-  },
-  {
-   "vendorId": "google",
-   "categoryId": "frontier_model_api",
-   "estimatedShare": 15,
-   "confidence": 95,
-   "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
-   "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 15,
-   "changePct": 0
-  },
-  {
-   "vendorId": "openai",
-   "categoryId": "frontier_model_api",
-   "estimatedShare": 14.8,
-   "confidence": 95,
-   "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
-   "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 14.8,
-   "changePct": 0
+   "previousEstimate": 15.1,
+   "changePct": -0.7
   },
   {
    "vendorId": "cohere",
    "categoryId": "frontier_model_api",
-   "estimatedShare": 13.4,
+   "estimatedShare": 13.5,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 13.4,
+   "previousEstimate": 13.5,
    "changePct": 0
   },
   {
@@ -450,32 +450,32 @@
    "estimatedShare": 12.1,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 12.1,
-   "changePct": 0
+   "previousEstimate": 12.2,
+   "changePct": -0.8
   },
   {
    "vendorId": "snowflake",
    "categoryId": "frontier_model_api",
-   "estimatedShare": 11.2,
+   "estimatedShare": 11.3,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 11.3,
-   "changePct": -0.9
+   "changePct": 0
   },
   {
    "vendorId": "moonshot",
    "categoryId": "frontier_model_api",
-   "estimatedShare": 3.1,
+   "estimatedShare": 3.2,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 3,
-   "changePct": 3.3
+   "previousEstimate": 3.2,
+   "changePct": 0
   },
   {
    "vendorId": "xai",
@@ -483,7 +483,7 @@
    "estimatedShare": 2.9,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 2.9,
    "changePct": 0
@@ -491,13 +491,13 @@
   {
    "vendorId": "meta",
    "categoryId": "frontier_model_api",
-   "estimatedShare": 2.6,
+   "estimatedShare": 2.7,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 2.6,
-   "changePct": 0
+   "changePct": 3.8
   },
   {
    "vendorId": "zai",
@@ -505,10 +505,21 @@
    "estimatedShare": 2.3,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 2.3,
    "changePct": 0
+  },
+  {
+   "vendorId": "alibaba",
+   "categoryId": "frontier_model_api",
+   "estimatedShare": 2.2,
+   "confidence": 95,
+   "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
+   "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
+   "previousEstimate": 2.1,
+   "changePct": 4.8
   },
   {
    "vendorId": "deepseek",
@@ -516,32 +527,21 @@
    "estimatedShare": 2.2,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 2.2,
    "changePct": 0
   },
   {
-   "vendorId": "alibaba",
-   "categoryId": "frontier_model_api",
-   "estimatedShare": 2.1,
-   "confidence": 95,
-   "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
-   "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 2.1,
-   "changePct": 0
-  },
-  {
    "vendorId": "minimax",
    "categoryId": "frontier_model_api",
-   "estimatedShare": 2,
+   "estimatedShare": 1.5,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 2,
-   "changePct": 0
+   "previousEstimate": 1.6,
+   "changePct": -6.3
   },
   {
    "vendorId": "ai21",
@@ -549,7 +549,7 @@
    "estimatedShare": 1.2,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 1.2,
    "changePct": 0
@@ -560,7 +560,7 @@
    "estimatedShare": 42.4,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 42.4,
    "changePct": 0
@@ -571,7 +571,7 @@
    "estimatedShare": 35.4,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 35.4,
    "changePct": 0
@@ -582,7 +582,7 @@
    "estimatedShare": 22.3,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 22.3,
    "changePct": 0
@@ -590,24 +590,35 @@
   {
    "vendorId": "lambda",
    "categoryId": "neocloud_inference",
-   "estimatedShare": 24.4,
+   "estimatedShare": 24.8,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 24.6,
-   "changePct": -0.8
+   "previousEstimate": 24.8,
+   "changePct": 0
   },
   {
    "vendorId": "fireworks",
    "categoryId": "neocloud_inference",
-   "estimatedShare": 18.1,
+   "estimatedShare": 18.4,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 18.2,
-   "changePct": -0.5
+   "previousEstimate": 18.4,
+   "changePct": 0
+  },
+  {
+   "vendorId": "groq",
+   "categoryId": "neocloud_inference",
+   "estimatedShare": 17.8,
+   "confidence": 95,
+   "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
+   "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
+   "previousEstimate": 17.8,
+   "changePct": 0
   },
   {
    "vendorId": "together",
@@ -615,42 +626,31 @@
    "estimatedShare": 17.7,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
-   "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 17,
-   "changePct": 4.1
-  },
-  {
-   "vendorId": "groq",
-   "categoryId": "neocloud_inference",
-   "estimatedShare": 17.5,
-   "confidence": 95,
-   "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 17.7,
-   "changePct": -1.1
+   "changePct": 0
   },
   {
    "vendorId": "coreweave",
    "categoryId": "neocloud_inference",
-   "estimatedShare": 11.5,
+   "estimatedShare": 11.7,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 11.6,
-   "changePct": -0.9
+   "previousEstimate": 11.7,
+   "changePct": 0
   },
   {
    "vendorId": "nscale",
    "categoryId": "neocloud_inference",
-   "estimatedShare": 10.8,
+   "estimatedShare": 9.6,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 10.8,
+   "previousEstimate": 9.6,
    "changePct": 0
   },
   {
@@ -659,7 +659,7 @@
    "estimatedShare": 23.8,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 23.8,
    "changePct": 0
@@ -670,7 +670,7 @@
    "estimatedShare": 21.1,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 21.1,
    "changePct": 0
@@ -681,7 +681,7 @@
    "estimatedShare": 19,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 19,
    "changePct": 0
@@ -692,7 +692,7 @@
    "estimatedShare": 18.5,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 18.5,
    "changePct": 0
@@ -703,7 +703,7 @@
    "estimatedShare": 17.5,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 17.5,
    "changePct": 0
@@ -714,7 +714,7 @@
    "estimatedShare": 35.1,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 35.1,
    "changePct": 0
@@ -725,7 +725,7 @@
    "estimatedShare": 23.5,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 23.5,
    "changePct": 0
@@ -736,7 +736,7 @@
    "estimatedShare": 22.2,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 22.2,
    "changePct": 0
@@ -747,7 +747,7 @@
    "estimatedShare": 19.2,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
    "previousEstimate": 19.2,
    "changePct": 0
@@ -755,45 +755,45 @@
   {
    "vendorId": "sap",
    "categoryId": "workflow_automation_ai",
-   "estimatedShare": 29.6,
+   "estimatedShare": 29.8,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 29.6,
+   "previousEstimate": 29.8,
    "changePct": 0
   },
   {
    "vendorId": "moveworks",
    "categoryId": "workflow_automation_ai",
-   "estimatedShare": 28.2,
+   "estimatedShare": 28.5,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 28.2,
+   "previousEstimate": 28.5,
    "changePct": 0
   },
   {
    "vendorId": "servicenow",
    "categoryId": "workflow_automation_ai",
-   "estimatedShare": 21.7,
+   "estimatedShare": 21.9,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 21.7,
+   "previousEstimate": 21.9,
    "changePct": 0
   },
   {
    "vendorId": "salesforce",
    "categoryId": "workflow_automation_ai",
-   "estimatedShare": 20.5,
+   "estimatedShare": 19.8,
    "confidence": 95,
    "source": "Evidence-derived adoption-signal estimate (verified evidence + production references + deployment depth + momentum + IT-services delivery reach)",
-   "sourceDate": "2026-08-04T01:07:38.913Z",
+   "sourceDate": "2026-08-08T02:46:33.072Z",
    "methodology": "Directional category-presence estimate computed each refresh from real ingested signals — share of observed enterprise-adoption signal within the category, including IT-services/GSI delivery reach (curated, confidence-discounted). NOT measured revenue/market share. Confidence reflects verified-evidence depth only.",
-   "previousEstimate": 20.5,
+   "previousEstimate": 19.8,
    "changePct": 0
   }
  ]
