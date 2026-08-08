@@ -17,6 +17,43 @@ than a gap.
 
 ## 8 August 2026
 
+**The Decision Desk now ends with three vendors and a plan, not with a score.**
+
+It could tell you what your situation was and how to weigh the call, and then
+it stopped, one step short of the thing anybody actually came for, which is a
+name. A third step names three, puts a paragraph beside each saying why, and
+then walks you through what to do about them.
+
+**Each vendor gets its own card**: its composite score, how many of the three
+inputs that score rests on, and a paragraph explaining the placing in terms of
+what is actually published about it. Every sentence in that paragraph restates
+a figure on the card above it. Nothing is written by a model, so the reason
+cannot drift from the score it explains, and it reads the same whether or not
+the analyst is reachable, which on 8 August it was not.
+
+**It asks which market you are buying in first, and that is not a formality.**
+Capability is scored against the other vendors doing the same job, so ranking a
+frontier lab against a chip maker would order two different scales and mean
+nothing. The list never crosses a category.
+
+**Where a category holds fewer than three vendors, you get fewer than three and
+the reason why.** Six of the ten categories are like this: CRM/customer AI has
+one. Filling those cards from a neighbouring category would produce exactly the
+false comparison the paragraph above avoids, so it says the gap is our coverage
+rather than a verdict on the market.
+
+**Then it guides you through the next seven steps**, from building an eval set
+on your own tasks to setting the go or no-go threshold before you look at any
+results. You can tick them off as you go. Nothing is stored and nothing is
+reported back.
+
+The shortlist is deliberately not a recommendation, and every card says so. It
+does not price the work, does not know your stack, and has not read your
+contract. Trust Rank answers the contract question and the seven steps answer
+the rest.
+
+---
+
 **Research a company once, and the Decision Desk knows who you are.**
 
 Until today the two tools did not speak. You could research your company on Your

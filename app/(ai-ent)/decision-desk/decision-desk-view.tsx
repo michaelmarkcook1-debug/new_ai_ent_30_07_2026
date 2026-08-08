@@ -3,7 +3,9 @@
 import { Suspense, useState } from "react";
 import { InterrogateView } from "./interrogate-view";
 import { AssessDecideView } from "./assess-decide-view";
+import { ShortlistView } from "./shortlist-view";
 import type { ShellFixture } from "@/lib/shell-fixture";
+import type { ShortlistPayload } from "@/lib/desk/shortlist-payload";
 
 // A third step, the sourcing shortlist, briefly sat here (6 August 2026) and
 // moved to Trust Rank the same day with the rest of the Security Desk
@@ -11,7 +13,7 @@ import type { ShellFixture } from "@/lib/shell-fixture";
 // Trust Rank question; these two steps are about the reader's own situation
 // and their own weights.
 
-type Tool = "finding" | "assess";
+type Tool = "finding" | "assess" | "shortlist";
 
 // The Decision Desk holds the two converging tools that used to be separate
 // tabs: Interrogate (a situation in, a source-cited finding out) and Assess
@@ -26,12 +28,16 @@ export function DecisionDeskView({
   assessment,
   initialTool,
   liveKey = false,
+  shortlist,
 }: {
   assessment: ShellFixture["assess"]["assessment"];
   initialTool: Tool;
   /** Whether a live analyst key is configured. Read on the server; the key
       itself never crosses this boundary. */
   liveKey?: boolean;
+  /** Computed on the server: the vendor directory and the three scoring
+      modules behind the composite never reach the browser. */
+  shortlist: ShortlistPayload;
 }) {
   const [tool, setTool] = useState<Tool>(initialTool);
 
@@ -55,7 +61,7 @@ export function DecisionDeskView({
 
   return (
     <div className="space-y-4">
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
         {pill(
           "finding",
           "1 · The cited finding",
@@ -66,6 +72,11 @@ export function DecisionDeskView({
           "2 · The weighted score",
           "Set the weights to your priorities and read the score with its full derivation. The scores never move, only your weights do."
         )}
+        {pill(
+          "shortlist",
+          "3 · Three vendors, and what next",
+          "The three to look at in your market, a paragraph on each saying why, and the sequence that turns them into a decision."
+        )}
       </div>
 
       <div className={tool === "finding" ? "" : "hidden"}>
@@ -75,6 +86,9 @@ export function DecisionDeskView({
       </div>
       <div className={tool === "assess" ? "" : "hidden"}>
         <AssessDecideView assessment={assessment} />
+      </div>
+      <div className={tool === "shortlist" ? "" : "hidden"}>
+        <ShortlistView payload={shortlist} />
       </div>
     </div>
   );

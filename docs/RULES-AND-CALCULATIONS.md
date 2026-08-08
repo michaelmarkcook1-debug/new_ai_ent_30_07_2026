@@ -836,6 +836,91 @@ Position sees no change at all, which is the common case and is pinned by test.
 
 ---
 
+## 8.13 The Decision Desk shortlist
+
+Step 3 of `/decision-desk`: three vendors, a computed paragraph on each, and the
+pilot sequence.
+
+**Derivation**: `lib/desk/shortlist.ts`. **Payload**: `lib/desk/shortlist-payload.ts`.
+**View**: `app/(ai-ent)/decision-desk/shortlist-view.tsx`. **Tests**:
+`tests/shortlist.test.ts`, 20.
+
+### It ranks within one market category, never across
+
+`buildShortlist(category, weights, size = 3)` filters `scorecardSet()` to one
+`VENDOR_DIRECTORY` category before ranking. This is not presentational. The
+composite rests on capability assessed **relative to peers doing the same job**,
+which `WORKSPACE_COVERS` in `app/api/interrogate/live.ts` already states as
+"comparable only within a market category". A list mixing a frontier lab with a
+chip maker orders two scales against each other.
+
+Pinned by *"draws every card from the chosen category"*, which walks every
+category and asserts each entry's directory category matches.
+
+Investors are excluded, the same exclusion `scorecardSet()` already makes:
+"is it winning, do people trust it, will it still exist" are questions about a
+vendor you might buy from.
+
+### It returns fewer than three rather than padding
+
+Only **4 of 10** categories hold three or more scored vendors:
+
+| Category | Scored |
+|---|---|
+| Frontier model/API | 12 |
+| AI infrastructure | 11 |
+| Cloud AI platform | 6 |
+| Regulated-industry AI | 3 |
+| Sovereign/regional AI | 3 |
+| Enterprise assistant, ITSM/HR, RAG | 2 each |
+| CRM/customer AI, Enterprise applications | 1 each |
+
+A short category returns what it has and sets `shortfall`, which the interface
+renders as a warning. Reaching into a neighbouring category to fill a third card
+would commit precisely the cross-category comparison the section above forbids.
+
+### Ordering, and how ties break
+
+Composite descending, then **`inputsPresent` descending**, then name. The second
+key is the substantive one: between two equal scores, the better-evidenced claim
+ranks higher. A vendor whose `result.score` is null is never shortlisted, since
+an absence is not a zero and cannot be ranked.
+
+### The reason paragraph is computed, not authored
+
+Every clause restates a figure already on the card. No model call, so it cannot
+drift from the score it explains, costs nothing, and survives an analyst outage.
+
+Three presentation rules exist because the first cut broke each of them:
+
+1. **`fig()` rounds to one decimal.** Raw inputs carry float noise
+   (`64.9651156889088`) that reads as precision the measure does not have.
+   Pinned by *"does not print raw float noise"*, which fails on any run of three
+   or more decimals.
+2. **`INPUT_NOUN` not `QUESTIONS`.** The rubric holds the inputs as questions,
+   which is right as a column heading and not English inside a sentence: "top
+   third on is it winning at 64.9". The nouns are capability, reputation and
+   disclosed durability.
+3. **The absence is named, not skipped.** A score on one input is a different
+   claim from one on three. Two phrasings, because "rests on a single input"
+   and "nothing is published for reputation" are different facts, and both say
+   the weights were renormalised over what exists.
+
+### What it refuses to claim
+
+`limitFor()` puts the same sentence on every card rather than in one footnote:
+it does not price the work, does not know the reader's stack, and **is not a
+recommendation to buy**. Pinned by *"never reads as a recommendation to buy"*,
+which also fails on "you should" and "best choice" appearing in a reason.
+
+### Next steps
+
+`PILOT_STEPS` from `lib/desk/pilot.ts`, seven ordered steps, reused rather than
+rewritten. Ticking is `useState` only: not persisted, not sent anywhere, and the
+interface says so.
+
+---
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

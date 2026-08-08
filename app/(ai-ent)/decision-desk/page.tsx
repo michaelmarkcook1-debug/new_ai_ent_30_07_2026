@@ -3,6 +3,7 @@ import { loadShellFixture } from "@/lib/shell-fixture";
 import { DecisionDeskView } from "./decision-desk-view";
 import { cookies } from "next/headers";
 import { getUploads, analystKeyConfigured } from "@/app/api/analyst/lib";
+import { shortlistPayload } from "@/lib/desk/shortlist-payload";
 import Link from "next/link";
 
 export const metadata = { title: "Decision Desk | AI Enterprise" };
@@ -27,13 +28,16 @@ export default async function DecisionDeskPage({
   const uploads = getUploads(sid);
   // Arriving with a situation to interrogate opens the finding tool whatever
   // the tool parameter says: the visitor brought a question, answer it.
+  const asked = sp.q || sp.situation;
   const initialTool =
-    sp.tool === "assess" && !sp.q && !sp.situation ? "assess" : "finding";
+    !asked && (sp.tool === "assess" || sp.tool === "shortlist")
+      ? (sp.tool as "assess" | "shortlist")
+      : "finding";
   return (
     <>
       <PageHeader
         title="Decision Desk"
-        subtitle="Converge on a call you can defend: describe your situation for a source-cited finding, then score the decision against your own weights with the derivation open. Nothing here invents a figure."
+        subtitle="Converge on a call you can defend: describe your situation for a source-cited finding, score the decision against your own weights with the derivation open, then leave with three vendors to look at and the sequence that tests them. Nothing here invents a figure."
         lanes={["aie-live", "aie", "sample"]}
       />
       <section className="mb-4 rounded-lg border border-base-300 bg-base-100 p-4">
@@ -71,6 +75,7 @@ export default async function DecisionDeskPage({
         }}
         initialTool={initialTool}
         liveKey={await analystKeyConfigured()}
+        shortlist={shortlistPayload()}
       />
     </>
   );
