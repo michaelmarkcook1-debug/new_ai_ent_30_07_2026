@@ -303,6 +303,49 @@ export async function authored<T extends object>(
   // returning null, and a throw is not stored, so a model that is unavailable
   // or whose answer was discarded for inventing a figure cannot freeze a page
   // into computed mode for a day.
+  return (
+    await authoredResult<T>(kind, facts, instruction, maxTokens, roster)
+  ).value;
+}
+
+/**
+ * Why a reading is missing, for callers that must not misreport it.
+ *
+ * `authored()` flattens every failure to null, which is right for a panel that
+ * simply falls back to computed text. It is wrong for anything that then tells
+ * the reader WHY there is no reading: company research said "the retrieved
+ * sources did not support a reading" whether the sources were thin or the API
+ * had rejected the call outright, and on 8 August 2026 an exhausted credit
+ * balance made every research run blame the sources for it.
+ *
+ *   no-key      no key is configured, so nothing was attempted
+ *   unreachable the call did not come back: network, auth, credit, rate limit
+ *   rejected    the model answered and the guards discarded it, twice
+ *
+ * Only `rejected` says anything at all about the sources.
+ */
+export type AuthorFailure = "no-key" | "unreachable" | "rejected";
+
+export interface AuthoredResult<T> {
+  value: T | null;
+  failure: AuthorFailure | null;
+}
+
+export async function authoredResult<T extends object>(
+  kind: string,
+  facts: string,
+  instruction: string,
+  maxTokens = 900,
+  roster: readonly string[] = []
+): Promise<AuthoredResult<T>> {
+  if (!llmAvailable()) return { value: null, failure: "no-key" };
+
+  const cacheKey = keyOf(kind, { facts, instruction });
+  const hit = cache.get(cacheKey);
+  if (hit && Date.now() - hit.at < TTL_MS) {
+    return { value: hit.value as T, failure: null };
+  }
+
   try {
     const value = await cachedGenerate(
       kind,
@@ -313,9 +356,16 @@ export async function authored<T extends object>(
       cacheKey
     );
     cache.set(cacheKey, { value, at: Date.now() });
-    return value as T;
-  } catch {
-    return null;
+    return { value: value as T, failure: null };
+  } catch (err) {
+    // generate() throws exactly two ways, and which one it was is the whole
+    // point of this function. Matched on the message because that is what
+    // crosses the unstable_cache boundary; an error class would not survive it.
+    const msg = err instanceof Error ? err.message : "";
+    return {
+      value: null,
+      failure: msg.includes("discarded after retry") ? "rejected" : "unreachable",
+    };
   }
 }
 

@@ -37,6 +37,38 @@ const WORKSPACE_COVERS = [
   "role and workflow to model-tier fit, with the cost of running it",
 ].join("; ");
 
+/** Everything known about a failure, for the log. Never shown to a reader. */
+function detail(err: unknown): string {
+  if (err instanceof Anthropic.APIError) {
+    return `${err.status}: ${err.message}`.slice(0, 400);
+  }
+  return (err instanceof Error ? err.message : String(err)).slice(0, 400);
+}
+
+/**
+ * The same failure, said to the person waiting on the page.
+ *
+ * The API's own wording is written for whoever holds the account, not for a
+ * reader, and pasting it through means a visitor is told to go and buy credits
+ * on somebody else's billing page. Each case gets a sentence that is true,
+ * useful to the reader, and free of anything about our account.
+ */
+function readerMessage(err: unknown): string {
+  const status = err instanceof Anthropic.APIError ? err.status : null;
+  const raw = err instanceof Error ? err.message.toLowerCase() : "";
+
+  if (raw.includes("credit balance") || status === 402) {
+    return "The live analyst is unavailable: this demo's API allowance is exhausted. The questions above and every cited source on this page are unaffected.";
+  }
+  if (status === 429) {
+    return "The live analyst is rate limited just now. Try again in a moment; the cited sources on this page are unaffected.";
+  }
+  if (status === 401 || status === 403) {
+    return "The live analyst is not authorised in this environment, so no finding was written.";
+  }
+  return "The live analyst could not be reached, so no finding was written. The cited sources on this page are unaffected.";
+}
+
 /**
  * The reader's saved position, rendered for the finding prompt.
  *
@@ -154,7 +186,15 @@ export async function liveInterrogate(
           ],
         });
       }
-    } catch {
+    } catch (err) {
+      // Falling back to the question bank is the right behaviour and silence
+      // about why is not: the interface says "fallback bank" and nothing on the
+      // server records what failed, so a live path that has been broken for
+      // days looks like a design choice.
+      console.error(
+        "[interrogate] question phase failed, using the bank:",
+        detail(err)
+      );
       if (scriptedFallback) {
         return Response.json({
           success: true,
@@ -239,10 +279,14 @@ export async function liveInterrogate(
           ],
         });
       } catch (err) {
-        send({
-          type: "error",
-          message: err instanceof Anthropic.APIError ? `${err.status}: ${err.name}` : "Live Interrogate call failed",
-        });
+        // The reader gets a sentence they can act on; the log gets everything.
+        //
+        // This said "400: Error" until 8 August 2026, which told a reader
+        // nothing and told whoever had to fix it nothing either. The cause
+        // turned out to be an exhausted API credit balance, and finding that
+        // out took a deploy purely to widen an error message.
+        console.error("[interrogate] finding phase failed:", detail(err));
+        send({ type: "error", message: readerMessage(err) });
       } finally {
         controller.close();
       }

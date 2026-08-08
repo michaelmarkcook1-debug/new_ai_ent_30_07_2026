@@ -1,5 +1,10 @@
 import { webSearch, groundingBlock, searchAvailable, type SearchHit } from "./search";
-import { authored, llmAvailable } from "@/lib/analyst/llm";
+import {
+  authored,
+  authoredResult,
+  llmAvailable,
+  type AuthorFailure,
+} from "@/lib/analyst/llm";
 import { TAG_LABEL } from "@/lib/exposure/vertical";
 
 // Research a company the product does not already track.
@@ -224,9 +229,13 @@ export async function researchCompany(
     { hits: sources.slice(0, 4), findings: 3, tokens: 1800 },
   ];
 
+  // Why the last attempt produced nothing, so the absence below can say the
+  // true thing instead of the convenient one.
+  let lastFailure: AuthorFailure | null = null;
+
   for (const [i, attempt] of attempts.entries()) {
     onStage(i === 0 ? "reading" : "reading-retry");
-    const draft = await authored<Draft>(
+    const drafted = await authoredResult<Draft>(
       `company:${name.toLowerCase()}:${i}`,
       groundingBlock(attempt.hits),
       `Read these retrieved passages about ${name} and report what they support.
@@ -257,6 +266,12 @@ Before you say two sources disagree, check whether they are the same quantity ex
 Keep every statement to one sentence. A long answer that runs past its limit arrives as broken JSON and is discarded whole.`,
       attempt.tokens
     );
+    const draft = drafted.value;
+    lastFailure = drafted.failure;
+
+    // A call that never reached the API will not reach it on the retry either,
+    // and a second attempt only doubles the wait before the same answer.
+    if (drafted.failure === "unreachable" || drafted.failure === "no-key") break;
 
     if (draft?.name) {
       return {
@@ -283,13 +298,21 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
     );
   }
 
-  // Both attempts failed. The sources are still real and still worth the
-  // reader's time, so they are shown with the reason rather than withheld.
+  // No reading. The sources are still real and still worth the reader's time,
+  // so they are shown with the reason rather than withheld.
+  //
+  // The reason has to be the true one. This used to blame the sources whatever
+  // had happened, so when the API credit ran out on 8 August 2026 every company
+  // on the product read as one the public record could not support. That is a
+  // fabrication of exactly the kind this product exists not to commit: an
+  // assertion about evidence, made when no evidence was ever examined.
   return {
     ...empty(name, ""),
     sources,
     absence:
-      "The retrieved sources did not support a reading that passed our checks, on two attempts. The sources themselves are below and are worth reading directly.",
+      lastFailure === "unreachable" || lastFailure === "no-key"
+        ? "The analysis could not be run just now, so these sources have not been read. This is a fault on our side and says nothing about the company or its coverage. The sources retrieved are below and are worth reading directly."
+        : "The retrieved sources did not support a reading that passed our checks, on two attempts. The sources themselves are below and are worth reading directly.",
   };
 }
 
