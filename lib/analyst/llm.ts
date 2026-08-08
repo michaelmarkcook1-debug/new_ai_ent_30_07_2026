@@ -278,34 +278,43 @@ export async function authored<T extends object>(
   /** Every vendor the product knows, used to catch a name off this page. */
   roster: readonly string[] = []
 ): Promise<T | null> {
-  if (!llmAvailable()) return null;
-
-  const cacheKey = keyOf(kind, { facts, instruction });
-  const hit = cache.get(cacheKey);
-  if (hit && Date.now() - hit.at < TTL_MS) return hit.value as T;
-
-  // L2: Vercel's Data Cache, shared by every instance.
-  //
-  // The in-process Map above was the only cache until 5 August 2026, and it
-  // made the app feel broken once the key went live. Measured on production:
-  // a page whose instance held the answer returned in 0.2s; one that landed on
-  // a fresh instance took 8 to 19 seconds, because it paid for a full Opus
-  // call before sending a byte. Browsing hits fresh instances constantly.
-  //
-  // `cachedGenerate` is built once at module scope and takes everything it
-  // needs as arguments. The first attempt at this built it inside the request
-  // and captured `facts` in a closure, which changes the derived key on every
-  // call: it cached nothing, and back-to-back requests hid that because L1 was
-  // answering them. Arguments become part of the key; closures are not a
-  // reliable way to vary it.
-  //
-  // Failures are deliberately not cached. `generate` throws rather than
-  // returning null, and a throw is not stored, so a model that is unavailable
-  // or whose answer was discarded for inventing a figure cannot freeze a page
-  // into computed mode for a day.
   return (
     await authoredResult<T>(kind, facts, instruction, maxTokens, roster)
   ).value;
+}
+
+/**
+ * The same facts with the moment we asked reduced to the day we asked.
+ *
+ * THIS IS THE CACHE. Everything else about the two tiers below was already
+ * right and none of it worked, because the key changed on every request.
+ *
+ * The chain, measured on production on 8 August 2026. The AIE upstream stamps
+ * a fresh `asOf` on every single response: three calls two seconds apart
+ * returned 08:11:58.585, 08:12:00.823 and 08:12:03.065 over identical data.
+ * That stamp reaches `evidence.lastUpdated`, which is written into the facts,
+ * which are hashed into the key. So a fresh fetch produced a key nothing had
+ * ever stored, the Data Cache missed, and the reader paid for a full Opus call
+ * before the first byte: 38 seconds on /vendor-view, 30 on /competitive-intel.
+ *
+ * The reason it looked like it worked is that our AIE proxy caches five
+ * minutes in-process. Inside that window an instance replays one `asOf`, so
+ * the key holds and the page returns in 0.2 seconds. Every measurement of
+ * "it's fine" was taken inside that window, and every complaint came from
+ * outside it.
+ *
+ * Reducing an instant to its date is safe here and not a fudge: the TTL below
+ * is 24 hours, so a key that varies within the day is asking to author the
+ * same reading repeatedly and store each under a name nothing will look up.
+ * Applied to the PROMPT as well as the key, because keying on one string and
+ * prompting with another lets two different prompts collide on one entry, and
+ * because no analyst reading should quote a fetch time to the millisecond.
+ */
+const ISO_INSTANT =
+  /(\d{4}-\d{2}-\d{2})T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})/g;
+
+export function dayPrecision(facts: string): string {
+  return facts.replace(ISO_INSTANT, "$1");
 }
 
 /**
@@ -340,7 +349,11 @@ export async function authoredResult<T extends object>(
 ): Promise<AuthoredResult<T>> {
   if (!llmAvailable()) return { value: null, failure: "no-key" };
 
-  const cacheKey = keyOf(kind, { facts, instruction });
+  // Normalised once, then used for the key, for L2's own argument-derived key,
+  // and for the prompt. All three have to agree or the caching is theatre.
+  const stable = dayPrecision(facts);
+
+  const cacheKey = keyOf(kind, { facts: stable, instruction });
   const hit = cache.get(cacheKey);
   if (hit && Date.now() - hit.at < TTL_MS) {
     return { value: hit.value as T, failure: null };
@@ -349,7 +362,7 @@ export async function authoredResult<T extends object>(
   try {
     const value = await cachedGenerate(
       kind,
-      facts,
+      stable,
       instruction,
       maxTokens,
       roster as string[],
