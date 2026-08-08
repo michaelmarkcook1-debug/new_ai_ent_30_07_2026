@@ -163,6 +163,10 @@ export async function liveInterrogate(
               `So ask about something that changes which of those the finding draws on, or how it reads them. A question whose answer the workspace cannot act on is a wasted turn.`,
               ``,
               `If one more sharp, nuanced question would materially improve the finding, return {"ask": "<the question>"}. If you have enough, return {"ask": null}. JSON only. The question must be specific to what they said, never generic.`,
+              // The finding prompt has carried the house rules since it was
+              // written; this one never did, and it puts text on the same
+              // screen. It was returning "prioritizing" and em-dashes.
+              `British English. No em-dashes anywhere: use commas, colons or parentheses.`,
             ].join("\n"),
           },
         ],
