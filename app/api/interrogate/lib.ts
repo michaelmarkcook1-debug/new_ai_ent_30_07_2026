@@ -14,6 +14,15 @@ export interface InterrogateState {
   answers: string[];
   depth: "quick" | "comprehensive";
   /**
+   * The questions already put to this reader.
+   *
+   * The engine used to receive only the answers, so it could not see its own
+   * turns and re-used the framing it had just used. Two consecutive questions
+   * opening "Across supply chain, HR and payroll, which functions..." is what
+   * that looks like on screen.
+   */
+  asked: string[];
+  /**
    * A company the reader already researched in Your AI Position, when their
    * situation names it. Null is the normal case and the engine works exactly as
    * it did before when it is.

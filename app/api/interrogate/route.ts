@@ -52,6 +52,7 @@ export async function POST(request: NextRequest) {
     depth?: string;
     conclude?: boolean;
     position?: unknown;
+    asked?: unknown;
   };
   try {
     body = await request.json();
@@ -73,6 +74,13 @@ export async function POST(request: NextRequest) {
     situation,
     answers: (body.answers ?? []).map((a) => String(a).slice(0, 2000)),
     depth: body.depth === "comprehensive" ? "comprehensive" : "quick",
+    // The questions already put, so the engine does not repeat itself.
+    asked: Array.isArray(body.asked)
+      ? body.asked
+          .filter((q): q is string => typeof q === "string")
+          .slice(0, 6)
+          .map((q) => q.slice(0, 500))
+      : [],
     position: sanitisePosition(body.position),
   };
 
@@ -117,9 +125,12 @@ export async function POST(request: NextRequest) {
     ],
     tokens: approxTokens(finding),
     links: [
-      { label: "Vendor rankings", href: "/vendor-view" },
+      { label: "Your three vendors, and what next", href: "/decision-desk?tool=shortlist" },
+      // /assess-decide was folded into the Decision Desk on 3 August 2026 and
+      // this link was still pointing at the old route.
+      { label: "Score it against your weights", href: "/decision-desk?tool=assess" },
       { label: "Trust Rank", href: "/trust-rank" },
-      { label: "Assess and Decide", href: "/assess-decide" },
+      { label: "Vendor rankings", href: "/vendor-view" },
     ],
   });
 }

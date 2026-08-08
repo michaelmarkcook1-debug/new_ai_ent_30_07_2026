@@ -1,5 +1,7 @@
 import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import { scorecardSet } from "@/lib/vendor/composite-data";
+import { sovereigntyRows, type SovereigntyFlag } from "@/lib/shield/sovereignty";
+import { vendorIdForSlug } from "@/lib/shield/vendor-map";
 import {
   DEFAULT_WEIGHTS,
   INPUT_KEYS,
@@ -54,6 +56,8 @@ export interface ShortlistEntry {
   reason: string;
   /** What this ranking cannot see, stated per card rather than once per page. */
   limit: string;
+  /** Null when the Sovereignty Lens has not assessed this vendor. */
+  jurisdiction: Jurisdiction | null;
 }
 
 export interface Shortlist {
@@ -64,9 +68,74 @@ export interface Shortlist {
   /** Set when the category could not yield three. */
   shortfall: string | null;
   weights: Weights;
+  filter: JurisdictionFilter;
+  /** Vendors the filter removed, named so the list never shortens silently. */
+  excluded: {
+    vendorId: string;
+    name: string;
+    hqJurisdiction: string;
+    flag: SovereigntyFlag;
+    why: string;
+  }[];
 }
 
 const INVESTOR_CATEGORY = "AI investor";
+
+/**
+ * Where each vendor sits in law, for the jurisdiction filter.
+ *
+ * Read from the Sovereignty Lens rather than restated, so the shortlist and
+ * Trust Rank can never give different answers about the same vendor. That lens
+ * derives from the Shield's own fetched quotes: Alibaba, Z.ai and Moonshot are
+ * flagged because the Shield fetched their Chinese parentage alongside their
+ * documented Singapore hosting, and DeepSeek is a hard stop on its own
+ * admission that it stores in the PRC.
+ *
+ * IT COVERS 13 OF THE 43 SCORED VENDORS. The Shield holds 14 entries and one
+ * of them maps to no scored vendor, so the figure on screen is computed by
+ * jurisdictionCoverage() rather than written down here where it would rot. That is the fact the filter has to carry with
+ * it. A vendor absent from the Shield has not been cleared, it has not been
+ * looked at, and a filter that silently passed it would convert our own gap
+ * into a clean bill of health, which is the worst thing a control like this can
+ * do.
+ */
+export type Jurisdiction = {
+  flag: SovereigntyFlag;
+  hqJurisdiction: string;
+  flagNote: string;
+};
+
+let jurisdictionCache: Map<string, Jurisdiction> | null = null;
+
+function jurisdictions(): Map<string, Jurisdiction> {
+  if (jurisdictionCache) return jurisdictionCache;
+  const m = new Map<string, Jurisdiction>();
+  for (const r of sovereigntyRows()) {
+    const id = vendorIdForSlug(r.slug);
+    if (!id) continue;
+    m.set(id, {
+      flag: r.flag,
+      hqJurisdiction: r.hqJurisdiction,
+      flagNote: r.flagNote,
+    });
+  }
+  jurisdictionCache = m;
+  return m;
+}
+
+export function jurisdictionFor(vendorId: string): Jurisdiction | null {
+  return jurisdictions().get(vendorId) ?? null;
+}
+
+/** How many of the scored vendors the lens actually reaches. */
+export function jurisdictionCoverage(): { assessed: number; total: number } {
+  const set = scorecardSet();
+  const j = jurisdictions();
+  return {
+    assessed: set.vendors.filter((v) => j.has(v.vendorId)).length,
+    total: set.vendors.length,
+  };
+}
 
 /** Categories the product can rank inside, most populous first. */
 export function shortlistCategories(): ShortlistCategory[] {
@@ -187,10 +256,35 @@ function limitFor(category: string): string {
   return `Ranks capability, reputation and disclosed durability inside ${category}. It does not price the work, does not know your stack, and is not a recommendation to buy.`;
 }
 
+/**
+ * How much foreign-jurisdiction exposure the reader will accept.
+ *
+ *   all       rank everybody, flags shown on the card
+ *   no-stop   drop only a hard stop
+ *   cleared   drop anything flagged at all
+ *
+ * Applied BEFORE the top three are taken, not after. Filtering afterwards
+ * would hand back one or two cards and call it a shortlist, when the honest
+ * answer is the next-best vendors that pass.
+ */
+export type JurisdictionFilter = "all" | "no-stop" | "cleared";
+
+function passesFilter(vendorId: string, f: JurisdictionFilter): boolean {
+  if (f === "all") return true;
+  const j = jurisdictionFor(vendorId);
+  // Unassessed vendors are NOT dropped. The lens covers 13 of the 43, and treating
+  // silence as a flag would remove two thirds of the market on no evidence.
+  // The interface says this rather than the filter guessing.
+  if (!j) return true;
+  if (f === "no-stop") return j.flag !== "hard-stop";
+  return j.flag === "none";
+}
+
 export function buildShortlist(
   category: string,
   weights: Weights = DEFAULT_WEIGHTS,
-  size = 3
+  size = 3,
+  filter: JurisdictionFilter = "all"
 ): Shortlist | null {
   const set = scorecardSet(weights);
   const inCategory = new Set(
@@ -202,8 +296,33 @@ export function buildShortlist(
     VENDOR_DIRECTORY.map((v) => [v.id, v.marketPosition ?? ""])
   );
 
+  // Named before filtering, so the interface can say who was dropped and why
+  // rather than a list quietly getting shorter.
+  const excluded = set.vendors
+    .filter(
+      (v) =>
+        inCategory.has(v.vendorId) &&
+        v.result.score !== null &&
+        !passesFilter(v.vendorId, filter)
+    )
+    .map((v) => {
+      const j = jurisdictionFor(v.vendorId)!;
+      return {
+        vendorId: v.vendorId,
+        name: v.name,
+        hqJurisdiction: j.hqJurisdiction,
+        flag: j.flag,
+        why: j.flagNote,
+      };
+    });
+
   const ranked = set.vendors
-    .filter((v) => inCategory.has(v.vendorId) && v.result.score !== null)
+    .filter(
+      (v) =>
+        inCategory.has(v.vendorId) &&
+        v.result.score !== null &&
+        passesFilter(v.vendorId, filter)
+    )
     // Score first. Where two tie, the one resting on more published inputs
     // wins, because it is the better-evidenced of two equal claims.
     .sort(
@@ -236,6 +355,7 @@ export function buildShortlist(
       v.result
     ),
     limit: limitFor(category),
+    jurisdiction: jurisdictionFor(v.vendorId),
   }));
 
   return {
@@ -247,5 +367,7 @@ export function buildShortlist(
         ? `${category} holds ${considered} scored ${considered === 1 ? "vendor" : "vendors"}, so this is ${entries.length} rather than ${size}. The gap is our coverage, not the market: naming a vendor from another category would compare scores the product states are only comparable within one.`
         : null,
     weights,
+    filter,
+    excluded,
   };
 }

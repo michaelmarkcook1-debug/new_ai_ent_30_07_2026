@@ -46,6 +46,10 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
   const [depth, setDepth] = useState<"quick" | "comprehensive">("quick");
   const [situation, setSituation] = useState("");
   const [answers, setAnswers] = useState<string[]>([]);
+  // The questions already put, kept beside the answers and sent with them.
+  // The engine used to see only the answers, so it had no memory of its own
+  // turns and re-used the framing it had just used.
+  const [asked, setAsked] = useState<string[]>([]);
   const [turns, setTurns] = useState<Turn[]>([]);
   const [input, setInput] = useState("");
   const [busy, setBusy] = useState(false);
@@ -82,6 +86,12 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
           depth,
           conclude,
           position: ctx,
+          // The questions already put. Without these the engine only ever saw
+          // the answers, so it had no memory of its own turns and re-used the
+          // framing it had just used: two consecutive questions opening
+          // "Across supply chain, HR and payroll, which functions..." was the
+          // report that led here.
+          asked,
         }),
       });
 
@@ -140,6 +150,7 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
         return;
       }
       if (data.type === "question") {
+        setAsked((a) => (a.includes(data.question) ? a : [...a, data.question]));
         setTurns((t) => [
           ...t,
           {
@@ -187,6 +198,7 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
     setAttached(ctx);
     setSituation(sit);
     setAnswers([]);
+    setAsked([]);
     setTurns([{ role: "user", kind: "situation", text: sit }]);
     setInput("");
     void call(sit, [], false, ctx);
@@ -237,6 +249,7 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
     setPhase("start");
     setTurns([]);
     setAnswers([]);
+    setAsked([]);
     setSituation("");
     setAttached(null);
     // Starting over offers the saved position again, since the reader is back

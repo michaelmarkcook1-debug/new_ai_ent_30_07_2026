@@ -1,6 +1,10 @@
 import { describe, it, expect } from "vitest";
-import { buildShortlist, shortlistCategories } from "@/lib/desk/shortlist";
-import { shortlistPayload } from "@/lib/desk/shortlist-payload";
+import {
+  buildShortlist,
+  shortlistCategories,
+  jurisdictionCoverage,
+} from "@/lib/desk/shortlist";
+import { shortlistPayload, shortlistFor } from "@/lib/desk/shortlist-payload";
 import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 
 // Step 3 of the Decision Desk: three vendors, a paragraph each, and the
@@ -171,12 +175,12 @@ describe("the payload the browser receives", () => {
 
   it("carries every rankable category and opens on the deepest", () => {
     expect(p.categories.length).toBeGreaterThan(3);
-    expect(Object.keys(p.byCategory).length).toBe(p.categories.length);
+    expect(Object.keys(p.byFilter.all).length).toBe(p.categories.length);
     expect(p.defaultCategory).toBe(p.categories[0].category);
     // The deepest category demonstrates a shortlist; a category of three does
     // not, because the list is then everybody in it.
-    expect(p.byCategory[p.defaultCategory].entries.length).toBe(3);
-    expect(p.byCategory[p.defaultCategory].considered).toBeGreaterThan(3);
+    expect(p.byFilter.all[p.defaultCategory].entries.length).toBe(3);
+    expect(p.byFilter.all[p.defaultCategory].considered).toBeGreaterThan(3);
   });
 
   it("carries the next steps in their given order", () => {
@@ -198,10 +202,94 @@ describe("the payload the browser receives", () => {
   });
 
   it("rounds every score it prints", () => {
-    for (const c of Object.values(p.byCategory)) {
+    for (const c of Object.values(p.byFilter.all)) {
       for (const e of c.entries) {
         expect(String(e.score)).toMatch(/^\d+(\.\d)?$/);
       }
+    }
+  });
+});
+
+describe("the jurisdiction filter", () => {
+  // A real buyer constraint, answered from the Sovereignty Lens rather than
+  // from a list of countries we decided we disliked. The lens derives from the
+  // Shield's own fetched quotes, so the shortlist and Trust Rank can never give
+  // different answers about the same vendor.
+
+  it("drops a hard stop, and names it", () => {
+    const all = buildShortlist("Frontier model/API", undefined, 3, "all")!;
+    const filtered = buildShortlist("Frontier model/API", undefined, 3, "no-stop")!;
+    const stops = all.entries.concat().filter((e) => e.jurisdiction?.flag === "hard-stop");
+    expect(filtered.entries.every((e) => e.jurisdiction?.flag !== "hard-stop")).toBe(true);
+    // Whatever was removed is reported rather than silently absent.
+    for (const x of filtered.excluded) {
+      expect(x.name).toBeTruthy();
+      expect(x.why.length).toBeGreaterThan(10);
+      expect(x.hqJurisdiction).toBeTruthy();
+    }
+    expect(stops.length + filtered.excluded.length).toBeGreaterThan(0);
+  });
+
+  it("drops anything flagged when asked for cleared only", () => {
+    const cleared = buildShortlist("Frontier model/API", undefined, 3, "cleared")!;
+    for (const e of cleared.entries) {
+      expect(e.jurisdiction === null || e.jurisdiction.flag === "none").toBe(true);
+    }
+  });
+
+  it("still returns three by promoting the next vendor, not by shortening", () => {
+    // Filtering after taking the top three would hand back one or two cards and
+    // call it a shortlist. The filter runs before the cut.
+    const cleared = buildShortlist("Frontier model/API", undefined, 3, "cleared")!;
+    expect(cleared.entries.length).toBe(3);
+    expect(cleared.shortfall).toBeNull();
+  });
+
+  it("renumbers the reason to the filtered field", () => {
+    // "first of 12" has to become "first of N" once vendors are excluded, or
+    // the paragraph describes a ranking that was not run.
+    const cleared = buildShortlist("Frontier model/API", undefined, 3, "cleared")!;
+    expect(cleared.entries[0].reason).toContain(
+      `of the ${cleared.considered} scored vendors`
+    );
+    expect(cleared.considered).toBeLessThan(12);
+  });
+
+  it("keeps an unassessed vendor rather than excluding it on silence", () => {
+    // The lens covers 13 of the 43 scored vendors. Treating silence as a flag
+    // would remove most of the market on no evidence, which is the opposite of
+    // what a sovereignty control is for.
+    const { assessed, total } = jurisdictionCoverage();
+    expect(assessed).toBeLessThan(total);
+    const cleared = buildShortlist("AI infrastructure", undefined, 3, "cleared")!;
+    expect(cleared.entries.some((e) => e.jurisdiction === null)).toBe(true);
+  });
+
+  it("changes nothing in a category with no flagged vendor", () => {
+    const a = buildShortlist("Cloud AI platform", undefined, 3, "all")!;
+    const c = buildShortlist("Cloud AI platform", undefined, 3, "cleared")!;
+    expect(c.entries.map((e) => e.vendorId)).toEqual(a.entries.map((e) => e.vendorId));
+    expect(c.excluded).toEqual([]);
+  });
+});
+
+describe("the sparse payload", () => {
+  const p = shortlistPayload();
+
+  it("stores a variant only where the filter changed something", () => {
+    // 18 of 20 were byte-identical to "all"; carrying all three cost 40 KB to
+    // say the same thing three times.
+    expect(Object.keys(p.byFilter.cleared).length).toBeLessThan(
+      Object.keys(p.byFilter.all).length
+    );
+  });
+
+  it("falls back to the unfiltered list for an untouched category", () => {
+    // Reading byFilter directly would blank most categories the moment a
+    // filter was selected.
+    for (const c of Object.keys(p.byFilter.all)) {
+      expect(shortlistFor(p, "cleared", c), c).toBeTruthy();
+      expect(shortlistFor(p, "no-stop", c), c).toBeTruthy();
     }
   });
 });

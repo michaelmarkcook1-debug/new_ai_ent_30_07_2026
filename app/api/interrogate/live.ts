@@ -143,10 +143,20 @@ export async function liveInterrogate(
       facets.stack.length > 0 ? null : "what is already in the estate",
     ].filter(Boolean);
 
+    // Haiku shaped every question regardless of depth, which is why the
+    // questions read as generic on a comprehensive run: the cheapest tier was
+    // being asked to find the one thing worth asking about a federated payroll
+    // estate. Comprehensive is the reader explicitly asking for depth and
+    // already pays for Opus on the finding, so it gets a thinking model on the
+    // questions too. Quick stays on Haiku and stays cheap.
+    const askModel = state.depth === "comprehensive" ? SONNET : HAIKU;
+    const askTier = state.depth === "comprehensive" ? "Sonnet" : "Haiku";
+
     try {
       const res = await client.messages.create({
-        model: HAIKU,
-        max_tokens: 200,
+        model: askModel,
+        // 200 was enough for a one-line question and not for a considered one.
+        max_tokens: 700,
         messages: [
           {
             role: "user",
@@ -154,7 +164,25 @@ export async function liveInterrogate(
               `You are interrogating an enterprise AI buyer to shape a tailored finding.`,
               ``,
               `Their situation: "${state.situation}"`,
-              `Their answers so far: ${JSON.stringify(state.answers)}`,
+              ``,
+              // Paired, so the model can see which answer belongs to which
+              // question. Sending two flat lists made it re-ask what it had
+              // just asked, in the same words.
+              state.asked.length
+                ? `THE EXCHANGE SO FAR. You asked these and got these back:\n${state.asked
+                    .map(
+                      (q, i) =>
+                        `  Q${i + 1}: ${q}\n  A${i + 1}: ${state.answers[i] ?? "(not yet answered)"}`
+                    )
+                    .join("\n")}`
+                : `Nothing has been asked yet. This is your first question.`,
+              ``,
+              // The failure this replaces: two consecutive questions opening
+              // "Across supply chain, HR and payroll, which functions are..."
+              // The second was a rephrasing of the first and bought nothing.
+              state.asked.length
+                ? `DO NOT ASK ANY OF THOSE AGAIN, and do not rephrase one. Reusing the opening clause of your last question is the specific failure to avoid. If their answer was vague, do not repeat the question: take the vaguest load-bearing word in it and ask what it means in their estate.`
+                : ``,
               ``,
               `Already established, do not ask again: ${known.length ? known.join("; ") : "nothing yet"}.`,
               `Still unknown: ${missing.length ? missing.join("; ") : "nothing material"}.`,
@@ -162,7 +190,12 @@ export async function liveInterrogate(
               `The finding will be written only from what this workspace holds: ${WORKSPACE_COVERS}.`,
               `So ask about something that changes which of those the finding draws on, or how it reads them. A question whose answer the workspace cannot act on is a wasted turn.`,
               ``,
-              `If one more sharp, nuanced question would materially improve the finding, return {"ask": "<the question>"}. If you have enough, return {"ask": null}. JSON only. The question must be specific to what they said, never generic.`,
+              // What separates a sharp question from a survey question. The
+              // engine was producing the latter: broad, multi-part, and
+              // answerable with a list that changes no conclusion.
+              `WHAT MAKES A QUESTION WORTH A TURN. Ask ONE thing, not three joined by "and". Ask it about the specific case in front of you, using their own nouns. Prefer the question whose two possible answers would send the finding somewhere different: if both answers lead to the same advice, it is not worth asking. Go one level below what they have already told you rather than across at the same level. Do not ask them to list or categorise their functions; that produces an inventory, and an inventory is not a decision.`,
+              ``,
+              `If one more sharp, nuanced question would materially improve the finding, return {"ask": "<the question>"}. If you have enough, return {"ask": null}. Returning null early is a good outcome, not a failure: a third question that only confirms what you already have is worse than stopping at two. JSON only.`,
               // The finding prompt has carried the house rules since it was
               // written; this one never did, and it puts text on the same
               // screen. It was returning "prioritizing" and em-dashes.
@@ -182,7 +215,7 @@ export async function liveInterrogate(
           asked: state.answers.length + 1,
           tiers: [
             {
-              tier: "Haiku",
+              tier: askTier,
               role: "question shaping",
               mode: "live",
               tokens: res.usage.input_tokens + res.usage.output_tokens,
@@ -206,7 +239,7 @@ export async function liveInterrogate(
           type: "question",
           question: scriptedFallback,
           asked: state.answers.length + 1,
-          tiers: [{ tier: "Haiku", role: "question shaping (fallback bank)", mode: "live" }],
+          tiers: [{ tier: askTier, role: "question shaping (fallback bank)", mode: "live" }],
         });
       }
     }
@@ -267,7 +300,11 @@ export async function liveInterrogate(
           type: "done",
           mode: "live",
           tiers: [
-            { tier: "Haiku", role: "question shaping", mode: "live" },
+            {
+              tier: state.depth === "comprehensive" ? "Sonnet" : "Haiku",
+              role: "question shaping",
+              mode: "live",
+            },
             {
               tier: synthTier,
               role: "finding synthesis",
@@ -276,10 +313,15 @@ export async function liveInterrogate(
             },
           ],
           tokens: final.usage.input_tokens + final.usage.output_tokens,
+          // The shortlist leads, because a reader who has just read a finding
+          // wants names next, not another page of market data. The finding
+          // narrates vendors it found in the corpus; step 3 is the ranked
+          // three with the reason beside each, which is the thing to act on.
           links: [
-            { label: "Vendor rankings", href: "/vendor-view" },
+            { label: "Your three vendors, and what next", href: "/decision-desk?tool=shortlist" },
+            { label: "Score it against your weights", href: "/decision-desk?tool=assess" },
             { label: "Trust Rank", href: "/trust-rank" },
-            { label: "Decision Desk: score it against your weights", href: "/decision-desk?tool=assess" },
+            { label: "Vendor rankings", href: "/vendor-view" },
           ],
         });
       } catch (err) {

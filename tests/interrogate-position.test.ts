@@ -16,6 +16,7 @@ const state = (over: Partial<InterrogateState> = {}): InterrogateState => ({
   situation: "We are Ocado. Should we buy Copilot or go direct to a frontier API?",
   answers: [],
   depth: "quick",
+  asked: [],
   position: null,
   ...over,
 });

@@ -6,7 +6,8 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
 import { useShortlist } from "@/lib/shortlist";
-import type { ShortlistPayload } from "@/lib/desk/shortlist-payload";
+import { shortlistFor, type ShortlistPayload } from "@/lib/desk/shortlist-payload";
+import type { JurisdictionFilter } from "@/lib/desk/shortlist";
 
 // Step 3: the three names, and what to do about them.
 //
@@ -22,13 +23,18 @@ import type { ShortlistPayload } from "@/lib/desk/shortlist-payload";
 
 export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
   const [category, setCategory] = useState(payload.defaultCategory);
+  // How much foreign-jurisdiction exposure the reader will accept. Default
+  // is everything, with the flags shown: a product that silently excluded
+  // vendors on our reading of sovereignty would be making the buyer's
+  // decision for them.
+  const [filter, setFilter] = useState<JurisdictionFilter>("all");
   const [done, setDone] = useState<Set<number>>(new Set());
   // The shortlist the rest of the product already reads. ModelEngine, Trust
   // Rank and Integrators all watch it, so putting these three on it is what
   // carries this decision into the tabs that come after it.
   const { ids, has, toggle: toggleVendor, ready, full } = useShortlist();
 
-  const list = payload.byCategory[category];
+  const list = shortlistFor(payload, filter, category);
   const cats = payload.categories;
 
   const shortlisted = list
@@ -95,6 +101,52 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
         </div>
       </section>
 
+      {/* Jurisdiction. A real buyer constraint, answered from the Sovereignty
+          Lens rather than from a list of countries we decided we disliked. */}
+      <section>
+        <MicroLabel
+          label="Whose law reaches your data"
+          tooltip="From the Sovereignty Lens on Trust Rank: the jurisdiction of the company holding your data, not only where the data sits."
+        />
+        <div className="mt-2 flex flex-wrap gap-2">
+          {(
+            [
+              ["all", "Rank everybody"],
+              ["no-stop", "Exclude hard stops"],
+              ["cleared", "Exclude anything flagged"],
+            ] as [JurisdictionFilter, string][]
+          ).map(([f, label]) => (
+            <button
+              key={f}
+              type="button"
+              onClick={() => setFilter(f)}
+              aria-pressed={filter === f}
+              className={`rounded-full border px-3 py-1.5 text-sm transition ${
+                filter === f
+                  ? "border-primary bg-primary/[0.08] font-semibold text-primary"
+                  : "border-base-300 hover:border-primary/50"
+              }`}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        {/* The sentence that stops this control being worse than useless. */}
+        <p className="measure mt-2 text-sm text-muted">
+          Jurisdiction is established for{" "}
+          <span className="font-semibold">
+            {payload.jurisdictionCoverage.assessed} of the{" "}
+            {payload.jurisdictionCoverage.total}
+          </span>{" "}
+          scored vendors, from their own published terms. A vendor we have not
+          reached is left in the ranking rather than excluded:{" "}
+          <span className="font-semibold">
+            it has not been cleared, it has not been looked at
+          </span>
+          . Excluding on silence would drop most of the market on no evidence.
+        </p>
+      </section>
+
       {!list ? (
         <p className="measure rounded-lg border border-dashed border-base-300 px-4 py-4 text-sm text-muted">
           No vendor in this category carries a published input, so there is
@@ -103,6 +155,26 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
         </p>
       ) : (
         <>
+          {list.excluded.length > 0 ? (
+            <div className="rounded-lg border border-base-300 bg-base-200/40 px-4 py-3">
+              <p className="micro-label">
+                Dropped by your jurisdiction setting
+              </p>
+              <ul className="measure mt-2 space-y-1 text-sm">
+                {list.excluded.map((x) => (
+                  <li key={x.name}>
+                    <span className="font-semibold">{x.name}</span>
+                    <span className="text-muted"> ({x.hq}). {x.why}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="measure mt-2 text-sm text-muted">
+                Named rather than removed quietly. A vendor that drops off a
+                ranking without a reason is a decision made on your behalf.
+              </p>
+            </div>
+          ) : null}
+
           {list.shortfall ? (
             <p className="measure rounded-lg border border-warn/30 bg-warn-bg/40 px-4 py-3 text-sm text-warn">
               {list.shortfall}
@@ -173,6 +245,27 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
                     </p>
                   </div>
                 </div>
+
+                {e.jurisdiction ? (
+                  <p
+                    className={`mt-2 rounded px-2 py-1 text-sm ${
+                      e.jurisdiction.flag === "hard-stop"
+                        ? "bg-bad-bg text-error"
+                        : e.jurisdiction.flag === "consideration"
+                          ? "bg-warn-bg text-warn"
+                          : "bg-base-200 text-muted"
+                    }`}
+                  >
+                    {e.jurisdiction.hq}
+                    {e.jurisdiction.flag !== "none"
+                      ? ` · ${e.jurisdiction.flag === "hard-stop" ? "hard stop" : "consideration"}`
+                      : ""}
+                  </p>
+                ) : (
+                  <p className="mt-2 rounded bg-base-200 px-2 py-1 text-sm text-muted">
+                    Jurisdiction not yet established
+                  </p>
+                )}
 
                 {/* The paragraph the reader asked for: one per card, and every
                     clause a restatement of a figure above it. */}

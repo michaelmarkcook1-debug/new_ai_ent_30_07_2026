@@ -971,6 +971,77 @@ implying it moved the answer.
 
 ---
 
+## 8.15 The jurisdiction filter, and the interrogation's memory
+
+### The filter
+
+`JurisdictionFilter` in `lib/desk/shortlist.ts`: `all`, `no-stop`, `cleared`.
+
+Flags are read from `lib/shield/sovereignty.ts` through `vendorIdForSlug`,
+never restated, so the shortlist and Trust Rank cannot give different answers
+about one vendor. That lens rests on the Shield's own fetched quotes.
+
+| Vendor | Flag | Basis |
+|---|---|---|
+| DeepSeek | `hard-stop` | its own privacy policy: stores in the PRC, no residency choice |
+| Alibaba, Moonshot, Z.ai | `consideration` | documented Singapore hosting, PRC parent |
+| 9 others | `none` | US, Canada, France/EU, Israel |
+
+**Three rules, each of which a naive filter would get wrong.**
+
+1. **It runs BEFORE the top three are cut**, not after. Filtering afterwards
+   hands back one or two cards and calls it a shortlist. Excluding flagged
+   vendors from frontier models promotes AI21 Labs into third; the reader still
+   gets three. Pinned by *"still returns three by promoting the next vendor"*.
+2. **An unassessed vendor is kept.** `passesFilter()` returns true when
+   `jurisdictionFor()` is null. Coverage is **13 of 43** scored vendors, so
+   treating silence as a flag would drop most of the market on no evidence. The
+   panel states this in those words, and the count comes from
+   `jurisdictionCoverage()` rather than being written into prose that would rot.
+3. **Every exclusion is named**, with the lens's own `flagNote`. A vendor that
+   vanishes from a ranking without a reason is a decision made for the reader.
+
+The reason paragraph renumbers to the filtered field: "first of 12" becomes
+"first of N". Pinned by *"renumbers the reason to the filtered field"*.
+
+### The payload is sparse
+
+`byFilter` stores a category under a filter **only where that filter changed
+it**. Measured: 18 of 20 variants were byte-identical to `all`, because only
+two categories hold a flagged vendor, and carrying all three in full cost 40 KB
+to say the same thing three times (65 KB against a 40 KB budget).
+
+Read it through **`shortlistFor()`**, never directly: a missing key means "this
+filter changed nothing here", and indexing the record straight would blank most
+categories the moment a filter was selected.
+
+### The interrogation now remembers its own questions
+
+`InterrogateState.asked`. The engine received the answers and never the
+questions, so it could not see its own turns and re-used the framing it had
+just used: two consecutive questions opening *"Across supply chain, HR and
+payroll, which functions..."* is what that produced on screen.
+
+`live.ts` now renders the exchange as **Q/A pairs** rather than two flat lists,
+forbids rephrasing a question already put, and carries a standard for what earns
+a turn: one thing not three joined by "and", their nouns, and only where the two
+possible answers would send the finding somewhere different.
+
+### Question shaping is tiered to the depth
+
+| Depth | Question model | Finding model |
+|---|---|---|
+| Quick | `claude-haiku-4-5` | `claude-sonnet-5` |
+| Comprehensive | `claude-sonnet-5` | `claude-opus-5` |
+
+Haiku shaped every question at both depths, which is why a comprehensive run
+still produced broad questions: the cheapest tier was being asked to find the
+one thing worth asking. `max_tokens` on the question rose from 200 to 700. The
+tier label shown to the reader is derived from the same variable as the model,
+so it cannot claim Haiku while running Sonnet.
+
+---
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

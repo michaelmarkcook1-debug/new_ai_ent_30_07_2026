@@ -17,6 +17,53 @@ than a gap.
 
 ## 8 August 2026
 
+**The Decision Desk asks better questions, and the shortlist can now exclude a
+jurisdiction.**
+
+Four things, all on the Decision Desk.
+
+**It stopped repeating itself.** The engine was shown your answers but never
+its own questions, so it had no memory of what it had just asked and re-used
+the same opening. Two consecutive questions beginning "Across supply chain, HR
+and payroll, which functions..." is what that looked like. It now sees the
+exchange as pairs, is told plainly not to rephrase a question it has already
+put, and is given a standard for what makes a question worth a turn: one thing
+rather than three joined by "and", asked about your specific case, and only
+where the two possible answers would send the finding somewhere different.
+
+**Comprehensive now thinks harder about what to ask.** The cheapest model was
+shaping every question regardless of the depth you chose, which is why a
+comprehensive run still produced broad questions. Comprehensive now uses a
+stronger model for the questions as well as the finding. Quick is unchanged
+and still cheap.
+
+**The finding hands you to the three vendors.** Its first link is now "Your
+three vendors, and what next" rather than a list of pages to go and read.
+
+**You can exclude a jurisdiction.** Three settings: rank everybody, exclude
+hard stops, or exclude anything flagged. Choosing the strictest on frontier
+models drops Alibaba, DeepSeek, Moonshot and Z.ai and promotes the next vendor
+into third, so you still get three rather than a list that quietly got shorter.
+
+Three things about that filter are worth knowing.
+
+**It uses the vendors' own words.** Every flag comes from the Sovereignty Lens
+on Trust Rank, which rests on quotes fetched from the vendors' published terms.
+DeepSeek is a hard stop on its own privacy policy. The others are flagged as a
+consideration because their documented hosting is Singapore while their parent
+sits under PRC law, and both halves of that are shown.
+
+**Nothing is dropped silently.** Every excluded vendor is named with the
+sentence explaining why. A vendor that disappears from a ranking without a
+reason is a decision made on your behalf.
+
+**A vendor we have not assessed stays in the list.** Jurisdiction is
+established for 13 of the 43 scored vendors. The rest have not been cleared,
+they have not been looked at, and excluding on silence would drop most of the
+market on no evidence. The panel says so in those words.
+
+---
+
 **The five tabs under "AI and Your Company" now carry your answers between
 them.**
 
