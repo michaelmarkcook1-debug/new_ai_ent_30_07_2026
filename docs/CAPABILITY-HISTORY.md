@@ -17,6 +17,38 @@ than a gap.
 
 ## 8 August 2026
 
+**Investment funds no longer appear where you are being told what to buy.**
+
+The ranking engine tracks four investors beside the vendors: Andreessen
+Horowitz, MGX, Sequoia and SoftBank. They belong in a market map. They do not
+belong anywhere you are being advised.
+
+Two places were showing them, and both were writing advice off the back of it.
+
+**"Since you last looked" filled all six rows with MGX**, then wrote a
+paragraph about unit economics recommending shorter commitments and priced exit
+terms. Every figure behind that was an investment fund's capability score. MGX
+had the joint-highest number of recorded moves of anything tracked, not because
+it is important but because it is thinly assessed: with little evidence behind
+it, small revisions swing its numbers hard, and it wins any list sorted by size
+of movement.
+
+**Your Pulse said "worth a dated check before renewing or widening SoftBank"**
+in its momentum panel, and named SoftBank in the headline of what moved. There
+is no SoftBank contract to renew.
+
+Both are fixed. The movement line now reads "AWS gaining, Cohere gaining, AI21
+Labs slipping, Groq slipping": a real vendor took the vacated place rather than
+the list getting shorter.
+
+The rule itself is not new. The vendor scores have excluded investors since
+they were written, on the grounds that "is it winning, do people trust it, will
+it still exist in three years" are questions about a supplier, and asking them
+of Sequoia Capital is a category error. It was enforced in one place and needed
+in several. It now lives in one place and every buyer-facing surface uses it.
+
+---
+
 **The Decision Desk asks better questions, and the shortlist can now exclude a
 jurisdiction.**
 

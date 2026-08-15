@@ -1,4 +1,5 @@
 import { aieServerFetch, type AieLane } from "@/lib/aie-server";
+import { isInvestor } from "@/lib/vendor/is-investor";
 
 // Market metrics derived from the real AI Enterprise datasets.
 //
@@ -174,7 +175,14 @@ export async function loadMarketMetrics(): Promise<MarketMetrics> {
     ? "aie"
     : "aie-live";
 
-  const rawVendors = vendorsRes.data?.vendors ?? [];
+  // Suppliers only. The feed carries four investment firms beside the vendors,
+  // and this roster drives the Pulse momentum panel, which was telling a reader
+  // it was "worth a dated check before renewing or widening SoftBank". There is
+  // no contract with SoftBank to renew. Same rule as the composite, one
+  // definition, in lib/vendor/is-investor.ts.
+  const rawVendors = (vendorsRes.data?.vendors ?? []).filter(
+    (v) => !isInvestor(v.id)
+  );
 
   // Capability maturity, grouped per vendor.
   const capsByVendor = new Map<string, RawCapabilityRow[]>();
@@ -240,13 +248,19 @@ export async function loadMarketMetrics(): Promise<MarketMetrics> {
     rows: RawDashboardEntry[] | undefined,
     field: "alert" | "reason"
   ): MarketSignal[] =>
-    (rows ?? []).map((r) => ({
-      vendorId: r.vendor.id,
-      vendorName: r.vendor.name,
-      headline: (field === "alert" ? r.alert : r.reason) ?? "",
-      severity: r.severity ?? null,
-      confidence: typeof r.confidence === "number" ? r.confidence : null,
-    }));
+    (rows ?? [])
+      // The gaining, slipping and risk lists come from the dashboard payload
+      // rather than from the vendor roster, so filtering that roster above did
+      // not reach them. This is where "SoftBank slipping" got into the Pulse
+      // headline and into the reading written over it.
+      .filter((r) => !isInvestor(r.vendor.id))
+      .map((r) => ({
+        vendorId: r.vendor.id,
+        vendorName: r.vendor.name,
+        headline: (field === "alert" ? r.alert : r.reason) ?? "",
+        severity: r.severity ?? null,
+        confidence: typeof r.confidence === "number" ? r.confidence : null,
+      }));
 
   // ---------- market-level aggregates ----------
   const composites = vendors

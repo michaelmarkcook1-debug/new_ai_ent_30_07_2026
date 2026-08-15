@@ -15,6 +15,8 @@
 // ships previousEstimate and changePct on every row, and changePct is zero on
 // every row because each prior estimate is a copy of the current one.
 
+import { isInvestor } from "@/lib/vendor/is-investor";
+
 export type SignalKind =
   | "vendor_score"
   | "capability_score"
@@ -193,6 +195,13 @@ export function changesSince(
 ): Change[] {
   const watch = watchedVendorIds?.length ? new Set(watchedVendorIds) : null;
   return log.changes.filter((c) => {
+    // Investors are never news for a buyer, and this is where that has to be
+    // enforced rather than in the panel: every reader of this function is
+    // buyer-facing, and the one that was not filtering filled its whole panel
+    // with MGX, an investment fund, then wrote procurement advice off the back
+    // of it. Applied at read rather than at ingest so a snapshot taken before
+    // this existed is also cleaned.
+    if (isInvestor(c.vendorId)) return false;
     if (watch && !watch.has(c.vendorId)) return false;
     if (!sinceIso) return true;
     // detectedAt is a date, sinceIso may carry a time; compare on the date so

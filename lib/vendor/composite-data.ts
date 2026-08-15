@@ -3,6 +3,7 @@ import reputationJson from "@/fixtures/aie-live/reputation.json";
 import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import { VALUATIONS, REVENUES } from "@/lib/finance/private-revenue";
 import { TRACKED_VENDORS } from "@/lib/aie/vendors";
+import { isInvestor } from "./is-investor";
 import {
   composite,
   terciles,
@@ -128,11 +129,13 @@ function rawInputs(vendorId: string): CompositeInputs {
 // asking them of Sequoia Capital is a category error. They are also absent
 // from /vendor-view for the same reason, so scoring them here offered a
 // verdict on something the rest of the product does not treat as a vendor.
-const INVESTOR_CATEGORY = "AI investor";
+// The rule now lives in lib/vendor/is-investor.ts. It was enforced here and
+// nowhere else, and the movement panel was showing a buyer six rows of an
+// investment fund's capability scores as a result.
 
 export function scorecardSet(weights: Weights = DEFAULT_WEIGHTS): ScorecardSet {
   const roster = VENDOR_DIRECTORY.filter(
-    (v) => v.category !== INVESTOR_CATEGORY
+    (v) => !isInvestor(v.id)
   ).map((v) => ({
     vendorId: v.id,
     name: v.name,

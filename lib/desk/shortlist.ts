@@ -2,6 +2,7 @@ import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import { scorecardSet } from "@/lib/vendor/composite-data";
 import { sovereigntyRows, type SovereigntyFlag } from "@/lib/shield/sovereignty";
 import { vendorIdForSlug } from "@/lib/shield/vendor-map";
+import { isInvestor } from "@/lib/vendor/is-investor";
 import {
   DEFAULT_WEIGHTS,
   INPUT_KEYS,
@@ -79,8 +80,6 @@ export interface Shortlist {
   }[];
 }
 
-const INVESTOR_CATEGORY = "AI investor";
-
 /**
  * Where each vendor sits in law, for the jurisdiction filter.
  *
@@ -91,13 +90,13 @@ const INVESTOR_CATEGORY = "AI investor";
  * documented Singapore hosting, and DeepSeek is a hard stop on its own
  * admission that it stores in the PRC.
  *
- * IT COVERS 13 OF THE 43 SCORED VENDORS. The Shield holds 14 entries and one
- * of them maps to no scored vendor, so the figure on screen is computed by
- * jurisdictionCoverage() rather than written down here where it would rot. That is the fact the filter has to carry with
- * it. A vendor absent from the Shield has not been cleared, it has not been
- * looked at, and a filter that silently passed it would convert our own gap
- * into a clean bill of health, which is the worst thing a control like this can
- * do.
+ * IT COVERS 13 OF THE 43 SCORED VENDORS, and that is the fact the filter has to
+ * carry with it. A vendor absent from the Shield has not been cleared, it has
+ * not been looked at, and a filter that silently passed it would convert our own
+ * gap into a clean bill of health, which is the worst thing a control like this
+ * can do. The Shield holds 14 entries and one maps to no scored vendor, so the
+ * figure on screen comes from jurisdictionCoverage() rather than from a number
+ * written here that would rot.
  */
 export type Jurisdiction = {
   flag: SovereigntyFlag;
@@ -147,7 +146,7 @@ export function shortlistCategories(): ShortlistCategory[] {
     // A vendor with no category cannot be ranked inside one. Skipped rather
     // than bucketed under "Other", which would invite exactly the
     // cross-category comparison this whole module refuses to make.
-    if (!v.category || v.category === INVESTOR_CATEGORY) continue;
+    if (!v.category || isInvestor(v.id)) continue;
     const sc = byId.get(v.id);
     if (!sc || sc.result.score === null) continue;
     counts.set(v.category, (counts.get(v.category) ?? 0) + 1);

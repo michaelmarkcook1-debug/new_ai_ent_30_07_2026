@@ -1042,6 +1042,64 @@ so it cannot claim Haiku while running Sonnet.
 
 ---
 
+## 8.16 Investors are not vendors
+
+`lib/vendor/is-investor.ts`. **Tests**: `tests/investors-excluded.test.ts`, 10.
+
+The ranking engine tracks four investment firms beside the vendors: `a16z`,
+`mgx`, `sequoia`, `softbank`, all carrying `category: "AI investor"`.
+
+`scorecardSet()` has excluded them since it was written, on the grounds that
+"is it winning, do people trust it, will it still exist in three years" are
+questions about a supplier. **That rule was enforced in exactly one place and
+was needed in three.**
+
+### What it looked like when it leaked
+
+| Surface | What a buyer was shown |
+|---|---|
+| "Since you last looked" (Pulse) | All six rows MGX, plus an authored paragraph on unit economics recommending shorter commitments and priced exit terms |
+| Pulse momentum panel | *"Worth a dated check before renewing or widening SoftBank"* |
+| Pulse headline | *"AWS and Cohere gaining, SoftBank and AI21 slipping"* |
+
+MGX dominated because it is **thinly assessed**: with few inputs behind it,
+small revisions swing its scores hard, so it wins any list sorted by size of
+movement. It had 12 recorded moves in `signal-changes.json`, joint highest of
+any entity tracked.
+
+### Three enforcement points, one definition
+
+| Where | Call |
+|---|---|
+| `lib/changes/snapshot.ts` `changesSince()` | every reader is buyer-facing, so the filter sits here, not in one panel |
+| `lib/market-metrics.ts` vendor roster | drives the momentum panel |
+| `lib/market-metrics.ts` `signal()` | gaining, slipping and risks come from the dashboard payload, NOT the roster, so filtering the roster did not reach them |
+
+`composite-data.ts` and `desk/shortlist.ts` now call the same predicate instead
+of each declaring `INVESTOR_CATEGORY`.
+
+### Two deliberate choices
+
+**Filtered at read, not at ingest.** `diffSnapshots()` still records investor
+movement and `signal-changes.json` still contains it. The snapshot is a complete
+record of what moved; the buyer-facing view is the thing that must be filtered.
+This also means a snapshot taken before the fix is cleaned on read rather than
+needing a re-ingest.
+
+**A predicate over the directory, not a hardcoded list of four ids**, so a fifth
+investor added upstream is excluded without anybody remembering to come back
+here. Pinned by *"stays in step with the directory as it changes"*.
+
+### A test fixture that had to change
+
+`tests/change-detection.test.ts` used `mgx` as the generic second vendor in its
+`buildSinceView` fixture. That test is about falling back to the market when
+nothing is watched, and it needs two rows that survive the filter, so the
+fixture now names two suppliers. The `diffSnapshots` test still uses `mgx`
+deliberately: the raw diff is not filtered.
+
+---
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

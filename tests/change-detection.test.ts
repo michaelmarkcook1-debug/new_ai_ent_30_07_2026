@@ -124,10 +124,15 @@ describe("appendChanges", () => {
 });
 
 describe("buildSinceView", () => {
+  // Both entities here are suppliers on purpose. This fixture used to name MGX
+  // as its generic second vendor, which stopped meaning anything once investors
+  // were excluded from the movement feed: the test is about falling back to the
+  // market when nothing is watched, and it needs two rows that survive to test
+  // that. Investor exclusion has its own tests in investors-excluded.test.ts.
   const log = {
     changes: [
       { key: "a", kind: "vendor_score", vendorId: "anthropic", label: "l", from: 1, to: 2, delta: 1, direction: "up", detectedAt: "2026-08-04" },
-      { key: "b", kind: "vendor_score", vendorId: "mgx", label: "l", from: 1, to: 2, delta: 9, direction: "up", detectedAt: "2026-08-04" },
+      { key: "b", kind: "vendor_score", vendorId: "openai", label: "l", from: 1, to: 2, delta: 9, direction: "up", detectedAt: "2026-08-04" },
     ],
   } as never;
 
