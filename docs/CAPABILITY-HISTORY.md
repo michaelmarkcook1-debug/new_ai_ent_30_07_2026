@@ -15,6 +15,43 @@ than a gap.
 
 ---
 
+## 16 August 2026
+
+**The app now works properly on a phone, and tells you when it is working.**
+
+A design audit walked the live app at phone, tablet and desktop. Three things
+came out of it, and two more turned out not to need fixing at all.
+
+**Twenty controls were too small to tap reliably.** The sidebar toggle, the
+theme switch, the notification bell and the info icons beside every label were
+all around 28 pixels, where a thumb needs 44. They now grow to 44 on a touch
+device and stay exactly as they were on a desktop, so nothing moved for anyone
+using a mouse. Measured after the change: zero controls left under the mark.
+
+**Every tab now shows that it is loading.** There were no loading states
+anywhere. A tab that fetches live sources sat on the previous page, motionless,
+until the new one arrived whole. Trust Rank does one to two seconds of real work
+at open, reading vendor status and overnight news. That silence mattered more
+here than it normally would, because this product spent a week genuinely broken
+with pages taking thirty-eight seconds, so a reader waiting with no feedback had
+recent grounds to assume the worst. Tabs now show the shape of the page arriving
+and say plainly: assembling this page, live sources are being read now.
+
+**ModelEngine says what it is about to do with your vendors.** Take three
+vendors forward on the Decision Desk, open ModelEngine, and the control that
+applies them only appeared after you had picked a role. Now the page says up
+front that three are approved and that it will answer twice: the model the role
+needs, and the best you may buy inside your list. It stays silent for anyone who
+has not been to the Decision Desk.
+
+Two things were checked and found already right, and are recorded so nobody
+spends time on them again. Every wide table on every tab already scrolls inside
+its own box, so no page has ever pushed sideways on a small screen. And keyboard
+focus is already drawn properly, on the modern rule that shows a ring for the
+keyboard and not for the mouse.
+
+---
+
 ## 8 August 2026
 
 **Investment funds no longer appear where you are being told what to buy.**

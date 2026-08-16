@@ -1100,6 +1100,72 @@ deliberately: the raw diff is not filtered.
 
 ---
 
+## 8.17 Touch targets and loading states
+
+From a design audit of the live app at 375, 768 and 1280, 16 August 2026.
+
+### Touch targets
+
+`.tap` and `.tap-row` in `app/globals.css`, both inside `@media (pointer: coarse)`.
+
+Twenty interactive elements measured under 44px at 375px, and they were the
+chrome a reader touches most: the sidebar toggle, theme switch and notification
+bell were 28px each (14px icons in `p-1.5`), the Ask AI pill 36px, and every
+`MicroLabel` tooltip 11px.
+
+**Gated on `pointer: coarse` deliberately.** Those sizes are correct for a
+mouse, and forcing 44px everywhere would put three oversized buttons in the
+desktop header to solve a problem desktop does not have. Only the hit area
+grows; padding and border are untouched, so nothing moves visually on either.
+
+Verified after the change: **0** interactive elements under 44px at 375px, and
+the theme toggle still measures **28px** at 1280 with `pointer: coarse` false.
+
+### Loading states
+
+`app/(ai-ent)/loading.tsx`, plus the `.skeleton` class in `globals.css`.
+
+The app had **zero** `loading.tsx` files and no Suspense boundary on Trust Rank,
+so every dynamic route blocked on its slowest fetch showing the previous page.
+Trust Rank takes 1 to 2 seconds fetching vendor status and desk news at open.
+
+One file at the route-group level covers all tabs. Per-route skeletons would be
+eighteen shapes to keep in step with eighteen layouts, and a stale skeleton is
+worse than an honest generic one. It mirrors `PageHeader`'s geometry so the
+layout does not jump when the real page replaces it, carries `aria-busy` and an
+`sr-only` line, and its shimmer is switched off under `prefers-reduced-motion`.
+
+`.skeleton` draws from `--ag-base-300` rather than a grey literal, so it sits on
+the page's own ground in both themes.
+
+Verified by MutationObserver during a real navigation to `/trust-rank`:
+skeleton observed, then replaced by the page.
+
+### Two things audited and found already correct
+
+Recorded so nobody re-opens them.
+
+**Every wide table already scrolls in its own container.** All 12 tables
+carrying a `min-w-` have an `overflow-x-auto` ancestor, and no page overflows
+the body at 375 or 768. Four tables have no scroller and need none: they are
+`w-full` with no minimum, so they compress rather than overflow.
+
+**Keyboard focus is already drawn correctly.** `globals.css:279` uses
+`:where(a, button, select, input, textarea, summary, [tabindex]):focus-visible`
+with a 2px `--ag-primary` outline. `:focus-visible` rather than `:focus`, so a
+pointer click leaves no ring behind, and `:where()` so it never fights component
+specificity.
+
+### A trap worth not repeating
+
+Running `next build` **while the dev server is running** overwrites `.next` and
+breaks the running server's chunks: `layout.js` and `main-app.js` start 404ing
+and the page hangs on the loading state forever, which looks exactly like a
+broken `loading.tsx`. It is not. Stop the dev server before building, or clear
+`.next` and restart afterwards.
+
+---
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

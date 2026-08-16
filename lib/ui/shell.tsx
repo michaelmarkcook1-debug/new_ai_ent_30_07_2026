@@ -157,7 +157,7 @@ function ThemeToggle() {
       type="button"
       onClick={toggle}
       aria-label="Toggle theme"
-      className="rounded-md border border-base-300 p-1.5 text-muted hover:text-primary"
+      className="tap rounded-md border border-base-300 p-1.5 text-muted hover:text-primary"
     >
       {dark ? (
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="4" /><path d="M12 2v2m0 16v2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M2 12h2m16 0h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
@@ -197,7 +197,7 @@ export function Shell({
             type="button"
             aria-label="Toggle sidebar"
             onClick={() => setCollapsed((v) => !v)}
-            className="rounded-md p-1.5 text-muted hover:bg-base-200"
+            className="tap rounded-md p-1.5 text-muted hover:bg-base-200"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
           </button>
@@ -222,7 +222,7 @@ export function Shell({
           <button
             type="button"
             aria-label="Notifications"
-            className="rounded-md border border-base-300 p-1.5 text-muted hover:text-primary"
+            className="tap rounded-md border border-base-300 p-1.5 text-muted hover:text-primary"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9a6 6 0 1 1 12 0c0 6 2 7 2 7H4s2-1 2-7" /><path d="M10 20a2 2 0 0 0 4 0" /></svg>
           </button>
@@ -271,7 +271,7 @@ export function Shell({
                             title={item.hint ?? item.label}
                             onClick={() => setPending(item.href)}
                             aria-busy={pending === item.href && !active}
-                            className={`flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium transition ${
+                            className={`tap-row flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium transition ${
                               active
                                 ? "bg-primary text-white shadow-sm"
                                 : pending === item.href
@@ -335,7 +335,7 @@ export function Shell({
               <button
                 type="button"
                 onClick={() => setCollapsed((v) => !v)}
-                className="flex w-full items-center gap-2 rounded-md px-2 py-2 text-xs text-muted hover:bg-base-300/50"
+                className="tap-row flex w-full items-center gap-2 rounded-md px-2 py-2 text-xs text-muted hover:bg-base-300/50"
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d={collapsed ? "m9 6 6 6-6 6" : "m15 6-6 6 6 6"} /></svg>
                 {!collapsed ? (

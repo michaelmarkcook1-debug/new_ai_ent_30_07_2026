@@ -86,7 +86,7 @@ export function AskAiButton() {
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+        className="tap inline-flex items-center gap-1.5 rounded-full bg-primary px-3.5 py-2 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
       >
         <svg
           width="12"

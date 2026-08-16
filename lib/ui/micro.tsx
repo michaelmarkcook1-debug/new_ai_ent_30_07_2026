@@ -51,7 +51,10 @@ export function MicroLabel({
         <button
           type="button"
           aria-label={`About ${label}`}
-          className="text-muted/70 hover:text-primary"
+          // The icon is 11px by design: it sits beside a 0.7rem label and a
+          // larger glyph would outweigh the words it annotates. `tap` grows
+          // only the hit area, and only on a touch device.
+          className="tap text-muted/70 hover:text-primary"
           onMouseEnter={() => setOpen(true)}
           onMouseLeave={() => setOpen(false)}
           onClick={() => setOpen((v) => !v)}

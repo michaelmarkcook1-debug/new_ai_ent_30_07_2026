@@ -741,7 +741,10 @@ export function ModelFit() {
       </div>
 
       {!role || !answer || !detail ? (
-        <WaitingForCompute industry={industry} fn={fn} roleId={roleId} />
+        <>
+          <ApprovedVendorsWaiting />
+          <WaitingForCompute industry={industry} fn={fn} roleId={roleId} />
+        </>
       ) : answer.outcome === "cannot assess" ? (
         <div className="mt-4 rounded border border-error/40 bg-bad-bg p-5">
           <p className="text-sm font-semibold text-error">
@@ -1824,6 +1827,38 @@ function headline(
 // gap between them is the number a reader takes back to whoever set the list:
 // the unconstrained pick is what the role needs, the constrained pick is what
 // they may actually buy, and the difference is the price of the policy.
+/**
+ * The approved-vendor constraint, announced before there is an answer to apply
+ * it to.
+ *
+ * ShortlistOverlay below is the control itself, and it lives inside the answer
+ * panel because it re-runs the engine's choice inside the approved set. That is
+ * the right home for the control and the wrong home for the news that it
+ * exists: a reader arriving from the Decision Desk with three vendors taken
+ * forward saw the header strip confirming they were carried, then a role picker
+ * with no sign the constraint was coming. Audited on 16 August 2026.
+ *
+ * Renders nothing when nothing is approved, which is the common case, so the
+ * page is unchanged for a reader who has not been to the Decision Desk.
+ */
+function ApprovedVendorsWaiting() {
+  const { ids, ready } = useShortlist();
+  if (!ready || ids.length === 0) return null;
+  return (
+    <div className="mt-4 rounded-lg border border-insight/30 bg-insight/[0.05] px-4 py-3">
+      <p className="measure text-sm">
+        <span className="font-semibold">
+          {ids.length} vendor{ids.length === 1 ? "" : "s"} approved on the
+          Decision Desk.
+        </span>{" "}
+        Pick a role and the engine answers twice: the model the role actually
+        needs, and the best you may buy inside that list. The gap between them
+        is what the policy costs.
+      </p>
+    </div>
+  );
+}
+
 function ShortlistOverlay({
   survivors,
   pick,
