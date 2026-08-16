@@ -1,0 +1,216 @@
+{
+  "meta": {
+    "vertical": "technology_software",
+    "generated": "2026-08-16T10:24:15.307Z",
+    "retrievalModel": "claude-haiku-4-5",
+    "scoringModel": "claude-sonnet-5",
+    "status": "PROPOSED, NOT REVIEWED",
+    "reviewNote": "Every class A and B claim must be opened and read against its source before this is merged into customer-operations.json. The class is the product; the score is downstream of it."
+  },
+  "rejected": [],
+  "deltas": {
+    "ROLE-0044": {
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.traverssmith.com/knowledge/knowledge-container/get-ready-for-the-new-data-protection-complaints-handling-rules",
+        "why": "DUAA 2025 imposes mandatory 30-day acknowledgment windows and defined investigation timeframes for data-protection complaints, and FDA 21 CFR 820.198 sets equally rigid procedural steps for complaint receipt, review and reporting; in this sector, deviation from these fixed procedures is a reportable compliance event, matching the 70 anchor rather than the general-adherence 50 anchor."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "FDA 21 CFR 820.198 links complaint evaluation directly to CAPA and regulatory reporting obligations, so an undetected error in complaint handling can trigger regulatory attention or reportable non-conformance, moving accuracy consequence from routine rework (50) to regulatory/financial exposure (70)."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "Complaint files must be maintained for FDA inspection and CAPA linkage, and the newly effective DUAA complaints regime (19 June 2026) adds a parallel statutory audit obligation for data-protection complaints; the band stays at 70 (formal audit trail, subject to regulator inspection) but the underlying rule set has materially changed and is flagged for visibility."
+      }
+    },
+    "ROLE-0045": {
+      "CAP-09": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "FDA 21 CFR §820.198 requires complaint files to link receipt, investigation and CAPA records, forcing the advisor to hold a substantial cross-referenced case file rather than a handful of related items, matching the 50-band anchor."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.traverssmith.com/knowledge/knowledge-container/get-ready-for-the-new-data-protection-complaints-handling-rules",
+        "why": "The DUAA 2025 imposes a statutory 30-day acknowledgment deadline and mandatory information requirements for data-protection complaints, and FDA 21 CFR §820.198 mandates regulatory reporting procedures; failing either is a legal breach with external (regulator) consequence, not merely an internally reportable deviation."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "Under FDA 21 CFR §820.198, an undetected error in complaint evaluation (e.g. missed investigation or reporting trigger) can lead to regulatory attention or enforcement, moving beyond errors that merely require internal correction."
+      },
+      "CAP-15": {
+        "from": 30,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "FDA 21 CFR §820.198 requires maintained complaint files with investigation and CAPA linkage that are subject to FDA inspection, establishing a formal audit trail rather than informal supervisory review."
+      }
+    },
+    "ROLE-0046": {
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.traverssmith.com/knowledge/knowledge-container/get-ready-for-the-new-data-protection-complaints-handling-rules",
+        "why": "The DUAA 2025 imposes mandatory 30-day acknowledgment timeframes and information requirements for data protection complaints; missing these is a reportable compliance failure, matching the 'strict compliance; deviation is a reportable event' band rather than the base 'defined procedures, deviation must be justified'."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "Under FDA 21 CFR 820.198, an undetected error in complaint evaluation or CAPA linkage can trigger regulatory attention or enforcement action against the manufacturer, moving beyond errors merely reaching customers (band 50) into regulatory-consequence territory (band 70)."
+      },
+      "CAP-14": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-is-special-category-data",
+        "why": "Complaint records for software products (e.g. health-related SaMD complaints under 21 CFR 820.198) can contain special category data such as health information under UK GDPR Article 9, which requires safeguards beyond ordinary confidential commercial data (band 50)."
+      },
+      "CAP-15": {
+        "from": 10,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "21 CFR 820.198 requires manufacturers to maintain auditable complaint files with investigation and CAPA linkage, subject to FDA inspection, which matches the 'formal audit trail; subject to internal audit or regulator inspection' band rather than the base assumption of no review."
+      }
+    },
+    "ROLE-0047": {
+      "CAP-03": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "A software complaints manager here must navigate overlapping FDA device-complaint rules, UK DUAA data-protection complaint timeframes, and GDPR special-category provisions simultaneously, requiring expert-level recognition of exceptions and rationale rather than standard-case practitioner knowledge (band 70)."
+      },
+      "CAP-08": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.traverssmith.com/knowledge/knowledge-container/get-ready-for-the-new-data-protection-complaints-handling-rules",
+        "why": "DUAA 2025 imposes mandatory information content and statutory timeframes for complaint responses to data subjects, meaning the exact wording of complaint correspondence now carries direct regulatory consequence, matching the top band."
+      },
+      "CAP-10": {
+        "from": 90,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.traverssmith.com/knowledge/knowledge-container/get-ready-for-the-new-data-protection-complaints-handling-rules",
+        "why": "The Data (Use and Access) Act 2025 introduces new mandatory 30-day acknowledgment and information requirements effective 2026; the band remains at the existing ceiling (deviation is a breach with external consequence) but the governing rule has materially changed and must stay visible."
+      },
+      "CAP-11": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "21 CFR 820.198 links complaint evaluation directly to CAPA and post-market vigilance for device-adjacent software; an undetected error in complaint handling can propagate to a missed safety signal or recall, matching the 'errors risk safety, legal liability or systemic harm' band."
+      },
+      "CAP-14": {
+        "from": 90,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-is-special-category-data",
+        "why": "Complaints in this sector can involve UK GDPR Article 9 special-category data (e.g., health data tied to device software complaints), confirming the existing top-band data sensitivity rather than changing it, so the linkage is recorded for visibility."
+      }
+    },
+    "ROLE-0048": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "21 CFR Part 820 §820.198 requires complaint handlers to recognise reportable events, distinguish standard vs. adverse-event complaints, and link findings to CAPA — working practitioner knowledge of a regulated process, not general knowledge."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.traverssmith.com/knowledge/knowledge-container/get-ready-for-the-new-data-protection-complaints-handling-rules",
+        "why": "The Data (Use and Access) Act 2025 (effective June 2026) imposes new mandatory 30-day acknowledgement and information-content rules for data-protection complaints; band stays at strict-compliance level 70 but the governing rule has materially changed and must remain visible."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.traverssmith.com/knowledge/knowledge-container/get-ready-for-the-new-data-protection-complaints-handling-rules",
+        "why": "Under DUAA and 21 CFR 820.198, an undetected error in complaint logging or escalation (e.g. missed regulatory-reportable event or missed statutory deadline) triggers regulatory attention, moving the role from customer-facing rework (50) to regulatory/financial exposure (70)."
+      },
+      "CAP-15": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "21 CFR Part 820 §820.198 requires complaint files with investigation records and CAPA linkage that are subject to FDA inspection, establishing a formal audit trail rather than informal internal sign-off."
+      }
+    },
+    "ROLE-0049": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "FDA 21 CFR §820.198 requires complaint handlers to recognise which complaints constitute reportable events requiring CAPA linkage and regulatory submission, moving the role from general familiarity with terms to working practitioner recognition of standard regulated cases."
+      },
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "Complaint files under §820.198 feed regulatory reporting (e.g. MDR-style submissions) that are binding external documents reviewed by regulators, not just internal structured records, which follows directly from the FDA rule though it does not name writing standards itself."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.traverssmith.com/knowledge/knowledge-container/get-ready-for-the-new-data-protection-complaints-handling-rules",
+        "why": "The Data (Use and Access) Act 2025 imposes a hard 30-day acknowledgement deadline and mandatory investigation content for data-protection complaints, so deviation from the prescribed procedure is itself a statutory breach with external regulatory consequence, not merely a reportable internal event."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://simplerqms.com/complaint-management",
+        "why": "Under §820.198, an undetected error in complaint evaluation (e.g. missing a reportable adverse event) can trigger regulatory attention or enforcement action against the manufacturer, which follows from the FDA rule even though it does not state error consequences in these terms."
+      }
+    }
+  },
+  "evidence": {
+    "regime": "Data protection, medical device quality management, financial services complaint handling, and consumer protection regulations",
+    "sources": [
+      {
+        "title": "FDA 21 CFR Part 820",
+        "rule": "§820.198 (complaint files)",
+        "cite": "Manufacturers must establish and maintain complaint handling procedures that cover receipt, review, and evaluation of complaints, including investigation, regulatory reporting, and effective post-market vigilance, and linkage to corrective action and preventive actions (CAPA).",
+        "url": "https://simplerqms.com/complaint-management"
+      },
+      {
+        "title": "Data (Use and Access) Act 2025 (DUAA)",
+        "rule": "Complaints handling rules (effective 19 June 2026)",
+        "cite": "Organisations must acknowledge complaints within 30 days of receipt and investigate without undue delay, with mandatory information requirements and timeframes for handling data protection complaints made directly to the data controller.",
+        "url": "https://www.traverssmith.com/knowledge/knowledge-container/get-ready-for-the-new-data-protection-complaints-handling-rules"
+      },
+      {
+        "title": "UK GDPR - Article 9",
+        "rule": "Special Category Data processing",
+        "cite": "Special category personal data (including health data, biometric data, racial or ethnic origin, political opinions, religious beliefs, genetic data, trade union membership, sex life, and sexual orientation) requires explicit consent and additional safeguards to protect individuals' rights and freedoms.",
+        "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-is-special-category-data"
+      }
+    ]
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "meta": {
+    "vertical": "legal",
+    "generated": "2026-08-16T10:19:40.417Z",
+    "retrievalModel": "claude-haiku-4-5",
+    "scoringModel": "claude-sonnet-5",
+    "status": "PROPOSED, NOT REVIEWED",
+    "reviewNote": "Every class A and B claim must be opened and read against its source before this is merged into customer-operations.json. The class is the product; the score is downstream of it."
+  },
+  "rejected": [
+    "ROLE-0047 CAP-10: from 50 but the library says 90"
+  ],
+  "deltas": {
+    "ROLE-0044": {
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Ombudsman Scheme Rule 4.2(a) imposes a fixed eight-week limit for internal complaint resolution before escalation rights arise, making the procedure a strict compliance matter where missing the deadline is a reportable event to the Ombudsman, matching the 70 band rather than the base 50 'deviation must be justified' band."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Services Act 2007 s.112 creates a statutory complaint-handling regime with external escalation to the Legal Ombudsman, whose determinations carry regulatory and licensing consequences for the firm and individuals, moving assurance from internal audit (70) to external assurance with legal/licensing consequence (90)."
+      }
+    },
+    "ROLE-0045": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Handling legal-services complaints requires working knowledge of the statutory scheme itself (LSA 2007 s.112, LeO Scheme Rules, GDPR special-category conditions) to recognise standard versus escalation-triggering cases, moving past generic familiarity with terms."
+      },
+      "CAP-08": {
+        "from": 30,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Services Act 2007 s.112 and LeO Rule 4.2(a) require formal written complaint responses addressed to external complainants that must correctly state statutory escalation rights within the eight-week window, matching the band-70 anchor for binding external-audience documents."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "LeO Scheme Rule 4.2(a) imposes a fixed eight-week resolution deadline; missing it is a reportable breach with external regulatory consequence (escalation to the Ombudsman), matching the band-90 anchor rather than the discretionary band-70 anchor."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Under the LSA 2007 s.112 regime, an undetected error in complaint handling can trigger Legal Ombudsman investigation, compensation orders, or reputational damage, matching band 70 rather than errors merely requiring internal correction."
+      },
+      "CAP-15": {
+        "from": 30,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "The statutory complaint-handling process under LSA 2007 s.112 and LeO Scheme Rules requires a documented, auditable process subject to inspection by the Legal Ombudsman, matching the band-70 anchor for formal audit trail and regulator inspection rather than informal supervisory review."
+      }
+    },
+    "ROLE-0046": {
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Services Act 2007 s.112 and Legal Ombudsman Scheme Rule 4.2(a) impose a statutory complaint-handling procedure with a fixed eight-week resolution limit; missing it or deviating from the prescribed process is reportable to the Ombudsman, matching the 70 band 'strict compliance; deviation is a reportable event' rather than the base 50 'deviation must be justified'."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Because complaint handling is statutorily governed (s.112), an undetected error in the CSM's handling can trigger Legal Ombudsman intervention or regulatory attention, not merely internal rework, moving the band from 50 to 70 ('errors cause ... regulatory attention or reputational damage')."
+      },
+      "CAP-14": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data",
+        "why": "Complaint and case files handled by a legal-sector CSM routinely include special-category personal data (e.g. health or criminal-justice details) subject to UK GDPR Article 9 and DPA 2018 Schedule 1 safeguards, matching the 70 band 'special-category personal data, regulated ... records' rather than the base 50 'confidential commercial or limited personal data'."
+      },
+      "CAP-15": {
+        "from": 10,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Services Act 2007 s.112 and the Legal Ombudsman Scheme Rules require a documented, auditable complaint process subject to external regulator inspection and formal review, well beyond the base 10 'no review', matching the 70 band 'formal audit trail; subject to internal audit or regulator inspection'."
+      }
+    },
+    "ROLE-0047": {
+      "CAP-03": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Services Act 2007 s.112 and the Legal Ombudsman Scheme Rules impose a statutory complaint-handling framework distinct from general practice; the role must recognise exceptions (e.g. jurisdiction limits, escalation triggers, interplay with SRA regulation) and know why the rules exist, matching the 70 band rather than standard-case practitioner knowledge."
+      }
+    },
+    "ROLE-0048": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Services Act 2007 s.112 and the Legal Ombudsman Scheme Rules establish a specific statutory complaints regime (categories, escalation routes, remedies) that a contact centre manager must recognise and apply correctly, moving from generic field familiarity to working practitioner knowledge of standard cases (band 50)."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Because complaint handling sits inside a statutory scheme (LSA 2007 s.112, Ombudsman Rule 4.2(a) eight-week limit), an undetected error (missed deadline, mishandled complaint) triggers Ombudsman findings, compensation orders or reputational damage rather than mere internal correction, matching the band-70 anchor 'errors cause financial loss, regulatory attention or reputational damage'."
+      },
+      "CAP-15": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Services Act 2007 s.112 and Legal Ombudsman Scheme Rule 4.2(a) impose a statutory complaint-handling process with defined timescales that is directly subject to external regulator inspection and adjudication by the Legal Ombudsman, matching band 70 ('formal audit trail; subject to internal audit or regulator inspection') rather than informal internal sign-off."
+      }
+    },
+    "ROLE-0049": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Complaint handling under LSA 2007 s.112 and the Legal Ombudsman Scheme Rules requires working knowledge of specific statutory time limits, jurisdiction rules and special-category data conditions (UK GDPR Art.9 / DPA 2018 Sch.1) rather than general customer-service familiarity, matching band 50 'working practitioner knowledge; recognises standard cases'."
+      },
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Complaint responses required under LSA 2007 s.112 are external-facing documents that may be scrutinised by the Legal Ombudsman, raising the demand from internal structured documents (50) to persuasive/consequential documents for external audiences (70)."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Ombudsman Scheme Rule 4.2(a) imposes a strict eight-week resolution limit; missing it lets the complainant escalate directly to the Ombudsman, an external consequence matching band 90 'prescribed to the letter; deviation is a breach with external consequence' rather than the generic 70 'strict compliance' band."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Because LSA 2007 s.112 and the Legal Ombudsman Scheme give the regulator power to investigate and award compensation for mishandled complaints, undetected errors in this sector routinely trigger regulatory attention and reputational or financial exposure, matching band 70 rather than the generic 50 'reaches colleagues or customers' band."
+      }
+    }
+  },
+  "evidence": {
+    "regime": "Legal services complaint handling and data protection regulations in the UK",
+    "sources": [
+      {
+        "title": "Legal Services Act 2007",
+        "rule": "Section 112 - statutory requirements for complaint handling",
+        "cite": "Section 112",
+        "url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide"
+      },
+      {
+        "title": "Legal Ombudsman Scheme Rules",
+        "rule": "Rule 4.2(a) - eight-week time limit for complaint resolution",
+        "cite": "Rule 4.2(a)",
+        "url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide"
+      },
+      {
+        "title": "UK GDPR - General Data Protection Regulation",
+        "rule": "Article 9 - processing of special category data requires lawful basis and specific conditions",
+        "cite": "Article 9",
+        "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data"
+      },
+      {
+        "title": "Data Protection Act 2018",
+        "rule": "Schedule 1 - additional conditions and safeguards for processing special category data",
+        "cite": "Schedule 1",
+        "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data"
+      },
+      {
+        "title": "The Social Housing (Regulation) Act 2023",
+        "rule": "Makes the Complaint Handling Code statutory for landlords",
+        "cite": "The Social Housing (Regulation) Act 2023",
+        "url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code"
+      }
+    ]
+  }
+}

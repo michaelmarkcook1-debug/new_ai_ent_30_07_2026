@@ -377,6 +377,60 @@ Chinese parent. Country of incorporation carries no vendor citation because it
 is public record; where the Shield already fetched a parent-company fact, that
 fetched fact is the one shown rather than a re-derived one.
 
+### 8.3a The HQ register: jurisdiction for the other thirty vendors
+
+`lib/shield/hq-register.ts` (added 16 August 2026). Lane `derived`. A second
+map, keyed by **vendor-directory id** rather than Shield slug, holding country
+of incorporation for the 30 scored vendors the Shield does not reach.
+
+**Why it is not more Shield rows.** `sovereigntyRows()` maps over `SHIELD`, and
+`SHIELD` is a ledger of documents that were actually fetched and quoted. Adding
+thirty rows to it would assert thirty fetches that never happened.
+
+**The two classes and their precedence.** `jurisdictions()` in
+`lib/desk/shortlist.ts` loads the register first and the Shield second, so a
+Shield row overwrites a register row. Every `Jurisdiction` now carries
+`basis: "vendor-document" | "public-record"`, surfaced on the card as "their
+terms" or "public record". A fetched policy answers where the data sits; country
+of incorporation answers only which legal system reaches the company.
+
+**Coverage.** `jurisdictionCoverage()` returns `assessed`, `total`,
+`fromDocument` and `fromPublicRecord` rather than one total, because a single
+number would let a reader take 30 public-record entries for 30 fetched policies.
+Currently **43 of 43: 13 from documents, 30 from public record.** Pinned by
+`tests/hq-register.test.ts` and by "covers every scored vendor" in
+`tests/shortlist.test.ts`.
+
+**What it fixed.** At 13 of 43 the filter passed unassessed vendors through, by
+design, since silence is not clearance. MiniMax sat in the unassessed set, so
+"exclude anything flagged" returned a Shanghai-headquartered frontier lab. The
+default was not changed; the coverage was.
+
+**The three flags added**, all `consideration`, verified 16 August 2026:
+
+| Vendor | Jurisdiction | What the flag rests on |
+|---|---|---|
+| `minimax` | China, listed parent Cayman Islands | Shanghai HQ, R&D in Shanghai and Beijing; MiniMax Group Inc. is Cayman-incorporated and HKEX-listed. Hosting not established |
+| `g42` | United Arab Emirates | Group 42 Holding Ltd, Abu Dhabi, chaired by a member of the ruling family, Mubadala-backed. No EU or UK adequacy decision |
+| `humain` | Saudi Arabia | Riyadh, wholly owned by the Public Investment Fund, chaired by the Crown Prince. No EU or UK adequacy decision |
+
+The adequacy position was read at the time of writing, not recalled. The list
+covers Andorra, Argentina, Canada for commercial organisations under PIPEDA, the
+Faroe Islands, Guernsey, Israel, the Isle of Man, Japan, Jersey, New Zealand,
+the Republic of Korea, Switzerland, Uruguay, the United Kingdom and the United
+States under the EU-US Data Privacy Framework for certified organisations.
+
+**`tsmc` is Taiwanese and carries no flag**, which is deliberate and not an
+oversight. Taiwan holds no adequacy decision, but a foundry never holds a
+buyer's data, so the question does not arise through that vendor. Same
+structural reasoning the lens already applies to Meta's self-hosted weights. The
+note says so rather than leaving it looking cleared.
+
+**`passesFilter` is exported** from `lib/desk/shortlist.ts` so the pass-through
+rule is pinned directly. It was previously pinned by asserting that some scored
+vendor had no record, which was true at 13 of 43 and became false here, making a
+rule still in force look as though it had been removed.
+
 ### 8.4 Joining the Shield to the shortlist
 
 `lib/shield/vendor-map.ts`. Shield slugs (`openai-api`) and vendor-directory

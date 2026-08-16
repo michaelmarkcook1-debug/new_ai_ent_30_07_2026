@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "vertical": "manufacturing",
+    "generated": "2026-08-16T10:28:44.351Z",
+    "retrievalModel": "claude-haiku-4-5",
+    "scoringModel": "claude-sonnet-5",
+    "status": "PROPOSED, NOT REVIEWED",
+    "reviewNote": "Every class A and B claim must be opened and read against its source before this is merged into customer-operations.json. The class is the product; the score is downstream of it."
+  },
+  "rejected": [
+    "ROLE-0044 CAP-15: from 50 but the library says 70",
+    "ROLE-0048 CAP-14: from 50 but the library says 70"
+  ],
+  "deltas": {
+    "ROLE-0044": {
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "21 CFR 820.198 and MDR Article 87 mandate a designated unit and systematic, documented procedures for receiving and reviewing complaints; deviation from these procedures is a reportable regulatory event, matching the 70 band."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://quality.eleapsoftware.com/glossary/concern-and-complaint-management-in-qms-a-complete-guide",
+        "why": "Under 21 CFR 820.198 and MDR Article 87, an undetected error in complaint assessment (e.g. missing a reportable adverse event) triggers regulatory attention and enforcement action, matching the 70 band rather than internal-only correction."
+      },
+      "CAP-14": {
+        "from": 70,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://quality.eleapsoftware.com/glossary/concern-and-complaint-management-in-qms-a-complete-guide",
+        "why": "MDR Article 87 (fully applicable since 2021) governs complaint records that routinely contain special-category health-related data linked to device use; the requirement is confirmed at the existing 70 band under a recently applicable rule."
+      },
+      "CAP-03": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "Distinguishing a routine complaint from a reportable adverse event under 21 CFR 820.198 and MDR Article 87 requires expert-level regulatory knowledge of exceptions, following directly from these rules though not stated in their text."
+      }
+    },
+    "ROLE-0045": {
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "21 CFR 820.198 mandates a designated unit and defined receipt/review/assessment procedure for every complaint; in medical device manufacturing failure to follow the prescribed process is itself a reportable regulatory breach, matching the 90 band rather than the generic 70."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "Because 21 CFR 820.198 and EU MDR Article 87 require complaints to feed formal quality and vigilance systems, an undetected error in logging or assessing a complaint can trigger regulatory action or missed adverse-event reporting, consistent with the 70 band rather than errors merely reaching a colleague or customer."
+      },
+      "CAP-15": {
+        "from": 30,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://quality.eleapsoftware.com/glossary/concern-and-complaint-management-in-qms-a-complete-guide",
+        "why": "EU MDR Article 87 and 21 CFR 820.198 require systematic, documented complaint-handling infrastructure that is subject to inspection by notified bodies and regulators, matching the 70 band ('formal audit trail; subject to internal audit or regulator inspection') rather than informal supervisory review."
+      }
+    },
+    "ROLE-0046": {
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "21 CFR 820.198 requires manufacturers to operate a designated complaint-handling unit following a defined receipt/review/evaluation procedure; a Customer Success Manager taking complaints in this sector must follow this procedure strictly, and deviation (e.g. failing to escalate a reportable event) has regulatory consequence, matching the 70 band."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "Under 21 CFR 820.198 and MDR Article 87, an undetected error in logging or assessing a complaint (e.g. missing an adverse event) can trigger regulatory attention or inspection findings, moving accuracy consequences beyond internal rework to the 70 band."
+      },
+      "CAP-15": {
+        "from": 10,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://quality.eleapsoftware.com/glossary/concern-and-complaint-management-in-qms-a-complete-guide",
+        "why": "MDR Article 87 and 21 CFR 820.198 mandate systematic, auditable complaint files maintained through a designated unit, subject to regulator inspection, which is a formal-audit-trail requirement well above the base role's 'no review' assumption."
+      },
+      "CAP-14": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://quality.eleapsoftware.com/glossary/concern-and-complaint-management-in-qms-a-complete-guide",
+        "why": "Complaint files required under Article 87 routinely capture patient/user harm details tied to device incidents; although the rule does not name a data class, this follows directly from its scope as health-related regulated information, raising sensitivity above ordinary commercial/personal data."
+      }
+    },
+    "ROLE-0047": {
+      "CAP-11": {
+        "from": 70,
+        "to": 90,
+        "class": "B",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "21 CFR 820.198 requires a designated unit to review and assess every complaint, a process whose core purpose (though not stated in the cite itself) is to catch device malfunctions that could indicate an adverse event; an undetected error in that assessment in a medical device manufacturer risks patient safety and regulatory/legal liability, matching the band-90 anchor rather than the generic band-70 'financial loss or reputational damage' level."
+      }
+    },
+    "ROLE-0048": {
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "21 CFR 820.198 requires a designated unit to receive, review and assess complaints because an undetected error (missed complaint or trend) can hide a device safety issue, triggering regulatory attention or recall action, matching the band-70 anchor rather than routine rework."
+      },
+      "CAP-15": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "21 CFR 820.198 requires a designated complaint-handling unit and documented review process that is subject to FDA Quality System Regulation inspection, establishing a formal audit trail rather than informal supervisory review."
+      }
+    },
+    "ROLE-0049": {
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "21 CFR 820.198 mandates a designated complaint-handling unit with specific procedures for receiving, reviewing and assessing complaints, including determining medical-device-reporting obligations; deviation from these prescribed procedures is a breach with external regulatory consequence (FDA 483s, warning letters), matching the 90 anchor rather than the 70 'reportable event' anchor."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://quality.eleapsoftware.com/glossary/concern-and-complaint-management-in-qms-a-complete-guide",
+        "why": "EU MDR Article 87 and 21 CFR 820.198 require complaint files and systematic review infrastructure that is directly subject to notified-body and FDA inspection, with individual/organisational licensing consequences for failure -- the 90 anchor for externally assured work with legal/licensing consequence, not just internal audit trail (70)."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "Because 21 CFR 820.198 requires complaints to be assessed for reportability (adverse event/recall triggers), an undetected error in this role's complaint assessment can cause regulatory action or missed safety reporting, moving beyond the base 'reaches customers, needs correction' band toward the 70 anchor of regulatory attention and reputational/financial damage."
+      },
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+        "why": "The regulatory requirement for a designated, qualified unit to review and assess complaints against QSR/MDR criteria implies working practitioner-level knowledge of device complaint classification and reportability rules, beyond generic familiarity with field terms, supporting the 50 anchor."
+      }
+    }
+  },
+  "evidence": {
+    "regime": "Medical device manufacturing quality systems and complaint handling regulations; Data protection in manufacturing",
+    "sources": [
+      {
+        "title": "Code of Federal Regulations Title 21, Part 820 (Quality System Regulation)",
+        "rule": "21 CFR 820.198",
+        "cite": "Manufacturers are required to keep complaint files and set up processes for receiving, reviewing, and assessing complaints via a designated unit.",
+        "url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks"
+      },
+      {
+        "title": "EU Medical Device Regulation",
+        "rule": "Article 87",
+        "cite": "Requires manufacturers to implement systematic procedures for gathering and reviewing complaints through their complaint management infrastructure.",
+        "url": "https://quality.eleapsoftware.com/glossary/concern-and-complaint-management-in-qms-a-complete-guide"
+      },
+      {
+        "title": "Ofgem Licence Guide: Safety and Vulnerable Consumer Protections",
+        "rule": "License conditions for gas and electricity supply",
+        "cite": "Sets out relevant licence conditions and guidance relating to safety of energy supply and specific protections for consumers in vulnerable situations.",
+        "url": "https://www.ofgem.gov.uk/guidance/licence-guide-safety-and-vulnerable-consumer-protections"
+      }
+    ]
+  }
+}

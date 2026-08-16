@@ -17,6 +17,41 @@ than a gap.
 
 ## 16 August 2026
 
+**Asking to exclude Chinese providers now actually excludes all of them.**
+
+The Decision Desk lets a buyer say how much foreign-jurisdiction exposure they
+will accept. Until today that control could only see 13 of the 43 vendors we
+score, because it read from the set of vendors whose privacy policies we had
+actually fetched and quoted. A vendor outside that set was left in the ranking
+rather than excluded, on the principle that not having looked at something is
+not the same as having cleared it.
+
+That principle is right, and at 13 of 43 it had a consequence nobody would
+want. MiniMax is a Shanghai-headquartered AI lab, and it sat in the two thirds
+we had not reached, so a reader who asked to exclude anything flagged was shown
+it anyway. Jurisdiction is now established for all 43, and MiniMax is named in
+the dropped list with the reason.
+
+**The product is careful to say how it knows.** There are two kinds of answer
+here and they are not equally strong. Thirteen come from the vendor's own
+published terms, which say where your data physically sits. Thirty come from
+public record, which establishes only which country's law reaches the company
+and says nothing about where it keeps anything. Every card says which of the
+two it is, and the summary line gives the split rather than one total, so
+thirty of the weaker answer can never be read as thirty of the stronger.
+
+**Two more vendors were flagged, and one deliberately was not.** G42 in Abu
+Dhabi and HUMAIN in Riyadh are both owned or chaired by their states, and
+neither country holds a European or UK data-adequacy decision, so both are
+flagged as a consideration. TSMC is Taiwanese and Taiwan holds no adequacy
+decision either, but TSMC makes chips and never holds anyone's data, so
+flagging it would be noise. It is left unflagged and the note says why, rather
+than sitting there looking as though it had been cleared.
+
+A flag says a question is open, not that a country is bad. Each one carries the
+facts it rests on, so you can accept the facts and still disagree with the
+conclusion.
+
 **The app now works properly on a phone, and tells you when it is working.**
 
 A design audit walked the live app at phone, tablet and desktop. Three things
