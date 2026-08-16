@@ -17,6 +17,15 @@ than a gap.
 
 ## 16 August 2026
 
+**A permanently empty panel was removed from AI Adoption.**
+
+"What moved, by vendor and measure" read a catalogue endpoint that answers
+"fetch failed" against production, so it could only ever show its own empty
+state. The empty state was doing its job and was honest, but a panel that is
+reliably honest about having nothing is still a panel with nothing in it, and
+it sat above real content. The component is kept, so if that endpoint starts
+answering the panel comes back in one line.
+
 **A wrong figure about OpenAI was corrected, and one is still on screen.**
 
 Four news items were checked against their original sources. Three held up.

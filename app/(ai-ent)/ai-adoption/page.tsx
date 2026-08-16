@@ -2,7 +2,6 @@ import { PageHeader } from "@/lib/ui/page";
 import { MicroLabel } from "@/lib/ui/micro";
 import { AdoptionMaturity } from "./adoption-view";
 import { DisclosurePanel } from "./disclosure-panel";
-import { MovementPanel } from "./movement-panel";
 
 export const metadata = { title: "AI Adoption | AI Enterprise" };
 
@@ -127,7 +126,16 @@ export default function AiAdoptionPage() {
           </p>
         </section>
 
-        <MovementPanel />
+        {/* MovementPanel was here and was removed on 16 August 2026. It read
+            /api/catalogue/vendor, which answers CATALOGUE_ERROR "fetch failed"
+            against production, so the panel could only ever render its own
+            empty state. The empty state was working correctly and was honest;
+            a panel that is permanently honest about having nothing is still a
+            panel with nothing in it, and it sat above real content.
+
+            The component file is kept. Nothing about the panel was wrong, so
+            if the catalogue endpoint starts answering, restoring it is a
+            one-line import. */}
         <DisclosurePanel />
       </div>
     </>
