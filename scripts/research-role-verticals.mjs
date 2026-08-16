@@ -204,9 +204,22 @@ ${hits.map((h, i) => `[${i + 1}] ${h.title}\n${h.url}\n${h.content}`).join("\n\n
 
 /** Score the sector's effect on one role, against evidence already gathered. */
 async function scoreRole(client, vertical, roleId, role, rubric, evidence) {
-  const res = await client.messages.create({
+  const res = await client.messages.stream({
     model: SCORING_MODEL,
-    max_tokens: 4000,
+    // 4000 was the whole budget and adaptive thinking spent all of it:
+    // measured stop_reason=max_tokens, output_tokens 4000, thinking_tokens
+    // 4000. The answer never began and the call returned an empty object.
+    //
+    // That is the worst failure this pipeline has, because an empty object is
+    // indistinguishable from an honest "this sector changes nothing" and would
+    // have been recorded as one. Insurance would have gone down as having no
+    // regulatory effect on a complaints role.
+    //
+    // The thinking earns its place (eighteen requirements against a full rubric
+    // and a body of retrieved law), so it gets room rather than being switched
+    // off. Streamed, because a high ceiling without streaming is how you meet a
+    // timeout instead of an answer.
+    max_tokens: 16000,
     thinking: { type: "adaptive" },
     messages: [
       {
@@ -244,12 +257,28 @@ Return JSON only:
             "why": "one or two sentences citing the rule and the band anchor"}}`,
       },
     ],
-  });
+  }).finalMessage();
+
+  // A truncated answer is not an empty answer, and only one of those is a
+  // finding. Without this the caller cannot tell them apart.
+  if (res.stop_reason === "max_tokens") {
+    const t = res.usage?.output_tokens_details?.thinking_tokens ?? "?";
+    return {
+      deltas: {},
+      rejected: [
+        `hit the token ceiling before answering (thinking ${t} of ${res.usage?.output_tokens ?? "?"}). This is NOT a finding of no change.`,
+      ],
+    };
+  }
 
   const text = res.content.find((c) => c.type === "text")?.text ?? "{}";
+  if (process.env.RESEARCH_DEBUG) {
+    console.error(`\n--- ${roleId} stop_reason=${res.stop_reason} out=${res.usage?.output_tokens} think=${res.usage?.output_tokens_details?.thinking_tokens ?? 0}`);
+    console.error(text.slice(0, 700));
+  }
   let parsed;
   try {
-    parsed = JSON.parse(text.replace(/^```json\n?|\n?```$/g, ""));
+    parsed = JSON.parse(text.replace(/^```json\n?|\n?```$/g, "").trim());
   } catch {
     return { deltas: {}, rejected: ["unparseable response"] };
   }

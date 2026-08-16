@@ -8,7 +8,8 @@ import { latestPosition, type SavedPosition } from "./store";
 
 // What the reader has established, carried across the section.
 //
-// "AI and Your Company" is five tabs in a deliberate order: where do we stand,
+// The "What should we do about it?" group is five tabs in a deliberate order:
+// where do we stand,
 // what call do we make, what does it cost for a role, what binds us, and who
 // would deliver it. Each one was answering its question in isolation, so a
 // reader who had named their company on the first tab had to remember it

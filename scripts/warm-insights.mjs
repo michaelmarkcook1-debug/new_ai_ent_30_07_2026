@@ -18,6 +18,10 @@ const BASE = process.argv[2] ?? "https://newaient30072026.vercel.app";
 // Every page that calls authorInsight, plus the Pulse, which authors its own
 // hero. Kept as a list rather than derived: a page that stops authoring should
 // drop off this list deliberately, not silently.
+//
+// MIRRORS lib/analyst/warm-list.ts, which the /api/warm cron reads. This file
+// is plain JS and cannot import a TypeScript module, so the list lives twice.
+// tests/warm-list.test.ts fails if the two ever disagree.
 const PAGES = [
   "/pulse",
   "/trust-rank",

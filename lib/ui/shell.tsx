@@ -57,6 +57,21 @@ function Icon({ name }: { name: string }) {
   );
 }
 
+// The group labels are the questions each section answers, not the names of
+// the things inside it.
+//
+// The entry page at /start offers nine doors phrased as questions ("What is our
+// own AI position?", "What binds us legally, and where is the risk?") and a
+// reader arriving for the first time navigates it easily. The sidebar then
+// reverted to category nouns for every visit after, so the product taught one
+// mental model on the way in and a different one thereafter. Audited 16 August
+// 2026.
+//
+// Labels rather than a restructure: the grouping was already right, and the
+// source comment on the third group already described it as "the reader's own
+// decisions, in the order they make them". That sentence was true of the
+// section and invisible to the reader. Now it is the label. This costs no
+// vertical space, which matters in a sidebar carrying thirteen destinations.
 export const NAV_GROUPS: NavGroup[] = [
   {
     label: "Start here",
@@ -66,7 +81,7 @@ export const NAV_GROUPS: NavGroup[] = [
     ],
   },
   {
-    label: "Market Intelligence",
+    label: "What is the market doing?",
     items: [
       { label: "News", href: "/news-feed", icon: "news", hint: "What moved, and which vendors it bears on" },
       {
@@ -99,7 +114,7 @@ export const NAV_GROUPS: NavGroup[] = [
     // The reader's own decisions, in the order they make them: where do we
     // stand, what should each person get and what does it cost, what call do
     // we make, what binds us, and who would deliver it.
-    label: "AI and Your Company",
+    label: "What should we do about it?",
     items: [
       { label: "Your AI Position", href: "/company-view", icon: "company", hint: "Name your company and its public sources are researched and read against the AI market" },
       // Before ModelEngine, because that is the order the work happens in: the
