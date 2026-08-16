@@ -1,0 +1,327 @@
+{
+  "meta": {
+    "vertical": "real_estate",
+    "generated": "2026-08-16T10:43:48.337Z",
+    "retrievalModel": "claude-haiku-4-5",
+    "scoringModel": "claude-sonnet-5",
+    "status": "PROPOSED, NOT REVIEWED",
+    "reviewNote": "Every class A and B claim must be opened and read against its source before this is merged into customer-operations.json. The class is the product; the score is downstream of it."
+  },
+  "rejected": [
+    "ROLE-0047 CAP-10: from 50 but the library says 90"
+  ],
+  "deltas": {
+    "ROLE-0044": {
+      "CAP-03": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+        "why": "Navigating distinct jurisdictional regimes (Florida's 5-year statute of limitations under 475.25(5), Colorado's 240-day process, Québec's 60/90-day rule, RERA's 60-day disposal) requires expert-level knowledge of exceptions and rationale behind each rule, matching band 70 rather than standard-case practitioner knowledge."
+      },
+      "CAP-07": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "The role must gather and reconcile differing complaint-handling rules across Colorado, Québec, Florida, the UK and RERA jurisdictions, matching band 50 'gathers from several sources and reconciles differences' rather than looking up a single known internal source."
+      },
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Québec's requirement for a written final response within 60-90 days, and Florida's 455.225(9) mandated status notifications to complainants, make complaint correspondence binding and externally consequential, matching band 70 rather than routine internal documents."
+      },
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://dre.colorado.gov/complaint-process",
+        "why": "Statutory deadlines (Colorado's 240-day goal, Québec's 60/90-day cap, Florida's 10-day broker notification) impose strict, auditable timelines where missed deadlines are reportable regulatory events, matching band 70 rather than a discretionary internal procedure."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+        "why": "Undetected errors in complaint handling can trigger FREC fines of up to $5,000 per count under 475.25(1) and disciplinary action, matching band 70 'financial loss, regulatory attention' rather than errors requiring only internal rework."
+      },
+      "CAP-13": {
+        "from": 50,
+        "to": 10,
+        "class": "A",
+        "source_url": "https://dre.colorado.gov/complaint-process",
+        "why": "Regulatory complaint-handling timelines operate on a weeks-to-months cadence (60, 90, 240 days), matching band 10 'days or weeks are acceptable' rather than hourly turnaround assumed in the generic role."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code",
+        "why": "Recently introduced statutory obligations (Social Housing (Regulation) Act 2023 Complaint Handling Code requiring annual submissions and self-assessment; Québec's 2025 regulation requiring public complaint summaries) keep the role at band 70 formal audit-trail oversight, but the underlying rule has materially changed and must be tracked."
+      }
+    },
+    "ROLE-0045": {
+      "CAP-08": {
+        "from": 30,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Québec's regulation requires a written final response to a complaint, and Florida law requires formal written notifications to brokers and complainants at defined stages; these are binding, externally consequential documents rather than routine correspondence, matching the 70 band."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Statutory deadlines (Québec's 60/90-day response, RERA's 60-day disposal, Florida's 10-day notification, Colorado's 240-day goal) prescribe process to the letter; missing them is a breach with regulatory consequence, not merely a reportable deviation."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+        "why": "Under Section 475.25(1), an undetected handling error can lead to administrative fines up to $5,000 per count, i.e. regulatory attention and financial loss, which matches the 70 band rather than internal rework only."
+      },
+      "CAP-13": {
+        "from": 90,
+        "to": 10,
+        "class": "A",
+        "source_url": "https://dre.colorado.gov/complaint-process",
+        "why": "Colorado's complaint process allows up to 240 days for investigation and Québec allows 60-90 days for a final response, so the value of the work depends on statutory weeks/months, not seconds as the generic base assumes."
+      },
+      "CAP-15": {
+        "from": 30,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code",
+        "why": "The Complaint Handling Code mandates annual submissions and self-assessments plus regulator oversight, and Florida's DBPR must report investigation and appeal status; this creates a formal audit trail subject to inspection, matching the 70 band rather than informal supervisory review."
+      }
+    },
+    "ROLE-0046": {
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Québec's regulation requires a final written response to complainants within a statutory 60–90 day window, and Florida law requires formal written notification of investigation and probable-cause status to complainants and brokers; these are binding, externally-facing documents (band 70) rather than internal structured documents (band 50)."
+      },
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://dre.colorado.gov/complaint-process",
+        "why": "Multiple statutory regimes (Colorado 240-day investigation goal, Québec 60/90-day response deadline, RERA 60-day disposal requirement, Florida notification triggers) impose strict procedural deadlines and notification duties whose breach is a reportable regulatory event, matching band 70 rather than general adherence at band 50."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+        "why": "Under Section 475.25(1), Florida Statutes, mishandled complaints can trigger administrative fines up to $5,000 per count and licensing action, so undetected errors carry regulatory and financial consequences (band 70) beyond mere customer-facing rework (band 50)."
+      },
+      "CAP-13": {
+        "from": 50,
+        "to": 30,
+        "class": "A",
+        "source_url": "https://dre.colorado.gov/complaint-process",
+        "why": "Statutory complaint-handling timelines in this sector run to weeks or months (Colorado's 240-day goal, Québec's 60/90-day final response, RERA's 60-day disposal), showing the work is paced to same-day/longer turnaround rather than within-the-hour resolution implied by the base band 50."
+      },
+      "CAP-14": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.hlc.com/en/publications/consumer-duty-achieving-good-outcomes-for-vulnerable-customers",
+        "why": "FCA Consumer Duty requires tailoring communications and support based on customer vulnerability characteristics (often health or financial hardship indicators), and UK GDPR Article 30 imposes formal processing-record obligations, indicating handling of special-category-adjacent personal data (band 70) rather than only confidential commercial data (band 50)."
+      },
+      "CAP-15": {
+        "from": 10,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code",
+        "why": "The Complaint Handling Code under the Social Housing (Regulation) Act 2023 mandates annual self-assessments and public complaint-summary submissions, and Florida/Colorado regimes involve regulator-run investigations of complaints, establishing a formal audit trail subject to external inspection (band 70) rather than no review (band 10)."
+      }
+    },
+    "ROLE-0047": {
+      "CAP-03": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://dre.colorado.gov/complaint-process",
+        "why": "Complaints managers must navigate distinct statutory regimes (Colorado 240-day investigation process, Québec 60/90-day response rules, Florida Ch. 475 broker/associate provisions, India's RERA, France's Law 70-9/Decree 72-678) each with different substantive rules and exceptions, requiring expert-level practitioner knowledge rather than generic working knowledge (band 70: 'expert knowledge; recognises exceptions and knows why rules exist')."
+      },
+      "CAP-08": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.hlc.com/en/publications/consumer-duty-achieving-good-outcomes-for-vulnerable-customers",
+        "why": "FCA Consumer Duty requires firms to tailor communications so vulnerable customers receive outcomes as good as other customers, and Québec's rule mandates a public complaint-summary posting; both make exact wording of complaint communications carry direct regulatory and market consequence (band 90), beyond persuasive internal documents."
+      },
+      "CAP-15": {
+        "from": 90,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code",
+        "why": "The Social Housing (Regulation) Act 2023 recently codified mandatory annual self-assessments and submissions against the statutory Complaint Handling Code, reinforcing externally assured, individually accountable oversight (band 90 unchanged) and making this rule-driven requirement newly explicit in statute."
+      }
+    },
+    "ROLE-0048": {
+      "CAP-08": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Québec's real-estate/financial complaint regime mandates a formal written final response within a fixed 60-90 day window, and Florida requires structured statutory notifications to complainants at each investigation stage, moving output from routine correspondence to structured documents for a defined regulatory/consumer audience."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code",
+        "why": "The statutory Complaint Handling Code under the Social Housing (Regulation) Act 2023 requires landlords to follow prescribed procedures, submit annual self-assessments and comply to the letter, with deviation constituting a reportable breach with external regulatory consequence, matching the top band."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+        "why": "Florida Statutes Section 475.25(1) permits administrative fines up to $5,000 per count for mishandled licensee conduct, meaning undetected complaint-handling errors can trigger direct regulatory and financial consequence rather than mere internal rework."
+      },
+      "CAP-14": {
+        "from": 70,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.hlc.com/en/publications/consumer-duty-achieving-good-outcomes-for-vulnerable-customers",
+        "why": "FCA Consumer Duty rules require identifying and tailoring service for customers with characteristics of vulnerability, a recently strengthened obligation touching special-category personal data; band unchanged at 70 but the underlying rule is newly in force and should remain visible."
+      },
+      "CAP-15": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code",
+        "why": "The Complaint Handling Code requires annual submissions and self-assessments to a regulator, and Florida/Colorado regimes impose statutory investigation-status reporting, establishing a formal audit trail subject to regulator inspection rather than informal internal sign-off."
+      }
+    },
+    "ROLE-0049": {
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Quebec's 2025 complaint-handling regulation mandates a written final response within a statutory deadline and a publicly posted complaint summary, pushing output from internal structured documents (50) to binding, externally-facing communication (70)."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+        "why": "Florida Statute 475.25(6) requires written broker notification within a fixed 10-day window tied to license discipline, and multiple jurisdictions impose exact statutory deadlines (Quebec 60/90 days, Colorado 240 days, RERA 60 days); deviation is a licensing breach with external consequence, matching the 90 anchor rather than merely a reportable event."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+        "why": "Section 475.25(1) allows fines up to $5,000 per count and complaint mishandling triggers DBPR investigation and probable-cause findings, so undetected errors cause regulatory attention and financial loss (70) rather than only reaching colleagues/customers (50)."
+      },
+      "CAP-13": {
+        "from": 30,
+        "to": 10,
+        "class": "A",
+        "source_url": "https://dre.colorado.gov/complaint-process",
+        "why": "Statutory processes operate on weeks-to-months timelines (Colorado 240-day investigation goal, Quebec 60/90-day final response, RERA 60-day disposal), indicating the work is structured around long formal windows rather than same-day turnaround."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code",
+        "why": "The Social Housing (Regulation) Act 2023 Complaint Handling Code requires annual submissions and self-assessments to an external ombudsman, and Florida's FREC can impose individual license-holder fines/discipline, matching externally assured oversight with individual legal/licensing accountability (90)."
+      }
+    }
+  },
+  "evidence": {
+    "regime": "Real estate complaint handling and consumer protection regulations across multiple jurisdictions",
+    "sources": [
+      {
+        "title": "Colorado Real Estate Division Complaint Process Regulations",
+        "rule": "Respondent notification and response requirement; 240-day investigation completion goal",
+        "cite": "Colorado Division of Real Estate regulations",
+        "url": "https://dre.colorado.gov/complaint-process"
+      },
+      {
+        "title": "Regulation on Complaint Handling in Québec's Financial Sector",
+        "rule": "Final response must be provided in writing within 60 days, or maximum 90 days if exceptional circumstances apply; complaint summary must be posted on website in easily identifiable location",
+        "cite": "Québec financial sector complaint handling regulation",
+        "url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector"
+      },
+      {
+        "title": "The Complaint Handling Code",
+        "rule": "Landlords must comply with statutory complaint handling code requirements; annual submissions and self-assessments required",
+        "cite": "The Social Housing (Regulation) Act 2023",
+        "url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code"
+      },
+      {
+        "title": "Florida Statutes Section 455.225(9)",
+        "rule": "DBPR must notify person who filed complaint of investigation status, probable cause finding, and administrative proceeding or appeal status",
+        "cite": "Section 455.225(9), Florida Statutes",
+        "url": "https://www.floridarealtors.org/law-ethics/library/complaints"
+      },
+      {
+        "title": "Florida Statutes Section 475.25(5)",
+        "rule": "Buyer or seller has five years to file administrative complaint against broker or broker associate after act occurs or is discovered",
+        "cite": "Section 475.25(5), Florida Statutes",
+        "url": "https://www.floridarealtors.org/law-ethics/library/complaints"
+      },
+      {
+        "title": "Florida Statutes Section 475.25(6)",
+        "rule": "Broker must be notified in writing about complaint against sales associate within 10 days after probable cause finding or when associate waives confidentiality privilege",
+        "cite": "Section 475.25(6), Florida Statutes",
+        "url": "https://www.floridarealtors.org/law-ethics/library/complaints"
+      },
+      {
+        "title": "Florida Statutes Section 475.25(1)",
+        "rule": "Maximum administrative fine FREC may impose is $5,000 for each count or separate offense",
+        "cite": "Section 475.25(1), Florida Statutes",
+        "url": "https://www.floridarealtors.org/law-ethics/library/complaints"
+      },
+      {
+        "title": "Real Estate Regulation Act (RERA)",
+        "rule": "Real estate regulatory authority must dispose of application within 60 days from date of receiving it",
+        "cite": "Section 31, RERA",
+        "url": "https://www.youtube.com/watch?v=Et6NPh-OOEY"
+      },
+      {
+        "title": "French Law No. 70-9 of January 2, 1970",
+        "rule": "Regulates conditions for carrying out activities relating to transactions involving immovable property",
+        "cite": "Law No. 70-9 of January 2, 1970",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2954?lang=en"
+      },
+      {
+        "title": "French Decree No. 72-678 of 20 July 1972",
+        "rule": "Obligation to hold a warrant (Article 73) for real estate professionals",
+        "cite": "Decree No. 72-678, Article 73",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2954?lang=en"
+      },
+      {
+        "title": "French Order of 10 January 2017",
+        "rule": "Requires information for consumers by professionals involved in real estate transaction",
+        "cite": "Order of 10 January 2017",
+        "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2954?lang=en"
+      },
+      {
+        "title": "FCA Consumer Duty Regulation",
+        "rule": "Firms must ensure customers with characteristics of vulnerability receive outcomes as good as other customers and must tailor products, services, communications and support accordingly",
+        "cite": "FCA Consumer Duty",
+        "url": "https://www.hlc.com/en/publications/consumer-duty-achieving-good-outcomes-for-vulnerable-customers"
+      },
+      {
+        "title": "UK GDPR Article 30",
+        "rule": "Organizations with more than 250 employees and smaller organizations processing data regularly must maintain written record of all data processing activities",
+        "cite": "Article 30, UK GDPR",
+        "url": "https://www.ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-is-special-category-data"
+      }
+    ]
+  }
+}
