@@ -1,0 +1,210 @@
+{
+  "meta": {
+    "vertical": "professional_services",
+    "generated": "2026-08-16T09:59:42.130Z",
+    "retrievalModel": "claude-haiku-4-5",
+    "scoringModel": "claude-sonnet-5",
+    "status": "PROPOSED, NOT REVIEWED",
+    "reviewNote": "Every class A and B claim must be opened and read against its source before this is merged into customer-operations.json. The class is the product; the score is downstream of it."
+  },
+  "rejected": [
+    "ROLE-0046 CAP-10: from 30 but the library says 50",
+    "ROLE-0047 CAP-10: from 50 but the library says 90"
+  ],
+  "deltas": {
+    "ROLE-0044": {
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.icaew.com/regulation/probate-services/support-for-probate-accredited-firms/new-complaints-handling-requirements-from-1-october-2025/faqs-complaints-handling-requirements-for-accredited-legal-services-firms",
+        "why": "Regulations require final complaint responses to be in writing (Québec regime) and complaints procedures to be issued in accessible, tailored formats (ICAEW Part 7.4); these are binding documents seen by regulators and ombudsmen, matching band 70 rather than routine internal documents."
+      },
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Statutory deadlines are prescriptive and narrow (60/90 days Québec, 5 business days acknowledgment under ICAEW Part 7.6, 8-week escalation trigger under Legal Ombudsman Scheme Rule 4.2); missing them is a reportable regulatory event, not a tolerated deviation."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.ofgem.gov.uk/guidance/licence-guide-safety-and-vulnerable-consumer-protections",
+        "why": "Errors in complaint handling under Ofgem licence conditions, the Legal Services Act, and Québec's financial-sector regulation trigger regulatory attention and licence risk, not merely internal rework, matching the 70 band."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Section 112 of the Legal Services Act and the Legal Ombudsman Scheme Rules create external, statutory escalation and inspection of complaint handling with licensing consequence for the firm, matching band 90 rather than internal sign-off."
+      }
+    },
+    "ROLE-0045": {
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Ombudsman Scheme Rules (3.2, 4.2) let a complainant escalate externally after eight weeks, and Québec's regulation fixes 60/90-day final-response deadlines; missing these is a reportable breach with external consequence, matching the 90 anchor rather than the base 70."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Under the Québec complaint-handling regulation and ICAEW Part 7 rules, an undetected error (missed deadline, wrong format) triggers regulator or ombudsman attention and reputational damage, matching the 70 anchor rather than internal-only rework at 50."
+      },
+      "CAP-15": {
+        "from": 30,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Services Act s.112 statutory complaint requirements, ICAEW Part 7 acknowledgment rules, and Ofgem licence conditions place complaint handling under formal audit trails and regulator inspection, matching band 70 rather than informal internal review at 30."
+      }
+    },
+    "ROLE-0046": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Operating a CSM complaint-handling function under three distinct statutory regimes (Québec financial regulation, UK Legal Services Act, Ofgem licence conditions) requires practitioner-level recognition of standard regulatory cases and timelines, not just general familiarity, following directly from the named rules."
+      },
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Québec's regulation requires the final complaint response to be a written document that can trigger regulatory or ombudsman scrutiny, making it a binding external-facing communication rather than a routine internal document."
+      },
+      "CAP-13": {
+        "from": 50,
+        "to": 10,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "The regulated complaint-handling cycle explicitly permits 60-90 days for a final written response and 5 business days for acknowledgment, meaning days-to-weeks turnaround is the norm rather than within-the-hour responsiveness assumed in the base role."
+      },
+      "CAP-15": {
+        "from": 10,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.ofgem.gov.uk/guidance/licence-guide-safety-and-vulnerable-consumer-protections",
+        "why": "Complaint handling sits under licence conditions (Ofgem) and statutory ombudsman referral rights (Legal Ombudsman Scheme Rules), creating a formal audit trail subject to regulator inspection rather than informal supervisory review."
+      }
+    },
+    "ROLE-0047": {
+      "CAP-15": {
+        "from": 90,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "The band is unchanged but the underlying rule is new: Québec's 2025 complaint-handling regulation and the ICAEW's complaints regime effective 1 October 2025 both impose external, regulator-facing accountability for how complaints are logged, escalated and closed, so the requirement remains at band 90 ('externally assured; individual accountability with legal or licensing consequence') under freshly issued authority rather than the prior generic regime."
+      }
+    },
+    "ROLE-0048": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Operating complaint handling across three distinct regulatory regimes (Québec financial services, UK Legal Services Act s.112/Ombudsman rules, Ofgem licence conditions) requires practitioner-level knowledge of each regime's specific deadlines, escalation routes and exceptions, moving beyond generic familiarity to band 50 'recognises standard cases' within each regulated domain."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Ombudsman Scheme Rules 3.2/4.2 give complainants a statutory right to escalate externally after eight weeks, and Québec regulation fixes a hard 60/90-day final-response deadline; missing these prescribed timelines is a breach with external regulatory consequence, matching band 90 rather than an internally reportable deviation."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Because complaint-handling failures under the Québec regulation and Legal Services Act trigger regulator attention or ombudsman escalation rather than mere internal correction, undetected errors now carry regulatory and reputational cost consistent with band 70."
+      },
+      "CAP-15": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.ofgem.gov.uk/guidance/licence-guide-safety-and-vulnerable-consumer-protections",
+        "why": "Ofgem licence conditions, the Legal Ombudsman scheme, and Québec's financial complaint regulation each impose named regulator oversight of complaint handling, creating a formal audit trail subject to regulator inspection, matching band 70 rather than informal internal sign-off."
+      }
+    },
+    "ROLE-0049": {
+      "CAP-10": {
+        "from": 70,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Québec's new complaint-handling regulation (2025) and ICAEW's Part 7 rules (effective Oct 2025) impose defined statutory timelines and formats; deviation is a reportable regulatory event, matching the existing 70 band, but the rule itself is new and must stay visible."
+      },
+      "CAP-13": {
+        "from": 30,
+        "to": 10,
+        "class": "A",
+        "source_url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+        "why": "Statutory response windows of 60-90 days (Québec) and 8-week escalation to the Legal Ombudsman show the work is judged on weeks-long cycles, not same-day turnaround, matching the 'days or weeks acceptable' anchor rather than the base same-day band."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+        "why": "Legal Services Act s.112 and Legal Ombudsman Scheme Rules 3.2/4.2 create a statutory external escalation path with individual firm accountability and licensing consequence, moving beyond internal audit trail (70) to externally assured accountability (90)."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.ofgem.gov.uk/guidance/licence-guide-safety-and-vulnerable-consumer-protections",
+        "why": "Failure to meet statutory complaint-handling obligations (Québec timelines, Legal Services Act duties, Ofgem licence conditions) triggers regulatory attention or licence risk, matching 'errors cause financial loss, regulatory attention or reputational damage' rather than mere internal rework."
+      },
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.icaew.com/regulation/probate-services/support-for-probate-accredited-firms/new-complaints-handling-requirements-from-1-october-2025/faqs-complaints-handling-requirements-for-accredited-legal-services-firms",
+        "why": "Part 7 (7.4/7.6) requires final complaint responses in writing, accessible and tailored formats, usable as evidence before the Legal Ombudsman-these are binding, externally consequential documents rather than routine internal correspondence."
+      }
+    }
+  },
+  "evidence": {
+    "regime": "Financial services complaint handling regulations in Québec, UK legal services, and energy supply consumer protection",
+    "sources": [
+      {
+        "title": "Regulation on Complaint Handling in Québec's Financial Sector",
+        "rule": "Final response must be provided in writing within 60 days, or a maximum of 90 days if exceptional circumstances apply",
+        "cite": "Québec financial sector regulation (specific article not provided in source)",
+        "url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector"
+      },
+      {
+        "title": "Legal Services Regulations (ICAEW)",
+        "rule": "Part 7 - Complaints procedure should be accessible and in tailored formats where appropriate; complaints should be acknowledged within five business days",
+        "cite": "Part 7, regulations 7.4 and 7.6",
+        "url": "https://www.icaew.com/regulation/probate-services/support-for-probate-accredited-firms/new-complaints-handling-requirements-from-1-october-2025/faqs-complaints-handling-requirements-for-accredited-legal-services-firms"
+      },
+      {
+        "title": "Legal Services Act",
+        "rule": "Section 112 - statutory requirements for complaint handling",
+        "cite": "Section 112",
+        "url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide"
+      },
+      {
+        "title": "Legal Ombudsman Scheme Rules",
+        "rule": "Section 3.2 and Rule 4.2 - complainant can refer complaint to Legal Ombudsman after eight weeks from date complaint is raised",
+        "cite": "Scheme Rules 3.2 and 4.2",
+        "url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide"
+      },
+      {
+        "title": "Ofgem Licence Guide: Safety and Vulnerable Consumer Protections",
+        "rule": "Sets out relevant licence conditions for safety of energy supply and specific protections for consumers in vulnerable situations",
+        "cite": "Licence conditions (specific conditions referenced in PDF)",
+        "url": "https://www.ofgem.gov.uk/guidance/licence-guide-safety-and-vulnerable-consumer-protections"
+      }
+    ]
+  }
+}

@@ -4,6 +4,7 @@ import {
   jurisdictionCoverage,
   type ShortlistCategory,
   type JurisdictionFilter,
+  type JurisdictionBasis,
 } from "./shortlist";
 import { PILOT_STEPS, type PilotStep } from "./pilot";
 import { DEFAULT_WEIGHTS } from "@/lib/vendor/composite";
@@ -30,7 +31,13 @@ export interface ShortlistCardPayload {
   reason: string;
   limit: string;
   /** Null where the Sovereignty Lens has not reached this vendor. */
-  jurisdiction: { flag: string; hq: string; why: string } | null;
+  jurisdiction: {
+    flag: string;
+    hq: string;
+    why: string;
+    /** How we know: a fetched policy, or country of incorporation. */
+    basis: JurisdictionBasis;
+  } | null;
 }
 
 export interface ShortlistCategoryPayload {
@@ -55,8 +62,13 @@ export interface ShortlistPayload {
    *  carrying three copies of the other eighteen cost 40 KB to say the same
    *  thing three times. Read it through `shortlistFor()`, never directly. */
   byFilter: Record<JurisdictionFilter, Record<string, ShortlistCategoryPayload>>;
-  /** How many scored vendors the Sovereignty Lens actually reaches. */
-  jurisdictionCoverage: { assessed: number; total: number };
+  /** How many scored vendors we reach, split by strength of evidence. */
+  jurisdictionCoverage: {
+    assessed: number;
+    total: number;
+    fromDocument: number;
+    fromPublicRecord: number;
+  };
   /** Opened on first render: the category that can rank the most vendors. */
   defaultCategory: string;
   steps: PilotStep[];
@@ -101,6 +113,7 @@ export function shortlistPayload(): ShortlistPayload {
                 flag: e.jurisdiction.flag,
                 hq: e.jurisdiction.hqJurisdiction,
                 why: e.jurisdiction.flagNote,
+                basis: e.jurisdiction.basis,
               }
             : null,
         })),

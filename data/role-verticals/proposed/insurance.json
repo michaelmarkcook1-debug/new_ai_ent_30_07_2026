@@ -1,0 +1,266 @@
+{
+  "meta": {
+    "vertical": "insurance",
+    "generated": "2026-08-16T08:44:21.811Z",
+    "retrievalModel": "claude-haiku-4-5",
+    "scoringModel": "claude-sonnet-5",
+    "status": "PROPOSED, NOT REVIEWED",
+    "reviewNote": "Every class A and B claim must be opened and read against its source before this is merged into customer-operations.json. The class is the product; the score is downstream of it."
+  },
+  "rejected": [],
+  "deltas": {
+    "ROLE-0044": {
+      "CAP-03": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://media.umbraco.io/ciigroup-dxp/eaedofqi/managing-customer-vulnerability-in-insurance-and-personal-finance-a-practical-implementation-guide.pdf",
+        "why": "FCA Consumer Duty (PRIN 2A.2.22R) and GDPR Art.9(2)/DPA 2018 Sch.1 Para 20 require recognising when special-category or vulnerable-customer exceptions apply and why they exist, matching the 'expert knowledge; recognises exceptions' band rather than routine practitioner knowledge."
+      },
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://chad.ca/en/professional-practice/complaint-examination-policy",
+        "why": "Quebec's complaint regulation (ss.5-10, 30) and Texas 28 TAC 13.492 mandate specific, regulator-defined written acknowledgments and consumer-facing complaint summaries with prescribed content, i.e. binding external documents rather than routine internal correspondence."
+      },
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492",
+        "why": "Multiple regimes (Quebec complaint regulation in force July 2025, Texas 13.492 seven-day deadlines, CIMA Corporate Governance/Internal Controls rules) impose fixed procedural deadlines and formats whose breach is a reportable compliance event, matching the strict-compliance band rather than general adherence."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.cima.ky/complaints-handling-and-regulatory-expectations",
+        "why": "Undetected errors in complaint handling, record retention, or vulnerable-customer monitoring under CIMA, Texas and FCA rules trigger regulatory attention or reportable breaches, not merely customer-level correction, matching the 'regulatory attention or reputational damage' band."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://chad.ca/en/professional-practice/complaint-examination-policy",
+        "why": "The Quebec complaint-handling regulation (effective July 1, 2025) newly mandates formal complaint policies and audit-ready records subject to regulator review, reaffirming rather than shifting the existing 'formal audit trail; regulator inspection' band."
+      }
+    },
+    "ROLE-0045": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://media.umbraco.io/ciigroup-dxp/eaedofqi/managing-customer-vulnerability-in-insurance-and-personal-finance-a-practical-implementation-guide.pdf",
+        "why": "FCA Consumer Duty vulnerable-customer monitoring and multi-jurisdiction complaint regimes require practitioner-level knowledge of specific regulatory categories and standard cases (vulnerability triggers, complaint classification), matching band 50 rather than generic field familiarity."
+      },
+      "CAP-08": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://chad.ca/en/professional-practice/complaint-examination-policy",
+        "why": "Quebec's complaint regulation (in force July 1, 2025) mandates acknowledgment letters and summaries with specified, regulator-defined content for external consumers, requiring structured documents beyond routine correspondence."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492",
+        "why": "28 Tex. Admin. Code § 13.492 and the Quebec complaint regulation impose specific mandatory deadlines and content for complaint acknowledgment and handling; failure is a regulatory breach with external consequence, matching band 90 rather than 70."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://media.umbraco.io/ciigroup-dxp/eaedofqi/managing-customer-vulnerability-in-insurance-and-personal-finance-a-practical-implementation-guide.pdf",
+        "why": "Undetected errors in complaint handling or vulnerable-customer monitoring under FCA Consumer Duty and cross-jurisdiction complaint rules can trigger regulatory attention or reportable failures, not just internal rework, matching band 70."
+      },
+      "CAP-15": {
+        "from": 30,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.cima.ky/complaints-handling-and-regulatory-expectations",
+        "why": "CIMA's Corporate Governance Rule 5.7.5 and Internal Controls Rule 12.11/12.12 require a documented complaints-handling framework subject to regulatory inspection, and FCA Consumer Duty requires an evidence trail for vulnerable customers, matching the formal audit-trail band 70."
+      }
+    },
+    "ROLE-0046": {
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492",
+        "why": "Insurance complaint handling is bound by strict statutory deadlines and prescribed content (e.g., 7-day written acknowledgment under 28 Tex. Admin. Code §13.492, Quebec's mandatory complaint policy and acknowledgment content under Sections 5-10 and 30), making deviation a reportable regulatory event rather than a tolerated variance, matching band 70."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://chad.ca/en/professional-practice/complaint-examination-policy",
+        "why": "Errors in complaint handling or record management in insurance trigger regulatory attention under regimes like the Quebec complaint regulation and CIMA's Internal Controls Rule, moving beyond internal rework to band 70 ('regulatory attention or reputational damage')."
+      },
+      "CAP-14": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://dwfgroup.com/en/news-and-insights/insights/2018/5/data-protection-act-2018-what-is-it-and-what-does-it-mean-for-insurance",
+        "why": "GDPR Article 9 classifies health data processed for insurance purposes as special-category data requiring specific safeguards (DPA 2018 Schedule 1 Para 20), matching band 70 ('special-category personal data, regulated financial or health records') rather than generic confidential data."
+      },
+      "CAP-15": {
+        "from": 10,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.cima.ky/complaints-handling-and-regulatory-expectations",
+        "why": "CIMA's Corporate Governance and Internal Controls Rules mandate a formal complaints-handling framework subject to regulatory inspection, and the FCA Consumer Duty requires an evidence trail on vulnerable customers with a duty to notify the regulator of non-compliance, matching band 70 ('formal audit trail; subject to internal audit or regulator inspection') rather than informal review."
+      }
+    },
+    "ROLE-0047": {
+      "CAP-03": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://media.umbraco.io/ciigroup-dxp/eaedofqi/managing-customer-vulnerability-in-insurance-and-personal-finance-a-practical-implementation-guide.pdf",
+        "why": "FCA Consumer Duty (PRIN 2A.2.22R) requires ongoing reactive and proactive identification of vulnerable customers and maintenance of an evidence trail, which demands expert-level recognition of exceptions and the reasons behind protection rules rather than routine practitioner knowledge."
+      },
+      "CAP-08": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://chad.ca/en/professional-practice/complaint-examination-policy",
+        "why": "Quebec's Regulation respecting complaint processing (ss.5-10, 30) and 28 Tex. Admin. Code §13.492 mandate specific, regulator-prescribed wording and content in complaint acknowledgments and consumer-facing policy summaries, so the exact language used carries direct regulatory consequence."
+      },
+      "CAP-10": {
+        "from": 90,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://chad.ca/en/professional-practice/complaint-examination-policy",
+        "why": "Quebec's Regulation respecting complaint processing and dispute resolution (in force July 1, 2025) and 28 Tex. Admin. Code §13.492 impose strict, dated procedural steps (e.g. 7-day acknowledgment) whose breach is externally reportable; band stays at the ceiling but the underlying rule is newly in force, so the change is flagged for visibility."
+      }
+    },
+    "ROLE-0048": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://media.umbraco.io/ciigroup-dxp/eaedofqi/managing-customer-vulnerability-in-insurance-and-personal-finance-a-practical-implementation-guide.pdf",
+        "why": "Insurance regulatory regimes (FCA Consumer Duty vulnerable-customer rules, multi-jurisdictional complaint/retention regimes) require the manager to recognise standard regulated cases (vulnerable customer status, complaint categorisation, retention triggers) rather than apply general knowledge, matching band 50 practitioner-level recognition rather than the generic band 30 familiarity."
+      },
+      "CAP-09": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://media.umbraco.io/ciigroup-dxp/eaedofqi/managing-customer-vulnerability-in-insurance-and-personal-finance-a-practical-implementation-guide.pdf",
+        "why": "PRIN 2A.2.22R requires monitoring vulnerable customers reactively and proactively over the whole product/service lifetime with an evidence trail of changes, meaning a detail arising at one point in a long customer history changes handling elsewhere, matching band 70 rather than a single substantial case file."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://chad.ca/en/professional-practice/complaint-examination-policy",
+        "why": "The Regulation respecting complaint processing and dispute resolution (in force 1 July 2025) newly prescribes specific acknowledgment content, policy distribution and fair-handling duties (Sections 5-10, 30); deviation is a reportable regulatory event, confirming band 70 under a materially updated rule."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492",
+        "why": "Under 28 Tex. Admin. Code §13.492 and CIMA's Internal Controls Rule/SOG, mishandled complaints or failed acknowledgment/investigation deadlines trigger regulatory attention, not just internal rework, matching band 70 (errors causing regulatory attention or reputational damage)."
+      },
+      "CAP-15": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.cima.ky/complaints-handling-and-regulatory-expectations",
+        "why": "CIMA's Corporate Governance Rule (5.7.5) and Internal Controls Rule/SOG (12.11-12.12) require a documented complaints-handling framework subject to regulatory inspection, and FCA Consumer Duty requires an evidence trail and notification to the regulator, matching band 70 formal audit-trail/regulator-inspection requirements rather than informal sign-off."
+      }
+    },
+    "ROLE-0049": {
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://chad.ca/en/professional-practice/complaint-examination-policy",
+        "why": "The Quebec complaint-handling regulation (in force July 2025) and the Texas 7-day acknowledgment rule (28 Tex. Admin. Code §13.492) mandate exact procedures, timelines and required content for complaint communications; deviation is a statutory breach with external regulatory consequence, matching the 90 anchor rather than the base 70 'reportable event' level."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492",
+        "why": "Because complaint handling is governed by enforceable deadlines and investigation duties (Texas Insurance Code §848.107, Quebec regulation), an undetected error (missed deadline, mishandled complaint) triggers regulatory attention or sanction rather than mere internal rework, moving from band 50 to band 70."
+      },
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://media.umbraco.io/ciigroup-dxp/eaedofqi/managing-customer-vulnerability-in-insurance-and-personal-finance-a-practical-implementation-guide.pdf",
+        "why": "Operating across overlapping regimes (FCA Consumer Duty vulnerable-customer monitoring, CIMA governance rules, multi-jurisdiction complaint and retention rules) requires working practitioner knowledge to recognise standard regulated cases, beyond mere familiarity with field terms."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://chad.ca/en/professional-practice/complaint-examination-policy",
+        "why": "The Quebec regulation on complaint processing and dispute resolution (effective July 1, 2025) newly codifies formal complaint-handling policy, acknowledgment and audit obligations; the band remains 70 (formal audit trail, subject to regulator inspection) but the underlying rule has materially changed, so the requirement is flagged for visibility."
+      }
+    }
+  },
+  "evidence": {
+    "regime": "Insurance regulatory compliance including claims handling, complaints procedures, record retention, and vulnerable customer protections across multiple jurisdictions",
+    "sources": [
+      {
+        "title": "Regulation respecting complaint processing and dispute resolution in the financial sector",
+        "rule": "Entry into force July 1, 2025; requires firms to adopt a complaint handling policy and communicate it internally and externally, produce and distribute a summary to consumers, ensure fair handling of complaints, and send acknowledgment of receipt with specified information",
+        "cite": "Regulation respecting complaint processing and dispute resolution in the financial sector, Sections 5-10 and 30",
+        "url": "https://chad.ca/en/professional-practice/complaint-examination-policy"
+      },
+      {
+        "title": "Rule on Corporate Governance for Regulated Entities and Rule and Statement of Guidance on Internal Controls for Regulated Entities",
+        "rule": "Section 5.7.5 of the Corporate Governance Rule and Sections 12.11 & 12.12 of the Internal Controls Rule and SOG prescribe requirements for complaints-handling framework that regulated entities must incorporate",
+        "cite": "Section 5.7.5 of the Corporate Governance Rule; Sections 12.11 & 12.12 of the Internal Controls Rule and SOG",
+        "url": "https://www.cima.ky/complaints-handling-and-regulatory-expectations"
+      },
+      {
+        "title": "28 Tex. Admin. Code § 13.492 - Complaints; Deadlines for Response and Resolution",
+        "rule": "An HCC must acknowledge receipt of a complaint in writing within seven calendar days, acknowledge the date of receipt, provide a description of complaint procedures and deadlines, and investigate each complaint in accord with its policies and Insurance Code § 848.107",
+        "cite": "28 Tex. Admin. Code § 13.492(a) and (b)",
+        "url": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492"
+      },
+      {
+        "title": "N.Y. Comp. Codes R. & Regs. tit. 11, Part 243 (Regulation 152)",
+        "rule": "A policy record for each insurance contract or policy must be retained for six calendar years after the policy is no longer in force or until the filing of the report on examination in which the record was subject to review, whichever is longer",
+        "cite": "N.Y. Comp. Codes R. & Regs. tit. 11, Part 243, Section 243.2(b)(1)",
+        "url": "https://www.dfs.ny.gov/insurance/ogco2005/rg050332.htm"
+      },
+      {
+        "title": "N.Y. Ins. Law § 2119(a) & (c) and N.Y. Comp. Codes R. & Regs. tit. 11, § 20.4(b) & (c) (Regulation 29)",
+        "rule": "Record retention requirements for customer records of insurance agents and insurance brokers",
+        "cite": "N.Y. Ins. Law § 2119(a) & (c); N.Y. Comp. Codes R. & Regs. tit. 11, § 20.4(b) & (c)",
+        "url": "https://www.dfs.ny.gov/insurance/ogco2005/rg050332.htm"
+      },
+      {
+        "title": "Proceeds of Crime Money Laundering and Terrorist Financing Act (PCMLTFA) and associated Regulations",
+        "rule": "Life insurance companies, brokers and agents must meet record keeping obligations for purposes of PCMLTFA compliance with retention periods that cannot be shorter than specified requirements",
+        "cite": "PCMLTFA and associated Regulations",
+        "url": "https://fintrac-canafe.canada.ca/guidance-directives/recordkeeping-document/record/li-eng"
+      },
+      {
+        "title": "FCA Consumer Duty",
+        "rule": "Firms must monitor vulnerable customers over the product/service lifetime both reactively and proactively, maintain an evidence trail of changes, and notify the FCA where they become aware that another firm may not be complying with the Duty (PRIN 2A.2.22 R)",
+        "cite": "PRIN 2A.2.22 R and Consumer Duty requirements on vulnerable customer monitoring",
+        "url": "https://media.umbraco.io/ciigroup-dxp/eaedofqi/managing-customer-vulnerability-in-insurance-and-personal-finance-a-practical-implementation-guide.pdf"
+      },
+      {
+        "title": "General Data Protection Regulation (GDPR)",
+        "rule": "Article 9 prohibits processing of special category data including health data unless a legal basis applies; Article 9(2) provides exemptions including where processing is necessary for insurance purposes",
+        "cite": "Article 9 and Article 9(2) of GDPR",
+        "url": "https://dwfgroup.com/en/news-and-insights/insights/2018/5/data-protection-act-2018-what-is-it-and-what-does-it-mean-for-insurance"
+      },
+      {
+        "title": "Data Protection Act 2018",
+        "rule": "Schedule 1 Para 20 authorizes processing of special category data where necessary for an insurance purpose; Part 4 of Schedule 1 requires data controllers to have in place an appropriate policy document and additional safeguards for handling special category data",
+        "cite": "Schedule 1 Para 20; Part 4 of Schedule 1",
+        "url": "https://dwfgroup.com/en/news-and-insights/insights/2018/5/data-protection-act-2018-what-is-it-and-what-does-it-mean-for-insurance"
+      }
+    ]
+  }
+}

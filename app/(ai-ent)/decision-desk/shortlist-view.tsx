@@ -37,6 +37,14 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
   const list = shortlistFor(payload, filter, category);
   const cats = payload.categories;
 
+  // Coverage reads differently once it is complete. At 13 of 43 the sentence
+  // had to warn about the two thirds we had not reached; at 43 of 43 that
+  // warning describes an empty set and reads as though something is missing.
+  // The pass-through rule is still stated, as a standing rule rather than as a
+  // caveat about vendors on screen.
+  const cov = payload.jurisdictionCoverage;
+  const covComplete = cov.assessed === cov.total;
+
   const shortlisted = list
     ? list.entries.filter((e) => ids.includes(e.vendorId)).length
     : 0;
@@ -135,15 +143,24 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
         <p className="measure mt-2 text-sm text-muted">
           Jurisdiction is established for{" "}
           <span className="font-semibold">
-            {payload.jurisdictionCoverage.assessed} of the{" "}
-            {payload.jurisdictionCoverage.total}
+            {covComplete
+              ? `all ${cov.total}`
+              : `${cov.assessed} of the ${cov.total}`}
           </span>{" "}
-          scored vendors, from their own published terms. A vendor we have not
-          reached is left in the ranking rather than excluded:{" "}
+          scored vendors, and how we know it differs:{" "}
           <span className="font-semibold">
-            it has not been cleared, it has not been looked at
+            {cov.fromDocument} from the vendor&rsquo;s own published terms
           </span>
-          . Excluding on silence would drop most of the market on no evidence.
+          , which is the stronger answer because it says where your data sits,
+          and{" "}
+          <span className="font-semibold">
+            {cov.fromPublicRecord} from public record
+          </span>
+          , which establishes only which legal system reaches the company, not
+          where it keeps your data.{" "}
+          {covComplete
+            ? "A vendor we had not reached would be ranked rather than excluded, because silence is not clearance. There are none today."
+            : "A vendor we have not reached is left in the ranking rather than excluded: it has not been cleared, it has not been looked at."}
         </p>
       </section>
 
@@ -247,7 +264,11 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
                 </div>
 
                 {e.jurisdiction ? (
+                  // title carries the reasoning in full. Every note is written
+                  // to be checkable, so a reader can accept the facts and
+                  // reject the inference rather than take the flag on trust.
                   <p
+                    title={e.jurisdiction.why}
                     className={`mt-2 rounded px-2 py-1 text-sm ${
                       e.jurisdiction.flag === "hard-stop"
                         ? "bg-bad-bg text-error"
@@ -260,6 +281,15 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
                     {e.jurisdiction.flag !== "none"
                       ? ` · ${e.jurisdiction.flag === "hard-stop" ? "hard stop" : "consideration"}`
                       : ""}
+                    {/* How we know, because the two are not the same claim: a
+                        fetched policy says where the data sits, public record
+                        only says which legal system reaches the company. */}
+                    <span className="opacity-70">
+                      {" · "}
+                      {e.jurisdiction.basis === "vendor-document"
+                        ? "their terms"
+                        : "public record"}
+                    </span>
                   </p>
                 ) : (
                   <p className="mt-2 rounded bg-base-200 px-2 py-1 text-sm text-muted">

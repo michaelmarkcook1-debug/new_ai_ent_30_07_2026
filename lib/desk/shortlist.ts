@@ -1,6 +1,7 @@
 import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import { scorecardSet } from "@/lib/vendor/composite-data";
 import { sovereigntyRows, type SovereigntyFlag } from "@/lib/shield/sovereignty";
+import { HQ_REGISTER } from "@/lib/shield/hq-register";
 import { vendorIdForSlug } from "@/lib/shield/vendor-map";
 import { isInvestor } from "@/lib/vendor/is-investor";
 import {
@@ -90,18 +91,31 @@ export interface Shortlist {
  * documented Singapore hosting, and DeepSeek is a hard stop on its own
  * admission that it stores in the PRC.
  *
- * IT COVERS 13 OF THE 43 SCORED VENDORS, and that is the fact the filter has to
- * carry with it. A vendor absent from the Shield has not been cleared, it has
- * not been looked at, and a filter that silently passed it would convert our own
- * gap into a clean bill of health, which is the worst thing a control like this
- * can do. The Shield holds 14 entries and one maps to no scored vendor, so the
- * figure on screen comes from jurisdictionCoverage() rather than from a number
- * written here that would rot.
+ * IT USED TO COVER 13 OF THE 43 SCORED VENDORS. A vendor absent from the Shield
+ * has not been cleared, it has not been looked at, and a filter that silently
+ * passed it would convert our own gap into a clean bill of health, which is the
+ * worst thing a control like this can do. So unassessed vendors are passed
+ * through and the interface says why.
+ *
+ * That default is right and it was not safe at 13 of 43, because MiniMax sat in
+ * the unassessed two thirds. It is a Shanghai-headquartered frontier lab, so a
+ * reader who asked to exclude Chinese providers was shown one. The fix is
+ * coverage rather than a change of default: lib/shield/hq-register.ts carries
+ * the other thirty on public record.
+ *
+ * TWO EVIDENCE CLASSES, AND THE STRONGER ONE WINS. The Shield is a fetched,
+ * quoted policy and answers where the data sits. The register is country of
+ * incorporation and answers only which legal system reaches the company. Both
+ * are read, the Shield first, and every jurisdiction carries the class it came
+ * from so no surface can present the weaker one as the stronger.
  */
+export type JurisdictionBasis = "vendor-document" | "public-record";
+
 export type Jurisdiction = {
   flag: SovereigntyFlag;
   hqJurisdiction: string;
   flagNote: string;
+  basis: JurisdictionBasis;
 };
 
 let jurisdictionCache: Map<string, Jurisdiction> | null = null;
@@ -109,6 +123,19 @@ let jurisdictionCache: Map<string, Jurisdiction> | null = null;
 function jurisdictions(): Map<string, Jurisdiction> {
   if (jurisdictionCache) return jurisdictionCache;
   const m = new Map<string, Jurisdiction>();
+
+  // Public record first, so that a Shield row overwrites it rather than the
+  // other way round. A vendor in both should be reported on the evidence we
+  // actually fetched.
+  for (const [id, r] of Object.entries(HQ_REGISTER)) {
+    m.set(id, {
+      flag: r.flag,
+      hqJurisdiction: r.hqJurisdiction,
+      flagNote: r.flagNote,
+      basis: "public-record",
+    });
+  }
+
   for (const r of sovereigntyRows()) {
     const id = vendorIdForSlug(r.slug);
     if (!id) continue;
@@ -116,8 +143,10 @@ function jurisdictions(): Map<string, Jurisdiction> {
       flag: r.flag,
       hqJurisdiction: r.hqJurisdiction,
       flagNote: r.flagNote,
+      basis: "vendor-document",
     });
   }
+
   jurisdictionCache = m;
   return m;
 }
@@ -126,13 +155,29 @@ export function jurisdictionFor(vendorId: string): Jurisdiction | null {
   return jurisdictions().get(vendorId) ?? null;
 }
 
-/** How many of the scored vendors the lens actually reaches. */
-export function jurisdictionCoverage(): { assessed: number; total: number } {
+/**
+ * How many of the scored vendors we reach, split by how we know.
+ *
+ * Split rather than totalled because the two are not the same claim, and a
+ * single number would let a reader take thirty public-record entries for thirty
+ * fetched policies.
+ */
+export function jurisdictionCoverage(): {
+  assessed: number;
+  total: number;
+  fromDocument: number;
+  fromPublicRecord: number;
+} {
   const set = scorecardSet();
   const j = jurisdictions();
+  const found = set.vendors
+    .map((v) => j.get(v.vendorId))
+    .filter((x): x is Jurisdiction => Boolean(x));
   return {
-    assessed: set.vendors.filter((v) => j.has(v.vendorId)).length,
+    assessed: found.length,
     total: set.vendors.length,
+    fromDocument: found.filter((x) => x.basis === "vendor-document").length,
+    fromPublicRecord: found.filter((x) => x.basis === "public-record").length,
   };
 }
 
@@ -268,12 +313,21 @@ function limitFor(category: string): string {
  */
 export type JurisdictionFilter = "all" | "no-stop" | "cleared";
 
-function passesFilter(vendorId: string, f: JurisdictionFilter): boolean {
+/**
+ * Exported so the pass-through rule can be pinned directly.
+ *
+ * It used to be pinned by asserting that some vendor in the scored set had no
+ * jurisdiction record, which stopped being true when the register closed the
+ * gap. That made a rule we still rely on look like it had been removed. The
+ * rule is not a fact about today's coverage and should not be tested as one.
+ */
+export function passesFilter(vendorId: string, f: JurisdictionFilter): boolean {
   if (f === "all") return true;
   const j = jurisdictionFor(vendorId);
-  // Unassessed vendors are NOT dropped. The lens covers 13 of the 43, and treating
-  // silence as a flag would remove two thirds of the market on no evidence.
-  // The interface says this rather than the filter guessing.
+  // Unassessed vendors are NOT dropped, and treating silence as a flag would be
+  // a guess. The interface says so rather than the filter pretending otherwise.
+  // Coverage is now most of the scored set, so the rule bites on far fewer
+  // vendors than it did, but the reasoning is unchanged and so is the default.
   if (!j) return true;
   if (f === "no-stop") return j.flag !== "hard-stop";
   return j.flag === "none";

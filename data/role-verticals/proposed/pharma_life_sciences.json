@@ -1,0 +1,246 @@
+{
+  "meta": {
+    "vertical": "pharma_life_sciences",
+    "generated": "2026-08-16T09:53:55.476Z",
+    "retrievalModel": "claude-haiku-4-5",
+    "scoringModel": "claude-sonnet-5",
+    "status": "PROPOSED, NOT REVIEWED",
+    "reviewNote": "Every class A and B claim must be opened and read against its source before this is merged into customer-operations.json. The class is the product; the score is downstream of it."
+  },
+  "rejected": [
+    "ROLE-0047 CAP-10: from 50 but the library says 90",
+    "ROLE-0048 CAP-12: from 30 but the library says 70"
+  ],
+  "deltas": {
+    "ROLE-0044": {
+      "CAP-03": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 requires judgment on whether a complaint indicates possible product failure warranting formal investigation, requiring expert-level knowledge of GMP exceptions rather than routine practitioner recognition, matching the 70 band."
+      },
+      "CAP-09": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 mandates batch record examination for every quality-related complaint, meaning details in the complaint must be reconciled against large, cross-referenced manufacturing records, matching the 70-band description of interdependent material."
+      },
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 requires documented SOPs and mandatory investigation triggers for complaint handling; deviation from these procedures is a reportable GMP event, matching the 70-band 'strict compliance; deviation is a reportable event.'"
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "Under 21 CFR §211.198, an undetected error in complaint assessment (e.g. missing an investigation trigger) can cause regulatory attention or product recall, matching the 70-band cost-of-error anchor."
+      },
+      "CAP-12": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://host.etq.com/life-sciences-compliance",
+        "why": "21 CFR Part 11 requires electronic records and signatures across complaint, batch, and CAPA systems where handoffs must be valid and traceable, matching the 70-band 'orchestrates multiple systems where handoffs must not fail.'"
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://simplerqms.com/pharmaceutical-complaint-management",
+        "why": "EU GMP Chapter 8 names a designated individual personally responsible for complaint records and investigations, and complaints are subject to FDA/EU regulator inspection, matching the 90-band 'individual accountability with legal or licensing consequence.'"
+      }
+    },
+    "ROLE-0045": {
+      "CAP-09": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 requires batch record examination for every quality-related complaint, forcing the advisor to hold a complaint file together with cross-referenced manufacturing and batch records rather than a single isolated item, matching the 'substantial case file with cross-references' band."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 mandates documented SOPs, defined investigation triggers and timelines for complaint handling; deviation from these prescribed procedures is a reportable GMP breach with external (FDA) consequence, moving beyond 'strict compliance' to 'prescribed to the letter'."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "Because §211.198 requires investigation whenever a complaint may indicate the drug failed specifications, an undetected error in triaging or documenting a complaint can trigger regulatory attention or mask a quality failure, consistent with the 'regulatory attention or reputational damage' band."
+      },
+      "CAP-12": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://host.etq.com/life-sciences-compliance",
+        "why": "21 CFR Part 11 imposes validated electronic record and signature requirements on complaint systems; a malformed or non-compliant electronic complaint record breaks the downstream regulatory audit trail, matching 'orchestrates multiple systems where handoffs must not fail'."
+      },
+      "CAP-15": {
+        "from": 30,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://simplerqms.com/pharmaceutical-complaint-management",
+        "why": "EU GMP Chapter 8 requires a designated person to record and investigate every complaint, and §211.198 mandates retention of complaint records for at least one year past expiry, both subject to FDA/EU regulator inspection, matching 'formal audit trail; subject to internal audit or regulator inspection'."
+      }
+    },
+    "ROLE-0046": {
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 mandates documented SOPs, timely review and investigation triggers for every quality complaint; failure to follow the prescribed procedure is a reportable regulatory deviation, matching the 'strict compliance; deviation is a reportable event' band."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "Under 21 CFR §211.198 an undetected error in complaint handling (e.g. missed investigation of a possible specification failure) can trigger regulatory action, not just internal rework, moving this to the 'regulatory attention or reputational damage' band."
+      },
+      "CAP-12": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://host.etq.com/life-sciences-compliance",
+        "why": "21 CFR Part 11 requires complaint records to be captured as compliant electronic records/signatures across validated specialist systems, consistent with 'works across several specialist systems; produces structured records.'"
+      },
+      "CAP-14": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "Complaint files under 21 CFR §211.198 concern regulated drug products and can include health-related information tied to adverse events, matching 'regulated financial or health records' rather than mere confidential commercial data."
+      },
+      "CAP-15": {
+        "from": 10,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://simplerqms.com/pharmaceutical-complaint-management",
+        "why": "EU GMP Chapter 8 requires a designated person to record and investigate every complaint, and 21 CFR §211.198 requires records retained at least one year past expiry, subject to FDA/regulator inspection — this is a formal audit trail, not merely informal supervisory review."
+      }
+    },
+    "ROLE-0047": {
+      "CAP-11": {
+        "from": 70,
+        "to": 90,
+        "class": "B",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 requires investigation of complaints that may signal a drug's failure to meet specifications; an undetected error in complaint triage or investigation can mask a patient safety signal, meeting the band-90 anchor of errors risking safety or systemic harm, beyond the generic regulatory/financial risk in the base profile."
+      },
+      "CAP-12": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://host.etq.com/life-sciences-compliance",
+        "why": "21 CFR Part 11 requires validated electronic record and signature systems for complaint records, and these must reliably hand off to CAPA, batch-record and quality systems without failure, matching the 'orchestrates multiple systems where handoffs must not fail' band rather than routine structured recordkeeping."
+      }
+    },
+    "ROLE-0048": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 requires the complaint handler to judge whether a complaint indicates possible failure of the drug to meet specifications, which needs working practitioner-level GMP/quality-system knowledge rather than general familiarity, matching the band-50 anchor."
+      },
+      "CAP-09": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 mandates batch record examination for every quality-related complaint, so a detail in the batch record can change the assessment of the complaint, fitting the band-70 anchor of interdependent large bodies of material."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "Under 21 CFR §211.198 an undetected error in complaint triage can miss a required investigation, exposing the firm to regulatory action, matching the band-70 anchor of errors causing regulatory attention."
+      },
+      "CAP-15": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://simplerqms.com/pharmaceutical-complaint-management",
+        "why": "EU GMP Chapter 8 requires a designated person to record and investigate every complaint with a documented audit trail, and 21 CFR §211.198 requires records retained for a defined period subject to FDA inspection, matching the band-70 anchor of formal audit trail subject to regulator inspection."
+      }
+    },
+    "ROLE-0049": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 requires investigation whenever a complaint indicates possible failure of the drug to meet specifications, which demands practitioner-level knowledge of manufacturing specs to recognise standard versus exceptional cases (band 50), beyond the generic term-familiarity of band 30."
+      },
+      "CAP-07": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "The rule mandates batch record examination for every quality-related complaint, requiring the analyst to gather evidence from batch records, complaint history and QMS data and reconcile differences, matching band 50 rather than simple internal lookup (band 30)."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "21 CFR §211.198 prescribes specific, non-negotiable procedures (documented SOPs, mandatory investigation triggers, batch record checks, records kept at least one year past expiry); deviation constitutes a reportable FDA violation, matching band 90's 'breach with external consequence' rather than band 70's general strict compliance."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+        "why": "Because 211.198 ties complaint review directly to detecting possible drug specification failures, an undetected error in this role's work can allow an unsafe product to remain on market, matching band 90 ('errors risk safety... or systemic harm') rather than band 50's internal correction scope."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 90,
+        "class": "B",
+        "source_url": "https://simplerqms.com/pharmaceutical-complaint-management",
+        "why": "EU GMP Chapter 8 assigns a designated, individually accountable person to record and investigate every complaint, and this work is subject to regulator inspection with licensing consequences, matching band 90 ('individual accountability with legal or licensing consequence') rather than band 70's general audit trail."
+      }
+    }
+  },
+  "evidence": {
+    "regime": "FDA pharmaceutical complaint handling and Good Manufacturing Practice (GMP) requirements for life sciences",
+    "sources": [
+      {
+        "title": "FDA Code of Federal Regulations Title 21 Part 820.198",
+        "rule": "21 CFR §820.198",
+        "cite": "A regulatory requirement outlining the procedures for handling complaints concerning medical devices, emphasizing the importance of documentation, investigation, and corrective action.",
+        "url": "https://zamann-pharma.com/glossary/fda-complaint-handling"
+      },
+      {
+        "title": "FDA Code of Federal Regulations Title 21 Part 211.198",
+        "rule": "21 CFR §211.198",
+        "cite": "Pharma companies must have documented SOPs for handling complaints, timely complaint review, investigation requirements if a complaint indicates possible failure of the drug to meet specifications, batch record examination for every quality-related complaint, and complaint records must be maintained for at least 1 year after the product's expiration date.",
+        "url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma"
+      },
+      {
+        "title": "EU GMP (European Good Manufacturing Practices) Guidelines Chapter 8",
+        "rule": "Chapter 8",
+        "cite": "A designated person responsible for complaint handling records and investigates every complaint in the European Union.",
+        "url": "https://simplerqms.com/pharmaceutical-complaint-management"
+      },
+      {
+        "title": "FDA Code of Federal Regulations Title 21 Part 11",
+        "rule": "21 CFR Part 11",
+        "cite": "Electronic records and signatures compliance requirement for complaints handling in life sciences.",
+        "url": "https://host.etq.com/life-sciences-compliance"
+      }
+    ]
+  }
+}

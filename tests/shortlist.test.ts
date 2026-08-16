@@ -3,6 +3,7 @@ import {
   buildShortlist,
   shortlistCategories,
   jurisdictionCoverage,
+  passesFilter,
 } from "@/lib/desk/shortlist";
 import { shortlistPayload, shortlistFor } from "@/lib/desk/shortlist-payload";
 import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
@@ -256,13 +257,23 @@ describe("the jurisdiction filter", () => {
   });
 
   it("keeps an unassessed vendor rather than excluding it on silence", () => {
-    // The lens covers 13 of the 43 scored vendors. Treating silence as a flag
-    // would remove most of the market on no evidence, which is the opposite of
-    // what a sovereignty control is for.
+    // Treating silence as a flag would exclude on no evidence, which is the
+    // opposite of what a sovereignty control is for.
+    //
+    // Pinned on the rule, not on the coverage. This test used to assert that
+    // some scored vendor had no record, which was true at 13 of 43 and stopped
+    // being true when the register closed the gap. Coverage moving is not the
+    // rule being removed, and a test should not confuse the two.
+    for (const f of ["all", "no-stop", "cleared"] as const) {
+      expect(passesFilter("no-such-vendor", f), f).toBe(true);
+    }
+  });
+
+  it("covers every scored vendor, so the rule above is a guard and not a crutch", () => {
+    // Stated separately and as its own fact. If this ever fails, coverage has
+    // regressed and the vendors it dropped are being ranked unflagged.
     const { assessed, total } = jurisdictionCoverage();
-    expect(assessed).toBeLessThan(total);
-    const cleared = buildShortlist("AI infrastructure", undefined, 3, "cleared")!;
-    expect(cleared.entries.some((e) => e.jurisdiction === null)).toBe(true);
+    expect(assessed).toBe(total);
   });
 
   it("changes nothing in a category with no flagged vendor", () => {
