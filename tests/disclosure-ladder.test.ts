@@ -165,9 +165,16 @@ describe("the private ladder", () => {
   });
 
   it("scores OpenAI off its reported range floor, never the compute deals", () => {
-    // The $110B and $300B infrastructure commitments are the biggest numbers
-    // attached to OpenAI, and neither may reach the ladder. What reaches it
-    // is the floor of the reported $25-33B annualized range.
+    // The biggest numbers attached to OpenAI are the $110B equity round of
+    // February 2026, the $100B AWS expansion and the ~$300B Oracle agreement.
+    // None may reach the ladder. What reaches it is the floor of the reported
+    // $25-33B annualized range.
+    //
+    // The $110B was called a compute commitment here and in the ladder's own
+    // note until 16 August 2026. It is an equity round at a disclosed $730B
+    // pre-money valuation. It still may not reach the ladder, because a
+    // negotiated private-round price is not revenue, but it was being excluded
+    // for a reason that was not true.
     const o = priv("openai");
     expect(o.rung).toBe("stated");
     expect(o.stated!.valueUsd).toBe(25_000 * 1_000_000);

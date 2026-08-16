@@ -268,6 +268,46 @@ What this deliberately does not do (line 24): apply a multiple to a valuation
 that was never a revenue multiple in the first place. `NOT_VALUATIONS`
 (line 97) records entries excluded for that reason, each with its `why`.
 
+### 7.1 Correction: the OpenAI $110B round (16 August 2026)
+
+Found by spot-checking rendered figures against sources rather than by a test,
+which is why it survived. Two errors, both in our own curated record and not in
+anything upstream.
+
+**The round was misattributed.** `private-figures.json` read "$110B in funding
+involving Amazon, Microsoft and Nvidia". Microsoft did not participate. The
+round was **Amazon $50B, Nvidia $30B, SoftBank $30B**, announced 27 February
+2026 at a **$730B pre-money** valuation. Verified against Reuters, CNBC and
+TechCrunch on 16 August 2026.
+
+**The round was misclassified, which mattered more.** It sat in
+`notValuations`, whose stated `why` is "compute and infrastructure commitments,
+not equity rounds". A $110B equity round is exactly an equity round. The genuine
+compute commitments are the separate $100B expansion of the existing $38B AWS
+agreement and the ~$300B Oracle agreement of September 2025; those remain in
+`notValuations` and the round has been removed from it.
+
+`NOT_ESTIMABLE.openai` in `lib/finance/disclosure-ladder.ts` repeated the
+misclassification and added a third claim: "no disclosed valuation we will use".
+A valuation was disclosed. The note now states the $730B, states that it is not
+carried in the valuation record, and therefore that no range is derived from it,
+rather than implying none exists.
+
+**Not done, and deliberately.** OpenAI has not been added to `valuations`.
+That array feeds `impliedRange()`, so adding it would mint a new derived revenue
+range for the largest vendor in the set. That is a product decision about
+whether a negotiated private-round price is a sound basis, not a correction, and
+it is left open. Anthropic is carried on the same basis at $380B, so the
+inconsistency is real and is recorded here rather than resolved silently.
+
+**Still outstanding: the news item itself.** `fixtures/aie-live/news.json`
+carries the upstream headline "OpenAI Secures $110 Billion in Funding from
+Amazon, Microsoft, Nvidia" and the analyst summary above it repeats "Nvidia and
+Microsoft among them". That file is a recorded upstream response, so rewriting
+it would falsify the record of what the source said. It needs a correction layer
+at render, not an edit at rest. See CAPABILITY-HISTORY for what a reader
+currently sees.
+
 ---
 
 ## 8. Freshness and evidence

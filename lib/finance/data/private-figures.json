@@ -325,8 +325,8 @@
   "notValuations": [
     {
       "vendorId": "openai",
-      "what": "$110B in funding involving Amazon, Microsoft and Nvidia, including a $100B expansion of an AWS deal over eight years (Yahoo Finance, 2026-07-31), and the ~$300B Oracle compute agreement of September 2025",
-      "why": "Compute and infrastructure commitments, not equity rounds. They say nothing about what the company is worth or what it earns, and dividing them by a multiple would be meaningless."
+      "what": "A $100B expansion of the existing $38B AWS agreement over eight years, announced alongside the February 2026 round, and the ~$300B Oracle compute agreement of September 2025",
+      "why": "Compute and infrastructure commitments, not equity rounds. They say nothing about what the company is worth or what it earns, and dividing them by a multiple would be meaningless. The $110B round itself used to be listed here and was not a compute commitment: it is an equity round at a disclosed valuation, so it was the one item in this list that did not belong in it."
     },
     {
       "vendorId": "xai",
@@ -336,7 +336,7 @@
     {
       "vendorId": "cohere",
       "what": "A merger arrangement with Germany's Aleph Alpha 'tied to a combined valuation near $20B' (TechCrunch, 2026-04-25), and a $28M U.S. DoD contract won by 'Cohere Technologies' (The Mobile Network, 2026-07-03)",
-      "why": "The $20B figure prices the combined entity, not Cohere alone. The DoD contract belongs to Cohere Technologies, a wireless OTFS company that is a different business entirely — carried here so nobody transcribes it into this record again."
+      "why": "The $20B figure prices the combined entity, not Cohere alone. The DoD contract belongs to Cohere Technologies, a wireless OTFS company that is a different business entirely, carried here so nobody transcribes it into this record again."
     }
   ],
   "crossChecks": [

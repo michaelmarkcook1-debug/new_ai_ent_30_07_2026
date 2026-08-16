@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "vertical": "education",
+    "generated": "2026-08-16T10:38:44.510Z",
+    "retrievalModel": "claude-haiku-4-5",
+    "scoringModel": "claude-sonnet-5",
+    "status": "PROPOSED, NOT REVIEWED",
+    "reviewNote": "Every class A and B claim must be opened and read against its source before this is merged into customer-operations.json. The class is the product; the score is downstream of it."
+  },
+  "rejected": [
+    "ROLE-0047 CAP-10: from 50 but the library says 90"
+  ],
+  "deltas": {
+    "ROLE-0044": {
+      "CAP-03": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf",
+        "why": "Operating simultaneously under ESEA complaint procedures, GDPR/DPA 2018 special-category data rules, GLBA/FTC safeguarding requirements and state records law requires expert-level recognition of exceptions and the reasons behind each regime's rules, matching the 70 band rather than routine practitioner knowledge."
+      },
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf",
+        "why": "ESEA Section 8503 imposes a strict 30-calendar-day appeal deadline and the Education Act 2002 mandates published complaint procedures, so deviation from prescribed steps becomes a reportable event rather than a justifiable exception."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://cpdonline.co.uk/knowledge-base/business/understanding-legal-framework-surrounding-school-data-protection",
+        "why": "Under DPA 2018/GDPR, mishandling special-category student data (health, disability, psychological-pedagogical) exposes the school to regulatory attention and reputational harm, moving error cost beyond internal correction to the 70 band."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.education.wa.edu.au/web/policies/-/records-management-policy",
+        "why": "The WA State Records Act 2000 makes unauthorised removal, destruction or transfer of government records a personal offence carrying a $10,000 penalty, creating individual legal accountability that matches the 90 band rather than mere audit-trail review."
+      }
+    },
+    "ROLE-0045": {
+      "CAP-15": {
+        "from": 30,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.education.wa.edu.au/web/policies/-/records-management-policy",
+        "why": "The State Records Act 2000 (WA) makes unauthorised removal, destruction or transfer of government records a criminal offence for the individual employee, with a $10,000 penalty; this matches the CAP-15 band-90 anchor of 'individual accountability with legal or licensing consequence' rather than the base role's informal-review level. GDPR Article 30's requirement for a Record of Processing Activities further formalises the audit trail the role must maintain."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://fsapartners.ed.gov/knowledge-center/fsa-handbook/2025-2026/vol2/ch7-record-keeping-privacy-electronic-processes",
+        "why": "GLBA (15 USC 6801(b)/6805(b)(2)) and FTC Safeguards Rule (16 CFR 313.3(n), 314.1-5) require schools to keep customer/student information under contractual safeguards; an advisor's mishandling of that data is not merely reworked internally but exposes the institution to regulatory attention, moving the role past CAP-11's 'reaches colleagues or customers' band into 'regulatory attention or reputational damage'."
+      }
+    },
+    "ROLE-0046": {
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf",
+        "why": "ESEA Section 8503 imposes a strict 30-calendar-day statutory appeal window for complaint decisions, and the Education Act 2002 Part 7 requires published, mandated complaint procedures; a CSM handling education complaints must follow these to the letter, matching the 'strict compliance; deviation is a reportable event' anchor rather than the base 'defined procedures... deviation must be justified'."
+      },
+      "CAP-14": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://nflo.tech/knowledge-base/gdpr-in-education-student-data-protection",
+        "why": "GDPR Article 9 requires an additional lawful basis for processing special-category data such as health, disability or psychological-pedagogical information about students, which a CSM routinely encounters when resolving service issues; this matches the 'special-category personal data... regulated health records' anchor rather than the base 'confidential commercial or limited personal data' level."
+      },
+      "CAP-15": {
+        "from": 10,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://nflo.tech/knowledge-base/gdpr-in-education-student-data-protection",
+        "why": "GDPR Article 30 mandates a Record of Processing Activities across the student lifecycle, and the WA State Records Act 2000 makes unauthorised removal or destruction of government records a criminal offence with financial penalties; this creates a formal audit trail subject to regulatory inspection, well above the base 'no review' level."
+      }
+    },
+    "ROLE-0047": {},
+    "ROLE-0048": {
+      "CAP-08": {
+        "from": 30,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf",
+        "why": "ESEA Section 8503 requires issuance of a formal 'Letter of Decision' that is appealable to a federal agency within 30 days; this is a binding document for an external audience, matching band 70 rather than routine internal correspondence."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf",
+        "why": "ESEA Section 8503 sets a strict 30-calendar-day statutory appeal deadline for equitable-services complaints; missing it forecloses a legal right and constitutes a breach with external consequence, matching band 90 rather than band 70's 'reportable event' standard."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.education.wa.edu.au/web/policies/-/records-management-policy",
+        "why": "State Records Act 2000 (WA) makes unauthorised destruction, removal or transfer of government records an offence carrying a $10,000 penalty, so record-handling errors in complaint files trigger regulatory/legal consequence, matching band 70."
+      },
+      "CAP-15": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf",
+        "why": "Complaint decisions are subject to a formal external appeal to a federal education agency under ESEA Section 8503, and Education Act 2002 Part 7 mandates published, auditable complaint procedures, indicating a formal audit trail subject to regulator scrutiny (band 70) rather than informal internal sign-off."
+      }
+    },
+    "ROLE-0049": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf",
+        "why": "Handling education complaints correctly requires practitioner-level familiarity with multiple overlapping statutory regimes (ESEA Section 8503 equitable-services appeals, Education Act 2002 complaint procedures, GDPR Article 9 special-category data rules), moving beyond generic terminology to recognising standard regulated cases, matching the 50-band anchor."
+      },
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf",
+        "why": "ESEA Section 8503 requires issuance of a formal Letter of Decision that can be appealed to ED within 30 days; this is a binding document for an external regulatory audience, matching the 70-band anchor rather than routine internal documents."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf",
+        "why": "ESEA Section 8503 imposes a strict 30-calendar-day statutory appeal window; missing it forecloses the complainant's appeal rights, an external legal consequence matching the 90-band anchor ('deviation is a breach with external consequence') rather than merely a reportable internal event."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://fsapartners.ed.gov/knowledge-center/fsa-handbook/2025-2026/vol2/ch7-record-keeping-privacy-electronic-processes",
+        "why": "Under GLBA Sections 501/505(b)(2) and FTC 16 CFR 314.1-5, failures in safeguarding customer/student data during complaint or service handling can trigger regulatory attention, matching the 70-band anchor ('errors cause financial loss, regulatory attention, or reputational damage') rather than mere internal rework."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.education.wa.edu.au/web/policies/-/records-management-policy",
+        "why": "The State Records Act 2000 (WA) makes unauthorised destruction or removal of government records a personal offence carrying a $10,000 penalty, creating individual legal accountability that matches the 90-band anchor ('externally assured; individual accountability with legal or licensing consequence') rather than a standard internal audit trail."
+      }
+    }
+  },
+  "evidence": {
+    "regime": "Education sector complaint procedures and data protection regulations",
+    "sources": [
+      {
+        "title": "Elementary and Secondary Education Act (ESEA) Complaints Policy",
+        "rule": "Section 8503",
+        "cite": "An appeal of a Letter of Decision regarding an equitable services complaint governed by ESEA Section 8503 shall be filed with ED within thirty (30) calendar days after notice of the Letter of Decision.",
+        "url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf"
+      },
+      {
+        "title": "Education Act 2002",
+        "rule": "Part 7",
+        "cite": "All maintained schools and maintained nursery schools must have and published procedures to deal with all complaints relating to their school and any community facilities or services that the school provides for which there are no separate statutory procedure.",
+        "url": "https://www.youtube.com/watch?v=Kf1dOTowdYw"
+      },
+      {
+        "title": "State Records Act 2000 (WA)",
+        "rule": "General recordkeeping obligations",
+        "cite": "It is an offence for a government organisation employee to remove, destroy, or to have unauthorised possession or to transfer possession of government records, with penalties of $10,000.",
+        "url": "https://www.education.wa.edu.au/web/policies/-/records-management-policy"
+      },
+      {
+        "title": "Gramm-Leach-Bliley Act",
+        "rule": "Sections 501 and 505(b)(2)",
+        "cite": "Schools must take reasonable steps to have service providers that are capable of maintaining appropriate safeguards for customer information, and must require service providers by contract to implement and maintain such safeguards.",
+        "url": "https://fsapartners.ed.gov/knowledge-center/fsa-handbook/2025-2026/vol2/ch7-record-keeping-privacy-electronic-processes"
+      },
+      {
+        "title": "FTC Regulations",
+        "rule": "16 CFR 313.3(n) and 16 CFR 314.1–5",
+        "cite": "Schools must take reasonable steps to have service providers capable of maintaining appropriate safeguards for customer information and require service providers by contract to implement and maintain such safeguards.",
+        "url": "https://fsapartners.ed.gov/knowledge-center/fsa-handbook/2025-2026/vol2/ch7-record-keeping-privacy-electronic-processes"
+      },
+      {
+        "title": "U.S. Code",
+        "rule": "15 USC 6801(b), 6805(b)(2)",
+        "cite": "Schools must take reasonable steps to have service providers capable of maintaining appropriate safeguards for customer information.",
+        "url": "https://fsapartners.ed.gov/knowledge-center/fsa-handbook/2025-2026/vol2/ch7-record-keeping-privacy-electronic-processes"
+      },
+      {
+        "title": "Data Protection Act 2018 (DPA 2018)",
+        "rule": "General provisions incorporating GDPR",
+        "cite": "Schools must establish a lawful basis for processing children's data and must have explicit consent or a clear legal basis for processing special category data such as health information.",
+        "url": "https://cpdonline.co.uk/knowledge-base/business/understanding-legal-framework-surrounding-school-data-protection"
+      },
+      {
+        "title": "General Data Protection Regulation (GDPR)",
+        "rule": "Article 30",
+        "cite": "Educational institutions must maintain a Record of Processing Activities covering all data processing activities from enrollment through cooperation with external entities.",
+        "url": "https://nflo.tech/knowledge-base/gdpr-in-education-student-data-protection"
+      },
+      {
+        "title": "General Data Protection Regulation (GDPR)",
+        "rule": "Article 9",
+        "cite": "Processing of special categories of data such as health data, disability information, or psychological-pedagogical assessments requires an additional basis.",
+        "url": "https://nflo.tech/knowledge-base/gdpr-in-education-student-data-protection"
+      }
+    ]
+  }
+}

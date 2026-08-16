@@ -166,8 +166,18 @@ const BOUNDED: Record<
 // ---------------------------------------------------------- NOT ESTIMABLE
 
 const NOT_ESTIMABLE: Record<string, string> = {
+  // The $110B was described here as a compute commitment. It is not: it is an
+  // equity round, announced 27 February 2026 at a $730B pre-money valuation,
+  // with Amazon at $50B and Nvidia and SoftBank at $30B each. Verified against
+  // Reuters, CNBC and TechCrunch on 16 August 2026. The compute commitments are
+  // the separate $100B AWS expansion and the ~$300B Oracle agreement, and those
+  // are still carried as commitments in private-figures.json.
+  //
+  // Saying "no disclosed valuation" was the more misleading half, because one
+  // was disclosed. This says so and says we do not derive from it, rather than
+  // implying none exists.
   openai:
-    "No audited accounts, no disclosed valuation we will use, and no stated revenue. Its widely quoted $110B figure is a compute commitment, not a valuation or a revenue.",
+    "No audited accounts and no stated revenue. A $730B pre-money valuation was disclosed in the February 2026 round, and it is not carried in the valuation record, so no revenue range is derived from it here.",
   xai: "No audited accounts, no disclosed round we can cite, and no stated revenue.",
   databricks: "No audited accounts and no revenue figure in any source we hold.",
   together: "No audited accounts and no revenue figure in any source we hold.",

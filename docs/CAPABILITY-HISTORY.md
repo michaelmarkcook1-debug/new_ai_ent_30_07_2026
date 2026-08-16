@@ -17,6 +17,36 @@ than a gap.
 
 ## 16 August 2026
 
+**A wrong figure about OpenAI was corrected, and one is still on screen.**
+
+Four news items were checked against their original sources. Three held up.
+One did not, and the same error had been copied into our own financial record.
+
+The product said OpenAI's $110 billion round involved "Amazon, Microsoft and
+Nvidia". Microsoft was not in it. The round was Amazon at $50 billion, Nvidia
+at $30 billion and SoftBank at $30 billion, announced on 27 February 2026.
+
+The more serious half was not the name. Our record filed that round under
+"compute and infrastructure commitments, not equity rounds", which is what it
+uses to explain why a number must not be turned into a revenue estimate. A
+$110 billion funding round is an equity round. It was being excluded for a
+reason that was not true. The financial snapshot also told you there was "no
+disclosed valuation" when one had been disclosed: $730 billion before the money.
+Both are now stated correctly.
+
+**What has not changed, on purpose.** We still do not estimate OpenAI's revenue
+from that valuation. We could, and we already do exactly that for Anthropic, so
+this is an inconsistency rather than a principle. It is a decision about whether
+a privately negotiated price is a fair basis for a revenue estimate of the
+largest company in the set, and that is your call rather than ours.
+
+**Still wrong on screen.** The news headline itself still reads "from Amazon,
+Microsoft, Nvidia" on the News tab, and the paragraph above it still says
+"Nvidia and Microsoft among them". That text came from the news source, not
+from us, and quietly rewriting what a source said would be its own kind of
+dishonesty. It needs a visible correction printed next to it, which is not
+built yet.
+
 **Asking to exclude Chinese providers now actually excludes all of them.**
 
 The Decision Desk lets a buyer say how much foreign-jurisdiction exposure they

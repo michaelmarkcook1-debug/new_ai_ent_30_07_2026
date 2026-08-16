@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "vertical": "public_sector",
+    "generated": "2026-08-16T10:32:13.618Z",
+    "retrievalModel": "claude-haiku-4-5",
+    "scoringModel": "claude-sonnet-5",
+    "status": "PROPOSED, NOT REVIEWED",
+    "reviewNote": "Every class A and B claim must be opened and read against its source before this is merged into customer-operations.json. The class is the product; the score is downstream of it."
+  },
+  "rejected": [
+    "ROLE-0047 CAP-10: from 50 but the library says 90"
+  ],
+  "deltas": {
+    "ROLE-0044": {
+      "CAP-07": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "29 CFR §1614.106(a)-(d) requires an impartial investigation of an EEO complaint, meaning the role must gather evidence from complainant, respondent, witnesses and records and reconcile conflicting accounts within a fixed period, matching the CAP-07 band-50 anchor of gathering from several sources and reconciling differences rather than the base-profile's occasional-lookup level."
+      },
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "§1614.106 imposes a hard 180-day investigation deadline that can only be extended by written agreement of the parties; missing it is a reportable procedural failure, which is the CAP-10 band-70 anchor (strict compliance; deviation is a reportable event) rather than the base band-50 documented-procedure level."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-are-the-rules-on-special-category-data",
+        "why": "Undetected errors in satisfying Article 9/Schedule 1 conditions for special category data, or in delivering Consumer Duty outcomes for vulnerable customers, trigger ICO/FCA regulatory attention and reputational damage, matching CAP-11 band 70 rather than the base band-50 (errors reaching colleagues/customers requiring correction only)."
+      }
+    },
+    "ROLE-0045": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-are-the-rules-on-special-category-data",
+        "why": "UK GDPR Article 9/Schedule 1 requires identifying which specific lawful basis and condition applies before processing special category data (e.g. health or protected-characteristic information arising in complaints), which demands working practitioner knowledge of the statutory scheme rather than general familiarity (band 50)."
+      },
+      "CAP-05": {
+        "from": 30,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "29 CFR 1614.106 requires the agency to run an impartial investigation over up to 180 days, which in practice means the advisor tracks and coordinates a multi-stage process with investigators and complainants over months rather than completing short reviewed sequences, matching band 70."
+      },
+      "CAP-08": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://www.hlc.com/en/publications/consumer-duty-achieving-good-outcomes-for-vulnerable-customers",
+        "why": "FCA Consumer Duty explicitly requires firms to tailor communications and support for customers with characteristics of vulnerability to avoid foreseeable harm, raising correspondence above routine templated replies to structured, audience-specific documents (band 50)."
+      },
+      "CAP-09": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "The 1614.106 investigation process and accompanying GDPR record-keeping obligations mean the advisor must hold a substantial cross-referenced case file (complaint history, correspondence, data-processing conditions) rather than a handful of related items, matching band 50."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "Missing the mandated 180-day impartial investigation deadline in 1614.106 (absent a written extension) exposes the agency to EEOC oversight and regulatory attention, consistent with band 70 rather than errors merely requiring internal rework."
+      },
+      "CAP-15": {
+        "from": 30,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "The statutory investigation and appeal process under 1614.106, combined with GDPR's requirement to document categories of data and Article 9 conditions, creates a formal audit trail subject to regulator (EEOC/ICO) inspection, beyond informal supervisory review."
+      }
+    },
+    "ROLE-0046": {
+      "CAP-14": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-are-the-rules-on-special-category-data",
+        "why": "UK GDPR Article 9/Schedule 1 requires an identified lawful basis and processing condition for special category data (e.g. health, disability, race data arising in complaints and case handling), matching the band-70 anchor for special-category personal data rather than the base 50 'confidential commercial or limited personal data'."
+      },
+      "CAP-10": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "29 CFR §1614.106 imposes a fixed 180-day investigation deadline that can only be extended by written agreement, making missed timelines a reportable procedural failure rather than a tolerated deviation, consistent with the 70-band anchor."
+      },
+      "CAP-15": {
+        "from": 10,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "§1614.106 requires an impartial, documented investigation subject to EEOC/agency review, and UK GDPR Schedule 1 requires documented records of processing conditions for special category data -- both establish a formal audit trail exposed to external inspection, well above the base 'no review' level."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-are-the-rules-on-special-category-data",
+        "why": "Mishandling special category data or EEO complaint processes creates exposure to ICO enforcement or EEOC scrutiny, so undetected errors carry regulatory-attention consequences matching band 70 rather than the base internal-correction level."
+      }
+    },
+    "ROLE-0047": {
+      "CAP-03": {
+        "from": 50,
+        "to": 70,
+        "class": "B",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "29 CFR §1614.106(a)-(d) requires navigating federal EEO complaint procedure with exceptions (mixed-case complaints, written extension agreements, impartiality standards) that go beyond standard practitioner knowledge, requiring the manager to recognize exceptions and know why the procedural rules exist -- band 70, not the standard-case recognition of band 50."
+      },
+      "CAP-11": {
+        "from": 70,
+        "to": 90,
+        "class": "B",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "An undetected error or procedural lapse in the impartial-investigation requirement under §1614.106 exposes the agency to EEOC appeal, right-to-sue consequences and legal liability, which matches the band-90 anchor of errors that risk legal liability rather than the band-70 anchor of regulatory attention alone."
+      }
+    },
+    "ROLE-0048": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "A",
+        "source_url": "https://www.hlc.com/en/publications/consumer-duty-achieving-good-outcomes-for-vulnerable-customers",
+        "why": "FCA Consumer Duty requires firms to tailor communications and support so customers with characteristics of vulnerability receive outcomes as good as other customers, requiring the manager to hold working practitioner knowledge of vulnerability indicators and standard adaptations rather than mere familiarity with terms (band 50)."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "Undetected errors in EEO complaint handling (missed 180-day investigation deadline under 29 CFR 1614.106) or in special-category data processing under UK GDPR Article 9 trigger regulator attention (EEOC or ICO), matching the band-70 anchor of errors causing regulatory attention or reputational damage rather than mere internal rework."
+      },
+      "CAP-15": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "29 CFR 1614.106 mandates an impartial, time-bound investigation process subject to EEOC oversight, and UK GDPR Article 9/Schedule 1 requires documented records of special-category processing conditions; both impose a formal audit trail subject to external regulator inspection, matching band 70 rather than informal internal sign-off."
+      }
+    },
+    "ROLE-0049": {
+      "CAP-03": {
+        "from": 30,
+        "to": 50,
+        "class": "B",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "Handling federal EEO complaints under 29 CFR §1614.106 requires practitioner-level familiarity with statutory investigation procedures, timelines, and standard complaint categories (race, disability, reprisal, etc.) that a generic customer-service analyst would not otherwise need, matching the 'working practitioner knowledge; recognises standard cases' band."
+      },
+      "CAP-08": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://www.hlc.com/en/publications/consumer-duty-achieving-good-outcomes-for-vulnerable-customers",
+        "why": "FCA Consumer Duty requires firms to tailor communications and support to vulnerable customers to avoid foreseeable harm, raising the demands on produced language to the 'persuasive or binding documents for senior or external audiences' band, since these communications are reviewable by the regulator."
+      },
+      "CAP-10": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "§1614.106(a)-(d) mandates completion of an impartial investigation within 180 days unless extended by written agreement; this is a letter-of-the-law procedural deadline whose breach triggers external consequences (complainant's right to request immediate EEOC/court action), matching the 90 band rather than the base 70."
+      },
+      "CAP-11": {
+        "from": 50,
+        "to": 70,
+        "class": "A",
+        "source_url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-are-the-rules-on-special-category-data",
+        "why": "Undetected errors in classifying or documenting the Article 9 condition for special category data (or in vulnerable-customer handling under Consumer Duty) can trigger ICO or FCA regulatory attention, matching the 'errors cause financial loss, regulatory attention, or reputational damage' band rather than the base 'reach colleagues or customers' band."
+      },
+      "CAP-15": {
+        "from": 70,
+        "to": 90,
+        "class": "A",
+        "source_url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+        "why": "EEO complaint investigations are subject to external review and appeal (EEOC, subsequent civil action) and Schedule 1 DPA record-keeping obligations create individually accountable audit trails with legal consequence, moving beyond internal/regulator-inspection level assurance (70) to externally assured accountability (90)."
+      }
+    }
+  },
+  "evidence": {
+    "regime": "UK GDPR and Data Protection Act 2018 for special category data processing; FCA Consumer Duty for vulnerable customers; Federal sector EEO complaint procedures under 29 CFR Part 1614",
+    "sources": [
+      {
+        "title": "29 CFR Part 1614 -- Federal Sector Equal Employment Opportunity",
+        "rule": "§ 1614.106(a)-(d)",
+        "cite": "The agency is required to conduct an impartial and appropriate investigation of the complaint within 180 days of the filing of the complaint unless the parties agree in writing to extend the time period.",
+        "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614"
+      },
+      {
+        "title": "UK GDPR and Data Protection Act 2018",
+        "rule": "Article 9 and Schedule 1",
+        "cite": "Special category data may only be processed where a lawful basis and an Article 9 condition are satisfied; organizations must keep records including documenting categories of data and conditions for processing.",
+        "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-are-the-rules-on-special-category-data"
+      },
+      {
+        "title": "FCA Consumer Duty",
+        "rule": "Consumer Duty requirements",
+        "cite": "Firms must ensure that customers with characteristics of vulnerability are receiving outcomes that are as good as outcomes received by other customers and must tailor products, services, communications and support to avoid foreseeable harm.",
+        "url": "https://www.hlc.com/en/publications/consumer-duty-achieving-good-outcomes-for-vulnerable-customers"
+      }
+    ]
+  }
+}
