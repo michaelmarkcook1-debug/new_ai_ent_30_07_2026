@@ -17,6 +17,32 @@ than a gap.
 
 ## 16 August 2026
 
+**The vendor rankings now agree with AI Enterprise v1, and show where they don't.**
+
+Comparing the two products side by side, v1 named Anthropic the leader in
+frontier models and this one named OpenAI. Both were reading the same engine.
+It publishes two different scores, and we were showing the weaker one.
+
+The one we showed is a single 0 to 100 figure calculated the same way for every
+vendor, so a chip foundry and a service desk are judged on one yardstick and
+everything gets a rank. The one v1 uses is scored out of 5, weighted
+differently for each market, and it withholds a vendor entirely when the
+evidence behind it is too thin rather than giving it a default. On that
+measure, Anthropic leads frontier models at 3.65 and OpenAI is second at 3.36.
+
+The comparison table now sorts on the better one. **Both are still on screen**,
+so where the two disagree you can see it rather than having to take our word
+for which is right: OpenAI still shows the higher 0 to 100 figure in the same
+row where Anthropic shows the higher assessment.
+
+A vendor with too little evidence now reads "held" rather than showing an empty
+cell. Those are different facts and the old blank cell conflated them: held
+means the assessment looked and deliberately withheld a score.
+
+Verified against v1's own front page across all thirteen markets: the same
+leader, the same score, the same number of vendors ranked, and both of the two
+cases where a vendor is held.
+
 **A permanently empty panel was removed from AI Adoption.**
 
 "What moved, by vendor and measure" read a catalogue endpoint that answers

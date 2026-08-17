@@ -471,6 +471,59 @@ rule is pinned directly. It was previously pinned by asserting that some scored
 vendor had no record, which was true at 13 of 43 and became false here, making a
 rule still in force look as though it had been removed.
 
+### 8.3b The category assessment: v1's better score
+
+`lib/aie/category-rankings.ts`, fixture `fixtures/aie-live/category-rankings.json`,
+refreshed by `scripts/sync-category-rankings.mjs` (added 16 August 2026).
+
+**v1 publishes two scores and they name different leaders.** In
+`frontier_model_api`, `vendors[].overallScore` puts OpenAI first at 69.4; the
+category assessment puts Anthropic first at 3.65 against OpenAI's 3.36. Both are
+v1's numbers. This was the whole of the apparent disagreement between the two
+products: our comparison sorted on `overallScore` while v1's own front page
+sorts on the assessment.
+
+| | `overallScore` | category assessment |
+|---|---|---|
+| Scale | 0 to 100 | 0 to 5 |
+| Weights | one global formula | **specific to each category** |
+| Evidence | not reflected | each domain capped by its grade |
+| Thin evidence | ranked anyway | **held** under 60% domain coverage |
+| Domains | n/a | 7 (AI silicon) to 14 (frontier models) |
+
+Frontier model/API weights Enterprise Control 22%, Reliability & Safety 21%,
+Integration & Operations 20%, Market Strength 20%, Business Fit 10%, Vendor
+Resilience 7%. The formula v1 publishes is
+`domain score (0-5) x weight x (0.7 + 0.3 x confidence)`, contributions summing
+to the composite. Anthropic's six sum to 3.65.
+
+**It is parsed from v1's published pages**, which is done nowhere else in this
+product. It is not on v1's API: it is computed server-side into the
+`/category/<id>` pages. v1 is read-only from this side, confirmed explicitly on
+16 August 2026, so adding an endpoint was not available.
+
+What makes the parse safe enough to carry:
+
+- **It fails loudly.** A category yielding no rows stops the script. The
+  dangerous failure is not a parser that throws, it is one that returns nothing
+  and leaves yesterday's leader on screen under today's date.
+- **It writes a fixture, not the render path.** Their markup changing breaks a
+  script we run deliberately, never a page a reader is looking at.
+- **It reconciles per category.** ranked + held must equal the vendor count
+  `/api/market-share` reports for that category. That is what proves no rows
+  were dropped, and it is asserted per category rather than in aggregate.
+- The first parser both dropped and duplicated rows: v1 renders its table more
+  than once for responsive layouts, so vendors appeared at two ranks. The
+  contiguous-rank test in `tests/category-rankings.test.ts` caught it.
+
+Verified against v1's front page in all thirteen categories: same leader, same
+composite, same ranked count, and both held counts (AI silicon 4 ranked 1 held,
+AI cloud & compute 7 ranked 1 held).
+
+**The comparison already grouped correctly.** `lib/comparability.ts` has been
+many-to-many across the thirteen categories since it was written, and its
+membership already reconciles to ranked-plus-held. Only the metric was wrong.
+
 ### 8.4 Joining the Shield to the shortlist
 
 `lib/shield/vendor-map.ts`. Shield slugs (`openai-api`) and vendor-directory
