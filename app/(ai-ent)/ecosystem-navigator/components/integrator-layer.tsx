@@ -72,11 +72,24 @@ export function IntegratorLayer() {
     };
   }, [ticker]);
 
+  // SORTED ON ASSESSMENT, NOT AI READINESS.
+  //
+  // This used to sort on aiReadinessScore, and that measures how far a provider
+  // has adopted AI inside its OWN operations. It is not a measure of how well
+  // they would deliver an AI programme for you, which is the question this
+  // panel exists to answer.
+  //
+  // Sorting on it produced a table that read as a delivery league table and was
+  // not one: Accenture holds the highest assessment score on the page and sat
+  // tenth, below providers scoring in the sixties on that dimension. Assessment
+  // is the provider assessment framework score, a weighted composite of four
+  // dimensions with published rationales, and is the closer of the two to the
+  // question actually asked.
   const topProviders = useMemo(() => {
     if (!providers) return [];
     return [...providers]
-      .filter((p) => typeof p.aiReadinessScore === "number")
-      .sort((a, b) => (b.aiReadinessScore ?? 0) - (a.aiReadinessScore ?? 0))
+      .filter((p) => typeof p.assessmentScore === "number")
+      .sort((a, b) => (b.assessmentScore ?? 0) - (a.assessmentScore ?? 0))
       .slice(0, 12);
   }, [providers]);
 
@@ -105,7 +118,7 @@ export function IntegratorLayer() {
           <div className="flex flex-wrap items-start justify-between gap-2">
             <MicroLabel
               label="Integrator readiness"
-              tooltip="Top of the live BoardRadar provider catalogue by AI readiness score. Assessment and readiness figures are shown exactly as the API returns them."
+              tooltip="Top of the live BoardRadar provider catalogue by assessment score. Both figures are shown exactly as the API returns them. AI readiness is a separate measure: how far the provider has adopted AI in its own operations, not how well it would deliver AI for you."
             />
             <LaneBadge lane={laneFor(providersSource)} />
           </div>
@@ -121,7 +134,7 @@ export function IntegratorLayer() {
             ) : (
               <>
                 <p className="mb-2 font-mono text-xs text-muted">
-                  Top {topProviders.length} of {providers!.length} providers by AI readiness
+                  Top {topProviders.length} of {providers!.length} providers by assessment
                 </p>
                 <table className="w-full border-collapse text-left">
                   <thead>
@@ -133,7 +146,12 @@ export function IntegratorLayer() {
                         <span className="micro-label">Assessment</span>
                       </th>
                       <th className="py-1.5">
-                        <span className="micro-label">AI readiness</span>
+                        <span
+                          className="micro-label"
+                          title="How far this provider has adopted AI inside its own operations. NOT a measure of how well it would deliver AI for you."
+                        >
+                          Own AI adoption
+                        </span>
                       </th>
                     </tr>
                   </thead>
@@ -184,8 +202,14 @@ export function IntegratorLayer() {
                   composite of four dimensions with published rationales per provider.
                 </li>
                 <li>
-                  <strong>AI readiness</strong>: the provider&apos;s position in the BoardRadar AI
-                  readiness ranking, published with generation dates.
+                  <strong>Own AI adoption</strong>: the provider&apos;s position in the BoardRadar
+                  AI readiness ranking, published with generation dates. It measures how far the
+                  provider has adopted AI <strong>within its own operations</strong>, which is a
+                  different question from how well it would deliver an AI programme for you, and
+                  the two do not move together. This table was sorted on it under a heading about
+                  delivery, which put Accenture tenth while it held the highest assessment score on
+                  the page. It is shown because a provider that has not adopted AI itself is worth
+                  noticing, not because it ranks delivery.
                 </li>
               </ul>
               <p className="measure text-muted">
