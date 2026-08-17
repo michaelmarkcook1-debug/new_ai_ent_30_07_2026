@@ -17,6 +17,31 @@ than a gap.
 
 ## 16 August 2026
 
+**There is now one vendor rating, and it is the assessment out of 5.**
+
+The product was carrying three ways of scoring a vendor. The vendor comparison
+ranked on a single 0 to 100 figure calculated identically for every vendor. The
+Decision Desk ranked on our own composite of three inputs, weighted the same in
+every market. Both are gone from the ordering.
+
+Everything now ranks on the AI Enterprise assessment, because it reads more and
+guesses less: seven to fourteen evidence-graded domains depending on the market,
+weighted differently for each market, every domain capped by the quality of the
+evidence behind it, and any vendor with less than 60 per cent coverage withheld
+rather than given a default.
+
+**The variables came with it.** Each ranked vendor now carries the domains
+behind its score: what each scored, how confident, what grade of evidence, and
+up to three source links you can open. Where a domain had too little evidence it
+says so rather than showing a zero, because those are different facts.
+
+**A withheld vendor does not appear at all**, rather than appearing last. The
+assessment declined to rank it, and putting it below a scored vendor would
+invent an order the evidence refused to give.
+
+The Decision Desk now reads 3.65 for Anthropic in frontier models, the same
+number to the same two decimals as AI Enterprise publishes.
+
 **The Decision Desk was missing whole markets, and now has all thirteen.**
 
 It grouped vendors by the single label each vendor's record carries. AI
