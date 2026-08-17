@@ -17,6 +17,22 @@ than a gap.
 
 ## 16 August 2026
 
+**The Decision Desk was missing whole markets, and now has all thirteen.**
+
+It grouped vendors by the single label each vendor's record carries. AI
+Enterprise ranks a vendor in every market it competes in, which is a different
+thing: Microsoft competes in seven, Google in five, Anthropic in four.
+
+Two effects, both now fixed. Frontier models showed twelve vendors on the
+Decision Desk and fourteen in the vendor comparison, on the same page of the
+same product. And three markets were absent altogether, because
+"Developer/coding agent", "Agent platform" and "Neocloud & inference" are
+markets a vendor is ranked in rather than the label its record happens to
+carry. You could not pick them at all.
+
+Both surfaces now read the same source, so they cannot disagree about who
+competes where.
+
 **The vendor rankings now agree with AI Enterprise v1, and show where they don't.**
 
 Comparing the two products side by side, v1 named Anthropic the leader in
