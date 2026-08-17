@@ -6,7 +6,7 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
 import { useShortlist } from "@/lib/shortlist";
-import { shortlistFor, type ShortlistPayload } from "@/lib/desk/shortlist-payload";
+import { shortlistFor, type ShortlistPayload } from "@/lib/desk/shortlist-select";
 import type { JurisdictionFilter } from "@/lib/desk/shortlist";
 
 // Step 3: the three names, and what to do about them.

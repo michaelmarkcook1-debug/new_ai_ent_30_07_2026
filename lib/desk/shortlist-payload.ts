@@ -153,10 +153,7 @@ export function shortlistPayload(): ShortlistPayload {
  * here", not "no list". Reading the record directly would blank most of the
  * categories the moment a filter was selected.
  */
-export function shortlistFor(
-  payload: ShortlistPayload,
-  filter: JurisdictionFilter,
-  category: string
-): ShortlistCategoryPayload | undefined {
-  return payload.byFilter[filter]?.[category] ?? payload.byFilter.all[category];
-}
+// Lives in ./shortlist-select so a client component can import it without
+// dragging this module, and the filesystem read behind it, into the browser
+// bundle. Re-exported here so server callers and tests keep one import site.
+export { shortlistFor } from "./shortlist-select";
