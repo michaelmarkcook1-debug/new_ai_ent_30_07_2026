@@ -17,6 +17,23 @@ than a gap.
 
 ## 16 August 2026
 
+**The integrator table was ranking on the wrong number.**
+
+That panel is headed "the integrators who would deliver your AI programme" and
+was sorted on a score called AI readiness. That score measures how far a
+provider has adopted AI inside its own operations. It says nothing about how
+well they would deliver an AI programme for you.
+
+The evidence was on screen the whole time: Accenture held the highest
+assessment score of any provider listed and sat tenth, below firms scoring in
+the sixties on that measure.
+
+It now sorts on the assessment score, which is a weighted composite of four
+dimensions with published reasoning, and Accenture is first. The other column
+stays, renamed "Own AI adoption", because a services firm that has not adopted
+AI itself is worth noticing. It is simply not a ranking of who would deliver
+well. Neither number changed.
+
 **The comparison is laid out as a ranking now, not a table.**
 
 A table gave every column equal weight, which was backwards: one of them was
