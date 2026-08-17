@@ -25,7 +25,21 @@ export interface ScoreColumn {
   help: string;
 }
 
-function scoreFor(row: RankingRow, key: ScoreSortKey): number | null {
+/**
+ * A row's value for a column, inside a given market.
+ *
+ * The market matters for the assessment and only for the assessment: a vendor
+ * scores differently in each one it competes in, so asking for "the
+ * assessment" without saying where is not a question with an answer.
+ */
+function scoreFor(
+  row: RankingRow,
+  key: ScoreSortKey,
+  categoryId?: string
+): number | null {
+  if (key === "assessment") {
+    return categoryId ? (row.placements[categoryId]?.composite ?? null) : null;
+  }
   if (key === "overallScore") return row.overallScore;
   if (key === "confidenceScore") return row.confidenceScore;
   return row.capabilities[key]?.score ?? null;
@@ -45,17 +59,28 @@ export function RankingsTable({
   generatedOn: string;
   columns: ScoreColumn[];
 }) {
-  const [sortBy, setSortBy] = useState<ScoreSortKey>("overallScore");
+  // The assessment, because it is the product's only rating. This defaulted to
+  // overallScore until 17 August 2026, which left this table ranking on a
+  // metric every other surface had stopped using.
+  const [sortBy, setSortBy] = useState<ScoreSortKey>("assessment");
   const [only, setOnly] = useState<string | null>(null);
 
-  const groups = useMemo(
-    () =>
-      placeByCategory(rows, (a, b) =>
-        (scoreFor(b, sortBy) ?? -1) - (scoreFor(a, sortBy) ?? -1) ||
-        a.name.localeCompare(b.name)
+  // Grouped first, then sorted inside each group, because the assessment is
+  // per market and placeByCategory's comparator cannot see which market it is
+  // ordering. Sorting before grouping would rank every group by one market's
+  // scores.
+  const groups = useMemo(() => {
+    const g = placeByCategory(rows);
+    return g.map((grp) => ({
+      ...grp,
+      rows: [...grp.rows].sort(
+        (a, b) =>
+          (scoreFor(b, sortBy, grp.category.id) ?? -1) -
+            (scoreFor(a, sortBy, grp.category.id) ?? -1) ||
+          a.name.localeCompare(b.name)
       ),
-    [rows, sortBy]
-  );
+    }));
+  }, [rows, sortBy]);
   const notPlaced = useMemo(() => unplaced(rows), [rows]);
 
   const visibleGroups = only
@@ -221,11 +246,32 @@ export function RankingsTable({
                       </div>
                     </td>
                     {columns.map((col) => {
-                      const value = scoreFor(row, col.key);
+                      const value = scoreFor(row, col.key, group.category.id);
                       return (
                         <td key={col.key} className="px-3 py-2.5">
                           <span className="inline-flex items-center gap-1">
-                            <ScorePill score={value} />
+                            {col.key === "assessment" ? (
+                              /* Its own 0 to 5 scale, deliberately not through
+                                 ScorePill, which bands 0 to 100 and would paint
+                                 a category-leading 3.65 as a failing score. */
+                              value === null ? (
+                                <span
+                                  className="font-mono text-xs text-muted"
+                                  title="Held: under 60 per cent domain coverage, so the assessment withheld a score rather than ranking this vendor on defaults."
+                                >
+                                  held
+                                </span>
+                              ) : (
+                                <span className="font-mono text-sm font-semibold tabular-nums">
+                                  {value.toFixed(2)}
+                                  <span className="ml-0.5 text-xs font-normal text-muted">
+                                    /5
+                                  </span>
+                                </span>
+                              )
+                            ) : (
+                              <ScorePill score={value} />
+                            )}
                           </span>
                         </td>
                       );

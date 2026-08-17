@@ -4,6 +4,7 @@
 // BoardRadar calls, no sample fixtures, nothing invented.
 
 import { TRACKED_VENDORS, type TrackedVendor } from "@/lib/aie/vendors";
+import { categoryRankings } from "@/lib/aie/category-rankings";
 import {
   INTELLIGENCE_VENDORS,
   VENDOR_PILLAR_SCORES,
@@ -68,15 +69,34 @@ export interface RankingRow {
   overallScore: number;
   confidenceScore: number;
   capabilities: Record<string, CapabilityCell>;
+  /**
+   * The assessment, per market, which is the product's only vendor rating.
+   *
+   * Keyed by market because a vendor scores differently in each one it
+   * competes in: Anthropic is 3.65 in frontier models and 3.69 as a coding
+   * agent. There is no single number to hang on a vendor row, which is why
+   * this table sorts inside a market group rather than across the set.
+   *
+   * `overallScore` stays on the row and is no longer what anything ranks on.
+   * It is the engine's other published figure, kept so the derivation can show
+   * both, and it is the number this table used to rank by. That was the last
+   * surface still doing so after the assessment became the single rating.
+   */
+  placements: Record<string, { composite: number; rank: number }>;
 }
 
 // Column labels are the dataset's real field names on purpose: the rankings
 // table shows exactly which named score it is sorting on, nothing renamed.
 export const SCORE_COLUMNS: { key: ScoreSortKey; label: string; help: string }[] = [
   {
+    key: "assessment",
+    label: "Assessment",
+    help: "The weighted composite (0 to 5) of evidence-graded assessment domains, weighted for this market. The product's only vendor rating, and what this table ranks on.",
+  },
+  {
     key: "overallScore",
     label: "Overall score",
-    help: "The vendor's overallScore as published by the AI Enterprise source (0 to 100).",
+    help: "The engine's other published figure: one global 0 to 100 formula over every vendor. Shown for reference and NOT what this table ranks on. This table sorted by it until 17 August 2026, which left it naming different leaders from the rest of the product.",
   },
   ...liveCapabilities().map((c) => ({
     key: c.id as ScoreSortKey,
@@ -86,6 +106,16 @@ export const SCORE_COLUMNS: { key: ScoreSortKey; label: string; help: string }[]
 ];
 
 const LIVE_BY_ID = new Map(liveVendors().map((v) => [v.id, v]));
+
+/** Every market this vendor is ranked in, with its assessment in each. */
+function placementsFor(vendorId: string): Record<string, { composite: number; rank: number }> {
+  const out: Record<string, { composite: number; rank: number }> = {};
+  for (const c of categoryRankings()) {
+    const r = c.ranked.find((x) => x.vendorId === vendorId);
+    if (r) out[c.categoryId] = { composite: r.composite, rank: r.rank };
+  }
+  return out;
+}
 
 // The capability breakdown replaces the pillar scores.
 //
@@ -123,6 +153,7 @@ export function buildRankingRows(): RankingRow[] {
         overallScore: live.overallScore,
         confidenceScore: live.confidenceScore ?? 0,
         capabilities: caps,
+        placements: placementsFor(vendor.id),
       },
     ];
   });

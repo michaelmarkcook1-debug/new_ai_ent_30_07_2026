@@ -1,5 +1,6 @@
 import type { DataLane } from "@/lib/provenance";
 import type { MarketMetrics, VendorMetrics } from "@/lib/market-metrics";
+import { MARKET_CATEGORY_LIST } from "@/lib/comparability";
 import type { ToolKey } from "@/lib/ui/tools";
 import { vendorName } from "@/lib/aie/vendor-directory";
 
@@ -272,24 +273,39 @@ export interface MarketTake {
 export function marketTake(m: MarketMetrics): MarketTake {
   const scored = aiVendors(m).filter((v) => v.composite !== null);
 
-  const byCategory = new Map<string, VendorMetrics[]>();
-  for (const v of scored) {
-    const list = byCategory.get(v.category) ?? [];
-    list.push(v);
-    byCategory.set(v.category, list);
-  }
+  // THE ASSESSMENT, AND THE MARKETS IT IS SCORED IN.
+  //
+  // This read overallScore grouped by the vendor record's single `category`
+  // field until 17 August 2026. That produced prose about "10 market
+  // categories" and a "14.7 point lead" beside a table ranked out of 5 across
+  // thirteen markets: the same page describing two different worlds.
+  //
+  // Both now come from categoryComposites, which is the assessment keyed by
+  // market, so the sentence and the table are reading the same numbers. Gaps
+  // are on the 0 to 5 scale and are small by comparison: a 0.29 lead in
+  // frontier models is the one the comparison calls decisive.
+  const nameOf = new Map(m.vendors.map((v) => [v.id, v.name]));
+  // Market LABELS, never ids. "workflow_automation_ai" in a sentence a reader
+  // is meant to act on is a leaked internal key, and this printed one.
+  const labelOf = new Map(MARKET_CATEGORY_LIST.map((c) => [c.id, c.name]));
+  const eligible = new Set(scored.map((v) => v.id));
 
   const leads: CategoryLead[] = [];
-  for (const [category, list] of byCategory) {
-    const ranked = [...list].sort((a, b) => (b.composite ?? 0) - (a.composite ?? 0));
-    const top = ranked[0];
+  for (const [categoryId, placements] of Object.entries(m.categoryComposites)) {
+    const ranked = Object.entries(placements)
+      .filter(([vendorId]) => eligible.has(vendorId))
+      .sort((a, b) => a[1].rank - b[1].rank);
+    if (ranked.length === 0) continue;
+    const [topId, top] = ranked[0];
     const second = ranked[1] ?? null;
     leads.push({
-      category,
-      leader: top.name,
-      score: round1(top.composite ?? 0),
-      runnerUp: second?.name ?? null,
-      gap: second ? round1((top.composite ?? 0) - (second.composite ?? 0)) : null,
+      category: labelOf.get(categoryId) ?? categoryId,
+      leader: nameOf.get(topId) ?? topId,
+      score: top.composite,
+      runnerUp: second ? (nameOf.get(second[0]) ?? second[0]) : null,
+      // Two decimals: on a 0 to 5 scale a gap rounded to one decimal turns
+      // 0.29 into 0.3 and a real separation into a rounding artefact.
+      gap: second ? Math.round((top.composite - second[1].composite) * 100) / 100 : null,
       contested: ranked.length,
     });
   }
@@ -301,8 +317,15 @@ export function marketTake(m: MarketMetrics): MarketTake {
 
   return {
     leads,
-    close: leads.filter((l) => l.gap !== null && l.gap <= 3),
-    clear: leads.filter((l) => l.gap !== null && l.gap >= 10),
+    // Rescaled with the metric. These were 3 and 10 on a 0 to 100 score; left
+    // alone against a 0 to 5 assessment every market would read as "close" and
+    // none as "clear", because the widest gap in the set is under one point.
+    //
+    // 0.15 and 0.50 are the same proportions of the scale the old numbers were
+    // of theirs. On today's data that makes frontier models clear at 0.29 and
+    // the tightest markets close, which is the reading the comparison gives.
+    close: leads.filter((l) => l.gap !== null && l.gap <= 0.15),
+    clear: leads.filter((l) => l.gap !== null && l.gap >= 0.5),
     gaining: m.gaining.map((s) => s.vendorName),
     slipping: m.slipping.map((s) => s.vendorName),
     strongButRisky: scored.filter(
@@ -673,7 +696,10 @@ export function vendorViewInsight(
   const take = marketTake(m);
   const { strongButRisky, clear, close } = take;
   const noMomentum = scored.filter((v) => v.momentum === null).length;
-  const categories = new Set(vendors.map((v) => v.category)).size;
+  // Markets the assessment scores in, not distinct values of the vendor
+  // record's single category field. The two differ: 13 against 10, and the
+  // table beside this sentence groups by the first.
+  const categories = take.leads.length;
 
   // The widest and the tightest category, named. These are the two facts a
   // reader can act on: where the incumbent is unassailable and where a second
