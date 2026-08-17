@@ -17,6 +17,36 @@ than a gap.
 
 ## 16 August 2026
 
+**Commentary on each tab is now ours, from that tab's data.**
+
+Every tab picks the most relevant recent news item and shows it inside its
+analysis block. It was showing the news source's own commentary underneath the
+headline, under our heading, which presented somebody else's reading as ours on
+nine tabs.
+
+That would be wrong even where the commentary is right. On the OpenAI funding
+item it was not right: the source's line restates that round's investors
+incorrectly, and we were reprinting it.
+
+**The headline stays exactly as the source wrote it**, attributed and linked,
+because rewriting somebody's headline to correct it misattributes rather than
+corrects. The line beside it is now ours, and it is calculated rather than
+written, so it cannot drift from the page it sits on: where the item names
+vendors this page covers it names them and says how many of the page's set that
+is; where it names none, it says so, so you read it as market context rather
+than as a read on the figures; where it names nobody at all, it says nothing.
+
+It never characterises the item, because that would be asserting something the
+page cannot check.
+
+Market Watch reads, for example: "It names DeepSeek, which is among the 43 this
+page covers. The figures below are what this page holds on it, and are not
+derived from this item."
+
+**Still to do.** Eight of the nine tabs show no line yet rather than the
+source's, which is the half that mattered: the incorrect commentary is off
+every tab. Each gains its own line as its vendor set is passed through.
+
 **The integrator table was ranking on the wrong number.**
 
 That panel is headed "the integrators who would deliver your AI programme" and
