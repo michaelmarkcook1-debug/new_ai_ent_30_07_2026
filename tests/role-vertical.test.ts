@@ -211,8 +211,15 @@ describe("evidence narrower than its sector bucket says so", () => {
 
 describe("absence is reported rather than filled", () => {
   it("returns null for a sector the pilot did not research", () => {
-    expect(lensRole("ROLE-0045", "insurance")).toBeNull();
-    expect(lensRole("ROLE-0045", "manufacturing")).toBeNull();
+    // Insurance and manufacturing were the examples until 17 August 2026, when
+    // the nine researched sectors merged and the pilot reached all fifteen the
+    // classifier knows. The rule is unchanged and still has to hold, so it is
+    // asserted against a sector that is not in the taxonomy at all rather than
+    // against whichever one happens to be unresearched today.
+    expect(lensRole("ROLE-0045", "not_a_sector")).toBeNull();
+    for (const v of PILOT_META.verticalsUnresearched) {
+      expect(lensRole("ROLE-0045", v), v).toBeNull();
+    }
   });
 
   it("returns null for a role outside the pilot", () => {
@@ -221,7 +228,10 @@ describe("absence is reported rather than filled", () => {
   });
 
   it("names the sectors it has not reached", () => {
-    expect(PILOT_META.verticalsUnresearched.length).toBeGreaterThan(0);
+    // No longer required to be non-empty: the pilot now covers all fifteen. The
+    // list must still be honest whenever it has entries, and an empty list must
+    // mean genuinely complete coverage rather than a stale field, which the
+    // classifier-accounting test above enforces.
     for (const v of PILOT_META.verticalsUnresearched) {
       expect(verticalsCovered()).not.toContain(v);
     }
@@ -231,8 +241,11 @@ describe("absence is reported rather than filled", () => {
 describe("what the pilot actually produced", () => {
   const rows = coverage();
 
-  it("covers six sectors across six roles", () => {
-    expect(rows.length).toBe(6);
+  it("covers every sector the classifier knows, across six roles", () => {
+    // Six sectors on 6 August 2026, fifteen on 17 August when the researched
+    // nine merged. Pinned to the taxonomy rather than to a number, so this
+    // tracks the classifier instead of needing an edit each time coverage moves.
+    expect(rows.length).toBe(Object.keys(TAG_LABEL).length);
     expect(pilotRoleIds().length).toBe(6);
   });
 

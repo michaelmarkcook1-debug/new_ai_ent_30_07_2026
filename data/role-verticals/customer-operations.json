@@ -1,258 +1,2405 @@
 {
-  "meta": {
-    "pilot": "Customer Operations & Service",
-    "researched": "2026-08-06",
-    "method": "hand-researched against named sources, scored against lib/model-fit/rubric.ts",
-    "note": "Deltas only. The base profile in the role library is unchanged and still carries evidence class D. A requirement with no entry here has no sector-specific evidence and reads at its base value.",
-    "roles": [
-      "ROLE-0044",
-      "ROLE-0045",
-      "ROLE-0046",
-      "ROLE-0047",
-      "ROLE-0048",
-      "ROLE-0049"
-    ],
-    "verticalsResearched": 6,
-    "verticalsUnresearched": [
-      "insurance",
-      "pharma_life_sciences",
-      "legal",
-      "professional_services",
-      "technology_software",
-      "manufacturing",
-      "public_sector",
-      "education",
-      "real_estate"
-    ],
-    "tagVocabulary": "lib/exposure/vertical.ts TAG_LABEL, so a sector reading keys off the same tag the company classifier emits"
-  },
-
-  "sources": {
-    "fca-disp-1-6-2r": {
-      "title": "FCA Handbook DISP 1.6.2R, complaints time limit rules",
-      "cite": "A firm must send a final response, or a written response explaining why it cannot yet do so, by the end of eight weeks after receiving the complaint.",
-      "url": "https://handbook.fca.org.uk/handbook/disp1/disp1s6",
-      "class": "A"
+ "meta": {
+  "pilot": "Customer Operations & Service",
+  "researched": "2026-08-17",
+  "method": "Six verticals hand-researched 6 August 2026 against named sources. Nine added 17 August 2026 by scripts/research-role-verticals.mjs, search-first and source-cited, merged by scripts/merge-role-verticals.mjs.",
+  "note": "Deltas only. The base profile in the role library is unchanged and still carries evidence class D. A requirement with no entry here has no sector-specific evidence and reads at its base value.",
+  "roles": [
+   "ROLE-0044",
+   "ROLE-0045",
+   "ROLE-0046",
+   "ROLE-0047",
+   "ROLE-0048",
+   "ROLE-0049"
+  ],
+  "verticalsResearched": 15,
+  "verticalsUnresearched": [],
+  "tagVocabulary": "lib/exposure/vertical.ts TAG_LABEL, so a sector reading keys off the same tag the company classifier emits",
+  "held": {
+   "note": "Claims opened, read against their source, and found not to support what they were cited for. Held rather than merged. Nothing here is a judgement about the sector; each row names the source and what reading it showed.",
+   "rows": [
+    {
+     "vertical": "insurance",
+     "role": "ROLE-0044",
+     "capability": "CAP-10",
+     "from": 50,
+     "to": 70,
+     "class": "A",
+     "sourceUrl": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492",
+     "heldBecause": "Quoted accurately but scoped to Health Care Collaboratives (Title 28, Chapter 13, Subchapter E), not to insurers. Read 17 August 2026.",
+     "why": "Multiple regimes (Quebec complaint regulation in force July 2025, Texas 13.492 seven-day deadlines, CIMA Corporate Governance/Internal Controls rules) impose fixed procedural deadlines and formats whose breach is a reportable compliance event, matching the strict-compliance band rather than general adherence."
     },
-    "fca-disp-1": {
-      "title": "FCA Handbook DISP 1, Treating complainants fairly",
-      "cite": "Prescribes acknowledgement, investigation, final response content and referral rights for FCA-authorised firms handling eligible complainants.",
-      "url": "https://handbook.fca.org.uk/handbook/disp1",
-      "class": "A"
+    {
+     "vertical": "insurance",
+     "role": "ROLE-0044",
+     "capability": "CAP-11",
+     "from": 50,
+     "to": 70,
+     "class": "A",
+     "sourceUrl": "https://www.cima.ky/complaints-handling-and-regulatory-expectations",
+     "heldBecause": "Genuine CIMA complaints page, but contains no deadline provision, and the claims cite it for fixed procedural deadlines. Read 17 August 2026.",
+     "why": "Undetected errors in complaint handling, record retention, or vulnerable-customer monitoring under CIMA, Texas and FCA rules trigger regulatory attention or reportable breaches, not merely customer-level correction, matching the 'regulatory attention or reputational damage' band."
     },
-    "ofcom-gc-c4": {
-      "title": "Ofcom General Condition C4 and its annexed approved complaints code of practice",
-      "cite": "Providers must have and comply with complaints procedures meeting the minimum standards set out in the Ofcom approved complaints code of practice for customer service and complaints handling, and must be a member of an approved ADR scheme (C4.3).",
-      "url": "https://www.ofcom.org.uk/siteassets/resources/documents/advice-for-businesses/ofcom-approved-complaints-code-of-practice",
-      "class": "A"
+    {
+     "vertical": "insurance",
+     "role": "ROLE-0045",
+     "capability": "CAP-10",
+     "from": 70,
+     "to": 90,
+     "class": "A",
+     "sourceUrl": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492",
+     "heldBecause": "Quoted accurately but scoped to Health Care Collaboratives (Title 28, Chapter 13, Subchapter E), not to insurers. Read 17 August 2026.",
+     "why": "28 Tex. Admin. Code § 13.492 and the Quebec complaint regulation impose specific mandatory deadlines and content for complaint acknowledgment and handling; failure is a regulatory breach with external consequence, matching band 90 rather than 70."
     },
-    "ofcom-adr-six-weeks": {
-      "title": "Ofcom statement, review of ADR in the telecoms sector, 8 July 2025",
-      "cite": "The period a consumer must wait to access ADR falls from eight weeks to six weeks, in effect from 8 April 2026.",
-      "url": "https://www.ofcom.org.uk/phones-and-broadband/service-quality/quicker-complaints-resolution-for-telecoms-customers-under-new-ofcom-rules",
-      "class": "A"
+    {
+     "vertical": "insurance",
+     "role": "ROLE-0045",
+     "capability": "CAP-15",
+     "from": 30,
+     "to": 70,
+     "class": "A",
+     "sourceUrl": "https://www.cima.ky/complaints-handling-and-regulatory-expectations",
+     "heldBecause": "Genuine CIMA complaints page, but contains no deadline provision, and the claims cite it for fixed procedural deadlines. Read 17 August 2026.",
+     "why": "CIMA's Corporate Governance Rule 5.7.5 and Internal Controls Rule 12.11/12.12 require a documented complaints-handling framework subject to regulatory inspection, and FCA Consumer Duty requires an evidence trail for vulnerable customers, matching the formal audit-trail band 70."
     },
-    "si-2009-309": {
-      "title": "The Local Authority Social Services and National Health Service Complaints (England) Regulations 2009, SI 2009/309",
-      "cite": "The responsible body must acknowledge the complaint not later than 3 working days after the day on which it receives it. The relevant period for response is 6 months from receipt unless a longer period is agreed.",
-      "url": "https://www.legislation.gov.uk/uksi/2009/309",
-      "class": "A"
+    {
+     "vertical": "insurance",
+     "role": "ROLE-0046",
+     "capability": "CAP-10",
+     "from": 50,
+     "to": 70,
+     "class": "A",
+     "sourceUrl": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492",
+     "heldBecause": "Quoted accurately but scoped to Health Care Collaboratives (Title 28, Chapter 13, Subchapter E), not to insurers. Read 17 August 2026.",
+     "why": "Insurance complaint handling is bound by strict statutory deadlines and prescribed content (e.g., 7-day written acknowledgment under 28 Tex. Admin. Code §13.492, Quebec's mandatory complaint policy and acknowledgment content under Sections 5-10 and 30), making deviation a reportable regulatory event rather than a tolerated variance, matching band 70."
     },
-    "ofgem-slc-0": {
-      "title": "Ofgem electricity and gas supply standard licence conditions, SLC 0, Standards of Conduct",
-      "cite": "Suppliers must treat domestic customers fairly, including those in vulnerable situations, and satisfy themselves that their actions result in vulnerable consumers being treated fairly.",
-      "url": "https://www.ofgem.gov.uk/sites/default/files/2025-08/Electricity-Supply-Standard-Consolidated-Licence-Conditions.pdf",
-      "class": "A"
+    {
+     "vertical": "insurance",
+     "role": "ROLE-0046",
+     "capability": "CAP-15",
+     "from": 10,
+     "to": 70,
+     "class": "A",
+     "sourceUrl": "https://www.cima.ky/complaints-handling-and-regulatory-expectations",
+     "heldBecause": "Genuine CIMA complaints page, but contains no deadline provision, and the claims cite it for fixed procedural deadlines. Read 17 August 2026.",
+     "why": "CIMA's Corporate Governance and Internal Controls Rules mandate a formal complaints-handling framework subject to regulatory inspection, and the FCA Consumer Duty requires an evidence trail on vulnerable customers with a duty to notify the regulator of non-compliance, matching band 70 ('formal audit trail; subject to internal audit or regulator inspection') rather than informal review."
     },
-    "ofgem-slc-26": {
-      "title": "Ofgem supply standard licence conditions, SLC 26, Priority Services Register",
-      "cite": "Duty on the supplier to establish a Priority Services Register, share information and offer additional support to customers on it, taking all reasonable steps to identify customers in vulnerable situations.",
-      "url": "https://www.ofgem.gov.uk/sites/default/files/2025-08/Electricity-Supply-Standard-Consolidated-Licence-Conditions.pdf",
-      "class": "A"
+    {
+     "vertical": "insurance",
+     "role": "ROLE-0048",
+     "capability": "CAP-11",
+     "from": 50,
+     "to": 70,
+     "class": "A",
+     "sourceUrl": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492",
+     "heldBecause": "Quoted accurately but scoped to Health Care Collaboratives (Title 28, Chapter 13, Subchapter E), not to insurers. Read 17 August 2026.",
+     "why": "Under 28 Tex. Admin. Code §13.492 and CIMA's Internal Controls Rule/SOG, mishandled complaints or failed acknowledgment/investigation deadlines trigger regulatory attention, not just internal rework, matching band 70 (errors causing regulatory attention or reputational damage)."
     },
-    "uk261": {
-      "title": "Assimilated Regulation (EC) No 261/2004, UK261",
-      "cite": "Establishes compensation and assistance rights on denied boarding, cancellation and long delay, including duties of care during disruption.",
-      "url": "https://www.legislation.gov.uk/eur/2004/261",
-      "class": "A"
+    {
+     "vertical": "insurance",
+     "role": "ROLE-0048",
+     "capability": "CAP-15",
+     "from": 50,
+     "to": 70,
+     "class": "A",
+     "sourceUrl": "https://www.cima.ky/complaints-handling-and-regulatory-expectations",
+     "heldBecause": "Genuine CIMA complaints page, but contains no deadline provision, and the claims cite it for fixed procedural deadlines. Read 17 August 2026.",
+     "why": "CIMA's Corporate Governance Rule (5.7.5) and Internal Controls Rule/SOG (12.11-12.12) require a documented complaints-handling framework subject to regulatory inspection, and FCA Consumer Duty requires an evidence trail and notification to the regulator, matching band 70 formal audit-trail/regulator-inspection requirements rather than informal sign-off."
     },
-    "caa-adr": {
-      "title": "UK Civil Aviation Authority, making a claim",
-      "cite": "A passenger dissatisfied with the airline's final response, or waiting more than eight weeks for one, may escalate to an approved ADR provider or to the CAA's Passenger Advice and Complaints Team.",
-      "url": "https://www.caa.co.uk/passengers-and-public/resolving-travel-problems/delays-and-cancellations/making-a-claim/am-i-entitled-to-compensation/",
-      "class": "A"
-    },
-    "eu-ai-act-art-50": {
-      "title": "EU AI Act Article 50, transparency obligations",
-      "cite": "Obligations under Article 50 apply from 2 August 2026, including informing individuals that they are interacting with an AI system.",
-      "url": "https://artificialintelligenceact.eu/high-level-summary/",
-      "class": "A"
-    },
-    "eu-ai-act-omnibus": {
-      "title": "EU AI Act Omnibus, political agreement 7 May 2026, in force 27 July 2026",
-      "cite": "Annex III high-risk use cases extended to 2 December 2027 and Annex I embedded high-risk systems to 2 August 2028.",
-      "url": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
-      "class": "A"
-    },
-    "retail-baseline": {
-      "title": "No sector-specific statutory complaint-handling regime identified for general retail",
-      "cite": "General consumer law applies. No regulator-mandated complaint timetable, approved code or ADR membership duty of the kind Ofcom, the FCA, Ofgem and the CAA impose was found for general retail.",
-      "url": null,
-      "class": "E"
+    {
+     "vertical": "insurance",
+     "role": "ROLE-0049",
+     "capability": "CAP-11",
+     "from": 50,
+     "to": 70,
+     "class": "B",
+     "sourceUrl": "https://www.law.cornell.edu/regulations/texas/28-Tex-Admin-Code-SS-13-492",
+     "heldBecause": "Quoted accurately but scoped to Health Care Collaboratives (Title 28, Chapter 13, Subchapter E), not to insurers. Read 17 August 2026.",
+     "why": "Because complaint handling is governed by enforceable deadlines and investigation duties (Texas Insurance Code §848.107, Quebec regulation), an undetected error (missed deadline, mishandled complaint) triggers regulatory attention or sanction rather than mere internal rework, moving from band 50 to band 70."
     }
-  },
-
-  "verticals": {
-    "financial_services": {
-      "label": "Financial services",
-      "regime": "FCA DISP plus Consumer Duty. A complaint carries a statutory clock, a prescribed final response and a right of referral to the Financial Ombudsman Service.",
-      "deltas": {
-        "ROLE-0045": {
-          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "fca-disp-1", "why": "DISP prescribes acknowledgement, timetable and the referral wording a final response must carry. Deviation is a rule breach with external consequence, which is the band 90 anchor." },
-          "CAP-15": { "from": 30, "to": 70, "class": "A", "source": "fca-disp-1", "why": "Complaint files are subject to FCA supervision and firms report complaints data, so the work carries a formal audit trail open to regulator inspection." },
-          "CAP-11": { "from": 50, "to": 70, "class": "A", "source": "fca-disp-1-6-2r", "why": "A missed eight-week deadline is itself a breach, so an undetected error draws regulatory attention rather than only requiring correction." },
-          "CAP-08": { "from": 30, "to": 50, "class": "D", "why": "Where an advisor drafts the final response it is a binding external document. Firms vary in whether the front line drafts it, so this is scored from job descriptions rather than from the rules." }
-        },
-        "ROLE-0047": {
-          "CAP-03": { "from": 50, "to": 70, "class": "A", "source": "fca-disp-1", "why": "Requires knowing why the rules exist and where exceptions apply, not only recognising standard cases: eligibility, jurisdiction and time bars are all judgement calls under DISP." },
-          "CAP-11": { "from": 70, "to": 90, "class": "B", "source": "fca-disp-1", "why": "An FOS determination is binding on the firm, so a mishandled complaint creates legal liability rather than reputational damage alone. Scored from the ombudsman's binding power rather than from a rule that states the consequence." }
-        },
-        "ROLE-0048": {
-          "CAP-15": { "from": 50, "to": 70, "class": "A", "source": "fca-disp-1", "why": "Contact centre quality assurance forms part of the evidence a firm shows the FCA on complaint handling, so the work is inspected rather than internally signed off." },
-          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "fca-disp-1", "why": "The procedures the manager enforces are themselves prescribed by DISP." }
-        },
-        "ROLE-0049": {
-          "CAP-15": { "from": 70, "to": 90, "class": "B", "source": "fca-disp-1", "why": "Complaints reporting is submitted to the regulator and attested, so assurance work is externally assured rather than internally audited. Scored from the reporting duty rather than from a rule naming the analyst." }
-        },
-        "ROLE-0044": {
-          "CAP-15": { "from": 70, "to": 90, "class": "B", "source": "fca-disp-1", "why": "Consumer Duty places individual accountability on a named senior manager, which is the band 90 anchor. Scored from the Duty's accountability structure rather than from a rule naming this job title." }
-        },
-        "ROLE-0046": {}
-      }
-    },
-
-    "telecom_media": {
-      "label": "Telecoms and media",
-      "regime": "Ofcom General Condition C4 and its annexed approved complaints code, with compulsory ADR membership. The escalation window fell from eight weeks to six on 8 April 2026.",
-      "scopeNote": "The evidence is telecoms-specific. General Condition C4 binds communications providers serving residential, small business and not-for-profit customers. A media business in this sector that is not a communications provider is not covered by it, and this lens overstates its position.",
-      "deltas": {
-        "ROLE-0045": {
-          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "ofcom-gc-c4", "why": "The approved code is a minimum standard annexed to a general condition, so departure from it is a breach of the provider's authorisation." },
-          "CAP-15": { "from": 30, "to": 70, "class": "A", "source": "ofcom-gc-c4", "why": "Ofcom has run enforcement programmes into complaints handling, so the work is subject to regulator inspection." },
-          "CAP-13": { "from": 90, "to": 90, "class": "A", "source": "ofcom-adr-six-weeks", "why": "No change to the band, recorded because the escalation window shortened from eight weeks to six on 8 April 2026 and any timetable built on the old figure is now wrong." }
-        },
-        "ROLE-0047": {
-          "CAP-10": { "from": 90, "to": 90, "class": "A", "source": "ofcom-adr-six-weeks", "why": "No change to the band. Recorded because the six-week ADR trigger replaced the eight-week one on 8 April 2026 and the deadline the role works to has moved." },
-          "CAP-03": { "from": 50, "to": 70, "class": "B", "source": "ofcom-gc-c4", "why": "The code sets out when ADR letters are due and to whom the rules apply, which turns on customer classification: residential, small business and not-for-profit are in scope and others are not." }
-        },
-        "ROLE-0048": {
-          "CAP-15": { "from": 50, "to": 70, "class": "A", "source": "ofcom-gc-c4", "why": "Compliance with the annexed code is inspected by Ofcom rather than signed off internally." }
-        },
-        "ROLE-0049": {},
-        "ROLE-0044": {},
-        "ROLE-0046": {}
-      }
-    },
-
-    "healthcare": {
-      "label": "Healthcare",
-      "regime": "SI 2009/309 sets a statutory complaints procedure for NHS bodies and local authority social care, with a three working day acknowledgement and a six month relevant period.",
-      "deltas": {
-        "ROLE-0045": {
-          "CAP-14": { "from": 70, "to": 90, "class": "A", "source": "si-2009-309", "why": "Health records are special-category data and their exposure causes serious harm, which is the band 90 anchor rather than the band 70 one the base profile carries." },
-          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "si-2009-309", "why": "The acknowledgement deadline is set by statutory instrument, so missing it is a breach of regulation and not an internal service failure." },
-          "CAP-15": { "from": 30, "to": 70, "class": "A", "source": "si-2009-309", "why": "Complaint handling is inspected by the Care Quality Commission and reviewable by the Parliamentary and Health Service Ombudsman." }
-        },
-        "ROLE-0047": {
-          "CAP-13": { "from": 30, "to": 50, "class": "A", "source": "si-2009-309", "why": "Three working days to acknowledge is a same-week statutory obligation rather than the same-day norm the base profile assumes, and the clock starts on receipt anywhere in the body." },
-          "CAP-03": { "from": 50, "to": 70, "class": "A", "source": "si-2009-309", "why": "The regulations require the body to offer to agree the handling and response period at acknowledgement, which is a judgement about scope made against the statute." }
-        },
-        "ROLE-0048": {
-          "CAP-14": { "from": 70, "to": 90, "class": "A", "source": "si-2009-309", "why": "Oversight of a contact centre handling patient records reaches the same special-category data as the front line." }
-        },
-        "ROLE-0049": {
-          "CAP-14": { "from": 70, "to": 90, "class": "A", "source": "si-2009-309", "why": "Quality sampling reads the case files themselves, so the analyst holds the same records." }
-        },
-        "ROLE-0044": {
-          "CAP-15": { "from": 70, "to": 90, "class": "B", "source": "si-2009-309", "why": "The regulations place the duty on the responsible body and require an annual report, which is external assurance. Scored from the body-level duty rather than from a rule naming this job title." }
-        },
-        "ROLE-0046": {}
-      }
-    },
-
-    "energy_utilities": {
-      "label": "Energy and utilities",
-      "regime": "Ofgem standard licence conditions. SLC 0 requires fair treatment of customers in vulnerable situations and SLC 26 establishes the Priority Services Register.",
-      "deltas": {
-        "ROLE-0045": {
-          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "ofgem-slc-26", "why": "Identifying a customer in a vulnerable situation and registering them is a licence obligation, so failing to act on the signs is a breach of the supply licence." },
-          "CAP-15": { "from": 30, "to": 70, "class": "A", "source": "ofgem-slc-0", "why": "Ofgem has opened investigations into supplier compliance with SLC 0 and SLC 26, so day to day conduct is subject to regulator inspection." },
-          "CAP-11": { "from": 50, "to": 70, "class": "A", "source": "ofgem-slc-0", "why": "A missed vulnerability signal reaches a customer who may be at risk and draws regulatory attention, which is the band 70 anchor." },
-          "CAP-14": { "from": 70, "to": 90, "class": "B", "source": "ofgem-slc-26", "why": "Priority Services Register entries record health conditions and disability, which is special-category data held under a licence duty. Scored from what the register contains rather than from a data protection rule naming it." }
-        },
-        "ROLE-0047": {},
-        "ROLE-0048": {
-          "CAP-15": { "from": 50, "to": 70, "class": "A", "source": "ofgem-slc-0", "why": "Ofgem has issued guidance on its expectations for consumers to be able to contact their supplier, making contact centre performance a licence matter open to inspection." }
-        },
-        "ROLE-0049": {},
-        "ROLE-0044": {
-          "CAP-15": { "from": 70, "to": 90, "class": "B", "source": "ofgem-slc-0", "why": "SLC 0 requires the supplier to satisfy itself that its actions result in fair treatment, which is a standing attestation rather than a periodic audit. Scored from the licence wording rather than from a rule naming this job title." }
-        },
-        "ROLE-0046": {}
-      }
-    },
-
-    "transport_logistics": {
-      "label": "Transport and logistics",
-      "regime": "UK261 sets compensation and duty of care on delay, cancellation and denied boarding. The CAA takes escalation after eight weeks or an unsatisfactory final response.",
-      "scopeNote": "The evidence is passenger aviation only. UK261 confers rights on air passengers and says nothing about freight, shipping or road logistics, which sit in this sector and have no equivalent regime. For a business that does not carry passengers by air this lens overstates its position and should be read as not yet researched.",
-      "deltas": {
-        "ROLE-0045": {
-          "CAP-02": { "from": 30, "to": 50, "class": "A", "source": "uk261", "why": "Entitlement depends on a chain: distance band, delay at destination, notice given, and whether the cause was within the airline's control. An early error changes the answer, which is the band 50 anchor." },
-          "CAP-10": { "from": 70, "to": 90, "class": "A", "source": "uk261", "why": "Duty of care during disruption is a regulatory entitlement, not a service gesture, and withholding it is a breach." },
-          "CAP-15": { "from": 30, "to": 70, "class": "A", "source": "caa-adr", "why": "The CAA runs a UK261 compliance programme into air passenger rights, so handling is subject to regulator inspection." }
-        },
-        "ROLE-0047": {
-          "CAP-02": { "from": 50, "to": 70, "class": "A", "source": "uk261", "why": "The extraordinary circumstances defence, re-routing obligations and compensation bands interact, so the reasoning branches rather than running to a single conclusion." },
-          "CAP-03": { "from": 50, "to": 70, "class": "A", "source": "uk261", "why": "Knowing when the extraordinary circumstances defence holds is expert knowledge of why the rule exists, not recognition of a standard case." }
-        },
-        "ROLE-0048": {
-          "CAP-13": { "from": 70, "to": 90, "class": "B", "source": "uk261", "why": "Duty of care during live disruption is owed while passengers are waiting at the airport, so delay in standing up the response causes the harm the rule addresses. Scored from the nature of the duty rather than from a stated response time." }
-        },
-        "ROLE-0049": {},
-        "ROLE-0044": {},
-        "ROLE-0046": {}
-      }
-    },
-
-    "retail_consumer": {
-      "label": "Retail and consumer",
-      "regime": "General consumer law only. No sector regulator imposes a complaint timetable, an approved code or compulsory ADR membership, which is why this vertical is the baseline the others are read against.",
-      "deltas": {
-        "ROLE-0044": {},
-        "ROLE-0045": {},
-        "ROLE-0046": {},
-        "ROLE-0047": {},
-        "ROLE-0048": {},
-        "ROLE-0049": {}
-      }
-    }
-  },
-
-  "crossCutting": {
-    "eu_ai_act": {
-      "appliesTo": "Any vertical deploying an AI system in customer service within the EU.",
-      "live": {
-        "since": "2026-08-02",
-        "source": "eu-ai-act-art-50",
-        "effect": "Article 50 transparency obligations are in force. A customer must be told they are interacting with an AI system."
-      },
-      "deferred": {
-        "annexIII": "2027-12-02",
-        "annexI": "2028-08-02",
-        "source": "eu-ai-act-omnibus",
-        "effect": "The AI Omnibus, in force 27 July 2026, postponed the high-risk obligations. A deployment plan written against the original 2 August 2026 high-risk date is now working to the wrong deadline in both directions: transparency arrived, high-risk did not."
-      }
-    }
+   ]
   }
+ },
+ "sources": {
+  "fca-disp-1-6-2r": {
+   "title": "FCA Handbook DISP 1.6.2R, complaints time limit rules",
+   "cite": "A firm must send a final response, or a written response explaining why it cannot yet do so, by the end of eight weeks after receiving the complaint.",
+   "url": "https://handbook.fca.org.uk/handbook/disp1/disp1s6",
+   "class": "A"
+  },
+  "fca-disp-1": {
+   "title": "FCA Handbook DISP 1, Treating complainants fairly",
+   "cite": "Prescribes acknowledgement, investigation, final response content and referral rights for FCA-authorised firms handling eligible complainants.",
+   "url": "https://handbook.fca.org.uk/handbook/disp1",
+   "class": "A"
+  },
+  "ofcom-gc-c4": {
+   "title": "Ofcom General Condition C4 and its annexed approved complaints code of practice",
+   "cite": "Providers must have and comply with complaints procedures meeting the minimum standards set out in the Ofcom approved complaints code of practice for customer service and complaints handling, and must be a member of an approved ADR scheme (C4.3).",
+   "url": "https://www.ofcom.org.uk/siteassets/resources/documents/advice-for-businesses/ofcom-approved-complaints-code-of-practice",
+   "class": "A"
+  },
+  "ofcom-adr-six-weeks": {
+   "title": "Ofcom statement, review of ADR in the telecoms sector, 8 July 2025",
+   "cite": "The period a consumer must wait to access ADR falls from eight weeks to six weeks, in effect from 8 April 2026.",
+   "url": "https://www.ofcom.org.uk/phones-and-broadband/service-quality/quicker-complaints-resolution-for-telecoms-customers-under-new-ofcom-rules",
+   "class": "A"
+  },
+  "si-2009-309": {
+   "title": "The Local Authority Social Services and National Health Service Complaints (England) Regulations 2009, SI 2009/309",
+   "cite": "The responsible body must acknowledge the complaint not later than 3 working days after the day on which it receives it. The relevant period for response is 6 months from receipt unless a longer period is agreed.",
+   "url": "https://www.legislation.gov.uk/uksi/2009/309",
+   "class": "A"
+  },
+  "ofgem-slc-0": {
+   "title": "Ofgem electricity and gas supply standard licence conditions, SLC 0, Standards of Conduct",
+   "cite": "Suppliers must treat domestic customers fairly, including those in vulnerable situations, and satisfy themselves that their actions result in vulnerable consumers being treated fairly.",
+   "url": "https://www.ofgem.gov.uk/sites/default/files/2025-08/Electricity-Supply-Standard-Consolidated-Licence-Conditions.pdf",
+   "class": "A"
+  },
+  "ofgem-slc-26": {
+   "title": "Ofgem supply standard licence conditions, SLC 26, Priority Services Register",
+   "cite": "Duty on the supplier to establish a Priority Services Register, share information and offer additional support to customers on it, taking all reasonable steps to identify customers in vulnerable situations.",
+   "url": "https://www.ofgem.gov.uk/sites/default/files/2025-08/Electricity-Supply-Standard-Consolidated-Licence-Conditions.pdf",
+   "class": "A"
+  },
+  "uk261": {
+   "title": "Assimilated Regulation (EC) No 261/2004, UK261",
+   "cite": "Establishes compensation and assistance rights on denied boarding, cancellation and long delay, including duties of care during disruption.",
+   "url": "https://www.legislation.gov.uk/eur/2004/261",
+   "class": "A"
+  },
+  "caa-adr": {
+   "title": "UK Civil Aviation Authority, making a claim",
+   "cite": "A passenger dissatisfied with the airline's final response, or waiting more than eight weeks for one, may escalate to an approved ADR provider or to the CAA's Passenger Advice and Complaints Team.",
+   "url": "https://www.caa.co.uk/passengers-and-public/resolving-travel-problems/delays-and-cancellations/making-a-claim/am-i-entitled-to-compensation/",
+   "class": "A"
+  },
+  "eu-ai-act-art-50": {
+   "title": "EU AI Act Article 50, transparency obligations",
+   "cite": "Obligations under Article 50 apply from 2 August 2026, including informing individuals that they are interacting with an AI system.",
+   "url": "https://artificialintelligenceact.eu/high-level-summary/",
+   "class": "A"
+  },
+  "eu-ai-act-omnibus": {
+   "title": "EU AI Act Omnibus, political agreement 7 May 2026, in force 27 July 2026",
+   "cite": "Annex III high-risk use cases extended to 2 December 2027 and Annex I embedded high-risk systems to 2 August 2028.",
+   "url": "https://www.gibsondunn.com/eu-ai-act-omnibus-agreement-postponed-high-risk-deadlines-and-other-key-changes/",
+   "class": "A"
+  },
+  "retail-baseline": {
+   "title": "No sector-specific statutory complaint-handling regime identified for general retail",
+   "cite": "General consumer law applies. No regulator-mandated complaint timetable, approved code or ADR membership duty of the kind Ofcom, the FCA, Ofgem and the CAA impose was found for general retail.",
+   "url": null,
+   "class": "E"
+  },
+  "education-an-appeal-of-a-letter-of-decision-regard": {
+   "title": "Elementary and Secondary Education Act (ESEA) Complaints Policy",
+   "cite": "An appeal of a Letter of Decision regarding an equitable services complaint governed by ESEA Section 8503 shall be filed with ED within thirty (30) calendar days after notice of the Letter of Decision.",
+   "url": "https://osse.dc.gov/sites/default/files/dc/sites/osse/publication/attachments/ESEA%20Complaints%20Policy.7.2021.pdf",
+   "class": "A"
+  },
+  "education-all-maintained-schools-and-maintained-nu": {
+   "title": "Education Act 2002",
+   "cite": "All maintained schools and maintained nursery schools must have and published procedures to deal with all complaints relating to their school and any community facilities or services that the school provides for which there are no separate statutory procedure.",
+   "url": "https://www.youtube.com/watch?v=Kf1dOTowdYw",
+   "class": "D"
+  },
+  "education-it-is-an-offence-for-a-government-organi": {
+   "title": "State Records Act 2000 (WA)",
+   "cite": "It is an offence for a government organisation employee to remove, destroy, or to have unauthorised possession or to transfer possession of government records, with penalties of $10,000.",
+   "url": "https://www.education.wa.edu.au/web/policies/-/records-management-policy",
+   "class": "A"
+  },
+  "education-schools-must-take-reasonable-steps-to-ha": {
+   "title": "U.S. Code",
+   "cite": "Schools must take reasonable steps to have service providers capable of maintaining appropriate safeguards for customer information.",
+   "url": "https://fsapartners.ed.gov/knowledge-center/fsa-handbook/2025-2026/vol2/ch7-record-keeping-privacy-electronic-processes",
+   "class": "A"
+  },
+  "education-schools-must-establish-a-lawful-basis-fo": {
+   "title": "Data Protection Act 2018 (DPA 2018)",
+   "cite": "Schools must establish a lawful basis for processing children's data and must have explicit consent or a clear legal basis for processing special category data such as health information.",
+   "url": "https://cpdonline.co.uk/knowledge-base/business/understanding-legal-framework-surrounding-school-data-protection",
+   "class": "A"
+  },
+  "education-educational-institutions-must-maintain-a": {
+   "title": "General Data Protection Regulation (GDPR)",
+   "cite": "Educational institutions must maintain a Record of Processing Activities covering all data processing activities from enrollment through cooperation with external entities.",
+   "url": "https://nflo.tech/knowledge-base/gdpr-in-education-student-data-protection",
+   "class": "A"
+  },
+  "education-processing-of-special-categories-of-data": {
+   "title": "General Data Protection Regulation (GDPR)",
+   "cite": "Processing of special categories of data such as health data, disability information, or psychological-pedagogical assessments requires an additional basis.",
+   "url": "https://nflo.tech/knowledge-base/gdpr-in-education-student-data-protection",
+   "class": "A"
+  },
+  "insurance-regulation-respecting-complaint-processi": {
+   "title": "Regulation respecting complaint processing and dispute resolution in the financial sector",
+   "cite": "Regulation respecting complaint processing and dispute resolution in the financial sector, Sections 5-10 and 30",
+   "url": "https://chad.ca/en/professional-practice/complaint-examination-policy",
+   "class": "A"
+  },
+  "insurance-n-y-comp-codes-r-regs-tit-11-part-243-se": {
+   "title": "N.Y. Comp. Codes R. & Regs. tit. 11, Part 243 (Regulation 152)",
+   "cite": "N.Y. Comp. Codes R. & Regs. tit. 11, Part 243, Section 243.2(b)(1)",
+   "url": "https://www.dfs.ny.gov/insurance/ogco2005/rg050332.htm",
+   "class": "D"
+  },
+  "insurance-n-y-ins-law-2119-a-c-n-y-comp-codes-r-re": {
+   "title": "N.Y. Ins. Law § 2119(a) & (c) and N.Y. Comp. Codes R. & Regs. tit. 11, § 20.4(b) & (c) (Regulation 29)",
+   "cite": "N.Y. Ins. Law § 2119(a) & (c); N.Y. Comp. Codes R. & Regs. tit. 11, § 20.4(b) & (c)",
+   "url": "https://www.dfs.ny.gov/insurance/ogco2005/rg050332.htm",
+   "class": "D"
+  },
+  "insurance-pcmltfa-and-associated-regulations": {
+   "title": "Proceeds of Crime Money Laundering and Terrorist Financing Act (PCMLTFA) and associated Regulations",
+   "cite": "PCMLTFA and associated Regulations",
+   "url": "https://fintrac-canafe.canada.ca/guidance-directives/recordkeeping-document/record/li-eng",
+   "class": "D"
+  },
+  "insurance-prin-2a-2-22-r-and-consumer-duty-require": {
+   "title": "FCA Consumer Duty",
+   "cite": "PRIN 2A.2.22 R and Consumer Duty requirements on vulnerable customer monitoring",
+   "url": "https://media.umbraco.io/ciigroup-dxp/eaedofqi/managing-customer-vulnerability-in-insurance-and-personal-finance-a-practical-implementation-guide.pdf",
+   "class": "A"
+  },
+  "insurance-article-9-and-article-9-2-of-gdpr": {
+   "title": "General Data Protection Regulation (GDPR)",
+   "cite": "Article 9 and Article 9(2) of GDPR",
+   "url": "https://dwfgroup.com/en/news-and-insights/insights/2018/5/data-protection-act-2018-what-is-it-and-what-does-it-mean-for-insurance",
+   "class": "A"
+  },
+  "insurance-schedule-1-para-20-part-4-of-schedule-1": {
+   "title": "Data Protection Act 2018",
+   "cite": "Schedule 1 Para 20; Part 4 of Schedule 1",
+   "url": "https://dwfgroup.com/en/news-and-insights/insights/2018/5/data-protection-act-2018-what-is-it-and-what-does-it-mean-for-insurance",
+   "class": "A"
+  },
+  "legal-section-112": {
+   "title": "Legal Services Act 2007",
+   "cite": "Section 112",
+   "url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+   "class": "A"
+  },
+  "legal-rule-4-2-a": {
+   "title": "Legal Ombudsman Scheme Rules",
+   "cite": "Rule 4.2(a)",
+   "url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+   "class": "A"
+  },
+  "legal-article-9": {
+   "title": "UK GDPR - General Data Protection Regulation",
+   "cite": "Article 9",
+   "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data",
+   "class": "A"
+  },
+  "legal-schedule-1": {
+   "title": "Data Protection Act 2018",
+   "cite": "Schedule 1",
+   "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/a-guide-to-lawful-basis/special-category-data",
+   "class": "A"
+  },
+  "legal-the-social-housing-regulation-act-2023": {
+   "title": "The Social Housing (Regulation) Act 2023",
+   "cite": "The Social Housing (Regulation) Act 2023",
+   "url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code",
+   "class": "D"
+  },
+  "manufacturing-manufacturers-are-required-to-keep-compl": {
+   "title": "Code of Federal Regulations Title 21, Part 820 (Quality System Regulation)",
+   "cite": "Manufacturers are required to keep complaint files and set up processes for receiving, reviewing, and assessing complaints via a designated unit.",
+   "url": "https://mavenprofserv.com/blog/handle-customer-complaints-regulatory-frameworks",
+   "class": "A"
+  },
+  "manufacturing-requires-manufacturers-to-implement-syst": {
+   "title": "EU Medical Device Regulation",
+   "cite": "Requires manufacturers to implement systematic procedures for gathering and reviewing complaints through their complaint management infrastructure.",
+   "url": "https://quality.eleapsoftware.com/glossary/concern-and-complaint-management-in-qms-a-complete-guide",
+   "class": "A"
+  },
+  "manufacturing-sets-out-relevant-licence-conditions-and": {
+   "title": "Ofgem Licence Guide: Safety and Vulnerable Consumer Protections",
+   "cite": "Sets out relevant licence conditions and guidance relating to safety of energy supply and specific protections for consumers in vulnerable situations.",
+   "url": "https://www.ofgem.gov.uk/guidance/licence-guide-safety-and-vulnerable-consumer-protections",
+   "class": "D"
+  },
+  "pharma_life_sciences-a-regulatory-requirement-outlining-the-p": {
+   "title": "FDA Code of Federal Regulations Title 21 Part 820.198",
+   "cite": "A regulatory requirement outlining the procedures for handling complaints concerning medical devices, emphasizing the importance of documentation, investigation, and corrective action.",
+   "url": "https://zamann-pharma.com/glossary/fda-complaint-handling",
+   "class": "D"
+  },
+  "pharma_life_sciences-pharma-companies-must-have-documented-so": {
+   "title": "FDA Code of Federal Regulations Title 21 Part 211.198",
+   "cite": "Pharma companies must have documented SOPs for handling complaints, timely complaint review, investigation requirements if a complaint indicates possible failure of the drug to meet specifications, batch record examination for every quality-related complaint, and complaint records must be maintained for at least 1 year after the product's expiration date.",
+   "url": "https://qedge.sarjen.com/regulatory-expectations-for-market-complaint-management-in-pharma",
+   "class": "A"
+  },
+  "pharma_life_sciences-a-designated-person-responsible-for-comp": {
+   "title": "EU GMP (European Good Manufacturing Practices) Guidelines Chapter 8",
+   "cite": "A designated person responsible for complaint handling records and investigates every complaint in the European Union.",
+   "url": "https://simplerqms.com/pharmaceutical-complaint-management",
+   "class": "A"
+  },
+  "pharma_life_sciences-electronic-records-and-signatures-compli": {
+   "title": "FDA Code of Federal Regulations Title 21 Part 11",
+   "cite": "Electronic records and signatures compliance requirement for complaints handling in life sciences.",
+   "url": "https://host.etq.com/life-sciences-compliance",
+   "class": "A"
+  },
+  "professional_services-qu-bec-financial-sector-regulation-speci": {
+   "title": "Regulation on Complaint Handling in Québec's Financial Sector",
+   "cite": "Québec financial sector regulation (specific article not provided in source)",
+   "url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+   "class": "A"
+  },
+  "professional_services-part-7-regulations-7-4-and-7-6": {
+   "title": "Legal Services Regulations (ICAEW)",
+   "cite": "Part 7, regulations 7.4 and 7.6",
+   "url": "https://www.icaew.com/regulation/probate-services/support-for-probate-accredited-firms/new-complaints-handling-requirements-from-1-october-2025/faqs-complaints-handling-requirements-for-accredited-legal-services-firms",
+   "class": "A"
+  },
+  "professional_services-section-112": {
+   "title": "Legal Services Act",
+   "cite": "Section 112",
+   "url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+   "class": "A"
+  },
+  "professional_services-scheme-rules-3-2-and-4-2": {
+   "title": "Legal Ombudsman Scheme Rules",
+   "cite": "Scheme Rules 3.2 and 4.2",
+   "url": "https://www.legalombudsman.org.uk/for-legal-service-providers/learning-resources/good-complaints-handling/best-practice-complaint-handling-guide",
+   "class": "A"
+  },
+  "professional_services-licence-conditions-specific-conditions-r": {
+   "title": "Ofgem Licence Guide: Safety and Vulnerable Consumer Protections",
+   "cite": "Licence conditions (specific conditions referenced in PDF)",
+   "url": "https://www.ofgem.gov.uk/guidance/licence-guide-safety-and-vulnerable-consumer-protections",
+   "class": "A"
+  },
+  "public_sector-the-agency-is-required-to-conduct-an-imp": {
+   "title": "29 CFR Part 1614 -- Federal Sector Equal Employment Opportunity",
+   "cite": "The agency is required to conduct an impartial and appropriate investigation of the complaint within 180 days of the filing of the complaint unless the parties agree in writing to extend the time period.",
+   "url": "https://www.ecfr.gov/current/title-29/subtitle-B/chapter-XIV/part-1614",
+   "class": "A"
+  },
+  "public_sector-special-category-data-may-only-be-proces": {
+   "title": "UK GDPR and Data Protection Act 2018",
+   "cite": "Special category data may only be processed where a lawful basis and an Article 9 condition are satisfied; organizations must keep records including documenting categories of data and conditions for processing.",
+   "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-are-the-rules-on-special-category-data",
+   "class": "A"
+  },
+  "public_sector-firms-must-ensure-that-customers-with-ch": {
+   "title": "FCA Consumer Duty",
+   "cite": "Firms must ensure that customers with characteristics of vulnerability are receiving outcomes that are as good as outcomes received by other customers and must tailor products, services, communications and support to avoid foreseeable harm.",
+   "url": "https://www.hlc.com/en/publications/consumer-duty-achieving-good-outcomes-for-vulnerable-customers",
+   "class": "A"
+  },
+  "real_estate-colorado-division-of-real-estate-regulat": {
+   "title": "Colorado Real Estate Division Complaint Process Regulations",
+   "cite": "Colorado Division of Real Estate regulations",
+   "url": "https://dre.colorado.gov/complaint-process",
+   "class": "A"
+  },
+  "real_estate-qu-bec-financial-sector-complaint-handli": {
+   "title": "Regulation on Complaint Handling in Québec's Financial Sector",
+   "cite": "Québec financial sector complaint handling regulation",
+   "url": "https://www.blg.com/en/insights/2025/05/new-regulation-on-complaint-handling-in-quebecs-financial-sector",
+   "class": "A"
+  },
+  "real_estate-the-social-housing-regulation-act-2023": {
+   "title": "The Complaint Handling Code",
+   "cite": "The Social Housing (Regulation) Act 2023",
+   "url": "https://www.housing-ombudsman.org.uk/landlords-info/complaint-handling-code",
+   "class": "A"
+  },
+  "real_estate-section-455-225-9-florida-statutes": {
+   "title": "Florida Statutes Section 455.225(9)",
+   "cite": "Section 455.225(9), Florida Statutes",
+   "url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+   "class": "A"
+  },
+  "real_estate-section-475-25-5-florida-statutes": {
+   "title": "Florida Statutes Section 475.25(5)",
+   "cite": "Section 475.25(5), Florida Statutes",
+   "url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+   "class": "A"
+  },
+  "real_estate-section-475-25-6-florida-statutes": {
+   "title": "Florida Statutes Section 475.25(6)",
+   "cite": "Section 475.25(6), Florida Statutes",
+   "url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+   "class": "A"
+  },
+  "real_estate-section-475-25-1-florida-statutes": {
+   "title": "Florida Statutes Section 475.25(1)",
+   "cite": "Section 475.25(1), Florida Statutes",
+   "url": "https://www.floridarealtors.org/law-ethics/library/complaints",
+   "class": "A"
+  },
+  "real_estate-section-31-rera": {
+   "title": "Real Estate Regulation Act (RERA)",
+   "cite": "Section 31, RERA",
+   "url": "https://www.youtube.com/watch?v=Et6NPh-OOEY",
+   "class": "D"
+  },
+  "real_estate-law-no-70-9-of-january-2-1970": {
+   "title": "French Law No. 70-9 of January 2, 1970",
+   "cite": "Law No. 70-9 of January 2, 1970",
+   "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2954?lang=en",
+   "class": "D"
+  },
+  "real_estate-decree-no-72-678-article-73": {
+   "title": "French Decree No. 72-678 of 20 July 1972",
+   "cite": "Decree No. 72-678, Article 73",
+   "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2954?lang=en",
+   "class": "D"
+  },
+  "real_estate-order-of-10-january-2017": {
+   "title": "French Order of 10 January 2017",
+   "cite": "Order of 10 January 2017",
+   "url": "https://www.service-public.gouv.fr/particuliers/vosdroits/F2954?lang=en",
+   "class": "D"
+  },
+  "real_estate-fca-consumer-duty": {
+   "title": "FCA Consumer Duty Regulation",
+   "cite": "FCA Consumer Duty",
+   "url": "https://www.hlc.com/en/publications/consumer-duty-achieving-good-outcomes-for-vulnerable-customers",
+   "class": "A"
+  },
+  "real_estate-article-30-uk-gdpr": {
+   "title": "UK GDPR Article 30",
+   "cite": "Article 30, UK GDPR",
+   "url": "https://www.ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-is-special-category-data",
+   "class": "D"
+  },
+  "technology_software-manufacturers-must-establish-and-maintai": {
+   "title": "FDA 21 CFR Part 820",
+   "cite": "Manufacturers must establish and maintain complaint handling procedures that cover receipt, review, and evaluation of complaints, including investigation, regulatory reporting, and effective post-market vigilance, and linkage to corrective action and preventive actions (CAPA).",
+   "url": "https://simplerqms.com/complaint-management",
+   "class": "A"
+  },
+  "technology_software-organisations-must-acknowledge-complaint": {
+   "title": "Data (Use and Access) Act 2025 (DUAA)",
+   "cite": "Organisations must acknowledge complaints within 30 days of receipt and investigate without undue delay, with mandatory information requirements and timeframes for handling data protection complaints made directly to the data controller.",
+   "url": "https://www.traverssmith.com/knowledge/knowledge-container/get-ready-for-the-new-data-protection-complaints-handling-rules",
+   "class": "A"
+  },
+  "technology_software-special-category-personal-data-including": {
+   "title": "UK GDPR - Article 9",
+   "cite": "Special category personal data (including health data, biometric data, racial or ethnic origin, political opinions, religious beliefs, genetic data, trade union membership, sex life, and sexual orientation) requires explicit consent and additional safeguards to protect individuals' rights and freedoms.",
+   "url": "https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/lawful-basis/special-category-data/what-is-special-category-data",
+   "class": "A"
+  }
+ },
+ "verticals": {
+  "financial_services": {
+   "label": "Financial services",
+   "regime": "FCA DISP plus Consumer Duty. A complaint carries a statutory clock, a prescribed final response and a right of referral to the Financial Ombudsman Service.",
+   "deltas": {
+    "ROLE-0045": {
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "fca-disp-1",
+      "why": "DISP prescribes acknowledgement, timetable and the referral wording a final response must carry. Deviation is a rule breach with external consequence, which is the band 90 anchor."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "fca-disp-1",
+      "why": "Complaint files are subject to FCA supervision and firms report complaints data, so the work carries a formal audit trail open to regulator inspection."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "fca-disp-1-6-2r",
+      "why": "A missed eight-week deadline is itself a breach, so an undetected error draws regulatory attention rather than only requiring correction."
+     },
+     "CAP-08": {
+      "from": 30,
+      "to": 50,
+      "class": "D",
+      "why": "Where an advisor drafts the final response it is a binding external document. Firms vary in whether the front line drafts it, so this is scored from job descriptions rather than from the rules."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "fca-disp-1",
+      "why": "Requires knowing why the rules exist and where exceptions apply, not only recognising standard cases: eligibility, jurisdiction and time bars are all judgement calls under DISP."
+     },
+     "CAP-11": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "fca-disp-1",
+      "why": "An FOS determination is binding on the firm, so a mishandled complaint creates legal liability rather than reputational damage alone. Scored from the ombudsman's binding power rather than from a rule that states the consequence."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "fca-disp-1",
+      "why": "Contact centre quality assurance forms part of the evidence a firm shows the FCA on complaint handling, so the work is inspected rather than internally signed off."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "fca-disp-1",
+      "why": "The procedures the manager enforces are themselves prescribed by DISP."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "fca-disp-1",
+      "why": "Complaints reporting is submitted to the regulator and attested, so assurance work is externally assured rather than internally audited. Scored from the reporting duty rather than from a rule naming the analyst."
+     }
+    },
+    "ROLE-0044": {
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "fca-disp-1",
+      "why": "Consumer Duty places individual accountability on a named senior manager, which is the band 90 anchor. Scored from the Duty's accountability structure rather than from a rule naming this job title."
+     }
+    },
+    "ROLE-0046": {}
+   }
+  },
+  "telecom_media": {
+   "label": "Telecoms and media",
+   "regime": "Ofcom General Condition C4 and its annexed approved complaints code, with compulsory ADR membership. The escalation window fell from eight weeks to six on 8 April 2026.",
+   "scopeNote": "The evidence is telecoms-specific. General Condition C4 binds communications providers serving residential, small business and not-for-profit customers. A media business in this sector that is not a communications provider is not covered by it, and this lens overstates its position.",
+   "deltas": {
+    "ROLE-0045": {
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "ofcom-gc-c4",
+      "why": "The approved code is a minimum standard annexed to a general condition, so departure from it is a breach of the provider's authorisation."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "ofcom-gc-c4",
+      "why": "Ofcom has run enforcement programmes into complaints handling, so the work is subject to regulator inspection."
+     },
+     "CAP-13": {
+      "from": 90,
+      "to": 90,
+      "class": "A",
+      "source": "ofcom-adr-six-weeks",
+      "why": "No change to the band, recorded because the escalation window shortened from eight weeks to six on 8 April 2026 and any timetable built on the old figure is now wrong."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-10": {
+      "from": 90,
+      "to": 90,
+      "class": "A",
+      "source": "ofcom-adr-six-weeks",
+      "why": "No change to the band. Recorded because the six-week ADR trigger replaced the eight-week one on 8 April 2026 and the deadline the role works to has moved."
+     },
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "ofcom-gc-c4",
+      "why": "The code sets out when ADR letters are due and to whom the rules apply, which turns on customer classification: residential, small business and not-for-profit are in scope and others are not."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "ofcom-gc-c4",
+      "why": "Compliance with the annexed code is inspected by Ofcom rather than signed off internally."
+     }
+    },
+    "ROLE-0049": {},
+    "ROLE-0044": {},
+    "ROLE-0046": {}
+   }
+  },
+  "healthcare": {
+   "label": "Healthcare",
+   "regime": "SI 2009/309 sets a statutory complaints procedure for NHS bodies and local authority social care, with a three working day acknowledgement and a six month relevant period.",
+   "deltas": {
+    "ROLE-0045": {
+     "CAP-14": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "si-2009-309",
+      "why": "Health records are special-category data and their exposure causes serious harm, which is the band 90 anchor rather than the band 70 one the base profile carries."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "si-2009-309",
+      "why": "The acknowledgement deadline is set by statutory instrument, so missing it is a breach of regulation and not an internal service failure."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "si-2009-309",
+      "why": "Complaint handling is inspected by the Care Quality Commission and reviewable by the Parliamentary and Health Service Ombudsman."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-13": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "si-2009-309",
+      "why": "Three working days to acknowledge is a same-week statutory obligation rather than the same-day norm the base profile assumes, and the clock starts on receipt anywhere in the body."
+     },
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "si-2009-309",
+      "why": "The regulations require the body to offer to agree the handling and response period at acknowledgement, which is a judgement about scope made against the statute."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-14": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "si-2009-309",
+      "why": "Oversight of a contact centre handling patient records reaches the same special-category data as the front line."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-14": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "si-2009-309",
+      "why": "Quality sampling reads the case files themselves, so the analyst holds the same records."
+     }
+    },
+    "ROLE-0044": {
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "si-2009-309",
+      "why": "The regulations place the duty on the responsible body and require an annual report, which is external assurance. Scored from the body-level duty rather than from a rule naming this job title."
+     }
+    },
+    "ROLE-0046": {}
+   }
+  },
+  "energy_utilities": {
+   "label": "Energy and utilities",
+   "regime": "Ofgem standard licence conditions. SLC 0 requires fair treatment of customers in vulnerable situations and SLC 26 establishes the Priority Services Register.",
+   "deltas": {
+    "ROLE-0045": {
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "ofgem-slc-26",
+      "why": "Identifying a customer in a vulnerable situation and registering them is a licence obligation, so failing to act on the signs is a breach of the supply licence."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "ofgem-slc-0",
+      "why": "Ofgem has opened investigations into supplier compliance with SLC 0 and SLC 26, so day to day conduct is subject to regulator inspection."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "ofgem-slc-0",
+      "why": "A missed vulnerability signal reaches a customer who may be at risk and draws regulatory attention, which is the band 70 anchor."
+     },
+     "CAP-14": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "ofgem-slc-26",
+      "why": "Priority Services Register entries record health conditions and disability, which is special-category data held under a licence duty. Scored from what the register contains rather than from a data protection rule naming it."
+     }
+    },
+    "ROLE-0047": {},
+    "ROLE-0048": {
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "ofgem-slc-0",
+      "why": "Ofgem has issued guidance on its expectations for consumers to be able to contact their supplier, making contact centre performance a licence matter open to inspection."
+     }
+    },
+    "ROLE-0049": {},
+    "ROLE-0044": {
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "ofgem-slc-0",
+      "why": "SLC 0 requires the supplier to satisfy itself that its actions result in fair treatment, which is a standing attestation rather than a periodic audit. Scored from the licence wording rather than from a rule naming this job title."
+     }
+    },
+    "ROLE-0046": {}
+   }
+  },
+  "transport_logistics": {
+   "label": "Transport and logistics",
+   "regime": "UK261 sets compensation and duty of care on delay, cancellation and denied boarding. The CAA takes escalation after eight weeks or an unsatisfactory final response.",
+   "scopeNote": "The evidence is passenger aviation only. UK261 confers rights on air passengers and says nothing about freight, shipping or road logistics, which sit in this sector and have no equivalent regime. For a business that does not carry passengers by air this lens overstates its position and should be read as not yet researched.",
+   "deltas": {
+    "ROLE-0045": {
+     "CAP-02": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "uk261",
+      "why": "Entitlement depends on a chain: distance band, delay at destination, notice given, and whether the cause was within the airline's control. An early error changes the answer, which is the band 50 anchor."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "uk261",
+      "why": "Duty of care during disruption is a regulatory entitlement, not a service gesture, and withholding it is a breach."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "caa-adr",
+      "why": "The CAA runs a UK261 compliance programme into air passenger rights, so handling is subject to regulator inspection."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-02": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "uk261",
+      "why": "The extraordinary circumstances defence, re-routing obligations and compensation bands interact, so the reasoning branches rather than running to a single conclusion."
+     },
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "uk261",
+      "why": "Knowing when the extraordinary circumstances defence holds is expert knowledge of why the rule exists, not recognition of a standard case."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-13": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "uk261",
+      "why": "Duty of care during live disruption is owed while passengers are waiting at the airport, so delay in standing up the response causes the harm the rule addresses. Scored from the nature of the duty rather than from a stated response time."
+     }
+    },
+    "ROLE-0049": {},
+    "ROLE-0044": {},
+    "ROLE-0046": {}
+   }
+  },
+  "retail_consumer": {
+   "label": "Retail and consumer",
+   "regime": "General consumer law only. No sector regulator imposes a complaint timetable, an approved code or compulsory ADR membership, which is why this vertical is the baseline the others are read against.",
+   "deltas": {
+    "ROLE-0044": {},
+    "ROLE-0045": {},
+    "ROLE-0046": {},
+    "ROLE-0047": {},
+    "ROLE-0048": {},
+    "ROLE-0049": {}
+   }
+  },
+  "education": {
+   "label": "Education",
+   "regime": "Education sector complaint procedures and data protection regulations",
+   "deltas": {
+    "ROLE-0044": {
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "education-an-appeal-of-a-letter-of-decision-regard",
+      "why": "Operating simultaneously under ESEA complaint procedures, GDPR/DPA 2018 special-category data rules, GLBA/FTC safeguarding requirements and state records law requires expert-level recognition of exceptions and the reasons behind each regime's rules, matching the 70 band rather than routine practitioner knowledge."
+     },
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "education-an-appeal-of-a-letter-of-decision-regard",
+      "why": "ESEA Section 8503 imposes a strict 30-calendar-day appeal deadline and the Education Act 2002 mandates published complaint procedures, so deviation from prescribed steps becomes a reportable event rather than a justifiable exception."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "education-schools-must-establish-a-lawful-basis-fo",
+      "why": "Under DPA 2018/GDPR, mishandling special-category student data (health, disability, psychological-pedagogical) exposes the school to regulatory attention and reputational harm, moving error cost beyond internal correction to the 70 band."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "education-it-is-an-offence-for-a-government-organi",
+      "why": "The WA State Records Act 2000 makes unauthorised removal, destruction or transfer of government records a personal offence carrying a $10,000 penalty, creating individual legal accountability that matches the 90 band rather than mere audit-trail review."
+     }
+    },
+    "ROLE-0045": {
+     "CAP-15": {
+      "from": 30,
+      "to": 90,
+      "class": "A",
+      "source": "education-it-is-an-offence-for-a-government-organi",
+      "why": "The State Records Act 2000 (WA) makes unauthorised removal, destruction or transfer of government records a criminal offence for the individual employee, with a $10,000 penalty; this matches the CAP-15 band-90 anchor of 'individual accountability with legal or licensing consequence' rather than the base role's informal-review level. GDPR Article 30's requirement for a Record of Processing Activities further formalises the audit trail the role must maintain."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "education-schools-must-take-reasonable-steps-to-ha",
+      "why": "GLBA (15 USC 6801(b)/6805(b)(2)) and FTC Safeguards Rule (16 CFR 313.3(n), 314.1-5) require schools to keep customer/student information under contractual safeguards; an advisor's mishandling of that data is not merely reworked internally but exposes the institution to regulatory attention, moving the role past CAP-11's 'reaches colleagues or customers' band into 'regulatory attention or reputational damage'."
+     }
+    },
+    "ROLE-0046": {
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "education-an-appeal-of-a-letter-of-decision-regard",
+      "why": "ESEA Section 8503 imposes a strict 30-calendar-day statutory appeal window for complaint decisions, and the Education Act 2002 Part 7 requires published, mandated complaint procedures; a CSM handling education complaints must follow these to the letter, matching the 'strict compliance; deviation is a reportable event' anchor rather than the base 'defined procedures... deviation must be justified'."
+     },
+     "CAP-14": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "education-processing-of-special-categories-of-data",
+      "why": "GDPR Article 9 requires an additional lawful basis for processing special-category data such as health, disability or psychological-pedagogical information about students, which a CSM routinely encounters when resolving service issues; this matches the 'special-category personal data... regulated health records' anchor rather than the base 'confidential commercial or limited personal data' level."
+     },
+     "CAP-15": {
+      "from": 10,
+      "to": 70,
+      "class": "A",
+      "source": "education-processing-of-special-categories-of-data",
+      "why": "GDPR Article 30 mandates a Record of Processing Activities across the student lifecycle, and the WA State Records Act 2000 makes unauthorised removal or destruction of government records a criminal offence with financial penalties; this creates a formal audit trail subject to regulatory inspection, well above the base 'no review' level."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-08": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "education-an-appeal-of-a-letter-of-decision-regard",
+      "why": "ESEA Section 8503 requires issuance of a formal 'Letter of Decision' that is appealable to a federal agency within 30 days; this is a binding document for an external audience, matching band 70 rather than routine internal correspondence."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "education-an-appeal-of-a-letter-of-decision-regard",
+      "why": "ESEA Section 8503 sets a strict 30-calendar-day statutory appeal deadline for equitable-services complaints; missing it forecloses a legal right and constitutes a breach with external consequence, matching band 90 rather than band 70's 'reportable event' standard."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "education-it-is-an-offence-for-a-government-organi",
+      "why": "State Records Act 2000 (WA) makes unauthorised destruction, removal or transfer of government records an offence carrying a $10,000 penalty, so record-handling errors in complaint files trigger regulatory/legal consequence, matching band 70."
+     },
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "education-an-appeal-of-a-letter-of-decision-regard",
+      "why": "Complaint decisions are subject to a formal external appeal to a federal education agency under ESEA Section 8503, and Education Act 2002 Part 7 mandates published, auditable complaint procedures, indicating a formal audit trail subject to regulator scrutiny (band 70) rather than informal internal sign-off."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "education-an-appeal-of-a-letter-of-decision-regard",
+      "why": "Handling education complaints correctly requires practitioner-level familiarity with multiple overlapping statutory regimes (ESEA Section 8503 equitable-services appeals, Education Act 2002 complaint procedures, GDPR Article 9 special-category data rules), moving beyond generic terminology to recognising standard regulated cases, matching the 50-band anchor."
+     },
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "education-an-appeal-of-a-letter-of-decision-regard",
+      "why": "ESEA Section 8503 requires issuance of a formal Letter of Decision that can be appealed to ED within 30 days; this is a binding document for an external regulatory audience, matching the 70-band anchor rather than routine internal documents."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "education-an-appeal-of-a-letter-of-decision-regard",
+      "why": "ESEA Section 8503 imposes a strict 30-calendar-day statutory appeal window; missing it forecloses the complainant's appeal rights, an external legal consequence matching the 90-band anchor ('deviation is a breach with external consequence') rather than merely a reportable internal event."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "education-schools-must-take-reasonable-steps-to-ha",
+      "why": "Under GLBA Sections 501/505(b)(2) and FTC 16 CFR 314.1-5, failures in safeguarding customer/student data during complaint or service handling can trigger regulatory attention, matching the 70-band anchor ('errors cause financial loss, regulatory attention, or reputational damage') rather than mere internal rework."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "education-it-is-an-offence-for-a-government-organi",
+      "why": "The State Records Act 2000 (WA) makes unauthorised destruction or removal of government records a personal offence carrying a $10,000 penalty, creating individual legal accountability that matches the 90-band anchor ('externally assured; individual accountability with legal or licensing consequence') rather than a standard internal audit trail."
+     }
+    }
+   }
+  },
+  "insurance": {
+   "label": "Insurance",
+   "regime": "Insurance regulatory compliance including claims handling, complaints procedures, record retention, and vulnerable customer protections across multiple jurisdictions",
+   "deltas": {
+    "ROLE-0044": {
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "insurance-prin-2a-2-22-r-and-consumer-duty-require",
+      "why": "FCA Consumer Duty (PRIN 2A.2.22R) and GDPR Art.9(2)/DPA 2018 Sch.1 Para 20 require recognising when special-category or vulnerable-customer exceptions apply and why they exist, matching the 'expert knowledge; recognises exceptions' band rather than routine practitioner knowledge."
+     },
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "insurance-regulation-respecting-complaint-processi",
+      "why": "Quebec's complaint regulation (ss.5-10, 30) and Texas 28 TAC 13.492 mandate specific, regulator-defined written acknowledgments and consumer-facing complaint summaries with prescribed content, i.e. binding external documents rather than routine internal correspondence."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 70,
+      "class": "A",
+      "source": "insurance-regulation-respecting-complaint-processi",
+      "why": "The Quebec complaint-handling regulation (effective July 1, 2025) newly mandates formal complaint policies and audit-ready records subject to regulator review, reaffirming rather than shifting the existing 'formal audit trail; regulator inspection' band."
+     }
+    },
+    "ROLE-0045": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "insurance-prin-2a-2-22-r-and-consumer-duty-require",
+      "why": "FCA Consumer Duty vulnerable-customer monitoring and multi-jurisdiction complaint regimes require practitioner-level knowledge of specific regulatory categories and standard cases (vulnerability triggers, complaint classification), matching band 50 rather than generic field familiarity."
+     },
+     "CAP-08": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "insurance-regulation-respecting-complaint-processi",
+      "why": "Quebec's complaint regulation (in force July 1, 2025) mandates acknowledgment letters and summaries with specified, regulator-defined content for external consumers, requiring structured documents beyond routine correspondence."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "insurance-prin-2a-2-22-r-and-consumer-duty-require",
+      "why": "Undetected errors in complaint handling or vulnerable-customer monitoring under FCA Consumer Duty and cross-jurisdiction complaint rules can trigger regulatory attention or reportable failures, not just internal rework, matching band 70."
+     }
+    },
+    "ROLE-0046": {
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "insurance-regulation-respecting-complaint-processi",
+      "why": "Errors in complaint handling or record management in insurance trigger regulatory attention under regimes like the Quebec complaint regulation and CIMA's Internal Controls Rule, moving beyond internal rework to band 70 ('regulatory attention or reputational damage')."
+     },
+     "CAP-14": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "insurance-schedule-1-para-20-part-4-of-schedule-1",
+      "why": "GDPR Article 9 classifies health data processed for insurance purposes as special-category data requiring specific safeguards (DPA 2018 Schedule 1 Para 20), matching band 70 ('special-category personal data, regulated financial or health records') rather than generic confidential data."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "insurance-prin-2a-2-22-r-and-consumer-duty-require",
+      "why": "FCA Consumer Duty (PRIN 2A.2.22R) requires ongoing reactive and proactive identification of vulnerable customers and maintenance of an evidence trail, which demands expert-level recognition of exceptions and the reasons behind protection rules rather than routine practitioner knowledge."
+     },
+     "CAP-08": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "insurance-regulation-respecting-complaint-processi",
+      "why": "Quebec's Regulation respecting complaint processing (ss.5-10, 30) and 28 Tex. Admin. Code §13.492 mandate specific, regulator-prescribed wording and content in complaint acknowledgments and consumer-facing policy summaries, so the exact language used carries direct regulatory consequence."
+     },
+     "CAP-10": {
+      "from": 90,
+      "to": 90,
+      "class": "A",
+      "source": "insurance-regulation-respecting-complaint-processi",
+      "why": "Quebec's Regulation respecting complaint processing and dispute resolution (in force July 1, 2025) and 28 Tex. Admin. Code §13.492 impose strict, dated procedural steps (e.g. 7-day acknowledgment) whose breach is externally reportable; band stays at the ceiling but the underlying rule is newly in force, so the change is flagged for visibility."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "insurance-prin-2a-2-22-r-and-consumer-duty-require",
+      "why": "Insurance regulatory regimes (FCA Consumer Duty vulnerable-customer rules, multi-jurisdictional complaint/retention regimes) require the manager to recognise standard regulated cases (vulnerable customer status, complaint categorisation, retention triggers) rather than apply general knowledge, matching band 50 practitioner-level recognition rather than the generic band 30 familiarity."
+     },
+     "CAP-09": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "insurance-prin-2a-2-22-r-and-consumer-duty-require",
+      "why": "PRIN 2A.2.22R requires monitoring vulnerable customers reactively and proactively over the whole product/service lifetime with an evidence trail of changes, meaning a detail arising at one point in a long customer history changes handling elsewhere, matching band 70 rather than a single substantial case file."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 70,
+      "class": "A",
+      "source": "insurance-regulation-respecting-complaint-processi",
+      "why": "The Regulation respecting complaint processing and dispute resolution (in force 1 July 2025) newly prescribes specific acknowledgment content, policy distribution and fair-handling duties (Sections 5-10, 30); deviation is a reportable regulatory event, confirming band 70 under a materially updated rule."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "insurance-regulation-respecting-complaint-processi",
+      "why": "The Quebec complaint-handling regulation (in force July 2025) and the Texas 7-day acknowledgment rule (28 Tex. Admin. Code §13.492) mandate exact procedures, timelines and required content for complaint communications; deviation is a statutory breach with external regulatory consequence, matching the 90 anchor rather than the base 70 'reportable event' level."
+     },
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "insurance-prin-2a-2-22-r-and-consumer-duty-require",
+      "why": "Operating across overlapping regimes (FCA Consumer Duty vulnerable-customer monitoring, CIMA governance rules, multi-jurisdiction complaint and retention rules) requires working practitioner knowledge to recognise standard regulated cases, beyond mere familiarity with field terms."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 70,
+      "class": "A",
+      "source": "insurance-regulation-respecting-complaint-processi",
+      "why": "The Quebec regulation on complaint processing and dispute resolution (effective July 1, 2025) newly codifies formal complaint-handling policy, acknowledgment and audit obligations; the band remains 70 (formal audit trail, subject to regulator inspection) but the underlying rule has materially changed, so the requirement is flagged for visibility."
+     }
+    }
+   }
+  },
+  "legal": {
+   "label": "Legal",
+   "regime": "Legal services complaint handling and data protection regulations in the UK",
+   "deltas": {
+    "ROLE-0044": {
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "Legal Ombudsman Scheme Rule 4.2(a) imposes a fixed eight-week limit for internal complaint resolution before escalation rights arise, making the procedure a strict compliance matter where missing the deadline is a reportable event to the Ombudsman, matching the 70 band rather than the base 50 'deviation must be justified' band."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "Legal Services Act 2007 s.112 creates a statutory complaint-handling regime with external escalation to the Legal Ombudsman, whose determinations carry regulatory and licensing consequences for the firm and individuals, moving assurance from internal audit (70) to external assurance with legal/licensing consequence (90)."
+     }
+    },
+    "ROLE-0045": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "legal-rule-4-2-a",
+      "why": "Handling legal-services complaints requires working knowledge of the statutory scheme itself (LSA 2007 s.112, LeO Scheme Rules, GDPR special-category conditions) to recognise standard versus escalation-triggering cases, moving past generic familiarity with terms."
+     },
+     "CAP-08": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "Legal Services Act 2007 s.112 and LeO Rule 4.2(a) require formal written complaint responses addressed to external complainants that must correctly state statutory escalation rights within the eight-week window, matching the band-70 anchor for binding external-audience documents."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "LeO Scheme Rule 4.2(a) imposes a fixed eight-week resolution deadline; missing it is a reportable breach with external regulatory consequence (escalation to the Ombudsman), matching the band-90 anchor rather than the discretionary band-70 anchor."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "Under the LSA 2007 s.112 regime, an undetected error in complaint handling can trigger Legal Ombudsman investigation, compensation orders, or reputational damage, matching band 70 rather than errors merely requiring internal correction."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "The statutory complaint-handling process under LSA 2007 s.112 and LeO Scheme Rules requires a documented, auditable process subject to inspection by the Legal Ombudsman, matching the band-70 anchor for formal audit trail and regulator inspection rather than informal supervisory review."
+     }
+    },
+    "ROLE-0046": {
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "Legal Services Act 2007 s.112 and Legal Ombudsman Scheme Rule 4.2(a) impose a statutory complaint-handling procedure with a fixed eight-week resolution limit; missing it or deviating from the prescribed process is reportable to the Ombudsman, matching the 70 band 'strict compliance; deviation is a reportable event' rather than the base 50 'deviation must be justified'."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "legal-rule-4-2-a",
+      "why": "Because complaint handling is statutorily governed (s.112), an undetected error in the CSM's handling can trigger Legal Ombudsman intervention or regulatory attention, not merely internal rework, moving the band from 50 to 70 ('errors cause ... regulatory attention or reputational damage')."
+     },
+     "CAP-14": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "legal-schedule-1",
+      "why": "Complaint and case files handled by a legal-sector CSM routinely include special-category personal data (e.g. health or criminal-justice details) subject to UK GDPR Article 9 and DPA 2018 Schedule 1 safeguards, matching the 70 band 'special-category personal data, regulated ... records' rather than the base 50 'confidential commercial or limited personal data'."
+     },
+     "CAP-15": {
+      "from": 10,
+      "to": 70,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "Legal Services Act 2007 s.112 and the Legal Ombudsman Scheme Rules require a documented, auditable complaint process subject to external regulator inspection and formal review, well beyond the base 10 'no review', matching the 70 band 'formal audit trail; subject to internal audit or regulator inspection'."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "Legal Services Act 2007 s.112 and the Legal Ombudsman Scheme Rules impose a statutory complaint-handling framework distinct from general practice; the role must recognise exceptions (e.g. jurisdiction limits, escalation triggers, interplay with SRA regulation) and know why the rules exist, matching the 70 band rather than standard-case practitioner knowledge."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "legal-rule-4-2-a",
+      "why": "Legal Services Act 2007 s.112 and the Legal Ombudsman Scheme Rules establish a specific statutory complaints regime (categories, escalation routes, remedies) that a contact centre manager must recognise and apply correctly, moving from generic field familiarity to working practitioner knowledge of standard cases (band 50)."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "legal-rule-4-2-a",
+      "why": "Because complaint handling sits inside a statutory scheme (LSA 2007 s.112, Ombudsman Rule 4.2(a) eight-week limit), an undetected error (missed deadline, mishandled complaint) triggers Ombudsman findings, compensation orders or reputational damage rather than mere internal correction, matching the band-70 anchor 'errors cause financial loss, regulatory attention or reputational damage'."
+     },
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "Legal Services Act 2007 s.112 and Legal Ombudsman Scheme Rule 4.2(a) impose a statutory complaint-handling process with defined timescales that is directly subject to external regulator inspection and adjudication by the Legal Ombudsman, matching band 70 ('formal audit trail; subject to internal audit or regulator inspection') rather than informal internal sign-off."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "legal-rule-4-2-a",
+      "why": "Complaint handling under LSA 2007 s.112 and the Legal Ombudsman Scheme Rules requires working knowledge of specific statutory time limits, jurisdiction rules and special-category data conditions (UK GDPR Art.9 / DPA 2018 Sch.1) rather than general customer-service familiarity, matching band 50 'working practitioner knowledge; recognises standard cases'."
+     },
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "legal-rule-4-2-a",
+      "why": "Complaint responses required under LSA 2007 s.112 are external-facing documents that may be scrutinised by the Legal Ombudsman, raising the demand from internal structured documents (50) to persuasive/consequential documents for external audiences (70)."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "legal-rule-4-2-a",
+      "why": "Legal Ombudsman Scheme Rule 4.2(a) imposes a strict eight-week resolution limit; missing it lets the complainant escalate directly to the Ombudsman, an external consequence matching band 90 'prescribed to the letter; deviation is a breach with external consequence' rather than the generic 70 'strict compliance' band."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "legal-rule-4-2-a",
+      "why": "Because LSA 2007 s.112 and the Legal Ombudsman Scheme give the regulator power to investigate and award compensation for mishandled complaints, undetected errors in this sector routinely trigger regulatory attention and reputational or financial exposure, matching band 70 rather than the generic 50 'reaches colleagues or customers' band."
+     }
+    }
+   }
+  },
+  "manufacturing": {
+   "label": "Manufacturing",
+   "regime": "Medical device manufacturing quality systems and complaint handling regulations; Data protection in manufacturing",
+   "deltas": {
+    "ROLE-0044": {
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "21 CFR 820.198 and MDR Article 87 mandate a designated unit and systematic, documented procedures for receiving and reviewing complaints; deviation from these procedures is a reportable regulatory event, matching the 70 band."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "manufacturing-requires-manufacturers-to-implement-syst",
+      "why": "Under 21 CFR 820.198 and MDR Article 87, an undetected error in complaint assessment (e.g. missing a reportable adverse event) triggers regulatory attention and enforcement action, matching the 70 band rather than internal-only correction."
+     },
+     "CAP-14": {
+      "from": 70,
+      "to": 70,
+      "class": "A",
+      "source": "manufacturing-requires-manufacturers-to-implement-syst",
+      "why": "MDR Article 87 (fully applicable since 2021) governs complaint records that routinely contain special-category health-related data linked to device use; the requirement is confirmed at the existing 70 band under a recently applicable rule."
+     },
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "Distinguishing a routine complaint from a reportable adverse event under 21 CFR 820.198 and MDR Article 87 requires expert-level regulatory knowledge of exceptions, following directly from these rules though not stated in their text."
+     }
+    },
+    "ROLE-0045": {
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "21 CFR 820.198 mandates a designated unit and defined receipt/review/assessment procedure for every complaint; in medical device manufacturing failure to follow the prescribed process is itself a reportable regulatory breach, matching the 90 band rather than the generic 70."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "Because 21 CFR 820.198 and EU MDR Article 87 require complaints to feed formal quality and vigilance systems, an undetected error in logging or assessing a complaint can trigger regulatory action or missed adverse-event reporting, consistent with the 70 band rather than errors merely reaching a colleague or customer."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "manufacturing-requires-manufacturers-to-implement-syst",
+      "why": "EU MDR Article 87 and 21 CFR 820.198 require systematic, documented complaint-handling infrastructure that is subject to inspection by notified bodies and regulators, matching the 70 band ('formal audit trail; subject to internal audit or regulator inspection') rather than informal supervisory review."
+     }
+    },
+    "ROLE-0046": {
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "21 CFR 820.198 requires manufacturers to operate a designated complaint-handling unit following a defined receipt/review/evaluation procedure; a Customer Success Manager taking complaints in this sector must follow this procedure strictly, and deviation (e.g. failing to escalate a reportable event) has regulatory consequence, matching the 70 band."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "Under 21 CFR 820.198 and MDR Article 87, an undetected error in logging or assessing a complaint (e.g. missing an adverse event) can trigger regulatory attention or inspection findings, moving accuracy consequences beyond internal rework to the 70 band."
+     },
+     "CAP-15": {
+      "from": 10,
+      "to": 70,
+      "class": "A",
+      "source": "manufacturing-requires-manufacturers-to-implement-syst",
+      "why": "MDR Article 87 and 21 CFR 820.198 mandate systematic, auditable complaint files maintained through a designated unit, subject to regulator inspection, which is a formal-audit-trail requirement well above the base role's 'no review' assumption."
+     },
+     "CAP-14": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "manufacturing-requires-manufacturers-to-implement-syst",
+      "why": "Complaint files required under Article 87 routinely capture patient/user harm details tied to device incidents; although the rule does not name a data class, this follows directly from its scope as health-related regulated information, raising sensitivity above ordinary commercial/personal data."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-11": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "21 CFR 820.198 requires a designated unit to review and assess every complaint, a process whose core purpose (though not stated in the cite itself) is to catch device malfunctions that could indicate an adverse event; an undetected error in that assessment in a medical device manufacturer risks patient safety and regulatory/legal liability, matching the band-90 anchor rather than the generic band-70 'financial loss or reputational damage' level."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "21 CFR 820.198 requires a designated unit to receive, review and assess complaints because an undetected error (missed complaint or trend) can hide a device safety issue, triggering regulatory attention or recall action, matching the band-70 anchor rather than routine rework."
+     },
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "21 CFR 820.198 requires a designated complaint-handling unit and documented review process that is subject to FDA Quality System Regulation inspection, establishing a formal audit trail rather than informal supervisory review."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "21 CFR 820.198 mandates a designated complaint-handling unit with specific procedures for receiving, reviewing and assessing complaints, including determining medical-device-reporting obligations; deviation from these prescribed procedures is a breach with external regulatory consequence (FDA 483s, warning letters), matching the 90 anchor rather than the 70 'reportable event' anchor."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "manufacturing-requires-manufacturers-to-implement-syst",
+      "why": "EU MDR Article 87 and 21 CFR 820.198 require complaint files and systematic review infrastructure that is directly subject to notified-body and FDA inspection, with individual/organisational licensing consequences for failure -- the 90 anchor for externally assured work with legal/licensing consequence, not just internal audit trail (70)."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "Because 21 CFR 820.198 requires complaints to be assessed for reportability (adverse event/recall triggers), an undetected error in this role's complaint assessment can cause regulatory action or missed safety reporting, moving beyond the base 'reaches customers, needs correction' band toward the 70 anchor of regulatory attention and reputational/financial damage."
+     },
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "manufacturing-manufacturers-are-required-to-keep-compl",
+      "why": "The regulatory requirement for a designated, qualified unit to review and assess complaints against QSR/MDR criteria implies working practitioner-level knowledge of device complaint classification and reportability rules, beyond generic familiarity with field terms, supporting the 50 anchor."
+     }
+    }
+   }
+  },
+  "pharma_life_sciences": {
+   "label": "Pharma and life sciences",
+   "regime": "FDA pharmaceutical complaint handling and Good Manufacturing Practice (GMP) requirements for life sciences",
+   "deltas": {
+    "ROLE-0044": {
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 requires judgment on whether a complaint indicates possible product failure warranting formal investigation, requiring expert-level knowledge of GMP exceptions rather than routine practitioner recognition, matching the 70 band."
+     },
+     "CAP-09": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 mandates batch record examination for every quality-related complaint, meaning details in the complaint must be reconciled against large, cross-referenced manufacturing records, matching the 70-band description of interdependent material."
+     },
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 requires documented SOPs and mandatory investigation triggers for complaint handling; deviation from these procedures is a reportable GMP event, matching the 70-band 'strict compliance; deviation is a reportable event.'"
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "Under 21 CFR §211.198, an undetected error in complaint assessment (e.g. missing an investigation trigger) can cause regulatory attention or product recall, matching the 70-band cost-of-error anchor."
+     },
+     "CAP-12": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-electronic-records-and-signatures-compli",
+      "why": "21 CFR Part 11 requires electronic records and signatures across complaint, batch, and CAPA systems where handoffs must be valid and traceable, matching the 70-band 'orchestrates multiple systems where handoffs must not fail.'"
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "pharma_life_sciences-a-designated-person-responsible-for-comp",
+      "why": "EU GMP Chapter 8 names a designated individual personally responsible for complaint records and investigations, and complaints are subject to FDA/EU regulator inspection, matching the 90-band 'individual accountability with legal or licensing consequence.'"
+     }
+    },
+    "ROLE-0045": {
+     "CAP-09": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 requires batch record examination for every quality-related complaint, forcing the advisor to hold a complaint file together with cross-referenced manufacturing and batch records rather than a single isolated item, matching the 'substantial case file with cross-references' band."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 mandates documented SOPs, defined investigation triggers and timelines for complaint handling; deviation from these prescribed procedures is a reportable GMP breach with external (FDA) consequence, moving beyond 'strict compliance' to 'prescribed to the letter'."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "Because §211.198 requires investigation whenever a complaint may indicate the drug failed specifications, an undetected error in triaging or documenting a complaint can trigger regulatory attention or mask a quality failure, consistent with the 'regulatory attention or reputational damage' band."
+     },
+     "CAP-12": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-electronic-records-and-signatures-compli",
+      "why": "21 CFR Part 11 imposes validated electronic record and signature requirements on complaint systems; a malformed or non-compliant electronic complaint record breaks the downstream regulatory audit trail, matching 'orchestrates multiple systems where handoffs must not fail'."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-a-designated-person-responsible-for-comp",
+      "why": "EU GMP Chapter 8 requires a designated person to record and investigate every complaint, and §211.198 mandates retention of complaint records for at least one year past expiry, both subject to FDA/EU regulator inspection, matching 'formal audit trail; subject to internal audit or regulator inspection'."
+     }
+    },
+    "ROLE-0046": {
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 mandates documented SOPs, timely review and investigation triggers for every quality complaint; failure to follow the prescribed procedure is a reportable regulatory deviation, matching the 'strict compliance; deviation is a reportable event' band."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "Under 21 CFR §211.198 an undetected error in complaint handling (e.g. missed investigation of a possible specification failure) can trigger regulatory action, not just internal rework, moving this to the 'regulatory attention or reputational damage' band."
+     },
+     "CAP-12": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "pharma_life_sciences-electronic-records-and-signatures-compli",
+      "why": "21 CFR Part 11 requires complaint records to be captured as compliant electronic records/signatures across validated specialist systems, consistent with 'works across several specialist systems; produces structured records.'"
+     },
+     "CAP-14": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "Complaint files under 21 CFR §211.198 concern regulated drug products and can include health-related information tied to adverse events, matching 'regulated financial or health records' rather than mere confidential commercial data."
+     },
+     "CAP-15": {
+      "from": 10,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-a-designated-person-responsible-for-comp",
+      "why": "EU GMP Chapter 8 requires a designated person to record and investigate every complaint, and 21 CFR §211.198 requires records retained at least one year past expiry, subject to FDA/regulator inspection — this is a formal audit trail, not merely informal supervisory review."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-11": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 requires investigation of complaints that may signal a drug's failure to meet specifications; an undetected error in complaint triage or investigation can mask a patient safety signal, meeting the band-90 anchor of errors risking safety or systemic harm, beyond the generic regulatory/financial risk in the base profile."
+     },
+     "CAP-12": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-electronic-records-and-signatures-compli",
+      "why": "21 CFR Part 11 requires validated electronic record and signature systems for complaint records, and these must reliably hand off to CAPA, batch-record and quality systems without failure, matching the 'orchestrates multiple systems where handoffs must not fail' band rather than routine structured recordkeeping."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 requires the complaint handler to judge whether a complaint indicates possible failure of the drug to meet specifications, which needs working practitioner-level GMP/quality-system knowledge rather than general familiarity, matching the band-50 anchor."
+     },
+     "CAP-09": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 mandates batch record examination for every quality-related complaint, so a detail in the batch record can change the assessment of the complaint, fitting the band-70 anchor of interdependent large bodies of material."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "Under 21 CFR §211.198 an undetected error in complaint triage can miss a required investigation, exposing the firm to regulatory action, matching the band-70 anchor of errors causing regulatory attention."
+     },
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "pharma_life_sciences-a-designated-person-responsible-for-comp",
+      "why": "EU GMP Chapter 8 requires a designated person to record and investigate every complaint with a documented audit trail, and 21 CFR §211.198 requires records retained for a defined period subject to FDA inspection, matching the band-70 anchor of formal audit trail subject to regulator inspection."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 requires investigation whenever a complaint indicates possible failure of the drug to meet specifications, which demands practitioner-level knowledge of manufacturing specs to recognise standard versus exceptional cases (band 50), beyond the generic term-familiarity of band 30."
+     },
+     "CAP-07": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "The rule mandates batch record examination for every quality-related complaint, requiring the analyst to gather evidence from batch records, complaint history and QMS data and reconcile differences, matching band 50 rather than simple internal lookup (band 30)."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "21 CFR §211.198 prescribes specific, non-negotiable procedures (documented SOPs, mandatory investigation triggers, batch record checks, records kept at least one year past expiry); deviation constitutes a reportable FDA violation, matching band 90's 'breach with external consequence' rather than band 70's general strict compliance."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 90,
+      "class": "A",
+      "source": "pharma_life_sciences-pharma-companies-must-have-documented-so",
+      "why": "Because 211.198 ties complaint review directly to detecting possible drug specification failures, an undetected error in this role's work can allow an unsafe product to remain on market, matching band 90 ('errors risk safety... or systemic harm') rather than band 50's internal correction scope."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "pharma_life_sciences-a-designated-person-responsible-for-comp",
+      "why": "EU GMP Chapter 8 assigns a designated, individually accountable person to record and investigate every complaint, and this work is subject to regulator inspection with licensing consequences, matching band 90 ('individual accountability with legal or licensing consequence') rather than band 70's general audit trail."
+     }
+    }
+   }
+  },
+  "professional_services": {
+   "label": "Professional services",
+   "regime": "Financial services complaint handling regulations in Québec, UK legal services, and energy supply consumer protection",
+   "deltas": {
+    "ROLE-0044": {
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-part-7-regulations-7-4-and-7-6",
+      "why": "Regulations require final complaint responses to be in writing (Québec regime) and complaints procedures to be issued in accessible, tailored formats (ICAEW Part 7.4); these are binding documents seen by regulators and ombudsmen, matching band 70 rather than routine internal documents."
+     },
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-qu-bec-financial-sector-regulation-speci",
+      "why": "Statutory deadlines are prescriptive and narrow (60/90 days Québec, 5 business days acknowledgment under ICAEW Part 7.6, 8-week escalation trigger under Legal Ombudsman Scheme Rule 4.2); missing them is a reportable regulatory event, not a tolerated deviation."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-licence-conditions-specific-conditions-r",
+      "why": "Errors in complaint handling under Ofgem licence conditions, the Legal Services Act, and Québec's financial-sector regulation trigger regulatory attention and licence risk, not merely internal rework, matching the 70 band."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "professional_services-scheme-rules-3-2-and-4-2",
+      "why": "Section 112 of the Legal Services Act and the Legal Ombudsman Scheme Rules create external, statutory escalation and inspection of complaint handling with licensing consequence for the firm, matching band 90 rather than internal sign-off."
+     }
+    },
+    "ROLE-0045": {
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "professional_services-scheme-rules-3-2-and-4-2",
+      "why": "Legal Ombudsman Scheme Rules (3.2, 4.2) let a complainant escalate externally after eight weeks, and Québec's regulation fixes 60/90-day final-response deadlines; missing these is a reportable breach with external consequence, matching the 90 anchor rather than the base 70."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-qu-bec-financial-sector-regulation-speci",
+      "why": "Under the Québec complaint-handling regulation and ICAEW Part 7 rules, an undetected error (missed deadline, wrong format) triggers regulator or ombudsman attention and reputational damage, matching the 70 anchor rather than internal-only rework at 50."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-scheme-rules-3-2-and-4-2",
+      "why": "Legal Services Act s.112 statutory complaint requirements, ICAEW Part 7 acknowledgment rules, and Ofgem licence conditions place complaint handling under formal audit trails and regulator inspection, matching band 70 rather than informal internal review at 30."
+     }
+    },
+    "ROLE-0046": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "professional_services-qu-bec-financial-sector-regulation-speci",
+      "why": "Operating a CSM complaint-handling function under three distinct statutory regimes (Québec financial regulation, UK Legal Services Act, Ofgem licence conditions) requires practitioner-level recognition of standard regulatory cases and timelines, not just general familiarity, following directly from the named rules."
+     },
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-qu-bec-financial-sector-regulation-speci",
+      "why": "Québec's regulation requires the final complaint response to be a written document that can trigger regulatory or ombudsman scrutiny, making it a binding external-facing communication rather than a routine internal document."
+     },
+     "CAP-13": {
+      "from": 50,
+      "to": 10,
+      "class": "A",
+      "source": "professional_services-qu-bec-financial-sector-regulation-speci",
+      "why": "The regulated complaint-handling cycle explicitly permits 60-90 days for a final written response and 5 business days for acknowledgment, meaning days-to-weeks turnaround is the norm rather than within-the-hour responsiveness assumed in the base role."
+     },
+     "CAP-15": {
+      "from": 10,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-licence-conditions-specific-conditions-r",
+      "why": "Complaint handling sits under licence conditions (Ofgem) and statutory ombudsman referral rights (Legal Ombudsman Scheme Rules), creating a formal audit trail subject to regulator inspection rather than informal supervisory review."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-15": {
+      "from": 90,
+      "to": 90,
+      "class": "A",
+      "source": "professional_services-qu-bec-financial-sector-regulation-speci",
+      "why": "The band is unchanged but the underlying rule is new: Québec's 2025 complaint-handling regulation and the ICAEW's complaints regime effective 1 October 2025 both impose external, regulator-facing accountability for how complaints are logged, escalated and closed, so the requirement remains at band 90 ('externally assured; individual accountability with legal or licensing consequence') under freshly issued authority rather than the prior generic regime."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "professional_services-scheme-rules-3-2-and-4-2",
+      "why": "Operating complaint handling across three distinct regulatory regimes (Québec financial services, UK Legal Services Act s.112/Ombudsman rules, Ofgem licence conditions) requires practitioner-level knowledge of each regime's specific deadlines, escalation routes and exceptions, moving beyond generic familiarity to band 50 'recognises standard cases' within each regulated domain."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "professional_services-scheme-rules-3-2-and-4-2",
+      "why": "Legal Ombudsman Scheme Rules 3.2/4.2 give complainants a statutory right to escalate externally after eight weeks, and Québec regulation fixes a hard 60/90-day final-response deadline; missing these prescribed timelines is a breach with external regulatory consequence, matching band 90 rather than an internally reportable deviation."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "professional_services-qu-bec-financial-sector-regulation-speci",
+      "why": "Because complaint-handling failures under the Québec regulation and Legal Services Act trigger regulator attention or ombudsman escalation rather than mere internal correction, undetected errors now carry regulatory and reputational cost consistent with band 70."
+     },
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-licence-conditions-specific-conditions-r",
+      "why": "Ofgem licence conditions, the Legal Ombudsman scheme, and Québec's financial complaint regulation each impose named regulator oversight of complaint handling, creating a formal audit trail subject to regulator inspection, matching band 70 rather than informal internal sign-off."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-10": {
+      "from": 70,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-qu-bec-financial-sector-regulation-speci",
+      "why": "Québec's new complaint-handling regulation (2025) and ICAEW's Part 7 rules (effective Oct 2025) impose defined statutory timelines and formats; deviation is a reportable regulatory event, matching the existing 70 band, but the rule itself is new and must stay visible."
+     },
+     "CAP-13": {
+      "from": 30,
+      "to": 10,
+      "class": "A",
+      "source": "professional_services-qu-bec-financial-sector-regulation-speci",
+      "why": "Statutory response windows of 60-90 days (Québec) and 8-week escalation to the Legal Ombudsman show the work is judged on weeks-long cycles, not same-day turnaround, matching the 'days or weeks acceptable' anchor rather than the base same-day band."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "professional_services-scheme-rules-3-2-and-4-2",
+      "why": "Legal Services Act s.112 and Legal Ombudsman Scheme Rules 3.2/4.2 create a statutory external escalation path with individual firm accountability and licensing consequence, moving beyond internal audit trail (70) to externally assured accountability (90)."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-licence-conditions-specific-conditions-r",
+      "why": "Failure to meet statutory complaint-handling obligations (Québec timelines, Legal Services Act duties, Ofgem licence conditions) triggers regulatory attention or licence risk, matching 'errors cause financial loss, regulatory attention or reputational damage' rather than mere internal rework."
+     },
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "professional_services-part-7-regulations-7-4-and-7-6",
+      "why": "Part 7 (7.4/7.6) requires final complaint responses in writing, accessible and tailored formats, usable as evidence before the Legal Ombudsman-these are binding, externally consequential documents rather than routine internal correspondence."
+     }
+    }
+   }
+  },
+  "public_sector": {
+   "label": "Public sector",
+   "regime": "UK GDPR and Data Protection Act 2018 for special category data processing; FCA Consumer Duty for vulnerable customers; Federal sector EEO complaint procedures under 29 CFR Part 1614",
+   "deltas": {
+    "ROLE-0044": {
+     "CAP-07": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "29 CFR §1614.106(a)-(d) requires an impartial investigation of an EEO complaint, meaning the role must gather evidence from complainant, respondent, witnesses and records and reconcile conflicting accounts within a fixed period, matching the CAP-07 band-50 anchor of gathering from several sources and reconciling differences rather than the base-profile's occasional-lookup level."
+     },
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "§1614.106 imposes a hard 180-day investigation deadline that can only be extended by written agreement of the parties; missing it is a reportable procedural failure, which is the CAP-10 band-70 anchor (strict compliance; deviation is a reportable event) rather than the base band-50 documented-procedure level."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "public_sector-special-category-data-may-only-be-proces",
+      "why": "Undetected errors in satisfying Article 9/Schedule 1 conditions for special category data, or in delivering Consumer Duty outcomes for vulnerable customers, trigger ICO/FCA regulatory attention and reputational damage, matching CAP-11 band 70 rather than the base band-50 (errors reaching colleagues/customers requiring correction only)."
+     }
+    },
+    "ROLE-0045": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "public_sector-special-category-data-may-only-be-proces",
+      "why": "UK GDPR Article 9/Schedule 1 requires identifying which specific lawful basis and condition applies before processing special category data (e.g. health or protected-characteristic information arising in complaints), which demands working practitioner knowledge of the statutory scheme rather than general familiarity (band 50)."
+     },
+     "CAP-05": {
+      "from": 30,
+      "to": 70,
+      "class": "B",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "29 CFR 1614.106 requires the agency to run an impartial investigation over up to 180 days, which in practice means the advisor tracks and coordinates a multi-stage process with investigators and complainants over months rather than completing short reviewed sequences, matching band 70."
+     },
+     "CAP-08": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "public_sector-firms-must-ensure-that-customers-with-ch",
+      "why": "FCA Consumer Duty explicitly requires firms to tailor communications and support for customers with characteristics of vulnerability to avoid foreseeable harm, raising correspondence above routine templated replies to structured, audience-specific documents (band 50)."
+     },
+     "CAP-09": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "The 1614.106 investigation process and accompanying GDPR record-keeping obligations mean the advisor must hold a substantial cross-referenced case file (complaint history, correspondence, data-processing conditions) rather than a handful of related items, matching band 50."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "Missing the mandated 180-day impartial investigation deadline in 1614.106 (absent a written extension) exposes the agency to EEOC oversight and regulatory attention, consistent with band 70 rather than errors merely requiring internal rework."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "B",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "The statutory investigation and appeal process under 1614.106, combined with GDPR's requirement to document categories of data and Article 9 conditions, creates a formal audit trail subject to regulator (EEOC/ICO) inspection, beyond informal supervisory review."
+     }
+    },
+    "ROLE-0046": {
+     "CAP-14": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "public_sector-special-category-data-may-only-be-proces",
+      "why": "UK GDPR Article 9/Schedule 1 requires an identified lawful basis and processing condition for special category data (e.g. health, disability, race data arising in complaints and case handling), matching the band-70 anchor for special-category personal data rather than the base 50 'confidential commercial or limited personal data'."
+     },
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "29 CFR §1614.106 imposes a fixed 180-day investigation deadline that can only be extended by written agreement, making missed timelines a reportable procedural failure rather than a tolerated deviation, consistent with the 70-band anchor."
+     },
+     "CAP-15": {
+      "from": 10,
+      "to": 70,
+      "class": "A",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "§1614.106 requires an impartial, documented investigation subject to EEOC/agency review, and UK GDPR Schedule 1 requires documented records of processing conditions for special category data -- both establish a formal audit trail exposed to external inspection, well above the base 'no review' level."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "public_sector-special-category-data-may-only-be-proces",
+      "why": "Mishandling special category data or EEO complaint processes creates exposure to ICO enforcement or EEOC scrutiny, so undetected errors carry regulatory-attention consequences matching band 70 rather than the base internal-correction level."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "29 CFR §1614.106(a)-(d) requires navigating federal EEO complaint procedure with exceptions (mixed-case complaints, written extension agreements, impartiality standards) that go beyond standard practitioner knowledge, requiring the manager to recognize exceptions and know why the procedural rules exist -- band 70, not the standard-case recognition of band 50."
+     },
+     "CAP-11": {
+      "from": 70,
+      "to": 90,
+      "class": "B",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "An undetected error or procedural lapse in the impartial-investigation requirement under §1614.106 exposes the agency to EEOC appeal, right-to-sue consequences and legal liability, which matches the band-90 anchor of errors that risk legal liability rather than the band-70 anchor of regulatory attention alone."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "public_sector-firms-must-ensure-that-customers-with-ch",
+      "why": "FCA Consumer Duty requires firms to tailor communications and support so customers with characteristics of vulnerability receive outcomes as good as other customers, requiring the manager to hold working practitioner knowledge of vulnerability indicators and standard adaptations rather than mere familiarity with terms (band 50)."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "Undetected errors in EEO complaint handling (missed 180-day investigation deadline under 29 CFR 1614.106) or in special-category data processing under UK GDPR Article 9 trigger regulator attention (EEOC or ICO), matching the band-70 anchor of errors causing regulatory attention or reputational damage rather than mere internal rework."
+     },
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "29 CFR 1614.106 mandates an impartial, time-bound investigation process subject to EEOC oversight, and UK GDPR Article 9/Schedule 1 requires documented records of special-category processing conditions; both impose a formal audit trail subject to external regulator inspection, matching band 70 rather than informal internal sign-off."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "B",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "Handling federal EEO complaints under 29 CFR §1614.106 requires practitioner-level familiarity with statutory investigation procedures, timelines, and standard complaint categories (race, disability, reprisal, etc.) that a generic customer-service analyst would not otherwise need, matching the 'working practitioner knowledge; recognises standard cases' band."
+     },
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "public_sector-firms-must-ensure-that-customers-with-ch",
+      "why": "FCA Consumer Duty requires firms to tailor communications and support to vulnerable customers to avoid foreseeable harm, raising the demands on produced language to the 'persuasive or binding documents for senior or external audiences' band, since these communications are reviewable by the regulator."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "§1614.106(a)-(d) mandates completion of an impartial investigation within 180 days unless extended by written agreement; this is a letter-of-the-law procedural deadline whose breach triggers external consequences (complainant's right to request immediate EEOC/court action), matching the 90 band rather than the base 70."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "public_sector-special-category-data-may-only-be-proces",
+      "why": "Undetected errors in classifying or documenting the Article 9 condition for special category data (or in vulnerable-customer handling under Consumer Duty) can trigger ICO or FCA regulatory attention, matching the 'errors cause financial loss, regulatory attention, or reputational damage' band rather than the base 'reach colleagues or customers' band."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "public_sector-the-agency-is-required-to-conduct-an-imp",
+      "why": "EEO complaint investigations are subject to external review and appeal (EEOC, subsequent civil action) and Schedule 1 DPA record-keeping obligations create individually accountable audit trails with legal consequence, moving beyond internal/regulator-inspection level assurance (70) to externally assured accountability (90)."
+     }
+    }
+   }
+  },
+  "real_estate": {
+   "label": "Real estate",
+   "regime": "Real estate complaint handling and consumer protection regulations across multiple jurisdictions",
+   "deltas": {
+    "ROLE-0044": {
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-section-475-25-1-florida-statutes",
+      "why": "Navigating distinct jurisdictional regimes (Florida's 5-year statute of limitations under 475.25(5), Colorado's 240-day process, Québec's 60/90-day rule, RERA's 60-day disposal) requires expert-level knowledge of exceptions and rationale behind each rule, matching band 70 rather than standard-case practitioner knowledge."
+     },
+     "CAP-07": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "real_estate-qu-bec-financial-sector-complaint-handli",
+      "why": "The role must gather and reconcile differing complaint-handling rules across Colorado, Québec, Florida, the UK and RERA jurisdictions, matching band 50 'gathers from several sources and reconciles differences' rather than looking up a single known internal source."
+     },
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-qu-bec-financial-sector-complaint-handli",
+      "why": "Québec's requirement for a written final response within 60-90 days, and Florida's 455.225(9) mandated status notifications to complainants, make complaint correspondence binding and externally consequential, matching band 70 rather than routine internal documents."
+     },
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-colorado-division-of-real-estate-regulat",
+      "why": "Statutory deadlines (Colorado's 240-day goal, Québec's 60/90-day cap, Florida's 10-day broker notification) impose strict, auditable timelines where missed deadlines are reportable regulatory events, matching band 70 rather than a discretionary internal procedure."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-section-475-25-1-florida-statutes",
+      "why": "Undetected errors in complaint handling can trigger FREC fines of up to $5,000 per count under 475.25(1) and disciplinary action, matching band 70 'financial loss, regulatory attention' rather than errors requiring only internal rework."
+     },
+     "CAP-13": {
+      "from": 50,
+      "to": 10,
+      "class": "A",
+      "source": "real_estate-colorado-division-of-real-estate-regulat",
+      "why": "Regulatory complaint-handling timelines operate on a weeks-to-months cadence (60, 90, 240 days), matching band 10 'days or weeks are acceptable' rather than hourly turnaround assumed in the generic role."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-the-social-housing-regulation-act-2023",
+      "why": "Recently introduced statutory obligations (Social Housing (Regulation) Act 2023 Complaint Handling Code requiring annual submissions and self-assessment; Québec's 2025 regulation requiring public complaint summaries) keep the role at band 70 formal audit-trail oversight, but the underlying rule has materially changed and must be tracked."
+     }
+    },
+    "ROLE-0045": {
+     "CAP-08": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-qu-bec-financial-sector-complaint-handli",
+      "why": "Québec's regulation requires a written final response to a complaint, and Florida law requires formal written notifications to brokers and complainants at defined stages; these are binding, externally consequential documents rather than routine correspondence, matching the 70 band."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "real_estate-qu-bec-financial-sector-complaint-handli",
+      "why": "Statutory deadlines (Québec's 60/90-day response, RERA's 60-day disposal, Florida's 10-day notification, Colorado's 240-day goal) prescribe process to the letter; missing them is a breach with regulatory consequence, not merely a reportable deviation."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-section-475-25-1-florida-statutes",
+      "why": "Under Section 475.25(1), an undetected handling error can lead to administrative fines up to $5,000 per count, i.e. regulatory attention and financial loss, which matches the 70 band rather than internal rework only."
+     },
+     "CAP-13": {
+      "from": 90,
+      "to": 10,
+      "class": "A",
+      "source": "real_estate-colorado-division-of-real-estate-regulat",
+      "why": "Colorado's complaint process allows up to 240 days for investigation and Québec allows 60-90 days for a final response, so the value of the work depends on statutory weeks/months, not seconds as the generic base assumes."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-the-social-housing-regulation-act-2023",
+      "why": "The Complaint Handling Code mandates annual submissions and self-assessments plus regulator oversight, and Florida's DBPR must report investigation and appeal status; this creates a formal audit trail subject to inspection, matching the 70 band rather than informal supervisory review."
+     }
+    },
+    "ROLE-0046": {
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-qu-bec-financial-sector-complaint-handli",
+      "why": "Québec's regulation requires a final written response to complainants within a statutory 60–90 day window, and Florida law requires formal written notification of investigation and probable-cause status to complainants and brokers; these are binding, externally-facing documents (band 70) rather than internal structured documents (band 50)."
+     },
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-colorado-division-of-real-estate-regulat",
+      "why": "Multiple statutory regimes (Colorado 240-day investigation goal, Québec 60/90-day response deadline, RERA 60-day disposal requirement, Florida notification triggers) impose strict procedural deadlines and notification duties whose breach is a reportable regulatory event, matching band 70 rather than general adherence at band 50."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-section-475-25-1-florida-statutes",
+      "why": "Under Section 475.25(1), Florida Statutes, mishandled complaints can trigger administrative fines up to $5,000 per count and licensing action, so undetected errors carry regulatory and financial consequences (band 70) beyond mere customer-facing rework (band 50)."
+     },
+     "CAP-13": {
+      "from": 50,
+      "to": 30,
+      "class": "A",
+      "source": "real_estate-colorado-division-of-real-estate-regulat",
+      "why": "Statutory complaint-handling timelines in this sector run to weeks or months (Colorado's 240-day goal, Québec's 60/90-day final response, RERA's 60-day disposal), showing the work is paced to same-day/longer turnaround rather than within-the-hour resolution implied by the base band 50."
+     },
+     "CAP-14": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-fca-consumer-duty",
+      "why": "FCA Consumer Duty requires tailoring communications and support based on customer vulnerability characteristics (often health or financial hardship indicators), and UK GDPR Article 30 imposes formal processing-record obligations, indicating handling of special-category-adjacent personal data (band 70) rather than only confidential commercial data (band 50)."
+     },
+     "CAP-15": {
+      "from": 10,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-the-social-housing-regulation-act-2023",
+      "why": "The Complaint Handling Code under the Social Housing (Regulation) Act 2023 mandates annual self-assessments and public complaint-summary submissions, and Florida/Colorado regimes involve regulator-run investigations of complaints, establishing a formal audit trail subject to external inspection (band 70) rather than no review (band 10)."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-colorado-division-of-real-estate-regulat",
+      "why": "Complaints managers must navigate distinct statutory regimes (Colorado 240-day investigation process, Québec 60/90-day response rules, Florida Ch. 475 broker/associate provisions, India's RERA, France's Law 70-9/Decree 72-678) each with different substantive rules and exceptions, requiring expert-level practitioner knowledge rather than generic working knowledge (band 70: 'expert knowledge; recognises exceptions and knows why rules exist')."
+     },
+     "CAP-08": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "real_estate-fca-consumer-duty",
+      "why": "FCA Consumer Duty requires firms to tailor communications so vulnerable customers receive outcomes as good as other customers, and Québec's rule mandates a public complaint-summary posting; both make exact wording of complaint communications carry direct regulatory and market consequence (band 90), beyond persuasive internal documents."
+     },
+     "CAP-15": {
+      "from": 90,
+      "to": 90,
+      "class": "A",
+      "source": "real_estate-the-social-housing-regulation-act-2023",
+      "why": "The Social Housing (Regulation) Act 2023 recently codified mandatory annual self-assessments and submissions against the statutory Complaint Handling Code, reinforcing externally assured, individually accountable oversight (band 90 unchanged) and making this rule-driven requirement newly explicit in statute."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-08": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "real_estate-qu-bec-financial-sector-complaint-handli",
+      "why": "Québec's real-estate/financial complaint regime mandates a formal written final response within a fixed 60-90 day window, and Florida requires structured statutory notifications to complainants at each investigation stage, moving output from routine correspondence to structured documents for a defined regulatory/consumer audience."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "real_estate-the-social-housing-regulation-act-2023",
+      "why": "The statutory Complaint Handling Code under the Social Housing (Regulation) Act 2023 requires landlords to follow prescribed procedures, submit annual self-assessments and comply to the letter, with deviation constituting a reportable breach with external regulatory consequence, matching the top band."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-section-475-25-1-florida-statutes",
+      "why": "Florida Statutes Section 475.25(1) permits administrative fines up to $5,000 per count for mishandled licensee conduct, meaning undetected complaint-handling errors can trigger direct regulatory and financial consequence rather than mere internal rework."
+     },
+     "CAP-14": {
+      "from": 70,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-fca-consumer-duty",
+      "why": "FCA Consumer Duty rules require identifying and tailoring service for customers with characteristics of vulnerability, a recently strengthened obligation touching special-category personal data; band unchanged at 70 but the underlying rule is newly in force and should remain visible."
+     },
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-the-social-housing-regulation-act-2023",
+      "why": "The Complaint Handling Code requires annual submissions and self-assessments to a regulator, and Florida/Colorado regimes impose statutory investigation-status reporting, establishing a formal audit trail subject to regulator inspection rather than informal internal sign-off."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-qu-bec-financial-sector-complaint-handli",
+      "why": "Quebec's 2025 complaint-handling regulation mandates a written final response within a statutory deadline and a publicly posted complaint summary, pushing output from internal structured documents (50) to binding, externally-facing communication (70)."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "real_estate-section-475-25-1-florida-statutes",
+      "why": "Florida Statute 475.25(6) requires written broker notification within a fixed 10-day window tied to license discipline, and multiple jurisdictions impose exact statutory deadlines (Quebec 60/90 days, Colorado 240 days, RERA 60 days); deviation is a licensing breach with external consequence, matching the 90 anchor rather than merely a reportable event."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "real_estate-section-475-25-1-florida-statutes",
+      "why": "Section 475.25(1) allows fines up to $5,000 per count and complaint mishandling triggers DBPR investigation and probable-cause findings, so undetected errors cause regulatory attention and financial loss (70) rather than only reaching colleagues/customers (50)."
+     },
+     "CAP-13": {
+      "from": 30,
+      "to": 10,
+      "class": "A",
+      "source": "real_estate-colorado-division-of-real-estate-regulat",
+      "why": "Statutory processes operate on weeks-to-months timelines (Colorado 240-day investigation goal, Quebec 60/90-day final response, RERA 60-day disposal), indicating the work is structured around long formal windows rather than same-day turnaround."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "real_estate-the-social-housing-regulation-act-2023",
+      "why": "The Social Housing (Regulation) Act 2023 Complaint Handling Code requires annual submissions and self-assessments to an external ombudsman, and Florida's FREC can impose individual license-holder fines/discipline, matching externally assured oversight with individual legal/licensing accountability (90)."
+     }
+    }
+   }
+  },
+  "technology_software": {
+   "label": "Technology and software",
+   "regime": "Data protection, medical device quality management, financial services complaint handling, and consumer protection regulations",
+   "deltas": {
+    "ROLE-0044": {
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-organisations-must-acknowledge-complaint",
+      "why": "DUAA 2025 imposes mandatory 30-day acknowledgment windows and defined investigation timeframes for data-protection complaints, and FDA 21 CFR 820.198 sets equally rigid procedural steps for complaint receipt, review and reporting; in this sector, deviation from these fixed procedures is a reportable compliance event, matching the 70 anchor rather than the general-adherence 50 anchor."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "FDA 21 CFR 820.198 links complaint evaluation directly to CAPA and regulatory reporting obligations, so an undetected error in complaint handling can trigger regulatory attention or reportable non-conformance, moving accuracy consequence from routine rework (50) to regulatory/financial exposure (70)."
+     },
+     "CAP-15": {
+      "from": 70,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "Complaint files must be maintained for FDA inspection and CAPA linkage, and the newly effective DUAA complaints regime (19 June 2026) adds a parallel statutory audit obligation for data-protection complaints; the band stays at 70 (formal audit trail, subject to regulator inspection) but the underlying rule set has materially changed and is flagged for visibility."
+     }
+    },
+    "ROLE-0045": {
+     "CAP-09": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "FDA 21 CFR §820.198 requires complaint files to link receipt, investigation and CAPA records, forcing the advisor to hold a substantial cross-referenced case file rather than a handful of related items, matching the 50-band anchor."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "technology_software-organisations-must-acknowledge-complaint",
+      "why": "The DUAA 2025 imposes a statutory 30-day acknowledgment deadline and mandatory information requirements for data-protection complaints, and FDA 21 CFR §820.198 mandates regulatory reporting procedures; failing either is a legal breach with external (regulator) consequence, not merely an internally reportable deviation."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "Under FDA 21 CFR §820.198, an undetected error in complaint evaluation (e.g. missed investigation or reporting trigger) can lead to regulatory attention or enforcement, moving beyond errors that merely require internal correction."
+     },
+     "CAP-15": {
+      "from": 30,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "FDA 21 CFR §820.198 requires maintained complaint files with investigation and CAPA linkage that are subject to FDA inspection, establishing a formal audit trail rather than informal supervisory review."
+     }
+    },
+    "ROLE-0046": {
+     "CAP-10": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-organisations-must-acknowledge-complaint",
+      "why": "The DUAA 2025 imposes mandatory 30-day acknowledgment timeframes and information requirements for data protection complaints; missing these is a reportable compliance failure, matching the 'strict compliance; deviation is a reportable event' band rather than the base 'defined procedures, deviation must be justified'."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "Under FDA 21 CFR 820.198, an undetected error in complaint evaluation or CAPA linkage can trigger regulatory attention or enforcement action against the manufacturer, moving beyond errors merely reaching customers (band 50) into regulatory-consequence territory (band 70)."
+     },
+     "CAP-14": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-special-category-personal-data-including",
+      "why": "Complaint records for software products (e.g. health-related SaMD complaints under 21 CFR 820.198) can contain special category data such as health information under UK GDPR Article 9, which requires safeguards beyond ordinary confidential commercial data (band 50)."
+     },
+     "CAP-15": {
+      "from": 10,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "21 CFR 820.198 requires manufacturers to maintain auditable complaint files with investigation and CAPA linkage, subject to FDA inspection, which matches the 'formal audit trail; subject to internal audit or regulator inspection' band rather than the base assumption of no review."
+     }
+    },
+    "ROLE-0047": {
+     "CAP-03": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "A software complaints manager here must navigate overlapping FDA device-complaint rules, UK DUAA data-protection complaint timeframes, and GDPR special-category provisions simultaneously, requiring expert-level recognition of exceptions and rationale rather than standard-case practitioner knowledge (band 70)."
+     },
+     "CAP-08": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "technology_software-organisations-must-acknowledge-complaint",
+      "why": "DUAA 2025 imposes mandatory information content and statutory timeframes for complaint responses to data subjects, meaning the exact wording of complaint correspondence now carries direct regulatory consequence, matching the top band."
+     },
+     "CAP-10": {
+      "from": 90,
+      "to": 90,
+      "class": "A",
+      "source": "technology_software-organisations-must-acknowledge-complaint",
+      "why": "The Data (Use and Access) Act 2025 introduces new mandatory 30-day acknowledgment and information requirements effective 2026; the band remains at the existing ceiling (deviation is a breach with external consequence) but the governing rule has materially changed and must stay visible."
+     },
+     "CAP-11": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "21 CFR 820.198 links complaint evaluation directly to CAPA and post-market vigilance for device-adjacent software; an undetected error in complaint handling can propagate to a missed safety signal or recall, matching the 'errors risk safety, legal liability or systemic harm' band."
+     },
+     "CAP-14": {
+      "from": 90,
+      "to": 90,
+      "class": "A",
+      "source": "technology_software-special-category-personal-data-including",
+      "why": "Complaints in this sector can involve UK GDPR Article 9 special-category data (e.g., health data tied to device software complaints), confirming the existing top-band data sensitivity rather than changing it, so the linkage is recorded for visibility."
+     }
+    },
+    "ROLE-0048": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "21 CFR Part 820 §820.198 requires complaint handlers to recognise reportable events, distinguish standard vs. adverse-event complaints, and link findings to CAPA — working practitioner knowledge of a regulated process, not general knowledge."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-organisations-must-acknowledge-complaint",
+      "why": "The Data (Use and Access) Act 2025 (effective June 2026) imposes new mandatory 30-day acknowledgement and information-content rules for data-protection complaints; band stays at strict-compliance level 70 but the governing rule has materially changed and must remain visible."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-organisations-must-acknowledge-complaint",
+      "why": "Under DUAA and 21 CFR 820.198, an undetected error in complaint logging or escalation (e.g. missed regulatory-reportable event or missed statutory deadline) triggers regulatory attention, moving the role from customer-facing rework (50) to regulatory/financial exposure (70)."
+     },
+     "CAP-15": {
+      "from": 50,
+      "to": 70,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "21 CFR Part 820 §820.198 requires complaint files with investigation records and CAPA linkage that are subject to FDA inspection, establishing a formal audit trail rather than informal internal sign-off."
+     }
+    },
+    "ROLE-0049": {
+     "CAP-03": {
+      "from": 30,
+      "to": 50,
+      "class": "A",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "FDA 21 CFR §820.198 requires complaint handlers to recognise which complaints constitute reportable events requiring CAPA linkage and regulatory submission, moving the role from general familiarity with terms to working practitioner recognition of standard regulated cases."
+     },
+     "CAP-08": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "Complaint files under §820.198 feed regulatory reporting (e.g. MDR-style submissions) that are binding external documents reviewed by regulators, not just internal structured records, which follows directly from the FDA rule though it does not name writing standards itself."
+     },
+     "CAP-10": {
+      "from": 70,
+      "to": 90,
+      "class": "A",
+      "source": "technology_software-organisations-must-acknowledge-complaint",
+      "why": "The Data (Use and Access) Act 2025 imposes a hard 30-day acknowledgement deadline and mandatory investigation content for data-protection complaints, so deviation from the prescribed procedure is itself a statutory breach with external regulatory consequence, not merely a reportable internal event."
+     },
+     "CAP-11": {
+      "from": 50,
+      "to": 70,
+      "class": "B",
+      "source": "technology_software-manufacturers-must-establish-and-maintai",
+      "why": "Under §820.198, an undetected error in complaint evaluation (e.g. missing a reportable adverse event) can trigger regulatory attention or enforcement action against the manufacturer, which follows from the FDA rule even though it does not state error consequences in these terms."
+     }
+    }
+   }
+  }
+ },
+ "crossCutting": {
+  "eu_ai_act": {
+   "appliesTo": "Any vertical deploying an AI system in customer service within the EU.",
+   "live": {
+    "since": "2026-08-02",
+    "source": "eu-ai-act-art-50",
+    "effect": "Article 50 transparency obligations are in force. A customer must be told they are interacting with an AI system."
+   },
+   "deferred": {
+    "annexIII": "2027-12-02",
+    "annexI": "2028-08-02",
+    "source": "eu-ai-act-omnibus",
+    "effect": "The AI Omnibus, in force 27 July 2026, postponed the high-risk obligations. A deployment plan written against the original 2 August 2026 high-risk date is now working to the wrong deadline in both directions: transparency arrived, high-risk did not."
+   }
+  }
+ }
 }

@@ -185,7 +185,17 @@ describe("the payload the browser receives", () => {
 
   it("stays small enough to send", () => {
     // The role library is 684 KB and must never reach the browser.
-    expect(JSON.stringify(p).length).toBeLessThan(60_000);
+    //
+    // Raised from 60 KB on 17 August 2026. The sector pilot went from six
+    // sectors to the fifteen the classifier knows, so rolePilots went from
+    // roughly 30 KB to 133 KB and carries 234 deltas with the sentence
+    // explaining each. That is the correct payload for the coverage: the old
+    // figure was small because two thirds of the taxonomy had no evidence.
+    //
+    // Still a real ceiling, because this is sent to every reader on the tab.
+    // If it needs to come down, the lever is the `why` prose rather than the
+    // deltas, since switching sector is meant to be instant and offline.
+    expect(JSON.stringify(p).length).toBeLessThan(170_000);
   });
 
   it("agrees with the server-side view it was flattened from", () => {
