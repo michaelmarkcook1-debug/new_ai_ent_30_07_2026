@@ -75,9 +75,13 @@ Market Watch reads, for example: "It names DeepSeek, which is among the 43 this
 page covers. The figures below are what this page holds on it, and are not
 derived from this item."
 
-**Still to do.** Eight of the nine tabs show no line yet rather than the
-source's, which is the half that mattered: the incorrect commentary is off
-every tab. Each gains its own line as its vendor set is passed through.
+**Finished later the same day.** Six of the nine tabs now carry their own line.
+Two of those say the item names no vendor the page covers, which is the same
+mechanism reporting a real absence. The remaining three are Price/Performance,
+Peer Insights and the News tab itself: the first two are about models and about
+adoption rather than about vendors, so there is nothing for a line to be true
+of, and inventing one to fill the slot would put a sentence there that means
+nothing.
 
 **The integrator table was ranking on the wrong number.**
 
