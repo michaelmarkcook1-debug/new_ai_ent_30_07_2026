@@ -15,6 +15,38 @@ than a gap.
 
 ---
 
+## 17 August 2026
+
+**The sector lens now covers every industry, not a third of them.**
+
+Pick a customer-operations role and the product tells you what a named industry
+changes about it: what the regulator requires, and therefore what the role has
+to be able to do. Until today it could answer for six industries out of the
+fifteen it can classify a company into, so two thirds of the time the honest
+answer was "we have not researched that industry".
+
+It now answers for all fifteen. 198 new findings across nine industries,
+each carrying the rule it rests on and a link to it: insurance, pharma and life
+sciences, legal, professional services, technology and software, manufacturing,
+public sector, education and real estate.
+
+**Nine claims were held back, and you can overrule that.** All nine are in
+insurance and rest on two sources I opened and read. One is a Texas regulation
+quoted accurately and about a different kind of organisation entirely: it
+governs health care collaboratives, not insurers. The other is a genuine Cayman
+Islands regulator page about complaints that does not mention deadlines, cited
+for a claim about deadlines.
+
+They are recorded in the file with the source and what reading it showed, so
+putting them in is one edit rather than a re-run. Nothing about either is a
+judgement on the sector.
+
+**Fourteen of the findings confirm that a requirement does not move** in that
+industry. Those are kept. A sector confirming a requirement is unchanged is a
+research result, not an empty one.
+
+---
+
 ## 16 August 2026
 
 **Commentary on each tab is now ours, from that tab's data.**
