@@ -45,7 +45,7 @@ demonstrable.
 | `/vendor-view`, `/vendor-view/[id]` | One vendor, read properly | `vendors.json`, `capabilities.json`, `reputation.json`, composite | AIE | 0 | `sync-aie-fixtures` |
 | `/reputation-tracker` | How buyers rate vendors | `reputation.json` (29 rows, 4 Aug 2026) + third-party block | AIE, LIVE, third-party lane | **1** | `sync-aie-fixtures` |
 | `/alliances` | Which GSI carries which vendor | `lib/aie/alliances/seed.ts`, 51 channel links | AIE | 0 | Hand-curated |
-| `/market-view` (Model for Role) | Which model per role | `roles.json` (294 roles), `models.json` (330 models) | DERIVED, AIE | 0 | Bundled snapshot, 2 Aug 2026 |
+| `/market-view` (Model for Role) | Which model per role | `roles.json` (297 roles), `models.json` (330 models) | DERIVED, AIE | 0 | Bundled snapshot, 2 Aug 2026 |
 | `/price-performance` | What capability costs | `models.json` | AIE LIVE, AIE | 0 | Bundled snapshot |
 | `/workflow-shortlist` | Who to buy for a workflow | `lib/aie/use-cases.ts` (75 workflows) + vendor index | AIE LIVE, AIE | 0 | Bundled + proxy |
 | `/trust-rank` | What regulation binds you | Governance postures | AIE, postures lane | **9** | Hand-curated |

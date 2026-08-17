@@ -18,7 +18,7 @@ Four gates. All four, in this order, every time.
 
 ```bash
 npx tsc --noEmit     # types: strict; fastest signal, run it first
-npm test             # 322 tests across 21 files
+npm test             # 593 tests across 41 files
 npm run lint         # ESLint: expect 0 errors, ~39 warnings
 npm run build        # 84 pages
 ```

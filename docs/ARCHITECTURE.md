@@ -236,7 +236,7 @@ Web-standard `Request`/`Response` are enough to check a header. Leave it alone.
 
 ## 8. Testing
 
-`npm test` runs Vitest. 322 tests across 21 files, all passing as of 5 August
+`npm test` runs Vitest. 593 tests across 41 files, all passing as of 17 August
 2026. `tests/**/*.test.ts` only: **Vitest cannot parse JSX here**, so pure
 logic must live in `.ts` for it to be testable. That constraint is why the
 chart maths sits in `lib/` and the components only draw. It also means a test
@@ -252,7 +252,7 @@ The tests worth understanding before changing anything:
 | `price-performance.test.ts` | Axis denominators (330/56/44/262) and that the recomputed intelligence frontier reproduces the catalogue's own 10 |
 | `disclosure-ladder.test.ts` | Every STATED phrase appears verbatim in the filing text held in the fixture |
 | `composite.test.ts`, `composite-data.test.ts` | That no composite is ever returned without its input count, and that durability cannot return "No" |
-| `live-vendor-parity.test.ts`, `model-fit-parity.test.ts` | Parity against the upstream and the Python reference: all 294 roles under four control settings |
+| `live-vendor-parity.test.ts`, `model-fit-parity.test.ts` | Parity against the upstream and the Python reference: all 297 roles under four control settings |
 | `scorecard-ledger.test.ts` | The committed internal report matches what the code produces |
 | `library-counts.test.ts` | That no file states a library size as a literal |
 

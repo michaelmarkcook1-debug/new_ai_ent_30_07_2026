@@ -21,13 +21,13 @@ live endpoint, or by reading the rendered HTML.
 | Nav and information architecture | 13 resting items, paired pages, `/start` as the front door |
 | Provenance system | Every figure carries a lane; no badge renders before data lands; worst lane wins |
 | BoardRadar integration | 14 tickers probed live, key server-side only, 8 s timeout, fixture fallback, honest badging |
-| Model for Role | 294 roles × 330 priced models, engine at parity with the Python reference |
+| Model for Role | 297 roles × 330 priced models, engine at parity with the Python reference |
 | Workforce distribution | Two-panel figure, 14.8% / 0.7% pinned by test |
 | Price / performance | Five axes with data (Accuracy added 5 Aug 2026), unscored models kept in a gutter, denominators printed |
 | Composite metric | Three Questions + Verdict dial, never a score without its input count |
 | Disclosure ladder | Five rungs, 7 of 9 filers with a stated figure or hard bound, zero invented numbers |
 | Movement catalogue | Postgres over PostgREST, paging past the 1,000-row ceiling |
-| Test suite | 322 tests, 21 files, green |
+| Test suite | 593 tests, 41 files, green |
 | Typecheck | Clean |
 | Lint | ESLint + Next preset, 0 errors (gate added 5 Aug 2026; it had never run before) |
 | Peer Insights | Industry→workflow reverse lookup on the 75-workflow library |
