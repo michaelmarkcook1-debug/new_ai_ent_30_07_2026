@@ -35,6 +35,10 @@ export default async function FinancialSnapshotPage() {
     pickNews(news.items, {
       categories: ["Market movement", "Strategy signal"],
       minImpact: 70,
+      // The private companies this page actually carries a rung for. `key` is
+      // the vendor id, which is what the news feed names vendors by.
+      pageVendorIds: privateRows.map((r) => r.key),
+      vendorNames: new Map(privateRows.map((r) => [r.key, r.name])),
     }),
     { disclosing: revenue.disclosingCount, total: revenue.totalCount },
     revenue.companies.filter((c) => c.segments?.length).length,

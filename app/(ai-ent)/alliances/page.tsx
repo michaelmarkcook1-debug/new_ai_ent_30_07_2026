@@ -63,6 +63,8 @@ export default async function AlliancesPage() {
     },
     pickNews(news.items, {
       categories: ["Partnership", "Strategy signal"],
+      // The vendors this page maps alliances for.
+      pageVendorIds: [...partnersPerVendor.keys()],
     }),
     null
   );

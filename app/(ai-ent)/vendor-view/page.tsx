@@ -21,7 +21,13 @@ export default async function VendorViewPage() {
   const m = await loadMarketMetrics();
   const insight = vendorViewInsight(
     m,
-    pickNews(news.items, { categories: ["Market movement", "Product launch"] })
+    pickNews(news.items, {
+      categories: ["Market movement", "Product launch"],
+      // The vendors this page covers, so the tie line can say whether the item
+      // bears on the figures below or is market context.
+      pageVendorIds: m.vendors.map((v) => v.id),
+      vendorNames: new Map(m.vendors.map((v) => [v.id, v.name])),
+    })
   );
 
   const written = await authorInsight(

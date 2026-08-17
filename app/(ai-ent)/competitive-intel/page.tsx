@@ -35,7 +35,13 @@ export default async function CompetitiveIntelPage({
   const m = await loadMarketMetrics();
   const insight = competitiveInsight(
     m,
-    pickNews(news.items, { categories: ["Product launch", "Market movement"] }),
+    pickNews(news.items, {
+      categories: ["Product launch", "Market movement"],
+      // The vendors this page covers, so the tie line can say whether the item
+      // bears on the figures below or is market context.
+      pageVendorIds: m.vendors.map((v) => v.id),
+      vendorNames: new Map(m.vendors.map((v) => [v.id, v.name])),
+    }),
     matrix.categoryName,
     matrix.rows.length,
     matrix.capabilities.length

@@ -28,7 +28,13 @@ export default async function ReputationTrackerPage() {
   const m = await loadMarketMetrics();
   const insight = reputationInsight(
     m,
-    pickNews(news.items, { categories: ["Risk event", "Strategy signal"] }),
+    pickNews(news.items, {
+      categories: ["Risk event", "Strategy signal"],
+      // The vendors this page covers, so the tie line can say whether the item
+      // bears on the figures below or is market context.
+      pageVendorIds: m.vendors.map((v) => v.id),
+      vendorNames: new Map(m.vendors.map((v) => [v.id, v.name])),
+    }),
     5,
     3
   );
