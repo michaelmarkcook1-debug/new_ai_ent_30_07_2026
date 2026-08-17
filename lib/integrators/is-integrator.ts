@@ -45,7 +45,28 @@ import type { BrProvider } from "@/app/(ai-ent)/ecosystem-navigator/types";
 /** The sectors whose providers deliver AI programmes for an enterprise. */
 export const INTEGRATOR_SECTORS = ["global-si", "consulting"] as const;
 
-export function isIntegrator(p: Pick<BrProvider, "sector">): boolean {
+// Sector alone is not enough: the catalogue over-assigns `global-si`. Three
+// providers carry it whose own segment says otherwise, so the segment is
+// checked too.
+//
+//   Financial Technology Services   Broadridge. A fintech product company. It
+//                                   sells mission-critical infrastructure, it
+//                                   does not integrate AI into your estate.
+//   Enterprise BPO                  Capita. An outsourcer, and the matrix
+//                                   returns nothing for it.
+//
+// Telecom IT Services is deliberately NOT excluded. Amdocs integrates for
+// communications providers, which is vertical but real, and the matrix answers
+// for it with fifteen platform rows. Excluding it would have been me trusting a
+// first reading over the data: an earlier probe reported Amdocs and Broadridge
+// at zero rows and both were wrong, at 15 and 4.
+const NOT_INTEGRATION_SEGMENTS = new Set([
+  "Financial Technology Services",
+  "Enterprise BPO",
+]);
+
+export function isIntegrator(p: Pick<BrProvider, "sector" | "segment">): boolean {
+  if (NOT_INTEGRATION_SEGMENTS.has(p.segment ?? "")) return false;
   return INTEGRATOR_SECTORS.includes(
     (p.sector ?? "") as (typeof INTEGRATOR_SECTORS)[number]
   );
@@ -60,5 +81,5 @@ export function isIntegrator(p: Pick<BrProvider, "sector">): boolean {
 export function excludedNote(total: number, shown: number): string | null {
   const dropped = total - shown;
   if (dropped <= 0) return null;
-  return `${dropped} of the ${total} providers in the catalogue are not shown: contact-centre and BPO operators, an infrastructure vendor and a payroll platform. They deliver AI inside their own service, which is a different question from integrating it across your estate, and the platform matrix holds no data for them.`;
+  return `${dropped} of the ${total} providers in the catalogue are not shown: contact-centre and BPO operators, a fintech product company, an infrastructure vendor and a payroll platform. They deliver AI inside their own service or sell it as a product, which is a different question from integrating it across your estate.`;
 }
