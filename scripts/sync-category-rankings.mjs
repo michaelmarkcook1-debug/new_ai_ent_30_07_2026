@@ -74,6 +74,68 @@ const CATEGORIES = [
 const COMPOSITE = /(\d+)-domain weighted assessment composite/g;
 const POSITION = />(Leader|Strong|Emerging leader|Contender|Niche)<\/span>/g;
 
+// How many source URLs to keep per domain. The pages carry every citation the
+// domain was scored from, up to 25 or so, which is 1.37 MB across the thirteen
+// categories and no use to a reader who wants to check a number rather than
+// audit it. Three is enough to open the evidence; evidenceCount keeps the true
+// total honest so the trim never reads as "only three sources exist".
+const CITATION_CAP = 3;
+
+/**
+ * The domain-level variables behind each composite.
+ *
+ * Taken from the JSON the page already serialises rather than from its markup,
+ * which makes this the sturdiest part of the parse: it is real structured data
+ * with named fields, not table cells identified by position.
+ *
+ * `state` matters as much as `score`. A domain can be scored, or it can be
+ * insufficient, and an insufficient domain contributes zero while still
+ * counting toward the coverage that decides whether a vendor is ranked at all.
+ * Dropping the state would turn "we looked and the evidence was thin" into
+ * "this scored zero", which are different claims about a vendor.
+ */
+function parseDomains(html, id) {
+  const s = html.replaceAll('\\"', '"');
+  const start = s.indexOf('[{"vendorId');
+  if (start < 0) {
+    throw new Error(
+      `${id}: no domain payload found. The page no longer serialises its ` +
+        `assessment as JSON, so the variables behind every score would be lost.`
+    );
+  }
+  let depth = 0;
+  let end = -1;
+  for (let k = start; k < s.length; k++) {
+    if (s[k] === "[") depth++;
+    else if (s[k] === "]") {
+      depth--;
+      if (depth === 0) {
+        end = k + 1;
+        break;
+      }
+    }
+  }
+  if (end < 0) throw new Error(`${id}: domain payload never closes`);
+
+  const raw = JSON.parse(s.slice(start, end));
+  const byVendor = {};
+  for (const v of raw) {
+    byVendor[v.vendorId] = (v.domains ?? []).map((d) => ({
+      domain: d.domain,
+      pillar: d.pillar,
+      state: d.state,
+      score: d.score ?? null,
+      confidence: d.confidence ?? null,
+      bestGrade: d.bestGrade ?? null,
+      evidenceCount: d.evidenceCount ?? 0,
+      citations: (d.citations ?? [])
+        .slice(0, CITATION_CAP)
+        .map((c) => c.sourceUrl),
+    }));
+  }
+  return byVendor;
+}
+
 async function fetchPage(id) {
   const res = await fetch(`${BASE}/category/${id}`, {
     headers: { accept: "text/html" },
@@ -151,6 +213,16 @@ async function main() {
   for (const [id, label] of CATEGORIES) {
     const html = await fetchPage(id);
     const { domains, ranked } = parse(html, id);
+    const variables = parseDomains(html, id);
+    for (const r of ranked) {
+      r.domains = variables[r.vendorId] ?? [];
+      if (r.domains.length === 0) {
+        throw new Error(
+          `${id}/${r.vendorId}: ranked but carries no domain variables. The ` +
+            `composite would be shown with nothing behind it.`
+        );
+      }
+    }
     const total = inCategory.get(id);
     if (total === undefined) {
       throw new Error(`${id}: no rows in market-share, so held cannot be derived`);

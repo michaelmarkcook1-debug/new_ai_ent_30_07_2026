@@ -4,6 +4,7 @@ import { sovereigntyRows, type SovereigntyFlag } from "@/lib/shield/sovereignty"
 import { HQ_REGISTER } from "@/lib/shield/hq-register";
 import { vendorIdForSlug } from "@/lib/shield/vendor-map";
 import { isInvestor } from "@/lib/vendor/is-investor";
+import { categoryRanking } from "@/lib/aie/category-rankings";
 import {
   MARKET_CATEGORY_LIST,
   vendorIdsInCategory,
@@ -394,20 +395,42 @@ export function buildShortlist(
       };
     });
 
+  // THE ASSESSMENT IS THE RATING, and the only one.
+  //
+  // This used to rank on our own three-input composite. That composite was a
+  // reasonable thing to build when it was all we had, and it is thinner than
+  // what AI Enterprise publishes: three inputs weighted the same way in every
+  // market, against fourteen evidence-graded domains weighted per market, each
+  // capped by the grade of the evidence behind it, with a vendor under 60%
+  // coverage held rather than ranked on a default.
+  //
+  // A vendor with no assessment is not shortlisted. It is not a zero and it is
+  // not last: it is a vendor the assessment declined to rank, and putting it
+  // below one that was ranked would invent an ordering the evidence refused to
+  // give. `held` in the payload says how many that is per category.
+  const assessment = categoryRanking(category);
+  const scoreOf = new Map(
+    (assessment?.ranked ?? []).map((r) => [r.vendorId, r.composite])
+  );
+  // Order comes from the assessment's own rank, not from re-sorting its scores.
+  // Z.ai and AI21 tie in frontier models, and the ranking puts Z.ai first while
+  // sorting by score and breaking ties on name puts AI21 first. Re-deriving an
+  // order we did not compute means inventing a tiebreak, so the rank is read
+  // rather than recalculated.
+  const rankOf = new Map(
+    (assessment?.ranked ?? []).map((r) => [r.vendorId, r.rank])
+  );
+
   const ranked = set.vendors
     .filter(
       (v) =>
         inCategory.has(v.vendorId) &&
-        v.result.score !== null &&
+        scoreOf.has(v.vendorId) &&
         passesFilter(v.vendorId, filter)
     )
-    // Score first. Where two tie, the one resting on more published inputs
-    // wins, because it is the better-evidenced of two equal claims.
     .sort(
       (a, b) =>
-        (b.result.score ?? 0) - (a.result.score ?? 0) ||
-        b.result.inputsPresent - a.result.inputsPresent ||
-        a.name.localeCompare(b.name)
+        (rankOf.get(a.vendorId) ?? Infinity) - (rankOf.get(b.vendorId) ?? Infinity)
     );
 
   if (ranked.length === 0) return null;
@@ -420,7 +443,11 @@ export function buildShortlist(
     // The label, not the id: this is read by a person on a card.
     category: label,
     marketPosition: position.get(v.vendorId) ?? "",
-    score: v.result.score as number,
+    // The assessment, 0 to 5. The old three-input composite is still computed
+    // and still carried on `result`, because the paragraph explains which of
+    // the three questions the vendor answers and which are unpublished, and
+    // that is worth saying. It is no longer what the card is ranked on.
+    score: scoreOf.get(v.vendorId) as number,
     result: v.result,
     verdicts: v.verdicts,
     inputs: v.inputs,

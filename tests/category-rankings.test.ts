@@ -6,6 +6,8 @@ import {
   categoryRanking,
   categoryLeaders,
 } from "@/lib/aie/category-rankings";
+import { buildShortlist } from "@/lib/desk/shortlist";
+import { isInvestor } from "@/lib/vendor/is-investor";
 
 // These are AI Enterprise v1's numbers, parsed from its published pages because
 // v1 does not expose the category composite on its API and is read-only.
@@ -149,5 +151,88 @@ describe("parity with what v1's front page shows", () => {
     expect(
       frontier.ranked[0].composite - frontier.ranked[1].composite
     ).toBeCloseTo(0.29, 2);
+  });
+});
+
+describe("the assessment is the product's only vendor rating", () => {
+  it("orders the Decision Desk shortlist exactly as the category ranking does", () => {
+    // The shortlist used to rank on our own three-input composite, which named
+    // a different order from the ranking on the same data. One rating, one
+    // order: if these two ever diverge again, this fails.
+    for (const c of categoryRankings()) {
+      const list = buildShortlist(c.categoryId, undefined, 40, "all");
+      if (!list) continue;
+      // Compared as the intersection, because a vendor the assessment ranks may
+      // carry no scorecard row here and would otherwise look like a reordering.
+      const got = list.entries.map((e) => e.vendorId);
+      const expected = c.ranked
+        .filter((r) => !isInvestor(r.vendorId) && got.includes(r.vendorId))
+        .map((r) => r.vendorId);
+      expect(got, c.categoryId).toEqual(expected);
+      for (const e of list.entries) {
+        const r = c.ranked.find((x) => x.vendorId === e.vendorId)!;
+        expect(e.score, `${c.categoryId}/${e.vendorId}`).toBe(r.composite);
+      }
+    }
+  });
+
+  it("never shortlists a vendor the assessment held", () => {
+    // Held means the assessment looked and declined to score. Ranking it below
+    // the scored vendors would invent an order the evidence refused to give.
+    for (const c of categoryRankings()) {
+      const list = buildShortlist(c.categoryId, undefined, 40, "all");
+      if (!list) continue;
+      const ranked = new Set(c.ranked.map((r) => r.vendorId));
+      for (const e of list.entries) {
+        expect(ranked.has(e.vendorId), `${e.name} was held in ${c.categoryId}`).toBe(true);
+      }
+    }
+  });
+
+  it("scores every card between 0 and 5, never on the 0 to 100 scale", () => {
+    for (const c of categoryRankings()) {
+      const list = buildShortlist(c.categoryId, undefined, 40, "all");
+      if (!list) continue;
+      for (const e of list.entries) {
+        expect(e.score, `${e.name}`).toBeGreaterThan(0);
+        expect(e.score, `${e.name}`).toBeLessThanOrEqual(5);
+      }
+    }
+  });
+});
+
+describe("the variables behind each score", () => {
+  it("carries domains for every ranked vendor", () => {
+    for (const c of categoryRankings()) {
+      for (const r of c.ranked) {
+        expect(r.domains.length, `${c.categoryId}/${r.vendorId}`).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it("keeps an unscored domain distinguishable from a zero", () => {
+    // An insufficient domain contributes zero to the composite but is not a
+    // score of zero, and conflating them would report thin evidence as a
+    // judgement about the vendor.
+    const all = categoryRankings().flatMap((c) => c.ranked.flatMap((r) => r.domains));
+    for (const d of all) {
+      if (d.state !== "scored") expect(d.score, d.domain).toBeNull();
+      else expect(d.score, d.domain).not.toBeNull();
+    }
+  });
+
+  it("cites its evidence", () => {
+    // evidenceCount is NOT asserted against the citation list. Two domains in
+    // the source report an evidenceCount lower than the number of citations
+    // they carry (dev_sentiment: count 2, three cited), so the two fields do
+    // not describe the same population upstream. Both are recorded as given;
+    // neither is treated as the other's total.
+    const all = categoryRankings().flatMap((c) => c.ranked.flatMap((r) => r.domains));
+    const cited = all.filter((d) => d.citations.length > 0);
+    expect(cited.length).toBeGreaterThan(0);
+    for (const d of cited) {
+      expect(d.citations.length).toBeLessThanOrEqual(3);
+      for (const u of d.citations) expect(u).toMatch(/^https?:\/\//);
+    }
   });
 });

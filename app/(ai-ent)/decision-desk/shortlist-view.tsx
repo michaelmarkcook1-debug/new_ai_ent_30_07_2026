@@ -414,13 +414,33 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
         trigger="How this shortlist is derived"
       >
         <p>
-          Each vendor carries up to three published inputs: assessed capability,
-          reputation across customer, developer and employee sources, and what
-          the company discloses about its finances. The composite weights them{" "}
-          {payload.weightNote}, and where an input is unpublished the weights are
-          renormalised over the ones that exist rather than treating the absence
-          as a zero. A vendor with one published input therefore gets a score
-          built on one, and its card says so.
+          <strong className="text-base-content">
+            The order is the AI Enterprise assessment, scored out of 5.
+          </strong>{" "}
+          It is a weighted composite of evidence-graded assessment domains,
+          between seven and fourteen of them depending on the market, weighted
+          differently for each market because a frontier model API and a service
+          desk are not judged on the same things. Every domain&rsquo;s score is
+          capped by the grade of the evidence behind it, so a claim cannot reach
+          the top bands without audit-grade proof, and a domain with insufficient
+          evidence contributes zero while still counting toward coverage. A
+          vendor under 60 per cent domain coverage is{" "}
+          <strong className="text-base-content">held rather than ranked</strong>,
+          so it does not appear here at all. That is a refusal to guess, not an
+          absence of the vendor.
+        </p>
+        <p>
+          The paragraph on each card describes three other published inputs:
+          assessed capability, reputation across customer, developer and employee
+          sources, and what the company discloses about its finances. Those
+          weight {payload.weightNote} and are renormalised where one is
+          unpublished rather than counting an absence as a zero. They explain
+          what is known about a vendor.{" "}
+          <strong className="text-base-content">
+            They no longer decide the order.
+          </strong>{" "}
+          The assessment does, because it reads more variables, weights them per
+          market, and refuses to score what it cannot evidence.
         </p>
         <p>
           <strong className="text-base-content">

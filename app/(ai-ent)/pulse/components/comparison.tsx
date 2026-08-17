@@ -21,7 +21,6 @@ import type { CategoryShare, VendorMetrics } from "@/lib/market-metrics";
 
 type MetricKey =
   | "assessment"
-  | "composite"
   | "momentum"
   | "maturity"
   | "reputation"
@@ -37,12 +36,6 @@ const COLUMNS: {
     label: "Assessment",
     title:
       "The weighted composite (0 to 5) of evidence-graded assessment domains, with weights specific to this category, as published on the AI Enterprise category ranking. This is the number that ranking sorts on. Each domain's score is capped by its evidence grade, and a vendor under 60% domain coverage is held rather than ranked.",
-  },
-  {
-    key: "composite",
-    label: "Overall score",
-    title:
-      "vendors[].overallScore: one global 0 to 100 formula applied to every vendor, published on the same API. It is NOT what the category ranking sorts on and the two disagree: here OpenAI leads frontier models on overall score while Anthropic leads on the category assessment. Shown so the difference is visible rather than hidden.",
   },
   {
     key: "momentum",
@@ -267,9 +260,6 @@ export function VendorComparisonTable({
                         held
                       </span>
                     )}
-                  </td>
-                  <td className="px-3 py-2.5">
-                    <ScorePill score={v.composite} />
                   </td>
                   <td className="px-3 py-2.5">
                     {v.momentum === null ? (

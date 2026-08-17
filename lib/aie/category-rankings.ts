@@ -32,13 +32,39 @@ import path from "node:path";
 // empty ranking, so a stale fixture here means the sync was not run, never that
 // it ran and silently found nothing.
 
+/**
+ * One assessment domain: a variable behind the composite.
+ *
+ * `state` carries as much as `score`. An insufficient domain contributes zero
+ * to the composite while still counting toward the coverage that decides
+ * whether a vendor is ranked at all, so reading a null score as a zero would
+ * turn "we looked and the evidence was thin" into "this scored nothing".
+ */
+export interface AssessmentDomain {
+  domain: string;
+  /** Which of the six pillars it rolls up into. */
+  pillar: string;
+  /** "scored", or insufficient. */
+  state: string;
+  /** 0 to 5, null where the state is not scored. */
+  score: number | null;
+  confidence: number | null;
+  /** Best evidence grade behind it, E1 to E5. */
+  bestGrade: string | null;
+  evidenceCount: number;
+  /** Up to three source URLs. `evidenceCount` holds the true total. */
+  citations: string[];
+}
+
 export interface RankedVendor {
   rank: number;
   vendorId: string;
-  /** Weighted composite, 0 to 5. */
+  /** Weighted composite, 0 to 5. The product's only vendor rating. */
   composite: number;
   /** v1's own band: Leader, Strong, Emerging leader and so on. */
   position: string | null;
+  /** The variables the composite was built from, with their evidence. */
+  domains: AssessmentDomain[];
 }
 
 export interface CategoryRanking {
