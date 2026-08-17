@@ -26,8 +26,8 @@
   ],
   "thresholds": {
     "winning": {
-      "low": 56.43191471571906,
-      "high": 60.27306481009414
+      "low": 56.194039244637075,
+      "high": 60.201094218920005
     },
     "trust": {
       "low": 75,
@@ -68,10 +68,10 @@
     {
       "vendorId": "fireworks",
       "name": "Fireworks AI",
-      "winning": 56.53553401056308,
+      "winning": 56.69383831663114,
       "trust": null,
       "durability": null,
-      "composite": 56.5,
+      "composite": 56.7,
       "confidence": "1 of 3",
       "missing": [
         "trust",
@@ -81,10 +81,10 @@
     {
       "vendorId": "g42",
       "name": "G42 / Falcon (TII)",
-      "winning": 57.558571428571426,
+      "winning": 57.50023809523809,
       "trust": null,
       "durability": null,
-      "composite": 57.6,
+      "composite": 57.5,
       "confidence": "1 of 3",
       "missing": [
         "trust",
@@ -120,10 +120,10 @@
     {
       "vendorId": "lambda",
       "name": "Lambda",
-      "winning": 55.07172964730457,
+      "winning": 54.66768052134646,
       "trust": null,
       "durability": null,
-      "composite": 55.1,
+      "composite": 54.7,
       "confidence": "1 of 3",
       "missing": [
         "trust",
@@ -221,7 +221,7 @@
     {
       "vendorId": "deepseek",
       "name": "DeepSeek",
-      "winning": 62.75518589253884,
+      "winning": 62.76935046935047,
       "trust": 75.66666666666667,
       "durability": null,
       "composite": 68.3,
@@ -245,7 +245,7 @@
     {
       "vendorId": "harvey",
       "name": "Harvey",
-      "winning": 58.49724118010653,
+      "winning": 58.490463658589604,
       "trust": 76.66666666666667,
       "durability": null,
       "composite": 66.3,
@@ -377,7 +377,7 @@
     {
       "vendorId": "alibaba",
       "name": "Alibaba",
-      "winning": 62.39370766488414,
+      "winning": 62.47224143610013,
       "trust": 75,
       "durability": 85,
       "composite": 73,
@@ -387,7 +387,7 @@
     {
       "vendorId": "anthropic",
       "name": "Anthropic",
-      "winning": 60.27306481009414,
+      "winning": 60.201094218920005,
       "trust": 80,
       "durability": 60,
       "composite": 66.1,
@@ -397,7 +397,7 @@
     {
       "vendorId": "aws",
       "name": "AWS",
-      "winning": 61.785814083451086,
+      "winning": 61.86215904296006,
       "trust": 76.33333333333333,
       "durability": 85,
       "composite": 73.1,
@@ -407,40 +407,40 @@
     {
       "vendorId": "cohere",
       "name": "Cohere (incl. Aleph Alpha)",
-      "winning": 59.71393791376819,
+      "winning": 59.26013779810758,
       "trust": 77,
       "durability": 60,
-      "composite": 65,
+      "composite": 64.8,
       "confidence": "3 of 3",
       "missing": []
     },
     {
       "vendorId": "databricks",
       "name": "Databricks",
-      "winning": 54.756824407250576,
+      "winning": 54.46599562178197,
       "trust": 79,
       "durability": 60,
-      "composite": 63.6,
+      "composite": 63.5,
       "confidence": "3 of 3",
       "missing": []
     },
     {
       "vendorId": "google",
       "name": "Google",
-      "winning": 63.2429055708591,
+      "winning": 63.394827546910264,
       "trust": 80,
       "durability": 85,
-      "composite": 74.8,
+      "composite": 74.9,
       "confidence": "3 of 3",
       "missing": []
     },
     {
       "vendorId": "ibm",
       "name": "IBM",
-      "winning": 54.987753468470785,
+      "winning": 54.60908244115426,
       "trust": 69.33333333333333,
       "durability": 85,
-      "composite": 68.3,
+      "composite": 68.1,
       "confidence": "3 of 3",
       "missing": []
     },
@@ -477,7 +477,7 @@
     {
       "vendorId": "openai",
       "name": "OpenAI",
-      "winning": 69.85739370014335,
+      "winning": 69.85109907826185,
       "trust": 80.33333333333333,
       "durability": 60,
       "composite": 70,
@@ -527,10 +527,10 @@
     {
       "vendorId": "snowflake",
       "name": "Snowflake",
-      "winning": 57.35506337960286,
+      "winning": 56.194039244637075,
       "trust": 73.33333333333333,
       "durability": 85,
-      "composite": 70.4,
+      "composite": 70,
       "confidence": "3 of 3",
       "missing": []
     }

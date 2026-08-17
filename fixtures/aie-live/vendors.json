@@ -170,8 +170,8 @@
     "sovereign"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 53,
-   "confidenceScore": 97.7,
+   "overallScore": 53.1,
+   "confidenceScore": 97.8,
    "marketPosition": "Major challenger",
    "strategy": "Win through Bedrock-style model optionality, cloud-native deployment, and enterprise infrastructure trust.",
    "productCapabilities": [
@@ -248,8 +248,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 62.7,
-   "confidenceScore": 95.9,
+   "overallScore": 67.7,
+   "confidenceScore": 96,
    "marketPosition": "Major challenger",
    "strategy": "Distribute Qwen via Alibaba Cloud and open-weight release; lead non-English benchmarks.",
    "productCapabilities": [
@@ -390,7 +390,7 @@
     "vpc"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 68.3,
+   "overallScore": 68.8,
    "confidenceScore": 97.8,
    "marketPosition": "Leader",
    "strategy": "Lead on reasoning + coding quality, ship computer-use and tool-use primitives, and distribute through Bedrock, Vertex, Snowflake, and Databricks rather than a packaged assistant UI.",
@@ -763,7 +763,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 44,
+   "overallScore": 43.8,
    "confidenceScore": 97.4,
    "marketPosition": "Category leader",
    "strategy": "Use data estate, open model tooling, and governance to become enterprise AI build platform.",
@@ -836,8 +836,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 62.7,
-   "confidenceScore": 97,
+   "overallScore": 64.2,
+   "confidenceScore": 97.1,
    "marketPosition": "Category leader",
    "strategy": "Win on price-per-token + reasoning quality through aggressive open release cadence.",
    "productCapabilities": [
@@ -908,8 +908,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 54.9,
-   "confidenceScore": 98.5,
+   "overallScore": 55.2,
+   "confidenceScore": 98.6,
    "marketPosition": "Specialist contender",
    "strategy": "Differentiate on inference throughput optimisation (FireAttention) rather than custom silicon.",
    "productCapabilities": [
@@ -981,8 +981,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 42.7,
-   "confidenceScore": 94.6,
+   "overallScore": 42.6,
+   "confidenceScore": 94.7,
    "marketPosition": "Emerging specialist",
    "strategy": "Be the AI capital of the Arab world with explicit US-technology alignment; pair sovereign compute with the Falcon open-weights franchise.",
    "productCapabilities": [
@@ -1129,7 +1129,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 62.3,
+   "overallScore": 65,
    "confidenceScore": 97.8,
    "marketPosition": "Major challenger",
    "strategy": "Differentiate on model research, multimodal capability, data/cloud integration, and Workspace adoption.",
@@ -1348,7 +1348,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 56.6,
+   "overallScore": 56.8,
    "confidenceScore": 98.9,
    "marketPosition": "Category leader",
    "strategy": "Own legal knowledge work and expand into adjacent professional-services workflows.",
@@ -1484,7 +1484,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 45.2,
+   "overallScore": 44.9,
    "confidenceScore": 97.5,
    "marketPosition": "Specialist contender",
    "strategy": "Compete on trusted AI, hybrid deployment, consulting, governance, and model lifecycle management.",
@@ -1547,7 +1547,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 56.9,
+   "overallScore": 56.7,
    "confidenceScore": 99,
    "marketPosition": "Emerging specialist",
    "strategy": "Offer NVIDIA capacity (on-demand + reserved) outside the big-three hyperscalers.",
@@ -1618,8 +1618,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 48.5,
-   "confidenceScore": 93.1,
+   "overallScore": 48.1,
+   "confidenceScore": 93.6,
    "marketPosition": "Emerging specialist",
    "strategy": "Deploy sovereign capital at mega-round scale across frontier labs and AI infrastructure.",
    "productCapabilities": [
@@ -1687,7 +1687,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 62.1,
+   "overallScore": 64.7,
    "confidenceScore": 97.8,
    "marketPosition": "Major challenger",
    "strategy": "Lead open-weights ecosystem while running Meta AI as a consumer assistant; deepen developer reach via Llama API.",
@@ -1844,7 +1844,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 56.4,
+   "overallScore": 56.8,
    "confidenceScore": 93.3,
    "marketPosition": "Emerging specialist",
    "strategy": "Differentiate on speech-multimodal and consumer-AI integration patterns.",
@@ -1917,7 +1917,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 51.1,
+   "overallScore": 51.3,
    "confidenceScore": 97.7,
    "marketPosition": "Specialist contender",
    "strategy": "Win buyers needing model optionality, European positioning, and flexible deployment.",
@@ -1988,7 +1988,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 58.8,
+   "overallScore": 59.9,
    "confidenceScore": 97.7,
    "marketPosition": "Specialist contender",
    "strategy": "Build a reasoning-and-long-context niche through K2 Thinking and platform.moonshot.ai.",
@@ -2130,7 +2130,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 61.5,
+   "overallScore": 61.7,
    "confidenceScore": 93.5,
    "marketPosition": "Leader",
    "strategy": "Hold the silicon + software (CUDA) standard, extend into systems (DGX) and networking, and use strategic investments to seed demand across labs and neoclouds.",
@@ -2281,7 +2281,7 @@
     "vpc"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 68.5,
+   "overallScore": 69.4,
    "confidenceScore": 97.8,
    "marketPosition": "Leader",
    "strategy": "Lead with model quality, agent runtime, enterprise controls, and ecosystem distribution through strategic partners.",
@@ -2429,7 +2429,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 49.5,
+   "overallScore": 49.6,
    "confidenceScore": 95.1,
    "marketPosition": "Specialist contender",
    "strategy": "Win AI-native search and research as an application, blending first-party Sonar models with frontier model routing.",
@@ -2831,8 +2831,8 @@
     "vpc"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 45.7,
-   "confidenceScore": 90.6,
+   "overallScore": 45.9,
+   "confidenceScore": 88.6,
    "marketPosition": "Category leader",
    "strategy": "Position AI agents as workflow execution inside systems of record for service operations.",
    "productCapabilities": [
@@ -2895,8 +2895,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 46.7,
-   "confidenceScore": 96.7,
+   "overallScore": 45.7,
+   "confidenceScore": 96.9,
    "marketPosition": "Category leader",
    "strategy": "Turn governed data estate into AI applications, search, and application-development layer.",
    "productCapabilities": [
@@ -3035,7 +3035,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 64.3,
+   "overallScore": 64.2,
    "confidenceScore": 87,
    "marketPosition": "Major challenger",
    "strategy": "Hold the leading-edge process lead and capacity that every fabless AI-chip designer depends on.",
@@ -3251,7 +3251,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 60.1,
+   "overallScore": 60.7,
    "confidenceScore": 96.1,
    "marketPosition": "Emerging specialist",
    "strategy": "Anchor GLM as Chinese frontier alternative with English/multilingual coverage expanding.",
@@ -3319,7 +3319,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 62.2,
+   "overallScore": 65.2,
    "confidenceScore": 97.5,
    "marketPosition": "Specialist contender",
    "strategy": "Win on compute scale, real-time signal (X integration), and aggressive model cadence.",
