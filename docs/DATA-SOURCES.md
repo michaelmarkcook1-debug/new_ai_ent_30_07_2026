@@ -293,7 +293,7 @@ No network. Each is a snapshot and is labelled with its vintage.
 
 | File | Size | Rows | Vintage |
 |---|---:|---|---|
-| `lib/model-fit/data/roles.json` | 684 KB | 294 role profiles | 2 Aug 2026 |
+| `lib/model-fit/data/roles.json` | 684 KB | 297 role profiles | 2 Aug 2026 |
 | `lib/model-fit/data/models.json` | 132 KB | 330 models | 2 Aug 2026 |
 | `fixtures/aie-live/*.json` | ~1.1 MB | 11 files | Proxy fallbacks |
 | `fixtures/br/*.json` | ~500 KB | 6 files | Proxy fallbacks |
