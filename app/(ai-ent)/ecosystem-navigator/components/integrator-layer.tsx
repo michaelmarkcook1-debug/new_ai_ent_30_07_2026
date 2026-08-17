@@ -9,6 +9,7 @@ import { MicroLabel } from "@/lib/ui/micro";
 import { isIntegrator, excludedNote } from "@/lib/integrators/is-integrator";
 import {
   capabilitySignals,
+  partnersMissingFromMatrix,
   NO_SIGNAL_NOTE,
 } from "@/lib/integrators/capability-signals";
 import type { NewsItemRaw } from "@/lib/analyst/insight";
@@ -110,8 +111,19 @@ export function IntegratorLayer({ news }: { news: NewsItemRaw[] }) {
   const signals = useMemo(() => {
     if (!selected) return [];
     const names = [selected.displayName, selected.name].filter(Boolean);
-    return capabilitySignals(news, names as string[]);
+    return capabilitySignals(news, names as string[], 6);
   }, [news, selected]);
+
+  // Partners the feed names that the matrix does not list. A coverage gap must
+  // not read as a capability gap: the matrix shows Accenture on 2 platforms
+  // against Infosys on 8, and Accenture is the larger integrator by some way.
+  const missingPartners = useMemo(() => {
+    if (!integration) return [];
+    const listed = integration.categories.flatMap((c) =>
+      (c.platforms ?? []).map((pl) => pl.name)
+    );
+    return partnersMissingFromMatrix(signals, listed);
+  }, [signals, integration]);
 
   // Integrators only. The catalogue carries payroll, telecom billing and
   // infrastructure vendors, and offering them under a heading about delivering
@@ -305,6 +317,12 @@ export function IntegratorLayer({ news }: { news: NewsItemRaw[] }) {
                     {integration.platformCounts.proprietary} proprietary,{" "}
                     {integration.platformCounts.partner} partner
                   </span>
+                  {/* A coverage gap must not read as a capability gap. */}
+                  {missingPartners.length > 0 ? (
+                    <span className="rounded-full border border-warn/40 bg-warn-bg px-2 py-0.5 font-mono text-xs text-warn">
+                      matrix omits {missingPartners.join(", ")}
+                    </span>
+                  ) : null}
                   <span className="flex items-center gap-1.5">
                     <MicroLabel label="Generated" />
                     <span className="font-mono text-xs text-muted">
@@ -338,6 +356,16 @@ export function IntegratorLayer({ news }: { news: NewsItemRaw[] }) {
                       {NO_SIGNAL_NOTE}
                     </p>
                   ) : (
+                    <>
+                    {missingPartners.length > 0 ? (
+                      <p className="measure mt-1.5 text-xs text-warn">
+                        The feed names {missingPartners.join(", ")} working with
+                        this integrator, and the platform matrix above does not
+                        list {missingPartners.length === 1 ? "it" : "them"}. Read
+                        a low platform count as our coverage of them, not as the
+                        limit of what they deliver.
+                      </p>
+                    ) : null}
                     <ul className="mt-1.5 space-y-1.5">
                       {signals.map((sig) => (
                         <li key={sig.title} className="text-sm">
@@ -364,6 +392,7 @@ export function IntegratorLayer({ news }: { news: NewsItemRaw[] }) {
                         </li>
                       ))}
                     </ul>
+                    </>
                   )}
                 </div>
 

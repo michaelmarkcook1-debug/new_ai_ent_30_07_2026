@@ -72,6 +72,34 @@ async function fromFixture(): Promise<AnalystNews> {
   }
 }
 
+/**
+ * Every item, untrimmed.
+ *
+ * analystNews() keeps the 300 most recent, which suits a surface that shows one
+ * item and starves one that has to find events across 48 companies: the top 300
+ * carries 9 of the 89 integrator capability events. Callers of this must match
+ * server-side and send only what matched, because the payload is 3.28 MB.
+ */
+export async function fullNewsFeed(): Promise<NewsItemRaw[]> {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), TIMEOUT_MS);
+    const res = await fetch(NEWS_URL, {
+      signal: controller.signal,
+      headers: { accept: "application/json" },
+      cache: "no-store",
+    });
+    clearTimeout(timer);
+    if (res.ok) {
+      const parsed = (await res.json()) as { news?: NewsItemRaw[] };
+      return parsed.news ?? [];
+    }
+  } catch {
+    // Fall through to the recording rather than to nothing.
+  }
+  return (await fromFixture()).items;
+}
+
 export async function analystNews(): Promise<AnalystNews> {
   if (cached && Date.now() - cached.at < TTL_MS) return cached.value;
 

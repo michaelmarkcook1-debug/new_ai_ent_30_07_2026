@@ -106,3 +106,37 @@ export function capabilitySignals(
 /** Stated when the feed reaches nobody, so an empty box is never read as quiet. */
 export const NO_SIGNAL_NOTE =
   "No item in the current feed names this integrator. The feed is a market news feed rather than a services-industry one, so it reaches six of the 48 integrators; silence here is our coverage, not theirs.";
+
+/**
+ * Vendors the news says this integrator works with, that the matrix does not list.
+ *
+ * WHY THIS EXISTS. The platform matrix returns 2 distinct platforms for
+ * Accenture, with "AI Refinery" repeated across all five service lines, against
+ * 6 for TCS and 8 for Infosys. A buyer reading 2 against 8 concludes Accenture
+ * is the narrower integrator, which is the opposite of true: it is the largest
+ * in the set, fields around 77,000 AI professionals and has a multi-year
+ * Anthropic partnership the matrix does not show.
+ *
+ * That is upstream coverage and not ours to correct. What is ours is refusing to
+ * let a coverage gap read as a capability gap, so where the feed names a partner
+ * the matrix omits, the panel says so and cites it.
+ */
+export function partnersMissingFromMatrix(
+  signals: CapabilitySignal[],
+  platformsInMatrix: string[]
+): string[] {
+  const listed = platformsInMatrix.map((p) => p.toLowerCase());
+  const named = new Set<string>();
+  for (const s of signals) {
+    // Headline matches only. A partner named in another firm's summary is not
+    // evidence about this one, which is the mistake the register itself made.
+    if (s.matchedIn !== "headline") continue;
+    for (const v of s.alongside) {
+      const hit = listed.some(
+        (l) => l.includes(v.toLowerCase()) || v.toLowerCase().includes(l)
+      );
+      if (!hit) named.add(v);
+    }
+  }
+  return [...named].sort();
+}

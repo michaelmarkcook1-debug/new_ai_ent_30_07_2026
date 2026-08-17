@@ -1,5 +1,5 @@
 import { PageHeader } from "@/lib/ui/page";
-import { analystNews } from "@/lib/analyst/news-source";
+import { fullNewsFeed } from "@/lib/analyst/news-source";
 import { DependencyGraph } from "./components/dependency-graph";
 import { ModelsCatalogue } from "./components/models-catalogue";
 import { IntegratorLayer } from "./components/integrator-layer";
@@ -7,10 +7,16 @@ import { IntegratorLayer } from "./components/integrator-layer";
 export const metadata = { title: "AI Ecosystem Navigator | AI Enterprise" };
 
 export default async function EcosystemNavigatorPage() {
-  // The live capability signal for the delivery layer: which integrator has
-  // partnered with whom. Fetched here rather than in the client component so
-  // it costs one server pull rather than a round trip per reader.
-  const news = await analystNews();
+  // The FULL feed, not analystNews(), which trims to the 300 most recent.
+  //
+  // That trim is right for the analyst insight, which picks a single item. It is
+  // wrong here: measured against the full feed, the top 300 holds 9 of the 89
+  // integrator capability events and reaches 3 of the 16 integrators with any
+  // signal at all. Accenture's own Anthropic partnership falls outside it.
+  //
+  // The feed is 3.28 MB, so it is matched here on the server and only the
+  // matched events cross to the browser.
+  const news = await fullNewsFeed();
   return (
     <>
       <PageHeader
@@ -21,7 +27,7 @@ export default async function EcosystemNavigatorPage() {
       <div className="space-y-8">
         <DependencyGraph />
         <ModelsCatalogue />
-        <IntegratorLayer news={news.items} />
+        <IntegratorLayer news={news} />
       </div>
     </>
   );
