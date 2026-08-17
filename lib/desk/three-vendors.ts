@@ -22,6 +22,8 @@ import { categoryRanking, rankingsCapturedAt } from "@/lib/aie/category-rankings
 import type { AssessmentDomain } from "@/lib/aie/category-rankings";
 import { MARKET_CATEGORY_LIST } from "@/lib/comparability";
 import { vendorName } from "@/lib/aie/vendor-directory";
+import { SHIELD } from "@/lib/shield/data";
+import { vendorIdForSlug } from "@/lib/shield/vendor-map";
 
 export interface RecommendedVendor {
   rank: number;
@@ -40,6 +42,17 @@ export interface RecommendedVendor {
   weakestGrade: string | null;
   /** This vendor's own profile. A real route, not a filter that does nothing. */
   profileHref: string;
+  /**
+   * Whether the Privacy and IP Shield grades this vendor's published terms.
+   *
+   * The two datasets cover different populations on purpose. The Shield reads
+   * the published terms of model providers, fourteen of them. The assessment
+   * ranks every market, including application vendors, clouds and silicon. So
+   * in six of the thirteen markets none of the three has Shield evidence, and
+   * without this the finding wrote "no evidence in this workspace on X" three
+   * times running without ever saying why.
+   */
+  contractEvidence: boolean;
 }
 
 export interface ThreeVendors {
@@ -83,6 +96,11 @@ const MARKET_WORDS: Record<string, string[]> = {
 };
 
 const LABEL_BY_ID = new Map(MARKET_CATEGORY_LIST.map((c) => [c.id, c.name]));
+
+/** Vendor ids whose published terms the Shield actually grades. */
+const SHIELDED = new Set(
+  SHIELD.map((v) => vendorIdForSlug(v.slug)).filter((id): id is string => Boolean(id))
+);
 
 /**
  * Which market this situation is about.
@@ -167,6 +185,7 @@ export function threeVendorsFor(text: string): ThreeVendors | null {
       strongest: strongest(r.domains),
       weakestGrade: weakestGrade(r.domains),
       profileHref: `/vendor-view/${encodeURIComponent(r.vendorId)}`,
+      contractEvidence: SHIELDED.has(r.vendorId),
     };
   });
 
@@ -206,7 +225,18 @@ export function threeVendorsBlock(three: ThreeVendors): string {
       : three.held > 0
         ? `${three.held} vendors were held in this market for thin evidence.`
         : ``,
-    `Say why each one suits THIS buyer, using the cited chunks. Where the chunks say nothing about a vendor, say that rather than filling the gap.`,
+    `Say why each one suits THIS buyer, using the cited chunks.`,
+    (() => {
+      const withEv = three.vendors.filter((v) => v.contractEvidence).map((v) => v.name);
+      const without = three.vendors.filter((v) => !v.contractEvidence).map((v) => v.name);
+      if (without.length === 0) {
+        return `The cited contract evidence covers all three of these vendors, so use it.`;
+      }
+      if (withEv.length === 0) {
+        return `IMPORTANT: the cited contract evidence in this workspace grades the published terms of model providers only, and none of these three is one. Do NOT write "no evidence on X" once per vendor. Say ONCE, in the risk line, that this workspace holds no published-terms evidence for ${three.marketLabel} vendors and that residency, retention and indemnity terms have to be requested from them directly. Then use the chunks for what they do cover.`;
+      }
+      return `The cited contract evidence covers ${withEv.join(" and ")} but not ${without.join(" or ")}, because it grades model providers' published terms and those are not model providers. Note that once, in the risk line, rather than repeating "no evidence" per vendor.`;
+    })(),
   ].filter((l) => l !== ``);
   return lines.join("\n");
 }

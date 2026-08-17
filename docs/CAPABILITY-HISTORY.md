@@ -17,6 +17,70 @@ than a gap.
 
 ## 17 August 2026
 
+**The Decision Desk now tells you which three vendors to look at, and it is not
+the AI that picks them.**
+
+Describe your situation and the finding comes back naming three vendors, in
+order, with the score out of 5 behind each and the evidence that produced it.
+One button carries all three into ModelEngine, Trust Rank and Integrators, so
+those pages open already narrowed to your three.
+
+The three are chosen by the weighted assessment before the AI writes anything.
+That distinction matters more than it sounds. We tested what happened when the
+finding was left to name vendors itself: asked about a European bank doing
+agentic onboarding, it came back with Cohere and DeepSeek, not because they fit
+but because those words happened to appear near the question. Now the
+assessment picks and the AI only explains.
+
+Where it cannot tell which market you are in, it recommends nobody and asks.
+That is deliberate. Three vendors from the wrong market is worse than a
+question.
+
+**A third option, Weighted score.** Alongside Quick response and Comprehensive.
+It asks you nothing and goes straight to the three with every variable behind
+each score. Findings are also much shorter now: they were unbounded and often
+did not name a single vendor.
+
+**Competitive Intel was telling you the opposite of what its own data said.**
+
+The page compared vendors inside one market but calculated its headline across
+all of them. TSMC, a chip foundry, was being counted as the top performer on a
+page about model providers, which made the gap between leaders look far wider
+than it is. So the page said capability still separates the leaders and told you
+to shortlist on it.
+
+Corrected, every one of the thirteen markets tells the same story: the leaders
+have converged, and the gap in most markets is under two points out of a
+hundred. The advice flips from "shortlist on capability" to "your leverage is
+commercial". That is a materially different instruction, and the old one was
+wrong.
+
+The category menu was also showing seven markets out of thirteen. Workflow
+automation, CRM, service management, silicon, cloud and inference were all
+missing, and all six had complete data behind them the whole time.
+
+**Financial Snapshot is roughly half the size.**
+
+Two panels went. One showed share prices, EBITDA and "activist risk exposure",
+which is written for someone buying the shares rather than the software. The
+other estimated private company revenue by multiplying a valuation, on the one
+page whose whole argument is that you should not treat an undisclosed figure as
+known.
+
+What stays is the finding worth having: most AI revenue claims appear in
+nobody's filings, which is a procurement problem before it is a finance one.
+The page is worth keeping for that. It was the machinery around it that was not.
+
+**Smaller things.** Vendor View was opening with all thirteen categories shut,
+so the page whose job is to be the evidence table showed no table. Picking a
+single category did not open it either. Both fixed. Some old text that repeated
+itself has gone, and two pages of dead code left behind by earlier moves has
+been removed.
+
+---
+
+## 17 August 2026
+
 **Construction can now ask about the people who do the designing.**
 
 Ask ModelEngine about construction and it used to answer for five jobs: the

@@ -1378,6 +1378,92 @@ and the page hangs on the loading state forever, which looks exactly like a
 broken `loading.tsx`. It is not. Stop the dev server before building, or clear
 `.next` and restart afterwards.
 
+
+---
+
+## 8.13 The three vendors a cited finding recommends
+
+`lib/desk/three-vendors.ts`. The three are **computed before the model writes
+a word**, from the weighted assessment, and the model is told it may not change
+them.
+
+**Why not let the model pick.** `scripts/audit-cited-findings.ts`, run 17
+August 2026, retrieved over the cited corpus for ten realistic buyer
+situations. It surfaced **zero to two distinct vendors** per situation, and the
+ones it surfaced shared words with the question rather than fitting it: a
+European bank asking about agentic onboarding retrieved Cohere and DeepSeek.
+
+**Selection.** `categoryRanking(marketId).ranked.slice(0, 3)`, read and never
+re-sorted. `tests/three-vendors.test.ts` asserts the ids and composites equal
+the source ranking's first three.
+
+**Market detection.** `detectMarket()` returns `null` rather than guessing, and
+a null market means the finding recommends nobody and names the market it
+needs. A market named outright beats one inferred.
+
+**Coverage stated, not implied.** `alsoRanked` and `held` are carried so a
+reader is never shown three from a market of five as though it were the whole
+market.
+
+**Contract evidence.** `SHIELDED` is built from `vendorIdForSlug` over the
+Shield. **15 of the 39 recommended vendors across the thirteen markets carry
+Shield evidence**, and in six markets none of the three does, because the
+Shield grades model providers' published terms while the assessment ranks every
+market. The prompt block states that once instead of the model writing "no
+evidence on X" per vendor.
+
+**Handoff.** `profileHref` only. ModelEngine, Trust Rank and Integrators read
+the shortlist cookie and not a query param, so the page carries all three onto
+the shortlist and then links; a `?vendor=` link would have filtered nothing.
+
+**Length bound.** Under 220 words with three vendors, under 180 without. There
+was no bound before, and no requirement to name a vendor at all.
+
+**Option list.** `depth` is `"quick" | "comprehensive" | "weighted"`
+(`app/api/interrogate/lib.ts`). Weighted sets `maxQuestions` to 0.
+
+---
+
+## 8.14 Competitive Intel: two corrections
+
+**The insight was computed on the wrong population.** `competitiveInsight()`
+took a `categoryName` and a provider count scoped to that category, then read
+`aiVendors(m)`, which is every tracked vendor. Measured 17 August 2026:
+
+| Population | top | median | spread | branch | action |
+|---|---|---|---|---|---|
+| All tracked vendors (what it used) | 75.5 (TSMC) | 57.6 | 17.9 | wide | Shortlist |
+| Every one of the 13 categories | 59.3 to 75.5 | varies | **0.0 to 11.2** | narrow | Renegotiate |
+
+TSMC, a chip foundry, was setting the top for a page about model providers. The
+conclusion was inverted in every category. `competitiveInsight()` now takes
+`rows: CapabilityRow[]` and derives `providerCount` from them, so the count and
+the scores cannot disagree. Pinned by `tests/competitive-insight.test.ts`.
+
+**The category dropdown offered 7 of 13.** `PROVIDER_CATEGORIES` in
+`app/(ai-ent)/competitive-intel/provider-matrix-data.ts` excluded silicon,
+compute and services on the stated grounds that the capability rubric does not
+describe them. Checked against `fixtures/aie-live/capabilities.json`: all 47
+assessed vendors carry all 10 capabilities, scored, graded and status-stamped.
+NVIDIA is assessed on enterprise assistant at 45, `verified`, grade E2. The set
+is removed.
+
+---
+
+## 8.15 Retrieval: stemming
+
+`app/api/analyst/lib.ts`, `stem()`. Substring matching is asymmetric: a query
+term "train" matches a chunk saying "trains", but "retired" never matches
+"retiring". "Which models are being retired and when do our calls start
+failing" retrieved **no deprecation chunk at all**. Suffix stripping now runs on
+both sides, paired with a whole-word prefix test and OR-ed with the original
+substring test, so it only adds recall. Corpus reach across the ten audit
+situations: **34 chunks to 40**.
+
+`lib/desk/corpus.ts` was also the only consumer in the codebase bypassing
+`upcomingDeprecations()`, so three already-retired models were stated in the
+future tense. Past retirements now read in the past tense and are kept.
+
 ---
 
 ## 9. Run costs

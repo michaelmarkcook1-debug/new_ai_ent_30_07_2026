@@ -638,8 +638,9 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
           that corpus. The Shell exemplar was removed from it, so no finding
           rests on one sample company's figures. Tiered routing: Haiku shapes
           the questions, and the finding is written by Sonnet on a quick
-          response or by Opus on a comprehensive one. Opus never runs unless
-          you ask for it.
+          response or a weighted score, and by Opus on a comprehensive one.
+          Opus never runs unless you ask for it. A weighted score asks nothing
+          and goes straight to the three vendors the assessment picks.
         </p>
       </div>
     </div>

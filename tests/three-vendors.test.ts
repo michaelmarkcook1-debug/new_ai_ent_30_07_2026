@@ -153,3 +153,24 @@ describe("the prompt block", () => {
     }
   });
 });
+
+describe("contract evidence coverage", () => {
+  it("marks which of the three the Shield actually reaches", () => {
+    // The Shield grades the published terms of model providers; the assessment
+    // ranks every market. In six of thirteen markets none of the three is a
+    // model provider, and the finding was writing "no evidence in this
+    // workspace on X" once per vendor without ever saying why.
+    const labs = threeVendorsFor("frontier model api for our engineering team")!;
+    expect(labs.vendors.some((v) => v.contractEvidence)).toBe(true);
+
+    const silicon = threeVendorsFor("We want to buy GPUs.")!;
+    expect(silicon.vendors.every((v) => !v.contractEvidence)).toBe(true);
+  });
+
+  it("tells the model to state the gap once, not once per vendor", () => {
+    const silicon = threeVendorsFor("We want to buy GPUs.")!;
+    const block = threeVendorsBlock(silicon);
+    expect(block).toMatch(/Do NOT write "no evidence on X" once per vendor/);
+    expect(block).toContain(silicon.marketLabel);
+  });
+});
