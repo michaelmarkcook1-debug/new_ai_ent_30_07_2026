@@ -769,7 +769,7 @@ may still be wrong about a contract somebody is about to sign.
 ## 8.11 The role-vertical pilot: Customer Operations & Service
 
 Closes a gap the role library records against itself. `lib/model-fit/data/roles.json`
-holds 294 roles, of which 99 carry `industry: "*"` and ONE shared profile each,
+holds 297 roles, of which 99 carry `industry: "*"` and ONE shared profile each,
 so a Customer Support Advisor scored identically in investment banking and in
 retail. This is the first evidence-backed correction, scoped to the six roles in
 Customer Operations & Service.
@@ -881,7 +881,74 @@ propagates a wrong number onto the screen.
 
 ---
 
-## 8.12 Saved positions: Your AI Position into the Decision Desk
+## 8.12 The three construction design roles
+
+`lib/model-fit/data/roles.json` held five roles under
+`Construction & Engineering`: Civil Engineer, Construction Project Manager, Site
+Manager, Quantity Surveyor, Health and Safety Manager. That is delivery,
+commercial and safety plus one generic engineer. The three disciplines that
+produce the design were absent, so a design office got no answer.
+
+Added 17 August 2026 by `scripts/add-construction-design-roles.mjs`, which
+refuses to overwrite an existing `role_id` and asserts 18 capabilities per role
+before it writes. Library 294 to 297.
+
+| Role | id | `function` |
+|---|---|---|
+| Architect | `ROLE-0295` | Architecture |
+| Structural Engineer | `ROLE-0296` | Structural Engineering |
+| Building Services (MEP) Engineer | `ROLE-0297` | Building Services Engineering |
+
+**Criticality is derived, not authored.** `scripts/add-construction-design-roles.mjs:64`
+
+```js
+const critical = (score) => (score >= 70 ? "Mandatory" : "Desirable");
+```
+
+Verified against all 5,292 pre-existing capability entries: the rule holds
+without exception, so it is applied rather than restated per capability.
+
+**Evidence class D throughout**, the same as the other 294 roles. Class D means
+derived from role definitions. The definitions used were ARB *Tomorrow's
+Architects* (competency outcome D5 for CAP-09, PE4 for CAP-11 and CAP-15), the
+IStructE Code of Conduct, and the CIBSE Level 6 Building Services Design
+Engineering standard, whose named scope of twelve system families is the basis
+for the MEP engineer's CAP-09 of 90. All three carry the Building Safety Act
+2022 dutyholder regime, with PAS 8671 setting the individual principal designer
+threshold. Nothing here states a number; the scores are derived, and the
+frameworks are what they were derived from.
+
+### The architect is the one construction role no model covers
+
+Distinguishing scores, read from `scripts/add-construction-design-roles.mjs`:
+
+| | CAP-01 general intelligence | CAP-11 accuracy | Outcome |
+|---|---|---|---|
+| Civil Engineer (existing) | 50 | 90 | qualified |
+| Structural Engineer | 50 | 90 | qualified, Granite 3.3 8B |
+| Building Services (MEP) | 50 | 90 | qualified, Gemma 4 E4B |
+| Architect | 70 | 90 | **not supported** |
+
+The architect sits at 70 on CAP-01 because ARB's competency areas make each
+brief and site genuinely novel, where civil and structural work carries more
+codified method. No model in `models.json` clears 70 general intelligence and 90
+accuracy together, so the engine returns `blocked_by: ["General intelligence",
+"Accuracy"]` rather than a recommendation. That is the engine declining, not a
+missing record.
+
+Confirmed against the Python reference: `python3 scripts/model-fit-baseline.py`
+regenerated the baseline at 297 roles x 4 configs, 43 specification cases, and
+`tests/model-fit-engine.test.ts` parity passes unchanged. The distribution moved
+by exactly the three roles, qualified 231 to 233 and not supported 43 to 44.
+
+**Tests**: `tests/model-fit-engine.test.ts` (roles load, outcome distribution),
+`tests/workforce-curve.test.ts`. All three now assert against
+`LIBRARY_ROLE_COUNT` (`lib/model-fit/index.ts:239`) rather than a literal, so
+the library can grow without a test edit.
+
+---
+
+## 8.13 Saved positions: Your AI Position into the Decision Desk
 
 Carries a finished company research result from `/company-view` to the
 Interrogate step of `/decision-desk`.

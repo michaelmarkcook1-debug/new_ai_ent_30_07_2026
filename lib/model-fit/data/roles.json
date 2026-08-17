@@ -35123,5 +35123,308 @@
    "https://www.abb.com/global/en/industries/power-generation/solutions/grid-stability/grid-code-compliance"
   ],
   "onet_analogue": "Wind Energy Operations Managers"
+ },
+ "ROLE-0295": {
+  "role_id": "ROLE-0295",
+  "name": "Architect",
+  "industry": "Construction & Engineering",
+  "function": "Architecture",
+  "profile": {
+   "CAP-01": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-03": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-04": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-05": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-06": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-07": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-09": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-10": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-11": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-13": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-15": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-16": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-17": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   }
+  },
+  "headcount": null,
+  "seniority": "Individual contributor",
+  "authority": null
+ },
+ "ROLE-0296": {
+  "role_id": "ROLE-0296",
+  "name": "Structural Engineer",
+  "industry": "Construction & Engineering",
+  "function": "Structural Engineering",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-02": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-03": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-05": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-06": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-08": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-09": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-10": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-11": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-12": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-13": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-15": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-16": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   }
+  },
+  "headcount": null,
+  "seniority": "Individual contributor",
+  "authority": null
+ },
+ "ROLE-0297": {
+  "role_id": "ROLE-0297",
+  "name": "Building Services (MEP) Engineer",
+  "industry": "Construction & Engineering",
+  "function": "Building Services Engineering",
+  "profile": {
+   "CAP-01": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-02": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-03": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-04": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-05": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-06": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-07": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-08": {
+    "score": 50,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-09": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-10": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-11": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-12": {
+    "score": 90,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-13": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-14": {
+    "score": 30,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-15": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-16": {
+    "score": 70,
+    "critical": "Mandatory",
+    "evidence_class": "D"
+   },
+   "CAP-17": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   },
+   "CAP-18": {
+    "score": 10,
+    "critical": "Desirable",
+    "evidence_class": "D"
+   }
+  },
+  "headcount": null,
+  "seniority": "Individual contributor",
+  "authority": null
  }
 }

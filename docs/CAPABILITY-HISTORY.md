@@ -17,6 +17,39 @@ than a gap.
 
 ## 17 August 2026
 
+**Construction can now ask about the people who do the designing.**
+
+Ask ModelEngine about construction and it used to answer for five jobs: the
+civil engineer, the project manager, the site manager, the quantity surveyor and
+the health and safety manager. Between them those are delivery, cost and safety.
+The three disciplines that actually produce the design were missing, so a
+practice full of designers got nothing back.
+
+Architect, structural engineer and building services (MEP) engineer are now in
+the library. Each was scored against its own profession's published competence
+standard rather than from general knowledge: the Architects Registration Board
+for the architect, the Institution of Structural Engineers for the structural
+engineer, and CIBSE for building services. All three carry the Building Safety
+Act duties that came in after Grenfell.
+
+**One of the three comes back with no answer, and that is the interesting
+result.** The structural engineer and the building services engineer both get a
+recommendation, and both land on small, cheap models: a few pounds per person
+per year. The architect does not. No model available today is good enough at
+handling genuinely unfamiliar problems while also being accurate enough for work
+that carries public safety duties, and those two requirements have to be met at
+once. So the product says so, and names the two things blocking it, instead of
+recommending something that would not do the job.
+
+That is worth reading twice, because it is the shape of answer this product is
+for. Architecture is not a job AI cannot help with at all. It is a job where the
+model has to clear a bar it currently does not clear, and pretending otherwise
+would cost somebody real money.
+
+---
+
+## 17 August 2026
+
 **The sector lens now covers every industry, not a third of them.**
 
 Pick a customer-operations role and the product tells you what a named industry

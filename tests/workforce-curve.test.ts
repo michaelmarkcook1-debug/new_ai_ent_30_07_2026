@@ -13,6 +13,7 @@ import {
   TOP_TIER_INDEX,
   BANDWIDTH,
 } from "@/lib/model-fit/workforce-curve";
+import { LIBRARY_ROLE_COUNT } from "@/lib/model-fit";
 import type { Role, ModelRecord } from "@/lib/model-fit/engine";
 
 const ROLES = Object.values(rolesJson as Record<string, unknown>) as Role[];
@@ -24,7 +25,11 @@ const pct = (x: number) => Number((x * 100).toFixed(1));
 
 describe("the workforce distribution", () => {
   it("reads the bundle the chart claims to read", () => {
-    expect(ROLES.length).toBe(294);
+    // Was a literal 294 until three construction design roles landed on 17
+    // August 2026. Checking the chart's own read of the bundle against the
+    // engine's index is the check that was meant: it catches the engine
+    // silently dropping a role, which a hardcoded number never did.
+    expect(ROLES.length).toBe(LIBRARY_ROLE_COUNT);
     const w = workforceCurve(ROLES);
     expect(w.totalHeadcount).toBe(17116);
     expect(industries(ROLES).length).toBe(37);

@@ -13,7 +13,9 @@ import {
   CROSS_INDUSTRY,
   INDUSTRIES,
   INDUSTRY_GROUPS,
+  LIBRARY_ROLE_COUNT,
 } from "@/lib/model-fit";
+
 import type { CalibrationTable, ModelRecord, Profile, Role } from "@/lib/model-fit";
 
 // The integration package's own regression suite, 02_engine/test_engine.py,
@@ -62,8 +64,14 @@ const eng = loadEngine();
 describe("data", () => {
   it("roles load", () => {
     // The package's 258, plus 36 researched for the seven industries it left
-    // uncovered. See scripts/research-missing-industries.py.
-    expect(Object.keys(ROLES).length).toBe(294);
+    // uncovered (scripts/research-missing-industries.py), plus the three
+    // construction design disciplines added 17 August 2026
+    // (scripts/add-construction-design-roles.mjs).
+    //
+    // Pinned to LIBRARY_ROLE_COUNT rather than a literal so the library can
+    // grow without a test edit. The count still has to be asserted somewhere,
+    // and library-counts.test.ts is where it is checked against the data.
+    expect(Object.keys(ROLES).length).toBe(LIBRARY_ROLE_COUNT);
   });
 
   it("every profile is complete", () => {
@@ -345,10 +353,16 @@ describe("full library", () => {
   it("matches the reference run's outcome distribution", () => {
     // The reference prints these counts when engine.py is run directly.
     expect(counts).toEqual({
-      qualified: 231,
+      // 231 before the three construction design roles landed on 17 August
+      // 2026. Structural and building services qualified, the architect did
+      // not: the reference blocks it on General intelligence and Accuracy
+      // together, which no current model clears. Regenerated from the Python
+      // reference with scripts/model-fit-baseline.py, so this is its number
+      // and not ours.
+      qualified: 233,
       supported: 4,
       "partially supported": 6,
-      "not supported": 43,
+      "not supported": 44,
       "best available": 10,
     });
   });
