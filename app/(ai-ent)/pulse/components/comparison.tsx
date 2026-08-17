@@ -3,14 +3,18 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { LaneBadge } from "@/lib/ui/badges";
-import { ScorePill, DerivationDrawer } from "@/lib/ui/score";
+import { DerivationDrawer } from "@/lib/ui/score";
 import {
   COMPARABILITY_NOTE,
   THIN_CATEGORY_NOTE,
   categoriesPresent,
   vendorIdsInCategory,
 } from "@/lib/comparability";
-import type { CategoryShare, VendorMetrics } from "@/lib/market-metrics";
+import type {
+  CategoryShare,
+  VendorMetrics,
+  CategoryPlacement,
+} from "@/lib/market-metrics";
 
 // Vendor comparison, scoped to one market category at a time (the
 // comparability rule: rank within a category, never across one).
@@ -18,50 +22,6 @@ import type { CategoryShare, VendorMetrics } from "@/lib/market-metrics";
 // Every column is a real field rather than a composite invented here, and the
 // column label says which. A vendor the dataset does not reach on a given
 // metric shows an empty cell, not a zero and not a midpoint.
-
-type MetricKey =
-  | "assessment"
-  | "momentum"
-  | "maturity"
-  | "reputation"
-  | "share";
-
-const COLUMNS: {
-  key: MetricKey;
-  label: string;
-  title: string;
-}[] = [
-  {
-    key: "assessment",
-    label: "Assessment",
-    title:
-      "The weighted composite (0 to 5) of evidence-graded assessment domains, with weights specific to this category, as published on the AI Enterprise category ranking. This is the number that ranking sorts on. Each domain's score is capped by its evidence grade, and a vendor under 60% domain coverage is held rather than ranked.",
-  },
-  {
-    key: "momentum",
-    label: "Momentum",
-    title:
-      "market-dashboard agenticMomentum momentumScore, rolling 30 days. Published for a subset of vendors only.",
-  },
-  {
-    key: "maturity",
-    label: "Capability maturity",
-    title:
-      "Mean maturityScore across the vendor's assessed capabilities. Every row carries an evidence grade.",
-  },
-  {
-    key: "reputation",
-    label: "Reputation",
-    title:
-      "Mean of the customer, developer and employee pillar scores. Published for a subset of vendors only.",
-  },
-  {
-    key: "share",
-    label: "Category presence",
-    title:
-      "estimatedShare within the selected category. The source states this is a directional adoption-signal estimate, not measured revenue share.",
-  },
-];
 
 export function VendorComparisonTable({
   vendors,
@@ -78,18 +38,9 @@ export function VendorComparisonTable({
   onSelect: (id: string) => void;
   lane: "aie" | "aie-live";
   shareMovementPublished: boolean;
-  composites: Record<
-    string,
-    Record<string, { composite: number; rank: number; position: string | null }>
-  >;
+  composites: Record<string, Record<string, CategoryPlacement>>;
   held: Record<string, number>;
 }) {
-  // Sorted on the assessment, because that is what the AI Enterprise category
-  // ranking sorts on. Sorting on overallScore was the reason this table named a
-  // different leader from that ranking: both numbers are published, they
-  // disagree, and this was quietly showing the one that is not category-aware.
-  const [sortBy, setSortBy] = useState<MetricKey>("assessment");
-
   const categories = useMemo(
     () => categoriesPresent(vendors.map((v) => v.id)),
     [vendors]
@@ -116,34 +67,21 @@ export function VendorComparisonTable({
     [composites, categoryId]
   );
 
+  // Ordered by the assessment's own rank, never re-sorted. There is one rating
+  // now, so a sort control would only offer ways of disagreeing with it. A
+  // vendor it held carries no rank and sorts last, where the list says "held"
+  // rather than placing it as though it had scored badly.
   const rows = useMemo(() => {
     const members = new Set(vendorIdsInCategory(categoryId));
-    const inCategory = vendors.filter((v) => members.has(v.id));
-    const value = (v: VendorMetrics, k: MetricKey): number | null =>
-      k === "share"
-        ? (shareFor.get(v.id) ?? null)
-        : k === "assessment"
-          ? (assessmentFor[v.id]?.composite ?? null)
-          : v[k];
-    return [...inCategory].sort((a, b) => {
-      const av = value(a, sortBy);
-      const bv = value(b, sortBy);
-      // Vendors with no reading sort last rather than being treated as zero.
-      if (av === null && bv === null) return a.name.localeCompare(b.name);
-      if (av === null) return 1;
-      if (bv === null) return -1;
-      return bv - av;
-    });
-  }, [vendors, categoryId, sortBy, shareFor, assessmentFor]);
-
-  const coverage = (k: MetricKey) =>
-    rows.filter((v) =>
-      k === "share"
-        ? shareFor.has(v.id)
-        : k === "assessment"
-          ? assessmentFor[v.id] !== undefined
-          : v[k] !== null
-    ).length;
+    return vendors
+      .filter((v) => members.has(v.id))
+      .sort(
+        (a, b) =>
+          (assessmentFor[a.id]?.rank ?? Infinity) -
+            (assessmentFor[b.id]?.rank ?? Infinity) ||
+          a.name.localeCompare(b.name)
+      );
+  }, [vendors, categoryId, assessmentFor]);
 
   return (
     <section className="rounded-lg border border-base-300 bg-base-100">
@@ -183,166 +121,173 @@ export function VendorComparisonTable({
         </p>
       ) : null}
 
-      <div className="overflow-x-auto">
-        <table className="w-full text-left">
-          <thead>
-            <tr className="border-b border-base-300">
-              <th className="px-3 py-2.5 font-mono text-xs font-medium uppercase tracking-wider text-muted">
-                Vendor
-              </th>
-              {COLUMNS.map((c) => (
-                <th key={c.key} className="px-3 py-2.5" title={c.title}>
+      {/* The ranking, laid out the way the AI Enterprise category ranking lays
+          it out: a ranked list rather than a grid. A table gives every column
+          equal weight, which is exactly wrong here, because one of them is the
+          rating and the rest are context. This puts the rank, the vendor and
+          the score on one line and the evidence underneath it. */}
+      <ol className="divide-y divide-base-300">
+        {rows.map((v) => {
+          const share = shareFor.get(v.id) ?? null;
+          const a = assessmentFor[v.id];
+          return (
+            <li key={v.id} className="px-3 py-3">
+              <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                <div className="flex flex-wrap items-baseline gap-2">
+                  <span className="font-mono text-sm text-muted tabular-nums">
+                    {a ? `#${a.rank}` : "\u2014"}
+                  </span>
                   <button
                     type="button"
-                    onClick={() => setSortBy(c.key)}
-                    className={`font-mono text-xs font-medium uppercase tracking-wider ${
-                      sortBy === c.key
-                        ? "text-primary"
-                        : "text-muted hover:text-base-content"
+                    onClick={() => onSelect(v.id)}
+                    className={`text-base font-bold hover:underline ${
+                      v.id === primaryId ? "text-primary" : ""
                     }`}
                   >
-                    {c.label} {sortBy === c.key ? "↓" : ""}
+                    {v.name}
                   </button>
-                </th>
-              ))}
-              <th className="px-3 py-2.5" />
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-base-300">
-            {rows.map((v) => {
-              const share = shareFor.get(v.id) ?? null;
-              return (
-                <tr
-                  key={v.id}
-                  className={`transition hover:bg-base-200/60 ${
-                    v.id === primaryId ? "bg-primary/5" : ""
-                  }`}
-                >
-                  <td className="px-3 py-2.5">
-                    <button
-                      type="button"
-                      onClick={() => onSelect(v.id)}
-                      className="flex flex-wrap items-center gap-2 text-left text-sm font-semibold hover:text-primary"
+                  {a?.position ? (
+                    <span className="rounded-full border border-good/40 bg-good-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wide text-good">
+                      {a.position}
+                    </span>
+                  ) : null}
+                  {/* Coverage stated as a badge only where it is short, the way
+                      the source flags it. A vendor evidenced on every domain
+                      needs no badge; one evidenced on fewer does. */}
+                  {a && a.evidenced < a.domainsTotal ? (
+                    <span
+                      className="rounded-full border border-warn/40 bg-warn-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wide text-warn"
+                      title={`${a.domainsTotal - a.evidenced} of ${a.domainsTotal} domains carried too little evidence to score.`}
                     >
-                      {v.name}
-                      {v.id === primaryId ? (
-                        <span className="rounded bg-primary px-1.5 py-0.5 font-mono text-xs font-bold uppercase tracking-wider text-white">
-                          Primary
-                        </span>
-                      ) : null}
-                    </button>
-                    {v.marketPosition ? (
-                      <div className="text-xs text-muted">
-                        {v.marketPosition}
-                      </div>
-                    ) : null}
-                  </td>
-                  {/* The assessment, on its own 0 to 5 scale. Deliberately not
-                      run through ScorePill, which bands 0 to 100: a 3.65 would
-                      read as a failing score against that scale when it is in
-                      fact the top of its category. */}
-                  <td className="px-3 py-2.5">
-                    {assessmentFor[v.id] ? (
-                      <span
-                        className="font-mono text-sm font-semibold tabular-nums"
-                        title={`Rank ${assessmentFor[v.id].rank} of ${rows.length} in this category${assessmentFor[v.id].position ? `, banded ${assessmentFor[v.id].position}` : ""}.`}
-                      >
-                        {assessmentFor[v.id].composite.toFixed(2)}
-                        <span className="ml-0.5 text-xs font-normal text-muted">
-                          /5
-                        </span>
+                      limited evidence
+                    </span>
+                  ) : null}
+                </div>
+                <div className="flex items-baseline gap-3">
+                  {a ? (
+                    <span className="font-mono text-lg font-semibold tabular-nums">
+                      {a.composite.toFixed(2)}
+                      <span className="ml-0.5 text-xs font-normal text-muted">
+                        /5
                       </span>
-                    ) : (
-                      <span
-                        className="font-mono text-xs text-muted"
-                        title="Held: under 60% domain coverage, so the assessment withholds a score rather than ranking this vendor on defaults."
-                      >
-                        held
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-3 py-2.5">
-                    {v.momentum === null ? (
-                      <span
-                        className="font-mono text-xs text-muted"
-                        title="No momentum reading published for this vendor."
-                      >
-                        not published
-                      </span>
-                    ) : (
-                      <ScorePill score={v.momentum} />
-                    )}
-                  </td>
-                  <td className="px-3 py-2.5">
-                    <ScorePill score={v.maturity} />
-                  </td>
-                  <td className="px-3 py-2.5">
-                    {v.reputation === null ? (
-                      <span
-                        className="font-mono text-xs text-muted"
-                        title="This vendor is not covered by the reputation dataset."
-                      >
-                        not covered
-                      </span>
-                    ) : (
-                      <ScorePill score={v.reputation} />
-                    )}
-                  </td>
-                  <td className="px-3 py-2.5">
-                    {share === null ? (
-                      <span className="font-mono text-xs text-muted">
-                        no estimate
-                      </span>
-                    ) : (
-                      <span className="font-mono text-sm font-semibold">
-                        {share.toFixed(1)}%
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-3 py-2.5 text-right">
-                    <Link
-                      href={`/vendor-view/${v.id}`}
-                      className="text-xs text-primary hover:underline"
+                    </span>
+                  ) : (
+                    <span
+                      className="font-mono text-sm text-muted"
+                      title="Held: under 60 per cent domain coverage, so the assessment withheld a score rather than ranking this vendor on defaults."
                     >
-                      Profile
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+                      held
+                    </span>
+                  )}
+                  <Link
+                    href={`/vendor-view/${v.id}`}
+                    className="text-xs text-primary hover:underline"
+                  >
+                    Profile
+                  </Link>
+                </div>
+              </div>
+
+              {/* Presence is context and says so on the line, because a share
+                  figure sitting beside a rank invites the reading that it
+                  produced the rank. The source states it is not measured share
+                  at all. */}
+              {share !== null ? (
+                <p className="mt-0.5 text-xs text-muted">
+                  Category presence: ~{share}%{" "}
+                  <span className="opacity-70">
+                    · context only, not the rank
+                  </span>
+                </p>
+              ) : null}
+
+              {a ? (
+                <>
+                  <p className="mt-1.5 font-mono text-xs text-muted">
+                    <span className="font-semibold text-base-content">
+                      Why this rank
+                    </span>{" "}
+                    {a.evidenced}/{a.domainsTotal} domains evidenced
+                    {a.weakestGrade ? ` · weakest evidence ${a.weakestGrade}` : ""}
+                  </p>
+                  {/* One chip per domain, in the order the assessment weighs
+                      them. An unscored domain is a dash, never a zero: it
+                      contributes nothing to the composite but it is not a
+                      judgement that the vendor scored nothing. */}
+                  <div className="mt-1.5 flex flex-wrap gap-1">
+                    {a.domains.map((d) => (
+                      <span
+                        key={d.domain}
+                        title={`${d.domain.replace(/_/g, " ")}: ${
+                          d.state === "scored"
+                            ? `${d.score} of 5, evidence ${d.grade ?? "ungraded"}, confidence ${d.confidence ?? "?"}%`
+                            : "insufficient evidence, contributes zero and still counts toward coverage"
+                        }`}
+                        className={`min-w-9 rounded px-1.5 py-0.5 text-center font-mono text-xs tabular-nums ${
+                          d.state === "scored"
+                            ? "bg-base-200 text-base-content"
+                            : "border border-dashed border-base-300 text-muted"
+                        }`}
+                      >
+                        {d.state === "scored" && d.score !== null
+                          ? d.score.toFixed(1)
+                          : "\u2013"}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              ) : null}
+            </li>
+          );
+        })}
+      </ol>
 
       <div className="border-t border-base-300 px-3 py-2.5">
-        <DerivationDrawer title="How these columns are derived">
+        <DerivationDrawer title="How this ranking is computed">
           <p>
-            Each column is one named field from the AI Enterprise datasets, not
-            a composite built here. Composite is AG&apos;s own{" "}
-            <code>overallScore</code> for the vendor. Momentum is the rolling
-            30 day{" "}
-            <code>momentumScore</code>. Capability maturity is the mean{" "}
-            <code>maturityScore</code> across a vendor&apos;s assessed
-            capabilities, shown with the weakest evidence grade among them,
-            because a mean is only as good as its weakest input. Reputation is
-            the mean of the customer, developer and employee pillar scores.
+            The score is the AI Enterprise assessment: a weighted composite, 0
+            to 5, of evidence-graded assessment domains. The weights are{" "}
+            <strong className="text-base-content">
+              specific to each market
+            </strong>
+            , because a frontier model API and a service desk are not judged on
+            the same things, and the number of domains varies with them: seven
+            for AI silicon, fourteen for frontier models. A bare accelerator has
+            no identity or governance surface, so those domains are excluded
+            rather than scored as thin.
           </p>
           <p>
-            Category presence is <code>estimatedShare</code> inside the
-            selected category. The source describes it as a directional
-            adoption-signal estimate and states plainly that it is not measured
-            revenue or market share, so it is labelled presence rather than
-            share here.
+            Each chip is one domain. Every domain&apos;s score is capped by the
+            grade of the evidence behind it, so a claim cannot reach the top
+            bands without audit-grade proof.{" "}
+            <strong className="text-base-content">A dash is not a zero.</strong>{" "}
+            It marks a domain with too little evidence to score, which
+            contributes nothing to the composite while still counting toward the
+            coverage that decides whether the vendor is ranked at all. Hover any
+            chip for its grade and confidence.
+          </p>
+          <p>
+            A vendor under 60 per cent domain coverage is{" "}
+            <strong className="text-base-content">held rather than ranked</strong>
+            , and reads as held here. That is the assessment refusing to place a
+            vendor it could not evidence, not a low score.
+          </p>
+          <p>
+            Category presence is <code>estimatedShare</code> inside the selected
+            market, and it is context rather than the rank. The source describes
+            it as a directional adoption-signal estimate and states plainly that
+            it is not measured revenue or market share, which is why it is
+            labelled presence and set apart from the score.
             {shareMovementPublished
               ? ""
               : " No movement is published against it yet: every prior estimate in the dataset is identical to the current one, so no change figure is shown rather than a misleading flat zero."}
           </p>
           <p className="measure text-muted">
-            The count under each column heading is how many vendors in this
-            category carry that reading. A vendor the dataset does not reach
-            shows what is missing and why, never a zero or a filled-in average.
-            Sorting moves rows within the selected category only, so no
-            interaction can produce a cross-category league table.
+            The order is the ranking&apos;s own, read rather than recalculated.
+            Where two vendors tie, re-sorting on the score would invent a
+            tiebreak we did not compute. Ranking runs inside one market and
+            never across, so no interaction here can produce a cross-market
+            league table.
           </p>
         </DerivationDrawer>
       </div>

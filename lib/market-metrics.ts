@@ -117,14 +117,31 @@ export interface MarketMetrics {
    * competes in. Anthropic is 3.65 in frontier models and 3.69 as a coding
    * agent, so there is no single composite for a vendor to carry on its row.
    */
-  categoryComposites: Record<
-    string,
-    Record<string, { composite: number; rank: number; position: string | null }>
-  >;
+  categoryComposites: Record<string, Record<string, CategoryPlacement>>;
   /** Withheld for thin evidence, per category. Not absent, not zero. */
   categoryHeld: Record<string, number>;
   /** When v1's rankings were last read. */
   compositesCapturedAt: string;
+}
+
+/** One vendor's placement in one market, with the variables behind it. */
+export interface CategoryPlacement {
+  composite: number;
+  rank: number;
+  position: string | null;
+  /** Domains actually scored, against the total the market weighs. */
+  evidenced: number;
+  domainsTotal: number;
+  /** Worst evidence grade among the scored domains, E1 to E5. */
+  weakestGrade: string | null;
+  domains: {
+    domain: string;
+    /** Null where the state is not "scored". Never read a null as a zero. */
+    score: number | null;
+    state: string;
+    grade: string | null;
+    confidence: number | null;
+  }[];
 }
 
 // ---------- upstream payload shapes (only the fields used) ----------
@@ -404,15 +421,31 @@ function categoryCompositePayload(): {
   const byCategory: MarketMetrics["categoryComposites"] = {};
   const held: Record<string, number> = {};
   for (const c of categoryRankings()) {
-    const row: Record<
-      string,
-      { composite: number; rank: number; position: string | null }
-    > = {};
+    const row: Record<string, CategoryPlacement> = {};
     for (const r of c.ranked) {
+      const scored = r.domains.filter((d) => d.state === "scored");
       row[r.vendorId] = {
         composite: r.composite,
         rank: r.rank,
         position: r.position,
+        evidenced: scored.length,
+        domainsTotal: r.domains.length,
+        // Weakest grade across the scored domains. The composite cannot be
+        // better evidenced than its worst-evidenced input, so a mean would
+        // overstate it. Same worst-wins rule the lane badges follow.
+        weakestGrade:
+          scored
+            .map((d) => d.bestGrade)
+            .filter((g): g is string => Boolean(g))
+            .sort()
+            .pop() ?? null,
+        domains: r.domains.map((d) => ({
+          domain: d.domain,
+          score: d.score,
+          state: d.state,
+          grade: d.bestGrade,
+          confidence: d.confidence,
+        })),
       };
     }
     byCategory[c.categoryId] = row;
