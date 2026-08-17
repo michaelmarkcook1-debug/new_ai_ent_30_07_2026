@@ -7,6 +7,11 @@ import { LaneBadge, ProvenanceBadge } from "@/lib/ui/badges";
 import { ScorePill, DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { isIntegrator, excludedNote } from "@/lib/integrators/is-integrator";
+import {
+  capabilitySignals,
+  NO_SIGNAL_NOTE,
+} from "@/lib/integrators/capability-signals";
+import type { NewsItemRaw } from "@/lib/analyst/insight";
 import type {
   BrProvider,
   BrProvidersResponse,
@@ -26,7 +31,7 @@ function laneFor(source: BrSource): "live" | "mock" {
 // Section (c): the LIVE integrator layer. Both calls go through the /api/br
 // proxy via brFetch; a mock source swaps the badge to "Cached sample" and a
 // failure renders the friendly error state with the code, never a guess.
-export function IntegratorLayer() {
+export function IntegratorLayer({ news }: { news: NewsItemRaw[] }) {
   const [providers, setProviders] = useState<BrProvider[] | null>(null);
   const [providersSource, setProvidersSource] = useState<BrSource>("live");
   const [providersError, setProvidersError] = useState<string | null>(null);
@@ -94,6 +99,19 @@ export function IntegratorLayer() {
       .sort((a, b) => (b.assessmentScore ?? 0) - (a.assessmentScore ?? 0))
       .slice(0, 12);
   }, [providers]);
+
+  // Live capability signal for whoever is selected. A frontier partnership is
+  // the most informative public event about what an integrator can now deliver,
+  // and the feed carries them: "IBM and OpenAI Announce Strategic Partnership".
+  const selected = useMemo(
+    () => providers?.find((p) => p.ticker === ticker) ?? null,
+    [providers, ticker]
+  );
+  const signals = useMemo(() => {
+    if (!selected) return [];
+    const names = [selected.displayName, selected.name].filter(Boolean);
+    return capabilitySignals(news, names as string[]);
+  }, [news, selected]);
 
   // Integrators only. The catalogue carries payroll, telecom billing and
   // infrastructure vendors, and offering them under a heading about delivering
@@ -293,7 +311,62 @@ export function IntegratorLayer() {
                       {formatDate(integration.generatedAt)}
                     </span>
                   </span>
+                  {/* The one link that will not move: the provider's own domain,
+                      carried on its catalogue record rather than constructed by
+                      us. Guessed service-page paths 404. */}
+                  {selected?.domain ? (
+                    <a
+                      href={`https://${selected.domain}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-xs text-primary hover:underline"
+                    >
+                      {selected.domain} &rarr;
+                    </a>
+                  ) : null}
                 </div>
+                {/* Live capability signal. A frontier partnership is the most
+                    informative public event about what an integrator can now
+                    deliver, and it dates itself, unlike a services page. */}
+                <div className="mt-3 border-t border-base-300/70 pt-3">
+                  <MicroLabel
+                    label="Capability signal, live"
+                    tooltip="Items in the AI Enterprise news feed naming this integrator. A new partnership with a frontier vendor is what changes what they can deliver, so that is what is tracked here rather than a marketing page."
+                  />
+                  {signals.length === 0 ? (
+                    <p className="measure mt-1.5 text-xs text-muted">
+                      {NO_SIGNAL_NOTE}
+                    </p>
+                  ) : (
+                    <ul className="mt-1.5 space-y-1.5">
+                      {signals.map((sig) => (
+                        <li key={sig.title} className="text-sm">
+                          <span className="leading-snug">{sig.title}</span>
+                          <span className="ml-1.5 font-mono text-xs text-muted">
+                            {sig.alongside.length > 0
+                              ? `with ${sig.alongside.join(", ")}`
+                              : null}
+                            {/* Named only in the summary is a weaker signal
+                                than named in the headline, and saying which
+                                stops the two reading alike. */}
+                            {sig.matchedIn === "summary" ? " · named in summary" : ""}
+                          </span>
+                          {sig.sourceUrl ? (
+                            <a
+                              href={sig.sourceUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="ml-1.5 font-mono text-xs text-primary hover:underline"
+                            >
+                              {sig.sourceName ?? "source"} &rarr;
+                            </a>
+                          ) : null}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+
                 <div className="mt-3 space-y-3">
                   {integration.categories.map((cat) => (
                     <div key={cat.id} className="border-t border-base-300/70 pt-2">
