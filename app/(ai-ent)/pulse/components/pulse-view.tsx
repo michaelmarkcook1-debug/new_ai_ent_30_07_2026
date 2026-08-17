@@ -258,7 +258,6 @@ export function PulseView({
             lane={metrics.lane}
             shareMovementPublished={metrics.shareMovementPublished}
             composites={metrics.categoryComposites}
-            held={metrics.categoryHeld}
           />
         </Accordion>
 

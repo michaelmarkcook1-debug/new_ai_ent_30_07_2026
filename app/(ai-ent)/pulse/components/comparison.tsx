@@ -39,7 +39,6 @@ export function VendorComparisonTable({
   lane: "aie" | "aie-live";
   shareMovementPublished: boolean;
   composites: Record<string, Record<string, CategoryPlacement>>;
-  held: Record<string, number>;
 }) {
   const categories = useMemo(
     () => categoriesPresent(vendors.map((v) => v.id)),
