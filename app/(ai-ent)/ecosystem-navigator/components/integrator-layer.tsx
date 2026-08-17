@@ -6,6 +6,7 @@ import { brFetch, type BrSource } from "@/lib/br-client";
 import { LaneBadge, ProvenanceBadge } from "@/lib/ui/badges";
 import { ScorePill, DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
+import { isIntegrator, excludedNote } from "@/lib/integrators/is-integrator";
 import type {
   BrProvider,
   BrProvidersResponse,
@@ -87,17 +88,23 @@ export function IntegratorLayer() {
   // question actually asked.
   const topProviders = useMemo(() => {
     if (!providers) return [];
-    return [...providers]
+    return providers
+      .filter(isIntegrator)
       .filter((p) => typeof p.assessmentScore === "number")
       .sort((a, b) => (b.assessmentScore ?? 0) - (a.assessmentScore ?? 0))
       .slice(0, 12);
   }, [providers]);
 
+  // Integrators only. The catalogue carries payroll, telecom billing and
+  // infrastructure vendors, and offering them under a heading about delivering
+  // your AI programme sent readers to an empty matrix.
   const selectorOptions = useMemo(() => {
     if (!providers) return [];
-    return [...providers].sort((a, b) =>
-      (a.displayName || a.name).localeCompare(b.displayName || b.name, "en-GB")
-    );
+    return providers
+      .filter(isIntegrator)
+      .sort((a, b) =>
+        (a.displayName || a.name).localeCompare(b.displayName || b.name, "en-GB")
+      );
   }, [providers]);
 
   return (
@@ -134,8 +141,20 @@ export function IntegratorLayer() {
             ) : (
               <>
                 <p className="mb-2 font-mono text-xs text-muted">
-                  Top {topProviders.length} of {providers!.length} providers by assessment
+                  Top {topProviders.length} of{" "}
+                  {providers!.filter(isIntegrator).length} integrators by
+                  assessment
                 </p>
+                {/* Named, not dropped silently. A list that quietly gets
+                    shorter is a decision made on the reader's behalf. */}
+                {excludedNote(providers!.length, providers!.filter(isIntegrator).length) ? (
+                  <p className="measure mb-2 text-xs text-muted">
+                    {excludedNote(
+                      providers!.length,
+                      providers!.filter(isIntegrator).length
+                    )}
+                  </p>
+                ) : null}
                 <table className="w-full border-collapse text-left">
                   <thead>
                     <tr>
