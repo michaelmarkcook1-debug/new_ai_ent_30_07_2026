@@ -54,7 +54,27 @@ export interface InsightEvidence {
 /** One dated, sourced item the reading should be read against. */
 export interface InsightNews {
   title: string;
+  /**
+   * The SOURCE's own commentary. Carried so nothing is lost, and deliberately
+   * not rendered as this page's analysis. See `tie`.
+   */
   whyItMatters: string | null;
+  /**
+   * OUR line on why this item matters HERE, computed from what the page
+   * actually covers.
+   *
+   * The source's commentary used to render directly under the headline inside
+   * our analysis block, which presented somebody else's reading as ours. That
+   * is wrong even when the commentary is right, and on the OpenAI funding item
+   * it was not right: the upstream line repeats the round's investors
+   * incorrectly, and we were printing it on seven tabs under our own heading.
+   *
+   * Computed rather than written, on the same reasoning as the shortlist
+   * paragraph: every clause restates something the page already holds, so it
+   * cannot drift from the page it sits on, costs nothing, and is still there
+   * when the analyst API is not.
+   */
+  tie: string | null;
   sentiment: string | null;
   impactScore: number | null;
   publishedAt: string | null;
@@ -90,6 +110,8 @@ export function pickNews(
     vendorIds?: string[];
     vendorNames?: Map<string, string>;
     minImpact?: number;
+    /** The vendors this page actually covers, for the tie line. */
+    pageVendorIds?: string[];
   } = {}
 ): InsightNews | null {
   const { categories, vendorIds, vendorNames, minImpact = 60 } = opts;
@@ -118,10 +140,44 @@ export function pickNews(
     publishedAt: best.publishedAt ?? null,
     sourceName: best.sourceName ?? null,
     sourceUrl: best.sourceUrl ?? null,
-    vendorNames: (best.vendors ?? []).map(
-      (v) => vendorNames?.get(v) ?? v
-    ),
+    vendorNames: (best.vendors ?? []).map((v) => vendorNames?.get(v) ?? v),
+    tie: tieToPage(best, opts),
   };
+}
+
+/**
+ * Why the picked item bears on THIS page, in our words and from our data.
+ *
+ * Says one of three things, and only what it can check:
+ *
+ *   The item names vendors this page covers  -> names them, and says how many
+ *                                               of the page's set that is.
+ *   It names vendors, none of them here      -> says so, so the reader reads
+ *                                               it as market context rather
+ *                                               than as a read on the figures.
+ *   It names no vendor at all                -> nothing. Silence beats filler.
+ *
+ * It never characterises the item. Characterising is what the source's own
+ * commentary does, and doing it ourselves would mean asserting something the
+ * page cannot check.
+ */
+function tieToPage(
+  item: NewsItemRaw,
+  opts: { pageVendorIds?: string[]; vendorNames?: Map<string, string> }
+): string | null {
+  const { pageVendorIds, vendorNames } = opts;
+  const named = item.vendors ?? [];
+  if (named.length === 0 || !pageVendorIds?.length) return null;
+
+  const onPage = named.filter((v) => pageVendorIds.includes(v));
+  const label = (v: string) => vendorNames?.get(v) ?? v;
+
+  if (onPage.length === 0) {
+    return `It names no vendor this page covers, so read it as market context rather than as a read on the figures below.`;
+  }
+  return `It names ${nameList(onPage.map(label))}, ${
+    onPage.length === 1 ? "which is" : "which are"
+  } among the ${pageVendorIds.length} this page covers. The figures below are what this page holds on ${onPage.length === 1 ? "it" : "them"}, and are not derived from this item.`;
 }
 
 export interface AnalystInsightData {

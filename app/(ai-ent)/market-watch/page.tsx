@@ -32,7 +32,13 @@ export default async function MarketWatchPage() {
   const metricsForInsight = await loadMarketMetrics();
   const insight = marketWatchInsight(
     metricsForInsight,
-    pickNews(news.items, { categories: ["Market movement", "Strategy signal"] })
+    pickNews(news.items, {
+      categories: ["Market movement", "Strategy signal"],
+      // The vendors this page actually covers, so the tie line can say whether
+      // the item bears on the figures below or is market context.
+      pageVendorIds: metricsForInsight.vendors.map((v) => v.id),
+      vendorNames: new Map(metricsForInsight.vendors.map((v) => [v.id, v.name])),
+    })
   );
 
   const written = await authorInsight(

@@ -167,9 +167,17 @@ export function AnalystInsight({
                   <p className="measure mt-1.5 text-sm font-semibold leading-snug">
                     {insight.news.title}
                   </p>
-                  {insight.news.whyItMatters ? (
+                  {/* Our tie to this page, not the source's commentary.
+                      The source's line used to render here, under our heading,
+                      which presented their reading as ours. On the OpenAI
+                      funding item that line names the round's investors
+                      wrongly, and it was printing on seven tabs. The headline
+                      above stays verbatim and linked, because that is what the
+                      source said and rewriting it would misattribute; the
+                      reading is ours and comes from what this page holds. */}
+                  {insight.news.tie ? (
                     <p className="measure mt-1 text-sm leading-snug text-muted">
-                      {insight.news.whyItMatters}
+                      {insight.news.tie}
                     </p>
                   ) : null}
                   {insight.news.sourceUrl ? (
