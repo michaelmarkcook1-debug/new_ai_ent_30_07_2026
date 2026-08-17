@@ -47,6 +47,12 @@ function metrics(over: Partial<MarketMetrics> = {}): MarketMetrics {
     reputationAsOf: null,
     shareAsOf: null,
     shareMovementPublished: false,
+    // The brief does not read the category assessment, so these are empty
+    // rather than fabricated. A test fixture carrying invented scores would
+    // teach the brief to expect readings the real payload may not have.
+    categoryComposites: {},
+    categoryHeld: {},
+    compositesCapturedAt: "2026-08-16T00:00:00.000Z",
     ...over,
   };
 }

@@ -19,7 +19,13 @@ import type { CategoryShare, VendorMetrics } from "@/lib/market-metrics";
 // column label says which. A vendor the dataset does not reach on a given
 // metric shows an empty cell, not a zero and not a midpoint.
 
-type MetricKey = "composite" | "momentum" | "maturity" | "reputation" | "share";
+type MetricKey =
+  | "assessment"
+  | "composite"
+  | "momentum"
+  | "maturity"
+  | "reputation"
+  | "share";
 
 const COLUMNS: {
   key: MetricKey;
@@ -27,9 +33,16 @@ const COLUMNS: {
   title: string;
 }[] = [
   {
+    key: "assessment",
+    label: "Assessment",
+    title:
+      "The weighted composite (0 to 5) of evidence-graded assessment domains, with weights specific to this category, as published on the AI Enterprise category ranking. This is the number that ranking sorts on. Each domain's score is capped by its evidence grade, and a vendor under 60% domain coverage is held rather than ranked.",
+  },
+  {
     key: "composite",
-    label: "Composite",
-    title: "vendors[].overallScore: AG's own overall score for the vendor, 0 to 100.",
+    label: "Overall score",
+    title:
+      "vendors[].overallScore: one global 0 to 100 formula applied to every vendor, published on the same API. It is NOT what the category ranking sorts on and the two disagree: here OpenAI leads frontier models on overall score while Anthropic leads on the category assessment. Shown so the difference is visible rather than hidden.",
   },
   {
     key: "momentum",
@@ -64,6 +77,7 @@ export function VendorComparisonTable({
   onSelect,
   lane,
   shareMovementPublished,
+  composites,
 }: {
   vendors: VendorMetrics[];
   shares: CategoryShare[];
@@ -71,8 +85,17 @@ export function VendorComparisonTable({
   onSelect: (id: string) => void;
   lane: "aie" | "aie-live";
   shareMovementPublished: boolean;
+  composites: Record<
+    string,
+    Record<string, { composite: number; rank: number; position: string | null }>
+  >;
+  held: Record<string, number>;
 }) {
-  const [sortBy, setSortBy] = useState<MetricKey>("composite");
+  // Sorted on the assessment, because that is what the AI Enterprise category
+  // ranking sorts on. Sorting on overallScore was the reason this table named a
+  // different leader from that ranking: both numbers are published, they
+  // disagree, and this was quietly showing the one that is not category-aware.
+  const [sortBy, setSortBy] = useState<MetricKey>("assessment");
 
   const categories = useMemo(
     () => categoriesPresent(vendors.map((v) => v.id)),
@@ -92,11 +115,23 @@ export function VendorComparisonTable({
     return map;
   }, [shares, categoryId]);
 
+  // The assessment is per category, not per vendor: Anthropic scores 3.65 in
+  // frontier models and 3.69 as a coding agent, so there is no single value to
+  // hang on a vendor row.
+  const assessmentFor = useMemo(
+    () => composites[categoryId] ?? {},
+    [composites, categoryId]
+  );
+
   const rows = useMemo(() => {
     const members = new Set(vendorIdsInCategory(categoryId));
     const inCategory = vendors.filter((v) => members.has(v.id));
     const value = (v: VendorMetrics, k: MetricKey): number | null =>
-      k === "share" ? (shareFor.get(v.id) ?? null) : v[k];
+      k === "share"
+        ? (shareFor.get(v.id) ?? null)
+        : k === "assessment"
+          ? (assessmentFor[v.id]?.composite ?? null)
+          : v[k];
     return [...inCategory].sort((a, b) => {
       const av = value(a, sortBy);
       const bv = value(b, sortBy);
@@ -106,11 +141,15 @@ export function VendorComparisonTable({
       if (bv === null) return -1;
       return bv - av;
     });
-  }, [vendors, categoryId, sortBy, shareFor]);
+  }, [vendors, categoryId, sortBy, shareFor, assessmentFor]);
 
   const coverage = (k: MetricKey) =>
     rows.filter((v) =>
-      k === "share" ? shareFor.has(v.id) : v[k] !== null
+      k === "share"
+        ? shareFor.has(v.id)
+        : k === "assessment"
+          ? assessmentFor[v.id] !== undefined
+          : v[k] !== null
     ).length;
 
   return (
@@ -204,6 +243,30 @@ export function VendorComparisonTable({
                         {v.marketPosition}
                       </div>
                     ) : null}
+                  </td>
+                  {/* The assessment, on its own 0 to 5 scale. Deliberately not
+                      run through ScorePill, which bands 0 to 100: a 3.65 would
+                      read as a failing score against that scale when it is in
+                      fact the top of its category. */}
+                  <td className="px-3 py-2.5">
+                    {assessmentFor[v.id] ? (
+                      <span
+                        className="font-mono text-sm font-semibold tabular-nums"
+                        title={`Rank ${assessmentFor[v.id].rank} of ${rows.length} in this category${assessmentFor[v.id].position ? `, banded ${assessmentFor[v.id].position}` : ""}.`}
+                      >
+                        {assessmentFor[v.id].composite.toFixed(2)}
+                        <span className="ml-0.5 text-xs font-normal text-muted">
+                          /5
+                        </span>
+                      </span>
+                    ) : (
+                      <span
+                        className="font-mono text-xs text-muted"
+                        title="Held: under 60% domain coverage, so the assessment withholds a score rather than ranking this vendor on defaults."
+                      >
+                        held
+                      </span>
+                    )}
                   </td>
                   <td className="px-3 py-2.5">
                     <ScorePill score={v.composite} />

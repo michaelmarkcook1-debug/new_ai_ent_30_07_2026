@@ -1,5 +1,9 @@
 import { aieServerFetch, type AieLane } from "@/lib/aie-server";
 import { isInvestor } from "@/lib/vendor/is-investor";
+import {
+  categoryRankings,
+  rankingsCapturedAt,
+} from "@/lib/aie/category-rankings";
 
 // Market metrics derived from the real AI Enterprise datasets.
 //
@@ -99,6 +103,28 @@ export interface MarketMetrics {
    * rather than render a flat zero as though the market were static.
    */
   shareMovementPublished: boolean;
+  /**
+   * v1's category composite, keyed categoryId then vendorId.
+   *
+   * This is the number v1's own front page ranks on, and it is not
+   * `overallScore`. The two disagree: in frontier models overallScore puts
+   * OpenAI first and this puts Anthropic first, by 0.29 rather than by a
+   * rounding error. Both are v1's; the difference is that this one weights
+   * each category's domains separately, caps a domain by its evidence grade,
+   * and holds a vendor under 60% coverage instead of ranking it on defaults.
+   *
+   * Keyed by category because a vendor scores differently in each one it
+   * competes in. Anthropic is 3.65 in frontier models and 3.69 as a coding
+   * agent, so there is no single composite for a vendor to carry on its row.
+   */
+  categoryComposites: Record<
+    string,
+    Record<string, { composite: number; rank: number; position: string | null }>
+  >;
+  /** Withheld for thin evidence, per category. Not absent, not zero. */
+  categoryHeld: Record<string, number>;
+  /** When v1's rankings were last read. */
+  compositesCapturedAt: string;
 }
 
 // ---------- upstream payload shapes (only the fields used) ----------
@@ -357,5 +383,44 @@ export async function loadMarketMetrics(): Promise<MarketMetrics> {
     reputationAsOf: repRes.data?.asOf ?? null,
     shareAsOf: shareRes.data?.asOf ?? null,
     shareMovementPublished,
+    ...categoryCompositePayload(),
+  };
+}
+
+/**
+ * v1's category rankings, flattened for the browser.
+ *
+ * Read from the recorded fixture rather than fetched, because v1 does not
+ * publish this on its API: it is computed into the /category/<id> pages and
+ * scripts/sync-category-rankings.mjs parses them. That script fails loudly and
+ * reconciles per category against market-share, so a thin payload here means
+ * nobody ran it, never that it ran and found nothing.
+ */
+function categoryCompositePayload(): {
+  categoryComposites: MarketMetrics["categoryComposites"];
+  categoryHeld: Record<string, number>;
+  compositesCapturedAt: string;
+} {
+  const byCategory: MarketMetrics["categoryComposites"] = {};
+  const held: Record<string, number> = {};
+  for (const c of categoryRankings()) {
+    const row: Record<
+      string,
+      { composite: number; rank: number; position: string | null }
+    > = {};
+    for (const r of c.ranked) {
+      row[r.vendorId] = {
+        composite: r.composite,
+        rank: r.rank,
+        position: r.position,
+      };
+    }
+    byCategory[c.categoryId] = row;
+    held[c.categoryId] = c.held;
+  }
+  return {
+    categoryComposites: byCategory,
+    categoryHeld: held,
+    compositesCapturedAt: rankingsCapturedAt(),
   };
 }
