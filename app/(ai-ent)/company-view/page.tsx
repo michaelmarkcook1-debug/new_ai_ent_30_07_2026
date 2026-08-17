@@ -46,7 +46,7 @@ export default async function CompanyOverviewPage({
     <>
       <PageHeader
         title="Your AI Position"
-        subtitle="Name your company and its public sources are retrieved and read now, with every statement carrying the link it came from. The analyst reading then sets what was found against the tracked AI market: where the position is exposed, where it is defensible."
+        subtitle="Name your company and its public sources are retrieved and read now, every statement carrying the link it came from, then set against the tracked AI market."
         lanes={["live", "aie-live"]}
       />
       <CompanyContextBar here="position" />

@@ -20,7 +20,7 @@
  * Vercel (Pro list prices; Hobby is $0 within hard caps):
  *   invocations $0.60 per million, Active CPU $0.128/hour (base region),
  *   provisioned memory $0.0106/GB-hour. Fluid compute bills CPU only while
- *   code executes , not during I/O waits, but provisioned memory accrues on
+ *   code executes, not during I/O waits, but provisioned memory accrues on
  *   wall time. Source: vercel.com/docs/functions/usage-and-pricing.
  *
  * Supabase (Free tier: 500MB database, 5GB egress, unlimited API requests;

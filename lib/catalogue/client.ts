@@ -211,7 +211,7 @@ export interface UsageSummaryRow {
 /**
  * Aggregate usage counts, via an RPC that returns GROUP BY totals only.
  *
- * The usage table itself stays unreadable from outside , no select policy,
+ * The usage table itself stays unreadable from outside: no select policy,
  * and that is not weakened here: the function returns which surface, which
  * action, how many, and when last. Nothing row-shaped ever leaves.
  */

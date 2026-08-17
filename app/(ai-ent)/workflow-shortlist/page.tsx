@@ -15,7 +15,7 @@ export default async function WorkflowShortlistPage() {
     <>
       <PageHeader
         title="Workflow Shortlist"
-        subtitle="Pick the workflow you want AI for, and get its risk and deployment profile with the vendors to buy it from and the models to build it on. The mapping from workflow to vendor category is editorial, and it is shown so you can disagree with it."
+        subtitle="Pick the workflow you want AI for, and get its risk and deployment profile with the vendors to buy it from and the models to build it on."
         lanes={["aie-live", "aie"]}
       />
       <WorkflowPicker workflowVendors={byCategory} />

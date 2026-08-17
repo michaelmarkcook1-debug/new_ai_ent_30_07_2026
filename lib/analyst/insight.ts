@@ -465,19 +465,24 @@ export function financialInsight(
    * The private side, when the page holds it. Omitted, the insight says
    * nothing about private vendors rather than guessing at them.
    *
-   * This parameter exists because the original copy stated that no range and
-   * no modelled figure was ever substituted for a silent vendor. That was true
-   * when written and stopped being true when the private-revenue estimator
-   * shipped: the page now shows a band for private companies. An insight that
-   * denies what the panel beneath it is doing is worse than no insight.
+   * This parameter tracked what the page beneath it was actually doing, and
+   * that has now changed twice. It was added when the private-revenue
+   * estimator shipped, because the original copy denied that any modelled
+   * figure was ever substituted for a silent vendor and the page had started
+   * showing a band. The estimator was removed on 17 August 2026, so the band
+   * language went with it: a multiple-derived range is an estimate of a number
+   * nobody outside those companies knows, on a page arguing that undisclosed
+   * figures must not be treated as known.
+   *
+   * The counts stay because they are still rendered and still true. An insight
+   * that describes a panel which is no longer there is the same defect as one
+   * that denies a panel which is.
    */
   privateSide?: {
     /** Private vendors stating a figure themselves. */
     stated: number;
-    /** Private vendors with nothing to state and no basis to estimate from. */
+    /** Private vendors with nothing to state. No figure is shown for these. */
     notEstimable: number;
-    /** The revenue multiple band the estimator will quote, low to high. */
-    band: { low: number; high: number };
   }
 ): AnalystInsightData {
   if (!disclosure || disclosure.total === 0) {
@@ -497,14 +502,14 @@ export function financialInsight(
         : "A majority of tracked vendors now quantify AI revenue in their filings, which makes their commercial claims checkable.",
     summary: `Of ${disclosure.total} tracked public vendors, ${disclosure.disclosing} state a quantified AI revenue figure in their filings and ${undisclosed} state none. ${segmentTotal > 0 ? `${segmentsFiled} of ${segmentTotal} break revenue down by segment, which is as close as most get to showing where AI money actually lands. ` : ""}That ${share} per cent disclosure rate is the useful number here, and it is low enough to change how a vendor's commercial claims should be treated in a sales cycle: a growth figure quoted in a pitch that does not appear in a filing has not been audited by anyone, and for a multi-year commitment that distinction matters more than the figure itself. ${
       privateSide
-        ? `On the private side, ${privateSide.stated} companies state a figure themselves and ${privateSide.notEstimable} give nothing to work from. Where a private company is silent but a dated valuation exists, this page shows a revenue band derived from the ${privateSide.band.low}x to ${privateSide.band.high}x range observed across comparable disclosed pairs, shown as a band, never as a point, and never mixed into a filed figure. A band is an argument about magnitude, not a measurement, and it is labelled as one.`
+        ? `On the private side, ${privateSide.stated} companies state a figure themselves and ${privateSide.notEstimable} give nothing to work from. The ones giving nothing are shown as exactly that: no figure is modelled for them, because a number nobody outside the company knows does not become knowable by being derived.`
         : "Private vendors file nothing and sit outside this entirely rather than being estimated into it."
     }`,
     implications: [
       `${undisclosed} of ${disclosure.total} tracked vendors publish no AI revenue figure, so their traction claims are unverifiable from public sources.`,
       "Treat vendor-supplied growth and scale numbers as unaudited unless the filing carries them.",
       privateSide
-        ? `Private revenue is banded from observed multiples, never filed: read the ${privateSide.band.low}x-${privateSide.band.high}x range as magnitude, not measurement.`
+        ? `${privateSide.notEstimable} private vendors state nothing and are shown with no figure at all, which is the honest reading rather than a gap in this page.`
         : "Private vendors are outside this entirely, so absence here is not a signal about them either way.",
     ],
     action: undisclosed > disclosure.disclosing ? "Investigate" : "Monitor",
@@ -530,21 +535,40 @@ export function financialInsight(
 /**
  * Competitive Intel: where capability actually differs between providers.
  */
+/**
+ * One row of the capability matrix, as much of it as this insight reads.
+ *
+ * Taken as an argument rather than pulled from MarketMetrics, and that is the
+ * whole fix. This function used to compute its top and median from
+ * `aiVendors(m)`, which is every tracked vendor, while the sentence it wrote
+ * named a single market category and quoted a provider count scoped to that
+ * category. So the reader was told "across 4 providers in Workflow automation
+ * AI the strongest scores 91 against a median of 62" when 91 and 62 came from
+ * all 43 vendors and had nothing to do with those 4. The count was category
+ * scoped, the scores were not, and both sat in one sentence.
+ */
+export interface CapabilityRow {
+  name: string;
+  mean: number | null;
+}
+
 export function competitiveInsight(
   m: MarketMetrics,
   news: InsightNews | null,
   categoryName: string | null,
-  providerCount: number,
-  capabilityCount: number
+  capabilityCount: number,
+  rows: CapabilityRow[]
 ): AnalystInsightData {
-  const vendors = aiVendors(m);
-  const scored = vendors
-    .filter((v) => v.maturity !== null)
-    .sort((a, b) => (b.maturity ?? 0) - (a.maturity ?? 0));
+  const scored = rows
+    .filter((v) => v.mean !== null)
+    .sort((a, b) => (b.mean ?? 0) - (a.mean ?? 0));
+  const providerCount = rows.length;
 
   if (scored.length < 3) {
     return insufficient(
-      "Fewer than three vendors carry an assessed capability score, so no comparison is drawn.",
+      categoryName
+        ? `Fewer than three vendors in ${categoryName} carry an assessed capability score, so no comparison is drawn for it.`
+        : "Fewer than three vendors carry an assessed capability score, so no comparison is drawn.",
       ["AIE capability matrix"],
       m.lane
     );
@@ -552,14 +576,14 @@ export function competitiveInsight(
 
   const top = scored[0];
   const median = scored[Math.floor(scored.length / 2)];
-  const spread = round1((top.maturity ?? 0) - (median.maturity ?? 0));
+  const spread = round1((top.mean ?? 0) - (median.mean ?? 0));
   const narrow = spread < 15;
 
   return {
     headline: narrow
       ? "Capability between the leading providers has converged far enough that the choice is now made on control and cost, not on the model."
       : "Capability still separates the leading providers by enough to make the model choice consequential on its own.",
-    summary: `Across ${providerCount} providers assessed on ${capabilityCount} capabilities${categoryName ? ` in ${categoryName}` : ""}, the strongest vendor scores ${top.maturity} for evidence-graded capability maturity against a median of ${median.maturity}, a spread of ${spread} points. ${
+    summary: `Across ${providerCount} providers assessed on ${capabilityCount} capabilities${categoryName ? ` in ${categoryName}` : ""}, the strongest vendor scores ${round1(top.mean ?? 0)} for evidence-graded capability maturity against a median of ${round1(median.mean ?? 0)}, a spread of ${spread} points. ${
       narrow
         ? "A spread that narrow means the differentiator has moved off the model itself. Deployment options, governance depth, integration surface and commercial terms now decide more than raw capability does, and a shortlist built purely on capability scores will produce several indistinguishable finalists. That is a better position for a buyer than it looks, because it converts a technical decision into a commercial one."
         : "A spread that wide means the model choice still carries real weight, and a shortlist that treats the leaders as interchangeable will underperform. Capability should stay a primary filter here rather than a tiebreak."

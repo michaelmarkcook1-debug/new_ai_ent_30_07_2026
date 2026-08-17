@@ -11,7 +11,7 @@ export const metadata = { title: "Decision Desk | AI Enterprise" };
 
 // The Decision Desk (3 August 2026). Interrogate and Assess and Decide were
 // separate top-level tabs, which read as two products; they are one moment in
-// the CIO's journey , converging on a call that must survive a board or a
+// the CIO's journey: converging on a call that must survive a board or a
 // procurement committee, so they now sit together as numbered steps. The old
 // routes redirect here with their query strings intact.
 export default async function DecisionDeskPage({
@@ -38,7 +38,7 @@ export default async function DecisionDeskPage({
     <>
       <PageHeader
         title="Decision Desk"
-        subtitle="Converge on a call you can defend: describe your situation for a source-cited finding, score the decision against your own weights with the derivation open, then leave with three vendors to look at and the sequence that tests them. Nothing here invents a figure."
+        subtitle="Converge on a call you can defend. Nothing here invents a figure."
         lanes={["aie-live", "aie", "sample"]}
       />
       <CompanyContextBar here="desk" />

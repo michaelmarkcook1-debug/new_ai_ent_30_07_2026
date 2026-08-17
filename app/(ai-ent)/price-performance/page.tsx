@@ -50,7 +50,7 @@ export default async function PricePerformancePage() {
     <>
       <PageHeader
         title="Price / Performance Scorecard"
-        subtitle="What capability costs: independent benchmark scores against published list prices, with the efficiency frontier picked out. The full token pricing table sits underneath, on request."
+        subtitle="What capability costs: independent benchmark scores against published list prices, with the efficiency frontier picked out."
         lanes={["aie-live", "aie"]}
       />
       <AnalystInsight

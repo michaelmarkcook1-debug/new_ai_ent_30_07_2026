@@ -64,18 +64,24 @@ interface RawVendor {
   marketPosition: string | null;
 }
 
-// Only categories whose members are actually model and platform providers.
-// The taxonomy also carries silicon, compute and services categories, which
-// the capability rubric does not describe.
-const PROVIDER_CATEGORIES = new Set([
-  "frontier_model_api",
-  "enterprise_assistant",
-  "developer_coding_agent",
-  "agent_platform",
-  "rag_enterprise_search",
-  "cloud_ai_platform",
-  "regulated_industry_ai",
-]);
+// Every market category the taxonomy holds. All thirteen.
+//
+// This used to be a hardcoded set of seven, on the stated grounds that the
+// taxonomy "also carries silicon, compute and services categories, which the
+// capability rubric does not describe". Checked against the data on 17 August
+// 2026, that is not true: every member of every one of the thirteen categories
+// carries all ten capabilities, scored, with an evidence grade and a status.
+// NVIDIA is assessed on enterprise assistant at 45, verified, grade E2. Groq,
+// SAP, Oracle and ServiceNow are all complete too.
+//
+// So the filter was hiding six categories and 29 assessed vendor placements
+// that had full evidence behind them, and a reader looking for workflow
+// automation or AI silicon was told the category did not exist rather than
+// shown what the product holds on it.
+//
+// No replacement set is needed. The comparability rule is what stops a chip
+// maker being ranked against a CRM assistant, and that rule is applied per
+// category below, not by shortening this list.
 
 export async function loadProviderMatrix(
   categoryId?: string
@@ -88,9 +94,7 @@ export async function loadProviderMatrix(
     aieServerFetch<{ vendors: RawVendor[] }>("vendors"),
   ]);
 
-  const categories = MARKET_CATEGORY_LIST.filter((c) =>
-    PROVIDER_CATEGORIES.has(c.id)
-  );
+  const categories = MARKET_CATEGORY_LIST;
   const active =
     categories.find((c) => c.id === categoryId) ?? categories[0] ?? null;
 

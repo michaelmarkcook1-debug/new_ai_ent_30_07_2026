@@ -1,21 +1,19 @@
 import { PageHeader } from "@/lib/ui/page";
 import { PROBED_TICKERS, privateVendorCards } from "./data";
 import { loadRevenueView } from "./segment-data";
-import { LiveTickers } from "./components/live-tickers";
 import { PrivateCompanyCards } from "./components/private-cards";
 import { AiRevenuePanel } from "./components/ai-revenue";
-import { PrivateRevenuePanel } from "./components/private-revenue";
 import { DisclosureLadder } from "./components/disclosure-ladder";
 import {
   publicLadder,
   privateLadder,
   publicCoverage,
 } from "@/lib/finance/disclosure-ladder";
+import { Accordion } from "@/lib/ui/accordion";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { financialInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
 import { analystNews } from "@/lib/analyst/news-source";
-import { DEFAULT_BAND } from "@/lib/finance/private-revenue";
 
 export const metadata = { title: "Financial Snapshot | AI Enterprise" };
 
@@ -28,7 +26,7 @@ export default async function FinancialSnapshotPage() {
   const privateRows = privateLadder();
 
   // The insight this page never had. financialInsight() was authored for it
-  // and wired to nothing, so the strongest finding on the page , that most AI
+  // and wired to nothing, so the strongest finding on the page, that most AI
   // revenue claims are in nobody's filings, was sitting in dead code.
   const news = await analystNews();
   const insight = financialInsight(
@@ -47,7 +45,6 @@ export default async function FinancialSnapshotPage() {
     {
       stated: privateRows.filter((r) => r.rung === "stated").length,
       notEstimable: privateRows.filter((r) => r.rung === "not_estimable").length,
-      band: DEFAULT_BAND,
     }
   );
   const written = await authorInsight(insight, "financial", []);
@@ -56,7 +53,7 @@ export default async function FinancialSnapshotPage() {
     <>
       <PageHeader
         title="Financial Snapshot"
-        subtitle="AI vendor financials on two honest lanes: live BoardRadar figures for the probed public tickers, and disclosed-figures-only cards for the private AI companies. When markets cross the chasm, buyers follow the herd: this page shows who is growing and where, without inventing a single number."
+        subtitle="What AI vendors have actually disclosed about AI revenue, and where a claim has nothing behind it. Disclosed figures only: no estimate, no inference, no invented number."
         lanes={["live", "aie"]}
       />
       <AnalystInsight
@@ -64,6 +61,27 @@ export default async function FinancialSnapshotPage() {
         authorship={written.authorship}
         context="financial"
       />
+      {/* Two panels open, one collapsed. This page carried five, and three of
+          them were answering a question this product does not ask.
+
+          LIVE TICKERS, REMOVED. It rendered share price, EBITDA, gross margin
+          and "moderate activist risk exposure with some areas that could
+          attract investor scrutiny". That is written for somebody buying the
+          stock, not somebody buying the software, and Michael has already
+          ruled valuation out of scope: this program is for buyers. The live
+          BoardRadar lane is not lost with it, because Reputation Tracker,
+          Trust Rank, News Feed and Company View all still demonstrate it.
+
+          PRIVATE REVENUE ESTIMATOR, REMOVED. A slider that multiplied a
+          valuation by a revenue multiple to produce a range. Honestly built,
+          and still an estimate of a number nobody outside those companies
+          knows, on a page whose entire argument is that undisclosed figures
+          should not be treated as known. The disclosure ladder below already
+          answers the buyer's version of that question, which is whether the
+          company has said anything at all.
+
+          What stays is the finding: what a vendor has actually disclosed
+          about AI revenue, and where a claim has nothing behind it. */}
       <div className="space-y-6">
         <AiRevenuePanel view={revenue} />
         <DisclosureLadder
@@ -71,11 +89,9 @@ export default async function FinancialSnapshotPage() {
           privateRows={privateRows}
           coverage={publicCoverage(PROBED_TICKERS)}
         />
-        <LiveTickers tickers={PROBED_TICKERS} />
-        <PrivateRevenuePanel
-          vendors={cards.map((c) => ({ id: c.id, name: c.name }))}
-        />
-        <PrivateCompanyCards cards={cards} ladder={privateRows} />
+        <Accordion title="Private companies, and what is behind each claim" count={cards.length}>
+          <PrivateCompanyCards cards={cards} ladder={privateRows} />
+        </Accordion>
       </div>
     </>
   );

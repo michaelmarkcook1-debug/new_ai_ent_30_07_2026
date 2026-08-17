@@ -43,8 +43,10 @@ export default async function CompetitiveIntelPage({
       vendorNames: new Map(m.vendors.map((v) => [v.id, v.name])),
     }),
     matrix.categoryName,
-    matrix.rows.length,
-    matrix.capabilities.length
+    matrix.capabilities.length,
+    // The rows actually on screen. The insight used to name this category and
+    // then quote a top and median computed across every tracked vendor.
+    matrix.rows
   );
 
   const written = await authorInsight(
@@ -56,9 +58,12 @@ export default async function CompetitiveIntelPage({
 
   return (
     <>
+      {/* The subtitle said "the model providers" while the dropdown offered
+          seven categories and the data covers thirteen, including silicon and
+          compute. It now says what it shows. */}
       <PageHeader
         title="Competitive Intel"
-        subtitle="How the model providers compare: evidence-graded capability maturity across one market category at a time, beside the AIE live rankings. Intensity grids, never quadrants."
+        subtitle="Evidence-graded capability maturity, one market category at a time, beside the AIE live rankings. Ranked within a category, never across one."
         lanes={[matrix.lane, "live"]}
       />
       <AnalystInsight

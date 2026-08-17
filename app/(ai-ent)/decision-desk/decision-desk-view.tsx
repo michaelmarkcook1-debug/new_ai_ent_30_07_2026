@@ -18,7 +18,7 @@ type Tool = "finding" | "assess" | "shortlist";
 // The Decision Desk holds the two converging tools that used to be separate
 // tabs: Interrogate (a situation in, a source-cited finding out) and Assess
 // and Decide (your weights in, a derivable score out). They are two halves of
-// the same moment , the call a CIO has to defend, and separating them made
+// the same moment: the call a CIO has to defend, and separating them made
 // each look like a destination rather than a step.
 //
 // Both stay mounted and the inactive one is hidden, not unmounted: the
@@ -62,21 +62,13 @@ export function DecisionDeskView({
   return (
     <div className="space-y-4">
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-        {pill(
-          "finding",
-          "1 · The cited finding",
-          "Describe your situation, answer sharp questions, and get a finding where every claim carries a source."
-        )}
-        {pill(
-          "assess",
-          "2 · The weighted score",
-          "Set the weights to your priorities and read the score with its full derivation. The scores never move, only your weights do."
-        )}
-        {pill(
-          "shortlist",
-          "3 · Three vendors, and what next",
-          "The three to look at in your market, a paragraph on each saying why, and the sequence that turns them into a decision."
-        )}
+        {/* One line each. These carried two-clause descriptions that the page
+            subtitle restated above them and each tool restated again on
+            opening, so the same three sentences appeared three times before a
+            reader had done anything. */}
+        {pill("finding", "1 · The cited finding", "Your situation in, a sourced finding out.")}
+        {pill("assess", "2 · The weighted score", "Your weights in, a derivable score out.")}
+        {pill("shortlist", "3 · Three vendors, and what next", "The three to look at, and the sequence that tests them.")}
       </div>
 
       <div className={tool === "finding" ? "" : "hidden"}>

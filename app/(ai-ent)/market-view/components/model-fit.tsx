@@ -1508,7 +1508,7 @@ export function ModelFit() {
                 </p>
                 <ol className="list-decimal space-y-1 pl-4 text-muted">
                   <li>
-                    Buyer constraints , excluded vendors and price ceiling, eliminate first.
+                    Buyer constraints (excluded vendors and price ceiling) eliminate first.
                     Certain.
                   </li>
                   <li>
