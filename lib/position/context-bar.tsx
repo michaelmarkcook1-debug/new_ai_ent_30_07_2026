@@ -31,13 +31,28 @@ import { latestPosition, type SavedPosition } from "./store";
 // selected" on every page is a permanent apology for a feature the reader has
 // not used yet.
 
+// CARRYING SOMETHING THROUGH HAS TO BE REVERSIBLE FROM WHERE IT IS ANNOUNCED.
+//
+// This bar told the reader what was being applied on their behalf and gave them
+// no way to stop it. On three of the five tabs that was survivable, because the
+// tab offered its own way out: ModelEngine answers twice, unconstrained and
+// constrained, so the shortlist never hides an answer; Integrators only narrows
+// when you ask it to and has "Show all nodes"; the Decision Desk lets you clear
+// the offered company off the box it prefilled.
+//
+// On Trust Rank it was not. The overnight brief silently becomes a verdict on
+// your shortlisted vendors instead of the market, the tab invites you to
+// shortlist in order to get that, and nothing on the page turns it back off.
+//
+// So the control belongs here rather than on Trust Rank: it is the one
+// component that appears on all five, and it is the thing making the claim.
 export function CompanyContextBar({
   /** The tab this is rendered on, so it does not offer to send you where you are. */
   here,
 }: {
   here: "position" | "desk" | "engine" | "trust" | "integrators";
 }) {
-  const { ids, ready } = useShortlist();
+  const { ids, ready, clear } = useShortlist();
   const [position, setPosition] = useState<SavedPosition | null>(null);
   // localStorage does not exist during the server render, so the company is
   // resolved after mount. Until then this renders nothing rather than a
@@ -85,6 +100,28 @@ export function CompanyContextBar({
             {more > 0 ? ` and ${more} more` : ""}
           </span>
         </span>
+      ) : null}
+
+      {/* The way out. Clears the list itself rather than muting it, because a
+          muted list is a third state a reader cannot see and would have to
+          remember. The vendors are three clicks to rebuild on the Decision
+          Desk, and the button says what it does to every tab rather than only
+          to this one. */}
+      {ids.length > 0 ? (
+        <button
+          type="button"
+          onClick={clear}
+          title={
+            "Stops these vendors narrowing any tab in this section. Trust Rank goes " +
+            "back to a market read rather than a verdict on your list, ModelEngine " +
+            "stops answering a second time inside it, and Integrators releases the " +
+            "drill. It does not delete anything researched, and you can take them " +
+            "forward again from the Decision Desk."
+          }
+          className="tap rounded-full border border-insight/40 px-2.5 py-0.5 text-xs font-semibold text-insight transition hover:bg-insight/10"
+        >
+          Stop carrying
+        </button>
       ) : null}
 
       {/* The gap, named, and only where filling it is the obvious next act. */}
