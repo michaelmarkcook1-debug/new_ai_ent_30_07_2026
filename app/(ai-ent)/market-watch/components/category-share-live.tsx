@@ -16,6 +16,15 @@ import { formatDate, type CategoryShareView, type ShareLookups } from "../data";
 // market-share API (directional, confidence-labelled estimates, dated as of
 // today). The ported seed remains the explicit fallback when the pull fails.
 
+/**
+ * Movement, drawn only where there is movement to draw.
+ *
+ * The source restamps `previousEstimate` to the current value on a refresh, and
+ * when it does every `changePct` in the payload is 0. Rendering that put a grey
+ * bar and "0%" against every vendor in every category, which states that the
+ * market measurably did not move. What is true is that no movement is published
+ * for this refresh, and those are different claims.
+ */
 function DeltaArrow({ changePct }: { changePct: number }) {
   const colour =
     changePct > 0 ? "text-good" : changePct < 0 ? "text-error" : "text-muted";
@@ -129,7 +138,15 @@ function ShareCards({ categories }: { categories: CategoryShareView[] }) {
         <Accordion key={g.id} title={g.label} count={g.members.length}>
           <p className="mb-2 text-sm text-muted">{g.blurb}</p>
           <div className="grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
-            {g.members.map((cat) => (
+            {g.members.map((cat) => {
+              // Movement is published only when something actually moved. The
+              // source restamps previousEstimate on a refresh, and when it does
+              // every changePct in the payload is 0, so drawing the arrow would
+              // assert that the market measurably held still.
+              const movementPublished = cat.rows.some(
+                (r) => r.changePct !== null && r.changePct !== 0
+              );
+              return (
         <div key={cat.id} className="rounded-lg border border-base-300 bg-base-100 p-5">
           <h3 className="text-sm font-bold">{cat.name}</h3>
           {cat.description ? (
@@ -145,7 +162,9 @@ function ShareCards({ categories }: { categories: CategoryShareView[] }) {
                     tracked={row.tracked}
                   />
                   <div className="flex items-baseline gap-2">
-                    <DeltaArrow changePct={row.changePct} />
+                    {movementPublished && row.changePct !== null ? (
+                      <DeltaArrow changePct={row.changePct} />
+                    ) : null}
                     <span className="font-mono text-xs font-semibold">
                       {row.share}%
                       <span className="ml-0.5 font-normal text-muted">est.</span>
@@ -167,8 +186,17 @@ function ShareCards({ categories }: { categories: CategoryShareView[] }) {
             Named vendors cover {cat.namedShareTotal} per cent of this category
             in the model; the rest is not modelled.
           </p>
+          {/* Said once per category rather than drawn on every row. */}
+          {!movementPublished ? (
+            <p className="measure mt-1 text-xs text-muted">
+              No movement is published against this refresh: the source restamped
+              every previous estimate to the current one, so no change figure is
+              shown rather than a flat zero that would read as a measurement.
+            </p>
+          ) : null}
         </div>
-            ))}
+              );
+            })}
           </div>
         </Accordion>
       ))}
@@ -224,7 +252,10 @@ export function CategoryShareLive({
           vendorName: lookups.vendorNames[e.vendorId] ?? e.vendorId,
           share: Math.round(e.estimatedShare * 10) / 10,
           previousEstimate: e.previousEstimate ?? undefined,
-          changePct: e.changePct ?? 0,
+          // Never `?? 0`. An absent movement is not a movement of zero, and
+          // coercing it drew a flat "no change" arrow on every row in the
+          // market, which reads as a measurement rather than as an absence.
+          changePct: e.changePct ?? null,
           confidence: e.confidence,
           tracked: tracked.has(e.vendorId),
         }))

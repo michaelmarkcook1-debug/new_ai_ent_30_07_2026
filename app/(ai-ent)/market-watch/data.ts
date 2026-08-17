@@ -99,7 +99,8 @@ export interface ShareRow {
   vendorName: string;
   share: number;
   previousEstimate?: number;
-  changePct: number;
+  /** Null where the source published no movement. Never coerce to zero. */
+  changePct: number | null;
   confidence: number;
   tracked: boolean;
 }
