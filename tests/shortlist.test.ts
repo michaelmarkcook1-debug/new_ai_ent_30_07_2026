@@ -221,10 +221,14 @@ describe("the payload the browser receives", () => {
     expect(JSON.stringify(p).length).toBeLessThan(70_000);
   });
 
-  it("rounds every score it prints", () => {
+  it("rounds every score it prints, to the assessment's own precision", () => {
+    // Two decimals. The assessment is published to two on a 0 to 5 scale, and
+    // rounding to one would print 3.7 where AI Enterprise prints 3.65, which
+    // is our number disagreeing with the source it came from.
     for (const c of Object.values(p.byFilter.all)) {
       for (const e of c.entries) {
-        expect(String(e.score)).toMatch(/^\d+(\.\d)?$/);
+        expect(String(e.score)).toMatch(/^\d+(\.\d{1,2})?$/);
+        expect(e.score).toBeLessThanOrEqual(5);
       }
     }
   });

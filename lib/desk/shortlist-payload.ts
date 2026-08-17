@@ -104,7 +104,11 @@ export function shortlistPayload(): ShortlistPayload {
           vendorId: e.vendorId,
           name: e.name,
           marketPosition: e.marketPosition,
-          score: Math.round(e.score * 10) / 10,
+          // Two decimals, not one. One was right for a 0 to 100 composite,
+          // where 69.4 loses nothing. On the assessment's 0 to 5 scale it turns
+          // 3.65 into 3.7 and 3.36 into 3.4, so the card stops matching the
+          // number AI Enterprise publishes and a 0.29 gap reads as 0.3.
+          score: Math.round(e.score * 100) / 100,
           inputsPresent: e.result.inputsPresent,
           reason: e.reason,
           limit: e.limit,
