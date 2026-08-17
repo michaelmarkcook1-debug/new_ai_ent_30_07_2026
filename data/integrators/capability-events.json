@@ -1,0 +1,1666 @@
+{
+ "note": "Capability EVENTS, not scores. The assessment and AI-readiness figures on the delivery panel belong to BoardRadar and are not touched here. Classification is pattern-matched from the headline; an item matching nothing is recorded as unclassified rather than forced into a bucket.",
+ "coverage": {
+  "integratorsInScope": 48,
+  "integratorsWithSignal": 18,
+  "newsItemsScanned": 3108,
+  "capabilityEvents": 94,
+  "mentionsNotEvents": 60
+ },
+ "capturedAt": "2026-08-17T17:21:54.598Z",
+ "integrators": {
+  "ACN": {
+   "name": "Accenture",
+   "hits": [
+    {
+     "event": null,
+     "title": "Writer says its new Palmyra X6 model cuts AI agent costs by 52% as token spending surges",
+     "publishedAt": "2026-08-13T00:00:00.000Z",
+     "sourceName": "VentureBeat",
+     "sourceUrl": "https://venturebeat.com/orchestration/writer-says-its-new-palmyra-x6-model-cuts-ai-agent-costs-by-52-as-token-spending-surges/",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "IBM and OpenAI Announce Strategic Partnership",
+     "publishedAt": "2026-08-13T00:00:00.000Z",
+     "sourceName": "IBTimes Singapore",
+     "sourceUrl": "https://www.ibtimes.sg/ibm-openai-partner-enterprise-ai-what-new-deal-means-businesses-92127",
+     "matchedIn": "summary",
+     "alongside": [
+      "OpenAI"
+     ]
+    },
+    {
+     "event": null,
+     "title": "HUMAIN Makes Investment in MOZN and Partners to Co-Build Enterprise AI Solutions",
+     "publishedAt": "2026-08-03T00:00:00.000Z",
+     "sourceName": "PRNewswire",
+     "sourceUrl": "https://www.prnewswire.com/news-releases/humain-makes-investment-in-mozn-and-partners-to-co-build-enterprise-ai-solutions-locally-and-globally-302841043.html",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "Cognizant Expands Partnership with Anthropic",
+     "publishedAt": "2026-07-27T00:00:00.000Z",
+     "sourceName": "Cryptonomist",
+     "sourceUrl": "https://en.cryptonomist.ch/2026/07/27/cognizant-anthropic-partnership/",
+     "matchedIn": "summary",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Voltage Control, Glean, and Miro announce three-way partnership to close 'New Friction' gap in enterprise AI adoption",
+     "publishedAt": "2026-07-21T00:00:00.000Z",
+     "sourceName": "PRNewswire / Yahoo Finance",
+     "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/voltage-control-partners-glean-miro-124100985.html",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "LTM Partners with Glean to Accelerate Enterprise AI Adoption",
+     "publishedAt": "2026-07-17T00:00:00.000Z",
+     "sourceName": "LTM Press Release",
+     "sourceUrl": "https://www.ltm.com/news-events/press-releases/2026/ltm-partners-with-glean-for-enterprise-ai",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "UST Partners with Anthropic for Enterprise AI Deployment",
+     "publishedAt": "2026-07-10T00:00:00.000Z",
+     "sourceName": "HPCwire",
+     "sourceUrl": "https://www.hpcwire.com/aiwire/2026/07/10/ust-partners-with-anthropic-to-bring-claude-to-engineering-and-enterprise-operations/",
+     "matchedIn": "summary",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "ServiceNow Expands AI Partnerships Including Hitachi, Accenture, and Others in Recent Weeks",
+     "publishedAt": "2026-07-09T00:00:00.000Z",
+     "sourceName": "Simply Wall St",
+     "sourceUrl": "https://simplywall.st/stocks/us/software/nyse-now/servicenow/news/servicenow's-expanding-ai-partnership-ecosystem-could-be-a-ga/amp",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "Hitachi Digital Services, Hexnode, Accenture, Cyberhill Expand AI Partnerships with ServiceNow",
+     "publishedAt": "2026-07-09T00:00:00.000Z",
+     "sourceName": "Simply Wall St News",
+     "sourceUrl": "https://simplywall.st/stocks/us/software/nyse-now/servicenow/news/servicenows-expanding-ai-partnership-ecosystem-could-be-a-ga/amp",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Datamatics Partners with North American Logistics Firm for Salesforce Cloud Implementation",
+     "publishedAt": "2026-07-09T00:00:00.000Z",
+     "sourceName": "GuruFocus",
+     "sourceUrl": "https://www.gurufocus.com/news/8951425/crm-datamatics-partners-with-north-american-logistics-firm-for-salesforce-cloud-implementation",
+     "matchedIn": "summary",
+     "alongside": [
+      "Salesforce"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "ServiceNow (NOW) Expands AI Reach With Hexnode, Accenture, and Cyberhill Deals",
+     "publishedAt": "2026-07-08T00:00:00.000Z",
+     "sourceName": "Simply Wall St News",
+     "sourceUrl": "https://simplywall.st/stocks/us/software/nyse-now/servicenow/news/servicenow-now-expands-ai-reach-with-hexnode-accenture-and-c/amp",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "ServiceNow Hexnode Integration and Accenture Partnership Announcements",
+     "publishedAt": "2026-07-08T00:00:00.000Z",
+     "sourceName": "Simply Wall St",
+     "sourceUrl": "https://simplywall.st/stocks/us/software/nyse-now/servicenow/news/servicenow-now-expands-ai-reach-with-hexnode-accenture-and-c",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Microsoft Announces Frontier Company Initiative with $2.5B Investment and 6,000 Embedded AI Engineers",
+     "publishedAt": "2026-07-06T00:00:00.000Z",
+     "sourceName": "Spyingbee - Microsoft Updates",
+     "sourceUrl": "https://spyingbee.com/updates/microsoft/2026-07",
+     "matchedIn": "summary",
+     "alongside": [
+      "Microsoft"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "Accenture and Anthropic launch multi-year partnership to move enterprises from AI pilots to production",
+     "publishedAt": "2026-07-06T00:00:00.000Z",
+     "sourceName": "Anthropic",
+     "sourceUrl": "https://www.anthropic.com/news/anthropic-accenture-partnership",
+     "matchedIn": "headline",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Microsoft Launches Microsoft Frontier Company with $2.5 Billion Commitment",
+     "publishedAt": "2026-07-02T00:00:00.000Z",
+     "sourceName": "Microsoft Official Blog",
+     "sourceUrl": "https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/",
+     "matchedIn": "summary",
+     "alongside": [
+      "Microsoft"
+     ]
+    },
+    {
+     "event": null,
+     "title": "AWS Summit Washington DC 2026: $1 Billion Forward Deployed Engineering Investment",
+     "publishedAt": "2026-07-02T00:00:00.000Z",
+     "sourceName": "CX Today",
+     "sourceUrl": "https://www.cxtoday.com/security-privacy-compliance/aws-summit-dc-2026-cx-announcements/",
+     "matchedIn": "summary",
+     "alongside": [
+      "AWS"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "StanChart Former AI Chief Joins Accenture as Southeast Asia Head",
+     "publishedAt": "2026-06-30T01:33:48.000Z",
+     "sourceName": "Bloomberg Technology",
+     "sourceUrl": "https://www.bloomberg.com/news/articles/2026-06-30/stanchart-former-ai-chief-joins-accenture-as-southeast-asia-head",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "AWS Invests $1 Billion in New Forward Deployed Engineering Unit for AI Customer Support",
+     "publishedAt": "2026-06-30T00:00:00.000Z",
+     "sourceName": "CNBC",
+     "sourceUrl": "https://www.cnbc.com/2026/06/30/aws-amazon-ai-forward-deployed-engineers.html",
+     "matchedIn": "summary",
+     "alongside": [
+      "AWS"
+     ]
+    },
+    {
+     "event": null,
+     "title": "AWS Forward Deployed Engineering: $1 Billion Investment in AI Solutions",
+     "publishedAt": "2026-06-30T00:00:00.000Z",
+     "sourceName": "Amazon About Amazon News",
+     "sourceUrl": "https://www.aboutamazon.com/news/company-news/amazon-news-today-top-stories-company",
+     "matchedIn": "summary",
+     "alongside": [
+      "AWS"
+     ]
+    },
+    {
+     "event": "launch",
+     "title": "ServiceNow and Accenture Launch AI-powered Services for Risk Modernization",
+     "publishedAt": "2026-06-29T00:00:00.000Z",
+     "sourceName": "Accenture Newsroom",
+     "sourceUrl": "https://newsroom.accenture.com/news/2026/servicenow-and-accenture-launch-ai-powered-services-to-accelerate-the-shift-from-legacy-risk-platforms-to-agentic-ai",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Oppenheimer reiterates Outperform on ServiceNow with $130 price target",
+     "publishedAt": "2026-06-29T00:00:00.000Z",
+     "sourceName": "Ad-Hoc News",
+     "sourceUrl": "https://www.ad-hoc-news.de/boerse/news/ueberblick/servicenow-clears-july-earnings-date-shares-eye-nasdaq-100-reaction/69650958",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "ID.me, Servos, and ServiceNow Partner to Modernize State Benefits Administration",
+     "publishedAt": "2026-06-23T00:00:00.000Z",
+     "sourceName": "Yahoo Finance Canada",
+     "sourceUrl": "https://ca.finance.yahoo.com/news/id-servos-servicenow-partner-modernize-120000310.html",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "Accenture: Then and now, and how it may signify things to come",
+     "publishedAt": "2026-06-18T18:17:49.000Z",
+     "sourceName": "Marcus on AI",
+     "sourceUrl": "https://garymarcus.substack.com/p/accenture-then-and-now-and-how-it",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "TCS Partners with Anthropic as Global Premier Partner to Bring Claude to Regulated Industries",
+     "publishedAt": "2026-06-12T00:00:00.000Z",
+     "sourceName": "w.media",
+     "sourceUrl": "https://w.media/tcs-partners-with-anthropic-to-drive-enterprise-ai-adoption/",
+     "matchedIn": "summary",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": null,
+     "title": "G42 and Publicis Sapient Explore AI-First Services Joint Venture for UAE and Global South",
+     "publishedAt": "2026-06-01T00:00:00.000Z",
+     "sourceName": "G42 Newsroom",
+     "sourceUrl": "https://www.g42.ai/resources/news/g42-and-publicis-sapient-explore-ai-first-services-joint-venture-uae-and-global-south",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": "partnership",
+     "title": "HUMAIN and Accenture Partner to Accelerate AI Adoption Across Saudi Arabia's Public and Private Sectors",
+     "publishedAt": "2026-05-25T00:00:00.000Z",
+     "sourceName": "Accenture Newsroom",
+     "sourceUrl": "https://newsroom.accenture.com/news/2026/humain-and-accenture-accelerate-ai-adoption-at-scale-across-public-and-private-sectors-in-saudi-arabia",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "partnership",
+     "title": "Accenture and Google Cloud expand Gemini Enterprise partnership",
+     "publishedAt": "2026-04-22T00:00:00.000Z",
+     "sourceName": "Accenture",
+     "sourceUrl": "https://newsroom.accenture.com/news/2026/accenture-and-google-cloud-expand-partnership-to-scale-agentic-transformation-for-global-enterprises-with-gemini-enterprise",
+     "matchedIn": "headline",
+     "alongside": [
+      "Google"
+     ]
+    },
+    {
+     "event": "launch",
+     "title": "Accenture and Google Cloud launch Gemini Enterprise Acceleration Program",
+     "publishedAt": "2026-04-22T00:00:00.000Z",
+     "sourceName": "Google Cloud Press Corner",
+     "sourceUrl": "https://www.googlecloudpresscorner.com/2026-04-22-Accenture-and-Google-Cloud-Expand-Partnership-to-Scale-Agentic-Transformation-for-Global-Enterprises-with-Gemini-Enterprise",
+     "matchedIn": "headline",
+     "alongside": [
+      "Google"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "Mistral and Accenture strike multi-year enterprise AI partnership",
+     "publishedAt": "2026-02-26T00:00:00.000Z",
+     "sourceName": "TechCrunch",
+     "sourceUrl": "https://techcrunch.com/2026/02/26/mistral-ai-inks-a-deal-with-global-consulting-giant-accenture/",
+     "matchedIn": "headline",
+     "alongside": [
+      "Mistral"
+     ]
+    }
+   ]
+  },
+  "CGEMY": {
+   "name": "Capgemini",
+   "hits": [
+    {
+     "event": null,
+     "title": "Microsoft Launches Microsoft Frontier Company with $2.5 Billion Commitment",
+     "publishedAt": "2026-07-02T00:00:00.000Z",
+     "sourceName": "Microsoft Official Blog",
+     "sourceUrl": "https://blogs.microsoft.com/blog/2026/07/02/microsoft-frontier-company-ai-engineering-that-amplifies-and-protects-your-intelligence/",
+     "matchedIn": "summary",
+     "alongside": [
+      "Microsoft"
+     ]
+    }
+   ]
+  },
+  "CTSH": {
+   "name": "Cognizant",
+   "hits": [
+    {
+     "event": "partnership",
+     "title": "Cognizant Expands Partnership with Anthropic",
+     "publishedAt": "2026-07-27T00:00:00.000Z",
+     "sourceName": "Cryptonomist",
+     "sourceUrl": "https://en.cryptonomist.ch/2026/07/27/cognizant-anthropic-partnership/",
+     "matchedIn": "headline",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Oppenheimer reiterates Outperform on ServiceNow with $130 price target",
+     "publishedAt": "2026-06-29T00:00:00.000Z",
+     "sourceName": "Ad-Hoc News",
+     "sourceUrl": "https://www.ad-hoc-news.de/boerse/news/ueberblick/servicenow-clears-july-earnings-date-shares-eye-nasdaq-100-reaction/69650958",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "Partner Integration Expansion: Nametag, IBM, Cognizant and Others Integrate with ServiceNow",
+     "publishedAt": "2026-06-24T00:00:00.000Z",
+     "sourceName": "Simply Wall St",
+     "sourceUrl": "https://simplywall.st/stocks/us/software/nyse-now/servicenow/news/is-servicenows-now-expanding-ai-partner-web-quietly-redefini/amp",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "ServiceNow AI Agents integrate with Cognizant Neuro AI Multi-Agent Accelerator for cross-platform orchestration",
+     "publishedAt": "2026-06-18T00:00:00.000Z",
+     "sourceName": "Cognizant News",
+     "sourceUrl": "https://news.cognizant.com/2026-06-18-Cognizant-expands-cross-platform-agentic-AI-with-new-ServiceNow-AI-Agent-interoperability",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "Partners including IBM, Cognizant, Wipro, NICE announce expanded ServiceNow AI Platform integrations",
+     "publishedAt": "2026-06-17T00:00:00.000Z",
+     "sourceName": "Yahoo Finance",
+     "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/servicenow-now-quietly-becoming-core-021137992.html",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "Cognizant Neuro® AI Trust Integrates with ServiceNow for Enterprise-Scale AI Governance",
+     "publishedAt": "2026-06-04T00:00:00.000Z",
+     "sourceName": "Cognizant Newsroom (PRNewswire)",
+     "sourceUrl": "https://news.cognizant.com/2026-06-04-Cognizant-announces-ServiceNow-partnership-to-accelerate-scalable,-operationalized-AI-governance-at-enterprise-scale",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    }
+   ]
+  },
+  "DATAMATICS": {
+   "name": "Datamatics",
+   "hits": [
+    {
+     "event": "unclassified",
+     "title": "Datamatics Partners with North American Logistics Firm for Salesforce Cloud Implementation",
+     "publishedAt": "2026-07-09T00:00:00.000Z",
+     "sourceName": "GuruFocus",
+     "sourceUrl": "https://www.gurufocus.com/news/8951425/crm-datamatics-partners-with-north-american-logistics-firm-for-salesforce-cloud-implementation",
+     "matchedIn": "headline",
+     "alongside": [
+      "Salesforce"
+     ]
+    }
+   ]
+  },
+  "DELOITTE": {
+   "name": "Deloitte",
+   "hits": [
+    {
+     "event": null,
+     "title": "LTM Partners with Glean to Accelerate Enterprise AI Adoption",
+     "publishedAt": "2026-07-17T00:00:00.000Z",
+     "sourceName": "LTM Press Release",
+     "sourceUrl": "https://www.ltm.com/news-events/press-releases/2026/ltm-partners-with-glean-for-enterprise-ai",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "UST Partners with Anthropic for Enterprise AI Deployment",
+     "publishedAt": "2026-07-10T00:00:00.000Z",
+     "sourceName": "HPCwire",
+     "sourceUrl": "https://www.hpcwire.com/aiwire/2026/07/10/ust-partners-with-anthropic-to-bring-claude-to-engineering-and-enterprise-operations/",
+     "matchedIn": "summary",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Datamatics Partners with North American Logistics Firm for Salesforce Cloud Implementation",
+     "publishedAt": "2026-07-09T00:00:00.000Z",
+     "sourceName": "GuruFocus",
+     "sourceUrl": "https://www.gurufocus.com/news/8951425/crm-datamatics-partners-with-north-american-logistics-firm-for-salesforce-cloud-implementation",
+     "matchedIn": "summary",
+     "alongside": [
+      "Salesforce"
+     ]
+    },
+    {
+     "event": null,
+     "title": "ServiceNow (NOW) Expands AI Reach With Hexnode, Accenture, and Cyberhill Deals",
+     "publishedAt": "2026-07-08T00:00:00.000Z",
+     "sourceName": "Simply Wall St News",
+     "sourceUrl": "https://simplywall.st/stocks/us/software/nyse-now/servicenow/news/servicenow-now-expands-ai-reach-with-hexnode-accenture-and-c/amp",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Microsoft Announces Frontier Company Initiative with $2.5B Investment and 6,000 Embedded AI Engineers",
+     "publishedAt": "2026-07-06T00:00:00.000Z",
+     "sourceName": "Spyingbee - Microsoft Updates",
+     "sourceUrl": "https://spyingbee.com/updates/microsoft/2026-07",
+     "matchedIn": "summary",
+     "alongside": [
+      "Microsoft"
+     ]
+    },
+    {
+     "event": null,
+     "title": "AWS Summit Washington DC 2026: $1 Billion Forward Deployed Engineering Investment",
+     "publishedAt": "2026-07-02T00:00:00.000Z",
+     "sourceName": "CX Today",
+     "sourceUrl": "https://www.cxtoday.com/security-privacy-compliance/aws-summit-dc-2026-cx-announcements/",
+     "matchedIn": "summary",
+     "alongside": [
+      "AWS"
+     ]
+    },
+    {
+     "event": null,
+     "title": "AWS Invests $1 Billion in New Forward Deployed Engineering Unit for AI Customer Support",
+     "publishedAt": "2026-06-30T00:00:00.000Z",
+     "sourceName": "CNBC",
+     "sourceUrl": "https://www.cnbc.com/2026/06/30/aws-amazon-ai-forward-deployed-engineers.html",
+     "matchedIn": "summary",
+     "alongside": [
+      "AWS"
+     ]
+    },
+    {
+     "event": null,
+     "title": "AWS Forward Deployed Engineering: $1 Billion Investment in AI Solutions",
+     "publishedAt": "2026-06-30T00:00:00.000Z",
+     "sourceName": "Amazon About Amazon News",
+     "sourceUrl": "https://www.aboutamazon.com/news/company-news/amazon-news-today-top-stories-company",
+     "matchedIn": "summary",
+     "alongside": [
+      "AWS"
+     ]
+    },
+    {
+     "event": null,
+     "title": "ServiceNow and Accenture Launch AI-powered Services for Risk Modernization",
+     "publishedAt": "2026-06-29T00:00:00.000Z",
+     "sourceName": "Accenture Newsroom",
+     "sourceUrl": "https://newsroom.accenture.com/news/2026/servicenow-and-accenture-launch-ai-powered-services-to-accelerate-the-shift-from-legacy-risk-platforms-to-agentic-ai",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Oppenheimer reiterates Outperform on ServiceNow with $130 price target",
+     "publishedAt": "2026-06-29T00:00:00.000Z",
+     "sourceName": "Ad-Hoc News",
+     "sourceUrl": "https://www.ad-hoc-news.de/boerse/news/ueberblick/servicenow-clears-july-earnings-date-shares-eye-nasdaq-100-reaction/69650958",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "IBM and Red Hat partner with Deloitte to fix open-source vulnerabilities",
+     "publishedAt": "2026-06-27T01:26:07.000Z",
+     "sourceName": "SiliconANGLE",
+     "sourceUrl": "https://siliconangle.com/2026/06/26/ibm-red-hat-partner-deloitte-fix-open-source-vulnerabilities/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "ID.me, Servos, and ServiceNow Partner to Modernize State Benefits Administration",
+     "publishedAt": "2026-06-23T00:00:00.000Z",
+     "sourceName": "Yahoo Finance Canada",
+     "sourceUrl": "https://ca.finance.yahoo.com/news/id-servos-servicenow-partner-modernize-120000310.html",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "ID.me, Servos, and ServiceNow Partner to Modernize State Benefits Administration",
+     "publishedAt": "2026-06-23T00:00:00.000Z",
+     "sourceName": "PR Newswire",
+     "sourceUrl": "https://www.prnewswire.com/news-releases/idme-servos-and-servicenow-partner-to-modernize-state-benefits-administration-302806981.html",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    }
+   ]
+  },
+  "EY": {
+   "name": "Ernst & Young",
+   "hits": [
+    {
+     "event": "unclassified",
+     "title": "EY re-envisions RAG around multimodal knowledge graphs to improve accuracy",
+     "publishedAt": "2026-07-17T17:54:01.000Z",
+     "sourceName": "SiliconANGLE",
+     "sourceUrl": "https://siliconangle.com/2026/07/17/ey-re-envisions-rag-around-multimodal-knowledge-graphs-improve-accuracy/",
+     "matchedIn": "headline",
+     "alongside": []
+    }
+   ]
+  },
+  "FJTSY": {
+   "name": "Fujitsu",
+   "hits": [
+    {
+     "event": "unclassified",
+     "title": "NVIDIA Expands Japan Partnerships with Fanuc, Yaskawa, Kawasaki, Fujitsu for Physical AI",
+     "publishedAt": "2026-07-16T00:00:00.000Z",
+     "sourceName": "BigGo Finance",
+     "sourceUrl": "https://finance.biggo.com/news/28fa230f-cf4e-4a1a-9e5d-67468d84edcf",
+     "matchedIn": "headline",
+     "alongside": [
+      "NVIDIA"
+     ]
+    },
+    {
+     "event": null,
+     "title": "NVIDIA Announces Cosmos 3 Edge AI Model and Expands Japanese Partnerships",
+     "publishedAt": "2026-07-16T00:00:00.000Z",
+     "sourceName": "American Bazaar Online",
+     "sourceUrl": "https://americanbazaaronline.com/2026/07/16/nvidia-announces-new-ai-model-expands-japanese-partnerships-484685/",
+     "matchedIn": "summary",
+     "alongside": [
+      "NVIDIA"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Japan Government, Industrial Leaders and NVIDIA Launch World's First National AI Infrastructure",
+     "publishedAt": "2026-07-15T00:00:00.000Z",
+     "sourceName": "CNN Markets via GlobeNewswire",
+     "sourceUrl": "https://www.cnn.com/markets/stocks/NVDA",
+     "matchedIn": "summary",
+     "alongside": [
+      "NVIDIA"
+     ]
+    }
+   ]
+  },
+  "HITACHIDS": {
+   "name": "Hitachi Digital Services",
+   "hits": [
+    {
+     "event": "unclassified",
+     "title": "ServiceNow Partners with Hitachi Digital Services for Infrastructure Monitoring",
+     "publishedAt": "2026-07-09T00:00:00.000Z",
+     "sourceName": "GuruFocus",
+     "sourceUrl": "https://www.gurufocus.com/news/8951598/servicenow-now-partners-with-hitachi-to-enhance-infrastructure-management",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "Hitachi Digital Services, Hexnode, Accenture, Cyberhill Expand AI Partnerships with ServiceNow",
+     "publishedAt": "2026-07-09T00:00:00.000Z",
+     "sourceName": "Simply Wall St News",
+     "sourceUrl": "https://simplywall.st/stocks/us/software/nyse-now/servicenow/news/servicenows-expanding-ai-partnership-ecosystem-could-be-a-ga/amp",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    }
+   ]
+  },
+  "IBM": {
+   "name": "IBM",
+   "hits": [
+    {
+     "event": "launch",
+     "title": "IBM and the Recording Academy Strike a Chord, Release New watsonx Digital Experiences for Fans and Members Around 2026 Grammy Awards",
+     "publishedAt": "2026-08-15T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/press-releases-artificial-intelligence?l=100",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "partnership",
+     "title": "IBM and OpenAI Announce Strategic Partnership",
+     "publishedAt": "2026-08-13T00:00:00.000Z",
+     "sourceName": "IBTimes Singapore",
+     "sourceUrl": "https://www.ibtimes.sg/ibm-openai-partner-enterprise-ai-what-new-deal-means-businesses-92127",
+     "matchedIn": "headline",
+     "alongside": [
+      "OpenAI"
+     ]
+    },
+    {
+     "event": "deal",
+     "title": "IBM, Together AI $240M inference cluster deal explained",
+     "publishedAt": "2026-08-11T00:00:00.000Z",
+     "sourceName": "Value Add Pulse",
+     "sourceUrl": "https://valueaddvc.com/pulse/together-ai-ibm-cloud-240m-inference-deal-2026",
+     "matchedIn": "headline",
+     "alongside": [
+      "Together AI"
+     ]
+    },
+    {
+     "event": "deal",
+     "title": "IBM and Together AI sign $240 million AI inference deal",
+     "publishedAt": "2026-08-11T00:00:00.000Z",
+     "sourceName": "Yahoo Finance",
+     "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/ibm-together-ai-sign-240-134324558.html",
+     "matchedIn": "headline",
+     "alongside": [
+      "Together AI"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "IBM, Together AI Partner In $240M Deal To Scale Open Source AI Inference",
+     "publishedAt": "2026-08-11T00:00:00.000Z",
+     "sourceName": "Open Source For You",
+     "sourceUrl": "https://www.opensourceforu.com/2026/08/ibm-together-ai-partner-open-source/",
+     "matchedIn": "headline",
+     "alongside": [
+      "Together AI"
+     ]
+    },
+    {
+     "event": "deal",
+     "title": "IBM and Together AI Sign $240 Million Multi-Year AI Inference Agreement",
+     "publishedAt": "2026-08-11T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/2026-08-11-IBM-and-Together-AI-Sign-Multi-Year-Agreement-to-Scale-Open-Source-AI-Inference-with-NVIDIA-AI-Infrastructure-on-IBM-Cloud",
+     "matchedIn": "headline",
+     "alongside": [
+      "Together AI"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "Self-improving agents, personalized chat experiences and faster workflows in IBM watsonx Orchestrate",
+     "publishedAt": "2026-08-03T00:00:00.000Z",
+     "sourceName": "IBM",
+     "sourceUrl": "https://www.ibm.com/new/announcements/new-in-ibm-watsonx-orchestrate-self-improving-agents-personalized-chat-experiences-and-faster-workflows",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "HUMAIN Makes Investment in MOZN and Partners to Co-Build Enterprise AI Solutions",
+     "publishedAt": "2026-08-03T00:00:00.000Z",
+     "sourceName": "PRNewswire",
+     "sourceUrl": "https://www.prnewswire.com/news-releases/humain-makes-investment-in-mozn-and-partners-to-co-build-enterprise-ai-solutions-locally-and-globally-302841043.html",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "watsonx Orchestrate at IBM TechXchange 2026",
+     "publishedAt": "2026-08-02T00:00:00.000Z",
+     "sourceName": "IBM watsonx Orchestrate",
+     "sourceUrl": "https://www.ibm.com/products/watsonx-orchestrate",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "G42 Joins NVIDIA's Open Secure AI Alliance with 37 Global Tech Leaders",
+     "publishedAt": "2026-07-30T00:00:00.000Z",
+     "sourceName": "Analytics Insight",
+     "sourceUrl": "https://www.analyticsinsight.net/amp/story/news/g42-joins-nvidias-open-ai-alliance-with-37-global-tech-leaders",
+     "matchedIn": "summary",
+     "alongside": [
+      "NVIDIA"
+     ]
+    },
+    {
+     "event": null,
+     "title": "OpenAI gpt-oss Models Now on watsonx.ai",
+     "publishedAt": "2026-07-30T00:00:00.000Z",
+     "sourceName": "IBM watsonx.ai",
+     "sourceUrl": "https://www.ibm.com/products/watsonx-ai",
+     "matchedIn": "summary",
+     "alongside": [
+      "OpenAI"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM Named a Leader in the 2026 Gartner Magic Quadrant for AI Governance Platforms",
+     "publishedAt": "2026-07-28T00:00:00.000Z",
+     "sourceName": "IBM watsonx",
+     "sourceUrl": "https://www.ibm.com/products/watsonx",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "Nvidia, Microsoft launch open AI security alliance — without OpenAI, Google, or Anthropic",
+     "publishedAt": "2026-07-27T12:06:22.000Z",
+     "sourceName": "AI | The Verge",
+     "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence/971281/nvidia-open-secure-ai-alliance-cybersecurity",
+     "matchedIn": "summary",
+     "alongside": [
+      "OpenAI",
+      "Anthropic",
+      "Google",
+      "Microsoft",
+      "NVIDIA"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM insists AI didn't kill software deals, just delayed them",
+     "publishedAt": "2026-07-23T11:34:42.000Z",
+     "sourceName": "www.theregister.com - Articles",
+     "sourceUrl": "https://www.theregister.com/software/2026/07/23/ibm-insists-ai-didnt-kill-software-deals-just-delayed-them/5276977",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "acquisition",
+     "title": "IBM announces acquisition of HRL Laboratories",
+     "publishedAt": "2026-07-23T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/announcements?keywords=acquisitions&l=100",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "After shocking quarter, IBM insists that AI isn&#8217;t killing the mainframe",
+     "publishedAt": "2026-07-22T23:47:54.000Z",
+     "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
+     "sourceUrl": "https://techcrunch.com/2026/07/22/after-shocking-quarter-ibm-insists-that-ai-isnt-killing-the-mainframe/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "launch",
+     "title": "IBM RELEASES SECOND-QUARTER RESULTS",
+     "publishedAt": "2026-07-22T00:00:00.000Z",
+     "sourceName": "PR Newswire",
+     "sourceUrl": "https://www.prnewswire.com/news-releases/ibm-releases-second-quarter-results-302832559.html",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM Q2 earnings report 2026",
+     "publishedAt": "2026-07-22T00:00:00.000Z",
+     "sourceName": "CNBC",
+     "sourceUrl": "https://www.cnbc.com/2026/07/22/ibm-q2-earnings-report-2026.html",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM: The approach directly contradicts the common vendor strategy of locking customers into proprietary ecosystems.",
+     "publishedAt": "2026-07-20T12:29:27.014Z",
+     "sourceName": "venturebeat.com",
+     "sourceUrl": "https://venturebeat.com/ai/ibm-sees-enterprise-customers-are-using-everything-when-it-comes-to-ai-the-challenge-is-matching-the-llm-to-the-right-use-case",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM Misses, IBM&#8217;s Mainframe Moat, IBM&#8217;s Many AI Problems",
+     "publishedAt": "2026-07-15T10:00:19.000Z",
+     "sourceName": "Stratechery by Ben Thompson",
+     "sourceUrl": "https://stratechery.com/2026/ibm-misses-ibms-mainframe-moat-ibms-many-ai-problems/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM shares plummet 25% on weak preliminary earnings",
+     "publishedAt": "2026-07-14T21:00:18.000Z",
+     "sourceName": "SiliconANGLE",
+     "sourceUrl": "https://siliconangle.com/2026/07/14/ibm-shares-plummet-25-weak-preliminary-earnings/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "12 YouTube default settings to change right now for a more enjoyable experience",
+     "publishedAt": "2026-07-14T12:20:00.000Z",
+     "sourceName": "Latest news",
+     "sourceUrl": "https://www.zdnet.com/article/12-youtube-settings-i-always-change-privacy-security-quality-autoplay/",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "Adobe, ServiceNow, and Appian Stocks Trade Down After IBM Earnings Warning",
+     "publishedAt": "2026-07-14T00:00:00.000Z",
+     "sourceName": "StockStory",
+     "sourceUrl": "https://stockstory.org/us/stocks/nasdaq/adbe/news/why-up-down/adobe-servicenow-and-appian-stocks-trade-down-what-you-need-to-know",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "IBM and Groq Partner to Accelerate Enterprise AI Deployment",
+     "publishedAt": "2026-07-14T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/campaign?item=2480",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM stock craters 25%, the worst day on record, after company issues second-quarter earnings warning",
+     "publishedAt": "2026-07-14T00:00:00.000Z",
+     "sourceName": "CNBC",
+     "sourceUrl": "https://www.cnbc.com/2026/07/14/ibm-warns-second-quarter-earnings-fell-short-of-expectations.html",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM Bob expands beyond code generation to orchestrate the entire SDLC",
+     "publishedAt": "2026-07-10T00:49:00.000Z",
+     "sourceName": "IBM Bob expands beyond code generation to orchestrate the entire SDLC | InfoWorld",
+     "sourceUrl": "https://www.infoworld.com/article/4195291/ibm-bob-expands-beyond-code-generation-to-orchestrate-the-entire-sdlc.html",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "launch",
+     "title": "IBM and Red Hat launch Lightwell to defend open-source code from AI attacks",
+     "publishedAt": "2026-07-08T17:26:26.000Z",
+     "sourceName": "Latest news",
+     "sourceUrl": "https://www.zdnet.com/article/ibm-and-red-hat-have-moved-project-lightwell-from-vision-to-product/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "SAP: Ericsson Scales AI Across the Enterprise with a Business Data Fabric and SAP (May 21, 2026).",
+     "publishedAt": "2026-07-08T03:05:46.613Z",
+     "sourceName": "news.sap.com",
+     "sourceUrl": "https://news.sap.com/",
+     "matchedIn": "summary",
+     "alongside": [
+      "SAP"
+     ]
+    },
+    {
+     "event": null,
+     "title": "ServiceNow (NOW) Expands AI Reach With Hexnode, Accenture, and Cyberhill Deals",
+     "publishedAt": "2026-07-08T00:00:00.000Z",
+     "sourceName": "Simply Wall St News",
+     "sourceUrl": "https://simplywall.st/stocks/us/software/nyse-now/servicenow/news/servicenow-now-expands-ai-reach-with-hexnode-accenture-and-c/amp",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "ServiceNow Stock Rides AI Partnerships And Price Target Hike",
+     "publishedAt": "2026-07-01T00:00:00.000Z",
+     "sourceName": "Timothy Sykes",
+     "sourceUrl": "https://www.timothysykes.com/news/servicenow-inc-now-news-2026_07_01/",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Mistral launches OCR 4, expanding into enterprise document extraction",
+     "publishedAt": "2026-07-01T00:00:00.000Z",
+     "sourceName": "VentureBeat",
+     "sourceUrl": "https://venturebeat.com/data/mistral-launches-ocr-4-turning-document-extraction-into-a-full-enterprise-ai-play",
+     "matchedIn": "summary",
+     "alongside": [
+      "Mistral"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "ServiceNow Expands IBM Partnership for Legacy Modernization and Autonomous IT",
+     "publishedAt": "2026-07-01T00:00:00.000Z",
+     "sourceName": "Yahoo Finance",
+     "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/servicenow-now-launches-ai-cybersecurity-190622645.html",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "ServiceNow and Accenture Launch AI-powered Services for Risk Modernization",
+     "publishedAt": "2026-06-29T00:00:00.000Z",
+     "sourceName": "Accenture Newsroom",
+     "sourceUrl": "https://newsroom.accenture.com/news/2026/servicenow-and-accenture-launch-ai-powered-services-to-accelerate-the-shift-from-legacy-risk-platforms-to-agentic-ai",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM expands watsonx via ServiceNow, OpenAI cyber, and Deepgram voice partnerships",
+     "publishedAt": "2026-06-29T00:00:00.000Z",
+     "sourceName": "24/7 Wall St.",
+     "sourceUrl": "https://247wallst.com/investing/2026/06/29/servicenows-new-ibm-partnership-a-real-catalyst-or-just-software-selloff-noise/",
+     "matchedIn": "headline",
+     "alongside": [
+      "OpenAI",
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "IBM and Red Hat partner with Deloitte to fix open-source vulnerabilities",
+     "publishedAt": "2026-06-27T01:26:07.000Z",
+     "sourceName": "SiliconANGLE",
+     "sourceUrl": "https://siliconangle.com/2026/06/26/ibm-red-hat-partner-deloitte-fix-open-source-vulnerabilities/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM claims world’s first sub-1 nanometer chip technology",
+     "publishedAt": "2026-06-25T10:00:55.000Z",
+     "sourceName": "AI - Ars Technica",
+     "sourceUrl": "https://arstechnica.com/gadgets/2026/06/ibm-claims-worlds-first-sub-1-nanometer-chip-technology/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "partnership",
+     "title": "Partner Integration Expansion: Nametag, IBM, Cognizant and Others Integrate with ServiceNow",
+     "publishedAt": "2026-06-24T00:00:00.000Z",
+     "sourceName": "Simply Wall St",
+     "sourceUrl": "https://simplywall.st/stocks/us/software/nyse-now/servicenow/news/is-servicenows-now-expanding-ai-partner-web-quietly-redefini/amp",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "OpenAI launches Partner Network with $150M investment",
+     "publishedAt": "2026-06-24T00:00:00.000Z",
+     "sourceName": "OpenAI",
+     "sourceUrl": "https://openai.com/index/introducing-openai-partner-network/",
+     "matchedIn": "summary",
+     "alongside": [
+      "OpenAI"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM deepens ServiceNow tie-up and acquires Seek AI, launches watsonx Labs",
+     "publishedAt": "2026-06-23T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/blog-ibm-and-aws-strengthen-partnership-to-accelerate-enterprise-agentic-ai-across-industries",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "launch",
+     "title": "Wimbledon and IBM roll out new watsonx-powered fan experiences for Championships 2026",
+     "publishedAt": "2026-06-22T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/2026-06-22-wimbledon-and-ibm-introduce-new-ai-powered-fan-experiences-and-modernized-digital-platforms-for-the-championships-2026",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM integrates ElevenLabs voice AI into watsonx Orchestrate",
+     "publishedAt": "2026-06-20T00:00:00.000Z",
+     "sourceName": "Futurum Group",
+     "sourceUrl": "https://futurumgroup.com/insights/ibm-pushes-voice-ai-into-watsonx-can-it-drive-enterprise-adoption/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "ServiceNow Analyst Fair Value Estimate Adjusted to $141.86",
+     "publishedAt": "2026-06-18T00:00:00.000Z",
+     "sourceName": "Simply Wall St",
+     "sourceUrl": "https://simplywall.st/stocks/us/software/nyse-now/servicenow",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM makes agent assist in watsonx Orchestrate generally available with Genesys Cloud integration",
+     "publishedAt": "2026-06-18T00:00:00.000Z",
+     "sourceName": "IBM",
+     "sourceUrl": "https://www.ibm.com/new/announcements/introducing-agent-assist-in-watsonx-orchestrate-to-transform-contact-center-performance",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM ships watsonx.ai v2.4 with expanded Model Gateway and multi-tenancy",
+     "publishedAt": "2026-06-18T00:00:00.000Z",
+     "sourceName": "IBM",
+     "sourceUrl": "https://www.ibm.com/new/announcements/ibm-watsonx-ai-v2-4-expanding-governed-ai-development-for-the-enterprise",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM acquires Seek AI and launches Watsonx Labs",
+     "publishedAt": "2026-06-18T00:00:00.000Z",
+     "sourceName": "CIO",
+     "sourceUrl": "https://www.cio.com/article/4000760/ibm-acquires-seek-ai-launches-watsonx-labs-to-scale-enterprise-ai.html",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "Partners including IBM, Cognizant, Wipro, NICE announce expanded ServiceNow AI Platform integrations",
+     "publishedAt": "2026-06-17T00:00:00.000Z",
+     "sourceName": "Yahoo Finance",
+     "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/servicenow-now-quietly-becoming-core-021137992.html",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM brings Agentic Data Intelligence to watsonx.data intelligence for self-managed deployments",
+     "publishedAt": "2026-06-17T00:00:00.000Z",
+     "sourceName": "IBM",
+     "sourceUrl": "https://www.ibm.com/new/announcements/agentic-data-intelligence-is-now-available-in-ibm-watsonx-data-intelligence-software",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM watsonx wins FedRAMP authorization across 11 solutions via AWS collaboration",
+     "publishedAt": "2026-06-15T00:00:00.000Z",
+     "sourceName": "PR Newswire",
+     "sourceUrl": "https://www.prnewswire.com/news-releases/ibm-expands-fedramp-portfolio-with-authorization-of-11-software-solutions-including-watsonx-302730758.html",
+     "matchedIn": "headline",
+     "alongside": [
+      "AWS"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM and ServiceNow deepen watsonx-plus-AI-Platform tie-up",
+     "publishedAt": "2026-06-15T00:00:00.000Z",
+     "sourceName": "AI Magazine",
+     "sourceUrl": "https://aimagazine.com/articles/ibms-salesforce-partnership-shows-watsonx-making-inroads-wi",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "ServiceNow and IBM Partnership on AI-Ready Enterprise Systems Modernization",
+     "publishedAt": "2026-06-14T00:00:00.000Z",
+     "sourceName": "CIO Dive",
+     "sourceUrl": "https://www.ciodive.com/news/servicenow-IBM-modernize-data-enterprises/822718/",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "Writer raises $200M Series C at a $1.9B valuation with strategic corporate backers",
+     "publishedAt": "2026-06-11T00:00:00.000Z",
+     "sourceName": "Writer",
+     "sourceUrl": "https://writer.com/blog/series-c-funding-writer-press-release/",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM and ServiceNow expand collaboration to modernize legacy systems for AI",
+     "publishedAt": "2026-06-11T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/2026-06-11-ibm-and-servicenow-expand-collaboration-to-unlock-enterprise-data-for-ai-at-scale",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": null,
+     "title": "G42 and Publicis Sapient Explore AI-First Services Joint Venture for UAE and Global South",
+     "publishedAt": "2026-06-01T00:00:00.000Z",
+     "sourceName": "G42 Newsroom",
+     "sourceUrl": "https://www.g42.ai/resources/news/g42-and-publicis-sapient-explore-ai-first-services-joint-venture-uae-and-global-south",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM watsonx Orchestrate AI Operating Model Coverage Signals Enterprise Adoption Debate",
+     "publishedAt": "2026-05-25T00:00:00.000Z",
+     "sourceName": "ACTGSYS",
+     "sourceUrl": "https://actgsys.com/en/blog/ibm-watsonx-orchestrate-ai-operating-model-sme-2026-05",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM opens a watsonx Orchestrate eCommerce pilot for AI agents",
+     "publishedAt": "2026-05-15T00:00:00.000Z",
+     "sourceName": "IBM",
+     "sourceUrl": "https://www.ibm.com/new/announcements/announcing-watsonx-orchestrate-ecommerce-pilot-for-ai-agents",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM partners with Deepgram and ElevenLabs to add voice to watsonx Orchestrate",
+     "publishedAt": "2026-05-05T00:00:00.000Z",
+     "sourceName": "AI Business",
+     "sourceUrl": "https://aibusiness.com/intelligent-automation/ibm-watsonx-deepgram-partnership",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM and AWS showcase expanded agentic AI collaboration at Think 2026",
+     "publishedAt": "2026-05-05T00:00:00.000Z",
+     "sourceName": "AWS Blog",
+     "sourceUrl": "https://aws.amazon.com/blogs/ibm-redhat/aws-and-ibm-new-agentic-collaborations-showcased-at-ibm-think-2026/",
+     "matchedIn": "headline",
+     "alongside": [
+      "AWS"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM unveils next-gen watsonx Orchestrate at Think 2026",
+     "publishedAt": "2026-05-05T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://www.ibm.com/new/announcements/ibm-announcements-at-think-2026",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM unveils next-gen watsonx Orchestrate as an enterprise agent control plane at Think 2026",
+     "publishedAt": "2026-05-05T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/2026-05-05-think-2026-ibm-delivers-the-blueprint-for-the-ai-operating-model-as-the-ai-divide-widens",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM previews GPU-accelerated query processing for watsonx.data",
+     "publishedAt": "2026-05-05T00:00:00.000Z",
+     "sourceName": "IBM",
+     "sourceUrl": "https://www.ibm.com/new/announcements/technical-preview-of-gpu-acceleration-for-presto-c-in-watsonx-data",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "partnership",
+     "title": "IBM expands Anthropic alliance across watsonx and enterprise security",
+     "publishedAt": "2026-05-05T00:00:00.000Z",
+     "sourceName": "AI Business",
+     "sourceUrl": "https://aibusiness.com/agentic-ai/ibm-out-with-agent-tools-ai-chip-anthropic-alliance",
+     "matchedIn": "headline",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "IBM Bob AI development partner hits general availability",
+     "publishedAt": "2026-04-28T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/2026-04-28-introducing-ibm-bob-ai-development-partner-that-takes-enterprises-from-ai-assisted-coding-to-production-ready-software",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "IBM wins FedRAMP authorization for 11 solutions including watsonx",
+     "publishedAt": "2026-04-01T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/2026-04-01-IBM-Expands-FedRAMP-Portfolio-with-Authorization-of-11-Software-Solutions,-Including-watsonx",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "ElevenLabs brings premium voice to IBM watsonx Orchestrate",
+     "publishedAt": "2026-03-25T00:00:00.000Z",
+     "sourceName": "ElevenLabs",
+     "sourceUrl": "https://elevenlabs.io/blog/elevenlabs-partners-with-ibm-to-bring-premium-voice-to-watsonx-orchestrate",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "acquisition",
+     "title": "IBM completes $11B acquisition of Confluent to power real-time AI data",
+     "publishedAt": "2026-03-17T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/2026-03-17-ibm-completes-acquisition-of-confluent,-making-real-time-data-the-engine-of-enterprise-ai-and-agents",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "partnership",
+     "title": "IBM taps Deepgram as first watsonx voice partner",
+     "publishedAt": "2026-02-24T00:00:00.000Z",
+     "sourceName": "SiliconANGLE",
+     "sourceUrl": "https://siliconangle.com/2026/02/24/ibm-taps-deepgram-add-real-time-speech-watsonx-orchestrate/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "partnership",
+     "title": "IBM taps Deepgram as its first watsonx voice partner",
+     "publishedAt": "2026-02-24T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/2026-02-24-deepgram-and-ibm-introduce-advanced-voice-capabilities-for-enterprise-ai",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "launch",
+     "title": "IBM and Recording Academy launch GRAMMY IQ built with watsonx",
+     "publishedAt": "2026-01-20T00:00:00.000Z",
+     "sourceName": "PR Newswire",
+     "sourceUrl": "https://www.prnewswire.com/news-releases/ibm-and-the-recording-academy-strike-a-chord-release-new-watsonx-digital-experiences-for-fans-and-members-around-2026-grammy-awards-302665639.html",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "launch",
+     "title": "IBM and Recording Academy launch GRAMMY IQ built on watsonx",
+     "publishedAt": "2026-01-20T00:00:00.000Z",
+     "sourceName": "IBM Newsroom",
+     "sourceUrl": "https://newsroom.ibm.com/2026-01-20-ibm-and-the-recording-academy-strike-a-chord,-release-new-watsonx-digital-experiences-for-fans-and-members-around-2026-grammy-awards",
+     "matchedIn": "headline",
+     "alongside": []
+    }
+   ]
+  },
+  "INFY": {
+   "name": "Infosys Limited",
+   "hits": [
+    {
+     "event": null,
+     "title": "Cognizant Expands Partnership with Anthropic",
+     "publishedAt": "2026-07-27T00:00:00.000Z",
+     "sourceName": "Cryptonomist",
+     "sourceUrl": "https://en.cryptonomist.ch/2026/07/27/cognizant-anthropic-partnership/",
+     "matchedIn": "summary",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "Former Infosys chief has a new startup that wants to challenge the IT services world",
+     "publishedAt": "2026-06-24T23:26:52.000Z",
+     "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
+     "sourceUrl": "https://techcrunch.com/2026/06/24/former-infosys-chief-has-a-new-startup-that-wants-to-challenge-the-it-services-world/",
+     "matchedIn": "headline",
+     "alongside": []
+    }
+   ]
+  },
+  "KPMG": {
+   "name": "KPMG",
+   "hits": [
+    {
+     "event": "unclassified",
+     "title": "KPMG Says Nearly Half Of Executives Pulled Back AI Agents Over Cost",
+     "publishedAt": "2026-08-09T00:00:00.000Z",
+     "sourceName": "Forbes",
+     "sourceUrl": "https://www.forbes.com/sites/sandycarter/2026/08/09/kpmg-says-nearly-half-of-executives-pulled-back-ai-agents-over-cost/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "Cohere's CEO Comments on IPO Timeline and Revenue Growth",
+     "publishedAt": "2026-07-02T00:00:00.000Z",
+     "sourceName": "Wikipedia",
+     "sourceUrl": "https://en.wikipedia.org/wiki/Cohere",
+     "matchedIn": "summary",
+     "alongside": [
+      "Cohere"
+     ]
+    },
+    {
+     "event": null,
+     "title": "ServiceNow and Accenture Launch AI-powered Services for Risk Modernization",
+     "publishedAt": "2026-06-29T00:00:00.000Z",
+     "sourceName": "Accenture Newsroom",
+     "sourceUrl": "https://newsroom.accenture.com/news/2026/servicenow-and-accenture-launch-ai-powered-services-to-accelerate-the-shift-from-legacy-risk-platforms-to-agentic-ai",
+     "matchedIn": "summary",
+     "alongside": [
+      "ServiceNow"
+     ]
+    }
+   ]
+  },
+  "NTT": {
+   "name": "NTT DATA",
+   "hits": [
+    {
+     "event": "deal",
+     "title": "NTT Data reports half a billion dollars of data center investment in Q1 financial results",
+     "publishedAt": "2026-08-07T17:00:40.000Z",
+     "sourceName": "DCD",
+     "sourceUrl": "https://www.datacenterdynamics.com/en/news/ntt-data-reports-half-a-billion-dollars-of-data-center-investment-in-q1-financial-results/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "deal",
+     "title": "NTT Data Is Said to Eye $9 Billion Outlay for Japan Data Centers",
+     "publishedAt": "2026-08-03T21:00:00.000Z",
+     "sourceName": "Bloomberg Technology",
+     "sourceUrl": "https://www.bloomberg.com/news/articles/2026-08-03/ntt-data-is-said-to-eye-9-billion-outlay-for-japan-data-centers",
+     "matchedIn": "headline",
+     "alongside": []
+    }
+   ]
+  },
+  "PERSISTENT": {
+   "name": "Persistent Systems",
+   "hits": [
+    {
+     "event": null,
+     "title": "Is paying artists enough to convince them to embrace AI?",
+     "publishedAt": "2026-08-02T13:00:00.000Z",
+     "sourceName": "AI | The Verge",
+     "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence/974018/pippa-seedance-artist-royalties",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "AMD Announces ROCm.ai AI-Driven Development Platform",
+     "publishedAt": "2026-07-24T00:00:00.000Z",
+     "sourceName": "HPCwire",
+     "sourceUrl": "https://www.hpcwire.com/off-the-wire/amd-rocm-ai-accelerates-ai-development-across-amd-platforms/",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "Data Center GPU Pricing 2026: The Full AI Pricing Index",
+     "publishedAt": "2026-07-20T00:00:00.000Z",
+     "sourceName": "IntuitionLabs",
+     "sourceUrl": "https://intuitionlabs.ai/articles/data-center-gpu-pricing-2026",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "Perplexity Computer Enhanced with Memory, Model Switching, and Website Publishing",
+     "publishedAt": "2026-07-13T00:00:00.000Z",
+     "sourceName": "Perplexity Official Changelog",
+     "sourceUrl": "https://www.perplexity.ai/changelog",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "Perplexity Adds Brain Memory System to Computer Agent",
+     "publishedAt": "2026-07-13T00:00:00.000Z",
+     "sourceName": "reconnAI",
+     "sourceUrl": "https://reconn-ai.com/llm-changelog.php",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "Anthropic brings Cowork out of the desktop and onto web and mobile",
+     "publishedAt": "2026-07-07T16:00:14.000Z",
+     "sourceName": "SiliconANGLE",
+     "sourceUrl": "https://siliconangle.com/2026/07/07/anthropic-brings-cowork-desktop-onto-web-mobile/",
+     "matchedIn": "summary",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "[AINews] Claude Tag: Multiplayer, Proactive, Persistent Agents in Slack",
+     "publishedAt": "2026-06-24T07:14:26.000Z",
+     "sourceName": "Latent.Space",
+     "sourceUrl": "https://www.latent.space/p/ainews-claude-tag-multiplayer-proactive",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "Perplexity Launches Brain, Self-Improving Memory System for Computer Agent",
+     "publishedAt": "2026-06-18T00:00:00.000Z",
+     "sourceName": "MarkTechPost",
+     "sourceUrl": "https://www.marktechpost.com/2026/06/18/perplexity-launches-brain/",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "Better Memory for a More Helpful ChatGPT",
+     "publishedAt": "2026-06-18T00:00:00.000Z",
+     "sourceName": "OpenAI / AI News Today",
+     "sourceUrl": "https://www.buildfastwithai.com/blogs/ai-news-today-june-6-2026",
+     "matchedIn": "summary",
+     "alongside": []
+    },
+    {
+     "event": null,
+     "title": "Yahoo Finance: CoreWeave's Agentic AI Launch Won't Move the Needle on CRWV Stock Despite 72% YTD Rally",
+     "publishedAt": "2026-06-01T00:00:00.000Z",
+     "sourceName": "CoreWeave / Yahoo Finance",
+     "sourceUrl": "https://finance.yahoo.com/markets/stocks/articles/coreweave-just-launched-shiny-product-173155496.html",
+     "matchedIn": "summary",
+     "alongside": []
+    }
+   ]
+  },
+  "PWC": {
+   "name": "PwC",
+   "hits": [
+    {
+     "event": "partnership",
+     "title": "PwC expands Anthropic alliance, to train 30,000 on Claude",
+     "publishedAt": "2026-05-14T00:00:00.000Z",
+     "sourceName": "SiliconANGLE",
+     "sourceUrl": "https://siliconangle.com/2026/05/14/pwc-expands-anthropic-alliance-will-train-30000-staff-claude/",
+     "matchedIn": "headline",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "PwC expands strategic alliance to deploy Claude across its business",
+     "publishedAt": "2026-05-04T00:00:00.000Z",
+     "sourceName": "Anthropic",
+     "sourceUrl": "https://www.anthropic.com/news/pwc-expanded-partnership",
+     "matchedIn": "headline",
+     "alongside": []
+    }
+   ]
+  },
+  "TTNQY": {
+   "name": "TCS",
+   "hits": [
+    {
+     "event": null,
+     "title": "Cognizant Expands Partnership with Anthropic",
+     "publishedAt": "2026-07-27T00:00:00.000Z",
+     "sourceName": "Cryptonomist",
+     "sourceUrl": "https://en.cryptonomist.ch/2026/07/27/cognizant-anthropic-partnership/",
+     "matchedIn": "summary",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "TCS and Anthropic form Global Premier Partnership to scale enterprise AI",
+     "publishedAt": "2026-06-12T00:00:00.000Z",
+     "sourceName": "TCS",
+     "sourceUrl": "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-anthropic-launch-global-premier-partnership-drive-enterprise-ai-scaling",
+     "matchedIn": "headline",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "TCS Partners with Anthropic as Global Premier Partner to Bring Claude to Regulated Industries",
+     "publishedAt": "2026-06-12T00:00:00.000Z",
+     "sourceName": "w.media",
+     "sourceUrl": "https://w.media/tcs-partners-with-anthropic-to-drive-enterprise-ai-adoption/",
+     "matchedIn": "headline",
+     "alongside": [
+      "Anthropic"
+     ]
+    },
+    {
+     "event": "partnership",
+     "title": "TCS becomes Global Premier Partner in Claude Partner Network",
+     "publishedAt": "2026-06-11T00:00:00.000Z",
+     "sourceName": "TechCrunch",
+     "sourceUrl": "https://techcrunch.com/2026/06/11/anthropic-taps-tcs-to-scale-its-enterprise-ai-deployments/",
+     "matchedIn": "headline",
+     "alongside": []
+    },
+    {
+     "event": "unclassified",
+     "title": "TCS Becomes First Global Systems Integrator to Deploy Mistral Forge for Enterprise Clients",
+     "publishedAt": "2026-06-02T00:00:00.000Z",
+     "sourceName": "BankInfoSecurity",
+     "sourceUrl": "https://www.bankinfosecurity.com/tcs-mistral-ai-sign-strategic-partnership-a-31835",
+     "matchedIn": "headline",
+     "alongside": [
+      "Mistral"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "TCS becomes first global systems integrator for Mistral Forge",
+     "publishedAt": "2026-05-28T00:00:00.000Z",
+     "sourceName": "Tata Consultancy Services",
+     "sourceUrl": "https://www.tcs.com/who-we-are/newsroom/press-release/tcs-partners-mistral-first-global-systems-integrator-enterprises-worldwide",
+     "matchedIn": "headline",
+     "alongside": [
+      "Mistral"
+     ]
+    }
+   ]
+  },
+  "UST": {
+   "name": "UST",
+   "hits": [
+    {
+     "event": "unclassified",
+     "title": "UST Partners with Anthropic for Enterprise AI Deployment",
+     "publishedAt": "2026-07-10T00:00:00.000Z",
+     "sourceName": "HPCwire",
+     "sourceUrl": "https://www.hpcwire.com/aiwire/2026/07/10/ust-partners-with-anthropic-to-bring-claude-to-engineering-and-enterprise-operations/",
+     "matchedIn": "headline",
+     "alongside": [
+      "Anthropic"
+     ]
+    }
+   ]
+  },
+  "WIT": {
+   "name": "Wipro",
+   "hits": [
+    {
+     "event": "unclassified",
+     "title": "ServiceNow Expands Agentic AI Workflow Ecosystem with Wipro, Digimarc, and HPE Partnerships",
+     "publishedAt": "2026-06-17T00:00:00.000Z",
+     "sourceName": "Yahoo Finance",
+     "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/servicenow-now-expands-agentic-ai-031541496.html",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    },
+    {
+     "event": "unclassified",
+     "title": "Partners including IBM, Cognizant, Wipro, NICE announce expanded ServiceNow AI Platform integrations",
+     "publishedAt": "2026-06-17T00:00:00.000Z",
+     "sourceName": "Yahoo Finance",
+     "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/servicenow-now-quietly-becoming-core-021137992.html",
+     "matchedIn": "headline",
+     "alongside": [
+      "ServiceNow"
+     ]
+    }
+   ]
+  },
+  "Z74": {
+   "name": "Singtel",
+   "hits": [
+    {
+     "event": "unclassified",
+     "title": "Mistral expands in Singapore with Singtel, HTX, NCS and ST Engineering",
+     "publishedAt": "2026-05-12T00:00:00.000Z",
+     "sourceName": "Digital News Asia",
+     "sourceUrl": "https://www.digitalnewsasia.com/business/mistral-ai-accelerates-singapore-expansion-strategic-partnership-and-industry",
+     "matchedIn": "headline",
+     "alongside": [
+      "Mistral"
+     ]
+    }
+   ]
+  }
+ }
+}
