@@ -17,6 +17,32 @@ than a gap.
 
 ## 16 August 2026
 
+**The comparison is laid out as a ranking now, not a table.**
+
+A table gave every column equal weight, which was backwards: one of them was
+the rating and the rest were context. Sitting momentum, capability maturity and
+reputation next to the assessment invited you to weigh them against it, when
+the assessment already reads fourteen variables and each of those reads one.
+
+It now reads the way the AI Enterprise category ranking reads. Rank, vendor,
+band and score on one line. Underneath, the evidence: how many domains were
+evidenced out of how many the market weighs, the weakest grade among them, and
+one chip per domain showing what it scored. Hover a chip for its grade and
+confidence.
+
+**A dash is not a zero.** Where a domain had too little evidence to score it
+draws a dash. It contributes nothing to the composite, but that is a fact about
+the evidence and not a finding that the vendor scored nothing.
+
+Category presence still appears and now says "context only, not the rank" on
+its own line, because a share figure in a column beside a rank invites the
+reading that it produced the rank.
+
+**Known difference from the source.** The domain chips carry the same fourteen
+values in a different order: AI Enterprise orders them by weight, and the
+weights are not in the data we can read, so ours follow the order the source
+serialises them in. The numbers are identical; the sequence is not.
+
 **There is now one vendor rating, and it is the assessment out of 5.**
 
 The product was carrying three ways of scoring a vendor. The vendor comparison
