@@ -100,7 +100,9 @@ export function ShortlistView({ payload }: { payload: ShortlistPayload }) {
                   : "border-base-300 hover:border-primary/50"
               }`}
             >
-              {c.category}
+              {/* label, not category: the latter is now the taxonomy id and
+                  would print "frontier_model_api" on a button. */}
+              {c.label}
               <span className="ml-1.5 font-mono text-sm text-muted">
                 {c.scored}
               </span>

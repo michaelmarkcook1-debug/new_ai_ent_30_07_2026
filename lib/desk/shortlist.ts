@@ -5,6 +5,10 @@ import { HQ_REGISTER } from "@/lib/shield/hq-register";
 import { vendorIdForSlug } from "@/lib/shield/vendor-map";
 import { isInvestor } from "@/lib/vendor/is-investor";
 import {
+  MARKET_CATEGORY_LIST,
+  vendorIdsInCategory,
+} from "@/lib/comparability";
+import {
   DEFAULT_WEIGHTS,
   INPUT_KEYS,
   type InputKey,
@@ -37,7 +41,10 @@ import {
 // still there when the analyst API is not, which on 8 August 2026 it was not.
 
 export interface ShortlistCategory {
+  /** The taxonomy id, e.g. `frontier_model_api`. */
   category: string;
+  /** Its display name, e.g. "Frontier model/API". */
+  label: string;
   /** Vendors in it carrying at least one published input. */
   scored: number;
   /** True when three can be named without leaving the category. */
@@ -181,25 +188,37 @@ export function jurisdictionCoverage(): {
   };
 }
 
-/** Categories the product can rank inside, most populous first. */
+/**
+ * Categories the product can rank inside, most populous first.
+ *
+ * THE TAXONOMY IS THE THIRTEEN, not the vendor record's own category field.
+ *
+ * This used to count `VENDOR_DIRECTORY[].category`, which places each vendor in
+ * exactly one market. AI Enterprise ranks a vendor in every market it competes
+ * in: Microsoft in seven, Google in five, Anthropic in four. Counting the
+ * single field gave Frontier model/API twelve vendors where the ranking has
+ * fourteen, and it made whole categories invisible here, because
+ * "Developer/coding agent" and "Agent platform" are markets a vendor is ranked
+ * in rather than the one label its record carries.
+ *
+ * lib/comparability.ts already resolves this the right way and the vendor
+ * comparison has used it all along. This now reads the same source, so the
+ * Decision Desk and the comparison cannot disagree about who competes where.
+ */
 export function shortlistCategories(): ShortlistCategory[] {
   const set = scorecardSet();
   const byId = new Map(set.vendors.map((v) => [v.vendorId, v]));
-  const counts = new Map<string, number>();
 
-  for (const v of VENDOR_DIRECTORY) {
-    // A vendor with no category cannot be ranked inside one. Skipped rather
-    // than bucketed under "Other", which would invite exactly the
-    // cross-category comparison this whole module refuses to make.
-    if (!v.category || isInvestor(v.id)) continue;
-    const sc = byId.get(v.id);
-    if (!sc || sc.result.score === null) continue;
-    counts.set(v.category, (counts.get(v.category) ?? 0) + 1);
-  }
-
-  return [...counts.entries()]
-    .map(([category, scored]) => ({ category, scored, full: scored >= 3 }))
-    .sort((a, b) => b.scored - a.scored || a.category.localeCompare(b.category));
+  return MARKET_CATEGORY_LIST.map((c) => {
+    const scored = vendorIdsInCategory(c.id).filter((id) => {
+      if (isInvestor(id)) return false;
+      const sc = byId.get(id);
+      return Boolean(sc && sc.result.score !== null);
+    }).length;
+    return { category: c.id, label: c.name, scored, full: scored >= 3 };
+  })
+    .filter((c) => c.scored > 0)
+    .sort((a, b) => b.scored - a.scored || a.label.localeCompare(b.label));
 }
 
 /** Plain-language band for a verdict, so the paragraph never prints "yes". */
@@ -340,10 +359,16 @@ export function buildShortlist(
   filter: JurisdictionFilter = "all"
 ): Shortlist | null {
   const set = scorecardSet(weights);
-  const inCategory = new Set(
-    VENDOR_DIRECTORY.filter((v) => v.category === category).map((v) => v.id)
-  );
+  // Membership from the thirteen-category taxonomy, the same source the vendor
+  // comparison reads, so a vendor competing in several markets is considered in
+  // each rather than only in the one its record happens to name.
+  //
+  // `category` is the taxonomy id. Every sentence a reader sees uses the label,
+  // because "frontier_model_api" in a paragraph is a leaked internal key.
+  const inCategory = new Set(vendorIdsInCategory(category));
   if (inCategory.size === 0) return null;
+  const label =
+    MARKET_CATEGORY_LIST.find((c) => c.id === category)?.name ?? category;
 
   const position = new Map(
     VENDOR_DIRECTORY.map((v) => [v.id, v.marketPosition ?? ""])
@@ -392,7 +417,8 @@ export function buildShortlist(
     rank: i + 1,
     vendorId: v.vendorId,
     name: v.name,
-    category,
+    // The label, not the id: this is read by a person on a card.
+    category: label,
     marketPosition: position.get(v.vendorId) ?? "",
     score: v.result.score as number,
     result: v.result,
@@ -401,13 +427,13 @@ export function buildShortlist(
     reason: reasonFor(
       v.name,
       i + 1,
-      category,
+      label,
       considered,
       v.inputs,
       v.verdicts,
       v.result
     ),
-    limit: limitFor(category),
+    limit: limitFor(label),
     jurisdiction: jurisdictionFor(v.vendorId),
   }));
 
@@ -417,7 +443,7 @@ export function buildShortlist(
     considered,
     shortfall:
       entries.length < size
-        ? `${category} holds ${considered} scored ${considered === 1 ? "vendor" : "vendors"}, so this is ${entries.length} rather than ${size}. The gap is our coverage, not the market: naming a vendor from another category would compare scores the product states are only comparable within one.`
+        ? `${label} holds ${considered} scored ${considered === 1 ? "vendor" : "vendors"}, so this is ${entries.length} rather than ${size}. The gap is our coverage, not the market: naming a vendor from another category would compare scores the product states are only comparable within one.`
         : null,
     weights,
     filter,

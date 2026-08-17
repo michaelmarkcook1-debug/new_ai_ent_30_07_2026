@@ -55,11 +55,11 @@ describe("what the register was built to fix", () => {
 
   it("excludes MiniMax from a cleared-only shortlist", () => {
     // The behaviour, not just the datum. This is the thing the reader asked for.
-    const cat = shortlistCategories().find((c) => c.category === "Frontier model/API");
+    const cat = shortlistCategories().find((c) => c.category === "frontier_model_api");
     expect(cat, "the category MiniMax sits in has gone").toBeTruthy();
 
-    const all = buildShortlist("Frontier model/API", DEFAULT_WEIGHTS, 40, "all");
-    const cleared = buildShortlist("Frontier model/API", DEFAULT_WEIGHTS, 40, "cleared");
+    const all = buildShortlist("frontier_model_api", DEFAULT_WEIGHTS, 40, "all");
+    const cleared = buildShortlist("frontier_model_api", DEFAULT_WEIGHTS, 40, "cleared");
     expect(all!.entries.some((e) => e.vendorId === "minimax")).toBe(true);
     expect(cleared!.entries.some((e) => e.vendorId === "minimax")).toBe(false);
     expect(cleared!.excluded.some((e) => e.vendorId === "minimax")).toBe(true);
