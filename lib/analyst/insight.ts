@@ -328,9 +328,19 @@ export function marketTake(m: MarketMetrics): MarketTake {
     clear: leads.filter((l) => l.gap !== null && l.gap >= 0.5),
     gaining: m.gaining.map((s) => s.vendorName),
     slipping: m.slipping.map((s) => s.vendorName),
-    strongButRisky: scored.filter(
-      (v) => (v.composite ?? 0) >= 60 && withRisk.has(v.id)
-    ),
+    // "Ranks well AND carries an open risk". Read off the assessment now, as
+    // a top-third placement in any market it competes in, rather than a
+    // composite over 60. The 60 was a 0 to 100 threshold and it sat in the same
+    // paragraph as gaps quoted out of 5, so one sentence described two scales.
+    strongButRisky: scored.filter((v) => {
+      if (!withRisk.has(v.id)) return false;
+      return Object.values(m.categoryComposites).some((placements) => {
+        const p = placements[v.id];
+        if (!p) return false;
+        const size = Object.keys(placements).length;
+        return size >= 3 && p.rank <= Math.ceil(size / 3);
+      });
+    }),
   };
 }
 
@@ -727,7 +737,7 @@ export function vendorViewInsight(
         : ""
     }${
       strongButRisky.length > 0
-        ? `${nameList(strongButRisky.map((v) => v.name))} score 60 or above while carrying an open high-severity risk. The composite measures capability and standing and does not net off governance exposure, so those vendors rank well and may still be the wrong commitment this quarter.`
+        ? `${nameList(strongButRisky.map((v) => v.name))} place in the top third of a market they compete in while carrying an open high-severity risk. The assessment measures evidenced capability and does not net off governance exposure, so those vendors rank well and may still be the wrong commitment this quarter.`
         : "No vendor combines a shortlist-grade score with an open high-severity risk, so the ranking can be read at face value this period."
     }${
       noMomentum > 0
@@ -742,7 +752,7 @@ export function vendorViewInsight(
         ? `${tightest.leader} and ${tightest.runnerUp} are within ${tightest.gap} points in ${tightest.category}, so decide on fit, not score.`
         : "Scores compare within a market category only, never across one.",
       strongButRisky.length > 0
-        ? `A high composite does not clear a vendor: ${nameList(strongButRisky.map((v) => v.name), 2)} carry open risks.`
+        ? `A high assessment does not clear a vendor: ${nameList(strongButRisky.map((v) => v.name), 2)} carry open risks.`
         : noMomentum > 0
           ? `${noMomentum} vendors publish no momentum reading, which is an absence rather than a flat trend.`
           : "Momentum is published across the scored set.",
