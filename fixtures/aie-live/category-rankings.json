@@ -1,0 +1,531 @@
+{
+ "source": "https://ranking-engine-red.vercel.app/category/<id>",
+ "note": "Weighted composite (0-5) of evidence-graded assessment domains, weights specific to each category, coverage-discounted. Parsed from the published pages: v1 does not expose this on its API and is read-only.",
+ "capturedAt": "2026-08-17T02:18:23.206Z",
+ "categories": [
+  {
+   "categoryId": "frontier_model_api",
+   "label": "Frontier model/API",
+   "domains": 14,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "anthropic",
+     "composite": 3.65,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "openai",
+     "composite": 3.36,
+     "position": "Leader"
+    },
+    {
+     "rank": 3,
+     "vendorId": "google",
+     "composite": 3.07,
+     "position": "Strong"
+    },
+    {
+     "rank": 4,
+     "vendorId": "deepseek",
+     "composite": 2.48,
+     "position": "Strong"
+    },
+    {
+     "rank": 5,
+     "vendorId": "xai",
+     "composite": 2.29,
+     "position": "Strong"
+    },
+    {
+     "rank": 6,
+     "vendorId": "meta",
+     "composite": 2.16,
+     "position": "Strong"
+    },
+    {
+     "rank": 7,
+     "vendorId": "cohere",
+     "composite": 2.05,
+     "position": "Contender"
+    },
+    {
+     "rank": 8,
+     "vendorId": "alibaba",
+     "composite": 2.03,
+     "position": "Contender"
+    },
+    {
+     "rank": 9,
+     "vendorId": "moonshot",
+     "composite": 2.02,
+     "position": "Contender"
+    },
+    {
+     "rank": 10,
+     "vendorId": "mistral",
+     "composite": 1.82,
+     "position": "Contender"
+    },
+    {
+     "rank": 11,
+     "vendorId": "snowflake",
+     "composite": 1.69,
+     "position": null
+    },
+    {
+     "rank": 12,
+     "vendorId": "minimax",
+     "composite": 1.44,
+     "position": null
+    },
+    {
+     "rank": 13,
+     "vendorId": "zai",
+     "composite": 1.1,
+     "position": null
+    },
+    {
+     "rank": 14,
+     "vendorId": "ai21",
+     "composite": 1.1,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "enterprise_assistant",
+   "label": "Enterprise assistant",
+   "domains": 12,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "anthropic",
+     "composite": 3.42,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "openai",
+     "composite": 3.37,
+     "position": "Strong"
+    },
+    {
+     "rank": 3,
+     "vendorId": "glean",
+     "composite": 2.95,
+     "position": "Contender"
+    },
+    {
+     "rank": 4,
+     "vendorId": "writer",
+     "composite": 2.33,
+     "position": null
+    },
+    {
+     "rank": 5,
+     "vendorId": "microsoft",
+     "composite": 2.19,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "developer_coding_agent",
+   "label": "Developer/coding agent",
+   "domains": 14,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "anthropic",
+     "composite": 3.69,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "openai",
+     "composite": 3.32,
+     "position": "Strong"
+    },
+    {
+     "rank": 3,
+     "vendorId": "google",
+     "composite": 3.09,
+     "position": "Contender"
+    },
+    {
+     "rank": 4,
+     "vendorId": "microsoft",
+     "composite": 1.53,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "agent_platform",
+   "label": "Agent platform",
+   "domains": 12,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "anthropic",
+     "composite": 3.34,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "openai",
+     "composite": 3.24,
+     "position": "Strong"
+    },
+    {
+     "rank": 3,
+     "vendorId": "aws",
+     "composite": 2.77,
+     "position": "Strong"
+    },
+    {
+     "rank": 4,
+     "vendorId": "microsoft",
+     "composite": 2.17,
+     "position": "Contender"
+    },
+    {
+     "rank": 5,
+     "vendorId": "salesforce",
+     "composite": 2.03,
+     "position": null
+    },
+    {
+     "rank": 6,
+     "vendorId": "servicenow",
+     "composite": 1.71,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "rag_enterprise_search",
+   "label": "RAG/enterprise search",
+   "domains": 12,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "google",
+     "composite": 3.02,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "glean",
+     "composite": 2.87,
+     "position": "Strong"
+    },
+    {
+     "rank": 3,
+     "vendorId": "cohere",
+     "composite": 2.78,
+     "position": "Contender"
+    },
+    {
+     "rank": 4,
+     "vendorId": "snowflake",
+     "composite": 2.61,
+     "position": null
+    },
+    {
+     "rank": 5,
+     "vendorId": "hebbia",
+     "composite": 2.47,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "workflow_automation_ai",
+   "label": "Workflow automation AI",
+   "domains": 12,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "sap",
+     "composite": 2.82,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "salesforce",
+     "composite": 2.02,
+     "position": "Strong"
+    },
+    {
+     "rank": 3,
+     "vendorId": "moveworks",
+     "composite": 1.92,
+     "position": "Contender"
+    },
+    {
+     "rank": 4,
+     "vendorId": "servicenow",
+     "composite": 1.65,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "crm_customer_ai",
+   "label": "CRM/customer AI",
+   "domains": 12,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "oracle",
+     "composite": 2.25,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "microsoft",
+     "composite": 2.12,
+     "position": "Contender"
+    },
+    {
+     "rank": 3,
+     "vendorId": "salesforce",
+     "composite": 2.04,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "itsm_hr_service_ai",
+   "label": "ITSM/HR/service AI",
+   "domains": 12,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "microsoft",
+     "composite": 2.14,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "moveworks",
+     "composite": 1.89,
+     "position": "Contender"
+    },
+    {
+     "rank": 3,
+     "vendorId": "servicenow",
+     "composite": 1.53,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "cloud_ai_platform",
+   "label": "Cloud AI platform",
+   "domains": 12,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "databricks",
+     "composite": 3.05,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "google",
+     "composite": 3,
+     "position": "Strong"
+    },
+    {
+     "rank": 3,
+     "vendorId": "aws",
+     "composite": 2.69,
+     "position": "Contender"
+    },
+    {
+     "rank": 4,
+     "vendorId": "snowflake",
+     "composite": 2.58,
+     "position": null
+    },
+    {
+     "rank": 5,
+     "vendorId": "microsoft",
+     "composite": 2.3,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "regulated_industry_ai",
+   "label": "Regulated-industry AI",
+   "domains": 12,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "rogo",
+     "composite": 3.28,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "harvey",
+     "composite": 3.18,
+     "position": "Strong"
+    },
+    {
+     "rank": 3,
+     "vendorId": "ibm",
+     "composite": 2.91,
+     "position": "Contender"
+    },
+    {
+     "rank": 4,
+     "vendorId": "cohere",
+     "composite": 2.68,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "ai_silicon",
+   "label": "AI silicon / accelerators",
+   "domains": 7,
+   "held": 1,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "nvidia",
+     "composite": 4.09,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "amd",
+     "composite": 3.29,
+     "position": "Strong"
+    },
+    {
+     "rank": 3,
+     "vendorId": "broadcom",
+     "composite": 3.18,
+     "position": "Contender"
+    },
+    {
+     "rank": 4,
+     "vendorId": "cerebras",
+     "composite": 2.57,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "ai_cloud_compute",
+   "label": "AI cloud & compute",
+   "domains": 10,
+   "held": 1,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "google",
+     "composite": 3.31,
+     "position": "Leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "aws",
+     "composite": 3.24,
+     "position": "Strong"
+    },
+    {
+     "rank": 3,
+     "vendorId": "microsoft",
+     "composite": 2.95,
+     "position": "Strong"
+    },
+    {
+     "rank": 4,
+     "vendorId": "oracle",
+     "composite": 2.49,
+     "position": "Contender"
+    },
+    {
+     "rank": 5,
+     "vendorId": "coreweave",
+     "composite": 2.37,
+     "position": "Contender"
+    },
+    {
+     "rank": 6,
+     "vendorId": "alibaba",
+     "composite": 1.98,
+     "position": null
+    },
+    {
+     "rank": 7,
+     "vendorId": "humain",
+     "composite": 1.19,
+     "position": null
+    }
+   ]
+  },
+  {
+   "categoryId": "neocloud_inference",
+   "label": "Neocloud & inference",
+   "domains": 10,
+   "held": 0,
+   "ranked": [
+    {
+     "rank": 1,
+     "vendorId": "groq",
+     "composite": 2.88,
+     "position": "Emerging leader"
+    },
+    {
+     "rank": 2,
+     "vendorId": "lambda",
+     "composite": 2.69,
+     "position": "Strong"
+    },
+    {
+     "rank": 3,
+     "vendorId": "together",
+     "composite": 2.52,
+     "position": "Strong"
+    },
+    {
+     "rank": 4,
+     "vendorId": "coreweave",
+     "composite": 2.35,
+     "position": "Contender"
+    },
+    {
+     "rank": 5,
+     "vendorId": "fireworks",
+     "composite": 2.1,
+     "position": null
+    },
+    {
+     "rank": 6,
+     "vendorId": "nscale",
+     "composite": 1.47,
+     "position": null
+    }
+   ]
+  }
+ ]
+}
