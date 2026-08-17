@@ -77,10 +77,6 @@ single category did not open it either. Both fixed. Some old text that repeated
 itself has gone, and two pages of dead code left behind by earlier moves has
 been removed.
 
----
-
-## 17 August 2026
-
 **Construction can now ask about the people who do the designing.**
 
 Ask ModelEngine about construction and it used to answer for five jobs: the
@@ -109,10 +105,6 @@ That is worth reading twice, because it is the shape of answer this product is
 for. Architecture is not a job AI cannot help with at all. It is a job where the
 model has to clear a bar it currently does not clear, and pretending otherwise
 would cost somebody real money.
-
----
-
-## 17 August 2026
 
 **The sector lens now covers every industry, not a third of them.**
 
