@@ -109,17 +109,47 @@ const STOPWORDS = new Set(
   "a an and are as at be by for from has have how in is it its of on or our that the this to was we what when where which who will with your you".split(" ")
 );
 
+/**
+ * Crude suffix stripping, so a question and a chunk that use different forms
+ * of the same word still meet.
+ *
+ * Plain substring matching is asymmetric and silently loses the reverse case.
+ * A question containing "train" matches a chunk saying "trains", because the
+ * chunk contains the shorter string. A question containing "retired" does NOT
+ * match a chunk saying "retiring", because neither contains the other. That
+ * one cost real recall: "which models are being retired and when do our calls
+ * start failing" retrieved no deprecation chunk at all, so the most actionable
+ * evidence in the corpus, dated model retirements, was unreachable by the
+ * plainest way of asking for it.
+ *
+ * Deliberately not a real stemmer. It runs on both sides and is paired with a
+ * prefix test, so over-stripping costs a little precision and never silently
+ * drops a match. For a keyword retriever feeding a model that must cite what
+ * it was given, recall is the side to err on.
+ */
+function stem(word: string): string {
+  const s = word.replace(/(ations|ation|ements|ement|ings|ing|ers|er|ed|es|s)$/, "");
+  return s.length >= 3 ? s : word;
+}
+
 export function retrieve(corpus: Chunk[], question: string, k = 4): { chunk: Chunk; score: number }[] {
   const terms = question
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
     .filter((t) => t.length > 2 && !STOPWORDS.has(t));
+  const stems = terms.map(stem);
   const scored = corpus.map((chunk) => {
     const hay = chunk.text.toLowerCase();
+    // Tokenised once per chunk so the stem test is a prefix test against whole
+    // words, not a substring scan that would match inside unrelated ones.
+    const words = hay.replace(/[^a-z0-9\s]/g, " ").split(/\s+/).filter(Boolean);
+    const wordStems = new Set(words.map(stem));
     let score = 0;
-    for (const t of terms) {
-      if (hay.includes(t)) score += 1;
+    for (let i = 0; i < terms.length; i += 1) {
+      // The original substring test first, so nothing that matched before
+      // stops matching now. The stem test only ever adds recall.
+      if (hay.includes(terms[i]) || wordStems.has(stems[i])) score += 1;
     }
     // At equal keyword score: the reader's own documents first, then material
     // quoted from a vendor's published terms, then the sample documents, then

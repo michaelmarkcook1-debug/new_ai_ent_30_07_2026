@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { LaneBadge } from "@/lib/ui/badges";
 import { PositionChip } from "@/lib/position/save-position";
+import type { ThreeVendors } from "@/lib/desk/three-vendors";
+import { useShortlist } from "@/lib/shortlist";
 import {
   latestPosition,
   matchPosition,
@@ -32,6 +34,8 @@ interface Turn {
   tokens?: number;
   mode?: string;
   links?: { label: string; href: string }[];
+  /** The three the weighted assessment picked, computed server-side. */
+  three?: ThreeVendors | null;
 }
 
 const EXAMPLES = [
@@ -41,9 +45,67 @@ const EXAMPLES = [
   "Energy company piloting maintenance AI; the board wants to know who delivers it and what it costs.",
 ];
 
+/**
+ * Put all three on the shortlist, then link to the pages that read it.
+ *
+ * This is the whole handoff. ModelEngine, Trust Rank and Integrators do not
+ * take a vendor query param, they read the shortlist cookie, so linking with
+ * `?vendor=x` would have navigated and filtered nothing. Carrying the three
+ * across first means those pages open already narrowed to them.
+ *
+ * The links stay visible before the click, greyed, so a reader can see where
+ * this goes without having to commit to it first.
+ */
+function CarryThrough({ three }: { three: ThreeVendors }) {
+  const shortlist = useShortlist();
+  const ids = three.vendors.map((v) => v.vendorId);
+  const allOn = ids.every((id) => shortlist.has(id));
+
+  const carry = () => {
+    for (const id of ids) if (!shortlist.has(id)) shortlist.toggle(id);
+  };
+
+  return (
+    <div className="mt-3 border-t border-base-300 pt-2.5">
+      {allOn ? (
+        <p className="mb-2 text-xs text-good">
+          All three are on your shortlist. These pages are now filtered to them.
+        </p>
+      ) : (
+        <button
+          type="button"
+          onClick={carry}
+          className="mb-2 rounded-full bg-primary px-3 py-1.5 text-xs font-semibold text-white transition hover:opacity-90"
+        >
+          Carry these three through
+        </button>
+      )}
+      <div className="flex flex-wrap gap-2">
+        {[
+          { label: "ModelEngine", href: "/market-view" },
+          { label: "Trust Rank", href: "/trust-rank" },
+          { label: "Integrators", href: "/alliances" },
+        ].map((l) => (
+          <Link
+            key={l.href}
+            href={l.href}
+            className={`rounded-full border px-3 py-1 text-xs font-semibold transition ${
+              allOn
+                ? "border-primary text-primary hover:bg-primary hover:text-white"
+                : "border-base-300 text-muted hover:text-base-content"
+            }`}
+          >
+            {l.label}
+          </Link>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
   const params = useSearchParams();
-  const [depth, setDepth] = useState<"quick" | "comprehensive">("quick");
+  const [depth, setDepth] = useState<"quick" | "comprehensive" | "weighted">("quick");
   const [situation, setSituation] = useState("");
   const [answers, setAnswers] = useState<string[]>([]);
   // The questions already put, kept beside the answers and sent with them.
@@ -116,7 +178,7 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
             if (evt.type === "meta") citations = evt.citations;
             const patch: Partial<Turn> =
               evt.type === "done"
-                ? { tiers: evt.tiers, tokens: evt.tokens, mode: evt.mode, links: evt.links }
+                ? { tiers: evt.tiers, tokens: evt.tokens, mode: evt.mode, links: evt.links, three: evt.three }
                 : {};
             setTurns((t) => {
               const copy = [...t];
@@ -175,6 +237,7 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
             tokens: data.tokens,
             mode: data.mode,
             links: data.links,
+            three: data.three,
           },
         ]);
         setPhase("done");
@@ -218,7 +281,7 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
   useEffect(() => {
     const q = params.get("q");
     const d = params.get("depth");
-    if (d === "comprehensive") setDepth("comprehensive");
+    if (d === "comprehensive" || d === "weighted") setDepth(d);
     if (q && !started.current) {
       started.current = true;
       start(q);
@@ -321,7 +384,7 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
           </div>
           <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-1 rounded-full border border-base-300 p-0.5">
-              {(["quick", "comprehensive"] as const).map((d) => (
+              {(["quick", "comprehensive", "weighted"] as const).map((d) => (
                 <button
                   key={d}
                   type="button"
@@ -329,11 +392,17 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
                   title={
                     d === "quick"
                       ? "One question, then the finding written by Sonnet."
-                      : "Up to three questions, and the finding written by Opus."
+                      : d === "comprehensive"
+                        ? "Up to three questions, and the finding written by Opus."
+                        : "No questions. Straight to the three vendors the weighted assessment picks, with every variable behind each score."
                   }
-                  className={`rounded-full px-3 py-1 text-xs font-semibold capitalize transition ${depth === d ? "bg-primary text-white" : "text-muted hover:text-base-content"}`}
+                  className={`whitespace-nowrap rounded-full px-3 py-1 text-xs font-semibold transition ${depth === d ? "bg-primary text-white" : "text-muted hover:text-base-content"}`}
                 >
-                  {d === "quick" ? "Quick response" : "Comprehensive"}
+                  {d === "quick"
+                    ? "Quick response"
+                    : d === "comprehensive"
+                      ? "Comprehensive"
+                      : "Weighted score"}
                 </button>
               ))}
             </div>
@@ -412,6 +481,81 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
                   <p className="micro-label mb-1 text-insight">Tailored finding</p>
                 ) : null}
                 <p className="whitespace-pre-wrap">{t.text}</p>
+
+                {/* The three, as the assessment computed them, rendered from
+                    the payload rather than parsed back out of the prose. The
+                    finding names them in its own words; these cards carry the
+                    score, the variables behind it and the handoffs, so what a
+                    reader acts on is the computed record and not a sentence a
+                    model wrote about it. */}
+                {t.kind === "finding" && t.three ? (
+                  <div className="mt-3 border-t border-base-300 pt-3">
+                    <p className="micro-label mb-2">
+                      The three, by weighted assessment
+                      <span className="ml-1.5 font-normal normal-case tracking-normal text-muted">
+                        {t.three.marketLabel} · {t.three.basis} · read{" "}
+                        {t.three.capturedAt.slice(0, 10)}
+                      </span>
+                    </p>
+                    <ol className="space-y-2">
+                      {t.three.vendors.map((v) => (
+                        <li
+                          key={v.vendorId}
+                          className="rounded-lg border border-base-300 bg-base-100 px-3 py-2.5"
+                        >
+                          <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                            <span className="flex items-baseline gap-2">
+                              <span className="font-mono text-xs text-muted tabular-nums">
+                                #{v.rank}
+                              </span>
+                              <span className="text-sm font-bold">{v.name}</span>
+                              {v.position ? (
+                                <span className="rounded-full border border-good/40 bg-good-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wide text-good">
+                                  {v.position}
+                                </span>
+                              ) : null}
+                            </span>
+                            <span className="font-mono text-base font-semibold tabular-nums">
+                              {v.composite.toFixed(2)}
+                              <span className="ml-0.5 text-xs font-normal text-muted">
+                                /5
+                              </span>
+                            </span>
+                          </div>
+                          <p className="mt-1 font-mono text-xs text-muted">
+                            {v.evidenced}/{v.domainsTotal} domains evidenced
+                            {v.weakestGrade ? ` · weakest ${v.weakestGrade}` : ""}
+                            {v.strongest.length
+                              ? ` · strongest ${v.strongest
+                                  .map((s) => `${s.domain} ${s.score.toFixed(1)}`)
+                                  .join(", ")}`
+                              : ""}
+                          </p>
+                          <Link
+                            href={v.profileHref}
+                            className="mt-1.5 inline-block text-xs text-primary hover:underline"
+                          >
+                            Full profile
+                          </Link>
+                        </li>
+                      ))}
+                    </ol>
+                    {t.three.alsoRanked > 0 || t.three.held > 0 ? (
+                      <p className="mt-2 text-xs text-muted">
+                        {t.three.alsoRanked > 0
+                          ? `${t.three.alsoRanked} more ranked below these in this market`
+                          : ""}
+                        {t.three.alsoRanked > 0 && t.three.held > 0 ? ", and " : ""}
+                        {t.three.held > 0
+                          ? `${t.three.held} held for thin evidence rather than ranked low`
+                          : ""}
+                        .
+                      </p>
+                    ) : null}
+                    <CarryThrough three={t.three} />
+                  </div>
+                ) : null}
+
                 {t.links && t.links.length > 0 ? (
                   <div className="mt-3 flex flex-wrap gap-2 border-t border-base-300 pt-2">
                     {t.links.map((l) => (

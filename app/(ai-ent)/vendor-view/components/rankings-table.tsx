@@ -147,13 +147,26 @@ export function RankingsTable({
         </div>
       </section>
 
-      {/* One ranked block per category */}
-      {visibleGroups.map((group) => (
+      {/* One ranked block per category.
+          The first block opens on arrival. This page's whole claim is that it
+          is the vendor set as an evidence table, and it was landing with all
+          thirteen collapsed, so a reader arriving at the evidence table saw no
+          evidence and no table.
+          The key carries the open condition on purpose. `defaultOpen` is a
+          useState initial value, so filtering down to one category set the
+          prop true on an already-mounted accordion and nothing happened: you
+          picked the one category you wanted and got an empty panel. Keying on
+          the condition remounts it, which is React's documented way to reset
+          state, and it also drops manual open/close state when the filter
+          changes, which is the behaviour you want anyway. */}
+      {visibleGroups.map((group, groupIndex) => {
+        const open = visibleGroups.length === 1 || groupIndex === 0;
+        return (
         <Accordion
-          key={group.category.id}
+          key={`${group.category.id}-${open}`}
           title={group.category.name}
           count={group.rows.length}
-          defaultOpen={visibleGroups.length === 1}
+          defaultOpen={open}
         >
         <section className="rounded-lg border-base-300 bg-base-100">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-base-300 px-3 py-2.5">
@@ -291,7 +304,8 @@ export function RankingsTable({
           </div>
         </section>
         </Accordion>
-      ))}
+        );
+      })}
 
       {notPlaced.length > 0 && !only ? (
         <section className="rounded-lg border border-dashed border-base-300 bg-base-200/40 p-4">

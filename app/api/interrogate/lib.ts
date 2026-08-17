@@ -1,6 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { buildCorpus, retrieve, type Chunk } from "../analyst/lib";
+import { threeVendorsFor } from "@/lib/desk/three-vendors";
 
 // Interrogate engine (hero piece, mirroring the deployed AIE app's
 // Interrogate pattern): the user states their situation, we ask a small
@@ -12,7 +13,16 @@ import { buildCorpus, retrieve, type Chunk } from "../analyst/lib";
 export interface InterrogateState {
   situation: string;
   answers: string[];
-  depth: "quick" | "comprehensive";
+  /**
+   * How the finding is produced.
+   *
+   * "weighted" asks nothing and goes straight to the three vendors the
+   * weighted assessment picks, with every variable behind each composite. It
+   * exists because the assessment is the product's one vendor rating, and a
+   * reader who already knows their market should not have to answer a question
+   * to reach it.
+   */
+  depth: "quick" | "comprehensive" | "weighted";
   /**
    * The questions already put to this reader.
    *
@@ -120,7 +130,9 @@ export function detectFacets(text: string): Facets {
 export function nextQuestion(state: InterrogateState): string | null {
   const combined = [state.situation, ...state.answers].join("\n");
   const facets = detectFacets(combined);
-  const maxQuestions = state.depth === "quick" ? 1 : 3;
+  // Weighted asks nothing: the reader chose the assessment, not an interview.
+  const maxQuestions =
+    state.depth === "weighted" ? 0 : state.depth === "quick" ? 1 : 3;
   if (state.answers.length >= maxQuestions) return null;
 
   // A saved position already establishes the sector, so asking for it would
@@ -220,38 +232,64 @@ export async function interrogateCorpus(sid: string): Promise<Chunk[]> {
 export function scriptedFinding(
   state: InterrogateState,
   corpus: Chunk[]
-): { finding: string; citations: { source: string; kind: string }[] } {
+): {
+  finding: string;
+  citations: { source: string; kind: string }[];
+  three: ReturnType<typeof threeVendorsFor>;
+} {
   const combined = [state.situation, ...state.answers].join("\n");
   const facets = detectFacets(combined);
   const hits = retrieve(corpus, combined, 6);
 
+  // The three the assessment picks, on the same computed path the live engine
+  // uses. Without this the no-key demo answered a "which vendors" question
+  // with a wall of quoted chunks and no vendors in it.
+  const three = threeVendorsFor(combined);
+
   const parts: string[] = [];
   parts.push(
-    `Reading of your situation: ${[
-      facets.industry ? `${facets.industry} context` : "industry not stated",
+    `Your situation: ${[
+      facets.industry ? `${facets.industry}` : "industry not stated",
       facets.scale ? "enterprise scale" : "scale not stated",
-      facets.constraint ? `binding constraint ${facets.constraint}` : "constraint not stated",
-      facets.stack.length > 0 ? `existing stack signals: ${facets.stack.join(", ")}` : "no stack named",
+      facets.constraint ? `binding constraint is ${facets.constraint}` : "constraint not stated",
+      facets.stack.length > 0 ? `already named: ${facets.stack.join(", ")}` : "no existing stack named",
     ].join("; ")}.`
   );
 
-  if (hits.length === 0) {
+  if (three) {
     parts.push(
-      "The grounded sources do not cover this situation. Rather than guess, that is stated plainly: try naming the industry, the workflow, or the vendors under consideration."
+      `The three vendors, by weighted assessment in ${three.marketLabel}:\n${three.vendors
+        .map(
+          (v) =>
+            `${v.rank}. ${v.name}, ${v.composite.toFixed(2)} of 5${v.position ? ` (${v.position})` : ""}. Evidenced on ${v.evidenced} of ${v.domainsTotal} domains${v.weakestGrade ? `, weakest evidence ${v.weakestGrade}` : ""}.`
+        )
+        .join("\n")}`
     );
   } else {
-    parts.push("What the grounded, cited sources support:");
-    hits.forEach((h, i) => {
-      parts.push(`${i + 1}. "${h.chunk.text}" (${h.chunk.source})`);
-    });
+    parts.push(
+      "No market could be determined from what you have written, so no three vendors are named. Naming the market, the workflow or the vendors you are weighing will produce them."
+    );
   }
 
-  parts.push(
-    "Where to go next in this workspace: the vendor rankings for the evidence table, Trust Rank for the regulatory grid, and Assess and Decide for the weighted decision with its derivation."
-  );
+  // Two, not eight. The old version quoted every hit in full, which made the
+  // sample finding several times longer than the live one and buried the
+  // vendors under it.
+  if (hits.length > 0) {
+    parts.push(
+      `What the cited sources add:\n${hits
+        .slice(0, 2)
+        .map((h) => `"${h.chunk.text}" (${h.chunk.source})`)
+        .join("\n")}`
+    );
+  } else {
+    parts.push(
+      "The cited sources do not reach this situation, which is stated rather than filled in."
+    );
+  }
 
   return {
     finding: parts.join("\n\n"),
     citations: hits.map((h) => ({ source: h.chunk.source, kind: h.chunk.sourceKind })),
+    three,
   };
 }

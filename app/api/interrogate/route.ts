@@ -73,7 +73,12 @@ export async function POST(request: NextRequest) {
   const state: InterrogateState = {
     situation,
     answers: (body.answers ?? []).map((a) => String(a).slice(0, 2000)),
-    depth: body.depth === "comprehensive" ? "comprehensive" : "quick",
+    depth:
+      body.depth === "comprehensive"
+        ? "comprehensive"
+        : body.depth === "weighted"
+          ? "weighted"
+          : "quick",
     // The questions already put, so the engine does not repeat itself.
     asked: Array.isArray(body.asked)
       ? body.asked
@@ -112,7 +117,7 @@ export async function POST(request: NextRequest) {
   }
 
   const corpus = await interrogateCorpus(sid);
-  const { finding, citations } = scriptedFinding(state, corpus);
+  const { finding, citations, three } = scriptedFinding(state, corpus);
   return NextResponse.json({
     success: true,
     mode: "scripted",
@@ -124,12 +129,15 @@ export async function POST(request: NextRequest) {
       { tier: "Sonnet", role: "finding synthesis", mode: "scripted" },
     ],
     tokens: approxTokens(finding),
+    // The three the assessment picked, so the no-key demo renders the same
+    // cards and the same handoffs as the live path.
+    three,
+    // /assess-decide was folded into the Decision Desk on 3 August 2026 and
+    // this link was still pointing at the old route. The per-vendor handoffs
+    // into ModelEngine, Trust Rank and Integrators are on the cards, where
+    // they carry a vendor id and filter something.
     links: [
-      { label: "Your three vendors, and what next", href: "/decision-desk?tool=shortlist" },
-      // /assess-decide was folded into the Decision Desk on 3 August 2026 and
-      // this link was still pointing at the old route.
       { label: "Score it against your weights", href: "/decision-desk?tool=assess" },
-      { label: "Trust Rank", href: "/trust-rank" },
       { label: "Vendor rankings", href: "/vendor-view" },
     ],
   });

@@ -25,7 +25,11 @@
 
 import { SHIELD, type MarkState } from "@/lib/shield/data";
 import { sovereigntyRows, FLAG_LABEL } from "@/lib/shield/sovereignty";
-import { DEPRECATIONS } from "./deprecations";
+import {
+  DEPRECATIONS,
+  DEPRECATIONS_VERSION,
+  upcomingDeprecations,
+} from "./deprecations";
 import { ENCROACHMENTS } from "./encroachment";
 
 export interface CitedChunk {
@@ -70,10 +74,26 @@ export function citedChunks(): CitedChunk[] {
     });
   }
 
+  // Retirements still ahead, and a separate sentence for the ones already
+  // past. This iterated the raw DEPRECATIONS array until 17 August 2026, which
+  // was the one consumer in the codebase bypassing the module's own filter. It
+  // meant a buyer asking about model retirements was told that three models
+  // already dead "will" be retired and that calls "would" then fail: three
+  // sentences in the future tense about the past.
+  //
+  // Past retirements are kept rather than dropped, in the right tense. A buyer
+  // still running a retired model needs to hear that more urgently than one
+  // facing a deadline, and dropping the row would make the corpus silent on
+  // exactly the question it was ported to answer. The wording carries the
+  // deprecation snapshot date so nobody reads it as a live check.
+  const now = new Date();
+  const upcoming = new Set(upcomingDeprecations(now).map((d) => d.model));
   for (const d of DEPRECATIONS) {
     out.push({
       source: d.source.name,
-      text: `${d.vendor} is retiring the model ${d.model} on ${d.retire}, replaced by ${d.replacement}. After that date, calls to it fail.`,
+      text: upcoming.has(d.model)
+        ? `${d.vendor} is retiring the model ${d.model} on ${d.retire}, replaced by ${d.replacement}. After that date, calls to it fail.`
+        : `${d.vendor} has already retired the model ${d.model}: the retirement date of ${d.retire} has passed, and it was replaced by ${d.replacement}. Calls to it now fail. Recorded from the vendor's own deprecation page on ${DEPRECATIONS_VERSION}.`,
     });
   }
 
