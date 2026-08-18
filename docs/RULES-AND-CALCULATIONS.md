@@ -1050,7 +1050,7 @@ Position sees no change at all, which is the common case and is pinned by test.
 
 ---
 
-## 8.13 The Decision Desk shortlist
+## 8.14 The Decision Desk shortlist
 
 Step 3 of `/decision-desk`: three vendors, a computed paragraph on each, and the
 pilot sequence.
@@ -1135,7 +1135,7 @@ interface says so.
 
 ---
 
-## 8.14 What carries across "AI and Your Company"
+## 8.15 What carries across "AI and Your Company"
 
 Five tabs in `lib/ui/shell.tsx:102`: Your AI Position, Decision Desk,
 ModelEngine, Trust Rank, Integrators. **Two** stores carry between them, and
@@ -1185,7 +1185,7 @@ implying it moved the answer.
 
 ---
 
-## 8.15 The jurisdiction filter, and the interrogation's memory
+## 8.16 The jurisdiction filter, and the interrogation's memory
 
 ### The filter
 
@@ -1256,7 +1256,7 @@ so it cannot claim Haiku while running Sonnet.
 
 ---
 
-## 8.16 Investors are not vendors
+## 8.17 Investors are not vendors
 
 `lib/vendor/is-investor.ts`. **Tests**: `tests/investors-excluded.test.ts`, 10.
 
@@ -1314,7 +1314,7 @@ deliberately: the raw diff is not filtered.
 
 ---
 
-## 8.17 Touch targets and loading states
+## 8.18 Touch targets and loading states
 
 From a design audit of the live app at 375, 768 and 1280, 16 August 2026.
 
@@ -1381,7 +1381,7 @@ broken `loading.tsx`. It is not. Stop the dev server before building, or clear
 
 ---
 
-## 8.13 The three vendors a cited finding recommends
+## 8.19 The three vendors a cited finding recommends
 
 `lib/desk/three-vendors.ts`. The three are **computed before the model writes
 a word**, from the weighted assessment, and the model is told it may not change
@@ -1424,7 +1424,7 @@ was no bound before, and no requirement to name a vendor at all.
 
 ---
 
-## 8.14 Competitive Intel: two corrections
+## 8.20 Competitive Intel: two corrections
 
 **The insight was computed on the wrong population.** `competitiveInsight()`
 took a `categoryName` and a provider count scoped to that category, then read
@@ -1450,7 +1450,7 @@ is removed.
 
 ---
 
-## 8.15 Retrieval: stemming
+## 8.21 Retrieval: stemming
 
 `app/api/analyst/lib.ts`, `stem()`. Substring matching is asymmetric: a query
 term "train" matches a chunk saying "trains", but "retired" never matches
