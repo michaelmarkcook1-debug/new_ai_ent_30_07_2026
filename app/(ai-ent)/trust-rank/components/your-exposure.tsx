@@ -6,6 +6,7 @@ import { MicroLabel } from "@/lib/ui/micro";
 import { latestPosition, type SavedPosition } from "@/lib/position/store";
 import {
   opportunitiesFor,
+  flagLabel,
   type PositionOpportunities,
 } from "@/lib/position/opportunities";
 import { useShortlist } from "@/lib/shortlist";
@@ -100,7 +101,7 @@ export function YourExposure() {
           <li className="measure">
             Those areas carry{" "}
             <strong className="font-semibold">
-              {opp?.regulatoryFlags.join(", ")}
+              {(opp?.regulatoryFlags ?? []).map(flagLabel).join(", ")}
             </strong>
             , which points first at {regimes.join(" and ")} in the obligations
             below. Every other regime is still listed: this is where to start,

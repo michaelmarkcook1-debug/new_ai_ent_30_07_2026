@@ -91,6 +91,35 @@ export interface PositionOpportunities {
   regulatoryFlags: string[];
 }
 
+/**
+ * Regulatory flags, as a reader would write them.
+ *
+ * The catalogue keys these as identifiers (`EU_AI_Act`, `FDA_21CFR11`) and
+ * they were reaching the screen unchanged, which is the same defect as leaking
+ * a raw taxonomy id into prose: it has shipped twice before in this product.
+ * An unmapped flag falls back to its identifier with underscores spaced, which
+ * is still readable, so a new flag degrades rather than breaking.
+ */
+const FLAG_LABEL: Record<string, string> = {
+  EU_AI_Act: "the EU AI Act",
+  GDPR: "GDPR",
+  HIPAA: "HIPAA",
+  SOX: "SOX",
+  CCPA: "CCPA",
+  FINRA: "FINRA",
+  MiFID_II: "MiFID II",
+  BASEL_III: "Basel III",
+  PCI_DSS: "PCI DSS",
+  FERPA: "FERPA",
+  FDA_21CFR11: "FDA 21 CFR Part 11",
+  ISO_27001: "ISO 27001",
+  SOC2: "SOC 2",
+};
+
+export function flagLabel(flag: string): string {
+  return FLAG_LABEL[flag] ?? flag.replace(/_/g, " ");
+}
+
 const RISK_ORDER: Record<UseCase["riskTier"], number> = {
   low: 0,
   medium: 1,
@@ -242,13 +271,30 @@ export function situationFrom(
   opp: PositionOpportunities | null
 ): string {
   const base = `We are ${position.name}, ${position.what}`.replace(/\.?$/, ". ");
-  if (!opp || opp.areas.length === 0) return base;
-  const named = opp.areas.slice(0, 3).map((a) => a.label.toLowerCase());
-  const lead =
-    opp.evidencedCount > 0
-      ? `Our own sources point at ${named.join(", ")}`
-      : `For ${opp.sectorLabel.toLowerCase()} the areas that matter are ${named.join(", ")}`;
-  return `${base}${lead}. `;
+  if (!opp || opp.lead.length === 0) return base;
+
+  // Attributed separately. A first cut said "our own sources point at" and
+  // then listed all three lead areas, when typically only one of them is
+  // evidenced and the rest are what the sector runs. That put a claim about
+  // the company into the reader's own opening sentence, which is the one place
+  // it would never be questioned.
+  const evidenced = opp.lead.filter((a) => a.basis === "evidenced");
+  const sector = opp.lead.filter((a) => a.basis === "sector");
+  const name = (list: Opportunity[]) =>
+    list.map((a) => a.label.toLowerCase()).join(", ");
+
+  const parts: string[] = [];
+  if (evidenced.length > 0) {
+    parts.push(`Our own sources point at ${name(evidenced)}`);
+  }
+  if (sector.length > 0) {
+    parts.push(
+      evidenced.length > 0
+        ? `and ${opp.sectorLabel.toLowerCase()} typically also runs ${name(sector)}`
+        : `For ${opp.sectorLabel.toLowerCase()} the areas that matter are ${name(sector)}`
+    );
+  }
+  return `${base}${parts.join(" ")}. `;
 }
 
 /**
@@ -328,9 +374,10 @@ export function weightingFrom(
 
 function regulatoryFlagSentence(flags: string[]): string {
   if (flags.length === 0) return "these areas carry no regulatory flags";
+  const named = flags.map(flagLabel);
   const list =
-    flags.length === 1
-      ? flags[0]
-      : `${flags.slice(0, -1).join(", ")} and ${flags[flags.length - 1]}`;
+    named.length === 1
+      ? named[0]
+      : `${named.slice(0, -1).join(", ")} and ${named[named.length - 1]}`;
   return `these areas carry ${list}`;
 }

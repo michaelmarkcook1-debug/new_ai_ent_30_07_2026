@@ -3,6 +3,7 @@ import {
   opportunitiesFor,
   weightingFrom,
   situationFrom,
+  flagLabel,
 } from "@/lib/position/opportunities";
 import { TAG_LABEL } from "@/lib/exposure/vertical";
 import { MARKET_CATEGORY_LIST } from "@/lib/comparability";
@@ -139,11 +140,53 @@ describe("the prefilled situation", () => {
     expect(situationFrom(bare, opportunitiesFor(bare))).toContain("For healthcare");
   });
 
+  it("attributes only the evidenced areas to the reader's own sources", () => {
+    // A first cut said "our own sources point at" and then listed all three
+    // lead areas when only one was evidenced, putting a claim about the
+    // company into the reader's own opening sentence.
+    const p = pos("healthcare", [
+      "The trust is piloting patient intake and symptom triage in A&E.",
+    ]);
+    const o = opportunitiesFor(p)!;
+    const line = situationFrom(p, o);
+    const evidenced = o.lead.filter((a) => a.basis === "evidenced");
+    const sector = o.lead.filter((a) => a.basis === "sector");
+    expect(evidenced.length).toBeGreaterThan(0);
+    expect(sector.length).toBeGreaterThan(0);
+
+    const claimed = line.slice(
+      line.indexOf("Our own sources"),
+      line.indexOf("typically also runs")
+    );
+    for (const a of sector) {
+      expect(claimed).not.toContain(a.label.toLowerCase());
+    }
+    for (const a of evidenced) {
+      expect(claimed).toContain(a.label.toLowerCase());
+    }
+  });
+
   it("carries no em-dash", () => {
     for (const tag of SECTORS) {
       const p = pos(tag);
       expect(situationFrom(p, opportunitiesFor(p))).not.toContain("—");
       expect(weightingFrom(opportunitiesFor(p)).why).not.toContain("—");
     }
+  });
+});
+
+describe("regulatory flag labels", () => {
+  it("never puts a raw identifier into prose", () => {
+    // Shipped twice before with taxonomy ids: "frontier_model_api" on a
+    // button and "workflow_automation_ai" in a sentence.
+    for (const tag of SECTORS) {
+      const why = weightingFrom(opportunitiesFor(pos(tag))).why;
+      expect(why, `${tag}: ${why}`).not.toMatch(/[A-Za-z]_[A-Za-z0-9]/);
+    }
+  });
+
+  it("degrades readably for a flag it has no label for", () => {
+    expect(flagLabel("SOME_NEW_RULE")).toBe("SOME NEW RULE");
+    expect(flagLabel("EU_AI_Act")).toBe("the EU AI Act");
   });
 });
