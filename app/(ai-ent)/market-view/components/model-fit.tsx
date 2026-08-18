@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useRef } from "react";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
@@ -42,6 +42,9 @@ import type {
   Role,
 } from "@/lib/model-fit";
 import { useShortlist } from "@/lib/shortlist";
+import { latestPosition } from "@/lib/position/store";
+import { opportunitiesFor } from "@/lib/position/opportunities";
+import { modelEngineHandoff, type ModelEngineHandoff } from "@/lib/position/handoff";
 import { vendorName } from "@/lib/aie/vendor-directory";
 import { PriceCapabilityChart } from "./model-fit-chart";
 import { recordUsage } from "@/lib/catalogue/client";
@@ -334,12 +337,24 @@ const OUTCOME_LABEL: Record<string, string> = {
 };
 
 export function ModelFit() {
-  // Nothing is preselected, and each menu waits for the one above it. A role
-  // arrived at by three deliberate choices is a question the buyer asked; a
-  // role sitting there by default is one the tool answered on its own.
+  // Each menu waits for the one above it, and THE ROLE IS NEVER PRESELECTED.
+  // That rule is the original one and it still holds: a role arrived at by
+  // deliberate choice is a question the buyer asked; a role sitting there by
+  // default is one the tool answered on its own.
+  //
+  // Industry and function are different, and are now carried in from Your AI
+  // Position when the reader has one. Those two are context the reader already
+  // established about themselves, not an answer: making somebody who has just
+  // researched their own bank find "Banking" again in a thirty-seven item list
+  // is not restraint, it is forgetting. The panel says where they came from
+  // and clears in one click.
   const [industry, setIndustry] = useState<string>("");
   const [fn, setFn] = useState<string>("");
   const [roleId, setRoleId] = useState<string>("");
+  // What was carried in, kept so the page can say so and offer to drop it.
+  const [carried, setCarried] = useState<ModelEngineHandoff | null>(null);
+  const [carriedFrom, setCarriedFrom] = useState<string | null>(null);
+  const chose = useRef(false);
   // The role the answer on screen belongs to. Held separately from the
   // selection so that changing a menu retires the old answer rather than
   // silently replacing it with a new one.
@@ -352,6 +367,22 @@ export function ModelFit() {
   const [excluded, setExcluded] = useState<string[]>([]);
   const [seatsText, setSeatsText] = useState<string | null>(null);
   const [showAllEliminations, setShowAllEliminations] = useState(false);
+
+  // Carried in after mount: localStorage does not exist during the server
+  // render. Only fills menus the reader has not touched, so arriving with a
+  // saved position never overwrites a choice already made.
+  useEffect(() => {
+    const p = latestPosition();
+    if (!p) return;
+    const h = modelEngineHandoff(opportunitiesFor(p));
+    if (!h) return;
+    setCarried(h);
+    setCarriedFrom(p.name);
+    if (chose.current) return;
+    setIndustry((cur) => cur || h.industry);
+    if (h.fn) setFn((cur) => cur || h.fn as string);
+    // Role stays empty on purpose. See the note on the state above.
+  }, []);
 
   const functions = useMemo(() => (industry ? functionsFor(industry) : []), [industry]);
   const roles = useMemo(
@@ -430,6 +461,8 @@ export function ModelFit() {
   // Choosing higher up the chain clears everything below it, because a function
   // from the last industry is not a valid choice in this one.
   function selectIndustry(next: string) {
+    // A deliberate choice, so the carried-in context stops being reapplied.
+    chose.current = true;
     setIndustry(next);
     setFn("");
     setRoleId("");
@@ -438,6 +471,7 @@ export function ModelFit() {
   }
 
   function selectFunction(next: string) {
+    chose.current = true;
     setFn(next);
     setRoleId("");
     setComputedRoleId(null);
@@ -573,6 +607,38 @@ export function ModelFit() {
           is sufficient for the engine; industry and function are how a human
           finds one, and asking for them in order is what makes the third menu
           short enough to read. */}
+      {/* Where the first two menus came from. Said out loud, because a menu
+          filled in without explanation reads as the tool having decided, which
+          is the exact thing the note on the state above refuses to do. */}
+      {carried ? (
+        <div className="mt-3 flex max-w-md flex-wrap items-baseline gap-x-2 gap-y-1 rounded-lg border border-insight/30 bg-insight/[0.06] px-3 py-2">
+          <span className="micro-label text-insight">Carried from your position</span>
+          <span className="text-sm">
+            <strong className="font-semibold">{carriedFrom}</strong> is{" "}
+            {carried.industry}
+            {carried.fn ? (
+              <>
+                , and{" "}
+                <strong className="font-semibold">{carried.fromArea}</strong>{" "}
+                puts you in {carried.fn}
+              </>
+            ) : null}
+            . The role is still yours to pick.
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              chose.current = true;
+              setCarried(null);
+              selectIndustry("");
+            }}
+            className="ml-auto text-xs text-muted underline underline-offset-2 hover:text-base-content"
+          >
+            Start blank
+          </button>
+        </div>
+      ) : null}
+
       <div className="mt-3 flex max-w-md flex-col gap-3">
         <Field
           label="1. Industry"

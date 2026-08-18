@@ -1,7 +1,13 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { createPortal } from "react-dom";
+import { latestPosition } from "@/lib/position/store";
+import {
+  opportunitiesFor,
+  weightingFrom,
+  type StartingWeights,
+} from "@/lib/position/opportunities";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { ScorePill } from "@/lib/ui/score";
@@ -51,6 +57,33 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
   const [pillarSource, setPillarSource] = useState<"live" | "mock" | "error">("live");
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [openDim, setOpenDim] = useState<string | null>(null);
+  // The weighting Your AI Position derived for this company's sector, applied
+  // as a starting point. Null when nothing is saved, which is the common case
+  // and changes nothing.
+  //
+  // Applied after mount, not during render: localStorage does not exist on the
+  // server. It only fills sliders the reader has not already moved, because a
+  // saved position arriving later must never overwrite a deliberate weighting.
+  const [derived, setDerived] = useState<StartingWeights | null>(null);
+  const [derivedFor, setDerivedFor] = useState<string | null>(null);
+  const touched = useRef(false);
+
+  useEffect(() => {
+    const p = latestPosition();
+    if (!p) return;
+    const w = weightingFrom(opportunitiesFor(p));
+    setDerived(w);
+    setDerivedFor(p.name);
+    if (touched.current) return;
+    setWeights((cur) => {
+      const next = { ...cur };
+      for (const k of ["strategic_fit", "execution_readiness", "governance_trust", "economics"] as const) {
+        if (k in next) next[k] = w[k];
+      }
+      return next;
+    });
+    // Once, on mount.
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -67,6 +100,9 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
   const applyTier = (id: (typeof TIERS)[number]["id"]) => {
     setTier(id);
     const preset = TIERS.find((t) => t.id === id)?.weights;
+    // Choosing a tier is a deliberate act, so it overrides the derived start
+    // and stops it being reapplied.
+    touched.current = true;
     if (preset) setWeights({ ...preset });
   };
 
@@ -166,6 +202,20 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
         </div>
       </section>
 
+      {/* Where these weights started, said out loud. A weighting applied from
+          a saved position without saying so would be a hidden setting, and the
+          reader would have no way to know why governance sat at 30 per cent. */}
+      {derived ? (
+        <section className="rounded-lg border border-insight/30 bg-insight/[0.06] px-3 py-2.5">
+          <p className="measure text-sm">
+            <span className="micro-label text-insight">Started from your position</span>{" "}
+            These weights opened where{" "}
+            <strong className="text-base-content">{derivedFor}</strong>&apos;s
+            sector puts them. {derived.why}
+          </p>
+        </section>
+      ) : null}
+
       {/* Dimensions with weight sliders */}
       <section className="grid grid-cols-1 gap-3 @xl:grid-cols-2">
         {assessment.dimensions.map((d) => (
@@ -185,7 +235,10 @@ export function AssessDecideView({ assessment }: { assessment: Assessment }) {
               max={60}
               value={Math.round((weights[d.id] ?? 0) * 100)}
               onChange={(e) =>
-                setWeights((w) => ({ ...w, [d.id]: Number(e.target.value) / 100 }))
+                {
+                  touched.current = true;
+                  setWeights((w) => ({ ...w, [d.id]: Number(e.target.value) / 100 }));
+                }
               }
               className="mt-3 w-full accent-[var(--ag-primary)]"
               aria-label={`Weight for ${d.label}`}

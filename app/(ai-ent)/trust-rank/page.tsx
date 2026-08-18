@@ -44,6 +44,7 @@ import { assembleBrief } from "@/lib/desk/brief";
 import { buildDossier, type VendorDossier } from "@/lib/desk/dossier";
 import { vendorName } from "@/lib/aie/vendor-directory";
 import { CompanyContextBar } from "@/lib/position/context-bar";
+import { YourExposure } from "./components/your-exposure";
 
 // The Analyst Insight is a pure function of this page's data, so it only says
 // something new when an input changes. News is the input that moves daily and
@@ -102,6 +103,10 @@ export default async function TrustRankPage() {
         lanes={["live", "cited", "aie", postures.lane]}
       />
       <CompanyContextBar here="trust" />
+
+      {/* What the reader's own company and approved vendors make relevant on
+          this page. Narrows nothing: the register below stays whole. */}
+      <YourExposure />
       {/* Today's brief leads the page. It answers what changed overnight and
           what to do about it, which is what a reader opens Trust Rank for. The
           analyst reading that used to sit here summarised the same governance

@@ -7,10 +7,10 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { PositionChip } from "@/lib/position/save-position";
 import type { ThreeVendors } from "@/lib/desk/three-vendors";
 import { useShortlist } from "@/lib/shortlist";
+import { opportunitiesFor, situationFrom } from "@/lib/position/opportunities";
 import {
   latestPosition,
   matchPosition,
-  openingLine,
   toContext,
   type PositionContext,
   type SavedPosition,
@@ -304,7 +304,11 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
     const p = latestPosition();
     if (!p) return;
     setOffered(p);
-    setInput((cur) => (cur.trim() ? cur : openingLine(p)));
+    // situationFrom() rather than openingLine(): it carries the AI areas Your
+    // AI Position derived for this company's sector, so the finding starts
+    // from where AI could actually go rather than from the company name alone.
+    // It still stops before the part only the reader knows.
+    setInput((cur) => (cur.trim() ? cur : situationFrom(p, opportunitiesFor(p))));
     // Once, on mount. Re-running would re-fill a box the reader had cleared.
   }, []);
 
@@ -319,7 +323,7 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
     // at the same blank box they first met.
     const p = latestPosition();
     setOffered(p);
-    setInput(p ? openingLine(p) : "");
+    setInput(p ? situationFrom(p, opportunitiesFor(p)) : "");
   };
 
   return (
