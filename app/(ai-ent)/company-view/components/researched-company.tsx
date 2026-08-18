@@ -1,6 +1,9 @@
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
+import Link from "next/link";
+import { toPosition } from "@/lib/position/store";
+import { opportunitiesFor, weightingFrom } from "@/lib/position/opportunities";
 import type { CompanyResearch } from "@/lib/research/company";
 
 // What was found about a company, and where each part of it came from.
@@ -141,6 +144,8 @@ export function ResearchedCompany({ research }: { research: CompanyResearch }) {
           </ol>
         </section>
       ) : null}
+
+      <OpportunityAreas research={research} />
 
       <SourceList sources={sources} />
 
@@ -369,4 +374,125 @@ function hostOf(url: string): string {
   } catch {
     return url;
   }
+}
+
+/**
+ * Where AI could go here, and what a buyer should weight because of it.
+ *
+ * The page reported what sources said and stopped, so a reader learned what
+ * had been written about the company and nothing about what to do with it.
+ * This takes a position, and takes it from the workflow catalogue keyed on the
+ * sector the research placed the company in, never from an impression of the
+ * company: the research prompt forbids carrying in anything the passages do
+ * not contain, and that rule is right.
+ *
+ * Two classes, kept apart on screen. An area the company's own sources spoke
+ * to is evidence; an area its sector runs is a place to look. Merging them
+ * would turn a curated library into a claim about this company.
+ */
+function OpportunityAreas({ research }: { research: CompanyResearch }) {
+  const position = toPosition(research);
+  const opp = position ? opportunitiesFor(position) : null;
+
+  if (!position || !opp) {
+    return (
+      <section className="rounded-lg border border-dashed border-base-300 bg-base-200/40 p-5">
+        <MicroLabel
+          label="Where AI could go here"
+          tooltip="Derived from the workflow catalogue, keyed on the sector the research placed this company in."
+        />
+        <p className="mt-2 measure text-sm text-muted">
+          The sources did not place this company in one of the fifteen sectors
+          the workflow catalogue carries, so no areas are named. Placing it
+          anyway would read this company against another sector&apos;s
+          workflows and its assurance bar.
+        </p>
+      </section>
+    );
+  }
+
+  const weights = weightingFrom(opp);
+  const pct = (n: number) => `${Math.round(n * 100)}%`;
+
+  return (
+    <section className="finding rounded-xl p-5">
+      <MicroLabel
+        label="Where AI could go here"
+        tooltip="The workflows the catalogue holds for this sector, ranked. Evidenced areas came from this company's own sources; sector areas are what the sector runs and are a place to look rather than a finding."
+      />
+      <p className="mt-1 measure text-sm">
+        For {opp.sectorLabel.toLowerCase()} the catalogue holds these areas.{" "}
+        <strong className="text-base-content">
+          {opp.evidencedCount} of {opp.areas.length}
+        </strong>{" "}
+        {opp.evidencedCount === 1 ? "is" : "are"} backed by this
+        company&apos;s own sources; the rest are what the sector runs, and are
+        somewhere to look rather than something we found.
+      </p>
+
+      <ul className="mt-3 space-y-1.5">
+        {opp.areas.map((a) => (
+          <li
+            key={a.id}
+            className="rounded-lg border border-base-300 bg-base-100 px-3 py-2"
+          >
+            <div className="flex flex-wrap items-baseline gap-2">
+              <span
+                className={`rounded-full px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wide ${
+                  a.basis === "evidenced"
+                    ? "border border-good/40 bg-good-bg text-good"
+                    : "border border-base-300 text-muted"
+                }`}
+                title={
+                  a.basis === "evidenced"
+                    ? "This company's own retrieved sources spoke to this area."
+                    : "The catalogue holds this workflow for this sector. The sources said nothing about it."
+                }
+              >
+                {a.basis === "evidenced" ? "evidenced" : "sector"}
+              </span>
+              <span className="text-sm font-semibold">{a.label}</span>
+              <span className="ml-auto font-mono text-xs text-muted">
+                {a.riskTier} risk · reliability {a.reliabilityRequirement}/5
+              </span>
+            </div>
+            {a.evidence ? (
+              <p className="mt-1 measure text-xs text-muted">
+                Your sources: &ldquo;{a.evidence}&rdquo;
+              </p>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+
+      {/* The weighting this implies, and where it goes next. Stated rather
+          than applied silently: it changes where the Decision Desk's sliders
+          start, and every one of them stays draggable. */}
+      <div className="mt-3 border-t border-base-300 pt-3">
+        <p className="micro-label mb-1.5">What this weights on the Decision Desk</p>
+        <div className="flex flex-wrap gap-1.5">
+          {[
+            ["Strategic fit", weights.strategic_fit],
+            ["Execution readiness", weights.execution_readiness],
+            ["Governance and trust", weights.governance_trust],
+            ["Economics", weights.economics],
+          ].map(([label, w]) => (
+            <span
+              key={label as string}
+              className="rounded border border-base-300 px-2 py-0.5 font-mono text-xs"
+            >
+              {label} {pct(w as number)}
+            </span>
+          ))}
+        </div>
+        <p className="mt-1.5 measure text-xs text-muted">{weights.why}</p>
+        <Link
+          href="/decision-desk"
+          className="mt-2 inline-block rounded-full border border-primary px-3 py-1 text-xs font-semibold text-primary transition hover:bg-primary hover:text-white"
+        >
+          Take this to the Decision Desk
+        </Link>
+      </div>
+    </section>
+  );
 }

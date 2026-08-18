@@ -1,9 +1,11 @@
 "use client";
 
+import { MicroLabel } from "@/lib/ui/micro";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import {
   isSaved,
+  listPositions,
   removePosition,
   savePosition,
   toPosition,
@@ -140,5 +142,84 @@ export function PositionChip({
         Clear
       </button>
     </div>
+  );
+}
+
+/**
+ * Everything saved in this browser, with a way to remove each one.
+ *
+ * `listPositions()` was written and never called, so nothing on any screen
+ * showed a reader what they had saved. The only way to remove a position was
+ * to research that same company again and click Remove on it, which nobody
+ * would guess. A test company saved while trying the tool therefore stayed in
+ * the store indefinitely and kept being offered to the Decision Desk.
+ *
+ * Renders nothing when the store is empty, rather than a standing "no saved
+ * positions" notice on a page most readers arrive at with none.
+ */
+export function SavedPositions() {
+  const [positions, setPositions] = useState<SavedPosition[]>([]);
+
+  // After mount: localStorage does not exist during the server render, and
+  // reading it while rendering is a hydration mismatch.
+  useEffect(() => {
+    setPositions(listPositions());
+  }, []);
+
+  const forget = (key: string) => {
+    removePosition(key);
+    setPositions(listPositions());
+  };
+
+  const forgetAll = () => {
+    for (const p of listPositions()) removePosition(p.key);
+    setPositions(listPositions());
+  };
+
+  if (positions.length === 0) return null;
+
+  return (
+    <section className="rounded-lg border border-base-300 bg-base-100 p-4">
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <MicroLabel
+          label={`Saved in this browser (${positions.length})`}
+          tooltip="Saved positions live in this browser only. There is no account here, so they do not follow you to another machine and clearing site data removes them."
+        />
+        <button
+          type="button"
+          onClick={forgetAll}
+          className="text-xs text-muted underline underline-offset-2 hover:text-base-content"
+        >
+          Clear all
+        </button>
+      </div>
+      <ul className="mt-2 divide-y divide-base-300">
+        {positions.map((p) => (
+          <li key={p.key} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2">
+            <span className="text-sm font-semibold">{p.name}</span>
+            {p.industry ? (
+              <span className="text-xs text-muted">{p.industry}</span>
+            ) : null}
+            <span className="font-mono text-xs text-muted">
+              {new Date(p.savedAt).toLocaleDateString("en-GB", {
+                day: "numeric",
+                month: "short",
+                year: "numeric",
+              })}
+            </span>
+            <button
+              type="button"
+              onClick={() => forget(p.key)}
+              className="ml-auto rounded-full border border-base-300 px-2 py-0.5 text-xs text-muted transition hover:border-error hover:text-error"
+            >
+              Clear
+            </button>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-2 measure text-xs text-muted">
+        The most recent of these is what the Decision Desk offers to open with.
+      </p>
+    </section>
   );
 }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageHeader } from "@/lib/ui/page";
 import { CompanyEntry } from "./components/company-entry";
+import { SavedPositions } from "@/lib/position/save-position";
 import { ResearchRunner } from "./components/research-runner";
 import { Assumptions } from "./components/assumptions";
 import { exposurePayload } from "@/lib/exposure/payload";
@@ -55,6 +56,13 @@ export default async function CompanyOverviewPage({
         <section className="rounded-lg border border-base-300 bg-base-100 p-4">
           <CompanyEntry />
         </section>
+
+        {/* What this browser already holds, with a way to remove each one.
+            listPositions() was written and never rendered, so the only way to
+            drop a company saved while trying the tool was to research it again
+            and click Remove, which nobody would guess. Renders nothing when
+            the store is empty. */}
+        <SavedPositions />
 
         {typed.length > 1 ? (
           <>

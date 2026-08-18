@@ -1,4 +1,6 @@
 import { aieServerFetch, type AieLane } from "@/lib/aie-server";
+import { CATEGORY_MAP as WORKFLOW_CATEGORY_MAP } from "./workflow-category-map";
+export { CATEGORY_MAP as WORKFLOW_CATEGORY_MAP } from "./workflow-category-map";
 import { MARKET_CATEGORY_LIST, vendorIdsInCategory } from "@/lib/comparability";
 
 // Which vendors to shortlist for a given workflow.
@@ -51,38 +53,7 @@ export interface WorkflowShortlist {
 // Workflow category to vendor market categories. Ordered most specific first,
 // so the shortlist leads with vendors built for that job rather than with
 // general-purpose platforms that could technically do it.
-const CATEGORY_MAP: Record<string, string[]> = {
-  Customer: ["crm_customer_ai", "agent_platform", "enterprise_assistant"],
-  Revenue: ["crm_customer_ai", "enterprise_assistant", "agent_platform"],
-  Engineering: ["developer_coding_agent", "agent_platform"],
-  IT: ["itsm_hr_service_ai", "workflow_automation_ai", "agent_platform"],
-  HR: ["itsm_hr_service_ai", "enterprise_assistant"],
-  Legal: ["regulated_industry_ai", "rag_enterprise_search", "enterprise_assistant"],
-  "Financial Services": ["regulated_industry_ai", "rag_enterprise_search"],
-  Health: ["regulated_industry_ai", "rag_enterprise_search"],
-  "Public Sector": [
-    "regulated_industry_ai",
-    "enterprise_assistant",
-    "workflow_automation_ai",
-  ],
-  "Critical Infrastructure": ["regulated_industry_ai", "workflow_automation_ai"],
-  Education: ["enterprise_assistant", "rag_enterprise_search"],
-  Finance: ["workflow_automation_ai", "enterprise_assistant", "agent_platform"],
-  Productivity: ["enterprise_assistant", "rag_enterprise_search"],
-  Data: ["cloud_ai_platform", "agent_platform"],
-  Operations: ["workflow_automation_ai", "agent_platform"],
-  Manufacturing: ["workflow_automation_ai", "agent_platform"],
-  "Enterprise Software": [
-    "agent_platform",
-    "workflow_automation_ai",
-    "cloud_ai_platform",
-  ],
-  "AI Platform & Governance": [
-    "cloud_ai_platform",
-    "agent_platform",
-    "frontier_model_api",
-  ],
-};
+const CATEGORY_MAP = WORKFLOW_CATEGORY_MAP;;
 
 // The build tier is the same for every workflow: a frontier model can serve
 // any of them, which is exactly why it is kept separate from the buy tier.
@@ -121,7 +92,6 @@ const DOMAIN_TAG: Record<string, string> = {
 const ALL_DOMAIN_TAGS = new Set(Object.values(DOMAIN_TAG));
 
 /** Every workflow category this mapping covers, for disclosure in the UI. */
-export const WORKFLOW_CATEGORY_MAP = CATEGORY_MAP;
 
 export async function loadWorkflowVendorIndex(): Promise<{
   byCategory: Record<string, WorkflowShortlist>;
