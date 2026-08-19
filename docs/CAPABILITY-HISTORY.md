@@ -15,6 +15,53 @@ than a gap.
 
 ---
 
+## 19 August 2026
+
+**The five tabs now work as one path instead of five separate questions.**
+
+Research your company on Your AI Position and everything after it knows who you
+are. The Decision Desk opens with your situation part-written and its weights
+already set where your sector puts them. ModelEngine opens on your industry and
+the right function. Trust Rank says what your own areas make relevant. You
+establish something once instead of four times.
+
+**Your AI Position now takes a view on where AI could go.**
+
+It used to report what the sources said and stop, so you learned what had been
+written about your company and nothing about what to do with it. It now names
+the areas, and it is careful about where each one comes from. An area your own
+sources spoke to is marked evidenced and quotes them. An area your sector
+typically runs is marked sector, which is a place to look rather than something
+we found. Those two are never merged, because one is a fact about you and the
+other is a fact about your industry.
+
+The view is taken from our own workflow library rather than from an impression
+of your company. The research itself is forbidden from saying anything the
+retrieved pages do not contain, and that rule stays exactly as it was.
+
+**The weighting on the Decision Desk starts where your sector puts it.** A
+hospital opens weighted toward governance and away from cost; a software company
+the other way. It says on screen why, and every slider is still yours to move.
+
+**ModelEngine does not pick your role, on purpose.** It fills in your industry
+and the function, which are things you already established about yourself. The
+role is the question you came to ask, and a tool that answers it before you have
+asked is not being helpful.
+
+**You can now clear a company you no longer want carried.** The strip at the top
+of each tab that reads "carried through" has a button beside it. Before today it
+only offered to drop the vendors, so a company you had researched while trying
+the tool stayed on five tabs with no way out of it except finding a list on
+another page. Your AI Position also lists everything saved in your browser, with
+a clear on each.
+
+**Ask AI works when you are already on the Decision Desk.** It only ever worked
+if you arrived from another tab. Clicking a question while looking at the Desk
+changed the address bar and left the previous answer on screen, and so did
+asking a second question after a first. Fixed.
+
+---
+
 ## 17 August 2026
 
 **The Decision Desk now tells you which three vendors to look at, and it is not

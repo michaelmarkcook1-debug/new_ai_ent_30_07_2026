@@ -1464,6 +1464,154 @@ situations: **34 chunks to 40**.
 `upcomingDeprecations()`, so three already-retired models were stated in the
 future tense. Past retirements now read in the past tense and are kept.
 
+
+---
+
+## 8.22 The carried chain: position to desk to engine to Trust Rank
+
+Four tabs that each asked their question in isolation, joined so a reader
+establishes something once. Added 18 and 19 August 2026.
+
+**Modules**: `lib/position/opportunities.ts`, `lib/position/handoff.ts`,
+`lib/workflow-category-map.ts`.
+**Tests**: `tests/opportunities.test.ts` (17), `tests/handoff.test.ts` (7),
+`tests/position-store.test.ts` (23).
+
+### Where AI could go: derived, never written
+
+The research prompt forbids carrying in anything the passages do not contain
+(section 7 of `lib/research/company.ts`). So the stand is taken from the
+workflow catalogue keyed on `sectorTag`, not from the model's impression of the
+company. `opportunitiesFor()` returns null when `placeSector()` found no
+sector, rather than inventing one.
+
+| Field | Meaning |
+|---|---|
+| `basis: "evidenced"` | the company's own retrieved sources spoke to this area, and `evidence` quotes them |
+| `basis: "sector"` | the catalogue holds this workflow for their sector and the sources were silent |
+
+`evidenceFor()` requires two matching content words over 4 characters, or one
+on a single-word label. Deliberately conservative: a miss costs a "sector"
+label where "evidenced" was available, which understates. A false match would
+put a claim about the company on screen that its sources never made.
+
+### Claims are scoped to the LEAD three, not all eight
+
+`lead = top.slice(0, 3)`. Everything asserted about the company (`topRisk`,
+`regulatoryFlags`, the weighting, the situation line) is computed from these.
+
+Aggregated across all eight, `regulatoryFlags` told a retail bank that
+**BASEL_III, EU_AI_Act, FINRA, GDPR, HIPAA, MiFID_II, PCI_DSS and SOX** applied.
+HIPAA does not apply to a bank: it was carried by a workflow far down the list
+the bank would never run. A flag is a fact about a workflow, and asserting it of
+the company is defensible only for the areas actually put forward.
+
+`regulatoryFlagSentence()` phrases them as "these areas carry X", never
+"X applies", for the same reason.
+
+### The starting weights, and why proportions rather than maxima
+
+Targets the four dimensions `assess-decide-view.tsx` renders sliders for:
+`strategic_fit`, `execution_readiness`, `governance_trust`, `economics`.
+
+```
+strategic_fit       0.30
+execution_readiness 0.20 + 0.20 * ((avgReliability - 1) / 4)
+governance_trust    0.15 + 0.25 * (0.5 * criticalShare + 0.5 * flagLoad)
+economics           0.20 - 0.10 * heavyShare
+```
+then normalised so the four sum to 1. `flagLoad = min(flags, 6) / 6`.
+
+A first cut used the highest risk tier and the highest reliability requirement
+and returned an **identical weighting for a bank, a hospital, a retailer, a
+school, a law firm and a software company**: every sector's most valuable AI
+workflows are high-risk and reliability-critical, so a max saturates at once.
+Measured after the change:
+
+| Sector | fit | exec | gov | econ |
+|---|---|---|---|---|
+| Financial services | 0.26 | 0.35 | 0.30 | 0.09 |
+| Healthcare | 0.27 | 0.36 | 0.28 | 0.09 |
+| Manufacturing | 0.31 | 0.38 | 0.20 | 0.10 |
+| Technology and software | 0.29 | 0.36 | 0.19 | 0.16 |
+
+Pinned by "actually varies by sector" and "weights governance higher for a
+regulated sector than for software". With no sector, the Desk's own balanced
+preset is returned unchanged.
+
+### The two vocabularies, bridged
+
+`SECTOR_TO_INDUSTRIES` maps the workflow catalogue's 15 sector tags to the role
+library's 37 industries; `CATEGORY_TO_FUNCTION` maps workflow categories to role
+functions. Both hand-written, because the lists were authored independently and
+no mechanical join exists: "Healthcare Providers" and "Pharmaceuticals" are both
+healthcare-adjacent and only one of them is what `healthcare` means.
+
+One tag maps to SEVERAL industries and that is the honest shape rather than a
+limitation. `financial_services` covers retail banking, investment banking,
+payments and asset management; the first is the default and the rest are
+returned as `alternatives`.
+
+**Every mapped value is asserted against `roles.json`** by
+`tests/handoff.test.ts`, so a typo cannot preselect a menu entry that does not
+exist.
+
+**The role is never preselected.** `model-fit.tsx` states the rule in its own
+comment: a role sitting there by default is one the tool answered on its own.
+Industry and function are context the reader established about themselves; the
+role is the question they came to ask. `modelEngineHandoff()` returns no role
+field at all, pinned by test.
+
+### Trust Rank narrows nothing
+
+`app/(ai-ent)/trust-rank/components/your-exposure.tsx` states what the carried
+company and shortlist make relevant and filters nothing. Deciding which law
+binds a reader from a workflow tag is not a judgement the evidence supports, so
+the register stays whole and the panel says where to start.
+
+### Flag labels
+
+`flagLabel()` maps `EU_AI_Act` to "the EU AI Act", `FDA_21CFR11` to "FDA 21 CFR
+Part 11" and so on. These were reaching the screen as identifiers, which is the
+same defect as leaking a raw taxonomy id and has now shipped three times. An
+unmapped flag falls back to its identifier with underscores spaced, so a new one
+degrades rather than breaking. Pinned by a test asserting no `[A-Za-z]_[A-Za-z0-9]`
+reaches the weighting rationale.
+
+### The change notification
+
+`POSITIONS_CHANGED`, dispatched by `write()` in `lib/position/store.ts`. A DOM
+event rather than a store or a context, because the consumers are siblings
+across three trees and the window is all they share; `storage` fires in OTHER
+tabs and never the one that made the change.
+
+**It is dispatched outside the try that wraps `setItem`.** Inside it, a window
+without `dispatchEvent` threw, the catch ran, and a write that had already
+succeeded was reported as failed: the save button told a reader it had not saved
+something it just had. A missed notification costs a stale panel until the next
+navigation; a wrong return value costs the reader their work. Pinned by "never
+turns a successful write into a reported failure".
+
+### Two client-side traps recorded
+
+**A ref survives a client-side navigation.** `started.current` guarded the `?q=`
+handler, so Ask AI did nothing whenever the reader was already on the Decision
+Desk: the URL changed and the previous answer stayed. It now tracks WHICH
+question was acted on (`startedQ`), and defers rather than consumes one that
+arrives while a stream is running, because `start()` bails on `busy`.
+
+**A state updater has to be pure.** Calling `setInput` from inside the
+`setOffered` updater did not run, so the context bar cleared while the chip and
+the prefilled box carried on naming the company. Read through a ref instead.
+
+### The build boundary, a third time
+
+`lib/workflow-category-map.ts` exists because reading `WORKFLOW_CATEGORY_MAP`
+out of `lib/workflow-vendors.ts` pulled in `lib/aie-server.ts` and therefore
+`node:fs`, and the production build failed with "Can't resolve 'fs'".
+**Typecheck and 607 tests passed with the bad import.** Only `next build` sees
+this. Same shape as `shortlistFor` and the workforce payload.
+
 ---
 
 ## 9. Run costs
