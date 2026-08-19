@@ -1,6 +1,7 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { InterrogateView } from "./interrogate-view";
 import { AssessDecideView } from "./assess-decide-view";
 import { ShortlistView } from "./shortlist-view";
@@ -40,11 +41,44 @@ export function DecisionDeskView({
   shortlist: ShortlistPayload;
 }) {
   const [tool, setTool] = useState<Tool>(initialTool);
+  const params = useSearchParams();
+  const panelRef = useRef<HTMLDivElement>(null);
+  // The ?tool= actually acted on.
+  //
+  // `initialTool` is a useState initial value, so it is read once on mount and
+  // a client-side navigation never reaches it. The finding's own "Score it
+  // against your weights" link points at /decision-desk?tool=assess, and a
+  // reader clicking it is ALREADY on /decision-desk: the URL changed, the
+  // server recomputed initialTool, and the step on screen did not move. The
+  // link did nothing, from the one place it is most likely to be clicked.
+  //
+  // Tracks which value was acted on rather than whether any has been, so the
+  // reader's own pill clicks are never fought: clicking step 1 while the URL
+  // still says assess leaves them on step 1.
+  const actedOn = useRef<string | null>(initialTool);
+
+  useEffect(() => {
+    const wanted = params.get("tool");
+    if (wanted !== "assess" && wanted !== "shortlist" && wanted !== "finding") return;
+    if (wanted === actedOn.current) return;
+    actedOn.current = wanted;
+    setTool(wanted);
+    // The links sit at the bottom of a long finding, so switching the step
+    // without moving the viewport looks exactly like nothing happening.
+    panelRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [params]);
 
   const pill = (id: Tool, label: string, sub: string) => (
     <button
       type="button"
-      onClick={() => setTool(id)}
+      onClick={() => {
+        // Recorded too, so a later link to a step the reader has since moved
+        // away from still switches: without this, going to assess by link,
+        // clicking back to the finding, then following the same link again
+        // would compare equal and do nothing.
+        actedOn.current = id;
+        setTool(id);
+      }}
       aria-pressed={tool === id}
       className={`rounded-lg border px-4 py-2.5 text-left transition ${
         tool === id
@@ -70,6 +104,8 @@ export function DecisionDeskView({
         {pill("assess", "2 · The weighted score", "Your weights in, a derivable score out.")}
         {pill("shortlist", "3 · Three vendors, and what next", "The three to look at, and the sequence that tests them.")}
       </div>
+
+      <div ref={panelRef} className="scroll-mt-4" />
 
       <div className={tool === "finding" ? "" : "hidden"}>
         <Suspense>
