@@ -30,7 +30,39 @@ class MemoryStorage {
 }
 
 const storage = new MemoryStorage();
-(globalThis as unknown as { window: unknown }).window = { localStorage: storage };
+
+// A minimal event target alongside the storage stand-in. The store notifies
+// listeners on every write so a panel showing a position can drop it when it
+// goes, and without these the stub window could not hear that. It is also the
+// environment that exposed the real defect: dispatching inside the same try as
+// the setItem meant a window without dispatchEvent reported a successful write
+// as a failure.
+const listeners = new Map<string, Set<() => void>>();
+(globalThis as unknown as { window: unknown }).window = {
+  localStorage: storage,
+  addEventListener(type: string, fn: () => void) {
+    const set = listeners.get(type) ?? new Set();
+    set.add(fn);
+    listeners.set(type, set);
+  },
+  removeEventListener(type: string, fn: () => void) {
+    listeners.get(type)?.delete(fn);
+  },
+  dispatchEvent(evt: { type: string }) {
+    for (const fn of listeners.get(evt.type) ?? []) fn();
+    return true;
+  },
+};
+// The store constructs `new Event(...)`, which Node has only from v15 as a
+// global. Provided explicitly so the test does not depend on that.
+if (typeof (globalThis as { Event?: unknown }).Event === "undefined") {
+  (globalThis as { Event?: unknown }).Event = class {
+    type: string;
+    constructor(type: string) {
+      this.type = type;
+    }
+  };
+}
 
 const {
   normaliseName,
@@ -43,6 +75,7 @@ const {
   toPosition,
   toContext,
   openingLine,
+  POSITIONS_CHANGED,
 } = await import("@/lib/position/store");
 
 const position = (name: string, savedAt = "2026-08-08T10:00:00.000Z") => ({
@@ -232,5 +265,37 @@ describe("what is carried, and what is deliberately not", () => {
     // they point at, so statements travel and citations stay put.
     const ctx = toContext(toPosition(research)!);
     expect(JSON.stringify(ctx)).not.toContain("sourceIndex");
+  });
+});
+
+describe("the change notification", () => {
+  it("never turns a successful write into a reported failure", () => {
+    // The dispatch sat inside the same try as the setItem. A window without
+    // dispatchEvent threw there, the catch returned false, and the save button
+    // told the reader it had not saved something it had just saved.
+    const original = window.dispatchEvent;
+    window.dispatchEvent = () => {
+      throw new Error("no dispatchEvent here");
+    };
+    try {
+      expect(savePosition(position("Ocado Retail"))).toBe(true);
+      expect(listPositions().map((p) => p.name)).toContain("Ocado Retail");
+    } finally {
+      window.dispatchEvent = original;
+    }
+  });
+
+  it("fires on save and on remove, so a stale panel can refresh itself", () => {
+    let heard = 0;
+    const onChange = () => (heard += 1);
+    window.addEventListener(POSITIONS_CHANGED, onChange);
+    try {
+      savePosition(position("Ocado Retail"));
+      expect(heard).toBe(1);
+      removePosition("ocado retail");
+      expect(heard).toBe(2);
+    } finally {
+      window.removeEventListener(POSITIONS_CHANGED, onChange);
+    }
   });
 });

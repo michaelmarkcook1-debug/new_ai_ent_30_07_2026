@@ -4,7 +4,12 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useShortlist } from "@/lib/shortlist";
 import { vendorName } from "@/lib/aie/vendor-directory";
-import { latestPosition, removePosition, type SavedPosition } from "./store";
+import {
+  latestPosition,
+  removePosition,
+  POSITIONS_CHANGED,
+  type SavedPosition,
+} from "./store";
 
 // What the reader has established, carried across the section.
 //
@@ -68,8 +73,12 @@ export function CompanyContextBar({
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setPosition(latestPosition());
+    const sync = () => setPosition(latestPosition());
+    sync();
     setMounted(true);
+    // Another component clearing or saving a position must reach this bar.
+    window.addEventListener(POSITIONS_CHANGED, sync);
+    return () => window.removeEventListener(POSITIONS_CHANGED, sync);
   }, []);
 
   if (!mounted || !ready) return null;

@@ -11,6 +11,7 @@ import { opportunitiesFor, situationFrom } from "@/lib/position/opportunities";
 import {
   latestPosition,
   matchPosition,
+  POSITIONS_CHANGED,
   toContext,
   type PositionContext,
   type SavedPosition,

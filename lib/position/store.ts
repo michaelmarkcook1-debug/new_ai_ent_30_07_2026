@@ -78,16 +78,43 @@ function read(): SavedPosition[] {
   }
 }
 
+/**
+ * Fired on every successful write, so anything showing a position can drop it.
+ *
+ * Two components read a position once on mount and then had no way to learn it
+ * had gone: the Decision Desk's saved-position chip and the situation box it
+ * prefills. Clearing the company from the context bar removed it from the
+ * store and left both of those on screen still naming it, so the reader was
+ * told it had stopped being carried while looking at it.
+ *
+ * A DOM event rather than a store or a context, because these components are
+ * siblings across three different trees and the only thing they already share
+ * is the window. `storage` would not do: it fires in OTHER tabs, never the one
+ * that made the change.
+ */
+export const POSITIONS_CHANGED = "ag:positions-changed";
+
 function write(list: SavedPosition[]): boolean {
   if (typeof window === "undefined") return false;
   try {
     window.localStorage.setItem(KEY, JSON.stringify(list.slice(0, MAX)));
-    return true;
   } catch {
     // Quota or a blocked store. Returned rather than thrown so the button can
     // say it did not save instead of claiming it did.
     return false;
   }
+  // Notified separately, and never inside the try above. A window without
+  // dispatchEvent (a test environment, an unusual embed) threw there and the
+  // catch reported a write that had actually succeeded as a failure, so the
+  // save button said it had not saved something it had just saved. A missed
+  // notification costs a stale panel until the next navigation; a wrong return
+  // value costs the reader their work.
+  try {
+    window.dispatchEvent(new Event(POSITIONS_CHANGED));
+  } catch {
+    // No listeners will hear it. The write still stands.
+  }
+  return true;
 }
 
 /** Newest first. */
