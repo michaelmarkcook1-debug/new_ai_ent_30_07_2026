@@ -3,6 +3,7 @@ import {
   detectMarket,
   threeVendorsFor,
   threeVendorsBlock,
+  strategyMarkets,
 } from "@/lib/desk/three-vendors";
 import { categoryRankings } from "@/lib/aie/category-rankings";
 import { MARKET_CATEGORY_LIST } from "@/lib/comparability";
@@ -172,5 +173,92 @@ describe("contract evidence coverage", () => {
     const block = threeVendorsBlock(silicon);
     expect(block).toMatch(/Do NOT write "no evidence on X" once per vendor/);
     expect(block).toContain(silicon.marketLabel);
+  });
+});
+
+describe("word-boundary market detection", () => {
+  it("does not fire on a keyword buried inside an ordinary word", () => {
+    // Matched with String.includes, "ide" fired inside provide, decide, wider
+    // and outside; "rag" inside average; "code" inside barcode and postcode.
+    // Since those words are unavoidable in a sentence about a decision, almost
+    // any situation scored a hit for the coding agent market. A luxury food
+    // retailer asking about discount approval was placed in Developer/coding
+    // agent and recommended vendors for a market it never mentioned.
+    expect(detectMarket("We provide guidance and decide on wider rollout.")).toBeNull();
+    expect(detectMarket("Average order value across our retail estate.")).toBeNull();
+    expect(detectMarket("Barcode and postcode lookups in our stores.")).toBeNull();
+  });
+
+  it("still matches the word itself, including a plural", () => {
+    expect(detectMarket("We want to buy GPUs.")?.id).toBe("ai_silicon");
+    expect(detectMarket("We need chips for training.")?.id).toBe("ai_silicon");
+    expect(detectMarket("RAG over our intranet.")?.id).toBe("rag_enterprise_search");
+  });
+});
+
+describe("across the reader's AI strategy", () => {
+  const retail = { sectorLabel: "Retail and consumer", marketIds: [] as string[] };
+
+  it("draws one leader from each of the company's markets, not three from one", () => {
+    const opp = strategyMarkets({ sectorTag: "retail_consumer", aiFindings: [], findings: [] })!;
+    expect(opp.marketIds.length).toBeGreaterThan(1);
+    const t = threeVendorsFor("discretionary discounting", opp)!;
+    expect(t.spread).toBe("across your strategy");
+    // Three different markets, which is what "the whole AI strategy" means.
+    expect(new Set(t.vendors.map((v) => v.marketId)).size).toBe(t.vendors.length);
+    // And no vendor taken twice.
+    expect(new Set(t.vendors.map((v) => v.vendorId)).size).toBe(t.vendors.length);
+  });
+
+  it("reaches beyond the frontier labs", () => {
+    // The single-market path returned the frontier three every time. Across a
+    // strategy the markets are a mix, so application vendors and clouds appear.
+    const opp = strategyMarkets({ sectorTag: "retail_consumer", aiFindings: [], findings: [] })!;
+    const t = threeVendorsFor("x", opp)!;
+    const frontier = new Set(["anthropic", "openai", "google", "meta", "mistral", "xai"]);
+    expect(t.vendors.some((v) => !frontier.has(v.vendorId))).toBe(true);
+  });
+
+  it("falls back to one market when nothing is carried", () => {
+    const t = threeVendorsFor("We need a coding agent for our engineering team.", null)!;
+    expect(t.spread).toBe("one market");
+    expect(new Set(t.vendors.map((v) => v.marketId)).size).toBe(1);
+  });
+
+  it("tells the model the scores are not comparable across markets", () => {
+    const opp = strategyMarkets({ sectorTag: "retail_consumer", aiFindings: [], findings: [] })!;
+    const block = threeVendorsBlock(threeVendorsFor("x", opp)!);
+    expect(block).toMatch(/LEADS A DIFFERENT MARKET/);
+    expect(block).toMatch(/never say one outscores another/);
+  });
+
+  it("returns null when there is neither a strategy nor a detectable market", () => {
+    expect(threeVendorsFor("Nothing about widgets here.", null)).toBeNull();
+    expect(strategyMarkets({ sectorTag: null, aiFindings: [], findings: [] })).toBeNull();
+    expect(retail.marketIds.length).toBe(0);
+  });
+});
+
+describe("security and data, every time", () => {
+  it("carries the security domains for every vendor whether or not they are a strength", () => {
+    for (const source of [
+      threeVendorsFor("We need a coding agent for our engineering team.", null)!,
+      threeVendorsFor("x", strategyMarkets({ sectorTag: "retail_consumer", aiFindings: [], findings: [] }))!,
+    ]) {
+      for (const v of source.vendors) {
+        expect(v.security.length).toBeGreaterThan(0);
+        const named = v.security.map((s) => s.domain);
+        expect(named).toContain("data security privacy");
+        expect(named).toContain("governance compliance");
+      }
+    }
+  });
+
+  it("instructs the finding to speak to security for each vendor", () => {
+    const block = threeVendorsBlock(
+      threeVendorsFor("We need a coding agent for our engineering team.", null)!
+    );
+    expect(block).toMatch(/SECURITY AND DATA ARE NOT OPTIONAL/);
+    expect(block).toMatch(/Security and data:/);
   });
 });

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { TAG_LABEL } from "@/lib/exposure/vertical";
 import { analystApiKey, approxTokens } from "../analyst/lib";
 import {
   interrogateCorpus,
@@ -36,10 +37,16 @@ function sanitisePosition(raw: unknown): InterrogateState["position"] {
 
   const name = str(p.name, 120).trim();
   if (!name) return null;
+  // Validated against the catalogue's own vocabulary rather than taken as
+  // given: this decides which markets the finding shops in, so an arbitrary
+  // string arriving here would choose vendors.
+  const rawTag = str(p.sectorTag, 60).trim();
+  const sectorTag = rawTag && rawTag in TAG_LABEL ? rawTag : null;
   return {
     name,
     industry: str(p.industry, 200),
     what: str(p.what, 400),
+    sectorTag,
     aiFindings: list(p.aiFindings),
     findings: list(p.findings),
   };

@@ -233,6 +233,15 @@ export interface PositionContext {
   name: string;
   industry: string;
   what: string;
+  /**
+   * The workflow-catalogue sector, carried so the SERVER can work out which
+   * markets this company's AI areas point at.
+   *
+   * Without it the finding could only ever guess a market from the words the
+   * reader typed, which is how a luxury food retailer asking about discount
+   * approval ended up recommended vendors for the coding agent market.
+   */
+  sectorTag: string | null;
   aiFindings: string[];
   findings: string[];
 }
@@ -243,6 +252,7 @@ export function toContext(p: SavedPosition): PositionContext {
     name: p.name.slice(0, 120),
     industry: p.industry.slice(0, 200),
     what: clamp(p.what),
+    sectorTag: p.sectorTag,
     aiFindings: p.aiFindings.slice(0, 6).map(clamp),
     findings: p.findings.slice(0, 6).map(clamp),
   };

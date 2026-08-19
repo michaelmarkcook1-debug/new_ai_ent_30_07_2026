@@ -6,7 +6,11 @@ import {
   nextQuestion,
   type InterrogateState,
 } from "./lib";
-import { threeVendorsFor, threeVendorsBlock } from "@/lib/desk/three-vendors";
+import {
+  threeVendorsFor,
+  threeVendorsBlock,
+  strategyMarkets,
+} from "@/lib/desk/three-vendors";
 
 // Live Interrogate. Haiku decides whether another sharp question is needed
 // and writes it; the finding is streamed as SSE, grounded only in the cited
@@ -258,7 +262,9 @@ export async function liveInterrogate(
   // rather than in the opening line. Null is a real outcome and is handled as
   // one: the finding then says which market it could not determine instead of
   // recommending three vendors from a market the buyer never mentioned.
-  const three = threeVendorsFor(combined);
+  // Across the company's own AI areas when a position is carried, so the
+  // finding weighs the buyer's AI strategy rather than one inferred role.
+  const three = threeVendorsFor(combined, strategyMarkets(state.position));
   const grounding = hits
     .map((h, i) => `<chunk index="${i + 1}" source="${h.chunk.source}">${h.chunk.text}</chunk>`)
     .join("\n");

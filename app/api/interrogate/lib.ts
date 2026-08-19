@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import path from "path";
 import { buildCorpus, retrieve, type Chunk } from "../analyst/lib";
-import { threeVendorsFor } from "@/lib/desk/three-vendors";
+import { threeVendorsFor, strategyMarkets } from "@/lib/desk/three-vendors";
 
 // Interrogate engine (hero piece, mirroring the deployed AIE app's
 // Interrogate pattern): the user states their situation, we ask a small
@@ -46,6 +46,8 @@ export interface InterrogateState {
     name: string;
     industry: string;
     what: string;
+    /** The catalogue sector, so the finding can shop the company's own markets. */
+    sectorTag: string | null;
     aiFindings: string[];
     findings: string[];
   } | null;
@@ -244,7 +246,9 @@ export function scriptedFinding(
   // The three the assessment picks, on the same computed path the live engine
   // uses. Without this the no-key demo answered a "which vendors" question
   // with a wall of quoted chunks and no vendors in it.
-  const three = threeVendorsFor(combined);
+  // Across the company's own AI areas when a position is carried, so the
+  // finding weighs the buyer's AI strategy rather than one inferred role.
+  const three = threeVendorsFor(combined, strategyMarkets(state.position));
 
   const parts: string[] = [];
   parts.push(

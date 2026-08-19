@@ -547,7 +547,10 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
                     <p className="micro-label mb-2">
                       The three, by weighted assessment
                       <span className="ml-1.5 font-normal normal-case tracking-normal text-muted">
-                        {t.three.marketLabel} · {t.three.basis} · read{" "}
+                        {t.three.spread === "across your strategy"
+                          ? `across ${t.three.marketLabel}`
+                          : t.three.marketLabel}{" "}
+                        · {t.three.basis} · read{" "}
                         {t.three.capturedAt.slice(0, 10)}
                       </span>
                     </p>
@@ -559,9 +562,18 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
                         >
                           <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                             <span className="flex items-baseline gap-2">
-                              <span className="font-mono text-xs text-muted tabular-nums">
-                                #{v.rank}
-                              </span>
+                              {/* A number reads as a ranking, and across a
+                                  strategy these three lead three different
+                                  markets and are not comparable. */}
+                              {t.three!.spread === "across your strategy" ? (
+                                <span className="rounded border border-base-300 px-1.5 py-0.5 font-mono text-xs text-muted">
+                                  {v.marketLabel}
+                                </span>
+                              ) : (
+                                <span className="font-mono text-xs text-muted tabular-nums">
+                                  #{v.rank}
+                                </span>
+                              )}
                               <span className="text-sm font-bold">{v.name}</span>
                               {v.position ? (
                                 <span className="rounded-full border border-good/40 bg-good-bg px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wide text-good">
@@ -585,6 +597,22 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
                                   .join(", ")}`
                               : ""}
                           </p>
+                          {/* Security and data every time, not only when it
+                              is a strength. A vendor weak here will never
+                              surface it through "strongest". */}
+                          {v.security.length > 0 ? (
+                            <p className="mt-1 font-mono text-xs text-muted">
+                              <span className="font-semibold text-base-content">
+                                Security and data
+                              </span>{" "}
+                              {v.security
+                                .map(
+                                  (x) =>
+                                    `${x.domain} ${x.score === null ? "not scored" : x.score.toFixed(1)}`
+                                )
+                                .join(" · ")}
+                            </p>
+                          ) : null}
                           <Link
                             href={v.profileHref}
                             className="mt-1.5 inline-block text-xs text-primary hover:underline"
@@ -594,6 +622,15 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
                         </li>
                       ))}
                     </ol>
+                    {t.three.spread === "across your strategy" ? (
+                      <p className="mt-2 measure text-xs text-muted">
+                        Each of these leads a different market, drawn from the
+                        AI areas on your position. Their scores are not
+                        comparable with each other: one leading its market at
+                        3.34 and another leading a different one at 2.25 are two
+                        separate readings, not a league table.
+                      </p>
+                    ) : null}
                     {t.three.alsoRanked > 0 || t.three.held > 0 ? (
                       <p className="mt-2 text-xs text-muted">
                         {t.three.alsoRanked > 0
