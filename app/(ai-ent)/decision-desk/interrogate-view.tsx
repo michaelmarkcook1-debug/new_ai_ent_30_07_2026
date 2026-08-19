@@ -267,8 +267,30 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
     // the reader's own words rather than on the prefill, so typing "Ocado are
     // rolling out agents" reaches the same research as clicking through from
     // Your AI Position did. Nothing is attached when nothing matches.
+    // Name-matched: the full context, including what the sources said, which
+    // is the only thing that may be attributed to this company.
     const hit = matchPosition(sit);
-    const ctx = hit ? toContext(hit) : null;
+    let ctx = hit ? toContext(hit) : null;
+
+    // Not name-matched, but a company IS being carried. The bar at the top of
+    // every tab says so, and the finding was ignoring it: clear the prefill,
+    // write your own sentence, and the three vendors fell back to one market
+    // guessed from your words while the page still claimed to be carrying you.
+    //
+    // Attached WITHOUT the research statements. The sector is what decides
+    // which markets to shop, and it is the reader's own carried choice; the
+    // findings are claims about a company they did not name here, so they stay
+    // out and nothing can be misattributed.
+    if (!ctx) {
+      const carried = latestPosition();
+      if (carried?.sectorTag) {
+        ctx = {
+          ...toContext(carried),
+          aiFindings: [],
+          findings: [],
+        };
+      }
+    }
     setAttached(ctx);
     setSituation(sit);
     setAnswers([]);
