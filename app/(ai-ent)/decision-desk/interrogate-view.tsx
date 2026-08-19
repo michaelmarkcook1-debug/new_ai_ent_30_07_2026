@@ -118,6 +118,16 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
   const [phase, setPhase] = useState<"start" | "asking" | "done">("start");
   const bottomRef = useRef<HTMLDivElement>(null);
   const started = useRef(false);
+  // The ?q= actually acted on, rather than a boolean "have we ever started".
+  //
+  // This was `started.current` alone, and it is a ref, so it survives a
+  // client-side navigation that does not unmount this component. Clicking an
+  // Ask AI question while already on the Decision Desk therefore changed the
+  // URL and did nothing at all: the effect re-ran, saw started.current true,
+  // and returned. Same for a second question after a first. Ask AI worked only
+  // on a cold load from another tab, which is the one route somebody demoing
+  // it would not take.
+  const startedQ = useRef<string | null>(null);
   // The saved position offered in the start panel, and the one actually
   // attached to the running interrogation. They are not the same thing: the
   // offer is whatever was researched last, and the attachment is whichever
@@ -282,12 +292,19 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
     const q = params.get("q");
     const d = params.get("depth");
     if (d === "comprehensive" || d === "weighted") setDepth(d);
-    if (q && !started.current) {
+    // A new question means a new interrogation, whatever is on screen.
+    // Deferred while a previous one is still streaming rather than dropped:
+    // start() bails on `busy`, so acting here would consume the question and
+    // leave the reader looking at the old answer, which is the bug this
+    // replaces. `busy` is in the dependencies so it retries when the stream
+    // ends.
+    if (q && q !== startedQ.current && !busy) {
+      startedQ.current = q;
       started.current = true;
       start(q);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [params]);
+  }, [params, busy]);
 
   // Open with the last company researched in Your AI Position already named.
   //

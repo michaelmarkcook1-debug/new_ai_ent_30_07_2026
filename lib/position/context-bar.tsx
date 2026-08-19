@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useShortlist } from "@/lib/shortlist";
 import { vendorName } from "@/lib/aie/vendor-directory";
-import { latestPosition, type SavedPosition } from "./store";
+import { latestPosition, removePosition, type SavedPosition } from "./store";
 
 // What the reader has established, carried across the section.
 //
@@ -46,6 +46,14 @@ import { latestPosition, type SavedPosition } from "./store";
 //
 // So the control belongs here rather than on Trust Rank: it is the one
 // component that appears on all five, and it is the thing making the claim.
+//
+// AND IT HAS TO COVER THE COMPANY, NOT ONLY THE VENDORS. The first cut gated
+// the button on `ids.length > 0`, so it appeared only when vendors were
+// carried. A reader who had researched a company and shortlisted nothing saw
+// "Carried through Nando's, Fast food restaurants" on five tabs with no
+// control beside it at all, and the only way out was to find the saved list on
+// Your AI Position. The bar announced something it could not undo, which is
+// the exact failure the paragraph above was written about.
 export function CompanyContextBar({
   /** The tab this is rendered on, so it does not offer to send you where you are. */
   here,
@@ -66,6 +74,18 @@ export function CompanyContextBar({
 
   if (!mounted || !ready) return null;
   if (!position && ids.length === 0) return null;
+
+  // Drops whatever this bar is currently claiming. The company is removed from
+  // the store rather than hidden: the saved list on Your AI Position is the
+  // other place it can be managed, and leaving a hidden-but-present entry
+  // would make those two screens disagree.
+  const stopCarrying = () => {
+    if (position) {
+      removePosition(position.key);
+      setPosition(null);
+    }
+    if (ids.length > 0) clear();
+  };
 
   const names = ids.slice(0, 3).map((id) => vendorName(id));
   const more = ids.length - names.length;
@@ -102,27 +122,31 @@ export function CompanyContextBar({
         </span>
       ) : null}
 
-      {/* The way out. Clears the list itself rather than muting it, because a
-          muted list is a third state a reader cannot see and would have to
-          remember. The vendors are three clicks to rebuild on the Decision
-          Desk, and the button says what it does to every tab rather than only
-          to this one. */}
-      {ids.length > 0 ? (
-        <button
-          type="button"
-          onClick={clear}
-          title={
-            "Stops these vendors narrowing any tab in this section. Trust Rank goes " +
-            "back to a market read rather than a verdict on your list, ModelEngine " +
-            "stops answering a second time inside it, and Integrators releases the " +
-            "drill. It does not delete anything researched, and you can take them " +
-            "forward again from the Decision Desk."
-          }
-          className="tap rounded-full border border-insight/40 px-2.5 py-0.5 text-xs font-semibold text-insight transition hover:bg-insight/10"
-        >
-          Stop carrying
-        </button>
-      ) : null}
+      {/* The way out, for whatever is actually being carried. Clears rather
+          than mutes, because a muted state is a third state a reader cannot
+          see and would have to remember. Both are rebuildable: the company by
+          researching it again, the vendors in three clicks on the Decision
+          Desk. */}
+      <button
+        type="button"
+        onClick={stopCarrying}
+        title={
+          (position
+            ? `Forgets ${position.name} on every tab in this section, so nothing is preselected from it and the Decision Desk stops opening with it. `
+            : "") +
+          (ids.length > 0
+            ? "Stops these vendors narrowing any tab: Trust Rank goes back to a market read rather than a verdict on your list, ModelEngine stops answering a second time inside it, and Integrators releases the drill. "
+            : "") +
+          "Nothing is deleted upstream and both are one visit away from being set again."
+        }
+        className="tap ml-auto rounded-full border border-insight/40 px-2.5 py-0.5 text-xs font-semibold text-insight transition hover:bg-insight/10"
+      >
+        {position && ids.length > 0
+          ? "Stop carrying both"
+          : position
+            ? `Stop carrying ${position.name}`
+            : "Stop carrying"}
+      </button>
 
       {/* The gap, named, and only where filling it is the obvious next act. */}
       {!position && here !== "position" ? (
