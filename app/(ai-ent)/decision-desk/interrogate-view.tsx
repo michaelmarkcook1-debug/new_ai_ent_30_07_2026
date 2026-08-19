@@ -330,6 +330,38 @@ export function InterrogateView({ liveKey = false }: { liveKey?: boolean }) {
     // Once, on mount. Re-running would re-fill a box the reader had cleared.
   }, []);
 
+  // A position cleared elsewhere on the page has to reach this view.
+  //
+  // The chip and the prefilled box both read the position on mount and had no
+  // way to learn it had gone, so clearing the company from the context bar
+  // left both still naming it: the reader was told it had stopped being
+  // carried while looking at it, twice, on the same page.
+  //
+  // Read through a ref rather than from inside a state updater. An updater has
+  // to be pure, so calling setInput from within the setOffered updater would
+  // not reliably run.
+  const offeredRef = useRef<SavedPosition | null>(null);
+  useEffect(() => {
+    offeredRef.current = offered;
+  }, [offered]);
+
+  useEffect(() => {
+    const sync = () => {
+      if (latestPosition()) return;
+      const prev = offeredRef.current;
+      if (prev) {
+        // Only clear the box when it still holds the text WE wrote. Anything
+        // typed since is the reader's and survives.
+        const ours = situationFrom(prev, opportunitiesFor(prev));
+        setInput((cur) => (cur === ours ? "" : cur));
+      }
+      setOffered(null);
+      setAttached(null);
+    };
+    window.addEventListener(POSITIONS_CHANGED, sync);
+    return () => window.removeEventListener(POSITIONS_CHANGED, sync);
+  }, []);
+
   const reset = () => {
     setPhase("start");
     setTurns([]);
