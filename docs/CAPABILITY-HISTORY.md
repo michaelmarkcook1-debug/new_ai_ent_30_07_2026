@@ -17,6 +17,51 @@ than a gap.
 
 ## 19 August 2026
 
+**The Decision Desk now answers about your AI strategy, not one job.**
+
+It used to work out a single market from the words you typed and hand back the
+top three vendors in it. That is the wrong shape of answer. A retailer weighing
+fraud detection, discount pricing and supplier risk is buying in three
+different markets at once, and being told about one of them is being told a
+third of the answer.
+
+It now draws one leader from each of the markets your own AI areas point at.
+For a food retailer that is Anthropic for agent platforms, OpenAI for the
+enterprise assistant, and Oracle for customer AI.
+
+**Which is also why it stopped answering with three frontier labs every time.**
+That was never a decision, it was a side effect: whichever single market got
+detected was usually the frontier one. Looking across your real markets brings
+in application vendors and cloud providers, which is the mix you would actually
+face.
+
+**Their scores are not a league table, and the page says so.** Each of the three
+leads a different market and is number one in it. A 3.34 in one market and a
+2.25 in another are two separate readings; comparing them would be exactly the
+mistake this product refuses to make everywhere else.
+
+**Security and data are now weighed every time.** Four measures, on every vendor,
+whether or not they are that vendor's strong suit: how they handle your data and
+privacy, their exposure to security threats, their governance and compliance,
+and their identity and access controls. Before this, the card showed what a
+vendor was best at, so one that was weak on data handling simply never mentioned
+it and you had to notice the silence. In the retail example Oracle leads its
+market and scores 1.6 out of 5 on identity access, which is the kind of thing
+nobody finds on their own.
+
+**A wrong answer we found from your screenshot.** A luxury food retailer asking
+about discount approval was told its market was developer coding tools. The
+cause was ours: the keyword match looked inside whole words, so "ide" matched
+inside "provide", "decide" and "outside", and almost any sentence about a
+decision scored a hit for the coding market. Fixed, with the plural cases
+kept working.
+
+**Two links that did nothing now work.** "Score it against your weights" at the
+bottom of a finding did not move the page when you were already on the Decision
+Desk. And if you cleared the prefilled box and wrote your own words, the answer
+quietly forgot which company you were carrying, even though the strip at the top
+still named it.
+
 **The five tabs now work as one path instead of five separate questions.**
 
 Research your company on Your AI Position and everything after it knows who you

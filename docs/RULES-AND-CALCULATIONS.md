@@ -1612,6 +1612,117 @@ out of `lib/workflow-vendors.ts` pulled in `lib/aie-server.ts` and therefore
 **Typecheck and 607 tests passed with the bad import.** Only `next build` sees
 this. Same shape as `shortlistFor` and the workforce payload.
 
+
+---
+
+## 8.23 The finding weighs a strategy, not a role
+
+Four defects and one redesign, 19 August 2026. `lib/desk/three-vendors.ts`.
+**Tests**: `tests/three-vendors.test.ts`, 25.
+
+### Keyword matching fired inside ordinary words
+
+`MARKET_WORDS` was matched with `String.includes`. Measured against one
+innocent retail sentence:
+
+| Keyword | Fired inside |
+|---|---|
+| `ide` | provide, decide, wider, outside |
+| `rag` | average |
+| `code` | barcode, postcode |
+| `process` | processing |
+
+"provide", "decide" and "outside" are unavoidable in a sentence about a
+decision, so almost any Decision Desk situation scored a hit for
+`developer_coding_agent`. A luxury food retailer asking about discount approval
+was placed in that market and recommended vendors for a market it had never
+mentioned.
+
+`hasPhrase()` now matches on a word boundary, with one trailing plural allowed
+so "GPUs" and "chips" still land. The optional `s` cannot reopen the hole: a
+leading-boundary failure rejects "provide" before it is considered. The same
+function guards the named-outright check above it, which had the same flaw.
+
+### The three now span the reader's markets
+
+`threeVendorsFor(text, opp?)` has two shapes:
+
+| `spread` | When | What it returns |
+|---|---|---|
+| `across your strategy` | a position is carried and its areas name markets | the LEADER of each of up to three different markets |
+| `one market` | nothing carried | the top three of one detected market |
+
+`strategyMarkets()` turns the wire position into `{ sectorLabel, marketIds }`
+via `opportunitiesFor()`, so the markets come from the company's own AI areas
+(section 8.22) rather than from the words the reader typed.
+
+A vendor is taken once: `seen` stops one competing in several of the reader's
+markets from filling two slots and leaving a market unrepresented.
+
+**Comparability is preserved and stated three times.** Each vendor is number one
+in ITS OWN market and none is ranked against the others. The prompt block
+forbids saying one outscores another, the card renders the market label instead
+of a rank number, and the panel says a 3.34 leading one market and a 2.25
+leading another are two readings rather than a league table.
+
+**This is why the three are no longer all frontier labs.** That was a
+consequence of the single-market path, not a policy: `frontier_model_api` was
+simply what most situations detected. Across a retail strategy it returns
+Anthropic leading agent platform, OpenAI leading enterprise assistant and Oracle
+leading CRM, verified against production.
+
+### Security and data are carried every time
+
+`SECURITY_DOMAINS`, four of the fourteen the composite already weighs:
+
+```
+data_security_privacy · security_threat · governance_compliance · identity_access
+```
+
+`securityRead()` returns all four for every vendor, scored or explicitly not
+scored, and they render on every card. `strongest` only ever showed what a
+vendor is best at, so one weak on data handling never mentioned it and the
+reader had to notice an absence. Oracle scores 1.6 on identity access and 1.6 on
+security threat while leading its market at 2.25.
+
+The prompt block carries `SECURITY AND DATA ARE NOT OPTIONAL HERE` and requires
+a sentence per vendor, plus an explicit note where a vendor's security sits
+materially below its own composite.
+
+### `sectorTag` crosses the wire
+
+Added to `PositionContext` (`lib/position/store.ts`) and to
+`InterrogateState.position`. **Validated in `sanitisePosition()` against
+`TAG_LABEL`** rather than taken as given: it decides which markets the finding
+shops in, so an arbitrary string arriving there would choose vendors.
+
+### The carried company attaches without being named
+
+`matchPosition()` requires the company name to appear in the reader's own
+sentence, which was right when a position supplied only prose. Once it also
+decided the markets, clearing the prefill and writing your own sentence dropped
+you to one guessed market while the context bar still said the company was
+carried.
+
+`start()` now falls back to `toContext(carried)` **with `aiFindings` and
+`findings` emptied**. The sector is the reader's own carried choice and the bar
+announces it; the research statements are claims about a company they did not
+name in this sentence, so they stay out and nothing can be misattributed. The
+strict name match still governs everything said about the company.
+
+### A third instance of state initialised on mount
+
+`decision-desk-view.tsx` held `tool` as `useState(initialTool)`. The finding's
+own "Score it against your weights" link points at `/decision-desk?tool=assess`
+and the reader clicking it is already on that route, so the URL changed and the
+step did not move. It now tracks which `?tool=` was acted on, and scrolls the
+panel into view: switching a step at the bottom of a long finding without moving
+the viewport also reads as nothing happening.
+
+Same shape as `started.current` in `interrogate-view.tsx` (section 8.22). A ref
+or a `useState` initial value survives a client-side navigation, and every link
+this product renders to its own current route is subject to it.
+
 ---
 
 ## 9. Run costs
