@@ -1,7 +1,13 @@
 # AI Enterprise: data sources
 
 **Working document.** Expect additions. Last verified against live endpoints:
-**5 August 2026**.
+**21 August 2026**.
+
+**Two sources that were healthy on 5 August are down.** The movement catalogue's
+host no longer resolves at all, and BoardRadar answers 503 on every path. Both
+are marked below and in section 7. A register listing a dead upstream as healthy
+is the exact failure this document exists to prevent, and it went sixteen days
+saying so.
 
 Every status in this file was probed, not assumed. Where something is broken it
 says so, because a source register that lists a dead upstream as healthy is
@@ -86,8 +92,10 @@ the refresh.
 | **Project** | `ag-vendor-intake` (Supabase, eu-west-2) |
 | **Schema** | `aie` (private) exposed via `public.catalogue_*` views |
 | **Auth** | Publishable key (read). Service key (write): `SUPABASE_SERVICE_ROLE_KEY` |
-| **Status** | ✅ Live. **1,340 observations** as at 4 Aug 2026 |
-| **Verified** | `content-range: 0-0/1340` |
+| **Status** | ❌ **DEAD as at 21 Aug 2026.** The host returns NXDOMAIN: it does not resolve. Every `/api/catalogue/*` route answers 502 `fetch failed` |
+| **Verified** | Healthy 4 Aug 2026 at `content-range: 0-0/1340`, **1,340 observations**. Re-probed 21 Aug 2026: host gone |
+| **Impact** | The only tier we own end to end. Those 1,340 observations are unreachable, and no fixture fallback exists, so the panels render their own empty state. Correct behaviour, but empty |
+| **To resolve** | Establish whether the Supabase project was deleted or paused. If deliberate, remove the series from the product and say so on the page. If not, restore it and re-run `ingest:catalogue` |
 
 **Tables**
 
@@ -274,7 +282,8 @@ UK regulators, no state law.
 | **Upstream** | `https://ag-api-prod-calm-seastar-79.fly.dev/api/v1` |
 | **Auth** | `X-API-Key`: `ANALYSTGENIUS_API_KEY` |
 | **Cache** | 5 min, 12 s timeout, 1 retry, 60 req/min per IP |
-| **Status** | ✅ `200` with key (135 KB), `401` without: auth working correctly |
+| **Status** | ❌ **503 on every path as at 21 Aug 2026.** The host is alive (`/health` answers 200) but `/api/v1` returns 404, so the API path has moved or the key is not reaching production. Was `200` with key (135 KB) on 5 Aug |
+| **Impact** | Six pages fall back to the 88 recorded fixtures: Company View, Competitive Intel, Ecosystem Navigator, News Feed, Reputation Tracker, Security Desk. The lane flips to `error` and no stale figure is shown as fresh |
 
 **Whitelist (23 prefixes):** `companies`, `providers`, `pulse`, `financial`,
 `financial-snapshot`, `talent`, `ai-exposure`, `reputation-tracker`,
@@ -399,6 +408,8 @@ looked and Do these three things, under the two guards in
 
 | # | Issue | Severity | Status |
 |---|---|---|---|
+| 0a | **Movement catalogue host does not resolve (NXDOMAIN)** | **High: a whole first-party tier gone** | ❌ Open, found 21 Aug 2026. See §1.1 |
+| 0b | **BoardRadar returns 503 on every path** | **High: six pages on fixtures** | ❌ Open, found 21 Aug 2026. See §3.2 |
 | 1 | `logo.clearbit.com` does not resolve | Low: fails in 19 ms, cached 24 h, blank SVG | ❌ Open: replace at leisure |
 | 2 | `/api/news` returns 3.28 MB and ignores `?limit` | Medium (bandwidth) | ⚠️ Mitigated: 24 h module TTL |
 | 3 | `uptake` is a static May 2026 seed | High (misleading) | ⚠️ Disclosed on-page; superseded by §1.1 |
