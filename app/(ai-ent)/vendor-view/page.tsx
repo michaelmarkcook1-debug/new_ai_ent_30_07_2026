@@ -4,6 +4,7 @@ import { RankingsTable } from "./components/rankings-table";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { vendorViewInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
+import { enrichWithSynthesis, signalsFromMetrics } from "@/lib/analyst/cross";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
 
@@ -30,10 +31,23 @@ export default async function VendorViewPage() {
     })
   );
 
-  const written = await authorInsight(
+  // Cross-signal. Everything here is read off the MarketMetrics this page has
+  // already fetched, so there is no extra call: the assessment says who leads
+  // and the risk register says who is carrying an open finding, and those two
+  // are never reconciled upstream. Where they disagree the finding becomes
+  // evidence against, which contests the strength and can only weaken the
+  // recommendation, never strengthen it.
+  const { insight: crossed, synthesis, signals } = enrichWithSynthesis(
     insight,
+    signalsFromMetrics(m)
+  );
+
+  const written = await authorInsight(
+    crossed,
     "vendor ranking",
-    m.vendors.slice(0, 12).map((v) => v.name)
+    m.vendors.slice(0, 12).map((v) => v.name),
+    null,
+    { signals, synthesis }
   );
 
 

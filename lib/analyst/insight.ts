@@ -33,7 +33,7 @@ import { vendorName } from "@/lib/aie/vendor-directory";
 //
 // The Pulse is untouched. This is the same shape, applied to the other tabs.
 
-import { decide, type Decision, type DecisionEvidence } from "./decision";
+import { decide, type Decision } from "./decision";
 
 export type AnalystAction =
   | "Accelerate"
@@ -106,6 +106,24 @@ export interface NewsItemRaw {
  * on a model launch. Returns null rather than reaching for a loosely related
  * item: an insight with no relevant news is a normal state, not a gap to fill.
  */
+/**
+ * How old a dated item may be and still be presented beside a recommendation.
+ *
+ * Fourteen days, which is roughly one buying-cycle heartbeat and comfortably
+ * inside the window the feed carries. It is a named constant rather than a
+ * literal because it is the kind of number that gets tuned, and a tuned number
+ * with no name becomes folklore.
+ */
+export const NEWS_MAX_AGE_DAYS = 14;
+
+/** Age in days, or null when the item carries no usable date. */
+function ageInDays(publishedAt: string | null | undefined, now: number): number | null {
+  if (!publishedAt) return null;
+  const t = Date.parse(publishedAt);
+  if (!Number.isFinite(t)) return null;
+  return (now - t) / (24 * 60 * 60 * 1000);
+}
+
 export function pickNews(
   items: NewsItemRaw[],
   opts: {
@@ -115,11 +133,43 @@ export function pickNews(
     minImpact?: number;
     /** The vendors this page actually covers, for the tie line. */
     pageVendorIds?: string[];
+    /**
+     * The moment to measure age against. Passed by tests so the gate is
+     * deterministic; defaults to now in a render.
+     */
+    now?: number;
+    /** Overrides NEWS_MAX_AGE_DAYS where a page genuinely needs a wider window. */
+    maxAgeDays?: number;
   } = {}
 ): InsightNews | null {
-  const { categories, vendorIds, vendorNames, minImpact = 60 } = opts;
+  const {
+    categories,
+    vendorIds,
+    vendorNames,
+    minImpact = 60,
+    now = Date.now(),
+    maxAgeDays = NEWS_MAX_AGE_DAYS,
+  } = opts;
+
+  // THE RECENCY GATE, and why it had to exist.
+  //
+  // This function used to filter on impact and then take the single highest
+  // upstream impact score, with no reference to the date at all. Measured on
+  // the shipped feed on 26 August 2026: the winner was an item published on
+  // 31 July, twenty-six days old, and it was rendering as this page's dated
+  // item directly beside a recommendation whose whole job is to say why now.
+  // A twenty-six day old article cannot establish why now.
+  //
+  // An item with no usable date is excluded rather than assumed recent.
+  // Assuming would be inventing freshness, which is the same class of error as
+  // inventing a figure.
   const relevant = items.filter((n) => {
     if ((n.impactScore ?? 0) < minImpact) return false;
+    const age = ageInDays(n.publishedAt, now);
+    if (age === null) return false;
+    // Future-dated items are a feed defect rather than fresh news, and one
+    // sitting a day ahead of the clock is not a reason to lead a page with it.
+    if (age < -1 || age > maxAgeDays) return false;
     if (categories?.length) {
       const cats = n.categories ?? [];
       if (!cats.some((c) => categories.includes(c))) return false;
@@ -132,9 +182,26 @@ export function pickNews(
   });
   if (relevant.length === 0) return null;
 
-  const best = relevant.reduce((a, b) =>
-    (b.impactScore ?? 0) > (a.impactScore ?? 0) ? b : a
-  );
+  // Selection on relevance, materiality and recency rather than materiality
+  // alone. Each part is bounded so no one of them can dominate: a very loud
+  // three-week-old item should not beat a material one from this week that
+  // actually names a vendor the reader holds.
+  const score = (n: NewsItemRaw): number => {
+    const materiality = Math.min(100, Math.max(0, n.impactScore ?? 0)); // 0-100
+    const age = ageInDays(n.publishedAt, now) ?? maxAgeDays;
+    // Linear decay across the window: today scores 100, the gate scores 0.
+    const recency = Math.max(0, (1 - Math.max(0, age) / maxAgeDays)) * 100;
+    const named = n.vendors ?? [];
+    const onPage = opts.pageVendorIds?.length
+      ? named.filter((v) => opts.pageVendorIds!.includes(v)).length
+      : 0;
+    // Relevance is a bonus and never a gate: pages that declare no vendor set
+    // score zero here and are ranked on the other two, exactly as before.
+    const relevance = onPage > 0 ? 100 : 0;
+    return materiality * 0.4 + recency * 0.4 + relevance * 0.2;
+  };
+
+  const best = relevant.reduce((a, b) => (score(b) > score(a) ? b : a));
   return {
     title: best.title,
     whyItMatters: best.whyItMatters ?? null,

@@ -9,6 +9,7 @@ import { CategoryShareLive } from "./components/category-share-live";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { marketWatchInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
+import { enrichWithSynthesis, signalsFromMetrics } from "@/lib/analyst/cross";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
 
@@ -41,10 +42,27 @@ export default async function MarketWatchPage() {
     })
   );
 
-  const written = await authorInsight(
+  // Cross-signal, from the metrics already fetched above. Concentration is a
+  // share-estimate reading and the clearest lead is an assessment reading;
+  // where both are tight the negotiating position is weaker than either says
+  // alone, and this page could not previously see that.
+  const {
+    insight: crossed,
+    synthesis,
+    // Named apart from this page's own `signals`, which are the rendered
+    // market-signal rows and a different thing entirely.
+    signals: crossSignals,
+  } = enrichWithSynthesis(
     insight,
+    signalsFromMetrics(metricsForInsight)
+  );
+
+  const written = await authorInsight(
+    crossed,
     "market",
-    metricsForInsight.vendors.slice(0, 12).map((v) => v.name)
+    metricsForInsight.vendors.slice(0, 12).map((v) => v.name),
+    null,
+    { signals: crossSignals, synthesis }
   );
 
 

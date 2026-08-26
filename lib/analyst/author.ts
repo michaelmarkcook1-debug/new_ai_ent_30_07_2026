@@ -5,6 +5,9 @@ import {
   intentViolation,
   type ActionIntent,
 } from "./canonical";
+import { priorsBlock, resolveTheses } from "./priors";
+import { synthesisBlock, type Synthesis } from "./synthesis";
+import type { Signal } from "./signals";
 import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import type { AnalystInsightData } from "./insight";
 import type { PulseJudgement } from "@/lib/pulse/judgement";
@@ -86,7 +89,20 @@ export async function authorInsight(
    * is what this market means for the company the reader named, not what the
    * market is doing on its own.
    */
-  subject: { label: string; facts: string[] } | null = null
+  subject: { label: string; facts: string[] } | null = null,
+  /**
+   * Cross-signal findings and the signals behind them, where the page computed
+   * any. Supplied by pages that call enrichWithSynthesis().
+   *
+   * Two things ride on this. The findings go into the prompt as fixed text the
+   * model may explain and may not restate, and the signals decide which
+   * analyst priors are allowed to appear at all: a claim this product can
+   * check is only stated where this page's own data has just checked it.
+   */
+  cross: {
+    signals: readonly Signal[];
+    synthesis: readonly Synthesis[];
+  } | null = null
 ): Promise<Written<AnalystInsightData>> {
   if (!llmAvailable() || computed.insufficient) return asComputed(computed);
 
@@ -133,6 +149,13 @@ export async function authorInsight(
       : null,
     subject ? `\nTHE SUBJECT OF THIS READING: ${subject.label}` : null,
     ...(subject?.facts ?? []).map((f) => `- ${f}`),
+    // Cross-signal findings, and the priors this page's data actually
+    // supports. Both empty on a page with no signals, which is the common
+    // case and leaves the prompt exactly as it was.
+    cross && cross.synthesis.length > 0 ? `\n${synthesisBlock(cross.synthesis)}` : null,
+    cross
+      ? `\n${priorsBlock(resolveTheses(cross.signals, new Date().toISOString().slice(0, 10)))}`
+      : null,
   ]);
 
   const draft = await authored<InsightDraft>(
@@ -184,6 +207,11 @@ The computed versions above are a floor, not a template. Say something a reader 
       // Where the page declared what it covers, that is the boundary for
       // naming. Where it did not, the guard stays scoped to the fact prose.
       entities,
+      // Only where cross-signal findings are actually in the prompt. A page
+      // with no synthesis has nothing to turn into a causal claim, and turning
+      // the check on everywhere would reject ordinary prose ("due to" appears
+      // in perfectly sound sentences) for no protection.
+      forbidCausal: (cross?.synthesis.length ?? 0) > 0,
     }
   );
 

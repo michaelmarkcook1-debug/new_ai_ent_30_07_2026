@@ -108,6 +108,68 @@ Nothing moved on screen. No new tab, no new panel, no dashboard. The
 recommendation box that was already there now has the answer in it.
 
 
+**The product can now reason across its own tabs.**
+
+Until now each tab was its own world. Competitive Intel knew capability had
+converged. Price / Performance knew the price gap had not. Nobody put the two
+together, because nothing in the product was allowed to look at two pages at
+once.
+
+It can now. Where a page holds readings from more than one dataset, it checks
+eight specific combinations and says what they mean together. For example:
+
+*Capability across the assessed set is narrow, while the price separation
+between the top model and a qualifying alternative is wide. The two readings
+come from different datasets and point the same way. A premium priced against a
+capability lead is being paid into a market where that lead has narrowed.*
+
+Neither page could say that on its own.
+
+**It can now also disagree with itself, on purpose.** The assessment says a
+vendor leads its market. The risk register says the same vendor is carrying two
+open high-severity findings. Nothing upstream reconciles those, and the product
+now says so out loud rather than presenting the ranking as the whole answer.
+
+**A disagreement makes the recommendation weaker, automatically.** Where the
+cross-check finds a contradiction, an action that told you to commit is pulled
+back to "look into this first". It can only ever weaken a recommendation, never
+strengthen one, and it does it through the same rules that already governed the
+action rather than around them.
+
+**Three rules it will not break.**
+
+*A snapshot never becomes a trend.* Of the thirteen datasets behind this
+product, exactly three carry a previous reading to compare against, and none
+carries three. So most readings can only say what is true now, and the product
+is not allowed to describe them as rising or falling. Where a source republishes
+the same numbers unchanged, that counts as no movement rather than as movement
+of zero.
+
+*Two things moving together never becomes one causing the other.* The product
+can say "coincides with" and "reinforces". It cannot say "because", "drove" or
+"led to", and an answer that tries is thrown away and rewritten.
+
+*A contradiction is never quietly dropped.* If the evidence disagrees, you see
+the disagreement.
+
+**Stale news can no longer create urgency.** The dated item beside a
+recommendation was chosen purely on the source's own impact score, with no
+reference to when it was published. Measured today, the winner was an article
+from 31 July, twenty-six days old, sitting next to a line explaining why now.
+Items now have to be from the last fortnight, and selection weighs how recent
+and how relevant an item is alongside how big it is. An item with no date is
+excluded rather than assumed recent. Some pages will show no dated item at all,
+which is honest and was always meant to be a normal state.
+
+**And two market claims stopped being permanent.** The analyst voice carried
+five pieces of market knowledge. Three describe how this kind of market behaves
+and will be true next year. Two were claims about the market right now, and this
+product measures both of them on its own pages, so they had no business being
+asserted from a prompt where nothing could check them. They now arrive only
+where the page's own data has just confirmed them. Where the data disagrees, the
+voice is told not to state them.
+
+
 ---
 
 ## 19 August 2026

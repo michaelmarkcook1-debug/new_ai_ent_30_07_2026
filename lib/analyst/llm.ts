@@ -5,6 +5,7 @@ import {
   unsupportedCounts,
   type DirectionClaim,
 } from "./canonical";
+import { claimsCausality } from "./synthesis";
 
 // The analyst voice, written by Opus 5 over figures it is not allowed to
 // invent.
@@ -215,18 +216,20 @@ Things you understand about this market that a reader may not:
 - The layers behave differently. Frontier labs, application vendors,
   infrastructure and the delivery channel are four different businesses with
   four different economics, and a figure from one says nothing about another.
-- Capability has commoditised faster than price. The gap between the best model
-  and an adequate one has narrowed while the price gap has not, which is where
-  most of the available saving in an AI budget sits.
-- Disclosure is thin by construction. Very few vendors quantify AI revenue,
-  most private valuations are not revenue multiples, and a confident market
-  figure is usually a modelled one wearing a measurement's clothes.
 - Concentration risk in this market is a delivery problem as much as a
   commercial one. Who can actually stand a system up is a smaller set than who
   can sell one.
 - Procurement cycles outlast model generations. A three-year commitment signed
   against today's capability leaders is a bet on a leaderboard that reorders in
   months.
+
+Two claims that used to sit in this list have been removed from it: that
+capability has commoditised faster than price, and that disclosure is thin.
+Both are true of the market as we last measured it, and both are things this
+product MEASURES on its own pages, so asserting them here would let a stale
+sentence outlive the reading that justified it. They now arrive with the data,
+already checked against it, or they do not arrive at all. Do not reintroduce
+them here. See lib/analyst/priors.ts.
 
 WHAT AN INSIGHT MUST DO:
 
@@ -321,6 +324,16 @@ export interface CanonicalGuards {
    * factual naming and the fact prose is not consulted. See foreignEntities().
    */
   entities?: readonly string[] | null;
+  /**
+   * Refuse an answer that asserts one reading caused another.
+   *
+   * Set wherever cross-signal findings are in the prompt. Those findings state
+   * co-movement and never establish mechanism, and "these moved together" is
+   * one careless verb away from "this moved that". The direction guard cannot
+   * see that failure: nothing has been reversed and no figure has moved, the
+   * sentence has simply claimed something the product cannot know.
+   */
+  forbidCausal?: boolean;
 }
 
 export async function authored<T extends object>(
@@ -415,6 +428,7 @@ export async function authoredResult<T extends object>(
   const guardKey = JSON.stringify({
     claims: guards.claims ?? [],
     entities: guards.entities ?? [],
+    forbidCausal: guards.forbidCausal ?? false,
   });
   const cacheKey = keyOf(kind, { facts: stable, instruction, guardKey });
   const hit = cache.get(cacheKey);
@@ -476,6 +490,7 @@ const cachedGenerate = unstable_cache(
       JSON.parse(guardKey) as {
         claims: DirectionClaim[];
         entities: string[];
+        forbidCausal: boolean;
       }
     ),
   ["analyst-insight"],
@@ -490,7 +505,11 @@ async function generate<T extends object>(
   maxTokens: number,
   roster: readonly string[],
   cacheKey: string,
-  guards: { claims: DirectionClaim[]; entities: string[] }
+  guards: {
+    claims: DirectionClaim[];
+    entities: string[];
+    forbidCausal: boolean;
+  }
 ): Promise<T> {
 
   let lastInvented: string[] = [];
@@ -548,6 +567,12 @@ ${instruction}`;
       ...reversedClaims(emitted, guards.claims).map(
         (c) => `direction of ${c.family} (canonically ${c.pole})`
       ),
+      // Correlation stated as cause. Only checked where cross-signal findings
+      // are in the prompt, because those are the only claims in this product
+      // built from two datasets that merely moved together.
+      ...(guards.forbidCausal
+        ? claimsCausality(emitted).map((w) => `a causal claim ("${w}")`)
+        : []),
     ];
     if (bad.length === 0) {
       cache.set(cacheKey, { value: parsed, at: Date.now() });

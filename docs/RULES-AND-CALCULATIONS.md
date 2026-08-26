@@ -2026,6 +2026,204 @@ shell's basic auth.
 37 tests across `tests/analyst-decision.test.ts` and
 `tests/analyst-insight-panel.test.ts`.
 
+## 8.26 Cross-signal intelligence
+
+Verified against the working tree at commit `334afb7`, 26 August 2026.
+
+Each page reached its own conclusion from its own datasets, and the conclusions
+that matter most to a buyer are not on any one page. This is the layer where
+they meet.
+
+### The signal map, from the audit that preceded this
+
+| Source | Metric | Direction available | Provenance | Freshness (vs 26 Aug) |
+|---|---|---|---|---|
+| `categoryComposites` | composite 0-5, rank, grade | no prior held | measured | 17 Aug, 9d |
+| `vendors[].momentum` | momentum | published delta | modelled | 17 Aug |
+| `kpis[].delta` | tracked average + change | **real prior** | derived | 17 Aug |
+| `shares[].changePct` | category share | **real prior**, gated | modelled estimate | 16 Aug, 10d |
+| `cost-capability` | intelligence vs input $/M | none | measured + disclosed | benchmark 24 Jul, **33d** |
+| `capabilities` | 10 caps x 470 vendors | none | measured | 17 Aug |
+| `reputation` | 3 pillars, 29 vendors | only at 2+ captures | curated seed | 16 Aug |
+| `uptake` | adoption share | none | **modelled, not audited** | May 2026 model |
+| SEC disclosure | disclosing / total | none | measured | varies |
+| alliances graph | edges, verified, breadth | none | measured | seed |
+| `risks` | open findings, severity | none | measured | 17 Aug |
+| `gaining` / `slipping` | movement classification | **direction, no magnitude** | modelled | 17 Aug |
+| `news` | 500 items, impact, sentiment | dated | feed | 24 Jul to 27 Aug |
+
+**Three of thirteen sources carry a prior. None carries three.** So most
+readings are states, and acceleration is not derivable from anything this
+product currently holds.
+
+### The signal contract
+
+`lib/analyst/signals.ts`. `Signal` at `:69`, ten dimensions at `:37`.
+
+`state` is the dataset's own word ("narrow", "tight", "sole-sourced") and
+`magnitude` is optional and native. **There is no numeric normalisation.**
+Forcing a 0-5 composite, a percentage and a price multiple onto one scale would
+compare things that do not compare, which is the same error as ranking across
+market categories.
+
+**`signal()` (`:138`) strips a direction from a single observation at
+construction.** Not filtered downstream, removed at the door, so there is no
+path by which a caller talks it back in.
+
+`temporalClass()` (`:103`):
+
+| Observations | Class | May say |
+|---|---|---|
+| 1 | `state` | "Vendor A leads" |
+| 2, differing | `change` | "Vendor A's lead has narrowed" |
+| 3, change growing | `acceleration` | "the narrowing is faster" |
+
+`stateWording()` is how prose asks for a verb and gets "is narrow" back when
+the observations are not there.
+
+`worstLane()` (`:188`) means a synthesis can never outrank its weakest input.
+`coincident()` (`:179`) returns false for any undated reading.
+
+### The eight relationships
+
+`lib/analyst/synthesis.ts`, `RULES` at `:154`. Each names the exact dimensions
+and states it needs and returns null otherwise. No scoring, no weighting, no
+inference over rules.
+
+| id | Relation | Bearing | Needs |
+|---|---|---|---|
+| `capability-price-divergence` | reinforces | supports | capability narrow + price wide |
+| `strength-risk-divergence` | contradicts | against | position leads + risk open/high |
+| `adoption-delivery-divergence` | contradicts | against | adoption high + delivery sole-sourced |
+| `concentration-alternatives` | reinforces | against | concentration tight + clear lead |
+| `commercial-tradeoff` | contradicts | against | price wide + reputation weak |
+| `reinforcing-movement` | reinforces | supports | two trends, same direction, different sources |
+| `contradictory-movement` | contradicts | against | two trends, opposite directions |
+| `simultaneous-change` | coincides with | supports | two trends inside one window |
+
+Specific rules run before generic ones and a signal consumed by one is not
+reused by another, so the same two readings cannot produce two findings saying
+the same thing twice.
+
+`jointTemporal()` takes the WEAKEST input's class. A change combined with a
+snapshot is a statement about a snapshot.
+
+### Causality
+
+`Relation` (`:50`) has four members and none is causal.
+
+`CAUSAL_WORDS` (`:64`) is 17 entries, and `claimsCausality()` is asserted
+against every finding and implication the module produces. A rule author who
+writes "drove" gets a failing suite rather than a plausible sentence in front of
+a buyer.
+
+It is also wired into the generation loop: `CanonicalGuards.forbidCausal`
+(`lib/analyst/llm.ts`) adds causal words to the discard-and-retry list, set only
+where cross-signal findings are actually in the prompt. Turning it on
+everywhere would reject ordinary prose ("due to" appears in sound sentences)
+for no protection.
+
+### How it reaches a recommendation, and the ceiling on it
+
+`enrichWithSynthesis()` (`lib/analyst/cross.ts:364`) adds each finding to the
+packet as evidence on the side its `bearing` names, then calls `decide()` again.
+
+Everything after that is the machinery from 8.25: `strengthOf()` sees the
+contradiction and returns `contested`; `resolveAction()` refuses to let a
+committing action stand on contested evidence.
+
+**So a synthesis can weaken a recommendation and cannot strengthen one, and it
+does so THROUGH the deterministic rules rather than around them.** Nothing in
+this layer names an action. Measured: an `Accelerate` page given a
+strength/risk divergence returns `Investigate`, with the trigger set to
+"either half of this disagreement moving".
+
+An insufficient-evidence page has no packet, so synthesis cannot conjure a
+recommendation onto one.
+
+### Signals from data already fetched
+
+`signalsFromMetrics()` (`lib/analyst/cross.ts:41`) reads six of the ten
+dimensions off the `MarketMetrics` a page has already loaded. **No new fetch,
+no new data source.** `priceSignal`, `disclosureSignal`, `deliverySignal` and
+`adoptionSignal` (`:236` onward) are optional and return null where the page
+does not hold the data.
+
+**Movement is gated on `shareMovementPublished`.** When the upstream
+republishes identical priors there is no movement, and classifying it as
+movement would be a trend made out of a repeated snapshot.
+
+Wired on two pages so far: `vendor-view` (position + risk) and `market-watch`
+(concentration + position). Both were two-line changes and neither added a
+fetch.
+
+### News recency
+
+`NEWS_MAX_AGE_DAYS = 14` (`lib/analyst/insight.ts:117`).
+
+`pickNews` previously filtered on `minImpact` and then took the single highest
+upstream impact score, with no reference to the date. **Measured on the shipped
+feed on 26 August 2026: the winner was published 31 July, twenty-six days old,
+and was rendering as the dated item beside a why-now.**
+
+Now: a hard gate on age, undated items excluded (assuming freshness is the same
+class of error as inventing a figure), future-dated items beyond one day
+excluded as a feed defect, and selection on a composite at `:189`:
+
+```
+materiality 0.4 + recency 0.4 + relevance 0.2
+```
+
+Recency decays linearly across the window. Relevance is a bonus for naming a
+vendor the page covers, never a gate, so pages declaring no vendor set rank as
+before. `minImpact` still applies, so recency alone cannot promote noise.
+
+### Analyst priors
+
+`lib/analyst/priors.ts`. `THESES` at `:72`, five entries.
+
+The system prompt carried five market claims as permanent truths. Three are
+structural. Two were claims about the market right now that this product
+measures on its own pages:
+
+- "Capability has commoditised faster than price" (Competitive Intel + Price /
+  Performance measure both halves)
+- "Disclosure is thin" (Financial Snapshot counts exactly this)
+
+Both are **removed from the SYSTEM constant** and now carry a validator.
+`resolveTheses()` (`:141`) returns `durable`, `validated`, `unvalidated` or
+`contradicted`; `priorsBlock()` (`:171`) states the durable ones always, the
+validated ones only where this page's data has just confirmed them, and names
+the contradicted ones under "Do NOT state these" rather than dropping them.
+
+`unvalidated` never reaches the prompt. A page with no signals gets the durable
+three and nothing else, which is strictly better than asserting all five
+everywhere.
+
+**A bug the tests caught here:** the disclosure validator matched `/mostly/`,
+which is present in both "mostly undisclosed" and "mostly disclosed", so it
+validated the thesis against data contradicting it. The alternation is now
+`/undisclosed|thin|minority/`.
+
+### Not a CMS
+
+No editor, no storage, no admin surface, no workflow. A typed list with
+validators, read at render.
+
+### Remaining limits
+
+- **Acceleration is unreachable.** No dataset carries three observations. The
+  classifier implements it and today returns it for nothing.
+- **`evidenceAgainst` is still builder-declared**, and synthesis only adds to
+  it. Nothing detects a contradiction no rule names.
+- **Two pages wired.** The other ten compute packets without cross-signal
+  enrichment; the function is general and the wiring is a two-line change per
+  page when the data justifies it.
+- **`cost-capability` is 33 days stale**, so the price signal is the oldest
+  input to any synthesis that uses it.
+
+49 tests in `tests/analyst-cross-signal.test.ts`, covering fixtures A to K.
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:
