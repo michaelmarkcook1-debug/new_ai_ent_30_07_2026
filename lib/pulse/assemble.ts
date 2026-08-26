@@ -4,6 +4,7 @@ import type { MarketMetrics } from "@/lib/market-metrics";
 import type { FinancialIndicator } from "@/app/(ai-ent)/pulse/components/financial-strip";
 import type { PulseSignal } from "@/app/(ai-ent)/pulse/components/decision-lists";
 import type { ToolKey } from "@/lib/ui/tools";
+import type { ActionIntent } from "@/lib/analyst/canonical";
 
 // Server-side assembly for the Pulse brief: the pieces that need the
 // filesystem or that stitch several sources together.
@@ -184,10 +185,12 @@ export function buildActions(
   highRisks: number | null,
   readiness: number | null,
   lastUpdated: string | null
-): { action: string; detail: string; tools: ToolKey[]; meta: { horizon: "Immediate" | "30 days" | "90 days" | "12 months"; lane: "derived"; lastUpdated: string | null } }[] {
+): { action: string; detail: string; tools: ToolKey[]; intent: ActionIntent; meta: { horizon: "Immediate" | "30 days" | "90 days" | "12 months"; lane: "derived"; lastUpdated: string | null } }[] {
   return [
     {
       action: "Tier your model spend",
+      // Commercial pressure on an existing commitment, not a change of scope.
+      intent: "press",
       detail:
         priceRatio !== null && priceRatio >= 2
           ? `The top model costs ${priceRatio}x the cheapest one reaching 80 per cent of its score. Map workloads to tiers before renewal and reserve the top tier for complex or regulated work.`
@@ -201,6 +204,7 @@ export function buildActions(
     },
     {
       action: "Re-open closed shortlists",
+      intent: "select",
       detail:
         "Capability across the tracked set moves faster than most procurement cycles. Any shortlist older than two quarters should be re-checked against current rankings before it is signed.",
       tools: ["workflowShortlist", "competitiveIntel"],
@@ -215,6 +219,12 @@ export function buildActions(
         highRisks !== null && highRisks > 0
           ? "Clear open risks before widening"
           : "Keep governance ahead of rollout",
+      // Declared rather than read off the sentence, and this is the one that
+      // proves why. "Clear open risks before widening" contains the word
+      // widening and asks for the opposite of widening: a classifier reads it
+      // as advance, the builder knows it is restraint.
+      intent:
+        highRisks !== null && highRisks > 0 ? "restrain" : "examine",
       detail:
         highRisks !== null && highRisks > 0
           ? `${highRisks} high-severity ${highRisks === 1 ? "risk is" : "risks are"} open against tracked vendors. Get a dated remediation position on each before expanding scope.`

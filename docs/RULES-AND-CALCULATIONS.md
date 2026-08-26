@@ -1725,6 +1725,156 @@ this product renders to its own current route is subject to it.
 
 ---
 
+## 8.24 The canonical contract: what the model may not contradict
+
+Verified against the working tree at commit `9c59322`, 26 August 2026.
+
+The figure guard answers one question: did the model write a number the data
+did not contain. Three failures pass it untouched, because none of them moves a
+number. The action reverses, the direction reverses, or a small count is
+asserted that nothing supplied. `lib/analyst/canonical.ts` closes all three.
+
+**Every check fails safe.** An ambiguous reading counts as a violation, the
+authored text is discarded, and the deterministic prose renders. A false
+rejection costs one render its analyst voice; a false acceptance costs the
+reader the truth.
+
+### Action intent, and why it is declared rather than inferred
+
+`ActionIntent` at `lib/analyst/canonical.ts:47` is five values:
+`advance`, `restrain`, `examine`, `select`, `press`. The first two are
+COMMITTED (`COMMITTED`, `lib/analyst/canonical.ts:54`): they move budget or
+scope. The other three are provisional.
+
+The eight `AnalystAction` values map to intent at
+`lib/analyst/canonical.ts:66`:
+
+| Action | Intent |
+|---|---|
+| Accelerate, Expand | `advance` |
+| Pause, Reduce exposure | `restrain` |
+| Monitor, Investigate | `examine` |
+| Shortlist | `select` |
+| Renegotiate | `press` |
+
+`intentViolation()` (`lib/analyst/canonical.ts:183`) refuses exactly two
+transitions and no others:
+
+- **reversal**: canonical committed one way, rewrite commits the other.
+- **strengthening**: canonical is provisional, rewrite commits. Monitor
+  becoming Accelerate.
+
+Softening is allowed on purpose. A rewrite turning Accelerate into "Review
+before scaling" understates the evidence, which is a worse product and not a
+safety failure, and refusing it would discard sound prose.
+
+**The intent is DECLARED by the builder, not read off our own sentence.**
+`buildActions()` sets it at `lib/pulse/assemble.ts:193`, `:207` and `:226`.
+The third action proves why: "Clear open risks before widening" contains the
+word widening and asks for the opposite of widening. `actionIntent()` reads it
+as `advance` (`lib/analyst/canonical.ts:137` takes the committed reading when
+several match, which is the cautious direction); the builder declares
+`restrain`. Classifying our own prose would make the safety of the check depend
+on the same fuzziness it exists to guard against.
+
+Enforced at `lib/analyst/author.ts:343`. **The whole set is discarded on one
+violation**, not the offending entry: three actions written together are one
+argument.
+
+### Direction families
+
+`FAMILIES` at `lib/analyst/canonical.ts:222`. Four axes, two poles each:
+
+| Family | Poles |
+|---|---|
+| `trend` | up / down |
+| `spread` | widening / narrowing |
+| `concentration` | concentrating / fragmenting |
+| `position` | gaining / slipping |
+
+`BARE_TREND` (`lib/analyst/canonical.ts:257`) matches "up" or "down" only when
+followed by a digit, `on`, `from` or `against`, which is how
+`pulseJudgement()` writes a direction of travel
+(`lib/pulse/judgement.ts:74`). Bare "up" and "down" are far too common in
+ordinary prose to be directional on their own.
+
+`claimsFrom()` (`:293`) emits a claim for a family only when the canonical text
+lands on **exactly one** of its poles. "Three vendors gaining, two slipping"
+names both and therefore claims no direction, which is correct: there is no
+single direction there to reverse.
+
+`reversedClaims()` (`:311`) flags the written text only when it lands on the
+opposite pole **and says nothing at the claimed one**. Text naming both poles
+passes.
+
+Claims are read off the deterministic prose rather than declared by the
+thirteen insight builders. The computed sentence IS the canonical statement.
+Wired at `lib/analyst/author.ts:137` (insight), `:198` (pulse), `:254`
+(since) and `:326` (actions).
+
+### Small-integer counts
+
+`numbersIn()` drops every integer with `|n| <= 10` (`lib/analyst/llm.ts:66`).
+That is right for "do these 3 things" and wrong for "3 vendors meet the
+threshold", and the difference is entirely the noun.
+
+`COUNTED_NOUNS` (`lib/analyst/canonical.ts:341`) is an explicit list of 46
+nouns the datasets hold real counts of. `COUNT_RE` (`:351`) matches a small
+integer followed by up to two describing words and then one of them.
+Everything absent from the list stays exempt, and "things", "steps", "points",
+"inputs", "areas" and "reasons" are deliberately absent: two shipped tests
+depend on it (`tests/analyst-llm-guard.test.ts:16` and
+`tests/analyst-figure-guard.test.ts:53`).
+
+This lives in a separate function rather than inside `numbersIn()` so that
+function keeps its contract, and so the two checks cannot report one figure
+twice. Only integers of ten or under are checked here; everything above is
+already covered.
+
+Grounding is membership: `unsupportedCounts()` (`:404`) permits a count when
+the integer appears anywhere in the facts. Looser than matching noun for noun,
+deliberately, so facts saying "3 providers" licence a written "3 vendors".
+
+**`integersIn()` (`:385`) parses whole numeric tokens.** Scanning for bare
+digit runs reads "13.7" as a 13 and a 7, and a facts sheet carrying a spread
+of 13.7 would then licence "7 vendors clear the threshold" out of nothing.
+This was caught by the new tests, not by review.
+
+Dates are stripped from both sides before the count check
+(`lib/analyst/llm.ts:121`), reusing `withoutDates()`, so "2026-08-04" in the
+facts cannot licence "8 models".
+
+### Entity grounding is packet-scoped
+
+`foreignEntities()` (`lib/analyst/llm.ts:156`) takes an optional `allowed`
+list. When a page declares what it covers, that list is the boundary and the
+fact prose is not consulted. A computed summary saying "unlike the frontier
+labs" used to licence every frontier lab in the roster for the rest of the
+answer.
+
+Null or empty keeps the facts-scoped rule, because several pages pass no
+entity list and treating an undeclared list as an empty allow-list would
+reject every vendor name on them. `authorInsight()` passes its `entities`
+argument through at `lib/analyst/author.ts:140`.
+
+### What is NOT covered
+
+- **Off-roster names.** The check is still roster-based, so a wholly invented
+  company name is caught by neither this nor the numeric guard. The system
+  prompt forbids it and an explicit allow-list makes it less likely. It is not
+  mechanically prevented.
+- **"5 of the 47 vendors".** More than two words between the number and the
+  noun and the association stops being reliable enough to reject prose over,
+  so this form is not caught.
+- **`authorActions` has no insufficient-evidence state.** `authorInsight()`
+  never sends an insufficient page to the model
+  (`lib/analyst/author.ts:75`); the actions path has no equivalent concept to
+  gate on.
+
+Pinned by 35 tests in `tests/analyst-canonical.test.ts`, including a
+`Record<AnalystAction, ActionIntent>` so a ninth action added to the union
+fails the typecheck here rather than arriving unclassified and unguarded.
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

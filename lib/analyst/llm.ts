@@ -1,5 +1,10 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { unstable_cache } from "next/cache";
+import {
+  reversedClaims,
+  unsupportedCounts,
+  type DirectionClaim,
+} from "./canonical";
 
 // The analyst voice, written by Opus 5 over figures it is not allowed to
 // invent.
@@ -103,6 +108,17 @@ export function invented(output: string, allowed: string): string[] {
     (n) => !permittedQuantities.has(n)
   );
   for (const d of datesIn(output)) if (!permittedDates.has(d)) bad.push(d);
+
+  // Small counts of real things. numbersIn() drops every integer under eleven,
+  // which is right for "do these 3 things" and wrong for "3 vendors meet the
+  // threshold": the first is prose and the second is a claim about the data.
+  // Checked here rather than inside numbersIn() so that function keeps its
+  // contract, which two shipped tests depend on, and so the two checks cannot
+  // report the same figure twice.
+  // Dates stripped from both sides first, reusing the rule the quantity check
+  // already relies on: a month or a day inside a capture date is not a supply
+  // of that integer, and "2026-08-04" in the facts must not licence "8 models".
+  bad.push(...unsupportedCounts(withoutDates(output), withoutDates(allowed)));
   return bad;
 }
 
@@ -140,17 +156,41 @@ function withoutDates(text: string): string {
 export function foreignEntities(
   output: string,
   facts: string,
-  roster: readonly string[]
+  roster: readonly string[],
+  /**
+   * The entities this intelligence packet actually supplied, when the caller
+   * knows them.
+   *
+   * Grounding against `facts` is grounding against a prose blob, and prose
+   * mentions things incidentally: a computed summary that says "unlike the
+   * frontier labs" licences every frontier lab in the roster for the rest of
+   * the answer. Where a page can state its own covered set, that set is the
+   * boundary and the prose is not consulted.
+   *
+   * Null or empty means the caller did not declare one, and the facts-scoped
+   * rule stands. Several pages pass no entity list at all, and treating an
+   * undeclared list as an empty allow-list would reject every vendor name on
+   * them, which is a worse product and not a safer one.
+   */
+  allowed?: readonly string[] | null
 ): string[] {
   const said = output.toLowerCase();
   const grounded = facts.toLowerCase();
+  const scoped = allowed && allowed.length > 0
+    ? new Set(allowed.map((a) => a.toLowerCase()))
+    : null;
   const out: string[] = [];
   for (const name of roster) {
     const n = name.toLowerCase();
     if (n.length < 3) continue;
     // Word-boundary match, so "Meta" does not fire on "metadata".
     const re = new RegExp(`\\b${n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\b`);
-    if (re.test(said) && !re.test(grounded)) out.push(name);
+    if (!re.test(said)) continue;
+    if (scoped) {
+      if (!scoped.has(n)) out.push(name);
+      continue;
+    }
+    if (!re.test(grounded)) out.push(name);
   }
   return out;
 }
@@ -270,16 +310,30 @@ function parseJson<T>(raw: string): T | null {
  * `facts` is both the grounding and the whitelist: nothing numeric may appear
  * in the output that is not in it.
  */
+export interface CanonicalGuards {
+  /**
+   * Directional statements the deterministic layer has already made. The
+   * written version may interpret them and may not reverse them.
+   */
+  claims?: readonly DirectionClaim[];
+  /**
+   * The entities this packet supplied. When present, this is the boundary for
+   * factual naming and the fact prose is not consulted. See foreignEntities().
+   */
+  entities?: readonly string[] | null;
+}
+
 export async function authored<T extends object>(
   kind: string,
   facts: string,
   instruction: string,
   maxTokens = 900,
   /** Every vendor the product knows, used to catch a name off this page. */
-  roster: readonly string[] = []
+  roster: readonly string[] = [],
+  guards: CanonicalGuards = {}
 ): Promise<T | null> {
   return (
-    await authoredResult<T>(kind, facts, instruction, maxTokens, roster)
+    await authoredResult<T>(kind, facts, instruction, maxTokens, roster, guards)
   ).value;
 }
 
@@ -345,7 +399,8 @@ export async function authoredResult<T extends object>(
   facts: string,
   instruction: string,
   maxTokens = 900,
-  roster: readonly string[] = []
+  roster: readonly string[] = [],
+  guards: CanonicalGuards = {}
 ): Promise<AuthoredResult<T>> {
   if (!llmAvailable()) return { value: null, failure: "no-key" };
 
@@ -353,7 +408,15 @@ export async function authoredResult<T extends object>(
   // and for the prompt. All three have to agree or the caching is theatre.
   const stable = dayPrecision(facts);
 
-  const cacheKey = keyOf(kind, { facts: stable, instruction });
+  // The guards are part of the key. Two callers with the same facts but
+  // different canonical claims are asking different questions, and letting
+  // them share an entry would serve one caller's answer under the other's
+  // contract without re-checking it.
+  const guardKey = JSON.stringify({
+    claims: guards.claims ?? [],
+    entities: guards.entities ?? [],
+  });
+  const cacheKey = keyOf(kind, { facts: stable, instruction, guardKey });
   const hit = cache.get(cacheKey);
   if (hit && Date.now() - hit.at < TTL_MS) {
     return { value: hit.value as T, failure: null };
@@ -366,7 +429,8 @@ export async function authoredResult<T extends object>(
       instruction,
       maxTokens,
       roster as string[],
-      cacheKey
+      cacheKey,
+      guardKey
     );
     cache.set(cacheKey, { value, at: Date.now() });
     return { value: value as T, failure: null };
@@ -395,8 +459,25 @@ const cachedGenerate = unstable_cache(
     instruction: string,
     maxTokens: number,
     roster: string[],
-    cacheKey: string
-  ) => generate(kind, facts, instruction, maxTokens, roster, cacheKey),
+    cacheKey: string,
+    // Passed as JSON rather than as an object so the value that lands in the
+    // cache key is the same string every time. Structurally identical objects
+    // are not guaranteed to serialise identically, and a key that varies over
+    // equal inputs is the bug this cache already shipped once.
+    guardKey: string
+  ) =>
+    generate(
+      kind,
+      facts,
+      instruction,
+      maxTokens,
+      roster,
+      cacheKey,
+      JSON.parse(guardKey) as {
+        claims: DirectionClaim[];
+        entities: string[];
+      }
+    ),
   ["analyst-insight"],
   { revalidate: TTL_MS / 1000 }
 );
@@ -408,7 +489,8 @@ async function generate<T extends object>(
   instruction: string,
   maxTokens: number,
   roster: readonly string[],
-  cacheKey: string
+  cacheKey: string,
+  guards: { claims: DirectionClaim[]; entities: string[] }
 ): Promise<T> {
 
   let lastInvented: string[] = [];
@@ -459,7 +541,13 @@ ${instruction}`;
     const emitted = JSON.stringify(parsed);
     const bad = [
       ...invented(emitted, facts),
-      ...foreignEntities(emitted, facts, roster),
+      ...foreignEntities(emitted, facts, roster, guards.entities),
+      // Numeric correctness is not enough. A reading may quote every figure
+      // exactly and still tell the reader the opposite of what the figures
+      // say, and nothing above this line can see it.
+      ...reversedClaims(emitted, guards.claims).map(
+        (c) => `direction of ${c.family} (canonically ${c.pole})`
+      ),
     ];
     if (bad.length === 0) {
       cache.set(cacheKey, { value: parsed, at: Date.now() });

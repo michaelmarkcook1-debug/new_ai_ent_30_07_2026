@@ -15,6 +15,52 @@ than a gap.
 
 ---
 
+## 26 August 2026
+
+**The analyst voice can no longer contradict what the product computed.**
+
+The written analysis on every tab is produced the same way it always has been:
+our own code works out the finding, and the model is then asked to say it
+well. A check already existed for figures, and it is strict. Anything numeric
+in the written version that was not in the computed version gets the whole
+answer thrown away, and the plain computed text renders instead.
+
+That check could only see numbers. Three ways of getting it wrong went past it
+untouched, because none of them changes a number.
+
+**It can no longer reverse the recommendation.** The three actions on Your
+Pulse were handed to the model in full, so a computed "clear open risks before
+widening" could come back as "widen scope now" and nothing would notice: the
+figures were all still correct. What each action asks you to do is now fixed
+before the model sees it. It may sharpen how the action is put and why it
+matters this quarter. It may not turn a hold into a go, and it may not turn
+"look into this first" into "commit", which is the quieter version of the same
+problem.
+
+**It can no longer reverse a finding.** If the computed reading says a gap is
+narrowing, prices are falling, or three vendors are gaining, the written
+version has to agree. It can explain what that means for you and argue about
+what to do; it cannot say the opposite. Where our own reading is genuinely
+mixed, saying so both ways stays allowed, because that is what the data says.
+
+**It can no longer make up a small count.** "3 vendors meet the threshold"
+used to pass when three was never one of our figures, because counts under
+eleven were treated as turns of phrase rather than claims. Small numbers
+attached to things we actually count are now checked like any other figure.
+Numbered lists and ordinary phrasing are untouched.
+
+**And it can only name what the page covers.** Naming a vendor was already
+limited to the ones in the page's data, but a passing mention in our own
+summary was enough to unlock a name for the rest of the answer. Where a page
+states which vendors it covers, that list is now the boundary.
+
+None of this is visible when it works, which is the point. When it fires you
+get the computed wording instead of the written wording, which is what the
+page showed before any of this was written. There is no state in which you are
+shown something the product does not stand behind.
+
+---
+
 ## 19 August 2026
 
 **The Decision Desk now answers about your AI strategy, not one job.**

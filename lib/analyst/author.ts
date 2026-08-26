@@ -1,4 +1,10 @@
 import { authored, llmAvailable, type Authorship } from "./llm";
+import {
+  actionIntent,
+  claimsFrom,
+  intentViolation,
+  type ActionIntent,
+} from "./canonical";
 import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import type { AnalystInsightData } from "./insight";
 import type { PulseJudgement } from "@/lib/pulse/judgement";
@@ -123,7 +129,16 @@ The computed versions above are a floor, not a template. Say something a reader 
     // 900 truncated the longest fact sheets mid-JSON, which read as a silent
     // failure rather than as the over-long answer it was.
     1400,
-    ROSTER
+    ROSTER,
+    {
+      // The computed headline and summary are the canonical statement of what
+      // this page found. Any direction they state plainly is a direction the
+      // written version may explain and may not reverse.
+      claims: claimsFrom(`${computed.headline} ${computed.summary}`),
+      // Where the page declared what it covers, that is the boundary for
+      // naming. Where it did not, the guard stays scoped to the fact prose.
+      entities,
+    }
   );
 
   if (!draft?.headline || !draft?.summary) return asComputed(computed);
@@ -174,7 +189,16 @@ Name the vendors that moved, where the data names them. A reader wants to know w
 
 This is the most-read text in the product. If it could have been written last month, it is wrong.`,
     600,
-    ROSTER
+    ROSTER,
+    {
+      // pulseJudgement() states direction outright: which vendors are gaining
+      // and which slipping, and whether the largest tracked move went up or
+      // down. This is the most-read text in the product and it was the easiest
+      // place in it to reverse a finding while quoting every figure correctly.
+      claims: claimsFrom(
+        `${computed.headline} ${computed.judgement} ${extra.movers ?? ""}`
+      ),
+    }
   );
 
   if (!draft?.headline || !draft?.judgement) return asComputed(computed);
@@ -226,7 +250,8 @@ Name the vendors involved, using only the names that appear above.
 
 Do not list the changes back: they are already rendered beneath this. Say which one deserves their attention.`,
     500,
-    ROSTER
+    ROSTER,
+    { claims: claimsFrom(facts.changes.join(". ")) }
   );
 
   if (!draft?.headline || !draft?.body) return null;
@@ -242,11 +267,34 @@ export interface ActionDraft {
 
 /**
  * The three actions on Your Pulse. The model rewrites the wording; the horizon,
- * the lane, the tools each action points at and the number of actions all stay
- * as computed.
+ * the lane, the tools each action points at, the number of actions and now the
+ * INTENT of each action all stay as computed.
+ *
+ * The intent is the part that matters. Until this check existed the model was
+ * handed both fields and could return anything for either, so a computed
+ * "Clear open risks before widening" could come back as "Widen scope now" and
+ * pass every guard in the product: no figure had moved, no vendor had been
+ * named, and the reader was told to do the opposite of what the data supports.
+ *
+ * The whole set is discarded on a single violation rather than the offending
+ * entry alone. Three actions written together are one argument, and keeping two
+ * thirds of an argument whose conclusion was rejected is not a safer product
+ * than falling back to the computed three.
  */
 export async function authorActions(
-  computed: { action: string; detail: string; tools?: ToolKey[] }[],
+  computed: {
+    action: string;
+    detail: string;
+    tools?: ToolKey[];
+    /**
+     * What this action asks the reader to do, declared by the builder that
+     * knows. Declared rather than inferred because inferring it from our own
+     * imperative would make the safety of the check depend on the same
+     * classifier it is guarding against: "Clear open risks before widening"
+     * reads as advance to a word list and means the opposite.
+     */
+    intent?: ActionIntent;
+  }[],
   context: string
 ): Promise<Written<{ action: string; detail: string }[]>> {
   if (!llmAvailable() || computed.length === 0) return asComputed(computed);
@@ -269,9 +317,16 @@ Return JSON: {"actions": [{"action": string, "detail": string}, ...]} with exact
 
 Where the context names a vendor or model, name it. You may only name entities that appear above.
 
+Each rewritten action must ask for the same thing as the one it replaces. You may sharpen how it is said and why it matters now. You may not turn a pause into an expansion, a review into a commitment, or a caution into an encouragement. An answer that changes what the reader is being asked to do is discarded in full.
+
 These are the only things on the page a reader is meant to act on. Vague advice here costs more than none.`,
     800,
-    ROSTER
+    ROSTER,
+    {
+      claims: claimsFrom(
+        computed.map((c) => `${c.action}. ${c.detail}`).join(" ")
+      ),
+    }
   );
 
   const actions = draft?.actions;
@@ -279,6 +334,20 @@ These are the only things on the page a reader is meant to act on. Vague advice 
     return asComputed(computed);
   }
   if (!actions.every((a) => a?.action && a?.detail)) return asComputed(computed);
+
+  // The canonical semantics, enforced. Anything the builder did not declare is
+  // classified from its own text as a fallback, which is weaker than a
+  // declaration and still far stronger than the nothing that was here before.
+  for (let i = 0; i < computed.length; i++) {
+    const canonical = computed[i].intent ?? actionIntent(computed[i].action);
+    const violation = intentViolation(canonical, actions[i].action);
+    if (violation) {
+      console.warn(
+        `[analyst-llm] discarded pulse-actions: "${computed[i].action}" (${canonical}) rewritten as "${actions[i].action}", which is a ${violation}`
+      );
+      return asComputed(computed);
+    }
+  }
 
   return {
     value: computed.map((c, i) => ({
