@@ -3,6 +3,7 @@ import { MicroLabel } from "@/lib/ui/micro";
 import { DoItHere } from "@/lib/ui/do-it-here";
 import { DerivationDrawer } from "@/lib/ui/score";
 import type { AnalystInsightData } from "@/lib/analyst/insight";
+import { STRENGTH_LABEL } from "@/lib/analyst/decision";
 
 // The Analyst Insight that opens every page except the Pulse.
 //
@@ -50,7 +51,7 @@ export function AnalystInsight({
   context: string;
   authorship?: "written" | "computed";
 }) {
-  const { evidence } = insight;
+  const { evidence, decision } = insight;
 
   return (
     <section className="finding rounded-xl p-6 sm:p-7">
@@ -210,11 +211,60 @@ export function AnalystInsight({
                     Recommended action
                   </span>
                   <span
-                    className={`rounded-full border px-3 py-1 text-sm font-semibold ${ACTION_TONE[insight.action] ?? ACTION_TONE.Monitor}`}
+                    className={`rounded-full border px-3 py-1 text-sm font-semibold ${ACTION_TONE[decision?.action ?? insight.action] ?? ACTION_TONE.Monitor}`}
                   >
-                    {insight.action}
+                    {decision?.action ?? insight.action}
                   </span>
                 </div>
+
+                {/* The action is a direction of travel. This is the thing to
+                    do. It sits directly under the pill because that is the
+                    order a reader needs them in, and it is deterministic:
+                    the analyst model may say it better and may not decide
+                    what it is. */}
+                {decision ? (
+                  <div className="mt-2.5 space-y-2">
+                    <p className="measure text-sm font-semibold text-base-content">
+                      {decision.instruction}
+                    </p>
+                    <p className="measure text-sm text-muted">
+                      <span className="font-semibold text-base-content">
+                        Why now:
+                      </span>{" "}
+                      {decision.whyNow}
+                    </p>
+
+                    {/* Inline rather than in the drawer below, deliberately.
+                        A contradiction hidden behind a disclosure control lets
+                        a recommendation read as settled when it is not, which
+                        is the failure this whole packet exists to prevent. */}
+                    {decision.evidenceAgainst.length > 0 ? (
+                      <p className="measure text-sm text-warn">
+                        <span className="font-semibold">Against this:</span>{" "}
+                        {decision.evidenceAgainst.map((e) => e.claim).join(" ")}
+                      </p>
+                    ) : null}
+
+                    {decision.trigger ? (
+                      <p className="measure text-sm text-muted">
+                        <span className="font-semibold text-base-content">
+                          Watch for:
+                        </span>{" "}
+                        {decision.trigger}
+                      </p>
+                    ) : null}
+
+                    {decision.doNotDo ? (
+                      <p className="measure text-sm text-muted">
+                        <span className="font-semibold text-base-content">
+                          Do not:
+                        </span>{" "}
+                        {decision.doNotDo}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null}
+
                 {/* A recommendation that names the page which does the thing
                     is worth more than one that leaves the reader to find it. */}
                 <DoItHere tools={insight.tools ?? []} label="Do this in" />
@@ -258,6 +308,44 @@ export function AnalystInsight({
             cannot drift from the data underneath it, and why it says nothing
             where the data runs out.
           </p>
+          {decision ? (
+            <>
+              {/* Not a confidence badge and not a score. Confidence labels
+                  were removed from this platform on request, and a 0 to 100
+                  number over evidence of mixed provenance would have no
+                  methodology behind it anyway. This says how many independent
+                  sources point the same way, which is a statement about the
+                  evidence rather than a rating of the conclusion. */}
+              <p>
+                <strong className="text-base-content">
+                  {STRENGTH_LABEL[decision.strength]}.
+                </strong>{" "}
+                {decision.evidenceFor.length > 0
+                  ? `Drawn from ${new Set(decision.evidenceFor.map((e) => e.source)).size === 1 ? "one source" : `${new Set(decision.evidenceFor.map((e) => e.source)).size} independent sources`}.`
+                  : ""}
+              </p>
+              <ul className="ml-4 list-disc space-y-1">
+                {decision.evidenceFor.map((e) => (
+                  <li key={`${e.source}-${e.claim}`}>
+                    {e.claim}{" "}
+                    <span className="text-muted">
+                      ({e.source}, {e.basis}
+                      {e.asOf ? `, ${shortDate(e.asOf)}` : ""})
+                    </span>
+                  </li>
+                ))}
+                {decision.evidenceAgainst.map((e) => (
+                  <li key={`against-${e.source}-${e.claim}`} className="text-warn">
+                    Against: {e.claim}{" "}
+                    <span className="text-muted">
+                      ({e.source}, {e.basis}
+                      {e.asOf ? `, ${shortDate(e.asOf)}` : ""})
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </>
+          ) : null}
           <p className="measure text-muted">
             It interprets the page&apos;s own datasets and weights them first.
             It is not general commentary on the AI market, and it does not

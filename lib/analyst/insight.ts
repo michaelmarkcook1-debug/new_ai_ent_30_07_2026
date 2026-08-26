@@ -33,6 +33,8 @@ import { vendorName } from "@/lib/aie/vendor-directory";
 //
 // The Pulse is untouched. This is the same shape, applied to the other tabs.
 
+import { decide, type Decision, type DecisionEvidence } from "./decision";
+
 export type AnalystAction =
   | "Accelerate"
   | "Monitor"
@@ -189,6 +191,22 @@ export interface AnalystInsightData {
   /** At most three. */
   implications: string[];
   action: AnalystAction;
+  /**
+   * What to actually do, why now, what argues against it, and what would
+   * change it. Null where no recommendation is supportable, which is the
+   * insufficient-evidence case and nothing else.
+   *
+   * The action above stays the canonical one and stays first: this does not
+   * replace it, it stops it being the whole answer. "Investigate" is a
+   * direction of travel, and a reader accountable for a purchase needs the
+   * instruction underneath it.
+   *
+   * `decision.action` is the same action after the escalation guard in
+   * lib/analyst/decision.ts has run, which can only ever weaken it. Where the
+   * two differ, the evidence did not support the threshold's proposal and the
+   * packet is the one to trust.
+   */
+  decision: Decision | null;
   /**
    * The tools that let a reader act on this insight now. A recommendation
    * that names the page which does the thing is worth more than one that
@@ -368,6 +386,10 @@ function insufficient(
     summary: "",
     implications: [],
     action: "Monitor",
+    // No recommendation is supportable, so there is no packet. Filling one in
+    // here would be the product recommending something on evidence it has just
+    // said it does not have.
+    decision: null,
     news: null,
     evidence: { count: 0, sources, lastUpdated: null, lane },
     insufficient: reason,
@@ -432,6 +454,39 @@ export function marketWatchInsight(
       "Share is an estimate per category, so it supports a direction of travel rather than a precise ranking.",
     ],
     action: tight ? "Investigate" : "Monitor",
+    decision: decide({
+      action: tight ? "Investigate" : "Monitor",
+      instruction: tight
+        ? `Name a credible second vendor in each concentrated category and get a current quote before the incumbent's renewal date, so the alternative exists on paper rather than in principle.`
+        : `Test one alternative in your largest category before the next renewal even where the incumbent is performing. The option only carries commercial value if it is real.`,
+      whyNow: `In a typical tracked category the three largest vendors hold about ${median} per cent of estimated share, measured across ${concentrations.length} categories with enough estimates to judge.`,
+      evidenceFor: [
+        {
+          claim: `Top three vendors hold about ${median} per cent of a typical category, across ${concentrations.length} categories carrying three or more share estimates, against the 70 per cent line this recommendation turns on.`,
+          source: "AIE market share estimates",
+          basis: "modelled",
+          lane: m.lane,
+          asOf: m.shareAsOf ?? m.generatedAt,
+        },
+      ],
+      evidenceAgainst:
+        gaining + slipping > 0
+          ? [
+              {
+                claim: `${gaining} vendors are gaining position and ${slipping} slipping, so the ordering inside categories is still moving and this concentration is not a settled picture.`,
+                source: "AIE vendor movement classification",
+                basis: "modelled",
+                lane: m.lane,
+                asOf: m.shareAsOf ?? m.generatedAt,
+              },
+            ]
+          : [],
+      trigger: tight
+        ? "Concentration in a category you buy in falling below 70 per cent, which is the point a real alternative appears."
+        : "Concentration rising above 70 per cent in a category you buy in, which shortens your list before procurement begins.",
+      doNotDo:
+        "Do not treat estimated share as a ranking. It is modelled from ingested signals rather than measured revenue, and it supports a direction of travel only.",
+    }),
     tools: ["competitiveIntel", "vendorView", "modelForRole"],
     news,
     evidence: {
@@ -513,6 +568,39 @@ export function financialInsight(
         : "Private vendors are outside this entirely, so absence here is not a signal about them either way.",
     ],
     action: undisclosed > disclosure.disclosing ? "Investigate" : "Monitor",
+    decision: decide({
+      action: undisclosed > disclosure.disclosing ? "Investigate" : "Monitor",
+      instruction:
+        undisclosed > disclosure.disclosing
+          ? `Ask for the filing reference behind any AI revenue or growth figure a vendor quotes in this cycle, and where none exists, record the claim as vendor-supplied in the evaluation rather than as a fact.`
+          : `Check the quoted figure against the filing for the ${disclosure.disclosing} vendors that publish one, since here that check is available and cheap.`,
+      whyNow: `${undisclosed} of ${disclosure.total} tracked public vendors put no quantified AI revenue figure in any filing, a disclosure rate of ${share} per cent.`,
+      evidenceFor: [
+        {
+          claim: `${disclosure.disclosing} of ${disclosure.total} tracked public vendors state a quantified AI revenue figure in their filings.`,
+          source: "SEC filings, full-text search",
+          basis: "measured",
+          lane: "aie",
+          asOf: capturedAt,
+        },
+        ...(segmentTotal > 0
+          ? [
+              {
+                claim: `${segmentsFiled} of ${segmentTotal} break revenue down by segment, which is as close as most get to showing where AI money lands.`,
+                source: "SEC segment revenue extraction",
+                basis: "measured" as const,
+                lane: "aie" as const,
+                asOf: capturedAt,
+              },
+            ]
+          : []),
+      ],
+      evidenceAgainst: [],
+      trigger:
+        "A vendor on your shortlist beginning to break out AI revenue in a filing, which moves its claims from unverifiable to checkable.",
+      doNotDo:
+        "Do not read an absent filing figure as evidence that a vendor is small. It is evidence of nothing either way, which is the whole problem.",
+    }),
     tools: ["vendorView", "competitiveIntel"],
     news,
     evidence: {
@@ -596,6 +684,37 @@ export function competitiveInsight(
       "Comparison holds within a market category only; scores do not transfer across categories.",
     ],
     action: narrow ? "Renegotiate" : "Shortlist",
+    decision: decide({
+      action: narrow ? "Renegotiate" : "Shortlist",
+      instruction: narrow
+        ? `Put the ${round1(top.mean ?? 0)} against the ${round1(median.mean ?? 0)} median in front of the incumbent at renewal and price the difference. A ${spread} point spread does not support a premium on capability alone.`
+        : `Keep capability as a primary shortlist filter rather than a tiebreak: at ${spread} points apart the leaders are not interchangeable.`,
+      whyNow: `The strongest vendor${categoryName ? ` in ${categoryName}` : ""} scores ${round1(top.mean ?? 0)} for evidence-graded capability maturity against a median of ${round1(median.mean ?? 0)}, a spread of ${spread} points across ${providerCount} providers.`,
+      evidenceFor: [
+        {
+          claim: `${providerCount} providers assessed on ${capabilityCount} capabilities, top ${round1(top.mean ?? 0)} against a median of ${round1(median.mean ?? 0)}: a spread of ${spread} against the 15 point line this recommendation turns on.`,
+          source: "AIE capability matrix",
+          basis: "measured",
+          lane: m.lane,
+          asOf: m.generatedAt,
+        },
+      ],
+      evidenceAgainst: [
+        {
+          claim:
+            "Every capability score is capped by the weakest evidence grade behind it, and that grade differs by vendor, so part of this spread is evidence coverage rather than capability.",
+          source: "AIE capability matrix",
+          basis: "absent",
+          lane: m.lane,
+          asOf: m.generatedAt,
+        },
+      ],
+      trigger: narrow
+        ? "The spread widening back above 15 points, which would put capability back in the shortlist as a primary filter rather than a tiebreak."
+        : "The spread narrowing below 15 points, at which point the decision moves off the model and onto control and cost.",
+      doNotDo:
+        "Do not treat two vendors with similar means as equivalent until you have compared the evidence grades behind them. A high score at thin evidence is a claim, not a verified strength.",
+    }),
     tools: ["modelForRole", "workflowShortlist"],
     news,
     evidence: {
@@ -692,6 +811,44 @@ export function reputationInsight(
         : "The trend is real but short; a direction will not be reliable for several more captures.",
     ],
     action: spread > 25 ? "Shortlist" : "Monitor",
+    decision: decide({
+      action: spread > 25 ? "Shortlist" : "Monitor",
+      instruction:
+        spread > 25
+          ? weakest
+            ? `Add ${weakest[0]} experience to the shortlist criteria and ask each finalist for two reference customers on it: at a ${spread} point spread this is the pillar the set is collectively weakest on and the one that bites after signature.`
+            : `Use the ${spread} point reputation spread to cut the shortlist before capability is compared, since reputation will not correct inside a procurement cycle.`
+          : `Use reputation to disqualify rather than to rank. At a ${spread} point spread it will flag a vendor with a genuine support problem and will not separate two strong ones.`,
+      whyNow: `${vendors.length} vendors carry a reputation reading averaging ${mean}, with ${spread} points between the highest and lowest${weakest ? `, and the set is weakest on ${weakest[0]} at ${weakest[1].mean}` : ""}.`,
+      evidenceFor: [
+        {
+          claim: `${vendors.length} vendors averaging ${mean} across the customer, developer and employee pillars, ${spread} points between highest and lowest.`,
+          source: "AIE reputation pillars",
+          basis: "measured",
+          lane: m.lane,
+          asOf: m.reputationAsOf ?? m.generatedAt,
+        },
+      ],
+      evidenceAgainst:
+        realSnapshots < 2
+          ? [
+              {
+                claim:
+                  "Only one real capture is held, so this is a point reading with no trend behind it and no way to tell a recovering vendor from a declining one.",
+                source: "AG reputation snapshots",
+                basis: "absent",
+                lane: m.lane,
+                asOf: m.reputationAsOf ?? m.generatedAt,
+              },
+            ]
+          : [],
+      trigger:
+        realSnapshots < 2
+          ? "A second and third capture, which would turn this point reading into a direction of travel."
+          : `${sorted[sorted.length - 1].name} moving off the bottom of the set, which would be the first sign reputation here corrects at all.`,
+      doNotDo:
+        "Do not expect a low reputation reading to correct inside a procurement cycle. It is the slowest of the tracked measures to move.",
+    }),
     tools: ["vendorView", "decisionDesk"],
     news,
     evidence: {
@@ -782,6 +939,58 @@ export function vendorViewInsight(
           : "Momentum is published across the scored set.",
     ],
     action: strongButRisky.length > 0 ? "Investigate" : "Shortlist",
+    decision: decide({
+      action: strongButRisky.length > 0 ? "Investigate" : "Shortlist",
+      instruction:
+        strongButRisky.length > 0
+          ? `Get a dated remediation position from ${nameList(strongButRisky.map((v) => v.name))} before ${strongButRisky.length === 1 ? "it goes" : "they go"} on a shortlist. The assessment scores evidenced capability and does not net off an open high-severity risk.`
+          : tightest
+            ? `Treat ${tightest.leader} and ${tightest.runnerUp} as equivalent on score in ${tightest.category} and decide between them on fit, governance and price: ${tightest.gap} points is inside the margin the evidence can carry.`
+            : "Draw the shortlist from the category rankings directly. No vendor combines a shortlist-grade score with an open high-severity risk this period.",
+      whyNow:
+        strongButRisky.length > 0
+          ? `${strongButRisky.length} ${strongButRisky.length === 1 ? "vendor places" : "vendors place"} in the top third of a market they compete in while carrying an open high-severity risk.`
+          : widest
+            ? `${widest.leader} holds the clearest position of any vendor tracked, ${widest.gap} points clear in ${widest.category}, and ${close.length} categories are close enough to contest.`
+            : `${scored.length} vendors carry a composite score across ${categories} market categories and no lead is currently being contested.`,
+      evidenceFor: [
+        {
+          claim: `${scored.length} vendors carry a composite score across ${categories} market categories${tightest ? `, the closest contest being ${tightest.category} at ${tightest.gap} points` : ""}${widest ? ` and the clearest ${widest.category} at ${widest.gap}` : ""}.`,
+          source: "AIE vendor rankings",
+          basis: "measured",
+          lane: m.lane,
+          asOf: m.generatedAt,
+        },
+        ...(strongButRisky.length > 0
+          ? [
+              {
+                claim: `${nameList(strongButRisky.map((v) => v.name))} carry an open high-severity risk while ranking in the top third of a market.`,
+                source: "AIE risk register",
+                basis: "measured" as const,
+                lane: m.lane,
+                asOf: m.generatedAt,
+              },
+            ]
+          : []),
+      ],
+      evidenceAgainst:
+        noMomentum > 0
+          ? [
+              {
+                claim: `${noMomentum} of the ${scored.length} scored vendors publish no momentum reading, so the direction of travel is unknown for them rather than flat.`,
+                source: "AIE vendor rankings",
+                basis: "absent",
+                lane: m.lane,
+                asOf: m.generatedAt,
+              },
+            ]
+          : [],
+      trigger: tightest
+        ? `The gap in ${tightest.category} moving outside ${tightest.gap} points, which would make that a real lead rather than a tie.`
+        : "A tracked vendor picking up a high-severity risk, which would take it off a capability-led shortlist.",
+      doNotDo:
+        "Do not read the composite as a net judgement. It scores evidenced capability and does not subtract governance exposure.",
+    }),
     tools: ["competitiveIntel", "workflowShortlist", "modelForRole"],
     news,
     evidence: {
@@ -833,6 +1042,46 @@ export function governanceInsight(
         : "Posture assessments are per-vendor and carry their own evidence state.",
     ],
     action: highSeverity > 0 ? "Investigate" : "Monitor",
+    decision: decide({
+      action: highSeverity > 0 ? "Investigate" : "Monitor",
+      instruction:
+        highSeverity > 0
+          ? `Require a dated remediation position from each of the ${affected} affected ${affected === 1 ? "vendor" : "vendors"} before scope widens, rather than an assurance that the finding is understood.`
+          : "Keep the current review cadence rather than standing it down, and re-check before each shortlist closes.",
+      whyNow:
+        highSeverity > 0
+          ? `${highSeverity} high-severity ${highSeverity === 1 ? "finding is" : "findings are"} open across ${affected} tracked ${affected === 1 ? "vendor" : "vendors"}, and governance findings rarely close on the vendor's own timetable.`
+          : `No high-severity finding is open against a tracked vendor, which makes this the cheapest moment to tighten the cadence rather than relax it.`,
+      evidenceFor: [
+        {
+          claim: `${openRisks} ${openRisks === 1 ? "risk is" : "risks are"} recorded against tracked vendors, ${highSeverity} of them high severity, touching ${affected} ${affected === 1 ? "vendor" : "vendors"}.`,
+          source: "AIE risk register",
+          basis: "measured",
+          lane: m.lane,
+          asOf: m.generatedAt,
+        },
+      ],
+      evidenceAgainst:
+        label === "governance" && jurisdictions - sourcedJurisdictions > 0
+          ? [
+              {
+                claim: `${jurisdictions - sourcedJurisdictions} of ${jurisdictions} tracked jurisdictions carry no dataset source, so the regulatory half of this reading is incomplete.`,
+                source: "AIE regulatory grid",
+                basis: "absent",
+                lane: m.lane,
+                asOf: m.generatedAt,
+              },
+            ]
+          : [],
+      trigger:
+        highSeverity > 0
+          ? "A high-severity finding closing with a dated vendor response, or a new one opening against a vendor already on your list."
+          : "The first high-severity finding opening against a tracked vendor, which moves this from cadence to action.",
+      doNotDo:
+        highSeverity > 0
+          ? null
+          : "Do not read an empty register as a clean bill of health. Risk registers lag by construction, and an absent finding is weaker evidence than a recorded one.",
+    }),
     tools: ["securityDesk", "vendorView"],
     news,
     evidence: {
@@ -920,6 +1169,42 @@ export function supplyMapInsight(
       "Delivery concentration shows up as correlated delay, which no vendor score captures.",
     ],
     action: narrow ? "Investigate" : "Monitor",
+    decision: decide({
+      action: narrow ? "Investigate" : "Monitor",
+      instruction: narrow
+        ? `Find a second delivery firm for ${soleSourced.length === 1 ? "the one vendor" : `each of the ${soleSourced.length} vendors`} currently carried by a single firm, and price the engagement with both before committing to the software.`
+        : `Get engagement quotes from two of the ${nodes} delivery firms before signing, since the competition that keeps implementation priced exists here and only pays if you use it.`,
+      whyNow: narrow
+        ? `${soleSourced.length === 1 ? "One vendor" : `${soleSourced.length} vendors`} on this page ${soleSourced.length === 1 ? "has" : "have"} a single firm able to deliver ${soleSourced.length === 1 ? "it" : "them"}, which turns a software decision into a supplier decision.`
+        : `${nodes} delivery firms carry the ${edges} vendor relationships tracked here, and no vendor depends on a single one.`,
+      evidenceFor: [
+        {
+          claim: `${nodes} delivery firms carry ${edges} tracked vendor relationships${widest ? `, the widest being ${widest.vendor} at ${widest.partners}` : ""}.`,
+          source: "AIE exposure map",
+          basis: "measured",
+          lane: "aie",
+          asOf: lastUpdated,
+        },
+      ],
+      evidenceAgainst:
+        verifiedPct < 50
+          ? [
+              {
+                claim: `Only ${verifiedPct} per cent of these links are confirmed directly by the parties, so any one vendor's delivery options are not settled by this map.`,
+                source: "AIE exposure map",
+                basis: "absent",
+                lane: "aie",
+                asOf: lastUpdated,
+              },
+            ]
+          : [],
+      trigger: busiest
+        ? `${busiest.partner} taking on or losing vendors, since it carries ${busiest.vendors} of them and is where this channel narrows.`
+        : "A sole-sourced vendor gaining a second delivery partner, which restores a second bidder for the work.",
+      doNotDo: narrow
+        ? "Do not assume the commercial terms you negotiate with the vendor transfer to the engagement. Where there is no second bidder for the work, they do not."
+        : null,
+    }),
     tools: ["workflowShortlist", "vendorView"],
     news,
     evidence: {
@@ -974,6 +1259,39 @@ export function workflowInsight(
       "Tier follows recorded risk and complexity, not vendor strength.",
     ],
     action: riskShare >= 40 ? "Investigate" : "Accelerate",
+    decision: decide({
+      action: riskShare >= 40 ? "Investigate" : "Accelerate",
+      instruction:
+        riskShare >= 40
+          ? `Tier the ${highRisk} high and critical workflows on assurance before cost, and only let price decide inside each tier. At ${riskShare} per cent of the catalogue the cheapest adequate model is the wrong default.`
+          : `Route the ${workflows - highRisk} workflows below the high-risk line to the cheapest model meeting their recorded requirement, and reserve the top tier for the ${highRisk} that carry high or critical risk.`,
+      whyNow: `${highRisk} of ${workflows} catalogued workflows sit at high or critical risk, which is ${riskShare} per cent of the catalogue.`,
+      evidenceFor: [
+        {
+          claim: `${highRisk} of ${workflows} workflows across ${categories} categories are recorded at high or critical risk, which is ${riskShare} per cent against the 40 per cent line this recommendation turns on.`,
+          source: "AIE workflow catalogue",
+          basis: "measured",
+          lane: "aie",
+          asOf: lastUpdated,
+        },
+        {
+          claim: `${mapped} categories carry a vendor mapping, so the tier a workflow needs can be matched to something buyable.`,
+          source: "AIE workflow vendor mapping",
+          basis: "measured",
+          lane: "aie",
+          asOf: lastUpdated,
+        },
+      ],
+      evidenceAgainst: [],
+      trigger:
+        riskShare >= 40
+          ? "The high-risk share falling below 40 per cent, which would move the binding constraint from assurance back to cost."
+          : "The high-risk share rising above 40 per cent, which would make assurance rather than cost the constraint on tiering.",
+      doNotDo:
+        riskShare >= 40
+          ? "Do not tier on inference cost where a wrong output carries legal or clinical consequence."
+          : null,
+    }),
     tools: ["modelForRole", "competitiveIntel"],
     news,
     evidence: {
@@ -1096,6 +1414,43 @@ export function newsInsight(
       "Where news and assessment disagree, the assessment is usually right and the news usually earlier.",
     ],
     action: mineNegative > 0 || negShare >= 25 ? "Investigate" : "Monitor",
+    decision: decide({
+      action: mineNegative > 0 || negShare >= 25 ? "Investigate" : "Monitor",
+      instruction:
+        mine.length > 0
+          ? `Read the ${mine.length} ${mine.length === 1 ? "item" : "items"} naming ${nameList(mineNames)} before your next vendor review, starting with ${mineNegative > 0 ? "the negative ones" : "the highest impact one"}.`
+          : negShare >= 25
+            ? `Read the ${neg} negative items in this window before your next review: at ${negShare} per cent of the cycle they are a pattern rather than noise.`
+            : "Leave the feed until your next scheduled review. Nothing in this cycle names a vendor on your list or moves the sentiment balance far enough to act on.",
+      whyNow:
+        mine.length > 0
+          ? `${mine.length} of ${items.length} items in the current window name vendors on your list, ${mineNegative} of them negative.`
+          : `${neg} of ${items.length} items are negative, a share of ${negShare} per cent, with ${risky} classified as risk events.`,
+      evidenceFor: [
+        {
+          claim: `${items.length} items in the current window: ${pos} positive, ${neg} negative, ${highImpact} at high impact and ${risky} classified as risk events.`,
+          source: "AIE news feed",
+          basis: "measured",
+          lane: "aie",
+          asOf: lastUpdated,
+        },
+      ],
+      evidenceAgainst: [
+        {
+          claim:
+            "Sentiment and impact are assigned by the source rather than measured here, so a share is a direction of travel rather than a finding about any one vendor.",
+          source: "AIE news feed",
+          basis: "modelled",
+          lane: "aie",
+          asOf: lastUpdated,
+        },
+      ],
+      trigger:
+        watched.size > 0
+          ? "A risk-event item naming a vendor on your list, which is the case this feed exists to catch."
+          : "Adding vendors to your list, which is what turns this feed from market coverage into your own.",
+      doNotDo: null,
+    }),
     tools: ["marketWatch", "vendorView"],
     news: pickNews(items, { minImpact: 75 }),
     evidence: {
@@ -1148,6 +1503,44 @@ export function pricePerformanceInsight(
       "Input price only, so test against your own token mix before committing.",
     ],
     action: wide ? "Renegotiate" : "Monitor",
+    decision: decide({
+      action: wide ? "Renegotiate" : "Monitor",
+      instruction: wide
+        ? `Route the workloads that do not need the top model to one of the ${adequate} models reaching 80 per cent of the top score, and put the ${ratio}x input-price difference to the incumbent before the next renewal.`
+        : `Choose on fit, latency and governance rather than price: at ${ratio}x the tiering argument does not pay for the work of moving a workload.`,
+      whyNow: `${adequate} of the ${models} priced and benchmarked models reach 80 per cent of the top score, and the cheapest of them costs ${ratio} times less than the top model.`,
+      evidenceFor: [
+        {
+          claim: `${adequate} models reach 80 per cent of the top benchmark score.`,
+          source: "Artificial Analysis benchmark",
+          basis: "measured",
+          lane: "derived",
+          asOf: lastUpdated,
+        },
+        {
+          claim: `The cheapest qualifying model costs ${ratio} times less than the top model on published input pricing, against the 5 times line this recommendation turns on.`,
+          source: "Vendor pricing pages",
+          basis: "disclosed",
+          lane: "derived",
+          asOf: lastUpdated,
+        },
+      ],
+      evidenceAgainst: [
+        {
+          claim:
+            "This prices input tokens only. A real workload's blend of input and output moves the multiple, and the catalogue holds no output prices to compute it.",
+          source: "Vendor pricing pages",
+          basis: "absent",
+          lane: "derived",
+          asOf: lastUpdated,
+        },
+      ],
+      trigger: wide
+        ? "The multiple falling below 5, at which point tiering stops paying for the work of moving a workload."
+        : "The multiple rising above 5, which would make tiering the largest available saving.",
+      doNotDo:
+        "Do not sign a multi-year commitment on the current benchmark lead alone. The leaderboard reorders faster than the commitment runs, and the price gap is the part of this that has held.",
+    }),
     tools: ["modelForRole", "workflowShortlist"],
     news,
     evidence: {
@@ -1224,6 +1617,40 @@ export function positionInsight(
         : "Add vendors to your shortlist and the Pulse will report what moves against them.",
     ],
     action: spread >= 30 ? "Investigate" : "Monitor",
+    decision: decide({
+      action: spread >= 30 ? "Investigate" : "Monitor",
+      instruction:
+        spread >= 30
+          ? `Compare your two strongest candidates on score directly: at a ${spread} point spread the choice of vendor still moves the outcome more than execution does.`
+          : `Put the effort into implementation rather than further vendor comparison: at a ${spread} point spread the field has converged and execution is the variable you control.`,
+      whyNow: `${scored.length} vendors carry a composite score with a median of ${median} and a top of ${top}, a spread of ${spread} points, and ${moving} moved position in the current period.`,
+      evidenceFor: [
+        {
+          claim: `Composite scores across ${scored.length} vendors run from a median of ${median} to a top of ${top}, a spread of ${spread} against the 30 point line this recommendation turns on.`,
+          source: "AIE vendor scores",
+          basis: "measured",
+          lane: m.lane,
+          asOf: m.generatedAt,
+        },
+      ],
+      evidenceAgainst:
+        moving > 0
+          ? [
+              {
+                claim: `${moving} vendors moved position in the current period, so this spread is a reading of a field that is still reordering.`,
+                source: "AIE vendor movement classification",
+                basis: "modelled",
+                lane: m.lane,
+                asOf: m.generatedAt,
+              },
+            ]
+          : [],
+      trigger:
+        spread >= 30
+          ? "The spread closing below 30 points, at which point vendor choice stops being the dominant variable."
+          : "The spread widening back above 30 points, which would put vendor choice back ahead of execution.",
+      doNotDo: null,
+    }),
     tools: ["decisionDesk", "workflowShortlist", "modelForRole"],
     news,
     evidence: {
@@ -1293,6 +1720,37 @@ export function peerInsight(
       "The vendor slice is a modelled May 2026 estimate: read it for shape, not for ranking.",
     ],
     action: "Investigate",
+    decision: decide({
+      action: "Investigate",
+      instruction: `Read the ${specific} sector-tagged workflows before the ${horizontal} horizontal ones when drawing a shortlist, and check which of the ${segments} segments your own sits in.`,
+      whyNow: `${horizontal} of ${workflows} catalogued workflows (${horizontalShare} per cent) run in every industry, so the sector-specific ${specific} are where the genuine difference sits.`,
+      evidenceFor: [
+        {
+          claim: `${workflows} workflows across ${categories} areas, ${horizontal} horizontal and ${specific} tagged to particular sectors, covering ${segmentsWithSpecific} of ${segments} segments.`,
+          source: "AIE workflow taxonomy",
+          basis: "measured",
+          lane: "aie",
+          asOf: lastUpdated,
+        },
+      ],
+      evidenceAgainst:
+        segmentsWithSpecific < segments
+          ? [
+              {
+                claim: `${segments - segmentsWithSpecific} of ${segments} segments carry no workflow of their own, so the library says nothing specific about those sectors.`,
+                source: "AIE workflow taxonomy",
+                basis: "absent",
+                lane: "aie",
+                asOf: lastUpdated,
+              },
+            ]
+          : [],
+      trigger: `Your own segment gaining a tagged workflow, which would move it out of the ${segments - segmentsWithSpecific} currently covered only by horizontal work.`,
+      doNotDo:
+        horizontalShare >= 60
+          ? "Do not pay a sector premium for capability that the horizontal list shows is the same everywhere."
+          : null,
+    }),
     tools: ["workflowShortlist", "modelForRole"],
     news,
     evidence: {

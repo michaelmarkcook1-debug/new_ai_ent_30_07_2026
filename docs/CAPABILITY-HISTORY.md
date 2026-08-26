@@ -59,6 +59,55 @@ get the computed wording instead of the written wording, which is what the
 page showed before any of this was written. There is no state in which you are
 shown something the product does not stand behind.
 
+**Every recommendation now says what to actually do.**
+
+Each tab has always ended in one of eight actions: Investigate, Monitor,
+Renegotiate, Pause and so on. Those are defensible and they are a direction of
+travel, not something you can do on Tuesday. "Investigate" tells you which way
+to lean and leaves you to work out what that means.
+
+Underneath the action you now get four more things, and all four are worked
+out by our own code before any writing happens.
+
+**What exactly to do.** On Price / Performance, instead of just "Renegotiate",
+it now reads: route the workloads that do not need the top model to one of the
+9 models reaching 80 per cent of the top score, and put the 12x input-price
+difference to the incumbent before the next renewal.
+
+**Why now.** The change, or the combination of figures, that makes it relevant
+this quarter rather than in general.
+
+**What argues against it.** This is the important one. On that same page it
+says plainly that the comparison prices input tokens only, and that a real
+workload's mix of input and output moves the answer. That sits next to the
+recommendation rather than hidden behind a control, because a caveat you have
+to go looking for is a caveat that does not do its job.
+
+**When to change your mind.** The observable thing that should make you
+reconsider: the price multiple falling below 5, a high-severity finding
+closing, a vendor starting to break out AI revenue in a filing.
+
+And where the evidence supports it, a plain "do not": do not sign a multi-year
+commitment on the current benchmark lead alone. Where nothing warrants one,
+nothing is written, rather than a warning being invented to fill the space.
+
+**A recommendation can now be held back by its own evidence.** If one signal
+says move and another says the implementation risk is high, the answer becomes
+"look into this" rather than "go ahead", automatically. The same happens when a
+conclusion rests on a single source where it should rest on several. The
+strongest recommendations are only available to the pages that can actually
+support them.
+
+No confidence percentage anywhere. Those were removed from this platform on
+request and they are not coming back: a score out of 100 over evidence of mixed
+quality is a number with nothing behind it. What you get instead is how many
+independent sources point the same way, stated in words, next to the sources
+themselves.
+
+Nothing moved on screen. No new tab, no new panel, no dashboard. The
+recommendation box that was already there now has the answer in it.
+
+
 ---
 
 ## 19 August 2026

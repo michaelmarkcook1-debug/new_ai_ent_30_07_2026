@@ -301,6 +301,9 @@ describe("the deterministic layer owns the decision", () => {
     summary: "The dataset does not reach this question.",
     implications: [],
     action: "Monitor",
+    // No recommendation is supportable on an insufficient page, so there is no
+    // packet. Asserted below rather than assumed.
+    decision: null,
     news: null,
     evidence: { count: 0, sources: [], lastUpdated: null, lane: "derived" },
     insufficient: "No vendor in this category carries enough evidence.",

@@ -51,6 +51,16 @@ interface InsightDraft {
   headline: string;
   summary: string;
   implications: string[];
+  /**
+   * The two halves of the decision packet the model is allowed to touch.
+   *
+   * Everything else in the packet travels around it: the action, both evidence
+   * arrays, the trigger, the do-not and the strength are deterministic and are
+   * never sent back through the model. The model may say the instruction
+   * better; it may not decide what the instruction is.
+   */
+  instruction?: string;
+  whyNow?: string;
 }
 
 /**
@@ -97,6 +107,30 @@ export async function authorInsight(
     entities.length > 0
       ? `Vendors and models this page covers, and the only ones you may name: ${entities.join(", ")}`
       : null,
+    // The decision packet, as grounding. The action, the evidence, the trigger
+    // and the do-not are stated as fixed so the model has them for context and
+    // knows it is not being asked to choose them.
+    computed.decision
+      ? `Computed instruction (you may rewrite the wording, not the instruction): ${computed.decision.instruction}`
+      : null,
+    computed.decision
+      ? `Computed why now (you may rewrite the wording, not the reason): ${computed.decision.whyNow}`
+      : null,
+    computed.decision && computed.decision.evidenceFor.length > 0
+      ? `Evidence for (fixed, do not change): ${computed.decision.evidenceFor.map((e) => `${e.claim} [${e.source}, ${e.basis}]`).join(" | ")}`
+      : null,
+    computed.decision && computed.decision.evidenceAgainst.length > 0
+      ? `Evidence against (fixed, do not change, and do not drop from your reasoning): ${computed.decision.evidenceAgainst.map((e) => `${e.claim} [${e.source}, ${e.basis}]`).join(" | ")}`
+      : null,
+    computed.decision
+      ? `Strength of this recommendation (fixed): ${computed.decision.strength}`
+      : null,
+    computed.decision?.trigger
+      ? `Trigger (fixed, do not change): ${computed.decision.trigger}`
+      : null,
+    computed.decision?.doNotDo
+      ? `Do not do (fixed, do not change): ${computed.decision.doNotDo}`
+      : null,
     subject ? `\nTHE SUBJECT OF THIS READING: ${subject.label}` : null,
     ...(subject?.facts ?? []).map((f) => `- ${f}`),
   ]);
@@ -106,7 +140,7 @@ export async function authorInsight(
     facts,
     `Write the analyst reading for this page, for a CIO.
 
-Return JSON: {"headline": string, "summary": string, "implications": [string, string, string]}
+Return JSON: {"headline": string, "summary": string, "implications": [string, string, string]${computed.decision ? ', "instruction": string, "whyNow": string' : ""}}
 
 - headline: one sentence, under 15 words, carrying a judgement rather than a measurement. Not a restatement of the numbers.
 - summary: 90 to 140 words, and it must do all three of the things in your brief: what this data shows as a judgement, what changes for this reader's buying decision, and what this is an instance of in the wider market. Reuse only the figures above.
@@ -125,6 +159,16 @@ ${
         ? `\nThis reading is about ${subject.label}, not about the market in general. Every sentence should connect what the market data shows to what it means for them specifically: where their position is exposed, where it is defensible, and what they should do about it. A paragraph that would read identically for any company has failed. Where the retrieved facts about them are thin, say what cannot be judged rather than filling it.\n`
         : ""
     }
+${
+      computed.decision
+        ? `
+- instruction: one sentence under 30 words. The specific thing this reader should do. It must ask for the SAME thing the computed instruction asks for: you are rewriting how it is said, not what it is. An instruction that merely repeats the action label ("investigate alternatives") is a failure; name the thing, the comparison or the deadline.
+- whyNow: one sentence. The change or combination of evidence that makes this relevant now, drawn only from the evidence above.
+
+The evidence, the trigger and the do-not are fixed and are rendered separately. Do not restate them, do not contradict them, and do not drop the evidence against: a recommendation that reads as certain when the evidence above is contested is the one failure here that matters more than being dull.
+`
+        : ""
+    }
 The computed versions above are a floor, not a template. Say something a reader could not have got by reading the numbers themselves.`,
     // 900 truncated the longest fact sheets mid-JSON, which read as a silent
     // failure rather than as the over-long answer it was.
@@ -134,7 +178,9 @@ The computed versions above are a floor, not a template. Say something a reader 
       // The computed headline and summary are the canonical statement of what
       // this page found. Any direction they state plainly is a direction the
       // written version may explain and may not reverse.
-      claims: claimsFrom(`${computed.headline} ${computed.summary}`),
+      claims: claimsFrom(
+        `${computed.headline} ${computed.summary}${computed.decision ? ` ${computed.decision.instruction} ${computed.decision.whyNow}` : ""}`
+      ),
       // Where the page declared what it covers, that is the boundary for
       // naming. Where it did not, the guard stays scoped to the fact prose.
       entities,
@@ -151,9 +197,101 @@ The computed versions above are a floor, not a template. Say something a reader 
       implications: Array.isArray(draft.implications)
         ? draft.implications.slice(0, 3)
         : computed.implications,
+      // The packet is rebuilt from the computed one, not taken from the draft.
+      // Only two fields can come from the model, and only after the rewritten
+      // instruction is checked against the canonical action. Everything else
+      // (the action, both evidence arrays, the trigger, the do-not and the
+      // strength) is copied across untouched, so there is no path by which a
+      // model response can reach them at all.
+      decision: mergeDecision(computed.decision, draft),
     },
     authorship: "written",
   };
+}
+
+/**
+ * The packet the reader gets, built from the computed one.
+ *
+ * TWO FIELDS IN, EVERYTHING ELSE COPIED. The action, both evidence arrays, the
+ * trigger, the do-not and the strength are read off `computed` and are never
+ * sourced from the draft, so there is no path by which a model response
+ * reaches them. That is a structural guarantee rather than a validated one:
+ * the check for "did the model drop the contradictory evidence" is that the
+ * model was never holding it.
+ *
+ * Exported so that guarantee is testable directly rather than inferred from
+ * the absence of an assignment.
+ */
+export function mergeDecision(
+  computed: AnalystInsightData["decision"],
+  draft: { instruction?: string; whyNow?: string } | null | undefined
+): AnalystInsightData["decision"] {
+  if (!computed) return null;
+  return {
+    ...computed,
+    instruction: usableInstruction(computed, draft?.instruction),
+    whyNow:
+      typeof draft?.whyNow === "string" && draft.whyNow.trim().length > 0
+        ? draft.whyNow
+        : computed.whyNow,
+  };
+}
+
+/**
+ * The rewritten instruction, or the computed one where the rewrite cannot
+ * stand in for it.
+ *
+ * Three ways a rewrite is refused, each falling back rather than failing:
+ *
+ *   empty        nothing to use
+ *   contradicts  the rewrite asks for the opposite of the canonical action, or
+ *                commits where the action only asked the reader to look. Same
+ *                rule the Pulse actions run under, and the same reasoning.
+ *   label only   the rewrite has collapsed back into the action word and says
+ *                nothing the action did not. That is the exact failure this
+ *                whole packet exists to fix, so accepting it would be worse
+ *                than not authoring at all.
+ */
+function usableInstruction(
+  decision: NonNullable<AnalystInsightData["decision"]>,
+  written: string | undefined
+): string {
+  if (typeof written !== "string" || written.trim().length === 0) {
+    return decision.instruction;
+  }
+  const canonical = actionIntent(decision.action);
+  if (intentViolation(canonical, written)) {
+    console.warn(
+      `[analyst-llm] discarded instruction: canonical action ${decision.action} rewritten as "${written}"`
+    );
+    return decision.instruction;
+  }
+  if (!isSpecific(written, decision.action)) {
+    console.warn(
+      `[analyst-llm] discarded instruction: "${written}" restates the action label`
+    );
+    return decision.instruction;
+  }
+  return written;
+}
+
+/**
+ * Whether an instruction says more than its action label does.
+ *
+ * Deliberately a floor rather than a judgement of quality: enough words to
+ * carry a specific, and something in it beyond the action word itself. This is
+ * the same check the deterministic packets are held to in
+ * tests/analyst-decision.test.ts, applied to the written version so the model
+ * cannot undo the thing the packet exists for.
+ */
+export function isSpecific(instruction: string, action: string): boolean {
+  const words = instruction.trim().split(/\s+/).filter(Boolean);
+  if (words.length < 6) return false;
+  const withoutAction = instruction
+    .toLowerCase()
+    .replace(action.toLowerCase(), "")
+    .trim();
+  return withoutAction.split(/\s+/).filter(Boolean).length >= 5;
 }
 
 // ---------------------------------------------------------- Today's Pulse

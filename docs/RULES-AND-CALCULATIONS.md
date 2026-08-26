@@ -1875,6 +1875,157 @@ Pinned by 35 tests in `tests/analyst-canonical.test.ts`, including a
 `Record<AnalystAction, ActionIntent>` so a ninth action added to the union
 fails the typecheck here rather than arriving unclassified and unguarded.
 
+## 8.25 The decision packet
+
+Verified against the working tree at commit `707a789`, 26 August 2026.
+
+Every insight ended in one of eight canonical actions. They are derived from
+thresholds we can point at, and they are too broad to act on: "Investigate" is
+a direction of travel. `lib/analyst/decision.ts` adds the packet underneath.
+
+`AnalystInsightData.decision` (`lib/analyst/insight.ts:209`) is
+`Decision | null`. Required, not optional, so a new builder cannot quietly ship
+without one. Null means no recommendation is supportable, which is the
+insufficient-evidence case and nothing else: `insufficient()` sets it
+explicitly.
+
+All twelve builders carry a packet. Each is filled from figures its own builder
+already computed; nothing here introduces a value.
+
+### The shape
+
+`Decision` at `lib/analyst/decision.ts:83`:
+
+| Field | What it is |
+|---|---|
+| `action` | the canonical action, after the escalation guard |
+| `instruction` | the specific thing to do |
+| `whyNow` | the change that makes it relevant now |
+| `evidenceFor` | supporting claims, each with source, basis and lane |
+| `evidenceAgainst` | countervailing claims, same shape |
+| `trigger` | the observable change that should reopen it |
+| `doNotDo` | the specific over-reach the evidence does not license |
+| `strength` | derived, never declared |
+
+`EvidenceBasis` (`:50`) is `measured | modelled | disclosed | absent`. This is
+the distinction that stops a modelled share estimate reading like a measured
+one.
+
+### Strength is a state, not a score
+
+`EvidenceStrength` (`:77`) is `corroborated | single signal | contested |
+insufficient`.
+
+**No confidence percentage anywhere.** Confidence labels were removed from this
+platform on request, and a 0 to 100 number over evidence of mixed provenance
+would have no methodology behind it. `tests/analyst-decision.test.ts` and
+`tests/analyst-insight-panel.test.ts` both assert none appears.
+
+`strengthOf()` (`:123`), derived from the arrays so a builder cannot claim a
+strength its evidence does not carry:
+
+- no `evidenceFor` at all, `insufficient`
+- any `evidenceAgainst`, `contested`
+- two or more DISTINCT `source` values in `evidenceFor`, `corroborated`
+- otherwise `single signal`
+
+Independence is counted by distinct source. Three figures out of one dataset
+are one signal read three times, and counting them as three would be exactly
+the false confidence this exists to stop. `contested` outranks `corroborated`
+for the same reason.
+
+### The escalation guard
+
+`resolveAction()` (`:147`). Can only ever WEAKEN the threshold's proposal:
+
+- action intent is not `advance` (per `lib/analyst/canonical.ts`), unchanged
+- `advance` on `corroborated`, unchanged
+- `advance` on `insufficient`, becomes `Monitor`
+- `advance` on `single signal` or `contested`, becomes `Investigate`
+
+**`restrain` is deliberately not downgraded on contested evidence.** Weakening
+a Pause because the picture is mixed would push a reader toward action on
+exactly the evidence saying be careful, which is the wrong direction to fail
+in.
+
+One shipped builder is affected: `workflowInsight` proposes `Accelerate` on its
+low-risk branch and survives only because the catalogue and the vendor mapping
+are two sources. On one it would be downgraded, which is the intended
+behaviour and is pinned by test.
+
+### Triggers state the threshold they turn on
+
+Seven evidence claims now carry the constant the recommendation flips at (the
+40 per cent risk share, the 70 per cent concentration line, the 15 point
+capability spread, the 5 times price multiple, the 30 point composite spread).
+
+This was found by test, not review. A trigger reading "the high-risk share
+rising above 40 per cent" was stating a figure that appeared nowhere in the
+evidence, which is the same defect as an invented figure even though the
+constant is ours. The threshold now sits in the claim, so the trigger is
+grounded in the packet it belongs to.
+
+### What the model may touch
+
+Two fields. `mergeDecision()` (`lib/analyst/author.ts:225`) rebuilds the packet
+from the computed one and takes only `instruction` and `whyNow` from the draft.
+The action, both evidence arrays, the trigger, the do-not and the strength are
+copied across, so there is no path by which a model response reaches them.
+That is a STRUCTURAL guarantee: the check for "did the model drop the
+contradictory evidence" is that the model was never holding it.
+
+The instruction is refused and falls back three ways
+(`usableInstruction()`, `:255`):
+
+1. empty
+2. `intentViolation()` fires, the same P0 rule the Pulse actions run under
+3. `isSpecific()` (`:287`) fails: fewer than six words, or fewer than five
+   once the action label is removed. A rewrite that collapses back into the
+   action word has undone the thing the packet exists for.
+
+### The panel
+
+`lib/ui/analyst-insight.tsx`, inside the recommendation box that was already
+there. No new panel, no new route.
+
+```
+[ACTION]
+instruction
+Why now:    ...
+Against this: ...      only when evidenceAgainst is non-empty
+Watch for:  ...        only when a trigger is supportable
+Do not:     ...        only when one is supportable
+```
+
+`Against this` is INLINE rather than in the derivation drawer, deliberately: a
+contradiction behind a disclosure control lets a recommendation read as settled
+when it is not. Evidence with source, basis and as-of, plus the strength, sit
+in the existing drawer, which is where the brief puts provenance.
+
+### Testing note
+
+`vitest.config.mts` gained `oxc: { jsx: { runtime: "automatic" } }`. The app's
+tsconfig sets `jsx: "preserve"` for Next, which leaves vite unable to parse a
+`.tsx` component. Setting the transform in the vitest config rather than the
+tsconfig keeps the build untouched. It is what lets
+`tests/analyst-insight-panel.test.ts` render the real panel and read its markup,
+which is repeatable in a way a screenshot is not and does not need the demo
+shell's basic auth.
+
+### Remaining limits
+
+- **`doNotDo` and `trigger` are authored per branch, not derived.** They are
+  written from the branch's own figures and are grounded by test, but they are
+  sentences a person wrote rather than values computed from data.
+- **`evidenceAgainst` is builder-declared.** Nothing detects a contradiction
+  the builder did not think to record.
+- **Two builders carry a single source**, so their strongest available action
+  is capped. That is the guard working, and it means those pages cannot reach
+  `Accelerate` or `Expand` until a second source is wired in.
+
+37 tests across `tests/analyst-decision.test.ts` and
+`tests/analyst-insight-panel.test.ts`.
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:
