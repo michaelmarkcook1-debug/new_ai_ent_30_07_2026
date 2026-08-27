@@ -89,6 +89,14 @@ export interface CostCapabilityView {
   provenance: string;
   capturedAtDisplay: string;
   freshestBenchmarkDisplay: string;
+  /**
+   * The capture date as the dataset states it, unformatted.
+   *
+   * The display strings above are for a reader. Freshness has to compare
+   * against a clock, and parsing a formatted date back into one is how a
+   * "31 July 20" bug gets made twice.
+   */
+  capturedAt: string;
 }
 
 // Ordered longest-match-first where prefixes could collide. Every entry is a
@@ -236,6 +244,53 @@ export function loadFrontierFaceOff(): FaceOffView {
   };
 }
 
+/**
+ * The price spread the analyst reading quotes, computed rather than pasted.
+ *
+ * These two figures were literals on the page: `ratio: 25, adequate: 29`.
+ * Both were correct for the capture they were written against, which is the
+ * problem. A number computed once by hand and pasted into a render does not
+ * become wrong loudly; it stays on screen reading as live while the dataset
+ * moves underneath it, and this one sits in a sentence about what a buyer
+ * should do before renewal.
+ *
+ * Derived here from the same view the chart plots, so the sentence and the
+ * chart cannot disagree.
+ *
+ * `adequate` counts models within 80 per cent of the top benchmark score, and
+ * `ratio` is what the top model costs against the cheapest of those, on input
+ * pricing only. Models with no price or no score are excluded rather than
+ * treated as zero.
+ */
+export function priceSpread(view: CostCapabilityView): {
+  models: number;
+  vendors: number;
+  adequate: number;
+  ratio: number | null;
+} {
+  const priced = view.models.filter(
+    (m) =>
+      typeof m.intelligence === "number" &&
+      typeof m.inputPerM === "number" &&
+      m.inputPerM > 0
+  );
+  if (priced.length === 0) {
+    return { models: 0, vendors: view.providers.length, adequate: 0, ratio: null };
+  }
+  const top = priced.reduce((a, b) => (b.intelligence > a.intelligence ? b : a));
+  const adequate = priced.filter((m) => m.intelligence >= top.intelligence * 0.8);
+  const cheapest = adequate.reduce((a, b) => (b.inputPerM < a.inputPerM ? b : a));
+  return {
+    models: priced.length,
+    vendors: view.providers.length,
+    adequate: adequate.length,
+    ratio:
+      cheapest.inputPerM > 0
+        ? Math.round((top.inputPerM / cheapest.inputPerM) * 10) / 10
+        : null,
+  };
+}
+
 export function loadCostCapability(): CostCapabilityView {
   // Static import keeps this a build-time read: the figures are a dated
   // capture, not a per-request pull.
@@ -280,6 +335,11 @@ export function loadCostCapability(): CostCapabilityView {
     provenance: raw.provenance,
     capturedAtDisplay: formatIsoDateGb(raw.capturedAt),
     freshestBenchmarkDisplay: formatIsoDateGb(raw.freshestBenchmark),
+    // The freshest BENCHMARK rather than the capture, because that is the
+    // reading the price multiple actually rests on and it is the older of the
+    // two. Taking the capture date would make the signal look a week fresher
+    // than the evidence behind it.
+    capturedAt: raw.freshestBenchmark || raw.capturedAt,
   };
 }
 

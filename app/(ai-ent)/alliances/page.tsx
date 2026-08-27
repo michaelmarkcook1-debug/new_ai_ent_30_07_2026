@@ -4,6 +4,12 @@ import { AlliancesView } from "./components/alliances-view";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { supplyMapInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
+import { aieServerFetch } from "@/lib/aie-server";
+import {
+  adoptionSignal,
+  deliverySignal,
+  enrichWithSynthesis,
+} from "@/lib/analyst/cross";
 import { analystNews } from "@/lib/analyst/news-source";
 import { CompanyContextBar } from "@/lib/position/context-bar";
 
@@ -69,10 +75,43 @@ export default async function AlliancesPage() {
     null
   );
 
-  const written = await authorInsight(
+  // Cross-signal. Delivery breadth is this page's own reading; adoption is not,
+  // and the pair is the one relationship in the engine that no page could
+  // reach until now. Everyone buying a vendor that one firm can install is a
+  // decision-relevant contradiction, and it lives in two datasets that never
+  // met.
+  //
+  // The uptake read goes through the same cached server fetch every other page
+  // uses, with the recorded payload behind it, so this adds no new data source
+  // and no new failure mode: a miss produces no adoption signal and therefore
+  // no synthesis, which is the honest outcome.
+  const uptake = await aieServerFetch<{
+    rows: { vendor: string; share: number }[];
+    provenance?: string;
+  }>("uptake");
+  const topUptake = (uptake.data?.rows ?? [])
+    .filter((r) => typeof r.share === "number")
+    .sort((a, b) => b.share - a.share)[0];
+
+  const soleSourced = breadth.filter((b) => b.partners === 1).length;
+  const crossInputs = [
+    deliverySignal(soleSourced, data.partnerCount, data.links.length, null),
+    topUptake
+      ? adoptionSignal(topUptake.vendor, topUptake.share, null)
+      : null,
+  ].filter((x): x is NonNullable<typeof x> => x !== null);
+
+  const { insight: crossed, synthesis, signals } = enrichWithSynthesis(
     insight,
+    crossInputs
+  );
+
+  const written = await authorInsight(
+    crossed,
     "alliance channel",
-    [...new Set(data.links.flatMap((l) => [l.vendorName, l.partnerName]))].slice(0, 14)
+    [...new Set(data.links.flatMap((l) => [l.vendorName, l.partnerName]))].slice(0, 14),
+    null,
+    { signals, synthesis }
   );
 
 

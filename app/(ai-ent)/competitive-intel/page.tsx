@@ -7,6 +7,7 @@ import { AieRankings } from "./components/aie-rankings";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { competitiveInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
+import { enrichWithSynthesis, signalsFromMetrics } from "@/lib/analyst/cross";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
 
@@ -49,10 +50,21 @@ export default async function CompetitiveIntelPage({
     matrix.rows
   );
 
-  const written = await authorInsight(
+  // Cross-signal, from the metrics this page already loaded. Capability is
+  // this page's own reading; the assessment's clearest lead and the risk
+  // register are not, and a vendor that ranks well while carrying an open
+  // finding is exactly the shortlist mistake this page can now flag.
+  const { insight: crossed, synthesis, signals } = enrichWithSynthesis(
     insight,
+    signalsFromMetrics(m)
+  );
+
+  const written = await authorInsight(
+    crossed,
     "competitive",
-    m.vendors.slice(0, 12).map((v) => v.name)
+    m.vendors.slice(0, 12).map((v) => v.name),
+    null,
+    { signals, synthesis }
   );
 
 

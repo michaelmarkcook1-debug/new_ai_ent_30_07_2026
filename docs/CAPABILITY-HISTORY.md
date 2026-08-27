@@ -15,6 +15,68 @@ than a gap.
 
 ---
 
+## 27 August 2026
+
+**"Why now" no longer argues both ways at once, and no longer compares two
+different markets.**
+
+Three faults in how the product reasons across its own tabs, all found by
+reading what it actually printed rather than what it was meant to print.
+
+**A reason not to act was being printed as a reason to act now.** When two
+datasets disagreed, the product recorded the disagreement, which is right, and
+then put that same sentence in two places: under "Why now" and under "Against
+this", word for word. A buyer reading the panel was told the identical fact was
+why they should move and why they should not. It was live on Price /
+Performance, Competitive Intel and Reputation Tracker. Why now is the case for
+acting, so only evidence that argues for the recommendation can appear there.
+Evidence that argues against it now appears once, under "Against this", where
+it already had the effect of making the product less certain.
+
+**The capability comparison was measuring the wrong set of companies.** The
+most consequential thing this product can tell a buyer is whether the premium
+they pay for a top model still buys a real lead. Price is measured across
+frontier model providers, the companies you can actually buy tokens from.
+Capability was being measured across all 43 tracked vendors, which includes
+chip makers, cloud platforms, CRM and service-desk suppliers and sovereign
+providers, most of which do not sell a model at all. The two halves were
+answering different questions, and putting them in one sentence described a
+market nobody had measured.
+
+Capability is now measured twice: once across the whole tracked field, which is
+what Competitive Intel wants when it asks how varied the market is, and once
+across the frontier providers alone, which is the one the price comparison is
+allowed to meet. Read across the frontier providers the spread is 10.6 points,
+which is exactly the figure Competitive Intel already showed for those 14
+companies. The page was right and the cross-tab comparison was wrong. With the
+right set in place, that comparison now fires and appears on Price /
+Performance as supporting evidence.
+
+**It was pairing one company's strength with another company's problem.** The
+product looked for a vendor that ranks well while carrying an open
+high-severity finding, which is a genuine shortlist trap. What it actually did
+was take the strongest vendor in the assessment, SAP, and the first company on
+the risk register, Cerebras, and present them as a single contradiction, then
+advise attaching one's findings to the other's shortlist entry. They are
+unrelated companies in unrelated markets. Both halves must now be about the
+same company. Against today's data nothing matches, so the product says
+nothing, which is the correct outcome and better than the sentence it was
+printing.
+
+**And a five-week-old price reading can no longer create urgency.** The
+benchmark behind the price comparison was captured on 24 July and is 34 days
+old. It is not too old to inform a decision, and it is too old to be the reason
+to act this week: a full release cycle has passed since anyone looked. The
+product now separates those two questions. Evidence past its refresh window
+still counts as evidence and can no longer answer "why now". Nothing was
+retuned to reach this; the shelf life for that benchmark is unchanged.
+
+What you should see: the same recommendations, with a "Why now" that only ever
+gives you reasons to move, an "Against this" that is genuinely different from
+it, and a capability-versus-price reading that compares like with like.
+
+---
+
 ## 26 August 2026
 
 **The analyst voice can no longer contradict what the product computed.**

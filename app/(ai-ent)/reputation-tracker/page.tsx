@@ -8,6 +8,7 @@ import { ThirdPartySignals } from "./components/third-party";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { reputationInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
+import { enrichWithSynthesis, signalsFromMetrics } from "@/lib/analyst/cross";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
 
@@ -39,10 +40,20 @@ export default async function ReputationTrackerPage() {
     3
   );
 
-  const written = await authorInsight(
+  // Cross-signal. Reputation is the slowest tracked measure to move, so
+  // pairing it with a price reading or an open finding is where it changes a
+  // decision rather than merely describing one.
+  const { insight: crossed, synthesis, signals } = enrichWithSynthesis(
     insight,
+    signalsFromMetrics(m)
+  );
+
+  const written = await authorInsight(
+    crossed,
     "reputation",
-    m.vendors.slice(0, 12).map((v) => v.name)
+    m.vendors.slice(0, 12).map((v) => v.name),
+    null,
+    { signals, synthesis }
   );
 
 

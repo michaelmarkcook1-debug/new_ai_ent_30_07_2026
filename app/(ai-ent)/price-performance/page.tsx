@@ -3,7 +3,14 @@ import {
   loadCostCapability,
   loadFrontierFaceOff,
   loadPricingDataset,
+  priceSpread,
 } from "./data";
+import { loadMarketMetrics } from "@/lib/market-metrics";
+import {
+  enrichWithSynthesis,
+  priceSignal,
+  signalsFromMetrics,
+} from "@/lib/analyst/cross";
 import { CostCapabilityChart } from "./components/cost-capability";
 import { PricePerformanceChart } from "../market-view/components/price-performance-chart";
 import { priceModels } from "@/lib/model-fit/price-payload";
@@ -28,21 +35,33 @@ export default async function PricePerformancePage() {
   const costCapability = loadCostCapability();
   const faceOff = loadFrontierFaceOff();
   const ccForInsight = loadCostCapability();
+  // Computed from the same view the chart plots. These were literals.
+  const spread = priceSpread(ccForInsight);
   const insight = pricePerformanceInsight(
-    {
-      models: ccForInsight.models.length,
-      vendors: ccForInsight.providers.length,
-      ratio: 25,
-      adequate: 29,
-    },
+    spread,
     pickNews(news.items, { categories: ["Pricing", "Product launch"] }),
     ccForInsight.capturedAtDisplay ?? null
   );
 
+  // Cross-signal. Price is this page's own reading; capability comes from the
+  // assessment, which is the other half of the one relationship that matters
+  // most to a buyer and which no single page could see. The benchmark capture
+  // is the oldest input in the product, so the freshness gate decides whether
+  // this may drive a why now or only stand as context.
+  const metricsForCross = await loadMarketMetrics();
+  const { insight: crossed, synthesis, signals } = enrichWithSynthesis(insight, [
+    ...signalsFromMetrics(metricsForCross),
+    ...(priceSignal(spread.ratio, spread.adequate, ccForInsight.capturedAt ?? null)
+      ? [priceSignal(spread.ratio, spread.adequate, ccForInsight.capturedAt ?? null)!]
+      : []),
+  ]);
+
   const written = await authorInsight(
-    insight,
+    crossed,
     "price and capability",
-    ccForInsight.models.slice(0, 14).map((x) => x.model)
+    ccForInsight.models.slice(0, 14).map((x) => x.model),
+    null,
+    { signals, synthesis }
   );
 
 

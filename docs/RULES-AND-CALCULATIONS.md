@@ -2084,22 +2084,88 @@ the observations are not there.
 `worstLane()` (`:188`) means a synthesis can never outrank its weakest input.
 `coincident()` (`:179`) returns false for any undated reading.
 
+### The comparison universe
+
+`SignalPopulation` (`lib/analyst/signals.ts:87`), five members, declared on the
+reading rather than inferred from its dimension:
+
+| Value | What it covers |
+|---|---|
+| `frontier-model-providers` | the `frontier_model_api` taxonomy category |
+| `tracked-vendor-set` | every non-investor vendor the assessment tracks |
+| `tracked-public-vendors` | tracked vendors with public filings |
+| `tracked-delivery-channel` | delivery firms carrying tracked relationships |
+| `unspecified` | not declared, and refused by every like-for-like rule |
+
+`samePopulation()` (`:116`) returns false where either side is `unspecified`,
+including when both are. Two readings nobody has scoped are not thereby about
+the same thing, which is the same rule `unknown` freshness follows.
+
+**Why it exists.** The capability half of `capability-price-divergence` was
+taken across every non-investor vendor and the price half across frontier
+language models. Measured on the live feed on 27 August 2026: 43 vendors
+spanning 10 categories, of which 12 are frontier model APIs and the rest are
+silicon, cloud platforms, CRM, ITSM, RAG, sovereign and regulated-industry
+suppliers, most of which sell nothing a token price can be quoted for. The two
+readings answered different questions and the combined sentence described a
+market nobody had measured.
+
+Measured spread, top to median, on `maturity`:
+
+| Population | n | Spread | State |
+|---|---|---|---|
+| every non-investor vendor | 43 | 17.1 | `wide` |
+| `frontier_model_api` cohort | 14 | 10.6 | `narrow` |
+
+The 10.6 is the figure Competitive Intelligence already reports for the same
+14 providers, so the page's reading was right and the cross-signal reading was
+the one measuring the wrong set.
+
+`frontierCohort()` (`lib/analyst/cross.ts:43`) takes membership from
+`m.categoryComposites["frontier_model_api"]`, the ranking engine's own
+taxonomy, **not** the vendor row's `category` string. Google's row reads
+`Cloud AI platform` and it competes in frontier models; the taxonomy carries it
+and the row does not. `loadFrontierFaceOff()` scopes the Price / Performance
+face-off from the same category, so both surfaces rest on one definition.
+
+Capability and reputation are each emitted twice, over both populations:
+`capability-spread` (`cross.ts:89`) and `capability-spread-frontier` (`:118`),
+`reputation-spread` and `reputation-spread-frontier` (`:322`). A cohort with
+fewer than three scored members produces no frontier signal.
+
 ### The eight relationships
 
 `lib/analyst/synthesis.ts`, `RULES` at `:154`. Each names the exact dimensions
 and states it needs and returns null otherwise. No scoring, no weighting, no
 inference over rules.
 
-| id | Relation | Bearing | Needs |
-|---|---|---|---|
-| `capability-price-divergence` | reinforces | supports | capability narrow + price wide |
-| `strength-risk-divergence` | contradicts | against | position leads + risk open/high |
-| `adoption-delivery-divergence` | contradicts | against | adoption high + delivery sole-sourced |
-| `concentration-alternatives` | reinforces | against | concentration tight + clear lead |
-| `commercial-tradeoff` | contradicts | against | price wide + reputation weak |
-| `reinforcing-movement` | reinforces | supports | two trends, same direction, different sources |
-| `contradictory-movement` | contradicts | against | two trends, opposite directions |
-| `simultaneous-change` | coincides with | supports | two trends inside one window |
+| id | Relation | Bearing | Needs | Same pop. | Same vendor |
+|---|---|---|---|---|---|
+| `capability-price-divergence` | reinforces | supports | capability narrow + price wide | yes | no |
+| `strength-risk-divergence` | contradicts | against | position leads + risk open/high | no | yes |
+| `adoption-delivery-divergence` | contradicts | against | adoption high + delivery sole-sourced | no | no |
+| `concentration-alternatives` | reinforces | against | concentration tight + clear lead | no | no |
+| `commercial-tradeoff` | contradicts | against | price wide + reputation weak | yes | no |
+| `reinforcing-movement` | reinforces | supports | two trends, same direction, different sources | no | no |
+| `contradictory-movement` | contradicts | against | two trends, opposite directions | no | no |
+| `simultaneous-change` | coincides with | supports | two trends inside one window | no | no |
+
+**`requiresSamePopulation`** (`synthesis.ts:196`) marks a rule that weighs one
+measurement against another and so needs both over the same universe. Enforced
+twice: `findComparable()` (`:144`) selects the comparable reading in the rule's
+own `match`, and the loop in `synthesise()` (`:514`) refuses to emit any such
+finding whose matched signals disagree, whatever the match returned.
+
+**`requiresSameSubject`** (`:206`) marks a rule whose conclusion is about one
+named company. The check at `:524` is an INTERSECTION of each signal's
+`members`, not a union: a union is satisfied by two readings about two
+different companies, which is the pairing it exists to refuse. Measured before
+the fix, on the live feed: `position-lead` carried SAP, the widest lead in
+workflow automation, and `risk-open` carried Cerebras, first by sort order on
+the register. The finding named both and its implication said "this vendor",
+and the two were unrelated companies in unrelated markets. `risk-open` now
+carries every high-severity vendor in `members` and states the register at
+register level.
 
 Specific rules run before generic ones and a signal consumed by one is not
 reused by another, so the same two readings cannot produce two findings saying
@@ -2141,10 +2207,72 @@ strength/risk divergence returns `Investigate`, with the trigger set to
 An insufficient-evidence page has no packet, so synthesis cannot conjure a
 recommendation onto one.
 
+### What may answer "why now"
+
+Two independent tests, both in `enrichWithSynthesis()` (`cross.ts:517`):
+
+```
+const urgent = found.filter(
+  (s) => s.bearing === "supports" && canCreateUrgency(s.freshness)
+);
+```
+
+**Bearing.** Why now is the case FOR acting, so only a supporting finding may
+appear there. This filtered on currency alone, and the result was that a
+contradiction current enough to matter was copied verbatim into both `whyNow`
+and `evidenceAgainst`: the reader was shown one sentence as the reason to move
+and as the reason not to. Measured on the live feed on 27 August 2026, before
+the fix, on three of the four wired pages:
+
+```
+Why now:      ... Across datasets: On the assessment SAP is clear, and leads
+              its market, and on the risk register Cerebras is carrying 6 open
+              high-severity findings. ...
+Against this: [the same sentence]
+```
+
+**Freshness, on the stricter of two tests.** `speaksToNow()`
+(`freshness.ts:178`) admits `current` and `aging`; `canCreateUrgency()`
+(`:205`) admits `current` only.
+
+| State | May inform the decision | May be why we act now |
+|---|---|---|
+| `current` | yes | yes |
+| `aging` | yes | no |
+| `stale` | no | no |
+| `unknown` | no | no |
+
+The two questions are different and were answered by one test. A reading past
+its source's own refresh window has had a full cadence to move since anybody
+looked; it is still evidence about the decision and it is not news. This is the
+gap the freshness module's own header describes and did not close: it records
+"a benchmark capture 33 days old feeding a why now", the shelf life correctly
+called that reading `aging`, `speaksToNow` let `aging` through, and the capture
+went on feeding a why now. **The shelf life was never the defect. What urgency
+required was.**
+
+### The 34-day benchmark, and why the shelf life is unchanged
+
+`cost-capability` was captured 2026-07-24 and read 2026-08-27: **34 days**.
+
+`SHELF_LIFE["Artificial Analysis benchmark"]` stays at `current: 21,
+stale: 60` (`freshness.ts:50`). Model releases land monthly and each can move
+the frontier score, so 21 days is the refresh window and a reading past it has
+had a release cycle to be superseded; 60 days is where the leaderboard has
+plausibly reordered outright. Both remain defensible for USABILITY.
+
+At 34 days the reading is `aging`. Under the new rule it contributes to
+`capability-price-divergence` as evidence and **cannot answer why now**, which
+is the honest answer to the product question: a five-week-old price observation
+is good enough to inform what you should do and is not the reason to do it this
+week. No threshold was moved to reach this.
+
 ### Signals from data already fetched
 
-`signalsFromMetrics()` (`lib/analyst/cross.ts:41`) reads six of the ten
-dimensions off the `MarketMetrics` a page has already loaded. **No new fetch,
+`signalsFromMetrics()` (`lib/analyst/cross.ts:68`) reads six of the ten
+dimensions off the `MarketMetrics` a page has already loaded, and emits eight
+signals over them: capability and reputation are each emitted once per
+population. **No new fetch,
 no new data source.** `priceSignal`, `disclosureSignal`, `deliverySignal` and
 `adoptionSignal` (`:236` onward) are optional and return null where the page
 does not hold the data.
@@ -2153,9 +2281,10 @@ does not hold the data.
 republishes identical priors there is no movement, and classifying it as
 movement would be a trend made out of a repeated snapshot.
 
-Wired on two pages so far: `vendor-view` (position + risk) and `market-watch`
-(concentration + position). Both were two-line changes and neither added a
-fetch.
+Wired on six pages: `vendor-view`, `market-watch`, `price-performance`
+(the only one passing `priceSignal`), `competitive-intel`, `reputation-tracker`
+and `alliances` (`deliverySignal` + `adoptionSignal`). Each was a two-line
+change and none added a fetch.
 
 ### News recency
 
@@ -2216,13 +2345,24 @@ validators, read at render.
   classifier implements it and today returns it for nothing.
 - **`evidenceAgainst` is still builder-declared**, and synthesis only adds to
   it. Nothing detects a contradiction no rule names.
-- **Two pages wired.** The other ten compute packets without cross-signal
-  enrichment; the function is general and the wiring is a two-line change per
-  page when the data justifies it.
-- **`cost-capability` is 33 days stale**, so the price signal is the oldest
-  input to any synthesis that uses it.
+- **`cost-capability` is 34 days old** as of 27 August 2026, so the price
+  signal is the oldest input to any synthesis that uses it. It is `aging`, and
+  therefore usable as evidence and barred from creating urgency.
+- **`commercial-tradeoff` is dormant against current data.** It needs a
+  reputation reading in a `weak`, `low`, `trailing` or `spread` state, and both
+  the landscape spread (13.7 across 28 vendors) and the frontier spread (11.0
+  across 14) read `tightly banded`, which is below the 25-point line at
+  `cross.ts`. The population guard is in place for when that changes.
+- **`strength-risk-divergence` is dormant against current data**, and correctly
+  so. The widest lead in the assessment is SAP at 0.8 in workflow automation
+  and SAP carries no open high-severity finding. NVIDIA and Groq both lead a
+  category and carry one, but `position-lead` reports only the single widest
+  lead, so the rule has no leader to match. That is conservative rather than
+  wrong: it is silent where there is no contradiction about the vendor it holds.
 
-49 tests in `tests/analyst-cross-signal.test.ts`, covering fixtures A to K.
+113 tests across `tests/analyst-cross-signal.test.ts` (49),
+`tests/analyst-freshness.test.ts` (40) and `tests/analyst-population.test.ts`
+(24).
 
 ## 9. Run costs
 

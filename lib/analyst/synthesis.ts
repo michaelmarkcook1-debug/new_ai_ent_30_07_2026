@@ -27,12 +27,15 @@
 // touches one. The deterministic rules stay exactly where they were.
 
 import type { DecisionEvidence } from "./decision";
+import { speaksToNow, worstFreshness, type Freshness } from "./freshness";
 import {
   coincident,
   hasTrend,
+  samePopulation,
   stateWording,
   temporalClass,
   worstLane,
+  POPULATION_LABEL,
   type Signal,
   type SignalDimension,
   type TemporalClass,
@@ -100,6 +103,21 @@ export interface Synthesis {
   /** The strongest temporal claim the inputs support, never more. */
   temporal: TemporalClass;
   /**
+   * Whether this may be spoken of as a reading of the present.
+   *
+   *   current     every input still speaks to now, so this may drive a why now
+   *   contextual  at least one input is stale or undated. The finding still
+   *               holds as background and may NOT create urgency
+   *
+   * A rule whose conclusion depends on currency is suppressed outright rather
+   * than downgraded, because "these two are moving in opposite directions" is
+   * not a weaker claim when one of the readings is three months old, it is a
+   * different and false one.
+   */
+  currency: "current" | "contextual";
+  /** The least fresh input, which is the one that governs. */
+  freshness: Freshness;
+  /**
    * Whether this argues for the page's recommendation or against it.
    *
    * "against" is how a synthesis reaches the decision packet: it becomes
@@ -114,6 +132,20 @@ export interface Synthesis {
 
 const find = (signals: readonly Signal[], d: SignalDimension) =>
   signals.find((s) => s.dimension === d) ?? null;
+
+/**
+ * A reading on this dimension taken over the same universe as `like`.
+ *
+ * The selector the like-for-like rules use instead of `find`. Where a page
+ * emits both a landscape and a frontier-scoped capability reading, this picks
+ * the one that can actually be compared against the price reading rather than
+ * whichever was pushed first.
+ */
+const findComparable = (
+  signals: readonly Signal[],
+  d: SignalDimension,
+  like: Signal
+) => signals.find((s) => s.dimension === d && samePopulation(s, like)) ?? null;
 
 const has = (s: Signal | null, ...states: string[]) =>
   s !== null && states.some((x) => s.state.toLowerCase().includes(x));
@@ -139,6 +171,39 @@ interface Rule {
   id: string;
   relation: Relation;
   bearing: "supports" | "against";
+  /**
+   * True where the conclusion is a claim about the present.
+   *
+   * Movement rules are the clear case: a stale movement reading is not weaker
+   * evidence of movement, it is evidence of movement that has since stopped
+   * being observed. Structural rules are the other case: a ranking beside an
+   * open finding says the same thing whether the register was read last week
+   * or last quarter, and registers lag by construction anyway.
+   */
+  requiresCurrency: boolean;
+  /**
+   * True where the rule weighs one measurement against another and so needs
+   * both to have been taken over the same universe.
+   *
+   * Enforced in `synthesise` as well as in the rule's own `match`, because
+   * this is the guard the previous audit went through: a capability spread
+   * over 43 vendors spanning silicon, CRM and service management was being
+   * weighed against a price multiple over frontier language models, and the
+   * combined sentence described a market nobody had measured. A rule that
+   * compares like with like must say so, and a reading that has not declared
+   * its population cannot satisfy it.
+   */
+  requiresSamePopulation: boolean;
+  /**
+   * True where the rule's conclusion is about one named company.
+   *
+   * "This vendor leads and carries an open finding" is only a contradiction
+   * when both halves are about the same vendor. Without this the rule paired
+   * the assessment's strongest leader with whichever unrelated company sorted
+   * first on the risk register and told the reader to attach one's findings to
+   * the other's shortlist entry.
+   */
+  requiresSameSubject: boolean;
   /** The signals this needs, or null when they are not present. */
   match(signals: readonly Signal[]): Signal[] | null;
   finding(matched: Signal[]): string;
@@ -158,16 +223,27 @@ const RULES: readonly Rule[] = [
     id: "capability-price-divergence",
     relation: "reinforces",
     bearing: "supports",
+    // "The premium is being paid into a market where the lead has narrowed" is
+    // a claim about the market now. On a stale benchmark it is a claim about
+    // the market in July.
+    requiresCurrency: true,
+    // The price multiple is taken over frontier models. The capability reading
+    // it meets must be taken over the same market, or the sentence compares a
+    // premium paid for a model against the breadth of a supplier landscape
+    // that mostly does not sell models.
+    requiresSamePopulation: true,
+    requiresSameSubject: false,
     match(signals) {
-      const cap = find(signals, "capability");
       const price = find(signals, "price");
-      if (!cap || !price) return null;
+      if (!price) return null;
+      const cap = findComparable(signals, "capability", price);
+      if (!cap) return null;
       if (!has(cap, "narrow", "converged")) return null;
       if (!has(price, "wide", "separated")) return null;
       return [cap, price];
     },
     finding([cap, price]) {
-      return `Capability across the assessed set ${stateWording(cap)}, while the price separation between the top model and a qualifying alternative ${stateWording(price)}. The two readings come from different datasets and point the same way.`;
+      return `Capability across ${POPULATION_LABEL[cap.population]} ${stateWording(cap)}, while the price separation between the top model and a qualifying alternative ${stateWording(price)}. The two readings come from different datasets, taken over the same set of vendors, and point the same way.`;
     },
     implication() {
       return `A premium priced against a capability lead is being paid into a market where that lead has narrowed. That is a commercial argument before it is a technical one, and it is available at renewal rather than at redesign.`;
@@ -181,19 +257,34 @@ const RULES: readonly Rule[] = [
     id: "strength-risk-divergence",
     relation: "contradicts",
     bearing: "against",
+    // Structural. The assessment does not net off governance exposure, and it
+    // did not do so last quarter either.
+    requiresCurrency: false,
+    requiresSamePopulation: false,
+    // Both halves must be about the same company. See below.
+    requiresSameSubject: true,
     match(signals) {
       const pos = find(signals, "position");
       const risk = find(signals, "risk");
       if (!pos || !risk) return null;
       if (!has(pos, "leads", "top", "clear")) return null;
       if (!has(risk, "open", "high")) return null;
+      // The leader has to be one of the vendors actually carrying a finding.
+      // Without this the rule fired on any leader beside any risk-carrying
+      // vendor: it read the assessment's widest lead in workflow automation
+      // beside a silicon vendor's open findings and told the reader to attach
+      // the second's remediation position to the first's shortlist entry.
+      // Two unrelated companies in two unrelated markets is not a
+      // contradiction, and stating it as one is worse than saying nothing.
+      if (!risk.members.includes(pos.subject)) return null;
       return [pos, risk];
     },
     finding([pos, risk]) {
-      return `On the assessment ${pos.subject} ${stateWording(pos)}, and on the risk register ${risk.subject} ${stateWording(risk)}. The assessment measures evidenced capability and does not subtract governance exposure, so the two readings are not reconciled anywhere upstream.`;
+      const n = risk.members.length;
+      return `On the assessment ${pos.subject} ${stateWording(pos)}, and the risk register records ${pos.subject} among the ${n} ${n === 1 ? "vendor" : "vendors"} carrying an open high-severity finding. The assessment measures evidenced capability and does not subtract governance exposure, so the two readings are not reconciled anywhere upstream.`;
     },
-    implication() {
-      return `A shortlist drawn on the ranking alone will carry this vendor without the finding attached to it. The remediation position belongs in the evaluation, not after it.`;
+    implication([pos]) {
+      return `A shortlist drawn on the ranking alone will carry ${pos.subject} without the finding attached to it. The remediation position belongs in the evaluation, not after it.`;
     },
   },
 
@@ -203,6 +294,13 @@ const RULES: readonly Rule[] = [
     id: "adoption-delivery-divergence",
     relation: "contradicts",
     bearing: "against",
+    // Delivery capacity is built out of trained people and moves over years.
+    requiresCurrency: false,
+    // Demand and the capacity to implement it are different measurements of
+    // different things, which is the point of the rule rather than a defect
+    // in it, so no same-population requirement applies.
+    requiresSamePopulation: false,
+    requiresSameSubject: false,
     match(signals) {
       const adopt = find(signals, "adoption");
       const delivery = find(signals, "delivery");
@@ -225,6 +323,12 @@ const RULES: readonly Rule[] = [
     id: "concentration-alternatives",
     relation: "reinforces",
     bearing: "against",
+    requiresCurrency: false,
+    // Both halves are readings of the tracked assessment already, and the rule
+    // compares a category's share against that category's leader rather than
+    // one measurement against another taken elsewhere.
+    requiresSamePopulation: false,
+    requiresSameSubject: false,
     match(signals) {
       const conc = find(signals, "concentration");
       const pos = find(signals, "position");
@@ -248,16 +352,26 @@ const RULES: readonly Rule[] = [
     id: "commercial-tradeoff",
     relation: "contradicts",
     bearing: "against",
+    // Half of it is a price reading, and a stale price is not a trade-off
+    // anyone faces today.
+    requiresCurrency: true,
+    // The finding says "across the same set" in as many words, so the two
+    // readings had better be over the same set. A reputation spread taken
+    // across every tracked supplier says nothing about the vendor whose model
+    // the price separation is pointing at.
+    requiresSamePopulation: true,
+    requiresSameSubject: false,
     match(signals) {
       const price = find(signals, "price");
-      const rep = find(signals, "reputation");
-      if (!price || !rep) return null;
+      if (!price) return null;
+      const rep = findComparable(signals, "reputation", price);
+      if (!rep) return null;
       if (!has(price, "wide", "separated", "cheap")) return null;
       if (!has(rep, "weak", "low", "trailing", "spread")) return null;
       return [price, rep];
     },
     finding([price, rep]) {
-      return `Price separation ${stateWording(price)}, and reputation across the same set ${stateWording(rep)}. Reputation measures support, documentation and post-contract behaviour, none of which appears in a price or a capability score.`;
+      return `Price separation ${stateWording(price)}, and reputation across the same set of ${POPULATION_LABEL[rep.population]} ${stateWording(rep)}. Reputation measures support, documentation and post-contract behaviour, none of which appears in a price or a capability score.`;
     },
     implication() {
       return `The saving available by moving down a tier is real and is not the whole cost. Reputation is the slowest tracked measure to move, so a support problem bought at renewal will still be there at the next one.`;
@@ -271,6 +385,9 @@ const RULES: readonly Rule[] = [
     id: "reinforcing-movement",
     relation: "reinforces",
     bearing: "supports",
+    requiresCurrency: true,
+    requiresSamePopulation: false,
+    requiresSameSubject: false,
     match(signals) {
       const moving = signals.filter(hasTrend);
       for (let i = 0; i < moving.length; i++) {
@@ -299,6 +416,9 @@ const RULES: readonly Rule[] = [
     id: "contradictory-movement",
     relation: "contradicts",
     bearing: "against",
+    requiresCurrency: true,
+    requiresSamePopulation: false,
+    requiresSameSubject: false,
     match(signals) {
       const moving = signals.filter(hasTrend);
       for (let i = 0; i < moving.length; i++) {
@@ -331,6 +451,11 @@ const RULES: readonly Rule[] = [
     id: "simultaneous-change",
     relation: "coincides with",
     bearing: "supports",
+    // The most currency-dependent of the lot: "both moved inside the same
+    // window" means nothing if the window closed a season ago.
+    requiresCurrency: true,
+    requiresSamePopulation: false,
+    requiresSameSubject: false,
     match(signals) {
       const moving = signals.filter(hasTrend);
       for (let i = 0; i < moving.length; i++) {
@@ -361,13 +486,55 @@ const RULES: readonly Rule[] = [
  * than as generic reinforcement. A rule whose inputs are absent contributes
  * nothing: there is no partial firing and no default.
  */
-export function synthesise(signals: readonly Signal[]): Synthesis[] {
+export function synthesise(
+  signals: readonly Signal[],
+  /**
+   * The moment currency is judged against. Passed by callers so the behaviour
+   * is deterministic and testable; defaults to now in a render.
+   */
+  now: number = Date.now()
+): Synthesis[] {
   const out: Synthesis[] = [];
   const claimed = new Set<string>();
 
   for (const rule of RULES) {
     const matched = rule.match(signals);
     if (!matched || matched.length === 0) continue;
+
+    // Comparability, enforced here as well as in the rule's own match.
+    //
+    // The rules select their own inputs and could each get this right, and one
+    // of them getting it wrong is how the product shipped a sentence weighing
+    // a capability spread over 43 vendors against a price multiple over
+    // frontier models. So the invariant lives in one place that every rule
+    // passes through, and a rule that declares it compares like with like
+    // cannot emit a finding over two populations regardless of what its match
+    // returned. An undeclared population fails this, which is the point:
+    // a reading nobody has scoped is not thereby scoped to whatever it met.
+    if (rule.requiresSamePopulation) {
+      const [first] = matched;
+      if (!matched.every((s) => samePopulation(s, first))) continue;
+    }
+
+    // The same check at vendor level, for a rule whose conclusion is about one
+    // named company: at least one company must be named by EVERY matched
+    // reading. An intersection rather than a union, because a union is
+    // satisfied by two readings about two different companies, which is
+    // exactly the pairing this exists to refuse.
+    if (rule.requiresSameSubject) {
+      const named = matched.map(
+        (s) => new Set(s.members.length > 0 ? s.members : [s.subject])
+      );
+      const shared = [...named[0]].some((name) => named.every((n) => n.has(name)));
+      if (!shared) continue;
+    }
+
+    // Freshness eligibility. A rule whose conclusion is a claim about the
+    // present does not fire at all on evidence that cannot speak to the
+    // present, and an undated reading counts as unable rather than as fresh.
+    const freshness = worstFreshness(matched, now);
+    const current = speaksToNow(freshness);
+    if (rule.requiresCurrency && !current) continue;
 
     // A signal already used by a more specific rule does not get reused by a
     // generic one, so the same two readings cannot produce two findings that
@@ -386,6 +553,8 @@ export function synthesise(signals: readonly Signal[]): Synthesis[] {
       signals: matched,
       temporal: jointTemporal(matched),
       bearing: rule.bearing,
+      currency: current ? "current" : "contextual",
+      freshness,
     });
   }
   return out;

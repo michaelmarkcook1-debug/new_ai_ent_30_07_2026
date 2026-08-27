@@ -66,10 +66,77 @@ export type SignalDirection = "up" | "down" | "flat" | "unknown";
  */
 export type TemporalClass = "state" | "change" | "acceleration";
 
+/**
+ * The comparison universe a reading was taken over.
+ *
+ * WHY THIS EXISTS. Two readings can share a dimension, a scale and a date and
+ * still be about different things. A capability spread taken across every
+ * tracked supplier and a price multiple taken across frontier language models
+ * are both "how far apart is the field", and combining them produces a
+ * sentence about a market that nobody measured. The previous audit found
+ * exactly that: a capability reading over 43 vendors spanning silicon, CRM and
+ * service management was being compared against a price reading over frontier
+ * model APIs, and the two answered different questions.
+ *
+ * So the universe is declared on the reading rather than inferred from the
+ * dimension, and rules that compare like with like check it. `unspecified` is
+ * the default and is REFUSED by those rules rather than waved through, on the
+ * same principle as `unknown` freshness: a population nobody has declared is
+ * not a population that happens to match.
+ */
+export type SignalPopulation =
+  /** The frontier_model_api taxonomy category: models a buyer can buy tokens from. */
+  | "frontier-model-providers"
+  /** Every non-investor vendor the assessment tracks, across all categories. */
+  | "tracked-vendor-set"
+  /** Tracked vendors with public filings. */
+  | "tracked-public-vendors"
+  /** The delivery firms carrying tracked vendor relationships. */
+  | "tracked-delivery-channel"
+  /** Not declared. Cannot participate in a like-for-like comparison. */
+  | "unspecified";
+
+/** How a population should be named to a reader. */
+export const POPULATION_LABEL: Readonly<Record<SignalPopulation, string>> = {
+  "frontier-model-providers": "frontier model providers",
+  "tracked-vendor-set": "the tracked vendor set",
+  "tracked-public-vendors": "tracked public vendors",
+  "tracked-delivery-channel": "the tracked delivery channel",
+  unspecified: "an undeclared set",
+};
+
+/**
+ * Whether two readings were taken over the same universe, and so may be
+ * compared like with like.
+ *
+ * An undeclared population is never comparable, including to another
+ * undeclared one. Two rules nobody has thought about are not thereby about the
+ * same thing.
+ */
+export function samePopulation(a: Signal, b: Signal): boolean {
+  if (a.population === "unspecified" || b.population === "unspecified") return false;
+  return a.population === b.population;
+}
+
 export interface Signal {
   id: string;
   /** What this is about: the tracked set, a named vendor, a market category. */
   subject: string;
+  /**
+   * The universe the reading was taken over. Declared, never inferred.
+   *
+   * Defaults to "unspecified" so that a builder which has not thought about
+   * its population produces a reading that refuses to be compared, rather than
+   * one that compares wrongly.
+   */
+  population: SignalPopulation;
+  /**
+   * The named entities the reading covers, where it covers a nameable few.
+   *
+   * Only set where a rule needs to check that two readings are about the same
+   * company. An aggregate over a whole population leaves it empty.
+   */
+  members: readonly string[];
   dimension: SignalDimension;
   /**
    * The dataset's own reading, in its own words. "narrow", "tight",
@@ -146,6 +213,8 @@ export function signal(input: {
   evidence: DecisionEvidence;
   lane: DataLane;
   observations?: number;
+  population?: SignalPopulation;
+  members?: readonly string[];
 }): Signal {
   const observations = input.observations ?? 1;
   // A direction on one observation is discarded here rather than trusted and
@@ -155,6 +224,11 @@ export function signal(input: {
   return {
     id: input.id,
     subject: input.subject,
+    // Undeclared rather than guessed. A rule comparing like with like refuses
+    // this value, so the cost of not declaring is a dormant rule rather than a
+    // wrong sentence.
+    population: input.population ?? "unspecified",
+    members: input.members ?? [],
     dimension: input.dimension,
     state: input.state,
     direction,

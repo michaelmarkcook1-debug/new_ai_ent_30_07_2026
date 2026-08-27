@@ -49,7 +49,8 @@ const ev = (source: string, extra: Partial<DecisionEvidence> = {}): DecisionEvid
 /** E. Capability converged, price still separated. Two datasets, one story. */
 const CAPABILITY_NARROW = signal({
   id: "cap",
-  subject: "the assessed set",
+  subject: "the frontier model cohort",
+  population: "frontier-model-providers",
   dimension: "capability",
   state: "narrow",
   magnitude: 9.2,
@@ -60,6 +61,7 @@ const CAPABILITY_NARROW = signal({
 const PRICE_WIDE = signal({
   id: "price",
   subject: "the priced catalogue",
+  population: "frontier-model-providers",
   dimension: "price",
   state: "wide, and separated from capability",
   magnitude: 12,
@@ -72,6 +74,8 @@ const PRICE_WIDE = signal({
 const POSITION_LEADS = signal({
   id: "pos",
   subject: "Anthropic",
+  population: "tracked-vendor-set",
+  members: ["Anthropic"],
   dimension: "position",
   state: "clear, and leads its market",
   observedAt: "2026-08-17",
@@ -80,7 +84,9 @@ const POSITION_LEADS = signal({
 });
 const RISK_OPEN = signal({
   id: "risk",
-  subject: "Anthropic",
+  subject: "the tracked set",
+  population: "tracked-vendor-set",
+  members: ["Anthropic"],
   dimension: "risk",
   state: "carrying 2 open high-severity findings",
   observedAt: "2026-08-17",

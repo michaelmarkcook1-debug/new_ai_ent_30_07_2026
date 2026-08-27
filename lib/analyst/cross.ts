@@ -25,43 +25,106 @@ import type { MarketMetrics } from "@/lib/market-metrics";
 import { decide, type Decision } from "./decision";
 import { signal, type Signal } from "./signals";
 import { synthesise, synthesisEvidence, type Synthesis } from "./synthesis";
+import { canCreateUrgency } from "./freshness";
 import type { AnalystInsightData } from "./insight";
 
 const round1 = (n: number) => Math.round(n * 10) / 10;
 
 /**
- * The six dimensions MarketMetrics carries on its own.
+ * The frontier model cohort, taken from the ranking engine's own taxonomy.
+ *
+ * NOT an editorial pick here, and deliberately not the vendor row's `category`
+ * string. Google's row categorises it as a cloud AI platform and it plainly
+ * competes in frontier models; the taxonomy says so and the vendor row does
+ * not. `loadFrontierFaceOff()` scopes the Price/Performance face-off from the
+ * same category, so the two surfaces are drawn from one definition rather than
+ * two that agree by luck.
+ */
+export function frontierCohort(m: MarketMetrics): Set<string> {
+  return new Set(Object.keys(m.categoryComposites["frontier_model_api"] ?? {}));
+}
+
+/** Top-to-median spread over a set of scores, or null when too few to judge. */
+function spreadOf(scores: readonly number[]): { spread: number; n: number } | null {
+  const s = [...scores].sort((a, b) => b - a);
+  if (s.length < 3) return null;
+  return { spread: round1(s[0] - s[Math.floor(s.length / 2)]), n: s.length };
+}
+
+/**
+ * The dimensions MarketMetrics carries on its own.
  *
  * Observation counts are the whole safety story here. `gaining` and `slipping`
  * are classifications against a previous reading, so they carry two
  * observations and may state a direction. Everything else in this object is a
  * single capture with no prior held, so it is a state and `signal()` strips
  * any direction a caller passes.
+ *
+ * Capability and reputation are each emitted TWICE, over two declared
+ * populations: once across the whole tracked landscape and once across the
+ * frontier model cohort. They are different readings of different markets and
+ * the price multiple can only be weighed against the second.
  */
 export function signalsFromMetrics(m: MarketMetrics): Signal[] {
   const out: Signal[] = [];
   const vendors = m.vendors.filter((v) => v.category !== "AI investor");
   const asOf = m.generatedAt;
+  const cohort = frontierCohort(m);
+  const maturityOf = (vs: typeof vendors) =>
+    vs.map((v) => v.maturity).filter((n): n is number => typeof n === "number");
 
-  // Capability, as the spread across the assessed set. Narrow means the choice
-  // has moved off the model, which is what the capability/price rule needs.
-  const scored = vendors
-    .map((v) => v.maturity)
-    .filter((n): n is number => typeof n === "number")
-    .sort((a, b) => b - a);
-  if (scored.length >= 3) {
-    const spread = round1(scored[0] - scored[Math.floor(scored.length / 2)]);
+  // Capability across the whole tracked landscape. A real reading, and the one
+  // Competitive Intelligence wants when it asks how varied the field is.
+  //
+  // WHAT IT IS NOT is the capability half of the capability/price comparison.
+  // This set spans silicon, CRM, service management and sovereign providers,
+  // most of which sell nothing a token price could be quoted for, so its
+  // spread is a statement about the breadth of the supplier landscape rather
+  // than about whether model capability has converged. Declaring the
+  // population is what stops it being used as the latter.
+  const landscape = spreadOf(maturityOf(vendors));
+  if (landscape) {
     out.push(
       signal({
         id: "capability-spread",
         subject: "the assessed set",
+        population: "tracked-vendor-set",
         dimension: "capability",
-        state: spread < 15 ? "narrow" : "wide",
-        magnitude: spread,
+        state: landscape.spread < 15 ? "narrow" : "wide",
+        magnitude: landscape.spread,
         observedAt: asOf,
         lane: m.lane,
         evidence: {
-          claim: `Capability maturity across ${scored.length} assessed vendors spreads ${spread} points between the strongest and the median.`,
+          claim: `Capability maturity across ${landscape.n} assessed vendors spreads ${landscape.spread} points between the strongest and the median.`,
+          source: "AIE capability matrix",
+          basis: "measured",
+          lane: m.lane,
+          asOf,
+        },
+      })
+    );
+  }
+
+  // Capability across the frontier cohort alone. THIS is the reading the price
+  // multiple has something to say about, because it is taken over the same
+  // market: the vendors whose models are on the benchmark and carry a list
+  // price. Narrow here means the choice has moved off the model, which is what
+  // the capability/price rule needs and what the landscape spread cannot tell
+  // it.
+  const frontier = spreadOf(maturityOf(vendors.filter((v) => cohort.has(v.id))));
+  if (frontier) {
+    out.push(
+      signal({
+        id: "capability-spread-frontier",
+        subject: "the frontier model cohort",
+        population: "frontier-model-providers",
+        dimension: "capability",
+        state: frontier.spread < 15 ? "narrow" : "wide",
+        magnitude: frontier.spread,
+        observedAt: asOf,
+        lane: m.lane,
+        evidence: {
+          claim: `Capability maturity across ${frontier.n} frontier model providers spreads ${frontier.spread} points between the strongest and the median.`,
           source: "AIE capability matrix",
           basis: "measured",
           lane: m.lane,
@@ -91,6 +154,8 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
       signal({
         id: "position-lead",
         subject: best.vendor,
+        population: "tracked-vendor-set",
+        members: [best.vendor],
         dimension: "position",
         // "clear" is what the concentration rule looks for; "leads" is what the
         // strength/risk rule looks for. Both are true of a defensible lead.
@@ -127,6 +192,7 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
       signal({
         id: "concentration",
         subject: "a typical tracked category",
+        population: "tracked-vendor-set",
         dimension: "concentration",
         state: median >= 70 ? "tight" : "spread",
         magnitude: median,
@@ -150,14 +216,25 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
   const high = m.risks.filter((r) => (r.severity ?? "").toLowerCase() === "high");
   if (m.risks.length > 0) {
     const affected = new Set(m.risks.map((r) => r.vendorId)).size;
+    const highVendors = [...new Set(high.map((r) => r.vendorName))];
     out.push(
       signal({
         id: "risk-open",
-        subject: high.length > 0 ? high[0].vendorName : "the tracked set",
+        // A register-level reading, and named as one. This carried the first
+        // high-severity vendor's name beside a count of every vendor's
+        // findings, which read as though that one company held all six.
+        subject: "the tracked set",
+        population: "tracked-vendor-set",
+        // Every vendor carrying an open high-severity finding, not just the
+        // first. The strength/risk rule has to establish that the vendor it is
+        // about is the same on both sides, and naming one of six made that
+        // impossible: it paired the assessment's strongest leader with
+        // whichever unrelated company happened to sort first on the register.
+        members: highVendors,
         dimension: "risk",
         state:
           high.length > 0
-            ? `carrying ${high.length} open high-severity ${high.length === 1 ? "finding" : "findings"}`
+            ? `carrying ${high.length} open high-severity ${high.length === 1 ? "finding" : "findings"} across ${highVendors.length} ${highVendors.length === 1 ? "vendor" : "vendors"}`
             : "carrying no open high-severity finding",
         observedAt: asOf,
         lane: m.lane,
@@ -183,6 +260,7 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
       signal({
         id: "movement",
         subject: "the tracked set",
+        population: "tracked-vendor-set",
         dimension: "movement",
         state:
           net > 0 ? "gaining on balance" : net < 0 ? "slipping on balance" : "mixed",
@@ -202,17 +280,24 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
     );
   }
 
-  // Reputation, as the spread across the pillars.
-  const reps = vendors
-    .map((v) => v.reputation)
-    .filter((n): n is number => typeof n === "number")
-    .sort((a, b) => b - a);
+  // Reputation, as the spread across the pillars. Emitted twice for the same
+  // reason capability is: the commercial trade-off rule weighs a price
+  // separation against reputation and says outright that both are read "across
+  // the same set", which is only true of the frontier-scoped reading.
+  const repOf = (vs: typeof vendors) =>
+    vs
+      .map((v) => v.reputation)
+      .filter((n): n is number => typeof n === "number")
+      .sort((a, b) => b - a);
+
+  const reps = repOf(vendors);
   if (reps.length >= 5) {
     const spread = round1(reps[0] - reps[reps.length - 1]);
     out.push(
       signal({
         id: "reputation-spread",
         subject: "the tracked set",
+        population: "tracked-vendor-set",
         dimension: "reputation",
         state: spread > 25 ? "widely spread, with a weak tail" : "tightly banded",
         magnitude: spread,
@@ -229,10 +314,42 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
     );
   }
 
+  const fReps = repOf(vendors.filter((v) => cohort.has(v.id)));
+  if (fReps.length >= 5) {
+    const spread = round1(fReps[0] - fReps[fReps.length - 1]);
+    out.push(
+      signal({
+        id: "reputation-spread-frontier",
+        subject: "the frontier model cohort",
+        population: "frontier-model-providers",
+        dimension: "reputation",
+        state: spread > 25 ? "widely spread, with a weak tail" : "tightly banded",
+        magnitude: spread,
+        observedAt: m.reputationAsOf ?? asOf,
+        lane: m.lane,
+        evidence: {
+          claim: `Reputation across ${fReps.length} frontier model providers spreads ${spread} points between the highest and lowest reading.`,
+          source: "AIE reputation pillars",
+          basis: "measured",
+          lane: m.lane,
+          asOf: m.reputationAsOf ?? asOf,
+        },
+      })
+    );
+  }
+
   return out;
 }
 
-/** Price separation, where a page holds the benchmark and pricing catalogue. */
+/**
+ * Price separation, where a page holds the benchmark and pricing catalogue.
+ *
+ * Declared as a frontier-model-provider reading because that is what it
+ * measures: the multiple runs between the top-scoring model and the cheapest
+ * model still within 80 per cent of it, and both endpoints sit inside the
+ * frontier cohort. It is the price half of the capability/price comparison and
+ * may only meet a capability reading taken over the same market.
+ */
 export function priceSignal(
   ratio: number | null,
   adequate: number,
@@ -242,6 +359,7 @@ export function priceSignal(
   return signal({
     id: "price-separation",
     subject: "the priced and benchmarked catalogue",
+    population: "frontier-model-providers",
     dimension: "price",
     state: ratio >= 5 ? "wide, and separated from capability" : "narrow",
     magnitude: ratio,
@@ -268,6 +386,7 @@ export function disclosureSignal(
   return signal({
     id: "disclosure",
     subject: "tracked public vendors",
+    population: "tracked-public-vendors",
     dimension: "disclosure",
     state: undisclosed > disclosing ? "mostly undisclosed" : "mostly disclosed",
     magnitude: Math.round((disclosing / total) * 100),
@@ -294,6 +413,7 @@ export function deliverySignal(
   return signal({
     id: "delivery-breadth",
     subject: "the tracked delivery channel",
+    population: "tracked-delivery-channel",
     dimension: "delivery",
     state:
       soleSourced > 0
@@ -327,6 +447,8 @@ export function adoptionSignal(
   return signal({
     id: "adoption",
     subject: leader,
+    population: "tracked-vendor-set",
+    members: [leader],
     dimension: "adoption",
     state: share >= 0.2 ? "high, and concentrated" : "spread across the field",
     magnitude: round1(share * 100),
@@ -363,9 +485,11 @@ export interface Enriched {
  */
 export function enrichWithSynthesis(
   insight: AnalystInsightData,
-  signals: readonly Signal[]
+  signals: readonly Signal[],
+  /** The moment freshness is judged against. Passed by tests. */
+  now: number = Date.now()
 ): Enriched {
-  const found = synthesise(signals);
+  const found = synthesise(signals, now);
   if (!insight.decision || found.length === 0) {
     return { insight, synthesis: found, signals: [...signals] };
   }
@@ -373,6 +497,26 @@ export function enrichWithSynthesis(
   const d: Decision = insight.decision;
   const supports = found.filter((s) => s.bearing === "supports");
   const against = found.filter((s) => s.bearing === "against");
+  // What may answer "why now", on two independent tests.
+  //
+  // BEARING. Why now is the case for acting, so only a finding that argues FOR
+  // the recommendation may appear there. This filtered on currency alone, and
+  // the result was that a contradiction current enough to matter was copied
+  // verbatim into both halves: the reader was shown the same sentence as the
+  // reason to move and as the reason not to. A finding that argues against
+  // acting is a reason for caution, it reaches the packet through
+  // evidenceAgainst, and it contests the strength there. It is never also a
+  // reason to hurry.
+  //
+  // FRESHNESS, on the stricter of the two tests. `currency` asks whether the
+  // finding may be spoken of at all, and admits an aging reading; urgency asks
+  // whether it may be the reason to move this week, and does not. A finding
+  // resting on a benchmark last refreshed over a full release cycle ago is
+  // real evidence about the decision and is not news, and the product has
+  // already shipped the mistake of treating the two as one question.
+  const urgent = found.filter(
+    (s) => s.bearing === "supports" && canCreateUrgency(s.freshness)
+  );
 
   const rebuilt = decide({
     // The action the page computed. Handed straight back to decide(), which
@@ -380,21 +524,24 @@ export function enrichWithSynthesis(
     // never names an action.
     action: d.action,
     instruction: d.instruction,
-    // Why now gains the cross-signal reason where one exists, because "two
-    // datasets now disagree" is a better answer to why now than a threshold
-    // that has been crossed for a month.
+    // Why now gains the cross-signal reason where a supporting one exists,
+    // because "two datasets independently point the same way, now" is a better
+    // answer to why now than a threshold that has been crossed for a month.
     whyNow:
-      found.length > 0
-        ? `${d.whyNow} Across datasets: ${found[0].finding}`
+      urgent.length > 0
+        ? `${d.whyNow} Across datasets: ${urgent[0].finding}`
         : d.whyNow,
     evidenceFor: [...d.evidenceFor, ...supports.map(synthesisEvidence)],
     evidenceAgainst: [...d.evidenceAgainst, ...against.map(synthesisEvidence)],
     // A contradiction between two datasets is exactly the kind of thing a
     // reader should be told to watch, and it is observable: it resolves when
     // one of the two readings moves.
+    // A trigger says what to watch for, so it may only be built from a
+    // disagreement that is live. A contextual contradiction is worth knowing
+    // and is not something to watch resolve.
     trigger:
-      against.length > 0
-        ? `Either half of this disagreement moving: ${against[0].signals.map((s) => s.evidence.source).join(" or ")}.`
+      against.some((s) => s.currency === "current")
+        ? `Either half of this disagreement moving: ${against.find((s) => s.currency === "current")!.signals.map((x) => x.evidence.source).join(" or ")}.`
         : d.trigger,
     doNotDo: d.doNotDo,
   });
