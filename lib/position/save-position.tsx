@@ -216,7 +216,22 @@ export function SavedPositions() {
       <ul className="mt-2 divide-y divide-base-300">
         {positions.map((p) => (
           <li key={p.key} className="flex flex-wrap items-baseline gap-x-3 gap-y-1 py-2">
-            <span className="text-sm font-semibold">{p.name}</span>
+            {/* The way back, which this list did not have.
+                A reader who researched a company, took it to the Decision Desk
+                and then returned here landed on the empty entry box: the page
+                renders whatever `?company=` names, the sidebar link carries no
+                query, and this list was plain text. Their analysis had not been
+                lost, it was still in the tab's session cache, but the only way
+                to see it again was to type the name a second time and pay for
+                the research again if the cache had gone.
+                Linking on the reader's own query rather than the resolved name
+                because that is what the page researches on. */}
+            <Link
+              href={`/company-view?company=${encodeURIComponent(p.query)}`}
+              className="text-sm font-semibold underline decoration-base-300 underline-offset-2 hover:decoration-current"
+            >
+              {p.name}
+            </Link>
             {p.industry ? (
               <span className="text-xs text-muted">{p.industry}</span>
             ) : null}

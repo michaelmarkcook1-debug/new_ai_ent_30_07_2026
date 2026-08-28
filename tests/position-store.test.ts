@@ -344,3 +344,66 @@ describe("every component that reads the position store subscribes to it", () =>
     expect(src.match(/addEventListener\(POSITIONS_CHANGED/g) ?? []).toHaveLength(2);
   });
 });
+
+// Carrying a company forward has to actually carry it.
+//
+// THE BUG THIS PINS. "Take this to the Decision Desk" was a bare link to
+// /decision-desk. The desk opens on `latestPosition()`, the most recently
+// SAVED company, so a reader who researched Boots and pressed a button saying
+// "take this" arrived at a box prefilled with whichever company they had saved
+// weeks earlier. Measured on the running product: saved was ["Fortnum &
+// Mason"], the desk opened on Fortnum, and nothing on screen said the handoff
+// had not happened.
+//
+// The desk's own prefill was never broken. Seeding a saved Boots position made
+// it open on Boots correctly. What was missing was the save.
+describe("the Decision Desk handoff", () => {
+  it("opens on the company most recently carried, not the one saved first", () => {
+    // The ordering the whole handoff rests on: the newest save wins, so
+    // carrying a second company forward replaces the first as what the desk
+    // offers rather than queueing behind it.
+    savePosition(position("Fortnum & Mason", "2026-08-08T10:00:00.000Z"));
+    savePosition(position("Boots", "2026-08-28T22:00:00.000Z"));
+    expect(latestPosition()?.name).toBe("Boots");
+  });
+
+  it("saves before it navigates, rather than linking and hoping", async () => {
+    const { readdirSync, readFileSync } = await import("node:fs");
+    // Scanned across the directory rather than pinned to one file: the control
+    // moved into its own client module the first time this was enforced, and a
+    // test that breaks when correct code is relocated teaches people to delete
+    // the test.
+    const dir = "app/(ai-ent)/company-view/components";
+    const sources = readdirSync(dir)
+      .filter((f) => f.endsWith(".tsx"))
+      .map((f) => ({ f, src: readFileSync(`${dir}/${f}`, "utf8") }));
+
+    const handoff = sources.filter((x) =>
+      /Take this to the Decision Desk/.test(x.src)
+    );
+    expect(handoff.length, "the Decision Desk handoff has gone").toBeGreaterThan(0);
+
+    for (const { f, src } of handoff) {
+      expect(
+        /savePosition\(/.test(src),
+        `${f} offers to take the company to the Decision Desk without saving it, so the desk will open on whatever was saved previously`
+      ).toBe(true);
+      expect(
+        /<Link\s+href="\/decision-desk"/.test(src),
+        `${f} carries the company with a bare link again, which carries nothing`
+      ).toBe(false);
+    }
+  });
+
+  it("gives every saved company a way back to its research", async () => {
+    const { readFileSync } = await import("node:fs");
+    const src = readFileSync("lib/position/save-position.tsx", "utf8");
+    // The page renders whatever ?company= names and the sidebar link carries
+    // no query, so a plain-text list left the reader retyping the name to see
+    // an analysis they had already paid for.
+    expect(
+      /company-view\?company=\$\{encodeURIComponent\(p\.query\)\}/.test(src),
+      "the saved list no longer links back to each company's research"
+    ).toBe(true);
+  });
+});

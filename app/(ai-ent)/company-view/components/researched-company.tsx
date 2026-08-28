@@ -1,7 +1,7 @@
+import { CarryToDesk } from "./carry-to-desk";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
-import Link from "next/link";
 import { toPosition } from "@/lib/position/store";
 import { opportunitiesFor, weightingFrom } from "@/lib/position/opportunities";
 import type { CompanyResearch } from "@/lib/research/company";
@@ -390,6 +390,7 @@ function hostOf(url: string): string {
  * to is evidence; an area its sector runs is a place to look. Merging them
  * would turn a curated library into a claim about this company.
  */
+
 function OpportunityAreas({ research }: { research: CompanyResearch }) {
   const position = toPosition(research);
   const opp = position ? opportunitiesFor(position) : null;
@@ -486,12 +487,7 @@ function OpportunityAreas({ research }: { research: CompanyResearch }) {
           ))}
         </div>
         <p className="mt-1.5 measure text-xs text-muted">{weights.why}</p>
-        <Link
-          href="/decision-desk"
-          className="mt-2 inline-block rounded-full border border-primary px-3 py-1 text-xs font-semibold text-primary transition hover:bg-primary hover:text-white"
-        >
-          Take this to the Decision Desk
-        </Link>
+        <CarryToDesk position={position} />
       </div>
     </section>
   );
