@@ -15,6 +15,59 @@ than a gap.
 
 ---
 
+## 28 August 2026
+
+**The written analysis can no longer claim more than the figures underneath it.**
+
+Yesterday's work fixed what the product computes. This fixes what it then says
+out loud. Both defects were found by reading what actually shipped rather than
+what was meant to ship, and neither was visible to any check that existed:
+no figure had moved, no vendor was named that should not have been, and no
+finding had been reversed.
+
+**A single reading was being published as a trend.** The Integrators page said
+adoption demand "keeps climbing". We hold exactly one adoption reading. There is
+no earlier one to compare it to, so nothing in this product knows whether it is
+climbing, falling or flat. The computed text is careful about this and says
+"is high"; the model was handed the finished paragraph and added the verb. The
+written version is now held to the same rule the computed version already
+followed: one reading is a state, two can be a change, and continuation or
+acceleration needs evidence we mostly do not have. Where it reaches for a word
+the data cannot support, the answer is rejected and rewritten, and if it does it
+twice the computed sentence renders instead.
+
+**A five-week-old reading was being restored as the reason to act now.**
+Yesterday the product stopped building "Why now" on the 34-day benchmark. The
+model then put it back, because it could see the finding in the evidence and had
+no way of knowing it had been set aside. Evidence now arrives labelled with what
+it may be used for: what to act on now, what merely supports, what argues
+against, and what is background. A finding the product has ruled too old, or
+that argues against the recommendation, cannot become the reason to move, and
+the check is mechanical rather than an instruction in the prompt.
+
+It is worth being clear about what this does not do. That aging finding is still
+real, still shown, and still counts as evidence and as something to investigate.
+The only thing it may not be is the reason this is urgent.
+
+**Measured on the live product.** The Integrators page tried twice to build its
+"Why now" out of the undated adoption reading and was refused both times, and
+the page fell back to the computed sentence. On the following run the model
+worked inside the labelled evidence and wrote a version that passed. That is the
+system behaving as intended: the guard is the floor, not the plan.
+
+What you should see: the same recommendations and the same figures, with written
+analysis that no longer sounds more certain, more current or more directional
+than the evidence behind it.
+
+**Still outstanding.** The Reputation Tracker page still throws an error in the
+browser for a separate reason, tracked in its own piece of work: one review
+platform reports its review count as unknown and the page tries to format it as
+a number. The live feed distinguishes an unknown count from a genuine zero
+(TrustRadius reports unknown, Capterra reports a real zero), so the fix has to
+preserve that difference rather than flatten both to nothing.
+
+---
+
 ## 27 August 2026
 
 **"Why now" no longer argues both ways at once, and no longer compares two

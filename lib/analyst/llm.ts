@@ -2,8 +2,11 @@ import Anthropic from "@anthropic-ai/sdk";
 import { unstable_cache } from "next/cache";
 import {
   reversedClaims,
+  temporalViolations,
   unsupportedCounts,
+  urgencyViolations,
   type DirectionClaim,
+  type TemporalLicence,
 } from "./canonical";
 import { claimsCausality } from "./synthesis";
 
@@ -334,6 +337,29 @@ export interface CanonicalGuards {
    * sentence has simply claimed something the product cannot know.
    */
   forbidCausal?: boolean;
+  /**
+   * The strongest temporal claim the evidence supports.
+   *
+   * Omitted means unchecked, which is what every caller did before this
+   * existed and is why a single-observation adoption reading could be
+   * published as "keeps climbing". Set it wherever the intelligence layer
+   * knows, which is everywhere the signals or the canonical prose are to hand.
+   */
+  temporal?: TemporalLicence;
+  /**
+   * What the answer's "why now" may rest on.
+   *
+   * The deterministic layer already decides this and then had no way to hold
+   * the model to it. `field` names the key in the returned JSON that carries
+   * the reason to act now; `restricted` is the vocabulary of the findings
+   * barred from grounding one; `allowed` is false when nothing in the packet
+   * is current enough to establish that anything must happen now.
+   */
+  urgency?: {
+    field: string;
+    restricted: readonly string[];
+    allowed: boolean;
+  };
 }
 
 export async function authored<T extends object>(
@@ -429,6 +455,14 @@ export async function authoredResult<T extends object>(
     claims: guards.claims ?? [],
     entities: guards.entities ?? [],
     forbidCausal: guards.forbidCausal ?? false,
+    // Both new contracts are part of the key for the same reason the others
+    // are: two callers with the same facts and different licences are asking
+    // different questions, and sharing an entry would serve one caller's
+    // answer under the other's contract without re-checking it. A packet whose
+    // benchmark has since gone stale must not be served the answer authored
+    // while it was current.
+    temporal: guards.temporal ?? null,
+    urgency: guards.urgency ?? null,
   });
   const cacheKey = keyOf(kind, { facts: stable, instruction, guardKey });
   const hit = cache.get(cacheKey);
@@ -491,6 +525,8 @@ const cachedGenerate = unstable_cache(
         claims: DirectionClaim[];
         entities: string[];
         forbidCausal: boolean;
+        temporal: TemporalLicence | null;
+        urgency: { field: string; restricted: string[]; allowed: boolean } | null;
       }
     ),
   ["analyst-insight"],
@@ -509,6 +545,8 @@ async function generate<T extends object>(
     claims: DirectionClaim[];
     entities: string[];
     forbidCausal: boolean;
+    temporal: TemporalLicence | null;
+    urgency: { field: string; restricted: string[]; allowed: boolean } | null;
   }
 ): Promise<T> {
 
@@ -535,7 +573,7 @@ ${instruction}`;
   for (let attempt = 0; attempt < 2; attempt++) {
     const correction =
       lastInvented.length > 0
-        ? `\n\nCORRECTION: your previous answer used ${lastInvented.join(", ")}, which ${lastInvented.length === 1 ? "is" : "are"} not in the data. Rewrite it without ${lastInvented.length === 1 ? "that" : "those"}.`
+        ? `\n\nCORRECTION: your previous answer was rejected for ${lastInvented.join("; ")}. Rewrite it without ${lastInvented.length === 1 ? "that" : "those"}. Where a claim cannot be made within these limits, make the weaker claim the evidence supports rather than restating the stronger one.`
         : attempt === 0
           ? ""
           : "\n\nCORRECTION: your previous answer was not valid JSON, most likely because it ran long. Answer again, shorter, as a single JSON object.";
@@ -559,8 +597,10 @@ ${instruction}`;
     // is tested against the figures it was given.
     const emitted = JSON.stringify(parsed);
     const bad = [
-      ...invented(emitted, facts),
-      ...foreignEntities(emitted, facts, roster, guards.entities),
+      ...invented(emitted, facts).map((n) => `the figure ${n}, which is not in the data`),
+      ...foreignEntities(emitted, facts, roster, guards.entities).map(
+        (e) => `${e}, a vendor this page's data does not cover`
+      ),
       // Numeric correctness is not enough. A reading may quote every figure
       // exactly and still tell the reader the opposite of what the figures
       // say, and nothing above this line can see it.
@@ -573,6 +613,31 @@ ${instruction}`;
       ...(guards.forbidCausal
         ? claimsCausality(emitted).map((w) => `a causal claim ("${w}")`)
         : []),
+      // A state written as a trend. The deterministic layer refuses to say
+      // "narrowing" off one observation and the model was under no such
+      // constraint, so a single adoption capture reached a reader as "keeps
+      // climbing" with every figure correct.
+      ...(guards.temporal
+        ? temporalViolations(emitted, guards.temporal).map(
+            (p) =>
+              `"${p}", which claims a ${guards.temporal === "state" ? "trend the evidence does not carry: it holds one observation" : "change of rate the evidence does not carry"}`
+          )
+        : []),
+      // A reason to act now built out of evidence that cannot establish now.
+      // Scoped to the field that carries the reason, because the same finding
+      // is legitimate background everywhere else in the answer.
+      ...(guards.urgency
+        ? urgencyViolations(
+            String(
+              (parsed as Record<string, unknown>)[guards.urgency.field] ?? ""
+            ),
+            guards.urgency.restricted,
+            guards.urgency.allowed
+          ).map(
+            (w) =>
+              `"${w}" in ${guards.urgency!.field}, which draws on evidence barred from establishing that this is happening now`
+          )
+        : []),
     ];
     if (bad.length === 0) {
       cache.set(cacheKey, { value: parsed, at: Date.now() });
@@ -583,7 +648,13 @@ ${instruction}`;
     // Never silent in the log: a model inventing figures is the one failure
     // that must stay visible to us even though the reader never sees it.
     console.warn(
-      `[analyst-llm] ${attempt === 0 ? "retrying" : "discarded"} ${kind}: invented ${bad.join(", ")}`
+      // "invented" was right when every entry was a fabricated figure and is
+      // wrong now that the list also carries temporal and freshness breaches:
+      // a model that wrote "keeps climbing" invented nothing, it claimed more
+      // than the evidence carries. The operator reading this log needs the
+      // difference, so the entries say what they are and this line does not
+      // label them.
+      `[analyst-llm] ${attempt === 0 ? "retrying" : "discarded"} ${kind}: ${bad.join("; ")}`
     );
   }
 

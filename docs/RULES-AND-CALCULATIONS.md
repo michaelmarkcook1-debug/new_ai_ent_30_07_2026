@@ -2174,6 +2174,73 @@ the same thing twice.
 `jointTemporal()` takes the WEAKEST input's class. A change combined with a
 snapshot is a statement about a snapshot.
 
+### The authoring contract
+
+`lib/analyst/author.ts`, `authoringContract()` at `:89`. The deterministic
+layer enforced two rules on itself and on nothing else, then handed the model
+the finished prose as one undifferentiated block in which neither rule was
+visible or checkable. Both shipped as defects on 27 August 2026:
+
+| Shipped | Evidence behind it |
+|---|---|
+| "adoption demand ... keeps climbing" | one observation, no prior held |
+| a why now built on the capability/price finding | benchmark 34 days old, `aging` |
+
+Neither moved a figure, named an off-page vendor or reversed a direction, so
+every guard passed them. Two checks were added, both deterministic, both run
+inside the existing retry loop in `generate()`. **No additional model call.**
+
+**Temporal.** `TemporalLicence` (`canonical.ts:437`) is the same three words
+`temporalClass()` returns. `temporalViolations()` (`:499`) matches two lists:
+`CONTINUATION` (`:459`, 14 patterns) needs `change` or better, `ACCELERATION`
+(`:483`, 7 patterns) needs `acceleration`. Bare progressive verbs are bound to
+a copula ("adoption IS rising") so an ordinary noun phrase ("the rising tide of
+enterprise AI") is left alone.
+
+The licence comes from `Synthesis.temporal` of the findings that actually reach
+the prompt, not from every signal the page holds. Price / Performance carries a
+movement reading with two observations that fires no rule and never enters the
+fact sheet; licensing trend words off it would grant vocabulary for a claim the
+model cannot cite. Where no finding reaches the prompt, `temporalFromText()`
+(`:530`) reads the licence off the canonical prose, the same move `claimsFrom()`
+makes for direction.
+
+**Freshness.** A finding is barred from grounding a why now when
+`canCreateUrgency(freshness)` is false or its bearing is `against`, which are
+`enrichWithSynthesis()`'s own two rules. `restrictedVocabulary()` (`:624`)
+subtracts the permitted material's words from the barred findings' words; what
+remains could only have come from evidence the deterministic layer refused to
+build a why now on, which makes its appearance mechanically detectable without
+any judgement about meaning.
+
+Matched on a **four-character stem** (`:624`). Exact matching restricted
+"price" while the permitted evidence said "priced", which would have thrown
+away any legitimate rewrite mentioning the price gap. `GENERIC` (`:593`)
+drops connectives for the same reason: "across", "while", "between" appear in
+every third analyst sentence and protect nothing.
+
+`IMMEDIACY` (`:648`) is the second half: where nothing in the packet is current,
+the why now may not assert that the reader must move now, however it is worded.
+
+Scoped to the `whyNow` field alone (`llm.ts:358`). An aging finding is
+legitimate background, legitimate evidence for or against, and legitimate
+grounds for what to investigate. It is not a reason to hurry.
+
+**Measured on the live product, 28 August 2026.** `/alliances` holds an undated
+adoption reading, so the finding built on it is barred. The model reached for
+it twice and the guard refused twice:
+
+```
+retrying insight:alliance channel: "implement" in whyNow, which draws on
+  evidence barred from establishing that this is happening now
+discarded insight:alliance channel: "adoption"; "concentrated"; "openai";
+  "signal" in whyNow ...
+```
+
+The page rendered the computed sentence. On the next generation the model
+worked inside the labelled contract and produced an authored why now that
+passed.
+
 ### Causality
 
 `Relation` (`:50`) has four members and none is causal.
@@ -2197,6 +2264,10 @@ packet as evidence on the side its `bearing` names, then calls `decide()` again.
 Everything after that is the machinery from 8.25: `strengthOf()` sees the
 contradiction and returns `contested`; `resolveAction()` refuses to let a
 committing action stand on contested evidence.
+
+`mergeDecision()` (`author.ts:373`) is the second line: a why now that breaches
+the contract is replaced by the computed one rather than rendered, so a guard
+missed upstream still cannot reach a reader.
 
 **So a synthesis can weaken a recommendation and cannot strengthen one, and it
 does so THROUGH the deterministic rules rather than around them.** Nothing in
@@ -2360,9 +2431,20 @@ validators, read at render.
   lead, so the rule has no leader to match. That is conservative rather than
   wrong: it is silent where there is no contradiction about the vendor it holds.
 
-113 tests across `tests/analyst-cross-signal.test.ts` (49),
-`tests/analyst-freshness.test.ts` (40) and `tests/analyst-population.test.ts`
-(24).
+146 tests across `tests/analyst-cross-signal.test.ts` (49),
+`tests/analyst-freshness.test.ts` (40), `tests/analyst-population.test.ts` (24)
+and `tests/analyst-authored-contract.test.ts` (33). The last carries three
+generations captured from the running product, so the contract is tested
+against prose a model actually wrote and not only against prose chosen to fail
+it.
+
+**The live authoring path cannot be exercised under vitest.** `authoredResult()`
+wraps the call in `unstable_cache`, which throws `Invariant: incrementalCache
+missing` outside a Next render, so a test that calls it returns
+`failure: "unreachable"` in 3ms and every case falls back for an
+infrastructural reason rather than a model one. A suite that reported those
+fallbacks as passes would be asserting nothing. Live behaviour is therefore
+captured from the dev server and asserted as fixtures.
 
 ## 9. Run costs
 

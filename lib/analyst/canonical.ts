@@ -409,3 +409,288 @@ export function unsupportedCounts(output: string, facts: string): string[] {
   }
   return out;
 }
+
+// ---------------------------------------------------- The temporal contract
+//
+// A state is not a trend, and the deterministic layer has enforced that on
+// itself since the signal module was written: `signal()` strips a direction
+// from a single observation at construction, and `stateWording()` hands back
+// "is narrow" to a caller who asked for "narrowing".
+//
+// None of that reached the authored layer. The model was handed the finished
+// prose and could add the verb the data does not carry, which is what it did:
+// a single-observation adoption reading was published as "adoption demand
+// keeps climbing", past every guard in the product, because no figure had
+// moved, no vendor was named that should not be, and no direction had been
+// reversed. Continuation is its own claim and needed its own check.
+//
+// WHAT THIS IS NOT. Not a parser and not a general trend detector. A short
+// list of constructions that assert continuation or acceleration outright,
+// checked against the temporal class the intelligence layer already computed.
+
+/**
+ * The strongest temporal claim the evidence licenses.
+ *
+ * Deliberately the same three words `temporalClass()` returns, so the licence
+ * and the classifier cannot drift apart.
+ */
+export type TemporalLicence = "state" | "change" | "acceleration";
+
+const RANK: Readonly<Record<TemporalLicence, number>> = {
+  state: 0,
+  change: 1,
+  acceleration: 2,
+};
+
+/**
+ * Constructions that assert a reading is CONTINUING to move.
+ *
+ * Licensed by `change` and above. A single observation cannot support any of
+ * them: "keeps climbing" is a claim about a sequence, and there is no
+ * sequence.
+ *
+ * Two shapes. The first is unambiguous continuation wording, which is a trend
+ * claim in any context. The second binds a progressive verb to a copula
+ * ("adoption IS rising") so that the claim is caught while an ordinary noun
+ * phrase that happens to contain the word ("the rising tide of enterprise AI")
+ * is left alone. Every entry is a chance to reject sound prose, so the list
+ * stays short and each entry earns its place.
+ */
+const CONTINUATION: readonly RegExp[] = [
+  /\bkeeps?\s+(?:on\s+)?(?:rising|climbing|falling|growing|declining|widening|narrowing|increasing|decreasing)\b/i,
+  /\bcontinues?\s+(?:to\s+)?(?:rise|risen|rising|climb|climbing|fall|falling|grow|growing|decline|declining|widen|widening|narrow|narrowing|increase|increasing|decrease|decreasing)\b/i,
+  /\bcontinuing\s+to\s+\w+/i,
+  /\bstill\s+(?:rising|climbing|falling|growing|declining|widening|narrowing|increasing|decreasing)\b/i,
+  /\bfurther\s+(?:widening|narrowing|rising|climbing|falling|growing|declining|increasing|decreasing)\b/i,
+  /\bincreasingly\b/i,
+  /\b(?:gaining|losing|building|gathering)\s+momentum\b/i,
+  /\bmomentum\s+is\s+(?:building|growing|fading|slowing)\b/i,
+  /\breversing\b|\brebounding\b|\brebound(?:ed)?\b/i,
+  /\btrending\s+(?:up|down|upward|downward|higher|lower)\b/i,
+  /\bon\s+an?\s+(?:upward|downward)\s+(?:trajectory|path|trend)\b/i,
+  /\bhas\s+been\s+(?:rising|climbing|falling|growing|declining|widening|narrowing)\b/i,
+  /\b(?:is|are|was|were)\s+(?:rising|climbing|falling|growing|declining|widening|narrowing)\b/i,
+  /\b(?:has|have)\s+(?:risen|climbed|fallen|grown|declined|widened|narrowed)\b/i,
+];
+
+/**
+ * Constructions that assert the RATE of movement is itself changing.
+ *
+ * Licensed by `acceleration` only, which today nothing in this product
+ * reaches: no dataset carries three readings. That is the honest position and
+ * the check is written for the day one does, rather than left until then.
+ */
+const ACCELERATION: readonly RegExp[] = [
+  /\baccelerat(?:ing|ion|es|ed)\b/i,
+  /\bdecelerat(?:ing|ion|es|ed)\b/i,
+  /\bgathering\s+(?:pace|speed)\b/i,
+  /\bpicking\s+up\s+(?:pace|speed)\b/i,
+  /\bat\s+an?\s+(?:increasing|accelerating|quickening|growing)\s+(?:rate|pace)\b/i,
+  /\bfaster\s+and\s+faster\b/i,
+  /\brate\s+of\s+(?:increase|decline|growth|change)\s+(?:is\s+)?(?:growing|rising|increasing|climbing)\b/i,
+];
+
+/**
+ * Temporal claims in the output that the licence does not support.
+ *
+ * Returns the offending phrases, so the retry can name them. An empty array
+ * means every temporal claim made is one the evidence carries.
+ */
+export function temporalViolations(
+  output: string,
+  licence: TemporalLicence
+): string[] {
+  const bad: string[] = [];
+  const rank = RANK[licence];
+  if (rank < RANK.change) {
+    for (const re of CONTINUATION) {
+      const m = output.match(re);
+      if (m) bad.push(m[0].trim().toLowerCase());
+    }
+  }
+  if (rank < RANK.acceleration) {
+    for (const re of ACCELERATION) {
+      const m = output.match(re);
+      if (m) bad.push(m[0].trim().toLowerCase());
+    }
+  }
+  return [...new Set(bad)];
+}
+
+/**
+ * The licence the canonical text has already taken for itself.
+ *
+ * The same move `claimsFrom()` makes for direction: read what the
+ * deterministic layer said, and hold the written version to it. Used where a
+ * caller has no structured signals to derive a licence from, which is most of
+ * the authored surface. A page whose own computed prose describes a change may
+ * have that change described back; a page whose prose describes a state may
+ * not have a trend added to it.
+ */
+export function temporalFromText(canonical: string): TemporalLicence {
+  if (ACCELERATION.some((re) => re.test(canonical))) return "acceleration";
+  if (CONTINUATION.some((re) => re.test(canonical))) return "change";
+  return "state";
+}
+
+/** The strongest licence in a set, which is the one that governs. */
+export function strongestTemporal(
+  classes: readonly TemporalLicence[]
+): TemporalLicence {
+  let best: TemporalLicence = "state";
+  for (const c of classes) if (RANK[c] > RANK[best]) best = c;
+  return best;
+}
+
+// --------------------------------------------------- The freshness contract
+//
+// The deterministic layer decides what may answer "why now". `speaksToNow()`
+// admits evidence that may inform the decision; `canCreateUrgency()` admits
+// only evidence current enough to be the reason to move this week. A finding
+// resting on a benchmark past its refresh window is carried as evidence and
+// kept out of the computed whyNow.
+//
+// The model was then handed that finding in the same undifferentiated block as
+// everything else and asked to write a whyNow "drawn only from the evidence
+// above". It did exactly that, and put the aging relationship back:
+//
+//   computed  29 of the 330 priced and benchmarked models reach 80 per cent of
+//             the top score, and the cheapest of them costs 25 times less...
+//   authored  Capability across frontier providers reads narrow on the
+//             capability matrix alongside a 25x published input-price
+//             separation between the top model and a qualifying alternative.
+//
+// The second sentence is the suppressed cross-dataset finding, restored by the
+// only layer that was not told it had been suppressed.
+//
+// TWO MECHANISMS, BOTH CHECKABLE. The prompt now labels every evidence item
+// with the role it may play, and this checks the answer rather than trusting
+// the label was read. Neither is a request to the model.
+
+/**
+ * Content words distinctive to evidence that may NOT justify acting now.
+ *
+ * Built by subtraction: every substantial word in the non-urgency-capable
+ * material, minus every word the permitted material also uses. What is left is
+ * vocabulary that could only have come from the evidence the deterministic
+ * layer refused to build a whyNow on, which makes its appearance in a whyNow
+ * mechanically detectable without any judgement about meaning.
+ *
+ * Short words are dropped because they carry the grammar rather than the
+ * claim, and because a five-character floor removes the need for a stopword
+ * list that would need maintaining.
+ */
+/**
+ * Generic prose that carries the grammar rather than the claim.
+ *
+ * Without this the subtraction below returns connectives: "across", "between",
+ * "while", "different". They appear in the barred finding, they happen not to
+ * appear in the permitted evidence, and they are in every third sentence an
+ * analyst writes. Restricting them would reject sound prose and protect
+ * nothing, which is the failure mode this whole check has to avoid: a false
+ * rejection costs the page its analyst voice.
+ */
+const GENERIC = new Set([
+  "across", "between", "while", "different", "taken", "point", "these",
+  "those", "their", "there", "which", "where", "would", "could", "should",
+  "about", "after", "before", "other", "another", "every", "than", "over",
+  "under", "still", "being", "against", "within", "through", "because",
+  "however", "rather", "already", "further", "though", "since", "given",
+  "means", "meaning", "reads", "shows", "showing", "same", "both", "carry",
+  "carries", "carrying", "holds", "holding", "stands", "standing",
+]);
+
+/**
+ * Content words distinctive to evidence that may NOT justify acting now.
+ *
+ * Built by subtraction: every substantial word in the non-urgency-capable
+ * material, minus every word the permitted material also uses, minus the
+ * connectives above. What is left is vocabulary that could only have come from
+ * the evidence the deterministic layer refused to build a whyNow on, which
+ * makes its appearance in a whyNow mechanically detectable without any
+ * judgement about meaning.
+ *
+ * MATCHED ON A FOUR-CHARACTER STEM, not on the whole word. "price", "priced"
+ * and "pricing" are one concept and appear as all three across a fact sheet,
+ * so exact matching restricted "price" on the Price / Performance page while
+ * the permitted evidence said "priced": a legitimate rewrite mentioning the
+ * price gap would have been thrown away. The stem is crude and it is the right
+ * kind of crude here, because both sides are stemmed the same way and the cost
+ * of a collision is one word left unrestricted rather than a wrong sentence.
+ */
+const STEM_LEN = 4;
+const stem = (w: string) => w.slice(0, STEM_LEN);
+
+export function restrictedVocabulary(
+  /** Findings the deterministic layer barred from creating urgency. */
+  barred: readonly string[],
+  /** Everything that may legitimately ground a why now. */
+  permitted: readonly string[]
+): string[] {
+  const words = (xs: readonly string[]) =>
+    xs
+      .join(" ")
+      .toLowerCase()
+      .replace(/[^a-z\s]/g, " ")
+      .split(/\s+/)
+      .filter((w) => w.length >= 5 && !GENERIC.has(w));
+  const allowed = new Set(words(permitted).map(stem));
+  return [...new Set(words(barred).filter((w) => !allowed.has(stem(w))))].sort();
+}
+
+/**
+ * Assertions that something must happen NOW.
+ *
+ * Checked only where nothing in the packet is current enough to support one.
+ * A statement of fact ("29 models clear the bar") is not on this list and
+ * never trips it; a call to move this week is.
+ */
+const IMMEDIACY: readonly RegExp[] = [
+  /\bact\s+now\b/i,
+  /\bright\s+now\b/i,
+  /\bimmediate(?:ly)?\b/i,
+  /\bwithout\s+delay\b/i,
+  /\bthis\s+week\b/i,
+  /\burgent(?:ly|cy)?\b/i,
+  /\bbefore\s+it\s+is\s+too\s+late\b/i,
+  /\bno\s+time\s+to\s+(?:lose|waste)\b/i,
+  /\bcan(?:not|'t)\s+wait\b/i,
+  /\bmoving\s+fast\b/i,
+];
+
+/**
+ * What the authored why now took from evidence that may not ground one.
+ *
+ * Two failures, reported together:
+ *
+ *   restricted vocabulary  the sentence is built out of the barred finding
+ *   immediacy              it tells the reader to move now when nothing in the
+ *                          packet is current enough to say so
+ *
+ * The first is the one that catches the shipped defect. The second catches the
+ * blunter version, where the model asserts urgency without borrowing the
+ * wording it came from.
+ */
+export function urgencyViolations(
+  whyNow: string,
+  restricted: readonly string[],
+  /** True where at least one reading in the packet may establish "now". */
+  urgencyAllowed: boolean
+): string[] {
+  const stems = new Set(
+    whyNow
+      .toLowerCase()
+      .replace(/[^a-z\s]/g, " ")
+      .split(/\s+/)
+      .filter(Boolean)
+      .map(stem)
+  );
+  const bad = restricted.filter((w) => stems.has(stem(w)));
+  if (!urgencyAllowed) {
+    for (const re of IMMEDIACY) {
+      const m = whyNow.match(re);
+      if (m) bad.push(m[0].trim().toLowerCase());
+    }
+  }
+  return [...new Set(bad)];
+}

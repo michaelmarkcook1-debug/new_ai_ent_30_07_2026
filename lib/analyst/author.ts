@@ -3,10 +3,16 @@ import {
   actionIntent,
   claimsFrom,
   intentViolation,
+  restrictedVocabulary,
+  strongestTemporal,
+  temporalFromText,
+  urgencyViolations,
   type ActionIntent,
+  type TemporalLicence,
 } from "./canonical";
 import { priorsBlock, resolveTheses } from "./priors";
 import { synthesisBlock, type Synthesis } from "./synthesis";
+import { canCreateUrgency } from "./freshness";
 import type { Signal } from "./signals";
 import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import type { AnalystInsightData } from "./insight";
@@ -67,6 +73,89 @@ interface InsightDraft {
 }
 
 /**
+ * What the model may claim, derived from what the intelligence layer knows.
+ *
+ * THE POINT OF THIS FUNCTION is that the two restrictions the deterministic
+ * layer already enforces on itself were being enforced on nothing else. It
+ * refuses to write a trend off one observation and refuses to build a why now
+ * on a reading past its refresh window, and then handed the model a prose blob
+ * in which neither restriction was visible or checkable. Both shipped as
+ * defects: a state published as "keeps climbing", and a suppressed aging
+ * finding restored as the reason to act.
+ *
+ * Exported so the contract can be asserted directly rather than inferred from
+ * the behaviour of a model call.
+ */
+export function authoringContract(
+  computed: AnalystInsightData,
+  cross: { signals: readonly Signal[]; synthesis: readonly Synthesis[] } | null
+): {
+  temporal: TemporalLicence;
+  urgency: { field: string; restricted: string[]; allowed: boolean };
+  /** Findings barred from grounding a why now, for labelling the prompt. */
+  barred: Synthesis[];
+} {
+  // The temporal licence, taken from the findings the model is actually shown.
+  //
+  // NOT from every signal the page computed, which was the first attempt and
+  // was wrong in a way worth recording. Price / Performance holds a movement
+  // reading carrying two observations, so the strongest signal on the page is
+  // a change; but movement fires no rule there, never enters the prompt, and
+  // the model cannot cite it. Licensing trend vocabulary off evidence the
+  // model was never shown grants it words for claims it has no basis to make.
+  //
+  // `Synthesis.temporal` is already `jointTemporal()` of that finding's own
+  // inputs, which is the weakest of them, so this reuses the classifier rather
+  // than running a second one beside it. Where no finding reached the prompt,
+  // the canonical prose governs: the same move `claimsFrom()` makes for
+  // direction, and a page whose own text describes a change may have that
+  // change described back to it.
+  const canonical = `${computed.headline} ${computed.summary} ${computed.decision?.whyNow ?? ""}`;
+  const shown = cross?.synthesis ?? [];
+  const temporal: TemporalLicence =
+    shown.length > 0
+      ? strongestTemporal(shown.map((s) => s.temporal))
+      : temporalFromText(canonical);
+
+  // A finding may not ground a why now when it is too old to establish the
+  // present, or when it argues against the recommendation. Both rules are the
+  // deterministic layer's own, taken from `enrichWithSynthesis()` so the two
+  // cannot disagree about which findings were suppressed.
+  const barred = (cross?.synthesis ?? []).filter(
+    (s) => s.bearing === "against" || !canCreateUrgency(s.freshness)
+  );
+
+  // What may legitimately ground one: the computed sentence itself, and the
+  // supporting evidence that is not one of the barred findings. Deliberately
+  // narrower than the whole fact sheet. The headline and summary are
+  // interpretation rather than evidence, and letting them licence vocabulary
+  // would hand back the words this exists to withhold.
+  const barredText = new Set(barred.map((s) => s.finding));
+  const permitted = [
+    computed.decision?.whyNow ?? "",
+    ...(computed.decision?.evidenceFor ?? [])
+      .map((e) => e.claim)
+      .filter((c) => !barredText.has(c)),
+  ];
+
+  return {
+    temporal,
+    urgency: {
+      field: "whyNow",
+      restricted: restrictedVocabulary([...barredText], permitted),
+      // Nothing in the packet may assert immediacy unless something in it is
+      // current enough to say so. A page resting entirely on an aging capture
+      // may still recommend; it may not say the reader must move this week.
+      allowed:
+        (cross?.synthesis ?? []).some(
+          (s) => s.bearing === "supports" && canCreateUrgency(s.freshness)
+        ) || (cross?.synthesis.length ?? 0) === 0,
+    },
+    barred,
+  };
+}
+
+/**
  * The Analyst Insight on every tab except Your Pulse.
  *
  * The recommended action is deliberately not up for rewriting. It is derived
@@ -106,6 +195,11 @@ export async function authorInsight(
 ): Promise<Written<AnalystInsightData>> {
   if (!llmAvailable() || computed.insufficient) return asComputed(computed);
 
+  // What this packet licenses, worked out before the prompt is built so the
+  // prompt can state it and the guard can check it against the same values.
+  const contract = authoringContract(computed, cross);
+  const barredFindings = new Set(contract.barred.map((b) => b.finding));
+
   const facts = factSheet([
     `Page context: ${context}`,
     `Computed headline: ${computed.headline}`,
@@ -132,12 +226,31 @@ export async function authorInsight(
     computed.decision
       ? `Computed why now (you may rewrite the wording, not the reason): ${computed.decision.whyNow}`
       : null,
+    // Each item carries the ROLE it may play, not just its prose. A finding
+    // the deterministic layer barred from grounding a why now is still real
+    // evidence and is still shown; what changes is that the model is told
+    // which it is, and the guard checks the answer against the same list.
     computed.decision && computed.decision.evidenceFor.length > 0
-      ? `Evidence for (fixed, do not change): ${computed.decision.evidenceFor.map((e) => `${e.claim} [${e.source}, ${e.basis}]`).join(" | ")}`
+      ? `Evidence for (fixed, do not change). The role tag on each item says what it may be used for:\n${computed.decision.evidenceFor
+          .map(
+            (e) =>
+              `- [${barredFindings.has(e.claim) ? "AGING SUPPORT: may inform the reading and may NOT be the reason to act now" : "CURRENT: may ground the reason to act now"}] ${e.claim} [${e.source}, ${e.basis}]`
+          )
+          .join("\n")}`
       : null,
     computed.decision && computed.decision.evidenceAgainst.length > 0
       ? `Evidence against (fixed, do not change, and do not drop from your reasoning): ${computed.decision.evidenceAgainst.map((e) => `${e.claim} [${e.source}, ${e.basis}]`).join(" | ")}`
       : null,
+    // Stated, and then checked. The check is the protection; this is here so
+    // the model has a chance of passing it rather than being failed blind.
+    computed.decision
+      ? `WHY NOW MAY ONLY REST ON EVIDENCE TAGGED CURRENT. Evidence tagged AGING SUPPORT is real and you may use it anywhere else in the reading, including to say what should be investigated. It may not be the reason this is happening now, because nobody has re-read it inside its own refresh window.${contract.urgency.allowed ? "" : " Nothing in this packet is current enough to say the reader must move immediately, so do not say it."}`
+      : null,
+    contract.temporal === "state"
+      ? `TEMPORAL LIMIT: every reading here is a single observation. You may say what IS true. You may not say anything is rising, falling, climbing, widening, narrowing, continuing, still moving, gaining momentum or accelerating, because no prior reading is held and there is no sequence to describe.`
+      : contract.temporal === "change"
+        ? `TEMPORAL LIMIT: the readings here carry two observations, so a change may be described. You may not say the rate of change is itself growing or that anything is accelerating.`
+        : null,
     computed.decision
       ? `Strength of this recommendation (fixed): ${computed.decision.strength}`
       : null,
@@ -212,6 +325,10 @@ The computed versions above are a floor, not a template. Say something a reader 
       // the check on everywhere would reject ordinary prose ("due to" appears
       // in perfectly sound sentences) for no protection.
       forbidCausal: (cross?.synthesis.length ?? 0) > 0,
+      // The two contracts the deterministic layer already holds itself to,
+      // now checked against the answer rather than stated and hoped for.
+      temporal: contract.temporal,
+      urgency: contract.urgency,
     }
   );
 
@@ -231,7 +348,10 @@ The computed versions above are a floor, not a template. Say something a reader 
       // (the action, both evidence arrays, the trigger, the do-not and the
       // strength) is copied across untouched, so there is no path by which a
       // model response can reach them at all.
-      decision: mergeDecision(computed.decision, draft),
+      // The second check on why now. The guard above rejects and retries at
+      // the model boundary; this refuses and falls back at the assembly
+      // boundary, so an unsafe sentence cannot reach a reader by any route.
+      decision: mergeDecision(computed.decision, draft, contract.urgency),
     },
     authorship: "written",
   };
@@ -252,17 +372,52 @@ The computed versions above are a floor, not a template. Say something a reader 
  */
 export function mergeDecision(
   computed: AnalystInsightData["decision"],
-  draft: { instruction?: string; whyNow?: string } | null | undefined
+  draft: { instruction?: string; whyNow?: string } | null | undefined,
+  /**
+   * What the rewritten why now may rest on, where the caller computed it.
+   *
+   * Omitted leaves the previous behaviour, which is what every caller outside
+   * this module still does. Supplied, it is the second of two checks: the
+   * guard in `generate()` rejects and retries at the model boundary, and this
+   * refuses and falls back at the assembly boundary, so a caller that forgets
+   * to declare the contract loses the rewrite rather than the protection.
+   */
+  urgency?: { restricted: readonly string[]; allowed: boolean }
 ): AnalystInsightData["decision"] {
   if (!computed) return null;
   return {
     ...computed,
     instruction: usableInstruction(computed, draft?.instruction),
-    whyNow:
-      typeof draft?.whyNow === "string" && draft.whyNow.trim().length > 0
-        ? draft.whyNow
-        : computed.whyNow,
+    whyNow: usableWhyNow(computed, draft?.whyNow, urgency),
   };
+}
+
+/**
+ * The rewritten why now, or the computed one where the rewrite cannot stand in.
+ *
+ * Why now is the case for acting NOW, and the deterministic layer has already
+ * decided what may make that case: `canCreateUrgency()` admits current
+ * evidence only, and `enrichWithSynthesis()` keeps everything else out of the
+ * computed sentence. The model was then handed the barred finding as ordinary
+ * evidence and put it back, which is the defect this exists to close.
+ */
+function usableWhyNow(
+  decision: NonNullable<AnalystInsightData["decision"]>,
+  written: string | undefined,
+  urgency?: { restricted: readonly string[]; allowed: boolean }
+): string {
+  if (typeof written !== "string" || written.trim().length === 0) {
+    return decision.whyNow;
+  }
+  if (!urgency) return written;
+  const bad = urgencyViolations(written, urgency.restricted, urgency.allowed);
+  if (bad.length > 0) {
+    console.warn(
+      `[analyst-llm] discarded why now: "${written}" rests on evidence that cannot establish now (${bad.join(", ")})`
+    );
+    return decision.whyNow;
+  }
+  return written;
 }
 
 /**
@@ -364,6 +519,12 @@ This is the most-read text in the product. If it could have been written last mo
       claims: claimsFrom(
         `${computed.headline} ${computed.judgement} ${extra.movers ?? ""}`
       ),
+      // Movement is classified against a previous reading, so where movers are
+      // named a change may be described. Where none are, this is a set of
+      // snapshots and the trend verbs are not available. Declared from what
+      // the panel holds rather than inferred from its prose, because the
+      // prose is the thing being checked.
+      temporal: extra.movers ? "change" : "state",
     }
   );
 
@@ -417,7 +578,13 @@ Name the vendors involved, using only the names that appear above.
 Do not list the changes back: they are already rendered beneath this. Say which one deserves their attention.`,
     500,
     ROSTER,
-    { claims: claimsFrom(facts.changes.join(". ")) }
+    {
+      claims: claimsFrom(facts.changes.join(". ")),
+      // Every line here is a recorded difference between two captures, which
+      // is exactly what licenses "change" and nothing beyond it. No dataset in
+      // this product carries the third reading acceleration would need.
+      temporal: "change",
+    }
   );
 
   if (!draft?.headline || !draft?.body) return null;
@@ -491,6 +658,12 @@ These are the only things on the page a reader is meant to act on. Vague advice 
     {
       claims: claimsFrom(
         computed.map((c) => `${c.action}. ${c.detail}`).join(" ")
+      ),
+      // Read off the computed actions themselves. An action written from a
+      // snapshot may not be rewritten as a trend, and one already describing a
+      // movement may keep it.
+      temporal: temporalFromText(
+        computed.map((c) => `${c.action}. ${c.detail}`).join(" ") + " " + context
       ),
     }
   );
