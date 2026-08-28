@@ -13,7 +13,7 @@ import {
 import { priorsBlock, resolveTheses } from "./priors";
 import { synthesisBlock, type Synthesis } from "./synthesis";
 import { canCreateUrgency } from "./freshness";
-import type { Signal } from "./signals";
+import { POPULATION_LABEL, temporalClass, type Signal } from "./signals";
 import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import type { AnalystInsightData } from "./insight";
 import type { PulseJudgement } from "@/lib/pulse/judgement";
@@ -485,30 +485,109 @@ export function isSpecific(instruction: string, action: string): boolean {
  */
 export async function authorPulse(
   computed: PulseJudgement,
-  extra: { movers: string | null; asOf: string | null }
+  extra: {
+    movers: string | null;
+    asOf: string | null;
+    /**
+     * The tracked ecosystem, as the same normalised signals every other
+     * surface reasons over.
+     *
+     * WHY THIS ARGUMENT EXISTS. Today's Pulse is the most-read text in the
+     * product and was the thinnest-fed: a four-line sheet carrying its own
+     * computed sentence back to itself, four vendor names and a date. It was
+     * being asked for a read on the enterprise AI market while being shown
+     * almost none of it, so it could only restate the movers and reach for
+     * generic market prose. Everything below was already computed on the page
+     * that calls this and simply never travelled.
+     *
+     * No new fetch, no new dataset and no second model call: `signalsFromMetrics()`
+     * reads the MarketMetrics the page already loaded, and the price reading
+     * comes off the benchmark capture it already holds.
+     */
+    signals?: readonly Signal[];
+  }
 ): Promise<Written<PulseJudgement>> {
   if (!llmAvailable()) return asComputed(computed);
+
+  const signals = extra.signals ?? [];
+  // Stated with the population each reading was taken over, because the
+  // spread across 43 suppliers and the spread across the frontier cohort are
+  // different facts about different markets and the difference between them
+  // is itself the story on some days.
+  const ecosystem = signals.map(
+    (x) =>
+      `- [${
+        // Labelled with what may be claimed about it, not only what it says.
+        // A spread measured once is narrow; it has not converged, because
+        // there is no earlier reading it converged from. Stating which is
+        // which here is what lets the model write the stronger sentence where
+        // the evidence carries it and the weaker one where it does not.
+        temporalClass(x) === "state"
+          ? "SNAPSHOT, one observation: describe as a state, never as having changed"
+          : "classified against a previous reading: a change may be described"
+      }] ${x.dimension} across ${POPULATION_LABEL[x.population]}: ${x.state}${
+        typeof x.magnitude === "number" ? ` (${x.magnitude})` : ""
+      }. ${x.evidence.claim} [${x.evidence.source}, ${x.evidence.basis}]`
+  );
 
   const facts = factSheet([
     `Computed headline: ${computed.headline}`,
     `Computed judgement: ${computed.judgement}`,
     extra.movers ? `Named movement: ${extra.movers}` : null,
     extra.asOf ? `Data as of: ${extra.asOf}` : null,
+    ecosystem.length > 0
+      ? `\nTHE TRACKED ECOSYSTEM, as measured this period:\n${ecosystem.join("\n")}`
+      : null,
   ]);
 
   const draft = await authored<{ headline: string; judgement: string }>(
     "pulse-hero",
     facts,
-    `Write today's market read for a CIO scanning before a board meeting.
+    `Write today's read on the enterprise AI market for a CIO scanning before a board meeting.
 
 Return JSON: {"headline": string, "judgement": string}
 
-- headline: one sentence, under 14 words. The single thing that is true of this market today. It may use a figure from the data, but a headline that is only a figure is a wasted headline.
-- judgement: 2 to 3 sentences. What the movement means and what a buyer should do differently because of it. Reuse only the figures above.
+You are writing at the level of a research VP publishing a market pulse: a
+named judgement about where this market has got to, argued from the readings
+below. Not a summary of them.
 
-Name the vendors that moved, where the data names them. A reader wants to know who, not how many. You may only name vendors that appear above.
+- headline: one sentence, under 14 words, carrying a JUDGEMENT rather than a measurement. "Five vendors gained and three slipped" is the data restated and is a wasted headline; what that pattern means for a buyer is a headline.
+- judgement: 3 to 4 sentences. Read the ecosystem as a whole: what shape this market is in, what that shape does to a buyer's leverage, and what follows for how they should be contracting this quarter. Reuse only the figures above.
 
-This is the most-read text in the product. If it could have been written last month, it is wrong.`,
+WHAT MAKES THIS GOOD RATHER THAN COMPETENT. The readings above are separate
+measurements of one market: how far apart the field is on capability, what the
+top tier costs against an adequate alternative, how concentrated a typical
+category is, what governance load is open, how reputation is spread. The value
+is in what they say TOGETHER that none says alone. Lead with the reading that
+most changes what a buyer should do, and say why the others do not change it.
+
+Name the vendors and categories the data names. "Two providers lead" is worth
+far less than naming them. You may only name entities that appear above.
+
+DO NOT explain our data pipeline. Whether a prior reading exists, whether a
+figure is published this period, what our refresh cadence is: these are facts
+about us, not about the market. Where a reading cannot be taken, say what
+cannot be judged in the reader's language and move to what can.
+
+EVERY READING MARKED SNAPSHOT IS A STATE, NOT A CHANGE. Most of the readings
+above were measured once. A spread of 10.6 points IS narrow; it has not
+"converged", "narrowed" or "tightened", because there is no earlier reading it
+moved from and this product does not hold one. Write "capability is narrow
+across the frontier cohort", never "capability has converged". This is not a
+stylistic preference: a claim that something changed, over a figure measured
+once, is the single most common way this panel has been wrong, and an answer
+containing one is discarded in full and the reader gets plainer text instead.
+The judgement you want is available without it. "The field is close enough
+together that the model tier is no longer where the money should go" is a
+stronger sentence than "capability has converged" and it is one the evidence
+actually carries.
+
+DO NOT hedge into meaninglessness. "Buyers should monitor developments" is not
+a judgement. If the evidence supports a firmer line, take it; if it does not,
+say plainly what would be needed to take one.
+
+This is the most-read text in the product. If it could have been written last
+month, or about a different market, it is wrong.`,
     600,
     ROSTER,
     {
@@ -524,7 +603,19 @@ This is the most-read text in the product. If it could have been written last mo
       // snapshots and the trend verbs are not available. Declared from what
       // the panel holds rather than inferred from its prose, because the
       // prose is the thing being checked.
-      temporal: extra.movers ? "change" : "state",
+      //
+      // FROM THE READINGS THEMSELVES where the page supplies them, because
+      // they know how many observations each rests on and the movers line does
+      // not. Widening this sheet to the whole ecosystem handed the model a set
+      // of single-observation spreads, and a licence taken from the presence
+      // of movers let it write "frontier capability has converged" over a
+      // spread nobody has measured twice.
+      temporal:
+        signals.length > 0
+          ? strongestTemporal(signals.map(temporalClass))
+          : extra.movers
+            ? "change"
+            : "state",
     }
   );
 

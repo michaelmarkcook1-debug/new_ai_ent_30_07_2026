@@ -229,6 +229,39 @@ describe("a state does not become a trend", () => {
     }
   });
 
+  // Completed change, which is the form the widened Pulse sheet produced.
+  // "Frontier capability has converged" was written over a spread measured
+  // once. The field is narrow; it has not converged, because there is no
+  // earlier reading it converged from.
+  it("refuses completed-change verbs on one observation", () => {
+    for (const phrase of [
+      "Frontier capability has converged.",
+      "The field converged during the period.",
+      "Capability across the cohort has narrowed.",
+      "The spread widened this quarter.",
+      "Pricing has tightened across the frontier.",
+      "The providers have diverged on capability.",
+    ]) {
+      expect(
+        temporalViolations(emitted({ headline: phrase }), "state"),
+        phrase
+      ).not.toEqual([]);
+    }
+  });
+
+  it("allows the same readings described as the states they are", () => {
+    for (const phrase of [
+      "Frontier capability is narrow across the cohort.",
+      "The spread is 10.6 points across 14 providers.",
+      "Pricing separation is wide against a qualifying alternative.",
+    ]) {
+      expect(
+        temporalViolations(emitted({ headline: phrase }), "state"),
+        phrase
+      ).toEqual([]);
+    }
+  });
+
   it("leaves a plain statement of state alone", () => {
     for (const phrase of [
       "Adoption is high and concentrated on one provider.",

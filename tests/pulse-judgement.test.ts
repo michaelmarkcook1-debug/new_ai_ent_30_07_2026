@@ -61,7 +61,7 @@ describe("pulseJudgement", () => {
     );
     expect(
       pulseJudgement({ ...base, shareMovementPublished: false }).headline
-    ).toBe("Positions steady: no movement published this period");
+    ).toBe("Vendor positions moved; category share gives no read");
   });
 
   it("quotes the average that moved furthest, with its real numbers", () => {
@@ -86,8 +86,16 @@ describe("pulseJudgement", () => {
 
   it("claims no direction when nothing has a prior", () => {
     const r = pulseJudgement({ ...base, kpis: [kpi("Capability", 70, null)] });
-    expect(r.judgement).toContain("no prior reading");
+    // No direction asserted, in either direction.
     expect(r.judgement).not.toContain("up ");
+    expect(r.judgement).not.toContain("down ");
+    // And the absence of a prior is not reported as an absence of movement.
+    // "held flat", "steady" or "unchanged" would each turn "we cannot tell"
+    // into "nothing happened", which is the reading the missing prior denies.
+    expect(r.judgement).toMatch(/nothing to compare|no aggregate trend/i);
+    for (const claim of ["held flat", "unchanged", "steady", "no change"]) {
+      expect(r.judgement.toLowerCase()).not.toContain(claim);
+    }
   });
 
   it("counts high-severity risks separately", () => {
@@ -95,12 +103,12 @@ describe("pulseJudgement", () => {
       ...base,
       risks: [sig("A", "high"), sig("B", "medium"), sig("C", "high")],
     });
-    expect(r.judgement).toContain("3 risks are published against the set, 2 rated high");
+    expect(r.judgement).toContain("3 open governance risks against tracked vendors, 2 of them high severity");
   });
 
   it("states an empty risk list rather than omitting it", () => {
     expect(pulseJudgement(base).judgement).toContain(
-      "No open risks are published"
+      "No open governance risk is recorded"
     );
   });
 

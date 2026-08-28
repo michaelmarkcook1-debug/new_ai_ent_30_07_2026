@@ -13,6 +13,8 @@ import {
 import type { VendorDecision } from "@/lib/pulse/brief";
 import { SinceLastLook } from "./components/since-last-look";
 import { pulseJudgement } from "@/lib/pulse/judgement";
+import { priceSignal, signalsFromMetrics } from "@/lib/analyst/cross";
+import { priceSpread } from "../price-performance/data";
 import { authorPulse, authorActions, authorSince } from "@/lib/analyst/author";
 import { readWatchState, readChangeLog, buildSinceView } from "@/lib/changes/watchlist";
 
@@ -95,6 +97,18 @@ export default async function PulsePage() {
   // written by the analyst model over figures computed above. Each falls back
   // to its computed text when the model is unavailable or caught inventing a
   // figure, so the page never depends on the call succeeding.
+  // Both figures from priceSpread() rather than one from here and one from
+  // there: the signal's own claim quotes the ratio AND the qualifying count in
+  // one sentence, so they have to come from the same computation or the
+  // sentence contradicts itself. It is also the function Price / Performance
+  // reports from, which keeps the two surfaces quoting one number.
+  const pulseSpread = priceSpread(cost);
+  const pulsePrice = priceSignal(
+    pulseSpread.ratio,
+    pulseSpread.adequate,
+    cost.capturedAt ?? null
+  );
+
   const computedJudgement = pulseJudgement({
     gaining: metrics.gaining,
     slipping: metrics.slipping,
@@ -108,6 +122,13 @@ export default async function PulsePage() {
     authorPulse(computedJudgement, {
       movers: computedJudgement.movement,
       asOf: asOfDay,
+      // The tracked ecosystem, which this hero is a read on and had never
+      // been shown. Built from the MarketMetrics already loaded above and the
+      // benchmark capture already held, so this adds no fetch, no dataset and
+      // no second model call. The price reading travels too, because what the
+      // top tier costs against an adequate alternative is half of what a
+      // buyer's leverage is made of.
+      signals: [...signalsFromMetrics(metrics), ...(pulsePrice ? [pulsePrice] : [])],
     }),
     authorActions(actions, computedJudgement.judgement),
     authorSince({

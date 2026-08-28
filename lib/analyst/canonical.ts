@@ -470,7 +470,13 @@ const CONTINUATION: readonly RegExp[] = [
   /\bon\s+an?\s+(?:upward|downward)\s+(?:trajectory|path|trend)\b/i,
   /\bhas\s+been\s+(?:rising|climbing|falling|growing|declining|widening|narrowing)\b/i,
   /\b(?:is|are|was|were)\s+(?:rising|climbing|falling|growing|declining|widening|narrowing)\b/i,
-  /\b(?:has|have)\s+(?:risen|climbed|fallen|grown|declined|widened|narrowed)\b/i,
+  /\b(?:has|have)\s+(?:risen|climbed|fallen|grown|declined|widened|narrowed|converged|diverged|tightened|loosened)\b/i,
+  // Completed change stated as a bare verb. "Capability has converged" and
+  // "the field converged" are the same claim, and the second slipped past a
+  // list that only knew the auxiliary form. Caught because a spread measured
+  // once cannot have converged: it is simply narrow, which is what
+  // stateWording() would have said.
+  /\b(?:converged|diverged|tightened|loosened|widened|narrowed)\b/i,
 ];
 
 /**

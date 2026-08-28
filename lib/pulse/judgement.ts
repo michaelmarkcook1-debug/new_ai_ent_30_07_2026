@@ -54,7 +54,12 @@ export function pulseJudgement(input: PulseJudgementInput): PulseJudgement {
   // Headline: the single thing that actually happened to the tracked set.
   let headline: string;
   if (!shareMovementPublished) {
-    headline = "Positions steady: no movement published this period";
+    // NOT "share held flat". The source republished priors identical to the
+    // current figures, so whether share moved is unknown. market-metrics.ts
+    // makes the same point where the flag is derived: reporting this as "0 per
+    // cent gaining" would read as "nothing is growing" when the truth is that
+    // no movement has been published. The headline names what can be read.
+    headline = "Vendor positions moved; category share gives no read";
   } else if (movers === 0) {
     headline = "No vendor changed position in the tracked set";
   } else if (slipping.length === 0) {
@@ -77,7 +82,17 @@ export function pulseJudgement(input: PulseJudgementInput): PulseJudgement {
     );
   } else if (kpis.length > 0) {
     parts.push(
-      `The tracked averages carry no prior reading this period, so no direction of travel is claimed for them.`
+      // Said as a fact about the market rather than a fact about our ingest.
+      // The old wording, "the tracked averages carry no prior reading this
+      // period, so no direction of travel is claimed for them", is true and is
+      // written for whoever maintains the pipeline.
+      //
+      // AND IT MUST NOT BECOME "nothing moved". There is no prior to compare
+      // against, so whether the averages moved is unknown, not flat. Saying
+      // they held steady would manufacture the very reading the absent prior
+      // denies us. The sentence therefore says what cannot be read, and points
+      // at what can.
+      `The tracked averages have nothing to compare against this period, so no aggregate trend can be read and the only movement to go on is vendor level.`
     );
   }
 
@@ -85,11 +100,11 @@ export function pulseJudgement(input: PulseJudgementInput): PulseJudgement {
     const high = severe(risks);
     parts.push(
       high > 0
-        ? `${plural(risks.length, "risk is", "risks are")} published against the set, ${high} rated high.`
-        : `${plural(risks.length, "risk is", "risks are")} published against the set, none rated high.`
+        ? `${plural(risks.length, "open governance risk", "open governance risks")} against tracked vendors, ${high} of them high severity.`
+        : `${plural(risks.length, "open governance risk", "open governance risks")} against tracked vendors, none high severity.`
     );
   } else {
-    parts.push("No open risks are published against the tracked set.");
+    parts.push("No open governance risk is recorded against any tracked vendor.");
   }
 
   // Named movement, so the headline count is attributable rather than abstract.
