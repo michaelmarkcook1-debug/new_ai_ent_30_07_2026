@@ -2322,6 +2322,51 @@ called that reading `aging`, `speaksToNow` let `aging` through, and the capture
 went on feeding a why now. **The shelf life was never the defect. What urgency
 required was.**
 
+### KNOWN LIMIT: the AIE envelope dates are fetch stamps, not observations
+
+**Measured on the live feed, 28 August 2026.** The freshness architecture reads
+`observedAt` and assumes it is when the reading was taken. For the AIE-sourced
+signals it is when the reading was FETCHED:
+
+| Field | Value on a call at 18:38:16 | What it is |
+|---|---|---|
+| `generatedAt` | `2026-08-28T18:38:16.140Z` | the moment of the call |
+| `reputationAsOf` | `2026-08-28T18:38:16.242Z` | the moment of the call |
+| `shareAsOf` | `2026-08-28T18:38:16.261Z` | the moment of the call |
+| `compositesCapturedAt` | `2026-08-17T10:45:37.980Z` | a real capture, 11 days old |
+| vendor `lastUpdated` | `2026-05-07`, identical across all 43 | a real date, 113 days old |
+
+`lib/analyst/llm.ts` already records the upstream behaviour behind this: three
+calls two seconds apart returned three different `asOf` values over identical
+data. The five-minute in-process proxy cache is why two fetches in a test look
+stable.
+
+**Consequence.** Eight of the nine signals feeding decision intelligence are
+dated with the response timestamp, so they classify as `current` by
+construction and can never reach `aging` or `stale`. The freshness protection
+P2B added is therefore inert for those sources: if the AIE capability
+assessment were not re-synced for six months, this product would still call it
+current and let it license urgency. The one signal carrying a genuine capture
+date, the Artificial Analysis benchmark at 35.8 days, is classified `aging`
+correctly and is barred from creating urgency, which is the architecture
+working where the input is honest.
+
+**Not changed here, deliberately.** The obvious candidate for a real
+observation date is the vendor rows' `lastUpdated`, which is 113 days old and
+would make the capability reading `stale` under its own declared policy
+(`current 30, stale 90`), suppressing `capability-price-divergence` entirely.
+But that field is identical across all 43 vendors and sits beside a
+`compositesCapturedAt` of 11 days, which is consistent with a roster stamp
+rather than an assessment date. Asserting either reading would be claiming
+knowledge of upstream semantics this repository does not contain, and asserting
+that evidence is older than it is would be the same class of error as asserting
+it is fresher.
+
+**What has to happen before this can be closed:** the AIE upstream must state
+what its envelope `generatedAt` / `asOf` mean and expose the date each
+assessment was actually taken. Until then this is a known limit, recorded here
+rather than papered over.
+
 ### The 34-day benchmark, and why the shelf life is unchanged
 
 `cost-capability` was captured 2026-07-24 and read 2026-08-27: **34 days**.
