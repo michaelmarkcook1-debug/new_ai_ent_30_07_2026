@@ -1,4 +1,5 @@
 import { aieServerFetch, type AieLane } from "@/lib/aie-server";
+import type { DateProvenance } from "@/lib/analyst/freshness";
 import { isInvestor } from "@/lib/vendor/is-investor";
 import {
   categoryRankings,
@@ -84,6 +85,44 @@ export interface MarketKpi {
   sourceField: string;
   sampleSize: number;
 }
+
+/**
+ * What each date this module exposes actually means.
+ *
+ * Declared here rather than inferred downstream, because this is the only file
+ * that knows which upstream field each value was read from. `freshnessOf()`
+ * ages a reading against its source's shelf life, and that is only a
+ * meaningful question when the date is the date the reading was TAKEN.
+ *
+ * MEASURED, 28 August 2026. A call at 18:38:16.140 returned `generatedAt`
+ * 18:38:16.140, `reputationAsOf` 18:38:16.242 and `shareAsOf` 18:38:16.261:
+ * each is the clock at the moment that leg of the fetch completed. The same
+ * behaviour is recorded from the other side in `lib/analyst/llm.ts`, where
+ * three calls two seconds apart returned three different stamps over identical
+ * data. They are honest statements about when we asked and say nothing about
+ * when the underlying assessment was made.
+ *
+ * `compositesCapturedAt` is different in kind: `scripts/sync-category-rankings.mjs`
+ * stamps it when it writes the snapshot to disk, and the snapshot is then
+ * frozen, so it genuinely dates the reading it accompanies.
+ *
+ * Nothing on these payloads is known to carry the assessment's own observation
+ * date. The vendor rows' `lastUpdated` is identical across all 43 and sits
+ * beside a `compositesCapturedAt` eleven days old, which reads as a roster
+ * stamp; using it as an observation date would be asserting upstream semantics
+ * this repository cannot establish.
+ */
+export const DATE_PROVENANCE: Readonly<
+  Record<
+    "generatedAt" | "reputationAsOf" | "shareAsOf" | "compositesCapturedAt",
+    DateProvenance
+  >
+> = {
+  generatedAt: "response",
+  reputationAsOf: "response",
+  shareAsOf: "response",
+  compositesCapturedAt: "capture",
+};
 
 export interface MarketMetrics {
   vendors: VendorMetrics[];

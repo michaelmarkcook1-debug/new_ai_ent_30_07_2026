@@ -21,11 +21,11 @@
 // weakens, so the worst a synthesis can do to a reader is make the product less
 // certain than it was.
 
-import type { MarketMetrics } from "@/lib/market-metrics";
+import { DATE_PROVENANCE, type MarketMetrics } from "@/lib/market-metrics";
 import { decide, type Decision } from "./decision";
 import { signal, type Signal } from "./signals";
 import { synthesise, synthesisEvidence, type Synthesis } from "./synthesis";
-import { canCreateUrgency } from "./freshness";
+import { canCreateUrgency, evidenceDate } from "./freshness";
 import type { AnalystInsightData } from "./insight";
 
 const round1 = (n: number) => Math.round(n * 10) / 10;
@@ -68,7 +68,22 @@ function spreadOf(scores: readonly number[]): { spread: number; n: number } | nu
 export function signalsFromMetrics(m: MarketMetrics): Signal[] {
   const out: Signal[] = [];
   const vendors = m.vendors.filter((v) => v.category !== "AI investor");
+  // The response envelope's clock. Kept for `evidence.asOf`, which is a true
+  // statement about when this was read and is what the panel's "last updated"
+  // means, and NOT used to age anything: see `observedOn` below.
   const asOf = m.generatedAt;
+
+  // The dates a reading may actually be aged against, resolved through the
+  // provenance contract rather than taken on trust. A response stamp resolves
+  // to null, which is `unknown` freshness, which cannot claim the present and
+  // cannot create urgency. That is the honest cost of an upstream that does
+  // not publish when its assessment was made.
+  const observedOn = {
+    metrics: evidenceDate(m.generatedAt, DATE_PROVENANCE.generatedAt),
+    composites: evidenceDate(m.compositesCapturedAt, DATE_PROVENANCE.compositesCapturedAt),
+    reputation: evidenceDate(m.reputationAsOf, DATE_PROVENANCE.reputationAsOf),
+    share: evidenceDate(m.shareAsOf, DATE_PROVENANCE.shareAsOf),
+  };
   const cohort = frontierCohort(m);
   const maturityOf = (vs: typeof vendors) =>
     vs.map((v) => v.maturity).filter((n): n is number => typeof n === "number");
@@ -92,7 +107,7 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
         dimension: "capability",
         state: landscape.spread < 15 ? "narrow" : "wide",
         magnitude: landscape.spread,
-        observedAt: asOf,
+        observedAt: observedOn.metrics,
         lane: m.lane,
         evidence: {
           claim: `Capability maturity across ${landscape.n} assessed vendors spreads ${landscape.spread} points between the strongest and the median.`,
@@ -121,7 +136,7 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
         dimension: "capability",
         state: frontier.spread < 15 ? "narrow" : "wide",
         magnitude: frontier.spread,
-        observedAt: asOf,
+        observedAt: observedOn.metrics,
         lane: m.lane,
         evidence: {
           claim: `Capability maturity across ${frontier.n} frontier model providers spreads ${frontier.spread} points between the strongest and the median.`,
@@ -161,7 +176,7 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
         // strength/risk rule looks for. Both are true of a defensible lead.
         state: best.gap >= 0.25 ? "clear, and leads its market" : "leads narrowly",
         magnitude: best.gap,
-        observedAt: m.compositesCapturedAt,
+        observedAt: observedOn.composites,
         lane: m.lane,
         evidence: {
           claim: `${best.vendor} holds the widest lead in the assessment, ${best.gap} points clear of the runner-up in its market.`,
@@ -196,7 +211,7 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
         dimension: "concentration",
         state: median >= 70 ? "tight" : "spread",
         magnitude: median,
-        observedAt: m.shareAsOf ?? asOf,
+        observedAt: observedOn.share,
         lane: m.lane,
         evidence: {
           claim: `The three largest vendors hold about ${median} per cent of a typical tracked category, across ${tops.length} categories with enough estimates to judge.`,
@@ -236,7 +251,7 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
           high.length > 0
             ? `carrying ${high.length} open high-severity ${high.length === 1 ? "finding" : "findings"} across ${highVendors.length} ${highVendors.length === 1 ? "vendor" : "vendors"}`
             : "carrying no open high-severity finding",
-        observedAt: asOf,
+        observedAt: observedOn.metrics,
         lane: m.lane,
         evidence: {
           claim: `${m.risks.length} open ${m.risks.length === 1 ? "risk" : "risks"} against tracked vendors, ${high.length} high severity, touching ${affected} ${affected === 1 ? "vendor" : "vendors"}.`,
@@ -267,7 +282,7 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
         direction: net > 0 ? "up" : net < 0 ? "down" : "flat",
         magnitude: Math.abs(net),
         observations: 2,
-        observedAt: m.shareAsOf ?? asOf,
+        observedAt: observedOn.share,
         lane: m.lane,
         evidence: {
           claim: `${m.gaining.length} vendors classified as gaining position and ${m.slipping.length} as slipping, against the previous reading.`,
@@ -301,7 +316,7 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
         dimension: "reputation",
         state: spread > 25 ? "widely spread, with a weak tail" : "tightly banded",
         magnitude: spread,
-        observedAt: m.reputationAsOf ?? asOf,
+        observedAt: observedOn.reputation,
         lane: m.lane,
         evidence: {
           claim: `Reputation across ${reps.length} vendors spreads ${spread} points between the highest and lowest reading.`,
@@ -325,7 +340,7 @@ export function signalsFromMetrics(m: MarketMetrics): Signal[] {
         dimension: "reputation",
         state: spread > 25 ? "widely spread, with a weak tail" : "tightly banded",
         magnitude: spread,
-        observedAt: m.reputationAsOf ?? asOf,
+        observedAt: observedOn.reputation,
         lane: m.lane,
         evidence: {
           claim: `Reputation across ${fReps.length} frontier model providers spreads ${spread} points between the highest and lowest reading.`,

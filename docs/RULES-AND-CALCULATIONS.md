@@ -2322,50 +2322,75 @@ called that reading `aging`, `speaksToNow` let `aging` through, and the capture
 went on feeding a why now. **The shelf life was never the defect. What urgency
 required was.**
 
-### KNOWN LIMIT: the AIE envelope dates are fetch stamps, not observations
+### Date provenance: what a timestamp is allowed to mean
 
-**Measured on the live feed, 28 August 2026.** The freshness architecture reads
-`observedAt` and assumes it is when the reading was taken. For the AIE-sourced
-signals it is when the reading was FETCHED:
+`freshnessOf()` ages a reading against its source's shelf life. That is only a
+meaningful question when the date it is handed is the date the reading was
+TAKEN. Eight of the nine signals feeding decision intelligence were handed the
+timestamp their upstream stamped on the response, so they classified `current`
+by construction and could never reach `aging` or `stale`. The shelf-life table,
+`speaksToNow()` and `canCreateUrgency()` were all inert for those sources.
 
-| Field | Value on a call at 18:38:16 | What it is |
+**Measured, 28 August 2026.** A call whose legs returned at 18:38:16 came back
+with:
+
+| Field | Value | What it is |
 |---|---|---|
-| `generatedAt` | `2026-08-28T18:38:16.140Z` | the moment of the call |
-| `reputationAsOf` | `2026-08-28T18:38:16.242Z` | the moment of the call |
-| `shareAsOf` | `2026-08-28T18:38:16.261Z` | the moment of the call |
-| `compositesCapturedAt` | `2026-08-17T10:45:37.980Z` | a real capture, 11 days old |
-| vendor `lastUpdated` | `2026-05-07`, identical across all 43 | a real date, 113 days old |
+| `generatedAt` | `18:38:16.140Z` | the clock when that leg returned |
+| `reputationAsOf` | `18:38:16.242Z` | the clock when that leg returned |
+| `shareAsOf` | `18:38:16.261Z` | the clock when that leg returned |
+| `compositesCapturedAt` | `2026-08-17T10:45:37Z` | a real capture, 11 days old |
 
-`lib/analyst/llm.ts` already records the upstream behaviour behind this: three
-calls two seconds apart returned three different `asOf` values over identical
-data. The five-minute in-process proxy cache is why two fetches in a test look
-stable.
+`lib/analyst/llm.ts` records the same behaviour from the other side: three calls
+two seconds apart returned three different stamps over identical data.
 
-**Consequence.** Eight of the nine signals feeding decision intelligence are
-dated with the response timestamp, so they classify as `current` by
-construction and can never reach `aging` or `stale`. The freshness protection
-P2B added is therefore inert for those sources: if the AIE capability
-assessment were not re-synced for six months, this product would still call it
-current and let it license urgency. The one signal carrying a genuine capture
-date, the Artificial Analysis benchmark at 35.8 days, is classified `aging`
-correctly and is barred from creating urgency, which is the architecture
-working where the input is honest.
+`DateProvenance` (`lib/analyst/freshness.ts`) names the five things a timestamp
+can be, and `evidenceDate()` returns null for the two that are not evidence
+dates:
 
-**Not changed here, deliberately.** The obvious candidate for a real
-observation date is the vendor rows' `lastUpdated`, which is 113 days old and
-would make the capability reading `stale` under its own declared policy
-(`current 30, stale 90`), suppressing `capability-price-divergence` entirely.
-But that field is identical across all 43 vendors and sits beside a
-`compositesCapturedAt` of 11 days, which is consistent with a roster stamp
-rather than an assessment date. Asserting either reading would be claiming
-knowledge of upstream semantics this repository does not contain, and asserting
-that evidence is older than it is would be the same class of error as asserting
-it is fresher.
+| Provenance | Usable as an evidence date |
+|---|---|
+| `capture` | yes |
+| `publication` | yes |
+| `filing` | yes |
+| `response` | **no** |
+| `unknown` | **no** |
 
-**What has to happen before this can be closed:** the AIE upstream must state
-what its envelope `generatedAt` / `asOf` mean and expose the date each
-assessment was actually taken. Until then this is a known limit, recorded here
-rather than papered over.
+`DATE_PROVENANCE` (`lib/market-metrics.ts`) declares which is which, in the one
+file that knows what upstream field each value came from. `signalsFromMetrics()`
+resolves every `observedAt` through it. `evidence.asOf` is deliberately left on
+the response stamp: it is what the panel's "last updated" means, and it is a
+true statement about when we read the data.
+
+**No substitution.** The vendor rows carry `lastUpdated` of `2026-05-07`,
+identical across all 43 and sitting beside a `compositesCapturedAt` eleven days
+old, which reads as a roster stamp rather than an assessment date. Using it
+would assert upstream semantics this repository cannot establish, and asserting
+evidence is older than it is would be the same class of error as asserting it
+is fresher. Null, and therefore `unknown`, is the honest answer.
+
+**Freshness provenance of every active signal after the fix:**
+
+| Signal | Date used | Provenance | Freshness | May create urgency |
+|---|---|---|---|---|
+| `capability-spread` | none | response, refused | `unknown` | no |
+| `capability-spread-frontier` | none | response, refused | `unknown` | no |
+| `position-lead` | `compositesCapturedAt`, 11.4d | capture | `current` | yes |
+| `concentration` | none | response, refused | `unknown` | no |
+| `risk-open` | none | response, refused | `unknown` | no |
+| `movement` | none | response, refused | `unknown` | no |
+| `reputation-spread` | none | response, refused | `unknown` | no |
+| `reputation-spread-frontier` | none | response, refused | `unknown` | no |
+| `price-separation` | `capturedAt`, 35.8d | capture | `aging` | no |
+
+**Consequence, stated plainly.** `capability-price-divergence` requires
+currency and its capability half can no longer be dated, so it no longer fires.
+That is the rule's own `requiresCurrency` doing what it was written to do, not
+a suppression bolted on to make a gate pass: the finding claims something about
+the market NOW, and half of it cannot be dated. Structural rules
+(`requiresCurrency: false`) still consume the undated readings, which is the
+existing policy permitting contextual use, so the evidence is withheld from
+urgency rather than discarded.
 
 ### The 34-day benchmark, and why the shelf life is unchanged
 

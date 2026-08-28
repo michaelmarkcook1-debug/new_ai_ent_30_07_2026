@@ -15,6 +15,56 @@ than a gap.
 
 ---
 
+## 28 August 2026 (later)
+
+**The product no longer treats "when we asked" as "when it was measured".**
+
+Everything the product says about how current a reading is rests on a date. The
+release audit traced those dates back to where they come from, and found that
+eight of the nine readings behind the recommendations were dated with the
+moment we fetched them rather than the moment they were taken.
+
+The AI Enterprise feed stamps its response with the current time on every
+request. Ask it twice, two seconds apart, over data that has not changed, and
+it returns two different timestamps. So a reading always looked as though it had
+been taken seconds ago, which meant it could never be classified as ageing or
+out of date, no matter how long the underlying assessment had actually sat
+unchanged. All the care taken over shelf lives simply did not apply to those
+readings.
+
+Every date now has to say what it is: when the reading was captured, when it
+was published, when it was filed, or the response's own clock. Only the first
+three can age a reading. A response clock is a true statement about when we
+asked and tells you nothing about the evidence, so it is refused, and the
+reading is marked as having an unknown date. An unknown date cannot be the
+reason to act now, which is the rule this product already applied to undated
+readings everywhere else.
+
+**We did not invent a date to fill the gap.** The vendor records carry a
+"last updated" of 7 May, identical for all 43 of them, sitting next to a genuine
+capture date eleven days old. That pattern reads like a stamp on the list rather
+than a date on the assessment, and using it would have meant claiming the
+evidence is nearly four months old on a guess. Saying we do not know is the
+honest answer, and it is the safe one.
+
+**What changes on screen.** The Price / Performance page no longer shows the
+cross-dataset finding that paired capability with price. That finding claims
+something about the market *now*, and half of it can no longer be dated, so it
+is withheld rather than asserted. Every page keeps its recommendation, its
+instruction, its reason, its counter-evidence and its trigger. Two readings
+still carry real capture dates and behave exactly as before: the assessment
+rankings, eleven days old and current, and the benchmark, thirty-six days old
+and ageing.
+
+The practical effect is that this product will now tell you when it does not
+know how current something is, instead of quietly assuming it is fresh.
+
+**Still outstanding, for the upstream rather than for us.** The AI Enterprise
+feed does not publish when each assessment was actually made. Once it does,
+those readings can be aged properly and the cross-dataset finding can come back.
+
+---
+
 ## 28 August 2026
 
 **The written analysis can no longer claim more than the figures underneath it.**

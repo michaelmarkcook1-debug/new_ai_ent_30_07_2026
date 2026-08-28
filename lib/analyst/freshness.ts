@@ -30,6 +30,57 @@ import type { Signal } from "./signals";
 export type Freshness = "current" | "aging" | "stale" | "unknown";
 
 /**
+ * What a timestamp on a reading actually means.
+ *
+ * THE DISTINCTION THIS EXISTS FOR. `freshnessOf()` asks how old a reading is,
+ * which is only a meaningful question if the date it is given is the date the
+ * reading was TAKEN. Eight of the nine signals feeding decision intelligence
+ * were being dated with the timestamp their upstream stamped on the response,
+ * so they classified `current` by construction and could never reach `aging`
+ * or `stale`. The whole shelf-life table below was inert for them.
+ *
+ * Measured on the live AIE feed on 28 August 2026: a call at 18:38:16.140
+ * returned `generatedAt` of 18:38:16.140. `lib/analyst/llm.ts` records the same
+ * behaviour from the other side, three calls two seconds apart returning three
+ * different stamps over identical data.
+ *
+ *   capture      the source states when the reading was taken. Usable.
+ *   publication  when the source published it. Usable, on its own cadence.
+ *   filing       a regulatory filing date. Usable, on the filing cadence.
+ *   response     the response envelope's own clock. NOT an evidence date.
+ *   unknown      nobody has established what it means. NOT an evidence date.
+ *
+ * A response stamp is a true statement about when we asked, and it is not a
+ * statement about the evidence. Treating one as the other is how a product
+ * presents an assessment nobody has re-run since May as current.
+ */
+export type DateProvenance =
+  | "capture"
+  | "publication"
+  | "filing"
+  | "response"
+  | "unknown";
+
+/**
+ * The date a reading may be aged against, or null where there is none.
+ *
+ * Returns null rather than a substitute, deliberately. There is no field on
+ * the AIE payloads that is known to carry the assessment's own observation
+ * date, and reaching for the nearest plausible one would be inventing a date
+ * to satisfy a gate. Null means the freshness state is `unknown`, which
+ * `speaksToNow()` already refuses and `canCreateUrgency()` already refuses,
+ * so the honest answer costs a rule its currency rather than costing a reader
+ * the truth.
+ */
+export function evidenceDate(
+  iso: string | null | undefined,
+  provenance: DateProvenance
+): string | null {
+  if (!iso) return null;
+  return provenance === "response" || provenance === "unknown" ? null : iso;
+}
+
+/**
  * Days before a source's readings stop being current, and then stop being
  * usable for a claim about the present.
  *
