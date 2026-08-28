@@ -6,7 +6,7 @@ import { LaneBadge } from "@/lib/ui/badges";
 import { DerivationDrawer } from "@/lib/ui/score";
 import { MicroLabel } from "@/lib/ui/micro";
 import { EmptyState } from "@/lib/ui/page";
-import type { UnifiedReputation } from "../types";
+import type { UnifiedReputation, UnifiedReviewPlatform } from "../types";
 
 // BoardRadar universe tickers with confirmed unified-reputation coverage
 // (see DATA_COVERAGE.md). The AI labs above are not in this universe.
@@ -19,7 +19,20 @@ function labelise(key: string): string {
   return spaced.charAt(0).toUpperCase() + spaced.slice(1);
 }
 
-function Rating({ value, outOf = 5 }: { value: number; outOf?: number }) {
+// A rating on its platform's own scale. The endpoint returns null for a figure
+// it holds nothing for, and the house rule is an honest absence rather than a
+// zero, so a missing rating is named as missing instead of printing a bare
+// " / 5" that claims a reading nobody published.
+function Rating({
+  value,
+  outOf = 5,
+}: {
+  value: number | null | undefined;
+  outOf?: number;
+}) {
+  if (typeof value !== "number") {
+    return <span className="font-mono text-xs text-muted">no data</span>;
+  }
   return (
     <span className="font-mono text-xs font-semibold">
       {value}
@@ -28,7 +41,37 @@ function Rating({ value, outOf = 5 }: { value: number; outOf?: number }) {
   );
 }
 
-function RatingList({ entries }: { entries: [string, number][] }) {
+// How many reviews sit behind a rating. A null count means the platform
+// published none, which is not the same as having counted none of them, so it
+// is named rather than rendered as "0 reviews". It is also the null that took
+// the whole page down: toLocaleString on it threw during hydration, so every
+// section of the module went with it.
+export function ReviewCount({ count }: { count: number | null | undefined }) {
+  return (
+    <span className="font-mono text-xs text-muted">
+      {typeof count === "number"
+        ? `${count.toLocaleString("en-GB")} reviews`
+        : "no review count"}
+    </span>
+  );
+}
+
+// One customer-review platform: the platform, its review count and its rating.
+// Exported so the null-count path can be rendered and read in a test without
+// standing up the live fetch that wraps it.
+export function PlatformRow({ platform }: { platform: UnifiedReviewPlatform }) {
+  return (
+    <li className="flex flex-wrap items-center justify-between gap-2 py-1.5">
+      <span className="text-sm">{platform.platform}</span>
+      <span className="flex items-center gap-2">
+        <ReviewCount count={platform.reviewCount} />
+        <Rating value={platform.rating} />
+      </span>
+    </li>
+  );
+}
+
+function RatingList({ entries }: { entries: [string, number | null][] }) {
   return (
     <ul className="divide-y divide-base-300/60">
       {entries.map(([key, value]) => (
@@ -183,15 +226,7 @@ export function LiveUnifiedSection() {
                 >
                   <ul className="divide-y divide-base-300/60">
                     {data.customerReviews.platforms.map((p) => (
-                      <li key={p.platform} className="flex flex-wrap items-center justify-between gap-2 py-1.5">
-                        <span className="text-sm">{p.platform}</span>
-                        <span className="flex items-center gap-2">
-                          <span className="font-mono text-xs text-muted">
-                            {p.reviewCount.toLocaleString("en-GB")} reviews
-                          </span>
-                          <Rating value={p.rating} />
-                        </span>
-                      </li>
+                      <PlatformRow key={p.platform} platform={p} />
                     ))}
                   </ul>
                   <div className="mt-2 grid grid-cols-1 gap-2 @xl:grid-cols-2">
@@ -234,9 +269,7 @@ export function LiveUnifiedSection() {
                         <div className="flex items-center justify-between">
                           <p className="text-sm font-semibold">Glassdoor</p>
                           <span className="flex items-center gap-2">
-                            <span className="font-mono text-xs text-muted">
-                              {glassdoor.reviewCount.toLocaleString("en-GB")} reviews
-                            </span>
+                            <ReviewCount count={glassdoor.reviewCount} />
                             <Rating value={glassdoor.overallRating} />
                           </span>
                         </div>
@@ -248,9 +281,7 @@ export function LiveUnifiedSection() {
                         <div className="flex items-center justify-between">
                           <p className="text-sm font-semibold">Indeed</p>
                           <span className="flex items-center gap-2">
-                            <span className="font-mono text-xs text-muted">
-                              {indeed.reviewCount.toLocaleString("en-GB")} reviews
-                            </span>
+                            <ReviewCount count={indeed.reviewCount} />
                             <Rating value={indeed.overallRating} />
                           </span>
                         </div>
@@ -278,11 +309,7 @@ export function LiveUnifiedSection() {
                       {table.rows.map((row) => (
                         <li key={row.metric} className="flex flex-wrap items-center justify-between gap-2 py-1.5">
                           <span className="text-sm">{row.metric}</span>
-                          {typeof row.values[data.ticker] === "number" ? (
-                            <Rating value={row.values[data.ticker]} />
-                          ) : (
-                            <span className="font-mono text-xs text-muted">no data</span>
-                          )}
+                          <Rating value={row.values[data.ticker]} />
                         </li>
                       ))}
                     </ul>
