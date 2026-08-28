@@ -299,3 +299,48 @@ describe("the change notification", () => {
     }
   });
 });
+
+// A component that shows the store has to follow the store.
+//
+// THE BUG THIS PINS. `SavedPositions` read `listPositions()` once on mount and
+// never again, so clearing the company from the context bar emptied the store
+// and left the saved list on Your AI Position still naming it, on the very page
+// the list lives on. The store said nothing was saved and the screen said
+// Fortnum & Mason was. `SavePosition` had the same gap and went on saying "is
+// saved" beside it.
+//
+// The event already existed and was already tested to fire; what was missing
+// was that two of the four components reading the store had not subscribed to
+// it. There is no DOM environment in this suite, so this is asserted at source
+// level rather than by mounting: crude, and it would have caught the defect,
+// which is the bar a regression test has to clear.
+describe("every component that reads the position store subscribes to it", () => {
+  const READS = /\b(listPositions|latestPosition|isSaved)\s*\(/;
+
+  it("registers POSITIONS_CHANGED wherever it reads", async () => {
+    const { readdirSync, readFileSync } = await import("node:fs");
+    const dir = "lib/position";
+    const components = readdirSync(dir).filter((f) => f.endsWith(".tsx"));
+    expect(components.length).toBeGreaterThan(0);
+
+    for (const file of components) {
+      const src = readFileSync(`${dir}/${file}`, "utf8");
+      if (!READS.test(src)) continue;
+      expect(
+        src.includes("addEventListener(POSITIONS_CHANGED"),
+        `${file} reads the position store but never listens for POSITIONS_CHANGED, so it will keep showing a position after another component removes it`
+      ).toBe(true);
+      expect(
+        src.includes("removeEventListener(POSITIONS_CHANGED"),
+        `${file} subscribes to POSITIONS_CHANGED without unsubscribing`
+      ).toBe(true);
+    }
+  });
+
+  it("covers the two that were missed", async () => {
+    const { readFileSync } = await import("node:fs");
+    const src = readFileSync("lib/position/save-position.tsx", "utf8");
+    // Both components live in this file and both were reading once on mount.
+    expect(src.match(/addEventListener\(POSITIONS_CHANGED/g) ?? []).toHaveLength(2);
+  });
+});

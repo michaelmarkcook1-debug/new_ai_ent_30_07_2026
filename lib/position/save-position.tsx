@@ -6,6 +6,7 @@ import Link from "next/link";
 import {
   isSaved,
   listPositions,
+  POSITIONS_CHANGED,
   removePosition,
   savePosition,
   toPosition,
@@ -34,8 +35,17 @@ export function SavePosition({ research }: { research: CompanyResearch }) {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (position) setSaved(isSaved(position.name));
-    setReady(true);
+    // Re-derived on every change to the store rather than on mount alone. A
+    // reader who clears the company from the context bar while this run is
+    // still on screen was otherwise told it "is saved" by the button beside
+    // the list that had just stopped listing it.
+    const sync = () => {
+      if (position) setSaved(isSaved(position.name));
+      setReady(true);
+    };
+    sync();
+    window.addEventListener(POSITIONS_CHANGED, sync);
+    return () => window.removeEventListener(POSITIONS_CHANGED, sync);
   }, [position?.key]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Nothing to carry forward from a run that could not name the company.
@@ -162,8 +172,18 @@ export function SavedPositions() {
 
   // After mount: localStorage does not exist during the server render, and
   // reading it while rendering is a hydration mismatch.
+  //
+  // AND ON EVERY CHANGE, which this read once on mount and then stopped doing.
+  // The context bar's "Stop carrying" removes the position from the same store
+  // this list renders, so a reader who cleared it there was left looking at
+  // this list still naming the company, on the very page the list lives on.
+  // The store was empty and the screen said otherwise, which is the failure
+  // POSITIONS_CHANGED was added for and which this component was missed by.
   useEffect(() => {
-    setPositions(listPositions());
+    const sync = () => setPositions(listPositions());
+    sync();
+    window.addEventListener(POSITIONS_CHANGED, sync);
+    return () => window.removeEventListener(POSITIONS_CHANGED, sync);
   }, []);
 
   const forget = (key: string) => {
