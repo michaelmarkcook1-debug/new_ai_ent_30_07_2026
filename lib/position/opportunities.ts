@@ -58,6 +58,11 @@ export interface Opportunity {
   basis: "evidenced" | "sector";
   /** The source sentence, where one exists. Never paraphrased. */
   evidence: string | null;
+  /**
+   * Why that sentence counts as evidence, so the badge can be interrogated
+   * rather than trusted. Null wherever `evidence` is.
+   */
+  evidenceWhy: string | null;
   /** Market categories a buyer would shop in for this area. */
   marketIds: string[];
 }
@@ -154,18 +159,90 @@ function workflowsForSector(tag: string): { uc: UseCase; specific: boolean }[] {
  * would put a claim about the company on screen that its sources never made,
  * which is the failure that matters.
  */
-function evidenceFor(uc: UseCase, statements: string[]): string | null {
+/**
+ * Wording that means the company is NOT doing this.
+ *
+ * The matcher counted shared words and nothing else, so a statement saying the
+ * company has no fraud detection capability contained "fraud" and "detection"
+ * and was published back to the reader as evidence that it does. Negation is
+ * invisible to token overlap and it inverts the claim entirely, which makes it
+ * the most expensive thing the old rule could not see.
+ */
+const NEGATED =
+  /\b(?:no|not|never|without|lacks?|lacking|absent|does not|do not|did not|has not|have not|hasn't|haven't|doesn't|don't|declined to|failed to|yet to|no longer|ceased|discontinued)\b/i;
+
+/**
+ * Wording that means this is intention rather than practice.
+ *
+ * "Plans to deploy fraud detection" is a statement about the future. Reporting
+ * it as evidenced AI tells a reader the company already runs something it has
+ * only talked about, which is the same class of error as inventing the
+ * deployment outright.
+ *
+ * TWO THINGS DELIBERATELY NOT IN THIS LIST, both learned by getting it wrong.
+ *
+ * "Piloting" is not intention. A pilot is a real deployment that is running
+ * now, limited in scope rather than hypothetical, and "the bank is piloting a
+ * knowledge assistant" is exactly the kind of company evidence this product
+ * exists to surface. Rejecting it downgraded a real finding to a sector guess
+ * and threw away the quote.
+ *
+ * Bare modals are not here either. "May", "could" and "will" appear constantly
+ * in accurate descriptions of what a live system does, so matching them turns
+ * every careful sentence about an existing deployment into a rejection. The
+ * entries below are phrases that state an intention, not words that can carry
+ * one.
+ */
+const PROSPECTIVE =
+  /\b(?:plans? to|planning to|intends? to|intending to|aims? to|aiming to|expects? to|expected to|hopes? to|seeking to|set to|is considering|are considering|considering whether|exploring|evaluating|proposed|proposal|roadmap|announced plans|in talks to|has yet to|have yet to)\b/i;
+
+/**
+ * Whether a company's own statements evidence this workflow, and why.
+ *
+ * WHAT THIS REPLACES. The old rule was two shared words of the workflow label
+ * appearing anywhere in any statement. That promoted a sector hypothesis to
+ * company evidence on token overlap alone: it could not see negation, could not
+ * see intention, could not tell the company from a supplier it mentions, and
+ * would attach one statement to several unrelated workflows. It is the reason
+ * the narrative and the opportunity basis could tell different stories, because
+ * one was written by a model reading passages and the other was word counting
+ * over that model's output.
+ *
+ * It is still lexical, and that is a real limit stated plainly rather than
+ * dressed up: this does not understand the sentence. What it now does is refuse
+ * the readings it can detect are wrong, and require more overlap before
+ * claiming evidence, so the failures it has left are misses rather than false
+ * claims. A missed evidenced area appears as a sector area, which understates
+ * what the company does; a false one tells the reader something untrue about
+ * their own business.
+ */
+function evidenceFor(
+  uc: UseCase,
+  statements: string[]
+): { statement: string; why: string } | null {
   const words = uc.label
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
     .filter((w) => w.length > 4);
   if (words.length === 0) return null;
+
   for (const s of statements) {
     const hay = s.toLowerCase();
-    const hits = words.filter((w) => hay.includes(w)).length;
-    // Two matching content words, or one on a single-word label.
-    if (hits >= Math.min(2, words.length)) return s;
+    const matched = words.filter((w) => hay.includes(w));
+    // Two content words as before, and every word where the label has one or
+    // two, so a short label cannot be carried by a single common term.
+    if (matched.length < Math.min(2, words.length)) continue;
+    if (words.length <= 2 && matched.length < words.length) continue;
+
+    // The checks the count could not make.
+    if (NEGATED.test(hay)) continue;
+    if (PROSPECTIVE.test(hay)) continue;
+
+    return {
+      statement: s,
+      why: `The company's own sources use ${matched.map((w) => `"${w}"`).join(" and ")} in a statement about current practice.`,
+    };
   }
   return null;
 }
@@ -188,7 +265,7 @@ export function opportunitiesFor(
   if (candidates.length === 0) return null;
 
   const areas: Opportunity[] = candidates.map(({ uc }) => {
-    const evidence = evidenceFor(uc, statements);
+    const hit = evidenceFor(uc, statements);
     return {
       id: uc.id,
       label: uc.label,
@@ -197,8 +274,9 @@ export function opportunitiesFor(
       reliabilityRequirement: uc.reliabilityRequirement,
       autonomyDefault: uc.autonomyDefault,
       regulatoryFlags: uc.regulatoryFlags ?? [],
-      basis: evidence ? "evidenced" : "sector",
-      evidence,
+      basis: hit ? "evidenced" : "sector",
+      evidence: hit?.statement ?? null,
+      evidenceWhy: hit?.why ?? null,
       marketIds: WORKFLOW_CATEGORY_MAP[uc.category] ?? [],
     };
   });

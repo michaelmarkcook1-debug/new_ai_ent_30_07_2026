@@ -31,6 +31,7 @@ const area = (over: Partial<Opportunity> = {}): Opportunity => ({
   regulatoryFlags: [],
   basis: "sector",
   evidence: null,
+  evidenceWhy: null,
   marketIds: [],
   ...over,
 });

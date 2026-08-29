@@ -190,3 +190,76 @@ describe("regulatory flag labels", () => {
     expect(flagLabel("EU_AI_Act")).toBe("the EU AI Act");
   });
 });
+
+// What may be called the company's own evidence.
+//
+// THE DEFECT THIS PINS. `evidenceFor` counted shared words of the workflow
+// label against the research statements and promoted a sector hypothesis to
+// company evidence on two matches. Token overlap cannot see negation, cannot
+// see intention, and cannot tell the company from a supplier it mentions, so a
+// sentence saying the company has NO fraud detection contained "fraud" and
+// "detection" and was published back to the reader as evidence that it does.
+//
+// It is still lexical and it still cannot read a sentence. What it now does is
+// refuse the readings it can detect are wrong, so its remaining failures are
+// misses rather than false claims. A missed area shows as a sector area, which
+// understates the company; a false one tells them something untrue about their
+// own business.
+describe("what counts as the company's own evidence", () => {
+  const areasFor = (statements: string[]) =>
+    opportunitiesFor(pos("financial_services", statements))!;
+
+  it("refuses a statement that denies the company does it", () => {
+    for (const said of [
+      "The bank has no fraud detection capability of its own.",
+      "The group does not operate transaction fraud detection in house.",
+      "Trade surveillance was discontinued in 2024.",
+    ]) {
+      const o = areasFor([said]);
+      expect(o.evidencedCount, said).toBe(0);
+    }
+  });
+
+  it("refuses a statement about intention rather than practice", () => {
+    for (const said of [
+      "The bank plans to deploy transaction fraud detection next year.",
+      "It is exploring trade surveillance automation.",
+      "The group has yet to adopt transaction fraud detection.",
+    ]) {
+      const o = areasFor([said]);
+      expect(o.evidencedCount, said).toBe(0);
+    }
+  });
+
+  // A pilot is a real deployment, limited in scope rather than hypothetical,
+  // and is exactly the company evidence this product exists to surface.
+  it("accepts a pilot, which is current practice", () => {
+    const said = "The bank is piloting transaction fraud detection across two regions.";
+    const o = areasFor([said]);
+    expect(o.evidencedCount).toBeGreaterThan(0);
+    expect(o.areas.find((a) => a.basis === "evidenced")!.evidence).toBe(said);
+  });
+
+  it("accepts an ordinary description of a running system", () => {
+    // Bare modals appear constantly in accurate descriptions of live systems,
+    // so matching them would reject the careful sentences and keep the vague.
+    const said =
+      "Transaction fraud detection runs on every card authorisation and may hold a payment for review.";
+    expect(areasFor([said]).evidencedCount).toBeGreaterThan(0);
+  });
+
+  it("says why it counted something as evidence", () => {
+    const o = areasFor(["The bank operates transaction fraud detection at scale."]);
+    const hit = o.areas.find((a) => a.basis === "evidenced")!;
+    expect(hit.evidenceWhy).toBeTruthy();
+    expect(hit.evidenceWhy).toMatch(/own sources/i);
+  });
+
+  it("leaves evidenceWhy null wherever there is no evidence", () => {
+    for (const a of areasFor([]).areas) {
+      expect(a.basis).toBe("sector");
+      expect(a.evidence).toBeNull();
+      expect(a.evidenceWhy).toBeNull();
+    }
+  });
+});
