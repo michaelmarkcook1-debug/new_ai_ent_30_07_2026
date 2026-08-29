@@ -1,4 +1,5 @@
 import { CarryToDesk } from "./carry-to-desk";
+import { OpportunityRow } from "./opportunity-row";
 import { LaneBadge } from "@/lib/ui/badges";
 import { MicroLabel } from "@/lib/ui/micro";
 import { DerivationDrawer } from "@/lib/ui/score";
@@ -431,38 +432,13 @@ function OpportunityAreas({ research }: { research: CompanyResearch }) {
         somewhere to look rather than something we found.
       </p>
 
+      {/* The rows, unchanged when collapsed. OpportunityRow renders exactly
+          what was inline here and adds the take-forward control and the three
+          role columns underneath, so a reader who never uses it sees the row
+          they saw before. */}
       <ul className="mt-3 space-y-1.5">
         {opp.areas.map((a) => (
-          <li
-            key={a.id}
-            className="rounded-lg border border-base-300 bg-base-100 px-3 py-2"
-          >
-            <div className="flex flex-wrap items-baseline gap-2">
-              <span
-                className={`rounded-full px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wide ${
-                  a.basis === "evidenced"
-                    ? "border border-good/40 bg-good-bg text-good"
-                    : "border border-base-300 text-muted"
-                }`}
-                title={
-                  a.basis === "evidenced"
-                    ? "This company's own retrieved sources spoke to this area."
-                    : "The catalogue holds this workflow for this sector. The sources said nothing about it."
-                }
-              >
-                {a.basis === "evidenced" ? "evidenced" : "sector"}
-              </span>
-              <span className="text-sm font-semibold">{a.label}</span>
-              <span className="ml-auto font-mono text-xs text-muted">
-                {a.riskTier} risk · reliability {a.reliabilityRequirement}/5
-              </span>
-            </div>
-            {a.evidence ? (
-              <p className="mt-1 measure text-xs text-muted">
-                Your sources: &ldquo;{a.evidence}&rdquo;
-              </p>
-            ) : null}
-          </li>
+          <OpportunityRow key={a.id} area={a} positionKey={position.key} />
         ))}
       </ul>
 
