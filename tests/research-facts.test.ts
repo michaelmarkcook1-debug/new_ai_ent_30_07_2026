@@ -3,6 +3,7 @@ import {
   parseStatedValue,
   parsePeriod,
   incomparableBecause,
+  comparability,
   reconcile,
   convertedTo,
   fxRate,
@@ -93,6 +94,17 @@ describe("reading a period", () => {
   it("keeps fiscal and calendar years apart", () => {
     expect(parsePeriod("FY2025").kind).toBe("fiscal_year");
     expect(parsePeriod("CY2025").kind).toBe("calendar_year");
+  });
+
+  it("reads the ways a source actually writes a fiscal year", () => {
+    // Observed live: "fiscal 2025" fell through to the bare-year branch and was
+    // compared against a calendar figure as though they covered the same
+    // twelve months.
+    for (const w of ["fiscal 2025", "fiscal year 2025", "FY 2025", "FY ending September 30, 2023"]) {
+      expect(parsePeriod(w).kind, w).toBe("fiscal_year");
+    }
+    expect(parsePeriod("fiscal 2025").year).toBe(2025);
+    expect(parsePeriod("FY ending September 30, 2023").year).toBe(2023);
   });
 
   it("reads quarters and halves with their index", () => {
@@ -398,5 +410,92 @@ describe("the Boots run, as observed", () => {
       expect(f.asStated).toBe(before);
       expect(f.converted).toBeUndefined();
     }
+  });
+});
+
+// Ignorance is not difference, and the product must not confuse them.
+//
+// Two live runs surfaced the same mistake in two fields. On Boots a filing's
+// group revenue met two aggregator figures that stated no scope, and the
+// product reported three numbers spanning threefold as "not a disagreement".
+// On Salesforce "2025" met "fiscal 2025" and it said "they cover different
+// periods", which asserts two different twelve-month windows when the truth is
+// that one source never said which it meant.
+//
+// A known difference cannot become a disagreement. An unknown one cannot become
+// anything at all until somebody states the missing field.
+describe("unknown is not the same as different", () => {
+  const base = fact({ scope: "group", period: { kind: "fiscal_year", year: 2025, index: null, label: "FY2025" } });
+
+  it("calls an unstated scope unknown, not a different measure", () => {
+    const unscoped = fact({ scope: "unknown", value: 17, asStated: "£17bn", sourceIndex: 1 });
+    const c = comparability(base, unscoped);
+    expect(c.kind).toBe("unknown");
+    expect(reconcile([base, unscoped]).verdict).toBe("INSUFFICIENT");
+  });
+
+  it("still calls group against segment a genuine difference", () => {
+    const segment = fact({ scope: "segment", value: 3, asStated: "£3bn", sourceIndex: 1 });
+    expect(comparability(base, segment).kind).toBe("different");
+  });
+
+  it("calls a bare year against a fiscal year unknown, not different", () => {
+    const bare = fact({
+      period: { kind: "unknown", year: 2025, index: null, label: "2025" },
+      value: 12,
+      asStated: "£12bn",
+      sourceIndex: 1,
+    });
+    const c = comparability(base, bare);
+    expect(c.kind).toBe("unknown");
+    // Narrowed so the reason is readable: only the two non-comparable shapes
+    // carry one.
+    expect(c.kind === "comparable" ? "" : c.why).toMatch(/fiscal or a calendar/i);
+  });
+
+  it("still calls two stated, different years a difference", () => {
+    const prior = fact({
+      period: { kind: "fiscal_year", year: 2024, index: null, label: "FY2024" },
+      sourceIndex: 1,
+    });
+    expect(comparability(base, prior).kind).toBe("different");
+  });
+
+  it("compares two bare years of the same year", () => {
+    const p = { kind: "unknown" as const, year: 2025, index: null, label: "2025" };
+    const a = fact({ period: p });
+    const b = fact({ period: p, value: 10, sourceIndex: 1 });
+    expect(comparability(a, b).kind).toBe("comparable");
+  });
+
+  it("lets an unknown basis compare, so a filing can supersede an estimate", () => {
+    // An aggregator's estimate OF revenue is a claim about the number the
+    // filing reports. Blocking on the missing label meant the audited figure
+    // could never settle it.
+    const filing = fact({ evidenceType: "regulatory_filing", basis: "reported", value: 23.6, asStated: "$23.6bn", currency: "USD" });
+    const estimate = fact({ evidenceType: "aggregator", basis: "unknown", value: 7.6, asStated: "$7.6B", currency: "USD", sourceIndex: 1 });
+    expect(comparability(filing, estimate).kind).toBe("comparable");
+    expect(reconcile([filing, estimate]).verdict).toBe("SUPERSEDED");
+  });
+
+  it("still keeps reported and adjusted apart", () => {
+    const adjusted = fact({ basis: "adjusted", value: 11.4, asStated: "£11.4bn", sourceIndex: 1 });
+    expect(comparability(base, adjusted).kind).toBe("different");
+  });
+});
+
+describe("the reason reads as a sentence", () => {
+  it("says so plainly when a figure carries no period at all", () => {
+    const dated = fact({ period: { kind: "fiscal_year", year: 2025, index: null, label: "FY2025" } });
+    const undated = fact({
+      period: { kind: "unknown", year: null, index: null, label: "" },
+      value: 17,
+      asStated: "£17bn",
+      sourceIndex: 1,
+    });
+    const why = reconcile([dated, undated]).why;
+    expect(why).toMatch(/states no period at all/i);
+    // The empty label used to leave "does not say whether  is a fiscal".
+    expect(why).not.toMatch(/whether\s+is a fiscal/i);
   });
 });

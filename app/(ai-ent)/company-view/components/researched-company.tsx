@@ -14,7 +14,7 @@ import type { CompanyResearch } from "@/lib/research/company";
 // to travel together. A finding a reader cannot open is an assertion.
 
 export function ResearchedCompany({ research }: { research: CompanyResearch }) {
-  const { profile, metrics, findings, aiFindings, recommendations, sources, absence } =
+  const { profile, metrics, financials, findings, aiFindings, recommendations, sources, absence } =
     research;
 
   if (absence) {
@@ -63,8 +63,32 @@ export function ResearchedCompany({ research }: { research: CompanyResearch }) {
         <section>
           <MicroLabel
             label="What the sources state"
-            tooltip="Figures quoted exactly as the source gives them. Never converted, computed or estimated."
+            tooltip="Figures quoted exactly as the source gives them. Never converted, computed or estimated. Where two sources speak to the same measure, what the product concluded is stated underneath rather than one figure being quietly dropped."
           />
+
+          {/* What reconciliation concluded, where it had more than one figure
+              to work with. Stated above the cards rather than beside one of
+              them: the conclusion is about the set, and attaching it to a
+              single card would read as a note on that source. A conflict is
+              shown as a conflict, and no midpoint is invented. */}
+          {financials
+            .filter((f) => f.reconciliation.facts.length > 1 || !f.usable)
+            .map((f) => (
+              <p
+                key={f.metric}
+                className={`measure mt-2 text-xs ${
+                  f.usable ? "text-muted" : "text-warn"
+                }`}
+              >
+                <span className="font-semibold uppercase tracking-wide">
+                  {f.metric.replace(/_/g, " ")}
+                </span>{" "}
+                <span className="font-mono">
+                  [{f.reconciliation.verdict.toLowerCase()}]
+                </span>{" "}
+                {f.reconciliation.why}
+              </p>
+            ))}
           <div className="mt-2 grid grid-cols-1 gap-3 @xl:grid-cols-2 @4xl:grid-cols-3">
             {metrics.map((m, i) => {
               const src = sources[m.sourceIndex];

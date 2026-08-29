@@ -6,6 +6,7 @@ import {
   type AuthorFailure,
 } from "@/lib/analyst/llm";
 import { TAG_LABEL } from "@/lib/exposure/vertical";
+import { factsFrom, reconcileFacts, type ReconciledMetric } from "./ingest";
 
 // Research a company the product does not already track.
 //
@@ -38,6 +39,17 @@ export interface CompanyMetric {
   label: string;
   value: string;
   sourceIndex: number;
+  /**
+   * What the model classified, carried through unvalidated.
+   *
+   * `factsFrom()` is what decides whether any of it is usable. Kept on the
+   * metric so the card can still render the figure exactly as the source wrote
+   * it even where the classification was too thin to reconcile on.
+   */
+  metric?: string;
+  period?: string;
+  scope?: string;
+  basis?: string;
 }
 
 export interface CompanyResearch {
@@ -62,6 +74,17 @@ export interface CompanyResearch {
   } | null;
   /** Stated figures, rendered as cards. Never a score we computed. */
   metrics: CompanyMetric[];
+  /**
+   * The same figures as structured facts, and what the product concluded when
+   * two sources spoke to the same measure.
+   *
+   * THIS IS THE CANONICAL LAYER. Downstream intelligence reads `financials`
+   * rather than the metric strings, so a figure the product could not settle
+   * cannot quietly become the basis of a recommendation. The cards keep
+   * rendering from `metrics` because a reader should still see what each
+   * source said, including the ones that disagree.
+   */
+  financials: ReconciledMetric[];
   findings: CompanyFinding[];
   /** AI-specific findings, kept apart because that is what this product is for. */
   aiFindings: CompanyFinding[];
@@ -78,6 +101,7 @@ const empty = (query: string, absence: string): CompanyResearch => ({
   query,
   profile: null,
   metrics: [],
+  financials: [],
   findings: [],
   aiFindings: [],
   recommendations: [],
@@ -91,7 +115,19 @@ interface Draft {
   what?: string;
   industry?: string;
   sectorTag?: string;
-  metrics?: { label?: string; value?: string; source?: number }[];
+  metrics?: {
+    label?: string;
+    value?: string;
+    source?: number;
+    /** Normalised name, so two sources' "Group sales" and "Revenue" can meet. */
+    metric?: string;
+    /** As the source writes it: "FY2025", "Q3 2026". Absent is a real answer. */
+    period?: string;
+    /** group, segment, region, product_line. Absent is a real answer. */
+    scope?: string;
+    /** reported or estimated. Absent is a real answer. */
+    basis?: string;
+  }[];
   findings?: { statement?: string; source?: number }[];
   aiFindings?: { statement?: string; source?: number }[];
   recommendations?: string[];
@@ -117,6 +153,13 @@ function citedMetrics(
       label: m.label.trim(),
       value: m.value.trim(),
       sourceIndex: m.source - 1,
+      // Passed through as reported. Nothing here is trusted: readScope(),
+      // readBasis() and parsePeriod() in ingest.ts decide what survives, and
+      // anything they cannot classify becomes unknown rather than a default.
+      metric: (m as { metric?: string }).metric,
+      period: (m as { period?: string }).period,
+      scope: (m as { scope?: string }).scope,
+      basis: (m as { basis?: string }).basis,
     }));
 }
 
@@ -254,7 +297,16 @@ Return JSON:
 - sectorTag: place this company in one of the sectors below, copying the identifier EXACTLY (the part before the bracket). Leave it as an empty string when none fits. An empty string is a real answer and better than a wrong placement, which would read this company against another sector's assurance bar.
 
 SECTORS: ${SECTOR_LIST}
-- metrics: up to 6 figures the passages actually state, as cards. Label is two or three words ("Revenue", "Employees", "Listed as", "Founded"). Value is the figure exactly as the source gives it, currency and all. Only include a figure a passage states outright; never convert, never compute, never estimate. Each cites its passage.
+- metrics: up to 6 figures the passages actually state, as cards. Each carries:
+  - label: two or three words as a heading ("Revenue", "Employees", "Founded").
+  - value: the figure EXACTLY as the source gives it, currency symbol and all. Never convert, never compute, never estimate, never round.
+  - source: the passage number.
+  - metric: a normalised name for what is being measured, lower case with underscores, so two sources describing the same quantity can be compared. Use "revenue" for turnover, group sales and net sales alike; "employees", "market_cap", "stores", "founded" and so on. This is the only field where you may rename: it is a label for the quantity, not a change to the figure.
+  - period: the period the figure covers, as the source states it ("FY2025", "Q3 2026", "2024"). OMIT IT ENTIRELY if the passage does not say. Do not infer the year from the publication date, from context, or from what would be most likely.
+  - scope: "group" where the figure is the whole company, "segment" where it is one division or brand, "region" where it is one geography, "product_line" where it is one product. OMIT IT ENTIRELY if the passage does not make this clear. A figure that simply says "revenue" without saying whose is not group by default.
+  - basis: "reported" where the company or a filing states the figure, "estimated" where the source presents it as its own estimate, model or approximation. Data aggregators and company-profile sites are estimating unless they cite the company. OMIT IT ENTIRELY if you cannot tell.
+
+  An omitted field is a correct answer and is treated as unknown. A guessed one is treated as fact by everything downstream, so guessing a period, a scope or a reported status is worse than leaving it out.
 - recommendations: up to 3. What a buyer evaluating AI for this company should do next, following from what was found. No figures needed. If the sources are too thin to justify advice, return an empty array.
 - findings: up to ${attempt.findings}. What a buyer should know about the company's size, position and direction. Each cites the passage number it came from.
 - aiFindings: up to ${attempt.findings}. What the sources say about this company's use of, or exposure to, AI. Each cites its passage number. If the passages say nothing about AI, return an empty array rather than inferring.
@@ -274,6 +326,7 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
     if (drafted.failure === "unreachable" || drafted.failure === "no-key") break;
 
     if (draft?.name) {
+      const metricsA = citedMetrics(draft.metrics, attempt.hits.length);
       return {
         query: name,
         profile: {
@@ -282,7 +335,10 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
           industry: draft.industry ?? "not stated",
           sector: placeSector(draft),
         },
-        metrics: citedMetrics(draft.metrics, attempt.hits.length),
+        metrics: metricsA,
+        // Reconciled at the point the research lands, once, so every surface
+        // downstream reads one conclusion rather than re-deriving its own.
+        financials: reconcileFacts(factsFrom(metricsA, attempt.hits)),
         findings: cited(draft.findings, attempt.hits.length),
         aiFindings: cited(draft.aiFindings, attempt.hits.length),
         recommendations: (draft.recommendations ?? [])
@@ -404,6 +460,7 @@ Before you say two sources disagree, check whether they are the same quantity ex
     };
   }
 
+  const metricsB = citedMetrics(draft.metrics, found.hits.length);
   return {
     query: name,
     profile: {
@@ -412,7 +469,8 @@ Before you say two sources disagree, check whether they are the same quantity ex
       industry: draft.industry ?? "not stated",
       sector: placeSector(draft),
     },
-    metrics: citedMetrics(draft.metrics, found.hits.length),
+    metrics: metricsB,
+    financials: reconcileFacts(factsFrom(metricsB, found.hits)),
     findings: cited(draft.findings, found.hits.length),
     aiFindings: [],
     recommendations: [],

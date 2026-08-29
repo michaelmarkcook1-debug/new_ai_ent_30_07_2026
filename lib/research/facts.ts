@@ -207,7 +207,11 @@ export function parsePeriod(raw: string | null | undefined): FactPeriod {
   const h = s.match(/\bH([12])\s*(?:FY)?\s*(\d{4})\b/i);
   if (h) return { kind: "half", year: Number(h[2]), index: Number(h[1]), label: s };
 
-  const fy = s.match(/\bFY\s*(\d{4})\b/i);
+  // "FY2025", "FY 2025", "fiscal 2025" and "fiscal year 2025" are one thing.
+  // Observed on a live Salesforce run: "fiscal 2025" fell through to the bare
+  // year branch and was compared against a calendar-year figure as though the
+  // two covered the same twelve months.
+  const fy = s.match(/\b(?:FY|fiscal(?:\s+year)?)\s*(?:ending\s+[^,]*,?\s*)?(\d{4})\b/i);
   if (fy) return { kind: "fiscal_year", year: Number(fy[1]), index: null, label: s };
 
   const cy = s.match(/\b(?:CY|calendar\s+year)\s*(\d{4})\b/i);
@@ -224,25 +228,120 @@ export function parsePeriod(raw: string | null | undefined): FactPeriod {
 
 // ------------------------------------------------------------ comparability
 
-/** Why two facts cannot be compared, or null when they can. */
-export function incomparableBecause(
-  a: CompanyFact,
-  b: CompanyFact
-): string | null {
-  if (a.metric !== b.metric) return "they measure different things";
-  if (a.scope !== b.scope) {
-    return `one is ${a.scope} and the other is ${b.scope}, which are different figures rather than disagreeing ones`;
+/**
+ * Why two facts cannot be compared, and whether that is knowledge or ignorance.
+ *
+ * THE DISTINCTION THIS DRAWS, and it took a live case to see it. Group revenue
+ * against segment revenue is KNOWN to be two different measures, so it is not a
+ * disagreement and never could be. Group revenue against a figure whose scope
+ * nobody stated is UNKNOWN: it might be the same claim disagreeing, or a
+ * different one entirely, and the product cannot tell which.
+ *
+ * Collapsing those two into "not comparable" made the second come out as
+ * "not a disagreement", which is an assertion the evidence does not support.
+ * Worse, it let any figure escape scrutiny by omitting its scope: the Boots
+ * run had a filing's group sales against two aggregator estimates that stated
+ * no scope, and three revenue figures spanning threefold were reported as
+ * compatible. Ignorance now reads as ignorance.
+ */
+export type Comparability =
+  | { kind: "comparable" }
+  /** Known to be different measures. Not a disagreement, and cannot become one. */
+  | { kind: "different"; why: string }
+  /** Cannot be established either way, so no verdict may rest on it. */
+  | { kind: "unknown"; why: string };
+
+export function comparability(a: CompanyFact, b: CompanyFact): Comparability {
+  if (a.metric !== b.metric) {
+    return { kind: "different", why: "they measure different things" };
   }
-  if (a.basis !== b.basis) {
-    return `one is ${a.basis} and the other is ${b.basis}`;
+
+  // Scope. Unknown on either side is ignorance, not difference.
+  if (a.scope === "unknown" || b.scope === "unknown") {
+    if (a.scope !== b.scope) {
+      return {
+        kind: "unknown",
+        why: `one is stated as ${a.scope === "unknown" ? b.scope : a.scope} and the other does not say what it covers, so whether they describe the same thing cannot be established`,
+      };
+    }
+  } else if (a.scope !== b.scope) {
+    return {
+      kind: "different",
+      why: `one is ${a.scope} and the other is ${b.scope}, which are different figures rather than disagreeing ones`,
+    };
   }
-  if (a.period.kind !== b.period.kind || a.period.year !== b.period.year) {
-    return `they cover different periods, ${a.period.label || "unstated"} and ${b.period.label || "unstated"}`;
+
+  // Basis. Only a KNOWN difference blocks: reported and adjusted are genuinely
+  // different measures, because adjusted strips exceptionals the reported
+  // figure includes.
+  //
+  // An unknown basis must not block, and getting this wrong kept the Boots case
+  // unresolved. An aggregator's estimate OF revenue is a claim about the same
+  // quantity the filing reports; it is trying to be that number. Treating the
+  // missing label as incomparability meant a filing could never supersede an
+  // estimate, so the product said "cannot tell" even with the audited figure in
+  // front of it. Source rank is what that case needs, and rank only gets to act
+  // once the two are allowed to meet.
+  if (a.basis !== b.basis && a.basis !== "unknown" && b.basis !== "unknown") {
+    return { kind: "different", why: `one is ${a.basis} and the other is ${b.basis}` };
   }
-  if ((a.period.index ?? null) !== (b.period.index ?? null)) {
-    return "they cover different parts of the same year";
+
+  // Period. Same rule: a stated year against no year is not a known difference.
+  // A period is unknown when its KIND is, whether or not a year came with it.
+  // A bare "2025" does not say whether it means the calendar year or a fiscal
+  // one, and those are different twelve-month windows. Requiring the year to be
+  // missing too was the same mistake as the scope rule above and it surfaced
+  // the same way: a live Salesforce run reported "2025" against "fiscal 2025"
+  // as "not a disagreement: they cover different periods", which asserts they
+  // are different windows when the truth is that nobody said.
+  const aUnknown = a.period.kind === "unknown";
+  const bUnknown = b.period.kind === "unknown";
+  if (aUnknown !== bUnknown) {
+    return {
+      kind: "unknown",
+      // The unknown side often carries no label at all, which read as "does
+      // not say whether is a fiscal or a calendar year".
+      why: (() => {
+        const known = (aUnknown ? b : a).period.label || "a stated period";
+        const other = (aUnknown ? a : b).period.label;
+        return other
+          ? `one covers ${known} and the other does not say whether ${other} is a fiscal or a calendar year, so they cannot be lined up`
+          : `one covers ${known} and the other states no period at all, so they cannot be lined up`;
+      })(),
+    };
   }
-  return null;
+  if (aUnknown && bUnknown) {
+    // Two bare years. Comparable when they name the same year, different when
+    // they do not: neither is knowably fiscal, so at least they are alike.
+    if (a.period.year !== b.period.year) {
+      return {
+        kind: "different",
+        why: `they cover different periods, ${a.period.label || "unstated"} and ${b.period.label || "unstated"}`,
+      };
+    }
+  } else if (a.period.kind !== b.period.kind || a.period.year !== b.period.year) {
+    return {
+      kind: "different",
+      why: `they cover different periods, ${a.period.label || "unstated"} and ${b.period.label || "unstated"}`,
+    };
+  } else if ((a.period.index ?? null) !== (b.period.index ?? null)) {
+    return { kind: "different", why: "they cover different parts of the same year" };
+  }
+
+  return { kind: "comparable" };
+}
+
+/**
+ * Why two facts cannot be compared, or null when they can.
+ *
+ * Kept as the narrower question some callers actually want. It answers "is
+ * there a reason these do not line up", without distinguishing a known
+ * difference from an unknown one; `comparability()` is what reconciliation
+ * uses, because the difference between those two decides the verdict.
+ */
+export function incomparableBecause(a: CompanyFact, b: CompanyFact): string | null {
+  const c = comparability(a, b);
+  return c.kind === "comparable" ? null : c.why;
 }
 
 // ------------------------------------------------------------------- money
@@ -347,12 +446,36 @@ const TOLERANCE = 0.02;
  */
 function judgePair(a: CompanyFact, b: CompanyFact, table: FxTable): Reconciliation {
   const facts = [a, b];
-  const why0 = incomparableBecause(a, b);
-  if (why0) {
+  const c = comparability(a, b);
+
+  // Known to be different measures. Not a disagreement, and the stronger source
+  // is still the one to carry forward.
+  if (c.kind === "different") {
     return {
       verdict: "COMPATIBLE",
       chosen: EVIDENCE_RANK[a.evidenceType] >= EVIDENCE_RANK[b.evidenceType] ? a : b,
-      why: `Not a disagreement: ${why0}.`,
+      why: `Not a disagreement: ${c.why}.`,
+      facts,
+    };
+  }
+
+  // Cannot be established either way. This must NOT come out as "compatible":
+  // that asserts agreement the evidence does not support, and it is how three
+  // revenue figures spanning threefold were reported as reconciled. Where the
+  // figures are also far apart, say so, because a reader looking at both needs
+  // to know the product has not settled it.
+  if (c.kind === "unknown") {
+    const far =
+      a.currency === b.currency &&
+      Math.abs(magnitude(a) - magnitude(b)) /
+        Math.max(Math.abs(magnitude(a)), Math.abs(magnitude(b)), 1) >
+        TOLERANCE;
+    return {
+      verdict: "INSUFFICIENT",
+      chosen: null,
+      why: far
+        ? `${a.asStated} and ${b.asStated} are far apart and ${c.why}. Neither is used.`
+        : `${c.why}. Neither is used.`,
       facts,
     };
   }
