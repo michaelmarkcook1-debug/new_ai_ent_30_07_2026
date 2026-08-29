@@ -47,7 +47,17 @@ export default async function FinancialSnapshotPage() {
       notEstimable: privateRows.filter((r) => r.rung === "not_estimable").length,
     }
   );
-  const written = await authorInsight(insight, "financial", []);
+  // The companies this page carries a disclosure position for, public and
+  // private. Declared as an empty list before, so the reading could state that
+  // a third of tracked vendors file a quantified AI revenue figure and could
+  // not say which third. On a page whose recommendation is "demand the filing
+  // reference", an instruction that cannot name the vendor is not an
+  // instruction. Nothing new is loaded: both rosters are already rendered
+  // below as the disclosure ladder.
+  const written = await authorInsight(insight, "financial", [
+    ...revenue.companies.map((c) => c.name),
+    ...privateRows.map((r) => r.name),
+  ]);
 
   return (
     <>

@@ -59,7 +59,18 @@ export default async function PricePerformancePage() {
   const written = await authorInsight(
     crossed,
     "price and capability",
-    ccForInsight.models.slice(0, 14).map((x) => x.model),
+    // What this page can legitimately name: every provider it plots, plus the
+    // models the reading is actually about. NOT an arbitrary first 14 of 330,
+    // which excluded the cheapest qualifying model in the sentence the page
+    // leads with. All 330 model names would be 8,430 characters of prompt for
+    // no gain; providers are 150 and the face-off is 263.
+    [
+      ...ccForInsight.providers.map((p) => p.name),
+      ...faceOff.entries.map((e) => e.model),
+      ...ccForInsight.models
+        .filter((m) => m.frontier)
+        .map((m) => m.model),
+    ],
     null,
     { signals, synthesis }
   );

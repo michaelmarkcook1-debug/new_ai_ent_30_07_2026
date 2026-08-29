@@ -62,7 +62,7 @@ export default async function CompetitiveIntelPage({
   const written = await authorInsight(
     crossed,
     "competitive",
-    m.vendors.slice(0, 12).map((v) => v.name),
+    m.vendors.map((v) => v.name),
     null,
     { signals, synthesis }
   );

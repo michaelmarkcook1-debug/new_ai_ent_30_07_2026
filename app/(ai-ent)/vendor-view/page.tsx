@@ -45,7 +45,13 @@ export default async function VendorViewPage() {
   const written = await authorInsight(
     crossed,
     "vendor ranking",
-    m.vendors.slice(0, 12).map((v) => v.name),
+    // The vendors this page covers, all of them. This was sliced to the first 12
+    // of 43, which is not a prompt-size saving (the full list is 410 characters)
+    // and cost the page its analyst voice: the computed text names SAP, Google,
+    // Groq and Lambda, all outside that slice, so the model quoting the page's
+    // own reading was rejected for naming vendors "this page's data does not
+    // cover" and the reader got the enumerated computed text instead.
+    m.vendors.map((v) => v.name),
     null,
     { signals, synthesis }
   );

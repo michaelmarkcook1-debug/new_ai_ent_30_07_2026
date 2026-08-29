@@ -51,7 +51,7 @@ export default async function ReputationTrackerPage() {
   const written = await authorInsight(
     crossed,
     "reputation",
-    m.vendors.slice(0, 12).map((v) => v.name),
+    m.vendors.map((v) => v.name),
     null,
     { signals, synthesis }
   );

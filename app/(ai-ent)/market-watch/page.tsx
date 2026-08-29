@@ -60,7 +60,7 @@ export default async function MarketWatchPage() {
   const written = await authorInsight(
     crossed,
     "market",
-    metricsForInsight.vendors.slice(0, 12).map((v) => v.name),
+    metricsForInsight.vendors.map((v) => v.name),
     null,
     { signals: crossSignals, synthesis }
   );

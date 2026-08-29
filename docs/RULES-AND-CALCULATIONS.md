@@ -2174,6 +2174,39 @@ the same thing twice.
 `jointTemporal()` takes the WEAKEST input's class. A change combined with a
 snapshot is a statement about a snapshot.
 
+### What a page may name
+
+`authorInsight(computed, context, entities, ...)`. The third argument is the
+boundary for factual naming: `foreignEntities()` treats a name outside it as
+the model reaching past the page's data. Five pages declared that boundary as
+an arbitrary prefix of what they hold.
+
+| Page | Declared | Actually covers |
+|---|---|---|
+| `vendor-view` | `vendors.slice(0, 12)` | 43 vendors |
+| `competitive-intel` | `vendors.slice(0, 12)` | 43 vendors |
+| `market-watch` | `vendors.slice(0, 12)` | 43 vendors |
+| `reputation-tracker` | `vendors.slice(0, 12)` | 43 vendors |
+| `price-performance` | `models.slice(0, 14)` | 330 models, 18 providers |
+| `alliances` | `.slice(0, 14)` | the whole delivery map |
+| `financial-snapshot` | `[]` | 9 public and the private rungs |
+
+**Measured, 29 August 2026.** Vendor View's own computed reading names SAP,
+Google, Groq and Lambda, all four outside its first twelve. The model quoting
+the page back to itself was rejected with "a vendor this page's data does not
+cover", retried, failed again and the page rendered its computed text on every
+load. The guard was correct; the declaration was wrong.
+
+The truncation bought nothing: 43 vendor names is 410 characters. The one place
+a full list would have been costly is `price-performance`, where 330 model
+names is 8,430 characters, so that page declares its 18 providers (150
+characters) plus the frontier face-off and frontier models it actually
+discusses. `peer-insights` keeps an empty list, correctly: it reads the
+workflow catalogue and carries no vendor roster.
+
+`tests/analyst-page-entities.test.ts` fails on a `.slice(0, N)` over a covered
+set, and on an empty declaration from a page that holds a roster.
+
 ### The authoring contract
 
 `lib/analyst/author.ts`, `authoringContract()` at `:89`. The deterministic

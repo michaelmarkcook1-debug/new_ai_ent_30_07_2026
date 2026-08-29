@@ -109,7 +109,9 @@ export default async function AlliancesPage() {
   const written = await authorInsight(
     crossed,
     "alliance channel",
-    [...new Set(data.links.flatMap((l) => [l.vendorName, l.partnerName]))].slice(0, 14),
+    // Every vendor and delivery firm on the map. Sliced to 14 before, which
+    // silently barred the model from naming integrators the page plots.
+    [...new Set(data.links.flatMap((l) => [l.vendorName, l.partnerName]))],
     null,
     { signals, synthesis }
   );

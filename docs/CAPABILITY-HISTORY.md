@@ -15,6 +15,44 @@ than a gap.
 
 ---
 
+## 29 August 2026
+
+**Every tab can now name the vendors it is talking about.**
+
+The written analysis is only allowed to name vendors the page actually covers.
+That rule is right and it is what stops the model reaching for a company it
+happens to know about. What was wrong is the list each page handed it: four
+tabs covering 43 vendors declared only the first twelve, Price / Performance
+declared 14 of the 330 models it plots, and Financial Snapshot declared none at
+all.
+
+The effect was worst on Vendor View. Its own computed reading names SAP,
+Google, Groq and Lambda, and all four sit outside the first twelve, so the
+model quoting the page back to itself was refused for naming vendors "this page
+does not cover". It was refused twice and the page fell back to its plainer
+computed text on every single load. Nobody would have seen an error; the page
+simply read like a list instead of an analysis.
+
+Vendor View now reads: scores rank capability, not commitment risk, and four
+top-third vendors carry unresolved high-severity findings. It names SAP as the
+one genuinely uncontestable position, calls Databricks and Google a tie at 0.05
+apart, and says the decision there belongs to terms rather than to rank.
+
+Financial Snapshot gained the most in usefulness. It could already tell you
+that only a third of tracked vendors file a quantified AI revenue figure. It
+could not tell you which third, which makes "demand the filing reference" an
+instruction you cannot act on. It now names them.
+
+The truncation was never buying anything: the full list of 43 vendor names is
+about four hundred characters. The one page where a complete list would have
+been genuinely large is Price / Performance, which plots 330 models, so that
+one names its 18 providers and the specific models the reading is about.
+
+What you should see: the same recommendations and the same figures, with the
+analysis naming the companies it is actually about.
+
+---
+
 ## 28 August 2026 (later)
 
 **The product no longer treats "when we asked" as "when it was measured".**
