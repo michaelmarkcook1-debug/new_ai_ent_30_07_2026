@@ -71,6 +71,70 @@ const TIMEOUT_MS = 75_000;
  * the third was a request nobody could afford to wait for.
  */
 const SDK_RETRIES = 0;
+
+/**
+ * The whole authoring call's budget, model time and validation together.
+ *
+ * MEASURED, NOT CHOSEN. A normal authoring call on this product runs 11 to 30
+ * seconds: the company research call was timed at 30,491ms for 4,420 input
+ * tokens and a full 2,400-token answer, and the insight calls are smaller. Two
+ * attempts at 75 seconds is the arithmetic ceiling; 160 seconds leaves the
+ * second attempt room to complete and refuses a third that could not.
+ *
+ * This is the bound the two timer-based deadlines could not provide. It is
+ * checked synchronously, so a blocked event loop cannot postpone it.
+ */
+export const BUDGET_MS = 160_000;
+
+/**
+ * Room for the model to think, on top of the prose the caller asked for.
+ *
+ * THE BUG THIS FIXES, and it is the root cause of the whole investigation.
+ * `max_tokens` is the budget for EVERYTHING the model emits, thinking included.
+ * Every caller here passes it as though it were a length limit on the answer,
+ * because that is what it looks like: `authorInsight` asks for 1,400 tokens
+ * meaning a 90 to 140 word summary and three implications.
+ *
+ * Opus 5 thinks adaptively by default, and that thinking comes out of the same
+ * budget. Measured on 30 August 2026 against a real insight prompt: 601 of
+ * 1,054 output tokens went to thinking. Under the load of a production build
+ * generating 85 pages the model thought harder, spent the entire 1,400 before
+ * writing a word, and returned `stop_reason: max_tokens` with a single thinking
+ * block and no text at all. Four of nine insight calls ended that way, each
+ * after 18 to 21 seconds of latency and a full budget of tokens, and each one
+ * silently became "no response" and fell back to computed prose.
+ *
+ * The headroom is generous because the ceiling costs nothing when it is not
+ * reached: the model stops at `end_turn`, so a raised limit does not lengthen a
+ * call. The same prompt at 4,000 returned in 12.1 seconds against 14.8 at
+ * 1,400. What it buys is that thinking can no longer starve the answer.
+ *
+ * Thinking is deliberately NOT disabled, though that was measured too and is
+ * faster (9.3 seconds). Turning it off changes how the model reasons about the
+ * analysis, and this is a latency gate rather than a licence to change what the
+ * readings say.
+ */
+const THINKING_HEADROOM = 2_000;
+
+/**
+ * Whether another attempt may be started.
+ *
+ * A synchronous comparison of two clock readings and nothing else, which is the
+ * entire point: it needs no timer, so a blocked event loop cannot postpone it
+ * the way it postponed the SDK timeout and the abort signal.
+ *
+ * Exported so the rule can be tested directly. The wiring is proved by the
+ * measured authoring matrix rather than by a unit test, because the loop it
+ * guards sits behind `unstable_cache`, which throws `Invariant: incrementalCache
+ * missing` outside a Next render and cannot be driven from vitest at all.
+ */
+export function retryWithinBudget(
+  startedAt: number,
+  now: number,
+  budgetMs: number = BUDGET_MS
+): boolean {
+  return now - startedAt <= budgetMs;
+}
 // One day, matching the ISR cadence of the pages that call this. Without it,
 // every render of nine tabs would be an Opus call.
 const TTL_MS = 24 * 60 * 60 * 1000;
@@ -88,6 +152,36 @@ export type Authorship = "written" | "computed";
 // L1: this instance's own memory. Free and instant, and useless on the next
 // instance.
 const cache = new Map<string, { value: unknown; at: number }>();
+
+/**
+ * One line per authoring call, with the phases separated.
+ *
+ * WHY THIS EXISTS. Two authoring calls were observed at 568 and 951 seconds
+ * against a 75-second model timeout, and nothing in the logs could say which
+ * part of that was the model, which was our own retry loop, and which was the
+ * cache. A single duration is not a diagnosis: it cannot distinguish one slow
+ * call from twelve fast ones, and it cannot tell an aborted request that
+ * stopped from one that carried on.
+ *
+ * Deliberately one line and always on. An operator reading a slow page needs
+ * the breakdown at the moment it happens, and a debug flag nobody remembers to
+ * set is a flag that is off when it matters.
+ *
+ * Never carries the prompt, the answer or the key: only durations, counts and
+ * outcomes.
+ */
+function phaseLog(
+  kind: string,
+  phases: { label: string; ms: number }[],
+  outcome: string
+): void {
+  const total = phases.reduce((t, p) => t + p.ms, 0);
+  console.warn(
+    `[analyst-llm] ${kind} ${outcome} in ${total}ms (${phases
+      .map((p) => `${p.label} ${p.ms}ms`)
+      .join(", ")})`
+  );
+}
 
 function keyOf(kind: string, payload: unknown): string {
   const s = `${kind}:${JSON.stringify(payload)}`;
@@ -328,14 +422,47 @@ async function callModel(
       timeout: TIMEOUT_MS,
       maxRetries: SDK_RETRIES,
     });
-    const res = await client.messages.create({
-      model: MODEL,
-      max_tokens: maxTokens,
-      system: SYSTEM,
-      messages: [{ role: "user", content: prompt }],
-    });
+    const res = await client.messages.create(
+      {
+        model: MODEL,
+        // The caller's number is a PROSE budget; the API's is a budget for
+        // everything, thinking included. See THINKING_HEADROOM.
+        max_tokens: maxTokens + THINKING_HEADROOM,
+        system: SYSTEM,
+        messages: [{ role: "user", content: prompt }],
+      },
+      // A SECOND, INDEPENDENT ABORT ON THE UNDERLYING REQUEST.
+      //
+      // The SDK's own `timeout` is a promise-level deadline it enforces with a
+      // timer. `AbortSignal.timeout()` is passed through to fetch and aborts
+      // the HTTP request itself, so a call that overruns stops consuming a
+      // socket rather than being abandoned while still in flight. Both are
+      // timer-based and both can be delayed by a blocked event loop, which is
+      // why neither is the real bound: see the elapsed check in generate().
+      { signal: AbortSignal.timeout(TIMEOUT_MS) }
+    );
     const text = res.content.find((b) => b.type === "text");
-    return text && text.type === "text" ? text.text : null;
+    if (!text || text.type !== "text") {
+      // A RESPONSE THAT CAME BACK AND CARRIED NO PROSE.
+      //
+      // This returned null silently, and null is indistinguishable upstream
+      // from a call that never happened: `generate()` throws "no response" and
+      // the page falls back to computed text. Measured during a production
+      // build on 30 August 2026, four of nine insight calls ended this way
+      // after 19 to 21 seconds each, which is a full generation's worth of
+      // latency and tokens spent to produce nothing a reader ever sees.
+      //
+      // The stop reason and the block types are what separate the causes: an
+      // answer truncated before it reached prose, an answer that was all
+      // thinking, or a refusal. Logged rather than guessed at.
+      console.warn(
+        `[analyst-llm] call returned no text after ${Date.now() - started}ms: stop=${res.stop_reason}, blocks=[${res.content
+          .map((b) => b.type)
+          .join(", ")}], out=${res.usage?.output_tokens ?? "?"}`
+      );
+      return null;
+    }
+    return text.text;
   } catch (err) {
     // A failed call is a fallback to computed text, never a broken page. But
     // it was also, until now, completely silent: `catch {}` threw the reason
@@ -662,7 +789,38 @@ does not publish it, or make the point without it. Never supply one.
 TASK:
 ${instruction}`;
 
+  // THE END-TO-END BUDGET, and the only bound here that cannot be starved.
+  //
+  // Both the SDK timeout and the abort signal are enforced by timers, and a
+  // timer only fires when the event loop is free to run it. Under a dev
+  // compile, a production build or a full test run on the same machine, the
+  // loop is not free, and a 75-second deadline arrived minutes late. That is
+  // the mechanism behind the 568 and 951 second calls: not a slow model, and
+  // not the SDK ignoring its timeout, but the deadline itself unable to fire.
+  //
+  // This is a SYNCHRONOUS comparison of two clock readings, taken before a
+  // retry is started. It needs no timer, so nothing can delay it, and it caps
+  // the number of attempts rather than the duration of one. Combined with the
+  // per-request abort above, a call that overruns is stopped where that is
+  // possible and is never followed by another where it is not.
+  const startedAt = Date.now();
+  const attemptMs: number[] = [];
+
   for (let attempt = 0; attempt < 2; attempt++) {
+    // Checked BEFORE the attempt, never after: the point is to refuse to start
+    // work that cannot finish inside the budget, not to notice afterwards that
+    // it did not. A refused retry is what stops a series of individually legal
+    // attempts adding up to an unbounded request.
+    if (attempt > 0 && !retryWithinBudget(startedAt, Date.now())) {
+      phaseLog(
+        kind,
+        attemptMs.map((ms, i) => ({ label: `attempt${i + 1}`, ms })),
+        "budget spent, retry refused"
+      );
+      break;
+    }
+    const attemptStarted = Date.now();
+
     const correction =
       lastInvented.length > 0
         ? `\n\nCORRECTION: your previous answer was rejected for ${lastInvented.join("; ")}. Rewrite it without ${lastInvented.length === 1 ? "that" : "those"}. Where a claim cannot be made within these limits, make the weaker claim the evidence supports rather than restating the stronger one.`
@@ -671,8 +829,16 @@ ${instruction}`;
           : "\n\nCORRECTION: your previous answer was not valid JSON, most likely because it ran long. Answer again, shorter, as a single JSON object.";
 
     const raw = await callModel(base + correction, maxTokens);
+    attemptMs.push(Date.now() - attemptStarted);
     // Throw rather than return: a failed call must not be cached for a day.
-    if (!raw) throw new Error(`[analyst-llm] ${kind}: no response`);
+    if (!raw) {
+      phaseLog(
+        kind,
+        attemptMs.map((ms, i) => ({ label: `attempt${i + 1}`, ms })),
+        "no response"
+      );
+      throw new Error(`[analyst-llm] ${kind}: no response`);
+    }
 
     const parsed = parseJson<T>(raw);
     if (!parsed) {
@@ -752,6 +918,11 @@ ${instruction}`;
         : []),
     ];
     if (bad.length === 0) {
+      phaseLog(
+        kind,
+        attemptMs.map((ms, i) => ({ label: `attempt${i + 1}`, ms })),
+        `authored on attempt ${attempt + 1}`
+      );
       cache.set(cacheKey, { value: parsed, at: Date.now() });
       return parsed;
     }

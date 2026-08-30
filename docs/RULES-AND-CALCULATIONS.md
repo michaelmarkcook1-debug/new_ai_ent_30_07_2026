@@ -3083,6 +3083,121 @@ finding.
 market rather than about how many vendors moved. Absent, it behaves exactly as
 before.
 
+## 8.32 Authoring latency: the token budget and the retry bound
+
+Verified against the working tree at commit `2d7395d` plus this change,
+30 August 2026.
+
+### Root cause
+
+Two authoring calls were observed at 568 and 951 seconds against a 75-second
+model timeout. Instrumenting each phase separately showed it was neither a slow
+model nor an SDK ignoring its timeout.
+
+`max_tokens` is the budget for EVERYTHING the model emits, thinking included,
+and every caller here passed it as though it were a length limit on the prose:
+`authorInsight` asks for 1,400 meaning a 90 to 140 word summary and three
+implications. Opus 5 thinks adaptively by default and that thinking comes out
+of the same budget.
+
+Measured against a real insight prompt: 601 of 1,054 output tokens went to
+thinking. Under the load of a production build generating 85 pages the model
+thought harder, spent the entire 1,400 before writing a word, and returned:
+
+```
+call returned no text after 18095ms: stop=max_tokens, blocks=[thinking], out=1400
+```
+
+`callModel` found no text block and returned null, which is indistinguishable
+upstream from a call that never happened. Four of nine insight calls ended that
+way in one build, each after 18 to 21 seconds and a full budget of tokens, and
+each silently became "no response" and fell back to computed prose.
+
+### The constants
+
+| Constant | Value | Line |
+|---|---|---|
+| `TIMEOUT_MS` | `75_000` | `lib/analyst/llm.ts:54` |
+| `SDK_RETRIES` | `0` | `lib/analyst/llm.ts:73` |
+| `BUDGET_MS` | `160_000` | `lib/analyst/llm.ts:87` |
+| `THINKING_HEADROOM` | `2_000` | `lib/analyst/llm.ts:117` |
+
+**`THINKING_HEADROOM` is added to every caller's `max_tokens`.** The ceiling
+costs nothing when it is not reached, because the model stops at `end_turn`:
+the same prompt returned in 12.1 seconds at 4,000 against 14.8 at 1,400. What
+it buys is that thinking can no longer starve the answer.
+
+**Thinking is deliberately not disabled**, although that was measured and is
+faster at 9.3 seconds. Turning it off changes how the model reasons about the
+analysis, and this was a latency gate rather than a licence to change what the
+readings say.
+
+### Three bounds, and only one of them cannot be starved
+
+| Bound | Mechanism | Scope |
+|---|---|---|
+| `timeout: TIMEOUT_MS` | SDK promise deadline, timer | one attempt |
+| `AbortSignal.timeout()` | aborts the underlying fetch, timer | one attempt |
+| `retryWithinBudget()` | comparison of two clock readings | the whole call |
+
+The first two are enforced by timers, and a timer only fires when the event
+loop is free to run it. Under a dev compile, a production build or a full test
+run on the same machine the loop is not free, which is the mechanism behind a
+75-second deadline arriving minutes late.
+
+`retryWithinBudget()` (`lib/analyst/llm.ts:131`) needs no timer. It is checked
+BEFORE an attempt is started, so it caps the NUMBER of attempts rather than the
+duration of one, and a series of individually legal retries cannot add up to an
+unbounded request. `AbortSignal.timeout()` was added alongside so an overrunning
+request stops consuming a socket rather than being abandoned in flight.
+
+### Retry structure
+
+| Layer | Attempts | Retries with |
+|---|---|---|
+| SDK | 1 | n/a, disabled |
+| `generate()` | 2, second gated on the budget | a corrected prompt |
+| page render | 1 | n/a |
+
+### Measured latency, after the fix
+
+Model-call durations, taken from the per-call phase log, with no build or test
+run competing except in scenario D:
+
+| Scenario | n | p50 | p95 | max |
+|---|---|---|---|---|
+| single request, idle | 1 | 22.1s | 22.1s | 22.1s |
+| nine surfaces sequential | 11 | 18.2s | 29.2s | 29.2s |
+| nine surfaces concurrent | 11 | 21.9s | 37.3s | 37.3s |
+| under a production build of 85 pages | 7 | 25.0s | 56.0s | 56.0s |
+| **all** | **29** | **21.9s** | **37.3s** | **56.0s** |
+
+Maximum observed is 35 per cent of the budget. Zero no-response and zero
+no-text outcomes across all 29 calls.
+
+Under the identical production-build load, before and after:
+
+| | no-text | no-response | authored |
+|---|---|---|---|
+| before | 3 | 3 | 4 |
+| after | 0 | 0 | 7 |
+
+### Cache
+
+A successful answer is written to the L1 cache and to `unstable_cache`. A
+failure throws before either write, so nothing caches a failed or timed-out
+authoring. Demonstrated live rather than argued: Alliances fell back to computed
+in the sequential run after the urgency guard discarded two drafts, and authored
+successfully in 8,875ms in the concurrent run that followed, so a computed
+fallback does not prevent a later request from authoring.
+
+### Phase logging
+
+`phaseLog()` emits one line per authoring call carrying the outcome and the
+duration of each attempt. Always on, because a debug flag nobody remembers to
+set is a flag that is off when it matters. It never carries the prompt, the
+answer or the key.
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

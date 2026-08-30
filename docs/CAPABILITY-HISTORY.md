@@ -15,6 +15,53 @@ than a gap.
 
 ---
 
+## 30 August 2026 (reliability)
+
+**Some pages were quietly falling back to their plainer computed text, and the
+reason was a units mistake.**
+
+Two authoring calls had been seen taking nine and sixteen minutes against a
+seventy-five second limit. Timing each stage separately showed the limit was
+not the problem and neither was a slow model.
+
+When the product asks the model for a reading, it says how long the answer may
+be. That number is not what it looked like: it is the budget for everything the
+model produces, including the thinking it does before it writes. The model
+thinks harder when the machine is busy, and during a full site build it was
+using the entire allowance thinking and had nothing left to write with. It
+returned a perfectly valid response containing no words. The product could not
+tell that apart from a call that never happened, so it fell back, having waited
+about twenty seconds and paid for a full answer it never got. Four of nine
+readings ended that way in a single build.
+
+The fix is to ask for the thinking room separately from the answer. It costs
+nothing, because the model stops when it has finished rather than filling the
+space it is given: the same request came back faster with the larger allowance.
+Thinking was deliberately left switched on, even though switching it off is
+faster still, because that would change how the model reasons about the analysis
+and this was a reliability fix rather than an excuse to change the readings.
+
+Under the identical build load, before and after: three readings produced no
+text and three fell back, against seven that authored cleanly and none that
+failed.
+
+**And a slow call can no longer become an endless one.**
+
+The seventy-five second limit is enforced by a timer, and a timer only fires
+when the machine is free to run it. During a build or a test run it is not, so
+the limit arrived minutes late. There is now a second bound that does not depend
+on a timer at all: before the product retries a reading, it simply compares two
+clock readings and refuses to start again if the time is spent. Nothing can
+delay that check.
+
+Measured across twenty-nine authoring calls, on an idle machine and under a full
+site build: half complete within twenty-two seconds, and the slowest took
+fifty-six. The ceiling is one hundred and sixty.
+
+Nothing changed about what the readings say.
+
+---
+
 ## 30 August 2026 (analysis)
 
 **The Analyst Insight now makes one argument instead of listing six findings.**
