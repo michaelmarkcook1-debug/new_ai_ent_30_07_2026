@@ -1,5 +1,5 @@
 {
- "capturedAt": "2026-08-08",
+ "capturedAt": "2026-08-30",
  "signals": {
   "vendor_score:ai21": {
    "key": "vendor_score:ai21",
@@ -20,14 +20,14 @@
    "kind": "vendor_score",
    "vendorId": "aws",
    "label": "overall score",
-   "value": 53
+   "value": 53.2
   },
   "vendor_score:alibaba": {
    "key": "vendor_score:alibaba",
    "kind": "vendor_score",
    "vendorId": "alibaba",
    "label": "overall score",
-   "value": 62.7
+   "value": 67.6
   },
   "vendor_score:a16z": {
    "key": "vendor_score:a16z",
@@ -41,7 +41,7 @@
    "kind": "vendor_score",
    "vendorId": "anthropic",
    "label": "overall score",
-   "value": 68.3
+   "value": 68.8
   },
   "vendor_score:broadcom": {
    "key": "vendor_score:broadcom",
@@ -76,42 +76,42 @@
    "kind": "vendor_score",
    "vendorId": "databricks",
    "label": "overall score",
-   "value": 44
+   "value": 43.6
   },
   "vendor_score:deepseek": {
    "key": "vendor_score:deepseek",
    "kind": "vendor_score",
    "vendorId": "deepseek",
    "label": "overall score",
-   "value": 62.7
+   "value": 64.5
   },
   "vendor_score:fireworks": {
    "key": "vendor_score:fireworks",
    "kind": "vendor_score",
    "vendorId": "fireworks",
    "label": "overall score",
-   "value": 54.9
+   "value": 55.2
   },
   "vendor_score:g42": {
    "key": "vendor_score:g42",
    "kind": "vendor_score",
    "vendorId": "g42",
    "label": "overall score",
-   "value": 42.7
+   "value": 42.4
   },
   "vendor_score:glean": {
    "key": "vendor_score:glean",
    "kind": "vendor_score",
    "vendorId": "glean",
    "label": "overall score",
-   "value": 59.2
+   "value": 58.7
   },
   "vendor_score:google": {
    "key": "vendor_score:google",
    "kind": "vendor_score",
    "vendorId": "google",
    "label": "overall score",
-   "value": 62.3
+   "value": 64.8
   },
   "vendor_score:groq": {
    "key": "vendor_score:groq",
@@ -132,7 +132,7 @@
    "kind": "vendor_score",
    "vendorId": "harvey",
    "label": "overall score",
-   "value": 56.6
+   "value": 56.8
   },
   "vendor_score:hebbia": {
    "key": "vendor_score:hebbia",
@@ -146,28 +146,28 @@
    "kind": "vendor_score",
    "vendorId": "ibm",
    "label": "overall score",
-   "value": 45.2
+   "value": 48.6
   },
   "vendor_score:lambda": {
    "key": "vendor_score:lambda",
    "kind": "vendor_score",
    "vendorId": "lambda",
    "label": "overall score",
-   "value": 56.9
+   "value": 56.5
   },
   "vendor_score:mgx": {
    "key": "vendor_score:mgx",
    "kind": "vendor_score",
    "vendorId": "mgx",
    "label": "overall score",
-   "value": 48.5
+   "value": 48.6
   },
   "vendor_score:meta": {
    "key": "vendor_score:meta",
    "kind": "vendor_score",
    "vendorId": "meta",
    "label": "overall score",
-   "value": 62.1
+   "value": 64.7
   },
   "vendor_score:microsoft": {
    "key": "vendor_score:microsoft",
@@ -181,21 +181,21 @@
    "kind": "vendor_score",
    "vendorId": "minimax",
    "label": "overall score",
-   "value": 56.4
+   "value": 56.8
   },
   "vendor_score:mistral": {
    "key": "vendor_score:mistral",
    "kind": "vendor_score",
    "vendorId": "mistral",
    "label": "overall score",
-   "value": 51.1
+   "value": 51.3
   },
   "vendor_score:moonshot": {
    "key": "vendor_score:moonshot",
    "kind": "vendor_score",
    "vendorId": "moonshot",
    "label": "overall score",
-   "value": 58.8
+   "value": 59.9
   },
   "vendor_score:moveworks": {
    "key": "vendor_score:moveworks",
@@ -209,7 +209,7 @@
    "kind": "vendor_score",
    "vendorId": "nvidia",
    "label": "overall score",
-   "value": 61.5
+   "value": 62
   },
   "vendor_score:nscale": {
    "key": "vendor_score:nscale",
@@ -223,7 +223,7 @@
    "kind": "vendor_score",
    "vendorId": "openai",
    "label": "overall score",
-   "value": 68.5
+   "value": 69.6
   },
   "vendor_score:oracle": {
    "key": "vendor_score:oracle",
@@ -237,7 +237,7 @@
    "kind": "vendor_score",
    "vendorId": "perplexity",
    "label": "overall score",
-   "value": 49.5
+   "value": 49.6
   },
   "vendor_score:rogo": {
    "key": "vendor_score:rogo",
@@ -279,14 +279,14 @@
    "kind": "vendor_score",
    "vendorId": "servicenow",
    "label": "overall score",
-   "value": 45.7
+   "value": 46
   },
   "vendor_score:snowflake": {
    "key": "vendor_score:snowflake",
    "kind": "vendor_score",
    "vendorId": "snowflake",
    "label": "overall score",
-   "value": 46.7
+   "value": 45.7
   },
   "vendor_score:softbank": {
    "key": "vendor_score:softbank",
@@ -300,7 +300,7 @@
    "kind": "vendor_score",
    "vendorId": "tsmc",
    "label": "overall score",
-   "value": 64.3
+   "value": 64.2
   },
   "vendor_score:together": {
    "key": "vendor_score:together",
@@ -321,14 +321,14 @@
    "kind": "vendor_score",
    "vendorId": "zai",
    "label": "overall score",
-   "value": 60.1
+   "value": 63.3
   },
   "vendor_score:xai": {
    "key": "vendor_score:xai",
    "kind": "vendor_score",
    "vendorId": "xai",
    "label": "overall score",
-   "value": 62.2
+   "value": 65.3
   },
   "capability_score:a16z:agents": {
    "key": "capability_score:a16z:agents",
@@ -482,7 +482,7 @@
    "kind": "capability_score",
    "vendorId": "alibaba",
    "label": "cost controls capability",
-   "value": 40.1
+   "value": 42.64
   },
   "capability_score:alibaba:deployment_options": {
    "key": "capability_score:alibaba:deployment_options",
@@ -510,21 +510,21 @@
    "kind": "capability_score",
    "vendorId": "alibaba",
    "label": "integrations capability",
-   "value": 58.93
+   "value": 58.69
   },
   "capability_score:alibaba:models": {
    "key": "capability_score:alibaba:models",
    "kind": "capability_score",
    "vendorId": "alibaba",
    "label": "models capability",
-   "value": 68.73
+   "value": 68.57
   },
   "capability_score:alibaba:portability": {
    "key": "capability_score:alibaba:portability",
    "kind": "capability_score",
    "vendorId": "alibaba",
    "label": "portability capability",
-   "value": 59.18
+   "value": 57.83
   },
   "capability_score:alibaba:rag": {
    "key": "capability_score:alibaba:rag",
@@ -552,7 +552,7 @@
    "kind": "capability_score",
    "vendorId": "amd",
    "label": "cost controls capability",
-   "value": 61.33
+   "value": 63.5
   },
   "capability_score:amd:deployment_options": {
    "key": "capability_score:amd:deployment_options",
@@ -580,7 +580,7 @@
    "kind": "capability_score",
    "vendorId": "amd",
    "label": "integrations capability",
-   "value": 51.4
+   "value": 51.27
   },
   "capability_score:amd:models": {
    "key": "capability_score:amd:models",
@@ -594,7 +594,7 @@
    "kind": "capability_score",
    "vendorId": "amd",
    "label": "portability capability",
-   "value": 58
+   "value": 56.67
   },
   "capability_score:amd:rag": {
    "key": "capability_score:amd:rag",
@@ -615,14 +615,14 @@
    "kind": "capability_score",
    "vendorId": "anthropic",
    "label": "agents capability",
-   "value": 52.65
+   "value": 52.13
   },
   "capability_score:anthropic:cost_controls": {
    "key": "capability_score:anthropic:cost_controls",
    "kind": "capability_score",
    "vendorId": "anthropic",
    "label": "cost controls capability",
-   "value": 66.65
+   "value": 66.4
   },
   "capability_score:anthropic:deployment_options": {
    "key": "capability_score:anthropic:deployment_options",
@@ -643,28 +643,28 @@
    "kind": "capability_score",
    "vendorId": "anthropic",
    "label": "governance capability",
-   "value": 54.77
+   "value": 54.24
   },
   "capability_score:anthropic:integrations": {
    "key": "capability_score:anthropic:integrations",
    "kind": "capability_score",
    "vendorId": "anthropic",
    "label": "integrations capability",
-   "value": 60.48
+   "value": 60.41
   },
   "capability_score:anthropic:models": {
    "key": "capability_score:anthropic:models",
    "kind": "capability_score",
    "vendorId": "anthropic",
    "label": "models capability",
-   "value": 59.4
+   "value": 59.77
   },
   "capability_score:anthropic:portability": {
    "key": "capability_score:anthropic:portability",
    "kind": "capability_score",
    "vendorId": "anthropic",
    "label": "portability capability",
-   "value": 57.59
+   "value": 57.4
   },
   "capability_score:anthropic:rag": {
    "key": "capability_score:anthropic:rag",
@@ -678,21 +678,21 @@
    "kind": "capability_score",
    "vendorId": "anthropic",
    "label": "security capability",
-   "value": 59.23
+   "value": 59.15
   },
   "capability_score:aws:agents": {
    "key": "capability_score:aws:agents",
    "kind": "capability_score",
    "vendorId": "aws",
    "label": "agents capability",
-   "value": 56.7
+   "value": 56.56
   },
   "capability_score:aws:cost_controls": {
    "key": "capability_score:aws:cost_controls",
    "kind": "capability_score",
    "vendorId": "aws",
    "label": "cost controls capability",
-   "value": 66
+   "value": 66.12
   },
   "capability_score:aws:deployment_options": {
    "key": "capability_score:aws:deployment_options",
@@ -713,28 +713,28 @@
    "kind": "capability_score",
    "vendorId": "aws",
    "label": "governance capability",
-   "value": 61.77
+   "value": 62.33
   },
   "capability_score:aws:integrations": {
    "key": "capability_score:aws:integrations",
    "kind": "capability_score",
    "vendorId": "aws",
    "label": "integrations capability",
-   "value": 66.35
+   "value": 66.22
   },
   "capability_score:aws:models": {
    "key": "capability_score:aws:models",
    "kind": "capability_score",
    "vendorId": "aws",
    "label": "models capability",
-   "value": 52.25
+   "value": 52.28
   },
   "capability_score:aws:portability": {
    "key": "capability_score:aws:portability",
    "kind": "capability_score",
    "vendorId": "aws",
    "label": "portability capability",
-   "value": 60
+   "value": 60.61
   },
   "capability_score:aws:rag": {
    "key": "capability_score:aws:rag",
@@ -748,7 +748,7 @@
    "kind": "capability_score",
    "vendorId": "aws",
    "label": "security capability",
-   "value": 59.59
+   "value": 59.95
   },
   "capability_score:broadcom:agents": {
    "key": "capability_score:broadcom:agents",
@@ -895,14 +895,14 @@
    "kind": "capability_score",
    "vendorId": "cohere",
    "label": "agents capability",
-   "value": 51
+   "value": 51.56
   },
   "capability_score:cohere:cost_controls": {
    "key": "capability_score:cohere:cost_controls",
    "kind": "capability_score",
    "vendorId": "cohere",
    "label": "cost controls capability",
-   "value": 65.65
+   "value": 65.6
   },
   "capability_score:cohere:deployment_options": {
    "key": "capability_score:cohere:deployment_options",
@@ -916,35 +916,35 @@
    "kind": "capability_score",
    "vendorId": "cohere",
    "label": "enterprise assistant capability",
-   "value": 67.5
+   "value": 63.33
   },
   "capability_score:cohere:governance": {
    "key": "capability_score:cohere:governance",
    "kind": "capability_score",
    "vendorId": "cohere",
    "label": "governance capability",
-   "value": 57.31
+   "value": 57.02
   },
   "capability_score:cohere:integrations": {
    "key": "capability_score:cohere:integrations",
    "kind": "capability_score",
    "vendorId": "cohere",
    "label": "integrations capability",
-   "value": 57.21
+   "value": 57.18
   },
   "capability_score:cohere:models": {
    "key": "capability_score:cohere:models",
    "kind": "capability_score",
    "vendorId": "cohere",
    "label": "models capability",
-   "value": 60.76
+   "value": 60.57
   },
   "capability_score:cohere:portability": {
    "key": "capability_score:cohere:portability",
    "kind": "capability_score",
    "vendorId": "cohere",
    "label": "portability capability",
-   "value": 55.09
+   "value": 54.82
   },
   "capability_score:cohere:rag": {
    "key": "capability_score:cohere:rag",
@@ -958,7 +958,7 @@
    "kind": "capability_score",
    "vendorId": "cohere",
    "label": "security capability",
-   "value": 57.28
+   "value": 57.19
   },
   "capability_score:coreweave:agents": {
    "key": "capability_score:coreweave:agents",
@@ -1035,14 +1035,14 @@
    "kind": "capability_score",
    "vendorId": "databricks",
    "label": "agents capability",
-   "value": 50.67
+   "value": 50.11
   },
   "capability_score:databricks:cost_controls": {
    "key": "capability_score:databricks:cost_controls",
    "kind": "capability_score",
    "vendorId": "databricks",
    "label": "cost controls capability",
-   "value": 55.47
+   "value": 55.13
   },
   "capability_score:databricks:deployment_options": {
    "key": "capability_score:databricks:deployment_options",
@@ -1056,35 +1056,35 @@
    "kind": "capability_score",
    "vendorId": "databricks",
    "label": "enterprise assistant capability",
-   "value": 51.54
+   "value": 50.36
   },
   "capability_score:databricks:governance": {
    "key": "capability_score:databricks:governance",
    "kind": "capability_score",
    "vendorId": "databricks",
    "label": "governance capability",
-   "value": 50.51
+   "value": 49.97
   },
   "capability_score:databricks:integrations": {
    "key": "capability_score:databricks:integrations",
    "kind": "capability_score",
    "vendorId": "databricks",
    "label": "integrations capability",
-   "value": 54.06
+   "value": 53.6
   },
   "capability_score:databricks:models": {
    "key": "capability_score:databricks:models",
    "kind": "capability_score",
    "vendorId": "databricks",
    "label": "models capability",
-   "value": 50.06
+   "value": 49.43
   },
   "capability_score:databricks:portability": {
    "key": "capability_score:databricks:portability",
    "kind": "capability_score",
    "vendorId": "databricks",
    "label": "portability capability",
-   "value": 55.74
+   "value": 55.37
   },
   "capability_score:databricks:rag": {
    "key": "capability_score:databricks:rag",
@@ -1098,7 +1098,7 @@
    "kind": "capability_score",
    "vendorId": "databricks",
    "label": "security capability",
-   "value": 52.51
+   "value": 52.16
   },
   "capability_score:deepseek:agents": {
    "key": "capability_score:deepseek:agents",
@@ -1112,7 +1112,7 @@
    "kind": "capability_score",
    "vendorId": "deepseek",
    "label": "cost controls capability",
-   "value": 48.75
+   "value": 50.57
   },
   "capability_score:deepseek:deployment_options": {
    "key": "capability_score:deepseek:deployment_options",
@@ -1140,21 +1140,21 @@
    "kind": "capability_score",
    "vendorId": "deepseek",
    "label": "integrations capability",
-   "value": 62.35
+   "value": 63.16
   },
   "capability_score:deepseek:models": {
    "key": "capability_score:deepseek:models",
    "kind": "capability_score",
    "vendorId": "deepseek",
    "label": "models capability",
-   "value": 68.34
+   "value": 68.43
   },
   "capability_score:deepseek:portability": {
    "key": "capability_score:deepseek:portability",
    "kind": "capability_score",
    "vendorId": "deepseek",
    "label": "portability capability",
-   "value": 61.33
+   "value": 61.09
   },
   "capability_score:deepseek:rag": {
    "key": "capability_score:deepseek:rag",
@@ -1175,14 +1175,14 @@
    "kind": "capability_score",
    "vendorId": "fireworks",
    "label": "agents capability",
-   "value": 48.33
+   "value": 47.94
   },
   "capability_score:fireworks:cost_controls": {
    "key": "capability_score:fireworks:cost_controls",
    "kind": "capability_score",
    "vendorId": "fireworks",
    "label": "cost controls capability",
-   "value": 63.16
+   "value": 63.03
   },
   "capability_score:fireworks:deployment_options": {
    "key": "capability_score:fireworks:deployment_options",
@@ -1203,28 +1203,28 @@
    "kind": "capability_score",
    "vendorId": "fireworks",
    "label": "governance capability",
-   "value": 54.17
+   "value": 52.86
   },
   "capability_score:fireworks:integrations": {
    "key": "capability_score:fireworks:integrations",
    "kind": "capability_score",
    "vendorId": "fireworks",
    "label": "integrations capability",
-   "value": 52.09
+   "value": 52.51
   },
   "capability_score:fireworks:models": {
    "key": "capability_score:fireworks:models",
    "kind": "capability_score",
    "vendorId": "fireworks",
    "label": "models capability",
-   "value": 52.23
+   "value": 51.71
   },
   "capability_score:fireworks:portability": {
    "key": "capability_score:fireworks:portability",
    "kind": "capability_score",
    "vendorId": "fireworks",
    "label": "portability capability",
-   "value": 52.43
+   "value": 54.71
   },
   "capability_score:fireworks:rag": {
    "key": "capability_score:fireworks:rag",
@@ -1238,7 +1238,7 @@
    "kind": "capability_score",
    "vendorId": "fireworks",
    "label": "security capability",
-   "value": 48.94
+   "value": 50.18
   },
   "capability_score:g42:agents": {
    "key": "capability_score:g42:agents",
@@ -1280,7 +1280,7 @@
    "kind": "capability_score",
    "vendorId": "g42",
    "label": "integrations capability",
-   "value": 46.3
+   "value": 45.27
   },
   "capability_score:g42:models": {
    "key": "capability_score:g42:models",
@@ -1294,7 +1294,7 @@
    "kind": "capability_score",
    "vendorId": "g42",
    "label": "portability capability",
-   "value": 52
+   "value": 51.42
   },
   "capability_score:g42:rag": {
    "key": "capability_score:g42:rag",
@@ -1315,14 +1315,14 @@
    "kind": "capability_score",
    "vendorId": "glean",
    "label": "agents capability",
-   "value": 55.36
+   "value": 54.67
   },
   "capability_score:glean:cost_controls": {
    "key": "capability_score:glean:cost_controls",
    "kind": "capability_score",
    "vendorId": "glean",
    "label": "cost controls capability",
-   "value": 43
+   "value": 43.62
   },
   "capability_score:glean:deployment_options": {
    "key": "capability_score:glean:deployment_options",
@@ -1336,14 +1336,14 @@
    "kind": "capability_score",
    "vendorId": "glean",
    "label": "enterprise assistant capability",
-   "value": 51.93
+   "value": 50.88
   },
   "capability_score:glean:governance": {
    "key": "capability_score:glean:governance",
    "kind": "capability_score",
    "vendorId": "glean",
    "label": "governance capability",
-   "value": 54.82
+   "value": 55.89
   },
   "capability_score:glean:integrations": {
    "key": "capability_score:glean:integrations",
@@ -1357,14 +1357,14 @@
    "kind": "capability_score",
    "vendorId": "glean",
    "label": "models capability",
-   "value": 52.07
+   "value": 51.73
   },
   "capability_score:glean:portability": {
    "key": "capability_score:glean:portability",
    "kind": "capability_score",
    "vendorId": "glean",
    "label": "portability capability",
-   "value": 59.07
+   "value": 58.31
   },
   "capability_score:glean:rag": {
    "key": "capability_score:glean:rag",
@@ -1378,21 +1378,21 @@
    "kind": "capability_score",
    "vendorId": "glean",
    "label": "security capability",
-   "value": 59.11
+   "value": 58.63
   },
   "capability_score:google:agents": {
    "key": "capability_score:google:agents",
    "kind": "capability_score",
    "vendorId": "google",
    "label": "agents capability",
-   "value": 51.42
+   "value": 51.85
   },
   "capability_score:google:cost_controls": {
    "key": "capability_score:google:cost_controls",
    "kind": "capability_score",
    "vendorId": "google",
    "label": "cost controls capability",
-   "value": 54.84
+   "value": 54.09
   },
   "capability_score:google:deployment_options": {
    "key": "capability_score:google:deployment_options",
@@ -1413,28 +1413,28 @@
    "kind": "capability_score",
    "vendorId": "google",
    "label": "governance capability",
-   "value": 53.75
+   "value": 54.12
   },
   "capability_score:google:integrations": {
    "key": "capability_score:google:integrations",
    "kind": "capability_score",
    "vendorId": "google",
    "label": "integrations capability",
-   "value": 60.72
+   "value": 60.55
   },
   "capability_score:google:models": {
    "key": "capability_score:google:models",
    "kind": "capability_score",
    "vendorId": "google",
    "label": "models capability",
-   "value": 53.84
+   "value": 54
   },
   "capability_score:google:portability": {
    "key": "capability_score:google:portability",
    "kind": "capability_score",
    "vendorId": "google",
    "label": "portability capability",
-   "value": 57.71
+   "value": 57.95
   },
   "capability_score:google:rag": {
    "key": "capability_score:google:rag",
@@ -1448,7 +1448,7 @@
    "kind": "capability_score",
    "vendorId": "google",
    "label": "security capability",
-   "value": 53.15
+   "value": 52.98
   },
   "capability_score:groq:agents": {
    "key": "capability_score:groq:agents",
@@ -1525,7 +1525,7 @@
    "kind": "capability_score",
    "vendorId": "harvey",
    "label": "agents capability",
-   "value": 55.69
+   "value": 55.58
   },
   "capability_score:harvey:cost_controls": {
    "key": "capability_score:harvey:cost_controls",
@@ -1546,28 +1546,28 @@
    "kind": "capability_score",
    "vendorId": "harvey",
    "label": "enterprise assistant capability",
-   "value": 46.26
+   "value": 46.11
   },
   "capability_score:harvey:governance": {
    "key": "capability_score:harvey:governance",
    "kind": "capability_score",
    "vendorId": "harvey",
    "label": "governance capability",
-   "value": 58.68
+   "value": 58.86
   },
   "capability_score:harvey:integrations": {
    "key": "capability_score:harvey:integrations",
    "kind": "capability_score",
    "vendorId": "harvey",
    "label": "integrations capability",
-   "value": 55.55
+   "value": 55.67
   },
   "capability_score:harvey:models": {
    "key": "capability_score:harvey:models",
    "kind": "capability_score",
    "vendorId": "harvey",
    "label": "models capability",
-   "value": 53.83
+   "value": 53.4
   },
   "capability_score:harvey:portability": {
    "key": "capability_score:harvey:portability",
@@ -1588,7 +1588,7 @@
    "kind": "capability_score",
    "vendorId": "harvey",
    "label": "security capability",
-   "value": 61.8
+   "value": 62.13
   },
   "capability_score:hebbia:agents": {
    "key": "capability_score:hebbia:agents",
@@ -1735,14 +1735,14 @@
    "kind": "capability_score",
    "vendorId": "ibm",
    "label": "agents capability",
-   "value": 50.4
+   "value": 50.13
   },
   "capability_score:ibm:cost_controls": {
    "key": "capability_score:ibm:cost_controls",
    "kind": "capability_score",
    "vendorId": "ibm",
    "label": "cost controls capability",
-   "value": 41.78
+   "value": 41.35
   },
   "capability_score:ibm:deployment_options": {
    "key": "capability_score:ibm:deployment_options",
@@ -1756,35 +1756,35 @@
    "kind": "capability_score",
    "vendorId": "ibm",
    "label": "enterprise assistant capability",
-   "value": 53
+   "value": 51.62
   },
   "capability_score:ibm:governance": {
    "key": "capability_score:ibm:governance",
    "kind": "capability_score",
    "vendorId": "ibm",
    "label": "governance capability",
-   "value": 52.86
+   "value": 53.7
   },
   "capability_score:ibm:integrations": {
    "key": "capability_score:ibm:integrations",
    "kind": "capability_score",
    "vendorId": "ibm",
    "label": "integrations capability",
-   "value": 53.66
+   "value": 53.23
   },
   "capability_score:ibm:models": {
    "key": "capability_score:ibm:models",
    "kind": "capability_score",
    "vendorId": "ibm",
    "label": "models capability",
-   "value": 49.23
+   "value": 48.94
   },
   "capability_score:ibm:portability": {
    "key": "capability_score:ibm:portability",
    "kind": "capability_score",
    "vendorId": "ibm",
    "label": "portability capability",
-   "value": 58.79
+   "value": 57.35
   },
   "capability_score:ibm:rag": {
    "key": "capability_score:ibm:rag",
@@ -1798,21 +1798,21 @@
    "kind": "capability_score",
    "vendorId": "ibm",
    "label": "security capability",
-   "value": 57.4
+   "value": 57.04
   },
   "capability_score:lambda:agents": {
    "key": "capability_score:lambda:agents",
    "kind": "capability_score",
    "vendorId": "lambda",
    "label": "agents capability",
-   "value": 50.16
+   "value": 53.12
   },
   "capability_score:lambda:cost_controls": {
    "key": "capability_score:lambda:cost_controls",
    "kind": "capability_score",
    "vendorId": "lambda",
    "label": "cost controls capability",
-   "value": 58.47
+   "value": 57.75
   },
   "capability_score:lambda:deployment_options": {
    "key": "capability_score:lambda:deployment_options",
@@ -1826,35 +1826,35 @@
    "kind": "capability_score",
    "vendorId": "lambda",
    "label": "enterprise assistant capability",
-   "value": 44
+   "value": 45.22
   },
   "capability_score:lambda:governance": {
    "key": "capability_score:lambda:governance",
    "kind": "capability_score",
    "vendorId": "lambda",
    "label": "governance capability",
-   "value": 52.87
+   "value": 51.71
   },
   "capability_score:lambda:integrations": {
    "key": "capability_score:lambda:integrations",
    "kind": "capability_score",
    "vendorId": "lambda",
    "label": "integrations capability",
-   "value": 54.08
+   "value": 53.38
   },
   "capability_score:lambda:models": {
    "key": "capability_score:lambda:models",
    "kind": "capability_score",
    "vendorId": "lambda",
    "label": "models capability",
-   "value": 55.06
+   "value": 54.9
   },
   "capability_score:lambda:portability": {
    "key": "capability_score:lambda:portability",
    "kind": "capability_score",
    "vendorId": "lambda",
    "label": "portability capability",
-   "value": 57.31
+   "value": 56.78
   },
   "capability_score:lambda:rag": {
    "key": "capability_score:lambda:rag",
@@ -1868,7 +1868,7 @@
    "kind": "capability_score",
    "vendorId": "lambda",
    "label": "security capability",
-   "value": 51.78
+   "value": 50.52
   },
   "capability_score:meta:agents": {
    "key": "capability_score:meta:agents",
@@ -1945,14 +1945,14 @@
    "kind": "capability_score",
    "vendorId": "mgx",
    "label": "agents capability",
-   "value": 50
+   "value": 48.13
   },
   "capability_score:mgx:cost_controls": {
    "key": "capability_score:mgx:cost_controls",
    "kind": "capability_score",
    "vendorId": "mgx",
    "label": "cost controls capability",
-   "value": 46.67
+   "value": 47.5
   },
   "capability_score:mgx:deployment_options": {
    "key": "capability_score:mgx:deployment_options",
@@ -1980,21 +1980,21 @@
    "kind": "capability_score",
    "vendorId": "mgx",
    "label": "integrations capability",
-   "value": 45.91
+   "value": 46.21
   },
   "capability_score:mgx:models": {
    "key": "capability_score:mgx:models",
    "kind": "capability_score",
    "vendorId": "mgx",
    "label": "models capability",
-   "value": 28.25
+   "value": 31
   },
   "capability_score:mgx:portability": {
    "key": "capability_score:mgx:portability",
    "kind": "capability_score",
    "vendorId": "mgx",
    "label": "portability capability",
-   "value": 58.45
+   "value": 58.27
   },
   "capability_score:mgx:rag": {
    "key": "capability_score:mgx:rag",
@@ -2442,7 +2442,7 @@
    "kind": "capability_score",
    "vendorId": "nvidia",
    "label": "cost controls capability",
-   "value": 53.8
+   "value": 54
   },
   "capability_score:nvidia:deployment_options": {
    "key": "capability_score:nvidia:deployment_options",
@@ -2512,7 +2512,7 @@
    "kind": "capability_score",
    "vendorId": "openai",
    "label": "cost controls capability",
-   "value": 67.68
+   "value": 67.63
   },
   "capability_score:openai:deployment_options": {
    "key": "capability_score:openai:deployment_options",
@@ -2533,14 +2533,14 @@
    "kind": "capability_score",
    "vendorId": "openai",
    "label": "governance capability",
-   "value": 59.44
+   "value": 59.42
   },
   "capability_score:openai:integrations": {
    "key": "capability_score:openai:integrations",
    "kind": "capability_score",
    "vendorId": "openai",
    "label": "integrations capability",
-   "value": 66.22
+   "value": 66.62
   },
   "capability_score:openai:models": {
    "key": "capability_score:openai:models",
@@ -2554,7 +2554,7 @@
    "kind": "capability_score",
    "vendorId": "openai",
    "label": "portability capability",
-   "value": 57.72
+   "value": 57.92
   },
   "capability_score:openai:rag": {
    "key": "capability_score:openai:rag",
@@ -2568,7 +2568,7 @@
    "kind": "capability_score",
    "vendorId": "openai",
    "label": "security capability",
-   "value": 60.26
+   "value": 60.49
   },
   "capability_score:oracle:agents": {
    "key": "capability_score:oracle:agents",
@@ -3135,14 +3135,14 @@
    "kind": "capability_score",
    "vendorId": "snowflake",
    "label": "agents capability",
-   "value": 42.06
+   "value": 41.57
   },
   "capability_score:snowflake:cost_controls": {
    "key": "capability_score:snowflake:cost_controls",
    "kind": "capability_score",
    "vendorId": "snowflake",
    "label": "cost controls capability",
-   "value": 42.58
+   "value": 42.6
   },
   "capability_score:snowflake:deployment_options": {
    "key": "capability_score:snowflake:deployment_options",
@@ -3156,35 +3156,35 @@
    "kind": "capability_score",
    "vendorId": "snowflake",
    "label": "enterprise assistant capability",
-   "value": 59
+   "value": 55
   },
   "capability_score:snowflake:governance": {
    "key": "capability_score:snowflake:governance",
    "kind": "capability_score",
    "vendorId": "snowflake",
    "label": "governance capability",
-   "value": 55.64
+   "value": 54.39
   },
   "capability_score:snowflake:integrations": {
    "key": "capability_score:snowflake:integrations",
    "kind": "capability_score",
    "vendorId": "snowflake",
    "label": "integrations capability",
-   "value": 57.9
+   "value": 57.16
   },
   "capability_score:snowflake:models": {
    "key": "capability_score:snowflake:models",
    "kind": "capability_score",
    "vendorId": "snowflake",
    "label": "models capability",
-   "value": 48.85
+   "value": 48.44
   },
   "capability_score:snowflake:portability": {
    "key": "capability_score:snowflake:portability",
    "kind": "capability_score",
    "vendorId": "snowflake",
    "label": "portability capability",
-   "value": 62.32
+   "value": 59.61
   },
   "capability_score:snowflake:rag": {
    "key": "capability_score:snowflake:rag",
@@ -3198,7 +3198,7 @@
    "kind": "capability_score",
    "vendorId": "snowflake",
    "label": "security capability",
-   "value": 53.2
+   "value": 51.17
   },
   "capability_score:softbank:agents": {
    "key": "capability_score:softbank:agents",
@@ -3485,14 +3485,14 @@
    "kind": "capability_score",
    "vendorId": "xai",
    "label": "agents capability",
-   "value": 54.57
+   "value": 54.81
   },
   "capability_score:xai:cost_controls": {
    "key": "capability_score:xai:cost_controls",
    "kind": "capability_score",
    "vendorId": "xai",
    "label": "cost controls capability",
-   "value": 67.42
+   "value": 68.17
   },
   "capability_score:xai:deployment_options": {
    "key": "capability_score:xai:deployment_options",
@@ -3513,28 +3513,28 @@
    "kind": "capability_score",
    "vendorId": "xai",
    "label": "governance capability",
-   "value": 49.3
+   "value": 48.85
   },
   "capability_score:xai:integrations": {
    "key": "capability_score:xai:integrations",
    "kind": "capability_score",
    "vendorId": "xai",
    "label": "integrations capability",
-   "value": 61
+   "value": 63.99
   },
   "capability_score:xai:models": {
    "key": "capability_score:xai:models",
    "kind": "capability_score",
    "vendorId": "xai",
    "label": "models capability",
-   "value": 53.15
+   "value": 55.58
   },
   "capability_score:xai:portability": {
    "key": "capability_score:xai:portability",
    "kind": "capability_score",
    "vendorId": "xai",
    "label": "portability capability",
-   "value": 61.93
+   "value": 61.21
   },
   "capability_score:xai:rag": {
    "key": "capability_score:xai:rag",
@@ -3548,21 +3548,21 @@
    "kind": "capability_score",
    "vendorId": "xai",
    "label": "security capability",
-   "value": 48
+   "value": 45.53
   },
   "capability_score:zai:agents": {
    "key": "capability_score:zai:agents",
    "kind": "capability_score",
    "vendorId": "zai",
    "label": "agents capability",
-   "value": 50.5
+   "value": 51.25
   },
   "capability_score:zai:cost_controls": {
    "key": "capability_score:zai:cost_controls",
    "kind": "capability_score",
    "vendorId": "zai",
    "label": "cost controls capability",
-   "value": 65.67
+   "value": 62.08
   },
   "capability_score:zai:deployment_options": {
    "key": "capability_score:zai:deployment_options",
@@ -3590,21 +3590,21 @@
    "kind": "capability_score",
    "vendorId": "zai",
    "label": "integrations capability",
-   "value": 56.51
+   "value": 56.8
   },
   "capability_score:zai:models": {
    "key": "capability_score:zai:models",
    "kind": "capability_score",
    "vendorId": "zai",
    "label": "models capability",
-   "value": 55.94
+   "value": 55.11
   },
   "capability_score:zai:portability": {
    "key": "capability_score:zai:portability",
    "kind": "capability_score",
    "vendorId": "zai",
    "label": "portability capability",
-   "value": 56.86
+   "value": 55.83
   },
   "capability_score:zai:rag": {
    "key": "capability_score:zai:rag",
@@ -3618,7 +3618,7 @@
    "kind": "capability_score",
    "vendorId": "zai",
    "label": "security capability",
-   "value": 39.67
+   "value": 42.29
   },
   "market_share:anthropic:agent_platform": {
    "key": "market_share:anthropic:agent_platform",
@@ -3639,14 +3639,14 @@
    "kind": "market_share",
    "vendorId": "aws",
    "label": "share of agent platform",
-   "value": 18.6
+   "value": 18.7
   },
   "market_share:microsoft:agent_platform": {
    "key": "market_share:microsoft:agent_platform",
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of agent platform",
-   "value": 17.9
+   "value": 17.8
   },
   "market_share:salesforce:agent_platform": {
    "key": "market_share:salesforce:agent_platform",
@@ -3667,7 +3667,7 @@
    "kind": "market_share",
    "vendorId": "google",
    "label": "share of ai cloud compute",
-   "value": 25
+   "value": 25.1
   },
   "market_share:aws:ai_cloud_compute": {
    "key": "market_share:aws:ai_cloud_compute",
@@ -3681,28 +3681,28 @@
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of ai cloud compute",
-   "value": 21.5
+   "value": 21.4
   },
   "market_share:oracle:ai_cloud_compute": {
    "key": "market_share:oracle:ai_cloud_compute",
    "kind": "market_share",
    "vendorId": "oracle",
    "label": "share of ai cloud compute",
-   "value": 18.3
+   "value": 18.2
   },
   "market_share:alibaba:ai_cloud_compute": {
    "key": "market_share:alibaba:ai_cloud_compute",
    "kind": "market_share",
    "vendorId": "alibaba",
    "label": "share of ai cloud compute",
-   "value": 3.5
+   "value": 3.6
   },
   "market_share:g42:ai_cloud_compute": {
    "key": "market_share:g42:ai_cloud_compute",
    "kind": "market_share",
    "vendorId": "g42",
    "label": "share of ai cloud compute",
-   "value": 3.3
+   "value": 3.4
   },
   "market_share:coreweave:ai_cloud_compute": {
    "key": "market_share:coreweave:ai_cloud_compute",
@@ -3716,42 +3716,42 @@
    "kind": "market_share",
    "vendorId": "humain",
    "label": "share of ai cloud compute",
-   "value": 3
+   "value": 2.8
   },
   "market_share:broadcom:ai_silicon": {
    "key": "market_share:broadcom:ai_silicon",
    "kind": "market_share",
    "vendorId": "broadcom",
    "label": "share of ai silicon",
-   "value": 31
+   "value": 30.8
   },
   "market_share:cerebras:ai_silicon": {
    "key": "market_share:cerebras:ai_silicon",
    "kind": "market_share",
    "vendorId": "cerebras",
    "label": "share of ai silicon",
-   "value": 24.1
+   "value": 24.3
   },
   "market_share:nvidia:ai_silicon": {
    "key": "market_share:nvidia:ai_silicon",
    "kind": "market_share",
    "vendorId": "nvidia",
    "label": "share of ai silicon",
-   "value": 16
+   "value": 15.8
   },
   "market_share:amd:ai_silicon": {
    "key": "market_share:amd:ai_silicon",
    "kind": "market_share",
    "vendorId": "amd",
    "label": "share of ai silicon",
-   "value": 15.6
+   "value": 15.4
   },
   "market_share:tsmc:ai_silicon": {
    "key": "market_share:tsmc:ai_silicon",
    "kind": "market_share",
    "vendorId": "tsmc",
    "label": "share of ai silicon",
-   "value": 13.2
+   "value": 13.7
   },
   "market_share:google:cloud_ai_platform": {
    "key": "market_share:google:cloud_ai_platform",
@@ -3765,28 +3765,28 @@
    "kind": "market_share",
    "vendorId": "aws",
    "label": "share of cloud ai platform",
-   "value": 20.3
+   "value": 20.2
   },
   "market_share:databricks:cloud_ai_platform": {
    "key": "market_share:databricks:cloud_ai_platform",
    "kind": "market_share",
    "vendorId": "databricks",
    "label": "share of cloud ai platform",
-   "value": 20.1
+   "value": 20
   },
   "market_share:microsoft:cloud_ai_platform": {
    "key": "market_share:microsoft:cloud_ai_platform",
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of cloud ai platform",
-   "value": 19.7
+   "value": 19.6
   },
   "market_share:snowflake:cloud_ai_platform": {
    "key": "market_share:snowflake:cloud_ai_platform",
    "kind": "market_share",
    "vendorId": "snowflake",
    "label": "share of cloud ai platform",
-   "value": 16.9
+   "value": 17.1
   },
   "market_share:microsoft:crm_customer_ai": {
    "key": "market_share:microsoft:crm_customer_ai",
@@ -3828,28 +3828,28 @@
    "kind": "market_share",
    "vendorId": "openai",
    "label": "share of developer coding agent",
-   "value": 25.7
+   "value": 25.8
   },
   "market_share:microsoft:developer_coding_agent": {
    "key": "market_share:microsoft:developer_coding_agent",
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of developer coding agent",
-   "value": 22.4
+   "value": 22.3
   },
   "market_share:anthropic:enterprise_assistant": {
    "key": "market_share:anthropic:enterprise_assistant",
    "kind": "market_share",
    "vendorId": "anthropic",
    "label": "share of enterprise assistant",
-   "value": 22.3
+   "value": 22.4
   },
   "market_share:openai:enterprise_assistant": {
    "key": "market_share:openai:enterprise_assistant",
    "kind": "market_share",
    "vendorId": "openai",
    "label": "share of enterprise assistant",
-   "value": 22.2
+   "value": 22.3
   },
   "market_share:microsoft:enterprise_assistant": {
    "key": "market_share:microsoft:enterprise_assistant",
@@ -3863,28 +3863,14 @@
    "kind": "market_share",
    "vendorId": "glean",
    "label": "share of enterprise assistant",
-   "value": 18.1
+   "value": 18.3
   },
   "market_share:writer:enterprise_assistant": {
    "key": "market_share:writer:enterprise_assistant",
    "kind": "market_share",
    "vendorId": "writer",
    "label": "share of enterprise assistant",
-   "value": 18
-  },
-  "market_share:google:frontier_model_api": {
-   "key": "market_share:google:frontier_model_api",
-   "kind": "market_share",
-   "vendorId": "google",
-   "label": "share of frontier model api",
-   "value": 15.1
-  },
-  "market_share:openai:frontier_model_api": {
-   "key": "market_share:openai:frontier_model_api",
-   "kind": "market_share",
-   "vendorId": "openai",
-   "label": "share of frontier model api",
-   "value": 15
+   "value": 17.7
   },
   "market_share:anthropic:frontier_model_api": {
    "key": "market_share:anthropic:frontier_model_api",
@@ -3893,66 +3879,80 @@
    "label": "share of frontier model api",
    "value": 15
   },
+  "market_share:google:frontier_model_api": {
+   "key": "market_share:google:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "google",
+   "label": "share of frontier model api",
+   "value": 15
+  },
+  "market_share:openai:frontier_model_api": {
+   "key": "market_share:openai:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "openai",
+   "label": "share of frontier model api",
+   "value": 14.9
+  },
   "market_share:cohere:frontier_model_api": {
    "key": "market_share:cohere:frontier_model_api",
    "kind": "market_share",
    "vendorId": "cohere",
    "label": "share of frontier model api",
-   "value": 13.5
+   "value": 13.4
   },
   "market_share:mistral:frontier_model_api": {
    "key": "market_share:mistral:frontier_model_api",
    "kind": "market_share",
    "vendorId": "mistral",
    "label": "share of frontier model api",
-   "value": 12.1
+   "value": 12
   },
   "market_share:snowflake:frontier_model_api": {
    "key": "market_share:snowflake:frontier_model_api",
    "kind": "market_share",
    "vendorId": "snowflake",
    "label": "share of frontier model api",
-   "value": 11.3
+   "value": 11.5
   },
   "market_share:moonshot:frontier_model_api": {
    "key": "market_share:moonshot:frontier_model_api",
    "kind": "market_share",
    "vendorId": "moonshot",
    "label": "share of frontier model api",
-   "value": 3.2
+   "value": 3.1
   },
   "market_share:xai:frontier_model_api": {
    "key": "market_share:xai:frontier_model_api",
    "kind": "market_share",
    "vendorId": "xai",
    "label": "share of frontier model api",
-   "value": 2.9
+   "value": 3
   },
   "market_share:meta:frontier_model_api": {
    "key": "market_share:meta:frontier_model_api",
    "kind": "market_share",
    "vendorId": "meta",
    "label": "share of frontier model api",
-   "value": 2.7
+   "value": 2.6
   },
   "market_share:zai:frontier_model_api": {
    "key": "market_share:zai:frontier_model_api",
    "kind": "market_share",
    "vendorId": "zai",
    "label": "share of frontier model api",
-   "value": 2.3
-  },
-  "market_share:alibaba:frontier_model_api": {
-   "key": "market_share:alibaba:frontier_model_api",
-   "kind": "market_share",
-   "vendorId": "alibaba",
-   "label": "share of frontier model api",
-   "value": 2.2
+   "value": 2.4
   },
   "market_share:deepseek:frontier_model_api": {
    "key": "market_share:deepseek:frontier_model_api",
    "kind": "market_share",
    "vendorId": "deepseek",
+   "label": "share of frontier model api",
+   "value": 2.2
+  },
+  "market_share:alibaba:frontier_model_api": {
+   "key": "market_share:alibaba:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "alibaba",
    "label": "share of frontier model api",
    "value": 2.2
   },
@@ -3968,21 +3968,21 @@
    "kind": "market_share",
    "vendorId": "ai21",
    "label": "share of frontier model api",
-   "value": 1.2
+   "value": 1.3
   },
   "market_share:microsoft:itsm_hr_service_ai": {
    "key": "market_share:microsoft:itsm_hr_service_ai",
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of itsm hr service ai",
-   "value": 42.4
+   "value": 42.5
   },
   "market_share:moveworks:itsm_hr_service_ai": {
    "key": "market_share:moveworks:itsm_hr_service_ai",
    "kind": "market_share",
    "vendorId": "moveworks",
    "label": "share of itsm hr service ai",
-   "value": 35.4
+   "value": 35.1
   },
   "market_share:servicenow:itsm_hr_service_ai": {
    "key": "market_share:servicenow:itsm_hr_service_ai",
@@ -3996,49 +3996,49 @@
    "kind": "market_share",
    "vendorId": "lambda",
    "label": "share of neocloud inference",
-   "value": 24.8
-  },
-  "market_share:fireworks:neocloud_inference": {
-   "key": "market_share:fireworks:neocloud_inference",
-   "kind": "market_share",
-   "vendorId": "fireworks",
-   "label": "share of neocloud inference",
-   "value": 18.4
-  },
-  "market_share:groq:neocloud_inference": {
-   "key": "market_share:groq:neocloud_inference",
-   "kind": "market_share",
-   "vendorId": "groq",
-   "label": "share of neocloud inference",
-   "value": 17.8
+   "value": 26.7
   },
   "market_share:together:neocloud_inference": {
    "key": "market_share:together:neocloud_inference",
    "kind": "market_share",
    "vendorId": "together",
    "label": "share of neocloud inference",
-   "value": 17.7
+   "value": 17.8
+  },
+  "market_share:groq:neocloud_inference": {
+   "key": "market_share:groq:neocloud_inference",
+   "kind": "market_share",
+   "vendorId": "groq",
+   "label": "share of neocloud inference",
+   "value": 17.6
+  },
+  "market_share:fireworks:neocloud_inference": {
+   "key": "market_share:fireworks:neocloud_inference",
+   "kind": "market_share",
+   "vendorId": "fireworks",
+   "label": "share of neocloud inference",
+   "value": 17
   },
   "market_share:coreweave:neocloud_inference": {
    "key": "market_share:coreweave:neocloud_inference",
    "kind": "market_share",
    "vendorId": "coreweave",
    "label": "share of neocloud inference",
-   "value": 11.7
+   "value": 12.3
   },
   "market_share:nscale:neocloud_inference": {
    "key": "market_share:nscale:neocloud_inference",
    "kind": "market_share",
    "vendorId": "nscale",
    "label": "share of neocloud inference",
-   "value": 9.6
+   "value": 8.7
   },
   "market_share:google:rag_enterprise_search": {
    "key": "market_share:google:rag_enterprise_search",
    "kind": "market_share",
    "vendorId": "google",
    "label": "share of rag enterprise search",
-   "value": 23.8
+   "value": 24
   },
   "market_share:cohere:rag_enterprise_search": {
    "key": "market_share:cohere:rag_enterprise_search",
@@ -4052,28 +4052,28 @@
    "kind": "market_share",
    "vendorId": "glean",
    "label": "share of rag enterprise search",
-   "value": 19
-  },
-  "market_share:hebbia:rag_enterprise_search": {
-   "key": "market_share:hebbia:rag_enterprise_search",
-   "kind": "market_share",
-   "vendorId": "hebbia",
-   "label": "share of rag enterprise search",
-   "value": 18.5
+   "value": 19.2
   },
   "market_share:snowflake:rag_enterprise_search": {
    "key": "market_share:snowflake:rag_enterprise_search",
    "kind": "market_share",
    "vendorId": "snowflake",
    "label": "share of rag enterprise search",
-   "value": 17.5
+   "value": 17.9
+  },
+  "market_share:hebbia:rag_enterprise_search": {
+   "key": "market_share:hebbia:rag_enterprise_search",
+   "kind": "market_share",
+   "vendorId": "hebbia",
+   "label": "share of rag enterprise search",
+   "value": 17.8
   },
   "market_share:cohere:regulated_industry_ai": {
    "key": "market_share:cohere:regulated_industry_ai",
    "kind": "market_share",
    "vendorId": "cohere",
    "label": "share of regulated industry ai",
-   "value": 35.1
+   "value": 35
   },
   "market_share:harvey:regulated_industry_ai": {
    "key": "market_share:harvey:regulated_industry_ai",
@@ -4087,42 +4087,42 @@
    "kind": "market_share",
    "vendorId": "ibm",
    "label": "share of regulated industry ai",
-   "value": 22.2
+   "value": 22.1
   },
   "market_share:rogo:regulated_industry_ai": {
    "key": "market_share:rogo:regulated_industry_ai",
    "kind": "market_share",
    "vendorId": "rogo",
    "label": "share of regulated industry ai",
-   "value": 19.2
+   "value": 19.4
   },
   "market_share:sap:workflow_automation_ai": {
    "key": "market_share:sap:workflow_automation_ai",
    "kind": "market_share",
    "vendorId": "sap",
    "label": "share of workflow automation ai",
-   "value": 29.8
+   "value": 29.5
   },
   "market_share:moveworks:workflow_automation_ai": {
    "key": "market_share:moveworks:workflow_automation_ai",
    "kind": "market_share",
    "vendorId": "moveworks",
    "label": "share of workflow automation ai",
-   "value": 28.5
+   "value": 28.4
   },
   "market_share:servicenow:workflow_automation_ai": {
    "key": "market_share:servicenow:workflow_automation_ai",
    "kind": "market_share",
    "vendorId": "servicenow",
    "label": "share of workflow automation ai",
-   "value": 21.9
+   "value": 22.1
   },
   "market_share:salesforce:workflow_automation_ai": {
    "key": "market_share:salesforce:workflow_automation_ai",
    "kind": "market_share",
    "vendorId": "salesforce",
    "label": "share of workflow automation ai",
-   "value": 19.8
+   "value": 20
   },
   "narrative_gap:moonshot": {
    "key": "narrative_gap:moonshot",

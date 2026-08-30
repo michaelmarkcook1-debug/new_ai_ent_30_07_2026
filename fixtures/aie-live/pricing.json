@@ -1,7 +1,7 @@
 {
  "provenance": "Reference list pricing (USD per 1M tokens), captured 2026-06-02 from public vendor API pricing pages. List price ≠ negotiated enterprise price — batch APIs commonly list 50% lower; committed-use, volume, and residency terms vary. Rows with no price were not verified from a reliable live source. Seed reference data, not a contract.",
  "capturedAt": "2026-06-02",
- "asOf": "2026-08-16T20:57:22.146Z",
+ "asOf": "2026-08-30T15:45:15.987Z",
  "count": 33,
  "rows": [
   {

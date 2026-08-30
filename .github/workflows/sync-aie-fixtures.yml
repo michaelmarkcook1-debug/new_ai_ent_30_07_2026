@@ -1,0 +1,90 @@
+# Keeps the recorded AIE payloads from drifting away from the live source.
+#
+# WHY THIS IS A GITHUB ACTION AND NOT A VERCEL CRON. The sync WRITES FILES:
+# fixtures/aie-live/*.json, the generated lib/aie/vendor-directory.ts, and the
+# signal snapshot and change log. A Vercel cron runs inside a deployed function
+# with a read-only filesystem and no way to commit, so it can warm a cache but
+# it can never refresh a fixture. vercel.json's cron warms the analyst readings
+# and is a different job; this one is the only thing that can stop the drift.
+#
+# WHY IT GATES ON THE TEST SUITE. On 30 August 2026 a manual sync pulled a
+# vendor the upstream had just added, under a category this app had no mapping
+# for, and lib/aie/vendors.ts throws on an unmapped category by design. Nineteen
+# test files stopped importing. A job that committed that automatically would
+# have shipped a broken build overnight with nobody watching, so the tests run
+# BEFORE the commit and a failure stops the job loudly rather than landing.
+#
+# A red run here is therefore information, not noise: it means the upstream has
+# changed in a way this app cannot absorb without a decision, which is a
+# decision a person should make.
+
+name: Sync AIE fixtures
+
+on:
+  schedule:
+    # 04:30 UTC daily, ahead of the 05:00 analyst warm in vercel.json, so a
+    # deploy triggered by this commit is warmed rather than cold.
+    - cron: "30 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-aie-fixtures
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Pull the live payloads
+        run: npm run sync:aie
+
+      - name: Check whether anything moved
+        id: moved
+        run: |
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Sources have not moved. Nothing to commit."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git diff --stat
+          fi
+
+      # The gate. Everything below only runs when there is something to land,
+      # and nothing lands unless all three pass.
+      - name: Typecheck
+        if: steps.moved.outputs.changed == 'true'
+        run: npx tsc --noEmit
+
+      - name: Lint
+        if: steps.moved.outputs.changed == 'true'
+        run: npm run lint
+
+      - name: Test
+        if: steps.moved.outputs.changed == 'true'
+        run: npm test
+
+      - name: Commit the refreshed payloads
+        if: steps.moved.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fixtures lib/aie/vendor-directory.ts
+          git commit -m "Refresh the recorded AIE payloads from the live source
+
+          Automated by .github/workflows/sync-aie-fixtures.yml. Typecheck, lint
+          and the full test suite passed against these payloads before the
+          commit was made."
+          git push

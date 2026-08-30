@@ -27,7 +27,7 @@
   "thresholds": {
     "winning": {
       "low": 56.194039244637075,
-      "high": 60.201094218920005
+      "high": 60.14452850949234
     },
     "trust": {
       "low": 75,
@@ -81,10 +81,10 @@
     {
       "vendorId": "g42",
       "name": "G42 / Falcon (TII)",
-      "winning": 57.50023809523809,
+      "winning": 57.397510822510824,
       "trust": null,
       "durability": null,
-      "composite": 57.5,
+      "composite": 57.4,
       "confidence": "1 of 3",
       "missing": [
         "trust",
@@ -120,10 +120,10 @@
     {
       "vendorId": "lambda",
       "name": "Lambda",
-      "winning": 54.66768052134646,
+      "winning": 55.03837039092366,
       "trust": null,
       "durability": null,
-      "composite": 54.7,
+      "composite": 55,
       "confidence": "1 of 3",
       "missing": [
         "trust",
@@ -197,7 +197,7 @@
     {
       "vendorId": "amd",
       "name": "AMD",
-      "winning": 64.315,
+      "winning": 64.38560606060607,
       "trust": null,
       "durability": 85,
       "composite": 73.2,
@@ -221,10 +221,10 @@
     {
       "vendorId": "deepseek",
       "name": "DeepSeek",
-      "winning": 62.76935046935047,
+      "winning": 63.00140071027371,
       "trust": 75.66666666666667,
       "durability": null,
-      "composite": 68.3,
+      "composite": 68.4,
       "confidence": "2 of 3",
       "missing": [
         "durability"
@@ -233,10 +233,10 @@
     {
       "vendorId": "glean",
       "name": "Glean",
-      "winning": 60.03578730663851,
+      "winning": 59.87383461510602,
       "trust": 78.66666666666667,
       "durability": null,
-      "composite": 68,
+      "composite": 67.9,
       "confidence": "2 of 3",
       "missing": [
         "durability"
@@ -305,7 +305,7 @@
     {
       "vendorId": "nvidia",
       "name": "NVIDIA",
-      "winning": 73.64547619047619,
+      "winning": 73.6654761904762,
       "trust": null,
       "durability": 85,
       "composite": 78.5,
@@ -353,10 +353,10 @@
     {
       "vendorId": "xai",
       "name": "xAI",
-      "winning": 57.61158333333333,
+      "winning": 57.88613173669378,
       "trust": 69.66666666666667,
       "durability": null,
-      "composite": 62.8,
+      "composite": 62.9,
       "confidence": "2 of 3",
       "missing": [
         "durability"
@@ -365,10 +365,10 @@
     {
       "vendorId": "zai",
       "name": "Z.ai",
-      "winning": 55.51394735749574,
+      "winning": 55.33587878787879,
       "trust": 71.66666666666667,
       "durability": null,
-      "composite": 62.4,
+      "composite": 62.3,
       "confidence": "2 of 3",
       "missing": [
         "durability"
@@ -387,7 +387,7 @@
     {
       "vendorId": "anthropic",
       "name": "Anthropic",
-      "winning": 60.201094218920005,
+      "winning": 60.14452850949234,
       "trust": 80,
       "durability": 60,
       "composite": 66.1,
@@ -397,10 +397,10 @@
     {
       "vendorId": "aws",
       "name": "AWS",
-      "winning": 61.86215904296006,
+      "winning": 61.92709731711649,
       "trust": 76.33333333333333,
       "durability": 85,
-      "composite": 73.1,
+      "composite": 73.2,
       "confidence": "3 of 3",
       "missing": []
     },
@@ -417,20 +417,20 @@
     {
       "vendorId": "databricks",
       "name": "Databricks",
-      "winning": 54.46599562178197,
+      "winning": 54.311870207942015,
       "trust": 79,
       "durability": 60,
-      "composite": 63.5,
+      "composite": 63.4,
       "confidence": "3 of 3",
       "missing": []
     },
     {
       "vendorId": "google",
       "name": "Google",
-      "winning": 63.394827546910264,
+      "winning": 63.25379882843915,
       "trust": 80,
       "durability": 85,
-      "composite": 74.9,
+      "composite": 74.8,
       "confidence": "3 of 3",
       "missing": []
     },
@@ -477,10 +477,10 @@
     {
       "vendorId": "openai",
       "name": "OpenAI",
-      "winning": 69.85109907826185,
+      "winning": 69.93305926586785,
       "trust": 80.33333333333333,
       "durability": 60,
-      "composite": 70,
+      "composite": 70.1,
       "confidence": "3 of 3",
       "missing": []
     },

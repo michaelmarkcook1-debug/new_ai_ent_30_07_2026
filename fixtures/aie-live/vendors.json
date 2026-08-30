@@ -97,7 +97,7 @@
    ],
    "autonomyLevelMax": "human_in_loop",
    "overallScore": 56.9,
-   "confidenceScore": 93.8,
+   "confidenceScore": 94,
    "marketPosition": "Category leader",
    "strategy": "Win on price/performance and supply diversification; close the software gap (ROCm) versus CUDA.",
    "productCapabilities": [
@@ -170,7 +170,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 53.1,
+   "overallScore": 53.2,
    "confidenceScore": 97.8,
    "marketPosition": "Major challenger",
    "strategy": "Win through Bedrock-style model optionality, cloud-native deployment, and enterprise infrastructure trust.",
@@ -248,7 +248,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 67.7,
+   "overallScore": 67.6,
    "confidenceScore": 96,
    "marketPosition": "Major challenger",
    "strategy": "Distribute Qwen via Alibaba Cloud and open-weight release; lead non-English benchmarks.",
@@ -763,7 +763,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 43.8,
+   "overallScore": 43.6,
    "confidenceScore": 97.4,
    "marketPosition": "Category leader",
    "strategy": "Use data estate, open model tooling, and governance to become enterprise AI build platform.",
@@ -836,8 +836,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 64.2,
-   "confidenceScore": 97.1,
+   "overallScore": 64.5,
+   "confidenceScore": 97.2,
    "marketPosition": "Category leader",
    "strategy": "Win on price-per-token + reasoning quality through aggressive open release cadence.",
    "productCapabilities": [
@@ -981,7 +981,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 42.6,
+   "overallScore": 42.4,
    "confidenceScore": 94.7,
    "marketPosition": "Emerging specialist",
    "strategy": "Be the AI capital of the Arab world with explicit US-technology alignment; pair sovereign compute with the Falcon open-weights franchise.",
@@ -1054,7 +1054,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 59.2,
+   "overallScore": 58.7,
    "confidenceScore": 98.9,
    "marketPosition": "Category leader",
    "strategy": "Own enterprise knowledge retrieval and expand from answer engine into assistant and agent workflows.",
@@ -1129,7 +1129,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 65,
+   "overallScore": 64.8,
    "confidenceScore": 97.8,
    "marketPosition": "Major challenger",
    "strategy": "Differentiate on model research, multimodal capability, data/cloud integration, and Workspace adoption.",
@@ -1484,7 +1484,7 @@
     "sovereign"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 44.9,
+   "overallScore": 48.6,
    "confidenceScore": 97.5,
    "marketPosition": "Specialist contender",
    "strategy": "Compete on trusted AI, hybrid deployment, consulting, governance, and model lifecycle management.",
@@ -1547,7 +1547,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 56.7,
+   "overallScore": 56.5,
    "confidenceScore": 99,
    "marketPosition": "Emerging specialist",
    "strategy": "Offer NVIDIA capacity (on-demand + reserved) outside the big-three hyperscalers.",
@@ -1618,8 +1618,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 48.1,
-   "confidenceScore": 93.6,
+   "overallScore": 48.6,
+   "confidenceScore": 94.7,
    "marketPosition": "Emerging specialist",
    "strategy": "Deploy sovereign capital at mega-round scale across frontier labs and AI infrastructure.",
    "productCapabilities": [
@@ -2130,8 +2130,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 61.7,
-   "confidenceScore": 93.5,
+   "overallScore": 62,
+   "confidenceScore": 93.6,
    "marketPosition": "Leader",
    "strategy": "Hold the silicon + software (CUDA) standard, extend into systems (DGX) and networking, and use strategic investments to seed demand across labs and neoclouds.",
    "productCapabilities": [
@@ -2281,7 +2281,7 @@
     "vpc"
    ],
    "autonomyLevelMax": "supervised_agent",
-   "overallScore": 69.4,
+   "overallScore": 69.6,
    "confidenceScore": 97.8,
    "marketPosition": "Leader",
    "strategy": "Lead with model quality, agent runtime, enterprise controls, and ecosystem distribution through strategic partners.",
@@ -2831,7 +2831,7 @@
     "vpc"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 45.9,
+   "overallScore": 46,
    "confidenceScore": 88.6,
    "marketPosition": "Category leader",
    "strategy": "Position AI agents as workflow execution inside systems of record for service operations.",
@@ -3251,8 +3251,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 60.7,
-   "confidenceScore": 96.1,
+   "overallScore": 63.3,
+   "confidenceScore": 96.2,
    "marketPosition": "Emerging specialist",
    "strategy": "Anchor GLM as Chinese frontier alternative with English/multilingual coverage expanding.",
    "productCapabilities": [
@@ -3319,8 +3319,8 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 65.2,
-   "confidenceScore": 97.5,
+   "overallScore": 65.3,
+   "confidenceScore": 97.7,
    "marketPosition": "Specialist contender",
    "strategy": "Win on compute scale, real-time signal (X integration), and aggressive model cadence.",
    "productCapabilities": [

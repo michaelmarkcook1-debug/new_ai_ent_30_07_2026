@@ -49,7 +49,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "Alibaba",
     "category": "Frontier model/API",
     "ownershipType": "public",
-    "overallScore": 67.7,
+    "overallScore": 67.6,
     "confidenceScore": 96,
     "marketPosition": "Major challenger"
   },
@@ -59,7 +59,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "category": "AI infrastructure",
     "ownershipType": "public",
     "overallScore": 56.9,
-    "confidenceScore": 93.8,
+    "confidenceScore": 94,
     "marketPosition": "Category leader"
   },
   {
@@ -76,7 +76,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "AWS",
     "category": "Cloud AI platform",
     "ownershipType": "public",
-    "overallScore": 53.1,
+    "overallScore": 53.2,
     "confidenceScore": 97.8,
     "marketPosition": "Major challenger"
   },
@@ -121,7 +121,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "Databricks",
     "category": "Cloud AI platform",
     "ownershipType": "private",
-    "overallScore": 43.8,
+    "overallScore": 43.6,
     "confidenceScore": 97.4,
     "marketPosition": "Category leader"
   },
@@ -130,8 +130,8 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "DeepSeek",
     "category": "Frontier model/API",
     "ownershipType": "private",
-    "overallScore": 64.2,
-    "confidenceScore": 97.1,
+    "overallScore": 64.5,
+    "confidenceScore": 97.2,
     "marketPosition": "Category leader"
   },
   {
@@ -148,7 +148,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "G42 / Falcon (TII)",
     "category": "Sovereign/regional AI",
     "ownershipType": "private",
-    "overallScore": 42.6,
+    "overallScore": 42.4,
     "confidenceScore": 94.7,
     "marketPosition": "Emerging specialist"
   },
@@ -157,7 +157,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "Glean",
     "category": "RAG/enterprise search",
     "ownershipType": "private",
-    "overallScore": 59.2,
+    "overallScore": 58.7,
     "confidenceScore": 98.9,
     "marketPosition": "Category leader"
   },
@@ -166,7 +166,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "Google",
     "category": "Cloud AI platform",
     "ownershipType": "public",
-    "overallScore": 65,
+    "overallScore": 64.8,
     "confidenceScore": 97.8,
     "marketPosition": "Major challenger"
   },
@@ -211,7 +211,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "IBM",
     "category": "Regulated-industry AI",
     "ownershipType": "public",
-    "overallScore": 44.9,
+    "overallScore": 48.6,
     "confidenceScore": 97.5,
     "marketPosition": "Specialist contender"
   },
@@ -220,7 +220,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "Lambda",
     "category": "AI infrastructure",
     "ownershipType": "private",
-    "overallScore": 56.7,
+    "overallScore": 56.5,
     "confidenceScore": 99,
     "marketPosition": "Emerging specialist"
   },
@@ -238,8 +238,8 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "MGX",
     "category": "AI investor",
     "ownershipType": "public",
-    "overallScore": 48.1,
-    "confidenceScore": 93.6,
+    "overallScore": 48.6,
+    "confidenceScore": 94.7,
     "marketPosition": "Emerging specialist"
   },
   {
@@ -301,8 +301,8 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "NVIDIA",
     "category": "AI infrastructure",
     "ownershipType": "public",
-    "overallScore": 61.7,
-    "confidenceScore": 93.5,
+    "overallScore": 62,
+    "confidenceScore": 93.6,
     "marketPosition": "Leader"
   },
   {
@@ -310,7 +310,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "OpenAI",
     "category": "Frontier model/API",
     "ownershipType": "private",
-    "overallScore": 69.4,
+    "overallScore": 69.6,
     "confidenceScore": 97.8,
     "marketPosition": "Leader"
   },
@@ -382,7 +382,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "ServiceNow",
     "category": "ITSM/HR/service AI",
     "ownershipType": "public",
-    "overallScore": 45.9,
+    "overallScore": 46,
     "confidenceScore": 88.6,
     "marketPosition": "Category leader"
   },
@@ -436,8 +436,8 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "xAI",
     "category": "Frontier model/API",
     "ownershipType": "private",
-    "overallScore": 65.2,
-    "confidenceScore": 97.5,
+    "overallScore": 65.3,
+    "confidenceScore": 97.7,
     "marketPosition": "Specialist contender"
   },
   {
@@ -445,8 +445,8 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "Z.ai",
     "category": "Frontier model/API",
     "ownershipType": "private",
-    "overallScore": 60.7,
-    "confidenceScore": 96.1,
+    "overallScore": 63.3,
+    "confidenceScore": 96.2,
     "marketPosition": "Emerging specialist"
   }
 ];

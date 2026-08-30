@@ -345,7 +345,7 @@
    "vendorId": "amd",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 61.333333333333336,
+   "maturityScore": 63.5,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-14T00:00:00.000Z",
    "notes": "MI355X claims ~40% better tokens-per-dollar and ~30% faster inference than B200 on certain benchmarks — a price/perf strength."
@@ -381,10 +381,10 @@
    "vendorId": "amd",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 51.4,
+   "maturityScore": 51.27272727272727,
    "evidenceGrade": "E4",
    "lastVerified": "2026-07-14T00:00:00.000Z",
-   "notes": "ROCm 7.0 offers native PyTorch and JAX support — a real, improving open integration path."
+   "notes": "ROCm 7.0 supports PyTorch, TensorFlow, ONNX and JAX/XLA — a real, improving open integration path."
   },
   {
    "vendorId": "amd",
@@ -399,10 +399,10 @@
    "vendorId": "amd",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 58,
+   "maturityScore": 56.666666666666664,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-14T00:00:00.000Z",
-   "notes": "ROCm maturing (7.0 native PyTorch/JAX) but far weaker lock-in than CUDA; Triton eases portability off NVIDIA."
+   "notes": "ROCm 7.0 maturing (broad framework support) but far weaker ecosystem lock-in than CUDA's ~20-year base."
   },
   {
    "vendorId": "amd",
@@ -426,18 +426,18 @@
    "vendorId": "anthropic",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 52.03448275862069,
+   "maturityScore": 52.12903225806452,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-14T22:24:58.002Z",
-   "notes": "Jul 22: Service disruption on Claude Services Resolved - This incident has been resolved. Investigating an outage affecting features such as document creation in claude.ai, Cowork "
+   "lastVerified": "2026-08-28T18:54:24.268Z",
+   "notes": "Architect capability: The strategic brain—built for systemic design, deep planning, and high-horizon reasoning. Claude Opus 4.8 Thinking, Claude Opus 4.7 Thinking, Claude Opus 4.6 "
   },
   {
    "vendorId": "anthropic",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 66.48958333333333,
+   "maturityScore": 66.4,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:24:58.002Z",
+   "lastVerified": "2026-08-28T18:54:24.268Z",
    "notes": "Claude Opus 4.8 (launched May 28, 2026) costs $5.00/$25.00 per MTok — same rate as Opus 4.7, with Fast Mode now at $10/$50 per MTok (down from $30/$150 on Opus 4.7). Claude Sonnet "
   },
   {
@@ -462,36 +462,36 @@
    "vendorId": "anthropic",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 54.625,
+   "maturityScore": 54.24,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:24:58.002Z",
+   "lastVerified": "2026-08-28T18:54:21.908Z",
    "notes": "Anthropic has also obtained SOC 2 Type II attestation with an established control framework. Their controls follow regular testing cycles, and exception management follows a formal"
   },
   {
    "vendorId": "anthropic",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 60.474137931034484,
+   "maturityScore": 60.413223140495866,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:25:03.298Z",
+   "lastVerified": "2026-08-28T18:54:24.268Z",
    "notes": "Claude models are available on Amazon Bedrock and Google Cloud. Claude Platform on AWS bills through AWS Marketplace using Claude Consumption Units (CCUs). Claude in Microsoft Foun"
   },
   {
    "vendorId": "anthropic",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 59.62420382165605,
+   "maturityScore": 59.76543209876543,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-08-14T22:25:03.298Z",
+   "lastVerified": "2026-08-28T18:54:24.268Z",
    "notes": "In an externally conducted red team exercise that evaluated 23 models from multiple AI developers, Claude Sonnet 4.5 achieved the lowest rate of successful prompt injection attacks"
   },
   {
    "vendorId": "anthropic",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 57.705882352941174,
+   "maturityScore": 57.4,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:25:03.298Z",
+   "lastVerified": "2026-08-28T18:54:21.908Z",
    "notes": "At the beginning of 2025, less than two years after launch, Anthropic's run-rate revenue had grown to approximately $1 billion. By August 2025, just eight months later, our run-rat"
   },
   {
@@ -507,27 +507,27 @@
    "vendorId": "anthropic",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 59.113207547169814,
+   "maturityScore": 59.153153153153156,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-08-14T22:24:57.752Z",
+   "lastVerified": "2026-08-28T18:54:21.908Z",
    "notes": "Windsurf (CVE-2026-30615) was the only IDE where exploitation required zero user interaction...OX Security executed commands on six live production platforms and produced 10+ Criti"
   },
   {
    "vendorId": "aws",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 56.411764705882355,
+   "maturityScore": 56.55769230769231,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:25:24.798Z",
+   "lastVerified": "2026-08-28T18:54:46.607Z",
    "notes": "Inscribe developed an agentic AI system using Amazon Bedrock that reasons across documents the way an expert fraud analyst would. With this new agentic AI system, Inscribe now dete"
   },
   {
    "vendorId": "aws",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 66.19685039370079,
+   "maturityScore": 66.12121212121212,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:25:24.798Z",
+   "lastVerified": "2026-08-28T18:54:46.607Z",
    "notes": "Amazon Bedrock provided serverless access to multiple leading FMs, including Amazon Nova, Meta Llama, and Anthropic's Claude, without requiring the Yahoo team to build or manage co"
   },
   {
@@ -552,36 +552,36 @@
    "vendorId": "aws",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 62.07964601769911,
+   "maturityScore": 62.327586206896555,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-14T22:25:24.798Z",
+   "lastVerified": "2026-08-28T18:54:46.776Z",
    "notes": "By combining semantic similarity scoring with sensitive keyword filtering, we created a guardrailed keyword expansion pipeline. Filtering happens before inference (to avoid expansi"
   },
   {
    "vendorId": "aws",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 66.45664739884393,
+   "maturityScore": 66.21787709497207,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:25:24.798Z",
+   "lastVerified": "2026-08-28T18:54:46.776Z",
    "notes": "The solution involved adapting the Outpost VFX existing face swap model codebase to support distributed GPU training across multiple GPUs. The implementation used AWS multi-GPU Ama"
   },
   {
    "vendorId": "aws",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 52.25,
+   "maturityScore": 52.28,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-02T00:47:56.551Z",
+   "lastVerified": "2026-08-28T18:54:46.607Z",
    "notes": "When deployed through Amazon Bedrock, Claude 3.5 Sonnet v2 demonstrated substantially superior expansion capabilities compared to the legacy LSH method, frequently generating hundr"
   },
   {
    "vendorId": "aws",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 60.4040404040404,
+   "maturityScore": 60.61165048543689,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:25:23.412Z",
+   "lastVerified": "2026-08-28T18:54:46.776Z",
    "notes": "Stripe uses an LLM Proxy service for the following reasons: One API, many models – The single endpoint simplifies specifying capabilities such as prompt caching or tool calling acr"
   },
   {
@@ -597,9 +597,9 @@
    "vendorId": "aws",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 59.62264150943396,
+   "maturityScore": 59.95495495495496,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:25:24.798Z",
+   "lastVerified": "2026-08-28T18:54:46.776Z",
    "notes": "DoD Level 2, DoD Level 4, DoD Level 5, DoD Level 6, FedRAMP"
   },
   {
@@ -966,18 +966,18 @@
    "vendorId": "databricks",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 50.265306122448976,
+   "maturityScore": 50.10891089108911,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:26:07.383Z",
+   "lastVerified": "2026-08-24T17:46:49.238Z",
    "notes": "$10M in productivity gains: Block built an AI agent system using Databricks to automate operations for their sellers, such as generating customized menus. 96% accuracy of responses"
   },
   {
    "vendorId": "databricks",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 55.567567567567565,
+   "maturityScore": 55.12931034482759,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:26:07.383Z",
+   "lastVerified": "2026-08-24T17:46:49.238Z",
    "notes": "Comcast built a personalized viewer experience that boosted engagement through intelligent voice commands while reducing ML costs. 10x reduction in cost."
   },
   {
@@ -1002,36 +1002,36 @@
    "vendorId": "databricks",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 50.1858407079646,
+   "maturityScore": 49.96551724137931,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-08-14T22:26:07.383Z",
+   "lastVerified": "2026-08-24T17:46:49.238Z",
    "notes": "Has been assessed and found to be in accordance with the management system requirements in ISO/IEC 27001:2022...The scope of the ISO/IEC 27001:2022 include the information security"
   },
   {
    "vendorId": "databricks",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 53.78787878787879,
+   "maturityScore": 53.59803921568628,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:26:07.383Z",
+   "lastVerified": "2026-08-24T17:46:49.238Z",
    "notes": "Databricks supports compliance standards across all three major cloud platforms: AWS, Azure, and Google Cloud."
   },
   {
    "vendorId": "databricks",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 49.6078431372549,
+   "maturityScore": 49.43396226415094,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-14T22:26:07.383Z",
+   "lastVerified": "2026-08-24T17:46:49.238Z",
    "notes": "Uptime (30 days) 100.00% Platinum Transparency Grade Not tracked Vendor has fewer than 3 incidents in the last 90 days SLA Compliance Meeting SLA 100.00% actual vs 99.9% target"
   },
   {
    "vendorId": "databricks",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 55.38235294117647,
+   "maturityScore": 55.367924528301884,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:26:07.383Z",
+   "lastVerified": "2026-08-24T17:46:49.238Z",
    "notes": "Databricks attracted over 20,000 customers, including more than 700 large enterprises that spend at least $1 million per year on its services... Net dollar retention remained above"
   },
   {
@@ -1047,9 +1047,9 @@
    "vendorId": "databricks",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 52.506024096385545,
+   "maturityScore": 52.1578947368421,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-08-14T22:26:07.383Z",
+   "lastVerified": "2026-08-24T17:46:49.238Z",
    "notes": "The scope of the ISO/IEC 27001:2022 include the information security management system (ISMS) supporting the Databricks Data Intelligence Platform on AWS, Azure and Google Cloud"
   },
   {
@@ -1065,10 +1065,10 @@
    "vendorId": "deepseek",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 49.23076923076923,
+   "maturityScore": 50.57142857142857,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-14T22:26:29.438Z",
-   "notes": "DeepSeek's API pricing undercuts most proprietary models. If these costs hold, expect: New use cases: Tasks like real-time document analysis or granular customer sentiment tracking"
+   "lastVerified": "2026-08-28T18:55:11.350Z",
+   "notes": "DeepSeek-V4-Flash 1451 1466 51 86.2 61.4 DeepSeek MIT ... Qwen3-30B-A3B 1320 1346 21 77.7 Alibaba Apache 2.0 ... Llama-3.1-405B-Instruct 1286 1299 13 73.2 Meta Llama 3.1"
   },
   {
    "vendorId": "deepseek",
@@ -1101,27 +1101,27 @@
    "vendorId": "deepseek",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 62.666666666666664,
+   "maturityScore": 63.1578947368421,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-14T22:26:29.438Z",
-   "notes": "🥈 DeepSeek-V4-Pro ✅ 1467 1491 71 87.5 DeepSeek MIT\n🥉 DeepSeek-V4-Flash 1445 1460 64 86.2 DeepSeek MIT\n🪙 DeepSeek-V3.2-Thinking 1422 1438 66 86.2 4 DeepSeek MIT\n🪙 DeepSeek-V3.2 "
+   "lastVerified": "2026-08-28T18:55:11.350Z",
+   "notes": "DeepSeek-V4-Pro 1502 ... DeepSeek-V4-Flash 1451 ... DeepSeek-V3.2-Thinking 1422 ... DeepSeek-V3.1-Thinking 1418 ... DeepSeek-V3.2 1418 ... DeepSeek-V3.1 1417 ... DeepSeek-V3-0324 1"
   },
   {
    "vendorId": "deepseek",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 68.43243243243244,
+   "maturityScore": 68.425,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:26:29.438Z",
+   "lastVerified": "2026-08-28T18:55:11.350Z",
    "notes": "The Netskope AI Labs team recently evaluated the security of the open-source DeepSeek R1 model and found that it was vulnerable to 27% of prompt injection attacks, which was three-"
   },
   {
    "vendorId": "deepseek",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 60.59090909090909,
+   "maturityScore": 61.08695652173913,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-14T22:26:29.438Z",
+   "lastVerified": "2026-08-28T18:55:11.350Z",
    "notes": "DeepSeek-V4-Pro ✅ 1467... | DeepSeek-V3.2-Thinking 1422 | DeepSeek-V3.1-Thinking 1418 | DeepSeek-V3.2 1418 | DeepSeek-V3.1 1417 | DeepSeek-V3-0324 1377 | DeepSeek-R1-0528 1426 | De"
   },
   {
@@ -1281,9 +1281,9 @@
    "vendorId": "g42",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 46.3,
+   "maturityScore": 45.27272727272727,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-31T03:26:11.266Z",
+   "lastVerified": "2026-08-27T16:20:18.759Z",
    "notes": "Falcon 2 11B is the first LLM to offer vision-to-language capabilities. TII's Falcon 2 series needed capabilities like multimodal, multilingual, and vision-to-language support. Int"
   },
   {
@@ -1326,18 +1326,18 @@
    "vendorId": "glean",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 55.35897435897436,
+   "maturityScore": 54.674698795180724,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:18:03.608Z",
+   "lastVerified": "2026-08-28T18:41:31.743Z",
    "notes": "Glean's agent builder was accessible to anyone at DBS through natural language queries — and Glean Protect ensured scalability without concerns of oversharing or leaking data."
   },
   {
    "vendorId": "glean",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 43,
+   "maturityScore": 43.61904761904762,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T23:29:39.113Z",
+   "lastVerified": "2026-08-28T18:41:31.743Z",
    "notes": "Based on Vendr data from 159 purchases, the median contract is $97,500/year. Per-user costs vary from $25-40/month depending on deployment size, with larger organizations getting b"
   },
   {
@@ -1353,18 +1353,18 @@
    "vendorId": "glean",
    "capabilityId": "enterprise_assistant",
    "status": "verified",
-   "maturityScore": 51.93333333333333,
+   "maturityScore": 50.88235294117647,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:18:03.608Z",
+   "lastVerified": "2026-08-28T18:41:09.995Z",
    "notes": "Today, more than 70% of Confluent employees actively use Glean — a higher adoption rate than many other internal SaaS tools."
   },
   {
    "vendorId": "glean",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 54.81818181818182,
+   "maturityScore": 55.89473684210526,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:41:23.017Z",
+   "lastVerified": "2026-08-28T18:41:31.743Z",
    "notes": "Glean's agent builder was accessible to anyone at DBS through natural language queries — and Glean Protect ensured scalability without concerns of oversharing or leaking data."
   },
   {
@@ -1380,18 +1380,18 @@
    "vendorId": "glean",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 52.06896551724138,
+   "maturityScore": 51.72727272727273,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:18:03.608Z",
+   "lastVerified": "2026-08-28T18:41:31.743Z",
    "notes": "Zero-retention agreements with model providers ensure your data is never stored or used for model training."
   },
   {
    "vendorId": "glean",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 59.06818181818182,
+   "maturityScore": 58.3125,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-31T01:18:03.608Z",
+   "lastVerified": "2026-08-28T18:41:08.662Z",
    "notes": "Glean has raised $765M in funding from investors like Lightspeed Venture Partners, Sequoia Capital and DST Global, with a current valuation of $7.2B. Glean has raised a total fundi"
   },
   {
@@ -1407,28 +1407,28 @@
    "vendorId": "glean",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 59.110236220472444,
+   "maturityScore": 58.627737226277375,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-07-31T01:18:03.608Z",
+   "lastVerified": "2026-08-28T18:41:31.743Z",
    "notes": "Glean is certified to ISO/IEC 27001, the leading global standard for information security management, ensuring robust, independently validated controls for risk assessment, mitigat"
   },
   {
    "vendorId": "google",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 51.72727272727273,
+   "maturityScore": 51.85436893203884,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:27:24.994Z",
+   "lastVerified": "2026-08-29T18:57:57.675Z",
    "notes": "Wonderful uses Gemini and Vertex AI to overcome the global AI language gap, helping large local enterprises automate customer and business interactions across languages and regions"
   },
   {
    "vendorId": "google",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 55,
+   "maturityScore": 54.09411764705882,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-08-14T22:27:24.994Z",
-   "notes": "Consumption options include Provisioned Throughput (with overview, supported models, calculation tools, single-zone options, purchase guidance), PayGo (Standard, Priority, Flex var"
+   "lastVerified": "2026-08-29T18:57:58.602Z",
+   "notes": "Pricing. Standard PayGo. Priority PayGo. Flex PayGo. Provisioned Throughput overview. Calculate Provisioned Throughput requirements."
   },
   {
    "vendorId": "google",
@@ -1452,36 +1452,36 @@
    "vendorId": "google",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 54.04040404040404,
+   "maturityScore": 54.11764705882353,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-08-14T22:27:24.994Z",
+   "lastVerified": "2026-08-29T18:57:58.602Z",
    "notes": "Google maintains a FedRAMP Authorization to Operate (ATO) for Google Workspace and Google Cloud Platform."
   },
   {
    "vendorId": "google",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 60.81707317073171,
+   "maturityScore": 60.54651162790697,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:27:24.994Z",
+   "lastVerified": "2026-08-29T18:57:58.602Z",
    "notes": "Wonderful uses Gemini and Vertex AI to overcome the global AI language gap, helping large local enterprises automate customer and business interactions across languages and regions"
   },
   {
    "vendorId": "google",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 54.036144578313255,
+   "maturityScore": 54,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-14T22:27:24.994Z",
+   "lastVerified": "2026-08-29T18:57:58.602Z",
    "notes": "In this blinded study with patient actors, specialist physicians compared AMIE with 21 primary care doctors. AMIE matched clinicians in overall management reasoning and scored sign"
   },
   {
    "vendorId": "google",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 58.035714285714285,
+   "maturityScore": 57.94915254237288,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-14T22:27:20.557Z",
+   "lastVerified": "2026-08-29T18:57:57.675Z",
    "notes": "No broad severe incidents. Last updated time: 14 Aug 2026, 15:26 PDT. All times are US/Pacific"
   },
   {
@@ -1497,9 +1497,9 @@
    "vendorId": "google",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 53.291666666666664,
+   "maturityScore": 52.976190476190474,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:27:24.994Z",
+   "lastVerified": "2026-08-29T18:57:58.602Z",
    "notes": "Google has both SOC 2 and SOC 3 reports for Google Cloud Platform and Google Workspace."
   },
   {
@@ -1956,18 +1956,18 @@
    "vendorId": "lambda",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 49.9,
+   "maturityScore": 53.12,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-14T22:28:45.474Z",
+   "lastVerified": "2026-08-29T19:00:05.932Z",
    "notes": "python -m backend add-backend http://<gpu-3-ip>:8000/v1... Health-check the new backend... Reload Caddy before anything else learns the GPU exists... Inside the orchestrator, a dae"
   },
   {
    "vendorId": "lambda",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 58.26,
+   "maturityScore": 57.75471698113208,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-08-14T22:28:47.273Z",
+   "lastVerified": "2026-08-29T19:00:28.131Z",
    "notes": "1-Click Clusters pricing: NVIDIA HGX B200 2 weeks – 1 year 16 GPUs $9.86/GPU/HR, 64 GPUs $9.36/GPU/HR, 256+ GPUs $8.87/GPU/HR. NVIDIA H100: 16 GPUs $6.16/GPU/HR, 64 GPUs $5.85/GPU/"
   },
   {
@@ -1983,10 +1983,10 @@
    "vendorId": "lambda",
    "capabilityId": "enterprise_assistant",
    "status": "verified",
-   "maturityScore": 44,
+   "maturityScore": 45.22222222222222,
    "evidenceGrade": "E1",
-   "lastVerified": "2026-08-02T16:20:09.825Z",
-   "notes": "Getting started doesn't take much. Grab NCode from Noumena's GitHub, then follow one of our deployment guides to stand up GLM 5.2 or Kimi K2.7 Code on Lambda. Every guide ends with"
+   "lastVerified": "2026-08-29T19:00:28.131Z",
+   "notes": "Lambda brings both halves: the compute and the ML engineers to help you size it and get started. To request a sizing conversation, talk to our team."
   },
   {
    "vendorId": "lambda",
@@ -2001,27 +2001,27 @@
    "vendorId": "lambda",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 53.359375,
+   "maturityScore": 53.38235294117647,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-14T22:28:47.273Z",
+   "lastVerified": "2026-08-29T19:01:04.395Z",
    "notes": "API- and CLI-driven provisioning, and orchestration options that include managed Kubernetes, Slurm, and dstack-based workflows."
   },
   {
    "vendorId": "lambda",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 55.05555555555556,
+   "maturityScore": 54.9,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-08-02T16:20:23.904Z",
+   "lastVerified": "2026-08-29T19:00:05.932Z",
    "notes": "Our MLPerf Inference v5.1 results show Lambda's 1-Click Clusters powered by NVIDIA HGX B200 achieved up to 15.4% performance gains than the previous round's best results."
   },
   {
    "vendorId": "lambda",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 56.63492063492063,
+   "maturityScore": 56.779411764705884,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:28:47.273Z",
+   "lastVerified": "2026-08-29T19:01:04.395Z",
    "notes": "Notable customers, as reported in Lambda materials and analyst summaries, include Apple, MIT, Microsoft, Tencent, Kaiser Permanente, Stanford, Harvard, Caltech, and the Department "
   },
   {
@@ -2037,9 +2037,9 @@
    "vendorId": "lambda",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 50.758620689655174,
+   "maturityScore": 50.516666666666666,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T22:28:45.474Z",
+   "lastVerified": "2026-08-29T19:01:04.395Z",
    "notes": "lambda audit export --start \"2026-01-01\" --end \"2026-01-31\" --format csv ... # Generate compliance report lambda compliance report --standard hipaa --period \"2025-01-01 to 2026-01-"
   },
   {
@@ -2136,18 +2136,18 @@
    "vendorId": "mgx",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 50,
+   "maturityScore": 48.125,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-08-07T18:13:30.620Z",
+   "lastVerified": "2026-08-28T18:51:55.900Z",
    "notes": "MGX (MetaGPT X) is a next-generation AI platform that works as a fully autonomous software development team consisting of specialized agents... Automates the full software developm"
   },
   {
    "vendorId": "mgx",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 46.666666666666664,
+   "maturityScore": 47.5,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-08-07T18:13:30.620Z",
+   "lastVerified": "2026-08-28T18:51:55.900Z",
    "notes": "MGX is currently free and open-source. There are no license fees, usage costs, or subscriptions required to use the core platform."
   },
   {
@@ -2181,27 +2181,27 @@
    "vendorId": "mgx",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 45.90909090909091,
+   "maturityScore": 46.214285714285715,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-08-07T18:13:30.620Z",
-   "notes": "MGX supports multiple foundation models, including OpenAI GPT-4, Anthropic Claude, Google Gemini, and local models via LM Studio or Ollama."
+   "lastVerified": "2026-08-28T18:51:55.900Z",
+   "notes": "Supporting 2U and 4U form factors and compliant with OCP and EIA standards, MGX platforms integrate easily into existing data center. With PCIe 5.0 and switched fabric topology, MG"
   },
   {
    "vendorId": "mgx",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 28.25,
+   "maturityScore": 31,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-08-07T18:13:30.620Z",
+   "lastVerified": "2026-08-28T18:51:55.900Z",
    "notes": "The report listed API integration failures, configuration complexity, JSONDecodeError incidents, and documentation gaps that slowed new users. The high volume of issues and repeate"
   },
   {
    "vendorId": "mgx",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 58.75,
+   "maturityScore": 58.266666666666666,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-14T16:40:08.508Z",
+   "lastVerified": "2026-08-28T18:51:55.900Z",
    "notes": "MGX closed its Fund I at $49 billion on Wednesday, exceeding an initial target of $45 billion and establishing the Abu Dhabi-based firm as one of the largest dedicated AI investors"
   },
   {
@@ -2775,7 +2775,7 @@
    "vendorId": "nvidia",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 53.8,
+   "maturityScore": 54,
    "evidenceGrade": "E3",
    "lastVerified": "2026-07-14T00:00:00.000Z",
    "notes": "Performance-leading but premium-priced; competitors claim ~40% better tokens-per-dollar on some benchmarks."
@@ -2865,9 +2865,9 @@
    "vendorId": "openai",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 67.67676767676768,
+   "maturityScore": 67.62745098039215,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-07T18:37:05.955Z",
+   "lastVerified": "2026-08-28T18:56:24.927Z",
    "notes": "Implementing monitoring is the foundation of cost control with OpenAI services. Developers and organizations should use OpenAI's usage dashboards, billing APIs, and third-party obs"
   },
   {
@@ -2892,18 +2892,18 @@
    "vendorId": "openai",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 59.35294117647059,
+   "maturityScore": 59.421487603305785,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-08-14T22:29:06.527Z",
+   "lastVerified": "2026-08-28T18:55:54.144Z",
    "notes": "Our products are covered in our SOC 2 Type 2 report and have been evaluated by an independent third-party auditor to confirm that our controls align with industry standards for sec"
   },
   {
    "vendorId": "openai",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 66.21917808219177,
+   "maturityScore": 66.61842105263158,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-08-07T18:37:05.955Z",
+   "lastVerified": "2026-08-28T18:56:24.927Z",
    "notes": "Vision column tracks performance: Claude Opus 5 (61), GPT-5.6 Sol (59), Gemini-3.1-Pro (54). Separate vision model rows: Llama-3.2-90B-Vision-Instruct (67.1), Pixtral-Large-2411 (7"
   },
   {
@@ -2919,9 +2919,9 @@
    "vendorId": "openai",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 57.72,
+   "maturityScore": 57.92307692307692,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-08-07T18:37:05.955Z",
+   "lastVerified": "2026-08-28T18:56:24.927Z",
    "notes": "OpenAI's run rate is now roughly $25 billion, and the company filed its confidential S-1 on June 8, 2026. OpenAI closed a $122 billion funding round at an $852 billion post-money v"
   },
   {
@@ -2937,9 +2937,9 @@
    "vendorId": "openai",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 60.28813559322034,
+   "maturityScore": 60.48618784530387,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-08-14T22:29:06.527Z",
+   "lastVerified": "2026-08-28T18:56:24.927Z",
    "notes": "Our products are also ISO 27001, 27017, 27018, and 27701 certified. ... Control implementation also conforms to additional control sets of ISO/IEC 27017:2015 and ISO/IEC 27018:2019"
   },
   {
@@ -4116,18 +4116,18 @@
    "vendorId": "xai",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 54.57142857142857,
+   "maturityScore": 54.80555555555556,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-30T23:39:41.656Z",
+   "lastVerified": "2026-08-28T18:53:57.558Z",
    "notes": "Requests which make use of xAI provided server-side tools are priced based on two components: token usage and server-side tool invocations. Since the agent autonomously decides how"
   },
   {
    "vendorId": "xai",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 67.42,
+   "maturityScore": 68.16666666666667,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:39:41.656Z",
+   "lastVerified": "2026-08-28T18:53:57.558Z",
    "notes": "xAI API pricing starts at $0.20 per million input tokens for the budget-friendly Grok 4.1 Fast model and goes up to $3/$15 per million for the flagship Grok 4."
   },
   {
@@ -4152,36 +4152,36 @@
    "vendorId": "xai",
    "capabilityId": "governance",
    "status": "verified",
-   "maturityScore": 49.3,
+   "maturityScore": 48.84615384615385,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-24T18:25:44.904Z",
+   "lastVerified": "2026-08-28T18:53:57.558Z",
    "notes": "You acknowledge and agree that xAI may transfer and process Personal Data outside Europe as necessary to provide the Service, including the United States and other countries where "
   },
   {
    "vendorId": "xai",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 61,
+   "maturityScore": 63.986301369863014,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T23:39:41.656Z",
-   "notes": "xAI hosts 10 active AI models, with input pricing from $0.20 per 1M tokens, averaging 90 tok/s output throughput, with up to 2.0M context window."
+   "lastVerified": "2026-08-28T18:53:57.558Z",
+   "notes": "Open LM leaderboard [...] 250+ models [...] Llama-3, Llama-4, Mistral, Claude, GPT-5, Grok, Qwen, DeepSeek, Gemini, Gemma, Command, Yi families"
   },
   {
    "vendorId": "xai",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 53.145833333333336,
+   "maturityScore": 55.57575757575758,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-30T23:39:41.656Z",
+   "lastVerified": "2026-08-28T18:53:54.724Z",
    "notes": "The UK AI Security Institute conducted additional evaluations on the dual-use capabilities of our models on providing chemical and biological uplift, along with autonomously carryi"
   },
   {
    "vendorId": "xai",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 61.92857142857143,
+   "maturityScore": 61.205882352941174,
    "evidenceGrade": "E5",
-   "lastVerified": "2026-07-30T23:39:41.656Z",
+   "lastVerified": "2026-08-28T18:53:54.724Z",
    "notes": "xAI last closed a $20 billion Series E funding round in January 2026 at a $230 billion valuation, upsized from an initial $15 billion target."
   },
   {
@@ -4197,28 +4197,28 @@
    "vendorId": "xai",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 48,
+   "maturityScore": 45.525,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-30T23:39:41.656Z",
+   "lastVerified": "2026-08-28T18:53:54.724Z",
    "notes": "Publicly claims SOC 2 Type 2 compliance and a no-training-by-default policy for API data, with a 30-day default retention window and enterprise-only zero-data-retention; formal rep"
   },
   {
    "vendorId": "zai",
    "capabilityId": "agents",
    "status": "verified",
-   "maturityScore": 50.5,
+   "maturityScore": 51.25,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-14T13:08:39.027Z",
+   "lastVerified": "2026-08-28T18:55:33.673Z",
    "notes": "GLM-5.2 benchmark comparison: SWE-bench Pro: GLM-5.2 scored 62.1, decisively beating GPT-5.5 (58.6) and its own predecessor, GLM-5.1 (58.4)."
   },
   {
    "vendorId": "zai",
    "capabilityId": "cost_controls",
    "status": "verified",
-   "maturityScore": 65.66666666666667,
+   "maturityScore": 62.08,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-15T21:25:21.589Z",
-   "notes": "ARC-AGI-2 Performance vs. Cost Explorer... Linear Log Score: Cost: [interactive tool reference]"
+   "lastVerified": "2026-08-28T18:55:33.673Z",
+   "notes": "This page provides pricing information for Z.AI's models and tools. All prices are in USD... GLM-5.3-Flash $0.15 Input, $0.50 Output per 1M tokens. GLM-5.3 $1.4 Input, $4.4 Output "
   },
   {
    "vendorId": "zai",
@@ -4251,27 +4251,27 @@
    "vendorId": "zai",
    "capabilityId": "integrations",
    "status": "verified",
-   "maturityScore": 56.513513513513516,
+   "maturityScore": 56.79545454545455,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-15T21:25:21.589Z",
-   "notes": "GLM-5 1452 1461 70 87 5 Z.ai MIT... GLM-4-Plus-0111 1332 1310 78.6 Z.ai Proprietary... GLM-4-0520 1230 1237 Z.ai Proprietary"
+   "lastVerified": "2026-08-28T18:55:33.673Z",
+   "notes": "OpenAI Python SDK: OpenAI SDK Compatibility, quickly migrating from OpenAI. Usage Example: from openai import OpenAI; client = OpenAI(api_key=\"your-Z.AI-api-key\", base_url=\"https:/"
   },
   {
    "vendorId": "zai",
    "capabilityId": "models",
    "status": "verified",
-   "maturityScore": 55.935483870967744,
+   "maturityScore": 55.114285714285714,
    "evidenceGrade": "E3",
-   "lastVerified": "2026-07-15T21:25:21.589Z",
+   "lastVerified": "2026-08-28T18:55:33.673Z",
    "notes": "This leaderboard is based on the following benchmarks. Arena + — an agent-driven battle platform... AAII — Artificial Analysis Intelligence Index v3 aggregating 10 challenging eval"
   },
   {
    "vendorId": "zai",
    "capabilityId": "portability",
    "status": "verified",
-   "maturityScore": 56.857142857142854,
+   "maturityScore": 55.833333333333336,
    "evidenceGrade": "E4",
-   "lastVerified": "2026-07-15T21:25:21.589Z",
+   "lastVerified": "2026-08-28T18:55:33.673Z",
    "notes": "Z.ai released the model's weights under an MIT open-source license, establishing it as a 'Pure Open' system. The company's technical documentation explicitly notes that this licens"
   },
   {
@@ -4287,10 +4287,10 @@
    "vendorId": "zai",
    "capabilityId": "security",
    "status": "verified",
-   "maturityScore": 39.666666666666664,
+   "maturityScore": 42.285714285714285,
    "evidenceGrade": "E2",
-   "lastVerified": "2026-07-14T13:08:33.267Z",
-   "notes": "We implement commercially reasonable technical, administrative, and physical security measures to protect your personal data from unauthorized access, theft, disclosure, alteration"
+   "lastVerified": "2026-08-28T18:55:32.484Z",
+   "notes": "GLM-5.3 matches Mythos 5 in white-box code review and vulnerability discovery. In collaboration with multiple cybersecurity teams, it has been tested on real-world targets and has "
   }
  ]
 }

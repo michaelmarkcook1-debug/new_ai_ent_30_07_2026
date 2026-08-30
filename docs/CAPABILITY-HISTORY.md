@@ -15,6 +15,46 @@ than a gap.
 
 ---
 
+## 30 August 2026 (data)
+
+**The figures were up to a fortnight old, on and off, and now they are not.**
+
+The app reads its market figures live from the original AI Enterprise service,
+and when that service does not answer it falls back to a recording rather than
+showing a blank page. That is the right design. What was wrong was how quickly
+it gave up and how long it then stayed given up.
+
+The upstream service sleeps when nobody has used it, and waking it takes about
+twenty seconds. The app waited eight, gave up, and used a recording from two
+weeks earlier. Worse, it then held that recording for five minutes, so a single
+slow moment did not cost one page, it cost every page for the next five
+minutes. It now makes a second attempt, and a recording is only trusted for
+twenty seconds before it tries again.
+
+**The recordings themselves had not been refreshed since 16 August.** The tool
+that refreshes them was broken in a way that made it look like it had failed
+every time it ran, even on the runs where every figure came back perfectly. It
+now works, and it runs on a schedule.
+
+Refreshing them moved 191 of the 619 figures the product watches: 25 vendor
+scores, 114 capability scores and 52 market shares. Alibaba's overall score is
+up 4.9, IBM up 3.4, xAI up 3.1; Cohere's enterprise assistant capability is
+down 4.17 and Snowflake's down 4.
+
+**One figure is old at source and cannot be fixed here.** The pricing feed
+answers instantly and hands back a capture dated 2 June whatever day it is
+asked. That is the upstream's to refresh, not ours, and the product does not
+pretend otherwise.
+
+**The nightly refresh cannot ship a broken build.** It runs the full test
+suite before committing anything, and stops if it fails. That is not
+theoretical: on the day it was built, the upstream had added a vendor under a
+category this app had never seen, and the app stops rather than guessing where
+a vendor belongs. A refresh that committed that unattended would have taken the
+site down overnight.
+
+---
+
 ## 30 August 2026 (later)
 
 **The product can now recognise AI a company actually runs.**
