@@ -2889,10 +2889,25 @@ capability scores in `capabilities.json`, and the share estimates in
 No endpoint, captured by hand: `cost-capability.json`, `market-dashboard.json`,
 `model-inventory.json`. The sync lists them so the gap is visible.
 
-**Not in this sync at all:** `fixtures/aie-live/category-rankings.json`, the
-0-to-5 per-category composites. It has its own script,
-`scripts/sync-category-rankings.mjs`, because the upstream does not publish
-those as JSON and it parses the category pages.
+**`fixtures/aie-live/category-rankings.json` has its own script**,
+`scripts/sync-category-rankings.mjs`, because the upstream computes the 0-to-5
+per-category composites server-side and renders them into its category pages
+rather than publishing them as JSON.
+
+**The two must be refreshed together, and `npm run sync:aie` runs both in
+order.** The category script cross-checks ranked-plus-held against the vendor
+count `market-share` reports for the same category, so market-share has to be
+current first. Measured on 30 August 2026: syncing the API fixtures alone left
+market-share current and category-rankings on its 17 August capture, the
+cross-check failed for the right reason, and xAI was still missing
+`dev_sentiment`, a fourteenth scoring domain the upstream had added. With both
+synced, xAI's frontier composite moved 2.29 to 2.72 and its rank 5 to 4.
+
+**A new domain does not need a code change.** The per-domain scores are read
+from the fixture as data. `DomainId` in `lib/aie/types.ts:26` is a closed union
+used by the ported composite engine, not by the category rankings, so the two
+can differ and already do: the fixture carries `model_quality` where the union
+carries `market_position`.
 
 **It refuses to overwrite a newer capture with an older one.** The pricing
 endpoint answers on request and serves `capturedAt: 2026-06-02` whatever day it

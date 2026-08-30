@@ -12,8 +12,8 @@
     "ingest:catalogue": "node scripts/ingest-catalogue.mjs",
     "deploy": "vercel --prod --yes && node scripts/warm-insights.mjs",
     "warm": "node scripts/warm-insights.mjs",
-    "sync:aie": "node scripts/sync-aie-fixtures.mjs",
-    "sync:aie:dry": "node scripts/sync-aie-fixtures.mjs --dry"
+    "sync:aie": "node scripts/sync-aie-fixtures.mjs && node scripts/sync-category-rankings.mjs",
+    "sync:aie:dry": "node scripts/sync-aie-fixtures.mjs --dry && node scripts/sync-category-rankings.mjs --dry"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.115.0",

@@ -34,6 +34,18 @@ const MAP = {
   "uptake.json": "uptake",
   "vendors.json": "vendors",
 };
+// Not pulled here, and not forgotten. category-rankings.json holds the 0-to-5
+// per-category composites and their per-domain scores, which upstream computes
+// server-side and renders into its category pages rather than publishing as
+// JSON, so scripts/sync-category-rankings.mjs parses those pages instead.
+//
+// THE TWO MUST BE REFRESHED TOGETHER. That script cross-checks ranked-plus-held
+// against the vendor count market-share reports for the same category, so
+// refreshing one without the other fails the check for the right reason and
+// leaves the product holding two vintages. On 30 August 2026 this file was
+// synced alone: market-share came back current, category-rankings stayed on its
+// 17 August capture, and xAI was still missing dev_sentiment, a fourteenth
+// scoring domain upstream had added. `npm run sync:aie` runs both, in order.
 const NO_ENDPOINT = {
   "cost-capability.json": "captured from the AI Enterprise model inventory",
   "market-dashboard.json": "captured from the AIE dashboard",

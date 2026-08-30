@@ -48,6 +48,10 @@ jobs:
 
       - run: npm ci
 
+      # sync:aie chains both scripts, in this order deliberately. The category
+      # sync cross-checks ranked-plus-held against the vendor count that
+      # market-share reports for the same category, so market-share has to be
+      # refreshed first or the check compares today against a fortnight ago.
       - name: Pull the live payloads
         run: npm run sync:aie
 
@@ -81,7 +85,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add fixtures lib/aie/vendor-directory.ts
+          # reports/ carries the scorecard ledger, which is regenerated from
+          # the same fixtures. Leaving it out committed a fixture change
+          # without its derived report and left the next run's suite red.
+          git add fixtures lib/aie/vendor-directory.ts reports
           git commit -m "Refresh the recorded AIE payloads from the live source
 
           Automated by .github/workflows/sync-aie-fixtures.yml. Typecheck, lint

@@ -1,7 +1,7 @@
 {
  "source": "https://ranking-engine-red.vercel.app/category/<id>",
  "note": "Weighted composite (0-5) of evidence-graded assessment domains, weights specific to each category, coverage-discounted. Parsed from the published pages: v1 does not expose this on its API and is read-only.",
- "capturedAt": "2026-08-17T10:45:37.980Z",
+ "capturedAt": "2026-08-30T16:17:10.775Z",
  "categories": [
   {
    "categoryId": "frontier_model_api",
@@ -22,11 +22,11 @@
        "score": 3.6,
        "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 87,
+       "evidenceCount": 90,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/pricing"
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -36,11 +36,11 @@
        "score": 4.6,
        "confidence": 80,
        "bestGrade": "E5",
-       "evidenceCount": 57,
+       "evidenceCount": 60,
        "citations": [
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news/claude-opus-5",
-        "https://docs.anthropic.com/en/docs/welcome"
+        "https://docs.anthropic.com/en/docs/welcome",
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -50,7 +50,7 @@
        "score": 2.7,
        "confidence": 80,
        "bestGrade": "E3",
-       "evidenceCount": 27,
+       "evidenceCount": 28,
        "citations": [
         "https://www.anthropic.com/pricing",
         "https://intuitionlabs.ai/articles/claude-pricing-plans-api-costs",
@@ -64,7 +64,7 @@
        "score": 4.6,
        "confidence": 78,
        "bestGrade": "E5",
-       "evidenceCount": 157,
+       "evidenceCount": 162,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://docs.anthropic.com/en/docs/welcome",
@@ -78,11 +78,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 96,
+       "evidenceCount": 100,
        "citations": [
-        "https://docs.anthropic.com/en/docs/welcome",
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news"
+        "https://status.anthropic.com/",
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -92,11 +92,11 @@
        "score": 4.5,
        "confidence": 78,
        "bestGrade": "E5",
-       "evidenceCount": 22,
+       "evidenceCount": 23,
        "citations": [
+        "https://status.anthropic.com/",
         "https://www.anthropic.com/news",
-        "https://www.anthropic.com/news/claude-sonnet-5",
-        "https://www.anthropic.com/news/claude-opus-5"
+        "https://www.anthropic.com/news/claude-sonnet-5"
        ]
       },
       {
@@ -106,11 +106,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 116,
+       "evidenceCount": 121,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/pricing"
+        "https://www.anthropic.com/pricing",
+        "https://status.anthropic.com/"
        ]
       },
       {
@@ -120,11 +120,11 @@
        "score": 2.5,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 52,
+       "evidenceCount": 55,
        "citations": [
+        "https://www.anthropic.com/pricing",
         "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/news",
-        "https://www.anthropic.com/news/cognizant-partnership"
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -134,11 +134,11 @@
        "score": 2.7,
        "confidence": 83,
        "bestGrade": "E3",
-       "evidenceCount": 79,
+       "evidenceCount": 83,
        "citations": [
-        "https://docs.anthropic.com/en/docs/welcome",
+        "https://openlm.ai/chatbot-arena/",
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news/cognizant-partnership"
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -162,11 +162,11 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 75,
+       "evidenceCount": 79,
        "citations": [
-        "https://openlm.ai/chatbot-arena/",
-        "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/news"
+        "https://www.anthropic.com/pricing",
+        "https://status.anthropic.com/",
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -174,12 +174,12 @@
        "pillar": "vendor_resilience",
        "state": "scored",
        "score": 2.6,
-       "confidence": 81,
+       "confidence": 80,
        "bestGrade": "E3",
-       "evidenceCount": 60,
+       "evidenceCount": 63,
        "citations": [
-        "https://www.anthropic.com/news",
         "https://status.anthropic.com/",
+        "https://www.anthropic.com/news",
         "https://techcrunch.com/2026/02/12/anthropic-raises-another-30-billion-in-series-g-with-a-new-value-of-380-billion/"
        ]
       },
@@ -222,12 +222,12 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 3.6,
-       "confidence": 80,
+       "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 37,
+       "evidenceCount": 38,
        "citations": [
-        "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
+        "https://developers.openai.com/api/docs/pricing",
         "https://platform.openai.com/docs/pricing"
        ]
       },
@@ -238,10 +238,10 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 107,
+       "evidenceCount": 110,
        "citations": [
-        "https://trust.openai.com/",
         "https://developers.openai.com/api/docs/pricing",
+        "https://trust.openai.com/",
         "https://platform.openai.com/docs/pricing"
        ]
       },
@@ -256,7 +256,7 @@
        "citations": [
         "https://www.spendhound.com/marketplace/openai-pricing",
         "https://openai.com/business-data/",
-        "https://help.openai.com/en/articles/10479654-understanding-your-ideal-user-management-setup"
+        "https://help.openai.com/en/articles/10468051-sso-overview"
        ]
       },
       {
@@ -266,11 +266,11 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 113,
+       "evidenceCount": 116,
        "citations": [
+        "https://openlm.ai/chatbot-arena/",
         "https://trust.openai.com/",
-        "https://status.openai.com/",
-        "https://openlm.ai/chatbot-arena/"
+        "https://status.openai.com/"
        ]
       },
       {
@@ -278,9 +278,9 @@
        "pillar": "enterprise_control",
        "state": "scored",
        "score": 4.6,
-       "confidence": 79,
+       "confidence": 80,
        "bestGrade": "E5",
-       "evidenceCount": 119,
+       "evidenceCount": 121,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -294,7 +294,7 @@
        "score": 3.6,
        "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 59,
+       "evidenceCount": 60,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -308,7 +308,7 @@
        "score": 3.7,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 73,
+       "evidenceCount": 76,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
@@ -336,7 +336,7 @@
        "score": 2.7,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 78,
+       "evidenceCount": 81,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
@@ -363,11 +363,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 68,
+       "evidenceCount": 71,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
-        "https://trust.openai.com/"
+        "https://status.openai.com/"
        ]
       },
       {
@@ -377,7 +377,7 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 40,
+       "evidenceCount": 43,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -425,11 +425,11 @@
        "score": 3.6,
        "confidence": 84,
        "bestGrade": "E4",
-       "evidenceCount": 114,
+       "evidenceCount": 123,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -439,11 +439,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 74,
+       "evidenceCount": 78,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://oneuptime.com/blog/post/2026-02-17-how-to-implement-data-processing-addendum-requirements-on-google-cloud/view"
+        "https://status.cloud.google.com/",
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -453,7 +453,7 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -467,11 +467,11 @@
        "score": 2.6,
        "confidence": 84,
        "bestGrade": "E3",
-       "evidenceCount": 83,
+       "evidenceCount": 92,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/technology/ai/",
-        "https://ai.google.dev/responsible/docs/evaluation"
+        "https://status.cloud.google.com/",
+        "https://blog.google/technology/ai/"
        ]
       },
       {
@@ -481,11 +481,11 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 99,
+       "evidenceCount": 102,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://status.cloud.google.com/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -495,11 +495,11 @@
        "score": 3.6,
        "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
+        "https://status.cloud.google.com/",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/"
+        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
        ]
       },
       {
@@ -509,11 +509,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 164,
+       "evidenceCount": 172,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://status.cloud.google.com/",
+        "https://blog.google/technology/ai/"
        ]
       },
       {
@@ -523,11 +523,11 @@
        "score": 2.5,
        "confidence": 85,
        "bestGrade": "E3",
-       "evidenceCount": 67,
+       "evidenceCount": 70,
        "citations": [
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://status.cloud.google.com/",
-        "https://blog.google/technology/ai/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/",
+        "https://blog.google/products-and-platforms/products/gemini/google-gemini-pixel-football-club-partnerships/"
        ]
       },
       {
@@ -537,11 +537,11 @@
        "score": 1.6,
        "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 72,
+       "evidenceCount": 76,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -551,11 +551,11 @@
        "score": 1.5,
        "confidence": 84,
        "bestGrade": "E2",
-       "evidenceCount": 25,
+       "evidenceCount": 29,
        "citations": [
         "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/",
+        "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/"
        ]
       },
       {
@@ -565,11 +565,11 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 43,
+       "evidenceCount": 46,
        "citations": [
         "https://status.cloud.google.com/",
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/innovation-and-ai/models-and-research/google-research/amie-video-consultations/",
+        "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/"
        ]
       },
       {
@@ -579,7 +579,7 @@
        "score": 2.7,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 46,
+       "evidenceCount": 47,
        "citations": [
         "https://status.cloud.google.com/",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -616,6 +616,208 @@
     },
     {
      "rank": 4,
+     "vendorId": "xai",
+     "composite": 2.72,
+     "position": "Strong",
+     "domains": [
+      {
+       "domain": "strategic_value",
+       "pillar": "business_fit",
+       "state": "scored",
+       "score": 3.5,
+       "confidence": 80,
+       "bestGrade": "E4",
+       "evidenceCount": 38,
+       "citations": [
+        "https://docs.x.ai/docs/pricing",
+        "https://docs.x.ai/docs/overview",
+        "https://openlm.ai/chatbot-arena/"
+       ]
+      },
+      {
+       "domain": "data_security_privacy",
+       "pillar": "enterprise_control",
+       "state": "scored",
+       "score": 3.5,
+       "confidence": 82,
+       "bestGrade": "E4",
+       "evidenceCount": 32,
+       "citations": [
+        "https://docs.x.ai/docs/overview",
+        "https://docs.x.ai/docs/pricing",
+        "https://aiprovidertrust.com/offerings/xai-api/"
+       ]
+      },
+      {
+       "domain": "identity_access",
+       "pillar": "enterprise_control",
+       "state": "scored",
+       "score": 1.6,
+       "confidence": 66,
+       "bestGrade": "E2",
+       "evidenceCount": 4,
+       "citations": [
+        "https://chiefaiofficer.com/grok-business-enterprise-ai-platform-launch/",
+        "https://zuplo.com/learning-center/xAI-grok-api",
+        "https://www.medianama.com/2026/01/223-xai-launches-grok-enterprise-and-business-plans/"
+       ]
+      },
+      {
+       "domain": "model_reliability",
+       "pillar": "reliability_safety",
+       "state": "scored",
+       "score": 3.6,
+       "confidence": 79,
+       "bestGrade": "E4",
+       "evidenceCount": 66,
+       "citations": [
+        "https://docs.x.ai/docs/overview",
+        "https://openlm.ai/chatbot-arena/",
+        "https://docs.x.ai/docs/pricing"
+       ]
+      },
+      {
+       "domain": "governance_compliance",
+       "pillar": "enterprise_control",
+       "state": "scored",
+       "score": 3.5,
+       "confidence": 77,
+       "bestGrade": "E4",
+       "evidenceCount": 13,
+       "citations": [
+        "https://docs.x.ai/docs/pricing",
+        "https://openlm.ai/chatbot-arena/",
+        "https://aiprovidertrust.com/offerings/xai-api/"
+       ]
+      },
+      {
+       "domain": "security_threat",
+       "pillar": "reliability_safety",
+       "state": "scored",
+       "score": 2.5,
+       "confidence": 54,
+       "bestGrade": "E3",
+       "evidenceCount": 4,
+       "citations": [
+        "https://www.thedeepview.com/articles/new-research-challenges-ai-safety-benchmark",
+        "https://ailabwatch.substack.com/p/xais-new-safety-framework-is-dreadful",
+        "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf"
+       ]
+      },
+      {
+       "domain": "integration_architecture",
+       "pillar": "integration_ops",
+       "state": "scored",
+       "score": 2.6,
+       "confidence": 82,
+       "bestGrade": "E3",
+       "evidenceCount": 73,
+       "citations": [
+        "https://docs.x.ai/docs/pricing",
+        "https://docs.x.ai/docs/overview",
+        "https://openlm.ai/chatbot-arena/"
+       ]
+      },
+      {
+       "domain": "agentic_autonomy",
+       "pillar": "integration_ops",
+       "state": "scored",
+       "score": 1.5,
+       "confidence": 81,
+       "bestGrade": "E2",
+       "evidenceCount": 20,
+       "citations": [
+        "https://docs.x.ai/docs/pricing",
+        "https://docs.x.ai/docs/overview",
+        "https://www.g2.com/articles/xai-grok-api-cost"
+       ]
+      },
+      {
+       "domain": "cost_finops",
+       "pillar": "integration_ops",
+       "state": "scored",
+       "score": 3.7,
+       "confidence": 83,
+       "bestGrade": "E4",
+       "evidenceCount": 61,
+       "citations": [
+        "https://docs.x.ai/docs/pricing",
+        "https://docs.x.ai/docs/overview",
+        "https://openlm.ai/chatbot-arena/"
+       ]
+      },
+      {
+       "domain": "workforce_adoption",
+       "pillar": "business_fit",
+       "state": "scored",
+       "score": 1.5,
+       "confidence": 68,
+       "bestGrade": "E2",
+       "evidenceCount": 4,
+       "citations": [
+        "https://www.tradingview.com/news/gurufocus:f5b845008094b:0-xai-is-struggling-to-sell-grok-models-to-enterprise-customers/",
+        "https://syp.vn/en/article/grok-business-use-cases",
+        "https://research.contrary.com/company/xai"
+       ]
+      },
+      {
+       "domain": "vendor_maturity_lockin",
+       "pillar": "vendor_resilience",
+       "state": "scored",
+       "score": 4.6,
+       "confidence": 75,
+       "bestGrade": "E5",
+       "evidenceCount": 28,
+       "citations": [
+        "https://docs.x.ai/docs/overview",
+        "https://openlm.ai/chatbot-arena/",
+        "https://tracxn.com/d/companies/xai/__saKrxbHN3TRWW-I4lYH6zkx6N5P_kMTqlLcKTzWs2ug"
+       ]
+      },
+      {
+       "domain": "capital_resilience",
+       "pillar": "vendor_resilience",
+       "state": "scored",
+       "score": 2.4,
+       "confidence": 63,
+       "bestGrade": "E3",
+       "evidenceCount": 5,
+       "citations": [
+        "https://techcrunch.com/2026/01/06/xai-says-it-raised-20b-in-series-e-funding/",
+        "https://sacra.com/c/xai/",
+        "https://openlm.ai/chatbot-arena/"
+       ]
+      },
+      {
+       "domain": "model_quality",
+       "pillar": "reliability_safety",
+       "state": "scored",
+       "score": 3.91,
+       "confidence": 64,
+       "bestGrade": "E4",
+       "evidenceCount": 3,
+       "citations": [
+        "https://artificialanalysis.ai/models"
+       ]
+      },
+      {
+       "domain": "dev_sentiment",
+       "pillar": "market_strength",
+       "state": "scored",
+       "score": 2.5,
+       "confidence": 60,
+       "bestGrade": "E3",
+       "evidenceCount": 2,
+       "citations": [
+        "https://github.com/xai-org/grok-1",
+        "https://news.ycombinator.com/item?id=39737281",
+        "https://news.ycombinator.com/item?id=48835111"
+       ]
+      }
+     ]
+    },
+    {
+     "rank": 5,
      "vendorId": "deepseek",
      "composite": 2.48,
      "position": "Strong",
@@ -625,9 +827,9 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 2.6,
-       "confidence": 74,
+       "confidence": 75,
        "bestGrade": "E3",
-       "evidenceCount": 11,
+       "evidenceCount": 12,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://www.straive.com/blogs/top-10-deepseek-use-cases-to-explore/",
@@ -644,8 +846,8 @@
        "evidenceCount": 5,
        "citations": [
         "https://layerxsecurity.io/hub/soc-2/soc-vs-iso-27001",
-        "https://www.kaspersky.com/blog/deepseek-privacy-and-security/54643/",
-        "https://deepseek-chat-app.com/policy/"
+        "https://deepseek-chat-app.com/policy/",
+        "https://compliancehub.wiki/deepseeks-training-data-underscores-systemic-privacy-and-compliance-gaps/"
        ]
       },
       {
@@ -665,13 +867,13 @@
        "pillar": "reliability_safety",
        "state": "scored",
        "score": 3.7,
-       "confidence": 76,
+       "confidence": 75,
        "bestGrade": "E4",
-       "evidenceCount": 37,
+       "evidenceCount": 40,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://www.mindstudio.ai/blog/deepseek-v4-open-source-frontier-model-review",
-        "https://www.netskope.com/blog/deepseek-just-shook-up-ai-heres-how-to-rethink-your-strategy"
+        "https://www.netskope.com/blog/deepseek-just-shook-up-ai-heres-how-to-rethink-your-strategy",
+        "https://www.mindstudio.ai/blog/deepseek-v4-open-source-frontier-model-review"
        ]
       },
       {
@@ -708,7 +910,7 @@
        "score": 2.6,
        "confidence": 78,
        "bestGrade": "E3",
-       "evidenceCount": 18,
+       "evidenceCount": 19,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://api-docs.deepseek.com/",
@@ -730,9 +932,9 @@
        "pillar": "integration_ops",
        "state": "scored",
        "score": 2.6,
-       "confidence": 77,
+       "confidence": 75,
        "bestGrade": "E3",
-       "evidenceCount": 12,
+       "evidenceCount": 13,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://www.elementera.com/ai-case-studies/deepseek-the-enterprise-ai-game-changer-you-cannot-afford-to-ignore",
@@ -758,7 +960,7 @@
        "score": 2.6,
        "confidence": 77,
        "bestGrade": "E3",
-       "evidenceCount": 18,
+       "evidenceCount": 19,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://www.crunchbase.com/organization/deepseek",
@@ -801,194 +1003,6 @@
         "https://news.ycombinator.com/item?id=46108780",
         "https://news.ycombinator.com/item?id=39209814",
         "https://github.com/deepseek-ai/DeepSeek-Coder"
-       ]
-      }
-     ]
-    },
-    {
-     "rank": 5,
-     "vendorId": "xai",
-     "composite": 2.29,
-     "position": "Strong",
-     "domains": [
-      {
-       "domain": "strategic_value",
-       "pillar": "business_fit",
-       "state": "scored",
-       "score": 3.6,
-       "confidence": 79,
-       "bestGrade": "E4",
-       "evidenceCount": 35,
-       "citations": [
-        "https://openlm.ai/chatbot-arena/",
-        "https://docs.x.ai/docs/overview",
-        "https://ramp.com/vendors/xai"
-       ]
-      },
-      {
-       "domain": "data_security_privacy",
-       "pillar": "enterprise_control",
-       "state": "scored",
-       "score": 3.5,
-       "confidence": 82,
-       "bestGrade": "E4",
-       "evidenceCount": 31,
-       "citations": [
-        "https://docs.x.ai/docs/overview",
-        "https://docs.x.ai/docs/pricing",
-        "https://aiprovidertrust.com/offerings/xai-api/"
-       ]
-      },
-      {
-       "domain": "identity_access",
-       "pillar": "enterprise_control",
-       "state": "scored",
-       "score": 1.6,
-       "confidence": 66,
-       "bestGrade": "E2",
-       "evidenceCount": 4,
-       "citations": [
-        "https://chiefaiofficer.com/grok-business-enterprise-ai-platform-launch/",
-        "https://zuplo.com/learning-center/xAI-grok-api",
-        "https://www.medianama.com/2026/01/223-xai-launches-grok-enterprise-and-business-plans/"
-       ]
-      },
-      {
-       "domain": "model_reliability",
-       "pillar": "reliability_safety",
-       "state": "scored",
-       "score": 3.6,
-       "confidence": 79,
-       "bestGrade": "E4",
-       "evidenceCount": 63,
-       "citations": [
-        "https://openlm.ai/chatbot-arena/",
-        "https://docs.x.ai/docs/pricing",
-        "https://docs.x.ai/docs/overview"
-       ]
-      },
-      {
-       "domain": "governance_compliance",
-       "pillar": "enterprise_control",
-       "state": "scored",
-       "score": 3.5,
-       "confidence": 77,
-       "bestGrade": "E4",
-       "evidenceCount": 12,
-       "citations": [
-        "https://openlm.ai/chatbot-arena/",
-        "https://docs.x.ai/docs/pricing",
-        "https://aiprovidertrust.com/offerings/xai-api/"
-       ]
-      },
-      {
-       "domain": "security_threat",
-       "pillar": "reliability_safety",
-       "state": "scored",
-       "score": 2.5,
-       "confidence": 54,
-       "bestGrade": "E3",
-       "evidenceCount": 4,
-       "citations": [
-        "https://www.thedeepview.com/articles/new-research-challenges-ai-safety-benchmark",
-        "https://ailabwatch.substack.com/p/xais-new-safety-framework-is-dreadful",
-        "https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf"
-       ]
-      },
-      {
-       "domain": "integration_architecture",
-       "pillar": "integration_ops",
-       "state": "scored",
-       "score": 2.6,
-       "confidence": 82,
-       "bestGrade": "E3",
-       "evidenceCount": 68,
-       "citations": [
-        "https://openlm.ai/chatbot-arena/",
-        "https://docs.x.ai/docs/pricing",
-        "https://docs.x.ai/docs/overview"
-       ]
-      },
-      {
-       "domain": "agentic_autonomy",
-       "pillar": "integration_ops",
-       "state": "scored",
-       "score": 1.5,
-       "confidence": 80,
-       "bestGrade": "E2",
-       "evidenceCount": 18,
-       "citations": [
-        "https://docs.x.ai/docs/pricing",
-        "https://docs.x.ai/docs/overview",
-        "https://www.g2.com/articles/xai-grok-api-cost"
-       ]
-      },
-      {
-       "domain": "cost_finops",
-       "pillar": "integration_ops",
-       "state": "scored",
-       "score": 3.7,
-       "confidence": 83,
-       "bestGrade": "E4",
-       "evidenceCount": 57,
-       "citations": [
-        "https://docs.x.ai/docs/pricing",
-        "https://docs.x.ai/docs/overview",
-        "https://openlm.ai/chatbot-arena/"
-       ]
-      },
-      {
-       "domain": "workforce_adoption",
-       "pillar": "business_fit",
-       "state": "scored",
-       "score": 1.5,
-       "confidence": 68,
-       "bestGrade": "E2",
-       "evidenceCount": 4,
-       "citations": [
-        "https://www.tradingview.com/news/gurufocus:f5b845008094b:0-xai-is-struggling-to-sell-grok-models-to-enterprise-customers/",
-        "https://syp.vn/en/article/grok-business-use-cases",
-        "https://research.contrary.com/company/xai"
-       ]
-      },
-      {
-       "domain": "vendor_maturity_lockin",
-       "pillar": "vendor_resilience",
-       "state": "scored",
-       "score": 4.6,
-       "confidence": 75,
-       "bestGrade": "E5",
-       "evidenceCount": 27,
-       "citations": [
-        "https://openlm.ai/chatbot-arena/",
-        "https://sacra.com/c/xai/",
-        "https://tracxn.com/d/companies/xai/__saKrxbHN3TRWW-I4lYH6zkx6N5P_kMTqlLcKTzWs2ug"
-       ]
-      },
-      {
-       "domain": "capital_resilience",
-       "pillar": "vendor_resilience",
-       "state": "scored",
-       "score": 2.4,
-       "confidence": 63,
-       "bestGrade": "E3",
-       "evidenceCount": 5,
-       "citations": [
-        "https://techcrunch.com/2026/01/06/xai-says-it-raised-20b-in-series-e-funding/",
-        "https://sacra.com/c/xai/",
-        "https://openlm.ai/chatbot-arena/"
-       ]
-      },
-      {
-       "domain": "model_quality",
-       "pillar": "reliability_safety",
-       "state": "scored",
-       "score": 3.91,
-       "confidence": 64,
-       "bestGrade": "E4",
-       "evidenceCount": 3,
-       "citations": [
-        "https://artificialanalysis.ai/models"
        ]
       }
      ]
@@ -1091,8 +1105,8 @@
        "evidenceCount": 29,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://www.infoworld.com/article/4195519/meta-launches-low-cost-muse-spark-1-1-as-enterprise-ai-spending-comes-under-scrutiny.html",
-        "https://www.digitalapplied.com/blog/meta-muse-spark-1-1-agentic-model-api-2026"
+        "https://www.digitalapplied.com/blog/meta-muse-spark-1-1-agentic-model-api-2026",
+        "https://www.infoworld.com/article/4195519/meta-launches-low-cost-muse-spark-1-1-as-enterprise-ai-spending-comes-under-scrutiny.html"
        ]
       },
       {
@@ -1380,8 +1394,8 @@
        "evidenceCount": 8,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://www.alibabacloud.com/en/solutions/ai/data-intelligence?_p_lc=1",
-        "https://www.alibabacloud.com/en/customers?_p_lc=1"
+        "https://www.alibabacloud.com/en/customers?_p_lc=1",
+        "https://www.alibabacloud.com/en/solutions/ai/data-intelligence?_p_lc=1"
        ]
       },
       {
@@ -1427,9 +1441,9 @@
        "bestGrade": "E2",
        "evidenceCount": 3,
        "citations": [
+        "https://www.alibabacloud.com/en/trust-center/soc2?_p_lc=1",
         "https://www.alibabacloud.com/en/trust-center/iso27001?_p_lc=1",
-        "https://www.alibabacloud.com/en/trust-center?_p_lc=1",
-        "https://www.alibabacloud.com/en/trust-center/soc2?_p_lc=1"
+        "https://www.alibabacloud.com/en/trust-center?_p_lc=1"
        ]
       },
       {
@@ -1452,7 +1466,7 @@
        "evidenceCount": 16,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://www.alibabacloud.com/help/en/ack/cloud-native-ai-suite/product-overview/cloud-native-ai-suite-overview",
+        "https://www.alibabacloud.com/help/en/api-gateway/ai-gateway/user-guide/managing-the-model-api",
         "https://www.alibabacloud.com/help/en/pai/developer-reference/api-aiworkspace-2021-02-04-overview"
        ]
       },
@@ -1477,7 +1491,7 @@
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://www.scmp.com/tech/big-tech/article/3354212/alibaba-unveils-new-qwen-model-custom-chips-bid-become-chinas-ai-factory",
-        "https://www.alibabacloud.com/blog/analyze-manage-and-optimize-your-cloud-costs-with-alibaba-cloud-finops-solution_601529"
+        "https://www.alibabacloud.com/blog/finops-for-cloud-transformation-migrating-to-alibaba-cloud-for-financial-optimization_602617"
        ]
       },
       {
@@ -1572,7 +1586,7 @@
        "evidenceCount": 16,
        "citations": [
         "https://aiverifyfoundation.sg/project-moonshot/",
-        "https://gist.github.com/gadgetb0y/11931119946c2e9dcae0a438fdefe0d5",
+        "https://www.cometapi.com/is-kimi-safe-to-use/",
         "https://www.securityscientist.net/blog/12-questions-and-answers-about-kimi-data-privacy-as-a-chinese-model/"
        ]
       },
@@ -1626,8 +1640,8 @@
        "evidenceCount": 9,
        "citations": [
         "https://www.kimi.com/blog/",
-        "https://x.com/ravirockks/status/2080442657864904960",
-        "https://arxiv.org/pdf/2502.11090"
+        "https://arxiv.org/pdf/2502.11090",
+        "https://x.com/ravirockks/status/2080442657864904960"
        ]
       },
       {
@@ -2125,7 +2139,7 @@
        "citations": [
         "https://platform.minimax.io/protocol/privacy-policy",
         "https://advenboost.com/minimax-2-5-review-setup-guide/",
-        "https://minimax-ai.chat/blog/is-minimax-ai-safe/"
+        "https://flowith.io/blog/minimax-faq-data-safety/"
        ]
       },
       {
@@ -2149,8 +2163,8 @@
        "bestGrade": "E4",
        "evidenceCount": 7,
        "citations": [
-        "https://www.minimax.io/news/minimax-m25",
         "https://wavespeed.ai/blog/posts/minimax-m2-7-self-evolving-agent-model-features-benchmarks-2026/",
+        "https://www.minimax.io/news/minimax-m25",
         "https://en.wikipedia.org/wiki/MiniMax_Group"
        ]
       },
@@ -2238,8 +2252,8 @@
        "bestGrade": "E4",
        "evidenceCount": 7,
        "citations": [
-        "https://en.wikipedia.org/wiki/MiniMax_Group",
         "https://sacra.com/c/minimax/",
+        "https://en.wikipedia.org/wiki/MiniMax_Group",
         "https://www.minimax.io/news/minimax-global-announces-full-year-2025-financial-results"
        ]
       },
@@ -2270,7 +2284,7 @@
     {
      "rank": 13,
      "vendorId": "zai",
-     "composite": 1.1,
+     "composite": 1.2,
      "position": null,
      "domains": [
       {
@@ -2278,13 +2292,13 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 2.6,
-       "confidence": 80,
+       "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 16,
+       "evidenceCount": 19,
        "citations": [
         "https://docs.z.ai/",
-        "https://docs.z.ai/guides/overview/pricing",
-        "https://app.dealroom.co/news/note/z-ai-becomes-china-s-first-major-generative-ai-company-to-go-public-with-a-6-6b-valuaiton"
+        "https://docs.z.ai/release-notes/new-released",
+        "https://docs.z.ai/guides/overview/pricing"
        ]
       },
       {
@@ -2318,11 +2332,11 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 31,
+       "evidenceCount": 35,
        "citations": [
-        "https://openlm.ai/chatbot-arena/",
         "https://docs.z.ai/",
-        "https://docs.z.ai/release-notes/new-released"
+        "https://docs.z.ai/release-notes/new-released",
+        "https://openlm.ai/chatbot-arena/"
        ]
       },
       {
@@ -2339,10 +2353,10 @@
        "domain": "security_threat",
        "pillar": "reliability_safety",
        "state": "scored",
-       "score": 0.4,
-       "confidence": 63,
-       "bestGrade": "E1",
-       "evidenceCount": 1,
+       "score": 1.5,
+       "confidence": 66,
+       "bestGrade": "E2",
+       "evidenceCount": 2,
        "citations": [
         "https://docs.z.ai/release-notes/new-released"
        ]
@@ -2354,10 +2368,10 @@
        "score": 1.6,
        "confidence": 81,
        "bestGrade": "E2",
-       "evidenceCount": 37,
+       "evidenceCount": 44,
        "citations": [
-        "https://openlm.ai/chatbot-arena/",
         "https://docs.z.ai/",
+        "https://docs.z.ai/release-notes/new-released",
         "https://docs.z.ai/guides/overview/pricing"
        ]
       },
@@ -2366,9 +2380,9 @@
        "pillar": "integration_ops",
        "state": "scored",
        "score": 0.4,
-       "confidence": 70,
+       "confidence": 73,
        "bestGrade": "E1",
-       "evidenceCount": 4,
+       "evidenceCount": 5,
        "citations": [
         "https://docs.z.ai/release-notes/new-released"
        ]
@@ -2377,14 +2391,14 @@
        "domain": "cost_finops",
        "pillar": "integration_ops",
        "state": "scored",
-       "score": 1.7,
-       "confidence": 82,
+       "score": 1.6,
+       "confidence": 83,
        "bestGrade": "E2",
-       "evidenceCount": 21,
+       "evidenceCount": 25,
        "citations": [
-        "https://openlm.ai/chatbot-arena/",
         "https://docs.z.ai/",
-        "https://docs.z.ai/guides/overview/pricing"
+        "https://docs.z.ai/guides/overview/pricing",
+        "https://openlm.ai/chatbot-arena/"
        ]
       },
       {
@@ -2402,13 +2416,13 @@
        "pillar": "vendor_resilience",
        "state": "scored",
        "score": 3.6,
-       "confidence": 74,
+       "confidence": 75,
        "bestGrade": "E4",
-       "evidenceCount": 16,
+       "evidenceCount": 18,
        "citations": [
-        "https://openlm.ai/chatbot-arena/",
         "https://docs.z.ai/",
-        "https://docs.z.ai/guides/overview/pricing"
+        "https://docs.z.ai/guides/overview/pricing",
+        "https://openlm.ai/chatbot-arena/"
        ]
       },
       {
@@ -2427,7 +2441,7 @@
        "domain": "model_quality",
        "pillar": "reliability_safety",
        "state": "scored",
-       "score": 3.2,
+       "score": 3.79,
        "confidence": 64,
        "bestGrade": "E4",
        "evidenceCount": 3,
@@ -2454,7 +2468,7 @@
        "citations": [
         "https://startupintros.com/orgs/ai21-labs",
         "https://venturebeat.com/ai/ai21-labs-raises-155m-to-accelerate-genai-for-enterprises",
-        "https://www.ai21.com/blog/overcoming-the-biggest-challenges-to-gen-ai-adoption/"
+        "https://app.dealroom.co/companies/ai21"
        ]
       },
       {
@@ -2467,8 +2481,8 @@
        "evidenceCount": 5,
        "citations": [
         "https://www.ai21.com/blog/soc-2-report/",
-        "https://trust.ai21.com/",
-        "https://www.ai21.com/blog/annual-soc-2-report/"
+        "https://www.ai21.com/blog/annual-soc-2-report/",
+        "https://trust.ai21.com/"
        ]
       },
       {
@@ -2555,8 +2569,8 @@
        "bestGrade": "E3",
        "evidenceCount": 5,
        "citations": [
-        "https://docs.ai21.com/docs/usage-cost",
         "https://artificialanalysis.ai/providers/ai21-labs",
+        "https://docs.ai21.com/docs/usage-cost",
         "https://www.ai21.com/pricing/"
        ]
       },
@@ -2579,8 +2593,8 @@
        "bestGrade": "E2",
        "evidenceCount": 6,
        "citations": [
-        "https://www.fintechweekly.com/magazine/articles/ai21-series-d-funding-nvidia-google",
         "https://research.contrary.com/company/ai21-labs",
+        "https://www.fintechweekly.com/magazine/articles/ai21-series-d-funding-nvidia-google",
         "https://tracxn.com/d/companies/ai21labs/__9qqWBeLg9q4CLuudvOpOQCjK3t3qEZ4R6rks9qID7F4"
        ]
       },
@@ -2629,11 +2643,11 @@
        "score": 3.6,
        "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 87,
+       "evidenceCount": 90,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/pricing"
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -2643,11 +2657,11 @@
        "score": 4.6,
        "confidence": 80,
        "bestGrade": "E5",
-       "evidenceCount": 57,
+       "evidenceCount": 60,
        "citations": [
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news/claude-opus-5",
-        "https://docs.anthropic.com/en/docs/welcome"
+        "https://docs.anthropic.com/en/docs/welcome",
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -2657,7 +2671,7 @@
        "score": 2.7,
        "confidence": 80,
        "bestGrade": "E3",
-       "evidenceCount": 27,
+       "evidenceCount": 28,
        "citations": [
         "https://www.anthropic.com/pricing",
         "https://intuitionlabs.ai/articles/claude-pricing-plans-api-costs",
@@ -2671,7 +2685,7 @@
        "score": 4.6,
        "confidence": 78,
        "bestGrade": "E5",
-       "evidenceCount": 157,
+       "evidenceCount": 162,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://docs.anthropic.com/en/docs/welcome",
@@ -2685,11 +2699,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 96,
+       "evidenceCount": 100,
        "citations": [
-        "https://docs.anthropic.com/en/docs/welcome",
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news"
+        "https://status.anthropic.com/",
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -2699,11 +2713,11 @@
        "score": 4.5,
        "confidence": 78,
        "bestGrade": "E5",
-       "evidenceCount": 22,
+       "evidenceCount": 23,
        "citations": [
+        "https://status.anthropic.com/",
         "https://www.anthropic.com/news",
-        "https://www.anthropic.com/news/claude-sonnet-5",
-        "https://www.anthropic.com/news/claude-opus-5"
+        "https://www.anthropic.com/news/claude-sonnet-5"
        ]
       },
       {
@@ -2713,11 +2727,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 116,
+       "evidenceCount": 121,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/pricing"
+        "https://www.anthropic.com/pricing",
+        "https://status.anthropic.com/"
        ]
       },
       {
@@ -2727,11 +2741,11 @@
        "score": 2.5,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 52,
+       "evidenceCount": 55,
        "citations": [
+        "https://www.anthropic.com/pricing",
         "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/news",
-        "https://www.anthropic.com/news/cognizant-partnership"
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -2741,11 +2755,11 @@
        "score": 2.7,
        "confidence": 83,
        "bestGrade": "E3",
-       "evidenceCount": 79,
+       "evidenceCount": 83,
        "citations": [
-        "https://docs.anthropic.com/en/docs/welcome",
+        "https://openlm.ai/chatbot-arena/",
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news/cognizant-partnership"
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -2769,11 +2783,11 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 75,
+       "evidenceCount": 79,
        "citations": [
-        "https://openlm.ai/chatbot-arena/",
-        "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/news"
+        "https://www.anthropic.com/pricing",
+        "https://status.anthropic.com/",
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -2781,12 +2795,12 @@
        "pillar": "vendor_resilience",
        "state": "scored",
        "score": 2.6,
-       "confidence": 81,
+       "confidence": 80,
        "bestGrade": "E3",
-       "evidenceCount": 60,
+       "evidenceCount": 63,
        "citations": [
-        "https://www.anthropic.com/news",
         "https://status.anthropic.com/",
+        "https://www.anthropic.com/news",
         "https://techcrunch.com/2026/02/12/anthropic-raises-another-30-billion-in-series-g-with-a-new-value-of-380-billion/"
        ]
       }
@@ -2803,12 +2817,12 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 3.6,
-       "confidence": 80,
+       "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 37,
+       "evidenceCount": 38,
        "citations": [
-        "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
+        "https://developers.openai.com/api/docs/pricing",
         "https://platform.openai.com/docs/pricing"
        ]
       },
@@ -2819,10 +2833,10 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 107,
+       "evidenceCount": 110,
        "citations": [
-        "https://trust.openai.com/",
         "https://developers.openai.com/api/docs/pricing",
+        "https://trust.openai.com/",
         "https://platform.openai.com/docs/pricing"
        ]
       },
@@ -2837,7 +2851,7 @@
        "citations": [
         "https://www.spendhound.com/marketplace/openai-pricing",
         "https://openai.com/business-data/",
-        "https://help.openai.com/en/articles/10479654-understanding-your-ideal-user-management-setup"
+        "https://help.openai.com/en/articles/10468051-sso-overview"
        ]
       },
       {
@@ -2847,11 +2861,11 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 113,
+       "evidenceCount": 116,
        "citations": [
+        "https://openlm.ai/chatbot-arena/",
         "https://trust.openai.com/",
-        "https://status.openai.com/",
-        "https://openlm.ai/chatbot-arena/"
+        "https://status.openai.com/"
        ]
       },
       {
@@ -2859,9 +2873,9 @@
        "pillar": "enterprise_control",
        "state": "scored",
        "score": 4.6,
-       "confidence": 79,
+       "confidence": 80,
        "bestGrade": "E5",
-       "evidenceCount": 119,
+       "evidenceCount": 121,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -2875,7 +2889,7 @@
        "score": 3.6,
        "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 59,
+       "evidenceCount": 60,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -2889,7 +2903,7 @@
        "score": 3.7,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 73,
+       "evidenceCount": 76,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
@@ -2917,7 +2931,7 @@
        "score": 2.7,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 78,
+       "evidenceCount": 81,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
@@ -2944,11 +2958,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 68,
+       "evidenceCount": 71,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
-        "https://trust.openai.com/"
+        "https://status.openai.com/"
        ]
       },
       {
@@ -2958,7 +2972,7 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 40,
+       "evidenceCount": 43,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -2970,7 +2984,7 @@
     {
      "rank": 3,
      "vendorId": "glean",
-     "composite": 2.95,
+     "composite": 2.96,
      "position": "Contender",
      "domains": [
       {
@@ -2980,11 +2994,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 43,
+       "evidenceCount": 47,
        "citations": [
         "https://www.glean.com/product/overview",
-        "https://www.glean.com/security",
-        "https://www.glean.com/press"
+        "https://www.glean.com/press",
+        "https://www.glean.com/security"
        ]
       },
       {
@@ -2994,7 +3008,7 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 103,
+       "evidenceCount": 109,
        "citations": [
         "https://www.glean.com/product/overview",
         "https://www.glean.com/security",
@@ -3006,13 +3020,13 @@
        "pillar": "enterprise_control",
        "state": "scored",
        "score": 2.6,
-       "confidence": 75,
+       "confidence": 77,
        "bestGrade": "E3",
-       "evidenceCount": 8,
+       "evidenceCount": 10,
        "citations": [
+        "https://www.glean.com/security",
         "https://docs.glean.com/administration/protect/overview",
-        "https://www.glean.com/platform/connectors",
-        "https://coda.io/@crystal-shuoqi-li/glean-architecture/glean-architecture-6"
+        "https://www.glean.com/platform/connectors"
        ]
       },
       {
@@ -3022,7 +3036,7 @@
        "score": 3.5,
        "confidence": 85,
        "bestGrade": "E4",
-       "evidenceCount": 29,
+       "evidenceCount": 33,
        "citations": [
         "https://www.glean.com/product/overview",
         "https://www.glean.com/press",
@@ -3036,11 +3050,11 @@
        "score": 3.6,
        "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 33,
+       "evidenceCount": 38,
        "citations": [
-        "https://www.glean.com/legal",
-        "https://www.glean.com/blog/agentic-security-aware",
-        "https://www.glean.com/security"
+        "https://www.glean.com/product/overview",
+        "https://www.glean.com/security",
+        "https://www.glean.com/blog/agentic-security-aware"
        ]
       },
       {
@@ -3050,7 +3064,7 @@
        "score": 1.6,
        "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 16,
+       "evidenceCount": 18,
        "citations": [
         "https://www.glean.com/security",
         "https://www.glean.com/blog/agentic-security-aware",
@@ -3064,7 +3078,7 @@
        "score": 1.6,
        "confidence": 83,
        "bestGrade": "E2",
-       "evidenceCount": 70,
+       "evidenceCount": 78,
        "citations": [
         "https://www.glean.com/product/overview",
         "https://www.glean.com/security",
@@ -3078,11 +3092,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 64,
+       "evidenceCount": 69,
        "citations": [
         "https://www.glean.com/product/overview",
-        "https://www.glean.com/security",
-        "https://www.glean.com/press"
+        "https://www.glean.com/press",
+        "https://www.glean.com/security"
        ]
       },
       {
@@ -3090,13 +3104,13 @@
        "pillar": "integration_ops",
        "state": "scored",
        "score": 2.5,
-       "confidence": 80,
+       "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 17,
+       "evidenceCount": 21,
        "citations": [
-        "https://coworker.ai/blog/enterprise-ai-pricing-comparison-2026",
-        "https://www.gosearch.ai/blog/glean-pricing-explained/",
-        "https://www.glean.com/press"
+        "https://www.glean.com/product/overview",
+        "https://www.glean.com/press",
+        "https://www.glean.com/security"
        ]
       },
       {
@@ -3104,13 +3118,13 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 3.6,
-       "confidence": 81,
+       "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 15,
+       "evidenceCount": 17,
        "citations": [
-        "https://www.glean.com/product/overview",
+        "https://www.glean.com/security",
         "https://www.glean.com/press",
-        "https://research.contrary.com/company/glean"
+        "https://www.glean.com/product/overview"
        ]
       },
       {
@@ -3120,11 +3134,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 37,
+       "evidenceCount": 41,
        "citations": [
+        "https://www.glean.com/press",
         "https://www.glean.com/product/overview",
-        "https://tracxn.com/d/companies/glean/__0aO5V-wZsJgrfCZYNJm9ccNqZCpaXHw-O9LJTlZYgQ",
-        "https://futurumgroup.com/insights/glean-doubles-arr-to-200m-can-its-knowledge-graph-beat-copilot/"
+        "https://www.glean.com/security"
        ]
       },
       {
@@ -3158,7 +3172,7 @@
        "citations": [
         "https://venturebeat.com/ai/writer-triples-revenue-and-expands-to-250-customers-as-demand-for-enterprise-ai-soars",
         "https://app.dealroom.co/companies/writer",
-        "https://writer.com/blog/series-c-funding-writer-press-release/"
+        "https://tracxn.com/d/companies/writer/__pn8dECY0pwUrYfmDrf82ATA9a_qWFFEnTiotoJrOnio"
        ]
       },
       {
@@ -3170,9 +3184,9 @@
        "bestGrade": "E4",
        "evidenceCount": 61,
        "citations": [
-        "https://writer.com/blog/writer-iso-trust-center-press-release/",
+        "https://writer.com/trust/",
         "https://writer.com/blog/writer-iso-trust-center/",
-        "https://writer.com/trust/"
+        "https://writer.com/blog/writer-iso-trust-center-press-release/"
        ]
       },
       {
@@ -3344,7 +3358,7 @@
        "citations": [
         "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview",
         "https://www.microsoft.com/en-us/trust-center",
-        "https://kelleycreate.com/microsoft-copilot-security-data-protection/"
+        "https://techcommunity.microsoft.com/blog/securitycopilotblog/microsoft-security-copilot-achieves-soc-2-certification/4295363"
        ]
       },
       {
@@ -3509,11 +3523,11 @@
        "score": 3.6,
        "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 87,
+       "evidenceCount": 90,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/pricing"
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -3523,11 +3537,11 @@
        "score": 4.6,
        "confidence": 80,
        "bestGrade": "E5",
-       "evidenceCount": 57,
+       "evidenceCount": 60,
        "citations": [
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news/claude-opus-5",
-        "https://docs.anthropic.com/en/docs/welcome"
+        "https://docs.anthropic.com/en/docs/welcome",
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -3537,7 +3551,7 @@
        "score": 2.7,
        "confidence": 80,
        "bestGrade": "E3",
-       "evidenceCount": 27,
+       "evidenceCount": 28,
        "citations": [
         "https://www.anthropic.com/pricing",
         "https://intuitionlabs.ai/articles/claude-pricing-plans-api-costs",
@@ -3551,7 +3565,7 @@
        "score": 4.6,
        "confidence": 78,
        "bestGrade": "E5",
-       "evidenceCount": 157,
+       "evidenceCount": 162,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://docs.anthropic.com/en/docs/welcome",
@@ -3565,11 +3579,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 96,
+       "evidenceCount": 100,
        "citations": [
-        "https://docs.anthropic.com/en/docs/welcome",
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news"
+        "https://status.anthropic.com/",
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -3579,11 +3593,11 @@
        "score": 4.5,
        "confidence": 78,
        "bestGrade": "E5",
-       "evidenceCount": 22,
+       "evidenceCount": 23,
        "citations": [
+        "https://status.anthropic.com/",
         "https://www.anthropic.com/news",
-        "https://www.anthropic.com/news/claude-sonnet-5",
-        "https://www.anthropic.com/news/claude-opus-5"
+        "https://www.anthropic.com/news/claude-sonnet-5"
        ]
       },
       {
@@ -3593,11 +3607,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 116,
+       "evidenceCount": 121,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/pricing"
+        "https://www.anthropic.com/pricing",
+        "https://status.anthropic.com/"
        ]
       },
       {
@@ -3607,11 +3621,11 @@
        "score": 2.5,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 52,
+       "evidenceCount": 55,
        "citations": [
+        "https://www.anthropic.com/pricing",
         "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/news",
-        "https://www.anthropic.com/news/cognizant-partnership"
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -3621,11 +3635,11 @@
        "score": 2.7,
        "confidence": 83,
        "bestGrade": "E3",
-       "evidenceCount": 79,
+       "evidenceCount": 83,
        "citations": [
-        "https://docs.anthropic.com/en/docs/welcome",
+        "https://openlm.ai/chatbot-arena/",
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news/cognizant-partnership"
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -3649,11 +3663,11 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 75,
+       "evidenceCount": 79,
        "citations": [
-        "https://openlm.ai/chatbot-arena/",
-        "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/news"
+        "https://www.anthropic.com/pricing",
+        "https://status.anthropic.com/",
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -3661,12 +3675,12 @@
        "pillar": "vendor_resilience",
        "state": "scored",
        "score": 2.6,
-       "confidence": 81,
+       "confidence": 80,
        "bestGrade": "E3",
-       "evidenceCount": 60,
+       "evidenceCount": 63,
        "citations": [
-        "https://www.anthropic.com/news",
         "https://status.anthropic.com/",
+        "https://www.anthropic.com/news",
         "https://techcrunch.com/2026/02/12/anthropic-raises-another-30-billion-in-series-g-with-a-new-value-of-380-billion/"
        ]
       },
@@ -3709,12 +3723,12 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 3.6,
-       "confidence": 80,
+       "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 37,
+       "evidenceCount": 38,
        "citations": [
-        "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
+        "https://developers.openai.com/api/docs/pricing",
         "https://platform.openai.com/docs/pricing"
        ]
       },
@@ -3725,10 +3739,10 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 107,
+       "evidenceCount": 110,
        "citations": [
-        "https://trust.openai.com/",
         "https://developers.openai.com/api/docs/pricing",
+        "https://trust.openai.com/",
         "https://platform.openai.com/docs/pricing"
        ]
       },
@@ -3753,11 +3767,11 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 113,
+       "evidenceCount": 116,
        "citations": [
+        "https://openlm.ai/chatbot-arena/",
         "https://trust.openai.com/",
-        "https://status.openai.com/",
-        "https://openlm.ai/chatbot-arena/"
+        "https://status.openai.com/"
        ]
       },
       {
@@ -3765,9 +3779,9 @@
        "pillar": "enterprise_control",
        "state": "scored",
        "score": 4.6,
-       "confidence": 79,
+       "confidence": 80,
        "bestGrade": "E5",
-       "evidenceCount": 119,
+       "evidenceCount": 121,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -3781,7 +3795,7 @@
        "score": 3.6,
        "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 59,
+       "evidenceCount": 60,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -3795,7 +3809,7 @@
        "score": 3.7,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 73,
+       "evidenceCount": 76,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
@@ -3823,7 +3837,7 @@
        "score": 2.7,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 78,
+       "evidenceCount": 81,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
@@ -3850,11 +3864,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 68,
+       "evidenceCount": 71,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
-        "https://trust.openai.com/"
+        "https://status.openai.com/"
        ]
       },
       {
@@ -3864,7 +3878,7 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 40,
+       "evidenceCount": 43,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -3912,11 +3926,11 @@
        "score": 3.6,
        "confidence": 84,
        "bestGrade": "E4",
-       "evidenceCount": 114,
+       "evidenceCount": 123,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -3926,11 +3940,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 74,
+       "evidenceCount": 78,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://cloud.google.com/security/compliance/iso-27001"
+        "https://status.cloud.google.com/",
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -3940,7 +3954,7 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -3954,11 +3968,11 @@
        "score": 2.6,
        "confidence": 84,
        "bestGrade": "E3",
-       "evidenceCount": 83,
+       "evidenceCount": 92,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/technology/ai/",
-        "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/determine-eval"
+        "https://status.cloud.google.com/",
+        "https://blog.google/technology/ai/"
        ]
       },
       {
@@ -3968,11 +3982,11 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 99,
+       "evidenceCount": 102,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://status.cloud.google.com/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -3982,11 +3996,11 @@
        "score": 3.6,
        "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
+        "https://status.cloud.google.com/",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/"
+        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
        ]
       },
       {
@@ -3996,11 +4010,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 164,
+       "evidenceCount": 172,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://status.cloud.google.com/",
+        "https://blog.google/technology/ai/"
        ]
       },
       {
@@ -4010,11 +4024,11 @@
        "score": 2.5,
        "confidence": 85,
        "bestGrade": "E3",
-       "evidenceCount": 67,
+       "evidenceCount": 70,
        "citations": [
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://status.cloud.google.com/",
-        "https://blog.google/technology/ai/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/",
+        "https://blog.google/products-and-platforms/products/gemini/google-gemini-pixel-football-club-partnerships/"
        ]
       },
       {
@@ -4024,11 +4038,11 @@
        "score": 1.6,
        "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 72,
+       "evidenceCount": 76,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -4038,11 +4052,11 @@
        "score": 1.5,
        "confidence": 84,
        "bestGrade": "E2",
-       "evidenceCount": 25,
+       "evidenceCount": 29,
        "citations": [
         "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/",
+        "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/"
        ]
       },
       {
@@ -4052,11 +4066,11 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 43,
+       "evidenceCount": 46,
        "citations": [
         "https://status.cloud.google.com/",
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/innovation-and-ai/models-and-research/google-research/amie-video-consultations/",
+        "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/"
        ]
       },
       {
@@ -4066,7 +4080,7 @@
        "score": 2.7,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 46,
+       "evidenceCount": 47,
        "citations": [
         "https://status.cloud.google.com/",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -4309,11 +4323,11 @@
        "score": 3.6,
        "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 87,
+       "evidenceCount": 90,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/pricing"
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -4323,11 +4337,11 @@
        "score": 4.6,
        "confidence": 80,
        "bestGrade": "E5",
-       "evidenceCount": 57,
+       "evidenceCount": 60,
        "citations": [
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news/claude-opus-5",
-        "https://docs.anthropic.com/en/docs/welcome"
+        "https://docs.anthropic.com/en/docs/welcome",
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -4337,7 +4351,7 @@
        "score": 2.7,
        "confidence": 80,
        "bestGrade": "E3",
-       "evidenceCount": 27,
+       "evidenceCount": 28,
        "citations": [
         "https://www.anthropic.com/pricing",
         "https://intuitionlabs.ai/articles/claude-pricing-plans-api-costs",
@@ -4351,7 +4365,7 @@
        "score": 4.6,
        "confidence": 78,
        "bestGrade": "E5",
-       "evidenceCount": 157,
+       "evidenceCount": 162,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://docs.anthropic.com/en/docs/welcome",
@@ -4365,11 +4379,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 96,
+       "evidenceCount": 100,
        "citations": [
-        "https://docs.anthropic.com/en/docs/welcome",
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news"
+        "https://status.anthropic.com/",
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -4379,11 +4393,11 @@
        "score": 4.5,
        "confidence": 78,
        "bestGrade": "E5",
-       "evidenceCount": 22,
+       "evidenceCount": 23,
        "citations": [
+        "https://status.anthropic.com/",
         "https://www.anthropic.com/news",
-        "https://www.anthropic.com/news/claude-sonnet-5",
-        "https://www.anthropic.com/news/claude-opus-5"
+        "https://www.anthropic.com/news/claude-sonnet-5"
        ]
       },
       {
@@ -4393,11 +4407,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 116,
+       "evidenceCount": 121,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/pricing"
+        "https://www.anthropic.com/pricing",
+        "https://status.anthropic.com/"
        ]
       },
       {
@@ -4407,11 +4421,11 @@
        "score": 2.5,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 52,
+       "evidenceCount": 55,
        "citations": [
+        "https://www.anthropic.com/pricing",
         "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/news",
-        "https://www.anthropic.com/news/cognizant-partnership"
+        "https://www.anthropic.com/news"
        ]
       },
       {
@@ -4421,11 +4435,11 @@
        "score": 2.7,
        "confidence": 83,
        "bestGrade": "E3",
-       "evidenceCount": 79,
+       "evidenceCount": 83,
        "citations": [
-        "https://docs.anthropic.com/en/docs/welcome",
+        "https://openlm.ai/chatbot-arena/",
         "https://www.anthropic.com/pricing",
-        "https://www.anthropic.com/news/cognizant-partnership"
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -4449,11 +4463,11 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 75,
+       "evidenceCount": 79,
        "citations": [
-        "https://openlm.ai/chatbot-arena/",
-        "https://docs.anthropic.com/en/docs/welcome",
-        "https://www.anthropic.com/news"
+        "https://www.anthropic.com/pricing",
+        "https://status.anthropic.com/",
+        "https://docs.anthropic.com/en/docs/welcome"
        ]
       },
       {
@@ -4461,12 +4475,12 @@
        "pillar": "vendor_resilience",
        "state": "scored",
        "score": 2.6,
-       "confidence": 81,
+       "confidence": 80,
        "bestGrade": "E3",
-       "evidenceCount": 60,
+       "evidenceCount": 63,
        "citations": [
-        "https://www.anthropic.com/news",
         "https://status.anthropic.com/",
+        "https://www.anthropic.com/news",
         "https://techcrunch.com/2026/02/12/anthropic-raises-another-30-billion-in-series-g-with-a-new-value-of-380-billion/"
        ]
       }
@@ -4483,12 +4497,12 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 3.6,
-       "confidence": 80,
+       "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 37,
+       "evidenceCount": 38,
        "citations": [
-        "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
+        "https://developers.openai.com/api/docs/pricing",
         "https://platform.openai.com/docs/pricing"
        ]
       },
@@ -4499,10 +4513,10 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 107,
+       "evidenceCount": 110,
        "citations": [
-        "https://trust.openai.com/",
         "https://developers.openai.com/api/docs/pricing",
+        "https://trust.openai.com/",
         "https://platform.openai.com/docs/pricing"
        ]
       },
@@ -4527,11 +4541,11 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 113,
+       "evidenceCount": 116,
        "citations": [
+        "https://openlm.ai/chatbot-arena/",
         "https://trust.openai.com/",
-        "https://status.openai.com/",
-        "https://openlm.ai/chatbot-arena/"
+        "https://status.openai.com/"
        ]
       },
       {
@@ -4539,13 +4553,13 @@
        "pillar": "enterprise_control",
        "state": "scored",
        "score": 4.6,
-       "confidence": 79,
+       "confidence": 80,
        "bestGrade": "E5",
-       "evidenceCount": 119,
+       "evidenceCount": 121,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
-        "https://openai.com/business-data/"
+        "https://aifoxx.com/trust/chatgpt"
        ]
       },
       {
@@ -4555,7 +4569,7 @@
        "score": 3.6,
        "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 59,
+       "evidenceCount": 60,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -4569,7 +4583,7 @@
        "score": 3.7,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 73,
+       "evidenceCount": 76,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
@@ -4597,7 +4611,7 @@
        "score": 2.7,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 78,
+       "evidenceCount": 81,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
@@ -4624,11 +4638,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 68,
+       "evidenceCount": 71,
        "citations": [
         "https://developers.openai.com/api/docs/pricing",
         "https://openlm.ai/chatbot-arena/",
-        "https://trust.openai.com/"
+        "https://status.openai.com/"
        ]
       },
       {
@@ -4638,7 +4652,7 @@
        "score": 3.6,
        "confidence": 79,
        "bestGrade": "E4",
-       "evidenceCount": 40,
+       "evidenceCount": 43,
        "citations": [
         "https://trust.openai.com/",
         "https://status.openai.com/",
@@ -4658,13 +4672,13 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 3.6,
-       "confidence": 84,
+       "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 92,
+       "evidenceCount": 95,
        "citations": [
         "https://aws.amazon.com/blogs/machine-learning/",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
-        "https://aws.amazon.com/bedrock/pricing/"
+        "https://aws.amazon.com/bedrock/pricing/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -4672,13 +4686,13 @@
        "pillar": "enterprise_control",
        "state": "scored",
        "score": 1.6,
-       "confidence": 83,
+       "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 73,
+       "evidenceCount": 77,
        "citations": [
+        "https://aws.amazon.com/compliance/programs/",
         "https://aws.amazon.com/blogs/machine-learning/",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
-        "https://aws.amazon.com/compliance/programs/"
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -4702,11 +4716,11 @@
        "score": 3.5,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 72,
+       "evidenceCount": 75,
        "citations": [
-        "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/",
-        "https://aws.amazon.com/blogs/machine-learning/optimizing-production-agents-with-amazon-bedrock-agentcore-observability/"
+        "https://aws.amazon.com/blogs/machine-learning/",
+        "https://aws.amazon.com/bedrock/pricing/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -4716,10 +4730,10 @@
        "score": 2.6,
        "confidence": 84,
        "bestGrade": "E3",
-       "evidenceCount": 113,
+       "evidenceCount": 116,
        "citations": [
-        "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/compliance/programs/",
+        "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/"
        ]
       },
@@ -4728,13 +4742,13 @@
        "pillar": "reliability_safety",
        "state": "scored",
        "score": 3.6,
-       "confidence": 82,
+       "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
+        "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/",
-        "https://aws.amazon.com/blogs/machine-learning/authenticate-with-private-key-jwt-using-amazon-bedrock-agentcore-identity/",
-        "https://aws.amazon.com/blogs/machine-learning/introducing-explicit-prompt-caching-for-openai-gpt-5-6-models-on-amazon-bedrock/"
+        "https://aws.amazon.com/blogs/machine-learning/authenticate-with-private-key-jwt-using-amazon-bedrock-agentcore-identity/"
        ]
       },
       {
@@ -4744,10 +4758,10 @@
        "score": 3.7,
        "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 173,
+       "evidenceCount": 179,
        "citations": [
+        "https://aws.amazon.com/compliance/programs/",
         "https://aws.amazon.com/blogs/machine-learning/",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
         "https://aws.amazon.com/bedrock/pricing/"
        ]
       },
@@ -4758,7 +4772,7 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 72,
+       "evidenceCount": 74,
        "citations": [
         "https://aws.amazon.com/blogs/machine-learning/",
         "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
@@ -4772,11 +4786,11 @@
        "score": 3.7,
        "confidence": 84,
        "bestGrade": "E4",
-       "evidenceCount": 123,
+       "evidenceCount": 128,
        "citations": [
         "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/bedrock/pricing/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/"
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -4800,11 +4814,11 @@
        "score": 1.6,
        "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 62,
+       "evidenceCount": 65,
        "citations": [
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
-        "https://aws.amazon.com/bedrock/pricing/",
-        "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/"
+        "https://aws.amazon.com/compliance/programs/",
+        "https://aws.amazon.com/blogs/machine-learning/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -4812,13 +4826,13 @@
        "pillar": "vendor_resilience",
        "state": "scored",
        "score": 3.7,
-       "confidence": 80,
+       "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 20,
+       "evidenceCount": 22,
        "citations": [
         "https://aws.amazon.com/compliance/programs/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-aws/"
+        "https://aws.amazon.com/bedrock/pricing/",
+        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/"
        ]
       }
      ]
@@ -4854,7 +4868,7 @@
        "citations": [
         "https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-overview",
         "https://www.microsoft.com/en-us/trust-center",
-        "https://techcommunity.microsoft.com/blog/securitycopilotblog/microsoft-security-copilot-achieves-soc-2-certification/4295363"
+        "https://kelleycreate.com/microsoft-copilot-security-data-protection/"
        ]
       },
       {
@@ -5181,8 +5195,8 @@
        "bestGrade": "E4",
        "evidenceCount": 5,
        "citations": [
-        "https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/resource-center/case-study/cs-servicenow-himss-novant.pdf",
         "https://www.inry.com/insights/any/success-story",
+        "https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/resource-center/case-study/cs-servicenow-himss-novant.pdf",
         "https://www.servicenow.com/platform/now-assist.html"
        ]
       },
@@ -5234,9 +5248,9 @@
        "bestGrade": "E4",
        "evidenceCount": 10,
        "citations": [
+        "https://trust.servicenow.com/",
         "https://www.servicenow.com/company/trust/compliance.html",
-        "https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/resource-center/white-paper/instance-security-best-practice.pdf",
-        "https://trust.servicenow.com/"
+        "https://www.servicenow.com/content/dam/servicenow-assets/public/en-us/doc-type/resource-center/white-paper/instance-security-best-practice.pdf"
        ]
       },
       {
@@ -5349,11 +5363,11 @@
        "score": 3.6,
        "confidence": 84,
        "bestGrade": "E4",
-       "evidenceCount": 114,
+       "evidenceCount": 123,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -5363,11 +5377,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 74,
+       "evidenceCount": 78,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://business.safety.google/compliance/"
+        "https://status.cloud.google.com/",
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -5377,7 +5391,7 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -5391,11 +5405,11 @@
        "score": 2.6,
        "confidence": 84,
        "bestGrade": "E3",
-       "evidenceCount": 83,
+       "evidenceCount": 92,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/technology/ai/",
-        "https://ai.google.dev/responsible/docs/evaluation"
+        "https://status.cloud.google.com/",
+        "https://blog.google/technology/ai/"
        ]
       },
       {
@@ -5405,11 +5419,11 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 99,
+       "evidenceCount": 102,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://status.cloud.google.com/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -5419,11 +5433,11 @@
        "score": 3.6,
        "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
+        "https://status.cloud.google.com/",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/"
+        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
        ]
       },
       {
@@ -5433,11 +5447,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 164,
+       "evidenceCount": 172,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://status.cloud.google.com/",
+        "https://blog.google/technology/ai/"
        ]
       },
       {
@@ -5447,11 +5461,11 @@
        "score": 2.5,
        "confidence": 85,
        "bestGrade": "E3",
-       "evidenceCount": 67,
+       "evidenceCount": 70,
        "citations": [
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://status.cloud.google.com/",
-        "https://blog.google/technology/ai/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/",
+        "https://blog.google/products-and-platforms/products/gemini/google-gemini-pixel-football-club-partnerships/"
        ]
       },
       {
@@ -5461,11 +5475,11 @@
        "score": 1.6,
        "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 72,
+       "evidenceCount": 76,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -5475,11 +5489,11 @@
        "score": 1.5,
        "confidence": 84,
        "bestGrade": "E2",
-       "evidenceCount": 25,
+       "evidenceCount": 29,
        "citations": [
         "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/",
+        "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/"
        ]
       },
       {
@@ -5489,11 +5503,11 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 43,
+       "evidenceCount": 46,
        "citations": [
         "https://status.cloud.google.com/",
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/innovation-and-ai/models-and-research/google-research/amie-video-consultations/",
+        "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/"
        ]
       },
       {
@@ -5503,7 +5517,7 @@
        "score": 2.7,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 46,
+       "evidenceCount": 47,
        "citations": [
         "https://status.cloud.google.com/",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -5515,7 +5529,7 @@
     {
      "rank": 2,
      "vendorId": "glean",
-     "composite": 2.87,
+     "composite": 2.88,
      "position": "Strong",
      "domains": [
       {
@@ -5525,11 +5539,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 43,
+       "evidenceCount": 47,
        "citations": [
         "https://www.glean.com/product/overview",
-        "https://www.glean.com/security",
-        "https://www.glean.com/press"
+        "https://www.glean.com/press",
+        "https://www.glean.com/security"
        ]
       },
       {
@@ -5539,7 +5553,7 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 103,
+       "evidenceCount": 109,
        "citations": [
         "https://www.glean.com/product/overview",
         "https://www.glean.com/security",
@@ -5551,13 +5565,13 @@
        "pillar": "enterprise_control",
        "state": "scored",
        "score": 2.6,
-       "confidence": 75,
+       "confidence": 77,
        "bestGrade": "E3",
-       "evidenceCount": 8,
+       "evidenceCount": 10,
        "citations": [
+        "https://www.glean.com/security",
         "https://docs.glean.com/administration/protect/overview",
-        "https://www.glean.com/platform/connectors",
-        "https://coda.io/@crystal-shuoqi-li/glean-architecture/glean-architecture-6"
+        "https://www.glean.com/platform/connectors"
        ]
       },
       {
@@ -5567,7 +5581,7 @@
        "score": 3.5,
        "confidence": 85,
        "bestGrade": "E4",
-       "evidenceCount": 29,
+       "evidenceCount": 33,
        "citations": [
         "https://www.glean.com/product/overview",
         "https://www.glean.com/press",
@@ -5581,11 +5595,11 @@
        "score": 3.6,
        "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 33,
+       "evidenceCount": 38,
        "citations": [
-        "https://www.glean.com/blog/agentic-security-aware",
-        "https://www.glean.com/legal",
-        "https://www.glean.com/security"
+        "https://www.glean.com/product/overview",
+        "https://www.glean.com/security",
+        "https://www.glean.com/blog/agentic-security-aware"
        ]
       },
       {
@@ -5595,7 +5609,7 @@
        "score": 1.6,
        "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 16,
+       "evidenceCount": 18,
        "citations": [
         "https://www.glean.com/security",
         "https://www.glean.com/blog/agentic-security-aware",
@@ -5609,7 +5623,7 @@
        "score": 1.6,
        "confidence": 83,
        "bestGrade": "E2",
-       "evidenceCount": 70,
+       "evidenceCount": 78,
        "citations": [
         "https://www.glean.com/product/overview",
         "https://www.glean.com/security",
@@ -5623,11 +5637,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 64,
+       "evidenceCount": 69,
        "citations": [
         "https://www.glean.com/product/overview",
-        "https://www.glean.com/security",
-        "https://www.glean.com/press"
+        "https://www.glean.com/press",
+        "https://www.glean.com/security"
        ]
       },
       {
@@ -5635,13 +5649,13 @@
        "pillar": "integration_ops",
        "state": "scored",
        "score": 2.5,
-       "confidence": 80,
+       "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 17,
+       "evidenceCount": 21,
        "citations": [
-        "https://coworker.ai/blog/enterprise-ai-pricing-comparison-2026",
-        "https://www.gosearch.ai/blog/glean-pricing-explained/",
-        "https://www.glean.com/press"
+        "https://www.glean.com/product/overview",
+        "https://www.glean.com/press",
+        "https://www.glean.com/security"
        ]
       },
       {
@@ -5649,13 +5663,13 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 3.6,
-       "confidence": 81,
+       "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 15,
+       "evidenceCount": 17,
        "citations": [
-        "https://www.glean.com/product/overview",
+        "https://www.glean.com/security",
         "https://www.glean.com/press",
-        "https://research.contrary.com/company/glean"
+        "https://www.glean.com/product/overview"
        ]
       },
       {
@@ -5665,11 +5679,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 37,
+       "evidenceCount": 41,
        "citations": [
+        "https://www.glean.com/press",
         "https://www.glean.com/product/overview",
-        "https://tracxn.com/d/companies/glean/__0aO5V-wZsJgrfCZYNJm9ccNqZCpaXHw-O9LJTlZYgQ",
-        "https://futurumgroup.com/insights/glean-doubles-arr-to-200m-can-its-knowledge-graph-beat-copilot/"
+        "https://www.glean.com/security"
        ]
       },
       {
@@ -5744,8 +5758,8 @@
        "evidenceCount": 77,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://cohere.com/research/papers/command-a-technical-report.pdf",
-        "https://artificialanalysis.ai/providers/cohere"
+        "https://artificialanalysis.ai/providers/cohere",
+        "https://cohere.com/research/papers/command-a-technical-report.pdf"
        ]
       },
       {
@@ -6061,9 +6075,9 @@
        "bestGrade": "E4",
        "evidenceCount": 51,
        "citations": [
-        "https://www.hebbia.com/security",
         "https://www.welcome.ai/solution/hebbia",
-        "https://www.g2.com/products/hebbia-ai-2026-02-24/reviews"
+        "https://www.g2.com/products/hebbia-ai-2026-02-24/reviews",
+        "https://www.hebbia.com/security"
        ]
       },
       {
@@ -6089,8 +6103,8 @@
        "bestGrade": "E4",
        "evidenceCount": 48,
        "citations": [
-        "https://sacra.com/c/hebbia/",
         "https://www.finsmes.com/2025/11/hebbia-financial-services-benchmark-reveals-critical-performance-gaps-across-leading-ai-models.html",
+        "https://sacra.com/c/hebbia/",
         "https://www.hebbia.com/blog/you-just-hired-a-million-bad-employees"
        ]
       },
@@ -6130,9 +6144,9 @@
        "bestGrade": "E2",
        "evidenceCount": 49,
        "citations": [
-        "https://www.cbinsights.com/company/hebbia",
         "https://www.g2.com/products/hebbia-ai-2026-02-24/reviews",
-        "https://www.usagepricing.com/blueprint/hebbia"
+        "https://www.cbinsights.com/company/hebbia",
+        "https://sacra.com/c/hebbia/"
        ]
       },
       {
@@ -6158,8 +6172,8 @@
        "bestGrade": "E3",
        "evidenceCount": 25,
        "citations": [
-        "https://www.eesel.ai/blog/hebbia-ai-pricing",
         "https://sacra.com/research/danny-wheller-hebbia-vertical-vs-horizontal-enterprise-ai/",
+        "https://www.eesel.ai/blog/hebbia-ai-pricing",
         "https://www.hebbia.com/blog/you-just-hired-a-million-bad-employees"
        ]
       },
@@ -7955,7 +7969,7 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 107,
+       "evidenceCount": 109,
        "citations": [
         "https://www.databricks.com/product/artificial-intelligence",
         "https://www.databricks.com/blog",
@@ -7969,11 +7983,11 @@
        "score": 4.6,
        "confidence": 85,
        "bestGrade": "E5",
-       "evidenceCount": 110,
+       "evidenceCount": 114,
        "citations": [
         "https://www.databricks.com/product/artificial-intelligence",
-        "https://www.databricks.com/trust",
-        "https://www.databricks.com/sites/default/files/2025-01/databricks-iso-27036-certificate.pdf"
+        "https://www.databricks.com/blog",
+        "https://www.databricks.com/trust"
        ]
       },
       {
@@ -7997,7 +8011,7 @@
        "score": 2.5,
        "confidence": 85,
        "bestGrade": "E3",
-       "evidenceCount": 51,
+       "evidenceCount": 53,
        "citations": [
         "https://www.databricks.com/product/artificial-intelligence",
         "https://www.databricks.com/blog",
@@ -8011,7 +8025,7 @@
        "score": 4.5,
        "confidence": 84,
        "bestGrade": "E5",
-       "evidenceCount": 113,
+       "evidenceCount": 116,
        "citations": [
         "https://www.databricks.com/product/artificial-intelligence",
         "https://www.databricks.com/blog",
@@ -8025,7 +8039,7 @@
        "score": 3.5,
        "confidence": 84,
        "bestGrade": "E4",
-       "evidenceCount": 37,
+       "evidenceCount": 38,
        "citations": [
         "https://www.databricks.com/trust",
         "https://kb.databricks.com/data-sources/security-bulletin-databricks-jdbc-driver-vulnerability-advisory-cve-2024-49194",
@@ -8037,13 +8051,13 @@
        "pillar": "integration_ops",
        "state": "scored",
        "score": 3.6,
-       "confidence": 82,
+       "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 99,
+       "evidenceCount": 102,
        "citations": [
         "https://www.databricks.com/product/artificial-intelligence",
         "https://www.databricks.com/blog",
-        "https://www.databricks.com/product/pricing"
+        "https://www.databricks.com/trust"
        ]
       },
       {
@@ -8053,7 +8067,7 @@
        "score": 1.5,
        "confidence": 85,
        "bestGrade": "E2",
-       "evidenceCount": 61,
+       "evidenceCount": 63,
        "citations": [
         "https://www.databricks.com/product/artificial-intelligence",
         "https://www.databricks.com/blog",
@@ -8067,7 +8081,7 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 100,
+       "evidenceCount": 105,
        "citations": [
         "https://www.databricks.com/product/artificial-intelligence",
         "https://www.databricks.com/blog",
@@ -8095,11 +8109,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 84,
+       "evidenceCount": 86,
        "citations": [
-        "https://www.databricks.com/blog",
+        "https://www.databricks.com/product/artificial-intelligence",
         "https://www.databricks.com/trust",
-        "https://www.databricks.com/product/pricing"
+        "https://www.databricks.com/blog"
        ]
       },
       {
@@ -8131,11 +8145,11 @@
        "score": 3.6,
        "confidence": 84,
        "bestGrade": "E4",
-       "evidenceCount": 114,
+       "evidenceCount": 123,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -8145,11 +8159,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 74,
+       "evidenceCount": 78,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://oneuptime.com/blog/post/2026-02-17-how-to-implement-data-processing-addendum-requirements-on-google-cloud/view"
+        "https://status.cloud.google.com/",
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -8159,7 +8173,7 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -8173,11 +8187,11 @@
        "score": 2.6,
        "confidence": 84,
        "bestGrade": "E3",
-       "evidenceCount": 83,
+       "evidenceCount": 92,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/technology/ai/",
-        "https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/determine-eval"
+        "https://status.cloud.google.com/",
+        "https://blog.google/technology/ai/"
        ]
       },
       {
@@ -8187,11 +8201,11 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 99,
+       "evidenceCount": 102,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://status.cloud.google.com/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -8201,11 +8215,11 @@
        "score": 3.6,
        "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
+        "https://status.cloud.google.com/",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/"
+        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
        ]
       },
       {
@@ -8215,11 +8229,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 164,
+       "evidenceCount": 172,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://status.cloud.google.com/",
+        "https://blog.google/technology/ai/"
        ]
       },
       {
@@ -8229,11 +8243,11 @@
        "score": 2.5,
        "confidence": 85,
        "bestGrade": "E3",
-       "evidenceCount": 67,
+       "evidenceCount": 70,
        "citations": [
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://status.cloud.google.com/",
-        "https://blog.google/technology/ai/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/",
+        "https://blog.google/products-and-platforms/products/gemini/google-gemini-pixel-football-club-partnerships/"
        ]
       },
       {
@@ -8243,11 +8257,11 @@
        "score": 1.6,
        "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 72,
+       "evidenceCount": 76,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -8257,11 +8271,11 @@
        "score": 1.5,
        "confidence": 84,
        "bestGrade": "E2",
-       "evidenceCount": 25,
+       "evidenceCount": 29,
        "citations": [
         "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/",
+        "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/"
        ]
       },
       {
@@ -8271,11 +8285,11 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 43,
+       "evidenceCount": 46,
        "citations": [
         "https://status.cloud.google.com/",
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/innovation-and-ai/models-and-research/google-research/amie-video-consultations/",
+        "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/"
        ]
       },
       {
@@ -8285,7 +8299,7 @@
        "score": 2.7,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 46,
+       "evidenceCount": 47,
        "citations": [
         "https://status.cloud.google.com/",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -8305,13 +8319,13 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 3.6,
-       "confidence": 84,
+       "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 92,
+       "evidenceCount": 95,
        "citations": [
         "https://aws.amazon.com/blogs/machine-learning/",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
-        "https://aws.amazon.com/bedrock/pricing/"
+        "https://aws.amazon.com/bedrock/pricing/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -8319,13 +8333,13 @@
        "pillar": "enterprise_control",
        "state": "scored",
        "score": 1.6,
-       "confidence": 83,
+       "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 73,
+       "evidenceCount": 77,
        "citations": [
+        "https://aws.amazon.com/compliance/programs/",
         "https://aws.amazon.com/blogs/machine-learning/",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
-        "https://aws.amazon.com/compliance/programs/"
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -8349,11 +8363,11 @@
        "score": 3.5,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 72,
+       "evidenceCount": 75,
        "citations": [
-        "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/",
-        "https://aws.amazon.com/blogs/machine-learning/optimizing-production-agents-with-amazon-bedrock-agentcore-observability/"
+        "https://aws.amazon.com/blogs/machine-learning/",
+        "https://aws.amazon.com/bedrock/pricing/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -8363,10 +8377,10 @@
        "score": 2.6,
        "confidence": 84,
        "bestGrade": "E3",
-       "evidenceCount": 113,
+       "evidenceCount": 116,
        "citations": [
-        "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/compliance/programs/",
+        "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/"
        ]
       },
@@ -8375,13 +8389,13 @@
        "pillar": "reliability_safety",
        "state": "scored",
        "score": 3.6,
-       "confidence": 82,
+       "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
+        "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/",
-        "https://aws.amazon.com/blogs/machine-learning/authenticate-with-private-key-jwt-using-amazon-bedrock-agentcore-identity/",
-        "https://aws.amazon.com/blogs/machine-learning/introducing-explicit-prompt-caching-for-openai-gpt-5-6-models-on-amazon-bedrock/"
+        "https://aws.amazon.com/blogs/machine-learning/authenticate-with-private-key-jwt-using-amazon-bedrock-agentcore-identity/"
        ]
       },
       {
@@ -8391,10 +8405,10 @@
        "score": 3.7,
        "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 173,
+       "evidenceCount": 179,
        "citations": [
+        "https://aws.amazon.com/compliance/programs/",
         "https://aws.amazon.com/blogs/machine-learning/",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
         "https://aws.amazon.com/bedrock/pricing/"
        ]
       },
@@ -8405,7 +8419,7 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 72,
+       "evidenceCount": 74,
        "citations": [
         "https://aws.amazon.com/blogs/machine-learning/",
         "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
@@ -8419,11 +8433,11 @@
        "score": 3.7,
        "confidence": 84,
        "bestGrade": "E4",
-       "evidenceCount": 123,
+       "evidenceCount": 128,
        "citations": [
         "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/bedrock/pricing/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/"
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -8447,11 +8461,11 @@
        "score": 1.6,
        "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 62,
+       "evidenceCount": 65,
        "citations": [
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
-        "https://aws.amazon.com/bedrock/pricing/",
-        "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/"
+        "https://aws.amazon.com/compliance/programs/",
+        "https://aws.amazon.com/blogs/machine-learning/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -8459,13 +8473,13 @@
        "pillar": "vendor_resilience",
        "state": "scored",
        "score": 3.7,
-       "confidence": 80,
+       "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 20,
+       "evidenceCount": 22,
        "citations": [
         "https://aws.amazon.com/compliance/programs/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-aws/"
+        "https://aws.amazon.com/bedrock/pricing/",
+        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/"
        ]
       }
      ]
@@ -9548,11 +9562,11 @@
        "score": 3.7,
        "confidence": 99,
        "bestGrade": "E4",
-       "evidenceCount": 7,
+       "evidenceCount": 8,
        "citations": [
+        "https://developer.nvidia.com/developer-program",
         "https://introl.com/blog/nvidia-dominance-cuda-moat-competition-analysis-2025",
-        "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026",
-        "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000019/q4fy26pr.htm"
+        "https://siliconanalysts.com/analysis/nvidia-ai-accelerator-market-share-2024-2026"
        ]
       },
       {
@@ -9650,11 +9664,11 @@
        "score": 2.5,
        "confidence": 99,
        "bestGrade": "E3",
-       "evidenceCount": 4,
+       "evidenceCount": 5,
        "citations": [
+        "https://inferencex.semianalysis.com/blog/mi355x-glm5-fp8-sglang-40-cheaper-than-b200",
         "https://news.alphastreet.com/nvidias-cuda-lock-in-and-supply-scarcity-make-its-ai-chip-moat-harder-to-break-than-it-looks/",
-        "https://images.nvidia.com/aem-dam/Solutions/Data-Center/nvidia-financing-solutions-datasheet.pdf",
-        "https://www.nvidia.com/en-us/data-center/products/ai-enterprise/get-started/"
+        "https://images.nvidia.com/aem-dam/Solutions/Data-Center/nvidia-financing-solutions-datasheet.pdf"
        ]
       },
       {
@@ -9692,8 +9706,8 @@
        "bestGrade": "E5",
        "evidenceCount": 2,
        "citations": [
-        "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025",
-        "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm"
+        "https://www.sec.gov/Archives/edgar/data/1045810/000104581025000023/nvda-20250126.htm",
+        "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-fourth-quarter-and-fiscal-2025"
        ]
       },
       {
@@ -9799,11 +9813,11 @@
        "score": 3.5,
        "confidence": 99,
        "bestGrade": "E4",
-       "evidenceCount": 10,
+       "evidenceCount": 11,
        "citations": [
+        "https://www.amd.com/en/blogs/2025/rocm7-supercharging-ai-and-hpc-infrastructure.html",
         "https://news.alphastreet.com/nvidias-cuda-lock-in-and-supply-scarcity-make-its-ai-chip-moat-harder-to-break-than-it-looks/",
-        "https://www.amd.com/en/products/software/rocm/whats-new.html",
-        "https://rocm.blogs.amd.com/artificial-intelligence/enterprise-ai-suite/README.html"
+        "https://www.amd.com/en/products/software/rocm/whats-new.html"
        ]
       },
       {
@@ -9825,11 +9839,11 @@
        "score": 2.6,
        "confidence": 99,
        "bestGrade": "E3",
-       "evidenceCount": 3,
+       "evidenceCount": 4,
        "citations": [
+        "https://inferencex.semianalysis.com/blog/mi355x-glm5-fp8-sglang-40-cheaper-than-b200",
         "https://news.alphastreet.com/nvidias-cuda-lock-in-and-supply-scarcity-make-its-ai-chip-moat-harder-to-break-than-it-looks/",
-        "https://www.amd.com/en/blogs/2025/rocm7-supercharging-ai-and-hpc-infrastructure.html",
-        "https://lablab.ai/ai-tutorials/amd-developer-cloud-host-llm-vllm"
+        "https://www.amd.com/en/blogs/2025/rocm7-supercharging-ai-and-hpc-infrastructure.html"
        ]
       },
       {
@@ -9851,11 +9865,11 @@
        "score": 2.6,
        "confidence": 99,
        "bestGrade": "E3",
-       "evidenceCount": 7,
+       "evidenceCount": 8,
        "citations": [
+        "https://www.amd.com/en/blogs/2025/rocm7-supercharging-ai-and-hpc-infrastructure.html",
         "https://news.alphastreet.com/nvidias-cuda-lock-in-and-supply-scarcity-make-its-ai-chip-moat-harder-to-break-than-it-looks/",
-        "https://www.ainvest.com/news/amd-dividend-sustainability-deep-dive-financial-leverage-cash-flow-dynamics-2508/",
-        "https://ir.amd.com/news-events/press-releases/detail/1276/amd-reports-fourth-quarter-and-full-year-2025-financial-results"
+        "https://www.ainvest.com/news/amd-dividend-sustainability-deep-dive-financial-leverage-cash-flow-dynamics-2508/"
        ]
       },
       {
@@ -9903,7 +9917,7 @@
        "citations": [
         "https://multiples.vc/public-comps/broadcom-valuation-multiples",
         "https://blogs.juniper.net/en-us/enterprise-cloud-and-transformation/turbocharging-ai-performance-with-juniper-switches-and-broadcom-nics",
-        "https://finance.yahoo.com/technology/ai/articles/broadcoms-ai-push-boosts-semiconductor-151800760.html"
+        "https://markets.financialcontent.com/stocks/article/marketminute-2026-3-24-broadcoms-ai-revenue-rockets-106-to-84-billion-as-custom-silicon-dominates-the-infrastructure-build-out"
        ]
       },
       {
@@ -9915,8 +9929,8 @@
        "bestGrade": "E4",
        "evidenceCount": 25,
        "citations": [
-        "https://docs.broadcom.com/doc/ca-information-security-practices",
         "https://www.broadcom.com/support/trust-center/compliance/iso",
+        "https://docs.broadcom.com/doc/ca-information-security-practices",
         "https://www.broadcom.com/support/trust-center/compliance/iso-9001"
        ]
       },
@@ -9956,8 +9970,8 @@
        "evidenceCount": 17,
        "citations": [
         "https://docs.broadcom.com/doc/ca-information-security-practices",
-        "https://www.broadcom.com/support/trust-center/compliance/iso-9001",
-        "https://www.broadcom.com/support/trust-center/compliance/iso"
+        "https://www.broadcom.com/support/trust-center/compliance/iso",
+        "https://www.broadcom.com/support/trust-center/compliance/iso-9001"
        ]
       },
       {
@@ -9983,8 +9997,8 @@
        "bestGrade": "E3",
        "evidenceCount": 25,
        "citations": [
-        "https://docs.broadcom.com/doc/ca-api-gateway-for-cloud-integration",
         "https://developer.broadcom.com/vmware-sdk-api",
+        "https://docs.broadcom.com/doc/ca-api-gateway-for-cloud-integration",
         "https://www.crunchbase.com/organization/broadcom"
        ]
       },
@@ -10039,8 +10053,8 @@
        "evidenceCount": 24,
        "citations": [
         "https://multiples.vc/public-comps/broadcom-valuation-multiples",
-        "https://pitchgrade.com/companies/broadcom",
-        "https://markets.financialcontent.com/stocks/article/finterra-2026-4-14-the-infrastructure-architect-an-in-depth-analysis-of-broadcom-inc-avgo-in-the-ai-era"
+        "https://markets.financialcontent.com/stocks/article/finterra-2026-4-14-the-infrastructure-architect-an-in-depth-analysis-of-broadcom-inc-avgo-in-the-ai-era",
+        "https://pitchgrade.com/companies/broadcom"
        ]
       },
       {
@@ -10268,11 +10282,11 @@
        "score": 3.6,
        "confidence": 84,
        "bestGrade": "E4",
-       "evidenceCount": 114,
+       "evidenceCount": 123,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -10282,11 +10296,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 74,
+       "evidenceCount": 78,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://cloud.google.com/security/compliance/iso-27001"
+        "https://status.cloud.google.com/",
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -10296,7 +10310,7 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -10310,11 +10324,11 @@
        "score": 2.6,
        "confidence": 84,
        "bestGrade": "E3",
-       "evidenceCount": 83,
+       "evidenceCount": 92,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/technology/ai/",
-        "https://ai.google.dev/responsible/docs/evaluation"
+        "https://status.cloud.google.com/",
+        "https://blog.google/technology/ai/"
        ]
       },
       {
@@ -10324,11 +10338,11 @@
        "score": 4.6,
        "confidence": 81,
        "bestGrade": "E5",
-       "evidenceCount": 99,
+       "evidenceCount": 102,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://status.cloud.google.com/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -10338,11 +10352,11 @@
        "score": 3.6,
        "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
+        "https://status.cloud.google.com/",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api/"
+        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
        ]
       },
       {
@@ -10352,11 +10366,11 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 164,
+       "evidenceCount": 172,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://status.cloud.google.com/",
+        "https://blog.google/technology/ai/"
        ]
       },
       {
@@ -10366,11 +10380,11 @@
        "score": 2.5,
        "confidence": 85,
        "bestGrade": "E3",
-       "evidenceCount": 67,
+       "evidenceCount": 70,
        "citations": [
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://status.cloud.google.com/",
-        "https://blog.google/technology/ai/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/",
+        "https://blog.google/products-and-platforms/products/gemini/google-gemini-pixel-football-club-partnerships/"
        ]
       },
       {
@@ -10380,11 +10394,11 @@
        "score": 1.6,
        "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 72,
+       "evidenceCount": 76,
        "citations": [
         "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/"
        ]
       },
       {
@@ -10394,11 +10408,11 @@
        "score": 1.5,
        "confidence": 84,
        "bestGrade": "E2",
-       "evidenceCount": 25,
+       "evidenceCount": 29,
        "citations": [
         "https://blog.google/technology/ai/",
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://blog.google/innovation-and-ai/technology/developers-tools/expanding-managed-agents-gemini-api-3-6-flash-hooks/"
+        "https://blog.google/products/ads-commerce/google-ads-analytics-ai-updates/",
+        "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/"
        ]
       },
       {
@@ -10408,11 +10422,11 @@
        "score": 2.6,
        "confidence": 81,
        "bestGrade": "E3",
-       "evidenceCount": 43,
+       "evidenceCount": 46,
        "citations": [
         "https://status.cloud.google.com/",
-        "https://cloud.google.com/vertex-ai/generative-ai/docs/overview",
-        "https://cloud.google.com/vertex-ai/generative-ai/pricing"
+        "https://blog.google/innovation-and-ai/models-and-research/google-research/amie-video-consultations/",
+        "https://blog.google/products-and-platforms/products/workspace/sheets-canvas-for-google-sheets-spreadsheets/"
        ]
       },
       {
@@ -10422,7 +10436,7 @@
        "score": 2.7,
        "confidence": 82,
        "bestGrade": "E3",
-       "evidenceCount": 46,
+       "evidenceCount": 47,
        "citations": [
         "https://status.cloud.google.com/",
         "https://cloud.google.com/vertex-ai/generative-ai/pricing",
@@ -10455,13 +10469,13 @@
        "pillar": "business_fit",
        "state": "scored",
        "score": 3.6,
-       "confidence": 84,
+       "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 92,
+       "evidenceCount": 95,
        "citations": [
         "https://aws.amazon.com/blogs/machine-learning/",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
-        "https://aws.amazon.com/bedrock/pricing/"
+        "https://aws.amazon.com/bedrock/pricing/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -10469,13 +10483,13 @@
        "pillar": "enterprise_control",
        "state": "scored",
        "score": 1.6,
-       "confidence": 83,
+       "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 73,
+       "evidenceCount": 77,
        "citations": [
+        "https://aws.amazon.com/compliance/programs/",
         "https://aws.amazon.com/blogs/machine-learning/",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
-        "https://aws.amazon.com/compliance/programs/"
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -10499,11 +10513,11 @@
        "score": 3.5,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 72,
+       "evidenceCount": 75,
        "citations": [
-        "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/",
-        "https://aws.amazon.com/blogs/machine-learning/optimizing-production-agents-with-amazon-bedrock-agentcore-observability/"
+        "https://aws.amazon.com/blogs/machine-learning/",
+        "https://aws.amazon.com/bedrock/pricing/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -10513,10 +10527,10 @@
        "score": 2.6,
        "confidence": 84,
        "bestGrade": "E3",
-       "evidenceCount": 113,
+       "evidenceCount": 116,
        "citations": [
-        "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/compliance/programs/",
+        "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/"
        ]
       },
@@ -10525,13 +10539,13 @@
        "pillar": "reliability_safety",
        "state": "scored",
        "score": 3.6,
-       "confidence": 82,
+       "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 23,
+       "evidenceCount": 24,
        "citations": [
+        "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/",
-        "https://aws.amazon.com/blogs/machine-learning/authenticate-with-private-key-jwt-using-amazon-bedrock-agentcore-identity/",
-        "https://aws.amazon.com/blogs/machine-learning/introducing-explicit-prompt-caching-for-openai-gpt-5-6-models-on-amazon-bedrock/"
+        "https://aws.amazon.com/blogs/machine-learning/authenticate-with-private-key-jwt-using-amazon-bedrock-agentcore-identity/"
        ]
       },
       {
@@ -10541,10 +10555,10 @@
        "score": 3.7,
        "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 173,
+       "evidenceCount": 179,
        "citations": [
+        "https://aws.amazon.com/compliance/programs/",
         "https://aws.amazon.com/blogs/machine-learning/",
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
         "https://aws.amazon.com/bedrock/pricing/"
        ]
       },
@@ -10555,7 +10569,7 @@
        "score": 3.6,
        "confidence": 83,
        "bestGrade": "E4",
-       "evidenceCount": 72,
+       "evidenceCount": 74,
        "citations": [
         "https://aws.amazon.com/blogs/machine-learning/",
         "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
@@ -10569,11 +10583,11 @@
        "score": 3.7,
        "confidence": 84,
        "bestGrade": "E4",
-       "evidenceCount": 123,
+       "evidenceCount": 128,
        "citations": [
         "https://aws.amazon.com/blogs/machine-learning/",
         "https://aws.amazon.com/bedrock/pricing/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/"
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -10597,11 +10611,11 @@
        "score": 1.6,
        "confidence": 82,
        "bestGrade": "E2",
-       "evidenceCount": 62,
+       "evidenceCount": 65,
        "citations": [
-        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html",
-        "https://aws.amazon.com/bedrock/pricing/",
-        "https://aws.amazon.com/blogs/machine-learning/generate-autonomous-business-insights-with-ai-agent-and-mcp-servers/"
+        "https://aws.amazon.com/compliance/programs/",
+        "https://aws.amazon.com/blogs/machine-learning/",
+        "https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html"
        ]
       },
       {
@@ -10609,13 +10623,13 @@
        "pillar": "vendor_resilience",
        "state": "scored",
        "score": 3.7,
-       "confidence": 80,
+       "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 20,
+       "evidenceCount": 22,
        "citations": [
         "https://aws.amazon.com/compliance/programs/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/",
-        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-aws/"
+        "https://aws.amazon.com/bedrock/pricing/",
+        "https://aws.amazon.com/blogs/machine-learning/deploying-kimi-k3-on-amazon-sagemaker-hyperpod-and-amazon-eks/"
        ]
       },
       {
@@ -10852,7 +10866,7 @@
        "citations": [
         "https://www.oracle.com/artificial-intelligence/generative-ai/",
         "https://www.oracle.com/trust/",
-        "https://blogs.oracle.com/cloud-infrastructure/iso-27001-certificate-and-soc-1-2-and-3-attestations-for-oracle-cloud-infrastructure"
+        "https://www.cloudcomputing-news.net/news/oracle-secures-iso-27001-hipaa-and-soc-certification-its-cloud-portfolio/"
        ]
       },
       {
@@ -10974,7 +10988,7 @@
        "citations": [
         "https://www.oracle.com/artificial-intelligence/generative-ai/",
         "https://www.oracle.com/trust/",
-        "https://seekingalpha.com/article/4855136-oracle-all-eyes-on-the-balance-sheet"
+        "https://artificall.com/analysis/companies/oracle-corporation/"
        ]
       },
       {
@@ -11019,8 +11033,8 @@
        "evidenceCount": 7,
        "citations": [
         "https://builtin.com/job/production-engineer-team-lead/6357391",
-        "https://www.coreweave.com/resources/case-studies/ibm",
-        "https://en.wikipedia.org/wiki/CoreWeave"
+        "https://en.wikipedia.org/wiki/CoreWeave",
+        "https://www.coreweave.com/resources/case-studies/ibm"
        ]
       },
       {
@@ -11097,8 +11111,8 @@
        "evidenceCount": 6,
        "citations": [
         "https://getdeploying.com/coreweave",
-        "https://akuity.io/case-studies/coreweave",
-        "https://www.coreweave.com/pricing"
+        "https://www.coreweave.com/pricing",
+        "https://akuity.io/case-studies/coreweave"
        ]
       },
       {
@@ -11120,8 +11134,8 @@
        "bestGrade": "E2",
        "evidenceCount": 6,
        "citations": [
-        "https://www.thundercompute.com/blog/coreweave-gpu-pricing-review",
         "https://www.coreweave.com/pricing/classic",
+        "https://www.thundercompute.com/blog/coreweave-gpu-pricing-review",
         "https://www.coreweave.com/pricing"
        ]
       },
@@ -11148,7 +11162,7 @@
        "citations": [
         "https://tracxn.com/d/companies/coreweave/__HFbQkaOHBsn7FCHjT7PzEwrcI30aJ3tAdCuzBa5TwxA/funding-and-investors",
         "https://investors.coreweave.com/news/news-details/2026/CoreWeave-Closes-Landmark-8-5-Billion-Financing-Facility-Achieving-First-Investment-Grade-Rated-GPU-backed-Financing/default.aspx",
-        "https://www.cbinsights.com/company/coreweave/financials"
+        "https://en.wikipedia.org/wiki/CoreWeave"
        ]
       },
       {
@@ -11194,8 +11208,8 @@
        "evidenceCount": 8,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://www.alibabacloud.com/en/customers?_p_lc=1",
-        "https://www.alibabacloud.com/en/solutions/ai/data-intelligence?_p_lc=1"
+        "https://www.alibabacloud.com/en/solutions/ai/data-intelligence?_p_lc=1",
+        "https://www.alibabacloud.com/en/customers?_p_lc=1"
        ]
       },
       {
@@ -11241,9 +11255,9 @@
        "bestGrade": "E2",
        "evidenceCount": 3,
        "citations": [
-        "https://www.alibabacloud.com/en/trust-center?_p_lc=1",
+        "https://www.alibabacloud.com/en/trust-center/iso27001?_p_lc=1",
         "https://www.alibabacloud.com/en/trust-center/soc2?_p_lc=1",
-        "https://www.alibabacloud.com/en/trust-center/iso27001?_p_lc=1"
+        "https://www.alibabacloud.com/en/trust-center?_p_lc=1"
        ]
       },
       {
@@ -11266,8 +11280,8 @@
        "evidenceCount": 16,
        "citations": [
         "https://openlm.ai/chatbot-arena/",
-        "https://www.alibabacloud.com/help/en/api-gateway/ai-gateway/user-guide/managing-the-model-api",
-        "https://www.alibabacloud.com/help/en/pai/developer-reference/api-aiworkspace-2021-02-04-overview"
+        "https://www.alibabacloud.com/help/en/pai/developer-reference/api-aiworkspace-2021-02-04-overview",
+        "https://www.alibabacloud.com/help/en/ack/cloud-native-ai-suite/product-overview/cloud-native-ai-suite-overview"
        ]
       },
       {
@@ -11291,7 +11305,7 @@
        "citations": [
         "https://openlm.ai/chatbot-arena/",
         "https://www.scmp.com/tech/big-tech/article/3354212/alibaba-unveils-new-qwen-model-custom-chips-bid-become-chinas-ai-factory",
-        "https://www.alibabacloud.com/blog/finops-for-cloud-transformation-migrating-to-alibaba-cloud-for-financial-optimization_602617"
+        "https://www.alibabacloud.com/blog/analyze-manage-and-optimize-your-cloud-costs-with-alibaba-cloud-finops-solution_601529"
        ]
       },
       {
@@ -11359,7 +11373,7 @@
        "citations": [
         "https://en.wikipedia.org/wiki/Humain",
         "https://www.arabnews.com/node/2637736/business-economy",
-        "https://www.consultancy-me.com/news/11970/enterprise-ai-platform-humain-one-launches-with-strategic-partners-ey-groq-and-replit"
+        "https://www.prnewswire.com/news-releases/humain-unveils-humain-one-its-next-generation-agentic-ai-operating-system-at-future-investment-initiative-fii9-in-riyadh-302596652.html"
        ]
       },
       {
@@ -11428,8 +11442,8 @@
        "evidenceCount": 13,
        "citations": [
         "https://www.humain.com/",
-        "https://www.mexc.com/it-IT/news/542227",
-        "https://en.wikipedia.org/wiki/Humain"
+        "https://en.wikipedia.org/wiki/Humain",
+        "https://www.mexc.com/it-IT/news/542227"
        ]
       },
       {
@@ -11532,8 +11546,8 @@
        "bestGrade": "E4",
        "evidenceCount": 32,
        "citations": [
-        "https://groq.com/customer-stories/stackai-powers-enterprise-customer-service-and-support-agents-with-groq",
         "https://groq.com/industry-solutions",
+        "https://groq.com/customer-stories/stackai-powers-enterprise-customer-service-and-support-agents-with-groq",
         "https://sacra.com/c/groq/"
        ]
       },
@@ -11576,7 +11590,7 @@
        "citations": [
         "https://groq.com/blog/new-ai-inference-speed-benchmark-for-llama-3-3-70b-powered-by-groq",
         "https://groq.com/blog/groq-lpu-inference-engine-crushes-first-public-llm-benchmark",
-        "https://github.com/groq/openbench"
+        "https://groq.com/blog/artificialanalysis-ai-llm-benchmark-doubles-axis-to-fit-new-groq-lpu-inference-engine-performance-results"
        ]
       },
       {
@@ -11588,8 +11602,8 @@
        "bestGrade": "E4",
        "evidenceCount": 8,
        "citations": [
-        "https://trust.groq.com/",
         "https://www.nudgesecurity.com/security-profile/groq-com",
+        "https://trust.groq.com/",
         "https://security-profiles.nudgesecurity.com/app/groq-com"
        ]
       },
@@ -11614,9 +11628,9 @@
        "bestGrade": "E4",
        "evidenceCount": 31,
        "citations": [
-        "https://www.aipricing.guru/groq-pricing/",
         "https://www.aipricing.guru/blog/groq-api-pricing-guide-2026/",
-        "https://www.xpay.sh/saas-pricing/groq/"
+        "https://www.aipricing.guru/groq-pricing/",
+        "https://sacra.com/c/groq/"
        ]
       },
       {
@@ -11644,7 +11658,7 @@
        "citations": [
         "https://www.eesel.ai/blog/groq-pricing",
         "https://www.cloudzero.com/blog/groq-pricing/",
-        "https://groq.com/pricing"
+        "https://www.aipricing.guru/groq-pricing/"
        ]
       },
       {
@@ -11670,7 +11684,7 @@
        "citations": [
         "https://tracxn.com/d/companies/groq/__pMJjkNzO3GELYaHvYyAD0pQB4BYTFTHh4Klu4dAJvoU",
         "https://www.bloomberg.com/news/articles/2025-09-17/ai-chip-startup-groq-raises-750-million-at-6-9-billion-valuation",
-        "https://www.chipstrat.com/p/the-rise-of-groq-slow-then-fast"
+        "https://sacra.com/c/groq/"
        ]
       },
       {
@@ -11702,7 +11716,7 @@
     {
      "rank": 2,
      "vendorId": "lambda",
-     "composite": 2.69,
+     "composite": 2.68,
      "position": "Strong",
      "domains": [
       {
@@ -11712,11 +11726,11 @@
        "score": 3.6,
        "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 57,
+       "evidenceCount": 60,
        "citations": [
-        "https://lambda.ai/blog",
-        "https://docs.lambda.ai",
-        "https://lambda.ai/blog/one-photo-in-a-full-3d-scene-out"
+        "https://lambda.ai/blog/build-and-buy-why-the-smartest-ai-teams-do-both",
+        "https://lambda.ai/blog/agentflow-when-the-agents-workflow-learns",
+        "https://lambda.ai/blog/lambda-closes-926-million-senior-secured-term-loan-b-facility"
        ]
       },
       {
@@ -11726,11 +11740,11 @@
        "score": 3.6,
        "confidence": 81,
        "bestGrade": "E4",
-       "evidenceCount": 33,
+       "evidenceCount": 35,
        "citations": [
-        "https://lambda.ai/blog",
-        "https://docs.lambda.ai",
-        "https://docs.lambdaprivacy.org/security/compliance"
+        "https://lambda.ai/blog/lambda-prices-926-million-senior-secured-term-loan-b-facility",
+        "https://lambda.ai/blog/build-and-buy-why-the-smartest-ai-teams-do-both",
+        "https://lambda.ai/blog"
        ]
       },
       {
@@ -11752,13 +11766,13 @@
        "pillar": "reliability_safety",
        "state": "scored",
        "score": 4.6,
-       "confidence": 77,
+       "confidence": 78,
        "bestGrade": "E5",
-       "evidenceCount": 18,
+       "evidenceCount": 20,
        "citations": [
+        "https://lambda.ai/blog/agentflow-when-the-agents-workflow-learns",
         "https://lambda.ai/blog/one-photo-in-a-full-3d-scene-out",
-        "https://lambda.ai/blog/your-coding-harness-shouldnt-be-a-black-box",
-        "https://lambda.ai/blog/prompt-injection-doesnt-care-what-your-agent-does-for-a-living"
+        "https://lambda.ai/blog/your-coding-harness-shouldnt-be-a-black-box"
        ]
       },
       {
@@ -11793,14 +11807,14 @@
        "domain": "integration_architecture",
        "pillar": "integration_ops",
        "state": "scored",
-       "score": 3.6,
+       "score": 3.5,
        "confidence": 82,
        "bestGrade": "E4",
-       "evidenceCount": 64,
+       "evidenceCount": 68,
        "citations": [
-        "https://lambda.ai/pricing",
-        "https://lambda.ai/blog",
-        "https://docs.lambda.ai"
+        "https://lambda.ai/blog/lambda-prices-926-million-senior-secured-term-loan-b-facility",
+        "https://lambda.ai/blog/build-and-buy-why-the-smartest-ai-teams-do-both",
+        "https://lambda.ai/blog/agentflow-when-the-agents-workflow-learns"
        ]
       },
       {
@@ -11808,13 +11822,13 @@
        "pillar": "integration_ops",
        "state": "scored",
        "score": 2.5,
-       "confidence": 78,
+       "confidence": 76,
        "bestGrade": "E3",
-       "evidenceCount": 13,
+       "evidenceCount": 14,
        "citations": [
+        "https://lambda.ai/blog/agentflow-when-the-agents-workflow-learns",
         "https://lambda.ai/blog/your-coding-harness-shouldnt-be-a-black-box",
-        "https://lambda.ai/blog/keeping-100k-battles-of-untrusted-agent-code-in-their-lane",
-        "https://lambda.ai/blog/prompt-injection-doesnt-care-what-your-agent-does-for-a-living"
+        "https://lambda.ai/blog/keeping-100k-battles-of-untrusted-agent-code-in-their-lane"
        ]
       },
       {
@@ -11822,27 +11836,27 @@
        "pillar": "integration_ops",
        "state": "scored",
        "score": 1.6,
-       "confidence": 82,
+       "confidence": 83,
        "bestGrade": "E2",
-       "evidenceCount": 43,
+       "evidenceCount": 46,
        "citations": [
-        "https://lambda.ai/pricing",
-        "https://docs.lambda.ai",
-        "https://lambda.ai/blog/high-frequency-trading-data-part-1"
+        "https://lambda.ai/blog/build-and-buy-why-the-smartest-ai-teams-do-both",
+        "https://lambda.ai/blog/agentflow-when-the-agents-workflow-learns",
+        "https://lambda.ai/blog/lambda-closes-926-million-senior-secured-term-loan-b-facility"
        ]
       },
       {
        "domain": "workforce_adoption",
        "pillar": "business_fit",
        "state": "scored",
-       "score": 0.4,
-       "confidence": 78,
+       "score": 0.5,
+       "confidence": 80,
        "bestGrade": "E1",
-       "evidenceCount": 8,
+       "evidenceCount": 9,
        "citations": [
+        "https://lambda.ai/blog/build-and-buy-why-the-smartest-ai-teams-do-both",
         "https://lambda.ai/blog/your-coding-harness-shouldnt-be-a-black-box",
-        "https://lambda.ai/blog",
-        "https://lambda.ai/pricing"
+        "https://lambda.ai/blog"
        ]
       },
       {
@@ -11850,13 +11864,13 @@
        "pillar": "vendor_resilience",
        "state": "scored",
        "score": 3.6,
-       "confidence": 79,
+       "confidence": 80,
        "bestGrade": "E4",
-       "evidenceCount": 57,
+       "evidenceCount": 61,
        "citations": [
-        "https://lambda.ai/pricing",
-        "https://lambda.ai/blog",
-        "https://docs.lambda.ai"
+        "https://lambda.ai/blog/lambda-prices-926-million-senior-secured-term-loan-b-facility",
+        "https://lambda.ai/blog/build-and-buy-why-the-smartest-ai-teams-do-both",
+        "https://lambda.ai/blog/agentflow-when-the-agents-workflow-learns"
        ]
       },
       {
@@ -11866,11 +11880,11 @@
        "score": 2.5,
        "confidence": 79,
        "bestGrade": "E3",
-       "evidenceCount": 25,
+       "evidenceCount": 30,
        "citations": [
-        "https://lambda.ai/pricing",
-        "https://lambda.ai/blog",
-        "https://lambda.ai/blog/your-coding-harness-shouldnt-be-a-black-box"
+        "https://lambda.ai/blog/lambda-prices-926-million-senior-secured-term-loan-b-facility",
+        "https://lambda.ai/blog/build-and-buy-why-the-smartest-ai-teams-do-both",
+        "https://lambda.ai/blog/lambda-closes-926-million-senior-secured-term-loan-b-facility"
        ]
       },
       {
@@ -11916,8 +11930,8 @@
        "bestGrade": "E2",
        "evidenceCount": 28,
        "citations": [
-        "https://www.together.ai/blog/soc-2-compliance",
         "https://www.together.ai/data-center-locations",
+        "https://www.together.ai/blog/soc-2-compliance",
         "https://docs.together.ai/docs/privacy-and-security"
        ]
       },
@@ -12009,8 +12023,8 @@
        "bestGrade": "E4",
        "evidenceCount": 32,
        "citations": [
-        "https://deploybase.ai/articles/together-ai-pricing",
         "https://docs.together.ai/docs/inference/pricing",
+        "https://deploybase.ai/articles/together-ai-pricing",
         "https://checkthat.ai/brands/together-ai/pricing"
        ]
       },
@@ -12037,7 +12051,7 @@
        "citations": [
         "https://finance.yahoo.com/technology/ai/articles/open-source-ai-firm-together-110520468.html",
         "https://www.together.ai/blog/together-ai-announcing-305m-series-b",
-        "https://tracxn.com/d/companies/together-ai/__fcIBLE0rJMeK3FAdcfzE0H41jE36bJd0FDBWalYo6cY"
+        "https://techcrunch.com/2026/07/01/neocloud-together-ai-raises-800m-leaps-to-8-3b-valuation/"
        ]
       },
       {
@@ -12084,8 +12098,8 @@
        "evidenceCount": 7,
        "citations": [
         "https://builtin.com/job/production-engineer-team-lead/6357391",
-        "https://www.coreweave.com/resources/case-studies/ibm",
-        "https://en.wikipedia.org/wiki/CoreWeave"
+        "https://en.wikipedia.org/wiki/CoreWeave",
+        "https://www.coreweave.com/resources/case-studies/ibm"
        ]
       },
       {
@@ -12213,7 +12227,7 @@
        "citations": [
         "https://investors.coreweave.com/news/news-details/2026/CoreWeave-Closes-Landmark-8-5-Billion-Financing-Facility-Achieving-First-Investment-Grade-Rated-GPU-backed-Financing/default.aspx",
         "https://tracxn.com/d/companies/coreweave/__HFbQkaOHBsn7FCHjT7PzEwrcI30aJ3tAdCuzBa5TwxA/funding-and-investors",
-        "https://en.wikipedia.org/wiki/CoreWeave"
+        "https://www.cbinsights.com/company/coreweave/financials"
        ]
       },
       {
@@ -12440,9 +12454,9 @@
        "bestGrade": "E4",
        "evidenceCount": 8,
        "citations": [
-        "https://app.dealroom.co/companies/nscale_1",
+        "https://io-fund.com/ai-stocks/nvidia-coreweave-nebius-circular-financing-gpu-boom",
         "https://www.i-scoop.eu/nscale/",
-        "https://io-fund.com/ai-stocks/nvidia-coreweave-nebius-circular-financing-gpu-boom"
+        "https://app.dealroom.co/companies/nscale_1"
        ]
       },
       {
@@ -12514,9 +12528,9 @@
        "bestGrade": "E2",
        "evidenceCount": 10,
        "citations": [
-        "https://www.nscale.com/press-releases/ai-hyperscaler-nscale-launches-serverless-inference-platform",
+        "https://www.nscale.com/",
         "https://www.nscale.com/services/fleet-operations",
-        "https://www.nscale.com/"
+        "https://www.nscale.com/press-releases/ai-hyperscaler-nscale-launches-serverless-inference-platform"
        ]
       },
       {
@@ -12562,8 +12576,8 @@
        "bestGrade": "E3",
        "evidenceCount": 9,
        "citations": [
-        "https://www.nscale.com/press-releases/nscale-series-b",
         "https://tracxn.com/d/companies/nscale/___dhLHMquAR5qddFAKM-if-hDvPQ2O3L5XB7pi2cqmpc",
+        "https://www.nscale.com/press-releases/nscale-series-b",
         "https://www.cnbc.com/2026/03/09/nscale-ai-data-center-nvidia-raise.html"
        ]
       },
@@ -12576,8 +12590,8 @@
        "bestGrade": "E2",
        "evidenceCount": 2,
        "citations": [
-        "https://www.tamradar.com/funding-rounds/nscale-series-c-1-7b-ai-hyperscaler",
-        "https://www.nscale.com/press-releases/nscale-series-b"
+        "https://www.nscale.com/press-releases/nscale-series-b",
+        "https://www.tamradar.com/funding-rounds/nscale-series-c-1-7b-ai-hyperscaler"
        ]
       },
       {
