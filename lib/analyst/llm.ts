@@ -33,7 +33,41 @@ import { claimsCausality } from "./synthesis";
 // written. Nothing here is required for the app to work.
 
 const MODEL = "claude-opus-5";
-const TIMEOUT_MS = 30_000;
+/**
+ * How long one call may take.
+ *
+ * MEASURED, NOT CHOSEN. On 30 August 2026 the company-research call for
+ * Woolworths South Africa was timed directly: 4,420 input tokens and a full
+ * 2,400-token answer took 30,491ms, against a ceiling that was 30,000ms. The
+ * call was landing either side of its own timeout depending on the day, which
+ * is why the same company sometimes read and sometimes returned "the analysis
+ * could not be run just now". A ceiling set at the measured duration is not a
+ * ceiling, it is a coin toss.
+ *
+ * Seventy-five seconds is roughly twice the slowest authoring call this product
+ * makes, and the wall-clock arithmetic that keeps the whole request inside
+ * Vercel's five-minute limit is in RETRY_BUDGET_MS in lib/research/company.ts.
+ */
+const TIMEOUT_MS = 75_000;
+/**
+ * How many times the SDK may retry underneath us.
+ *
+ * THE DEFECT THIS FIXES, measured on 30 August 2026. The SDK's default is 2,
+ * meaning three HTTP attempts per call, and that sat under two retry layers we
+ * had already written: `generate()` retries a rejected reading once, and
+ * `researchCompany()` retries the whole read once against narrower sources. So
+ * one company research could issue twelve HTTP requests, each allowed thirty
+ * seconds, and a Woolworths South Africa run measured ten minutes end to end.
+ * Vercel's function ceiling is five, so the reader got a page saying the
+ * analysis "could not be run", which was true and told them nothing.
+ *
+ * None, because the outer loops already do it and do it better: `generate()`
+ * retries with a CORRECTED prompt and `researchCompany()` retries against
+ * NARROWER sources, where this layer can only send the identical request again
+ * and hope. Two chances at the network remain, which is enough, and the cost of
+ * the third was a request nobody could afford to wait for.
+ */
+const SDK_RETRIES = 0;
 // One day, matching the ISR cadence of the pages that call this. Without it,
 // every render of nine tabs would be an Opus call.
 const TTL_MS = 24 * 60 * 60 * 1000;
@@ -284,8 +318,13 @@ async function callModel(
 ): Promise<string | null> {
   const apiKey = llmKey();
   if (!apiKey) return null;
+  const started = Date.now();
   try {
-    const client = new Anthropic({ apiKey, timeout: TIMEOUT_MS });
+    const client = new Anthropic({
+      apiKey,
+      timeout: TIMEOUT_MS,
+      maxRetries: SDK_RETRIES,
+    });
     const res = await client.messages.create({
       model: MODEL,
       max_tokens: maxTokens,
@@ -294,8 +333,23 @@ async function callModel(
     });
     const text = res.content.find((b) => b.type === "text");
     return text && text.type === "text" ? text.text : null;
-  } catch {
-    // A failed call is a fallback to computed text, never a broken page.
+  } catch (err) {
+    // A failed call is a fallback to computed text, never a broken page. But
+    // it was also, until now, completely silent: `catch {}` threw the reason
+    // away, so a timeout, an expired key, a rate limit and a spent balance all
+    // reached the reader as the same sentence and reached the operator as
+    // nothing at all. The four need different actions and only one of them is
+    // about the company being researched.
+    //
+    // The key is never in an SDK error and is never logged here. Status and
+    // name are what distinguish the four cases; the message is truncated
+    // because a long provider payload in a log is noise.
+    const e = err as { name?: string; status?: number; message?: string };
+    console.warn(
+      `[analyst-llm] call failed after ${Date.now() - started}ms: ${e?.name ?? "Error"}${
+        e?.status ? ` ${e.status}` : ""
+      }: ${String(e?.message ?? "").slice(0, 200)}`
+    );
     return null;
   }
 }
@@ -566,6 +620,15 @@ Any other number, including a rounded or approximated one, causes your answer
 to be discarded in full. If a sentence needs a figure that is not on that list,
 write the sentence without the figure. A sentence that makes its point
 qualitatively is worth far more than one that is thrown away.
+
+A MINUS SIGN IS PART OF THE FIGURE. Where the list carries -5.8, the data says
+something fell by 5.8, and "-5.8" is the only form of it you may write. Writing
+"5.8" is a different claim and is discarded in full. If the sign makes the
+sentence awkward, say that the thing fell or declined and give no figure at all.
+
+A PLACEHOLDER IS NOT A FIGURE. Where a passage shows XYZ, n/a, a dash or a
+blank where a value would be, that value was withheld from us. Say the source
+does not publish it, or make the point without it. Never supply one.
 
 TASK:
 ${instruction}`;

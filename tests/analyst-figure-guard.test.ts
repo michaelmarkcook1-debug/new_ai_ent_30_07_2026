@@ -53,3 +53,46 @@ describe("figure guard", () => {
     expect(numbersIn("three of the 5 vendors").has("5")).toBe(false);
   });
 });
+
+// ------------------------------------------------- the sign is part of the figure
+//
+// Found on live Woolworths South Africa research, 30 August 2026. The retrieved
+// GlobalData profile publishes the net income and net profit margin VALUES as
+// "XYZ", withheld behind a paywall, and publishes only their changes: -5.8% and
+// -9.4% year on year. The model restated both without their minus signs, and
+// the guard discarded the whole reading.
+//
+// It was right to. "Net income 5.8%" and "net income -5.8%" are different
+// claims and only one of them is in the data. These pin that the guard keeps
+// refusing it, because the fix that followed was to the prompt and the
+// grounding, and a prompt is a request where this is a check.
+
+describe("a dropped minus sign is a different figure", () => {
+  it("refuses a magnitude where the data carries a decline", () => {
+    const facts = "Net Income (2024) XYZ, -5.8% (2024 vs 2023). Net Profit Margin (2024) XYZ, -9.4% (2024 vs 2023).";
+    expect(invented("Net income rose 5.8% and margin 9.4%.", facts)).toEqual(
+      expect.arrayContaining(["5.8", "9.4"])
+    );
+    expect(guard("Net income rose 5.8% and margin 9.4%.", facts)).toBe(false);
+  });
+
+  it("accepts the figure written as the data states it", () => {
+    const facts = "Net Income (2024) XYZ, -5.8% (2024 vs 2023).";
+    expect(guard("Net income moved -5.8% year on year.", facts)).toBe(true);
+  });
+
+  it("still accepts the point made without the figure at all", () => {
+    const facts = "Net Income (2024) XYZ, -5.8% (2024 vs 2023).";
+    expect(guard("Net income fell year on year, and the value itself is not published.", facts)).toBe(true);
+  });
+
+  it("still refuses a figure that is simply not there", () => {
+    // The third rejection on that run: the model wrote 34,967 employees where
+    // the retrieved profile says 37,499. Nothing about the grounding fix makes
+    // this acceptable, and nothing should.
+    const facts = "No of Employees 37,499. Revenue (2024) $4.3B.";
+    expect(invented("It employs 34,967 people.", facts)).toContain("34967");
+    expect(guard("It employs 34,967 people.", facts)).toBe(false);
+    expect(guard("It employs 37,499 people.", facts)).toBe(true);
+  });
+});

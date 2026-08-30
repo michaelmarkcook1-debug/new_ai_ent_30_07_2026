@@ -97,6 +97,22 @@ export interface CompanyResearch {
   written: boolean;
 }
 
+/**
+ * How long a run may already have spent before the narrowing retry is skipped.
+ *
+ * Chosen against the platform rather than the model, and it is the arithmetic
+ * that keeps the whole request inside Vercel's five-minute function limit:
+ *
+ *   one call            up to 75s   (TIMEOUT_MS, no SDK retry underneath)
+ *   one attempt         up to 150s  (generate() makes at most two calls)
+ *   the narrowed retry  starts only if 90s have not already gone
+ *   worst case          90 + 150 + searches, comfortably under 300s
+ *
+ * Past the budget we stop and say what we have, which is the same outcome the
+ * retry was going to reach anyway, minus the timeout.
+ */
+const RETRY_BUDGET_MS = 90_000;
+
 const empty = (query: string, absence: string): CompanyResearch => ({
   query,
   profile: null,
@@ -211,6 +227,7 @@ export async function researchCompany(
 ): Promise<CompanyResearch> {
   const name = query.trim();
   if (name.length < 2) return empty(name, "Enter a company name to research.");
+  const startedAt = Date.now();
 
   if (!searchAvailable()) {
     return empty(
@@ -267,9 +284,16 @@ export async function researchCompany(
   // instead of ending it. Fewer passages means a smaller number-space for the
   // guard to reject on and a shorter answer to produce, and a reading of four
   // sources is worth incomparably more than an apology about eight.
+  //
+  // THE TOKEN BUDGETS ARE MEASURED. On 30 August 2026 the Woolworths South
+  // Africa call was run directly and came back `stop_reason: max_tokens` having
+  // used all 2,400 of them, so the JSON was cut off mid-object and arrived as
+  // "response was not valid JSON" twice in a row. The reading was not rejected
+  // for anything it said; it never finished saying it. Raised to the point
+  // where the answer the prompt asks for actually fits.
   const attempts: { hits: SearchHit[]; findings: number; tokens: number }[] = [
-    { hits: sources, findings: 4, tokens: 2400 },
-    { hits: sources.slice(0, 4), findings: 3, tokens: 1800 },
+    { hits: sources, findings: 4, tokens: 3200 },
+    { hits: sources.slice(0, 4), findings: 3, tokens: 2200 },
   ];
 
   // Why the last attempt produced nothing, so the absence below can say the
@@ -277,6 +301,20 @@ export async function researchCompany(
   let lastFailure: AuthorFailure | null = null;
 
   for (const [i, attempt] of attempts.entries()) {
+    // The narrowing retry is worth having and is not worth dying for.
+    //
+    // Measured on 30 August 2026: a Woolworths South Africa run took ten
+    // minutes, which on Vercel means the function is killed at five and the
+    // reader gets a broken stream rather than either a reading or an honest
+    // absence. Removing the SDK's own retry layer took most of that out; this
+    // makes the ceiling structural rather than arithmetic, so a slow provider
+    // day cannot put us back over it.
+    if (i > 0 && Date.now() - startedAt > RETRY_BUDGET_MS) {
+      console.warn(
+        `[research] ${name}: ${Date.now() - startedAt}ms spent, skipping the narrowed retry`
+      );
+      break;
+    }
     onStage(i === 0 ? "reading" : "reading-retry");
     const drafted = await authoredResult<Draft>(
       `company:${name.toLowerCase()}:${i}`,
