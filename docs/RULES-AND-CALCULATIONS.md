@@ -2909,6 +2909,36 @@ used by the ported composite engine, not by the category rankings, so the two
 can differ and already do: the fixture carries `model_quality` where the union
 carries `market_position`.
 
+### The two domain counts are different quantities
+
+A category in this fixture carries a `domains` NUMBER and each of its vendors
+carries a `domains` ARRAY, and they do not agree. Both are right:
+
+| | |
+|---|---|
+| `category.domains` | how many domains are WEIGHTED in that category's composite, read from the page's own "Category-specific weighting (N domains)" line |
+| `vendor.domains[]` | every domain the vendor was ASSESSED on, whether or not it carries weight here |
+
+Measured on 30 August 2026: `ai_silicon` weights 7 (Market Position 42%,
+Capital Resilience next) while every vendor in it carries 13 assessed scores.
+Reading the array length as the category's domain count makes eleven categories
+look under-synced when they are current.
+
+The weighted set is also what the held rule counts: the page holds a vendor
+with "Only 4/7 domains evidenced (need at least 4)".
+
+### Which categories weight the new domain
+
+`dev_sentiment` is weighted in two of the thirteen: `frontier_model_api` and
+`developer_coding_agent`, both of which went from 13 weighted domains to 14.
+The other eleven do not weight it, which is upstream's choice about what
+matters in each category and not a gap on this side.
+
+It matters where it applies. In `frontier_model_api` it is weighted **20 per
+cent**, the heaviest single weight in the category, ahead of Model Quality at
+10 and Governance at 10. Its arrival moved xAI's composite from 2.29 to 2.72
+and its rank from 5 to 4, past DeepSeek. The top three did not move.
+
 **It refuses to overwrite a newer capture with an older one.** The pricing
 endpoint answers on request and serves `capturedAt: 2026-06-02` whatever day it
 is asked, so a re-pull is not a refresh.
