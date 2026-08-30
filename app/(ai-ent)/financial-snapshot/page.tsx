@@ -13,6 +13,7 @@ import { Accordion } from "@/lib/ui/accordion";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { financialInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
+import { pageQuestion } from "@/lib/analyst/question";
 import { analystNews } from "@/lib/analyst/news-source";
 
 export const metadata = { title: "Financial Snapshot | AI Enterprise" };
@@ -57,7 +58,15 @@ export default async function FinancialSnapshotPage() {
   const written = await authorInsight(insight, "financial", [
     ...revenue.companies.map((c) => c.name),
     ...privateRows.map((r) => r.name),
-  ]);
+  ],
+    null,
+    null,
+
+    // The question this page answers, and the market context this reading
+    // has earned. See lib/analyst/question.ts and market-context.ts: neither
+    // adds a fetch, a dataset or a second model call.
+    { question: pageQuestion("financial-snapshot"), context: null }
+  );
 
   return (
     <>

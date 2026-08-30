@@ -1,6 +1,7 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { unstable_cache } from "next/cache";
 import {
+  consultancyFiller,
   reversedClaims,
   temporalViolations,
   unsupportedCounts,
@@ -9,6 +10,8 @@ import {
   type TemporalLicence,
 } from "./canonical";
 import { claimsCausality } from "./synthesis";
+import { comparabilityBreaches, type ComparableFact } from "./comparability";
+import type { ArgumentUnit } from "./question";
 
 // The analyst voice, written by Opus 5 over figures it is not allowed to
 // invent.
@@ -409,6 +412,18 @@ export interface CanonicalGuards {
    * barred from grounding one; `allowed` is false when nothing in the packet
    * is current enough to establish that anything must happen now.
    */
+  /**
+   * The facts this page supplied, with the category and population each was
+   * drawn from, so a comparison the answer makes can be checked against the
+   * comparison the page is entitled to make. See lib/analyst/comparability.ts.
+   */
+  comparability?: {
+    facts: readonly ComparableFact[];
+    unit: string;
+    marketLevelFinding: boolean;
+  } | null;
+  /** Refuse consultancy filler. Set wherever a page has a real argument to make. */
+  forbidFiller?: boolean;
   urgency?: {
     field: string;
     restricted: readonly string[];
@@ -509,6 +524,8 @@ export async function authoredResult<T extends object>(
     claims: guards.claims ?? [],
     entities: guards.entities ?? [],
     forbidCausal: guards.forbidCausal ?? false,
+    comparability: guards.comparability ?? null,
+    forbidFiller: guards.forbidFiller ?? false,
     // Both new contracts are part of the key for the same reason the others
     // are: two callers with the same facts and different licences are asking
     // different questions, and sharing an entry would serve one caller's
@@ -581,6 +598,12 @@ const cachedGenerate = unstable_cache(
         forbidCausal: boolean;
         temporal: TemporalLicence | null;
         urgency: { field: string; restricted: string[]; allowed: boolean } | null;
+        comparability: {
+          facts: ComparableFact[];
+          unit: string;
+          marketLevelFinding: boolean;
+        } | null;
+        forbidFiller: boolean;
       }
     ),
   ["analyst-insight"],
@@ -601,6 +624,12 @@ async function generate<T extends object>(
     forbidCausal: boolean;
     temporal: TemporalLicence | null;
     urgency: { field: string; restricted: string[]; allowed: boolean } | null;
+    comparability: {
+      facts: ComparableFact[];
+      unit: string;
+      marketLevelFinding: boolean;
+    } | null;
+    forbidFiller: boolean;
   }
 ): Promise<T> {
 
@@ -689,6 +718,26 @@ ${instruction}`;
       // A reason to act now built out of evidence that cannot establish now.
       // Scoped to the field that carries the reason, because the same finding
       // is legitimate background everywhere else in the answer.
+      // A comparison this page is not entitled to make. Checked against the
+      // structured facts the page supplied rather than by reading the prose,
+      // which is what makes it a check rather than a second opinion.
+      ...(guards.comparability
+        ? comparabilityBreaches(
+            emitted,
+            guards.comparability.facts,
+            {
+              unit: guards.comparability.unit as ArgumentUnit,
+              marketLevelFinding: guards.comparability.marketLevelFinding,
+            }
+          ).map((b) => `a comparison this page cannot make: ${b.detail}`)
+        : []),
+      // Consultancy filler. Not a truth failure, which is exactly why nothing
+      // else here catches it: the sentence is accurate and says nothing.
+      ...(guards.forbidFiller
+        ? consultancyFiller(emitted).map(
+            (phrase) => `the filler phrase "${phrase}", which would be true on any page in any year`
+          )
+        : []),
       ...(guards.urgency
         ? urgencyViolations(
             String(

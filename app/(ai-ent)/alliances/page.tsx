@@ -4,6 +4,7 @@ import { AlliancesView } from "./components/alliances-view";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { supplyMapInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
+import { pageQuestion } from "@/lib/analyst/question";
 import { aieServerFetch } from "@/lib/aie-server";
 import {
   adoptionSignal,
@@ -114,6 +115,12 @@ export default async function AlliancesPage() {
     [...new Set(data.links.flatMap((l) => [l.vendorName, l.partnerName]))],
     null,
     { signals, synthesis }
+  ,
+
+    // The question this page answers, and the market context this reading
+    // has earned. See lib/analyst/question.ts and market-context.ts: neither
+    // adds a fetch, a dataset or a second model call.
+    { question: pageQuestion("alliances"), context: null }
   );
 
 

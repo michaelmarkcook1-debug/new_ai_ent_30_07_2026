@@ -4,6 +4,7 @@ import { PeerInsightsView } from "./peer-insights-view";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { peerInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
+import { pageQuestion } from "@/lib/analyst/question";
 import { analystNews } from "@/lib/analyst/news-source";
 import { ADOPTION_SEGMENTS } from "./data";
 import { USE_CASES } from "@/lib/aie";
@@ -66,7 +67,15 @@ export default async function PeerInsightsPage() {
     pickNews(news.items, { categories: ["Market movement"], minImpact: 70 }),
     null
   );
-  const written = await authorInsight(insight, "peer", []);
+  const written = await authorInsight(insight, "peer", [],
+    null,
+    null,
+
+    // The question this page answers, and the market context this reading
+    // has earned. See lib/analyst/question.ts and market-context.ts: neither
+    // adds a fetch, a dataset or a second model call.
+    { question: pageQuestion("peer-insights"), context: null }
+  );
 
   return (
     <>

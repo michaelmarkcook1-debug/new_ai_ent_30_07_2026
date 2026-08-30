@@ -700,3 +700,48 @@ export function urgencyViolations(
   }
   return [...new Set(bad)];
 }
+
+// ------------------------------------------------------- consultancy filler
+//
+// Phrases that signal an analyst has stopped analysing.
+//
+// EVERY ONE OF THESE IS A SENTENCE THAT COULD APPEAR ON ANY PAGE, in any
+// market, in any year. "Organisations should monitor developments closely" is
+// true of everything and therefore says nothing, and a reading that reaches for
+// it has run out of argument and is filling the paragraph. That is not a
+// truth failure and the numeric guards will never catch it: the sentence is
+// perfectly accurate, which is the problem.
+//
+// Kept deliberately short and matched as phrases. "Data" and "suggests" are
+// ordinary words that belong in careful writing; "the data suggests" is the
+// hedge a writer uses when they do not want to own the conclusion, and owning
+// the conclusion is the job.
+const FILLER: RegExp[] = [
+  /\bthe data (?:indicates?|suggests?|shows that|reveals?)\b/i,
+  /\bit (?:is|remains) important to note\b/i,
+  /\bit is worth noting\b/i,
+  /\borganisations should (?:monitor|consider|be aware)\b/i,
+  /\borganizations should (?:monitor|consider|be aware)\b/i,
+  /\brapidly (?:evolving|changing|shifting) (?:ai )?landscape\b/i,
+  /\bin today's fast[- ]moving\b/i,
+  /\bcontinues? to evolve\b/i,
+  /\bplays? a (?:key|crucial|vital|critical) role\b/i,
+  /\bnavigate the complexit(?:y|ies)\b/i,
+  /\bmonitor developments closely\b/i,
+];
+
+/**
+ * The filler phrases an authored reading used.
+ *
+ * Returned rather than counted, so the retry can quote the exact phrase back:
+ * a model told "your answer contained filler" rewrites at random, and one told
+ * which five words to drop rewrites the sentence.
+ */
+export function consultancyFiller(text: string): string[] {
+  const out: string[] = [];
+  for (const re of FILLER) {
+    const m = text.match(re);
+    if (m) out.push(m[0].toLowerCase());
+  }
+  return [...new Set(out)];
+}

@@ -16,6 +16,7 @@ import { pulseJudgement } from "@/lib/pulse/judgement";
 import { priceSignal, signalsFromMetrics } from "@/lib/analyst/cross";
 import { priceSpread } from "../price-performance/data";
 import { authorPulse, authorActions, authorSince } from "@/lib/analyst/author";
+import { marketStructure } from "@/lib/analyst/insight";
 import { readWatchState, readChangeLog, buildSinceView } from "@/lib/changes/watchlist";
 
 // The Security Desk material briefly lived here (6 August 2026) and moved to
@@ -115,6 +116,10 @@ export default async function PulsePage() {
     risks: metrics.risks,
     kpis: metrics.kpis,
     shareMovementPublished: metrics.shareMovementPublished,
+    // The shape of the market, so the headline can be about the market rather
+    // than about how many vendors moved. Read off the MarketMetrics already
+    // loaded above: no fetch, no dataset, no second model call.
+    structure: marketStructure(metrics),
   });
   const asOfDay = metrics.generatedAt ? metrics.generatedAt.slice(0, 10) : null;
 

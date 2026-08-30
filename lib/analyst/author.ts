@@ -16,6 +16,9 @@ import { canCreateUrgency } from "./freshness";
 import { POPULATION_LABEL, temporalClass, type Signal } from "./signals";
 import { VENDOR_DIRECTORY } from "@/lib/aie/vendor-directory";
 import type { AnalystInsightData } from "./insight";
+import type { PageQuestion } from "./question";
+import type { GroundedContext } from "./market-context";
+import type { ComparableFact } from "./comparability";
 import type { PulseJudgement } from "@/lib/pulse/judgement";
 import type { ToolKey } from "@/lib/ui/tools";
 
@@ -191,6 +194,28 @@ export async function authorInsight(
   cross: {
     signals: readonly Signal[];
     synthesis: readonly Synthesis[];
+  } | null = null,
+  /**
+   * Which page this is, and the market it sits in.
+   *
+   * WHAT THIS ADDS AND WHY IT IS NOT MORE DATA. The complaint this answers was
+   * that readings were factually sound and analytically flat: correct sentences
+   * about what is on screen, with nothing about what kind of market produces
+   * that reading or what a buyer should do differently because of it. The
+   * obvious fix, handing the model more of the dataset, produces longer flat
+   * readings.
+   *
+   * So what travels is not data. It is the QUESTION this page exists to answer
+   * (lib/analyst/question.ts) and the market context this reading has actually
+   * earned (lib/analyst/market-context.ts, where a thesis only appears when the
+   * computed structure satisfies its precondition). Both are small, both are
+   * deterministic, and neither adds a fetch or a model call.
+   */
+  page: {
+    question: PageQuestion;
+    context: GroundedContext | null;
+    /** Facts with their category and population, for the comparability guard. */
+    comparable?: readonly ComparableFact[];
   } | null = null
 ): Promise<Written<AnalystInsightData>> {
   if (!llmAvailable() || computed.insufficient) return asComputed(computed);
@@ -202,6 +227,27 @@ export async function authorInsight(
 
   const facts = factSheet([
     `Page context: ${context}`,
+    // The question, first, because everything after it is only relevant in so
+    // far as it answers this. A builder that wandered across the whole dataset
+    // produced a reading that wandered with it.
+    page ? `THE ONE QUESTION THIS PAGE ANSWERS: ${page.question.question}` : null,
+    page
+      ? `Your argument must engage with: ${page.question.mustAddress.join("; ")}.`
+      : null,
+    page
+      ? `Not this page's job, and another page does each of these: ${page.question.outOfScope.join("; ")}.`
+      : null,
+    page
+      ? `Every comparison you make is drawn from ${page.question.population}. A comparison across two different sets is not a comparison, and naming the set is part of making it.`
+      : null,
+    // The market this reading sits in. Only the theses whose preconditions the
+    // computed structure actually satisfies reach this line, so context can
+    // explain the reading and cannot decorate it.
+    page && page.context && page.context.applicable.length > 0
+      ? `MARKET CONTEXT YOU MAY USE. Each is an analyst reading of how markets of this shape behave, not a dated event, and each is followed by what in THIS page's data makes it apply. Use it to explain the finding. Do not state one whose basis you cannot point at, and do not introduce market history of your own:\n${page.context.applicable
+          .map((a) => `- ${a.thesis}\n  (applies here because ${a.basis})`)
+          .join("\n")}`
+      : null,
     `Computed headline: ${computed.headline}`,
     `Computed summary: ${computed.summary}`,
     `Computed implications: ${computed.implications.join(" | ")}`,
@@ -278,9 +324,30 @@ export async function authorInsight(
 
 Return JSON: {"headline": string, "summary": string, "implications": [string, string, string]${computed.decision ? ', "instruction": string, "whyNow": string' : ""}}
 
-- headline: one sentence, under 15 words, carrying a judgement rather than a measurement. Not a restatement of the numbers.
-- summary: 90 to 140 words, and it must do all three of the things in your brief: what this data shows as a judgement, what changes for this reader's buying decision, and what this is an instance of in the wider market. Reuse only the figures above.
+- headline: one sentence, under 15 words, stating the analytical CONCLUSION. Not who leads, not a measurement, and not two findings joined by "and". A reader who never opens the table should still know what you concluded.
+- summary: 90 to 140 words carrying ONE argument, in this order. Reuse only the figures above.
 - implications: exactly three, each one short sentence, each a distinct consequence for a buyer. No number needs to appear in these.
+
+THE ONE ARGUMENT, AND IT IS ONE:
+
+  1. THE FINDING       the single most important conclusion this page supports
+  2. MARKET CONTEXT    what a market of this shape usually means
+  3. THE TENSION       what stops that reading being too simple
+  4. THE IMPLICATION   what the reader should now do differently
+
+Four moves, one line of reasoning, each following from the one before. Several
+unrelated observations in one paragraph is the failure this replaces, and it is
+a failure even when every observation is true.
+
+DO NOT NARRATE THE RANKING. The table already carries the scores. "SAP scores
+2.82 and Salesforce is 0.8 behind" is the table talking; "workflow automation is
+one of the few categories with a separated leader" is you talking. A figure
+earns its place only where its magnitude is itself the point.
+
+A NAMED VENDOR IS AN EXAMPLE, NEVER THE FINDING. Where you name one, it must be
+illustrating a conclusion you have already stated about the market. If you find
+yourself moving from one category to another, stop: either say what the two have
+in common and make THAT the finding, or drop the second.
 
 The summary is the paragraph that has to earn the page. A reader who already
 looked at the chart should still learn something from it. If your draft reads
@@ -325,6 +392,25 @@ The computed versions above are a floor, not a template. Say something a reader 
       // the check on everywhere would reject ordinary prose ("due to" appears
       // in perfectly sound sentences) for no protection.
       forbidCausal: (cross?.synthesis.length ?? 0) > 0,
+      // Only where the page declared its facts with their categories. Without
+      // that declaration there is nothing to check a comparison against, and a
+      // guess would be worse than the absence.
+      comparability:
+        page && page.comparable && page.comparable.length > 0
+          ? {
+              facts: page.comparable,
+              unit: page.question.unit,
+              // The market-level finding is the deterministic layer's, not the
+              // model's: a page may cross categories only underneath a
+              // conclusion this product already reached about the market.
+              marketLevelFinding: Boolean(
+                page.context && page.context.applicable.length > 0
+              ),
+            }
+          : null,
+      // Every page with a question has an argument to make, so filler is a
+      // failure everywhere the contract is in force.
+      forbidFiller: page !== null,
       // The two contracts the deterministic layer already holds itself to,
       // now checked against the answer rather than stated and hoped for.
       temporal: contract.temporal,

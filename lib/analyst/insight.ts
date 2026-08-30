@@ -2,6 +2,7 @@ import type { DataLane } from "@/lib/provenance";
 import type { MarketMetrics, VendorMetrics } from "@/lib/market-metrics";
 import { MARKET_CATEGORY_LIST } from "@/lib/comparability";
 import type { ToolKey } from "@/lib/ui/tools";
+import type { ComparableFact } from "./comparability";
 import { vendorName } from "@/lib/aie/vendor-directory";
 
 // The Analyst Insight that opens every page.
@@ -496,24 +497,42 @@ export function marketWatchInsight(
   const median = round1(concentrations[Math.floor(concentrations.length / 2)]);
   const gaining = m.gaining.length;
   const slipping = m.slipping.length;
-  const tight = median >= 70;
+
+  // THREE BANDS, NOT A SWITCH AT SEVENTY. The reading was binary on `>= 70`,
+  // so a market whose top three hold 68.6 per cent of a typical category was
+  // published as "spread widely enough that buyers still have alternatives".
+  // That is not a dull sentence, it is the wrong conclusion: a three-firm share
+  // near seventy is a concentrated market on any competition measure, and a
+  // reader told the field is open will not keep a second option warm.
+  //
+  // The bands follow the standard three-firm concentration reading rather than
+  // a line invented here, and the middle one exists precisely because the
+  // interesting cases sit in it.
+  const band: "high" | "moderate" | "contestable" =
+    median >= 70 ? "high" : median >= 50 ? "moderate" : "contestable";
+  const tight = band !== "contestable";
 
   return {
-    headline: tight
-      ? "Category share is concentrated enough that most buyers are negotiating against two or three real options, not a field."
-      : "Category share is spread widely enough that buyers still have alternatives to negotiate against.",
+    headline:
+      band === "high"
+        ? "Most buyers here are negotiating against two or three real options, not a field."
+        : band === "moderate"
+          ? "The shortlist looks broad; the share behind it does not, and renewal is where that shows."
+          : "Share is spread widely enough that a credible alternative exists in most categories.",
     summary: `In a typical tracked category the three largest vendors hold about ${median} per cent of estimated share, measured across ${concentrations.length} categories with enough estimates to judge. ${
-      gaining + slipping > 0
-        ? `${gaining} vendors are currently classified as gaining position and ${slipping} as slipping, so the ordering inside categories is still moving even where the totals are not.`
-        : "No vendor is currently classified as gaining or slipping, so the ordering inside categories is steady."
+      band === "high"
+        ? "Concentration at that level shortens a buyer's list before procurement begins, and it is why renewal terms harden in these categories."
+        : band === "moderate"
+          ? "That is a concentrated market presenting as an open one: the number of names on a shortlist is not the number of vendors who could actually carry the deal at your size."
+          : "A genuinely spread field is where commercial leverage lives, and it is the condition under which a competitive process returns real terms."
     } ${
       tight
-        ? "Concentration at this level shortens a buyer's list before procurement begins, and it is the reason renewal terms tend to harden in these categories. The practical response is to keep a credible second option warm even when the incumbent is performing, because the cost of having none appears at renewal rather than at deployment."
-        : "A spread field is where commercial leverage actually lives. It is worth testing an alternative before each renewal even when the incumbent is adequate, because the option only has value if it is real."
+        ? "The practical response is the same either way and it is unglamorous: keep one credible alternative current, with a live quote, even where the incumbent is performing. The cost of not having one does not appear at deployment, it appears at renewal, when the absence of an option is the whole negotiation."
+        : "It is worth testing an alternative before each renewal even when the incumbent is adequate, because an option only carries commercial value if somebody has actually priced it."
     } Share is estimated per category and never pooled across them, since the categories do not sum to a single market.`,
     implications: [
       tight
-        ? "Concentration limits negotiating leverage in the categories where it is highest."
+        ? "Concentration limits negotiating leverage well before procurement opens."
         : "Alternatives exist in most categories, so renewal terms are contestable.",
       gaining >= slipping
         ? "Positions are still moving, so a shortlist closed two quarters ago is likely to be out of date."
@@ -938,6 +957,187 @@ export function reputationInsight(
 /**
  * Vendor View: what the ranking is and is not telling a buyer.
  */
+/** What the tracked market looks like structurally, right now. */
+export interface MarketStructure {
+  /** Categories with a scored leader and at least one rival. */
+  judged: number;
+  /** Leads wide enough that the ranking decides something. */
+  separated: number;
+  /** Leads inside the margin the evidence carries, so the score decides nothing. */
+  contested: number;
+  /** Mean share held by the top three, across categories with estimates. */
+  topThreeShare: number | null;
+  /** Vendors ranking in the top third of a category while carrying an open high risk. */
+  riskContradictions: number;
+  /** How many scored vendors publish any direction of travel. */
+  withMovement: number;
+  scored: number;
+  /** The widest and narrowest category leads, for naming an example. */
+  widest: { category: string; leader: string; gap: number } | null;
+  closest: { category: string; leader: string; runnerUp: string; gap: number } | null;
+}
+
+/**
+ * A lead this wide decides something; anything narrower does not.
+ *
+ * Chosen against the instrument rather than by taste. The category composite is
+ * a 0 to 5 scale in which each domain is capped by its evidence grade, so two
+ * vendors a tenth apart differ by less than one grade step on one domain. Half
+ * a point is the smallest gap that cannot be explained by disclosure alone.
+ */
+export const SEPARATION_MARGIN = 0.5;
+
+/** Inside this, the score is noise and the reader should be told so. */
+export const CONTESTED_MARGIN = 0.15;
+
+export function marketStructure(m: MarketMetrics): MarketStructure {
+  const take = marketTake(m);
+  const scored = aiVendors(m).filter((v) => v.composite !== null);
+
+  const judged = take.leads.filter((l) => l.runnerUp !== null && l.gap !== null);
+  const separated = judged.filter((l) => (l.gap ?? 0) >= SEPARATION_MARGIN);
+  const contested = judged.filter((l) => (l.gap ?? 0) <= CONTESTED_MARGIN);
+
+  // Shares arrive as one row per vendor per category, so they are grouped
+  // before the top three can be taken. Categories with fewer than three
+  // estimates are dropped rather than counted as concentrated: three of three
+  // is 100 per cent of a category nobody has finished measuring.
+  const byCategory = new Map<string, number[]>();
+  for (const row of m.shares) {
+    const held = byCategory.get(row.categoryId) ?? [];
+    held.push(row.estimatedShare);
+    byCategory.set(row.categoryId, held);
+  }
+  const measured = [...byCategory.values()].filter((v) => v.length >= 3);
+  const topThree =
+    measured.length === 0
+      ? null
+      : measured.reduce(
+          (total, shares) =>
+            total +
+            [...shares].sort((a, b) => b - a).slice(0, 3).reduce((t, x) => t + x, 0),
+          0
+        ) / measured.length;
+
+  const byGap = [...judged].sort((a, b) => (b.gap ?? 0) - (a.gap ?? 0));
+  const widest = byGap[0];
+  const closest = byGap[byGap.length - 1];
+
+  return {
+    judged: judged.length,
+    separated: separated.length,
+    contested: contested.length,
+    topThreeShare: topThree === null ? null : Math.round(topThree * 10) / 10,
+    riskContradictions: take.strongButRisky.length,
+    withMovement: take.gaining.length + take.slipping.length,
+    scored: scored.length,
+    widest:
+      widest && widest.gap !== null
+        ? { category: widest.category, leader: widest.leader, gap: widest.gap }
+        : null,
+    closest:
+      closest && closest.runnerUp && closest.gap !== null
+        ? {
+            category: closest.category,
+            leader: closest.leader,
+            runnerUp: closest.runnerUp,
+            gap: closest.gap,
+          }
+        : null,
+  };
+}
+
+
+/**
+ * A category name mid-sentence, without destroying its acronyms.
+ *
+ * `toLowerCase()` on "Workflow automation AI" gives "workflow automation ai",
+ * which reads as a typo in the middle of an otherwise careful paragraph. Only
+ * the first word is lowered, and only when it is not itself an acronym.
+ */
+function midSentence(category: string): string {
+  const [first, ...rest] = category.split(" ");
+  const lowered = /^[A-Z]{2,}$/.test(first) ? first : first.toLowerCase();
+  return [lowered, ...rest].join(" ");
+}
+
+/**
+ * The page's facts, each carrying the category and population it came from.
+ *
+ * This is what lib/analyst/comparability.ts checks an authored comparison
+ * against. It is not extra data for the model and is never rendered into the
+ * prompt: it is the page declaring, in a form a machine can check, which set
+ * every figure it supplied was drawn from.
+ *
+ * Run against the reading this replaced it fires immediately. That paragraph
+ * named SAP (workflow automation, composite), Databricks and Google (cloud AI
+ * platform, composite) and AMD and Groq (infrastructure, open risk): three
+ * categories and two metrics inside one argument.
+ */
+export function vendorComparableFacts(m: MarketMetrics): ComparableFact[] {
+  const take = marketTake(m);
+  const out: ComparableFact[] = [];
+  for (const lead of take.leads) {
+    out.push({
+      subject: lead.leader,
+      category: lead.category,
+      population: "vendors scored in this category",
+      metric: "category composite",
+      period: "point",
+    });
+    if (lead.runnerUp) {
+      out.push({
+        subject: lead.runnerUp,
+        category: lead.category,
+        population: "vendors scored in this category",
+        metric: "category composite",
+        period: "point",
+      });
+    }
+  }
+  for (const v of take.strongButRisky) {
+    out.push({
+      subject: v.name,
+      category: v.category,
+      population: "vendors carrying an open high-severity finding",
+      metric: "open risk count",
+      period: "point",
+    });
+  }
+  return out;
+}
+
+/**
+ * Vendor View: where differentiation exists, and where it does not.
+ *
+ * WHAT THIS REPLACED, AND WHY IT HAD TO GO. The previous version reported every
+ * fact the dataset held, in sequence: the widest lead, the closest contest, who
+ * is gaining, who is slipping, who carries a risk, how many publish momentum.
+ * Six findings across four populations, joined by full stops. Live on 30 August
+ * 2026 it produced a headline naming SAP and an action about AMD and Groq, and
+ * a reader could not tell which of the six they were being asked to act on.
+ *
+ * Every sentence was true. The paragraph was still wrong, because a list of
+ * correct observations is not an analysis, and the authored layer inherits its
+ * shape from this one: a model handed six mini-findings as its floor writes six
+ * mini-findings back in better prose.
+ *
+ * WHAT IT DOES NOW. One argument, in the order lib/analyst/question.ts requires:
+ *
+ *   finding      how much of this market is actually differentiated, which is a
+ *                statement about the 13 categories rather than about a vendor
+ *   context      what a market of that shape usually means for a buyer
+ *   tension      what stops that being too simple, which here is that the two
+ *                real leads are incumbencies and four leaders carry open risk
+ *   implication  what a shortlist should therefore be built on
+ *
+ * A NAMED VENDOR IS AN EXAMPLE, NEVER THE FINDING. SAP still appears, and now
+ * it appears as the instance that shows what a separated category looks like,
+ * which is the only role a single vendor can legitimately play in a market-level
+ * argument. That is the distinction lib/analyst/comparability.ts enforces: this
+ * page's unit is the market, so naming vendors from two categories is showing a
+ * pattern holds in both, and the sentence has to be built that way.
+ */
 export function vendorViewInsight(
   m: MarketMetrics,
   news: InsightNews | null = null
@@ -952,77 +1152,73 @@ export function vendorViewInsight(
     );
   }
   const take = marketTake(m);
-  const { strongButRisky, clear, close } = take;
+  const { strongButRisky } = take;
+  const st = marketStructure(m);
   const noMomentum = scored.filter((v) => v.momentum === null).length;
-  // Markets the assessment scores in, not distinct values of the vendor
-  // record's single category field. The two differ: 13 against 10, and the
-  // table beside this sentence groups by the first.
-  const categories = take.leads.length;
 
-  // The widest and the tightest category, named. These are the two facts a
-  // reader can act on: where the incumbent is unassailable and where a second
-  // quote is worth getting.
-  const widest = clear[0] ?? null;
-  const tightest = close[close.length - 1] ?? null;
+  const widest = st.widest;
+  const closest = st.closest;
+  const shallow = st.judged > 0 && st.separated / st.judged <= 0.4;
+
+  // The finding: a statement about the market's shape, not about a vendor.
+  const finding = shallow
+    ? `Only ${st.separated} of the ${st.judged} categories this market is judged in carry a lead wide enough to decide anything.`
+    : `${st.separated} of ${st.judged} categories carry a decisive lead, so the ranking still separates vendors in most of this market.`;
+
+  // The tension: what stops the finding being read too simply.
+  const tension =
+    strongButRisky.length > 0
+      ? `The exception cuts the other way as well: ${strongButRisky.length} of the vendors that do lead a category carry an open high-severity finding, and the composite scores evidenced capability without netting governance off it.`
+      : noMomentum > 0
+        ? `That reading rests on a single capture for ${noMomentum} of the ${scored.length} scored vendors, so it describes where the market is rather than where it is going.`
+        : "";
 
   return {
-    headline: widest
-      ? `${widest.leader} holds the clearest position of any vendor tracked, and ${close.length > 0 ? `${close.length} other categories are close enough to contest` : "no category is close enough to contest"}.`
-      : close.length > 0
-        ? `No vendor holds a decisive lead in its category, and ${close.length} categories are within three points at the top.`
-        : "Category positions are settled enough that no lead is currently being contested.",
-    summary: `${scored.length} vendors carry a composite score across ${categories} market categories. ${
+    headline: shallow
+      ? `Differentiation in this market survives in ${st.separated === 1 ? "a single category" : `only ${st.separated} categories`}; everywhere else the contract decides.`
+      : `Most categories still separate their vendors, so the ranking is doing real work here.`,
+
+    summary: [
+      finding,
+      st.contested > 0
+        ? `${st.contested} sit inside the margin the evidence can carry, which means the score is not deciding those and the buying decision has already moved to fit, governance and price.`
+        : "",
       widest
-        ? `The most defensible position is ${widest.leader} in ${widest.category}, scoring ${widest.score} with ${widest.runnerUp} ${widest.gap} points behind. A gap that size is not closed in a quarter, and a buyer in that category is negotiating with an incumbent rather than choosing between options. `
-        : ""
-    }${
-      tightest
-        ? `The closest contest is ${tightest.category}, where ${tightest.leader} leads ${tightest.runnerUp} by ${tightest.gap}: inside the margin the evidence can carry, so treat those two as equivalent on score and decide on fit, governance and price. `
-        : ""
-    }${
-      take.gaining.length > 0 || take.slipping.length > 0
-        ? `${take.gaining.length > 0 ? `${nameList(take.gaining)} ${take.gaining.length === 1 ? "is" : "are"} gaining position` : ""}${take.gaining.length > 0 && take.slipping.length > 0 ? ", and " : ""}${take.slipping.length > 0 ? `${nameList(take.slipping)} ${take.slipping.length === 1 ? "is" : "are"} slipping` : ""}. `
-        : ""
-    }${
-      strongButRisky.length > 0
-        ? `${nameList(strongButRisky.map((v) => v.name))} place in the top third of a market they compete in while carrying an open high-severity risk. The assessment measures evidenced capability and does not net off governance exposure, so those vendors rank well and may still be the wrong commitment this quarter.`
-        : "No vendor combines a shortlist-grade score with an open high-severity risk, so the ranking can be read at face value this period."
-    }${
-      noMomentum > 0
-        ? ` Momentum is published for ${scored.length - noMomentum} of the ${scored.length} scored vendors, so ${noMomentum} show no movement reading rather than a flat one.`
-        : ""
-    } Every comparison above is inside a market category and never across one, which is why the table groups rather than producing a single ranking.`,
+        ? `Where a lead is real it is worth naming for what it is rather than for who holds it: ${widest.leader} is ${widest.gap.toFixed(2)} clear in ${midSentence(widest.category)}, and a gap that size is an incumbency to be negotiated with on exit and portability, not a shortlist to be run.`
+        : "",
+      tension,
+      `The practical consequence is that effort spent separating equivalent vendors is effort not spent on terms, and on this evidence most of the shortlist is equivalent.`,
+    ]
+      .filter(Boolean)
+      .join(" "),
+
     implications: [
-      widest
-        ? `${widest.leader} leads ${widest.category} by ${widest.gap} points; expect incumbent pricing there.`
-        : "No category has a decisive leader; leverage exists in all of them.",
-      tightest
-        ? `${tightest.leader} and ${tightest.runnerUp} are within ${tightest.gap} points in ${tightest.category}, so decide on fit, not score.`
-        : "Scores compare within a market category only, never across one.",
+      shallow
+        ? `Build the shortlist on switching cost and contract terms; the scores will not separate most of it.`
+        : `The ranking separates vendors in most categories, so it can carry more of the selection weight here.`,
+      closest
+        ? `${closest.category} is a tie on score, so decide it on fit rather than reopening the numbers.`
+        : `Every comparison is inside one category; there is no single cross-market ranking to read.`,
       strongButRisky.length > 0
-        ? `A high assessment does not clear a vendor: ${nameList(strongButRisky.map((v) => v.name), 2)} carry open risks.`
-        : noMomentum > 0
-          ? `${noMomentum} vendors publish no momentum reading, which is an absence rather than a flat trend.`
-          : "Momentum is published across the scored set.",
+        ? `A leading score is not a cleared vendor: ${strongButRisky.length} category leaders carry an open high-severity finding.`
+        : `${noMomentum} vendors publish no direction of travel, which is an absence rather than a flat trend.`,
     ],
+
     action: strongButRisky.length > 0 ? "Investigate" : "Shortlist",
     decision: decide({
       action: strongButRisky.length > 0 ? "Investigate" : "Shortlist",
-      instruction:
-        strongButRisky.length > 0
-          ? `Get a dated remediation position from ${nameList(strongButRisky.map((v) => v.name))} before ${strongButRisky.length === 1 ? "it goes" : "they go"} on a shortlist. The assessment scores evidenced capability and does not net off an open high-severity risk.`
-          : tightest
-            ? `Treat ${tightest.leader} and ${tightest.runnerUp} as equivalent on score in ${tightest.category} and decide between them on fit, governance and price: ${tightest.gap} points is inside the margin the evidence can carry.`
-            : "Draw the shortlist from the category rankings directly. No vendor combines a shortlist-grade score with an open high-severity risk this period.",
-      whyNow:
-        strongButRisky.length > 0
-          ? `${strongButRisky.length} ${strongButRisky.length === 1 ? "vendor places" : "vendors place"} in the top third of a market they compete in while carrying an open high-severity risk.`
-          : widest
-            ? `${widest.leader} holds the clearest position of any vendor tracked, ${widest.gap} points clear in ${widest.category}, and ${close.length} categories are close enough to contest.`
-            : `${scored.length} vendors carry a composite score across ${categories} market categories and no lead is currently being contested.`,
+      // The instruction follows the FINDING. It used to open on remediation
+      // from four infrastructure vendors under a headline about SAP's lead,
+      // which is the action and the analysis arguing with each other in public.
+      instruction: shallow
+        ? `Stop scoring the categories where the top vendors sit within ${CONTESTED_MARGIN} of each other and put that effort into exit, portability and price terms${strongButRisky.length > 0 ? `, and get a dated remediation position from the ${strongButRisky.length} category leaders carrying an open high-severity finding` : ""}.`
+        : `Use the category rankings to draw the shortlist${strongButRisky.length > 0 ? `, but get a dated remediation position from the ${strongButRisky.length} leaders carrying an open high-severity finding first` : ""}.`,
+      whyNow: shallow
+        ? `${st.contested} of ${st.judged} judged categories have leads inside the margin the evidence carries, so the ranking is not currently separating most of this market.`
+        : `${st.separated} of ${st.judged} judged categories carry a decisive lead.`,
       evidenceFor: [
         {
-          claim: `${scored.length} vendors carry a composite score across ${categories} market categories${tightest ? `, the closest contest being ${tightest.category} at ${tightest.gap} points` : ""}${widest ? ` and the clearest ${widest.category} at ${widest.gap}` : ""}.`,
+          claim: `${st.separated} of ${st.judged} judged categories carry a lead of ${SEPARATION_MARGIN} or more, and ${st.contested} are inside ${CONTESTED_MARGIN}.`,
           source: "AIE vendor rankings",
           basis: "measured",
           lane: m.lane,
@@ -1031,7 +1227,7 @@ export function vendorViewInsight(
         ...(strongButRisky.length > 0
           ? [
               {
-                claim: `${nameList(strongButRisky.map((v) => v.name))} carry an open high-severity risk while ranking in the top third of a market.`,
+                claim: `${strongButRisky.length} category leaders carry an open high-severity risk while ranking in the top third.`,
                 source: "AIE risk register",
                 basis: "measured" as const,
                 lane: m.lane,
@@ -1052,8 +1248,8 @@ export function vendorViewInsight(
               },
             ]
           : [],
-      trigger: tightest
-        ? `The gap in ${tightest.category} moving outside ${tightest.gap} points, which would make that a real lead rather than a tie.`
+      trigger: closest
+        ? `The ${midSentence(closest.category)} gap moving outside ${CONTESTED_MARGIN}, which would make that a real lead rather than a tie.`
         : "A tracked vendor picking up a high-severity risk, which would take it off a capability-led shortlist.",
       doNotDo:
         "Do not read the composite as a net judgement. It scores evidenced capability and does not subtract governance exposure.",
@@ -1067,8 +1263,6 @@ export function vendorViewInsight(
       lane: m.lane,
     },
     insufficient: null,
-    // Coverage differs by vendor, because the composite renormalises over
-    // whichever of the three inputs a vendor actually discloses.
     thin: "the composite scores only the inputs each vendor discloses, so coverage differs from vendor to vendor",
   };
 }

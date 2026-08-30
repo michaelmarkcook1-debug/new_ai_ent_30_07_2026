@@ -8,6 +8,8 @@ import { ThirdPartySignals } from "./components/third-party";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { reputationInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
+import { pageQuestion } from "@/lib/analyst/question";
+import { groundedContext } from "@/lib/analyst/market-context";
 import { enrichWithSynthesis, signalsFromMetrics } from "@/lib/analyst/cross";
 import { loadMarketMetrics } from "@/lib/market-metrics";
 import { analystNews } from "@/lib/analyst/news-source";
@@ -54,6 +56,12 @@ export default async function ReputationTrackerPage() {
     m.vendors.map((v) => v.name),
     null,
     { signals, synthesis }
+  ,
+
+    // The question this page answers, and the market context this reading
+    // has earned. See lib/analyst/question.ts and market-context.ts: neither
+    // adds a fetch, a dataset or a second model call.
+    { question: pageQuestion("reputation-tracker"), context: groundedContext(m) }
   );
 
 

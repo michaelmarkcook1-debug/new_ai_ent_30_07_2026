@@ -19,6 +19,7 @@ import { PricingDisclosure } from "./components/pricing-disclosure";
 import { AnalystInsight } from "@/lib/ui/analyst-insight";
 import { pricePerformanceInsight, pickNews } from "@/lib/analyst/insight";
 import { authorInsight } from "@/lib/analyst/author";
+import { pageQuestion } from "@/lib/analyst/question";
 import { analystNews } from "@/lib/analyst/news-source";
 
 // The Analyst Insight is a pure function of this page's data, so it only says
@@ -73,6 +74,12 @@ export default async function PricePerformancePage() {
     ],
     null,
     { signals, synthesis }
+  ,
+
+    // The question this page answers, and the market context this reading
+    // has earned. See lib/analyst/question.ts and market-context.ts: neither
+    // adds a fetch, a dataset or a second model call.
+    { question: pageQuestion("price-performance"), context: null }
   );
 
 

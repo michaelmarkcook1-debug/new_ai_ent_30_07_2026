@@ -2983,6 +2983,106 @@ committed that automatically would have shipped a broken build overnight. A red
 run is therefore information: the upstream has changed in a way this app cannot
 absorb without a decision.
 
+## 8.31 Analyst Insight: one question, one argument
+
+Verified against the working tree at commit `0c867c2` plus this change,
+30 August 2026.
+
+### What was wrong, measured
+
+Live captures of all nine Analyst Insight surfaces on 30 August 2026. Six read
+like a senior analyst already. Three did not, and they failed in two distinct
+ways rather than one:
+
+| Surface | Failure |
+|---|---|
+| Vendor View | six findings across four populations in one paragraph, and an action about AMD and Groq under a headline about SAP |
+| Pulse | headline was a movement count, "5 vendors gaining, 3 slipping" |
+| Market Watch | called a market whose top three hold 68.6 per cent "spread widely enough that buyers still have alternatives" |
+
+The third is not a prose failure. `tight` was a single threshold at `>= 70`, so
+a three-firm concentration of 68.6 took the "spread" branch. A three-firm share
+near seventy is a concentrated market on any competition measure, and a reader
+told the field is open will not keep a second option warm.
+
+### One page, one question
+
+`lib/analyst/question.ts` holds a `PageQuestion` per surface: the question, the
+`ArgumentUnit` the argument is about, the population every comparison is drawn
+from, what the answer must address, and what belongs to a neighbouring page.
+Three layers read it. The builder shapes its argument to it, the prompt states
+it before any data, and the comparability guard uses `unit` to decide whether a
+comparison was one this page may make.
+
+### Grounded market context
+
+`lib/analyst/market-context.ts`. Two kinds, kept apart:
+
+- **structure**, computed from the MarketMetrics the page already loaded:
+  categories judged, separated, contested, three-firm share, risk
+  contradictions, movement coverage;
+- **theses**, six analytical patterns written down, each carrying a predicate
+  over that structure.
+
+**A thesis is offered only when the computed structure satisfies its
+predicate.** That is the whole safety property: "capability is converging into
+commodity" cannot decorate a page whose scores are widely spread, because the
+precondition is false and the sentence is not available. No thesis states a
+dated event; `tests/analyst-argument.test.ts` asserts none contains a year or a
+launch verb, because this product holds no evidence for one.
+
+| Constant | Value | Line |
+|---|---|---|
+| `SEPARATION_MARGIN` | `0.5` | `lib/analyst/insight.ts:988` |
+| `CONTESTED_MARGIN` | `0.15` | `lib/analyst/insight.ts:991` |
+| concentration bands | high 70+, moderate 50+, contestable below | `lib/analyst/insight.ts:511` |
+
+`SEPARATION_MARGIN` is chosen against the instrument: each domain of the 0 to 5
+composite is capped by its evidence grade, so two vendors a tenth apart differ
+by less than one grade step on one domain, and half a point is the smallest gap
+that cannot be explained by disclosure alone.
+
+### The comparability guard
+
+`lib/analyst/comparability.ts`, wired into the `generate()` retry loop so a
+breach is corrected rather than merely discouraged.
+
+Nothing reads English. The page declares its facts as `ComparableFact` records
+carrying subject, category, population, metric and period, the guard finds
+which subjects the authored text names, and it counts the distinct categories
+and populations the paragraph reached into.
+
+| Breach | Fires when |
+|---|---|
+| `cross-category` | two categories named, and NOT (unit is market AND a market-level finding was supplied) |
+| `cross-population` | two populations in one comparison |
+| `cross-metric` | two metrics AND two categories |
+
+**Crossing categories is allowed on a market page that established a
+market-level finding first.** That is the approved route: the finding is the
+argument and the categories are evidence for it. Without one, several
+categories in a paragraph are several arguments.
+
+### Consultancy filler
+
+`lib/analyst/canonical.ts:719`, `consultancyFiller()`. Eleven phrases that would
+be true on any page in any market in any year. Not a truth failure, which is
+why nothing else catches it: "the data suggests" is accurate and says nothing.
+The phrase is returned rather than counted so the retry can quote it back.
+
+### The computed floor
+
+Rewritten for Vendor View (`vendorViewInsight`), Pulse (`pulseJudgement`) and
+Market Watch. The authored layer inherits its shape from the computed one: a
+model handed six mini-findings as its floor writes six mini-findings back in
+better prose. Each now produces finding, market context, tension, implication,
+in that order, with a named vendor appearing only as an example after the
+finding.
+
+`pulseJudgement` takes an optional `structure`, so the headline can be about the
+market rather than about how many vendors moved. Absent, it behaves exactly as
+before.
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

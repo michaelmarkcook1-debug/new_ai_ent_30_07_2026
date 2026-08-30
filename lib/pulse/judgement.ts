@@ -1,4 +1,5 @@
 import type { MarketKpi, MarketSignal } from "@/lib/market-metrics";
+import type { MarketStructure } from "@/lib/analyst/insight";
 
 // Today's Pulse, written from the tracked figures rather than read from a
 // fixture.
@@ -22,6 +23,21 @@ export interface PulseJudgementInput {
   kpis: MarketKpi[];
   /** False when the source publishes priors identical to current figures. */
   shareMovementPublished: boolean;
+  /**
+   * The shape of the tracked market, where the caller computed it.
+   *
+   * WHY THE HEADLINE NEEDED THIS. Without it the only thing this function knew
+   * was how many vendors moved, so the best headline it could write was "5
+   * vendors gaining, 3 slipping". That is an input to a market judgement, not
+   * a market judgement: it tells an executive that something happened and
+   * nothing about whether it matters. With the structure in hand the headline
+   * can say what the market IS, and movement becomes the supporting detail it
+   * always was.
+   *
+   * Optional, because the shape is only available to callers holding
+   * MarketMetrics. Absent, this behaves exactly as it did.
+   */
+  structure?: MarketStructure | null;
 }
 
 export interface PulseJudgement {
@@ -51,9 +67,27 @@ export function pulseJudgement(input: PulseJudgementInput): PulseJudgement {
   const { gaining, slipping, risks, kpis, shareMovementPublished } = input;
   const movers = gaining.length + slipping.length;
 
-  // Headline: the single thing that actually happened to the tracked set.
+  // Headline: the most important thing an executive should take from the
+  // market's CURRENT SHAPE, with movement as evidence rather than as the point.
+  //
+  // The ladder is ordered by what actually deserves attention, and each rung
+  // is a market condition rather than a count. A market where the leaders
+  // carry unresolved governance findings is a different problem from one where
+  // nobody is separated, and both are different from one that simply has not
+  // moved. Where no structure was supplied the old movement headline stands.
   let headline: string;
-  if (!shareMovementPublished) {
+  const st = input.structure ?? null;
+  if (st && st.riskContradictions > 0 && st.separated <= st.judged / 2) {
+    headline =
+      "Vendor choice is not where this quarter's risk sits; governance and terms are";
+  } else if (st && st.judged >= 4 && st.separated / st.judged <= 0.4) {
+    headline = `Differentiation holds in ${st.separated} of ${st.judged} categories, so the contract is doing the work the shortlist cannot`;
+  } else if (st && st.topThreeShare !== null && st.topThreeShare >= 60) {
+    headline = `A long shortlist is hiding a concentrated market: three vendors hold about ${st.topThreeShare} per cent of a typical category`;
+  } else if (st && movers === 0) {
+    headline =
+      "The tracked market did not move this period, which makes this a quarter to spend on terms rather than on selection";
+  } else if (!shareMovementPublished) {
     // NOT "share held flat". The source republished priors identical to the
     // current figures, so whether share moved is unknown. market-metrics.ts
     // makes the same point where the flag is derived: reporting this as "0 per
@@ -70,9 +104,32 @@ export function pulseJudgement(input: PulseJudgementInput): PulseJudgement {
     headline = `${plural(gaining.length, "vendor", "vendors")} gaining, ${slipping.length} slipping`;
   }
 
-  // Judgement: the tracked average that moved furthest, named and numbered,
-  // then the published risk load. Both are figures, not characterisations.
+  // Judgement: the argument under the headline, not a list of readings.
+  //
+  // WHAT THIS ADDS. The body used to open on whichever tracked average had
+  // moved furthest and then state the risk count, which is two measurements
+  // sitting next to each other. Under a headline that now makes a claim about
+  // where this quarter's risk actually sits, the body has to support that
+  // claim: what the market's shape is, then what it means, then the readings
+  // that qualify it. The measurements below are unchanged and still follow;
+  // they are evidence for the argument rather than the whole of it.
   const parts: string[] = [];
+  if (st) {
+    if (st.judged >= 4 && st.separated / st.judged <= 0.4) {
+      parts.push(
+        `Only ${st.separated} of ${st.judged} judged categories carry a lead wide enough to decide a purchase, so the scores are no longer doing the work of separating this market and the leverage has moved to what you sign.`
+      );
+    } else if (st.topThreeShare !== null && st.topThreeShare >= 60) {
+      parts.push(
+        `The three largest vendors hold about ${st.topThreeShare} per cent of a typical category, so a long shortlist is not the same thing as a contested one.`
+      );
+    }
+    if (st.riskContradictions > 0) {
+      parts.push(
+        `${plural(st.riskContradictions, "category leader carries", "category leaders carry")} an open high-severity finding while ranking in the top third, which makes governance a condition of the shortlist rather than a step after it.`
+      );
+    }
+  }
   const top = largestMove(kpis);
   if (top && top.score !== null && top.delta !== null) {
     const dir = top.delta > 0 ? "up" : "down";

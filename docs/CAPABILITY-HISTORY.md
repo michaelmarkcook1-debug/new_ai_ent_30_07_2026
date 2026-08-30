@@ -15,6 +15,72 @@ than a gap.
 
 ---
 
+## 30 August 2026 (analysis)
+
+**The Analyst Insight now makes one argument instead of listing six findings.**
+
+All nine Analyst Insight panels were captured live and read. Six were already
+good. Three were not, and they were wrong in different ways.
+
+Vendor View was the clearest failure. In one paragraph it moved from SAP's lead
+in workflow automation, to Databricks against Google in cloud AI platform, to
+AMD and Groq carrying open risks, to how many vendors publish a direction of
+travel. Every sentence was true. The paragraph was still wrong, because a
+reader could not tell which of the six observations they were meant to act on,
+and the recommended action at the bottom was about a different set of vendors
+from the headline at the top.
+
+It now says one thing: only two of the thirteen judged categories carry a lead
+wide enough to decide a purchase, which is what a market looks like once
+capability has converged, so the decision has moved to what you sign. SAP still
+appears, but as the example of what a real lead looks like rather than as the
+finding itself. The action follows the finding for the first time.
+
+**Today's Pulse led with a count and now leads with a judgement.**
+
+The headline was "5 vendors gaining, 3 slipping". That tells an executive that
+something happened and nothing about whether it matters. It now reads "The
+model tier is settled; your exposure now sits in contract terms and
+governance", and the paragraph underneath supports that rather than listing
+readings.
+
+**Market Watch was making an analytical error, not just a dull one.**
+
+It described a market where the three largest vendors hold 68.6 per cent of a
+typical category as "spread widely enough that buyers still have alternatives
+to negotiate against". That is close to the opposite of the truth: a
+three-firm share near seventy is a concentrated market, and a reader told the
+field is open will not keep a second supplier warm. The reading had a single
+cut-off at seventy and 68.6 fell the wrong side of it. It now reads "A broad
+shortlist hides a narrow field, and renewal is where you pay for that".
+
+**Market context is now grounded rather than remembered.**
+
+An analyst is worth reading because they know where a reading sits in the
+development of a market. The tempting way to get that is to let the model
+recall market history, which produces confident, dateless sentences nobody can
+check, and this product exists not to do that.
+
+So the product holds six analytical patterns in writing, each one attached to a
+condition in our own data. A pattern is offered to the reading only when the
+current figures actually satisfy it, so the observation that capability is
+commoditising cannot be used to decorate a page where the scores are widely
+spread. None of them asserts that a named thing happened on a named date.
+
+**And a paragraph can no longer quietly compare unlike things.**
+
+Where a reading names two vendors, the product now knows which category and
+which set each came from, and refuses a paragraph that puts them in one
+comparison unless it first said what the market-level finding is that they are
+both evidence for. It also refuses eleven phrases that would be true on any
+page in any year, of the "organisations should monitor developments closely"
+kind. Those are not false, which is exactly why nothing caught them before.
+
+All nine panels were re-read after the change. Every one now opens with a
+conclusion rather than a measurement.
+
+---
+
 ## 30 August 2026 (data)
 
 **The figures were up to a fortnight old, on and off, and now they are not.**
