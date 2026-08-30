@@ -1,0 +1,597 @@
+{
+ "Boots": {
+  "query": "Boots",
+  "profile": {
+   "name": "Boots",
+   "what": "A pharmacy-led health and beauty retailer operating chemist shops, opticians, hearing care and own-brand consumer healthcare products across the UK and international markets.",
+   "industry": "Pharmaceuticals, healthcare and beauty retail",
+   "sector": {
+    "tag": "retail_consumer"
+   }
+  },
+  "metrics": [
+   {
+    "label": "Group sales",
+    "value": "$23.6 billion",
+    "sourceIndex": 0,
+    "metric": "revenue",
+    "scope": "group"
+   },
+   {
+    "label": "Employees",
+    "value": "66,400",
+    "sourceIndex": 0,
+    "metric": "employees",
+    "period": "2025",
+    "scope": "group"
+   },
+   {
+    "label": "Shops worldwide",
+    "value": "3,912",
+    "sourceIndex": 0,
+    "metric": "stores",
+    "scope": "group"
+   },
+   {
+    "label": "UK locations",
+    "value": "c.2,000",
+    "sourceIndex": 0,
+    "metric": "stores",
+    "period": "2025",
+    "scope": "region"
+   },
+   {
+    "label": "Estimated revenue",
+    "value": "$11 billion",
+    "sourceIndex": 1,
+    "metric": "revenue",
+    "basis": "estimated"
+   },
+   {
+    "label": "Estimated revenue",
+    "value": "$7.6B",
+    "sourceIndex": 2,
+    "metric": "revenue",
+    "basis": "estimated"
+   }
+  ],
+  "financials": [
+   {
+    "metric": "employees",
+    "reconciliation": {
+     "verdict": "INSUFFICIENT",
+     "chosen": null,
+     "why": "Only one source states this, and it is secondary reporting rather than a filing, so it is reported rather than relied on.",
+     "facts": [
+      {
+       "metric": "employees",
+       "value": 66400,
+       "unit": "unit",
+       "currency": null,
+       "period": {
+        "kind": "unknown",
+        "year": 2025,
+        "index": null,
+        "label": "2025"
+       },
+       "scope": "group",
+       "basis": "unknown",
+       "sourceIndex": 0,
+       "evidenceType": "secondary_reporting",
+       "asStated": "66,400"
+      }
+     ]
+    },
+    "usable": false
+   },
+   {
+    "metric": "revenue",
+    "reconciliation": {
+     "verdict": "INSUFFICIENT",
+     "chosen": null,
+     "why": "$23.6 billion and $11 billion are far apart and one is stated as group and the other does not say what it covers, so whether they describe the same thing cannot be established. Neither is used.",
+     "facts": [
+      {
+       "metric": "revenue",
+       "value": 23.6,
+       "unit": "billion",
+       "currency": "USD",
+       "period": {
+        "kind": "unknown",
+        "year": null,
+        "label": ""
+       },
+       "scope": "group",
+       "basis": "unknown",
+       "sourceIndex": 0,
+       "evidenceType": "secondary_reporting",
+       "asStated": "$23.6 billion"
+      },
+      {
+       "metric": "revenue",
+       "value": 11,
+       "unit": "billion",
+       "currency": "USD",
+       "period": {
+        "kind": "unknown",
+        "year": null,
+        "label": ""
+       },
+       "scope": "unknown",
+       "basis": "unknown",
+       "sourceIndex": 1,
+       "evidenceType": "aggregator",
+       "asStated": "$11 billion"
+      },
+      {
+       "metric": "revenue",
+       "value": 7.6,
+       "unit": "billion",
+       "currency": "USD",
+       "period": {
+        "kind": "unknown",
+        "year": null,
+        "label": ""
+       },
+       "scope": "unknown",
+       "basis": "unknown",
+       "sourceIndex": 2,
+       "evidenceType": "aggregator",
+       "asStated": "$7.6B"
+      }
+     ]
+    },
+    "usable": false
+   },
+   {
+    "metric": "stores",
+    "reconciliation": {
+     "verdict": "COMPATIBLE",
+     "chosen": {
+      "metric": "stores",
+      "value": 3912,
+      "unit": "unit",
+      "currency": null,
+      "period": {
+       "kind": "unknown",
+       "year": null,
+       "label": ""
+      },
+      "scope": "group",
+      "basis": "unknown",
+      "sourceIndex": 0,
+      "evidenceType": "secondary_reporting",
+      "asStated": "3,912"
+     },
+     "why": "Not a disagreement: one is group and the other is region, which are different figures rather than disagreeing ones.",
+     "facts": [
+      {
+       "metric": "stores",
+       "value": 3912,
+       "unit": "unit",
+       "currency": null,
+       "period": {
+        "kind": "unknown",
+        "year": null,
+        "label": ""
+       },
+       "scope": "group",
+       "basis": "unknown",
+       "sourceIndex": 0,
+       "evidenceType": "secondary_reporting",
+       "asStated": "3,912"
+      },
+      {
+       "metric": "stores",
+       "value": 2000,
+       "unit": "unit",
+       "currency": null,
+       "period": {
+        "kind": "unknown",
+        "year": 2025,
+        "index": null,
+        "label": "2025"
+       },
+       "scope": "region",
+       "basis": "unknown",
+       "sourceIndex": 0,
+       "evidenceType": "secondary_reporting",
+       "asStated": "c.2,000"
+      }
+     ]
+    },
+    "usable": true
+   }
+  ],
+  "findings": [
+   {
+    "statement": "This is a large multi-country retailer rather than a single-market chemist, with 3,912 shops, 66,400 employees and $23.6 billion of annual sales across directly-owned markets in the UK, Ireland, Germany, Mexico and Thailand plus Middle East and Indonesian franchises.",
+    "sourceIndex": 0
+   },
+   {
+    "statement": "The estate is split almost evenly between c.2,000 UK locations and c.1,912 international ones, so any deployment decision is a multi-jurisdiction one from the outset, not a UK programme with overseas rollout to follow.",
+    "sourceIndex": 0
+   },
+   {
+    "statement": "Ownership sits with Sycamore Partners alongside Stefano Pessina and family, which is the private equity pattern that typically shortens payback expectations and pushes buying towards cost-per-transaction cases rather than multi-year platform bets.",
+    "sourceIndex": 0
+   },
+   {
+    "statement": "Third-party revenue estimates for Boots range from $7.6B and $11 billion up to the $23.6 billion group figure, and one profile lists $373K, so aggregator numbers here should not be used to size a deal without company-sourced accounts confirming which entity is being measured.",
+    "sourceIndex": 2
+   }
+  ],
+  "aiFindings": [],
+  "recommendations": [
+   "Establish which legal entity you are contracting with before pricing anything, because the group, Boots UK and the franchise markets are governed and funded differently and the public revenue figures clearly refer to different scopes.",
+   "Lead with a case tied to pharmacy and opticians operations rather than generic retail productivity, since the regulated healthcare side carries clinical and data obligations that will decide the governance review regardless of the commercial terms.",
+   "Assume a private-equity owner will test payback per shop and per employee, so structure the commercial model to scale with store count and headcount rather than as an enterprise-wide licence signed against uncertain adoption."
+  ],
+  "sources": [
+   {
+    "title": "Boots (company) - Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Boots_(company)",
+    "publishedAt": null
+   },
+   {
+    "title": "Boots UK Information",
+    "url": "https://rocketreach.co/boots-uk-profile_b5c60a19f42e0c52",
+    "publishedAt": null
+   },
+   {
+    "title": "Boots\u2019s Competitors, Revenue, Number of Employees, Funding, Acquisitions & News - Owler Company Profile",
+    "url": "https://www.owler.com/company/boots-uk",
+    "publishedAt": null
+   },
+   {
+    "title": "Boots Uk \u2013 Retail, contacts & B2B data",
+    "url": "https://www.zeliq.com/company/united-kingdom/retail/retail/boots-uk",
+    "publishedAt": null
+   },
+   {
+    "title": "DOD Releases AI Adoption Strategy > U.S. Department of War > Defense Department News | U.S. Department of War",
+    "url": "https://www.war.gov/News/News-Stories/Article/Article/3578219/dod-releases-ai-adoption-strategy",
+    "publishedAt": null
+   },
+   {
+    "title": "AI Technology Solutions | Dualboot Partners",
+    "url": "https://www.dualbootpartners.com/technologies/ai",
+    "publishedAt": null
+   },
+   {
+    "title": "What is AI Adoption and Why Does It Matter?",
+    "url": "https://www.fortinet.com/resources/cyberglossary/ai-adoption",
+    "publishedAt": null
+   },
+   {
+    "title": "Leading AI Adoption: From Behavior to Strategy | AACSB",
+    "url": "https://www.aacsb.edu/insights/videos/2026/03/leading-ai-adoption-from-behavior-to-strategy",
+    "publishedAt": null
+   }
+  ],
+  "absence": null,
+  "written": true
+ },
+ "Tesco": {
+  "query": "Tesco",
+  "profile": {
+   "name": "Tesco Plc",
+   "what": "A British multinational grocery and general merchandise retailer operating multi-format stores and online across the UK and central Europe, with adjacent banking, insurance, mobile and data businesses.",
+   "industry": "Retailing",
+   "sector": {
+    "tag": "retail_consumer"
+   }
+  },
+  "metrics": [
+   {
+    "label": "Revenue",
+    "value": "$97.1B",
+    "sourceIndex": 0,
+    "metric": "revenue",
+    "period": "2025",
+    "scope": "group",
+    "basis": "estimated"
+   },
+   {
+    "label": "Revenue",
+    "value": "\u00a372.886 billion",
+    "sourceIndex": 3,
+    "metric": "revenue",
+    "period": "2026",
+    "scope": "group",
+    "basis": "reported"
+   },
+   {
+    "label": "Net income",
+    "value": "\u00a31.787 billion",
+    "sourceIndex": 3,
+    "metric": "net_income",
+    "period": "2026",
+    "scope": "group",
+    "basis": "reported"
+   },
+   {
+    "label": "Market cap",
+    "value": "$40.1B",
+    "sourceIndex": 0,
+    "metric": "market_cap",
+    "basis": "estimated"
+   },
+   {
+    "label": "Employees",
+    "value": "336,123",
+    "sourceIndex": 0,
+    "metric": "employees",
+    "scope": "group",
+    "basis": "estimated"
+   },
+   {
+    "label": "Locations",
+    "value": "5,040",
+    "sourceIndex": 3,
+    "metric": "stores",
+    "period": "2026",
+    "scope": "group",
+    "basis": "reported"
+   }
+  ],
+  "financials": [
+   {
+    "metric": "employees",
+    "reconciliation": {
+     "verdict": "INSUFFICIENT",
+     "chosen": null,
+     "why": "Only one source states this, and it is secondary reporting rather than a filing, so it is reported rather than relied on.",
+     "facts": [
+      {
+       "metric": "employees",
+       "value": 336123,
+       "unit": "unit",
+       "currency": null,
+       "period": {
+        "kind": "unknown",
+        "year": null,
+        "label": ""
+       },
+       "scope": "group",
+       "basis": "unknown",
+       "sourceIndex": 0,
+       "evidenceType": "secondary_reporting",
+       "asStated": "336,123"
+      }
+     ]
+    },
+    "usable": false
+   },
+   {
+    "metric": "market_cap",
+    "reconciliation": {
+     "verdict": "INSUFFICIENT",
+     "chosen": null,
+     "why": "Only one source states this, and it is secondary reporting rather than a filing, so it is reported rather than relied on.",
+     "facts": [
+      {
+       "metric": "market_cap",
+       "value": 40.1,
+       "unit": "billion",
+       "currency": "USD",
+       "period": {
+        "kind": "unknown",
+        "year": null,
+        "label": ""
+       },
+       "scope": "unknown",
+       "basis": "unknown",
+       "sourceIndex": 0,
+       "evidenceType": "secondary_reporting",
+       "asStated": "$40.1B"
+      }
+     ]
+    },
+    "usable": false
+   },
+   {
+    "metric": "net_income",
+    "reconciliation": {
+     "verdict": "INSUFFICIENT",
+     "chosen": null,
+     "why": "Only one source states this, and it is secondary reporting rather than a filing, so it is reported rather than relied on.",
+     "facts": [
+      {
+       "metric": "net_income",
+       "value": 1.787,
+       "unit": "billion",
+       "currency": "GBP",
+       "period": {
+        "kind": "unknown",
+        "year": 2026,
+        "index": null,
+        "label": "2026"
+       },
+       "scope": "group",
+       "basis": "reported",
+       "sourceIndex": 3,
+       "evidenceType": "secondary_reporting",
+       "asStated": "\u00a31.787 billion"
+      }
+     ]
+    },
+    "usable": false
+   },
+   {
+    "metric": "revenue",
+    "reconciliation": {
+     "verdict": "COMPATIBLE",
+     "chosen": {
+      "metric": "revenue",
+      "value": 97.1,
+      "unit": "billion",
+      "currency": "USD",
+      "period": {
+       "kind": "unknown",
+       "year": 2025,
+       "index": null,
+       "label": "2025"
+      },
+      "scope": "group",
+      "basis": "unknown",
+      "sourceIndex": 0,
+      "evidenceType": "secondary_reporting",
+      "asStated": "$97.1B"
+     },
+     "why": "Not a disagreement: they cover different periods, 2025 and 2026.",
+     "facts": [
+      {
+       "metric": "revenue",
+       "value": 97.1,
+       "unit": "billion",
+       "currency": "USD",
+       "period": {
+        "kind": "unknown",
+        "year": 2025,
+        "index": null,
+        "label": "2025"
+       },
+       "scope": "group",
+       "basis": "unknown",
+       "sourceIndex": 0,
+       "evidenceType": "secondary_reporting",
+       "asStated": "$97.1B"
+      },
+      {
+       "metric": "revenue",
+       "value": 72.886,
+       "unit": "billion",
+       "currency": "GBP",
+       "period": {
+        "kind": "unknown",
+        "year": 2026,
+        "index": null,
+        "label": "2026"
+       },
+       "scope": "group",
+       "basis": "reported",
+       "sourceIndex": 3,
+       "evidenceType": "secondary_reporting",
+       "asStated": "\u00a372.886 billion"
+      }
+     ]
+    },
+    "usable": true
+   },
+   {
+    "metric": "stores",
+    "reconciliation": {
+     "verdict": "INSUFFICIENT",
+     "chosen": null,
+     "why": "Only one source states this, and it is secondary reporting rather than a filing, so it is reported rather than relied on.",
+     "facts": [
+      {
+       "metric": "stores",
+       "value": 5040,
+       "unit": "unit",
+       "currency": null,
+       "period": {
+        "kind": "unknown",
+        "year": 2026,
+        "index": null,
+        "label": "2026"
+       },
+       "scope": "group",
+       "basis": "reported",
+       "sourceIndex": 3,
+       "evidenceType": "secondary_reporting",
+       "asStated": "5,040"
+      }
+     ]
+    },
+    "usable": false
+   }
+  ],
+  "findings": [
+   {
+    "statement": "Tesco is the UK grocery market leader with a share of around 28.4 percent and stores across the Czech Republic, Hungary, Ireland, Slovakia and the UK, so any AI programme lands across a multi-country, multi-format estate rather than a single operating model.",
+    "sourceIndex": 3
+   },
+   {
+    "statement": "The GlobalData profile puts revenue at $97.1B for 2025 growing 5.4 percent while Wikipedia reports \u00a372.886 billion for 2026 with net income of \u00a31.787 billion; these are the same group quantity in two currencies and two fiscal labels rather than a contradiction.",
+    "sourceIndex": 0
+   },
+   {
+    "statement": "Headcount is reported as 336,123 by GlobalData and 330,000 for 2026 by Wikipedia, a gap consistent with different measurement dates rather than a genuine conflict, and either figure makes Tesco far larger by staff than listed UK peer J Sainsbury at 53,000.",
+    "sourceIndex": 0
+   },
+   {
+    "statement": "Zippia's entry describes a different entity, an energy company named Tesco Corp with 1,215 employees and $134.7M revenue, and should not be read against Tesco Plc.",
+    "sourceIndex": 1
+   }
+  ],
+  "aiFindings": [
+   {
+    "statement": "Tesco has signed a three-year agreement with Mistral AI giving it full access to that vendor's commercial models including future releases, plus direct engineering support.",
+    "sourceIndex": 7
+   },
+   {
+    "statement": "The arrangement includes a joint AI lab staffed by Mistral and Tesco technology people to build generative AI solutions across the business, which is a co-development commitment rather than a licence purchase.",
+    "sourceIndex": 7
+   },
+   {
+    "statement": "Tesco is recruiting a Lead Product Manager for AI Governance and Adoption covering ethical, safe and compliant development, procurement and use of AI alongside a company-wide adoption programme, indicating governance is being built in parallel with deployment rather than after it.",
+    "sourceIndex": 5
+   },
+   {
+    "statement": "Existing AI-adjacent customer-facing technology cited includes chatbots, self-checkout and the Clubcard programme, so the generative layer is arriving on top of an established data and personalisation estate.",
+    "sourceIndex": 6
+   }
+  ],
+  "recommendations": [
+   "Treat the three-year model commitment as the item to scrutinise: ask what exit, portability and re-benchmarking rights exist, because capability leadership among frontier labs reorders faster than a procurement cycle completes.",
+   "Test whether the joint lab produces reusable internal capability or vendor-held IP, since co-development arrangements decide who owns the integration surface and therefore who holds the pricing power at renewal.",
+   "Ask for the governance programme's actual artefacts, model registry, approval gates and evaluation criteria, rather than the job description, and check they bind procurement of third-party AI as well as internal builds."
+  ],
+  "sources": [
+   {
+    "title": "Tesco Plc Company Profile - Tesco Plc  Overview - GlobalData",
+    "url": "https://www.globaldata.com/company-profile/tesco-plc",
+    "publishedAt": null
+   },
+   {
+    "title": "Working At Tesco Corp: Company Overview and Culture",
+    "url": "https://www.zippia.com/tesco-careers-11361",
+    "publishedAt": null
+   },
+   {
+    "title": "Tesco",
+    "url": "https://uk.linkedin.com/company/-tesco",
+    "publishedAt": null
+   },
+   {
+    "title": "Tesco - Wikipedia",
+    "url": "https://en.wikipedia.org/wiki/Tesco",
+    "publishedAt": null
+   },
+   {
+    "title": "AI Implementation Strategies for Tesco | PDF | Artificial Intelligence | Intelligence (AI) & Semantics",
+    "url": "https://www.scribd.com/document/918883338/AI-in-Supermarkets",
+    "publishedAt": null
+   },
+   {
+    "title": "Lead Product Manager - AI Governance & Adoption at Tesco",
+    "url": "https://flexa.careers/jobs/tesco-lead-product-manager-ai-governance-amp-adoption-6a73ccfa0c7a276b2d05ccc9",
+    "publishedAt": null
+   },
+   {
+    "title": "(PDF) The Impact of the Integration of Artificial Intelligence ...",
+    "url": "https://www.researchgate.net/publication/393006355_The_Impact_of_the_Integration_of_Artificial_Intelligence_in_Customer_Services_on_Customer_Loyalty_and_Satisfaction_in_the_Retail_Industry_A_Study_on_Customers_of_Tesco_Plc",
+    "publishedAt": null
+   },
+   {
+    "title": "Tesco taps Mistral AI",
+    "url": "https://www.processexcellencenetwork.com/ai/news/tesco-taps-mistral-ai-to-enhance-operations-customer-experience",
+    "publishedAt": null
+   }
+  ],
+  "absence": null,
+  "written": true
+ }
+}

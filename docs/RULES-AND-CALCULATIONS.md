@@ -2549,6 +2549,175 @@ infrastructural reason rather than a model one. A suite that reported those
 fallbacks as passes would be asserting nothing. Live behaviour is therefore
 captured from the dev server and asserted as fixtures.
 
+## 8.27 Company signals and the three-way opportunity classification
+
+Verified against the working tree at commit `8380b25` plus this change,
+30 August 2026.
+
+### The classes
+
+`lib/position/opportunities.ts:617` sets the priority base and
+`app/(ai-ent)/company-view/components/opportunity-row.tsx` renders the badge.
+Every area is exactly one of three, decided in code and never by a model:
+
+| Class | Rule |
+|---|---|
+| `evidenced` | a retrieved statement names this workflow AND `classifyStatement()` returns `deployed` or `pilot` |
+| `derived` | not evidenced, at least one signal at HIGH or MEDIUM argues for the workflow's category, AND `companyEvidence.length > 0` |
+| `sector` | everything else |
+
+The last condition on `derived` is the company-specificity gate. It holds
+because `lib/position/company-signals.ts` takes no sector, industry or peer
+set: its only input type is `CompanyEvidence`, which carries sources,
+statements and reconciled financials and nothing else. Pinned by
+`tests/company-signals.test.ts`, "cannot build a signal from anything but this
+company's own evidence".
+
+### Statement classification
+
+`lib/position/company-signals.ts`, `classifyStatement()`. Five states, checked
+in this order, and only the first two are current practice:
+
+| State | Test |
+|---|---|
+| `sector_example` | `SECTOR_SUBJECT`, a plural industry noun with a verb, an explicit sector reference, or a quantifier |
+| `negated` | `NEGATED` |
+| `planned` | `PROSPECTIVE` or `EXPOSURE` |
+| `pilot` | `PILOT` |
+| `deployed` | anything else |
+
+`EXPOSURE` is scoped to the automation sense only: work described as "exposed
+to automation" is work available to automate, not work automated. "Exposed to"
+in any other sense stays present tense.
+
+Negation is judged on the CLAUSE the match landed in, not the whole sentence.
+`CLAUSE_SPLIT` divides on `;` and on contrast or consequence markers, and
+`relevantClause()` selects the clause the vocabulary matched. Without it, live
+Barclays research classified "More than 250 AI tools and models are already in
+use across the group, so the buying question here is consolidation and
+governance of an existing estate, not first adoption" as NEGATED.
+
+### Signal states
+
+Ordinal, never scored:
+
+| State | Rule |
+|---|---|
+| HIGH | two or more current-practice statements, or one reconciled fact |
+| MEDIUM | exactly one current-practice statement |
+| LOW | only negating statements |
+| UNKNOWN | candidates existed and every one was refused |
+
+A dimension nothing touched produces no signal at all. `evidenceState` is
+`company_reported`, `company_stated` or `unresolved`.
+
+### The one fact-driven signal
+
+`lib/position/company-signals.ts:384`: `LARGE_WORKFORCE = 25_000`. A settled
+employee count at or above it raises LABOUR INTENSITY. `EMPLOYEE_METRIC`
+(`company-signals.ts:386`) is the metric-name test, and a fact whose `currency`
+is non-null is refused as a money figure rather than a headcount. Only the
+large end is used: a small headcount is not evidence of low labour intensity.
+
+A reconciled metric with `usable === false`, which is every CONFLICTING and
+INSUFFICIENT verdict, raises nothing and records `unresolved`. Pinned by
+`tests/company-signals.test.ts`, "an unsettled figure raises nothing".
+
+### Priority
+
+`lib/position/opportunities.ts:617` to `:655`. Three steps, clamped 1 to 3:
+
+| Step | Effect |
+|---|---|
+| base | evidenced 3, derived 2, sector 1 |
+| converging | +1 where derived and the leading signal is HIGH |
+| unproven | -1 where AI adoption maturity is LOW and the workflow needs `reliabilityRequirement >= 4` or `autonomyDefault !== "advisory_only"` |
+| legacy | -1 where legacy dependency is HIGH and the category is Engineering, IT or Data |
+
+3 is HIGH, 2 MEDIUM, 1 LOW. Horizontality is deliberately NOT a step: it
+cancelled the signal just derived, because the workflows company evidence
+argues for are frequently the horizontal ones. It breaks ties in the sort
+instead.
+
+### Reliability
+
+`lib/position/reliability.ts:97`. This is NOT `reliabilityRequirement`, which
+is the catalogue's assurance bar for the workflow and is identical for every
+company. Both are rendered, each labelled for what it is.
+
+| Step | Effect |
+|---|---|
+| base | evidenced 4, derived 3, sector 2 |
+| own record | +1 where a `regulatory_filing`, `annual_report` or `company_announcement` sits under it |
+| converging | +1 where two or more distinct signals argue, or the evidence spans two or more sources |
+| conflict | -1 where any reconciled metric is CONFLICTING, or INSUFFICIENT across more than one candidate |
+| cap | sector never exceeds 2 |
+
+Clamped 1 to 5. `RELIABILITY_MEANING` states what each point asserts. Pinned by
+`tests/opportunity-classification.test.ts`, "reliability reflects evidence, not
+the catalogue".
+
+### Evidence matching
+
+`evidenceFor()` in `lib/position/opportunities.ts`. Three conditions, all
+required:
+
+1. at least `min(2, words)` of the label's content words (over four characters)
+   present, and all of them where the label has one or two;
+2. matched on a WORD boundary with an optional plural, never as a substring.
+   Live Siemens matched "report" inside "vendor-reported" and "audit" inside
+   "independently audited"; live Salesforce matched "agent" inside
+   "Agentforce";
+3. at least one match is a head noun, being the last content word of a label
+   segment split on `/` and `&`. Live Boots matched "third" and "party" out of
+   one hyphenated compound against Third-Party Vendor Risk Assessment.
+
+## 8.28 Company research: retry stack and generation budget
+
+Measured on 30 August 2026 against live Woolworths South Africa research.
+
+| Constant | Value | File |
+|---|---|---|
+| `TIMEOUT_MS` | `75_000` | `lib/analyst/llm.ts:51` |
+| `SDK_RETRIES` | `0` | `lib/analyst/llm.ts:70` |
+| `RETRY_BUDGET_MS` | `90_000` | `lib/research/company.ts:114` |
+| attempt 1 output budget | `3200` tokens | `lib/research/company.ts:295` |
+| attempt 2 output budget | `2200` tokens | `lib/research/company.ts:296` |
+
+**Why each of them.** Three retry layers were stacked: the SDK's own default of
+2 (three HTTP attempts), `generate()`'s two semantic attempts, and
+`researchCompany()`'s two source-scope attempts. Up to twelve HTTP requests for
+one research call, and a measured 604 seconds end to end. Vercel kills a
+function at 300, so the reader got a broken stream.
+
+The SDK layer is the one removed, because it can only resend an identical
+request, where the two outer layers retry with a corrected prompt or narrower
+sources. Two chances at the network remain.
+
+**The timeout was set at the measured duration.** A direct timing of the
+Woolworths call, 4,420 input tokens and a full answer, returned `ms=30491`
+against a 30,000ms ceiling. The call landed either side of its own timeout
+depending on the day.
+
+**The output budget was too small.** The same timing returned
+`stop_reason: max_tokens` having used all 2,400, so the JSON was cut off
+mid-object and arrived as "response was not valid JSON".
+
+Worst-case wall clock: one call 75s, one attempt 150s (two calls), the narrowed
+retry starts only if 90s have not already gone, so 90 + 150 plus searches, well
+inside 300s.
+
+**Grounding, not the guard.** Two of the three figures the guard rejected on
+that run, 5.8 and 9.4, were present in the retrieved evidence as `-5.8%` and
+`-9.4%`: GlobalData publishes Woolworths' net income and net profit margin as
+`XYZ` and gives only the year-on-year changes. The model restated them without
+their signs, which is a different claim. The third, 34,967, was absent
+altogether; the source says 37,499. The guard was right in all three cases and
+is unchanged. Two rules were added to the shared prompt in
+`lib/analyst/llm.ts`: a minus sign is part of the figure, and a placeholder is
+not a figure. Pinned by `tests/analyst-figure-guard.test.ts`, "a dropped minus
+sign is a different figure".
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

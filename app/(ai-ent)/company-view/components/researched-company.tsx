@@ -452,8 +452,24 @@ function OpportunityAreas({ research }: { research: CompanyResearch }) {
           {opp.evidencedCount} of {opp.areas.length}
         </strong>{" "}
         {opp.evidencedCount === 1 ? "is" : "are"} backed by this
-        company&apos;s own sources; the rest are what the sector runs, and are
-        somewhere to look rather than something we found.
+        company&apos;s own sources
+        {opp.derivedCount > 0 ? (
+          <>
+            , and{" "}
+            <strong className="text-base-content">{opp.derivedCount}</strong>{" "}
+            {opp.derivedCount === 1 ? "is" : "are"} argued for by what those
+            sources establish about this company
+          </>
+        ) : null}
+        {opp.sectorCount > 0 ? (
+          <>
+            . The remaining{" "}
+            {opp.sectorCount === 1 ? "one is" : `${opp.sectorCount} are`} what
+            the sector runs, and are somewhere to look rather than something we
+            found
+          </>
+        ) : null}
+        .
       </p>
 
       {/* The rows, unchanged when collapsed. OpportunityRow renders exactly

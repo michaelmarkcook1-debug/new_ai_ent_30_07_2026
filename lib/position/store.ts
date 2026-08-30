@@ -1,4 +1,6 @@
 import type { CompanyResearch } from "@/lib/research/company";
+import { evidenceTypeFor } from "@/lib/research/ingest";
+import type { CompanyEvidence } from "./company-signals";
 
 // Saved positions: the outcome of Your AI Position, kept so another tool can
 // use it.
@@ -38,6 +40,24 @@ export interface SavedPosition {
   aiFindings: string[];
   findings: string[];
   recommendations: string[];
+  /**
+   * Everything the signal layer is allowed to read: the statements with the
+   * source each cites, and the reconciled figures with what the product
+   * concluded about them.
+   *
+   * OPTIONAL, AND THAT IS A MIGRATION AND NOT A SHRUG. Positions saved into a
+   * browser before this existed have no evidence block, and there is nothing
+   * honest to reconstruct one from: the statements were stored without their
+   * sources, so a made-up attribution would be exactly the fabrication the
+   * block exists to prevent. Those positions derive no signals and every area
+   * stays evidenced or sector, which is the behaviour they already had.
+   * Researching the company again fills it.
+   *
+   * The server-side callers construct a SavedPosition from the sanitised wire
+   * subset, which carries no sources either, and they only ever read
+   * `marketIds`. They also get no signals, correctly.
+   */
+  evidence?: CompanyEvidence;
   /** ISO. Shown so a stale position can be recognised as one. */
   savedAt: string;
 }
@@ -150,6 +170,21 @@ export function toPosition(
     aiFindings: research.aiFindings.map((f) => f.statement),
     findings: research.findings.map((f) => f.statement),
     recommendations: research.recommendations,
+    // The same statements again, but keeping the source each one cites. The
+    // flat arrays above are what the prose surfaces read and what the wire
+    // subset carries; this is what the signal layer reads, because a quote
+    // whose source cannot be named cannot be weighed against another quote.
+    evidence: {
+      sources: research.sources.map((h) => ({
+        url: h.url,
+        evidenceType: evidenceTypeFor(h.url),
+      })),
+      statements: [...research.aiFindings, ...research.findings].map((f) => ({
+        text: f.statement,
+        sourceIndex: f.sourceIndex,
+      })),
+      financials: research.financials,
+    },
     savedAt: now.toISOString(),
   };
 }

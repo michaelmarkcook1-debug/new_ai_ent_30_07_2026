@@ -38,6 +38,25 @@ import {
 
 const ORDER: RoleColumn[] = ["businessOwner", "deliveryOwner", "governanceOwner"];
 
+// Three classes rather than two, and the middle one is the point. `derived`
+// reads as neither a finding nor a guess, which is exactly what it is: the
+// sources establish something about this company, and that something argues
+// for a workflow they never mentioned.
+const BADGE: Record<Opportunity["basis"], string> = {
+  evidenced: "border border-good/40 bg-good-bg text-good",
+  derived: "border border-primary/40 bg-primary/10 text-primary",
+  sector: "border border-base-300 text-muted",
+};
+
+const BADGE_TITLE: Record<Opportunity["basis"], string> = {
+  evidenced:
+    "This company's own retrieved sources say it is doing this now. A stated intention, a denial, or a sentence about the industry does not count.",
+  derived:
+    "No source names this workflow, but something the sources do establish about this company makes it relevant. The reason is stated below, with the quote it came from.",
+  sector:
+    "The catalogue holds this workflow for this sector. Nothing retrieved connects it to this company, so it is somewhere to look rather than something we found.",
+};
+
 function RoleSelect({
   column,
   fit,
@@ -143,23 +162,25 @@ export function OpportunityRow({
           state, so the collapsed rendering is unchanged. */}
       <div className="flex flex-wrap items-baseline gap-2">
         <span
-          className={`rounded-full px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wide ${
-            area.basis === "evidenced"
-              ? "border border-good/40 bg-good-bg text-good"
-              : "border border-base-300 text-muted"
-          }`}
-          title={
-            area.basis === "evidenced"
-              ? "This company's own retrieved sources spoke to this area."
-              : "The catalogue holds this workflow for this sector. The sources said nothing about it."
-          }
+          className={`rounded-full px-1.5 py-0.5 font-mono text-xs font-semibold uppercase tracking-wide ${BADGE[area.basis]}`}
+          title={BADGE_TITLE[area.basis]}
         >
-          {area.basis === "evidenced" ? "evidenced" : "sector"}
+          {area.basis}
         </span>
         <span className="text-sm font-semibold">{area.label}</span>
         <span className="ml-auto flex flex-wrap items-center gap-2">
-          <span className="font-mono text-xs text-muted">
-            {area.riskTier} risk · reliability {area.reliabilityRequirement}/5
+          {/* Two numbers that were one, and the label is the whole fix. The
+              row used to read "reliability 3/5" where the 3 was the workflow's
+              assurance bar from the catalogue: identical for every company,
+              and read by every reader as confidence in the recommendation.
+              Both are shown, and each is named for what it is. */}
+          <span
+            className="font-mono text-xs text-muted"
+            title={`${area.priorityWhy} ${area.reliability.basis}`}
+          >
+            {area.priority.toLowerCase()} priority · {area.riskTier} risk ·
+            assurance {area.reliabilityRequirement}/5 · reliability{" "}
+            {area.reliability.score}/5
           </span>
           <button
             type="button"
@@ -181,6 +202,24 @@ export function OpportunityRow({
         <p className="mt-1 measure text-xs text-muted">
           Your sources: &ldquo;{area.evidence}&rdquo;
         </p>
+      ) : null}
+
+      {/* The question a derived area exists to answer. Shown in the same place
+          the evidence quote sits for an evidenced one, because it is doing the
+          same job: saying why this line is about this company and not about
+          anyone else in the sector. */}
+      {area.whyThisCompany ? (
+        <div className="mt-1 measure text-xs text-muted">
+          <p>{area.whyThisCompany}</p>
+          {area.valueMechanism ? (
+            <p className="mt-0.5">
+              What it would do here: it {area.valueMechanism}.
+            </p>
+          ) : null}
+          {area.keyConstraint ? (
+            <p className="mt-0.5">What binds it: {area.keyConstraint}</p>
+          ) : null}
+        </div>
       ) : null}
 
       {expanded ? (

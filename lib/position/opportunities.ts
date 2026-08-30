@@ -13,12 +13,29 @@
 // and what reliability it demands. So "where could AI go at a bank" is a
 // lookup against a curated library, not a guess about that bank.
 //
-// TWO CLASSES, NEVER MERGED. An area the company's own sources mention is a
-// different kind of fact from an area its sector typically runs, and a reader
-// deciding where to spend needs to see which is which:
+// THREE CLASSES, NEVER MERGED. A reader deciding where to spend needs to know
+// which kind of thing each line is:
 //
-//   evidenced  the retrieved sources said something about this area
-//   sector     the catalogue holds it for this sector; the sources are silent
+//   evidenced  the retrieved sources say this company is doing it now
+//   derived    no source names it, but something the sources DO establish about
+//              this company makes it materially relevant
+//   sector     the catalogue holds it for this sector and nothing retrieved
+//              connects it to this company
+//
+// THE MIDDLE ONE IS WHY THIS FILE CHANGED. With only the outer two, almost
+// every line was "sector", because a company's retrieved sources rarely name a
+// specific workflow. So the page was mostly a list of what a retailer might do,
+// which is true of every retailer and therefore tells this reader nothing. The
+// derived class is the one that carries actual judgement, and it is the one
+// that has to be policed hardest.
+//
+// THE GATE THAT POLICES IT (Part 9). "If I swapped this company for another in
+// the same sector, would the rationale still work?" It is not asked of a model.
+// It is answered structurally: a derived area must carry at least one quote
+// from THIS company's own retrieved sources, and lib/position/company-signals.ts
+// cannot read the sector tag at all, so no rationale can be built from anything
+// a competitor also has. An area that cannot answer "why this company?" out of
+// company evidence is not derived. It stays sector.
 //
 // A sector area is a prompt to go and look, not a claim that they do it. The
 // label says so.
@@ -34,6 +51,19 @@
 import { USE_CASES, type UseCase, type IndustryTag } from "@/lib/aie/use-cases";
 import { TAG_LABEL } from "@/lib/exposure/vertical";
 import { CATEGORY_MAP as WORKFLOW_CATEGORY_MAP } from "@/lib/workflow-category-map";
+import {
+  classifyStatement,
+  deriveSignals,
+  isCurrentPractice,
+  relevantClause,
+  signalsFor,
+  DIMENSION_LABEL,
+  VALUE_MECHANISM,
+  type CompanySignal,
+  type EvidenceStatus,
+  type SignalBasis,
+} from "./company-signals";
+import { reliabilityOf, type EvidenceReliability, type OpportunityClass } from "./reliability";
 import type { SavedPosition } from "./store";
 
 export interface Opportunity {
@@ -49,13 +79,23 @@ export interface Opportunity {
   autonomyDefault: string;
   regulatoryFlags: string[];
   /**
-   * Why this area is on the list.
+   * Why this area is on the list. See the three classes at the top of the file.
    *
-   * "evidenced" means the company's own retrieved sources spoke to it.
-   * "sector" means the catalogue holds it for their sector and the sources
-   * said nothing, which is a place to look rather than a finding.
+   * DETERMINISTIC, AND NEVER THE MODEL'S CHOICE. Nothing that writes prose
+   * decides this. It is computed from what the retrieved statements say and
+   * from the signals derived off them, so the same evidence always produces
+   * the same class and the class can be argued with by reading the quotes.
    */
-  basis: "evidenced" | "sector";
+  basis: OpportunityClass;
+  /**
+   * How the sources describe it, where they describe it at all.
+   *
+   * Only `deployed` and `pilot` can classify an area as evidenced. `planned`
+   * is an intention, `negated` is the company saying it is not so, and
+   * `sector_example` is a sentence about the industry. Each of those was
+   * reaching the reader as evidence of live use before the classifier existed.
+   */
+  evidenceStatus: EvidenceStatus | null;
   /** The source sentence, where one exists. Never paraphrased. */
   evidence: string | null;
   /**
@@ -63,16 +103,54 @@ export interface Opportunity {
    * rather than trusted. Null wherever `evidence` is.
    */
   evidenceWhy: string | null;
+  /**
+   * Quotes from this company's own retrieved sources under this area.
+   *
+   * THE COMPANY-SPECIFICITY GATE IS THIS FIELD. Empty means nothing retrieved
+   * connects the area to this company, and an area in that state cannot be
+   * evidenced or derived whatever else is true of it.
+   */
+  companyEvidence: SignalBasis[];
+  /** The signals that argue for it. Populated only where `basis` is derived. */
+  derivedSignals: CompanySignal[];
+  /** The answer to "why this company?". Null unless derived. */
+  whyThisCompany: string | null;
+  /** How the work would create value against that pressure. Never a return. */
+  valueMechanism: string | null;
+  /** What would actually bind, taken from the catalogue rather than guessed. */
+  keyConstraint: string | null;
+  /** Where it sits against the others. Ordinal, and never a score out of 100. */
+  priority: Priority;
+  /** Which rules moved it there, so the order can be argued with. */
+  priorityWhy: string;
+  /**
+   * How far this company's evidence supports putting this area to them.
+   *
+   * NOT `reliabilityRequirement`, which is the assurance bar the WORKFLOW
+   * demands and is the same for every company. See lib/position/reliability.ts
+   * for why both exist and why neither can do the other's job.
+   */
+  reliability: EvidenceReliability;
   /** Market categories a buyer would shop in for this area. */
   marketIds: string[];
 }
+
+/** Where an area sits against the others. Three steps, and each one is argued. */
+export type Priority = "HIGH" | "MEDIUM" | "LOW";
 
 export interface PositionOpportunities {
   sectorTag: string;
   sectorLabel: string;
   areas: Opportunity[];
   evidencedCount: number;
+  derivedCount: number;
   sectorCount: number;
+  /**
+   * Everything the evidence established about this company, whether or not it
+   * argued for an area. Carried so a reader can see what the classification
+   * was working from, including the dimensions that came back UNKNOWN.
+   */
+  signals: CompanySignal[];
   /** Market categories across every area, most-supported first. */
   marketIds: string[];
   /** The single market the Decision Desk should open on. Null if none. */
@@ -160,91 +238,163 @@ function workflowsForSector(tag: string): { uc: UseCase; specific: boolean }[] {
  * which is the failure that matters.
  */
 /**
- * Wording that means the company is NOT doing this.
+ * Whether a company's own statements evidence this workflow, and how.
  *
- * The matcher counted shared words and nothing else, so a statement saying the
- * company has no fraud detection capability contained "fraud" and "detection"
- * and was published back to the reader as evidence that it does. Negation is
- * invisible to token overlap and it inverts the claim entirely, which makes it
- * the most expensive thing the old rule could not see.
- */
-const NEGATED =
-  /\b(?:no|not|never|without|lacks?|lacking|absent|does not|do not|did not|has not|have not|hasn't|haven't|doesn't|don't|declined to|failed to|yet to|no longer|ceased|discontinued)\b/i;
-
-/**
- * Wording that means this is intention rather than practice.
+ * WHAT THIS REPLACES. The original rule was two shared words of the workflow
+ * label appearing anywhere in any statement. That promoted a sector hypothesis
+ * to company evidence on token overlap alone: it could not see negation, could
+ * not see intention, and could not tell the company from the industry it sits
+ * in.
  *
- * "Plans to deploy fraud detection" is a statement about the future. Reporting
- * it as evidenced AI tells a reader the company already runs something it has
- * only talked about, which is the same class of error as inventing the
- * deployment outright.
- *
- * TWO THINGS DELIBERATELY NOT IN THIS LIST, both learned by getting it wrong.
- *
- * "Piloting" is not intention. A pilot is a real deployment that is running
- * now, limited in scope rather than hypothetical, and "the bank is piloting a
- * knowledge assistant" is exactly the kind of company evidence this product
- * exists to surface. Rejecting it downgraded a real finding to a sector guess
- * and threw away the quote.
- *
- * Bare modals are not here either. "May", "could" and "will" appear constantly
- * in accurate descriptions of what a live system does, so matching them turns
- * every careful sentence about an existing deployment into a rejection. The
- * entries below are phrases that state an intention, not words that can carry
- * one.
- */
-const PROSPECTIVE =
-  /\b(?:plans? to|planning to|intends? to|intending to|aims? to|aiming to|expects? to|expected to|hopes? to|seeking to|set to|is considering|are considering|considering whether|exploring|evaluating|proposed|proposal|roadmap|announced plans|in talks to|has yet to|have yet to)\b/i;
-
-/**
- * Whether a company's own statements evidence this workflow, and why.
- *
- * WHAT THIS REPLACES. The old rule was two shared words of the workflow label
- * appearing anywhere in any statement. That promoted a sector hypothesis to
- * company evidence on token overlap alone: it could not see negation, could not
- * see intention, could not tell the company from a supplier it mentions, and
- * would attach one statement to several unrelated workflows. It is the reason
- * the narrative and the opportunity basis could tell different stories, because
- * one was written by a model reading passages and the other was word counting
- * over that model's output.
+ * THE NEGATION AND INTENTION LISTS NOW LIVE IN ONE PLACE. They used to be
+ * duplicated here, and a statement that classified one way when deciding
+ * whether a workflow was evidenced could classify another way when deriving a
+ * signal off the same sentence. `classifyStatement()` is the single answer to
+ * "what is this sentence saying", and both callers ask it.
  *
  * It is still lexical, and that is a real limit stated plainly rather than
- * dressed up: this does not understand the sentence. What it now does is refuse
- * the readings it can detect are wrong, and require more overlap before
- * claiming evidence, so the failures it has left are misses rather than false
- * claims. A missed evidenced area appears as a sector area, which understates
- * what the company does; a false one tells the reader something untrue about
- * their own business.
+ * dressed up: this does not understand the sentence. What it does is refuse the
+ * readings it can detect are wrong and require real overlap before claiming
+ * evidence, so the failures it has left are misses rather than false claims. A
+ * missed evidenced area appears further down the list, which understates what
+ * the company does; a false one tells the reader something untrue about their
+ * own business.
  */
-function evidenceFor(
-  uc: UseCase,
-  statements: string[]
-): { statement: string; why: string } | null {
-  const words = uc.label
+/**
+ * A label word present as a word, rather than as a run of letters.
+ *
+ * THE BUG THIS FIXES, found on live Siemens and Salesforce research on 30
+ * August 2026. The match was `haystack.includes(word)`, so "report" matched
+ * inside "vendor-reported" and "audit" inside "independently audited", and a
+ * sentence about whether a vendor's claim had been independently checked was
+ * published to the reader as evidence that Siemens runs Expense Report Audit.
+ * At Salesforce, "agent" matched inside "Agentforce". Neither had anything to
+ * do with the workflow; both had two matches and cleared the threshold.
+ *
+ * A trailing plural is allowed, because "stores" and "store" are the same word
+ * for this purpose, and nothing else is.
+ */
+function wordIn(hay: string, word: string): boolean {
+  return new RegExp(`\\b${word}(?:s|es)?\\b`).test(hay);
+}
+
+/** A label's own words, minus the short ones that carry no meaning alone. */
+function contentWords(label: string): string[] {
+  return label
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
     .filter((w) => w.length > 4);
+}
+
+/**
+ * The word naming what each part of the workflow actually IS.
+ *
+ * THE FALSE POSITIVE THIS STOPS, found on live Boots research on 30 August
+ * 2026. Two matched words used to be enough, and this cleared it:
+ *
+ *   "Third-party revenue estimates for Boots range from $7.6B ..."
+ *   matched "third" and "party" against Third-Party Vendor Risk Assessment
+ *
+ * Both matches came out of one hyphenated compound modifying "revenue
+ * estimates". The sentence is about aggregator figures disagreeing and has
+ * nothing whatever to do with assessing vendors, and Boots was told it runs a
+ * vendor risk programme on the strength of it.
+ *
+ * The catalogue names workflows as "<qualifiers> <activity>", so the last
+ * content word of a segment is the activity: assessment, detection,
+ * forecasting, automation, copilot. Requiring one of those to appear means a
+ * sentence has to mention the thing itself and not only its adjectives.
+ * Segments are split on "/" and "&" because several labels carry two names for
+ * one workflow, and either should be able to satisfy it.
+ *
+ * It costs recall, and that is the trade this file has made throughout: a miss
+ * shows an area one class lower than it deserved, a false match tells a reader
+ * something untrue about their own business.
+ */
+function headNouns(label: string): string[] {
+  const out: string[] = [];
+  for (const segment of label.split(/[/&]/)) {
+    const words = contentWords(segment);
+    if (words.length > 0) out.push(words[words.length - 1]);
+  }
+  return out;
+}
+
+function evidenceFor(
+  uc: UseCase,
+  statements: { text: string; sourceIndex: number }[]
+): { statement: string; sourceIndex: number; why: string; status: EvidenceStatus } | null {
+  const words = contentWords(uc.label);
   if (words.length === 0) return null;
+  const heads = headNouns(uc.label);
 
   for (const s of statements) {
-    const hay = s.toLowerCase();
-    const matched = words.filter((w) => hay.includes(w));
+    const hay = s.text.toLowerCase();
+    const matched = words.filter((w) => wordIn(hay, w));
     // Two content words as before, and every word where the label has one or
     // two, so a short label cannot be carried by a single common term.
     if (matched.length < Math.min(2, words.length)) continue;
     if (words.length <= 2 && matched.length < words.length) continue;
+    // And one of them has to be the thing the workflow IS. See headNouns().
+    if (heads.length > 0 && !matched.some((w) => heads.includes(w))) continue;
 
-    // The checks the count could not make.
-    if (NEGATED.test(hay)) continue;
-    if (PROSPECTIVE.test(hay)) continue;
+    // The checks the count could not make. Only current practice evidences a
+    // workflow: an intention is not a deployment, a denial is not a deployment,
+    // and a sentence about the industry is not about this company.
+    // Judged on the clause the label words landed in. A negation belonging to
+    // a different clause is a claim about something else.
+    const status = classifyStatement(
+      relevantClause(s.text, (c) => matched.every((w) => wordIn(c.toLowerCase(), w)))
+    );
+    if (!isCurrentPractice(status)) continue;
 
     return {
-      statement: s,
-      why: `The company's own sources use ${matched.map((w) => `"${w}"`).join(" and ")} in a statement about current practice.`,
+      statement: s.text,
+      sourceIndex: s.sourceIndex,
+      status,
+      why: `The company's own sources use ${matched.map((w) => `"${w}"`).join(" and ")} in a statement about ${status === "pilot" ? "something running in pilot" : "current practice"}.`,
     };
   }
   return null;
+}
+
+/**
+ * The one sentence a derived area exists to answer.
+ *
+ * Built from the strongest signal arguing for the area, and it names both the
+ * dimension and the workflow's own category, because the join between them is
+ * the argument. A reader who disagrees can see exactly which quote and which
+ * category produced it.
+ */
+function whyThisCompanyLine(uc: UseCase, lead: CompanySignal): string {
+  const quote = lead.basis[0]?.quote ?? "";
+  const trimmed = quote.length > 180 ? `${quote.slice(0, 177)}...` : quote;
+  return `Your own sources establish ${DIMENSION_LABEL[lead.dimension]} at this company: "${trimmed}". ${uc.label} is ${uc.category} work, which is where that lands.`;
+}
+
+/**
+ * What would actually bind, if they took it forward.
+ *
+ * Every clause comes from the catalogue's own record of the workflow. Nothing
+ * here is inferred about the company, because the constraint is a property of
+ * the work rather than of who is doing it.
+ */
+function constraintLine(uc: UseCase): string {
+  const flags = (uc.regulatoryFlags ?? []).map(flagLabel);
+  const regulated =
+    flags.length > 0
+      ? ` It is bound by ${flags.length === 1 ? flags[0] : `${flags.slice(0, -1).join(", ")} and ${flags[flags.length - 1]}`}.`
+      : "";
+  const autonomy =
+    uc.autonomyDefault === "advisory_only"
+      ? " The catalogue holds it as advisory only, so a person stays in the loop by default."
+      : "";
+  return `${cap(uc.riskTier)} risk work needing ${uc.reliabilityRequirement} of 5 on the assurance bar before a system can be trusted with it.${regulated}${autonomy}`;
+}
+
+function cap(s: string): string {
+  return s.charAt(0).toUpperCase() + s.slice(1);
 }
 
 /**
@@ -260,12 +410,77 @@ export function opportunitiesFor(
   const tag = position.sectorTag;
   if (!tag || !TAG_LABEL[tag]) return null;
 
-  const statements = [...position.aiFindings, ...position.findings];
   const candidates = workflowsForSector(tag);
   if (candidates.length === 0) return null;
 
+  // Statements with the source each cites, where the position carries them.
+  // A position saved before the evidence block existed falls back to the flat
+  // arrays with no attribution, which still lets a workflow be evidenced and
+  // correctly lets nothing be derived: a signal needs a source it can name.
+  const attributed =
+    position.evidence?.statements ??
+    [...position.aiFindings, ...position.findings].map((text) => ({
+      text,
+      sourceIndex: -1,
+    }));
+
+  // Everything the evidence establishes about this company. Derived here, once,
+  // so every consumer of this object reads the same conclusions rather than
+  // each re-deriving its own. Nothing in here has seen the sector tag.
+  const signals = deriveSignals(position.evidence);
+
+  // An unresolved figure is a fact about the whole retrieved record, so it
+  // lowers reliability everywhere rather than only on the metric it came from.
+  const unresolvedConflict = (position.evidence?.financials ?? []).some(
+    (m) =>
+      m.reconciliation.verdict === "CONFLICTING" ||
+      (m.reconciliation.verdict === "INSUFFICIENT" && m.reconciliation.facts.length > 1)
+  );
+
+  const specificIds = new Set(
+    candidates.filter((c) => c.specific).map((c) => c.uc.id)
+  );
+
   const areas: Opportunity[] = candidates.map(({ uc }) => {
-    const hit = evidenceFor(uc, statements);
+    const hit = evidenceFor(uc, attributed);
+    const arguing = hit ? [] : signalsFor(signals, {
+      category: uc.category,
+      regulatoryFlags: uc.regulatoryFlags ?? [],
+    });
+
+    // The quotes under this area, whichever class it lands in. This is the
+    // field the company-specificity gate reads.
+    const companyEvidence: SignalBasis[] = hit
+      ? [
+          {
+            quote: hit.statement,
+            sourceIndex: hit.sourceIndex,
+            kind: "statement",
+            evidenceType:
+              position.evidence?.sources[hit.sourceIndex]?.evidenceType ?? null,
+          },
+        ]
+      : arguing.flatMap((sig) => sig.basis);
+
+    // THE GATE. Derived requires a quote from this company. Without one the
+    // rationale would survive swapping the company for any competitor, which
+    // is exactly what "sector" means.
+    const derived = !hit && arguing.length > 0 && companyEvidence.length > 0;
+    const cls: OpportunityClass = hit ? "evidenced" : derived ? "derived" : "sector";
+
+    const lead = arguing[0] ?? null;
+    const reliability = reliabilityOf({
+      classification: cls,
+      sourceTypes: companyEvidence.map((e) => e.evidenceType),
+      sourceIndices: companyEvidence
+        .map((e) => e.sourceIndex)
+        .filter((i) => i >= 0),
+      signals: cls === "derived" ? arguing : [],
+      unresolvedConflict,
+    });
+
+    const { priority, priorityWhy } = priorityOf({ cls, uc, signals, arguing });
+
     return {
       id: uc.id,
       label: uc.label,
@@ -274,23 +489,36 @@ export function opportunitiesFor(
       reliabilityRequirement: uc.reliabilityRequirement,
       autonomyDefault: uc.autonomyDefault,
       regulatoryFlags: uc.regulatoryFlags ?? [],
-      basis: hit ? "evidenced" : "sector",
+      basis: cls,
+      evidenceStatus: hit?.status ?? null,
       evidence: hit?.statement ?? null,
       evidenceWhy: hit?.why ?? null,
+      companyEvidence: cls === "sector" ? [] : companyEvidence,
+      derivedSignals: cls === "derived" ? arguing : [],
+      whyThisCompany: cls === "derived" && lead ? whyThisCompanyLine(uc, lead) : null,
+      valueMechanism: cls === "derived" && lead ? VALUE_MECHANISM[lead.dimension] : null,
+      keyConstraint: cls === "derived" ? constraintLine(uc) : null,
+      priority,
+      priorityWhy,
+      reliability,
       marketIds: WORKFLOW_CATEGORY_MAP[uc.category] ?? [],
     };
   });
 
-  // Evidenced first, then sector-specific over horizontal, then by risk, so
-  // the areas that carry the most consequence surface without a reader
-  // scrolling. Horizontal workflows are true of everyone and rank last.
-  const specificIds = new Set(
-    candidates.filter((c) => c.specific).map((c) => c.uc.id)
-  );
+  // Priority first, then the class behind it, then sector-specific over
+  // horizontal, then risk. Priority leads because it is the thing the ladder
+  // exists to express; the rest break its ties in the order they used to sort.
+  const PRIORITY_ORDER: Record<Priority, number> = { HIGH: 0, MEDIUM: 1, LOW: 2 };
+  const CLASS_ORDER: Record<OpportunityClass, number> = {
+    evidenced: 0,
+    derived: 1,
+    sector: 2,
+  };
   areas.sort((a, b) => {
-    if ((a.basis === "evidenced") !== (b.basis === "evidenced")) {
-      return a.basis === "evidenced" ? -1 : 1;
+    if (a.priority !== b.priority) {
+      return PRIORITY_ORDER[a.priority] - PRIORITY_ORDER[b.priority];
     }
+    if (a.basis !== b.basis) return CLASS_ORDER[a.basis] - CLASS_ORDER[b.basis];
     const aSpec = specificIds.has(a.id);
     const bSpec = specificIds.has(b.id);
     if (aSpec !== bSpec) return aSpec ? -1 : 1;
@@ -328,13 +556,104 @@ export function opportunitiesFor(
     sectorLabel: TAG_LABEL[tag],
     areas: top,
     evidencedCount: top.filter((a) => a.basis === "evidenced").length,
+    derivedCount: top.filter((a) => a.basis === "derived").length,
     sectorCount: top.filter((a) => a.basis === "sector").length,
+    signals,
     marketIds,
     leadMarketId: marketIds[0] ?? null,
     lead,
     topRisk,
     regulatoryFlags: [...new Set(lead.flatMap((a) => a.regulatoryFlags))].sort(),
   };
+}
+
+/**
+ * Where an area sits against the others, and which rules put it there.
+ *
+ * THREE STEPS, NOT A SCORE. An 83-out-of-100 implies a precision this evidence
+ * cannot carry: the inputs are a sector placement, a handful of retrieved
+ * sentences and a catalogue entry, and no arithmetic over those produces a
+ * second significant figure that means anything. So the ladder is ordinal, each
+ * step is one rule, and every rule that fired is named on screen.
+ *
+ * THE RULES, IN ORDER.
+ *
+ *   base           evidenced 3, derived 2, sector 1
+ *   +1 converging  derived, and the signal arguing for it is HIGH rather than
+ *                  a single statement
+ *   -1 unproven    the company evidences no AI in production and this workflow
+ *                  needs 4+ on the assurance bar or runs as an agent. Starting
+ *                  there is the least feasible thing on the list
+ *   -1 legacy      the sources establish legacy dependency and this is
+ *                  engineering, IT or data work, which is where that bites
+ *   clamp          1 to 3
+ *
+ * WHAT IS DELIBERATELY NOT A STEP, having been one and been wrong. A first cut
+ * marked down any workflow the catalogue holds for every sector rather than for
+ * this one. Run against live Tesco research it put all five derived areas at
+ * LOW, level with the sector areas, because the workflows company evidence
+ * argues for are frequently the horizontal ones. That cancels the very signal
+ * just derived: a horizontal workflow the company's own sources point at is
+ * specific to them, and the fact that it is also available to everyone else is
+ * beside the point. Horizontality still breaks ties in the sort, which is where
+ * it belongs.
+ *
+ * WHY AI MATURITY ONLY EVER SUBTRACTS. LOW is a specific incompatibility: no AI
+ * in production is a bad place to start a workflow that has to run unsupervised
+ * or clear a 4-of-5 assurance bar. HIGH is not the mirror of that. It says the
+ * company could take on any of these, which raises everything equally and
+ * therefore ranks nothing, so it is left to do its work through relevance
+ * instead.
+ */
+function priorityOf(args: {
+  cls: OpportunityClass;
+  uc: UseCase;
+  signals: readonly CompanySignal[];
+  arguing: readonly CompanySignal[];
+}): { priority: Priority; priorityWhy: string } {
+  const { cls, uc, signals, arguing } = args;
+  const steps: string[] = [];
+
+  let score = cls === "evidenced" ? 3 : cls === "derived" ? 2 : 1;
+  steps.push(
+    cls === "evidenced"
+      ? "high because this company's own sources place it in current practice"
+      : cls === "derived"
+        ? `medium because ${arguing.length === 1 ? "a company signal makes" : `${arguing.length} company signals make`} it relevant here`
+        : "low because nothing retrieved connects it to this company"
+  );
+
+  if (cls === "derived" && arguing[0]?.state === "HIGH") {
+    score += 1;
+    steps.push(
+      "up one because the signal arguing for it rests on more than a single statement"
+    );
+  }
+
+  const aiMaturity = signals.find((s) => s.dimension === "ai_adoption_maturity");
+  const unproven = aiMaturity?.state === "LOW";
+  if (
+    unproven &&
+    (uc.reliabilityRequirement >= 4 || uc.autonomyDefault !== "advisory_only")
+  ) {
+    score -= 1;
+    steps.push(
+      "down one because the sources say this company has no AI in production, and this is not the workflow to start on"
+    );
+  }
+
+  const legacy = signals.find((s) => s.dimension === "legacy_dependency");
+  if (
+    legacy?.state === "HIGH" &&
+    ["Engineering", "IT", "Data"].includes(uc.category)
+  ) {
+    score -= 1;
+    steps.push("down one because the sources establish legacy systems where this work would sit");
+  }
+
+  score = Math.max(1, Math.min(3, score));
+  const priority: Priority = score === 3 ? "HIGH" : score === 2 ? "MEDIUM" : "LOW";
+  return { priority, priorityWhy: `${priority} priority: ${steps.join("; ")}.` };
 }
 
 /**
@@ -348,15 +667,30 @@ export function situationFrom(
   position: SavedPosition,
   opp: PositionOpportunities | null
 ): string {
-  const base = `We are ${position.name}, ${position.what}`.replace(/\.?$/, ". ");
+  // Lower-cased the same way openingLine() does it, because the sources write
+  // `what` as a standalone sentence and it lands here mid-sentence: live Boots
+  // research produced "We are Boots, A pharmacy-led health and beauty
+  // retailer". An initialism keeps its capitals.
+  const base = `We are ${position.name}, ${lowerFirst(position.what.trim())}`.replace(
+    /\.?$/,
+    ". "
+  );
   if (!opp || opp.lead.length === 0) return base;
 
-  // Attributed separately. A first cut said "our own sources point at" and
-  // then listed all three lead areas, when typically only one of them is
-  // evidenced and the rest are what the sector runs. That put a claim about
-  // the company into the reader's own opening sentence, which is the one place
-  // it would never be questioned.
+  // Attributed separately, one clause per class. A first cut said "our own
+  // sources point at" and then listed all three lead areas, when typically only
+  // one of them is evidenced and the rest are what the sector runs. That put a
+  // claim about the company into the reader's own opening sentence, which is
+  // the one place it would never be questioned.
+  //
+  // THE DERIVED CLAUSE IS NOT DECORATION. Without it, a company whose three
+  // lead areas were all derived matched neither branch and the situation box
+  // was prefilled with "We are Tesco Plc, a British multinational grocery
+  // retailer. . " - a stray double stop and no areas at all. Measured on live
+  // Tesco research on 30 August 2026, and it is the exact failure the third
+  // class introduces if every consumer is not taught about it.
   const evidenced = opp.lead.filter((a) => a.basis === "evidenced");
+  const derived = opp.lead.filter((a) => a.basis === "derived");
   const sector = opp.lead.filter((a) => a.basis === "sector");
   const name = (list: Opportunity[]) =>
     list.map((a) => a.label.toLowerCase()).join(", ");
@@ -365,13 +699,21 @@ export function situationFrom(
   if (evidenced.length > 0) {
     parts.push(`Our own sources point at ${name(evidenced)}`);
   }
+  if (derived.length > 0) {
+    parts.push(
+      parts.length > 0
+        ? `and what those sources establish about us argues for ${name(derived)}`
+        : `What our own sources establish about us argues for ${name(derived)}`
+    );
+  }
   if (sector.length > 0) {
     parts.push(
-      evidenced.length > 0
+      parts.length > 0
         ? `and ${opp.sectorLabel.toLowerCase()} typically also runs ${name(sector)}`
         : `For ${opp.sectorLabel.toLowerCase()} the areas that matter are ${name(sector)}`
     );
   }
+  if (parts.length === 0) return base;
   return `${base}${parts.join(" ")}. `;
 }
 
@@ -448,6 +790,12 @@ export function weightingFrom(
       `${regulatoryFlagSentence(opp.regulatoryFlags)}. ` +
       `Every slider stays yours to move.`,
   };
+}
+
+/** Only where the word is not itself a name or an initialism. */
+function lowerFirst(s: string): string {
+  if (/^[A-Z]{2,}/.test(s)) return s;
+  return s.charAt(0).toLowerCase() + s.slice(1);
 }
 
 function regulatoryFlagSentence(flags: string[]): string {

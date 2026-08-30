@@ -15,6 +15,78 @@ than a gap.
 
 ---
 
+## 30 August 2026
+
+**Company research was timing out, and the page said so without saying why.**
+
+Naming a company sometimes returned "the analysis could not be run just now".
+The sources were listed, nothing had been read, and the message was true but
+useless. A run was timed end to end: ten minutes for one company. The hosting
+platform stops any request at five, so the reader's page simply broke.
+
+The cause was three separate retry systems sitting on top of each other, each
+unaware of the others, so a single company could set off twelve attempts at the
+same question. Two of those layers are ours and are worth keeping: one retries
+with a corrected instruction, the other with fewer sources. The third could
+only ask the identical question again, and it has been removed. Two further
+settings were being guessed rather than measured: how long one reading is
+allowed to take, and how much room the answer has to be written in. The answer
+was running out of room and arriving cut in half. Both are now set from a
+measurement.
+
+The same company now reads in 96 seconds instead of 604, and returns a full
+profile, four findings, four AI findings and six figures.
+
+**A number the sources did not state still cannot reach the page.**
+
+While fixing the above, three figures had been refused by the check that stops
+the model writing figures that are not in the evidence. Two of them turned out
+to be real: the source reports Woolworths' net income and profit margin as
+falling 5.8 and 9.4 per cent, and publishes nothing else, hiding the underlying
+values behind a placeholder. The model had restated both without the minus
+sign, which turns two declines into two figures that read as anything but. The
+third, a headcount of 34,967, was in no source at all; the retrieved profile
+says 37,499.
+
+The check was right three times out of three and has not been touched. What
+changed is what the model is told: a minus sign is part of the figure, and a
+placeholder where a value should be means the value was withheld, so say so or
+make the point without it. The reading now says net income "fell -5.8%" and
+gives the headcount the source actually states.
+
+**Where AI could go here can now say why it is about you.**
+
+The section offered two kinds of line: an area your own sources mentioned, or
+an area your sector runs. The first is rare, so almost every line was the
+second, which is true of every company in your sector and therefore tells you
+very little.
+
+There is now a third kind. Where your sources establish something about your
+company that makes an area relevant, the area is marked DERIVED and says which
+quote of yours it came from, what the work would actually do about it, and what
+would bind it. It cannot be shown unless it can name your own words: a rationale
+built from your sector would survive swapping you for a competitor, and that is
+the definition of not being about you.
+
+Every area also now carries a priority and a reliability. The reliability is
+new in meaning as well as in name. The number that used to sit there was the
+assurance bar the workflow itself demands, which is the same for everyone the
+catalogue offers it to, and it never moved with your evidence. Both numbers are
+now shown and each is labelled: assurance is what the work needs, reliability is
+how well your own sources support putting it to you. Five means your official
+record evidences it; two means your sector runs it and nothing retrieved about
+you speaks to it. A figure the research could not settle takes a point off
+everything.
+
+Six companies were run live to check the outputs actually differ. Boots
+retrieved no AI evidence at all and stays at zero evidenced areas and zero
+derived, which is the honest answer rather than a manufactured one. Tesco,
+whose sources carry a signed model agreement and a joint lab, gets four derived
+areas and a higher reliability. Barclays, Salesforce, Siemens and Woolworths
+each come out differently again.
+
+---
+
 ## 29 August 2026
 
 **Every tab can now name the vendors it is talking about.**
