@@ -63,6 +63,8 @@ import {
   type EvidenceStatus,
   type SignalBasis,
 } from "./company-signals";
+import { alignment, bestAlignment } from "./workflow-match";
+import type { AiClaim, ClaimStatus } from "@/lib/research/company";
 import { reliabilityOf, type EvidenceReliability, type OpportunityClass } from "./reliability";
 import type { SavedPosition } from "./store";
 
@@ -261,103 +263,137 @@ function workflowsForSector(tag: string): { uc: UseCase; specific: boolean }[] {
  * own business.
  */
 /**
- * A label word present as a word, rather than as a run of letters.
+ * Everything an EVIDENCED classification has to survive, and what carried it.
  *
- * THE BUG THIS FIXES, found on live Siemens and Salesforce research on 30
- * August 2026. The match was `haystack.includes(word)`, so "report" matched
- * inside "vendor-reported" and "audit" inside "independently audited", and a
- * sentence about whether a vendor's claim had been independently checked was
- * published to the reader as evidence that Siemens runs Expense Report Audit.
- * At Salesforce, "agent" matched inside "Agentforce". Neither had anything to
- * do with the workflow; both had two matches and cleared the threshold.
- *
- * A trailing plural is allowed, because "stores" and "store" are the same word
- * for this purpose, and nothing else is.
+ * Held so the classification is auditable rather than asserted: the statement,
+ * the source it cites, the status it was read at, and the rare catalogue terms
+ * the alignment turned on. Part 9's rule is structural rather than a promise:
+ * this is recomputed from the statement on every render, so if the supporting
+ * passage goes, the classification goes with it. Nothing persists a verdict.
  */
-function wordIn(hay: string, word: string): boolean {
-  return new RegExp(`\\b${word}(?:s|es)?\\b`).test(hay);
-}
-
-/** A label's own words, minus the short ones that carry no meaning alone. */
-function contentWords(label: string): string[] {
-  return label
-    .toLowerCase()
-    .replace(/[^a-z0-9\s]/g, " ")
-    .split(/\s+/)
-    .filter((w) => w.length > 4);
+export interface EvidenceHit {
+  statement: string;
+  sourceIndex: number;
+  status: EvidenceStatus;
+  why: string;
+  /** The catalogue terms that made the match arguable. */
+  terms: string[];
 }
 
 /**
- * The word naming what each part of the workflow actually IS.
+ * Which workflows this company's own sources evidence, and on what.
  *
- * THE FALSE POSITIVE THIS STOPS, found on live Boots research on 30 August
- * 2026. Two matched words used to be enough, and this cleared it:
+ * WHAT THIS REPLACES. Two of a workflow label's words appearing in a sentence,
+ * plus a head-noun check bolted on after two live false positives. That rule
+ * could not recognise the same activity written differently and could not tell
+ * a description from a coincidence. See lib/position/workflow-match.ts.
  *
- *   "Third-party revenue estimates for Boots range from $7.6B ..."
- *   matched "third" and "party" against Third-Party Vendor Risk Assessment
+ * THE FIVE CONDITIONS, all required, and the model is the final authority on
+ * none of them:
  *
- * Both matches came out of one hyphenated compound modifying "revenue
- * estimates". The sentence is about aggregator figures disagreeing and has
- * nothing whatever to do with assessing vendors, and Boots was told it runs a
- * vendor risk programme on the strength of it.
+ *   1 subject      the sentence is about THIS company. A competitor's
+ *                  deployment, a supplier's product and an industry trend are
+ *                  three different things and none of them is this company
+ *   2 affirmative  not negated
+ *   3 alignment    the passage describes the workflow, judged against the
+ *                  catalogue's own description of it
+ *   4 status       DEPLOYED or PILOT. An intention, an exploration, a signed
+ *                  agreement and a job advert are not use
+ *   5 provenance   a retrieved source it can be traced to
  *
- * The catalogue names workflows as "<qualifiers> <activity>", so the last
- * content word of a segment is the activity: assessment, detection,
- * forecasting, automation, copilot. Requiring one of those to appear means a
- * sentence has to mention the thing itself and not only its adjectives.
- * Segments are split on "/" and "&" because several labels carry two names for
- * one workflow, and either should be able to satisfy it.
- *
- * It costs recall, and that is the trade this file has made throughout: a miss
- * shows an area one class lower than it deserved, a false match tells a reader
- * something untrue about their own business.
+ * WHERE THE MODEL FITS. It reads the passage and reports subject, status and
+ * capability, which is knowledge no amount of post-hoc parsing recovers. Then
+ * every field is checked against the sentence: `classifyStatement()` reads the
+ * status independently and THE STRICTER OF THE TWO WINS, so a model answering
+ * DEPLOYED over a sentence that says "plans to" is overruled, and a model
+ * answering PLANNED over a deployment is taken at its word. A statement with no
+ * structured claim at all, which is every position saved before this existed,
+ * is judged on the sentence alone and can still evidence a workflow.
  */
-function headNouns(label: string): string[] {
-  const out: string[] = [];
-  for (const segment of label.split(/[/&]/)) {
-    const words = contentWords(segment);
-    if (words.length > 0) out.push(words[words.length - 1]);
+function evidencedWorkflows(
+  candidates: readonly { uc: UseCase }[],
+  statements: readonly PositionStatement[]
+): Map<string, EvidenceHit> {
+  const out = new Map<string, EvidenceHit>();
+  const catalogue = candidates.map((c) => c.uc);
+
+  // Where the research classified anything at all, an unclassified statement is
+  // one the model declined to call an AI deployment, and that is an answer.
+  // Where it classified nothing, the position predates the structured contract
+  // and every statement is judged on its own words.
+  const structured = statements.some((s) => s.claim);
+
+  for (const s of statements) {
+    const claim = s.claim;
+
+    // 0. A business finding describes the company. An AI finding describes its
+    //    AI. Only the second can evidence an AI workflow, and pooling them let
+    //    a sentence about revenue estimates reach a workflow classification.
+    if (s.ai === false) continue;
+
+    if (structured && !claim) continue;
+
+    // 1. Subject. The model's answer where it gave one, and the sentence's own
+    //    reading either way: a sentence about the industry is refused whatever
+    //    the model called it.
+    if (claim && claim.subject !== "company") continue;
+
+    // 4a. Status as the model read it, before the sentence is consulted.
+    if (claim && !MODEL_CURRENT.has(claim.status)) continue;
+
+    // 3. Alignment, over the sentence and the capability the model named. The
+    //    capability is additional evidence for the mapping and never a
+    //    substitute for the passage: on its own it is the model's summary of
+    //    itself.
+    const text = claim?.capability ? `${s.text} ${claim.capability}` : s.text;
+    const best = bestAlignment(text, catalogue);
+    if (!best) continue;
+
+    // 2 and 4b. The sentence's own reading, on the clause the match landed in.
+    //    Whichever of the two readings is stricter is the one that stands.
+    const label = best.uc.label.toLowerCase();
+    const status = classifyStatement(
+      relevantClause(s.text, (c) => alignment(c, best.uc).aligned) || s.text
+    );
+    if (!isCurrentPractice(status)) continue;
+
+    // 5. Provenance. A statement whose source cannot be named cannot be traced,
+    //    and an untraceable claim about a company's own systems is exactly the
+    //    kind this product refuses to make.
+    if (s.sourceIndex < 0) continue;
+
+    // The strictest status of the two readings.
+    const settled: EvidenceStatus =
+      claim?.status === "PILOT" || status === "pilot" ? "pilot" : "deployed";
+
+    if (out.has(best.uc.id)) continue;
+    out.set(best.uc.id, {
+      statement: s.text,
+      sourceIndex: s.sourceIndex,
+      status: settled,
+      terms: best.alignment.distinctive,
+      why:
+        `The company's own sources describe ${label} in terms the catalogue uses for it (${best.alignment.distinctive
+          .slice(0, 3)
+          .join(", ")}), as ${settled === "pilot" ? "something running in pilot" : "current practice"}.`,
+    });
   }
   return out;
 }
 
-function evidenceFor(
-  uc: UseCase,
-  statements: { text: string; sourceIndex: number }[]
-): { statement: string; sourceIndex: number; why: string; status: EvidenceStatus } | null {
-  const words = contentWords(uc.label);
-  if (words.length === 0) return null;
-  const heads = headNouns(uc.label);
+/** The two model statuses that are current practice. Nothing else is. */
+const MODEL_CURRENT: ReadonlySet<ClaimStatus> = new Set<ClaimStatus>([
+  "DEPLOYED",
+  "PILOT",
+]);
 
-  for (const s of statements) {
-    const hay = s.text.toLowerCase();
-    const matched = words.filter((w) => wordIn(hay, w));
-    // Two content words as before, and every word where the label has one or
-    // two, so a short label cannot be carried by a single common term.
-    if (matched.length < Math.min(2, words.length)) continue;
-    if (words.length <= 2 && matched.length < words.length) continue;
-    // And one of them has to be the thing the workflow IS. See headNouns().
-    if (heads.length > 0 && !matched.some((w) => heads.includes(w))) continue;
-
-    // The checks the count could not make. Only current practice evidences a
-    // workflow: an intention is not a deployment, a denial is not a deployment,
-    // and a sentence about the industry is not about this company.
-    // Judged on the clause the label words landed in. A negation belonging to
-    // a different clause is a claim about something else.
-    const status = classifyStatement(
-      relevantClause(s.text, (c) => matched.every((w) => wordIn(c.toLowerCase(), w)))
-    );
-    if (!isCurrentPractice(status)) continue;
-
-    return {
-      statement: s.text,
-      sourceIndex: s.sourceIndex,
-      status,
-      why: `The company's own sources use ${matched.map((w) => `"${w}"`).join(" and ")} in a statement about ${status === "pilot" ? "something running in pilot" : "current practice"}.`,
-    };
-  }
-  return null;
-}
+/** A statement as the position carries it. */
+type PositionStatement = {
+  text: string;
+  sourceIndex: number;
+  ai?: boolean;
+  claim?: AiClaim;
+};
 
 /**
  * The one sentence a derived area exists to answer.
@@ -441,8 +477,33 @@ export function opportunitiesFor(
     candidates.filter((c) => c.specific).map((c) => c.uc.id)
   );
 
-  const areas: Opportunity[] = candidates.map(({ uc }) => {
-    const hit = evidenceFor(uc, attributed);
+  // Computed once over the statements rather than once per workflow, because
+  // the question is "what does this sentence describe", not "does this workflow
+  // appear in this sentence". Asking it the old way let one statement evidence
+  // several unrelated workflows at once.
+  //
+  // AND ASKED OF THE WHOLE CATALOGUE, not only of this sector's workflows.
+  // Found on live Ocado research, 30 August 2026: its own sources say machine
+  // learning already schedules predictive maintenance in the fulfilment
+  // centres, and the product showed nothing, because the catalogue lists
+  // Predictive Maintenance under manufacturing, energy and transport rather
+  // than retail. The sector list is a prior about what a sector TYPICALLY runs.
+  // A company's own sources saying it runs something are evidence, and evidence
+  // outranks a prior. So an evidenced workflow joins this company's list
+  // wherever the catalogue files it, and the sector list keeps governing
+  // derived and sector areas, which is the job it is actually good at.
+  const evidenced = evidencedWorkflows(
+    USE_CASES.map((uc) => ({ uc })),
+    attributed
+  );
+
+  const extra = USE_CASES.filter(
+    (uc) => evidenced.has(uc.id) && !candidates.some((c) => c.uc.id === uc.id)
+  ).map((uc) => ({ uc, specific: false }));
+  const all = [...candidates, ...extra];
+
+  const areas: Opportunity[] = all.map(({ uc }) => {
+    const hit = evidenced.get(uc.id) ?? null;
     const arguing = hit ? [] : signalsFor(signals, {
       category: uc.category,
       regulatoryFlags: uc.regulatoryFlags ?? [],

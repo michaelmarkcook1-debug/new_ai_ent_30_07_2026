@@ -2718,6 +2718,128 @@ is unchanged. Two rules were added to the shared prompt in
 not a figure. Pinned by `tests/analyst-figure-guard.test.ts`, "a dropped minus
 sign is a different figure".
 
+## 8.29 Semantic workflow matching and the EVIDENCED contract
+
+Verified against the working tree at commit `794058e` plus this change,
+30 August 2026.
+
+### What replaced the lexical matcher
+
+`evidenceFor()` required two of a workflow label's own words, a head noun and a
+clause-scoped negation check. It could not recognise the same activity written
+differently and could not tell a description from a coincidence. It is gone.
+`lib/position/workflow-match.ts` now decides alignment against the catalogue's
+own metadata, all 75 entries of which carry `label`, `description`,
+`subcategory` and `commonInputs`.
+
+| Constant | Value | Line |
+|---|---|---|
+| `DISTINCTIVE_MAX_DF` | `6` | `workflow-match.ts:35` |
+| `MIN_STEM` | `4` | `workflow-match.ts:38` |
+| `WEIGHT` | label 3, description 2, subcategory 1, inputs 1 | `workflow-match.ts:110` |
+| `MIN_SCORE` | `8` | `workflow-match.ts:204` |
+| `MIN_SCORE_MECHANISM` | `10` | `workflow-match.ts:216` |
+| `MIN_DISTINCTIVE` | `2` | `workflow-match.ts:218` |
+| label segment minimum | `2` stems | `workflow-match.ts:159` |
+
+**Distinctiveness is computed, not declared.** `DOC_FREQUENCY` counts how many
+of the 75 workflows each stem appears in, at module load. Nobody maintains a
+list of generic words and none can drift from the library, because it is
+derived from the library. Measured: `fraud` appears in 1, `detection` in 6,
+`data` in 15.
+
+**Alignment requires all three of:**
+
+1. the text names the activity, either by the label's head noun or by two or
+   more rare terms out of the catalogue's description of how the work is done;
+2. two rare terms, or one where the text names a whole label segment;
+3. weighted overlap at or above the floor.
+
+**The two floors are measured, not chosen.** At 6, "a vendor-reported proof
+point rather than an independently audited customer outcome" reached Expense
+Report Audit; every genuine match in the control set scores 8 or more. The
+mechanism-only floor is higher because mechanism words include the workflow's
+objects as well as its verbs: "the bank says card payment fraud is a material
+risk" collects card, payment, fraud and risk for exactly 8 while describing no
+system, and every genuine mechanism-only match scores 13 or more.
+
+**A label segment must be two stems.** Segments split on `/` and `&` are
+alternative names for one workflow, so naming either completely identifies it.
+A one-word segment is a word rather than a name: live Boots matched
+`Sales / Account Research` on "sales" in a sentence about annual sales, and
+live Tesco matched `Financial Analysis & Reporting` on "reports" in a sentence
+about what Wikipedia reports.
+
+### Structured evidence from the research stage
+
+`lib/research/company.ts` extends each `aiFinding` with three fields the model
+reports and the position layer never trusts:
+
+| Field | Values | Line |
+|---|---|---|
+| `subject` | company, competitor, vendor, sector, unknown | `company.ts:55` |
+| `status` | DEPLOYED, PILOT, PLANNED, EXPLORING, NEGATED, UNKNOWN | `company.ts:67` |
+| `capability` | free text, never a catalogue id | |
+
+`citedAi()` maps anything it cannot place to `unknown` / `UNKNOWN` rather than
+to a default, on the same rule the metric ingest follows.
+
+### The EVIDENCED contract
+
+`evidencedWorkflows()` in `lib/position/opportunities.ts`. Six conditions, all
+required, and the model is the final authority on none:
+
+| # | Condition | Line |
+|---|---|---|
+| 0 | the statement is an AI finding, not a business finding | `:332` |
+| 0b | where the run classified anything, this statement carries a claim | `:334` |
+| 1 | `claim.subject === "company"` | |
+| 2 | not negated, judged on the clause the match landed in | |
+| 3 | `alignment()` aligns the passage to the workflow | |
+| 4 | `MODEL_CURRENT` holds the status, and `classifyStatement()` agrees | `:385` |
+| 5 | `sourceIndex >= 0`, so the claim can be traced | |
+
+**The stricter of the two status readings wins.** A model answering DEPLOYED
+over a sentence reading "plans to" is overruled; a model answering PLANNED over
+a deployment is taken at its word.
+
+**Nothing persists a verdict.** The classification is recomputed from the
+statement on every render, so if the supporting passage goes, EVIDENCED goes
+with it.
+
+**Evidence outranks the sector prior.** `opportunities.ts:500` unions any
+evidenced workflow into the company's list wherever the catalogue files it.
+Found on live Ocado research: its own sources say machine learning already
+schedules predictive maintenance in the fulfilment centres, and the product
+showed nothing, because Predictive Maintenance is catalogued for manufacturing,
+energy and transport rather than retail. The sector list still governs derived
+and sector areas.
+
+### Role assignment
+
+`lib/position/role-fit.ts:133`. The three columns were ranked independently, so
+live Tesco and live Salesforce both got the Chief Data Officer as business
+owner AND delivery owner. `assign()` now takes each column's best candidate not
+already taken (`role-fit.ts:140`), in the order business, delivery, governance:
+business first because its candidates come from the workflow's own category and
+are the narrowest list, governance last because its candidate set is the
+richest and it loses least by going last.
+
+Duplication is permitted only where a column has run out of candidates. The
+three fallbacks are themselves distinct (COO, CIO, Compliance Officer), so in
+practice it does not arise. Alternatives are never pruned: a role taken by
+another column stays in this column's dropdown, because deduplication governs
+the recommendation and never the reader's choice.
+
+### Controls
+
+`tests/evidence-controls.test.ts` holds four positive controls (deployed fraud
+detection, pilot customer service, deployed demand forecasting, deployed
+developer AI), each paired with near-neighbour negatives: plan, exploration,
+subject-without-work, competitor, vendor product, denial, sector, company-wide
+AI, vendor partnership, job advert. `tests/company-signals-live.test.ts` holds
+four live research captures.
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

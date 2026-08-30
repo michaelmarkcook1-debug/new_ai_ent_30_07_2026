@@ -1,5 +1,6 @@
 import type { EvidenceType } from "@/lib/research/facts";
 import type { ReconciledMetric } from "@/lib/research/ingest";
+import type { AiClaim } from "@/lib/research/company";
 
 // What the reconciled research says about THIS company, in terms an
 // opportunity can be selected on.
@@ -391,7 +392,26 @@ const EMPLOYEE_METRIC = /^(?:employees?|headcount|staff|workforce|colleagues|emp
 export interface CompanyEvidence {
   /** Source URLs by index, so a quote opens the page it came from. */
   sources: { url: string; evidenceType: EvidenceType }[];
-  statements: { text: string; sourceIndex: number }[];
+  /**
+   * Statements with the source each cites, and for AI findings what the
+   * research stage classified the sentence as claiming. The claim is carried,
+   * never trusted: `lib/position/opportunities.ts` re-derives subject and
+   * status from the sentence and takes whichever reading is stricter.
+   */
+  statements: {
+    text: string;
+    sourceIndex: number;
+    /**
+     * True where the research classified this as a statement about the
+     * company's AI, rather than about its business.
+     *
+     * A business finding describes the company; an AI finding describes its AI.
+     * Pooling them let a sentence about revenue estimates evidence an AI
+     * workflow. Only an AI finding may evidence one.
+     */
+    ai?: boolean;
+    claim?: AiClaim;
+  }[];
   financials: ReconciledMetric[];
 }
 

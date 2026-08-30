@@ -32,6 +32,56 @@ export interface CompanyFinding {
   statement: string;
   /** Index into `sources`, so every claim opens the page it came from. */
   sourceIndex: number;
+  /**
+   * What an AI finding is actually claiming, structured.
+   *
+   * WHY THE MODEL IS ASKED AND NOT TRUSTED. The model has the passage in front
+   * of it and knows whether the sentence is about this company or a competitor,
+   * and whether the thing is running or planned. Reconstructing either from the
+   * finished sentence afterwards is guesswork, and guessing it lexically is how
+   * "a large back-office population exposed to automation" became evidence of
+   * back-office automation.
+   *
+   * So the model reports it, and `lib/position/opportunities.ts` then checks
+   * every field against the statement itself before anything is classified. A
+   * model that says DEPLOYED over a sentence reading "plans to" is overruled,
+   * and a subject the statement does not support is refused. Present only on
+   * `aiFindings`, absent where the model gave nothing usable.
+   */
+  claim?: AiClaim;
+}
+
+/** Who a sentence about AI is actually about. */
+export type ClaimSubject =
+  /** This company. The only one that can evidence anything about it. */
+  | "company"
+  /** A named competitor or peer. */
+  | "competitor"
+  /** A supplier, and what a supplier sells is not what a buyer runs. */
+  | "vendor"
+  /** The industry in general. */
+  | "sector"
+  | "unknown";
+
+/** How far along the thing is. Only the first two are current practice. */
+export type ClaimStatus =
+  | "DEPLOYED"
+  | "PILOT"
+  | "PLANNED"
+  | "EXPLORING"
+  | "NEGATED"
+  | "UNKNOWN";
+
+export interface AiClaim {
+  subject: ClaimSubject;
+  status: ClaimStatus;
+  /**
+   * The AI capability in the passage's own terms, e.g. "detecting fraudulent
+   * card transactions". A free-text description, never a catalogue id: the
+   * mapping to a workflow is made deterministically in the position layer, so
+   * the model is never the thing that decides what was evidenced.
+   */
+  capability: string;
 }
 
 /** A figure a source actually states, for the headline row of cards. */
@@ -145,7 +195,16 @@ interface Draft {
     basis?: string;
   }[];
   findings?: { statement?: string; source?: number }[];
-  aiFindings?: { statement?: string; source?: number }[];
+  aiFindings?: {
+    statement?: string;
+    source?: number;
+    /** company, competitor, vendor, sector. Absent is a real answer. */
+    subject?: string;
+    /** DEPLOYED, PILOT, PLANNED, EXPLORING, NEGATED. Absent is a real answer. */
+    status?: string;
+    /** The capability in the passage's own words. Never a catalogue id. */
+    capability?: string;
+  }[];
   recommendations?: string[];
 }
 
@@ -194,6 +253,50 @@ function cited(
         f.source <= sourceCount
     )
     .map((f) => ({ statement: f.statement.trim(), sourceIndex: f.source - 1 }));
+}
+
+const SUBJECTS: ClaimSubject[] = ["company", "competitor", "vendor", "sector"];
+const STATUSES: ClaimStatus[] = [
+  "DEPLOYED",
+  "PILOT",
+  "PLANNED",
+  "EXPLORING",
+  "NEGATED",
+];
+
+/**
+ * The structured claim, kept only where the model actually classified it.
+ *
+ * Anything it could not place becomes `unknown` rather than a default, on the
+ * same rule the metric ingest follows: a field a model can fill in plausibly
+ * when the passage never said is a field that has to be able to say nothing.
+ * An `unknown` subject or status cannot evidence a workflow, so a claim the
+ * model declined to classify costs a classification rather than inventing one.
+ */
+function citedAi(
+  raw: NonNullable<Draft["aiFindings"]>,
+  sourceCount: number
+): CompanyFinding[] {
+  return cited(raw, sourceCount).map((f, i) => {
+    // cited() filters, so re-find the source row by statement rather than by
+    // index: the two arrays are not the same length.
+    const row = raw.find((r) => r?.statement?.trim() === f.statement) ?? raw[i];
+    const subject = (row?.subject ?? "").trim().toLowerCase();
+    const status = (row?.status ?? "").trim().toUpperCase();
+    const capability = (row?.capability ?? "").trim();
+    return {
+      ...f,
+      claim: {
+        subject: (SUBJECTS as string[]).includes(subject)
+          ? (subject as ClaimSubject)
+          : "unknown",
+        status: (STATUSES as string[]).includes(status)
+          ? (status as ClaimStatus)
+          : "UNKNOWN",
+        capability: capability.slice(0, 200),
+      },
+    };
+  });
 }
 
 // The sectors the workflow catalogue carries assurance data for. Classifying
@@ -326,7 +429,7 @@ Return JSON:
  "sectorTag": string,
  "metrics": [{"label": string, "value": string, "source": number}],
  "findings": [{"statement": string, "source": number}],
- "aiFindings": [{"statement": string, "source": number}],
+ "aiFindings": [{"statement": string, "source": number, "subject": string, "status": string, "capability": string}],
  "recommendations": [string]}
 
 - name: the company's name as the sources give it.
@@ -348,6 +451,12 @@ SECTORS: ${SECTOR_LIST}
 - recommendations: up to 3. What a buyer evaluating AI for this company should do next, following from what was found. No figures needed. If the sources are too thin to justify advice, return an empty array.
 - findings: up to ${attempt.findings}. What a buyer should know about the company's size, position and direction. Each cites the passage number it came from.
 - aiFindings: up to ${attempt.findings}. What the sources say about this company's use of, or exposure to, AI. Each cites its passage number. If the passages say nothing about AI, return an empty array rather than inferring.
+
+  Each aiFinding also carries three classifications of what the passage is actually claiming. Omit any field the passage does not settle; an omission is a real answer and is treated as one.
+
+  - subject: WHO the sentence is about. "company" only where it is this company doing the thing. "competitor" where it is a named rival or peer. "vendor" where it is a supplier describing what its product does, because what a supplier sells is not what a buyer runs. "sector" where it is the industry in general.
+  - status: HOW FAR ALONG it is. "DEPLOYED" for something running now. "PILOT" for something running now at limited scope. "PLANNED" for a stated intention. "EXPLORING" for evaluating, considering or in talks. "NEGATED" where the passage says it is not happening. A partnership, an agreement or a hiring is not DEPLOYED unless the passage says the capability itself is in use.
+  - capability: WHAT AI capability, in the passage's own terms, e.g. "detecting fraudulent card transactions" or "summarising support calls". Describe the work, not the vendor and not the technology. Leave it out where the passage says only that the company uses AI without saying what for, because "uses AI" is not a capability.
 
 Every statement must be supported by the passage it cites. Do not carry in anything you know about this company that the passages do not contain, and do not smooth over a disagreement between two sources: say they disagree.
 
@@ -378,7 +487,7 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
         // downstream reads one conclusion rather than re-deriving its own.
         financials: reconcileFacts(factsFrom(metricsA, attempt.hits)),
         findings: cited(draft.findings, attempt.hits.length),
-        aiFindings: cited(draft.aiFindings, attempt.hits.length),
+        aiFindings: citedAi(draft.aiFindings ?? [], attempt.hits.length),
         recommendations: (draft.recommendations ?? [])
           .filter((r) => typeof r === "string" && r.trim().length > 0)
           .slice(0, 3),

@@ -25,6 +25,15 @@ const pos = (sectorTag: string | null, ai: string[] = []): SavedPosition => ({
   aiFindings: ai,
   findings: [],
   recommendations: [],
+  // The shape toPosition() has produced since the evidence block landed: the
+  // flat arrays for prose, and the same statements again with the source each
+  // cites. An EVIDENCED classification needs a source it can be traced to, so
+  // a fixture without one can only ever produce sector areas.
+  evidence: {
+    sources: [{ url: "https://www.reuters.com/x", evidenceType: "primary_reporting" }],
+    statements: ai.map((text) => ({ text, sourceIndex: 0 })),
+    financials: [],
+  },
   savedAt: "2026-08-18",
 });
 

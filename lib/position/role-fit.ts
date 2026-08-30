@@ -78,17 +78,73 @@ const add = (into: Map<string, Scored>, role: string, score: number, why: string
   if (!held || score > held.score) into.set(role, { role, score, why });
 };
 
-const rank = (m: Map<string, Scored>, fallback: RoleCandidate): ColumnFit => {
-  const ordered = [...m.values()].sort(
-    (a, b) => b.score - a.score || a.role.localeCompare(b.role)
-  );
-  if (ordered.length === 0) return { recommended: fallback, alternatives: [] };
-  const [top, ...rest] = ordered;
-  // The broader fallback stays available even when something scored, because a
-  // reader who disagrees with a specialist pick needs the general one to hand.
-  const alternatives = rest.map(({ role, why }) => ({ role, why }));
-  if (!ordered.some((x) => x.role === fallback.role)) alternatives.push(fallback);
-  return { recommended: { role: top.role, why: top.why }, alternatives };
+/**
+ * A column's candidates, best first, with the broad fallback always available.
+ *
+ * The fallback stays on the list even when a specialist scored, because a
+ * reader who disagrees with a specialist pick needs the general one to hand,
+ * and because the assignment below needs somewhere to go when its first choice
+ * has been taken by another column.
+ */
+const ordered = (m: Map<string, Scored>, fallback: RoleCandidate): RoleCandidate[] => {
+  const sorted = [...m.values()]
+    .sort((a, b) => b.score - a.score || a.role.localeCompare(b.role))
+    .map(({ role, why }) => ({ role, why }));
+  if (!sorted.some((x) => x.role === fallback.role)) sorted.push(fallback);
+  return sorted;
+};
+
+/**
+ * Three owners, and three DIFFERENT owners wherever the library allows it.
+ *
+ * THE DEFECT THIS FIXES. The columns were ranked independently, so a workflow
+ * whose business owner and build owner both scored the Chief Data Officer got
+ * the CDO twice. Live Tesco and live Salesforce both did. Two thirds of a
+ * three-role model saying the same name is not a recommendation about
+ * ownership, it is a recommendation about one person, and it quietly removes
+ * the challenge function the third column exists to provide.
+ *
+ * THE ASSIGNMENT IS SEQUENTIAL, NOT A DEDUPLICATION PASS. Deleting a duplicate
+ * after the fact leaves a column empty or silently promotes whatever is next
+ * without regard to whether it fits. Instead each column takes the best
+ * candidate not already taken, in an order chosen because it puts each role
+ * where it is most specific:
+ *
+ *   business first    its candidates come from the workflow's own category and
+ *                     are the narrowest list of the three. Handing a data
+ *                     workflow's outcome to the COO because the CDO went to
+ *                     delivery is a worse answer than the reverse
+ *   delivery second   it always has the CIO to fall back to
+ *   governance last   it has the richest candidate set, so it loses least by
+ *                     going last
+ *
+ * DUPLICATION IS ALLOWED, AND ONLY WHEN NOTHING ELSE IS DEFENSIBLE. A small
+ * organisation genuinely does combine accountabilities. But this product
+ * recommends archetypes rather than reading an org chart, so it prefers
+ * distinct accountability wherever the role library offers a credible
+ * alternative, and falls back to a repeat only when a column has run out. The
+ * three fallbacks are themselves distinct, so in practice that does not arise.
+ *
+ * ALTERNATIVES ARE NOT PRUNED. A role taken by another column stays in this
+ * column's dropdown: the reader may know their organisation combines the two,
+ * and Part 17's rule is that deduplication governs the RECOMMENDATION, never
+ * the reader's choice.
+ */
+const assign = (
+  columns: { key: RoleColumn; candidates: RoleCandidate[] }[]
+): OpportunityRoles => {
+  const taken = new Set<string>();
+  const out = {} as OpportunityRoles;
+  for (const { key, candidates } of columns) {
+    const pick =
+      candidates.find((c) => !taken.has(c.role)) ?? candidates[0];
+    taken.add(pick.role);
+    out[key] = {
+      recommended: pick,
+      alternatives: candidates.filter((c) => c.role !== pick.role),
+    };
+  }
+  return out;
 };
 
 // -------------------------------------------------------- business owner
@@ -274,11 +330,11 @@ export function rolesFor(a: Opportunity): OpportunityRoles {
     add(governance, "Operational Risk Manager", 55, "It is allowed to act with limited supervision, so the operational control has to be designed rather than assumed.");
   }
 
-  return {
-    businessOwner: rank(business, BUSINESS_FALLBACK),
-    deliveryOwner: rank(delivery, DELIVERY_FALLBACK),
-    governanceOwner: rank(governance, GOVERNANCE_FALLBACK),
-  };
+  return assign([
+    { key: "businessOwner", candidates: ordered(business, BUSINESS_FALLBACK) },
+    { key: "deliveryOwner", candidates: ordered(delivery, DELIVERY_FALLBACK) },
+    { key: "governanceOwner", candidates: ordered(governance, GOVERNANCE_FALLBACK) },
+  ]);
 }
 
 /** Every archetype this module can ever name, for the library check. */

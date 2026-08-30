@@ -15,6 +15,73 @@ than a gap.
 
 ---
 
+## 30 August 2026 (later)
+
+**The product can now recognise AI a company actually runs.**
+
+Six live company runs had produced no evidenced workflows at all. That was an
+honest result for those six, but it only proved the product was cautious, and
+something that says no to everything is cautious too. It could not recognise
+the same activity written a different way: a source saying a bank "uses machine
+learning to detect fraudulent card transactions" did not match the workflow
+called Transaction Fraud Detection, because the words were not identical.
+
+Matching no longer works on the words in the workflow's name. The catalogue
+already describes all 75 of its workflows, what each one does and what it runs
+on, and a passage is now read against that description. Which words identify a
+workflow is worked out by counting how many of the 75 use them, so nobody
+maintains a list and it cannot go stale: "fraud" appears in one of them and
+identifies almost uniquely, "data" appears in fifteen and identifies nothing.
+
+The research step also now records three things about every AI sentence it
+finds: whether it is about this company or about a competitor, a supplier or
+the industry; whether the thing is running, being piloted, planned, being
+explored, or explicitly not happening; and what the AI actually does. None of
+that is taken on trust. Every field is checked back against the sentence, and
+where the two disagree the stricter reading wins, so a sentence beginning
+"plans to" cannot be recorded as a deployment however it was classified.
+
+Proved both ways, because one direction is not proof. Twenty controls now sit
+in the test suite: four cases where a company genuinely runs something, each
+paired with the nearest wrong answer to it. A plan, an exploration, a denial, a
+competitor doing it, a supplier selling it, the industry doing it, a
+company-wide AI statement, a signed vendor agreement and a job advert all
+remain not-evidenced. Adjacent workflows stay apart: a source proving payment
+fraud detection does not evidence cyber threat detection, and a developer
+copilot does not evidence a company knowledge assistant.
+
+Live, Mastercard now comes out with Transaction Fraud Detection evidenced from
+its own retrieved sources, at four out of five rather than five, because the
+source is press reporting rather than Mastercard's own filing. Boots and Tesco
+were re-run and neither gained a thing: Boots' AI findings are about making
+itself findable inside AI shopping assistants, which is real and is not one of
+the 75 workflows, and Tesco's are a signed model agreement, a joint lab and a
+job advert, none of which is a running system.
+
+**A workflow you evidence now shows even where your sector is not listed for
+it.**
+
+Ocado's own sources say machine learning already schedules predictive
+maintenance in its fulfilment centres. The product showed nothing, because the
+catalogue files predictive maintenance under manufacturing, energy and
+transport rather than retail. That list is a reasonable guess about what a
+sector usually does, and a guess should not be allowed to hide what your own
+sources say you actually do.
+
+**Take Forward stops naming the same person twice.**
+
+The three ownership columns were ranked separately, so a data workflow could
+come back with the Chief Data Officer as both the business owner and the
+delivery owner. Two thirds of a three-role recommendation naming one person is
+not a recommendation about ownership, and it quietly removes the challenge
+function the third column exists for. The three are now chosen as a set, each
+taking its best candidate that another column has not already taken. Nothing is
+invented to achieve it: every name still comes from the same role library, and
+a role another column took is still offered in this column's dropdown, because
+you may know your organisation combines the two.
+
+---
+
 ## 30 August 2026
 
 **Company research was timing out, and the page said so without saying why.**

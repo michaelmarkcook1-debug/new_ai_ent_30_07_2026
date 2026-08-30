@@ -179,9 +179,16 @@ export function toPosition(
         url: h.url,
         evidenceType: evidenceTypeFor(h.url),
       })),
-      statements: [...research.aiFindings, ...research.findings].map((f) => ({
+      statements: [
+        ...research.aiFindings.map((f) => ({ f, ai: true })),
+        ...research.findings.map((f) => ({ f, ai: false })),
+      ].map(({ f, ai }) => ({
         text: f.statement,
         sourceIndex: f.sourceIndex,
+        ai,
+        // Present on AI findings only, and carried rather than believed. See
+        // CompanyEvidence in company-signals.ts.
+        ...(f.claim ? { claim: f.claim } : {}),
       })),
       financials: research.financials,
     },
