@@ -1,6 +1,134 @@
 {
  "news": [
   {
+   "id": "mkt_30876c0e87f75a59",
+   "title": "Caterpillar is bringing to AI deployment what it learned from automating mining",
+   "summary": "Caterpillar has spent decades putting autonomous machines to work at remote mining sites. It's now bringing that experience to AI deployment.",
+   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
+   "sourceUrl": "https://techcrunch.com/2026/08/30/caterpillar-is-bringing-to-ai-deployment-what-it-learned-from-automating-mining/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-30T15:00:00.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal",
+    "Agentic AI"
+   ],
+   "impactScore": 55,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Industrial automation veteran transferring 30+ years of remote autonomous ops expertise to AI deployment—signals enterprise AI maturation beyond tech-native orgs.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_bb1121bcb2f44144",
+   "title": "Author Explores Cybersecurity Risks of Driverless Cars",
+   "summary": "Former New York City Traffic Commissioner Sam Schwartz joins hosts Christina Ruffini and Bailey Lipschultz on Bloomberg This Weekend and warns that the expansion of autonomous vehicles brings cybersecurity risks, including the possibility that bad actors could seize control of connected cars and use them as weapons. His new novel, Autokill, explores that threat while Schwartz argues that autonomous vehicles still have significant safety potential if companies provide greater transparency and governments prepare for emerging risks. (Source: Bloomberg)",
+   "sourceName": "Bloomberg Technology",
+   "sourceUrl": "https://www.bloomberg.com/news/videos/2026-08-30/author-explores-cybersecurity-risks-of-driverless-cars-video",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-30T14:55:56.000Z",
+   "vendors": [],
+   "categories": [
+    "Risk event",
+    "Enterprise control"
+   ],
+   "impactScore": 48,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Cybersecurity risks in autonomous systems underscore safety/compliance concerns enterprises must architect for; particularly acute as AV/robotics deployment accelerates.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_6e1cc16dffccc174",
+   "title": "Why the next wave of AI startups won’t optimize infrastructure – until they have to",
+   "summary": "For most AI startups, infrastructure isn’t the first problem to solve; speed is. At the earliest stages, success is defined by how quickly a team can move from idea to product, from prototype to traction. The constraints are immediate and unforgiving: limited runway, small teams, and the constant pressure to prove value before the next [&#8230;] The post Why the next wave of AI startups won’t optimize infrastructure – until they have to appeared first on SiliconANGLE .",
+   "sourceName": "SiliconANGLE",
+   "sourceUrl": "https://siliconangle.com/2026/08/30/why-the-next-wave-of-ai-startups-wont-optimize-infrastructure-until-they-have-to/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-30T14:53:26.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal"
+   ],
+   "impactScore": 62,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Strategic insight: early-stage AI companies deprioritize infrastructure optimization for speed-to-market, creating future technical debt. Informs enterprise procurement/build decisions.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_bb4f770506510788",
+   "title": "Four safeguards to stop your AI agents from going rogue",
+   "summary": "Artificial intelligence agents are moving from experimentation to production, and with this shift, the stakes are rising. A coding agent at PocketOS recently deleted an entire production database. An agent at Meta exposed sensitive user data for two hours. An Instagram support chatbot allowed hackers to hijack thousands of accounts. And last month, researchers tricked [&#8230;] The post Four safeguards to stop your AI agents from going rogue appeared first on SiliconANGLE .",
+   "sourceName": "SiliconANGLE",
+   "sourceUrl": "https://siliconangle.com/2026/08/30/four-safeguards-to-stop-your-ai-agents-from-going-rogue/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-30T14:53:22.000Z",
+   "vendors": [],
+   "categories": [
+    "Agentic AI",
+    "Enterprise control",
+    "Risk event"
+   ],
+   "impactScore": 71,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Autonomous agents deleting production data highlight urgent need for safety guardrails; enterprise buyers must demand rigorous control frameworks before agent deployment at scale.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_5af20dfc4578e54c",
+   "title": "Inside Meta’s push to put robots to work in data centers",
+   "summary": "Meta is testing robots that can plug in cables, reset servers, and handle other tasks inside its data centers , according to several current and former workers familiar with the projects. The ongoing effort, which has not been previously reported, may eventually allow Meta to operate its rapidly expanding data center footprint with fewer humans, keeping labor costs in check as its spending on AI infrastructure soars . Meta is using robots and related hardware from several different vendors, including Watney Robotics, Kinova, and ABB, according to the same workers, who asked to remain anonymous",
+   "sourceName": "AI - Ars Technica",
+   "sourceUrl": "https://arstechnica.com/ai/2026/08/inside-metas-push-to-put-robots-to-work-in-data-centers/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-30T11:03:47.000Z",
+   "vendors": [
+    "meta"
+   ],
+   "categories": [
+    "Infrastructure",
+    "Agentic AI",
+    "Product launch"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Meta's robotics in data centers demonstrates real-world agentic AI for infrastructure automation; signals maturity of embodied AI and cost-reduction path for large operators.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_b1f17b441886a76e",
+   "title": "🔮 Unbounded self-improvement and its limits #599",
+   "summary": "Good morning! The limits to recursion What are the conditions under which AI systems could undergo recursive self-improvement (RSI) &#8212; and how long might that last? Cards on the table, I&#8217;m not wildly excited by the theory of unending accelerating recursive self-improvement for the simple theoretical issue of control and alignment. But I also think it&#8217;s not likely for practical and theoretical reasons. Now philosopher, Toby Ord, has done the heavy lifting for me . He argues that a key gating factor to RSI is the generation time : how long it takes of an AI system to go through ",
+   "sourceName": "Exponential View",
+   "sourceUrl": "https://www.exponentialview.co/p/ev-599",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-30T02:51:35.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal"
+   ],
+   "impactScore": 72,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Expert analysis of recursive self-improvement limits in AI systems—core strategic question for enterprise risk assessment, capability planning, and long-term viability of frontier models.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
    "id": "mkt_02987cfd103136b4",
    "title": "Sony Music, Warner sue Anthropic, alleging a &#8220;brazen campaign&#8221; of intellectual property theft",
    "summary": "This latest lawsuit is particularly broad and homes in on accusations of illegal piracy.",
@@ -45,6 +173,26 @@
    "suggestedScoreImpact": [],
    "relatedVendors": [],
    "sentiment": "negative"
+  },
+  {
+   "id": "mkt_29dd11b870c3131a",
+   "title": "&#8220;We&#8217;re not doing 30 bets a year&#8221;: Vijay Pande on betting small after running $4 billion at a16z",
+   "summary": "Vijay Pande — who left a16z's roughly $4 billion biotech practice last year to start the much smaller, AI-native VZVC — talks about why biology is finally shifting from a \"discovery\" science to an \"engineering\" one, why clinical trials are still brutally expensive, and why he thinks open, shared datasets (not walled-off ones) are what will actually let AI transform medicine.",
+   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
+   "sourceUrl": "https://techcrunch.com/2026/08/29/were-not-doing-30-bets-a-year-vijay-pande-on-betting-small-after-running-4-billion-at-a16z/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-29T17:36:47.000Z",
+   "vendors": [],
+   "categories": [
+    "Market movement"
+   ],
+   "impactScore": 55,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Signals VC shift from bulk biotech bets to AI-native approaches; informs enterprise expectations for AI-driven life sciences and biotech workflow transformation.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
   },
   {
    "id": "mkt_8fce2b0548f1085e",
@@ -135,6 +283,26 @@
    "suggestedScoreImpact": [],
    "relatedVendors": [],
    "sentiment": "negative"
+  },
+  {
+   "id": "mkt_9b0bce16a98ec4bb",
+   "title": "From pressure to proof: Leading through constraint in the data center era",
+   "summary": "<p data-block-key=\"z3txb\">And the mindset shift the team needed</p>",
+   "sourceName": "DCD",
+   "sourceUrl": "https://www.datacenterdynamics.com/en/opinions/from-pressure-to-proof-leading-through-constraint-in-the-data-center-era/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-29T11:00:31.000Z",
+   "vendors": [],
+   "categories": [
+    "Infrastructure"
+   ],
+   "impactScore": 52,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Data center operational strategy under compute constraints; enterprise buyers need insight into cost/performance tradeoffs as inference capacity and power consumption pressure rise.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
   },
   {
    "id": "mkt_da9af8ed81c3fea3",
@@ -653,6 +821,26 @@
    "confidenceScore": 65,
    "affectedPillars": [],
    "whyItMatters": "Emerging AI vendor market positioning and competitive strategy insights; vendor not tracked but signals broader enterprise AI market segmentation.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_0bb39584995116dc",
+   "title": "CEO Interview: Elphi",
+   "summary": "Eilon Shalev , CEO of Elphi , tells CB Insights how they view the market, customer needs, and their company. How do you define your market and where does your company fit into that space? Elphi is the AI execution platform for regulated enterprises. Today we operate in the mortgage industry &mdash; mortgage is our wedge into the larger world of regulated workflows. In the mortgage industry alone, the estimated total addressable market (TAM) is at least $6B, including both Software as a Service (SaaS) fees and services-as-software fees, both part of the AI execution platform we offer. Want to s",
+   "sourceName": "CB Insights Research",
+   "sourceUrl": "https://www.cbinsights.com/research/ceo-interview-elphi/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-28T17:34:51.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal"
+   ],
+   "impactScore": 45,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "CEO commentary on market positioning provides strategic context, but Elphi is not a tracked vendor and excerpt is incomplete. Assess full interview for relevance to enterprise AI buyer landscape.",
    "suggestedScoreImpact": [],
    "relatedVendors": [],
    "sentiment": "neutral"
@@ -4261,211 +4449,6 @@
    "suggestedScoreImpact": [],
    "relatedVendors": [],
    "sentiment": "positive"
-  },
-  {
-   "id": "mkt_f5698f3aacf2384b",
-   "title": "OpenAI is building AI agents for everything. Will everyone use them?",
-   "summary": "Inside the frontier lab’s push to bring AI agents from software engineers to the masses.",
-   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
-   "sourceUrl": "https://techcrunch.com/2026/08/24/openai-is-building-an-ai-agent-for-everything-will-everyone-use-them/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:00:00.000Z",
-   "vendors": [
-    "openai"
-   ],
-   "categories": [
-    "Product launch",
-    "Strategy signal",
-    "Agentic AI"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "OpenAI's push to democratize agentic AI signals major shift in enterprise automation strategy. Scale of deployment ambition directly challenges competitor positioning and will reshape enterprise AI workflows.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_9916f3219be2830b",
-   "title": "Ives: Nvidia Earnings Could Be the Next Big Catalyst for AI Stocks",
-   "summary": "Nvidia’s earnings report on Wednesday will likely serve as another reminder of the company’s commanding lead. Analysts estimate that revenue nearly doubled last quarter from a year earlier to $92 billion. That’s more money than any of its rivals get in a full year. But the flood of cash — with sky-high profit margins — only makes its turf more attractive. Meanwhile, some of Nvidia Corp.’s biggest customers have been told that the prices of servers containing its artificial intelligence chips are going up more than 15% in many cases, people familiar with the matter have said. Dan Ives, Partner ",
-   "sourceName": "Bloomberg Technology",
-   "sourceUrl": "https://www.bloomberg.com/news/videos/2026-08-24/ives-nvidia-earnings-could-be-the-next-big-ai-catalyst-video",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T14:52:24.000Z",
-   "vendors": [
-    "nvidia"
-   ],
-   "categories": [
-    "Market movement",
-    "Infrastructure"
-   ],
-   "impactScore": 68,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "NVIDIA earnings serve as leading indicator for AI infrastructure health and enterprise spending. Near-doubled revenue affirms accelerating GPU demand critical to all tracked vendors' deployment strategies.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_0614addf35ef7519",
-   "title": "Greenidge Generation rebrands as Vulcan Infrastructure and Power, targets AI/HPC",
-   "summary": "<p data-block-key=\"lls61\">Moves away from Bitcoin mining to AI and HPC data centers</p>",
-   "sourceName": "DCD",
-   "sourceUrl": "https://www.datacenterdynamics.com/en/news/greenidge-generation-rebrands-as-vulcan-infrastructure-and-power-targets-aihpc/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T14:50:33.000Z",
-   "vendors": [
-    "coreweave"
-   ],
-   "categories": [
-    "Market movement",
-    "Infrastructure"
-   ],
-   "impactScore": 55,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Major Bitcoin miner pivoting to AI/HPC signals capital reallocation into inference and compute. Expands available GPU capacity for enterprise workloads and competitive pressure on pricing.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_af3ba9993d43eca4",
-   "title": "Wayve, Decart, NEURA Robotics, Nissan: All Running Physical AI on CoreWeave",
-   "summary": "CoreWeave's physical AI stack combines compute, orchestration, tooling, and domain experts, built for robotics, autonomous vehicles, and industrial AI teams",
-   "sourceName": "Coreweave Blog Posts",
-   "sourceUrl": "https://wf.coreweave.com/blog/wayve-decart-neura-robotics-nissan-all-running-physical-ai-on-coreweave",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T14:44:04.000Z",
-   "vendors": [
-    "coreweave"
-   ],
-   "categories": [
-    "Partnership",
-    "Agentic AI",
-    "Infrastructure"
-   ],
-   "impactScore": 58,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "CoreWeave's physical AI stack deployed across robotics and autonomous vehicle leaders signals infrastructure differentiation. Demonstrates enterprise-ready orchestration for hardware-bound AI workloads.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_31b7b79a527a0d45",
-   "title": "Taiwan Indicts Nvidia Manager Following Chip Smuggling Probe",
-   "summary": "Taiwanese prosecutors indicted a senior Nvidia Corp. manager as part of a group that allegedly smuggled advanced AI chips into China, according to people familiar with the matter, advancing the island democracy’s first known crackdown on the black-market trade of such accelerators.",
-   "sourceName": "Bloomberg Technology",
-   "sourceUrl": "https://www.bloomberg.com/news/articles/2026-08-24/taiwan-indicts-nvidia-manager-following-chip-smuggling-probe",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T14:12:24.000Z",
-   "vendors": [
-    "nvidia"
-   ],
-   "categories": [
-    "Regulation",
-    "Risk event"
-   ],
-   "impactScore": 71,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Chip smuggling indictment escalates geopolitical export controls on advanced AI accelerators. Direct threat to NVIDIA supply chains and enterprise access to cutting-edge GPU infrastructure globally.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "negative"
-  },
-  {
-   "id": "mkt_842cf9020813f0ee",
-   "title": "How AI Agents on CoreWeave Help Process F1® Radio in Near Real Time",
-   "summary": "CoreWeave and Aston Martin Aramco Formula One™ Team built a near real-time AI platform that transcribes 40 live radio channels to turn race-day audio into split-second strategy decisions",
-   "sourceName": "Coreweave Blog Posts",
-   "sourceUrl": "https://wf.coreweave.com/blog/how-ai-agents-on-coreweave-help-process-f1-radio-in-near-real-time",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T13:55:19.000Z",
-   "vendors": [
-    "coreweave"
-   ],
-   "categories": [
-    "Partnership",
-    "Agentic AI",
-    "Infrastructure"
-   ],
-   "impactScore": 62,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Real-time AI agent deployment at scale (40 live channels to strategy decisions) validates CoreWeave's inference infrastructure for mission-critical enterprise workloads and competitive differentiation.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_e3526f47c0f143a7",
-   "title": "Hugging Face reportedly in talks to be acquired for $13B",
-   "summary": "Hugging Face has reportedly been fielding acquisition offers that would value the company at around $13B. But with the founders' feeling of responsibility to community, doubts arise as to whether a sale will happen.",
-   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
-   "sourceUrl": "https://techcrunch.com/2026/08/24/hugging-face-reportedly-in-talks-to-be-acquired-for-13b/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T13:47:26.000Z",
-   "vendors": [],
-   "categories": [
-    "Market movement",
-    "Strategy signal"
-   ],
-   "impactScore": 65,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Hugging Face acquisition speculation at $13B valuation signals consolidation pressure in AI infrastructure/model ecosystems. Could reshape open-model strategies and enterprise vendor partnerships.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "mixed"
-  },
-  {
-   "id": "mkt_a7fe439a60bc77f6",
-   "title": "Import AI 470: No rights for machines; automating environment generation with SPADE; and building better GPU kernels with Hawkeye",
-   "summary": "Welcome to Import AI, a newsletter about AI research. Import AI runs on arXiv, cappuccinos, and feedback from readers. If you&#8217;d like to support this, please subscribe. Subscribe now AI is accelerating some types of progress but not others: &#8230;A nice METR study lays out where acceleration is showing up&#8230; Here&#8217;s a little analysis from METR which looks at where AI may be accelerating different types of science and technology. The study looks at three different areas: cyber, math, and AI research, and finds that AI has contributed a lot to cyber, a little bit to math, and it&#",
-   "sourceName": "Import AI",
-   "sourceUrl": "https://importai.substack.com/p/import-ai-470-no-rights-for-machines",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T13:12:40.000Z",
-   "vendors": [],
-   "categories": [
-    "Strategy signal"
-   ],
-   "impactScore": 45,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Research commentary on GPU kernels and environment automation touches infrastructure concerns but lacks vendor specificity or enterprise deployment signals.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_ae4e67258107e8c9",
-   "title": "AWS patches SDK flaw that turned a region field into credential theft",
-   "summary": "Amazon Web Services Inc. has patched a flaw across seven of its software development kits after product security startup Pi Inc. traced a single bug report to roughly 2,500 instances of the same defect, Pi revealed today. Every AWS SDK builds the hostname it calls from a template. The region drops into the middle of [&#8230;] The post AWS patches SDK flaw that turned a region field into credential theft appeared first on SiliconANGLE .",
-   "sourceName": "SiliconANGLE",
-   "sourceUrl": "https://siliconangle.com/2026/08/24/aws-patches-sdk-flaw-that-turned-a-region-field-into-credential-theft/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T13:00:52.000Z",
-   "vendors": [
-    "aws"
-   ],
-   "categories": [
-    "Risk event",
-    "Enterprise control"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "SDK credential-theft vulnerability across 7 AWS SDKs affecting ~2,500 instances is a material enterprise security risk requiring immediate patching and audit.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "negative"
   }
  ]
 }
