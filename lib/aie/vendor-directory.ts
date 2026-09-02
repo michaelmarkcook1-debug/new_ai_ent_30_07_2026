@@ -58,7 +58,7 @@ export const VENDOR_DIRECTORY: DirectoryVendor[] = [
     "name": "AMD",
     "category": "AI infrastructure",
     "ownershipType": "public",
-    "overallScore": 56.9,
+    "overallScore": 56.8,
     "confidenceScore": 94,
     "marketPosition": "Category leader"
   },

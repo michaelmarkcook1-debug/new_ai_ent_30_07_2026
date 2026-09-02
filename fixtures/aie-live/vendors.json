@@ -96,7 +96,7 @@
     "saas"
    ],
    "autonomyLevelMax": "human_in_loop",
-   "overallScore": 56.9,
+   "overallScore": 56.8,
    "confidenceScore": 94,
    "marketPosition": "Category leader",
    "strategy": "Win on price/performance and supply diversification; close the software gap (ROCm) versus CUDA.",

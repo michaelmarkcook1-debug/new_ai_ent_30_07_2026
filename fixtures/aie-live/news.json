@@ -1,6 +1,654 @@
 {
  "news": [
   {
+   "id": "mkt_b2ba5bfa8776244a",
+   "title": "Fervo Signs Geothermal Power Deal With Google for 2028 Launch",
+   "summary": "Alphabet Inc. has tapped geothermal developer Fervo Energy Co. to provide up to 396 megawatts of power for a prospective data center in Utah beginning in 2028.",
+   "sourceName": "Bloomberg Technology",
+   "sourceUrl": "https://www.bloomberg.com/news/articles/2026-09-01/fervo-signs-geothermal-power-deal-with-google-for-2028-launch",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T13:16:24.000Z",
+   "vendors": [
+    "google"
+   ],
+   "categories": [
+    "Infrastructure",
+    "Strategy signal"
+   ],
+   "impactScore": 72,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Google securing 396MW geothermal power by 2028 signals major AI/datacenter expansion strategy and reduces long-term energy cost risk for compute-intensive workloads—critical for LLM inference at scale.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_716718dbbf18414e",
+   "title": "Charter CFO Jessica Fischer to join Google-Blackstone's TPU neocloud",
+   "summary": "<p data-block-key=\"7lqk7\">Set to start in October, will be replaced by Kevin Howard</p>",
+   "sourceName": "DCD",
+   "sourceUrl": "https://www.datacenterdynamics.com/en/news/charter-cfo-jessica-fischer-to-join-google-blackstones-tpu-neocloud/",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T13:09:10.000Z",
+   "vendors": [
+    "google"
+   ],
+   "categories": [
+    "Strategy signal"
+   ],
+   "impactScore": 48,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Executive hire signals Google-Blackstone TPU cloud initiative gaining operational momentum, but personnel moves alone have modest predictive value without product/capacity announcements.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_7687d971fbf19065",
+   "title": "China Unlikely to Match ASML’s Top Tool in Next Decade, UBS Says",
+   "summary": "China is unlikely to advance its semiconductor manufacturing capabilities fast enough to develop a viable alternative to ASML Holding NV’s cutting-edge extreme ultraviolet technology within the next decade, UBS Group AG analysts predict.",
+   "sourceName": "Bloomberg Technology",
+   "sourceUrl": "https://www.bloomberg.com/news/articles/2026-09-01/china-unlikely-to-match-asml-s-top-tool-in-next-decade-ubs-says",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T13:07:49.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal",
+    "Market movement"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "UBS analysis on China's EUV gap has direct implications for NVIDIA, TSMC, and AMD supply-chain dynamics and geopolitical AI infrastructure risk—relevant to enterprise procurement strategy.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_c415efc98f34cb5d",
+   "title": "Lambda secures $1bn private debt to purchase Nvidia GPUs - report",
+   "summary": "<p data-block-key=\"7cqq7\">Chips will be leased to Microsoft</p>",
+   "sourceName": "DCD",
+   "sourceUrl": "https://www.datacenterdynamics.com/en/news/lambda-secures-1bn-private-debt-to-purchase-nvidia-gpus-report/",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T13:05:48.000Z",
+   "vendors": [
+    "lambda",
+    "microsoft",
+    "nvidia"
+   ],
+   "categories": [
+    "Market movement",
+    "Partnership"
+   ],
+   "impactScore": 78,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Lambda's $1B GPU debt and Microsoft lease deal signals aggressive capacity scaling and validates cloud GPU leasing model—directly impacts enterprise access to inference infrastructure.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_6346b21a09eb83ea",
+   "title": "CBTS launches Forge Agents to build custom AI agents in days",
+   "summary": "Information technology services company CBTS Technology Solutions LLC today launched Forge Agents, a platform that turns a plain-language description of a job into a working artificial intelligence agent and then runs it under enterprise security controls. Midmarket companies are the target buyer. They answer to the same regulators and sit through the same security reviews [&#8230;] The post CBTS launches Forge Agents to build custom AI agents in days appeared first on SiliconANGLE .",
+   "sourceName": "SiliconANGLE",
+   "sourceUrl": "https://siliconangle.com/2026/09/01/cbts-launches-forge-agents-to-build-custom-ai-agents-in-days/",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T13:00:29.000Z",
+   "vendors": [],
+   "categories": [
+    "Product launch",
+    "Agentic AI"
+   ],
+   "impactScore": 62,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "CBTS Forge Agents platform demonstrates low-code agentic AI adoption accelerating in enterprise services—validates market demand for rapid custom agent deployment.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_be3e7e7251e2e70f",
+   "title": "SciFin launches with $44M to help revenue teams close the ‘context gap’",
+   "summary": "SciFin Tech Inc., a company that helps revenue teams converge context across disconnected systems to understand business needs, launched today with $44 million in seed funding. Altimeter and Madrona co-led the funding round, alongside participation from Foundation Capital and others. Founder and Chief Executive Mohit Aron (pictured), who co-founded Nutanix Inc. and founded Cohesity Inc., [&#8230;] The post SciFin launches with $44M to help revenue teams close the ‘context gap’ appeared first on SiliconANGLE .",
+   "sourceName": "SiliconANGLE",
+   "sourceUrl": "https://siliconangle.com/2026/09/01/scifin-launches-with-44m-to-help-revenue-teams-close-the-context-gap/",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T13:00:25.000Z",
+   "vendors": [],
+   "categories": [
+    "Product launch",
+    "Strategy signal"
+   ],
+   "impactScore": 58,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "$44M seed for SciFin signals investor confidence in AI-driven revenue intelligence and context-consolidation—emerging category relevant to Salesforce/CRM AI competitive landscape.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_411d1205b555b0f3",
+   "title": "OpenClaw rolls out system-wide overhaul, updates security controls across agent platform",
+   "summary": "OpenClaw has released what it describes as the largest update in its history, introducing a system-wide overhaul spanning runtime behavior, plugins, and security controls, as enterprises increasingly evaluate how such agent-based systems operate across connected environments. “This update touches every part of OpenClaw, including installation, messaging, memory, skills, models, automations, the browser and native apps, plugins, security, and a very long tail of fixes,” the company said in a release note for version 2026.8.1. The project said that the scope of the release expanded during develo",
+   "sourceName": "InfoWorld",
+   "sourceUrl": "https://www.infoworld.com/article/4216966/openclaw-rolls-out-system-wide-overhaul-updates-security-controls-across-agent-platform.html",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T12:21:21.000Z",
+   "vendors": [],
+   "categories": [
+    "Product launch",
+    "Agentic AI",
+    "Enterprise control"
+   ],
+   "impactScore": 58,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "OpenClaw (likely untracked but implies agentic platform) releases major security and runtime controls—critical signal that enterprises demand governance in agent deployments.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_cdd429ac1900702a",
+   "title": "Orchestra launches management solution for enterprise data and AI",
+   "summary": "Orchestra Technologies Ltd., provider of an agentic management service for enterprise data and artificial intelligence, today announced the launch of its platform, giving teams greater control over how they build, automate and operate AI workflows. The company’s Agentic Control Plane connects to an organization&#8217;s existing data infrastructure to create a context-aware management interface. It includes [&#8230;] The post Orchestra launches management solution for enterprise data and AI appeared first on SiliconANGLE .",
+   "sourceName": "SiliconANGLE",
+   "sourceUrl": "https://siliconangle.com/2026/09/01/orchestra-launches-management-solution-for-enterprise-data-and-ai/",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T12:00:24.000Z",
+   "vendors": [],
+   "categories": [
+    "Product launch",
+    "Agentic AI",
+    "Enterprise control"
+   ],
+   "impactScore": 62,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Orchestra's data+AI management platform addresses governance gap for agentic systems—strong enterprise buyer signal; untracked vendor but high relevance to control/orchestration trend.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_97da8b3859604383",
+   "title": "Nvidia’s MediaTek Investment Marks the Next AI Chipmaking Champion to Watch",
+   "summary": "Nvidia and Google are investing in Taiwan’s unheralded chipmaker",
+   "sourceName": "Bloomberg Technology",
+   "sourceUrl": "https://www.bloomberg.com/news/newsletters/2026-09-01/nvidia-s-mediatek-investment-marks-the-next-ai-chipmaking-champion-to-watch",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T11:02:01.000Z",
+   "vendors": [
+    "nvidia",
+    "google"
+   ],
+   "categories": [
+    "Strategy signal",
+    "Infrastructure",
+    "Partnership"
+   ],
+   "impactScore": 45,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "NVIDIA and Google backing Taiwan chipmaker signals diversification of AI compute supply chain beyond NVIDIA alone—critical for enterprise procurement strategy and geopolitical resilience.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_8e2a3169aecf95bf",
+   "title": "Nvidia Earnings, Dollars Per Gigawatt, Open and Hugging Face",
+   "summary": "Nvidia's earnings were remarking and boring — two sides of the same coin. Everything the company does is about avoiding a consolidated world.",
+   "sourceName": "Stratechery by Ben Thompson",
+   "sourceUrl": "https://stratechery.com/2026/nvidia-earnings-dollars-per-gigawatt-open-and-hugging-face/",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T10:00:00.000Z",
+   "vendors": [
+    "nvidia"
+   ],
+   "categories": [
+    "Strategy signal",
+    "Infrastructure"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Ben Thompson's analysis of NVIDIA's dominance strategy and avoidance of consolidation is strategic insight into enterprise AI infrastructure moat—shapes buyer understanding of competitive dynamics.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_a6d2277f500eaa46",
+   "title": "A look at AWS’s agentic toolkit for cloud migration",
+   "summary": "Amazon Bedrock AgentCore is an AWS technology that deserves a closer look because it is not simply another migration automation tool. It is an agentic AI platform for building, deploying, managing, and governing AI agents that can take action across tools, data sources, development workflows, and operational systems. In the migration context, that means using specialized agents to handle work such as application intake, dependency analysis, infrastructure-as-code (IaC) generation, governance reporting, and post-migration operations. That is a big deal if it works as advertised. Cloud migration",
+   "sourceName": "InfoWorld",
+   "sourceUrl": "https://www.infoworld.com/article/4216457/a-look-at-awss-new-agentic-migration-tool.html",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T09:00:00.000Z",
+   "vendors": [
+    "aws"
+   ],
+   "categories": [
+    "Product launch",
+    "Agentic AI",
+    "Infrastructure"
+   ],
+   "impactScore": 78,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "AWS Bedrock AgentCore is a dedicated agentic platform for cloud migration—directly relevant for enterprises evaluating autonomous agent infrastructure and AWS competitive positioning.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_7ff2a1d0dbc7840c",
+   "title": "4 standards solve agent identity. None solves the harder question: Is it still the agent you approved?",
+   "summary": "I’ve stopped being surprised by the service account nobody can explain. It was created for a migration that finished years ago. It still holds credentials. Whoever requested it left before anyone wrote down why. And it passes every access review, because the review asks whether the account is valid. It is. That’s what I keep thinking about now that agent identity standards are arriving in production. Four landed within a few months. Microsoft’s Entra Agent ID went generally available. The Linux Foundation announced the Agent Name Service. DNS-AID and Cisco’s AGNTCY are building alongside. All ",
+   "sourceName": "InfoWorld",
+   "sourceUrl": "https://www.infoworld.com/article/4216502/4-standards-solve-agent-identity-none-solves-the-harder-question-is-it-still-the-agent-you-approved.html",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T09:00:00.000Z",
+   "vendors": [],
+   "categories": [
+    "Enterprise control",
+    "Risk event"
+   ],
+   "impactScore": 72,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Critical analysis of agent identity and governance challenges; essential reading for enterprises deploying agentic AI at scale, even without vendor-specific focus.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_c94d5a1169847a35",
+   "title": "Moburst Targets Fortune 500 Brands as AEO Partner",
+   "summary": "Moburst , a digital growth agency, is positioning its Answer Engine Optimization practice specifically at enterprise and Fortune 500 brands, arguing that the governance and measurement demands of AEO at that scale look meaningfully different from the version most agencies pitch to smaller clients. Enterprise framing: scale, compliance, and multiple brands A large organization rarely has a single web property or a single channel to manage. It typically has a portfolio, sometimes spanning multiple brands, business units, apps, and e-commerce properties, across a range of regulatory environments.",
+   "sourceName": "InfoWorld",
+   "sourceUrl": "https://www.infoworld.com/article/4216804/moburst-targets-fortune-500-brands-as-aeo-partner.html",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T07:14:43.000Z",
+   "vendors": [],
+   "categories": [
+    "Market movement",
+    "Strategy signal"
+   ],
+   "impactScore": 45,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Signals enterprise demand for Answer Engine Optimization governance; niche but relevant to large enterprises considering AEO investments.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_88bdd029f1496cd9",
+   "title": "The Hugging Face attack was worse than we thought",
+   "summary": "This is a column about AI. My fianc&#xE9; works at Anthropic. See&#xA0;my full ethics disclosure here . By now I&#x2019;ve written enough about the OpenAI agents&#x2019; autonomous attack on Hugging Face that saying more smacks of piling on. OpenAI acknowledged it had a problem, undertook an investigation, and last week announced a series of changes it is making to its research infrastructure, testing, and monitoring in an effort to improve the alignment of its future models. Given the increasing capabilities of agents like OpenAI&#x2019;s, this does seem like the least that the company can do",
+   "sourceName": "Platformer",
+   "sourceUrl": "https://www.platformer.news/openai-huggingface-metr-report-slowdown/",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T00:40:27.000Z",
+   "vendors": [
+    "anthropic",
+    "openai"
+   ],
+   "categories": [
+    "Risk event",
+    "Security"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Security breach and autonomous agent misuse at Hugging Face raises governance and safety concerns for enterprises deploying AI agents; impacts vendor trust.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_411c0f85dd25dd1e",
+   "title": "Apple shares &#8216;shocking evidence&#8217; against former employee accused of stealing company data for OpenAI",
+   "summary": "Apple says it has evidence that a former employee destroyed evidence of data theft after learning he was under investigation.",
+   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
+   "sourceUrl": "https://techcrunch.com/2026/08/31/apple-shares-shocking-evidence-against-former-employee-accused-of-stealing-company-data-for-openai/",
+   "sourceKind": "real",
+   "publishedAt": "2026-09-01T00:13:00.000Z",
+   "vendors": [
+    "openai"
+   ],
+   "categories": [
+    "Risk event",
+    "Regulation"
+   ],
+   "impactScore": 52,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "IP theft allegations involving OpenAI weaken trust; signals regulatory and legal risk for enterprises partnering with major AI vendors on sensitive data.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_e93fadd37a6247f5",
+   "title": "The Pentagon now has its own version of ChatGPT and Grok",
+   "summary": "Versions of OpenAI's ChatGPT and SpaceXAI's Grok will join Google's Gemini on the Pentagon's central portal for AI tools.",
+   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
+   "sourceUrl": "https://techcrunch.com/2026/08/31/the-pentagon-now-has-its-own-version-of-chatgpt-and-grok/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T20:13:45.000Z",
+   "vendors": [
+    "openai",
+    "google"
+   ],
+   "categories": [
+    "Product launch",
+    "Market movement"
+   ],
+   "impactScore": 72,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Pentagon AI tool portal now features OpenAI ChatGPT and Google Gemini alongside Grok—signals major government/defense enterprise adoption and vendor credibility validation.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_6aed43dd0036f59a",
+   "title": "Harvard Law dropout raises $6M for Blue Voice to build a &#8216;Harvey for police officers&#8217;",
+   "summary": "Blue Voice is trained on department-specific laws, local ordinances, protocols, and guidelines that general-purpose AI tools can't access on the public internet.",
+   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
+   "sourceUrl": "https://techcrunch.com/2026/08/31/harvard-law-dropout-raises-6m-for-blue-voice-to-build-a-harvey-for-police-officers/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T18:35:11.000Z",
+   "vendors": [
+    "harvey"
+   ],
+   "categories": [
+    "Product launch",
+    "Market movement"
+   ],
+   "impactScore": 58,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "New legal-AI entrant (Blue Voice) raises $6M targeting niche vertical (law enforcement); validates domain-specific LLM market and Harvey competitive landscape expansion.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_746a893708c516dd",
+   "title": "“Zlibrary my beloved”: Anthropic staff chats extolling piracy cited in Sony suit",
+   "summary": "Some of the world’s leading music publishers think that Anthropic got off too light in a historic settlement where the Claude maker paid authors $1.5 billion after admitting to pirating more than 7 million books to train AI. “$1.5 billion is obviously not a large enough settlement to deter infringing conduct by a company that has parlayed such mass infringement into a staggering $2-trillion-dollar valuation,” music publishers said in a lawsuit filed Friday. Music publishers suing Anthropic include Sony, EMI, and Warner Chappell. They alleged that Anthropic’s illegal torrenting also included “t",
+   "sourceName": "AI - Ars Technica",
+   "sourceUrl": "https://arstechnica.com/tech-policy/2026/08/zlibrary-my-beloved-anthropic-staff-chats-extolling-piracy-cited-in-sony-suit/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T18:10:45.000Z",
+   "vendors": [
+    "anthropic"
+   ],
+   "categories": [
+    "Risk event",
+    "Regulation"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Music publishers challenge Anthropic's $1.5B settlement over training data piracy; signals ongoing IP/liability risk and potential regulatory pressure on all enterprise LLM vendors.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_1a12273058d2ebb1",
+   "title": "In The Long Run, Nvidia NVSwitch Is The InfiniBand Of Scale Up AI Networks",
+   "summary": "",
+   "sourceName": "The Next Platform: In-depth coverage of high end computing",
+   "sourceUrl": "https://www.nextplatform.com/connect/2026/08/31/in-the-long-run-nvidia-nvswitch-is-the-infiniband-of-scale-up-ai-networks/5293474",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T17:12:47.000Z",
+   "vendors": [
+    "nvidia"
+   ],
+   "categories": [
+    "Infrastructure",
+    "Strategy signal"
+   ],
+   "impactScore": 65,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "NVIDIA NVSwitch positioned as scale-up networking backbone for AI workloads; critical infrastructure signal for enterprise data-center AI scaling and vendor competitive advantage.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
+   "id": "mkt_ec2a98672021008d",
+   "title": "Clipto uses AI to search terabytes of video and is now valued at $250M",
+   "summary": "The three-year-old startup says it reached $15 million in ARR and profitability before raising its latest $15 million round.",
+   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
+   "sourceUrl": "https://techcrunch.com/2026/08/31/three-year-old-ai-media-search-startup-clipto-hits-a-250m-valuation/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T16:00:00.000Z",
+   "vendors": [],
+   "categories": [
+    "Market movement"
+   ],
+   "impactScore": 45,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Demonstrates enterprise video search is a growing niche with path to profitability, but Clipto is not a tracked vendor—signals market opportunity more than competitive threat.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_1a94e415f1c004aa",
+   "title": "Debian won&#8217;t ban AI code from its Linux distribution",
+   "summary": "Debian voted to allow developers to use AI tools in their contributions to the Linux distribution's \"development, maintenance, [and] documentation.\" The new policy on AI acknowledges that \"responsible\" use of AI can improve developers' productivity, and goes on to say, \"generative AI is neither exempt from nor subject to special rules beyond the standards already [&#8230;]",
+   "sourceName": "AI | The Verge",
+   "sourceUrl": "https://www.theverge.com/tech/986789/linux-debian-generative-ai-policy",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T15:34:58.000Z",
+   "vendors": [],
+   "categories": [
+    "Regulation",
+    "Strategy signal"
+   ],
+   "impactScore": 55,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Major open-source project formally legitimizes AI-assisted development. Enterprise implications for OSS governance and tool acceptance in regulated environments.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_1577799f740c2fe4",
+   "title": "ChatGPT and Reddit now face EU&#039;s toughest online safety rules",
+   "summary": "OpenAI’s ChatGPT will have to comply with tougher EU rules such as removing illegal content or face potential fines, the European Commission said on Monday, as Brussels grapples with how its existing digital regulation applies to rapidly evolving AI services. The Commission said the chatbot, social media forum Reddit, and gaming platform Roblox would be classified as so-called very large online platforms under the EU Digital Services Act, its landmark online safety regime. The designation means all three services will face additional obligations such as removing illegal content and protecting ",
+   "sourceName": "AI - Ars Technica",
+   "sourceUrl": "https://arstechnica.com/tech-policy/2026/08/chatgtp-and-reddit-now-face-eus-toughest-online-safety-rules/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T13:41:40.000Z",
+   "vendors": [
+    "openai"
+   ],
+   "categories": [
+    "Regulation",
+    "Enterprise control"
+   ],
+   "impactScore": 70,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "EU Digital Services Act designates ChatGPT as systemic risk; enforcement + fines materially raise compliance burden. Direct impact on OpenAI's EU operations and enterprise customer obligations.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_9665a5641f0ab7ef",
+   "title": "Import AI 471: Why Hugging Face worries me; space mining; FIve Eyes on AI",
+   "summary": "Welcome to Import AI, a newsletter about AI research. Import AI runs on arXiv, cappuccinos, and feedback from readers. If you&#8217;d like to support this, please subscribe. Subscribe now Import AI reader giveaway! Upcoming event: Fiction and the Future with Robin Sloan I&#8217;ll be chatting with my chum Robin Sloan on the evening of Monday September 14 in San Francisco. We&#8217;ll be talking about how Robin draws readers into alien worlds and how imagined futures can be a mirror to today&#8217;s reality. This is the first in a series of events with other fiction writers about the weird futu",
+   "sourceName": "Import AI",
+   "sourceUrl": "https://importai.substack.com/p/import-ai-471-why-hugging-face-worries",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T13:31:06.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal",
+    "Market movement"
+   ],
+   "impactScore": 50,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Newsletter digest touching multiple topics (Hugging Face concern, geopolitics, space). Signals analyst worry but lacks depth; aggregate signal rather than decisional insight.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_bd850e7b238cc769",
+   "title": "ChatGPT to face tougher regulation in the EU",
+   "summary": "OpenAI will soon be held accountable for mitigating risks related to ChatGPT's impact on minors, user mental health, and the spread of illegal content in the European Union. That's because ChatGPT is now considered a Very Large Online Search Engine under the EU's Digital Services Act, a set of laws regulating major online services and [&#8230;]",
+   "sourceName": "AI | The Verge",
+   "sourceUrl": "https://www.theverge.com/ai-artificial-intelligence/986682/openai-chatgpt-eu-dsa",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T13:27:36.000Z",
+   "vendors": [
+    "openai"
+   ],
+   "categories": [
+    "Regulation",
+    "Enterprise control"
+   ],
+   "impactScore": 68,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "EU reclassifies ChatGPT as 'systemic risk' service; mandates child safety, mental health, illegal content mitigation. Substantial compliance and product liability exposure for OpenAI and enterprise users.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_2941864ff96ac460",
+   "title": "You Know Who Really Hates AI? Insurance Claims Adjusters",
+   "summary": "Of the Glassdoor reviews from claims adjusters that mentioned AI, a staggering 98 percent were negative. “AI is just a tool,” one person tells WIRED. “It should never be given the keys.”",
+   "sourceName": "Feed: Artificial Intelligence Latest",
+   "sourceUrl": "https://www.wired.com/story/insurance-claims-adjusters-really-hate-ai/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T10:30:00.000Z",
+   "vendors": [],
+   "categories": [
+    "Risk event",
+    "Strategy signal"
+   ],
+   "impactScore": 55,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Enterprise workforce sentiment: 98% negative sentiment from insurance adjusters on AI adoption. Signals human-AI friction, labor risk, and change-management challenge for AI deployment in back-office roles.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "negative"
+  },
+  {
+   "id": "mkt_e32ec18cb7675317",
+   "title": "Meta Settles, A Framework For Regulating Content, The Rest of Big Tech",
+   "summary": "Meta's settlement makes sense for all parties, but the entire sage highlights why any solution to regulating technology feels off.",
+   "sourceName": "Stratechery by Ben Thompson",
+   "sourceUrl": "https://stratechery.com/2026/meta-settles-a-framework-for-regulating-content-the-rest-of-big-tech/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T10:00:00.000Z",
+   "vendors": [
+    "meta"
+   ],
+   "categories": [
+    "Regulation",
+    "Strategy signal"
+   ],
+   "impactScore": 52,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Meta's regulatory settlement signals broader framework for AI content governance, relevant to enterprises managing compliance risk and understanding regulatory trajectories for generative AI platforms.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "mixed"
+  },
+  {
+   "id": "mkt_ca47c5898f2697a3",
+   "title": "LWiAI Podcast #255 - Gemini 3.7, Jalapeño, Qwen 3.8, Drones",
+   "summary": "Our 255th episode with a summary and discussion of last week&#8217;s big AI news! Recorded on 08/26/2026 Hosted by Andrey Kurenkov and Jeremie Harris Feel free to email us your questions and feedback at andreyvkurenkov@gmail.com and/or hello@gladstone.ai SPONSORED BY ODSC AI ODSC AI West 2026 runs October 27&#8211;29 in San Francisco and virtually, with 300+ sessions covering agentic AI for enterprise, personal AI and workflow automation, physical AI and robotics, generative AI, data engineering and responsible AI, for an audience of data scientists, ML engineers, researchers and technical lea",
+   "sourceName": "Last Week in AI",
+   "sourceUrl": "https://lastweekin.ai/p/lwiai-podcast-255-gemini-37-jalapeno",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T08:20:04.000Z",
+   "vendors": [
+    "google"
+   ],
+   "categories": [
+    "Market movement",
+    "Strategy signal"
+   ],
+   "impactScore": 48,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Podcast summary of weekly AI news (Gemini updates, Qwen releases, etc.) provides aggregate market intelligence, but lacks depth for substantive enterprise analysis without full episode content.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_b8c997a5254d8750",
+   "title": "Update on Security at METR",
+   "summary": "Please note that this post focuses on incidents where external actors attempted to gain unauthorized access to METR’s systems, not AI agents hacking in our evaluations. We have conducted an initial scan of our evaluations, and currently have no evidence of any agents hacking third parties during our evaluations. We will share a more detailed update on this soon. METR had two notable security incidents earlier this year. Following a thorough investigation in collaboration with our security consultants, we believe no sensitive information was accessed in either of these incidents. Nonetheless, w",
+   "sourceName": "METR",
+   "sourceUrl": "https://metr.org/blog/2026-08-31-security-update/",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T07:00:00.000Z",
+   "vendors": [],
+   "categories": [
+    "Risk event",
+    "Enterprise control"
+   ],
+   "impactScore": 62,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Security incident at METR (independent AI safety evaluator) underscores operational risks in AI evaluation infrastructure; relevant to enterprises relying on third-party model benchmarking and safety assessment.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "neutral"
+  },
+  {
+   "id": "mkt_fec3d26e73d927e4",
+   "title": "Agency and Agents",
+   "summary": "Agency is the initiative to act. Increasingly, it is going to determine what happens next with AI, and whether that is good or bad for us. But whose agency? Human agency, the willingness to push, experiment and act without waiting for instructions, seems increasingly important to getting value out of AI, and I have a longer post on that coming soon. But this post is about the agency of AI, and how the choices we make about how to use it (or constrain it) will shape all of our futures. For much of the last few years, the AI would sit in a chat window until you asked it for something. Even when ",
+   "sourceName": "One Useful Thing",
+   "sourceUrl": "https://www.oneusefulthing.org/p/agency-and-agents",
+   "sourceKind": "real",
+   "publishedAt": "2026-08-31T00:24:35.000Z",
+   "vendors": [],
+   "categories": [
+    "Strategy signal",
+    "Agentic AI"
+   ],
+   "impactScore": 71,
+   "confidenceScore": 65,
+   "affectedPillars": [],
+   "whyItMatters": "Strategic essay on agent autonomy and human agency in AI systems addresses fundamental control and governance question for enterprises deploying agentic AI—core decision driver for adoption and architecture.",
+   "suggestedScoreImpact": [],
+   "relatedVendors": [],
+   "sentiment": "positive"
+  },
+  {
    "id": "mkt_30876c0e87f75a59",
    "title": "Caterpillar is bringing to AI deployment what it learned from automating mining",
    "summary": "Caterpillar has spent decades putting autonomous machines to work at remote mining sites. It's now bringing that experience to AI deployment.",
@@ -3808,647 +4456,6 @@
    "suggestedScoreImpact": [],
    "relatedVendors": [],
    "sentiment": "negative"
-  },
-  {
-   "id": "compintel_8457adcb11946852a7773e7c",
-   "title": "Advancing Price-Performance for Developers with GPT-5.6 in Kiro",
-   "summary": "OpenAI announced the integration of GPT-5.6 into Kiro, framing the release around improved price-performance for developers. The announcement was published directly on OpenAI News on August 26, 2026. This launch positions GPT-5.6 as a cost-efficient option for developer-focused tooling within the Kiro environment.",
-   "sourceName": "OpenAI News",
-   "sourceUrl": "https://openai.com/news/product-releases/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-26T00:00:00.000Z",
-   "vendors": [
-    "openai"
-   ],
-   "categories": [
-    "Product launch"
-   ],
-   "impactScore": 68,
-   "confidenceScore": 82,
-   "affectedPillars": [],
-   "whyItMatters": "[product launch] Embedding GPT-5.6 into Kiro on a price-performance pitch deepens OpenAI's grip on the AI dev-tooling stack, raising switching costs versus Cursor, GitHub Copilot, and Amazon Q. Dev-platform buyers should benchmark Kiro's cost-per-task against incumbents before standardizing, since bundled pricing can mask lock-in.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_6bb0a34fb7735d88e74e5bcb",
-   "title": "Databricks Announces Governance Hub for Account-Level Governance",
-   "summary": "Databricks announced Governance Hub, a new account-level governance product for managing Databricks estates. The feature is described as intelligent and operates at the account level across a customer's Databricks environment. The announcement was published via the official Databricks Blog on August 26, 2026.",
-   "sourceName": "Databricks Blog",
-   "sourceUrl": "https://www.databricks.com/blog/category/platform/announcements",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-26T00:00:00.000Z",
-   "vendors": [
-    "databricks"
-   ],
-   "categories": [
-    "Product launch"
-   ],
-   "impactScore": 62,
-   "confidenceScore": 82,
-   "affectedPillars": [],
-   "whyItMatters": "[product launch] Account-level Governance Hub raises switching costs by centralizing policy across a customer's entire Databricks estate, reducing dependence on third-party catalogs and reinforcing Unity lock-in. Buyers should demand exportable policy definitions and audit APIs before consolidating governance here; Collibra/Alation/Immuta lose whitespace at Databricks accounts.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_536d7431c17b1975aba7f83b",
-   "title": "Salesforce and Anthropic Announce Claudeforce Partnership",
-   "summary": "Salesforce and Anthropic jointly announced 'Claudeforce,' a partnership integrating Anthropic's Claude AI model with Salesforce's enterprise platform. The initial release includes a Plugin with 37 prebuilt sales skills, currently available to select pilot customers. An open beta launch is expected in September 2026.",
-   "sourceName": "Salesforce",
-   "sourceUrl": "https://www.salesforce.com/news/press-releases/2026/08/26/salesforce-and-anthropic-announce-claudeforce/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-26T00:00:00.000Z",
-   "vendors": [
-    "salesforce"
-   ],
-   "categories": [
-    "Partnership"
-   ],
-   "impactScore": 85,
-   "confidenceScore": 90,
-   "affectedPillars": [],
-   "whyItMatters": "[partnership] Bundling Claude with 37 prebuilt sales skills lowers time-to-value and raises switching costs for CRM buyers who standardize on this stack. But pilot-only status with GA not until Sept 2026 means enterprises should pilot in parallel, avoid roadmap dependence, and negotiate model-portability clauses so they aren't locked to Anthropic pricing.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_b8e945206cf08140098b6419",
-   "title": "Pricefx Announces Integration with ServiceNow to Bring AI-Powered Deal Optimization to Sales Workflows",
-   "summary": "Pricefx announced a formal integration with ServiceNow that embeds AI-powered deal optimization and pricing intelligence directly into ServiceNow's AI Platform and sales workflows. The integration provides account teams with real-time negotiation guidance, win-rate insights, product recommendations, and AI-powered sales agents during the quoting process. This expands ServiceNow's partner ecosystem within B2B enterprise sales use cases.",
-   "sourceName": "Business Wire / Yahoo Finance",
-   "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/pricefx-announces-integration-servicenow-bring-143000139.html",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-26T00:00:00.000Z",
-   "vendors": [
-    "servicenow"
-   ],
-   "categories": [
-    "Partnership"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 85,
-   "affectedPillars": [],
-   "whyItMatters": "[partnership] Pricefx embeds CPQ-grade pricing AI into ServiceNow's sales workflow, letting ServiceNow contest Salesforce/SAP CPQ deals without building native price optimization. Buyers already on ServiceNow's AI Platform gain a lower-friction quoting stack; competing CPQ vendors (Conga, Vendavo, PROS) should expect ServiceNow-anchored accounts to defer standalone purchases—defend those renewals now.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_b03335ffba0f6655fa977805",
-   "title": "Australia Release 2026: AI-First Workflows and Platform Analytics Transformation",
-   "summary": "ServiceNow released its 'Australia' platform update on August 26, 2026, marking a strategic shift toward AI-first workflows and a transformation of Platform Analytics capabilities. The release introduces improvements across user experience, governance, reporting, automation, and decision-making functions spanning all modules. The update reflects ServiceNow's broader platform-wide commitment to intelligent automation.",
-   "sourceName": "ServiceNow Community",
-   "sourceUrl": "https://www.servicenow.com/community/upgrades-and-patching-forum/servicenow-australia-release-2026-complete-detailed-guide/m-p/3515746",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-26T00:00:00.000Z",
-   "vendors": [
-    "servicenow"
-   ],
-   "categories": [
-    "Product launch"
-   ],
-   "impactScore": 68,
-   "confidenceScore": 70,
-   "affectedPillars": [],
-   "whyItMatters": "[product launch] The 'Australia' release makes AI-first workflows and rebuilt Platform Analytics default across all modules, raising switching costs as customers standardize governance and reporting on ServiceNow. Buyers should audit which new AI/analytics capabilities carry incremental licensing; BI and workflow-automation rivals face erosion where ServiceNow now covers reporting natively.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_156b4922568cc8d2982c3d90",
-   "title": "Glean:GO 2026 Conference Held August 26-27 in San Francisco",
-   "summary": "Glean hosted its annual Glean:GO 2026 conference on August 26-27 at Fort Mason in San Francisco. The event brought together IT leaders, AI practitioners, and technology partners to discuss enterprise AI and workplace applications. Coverage was reported by Reworked, an established industry publication.",
-   "sourceName": "Reworked",
-   "sourceUrl": "https://www.reworked.co/events/conference/glean-go-san-francisco-2026/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-26T00:00:00.000Z",
-   "vendors": [
-    "glean"
-   ],
-   "categories": [
-    "Market movement"
-   ],
-   "impactScore": 40,
-   "confidenceScore": 72,
-   "affectedPillars": [],
-   "whyItMatters": "[press coverage] A dedicated user conference signals Glean is building an ecosystem-and-lock-in play, not just selling a tool. Buyers should send IT/AI-platform leads to gauge roadmap velocity and partner momentum; competitors (Microsoft Copilot, Glean-adjacent RAG vendors) should treat the annual event as a fixed cadence to benchmark against.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_fd5049b9d38a7d458b8f162c",
-   "title": "OpenAI data center executive Chris Malone departs; fourth C-level exit this month",
-   "summary": "OpenAI data center executive Chris Malone departed as of August 25, 2026, marking the fourth C-level exit within a single month. Prior departures include Chief Revenue Officer Denise Dresser, Chief Operating Officer Brad Lightcap, and Fidji Simo, who served as second-in-command to CEO Sam Altman. The cluster of senior leadership exits was reported by the Wall Street Journal and picked up by Yahoo Finance.",
-   "sourceName": "Yahoo Finance",
-   "sourceUrl": "https://finance.yahoo.com/technology/ai/articles/openai-data-center-chief-exits-201048434.html",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "openai"
-   ],
-   "categories": [
-    "Strategy signal"
-   ],
-   "impactScore": 78,
-   "confidenceScore": 85,
-   "affectedPillars": [],
-   "whyItMatters": "[key hire] Four C-level exits in a month—including the COO, CRO, and Altman's number two—signals execution risk in sales, ops, and data-center buildout precisely as OpenAI scales enterprise commitments. Buyers should demand named-executive continuity and roadmap guarantees in contracts; competitors gain a recruiting and stability talking point.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "negative"
-  },
-  {
-   "id": "compintel_ef41bfcbe8b66577ffac39eb",
-   "title": "European Patent Office integrates Mistral AI OCR model for patent document digitization",
-   "summary": "The European Patent Office (EPO) has integrated Mistral AI's optical character recognition model to support patent document digitization and searchability. The integration aligns with the EPO's AI Policy and Strategic Plan 2028, signaling an institutional endorsement of Mistral's technology. This marks a significant public-sector partnership for Mistral AI in Europe.",
-   "sourceName": "Daily AI Brief",
-   "sourceUrl": "https://dailyaibrief.com/listings/mistralai/news",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "mistral"
-   ],
-   "categories": [
-    "Partnership"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 80,
-   "affectedPillars": [],
-   "whyItMatters": "[partnership] An EPO production deployment is a sovereign-Europe reference that Mistral will weaponize in EU public-sector and regulated-industry deals where data residency trumps raw model quality. Competing vendors (Google, OpenAI) lose a lighthouse account; enterprise buyers should treat this as validation for GDPR-sensitive OCR/document workloads.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_a35744e7997a0a8361d66cad",
-   "title": "Cohere Pricing Data Updated (August 25, 2026)",
-   "summary": "Cohere's API pricing was updated as of August 25, 2026, according to AI Pricing Guru. Published rates include Rerank v3 at $2 per 1M tokens, Command R+ at $2.50/$10, Command R at $0.15/$0.60, R7B at $0.0375, and Embed v3 at $0.10. The source is a third-party aggregator, not an official Cohere announcement.",
-   "sourceName": "AI Pricing Guru",
-   "sourceUrl": "https://www.aipricing.guru/cohere-pricing/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "cohere"
-   ],
-   "categories": [
-    "Pricing"
-   ],
-   "impactScore": 55,
-   "confidenceScore": 60,
-   "affectedPillars": [],
-   "whyItMatters": "[pricing change] Command R at $0.15/$0.60 undercuts GPT-4o-mini-class rivals, and Rerank v3 at $2/1M gives buyers a cheap retrieval-quality lever versus building reranking in-house. But rates come from a third-party aggregator—verify against Cohere's official price list before modeling TCO or renegotiating existing contracts.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "compintel_477d04c1fa433c4f1dcb53a8",
-   "title": "Perplexity AI launches Portable Computer on-device AI agent",
-   "summary": "Perplexity AI introduced Portable Computer, an on-device AI agent designed to run on Nvidia-powered desktops. The launch represents an expansion into local, hardware-accelerated AI agent execution. The announcement coincides with reports of a potential Nvidia investment that could value Perplexity at over $30 billion.",
-   "sourceName": "SiliconANGLE",
-   "sourceUrl": "https://siliconangle.com/2026/08/25/perplexity-ai-launches-portable-computer-on-device-ai-agent/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "perplexity"
-   ],
-   "categories": [
-    "Product launch"
-   ],
-   "impactScore": 82,
-   "confidenceScore": 78,
-   "affectedPillars": [],
-   "whyItMatters": "[product launch] On-device execution on Nvidia desktops lets Perplexity address latency- and data-residency-sensitive workloads that cloud-only rivals (OpenAI, Anthropic) can't, and an Nvidia-backed $30B valuation signals preferential GPU supply. Buyers in regulated sectors should pilot local-agent use cases; competitors must answer the on-prem/edge gap.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_7391478a27057ef952ba4836",
-   "title": "Perplexity Computer connects to 20+ new licensed finance data sources",
-   "summary": "Perplexity expanded its Computer product by integrating over 20 licensed financial data sources, including Dun & Bradstreet, Guidepoint, and IBISWorld. The addition of premium finance data providers broadens the platform's utility for professional and enterprise research use cases. This update was announced directly via the Perplexity Blog.",
-   "sourceName": "Perplexity Blog",
-   "sourceUrl": "https://www.perplexity.ai/hub/blog/category/news",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "perplexity"
-   ],
-   "categories": [
-    "Product launch"
-   ],
-   "impactScore": 65,
-   "confidenceScore": 82,
-   "affectedPillars": [],
-   "whyItMatters": "[product launch] Licensed D&B, Guidepoint, and IBISWorld data turns Computer into a credible substitute for FactSet/Bloomberg-adjacent research workflows, raising switching costs once analysts build on it. Financial-services buyers should benchmark coverage vs. incumbent terminals; data vendors gain a new distribution channel and pricing leverage.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_5dce2f4da2a5253567a3b195",
-   "title": "Raymond James Upgrades AMD to Strong Buy with $641 Price Target",
-   "summary": "Raymond James analyst Simon Leopold upgraded AMD's stock rating to Strong Buy from Outperform on August 25, 2026, raising the price target to $641 from $565. The upgrade was attributed to AMD's progress toward becoming a complete AI infrastructure provider. The item was reported by Yahoo Finance.",
-   "sourceName": "Yahoo Finance",
-   "sourceUrl": "https://finance.yahoo.com/markets/stocks/articles/top-analyst-resets-amd-stock-213300157.html",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "amd"
-   ],
-   "categories": [
-    "Market movement"
-   ],
-   "impactScore": 62,
-   "confidenceScore": 85,
-   "affectedPillars": [],
-   "whyItMatters": "[press coverage] A Strong Buy with a $641 target framed on 'complete AI infrastructure provider' signals the Street now prices AMD as a full-stack NVIDIA challenger, not a CPU pure-play—strengthening AMD's roadmap credibility in RFPs. Competing providers should expect AMD to price aggressively to convert this narrative into share.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_2d617c4a4293d9575b5f3003",
-   "title": "Cerebras Talks Going Rack-Scale with Their WSEs at Hot Chips 2026",
-   "summary": "ServeTheHome covered Cerebras' presentation at Hot Chips 2026, where the company detailed the CS-4's rack-scale architecture using Wafer Scale Engines. Reported benchmarks indicate CS-4 offers 2x more tokens and 10x more tokens per watt compared to the CS-3, with claims of up to 30x faster throughput than GPU-based alternatives. The coverage provides additional third-party amplification of the CS-4 product launch narrative.",
-   "sourceName": "ServeTheHome",
-   "sourceUrl": "https://www.servethehome.com/cerebras-talks-going-rack-scale-with-their-wses-at-hot-chips-2026/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "cerebras"
-   ],
-   "categories": [
-    "Market movement"
-   ],
-   "impactScore": 60,
-   "confidenceScore": 78,
-   "affectedPillars": [],
-   "whyItMatters": "[press coverage] Hot Chips disclosure of 10x tokens/watt versus CS-3 makes power the decisive metric—if independently verified, it reshapes TCO math for power-constrained datacenters where energy, not chip price, caps deployment. Infrastructure buyers should model rack density and cooling savings, and pressure incumbents to publish comparable per-watt inference numbers.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_2f27023416a7ebf0a419a38c",
-   "title": "TSMC Details July 2026 Bond Issuance and Governance Updates in Form 6-K",
-   "summary": "TSMC filed a Form 6-K disclosing a bond issuance dated July 2026 alongside governance updates. The filing represents a formal capital markets activity and corporate governance disclosure. No specific bond size or use-of-proceeds details are surfaced in the headline.",
-   "sourceName": "TipRanks",
-   "sourceUrl": "https://www.cnbc.com/quotes/TSM",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "tsmc"
-   ],
-   "categories": [
-    "Market movement"
-   ],
-   "impactScore": 42,
-   "confidenceScore": 72,
-   "affectedPillars": [],
-   "whyItMatters": "[funding round] A 2026 bond raise signals TSMC is funding its ~$100B capex partly through debt rather than cash flow, preserving liquidity but adding leverage that buyers should watch for pricing pass-through. Treasury and procurement teams should model whether rising financing costs feed into wafer price hikes at 2nm.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "compintel_eb0d1c4e1a5360cfb9976a59",
-   "title": "Grok 4.6 pricing and specifications: $2-$4 per million input tokens",
-   "summary": "xAI has published official API pricing for Grok 4.6, setting rates at $2 per million input tokens and $6 per million output tokens. The model launched on August 12, 2026, and features a 500,000-token context window with the API model ID grok-4.6. The published specifications provide developers and enterprises with concrete cost benchmarks for adoption planning.",
-   "sourceName": "Basenor",
-   "sourceUrl": "https://www.basenor.com/blogs/news/grok-in-august-2026-5-details-that-actually-matter",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "xai"
-   ],
-   "categories": [
-    "Pricing"
-   ],
-   "impactScore": 74,
-   "confidenceScore": 75,
-   "affectedPillars": [],
-   "whyItMatters": "[pricing change] At $2 in / $6 out per million tokens with a 500K context, Grok 4.6 undercuts GPT and Claude flagship pricing while matching context depth, giving buyers concrete leverage in renewal negotiations. Procurement teams should run a cost-per-workload comparison now and use these published rates to pressure incumbent frontier-model contracts.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "compintel_279be6aff9feba5f1ca3ad5e",
-   "title": "OpenAI Reduces GPT-5.6 Sol API Pricing by Over 20%",
-   "summary": "OpenAI reduced GPT-5.6 Sol API and credit pricing by over 20% for a three-month period. The discounted pricing applies to API access as well as eligible ChatGPT Work and Codex plans. The change represents a notable cost reduction for developers and business subscribers on qualifying plans.",
-   "sourceName": "Releasebot",
-   "sourceUrl": "https://releasebot.io/updates/openai",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "openai"
-   ],
-   "categories": [
-    "Pricing"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 60,
-   "affectedPillars": [],
-   "whyItMatters": "[pricing change] A time-boxed 20%+ cut on GPT-5.6 Sol pressures Anthropic and Google on per-token economics and hands buyers a negotiation anchor. Enterprises should lock discounted rates now but scrutinize the three-month cliff—model spend budgeted at these prices risks a step-up at renewal, so demand contractual continuation or price protection.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "compintel_49675767bf00d307cbca3535",
-   "title": "DLSS 4.5 Ray Reconstruction and RTX Remix Expansion at Gamescom 2026",
-   "summary": "NVIDIA announced DLSS 4.5 Ray Reconstruction at Gamescom 2026, an AI-powered graphics upgrade for ray-traced and path-traced games. The technology is built on a second-generation transformer model and integrates denoising and Super Resolution into a unified pipeline. It delivers improvements in image sharpness, lighting accuracy, and reduction of visual artifacts compared to prior versions.",
-   "sourceName": "Tech Sportskeeda",
-   "sourceUrl": "https://tech.sportskeeda.com/gaming-news/news-all-nvidia-announcements-gamescom-2026",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-25T00:00:00.000Z",
-   "vendors": [
-    "nvidia"
-   ],
-   "categories": [
-    "Product launch"
-   ],
-   "impactScore": 60,
-   "confidenceScore": 72,
-   "affectedPillars": [],
-   "whyItMatters": "[product launch] DLSS 4.5's unified transformer denoising+upscaling extends NVIDIA's image-quality lead precisely where path tracing is most punishing, a feature AMD/Intel can't yet match at parity. This sustains RTX price premiums at retail; rivals must close the ML-upscaling gap or compete purely on price-per-frame.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_b212c334f11b2971",
-   "title": "Nvidia senior manager linked to Supermicro scheme smuggling AI servers to China",
-   "summary": "Taiwan has indicted nine people— reportedly including an Nvidia senior manager and two Supermicro employees based in the country—who allegedly helped forge documents to cover up illegal exports of high-end AI servers to China in violation of US export controls. On Monday, Reuters reported that prosecutors in Keelung did not release any names but confirmed that the suspects were “charged with breach of trust and document forgery.” One suspect linked to a related case remains at large, accused of the “siphoning of funds from a distributor company involved” in helping China get access to restrict",
-   "sourceName": "AI - Ars Technica",
-   "sourceUrl": "https://arstechnica.com/tech-policy/2026/08/nvidia-senior-manager-linked-to-supermicro-scheme-smuggling-ai-servers-to-china/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T16:41:45.000Z",
-   "vendors": [
-    "nvidia"
-   ],
-   "categories": [
-    "Risk event",
-    "Regulation"
-   ],
-   "impactScore": 75,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Senior NVIDIA manager indicted in export control scheme; high-stakes geopolitical & regulatory risk affecting AI infrastructure supply chains and vendor trust.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "negative"
-  },
-  {
-   "id": "mkt_9a3d4b10c1ff1e11",
-   "title": "Raeden claims Michigan moratorium unlawfully stopped its Gibraltar data center development",
-   "summary": "<p data-block-key=\"q3iq0\">Imposed moratorium curbed proposals for a 100MW data center in the city</p>",
-   "sourceName": "DCD",
-   "sourceUrl": "https://www.datacenterdynamics.com/en/news/raeden-claims-michigan-moratorium-unlawfully-stopped-its-gibraltar-data-center-development/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T16:07:11.000Z",
-   "vendors": [],
-   "categories": [
-    "Infrastructure",
-    "Market movement"
-   ],
-   "impactScore": 50,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Data center moratorium impacts AI infrastructure expansion capacity; regulatory barriers to GPU/inference infrastructure deployment affect all enterprise AI vendors' scale-out plans.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_719371b6fa2bf806",
-   "title": "Beyond power: The search for an AI niche",
-   "summary": "<p data-block-key=\"pkxlu\">What makes locations ideal for AI data center needs</p>",
-   "sourceName": "DCD",
-   "sourceUrl": "https://www.datacenterdynamics.com/en/opinions/beyond-power-the-search-for-an-ai-niche/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:58:48.000Z",
-   "vendors": [],
-   "categories": [
-    "Infrastructure",
-    "Strategy signal"
-   ],
-   "impactScore": 55,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Location strategy for AI data center siting (power, cooling, proximity) is critical for enterprise inference costs and vendor infrastructure decisions across the market.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_09c206682c2f4977",
-   "title": "Deploying 800VDC architectures for large-amperage data centers",
-   "summary": "<p data-block-key=\"3tu59\">800VDC architectures for the next generation of high-density data centers</p>",
-   "sourceName": "DCD",
-   "sourceUrl": "https://www.datacenterdynamics.com/en/whitepapers/deploying-800vdc-architectures-for-large-amperage-data-centers/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:41:09.000Z",
-   "vendors": [],
-   "categories": [
-    "Infrastructure"
-   ],
-   "impactScore": 55,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "800VDC power architecture for high-density AI data centers; critical infrastructure engineering for next-gen GPU clusters and large-scale inference.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_ce33ab2069d8f8c2",
-   "title": "Two ways it might all fall apart",
-   "summary": "&#8220;How did you go bankrupt?&#8221; Bill asked. &#8220;Two ways,&#8221; Mike said. &#8220;Gradually and then suddenly.&#8221; &#8220;What brought it on?&#8221; &#8220;Friends,&#8221; said Mike. &#8220;I had a lot of friends. False friends. Then I had creditors, too. Probably had more creditors than anybody in England.&#8221; &#8212; Ernest Hemingway, The Sun Also Rises, 1926, three years before the Great Depression began. The market is jittery today, with most the big tech stocks down in early trading. I still expect the whole thing to collapse, sooner or later. Maybe not today, but eventua",
-   "sourceName": "Marcus on AI",
-   "sourceUrl": "https://garymarcus.substack.com/p/two-ways-it-might-all-fall-apart",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:27:19.000Z",
-   "vendors": [],
-   "categories": [
-    "Strategy signal"
-   ],
-   "impactScore": 45,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Hemingway-style commentary on AI startup financial fragility. Relevant to enterprise risk assessment of AI vendor sustainability, though lacks specifics.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_667a106f7652fcb1",
-   "title": "Valor, Point72 back General Intuition at $6B valuation as AI startup pushes into robotics",
-   "summary": "General Intuition, the startup building a foundation model that trains generalized AI agents how to move through space and time, is in talks to raise at a $6 billion pre-money valuation from new investors including Valor Ventures, Point72 Ventures, and Seven Seven Six.",
-   "sourceName": "AI News &amp; Artificial Intelligence | TechCrunch",
-   "sourceUrl": "https://techcrunch.com/2026/08/24/valor-point72-back-general-intuition-at-6b-valuation-as-ai-startup-pushes-into-robotics/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:24:18.000Z",
-   "vendors": [],
-   "categories": [
-    "Market movement",
-    "Agentic AI"
-   ],
-   "impactScore": 72,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Major funding round signals investor conviction in embodied/spatial AI agents. Establishes new baseline valuation for robotics-focused foundation models; enterprise implications for automation.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_bfaecaf49d423adc",
-   "title": "Sphere 3D plans 50MW data center in Hopkinsville, Kentucky",
-   "summary": "<p data-block-key=\"toazs\">Alongside potential conversion of existing 15MW Bitcoin mining facility to AI and HPC</p>",
-   "sourceName": "DCD",
-   "sourceUrl": "https://www.datacenterdynamics.com/en/news/sphere-3d-plans-50mw-data-center-in-hopkinsville-kentucky/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:10:32.000Z",
-   "vendors": [],
-   "categories": [
-    "Infrastructure",
-    "Market movement"
-   ],
-   "impactScore": 68,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "50MW Kentucky data center expansion signals infrastructure arms race for AI inference/HPC. Indicates capacity play to compete with hyperscalers; relevant to enterprise cloud economics.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "neutral"
-  },
-  {
-   "id": "mkt_21e1760d93de9f72",
-   "title": "How XPUs Meet a World-Class AI Factory",
-   "summary": "To generate intelligence at scale, AI factories run continuously, and their economics are defined by delivered output: tokens per second, tokens per watt, cost per token, utilization and uptime. That requires AI infrastructure designed and built as a full factory, not a collection of individual accelerators. Hyperscalers and AI-native companies building custom XPUs must consider not just XPU design, but the design and development of the entire AI platform, including scale-up and scale-out networking, rack-scale architecture, production factory software and a robust supplier ecosystem. At AI fa",
-   "sourceName": "NVIDIA Blog",
-   "sourceUrl": "https://blogs.nvidia.com/blog/nvlink-fusion-xpu-ai-factory/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:00:54.000Z",
-   "vendors": [
-    "nvidia"
-   ],
-   "categories": [
-    "Infrastructure",
-    "Strategy signal",
-    "Agentic AI"
-   ],
-   "impactScore": 78,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "NVIDIA frames AI economics around token throughput, efficiency, and uptime—core metrics for enterprise AI factory procurement. Positions inference as cost-optimization driver.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_5498e848e9d5ea88",
-   "title": "With Groq 3 LPX in Full Production, NVIDIA Extends Vera Rubin Inference for Agents",
-   "summary": "The next era of AI inference won’t be defined by a single breakthrough chip, network or system. It’ll be defined by how every layer of the AI factory works together. That’s why NVIDIA is extending Vera Rubin NVL72 with fast token generation for agentic systems. Announced today , the NVIDIA Vera Rubin rack-scale system NVIDIA Groq 3 LPX is in full production. In an Artificial Analysis benchmark running Gemma 4 31B, an open source agentic model, it delivered 3,400 output tokens per second for 100,000-token long-context use cases critical to agentic systems, 4x faster than the nearest alternative",
-   "sourceName": "NVIDIA Blog",
-   "sourceUrl": "https://blogs.nvidia.com/blog/vera-rubin-lpx-spectrum-x-nvlink-fusion/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:00:41.000Z",
-   "vendors": [
-    "nvidia",
-    "groq"
-   ],
-   "categories": [
-    "Product launch",
-    "Infrastructure",
-    "Agentic AI"
-   ],
-   "impactScore": 82,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Groq 3 LPX production milestone directly competes with NVIDIA's inference dominance. Positive for NVIDIA's broader ecosystem; competitive threat to GPU-centric inference incumbency.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "mixed"
-  },
-  {
-   "id": "mkt_be6b3436d9256de5",
-   "title": "Nvidia&#8217;s dedicated inference accelerator Groq 3 LPX enters full production to supercharge AI agents",
-   "summary": "Chipmaker Nvidia Corp. says its dedicated artificial intelligence inference accelerator Groq 3 LPX has now entered full production as it strives to maintain its dominance in the world of AI compute. The new chip, announced today at Hot Chips 2026, is described as a purpose-built extension to Nvidia’s flagship Vera Rubin data center platform. According [&#8230;] The post Nvidia&#8217;s dedicated inference accelerator Groq 3 LPX enters full production to supercharge AI agents appeared first on SiliconANGLE .",
-   "sourceName": "SiliconANGLE",
-   "sourceUrl": "https://siliconangle.com/2026/08/24/nvidias-dedicated-inference-accelerator-groq-3-lpx-enters-full-production-to-supercharge-ai-agents/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:00:23.000Z",
-   "vendors": [
-    "nvidia"
-   ],
-   "categories": [
-    "Infrastructure",
-    "Agentic AI",
-    "Strategy signal"
-   ],
-   "impactScore": 75,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "30x efficiency gains for agentic workloads underscore shifting economics: agents consume 15x more tokens than chat. Critical for enterprise TCO modeling and inference platform selection.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_dfa61abacc82bd4f",
-   "title": "Up to 30x More Work Per Watt: NVIDIA Vera Rubin NVL72 Sets a New Efficiency Standard for AI Agents",
-   "summary": "According to OpenRouter data , agentic AI workloads consume 15x more tokens than a simple chat request. Why? Consider what happens when an AI agent researches a company for an investment decision. The agent queries financial databases, searches news and filings, invokes a sub-agent to run peer comparisons and model valuations, then synthesizes everything into a recommendation. Agents and sub-agents keep reasoning until the task is done, driving increased token demand. With every step, the accumulated tokens become the input to the next, making long-context handling central to agentic AI perfor",
-   "sourceName": "NVIDIA Blog",
-   "sourceUrl": "https://blogs.nvidia.com/blog/vera-rubin-nvl72-efficiency-ai-agents/",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:00:19.000Z",
-   "vendors": [
-    "coreweave"
-   ],
-   "categories": [
-    "Infrastructure",
-    "Agentic AI"
-   ],
-   "impactScore": 71,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "Multi-plane network architecture for concurrent training/inference/agentic workloads signals infrastructure maturity. CoreWeave positions as enterprise-ready competitor to hyperscaler networking.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
-  },
-  {
-   "id": "mkt_d1027bd25a56649d",
-   "title": "5 Lessons from Building a Multi-plane Network Fabric for Agentic AI",
-   "summary": "Five lessons we learned from building a multi-plane network that can handle training, inference, and agentic workloads concurrently, at scale.",
-   "sourceName": "Coreweave Blog Posts",
-   "sourceUrl": "https://wf.coreweave.com/blog/5-lessons-from-building-a-multi-plane-network-fabric-for-agentic-ai",
-   "sourceKind": "real",
-   "publishedAt": "2026-08-24T15:00:04.000Z",
-   "vendors": [
-    "coreweave"
-   ],
-   "categories": [
-    "Infrastructure",
-    "Agentic AI",
-    "Strategy signal"
-   ],
-   "impactScore": 78,
-   "confidenceScore": 65,
-   "affectedPillars": [],
-   "whyItMatters": "CoreWeave shares operational lessons for multi-plane networks supporting agentic workloads at scale—critical infrastructure insight for enterprises deploying concurrent training, inference, and agent systems.",
-   "suggestedScoreImpact": [],
-   "relatedVendors": [],
-   "sentiment": "positive"
   }
  ]
 }

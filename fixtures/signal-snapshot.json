@@ -1,5 +1,5 @@
 {
- "capturedAt": "2026-09-01",
+ "capturedAt": "2026-09-02",
  "signals": {
   "vendor_score:ai21": {
    "key": "vendor_score:ai21",
@@ -13,7 +13,7 @@
    "kind": "vendor_score",
    "vendorId": "amd",
    "label": "overall score",
-   "value": 56.9
+   "value": 56.8
   },
   "vendor_score:aws": {
    "key": "vendor_score:aws",
@@ -3625,14 +3625,14 @@
    "kind": "market_share",
    "vendorId": "anthropic",
    "label": "share of agent platform",
-   "value": 20.8
+   "value": 20.9
   },
   "market_share:openai:agent_platform": {
    "key": "market_share:openai:agent_platform",
    "kind": "market_share",
    "vendorId": "openai",
    "label": "share of agent platform",
-   "value": 20.7
+   "value": 20.8
   },
   "market_share:aws:agent_platform": {
    "key": "market_share:aws:agent_platform",
@@ -3646,70 +3646,70 @@
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of agent platform",
-   "value": 17.8
+   "value": 17.3
   },
   "market_share:salesforce:agent_platform": {
    "key": "market_share:salesforce:agent_platform",
    "kind": "market_share",
    "vendorId": "salesforce",
    "label": "share of agent platform",
-   "value": 11.2
+   "value": 11.4
   },
   "market_share:servicenow:agent_platform": {
    "key": "market_share:servicenow:agent_platform",
    "kind": "market_share",
    "vendorId": "servicenow",
    "label": "share of agent platform",
-   "value": 10.8
+   "value": 11
   },
   "market_share:google:ai_cloud_compute": {
    "key": "market_share:google:ai_cloud_compute",
    "kind": "market_share",
    "vendorId": "google",
    "label": "share of ai cloud compute",
-   "value": 25.1
+   "value": 25.4
   },
   "market_share:aws:ai_cloud_compute": {
    "key": "market_share:aws:ai_cloud_compute",
    "kind": "market_share",
    "vendorId": "aws",
    "label": "share of ai cloud compute",
-   "value": 22.1
+   "value": 22.3
   },
   "market_share:microsoft:ai_cloud_compute": {
    "key": "market_share:microsoft:ai_cloud_compute",
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of ai cloud compute",
-   "value": 21.4
+   "value": 21
   },
   "market_share:oracle:ai_cloud_compute": {
    "key": "market_share:oracle:ai_cloud_compute",
    "kind": "market_share",
    "vendorId": "oracle",
    "label": "share of ai cloud compute",
-   "value": 18.2
+   "value": 18.5
   },
   "market_share:alibaba:ai_cloud_compute": {
    "key": "market_share:alibaba:ai_cloud_compute",
    "kind": "market_share",
    "vendorId": "alibaba",
    "label": "share of ai cloud compute",
-   "value": 3.6
+   "value": 3.7
   },
   "market_share:g42:ai_cloud_compute": {
    "key": "market_share:g42:ai_cloud_compute",
    "kind": "market_share",
    "vendorId": "g42",
    "label": "share of ai cloud compute",
-   "value": 3.4
+   "value": 3.3
   },
   "market_share:coreweave:ai_cloud_compute": {
    "key": "market_share:coreweave:ai_cloud_compute",
    "kind": "market_share",
    "vendorId": "coreweave",
    "label": "share of ai cloud compute",
-   "value": 3.3
+   "value": 2.9
   },
   "market_share:humain:ai_cloud_compute": {
    "key": "market_share:humain:ai_cloud_compute",
@@ -3723,166 +3723,166 @@
    "kind": "market_share",
    "vendorId": "broadcom",
    "label": "share of ai silicon",
-   "value": 30.8
+   "value": 28.7
   },
   "market_share:cerebras:ai_silicon": {
    "key": "market_share:cerebras:ai_silicon",
    "kind": "market_share",
    "vendorId": "cerebras",
    "label": "share of ai silicon",
-   "value": 24.3
+   "value": 23.3
   },
   "market_share:nvidia:ai_silicon": {
    "key": "market_share:nvidia:ai_silicon",
    "kind": "market_share",
    "vendorId": "nvidia",
    "label": "share of ai silicon",
-   "value": 15.8
+   "value": 16.9
   },
   "market_share:amd:ai_silicon": {
    "key": "market_share:amd:ai_silicon",
    "kind": "market_share",
    "vendorId": "amd",
    "label": "share of ai silicon",
-   "value": 15.4
+   "value": 16.6
   },
   "market_share:tsmc:ai_silicon": {
    "key": "market_share:tsmc:ai_silicon",
    "kind": "market_share",
    "vendorId": "tsmc",
    "label": "share of ai silicon",
-   "value": 13.7
+   "value": 14.6
   },
   "market_share:google:cloud_ai_platform": {
    "key": "market_share:google:cloud_ai_platform",
    "kind": "market_share",
    "vendorId": "google",
    "label": "share of cloud ai platform",
-   "value": 23
+   "value": 23.1
   },
   "market_share:aws:cloud_ai_platform": {
    "key": "market_share:aws:cloud_ai_platform",
    "kind": "market_share",
    "vendorId": "aws",
    "label": "share of cloud ai platform",
-   "value": 20.2
+   "value": 20.3
   },
   "market_share:databricks:cloud_ai_platform": {
    "key": "market_share:databricks:cloud_ai_platform",
    "kind": "market_share",
    "vendorId": "databricks",
    "label": "share of cloud ai platform",
-   "value": 20
+   "value": 20.2
   },
   "market_share:microsoft:cloud_ai_platform": {
    "key": "market_share:microsoft:cloud_ai_platform",
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of cloud ai platform",
-   "value": 19.6
+   "value": 19.1
   },
   "market_share:snowflake:cloud_ai_platform": {
    "key": "market_share:snowflake:cloud_ai_platform",
    "kind": "market_share",
    "vendorId": "snowflake",
    "label": "share of cloud ai platform",
-   "value": 17.1
+   "value": 17.3
   },
   "market_share:microsoft:crm_customer_ai": {
    "key": "market_share:microsoft:crm_customer_ai",
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of crm customer ai",
-   "value": 41.8
+   "value": 40.9
   },
   "market_share:oracle:crm_customer_ai": {
    "key": "market_share:oracle:crm_customer_ai",
    "kind": "market_share",
    "vendorId": "oracle",
    "label": "share of crm customer ai",
-   "value": 33.8
+   "value": 34.2
   },
   "market_share:salesforce:crm_customer_ai": {
    "key": "market_share:salesforce:crm_customer_ai",
    "kind": "market_share",
    "vendorId": "salesforce",
    "label": "share of crm customer ai",
-   "value": 24.3
+   "value": 24.9
   },
   "market_share:google:developer_coding_agent": {
    "key": "market_share:google:developer_coding_agent",
    "kind": "market_share",
    "vendorId": "google",
    "label": "share of developer coding agent",
-   "value": 26
+   "value": 26.2
   },
   "market_share:anthropic:developer_coding_agent": {
    "key": "market_share:anthropic:developer_coding_agent",
    "kind": "market_share",
    "vendorId": "anthropic",
    "label": "share of developer coding agent",
-   "value": 25.9
+   "value": 26
   },
   "market_share:openai:developer_coding_agent": {
    "key": "market_share:openai:developer_coding_agent",
    "kind": "market_share",
    "vendorId": "openai",
    "label": "share of developer coding agent",
-   "value": 25.8
+   "value": 26
   },
   "market_share:microsoft:developer_coding_agent": {
    "key": "market_share:microsoft:developer_coding_agent",
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of developer coding agent",
-   "value": 22.3
+   "value": 21.8
   },
   "market_share:anthropic:enterprise_assistant": {
    "key": "market_share:anthropic:enterprise_assistant",
    "kind": "market_share",
    "vendorId": "anthropic",
    "label": "share of enterprise assistant",
-   "value": 22.4
+   "value": 22.5
   },
   "market_share:openai:enterprise_assistant": {
    "key": "market_share:openai:enterprise_assistant",
    "kind": "market_share",
    "vendorId": "openai",
    "label": "share of enterprise assistant",
-   "value": 22.3
+   "value": 22.5
   },
   "market_share:microsoft:enterprise_assistant": {
    "key": "market_share:microsoft:enterprise_assistant",
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of enterprise assistant",
-   "value": 19.3
+   "value": 18.9
   },
   "market_share:glean:enterprise_assistant": {
    "key": "market_share:glean:enterprise_assistant",
    "kind": "market_share",
    "vendorId": "glean",
    "label": "share of enterprise assistant",
-   "value": 18.3
+   "value": 18.6
   },
   "market_share:writer:enterprise_assistant": {
    "key": "market_share:writer:enterprise_assistant",
    "kind": "market_share",
    "vendorId": "writer",
    "label": "share of enterprise assistant",
-   "value": 17.7
-  },
-  "market_share:anthropic:frontier_model_api": {
-   "key": "market_share:anthropic:frontier_model_api",
-   "kind": "market_share",
-   "vendorId": "anthropic",
-   "label": "share of frontier model api",
-   "value": 15
+   "value": 17.6
   },
   "market_share:google:frontier_model_api": {
    "key": "market_share:google:frontier_model_api",
    "kind": "market_share",
    "vendorId": "google",
+   "label": "share of frontier model api",
+   "value": 15.1
+  },
+  "market_share:anthropic:frontier_model_api": {
+   "key": "market_share:anthropic:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "anthropic",
    "label": "share of frontier model api",
    "value": 15
   },
@@ -3905,7 +3905,7 @@
    "kind": "market_share",
    "vendorId": "mistral",
    "label": "share of frontier model api",
-   "value": 12
+   "value": 12.1
   },
   "market_share:snowflake:frontier_model_api": {
    "key": "market_share:snowflake:frontier_model_api",
@@ -3933,7 +3933,7 @@
    "kind": "market_share",
    "vendorId": "meta",
    "label": "share of frontier model api",
-   "value": 2.6
+   "value": 2.5
   },
   "market_share:zai:frontier_model_api": {
    "key": "market_share:zai:frontier_model_api",
@@ -3942,17 +3942,17 @@
    "label": "share of frontier model api",
    "value": 2.4
   },
-  "market_share:deepseek:frontier_model_api": {
-   "key": "market_share:deepseek:frontier_model_api",
-   "kind": "market_share",
-   "vendorId": "deepseek",
-   "label": "share of frontier model api",
-   "value": 2.2
-  },
   "market_share:alibaba:frontier_model_api": {
    "key": "market_share:alibaba:frontier_model_api",
    "kind": "market_share",
    "vendorId": "alibaba",
+   "label": "share of frontier model api",
+   "value": 2.2
+  },
+  "market_share:deepseek:frontier_model_api": {
+   "key": "market_share:deepseek:frontier_model_api",
+   "kind": "market_share",
+   "vendorId": "deepseek",
    "label": "share of frontier model api",
    "value": 2.2
   },
@@ -3961,7 +3961,7 @@
    "kind": "market_share",
    "vendorId": "minimax",
    "label": "share of frontier model api",
-   "value": 1.5
+   "value": 1.3
   },
   "market_share:ai21:frontier_model_api": {
    "key": "market_share:ai21:frontier_model_api",
@@ -3975,154 +3975,154 @@
    "kind": "market_share",
    "vendorId": "microsoft",
    "label": "share of itsm hr service ai",
-   "value": 42.5
+   "value": 42.4
   },
   "market_share:moveworks:itsm_hr_service_ai": {
    "key": "market_share:moveworks:itsm_hr_service_ai",
    "kind": "market_share",
    "vendorId": "moveworks",
    "label": "share of itsm hr service ai",
-   "value": 35.1
+   "value": 34.2
   },
   "market_share:servicenow:itsm_hr_service_ai": {
    "key": "market_share:servicenow:itsm_hr_service_ai",
    "kind": "market_share",
    "vendorId": "servicenow",
    "label": "share of itsm hr service ai",
-   "value": 22.3
+   "value": 23.5
   },
   "market_share:lambda:neocloud_inference": {
    "key": "market_share:lambda:neocloud_inference",
    "kind": "market_share",
    "vendorId": "lambda",
    "label": "share of neocloud inference",
-   "value": 26.7
-  },
-  "market_share:together:neocloud_inference": {
-   "key": "market_share:together:neocloud_inference",
-   "kind": "market_share",
-   "vendorId": "together",
-   "label": "share of neocloud inference",
-   "value": 17.8
-  },
-  "market_share:groq:neocloud_inference": {
-   "key": "market_share:groq:neocloud_inference",
-   "kind": "market_share",
-   "vendorId": "groq",
-   "label": "share of neocloud inference",
-   "value": 17.6
+   "value": 28.3
   },
   "market_share:fireworks:neocloud_inference": {
    "key": "market_share:fireworks:neocloud_inference",
    "kind": "market_share",
    "vendorId": "fireworks",
    "label": "share of neocloud inference",
+   "value": 18
+  },
+  "market_share:together:neocloud_inference": {
+   "key": "market_share:together:neocloud_inference",
+   "kind": "market_share",
+   "vendorId": "together",
+   "label": "share of neocloud inference",
    "value": 17
+  },
+  "market_share:groq:neocloud_inference": {
+   "key": "market_share:groq:neocloud_inference",
+   "kind": "market_share",
+   "vendorId": "groq",
+   "label": "share of neocloud inference",
+   "value": 16.8
   },
   "market_share:coreweave:neocloud_inference": {
    "key": "market_share:coreweave:neocloud_inference",
    "kind": "market_share",
    "vendorId": "coreweave",
    "label": "share of neocloud inference",
-   "value": 12.3
+   "value": 11.2
   },
   "market_share:nscale:neocloud_inference": {
    "key": "market_share:nscale:neocloud_inference",
    "kind": "market_share",
    "vendorId": "nscale",
    "label": "share of neocloud inference",
-   "value": 8.7
+   "value": 8.6
   },
   "market_share:google:rag_enterprise_search": {
    "key": "market_share:google:rag_enterprise_search",
    "kind": "market_share",
    "vendorId": "google",
    "label": "share of rag enterprise search",
-   "value": 24
+   "value": 24.2
   },
   "market_share:cohere:rag_enterprise_search": {
    "key": "market_share:cohere:rag_enterprise_search",
    "kind": "market_share",
    "vendorId": "cohere",
    "label": "share of rag enterprise search",
-   "value": 21.1
+   "value": 21.2
   },
   "market_share:glean:rag_enterprise_search": {
    "key": "market_share:glean:rag_enterprise_search",
    "kind": "market_share",
    "vendorId": "glean",
    "label": "share of rag enterprise search",
-   "value": 19.2
+   "value": 19.3
   },
   "market_share:snowflake:rag_enterprise_search": {
    "key": "market_share:snowflake:rag_enterprise_search",
    "kind": "market_share",
    "vendorId": "snowflake",
    "label": "share of rag enterprise search",
-   "value": 17.9
+   "value": 18
   },
   "market_share:hebbia:rag_enterprise_search": {
    "key": "market_share:hebbia:rag_enterprise_search",
    "kind": "market_share",
    "vendorId": "hebbia",
    "label": "share of rag enterprise search",
-   "value": 17.8
+   "value": 17.3
   },
   "market_share:cohere:regulated_industry_ai": {
    "key": "market_share:cohere:regulated_industry_ai",
    "kind": "market_share",
    "vendorId": "cohere",
    "label": "share of regulated industry ai",
-   "value": 35
+   "value": 35.7
   },
   "market_share:harvey:regulated_industry_ai": {
    "key": "market_share:harvey:regulated_industry_ai",
    "kind": "market_share",
    "vendorId": "harvey",
    "label": "share of regulated industry ai",
-   "value": 23.5
+   "value": 23.7
   },
   "market_share:ibm:regulated_industry_ai": {
    "key": "market_share:ibm:regulated_industry_ai",
    "kind": "market_share",
    "vendorId": "ibm",
    "label": "share of regulated industry ai",
-   "value": 22.1
+   "value": 22.3
   },
   "market_share:rogo:regulated_industry_ai": {
    "key": "market_share:rogo:regulated_industry_ai",
    "kind": "market_share",
    "vendorId": "rogo",
    "label": "share of regulated industry ai",
-   "value": 19.4
+   "value": 18.3
   },
   "market_share:sap:workflow_automation_ai": {
    "key": "market_share:sap:workflow_automation_ai",
    "kind": "market_share",
    "vendorId": "sap",
    "label": "share of workflow automation ai",
-   "value": 29.5
+   "value": 29.1
   },
   "market_share:moveworks:workflow_automation_ai": {
    "key": "market_share:moveworks:workflow_automation_ai",
    "kind": "market_share",
    "vendorId": "moveworks",
    "label": "share of workflow automation ai",
-   "value": 28.4
+   "value": 27.4
   },
   "market_share:servicenow:workflow_automation_ai": {
    "key": "market_share:servicenow:workflow_automation_ai",
    "kind": "market_share",
    "vendorId": "servicenow",
    "label": "share of workflow automation ai",
-   "value": 22.1
+   "value": 22.8
   },
   "market_share:salesforce:workflow_automation_ai": {
    "key": "market_share:salesforce:workflow_automation_ai",
    "kind": "market_share",
    "vendorId": "salesforce",
    "label": "share of workflow automation ai",
-   "value": 20
+   "value": 20.7
   },
   "narrative_gap:moonshot": {
    "key": "narrative_gap:moonshot",
