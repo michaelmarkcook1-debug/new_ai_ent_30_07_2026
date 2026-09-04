@@ -4,6 +4,15 @@ import { dirname } from "node:path";
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  // A statically generated page authors its analyst reading inside the build.
+  // On Fable 5.1 the slowest such call measured 69.8 seconds under build load
+  // (4 September 2026), and the default 60-second page timeout fired twice on
+  // price-performance in that build; the page survived only because the retry
+  // found the finished reading in the in-process cache. 240 is the worst case
+  // the model path allows, a rejected first draft plus a retry at the
+  // 120-second insight ceiling in lib/analyst/llm.ts, so the build stops
+  // depending on a retry landing in the same worker.
+  staticPageGenerationTimeout: 240,
   // Pin the tracing root to this project.
   //
   // Next infers the root by walking up for a lockfile, and there is a stray

@@ -45,8 +45,12 @@ for (const path of PAGES) {
   try {
     const res = await fetch(`${BASE}${path}`, {
       headers: { "user-agent": "aie-cache-warmer" },
-      // Generous: a cold authored page is the thing being paid for here.
-      signal: AbortSignal.timeout(60_000),
+      // Generous: a cold authored page is the thing being paid for here. The
+      // dynamic pages author at warm time, and on Fable 5.1 news-feed took 52
+      // seconds cold on an idle machine (4 September 2026), so 60 would abort
+      // it under any load. 150 covers Today's Pulse authoring its three
+      // readings and a retry.
+      signal: AbortSignal.timeout(150_000),
     });
     results.push({ path, status: res.status, ms: Date.now() - started });
   } catch (e) {

@@ -15,6 +15,33 @@ than a gap.
 
 ---
 
+## 4 September 2026 (analysis)
+
+**Every analyst reading is now written by Fable 5.1, and the product had to
+give it more room to think.**
+
+The switch was made on request. On the real pages Fable thinks about five
+times as long before it writes as Opus did, and with the allowance the product
+had been giving the model, a quarter of readings came back either empty or cut
+off part way through, and those pages quietly fell back to their plainer
+computed text. The allowance has been raised to fit, and every reading now
+writes cleanly on the first attempt.
+
+A reading takes about forty seconds to prepare instead of about twenty.
+Readers do not wait for that, because pages are prepared ahead of time and
+refreshed twice a day. A full rebuild of the site, which prepares most readings in advance, wrote every one of them cleanly on the first attempt under the new settings.
+
+A faster setting exists and was measured. On it, two of twelve first drafts
+had to be thrown out by the checks that sit over every reading, one of them for
+naming a company the page held no evidence on. The checks caught both, but the
+unhurried model never produced them, so the faster setting stays off.
+
+Readings that Opus wrote stay on the page until their figures change, which
+for most pages is within a day, so the change shows page by page rather than
+all at once.
+
+One thing to know: the twice-daily refresh works through the pages one at a time inside a five-minute window, and at the new model's pace a day on which every page needs rewriting will not fit in a single run. Some pages will refresh on the following run rather than the first. That is reported here rather than changed, because deciding how the refresh should be scheduled is a product choice.
+
 ## 30 August 2026 (reliability)
 
 **Some pages were quietly falling back to their plainer computed text, and the

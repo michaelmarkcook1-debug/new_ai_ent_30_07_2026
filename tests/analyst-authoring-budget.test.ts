@@ -52,11 +52,13 @@ describe("the end-to-end authoring budget", () => {
   });
 
   it("leaves room for two attempts at the measured normal latency", () => {
-    // Measured on 30 August 2026 under production-build load: insight calls
-    // completed in 8.4 to 28.9 seconds, and the slowest two-attempt call took
-    // 56.0 seconds. The budget has to clear that comfortably or it would start
-    // refusing legitimate retries.
-    expect(BUDGET_MS).toBeGreaterThan(56_000 * 2);
+    // Measured on 30 August 2026 on Opus 5 under production-build load: insight
+    // calls completed in 8.4 to 28.9 seconds, and the slowest two-attempt call
+    // took 56.0 seconds. Re-measured on 4 September 2026 on Fable 5.1, which
+    // thinks far harder on the same prompt: the slowest single call observed
+    // idle was 68.4 seconds, so two attempts need 136.8. The budget has to
+    // clear that comfortably or it would start refusing legitimate retries.
+    expect(BUDGET_MS).toBeGreaterThan(68_400 * 2);
     // And it must still be short enough to bound a page render.
     expect(BUDGET_MS).toBeLessThanOrEqual(180_000);
   });

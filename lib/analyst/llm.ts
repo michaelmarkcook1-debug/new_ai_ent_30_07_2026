@@ -35,7 +35,7 @@ import type { ArgumentUnit } from "./question";
 // deterministic text renders and the surface says it was computed rather than
 // written. Nothing here is required for the app to work.
 
-const MODEL = "claude-opus-5";
+const MODEL = "claude-fable-5-1";
 /**
  * How long one call may take.
  *
@@ -52,6 +52,30 @@ const MODEL = "claude-opus-5";
  * Vercel's five-minute limit is in RETRY_BUDGET_MS in lib/research/company.ts.
  */
 const TIMEOUT_MS = 75_000;
+/**
+ * How long one INSIGHT call may take. Research keeps TIMEOUT_MS above.
+ *
+ * WHY TWO CEILINGS. Fable 5.1, the model since 4 September 2026, thinks far
+ * harder than Opus 5 on the insight prompt: under an 85-page production build
+ * that day its slowest call took 69,826ms, 5.2 seconds inside the 75-second
+ * ceiling, on a reading whose thinking varied by 40 per cent between runs.
+ * generate() does not retry a timed-out call, so at build time a timeout is a
+ * page that ships computed until the next scheduled warm.
+ *
+ * The shared ceiling cannot simply be raised: RETRY_BUDGET_MS in
+ * lib/research/company.ts derives the research worst case from TIMEOUT_MS to
+ * stay inside Vercel's 300-second function limit, and at 120 seconds that
+ * arithmetic reaches roughly 345. So research keeps 75 and the insight path,
+ * which is bounded by a page render rather than by a research budget, gets
+ * 120: about 1.7 times the slowest call observed under load. A rejected first
+ * draft followed by a retry is then at most 240 seconds, which is what
+ * staticPageGenerationTimeout in next.config.ts is set to match.
+ */
+const INSIGHT_TIMEOUT_MS = 120_000;
+/** Company research kinds are "company:<name>:<attempt>"; everything else is an insight. */
+function timeoutFor(kind: string): number {
+  return kind.startsWith("company:") ? TIMEOUT_MS : INSIGHT_TIMEOUT_MS;
+}
 /**
  * How many times the SDK may retry underneath us.
  *
@@ -95,7 +119,8 @@ export const BUDGET_MS = 160_000;
  * because that is what it looks like: `authorInsight` asks for 1,400 tokens
  * meaning a 90 to 140 word summary and three implications.
  *
- * Opus 5 thinks adaptively by default, and that thinking comes out of the same
+ * MEASURED ON OPUS 5, which authored every reading until 4 September 2026 and
+ * thinks adaptively by default, with that thinking coming out of the same
  * budget. Measured on 30 August 2026 against a real insight prompt: 601 of
  * 1,054 output tokens went to thinking. Under the load of a production build
  * generating 85 pages the model thought harder, spent the entire 1,400 before
@@ -109,12 +134,28 @@ export const BUDGET_MS = 160_000;
  * call. The same prompt at 4,000 returned in 12.1 seconds against 14.8 at
  * 1,400. What it buys is that thinking can no longer starve the answer.
  *
- * Thinking is deliberately NOT disabled, though that was measured too and is
- * faster (9.3 seconds). Turning it off changes how the model reasons about the
- * analysis, and this is a latency gate rather than a licence to change what the
- * readings say.
+ * Thinking was deliberately NOT disabled on Opus 5, though that was measured
+ * too and is faster (9.3 seconds). Turning it off changes how the model reasons
+ * about the analysis, and that was a latency gate rather than a licence to
+ * change what the readings say.
+ *
+ * FABLE 5.1, the model since 4 September 2026, thinks far harder on the real
+ * prompt than Opus 5 did. A toy prompt measured zero thinking tokens, which was
+ * misleading: run through the actual pipeline on 4 September 2026 it spent a
+ * median 2,766 and a maximum 5,637 thinking tokens per reading, and at the old
+ * 2,000 ceiling three of twelve readings came back as a thinking block with no
+ * text and three more were cut mid-JSON, which the retry path reported as
+ * "not valid JSON". Both are the same starvation. At 12,000 all twelve authored
+ * on the first attempt with zero guard rejections.
+ *
+ * The ceiling is about twice the maximum observed, because the same reading
+ * varied by roughly 40 per cent between runs, and an unreached ceiling still
+ * costs nothing. Capping reasoning effort instead was measured and rejected:
+ * at effort "medium" two of twelve first drafts tripped a truth guard, one of
+ * them naming a vendor outside the page's roster. The register carries the
+ * arm-by-arm numbers.
  */
-const THINKING_HEADROOM = 2_000;
+const THINKING_HEADROOM = 12_000;
 
 /**
  * Whether another attempt may be started.
@@ -411,7 +452,8 @@ Return only the JSON object requested, with no prose around it and no code fence
 
 async function callModel(
   prompt: string,
-  maxTokens: number
+  maxTokens: number,
+  timeoutMs: number = TIMEOUT_MS
 ): Promise<string | null> {
   const apiKey = llmKey();
   if (!apiKey) return null;
@@ -419,7 +461,7 @@ async function callModel(
   try {
     const client = new Anthropic({
       apiKey,
-      timeout: TIMEOUT_MS,
+      timeout: timeoutMs,
       maxRetries: SDK_RETRIES,
     });
     const res = await client.messages.create(
@@ -439,7 +481,7 @@ async function callModel(
       // socket rather than being abandoned while still in flight. Both are
       // timer-based and both can be delayed by a blocked event loop, which is
       // why neither is the real bound: see the elapsed check in generate().
-      { signal: AbortSignal.timeout(TIMEOUT_MS) }
+      { signal: AbortSignal.timeout(timeoutMs) }
     );
     const text = res.content.find((b) => b.type === "text");
     if (!text || text.type !== "text") {
@@ -462,6 +504,12 @@ async function callModel(
       );
       return null;
     }
+    // The token split on success, so the headroom is sized from evidence rather
+    // than from the failures alone. Counts only, never content: this line is
+    // how the Fable 5.1 thinking load was measured on 4 September 2026.
+    console.warn(
+      `[analyst-llm] call ok in ${Date.now() - started}ms: stop=${res.stop_reason}, out=${res.usage?.output_tokens ?? "?"}, thinking=${res.usage?.output_tokens_details?.thinking_tokens ?? "?"}`
+    );
     return text.text;
   } catch (err) {
     // A failed call is a fallback to computed text, never a broken page. But
@@ -828,7 +876,7 @@ ${instruction}`;
           ? ""
           : "\n\nCORRECTION: your previous answer was not valid JSON, most likely because it ran long. Answer again, shorter, as a single JSON object.";
 
-    const raw = await callModel(base + correction, maxTokens);
+    const raw = await callModel(base + correction, maxTokens, timeoutFor(kind));
     attemptMs.push(Date.now() - attemptStarted);
     // Throw rather than return: a failed call must not be cached for a day.
     if (!raw) {

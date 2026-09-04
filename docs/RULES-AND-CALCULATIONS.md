@@ -64,26 +64,28 @@ component bug.
 
 ## 2. The analyst guards
 
-`lib/analyst/llm.ts`. Model `claude-opus-5` (line 25), 30 s timeout (line 26),
-24 h cache TTL (line 29).
+`lib/analyst/llm.ts`. Model `claude-fable-5-1` (line 38, Fable 5.1 since
+4 September 2026, Opus 5 before that), `TIMEOUT_MS` 75 s (line 54), `TTL_MS`
+24 h (line 181). Re-verified against the working tree on 4 September 2026;
+the previous line numbers here dated from before the file grew.
 
 Two independent guards run over every generated passage. Both must pass or the
 output is discarded and regenerated.
 
 ### 2.1 The numeric guard
 
-`guard()` at line 78, `invented()` at line 87, `numbersIn()` at line 57.
+`guard()` at line 262, `invented()` at line 271, `numbersIn()` at line 241.
 
 Every number in the generated text must appear in the whitelist of figures
 handed to the model. A number that does not is an invention, and its presence
 fails the whole passage rather than the sentence.
 
-Dates are excluded by `DATE_RE` (line 107), because a year is not a claim about
+Dates are excluded by `DATE_RE` (line 302), because a year is not a claim about
 the data.
 
 ### 2.2 The entity guard
 
-`foreignEntities()` at line 137.
+`foreignEntities()` at line 332.
 
 The numeric guard cannot see a fabricated claim built entirely from real words:
 "OpenAI leads here" on a page whose data never mentions OpenAI contains no
@@ -1814,7 +1816,7 @@ Wired at `lib/analyst/author.ts:137` (insight), `:198` (pulse), `:254`
 
 ### Small-integer counts
 
-`numbersIn()` drops every integer with `|n| <= 10` (`lib/analyst/llm.ts:66`).
+`numbersIn()` drops every integer with `|n| <= 10` (`lib/analyst/llm.ts:248`).
 That is right for "do these 3 things" and wrong for "3 vendors meet the
 threshold", and the difference is entirely the noun.
 
@@ -1841,12 +1843,12 @@ of 13.7 would then licence "7 vendors clear the threshold" out of nothing.
 This was caught by the new tests, not by review.
 
 Dates are stripped from both sides before the count check
-(`lib/analyst/llm.ts:121`), reusing `withoutDates()`, so "2026-08-04" in the
+(`lib/analyst/llm.ts:297`), reusing `withoutDates()`, so "2026-08-04" in the
 facts cannot licence "8 models".
 
 ### Entity grounding is packet-scoped
 
-`foreignEntities()` (`lib/analyst/llm.ts:156`) takes an optional `allowed`
+`foreignEntities()` (`lib/analyst/llm.ts:332`) takes an optional `allowed`
 list. When a page declares what it covers, that list is the boundary and the
 fact prose is not consulted. A computed summary saying "unlike the frontier
 labs" used to licence every frontier lab in the roster for the rest of the
@@ -2678,8 +2680,8 @@ Measured on 30 August 2026 against live Woolworths South Africa research.
 
 | Constant | Value | File |
 |---|---|---|
-| `TIMEOUT_MS` | `75_000` | `lib/analyst/llm.ts:51` |
-| `SDK_RETRIES` | `0` | `lib/analyst/llm.ts:70` |
+| `TIMEOUT_MS` | `75_000` | `lib/analyst/llm.ts:54` |
+| `SDK_RETRIES` | `0` | `lib/analyst/llm.ts:97` |
 | `RETRY_BUDGET_MS` | `90_000` | `lib/research/company.ts:114` |
 | attempt 1 output budget | `3200` tokens | `lib/research/company.ts:295` |
 | attempt 2 output budget | `2200` tokens | `lib/research/company.ts:296` |
@@ -3118,9 +3120,9 @@ each silently became "no response" and fell back to computed prose.
 | Constant | Value | Line |
 |---|---|---|
 | `TIMEOUT_MS` | `75_000` | `lib/analyst/llm.ts:54` |
-| `SDK_RETRIES` | `0` | `lib/analyst/llm.ts:73` |
-| `BUDGET_MS` | `160_000` | `lib/analyst/llm.ts:87` |
-| `THINKING_HEADROOM` | `2_000` | `lib/analyst/llm.ts:117` |
+| `SDK_RETRIES` | `0` | `lib/analyst/llm.ts:97` |
+| `BUDGET_MS` | `160_000` | `lib/analyst/llm.ts:111` |
+| `THINKING_HEADROOM` | `2_000` at the time; `12_000` since 8.33 | `lib/analyst/llm.ts:158` |
 
 **`THINKING_HEADROOM` is added to every caller's `max_tokens`.** The ceiling
 costs nothing when it is not reached, because the model stops at `end_turn`:
@@ -3145,7 +3147,7 @@ loop is free to run it. Under a dev compile, a production build or a full test
 run on the same machine the loop is not free, which is the mechanism behind a
 75-second deadline arriving minutes late.
 
-`retryWithinBudget()` (`lib/analyst/llm.ts:131`) needs no timer. It is checked
+`retryWithinBudget()` (`lib/analyst/llm.ts:172`) needs no timer. It is checked
 BEFORE an attempt is started, so it caps the NUMBER of attempts rather than the
 duration of one, and a series of individually legal retries cannot add up to an
 unbounded request. `AbortSignal.timeout()` was added alongside so an overrunning
@@ -3197,6 +3199,167 @@ fallback does not prevent a later request from authoring.
 duration of each attempt. Always on, because a debug flag nobody remembers to
 set is a flag that is off when it matters. It never carries the prompt, the
 answer or the key.
+
+## 8.33 Authoring model: Fable 5.1, and the room it needs
+
+Verified against the working tree at commit `57ae88c` plus this change,
+4 September 2026.
+
+### The change
+
+`MODEL` (`lib/analyst/llm.ts:38`) is now `claude-fable-5-1`. It was
+`claude-opus-5` from the first authored reading until this commit. Every
+reading that passes through `callModel` moves with it: the eleven insight
+surfaces, Today's Pulse, Since you last looked, Do these three things and
+company research. The interactive Ask-your-analyst path
+(`app/api/analyst/live.ts`) is unchanged: its Haiku, Sonnet and Opus tiers are
+a visible product behaviour under spec Section 8, not the analyst voice.
+
+### What a bare constant switch did
+
+A toy prompt measured zero thinking tokens on Fable 5.1, which was misleading.
+On the real prompt it thinks roughly five times harder than Opus 5, and at the
+2,000-token `THINKING_HEADROOM` that 8.32 sized for Opus it starved the same
+way, only higher up:
+
+```
+call returned no text after 40507ms: stop=max_tokens, blocks=[thinking], out=3400
+```
+
+The first cold pass through the real pipeline, 4 September 2026, twelve
+authoring kinds, sequential, idle machine, ceiling 2,000:
+
+| Outcome | Kinds |
+|---|---|
+| authored, first attempt | 7 |
+| authored on retry after "response was not valid JSON" | 2 (news, peer) |
+| fell back to computed | 3 (market and price and capability: thinking-only block at the full 3,400; reputation: invalid JSON, then the trend guard) |
+
+The three "not valid JSON" responses were the same starvation in a different
+message: a reading that thought for most of the ceiling and was cut off part
+way through writing the object. At a 12,000 ceiling none recurred.
+
+### Measured on the real pipeline, 4 September 2026
+
+Sequential, idle machine, cache cleared, twelve kinds. Model-call durations
+and thinking tokens from the phase log, first attempts.
+
+| Kind | uncapped: thinking / call | effort medium: thinking / call |
+|---|---|---|
+| pulse-since | 525 / 18.6s | 439 / 16.0s |
+| pulse-actions | 667 / 19.1s | 578 / 15.9s |
+| pulse-hero | 1,445 / 29.2s | 1,118 / 25.0s |
+| news | 3,538 / 50.0s | 1,479 / 31.1s |
+| vendor ranking | 2,723 / 41.8s | 1,495 / 29.8s |
+| financial | 3,785 / 51.6s | 1,295 / 30.8s, rejected, then 903 / 24.1s |
+| market | 1,634 / 34.7s | 2,305 / 38.4s |
+| competitive | 2,829 / 44.9s | 3,746 / 50.6s |
+| reputation | 3,182 / 46.0s | 951 / 23.2s |
+| alliance channel | 2,810 / 42.7s | 999 / 26.0s, rejected, then 723 / 22.6s |
+| price and capability | 4,044 / 56.6s | 1,356 / 29.1s |
+| peer | 2,438 / 41.3s | 579 / 20.6s |
+
+| | thinking p50 / max | call p50 / p95 / max | first drafts rejected by a truth guard |
+|---|---|---|---|
+| Opus 5 (8.32, 29 calls) | 601 on the measured prompt | 21.9s / 37.3s / 56.0s | 0 in the concurrent run |
+| Fable 5.1, uncapped, ceiling 12,000 | 2,766 / 4,044 (5,637 on an earlier run of price and capability) | 42.3s / 56.6s / 56.6s (68.4s earlier) | 0 of 12 |
+| Fable 5.1, effort medium, ceiling 12,000 | 1,207 / 3,746 | 27.6s / 50.6s / 50.6s | 2 of 12 |
+
+The two medium rejections were the guards working, and what they caught is the
+point: financial's first draft named Meta, a vendor outside the page's roster
+(the entity guard), and alliance's `whyNow` drew on evidence the temporal
+licence bars. Both recovered on the retry. The uncapped model produced neither.
+
+### The decision
+
+Uncapped. `THINKING_HEADROOM` (`lib/analyst/llm.ts:158`) is `12_000`:
+about twice the 5,637 maximum observed, because the same reading varied by
+roughly 40 per cent between runs (5,637 then 4,044), and an unreached ceiling
+costs nothing, as 8.32 established. Reasoning effort is not capped, because the
+one arm measured produced fabrication-class first drafts that the uncapped
+model did not, and the zero-fabrication rule outranks a 35 per cent latency
+saving. To run the medium arm, add `output_config: { effort: "medium" }` to the
+`messages.create` call in `callModel`; its numbers are the table above.
+
+### The timeout
+
+Two ceilings now, because one could not be raised.
+
+| Constant | Value | Line |
+|---|---|---|
+| `TIMEOUT_MS` (research) | `75_000` | `lib/analyst/llm.ts:54` |
+| `INSIGHT_TIMEOUT_MS` | `120_000` | `lib/analyst/llm.ts:74` |
+| `timeoutFor(kind)` | `company:` prefix takes the research ceiling, everything else the insight one | `lib/analyst/llm.ts:76` |
+| `staticPageGenerationTimeout` | `240` | `next.config.ts:15` |
+| warm-up per-page abort | `150_000` | `scripts/warm-insights.mjs:53` |
+
+Under the first Fable build, at the 75-second ceiling, the slowest call took
+69,826ms, and `generate()` does not retry a call that returned nothing, so at
+build time a timeout is a page that ships computed until the next scheduled
+warm. The shared ceiling could not simply go up: `RETRY_BUDGET_MS` in
+`lib/research/company.ts` derives the research worst case from it as
+90 + (min(ceiling, `BUDGET_MS`) + ceiling) + searches, which at 120 seconds
+is roughly 345 against Vercel's 300-second function limit. So research keeps
+75 and its arithmetic untouched, and the insight path, bounded by a page
+render, gets 120: about 1.7 times the slowest call under load. A rejected first
+draft followed by a retry is then at most 240 seconds, which is what the static
+page timeout is set to; the default 60 fired twice on price-performance in the
+first build and the page survived only because the retry landed in the same
+worker and found the reading in the L1 cache.
+
+**The warm cron is now under-provisioned, and is not changed here.**
+`app/api/warm/route.ts` fetches the eleven warm pages one at a time inside a
+300-second `maxDuration`, with no per-page abort and no elapsed budget. Most
+runs are cache hits and fit. The run after the daily fixture sync re-authors
+most pages, and at Fable's 42-second median that is about 420 seconds: the
+function is killed part way down the list, silently, and the pages after the
+cut wait for the next run or the next reader. Which pages those are depends
+on list order. A per-run budget with a reported skip list, a more frequent
+schedule, or bounded parallelism are the options; the choice is a design one
+and is reported rather than made.
+
+### Under a production build
+
+Two builds on the same machine, 85 pages each, all seven statically generated
+kinds authoring concurrently, from the phase log:
+
+| | model calls | authored | first drafts rejected by a guard | no text | timeouts | page-timeout retries | call p50 | call max |
+|---|---|---|---|---|---|---|---|---|
+| Opus 5, 31 August (8.32) | 7 | 7 | 0 | 0 | 0 | 0 | 25.0s | 56.0s |
+| Fable 5.1, ceiling 75s, page timeout 60 | 8 | 7 | 1 (alliance, temporal guard, recovered) | 0 | 0 | 2 | 42.1s | 69.8s |
+| **Fable 5.1, ceiling 120s, page timeout 240** | **7** | **7** | **0** | **0** | **0** | **0** | **47.4s** | **63.7s** |
+
+The final build's slowest call sits at 53 per cent of its ceiling. Thinking
+tokens in that build ran from 1,453 to 5,107 per reading.
+
+### Rollout: the cache key carries neither model nor effort
+
+`cachedGenerate` (`lib/analyst/llm.ts:749`) keys on kind, facts,
+instruction, `maxTokens`, roster, `cacheKey` and `guardKey`. A reading Opus 5
+wrote is served until its facts change or the 24-hour revalidation runs, and
+8.32's production check showed the Data Cache surviving a deploy. Fable readings
+therefore appear page by page as facts move, which the daily fixture sync does
+for most pages within a day, rather than at the moment of deploy. Not a defect;
+recorded so that a day-old Opus reading is not mistaken for a Fable one.
+
+### Two things found on the way, neither changed here
+
+1. `/trust-rank` is on both warm lists (`lib/analyst/warm-list.ts:13`,
+   `scripts/warm-insights.mjs:27`) and never calls `authorInsight`. Warming it
+   renders a page for nothing.
+2. A probe that tests `html.includes("analyst written")` is always true on an
+   insight page, because the derivation drawer prose contains the phrase. The
+   badge span, `text-muted">analyst written</span>`, is the only honest anchor.
+   8.32's counts came from the phase log, not the badge, and stand.
+
+### Telemetry
+
+`callModel` now logs `call ok in Nms: stop=..., out=..., thinking=...` on
+success (`lib/analyst/llm.ts:511`), alongside the existing no-text
+line. Counts only, never content. It is how every number in this section was
+read.
+
+---
 
 ## 9. Run costs
 

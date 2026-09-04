@@ -375,8 +375,9 @@ own thesis applied to itself:
 | `claude-opus-5` | Only on an explicit "comprehensive" request |
 
 The **analyst voice is a separate path and does not route**: `lib/analyst/llm.ts`
-pins `claude-opus-5` for every insight surface, Today's Pulse, Since you last
-looked and Do these three things, under the two guards in
+pins `claude-fable-5-1` (Fable 5.1, since 4 September 2026; Opus 5 before
+that) for every insight surface, Today's Pulse, Since you last looked and Do
+these three things, under the two guards in
 [RULES-AND-CALCULATIONS.md](RULES-AND-CALCULATIONS.md).
 
 > **Prompt caching does not apply here** and should not be added. The system
