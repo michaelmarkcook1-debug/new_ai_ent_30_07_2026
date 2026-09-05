@@ -24,7 +24,6 @@ const BASE = process.argv[2] ?? "https://newaient30072026.vercel.app";
 // tests/warm-list.test.ts fails if the two ever disagree.
 const PAGES = [
   "/pulse",
-  "/trust-rank",
   "/news-feed",
   "/vendor-view",
   "/financial-snapshot",
@@ -52,7 +51,21 @@ for (const path of PAGES) {
       // readings and a retry.
       signal: AbortSignal.timeout(150_000),
     });
-    results.push({ path, status: res.status, ms: Date.now() - started });
+    // The badge span says whether the reading was written or fell back; the
+    // time says whether it was authored now or served from cache. Same rule
+    // as lib/analyst/warm.ts, mirrored because this file cannot import it.
+    const html = await res.text();
+    const outcome =
+      res.status !== 200
+        ? "failed"
+        : html.includes('text-muted">computed</span>')
+          ? "fallback"
+          : html.includes('text-muted">analyst written</span>')
+            ? Date.now() - started >= 5_000
+              ? "authored"
+              : "cached"
+            : "no-reading";
+    results.push({ path, status: res.status, ms: Date.now() - started, outcome });
   } catch (e) {
     results.push({
       path,
@@ -68,13 +81,14 @@ for (const r of results) {
   slowest = Math.max(slowest, r.ms);
   const secs = (r.ms / 1000).toFixed(1).padStart(5);
   console.log(
-    `  ${String(r.status).padEnd(6)} ${secs}s  ${r.path}${r.error ? `  ${r.error}` : ""}`
+    `  ${String(r.status).padEnd(6)} ${secs}s  ${(r.outcome ?? "failed").padEnd(10)} ${r.path}${r.error ? `  ${r.error}` : ""}`
   );
 }
 
-const failed = results.filter((r) => r.status !== 200);
+const failed = results.filter((r) => r.status !== 200 || r.outcome === "no-reading");
+const count = (o) => results.filter((r) => r.outcome === o).length;
 console.log(
-  `\n  ${results.length - failed.length}/${results.length} warmed, slowest ${(slowest / 1000).toFixed(1)}s`
+  `\n  ${failed.length === 0 ? "COMPLETE" : "PARTIAL"}: ${results.length - failed.length}/${results.length} warmed (authored ${count("authored")}, cached ${count("cached")}, fallback ${count("fallback")}), slowest ${(slowest / 1000).toFixed(1)}s`
 );
 
 // A failure here is worth surfacing but is not worth failing a deploy over:

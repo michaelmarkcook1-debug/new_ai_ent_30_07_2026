@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import { WARM_PAGES } from "@/lib/analyst/warm-list";
 
@@ -25,7 +25,30 @@ function scriptPages(): string[] {
 
 describe("the warm list", () => {
   it("names every page that authors a reading", () => {
-    expect(WARM_PAGES.length).toBe(11);
+    expect(WARM_PAGES.length).toBe(10);
+  });
+
+  it("holds only pages whose source calls authorInsight", () => {
+    // /trust-rank sat here until 5 September 2026 without ever authoring, so
+    // each warm rendered it for nothing. A page earns its place by calling the
+    // author, anywhere under its route directory: Today's Pulse does so from
+    // its components rather than its page file.
+    const sources = (dir: string): string[] =>
+      readdirSync(dir).flatMap((name) => {
+        const full = path.join(dir, name);
+        return statSync(full).isDirectory() ? sources(full) : [full];
+      });
+    for (const page of WARM_PAGES) {
+      const dir = path.join(process.cwd(), "app", "(ai-ent)", page.slice(1));
+      // The four authoring entry points exported by lib/analyst/author.ts.
+      const calls = /\b(authorInsight|authorPulse|authorSince|authorActions)\(/;
+      const authors = sources(dir).some((f) => /\.tsx?$/.test(f) && calls.test(readFileSync(f, "utf8")));
+      expect(authors, `${page} is on the warm list but nothing under ${dir} calls an author entry point`).toBe(true);
+    }
+  });
+
+  it("does not warm /trust-rank, which never authors", () => {
+    expect(WARM_PAGES).not.toContain("/trust-rank");
   });
 
   it("matches the post-deploy script exactly, in the same order", () => {

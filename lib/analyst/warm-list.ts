@@ -8,9 +8,13 @@
 //
 // Kept as a list rather than derived from the routes, so a page that stops
 // authoring drops off it deliberately rather than silently.
+//
+// AUDITED 5 September 2026: every entry below calls authorInsight (Today's
+// Pulse authors three readings through its components). /trust-rank was
+// removed that day; it never authored and its warm rendered a page for
+// nothing. tests/warm-list.test.ts checks each entry's source for the call.
 export const WARM_PAGES = [
   "/pulse",
-  "/trust-rank",
   "/news-feed",
   "/vendor-view",
   "/financial-snapshot",

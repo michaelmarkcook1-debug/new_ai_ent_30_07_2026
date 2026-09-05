@@ -15,6 +15,48 @@ than a gap.
 
 ---
 
+## 5 September 2026 (readiness)
+
+**A reading written by one model can no longer be mistaken for another's, the
+refresh finishes in time and says exactly what it did, and a release is refused
+when production cannot author.**
+
+Three things had to be true before the Fable 5.1 switch could go live, and each
+is now built and tested.
+
+First, the stored readings know who wrote them. Until now a reading Opus had
+written could have been served after the switch as though Fable had written
+it, because the store did not record the model or the version of the analysis.
+It does now, and readings written under the old arrangement are simply never
+looked at again; they lapse on their own within a day. The same rule means the
+product never pays to rewrite a reading whose evidence and analysis have not
+changed.
+
+Second, the twice-daily refresh that prepares readings ahead of readers could
+no longer finish inside its five-minute window at the new model's pace, and
+when it ran out of time it was stopped without a word. It now prepares four
+pages at a time, which brings a full cold refresh to just over two minutes on
+the measured figures, and it reports every page as prepared, already current,
+fallen back, failed, timed out or not reached. A run that did not finish says
+so rather than claiming success. One page that never had a reading was being
+refreshed for nothing and has been dropped.
+
+Third, the refresh endpoint could be triggered by anyone who read the public
+code and sent one header, at the product's expense. It now accepts only the
+scheduler's secret and refuses everyone when that secret is missing.
+
+A pre-deployment check now blocks a release unless production holds a working
+key, that key can reach the model the code names, and the scheduler's secret
+is set. Run against production today it blocks on all three: the key has been
+rejected since 3 September, the secret has never been set, and the account's
+credit balance is exhausted. That last one surfaced when the day's release
+rehearsal could not author a single reading; a day of measuring Fable, which
+uses several times the tokens Opus did, had used up a prepaid balance. It is
+worth a spending alert on the account.
+
+Nothing about the analysis itself changed: the model, its room to think, and
+every check over its output are as they were on 4 September.
+
 ## 4 September 2026 (analysis)
 
 **Every analyst reading is now written by Fable 5.1, and the product had to

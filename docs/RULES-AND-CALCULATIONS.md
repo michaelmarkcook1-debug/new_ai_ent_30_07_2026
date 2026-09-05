@@ -65,8 +65,8 @@ component bug.
 ## 2. The analyst guards
 
 `lib/analyst/llm.ts`. Model `claude-fable-5-1` (line 38, Fable 5.1 since
-4 September 2026, Opus 5 before that), `TIMEOUT_MS` 75 s (line 54), `TTL_MS`
-24 h (line 181). Re-verified against the working tree on 4 September 2026;
+4 September 2026, Opus 5 before that), `TIMEOUT_MS` 75 s (line 92), `TTL_MS`
+24 h (line 219). Re-verified against the working tree on 4 September 2026;
 the previous line numbers here dated from before the file grew.
 
 Two independent guards run over every generated passage. Both must pass or the
@@ -74,18 +74,18 @@ output is discarded and regenerated.
 
 ### 2.1 The numeric guard
 
-`guard()` at line 262, `invented()` at line 271, `numbersIn()` at line 241.
+`guard()` at line 338, `invented()` at line 347, `numbersIn()` at line 317.
 
 Every number in the generated text must appear in the whitelist of figures
 handed to the model. A number that does not is an invention, and its presence
 fails the whole passage rather than the sentence.
 
-Dates are excluded by `DATE_RE` (line 302), because a year is not a claim about
+Dates are excluded by `DATE_RE` (line 378), because a year is not a claim about
 the data.
 
 ### 2.2 The entity guard
 
-`foreignEntities()` at line 332.
+`foreignEntities()` at line 408.
 
 The numeric guard cannot see a fabricated claim built entirely from real words:
 "OpenAI leads here" on a page whose data never mentions OpenAI contains no
@@ -1816,7 +1816,7 @@ Wired at `lib/analyst/author.ts:137` (insight), `:198` (pulse), `:254`
 
 ### Small-integer counts
 
-`numbersIn()` drops every integer with `|n| <= 10` (`lib/analyst/llm.ts:248`).
+`numbersIn()` drops every integer with `|n| <= 10` (`lib/analyst/llm.ts:324`).
 That is right for "do these 3 things" and wrong for "3 vendors meet the
 threshold", and the difference is entirely the noun.
 
@@ -1843,12 +1843,12 @@ of 13.7 would then licence "7 vendors clear the threshold" out of nothing.
 This was caught by the new tests, not by review.
 
 Dates are stripped from both sides before the count check
-(`lib/analyst/llm.ts:297`), reusing `withoutDates()`, so "2026-08-04" in the
+(`lib/analyst/llm.ts:373`), reusing `withoutDates()`, so "2026-08-04" in the
 facts cannot licence "8 models".
 
 ### Entity grounding is packet-scoped
 
-`foreignEntities()` (`lib/analyst/llm.ts:332`) takes an optional `allowed`
+`foreignEntities()` (`lib/analyst/llm.ts:408`) takes an optional `allowed`
 list. When a page declares what it covers, that list is the boundary and the
 fact prose is not consulted. A computed summary saying "unlike the frontier
 labs" used to licence every frontier lab in the roster for the rest of the
@@ -2680,8 +2680,8 @@ Measured on 30 August 2026 against live Woolworths South Africa research.
 
 | Constant | Value | File |
 |---|---|---|
-| `TIMEOUT_MS` | `75_000` | `lib/analyst/llm.ts:54` |
-| `SDK_RETRIES` | `0` | `lib/analyst/llm.ts:97` |
+| `TIMEOUT_MS` | `75_000` | `lib/analyst/llm.ts:92` |
+| `SDK_RETRIES` | `0` | `lib/analyst/llm.ts:135` |
 | `RETRY_BUDGET_MS` | `90_000` | `lib/research/company.ts:114` |
 | attempt 1 output budget | `3200` tokens | `lib/research/company.ts:295` |
 | attempt 2 output budget | `2200` tokens | `lib/research/company.ts:296` |
@@ -3119,10 +3119,10 @@ each silently became "no response" and fell back to computed prose.
 
 | Constant | Value | Line |
 |---|---|---|
-| `TIMEOUT_MS` | `75_000` | `lib/analyst/llm.ts:54` |
-| `SDK_RETRIES` | `0` | `lib/analyst/llm.ts:97` |
-| `BUDGET_MS` | `160_000` | `lib/analyst/llm.ts:111` |
-| `THINKING_HEADROOM` | `2_000` at the time; `12_000` since 8.33 | `lib/analyst/llm.ts:158` |
+| `TIMEOUT_MS` | `75_000` | `lib/analyst/llm.ts:92` |
+| `SDK_RETRIES` | `0` | `lib/analyst/llm.ts:135` |
+| `BUDGET_MS` | `160_000` | `lib/analyst/llm.ts:149` |
+| `THINKING_HEADROOM` | `2_000` at the time; `12_000` since 8.33 | `lib/analyst/llm.ts:196` |
 
 **`THINKING_HEADROOM` is added to every caller's `max_tokens`.** The ceiling
 costs nothing when it is not reached, because the model stops at `end_turn`:
@@ -3147,7 +3147,7 @@ loop is free to run it. Under a dev compile, a production build or a full test
 run on the same machine the loop is not free, which is the mechanism behind a
 75-second deadline arriving minutes late.
 
-`retryWithinBudget()` (`lib/analyst/llm.ts:172`) needs no timer. It is checked
+`retryWithinBudget()` (`lib/analyst/llm.ts:210`) needs no timer. It is checked
 BEFORE an attempt is started, so it caps the NUMBER of attempts rather than the
 duration of one, and a series of individually legal retries cannot add up to an
 unbounded request. `AbortSignal.timeout()` was added alongside so an overrunning
@@ -3272,7 +3272,7 @@ licence bars. Both recovered on the retry. The uncapped model produced neither.
 
 ### The decision
 
-Uncapped. `THINKING_HEADROOM` (`lib/analyst/llm.ts:158`) is `12_000`:
+Uncapped. `THINKING_HEADROOM` (`lib/analyst/llm.ts:196`) is `12_000`:
 about twice the 5,637 maximum observed, because the same reading varied by
 roughly 40 per cent between runs (5,637 then 4,044), and an unreached ceiling
 costs nothing, as 8.32 established. Reasoning effort is not capped, because the
@@ -3287,11 +3287,11 @@ Two ceilings now, because one could not be raised.
 
 | Constant | Value | Line |
 |---|---|---|
-| `TIMEOUT_MS` (research) | `75_000` | `lib/analyst/llm.ts:54` |
-| `INSIGHT_TIMEOUT_MS` | `120_000` | `lib/analyst/llm.ts:74` |
-| `timeoutFor(kind)` | `company:` prefix takes the research ceiling, everything else the insight one | `lib/analyst/llm.ts:76` |
+| `TIMEOUT_MS` (research) | `75_000` | `lib/analyst/llm.ts:92` |
+| `INSIGHT_TIMEOUT_MS` | `120_000` | `lib/analyst/llm.ts:112` |
+| `timeoutFor(kind)` | `company:` prefix takes the research ceiling, everything else the insight one | `lib/analyst/llm.ts:114` |
 | `staticPageGenerationTimeout` | `240` | `next.config.ts:15` |
-| warm-up per-page abort | `150_000` | `scripts/warm-insights.mjs:53` |
+| warm-up per-page abort | `150_000` | `scripts/warm-insights.mjs:52` |
 
 Under the first Fable build, at the 75-second ceiling, the slowest call took
 69,826ms, and `generate()` does not retry a call that returned nothing, so at
@@ -3334,7 +3334,7 @@ tokens in that build ran from 1,453 to 5,107 per reading.
 
 ### Rollout: the cache key carries neither model nor effort
 
-`cachedGenerate` (`lib/analyst/llm.ts:749`) keys on kind, facts,
+`cachedGenerate` (`lib/analyst/llm.ts:826`) keys on kind, facts,
 instruction, `maxTokens`, roster, `cacheKey` and `guardKey`. A reading Opus 5
 wrote is served until its facts change or the 24-hour revalidation runs, and
 8.32's production check showed the Data Cache surviving a deploy. Fable readings
@@ -3345,7 +3345,7 @@ recorded so that a day-old Opus reading is not mistaken for a Fable one.
 ### Two things found on the way, neither changed here
 
 1. `/trust-rank` is on both warm lists (`lib/analyst/warm-list.ts:13`,
-   `scripts/warm-insights.mjs:27`) and never calls `authorInsight`. Warming it
+   `scripts/warm-insights.mjs:52`) and never calls `authorInsight`. Warming it
    renders a page for nothing.
 2. A probe that tests `html.includes("analyst written")` is always true on an
    insight page, because the derivation drawer prose contains the phrase. The
@@ -3355,9 +3355,315 @@ recorded so that a day-old Opus reading is not mistaken for a Fable one.
 ### Telemetry
 
 `callModel` now logs `call ok in Nms: stop=..., out=..., thinking=...` on
-success (`lib/analyst/llm.ts:511`), alongside the existing no-text
+success (`lib/analyst/llm.ts:588`), alongside the existing no-text
 line. Counts only, never content. It is how every number in this section was
 read.
+
+---
+
+## 8.34 Fable 5.1 production readiness: cache identity, warming and the key gate
+
+Verified against the working tree at commit `80eacbb` plus this change,
+5 September 2026.
+
+### Configuration verified before anything changed
+
+| | Value | Where |
+|---|---|---|
+| `MODEL` | `claude-fable-5-1` | `lib/analyst/llm.ts:38` |
+| `INSIGHT_TIMEOUT_MS` | `120_000` | `lib/analyst/llm.ts:112` |
+| `TIMEOUT_MS` (research) | `75_000` | `lib/analyst/llm.ts:92` |
+| `THINKING_HEADROOM` | `12_000` | `lib/analyst/llm.ts:196` |
+| `staticPageGenerationTimeout` | `240` | `next.config.ts:15` |
+| warm-up per-page abort | `150_000` | `scripts/warm-insights.mjs` |
+| reasoning | adaptive default; no `output_config`, no `thinking` block | `lib/analyst/llm.ts:47` |
+
+None of these changed in this tranche.
+
+### Cache identity, before and after
+
+Two layers cache an authored reading and both are in `lib/analyst/llm.ts`:
+an in-process Map (L1) and `unstable_cache` (L2, Vercel's Data Cache, which
+8.32 showed surviving a deploy).
+
+| | Before | After |
+|---|---|---|
+| L1 key payload | `{ facts, instruction, guardKey }` | `{ contract, facts, instruction, guardKey }` (`authoringCacheKey()`, line 290) |
+| L2 key parts | `["analyst-insight"]` | `["analyst-insight", CONTRACT_KEY]` (line 864) |
+| L2 arguments | kind, facts, instruction, maxTokens, roster, cacheKey, guardKey | unchanged |
+
+**The authoring contract** (`AUTHORING_CONTRACT`, line 71) is
+everything besides the evidence that can change what the model writes:
+
+| Field | Value now | Source |
+|---|---|---|
+| `intelligence` | `"2026-09-05"` | `INTELLIGENCE_VERSION`, line 55. Bump when the prompt, guards or instruction wording change without the facts changing |
+| `model` | `"claude-fable-5-1"` | `MODEL`, line 38 |
+| `reasoning` | `"adaptive"` | `REASONING.effort ?? "adaptive"`, line 47. The request spreads the same object (line 551), so the identity and the request cannot drift |
+
+The evidence is already in the key as `facts` (day-precision normalised) and
+the per-reading canonical contract, `authoringContract()` in `author.ts`
+(temporal licence, urgency, barred findings), is already in it as `guardKey`.
+The two are different things and are named differently here on purpose.
+
+**Deliberately excluded:** token ceilings and timeouts. They change whether a
+call succeeds, not what a successful call says.
+
+**How `unstable_cache` builds its key**, read from the installed
+implementation (`node_modules/next/dist/server/web/spec-extension/unstable-cache.js`,
+lines 55 and 82): `fixedKey = cb.toString() + "-" + keyParts.join(",")`, then
+`invocationKey = fixedKey + "-" + JSON.stringify(args)`, hashed. So the
+contract in the key parts makes every entry written under another contract
+unreachable, and a change to the wrapper's own source text does the same as a
+side effect. Nothing is purged; the old entries expire on the 24-hour TTL.
+
+### Proof that the old model's cache cannot satisfy the new model's request
+
+**Unit, on the real key function** (`tests/fable-production-readiness.test.ts`):
+same contract and evidence produce the same key, including an evidence capture
+later the same day; a different model, reasoning, intelligence version or
+evidence produces a different one.
+
+**Integration, through the real lookup** (`tests/cache-identity-integration.test.ts`).
+An entry is planted in the real L1 store under a chosen contract with
+`primeAuthoringCache()` (line 243, the one seam added for
+this), and then `authoredResult()` itself is asked:
+
+| Planted under | Requested under | Result |
+|---|---|---|
+| Fable, current version, evidence X | the same | the planted reading is returned |
+| `claude-opus-5`, current version, evidence X | Fable, current version, evidence X | passed by: `{ value: null, failure: "unreachable" }` |
+| Fable, intelligence `2026-09-04` | Fable, current | passed by |
+| Fable, reasoning `medium` | Fable, adaptive | passed by |
+| Fable, evidence X | Fable, evidence Y | passed by; evidence X later the same day is found |
+
+"Passed by" is the lookup missing L1 and falling into L2, which outside a Next
+render throws its incrementalCache invariant; that throw is the evidence the
+request went past the planted entry. A live demonstration on the L2 layer needs
+a successful authoring inside Next and is recorded below as blocked.
+
+### The Opus seed that did not seed, and why
+
+The release simulation first tried to seed a genuine Opus 5 entry by pinning
+`MODEL` and rendering `/peer-insights` on the dev server. The page returned
+computed after 10.0 seconds. From the server log:
+
+| | |
+|---|---|
+| model called | `claude-opus-5` (the temporary pin) |
+| status | HTTP 400, `invalid_request_error`: "Your credit balance is too low to access the Anthropic API" |
+| duration | 321ms for the call; the 10 seconds were the dev compile of the route |
+| stop_reason, output tokens, thinking tokens, text block | none: no message was returned |
+| draft rejected by a guard | no draft existed |
+| authoring returned null | yes: `callModel` caught the error, `generate()` logged `insight:peer no response in 323ms` and threw |
+| fallback relative to the cache | after the L1 miss and the L2 invocation; nothing was written to either layer |
+
+**Class A, a model/auth failure, specifically billing.** Not the contract and
+not the simulation: the next two requests, on Fable, returned the same 400 in
+298ms and 211ms and each made a fresh attempt, which is also the live proof
+that a failed authoring is never cached. The pin was reverted and the source
+carries no trace of it. The working key that authored roughly sixty Fable
+readings and three builds on 4 September had exhausted the account's credit;
+Fable's four-to-six-fold output tokens (8.33) are the reason it went that fast.
+
+### Warm target audit
+
+| Target | Rendering | Authors | Classification | Action |
+|---|---|---|---|---|
+| `/pulse` | dynamic | three readings via `authorPulse`, `authorSince`, `authorActions` | AUTHORS ANALYST INSIGHT | kept |
+| `/trust-rank` | dynamic | nothing under its route calls an author entry point | DYNAMIC BUT DOES NOT AUTHOR | **removed** |
+| `/news-feed` | dynamic | `insight:news` | AUTHORS | kept |
+| `/vendor-view`, `/financial-snapshot`, `/market-watch`, `/competitive-intel`, `/reputation-tracker`, `/alliances`, `/price-performance`, `/peer-insights` | dynamic | one reading each | AUTHORS | kept |
+
+Every warm page is `ƒ` dynamic in the final build's route table; none is
+prerendered, so a warm fetch renders and a missing cache entry authors
+synchronously. The build still authors seven kinds while classifying routes,
+and those build-time entries seed the Data Cache; `/pulse`, `/news-feed` and
+`/competitive-intel` bail out of the build render first and are the post-deploy
+cold set. `tests/warm-list.test.ts` now checks each entry's route directory for
+an author call and pins `/trust-rank` off the list.
+
+### Cold-warm cost per surface, final Fable configuration
+
+Model-call durations and tokens from the phase log, sequential, idle machine,
+4 September 2026 (8.33). The configuration is identical for authoring: the
+changes since are the cache key and the timeouts, neither of which alters a
+call. Re-measurement on 5 September was blocked by the credit balance.
+
+| Surface | call | thinking | output | attempts | guard rejection | fallback |
+|---|---|---|---|---|---|---|
+| pulse-since | 18.6s | 525 | 875 | 1 | no | no |
+| pulse-actions | 19.1s | 667 | 1,050 | 1 | no | no |
+| pulse-hero | 29.2s | 1,445 | 1,917 | 1 | no | no |
+| news | 50.0s | 3,538 | 4,103 | 1 | no | no |
+| vendor ranking | 41.8s | 2,723 | 3,255 | 1 | no | no |
+| financial | 51.6s | 3,785 | 4,313 | 1 | no | no |
+| market | 34.7s | 1,634 | 2,210 | 1 | no | no |
+| competitive | 44.9s | 2,829 | 3,382 | 1 | no | no |
+| reputation | 46.0s | 3,182 | 3,753 | 1 | no | no |
+| alliance channel | 42.7s | 2,810 | 3,384 | 1 | no | no |
+| price and capability | 56.6s | 4,044 | 4,577 | 1 | no | no |
+| peer | 41.3s | 2,438 | 3,046 | 1 | no | no |
+
+Sequential total over the ten pages, Pulse counted once at its slowest reading
+plus a second of render each: about 456 seconds. Worst observed single call,
+any run: 69.8 seconds (first Fable build). Under the 85-page build calls ran
+about 25 per cent slower than idle.
+
+### Warm concurrency
+
+The measured durations above were run through the real pool
+(`tests/warm-schedule.test.ts`, at 1/1000 scale, which does not change the
+schedule):
+
+| concurrency | full cold warm |
+|---|---|
+| 1 | 456s |
+| 2 | 238s |
+| 3 | 171s |
+| **4** | **132s** |
+| 5 | 108s |
+
+Selection rule, pinned by the test: fits the 240-second budget after calls run
+25 per cent slower (observed under build load) AND the slowest page retries
+once (observed). At 3 that is 171 x 1.25 + 57 = 271, over. At 4 it is 222,
+inside. Four is therefore the lowest that fits comfortably. The final Fable
+build authored seven readings concurrently with no rate limit. A live run at
+concurrency 4 against a production-mode server is the one measurement in this
+section not yet taken; it was blocked by the credit balance and the harness
+(`new-ai-ent-prod` in `.claude/launch.json`, the route, the bearer) is ready.
+
+### Warm execution
+
+| Constant | Value | Line |
+|---|---|---|
+| `WARM_CONCURRENCY` | `4` | `lib/analyst/warm.ts:43` |
+| `WARM_PAGE_TIMEOUT_MS` | `150_000` | `lib/analyst/warm.ts:51` |
+| `WARM_BUDGET_MS` | `240_000` | `lib/analyst/warm.ts:58` |
+| `AUTHORED_THRESHOLD_MS` | `5_000` | `lib/analyst/warm.ts:67` |
+| `maxDuration` | `300` | `app/api/warm/route.ts:28` |
+
+`runWarm()` (line 157) fetches through a pool of `WARM_CONCURRENCY`
+workers; each checks the elapsed budget BEFORE starting a page, so a run can
+never be extended by a page begun in its last second, and anything not started
+is reported as remaining. `classify()` (line 127) reads the badge
+span: computed is a fallback, written is cached below the threshold and
+authored at or above it (cached pages served in 0.2 to 1.3 seconds on
+production; no Fable call has finished under 15.9), and no badge is a failure,
+because a page without a reading is not a warm target.
+
+The report carries requested, authored, cached, fallback, failed, timedOut,
+remaining and remainingPaths. `success` is true only when every target was
+fetched and none failed or timed out. Fallbacks are counted and logged as a
+warning, not treated as warm failures: they are the truth architecture
+declining a draft. An incomplete run answers **503**, so the scheduler's own
+log shows it. Its predecessor was killed by the platform mid-list and logged
+nothing.
+
+End-to-end on 5 September 2026, dev server, bearer supplied: HTTP 200,
+`success: true`, requested 10, fallback 10 (the account could not author),
+failed 0, timedOut 0, remaining 0, concurrency 4, 16.5 seconds. Before the
+demo-gate credentials were forwarded on page fetches the same run answered
+503 with ten 401s, each named, which is the report doing its job.
+
+### The endpoint was open, and is now closed
+
+A probe on 5 September 2026 with `x-vercel-cron: 1` and nothing else answered
+**HTTP 200** on production and ran a warm. The repository is public and
+`CRON_SECRET` is not set in production, so anyone could spend the budget.
+`isScheduler()` (line 118) now admits only
+`Authorization: Bearer $CRON_SECRET`, the mechanism Vercel documents, and
+returns false when the secret is unset: nobody in, the scheduler included, with
+the 401 body saying `CRON_SECRET_UNSET` so the operator knows which closed
+state it is. The middleware exemption for the route (`middleware.ts:45`)
+stands; the route does its own check. Verified locally: no header, a wrong
+bearer and the spoofed header each answer 401.
+
+### Schedule
+
+`vercel.json` keeps `0 5,17 * * *`. The 05:00 UTC run trails the 04:30 fixture
+sync by half an hour and lands after the day-precision key flips at midnight
+UTC, so Today's Pulse is prepared before the working day; the 17:00 run halves
+the worst wait after an evidence move. A run against a valid current cache is
+cheap by construction: the page is served from L1 or L2 in under a second and
+no model is called, which the integration test's control case pins and the
+31 August production check showed live. Warming therefore cannot regenerate an
+identical current-version reading; only a new contract or new evidence can.
+
+### The production key gate
+
+`scripts/preflight-production.mjs` runs first in `npm run deploy`. It pulls the
+production environment to a private temporary file (`vercel env pull`,
+removed in `finally`), sends one one-token request to the model the code pins
+(read from `lib/analyst/llm.ts`, so it cannot drift), and decides
+(`decide()`, line 33): missing key, HTTP 401 or 403, HTTP 404 on the
+model, HTTP 400 (an exhausted credit balance returns this on a valid key) and
+a missing `CRON_SECRET` each block with the reason. It prints presence and
+status, never a value. Against production on 5 September 2026 all three
+prerequisites fail: the key returns 401 (since 3 September), `CRON_SECRET` is
+unset, and the account's credit balance is exhausted. **Deployment is blocked
+until all three are fixed by the operator.**
+
+### Fallback
+
+Under the live 400 on 5 September, `/peer-insights` rendered its computed
+reading three times with HTTP 200, no blank panel, the canonical decision
+intact, and three fresh model attempts in the log: nothing cached the failure.
+
+### Telemetry
+
+The `call ok` line (`lib/analyst/llm.ts:588`) now carries
+`model=`, so a log proves which model authored a reading rather than leaving it
+to be inferred from thinking counts.
+
+### The build gate under the exhausted account
+
+`npm run build` on 5 September 2026, cache cleared: exit 0, 85/85 static
+pages, compiled clean, 0 page-timeout retries. Every one of the
+7 build-time authoring calls was refused by Anthropic with the 400 credit
+error in 345 to 750ms (7 `call failed` lines, 0 `call ok`, 0 no-text).
+Each reading fell back to its computed floor and the build shipped whole, which
+is the fallback contract holding under build conditions: no blank panel, no
+failed page, nothing cached. It is also what a deploy today would ship, which
+is why the preflight refuses one.
+
+### Tests added
+
+| # | Property | Test |
+|---|---|---|
+| 1 | Opus cache cannot satisfy a Fable request | readiness 1; integration, Opus row |
+| 2 | same Fable configuration reuses | readiness 2; integration, control |
+| 3 | effort change invalidates | readiness 3; integration, effort row |
+| 4 | evidence change invalidates | readiness 4; integration, evidence row |
+| 5 | intelligence version change invalidates | readiness 5; integration, version row |
+| 6 | warm against a valid cache calls no model | readiness 6 (classification, and `warm.ts` imports no model path); integration control |
+| 7 | non-authoring routes not warmed | warm-list: author-call check, `/trust-rank` pinned off |
+| 8 | bounded concurrency completes | readiness 8 (max in flight equals the bound); schedule test on measured durations |
+| 9 | partial warm reports failure | readiness 9 |
+| 10 | timed-out target visible | readiness 10 |
+| 11 | cannot report success with targets remaining | readiness 11 |
+| 12 | `/api/warm` protected | readiness 12, three cases and the header ban |
+| 13 | preflight fails closed on 401 | readiness 13, plus 400, 404, missing key, missing secret, deploy wiring |
+| 14 | fallback usable | readiness 14 |
+| 15 | no new reader-time model call | readiness 15: `callModel` invoked from exactly one place |
+
+Thirty-eight tests across four files; the suite is 1,188 tests in 67 files.
+
+### Remaining risks
+
+1. The live L2 demonstration and the live concurrency-4 run both need the
+   account to author; both harnesses are ready and neither changes a
+   conclusion the measured schedule does not already support.
+2. Fable's token cost emptied a prepaid balance in a day of measurement. The
+   twice-daily warm over ten pages at roughly 3,500 output tokens each is the
+   steady-state floor; a budget alert on the Anthropic account is the cheap
+   control.
+3. The demo gate, if switched on in production, is now forwarded by the warm
+   route; the post-deploy script does not forward it and would report every
+   page failed, visibly.
+4. `AUTHORED_THRESHOLD_MS` is a classification, not a guard; a page that
+   authored in under five seconds would be labelled cached. No Fable call has
+   come close.
 
 ---
 

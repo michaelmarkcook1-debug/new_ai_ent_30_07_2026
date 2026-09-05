@@ -48,56 +48,50 @@ Errors are a different matter and there should never be any.
 npm run deploy
 ```
 
-That deploys and then warms the analyst cache, which the deploy just emptied.
-They are one operation and were two commands until 8 August 2026, which is how
-the second one gets skipped: the deploy that morning went out unwarmed, and a
-cold sweep nine hours later still paid 35s on /vendor-view and 23s on
-/competitive-intel because no reader had filled those entries.
+That runs three steps as one operation, and stops at the first that fails:
 
-To warm without deploying, after a cache expiry or a slow report:
+1. **Preflight.** `scripts/preflight-production.mjs` pulls the production
+   environment to a private temporary file, sends one one-token request to
+   the model the code pins, and checks `CRON_SECRET` exists. It prints what it
+   found, never a value. `DEPLOYMENT BLOCKED` with the reasons means fix them
+   in Vercel and run again; nothing has been deployed. The three reasons it
+   has blocked on so far: the key rejected (401), the credit balance exhausted
+   (400), the scheduler secret unset.
+2. **Deploy.** `vercel --prod --yes`.
+3. **Warm.** `scripts/warm-insights.mjs` renders the pages the build could not
+   author, so the first reader after a deploy does not wait for a model call.
+   It prints one line per page (authored, cached, fallback, failed) and ends
+   `COMPLETE` or `PARTIAL`; a partial warm is not a failed deploy, it is a
+   list of pages that will be slow for their first reader.
+
+They became one command on 8 August 2026 after a deploy went out unwarmed and
+a cold sweep nine hours later still paid 35s on /vendor-view. The preflight
+joined on 5 September 2026 after production had shipped for two days with a
+key Anthropic no longer accepted.
+
+To warm without deploying, after a slow report:
 
 ```bash
 npm run warm
 ```
 
-The authored insight is cached in Vercel's Data Cache, shared across
-instances, but the key includes the build id. Every deploy therefore clears
-it, and without this the next person to open a page waits for a full Opus call
-before the first byte: measured between 8 and 30 seconds. The script walks the
-eleven pages that author a reading and absorbs that cost on our side. It takes
-a couple of minutes and is safe to run twice.
+**What the cache actually does.** The authored reading is cached in Vercel's
+Data Cache, shared across instances, under a key that carries the evidence,
+the model, the reasoning setting and the intelligence version
+(RULES-AND-CALCULATIONS 8.34). A deploy that changes none of those keeps
+serving the existing readings, which is cheap and correct. A deploy that
+changes the model or bumps `INTELLIGENCE_VERSION` makes every old reading
+unreachable at once; they are not deleted and expire within a day. The earlier
+note here that the key carried the build id was wrong: the cache was observed
+surviving a deploy on 31 August 2026.
 
-There is **no git remote**: deploys go through the Vercel CLI directly from
-this folder. `git push` will fail, and that is expected, not a broken setup.
-
-**The deploy fails intermittently on upload.** On 5 August 2026 the first
-attempt built 42 of 84 pages and then died with `fetch failed`; the retry went
-through unchanged. If you see that, retry once before investigating. A failed
-attempt never reaches production, but it does leave a failed deployment in the
-Vercel dashboard, so do not read one there as evidence that production is
-broken.
-
-### Checking a deploy actually landed
-
-Do not trust the CLI's "ready" alone: check what the site says:
-
-```bash
-curl -s https://newaient30072026.vercel.app/start | grep -o '[0-9]* roles across [0-9]* industries'
-curl -s -o /dev/null -w '%{http_code}\n' https://newaient30072026.vercel.app/market-view
-curl -s https://newaient30072026.vercel.app/api/catalogue/vendor | head -c 200
-```
-
-The three catalogue series must all report `truncated: false`. If one reports
-`true`, the paging in `lib/catalogue/client.ts` has regressed, see §5.
-
-### The site is public on purpose
-
-`DEMO_USER` and `DEMO_PASS` are deliberately **not** set in Vercel. The gate in
-`middleware.ts` opens when either is missing, so the deployed site is open by
-link. This is a decision so the demo can be shared. Do not "fix" it. Locally
-both are set in `.env.local`, so local development does prompt.
-
----
+**The scheduled warm.** `/api/warm` runs at 05:00 and 17:00 UTC and accepts
+only `Authorization: Bearer $CRON_SECRET`, which Vercel sends when that variable
+is set. With it unset the run answers 401 `CRON_SECRET_UNSET` and nothing is
+warmed. It renders four pages at a time inside a 240-second budget and returns
+a report: 200 when every page was fetched, 503 with the remaining pages named
+when it could not finish. Fallbacks are counted in the body and logged as a
+warning; they mean the model's draft was declined, not that the warm failed.
 
 ## 3. Refreshing the data
 

@@ -37,6 +37,44 @@ import type { ArgumentUnit } from "./question";
 
 const MODEL = "claude-fable-5-1";
 /**
+ * The reasoning configuration sent with every call, and nothing else decides
+ * it: the request spreads this object and the cache identity reads it, so the
+ * two cannot drift. Empty means the model's adaptive default, which is what
+ * every Fable 5.1 reading has been authored under since 4 September 2026.
+ * Capping effort was measured and rejected (8.33); setting it here would both
+ * change the request and, correctly, orphan every cached reading.
+ */
+const REASONING: { effort?: "low" | "medium" | "high" } = {};
+/**
+ * Bump when the analytical implementation changes in a way the facts string
+ * does not carry: the system prompt, the guards, the instruction wording, or
+ * anything in author.ts that changes what the model is asked without changing
+ * the evidence it is given. A change to the evidence itself needs no bump, the
+ * facts are already in the key. Same convention as SHIELD_VERSION.
+ */
+export const INTELLIGENCE_VERSION = "2026-09-05";
+/**
+ * THE AUTHORING CONTRACT: everything besides the evidence that can change
+ * what the model writes. It is part of the cache identity at both layers, so a
+ * reading authored under one contract can never satisfy a request under
+ * another. Opus 5 readings cached before 4 September 2026 are unreachable
+ * from this contract, not deleted: they expire on their own.
+ *
+ * Deliberately NOT here: token ceilings and timeouts, which change whether a
+ * call succeeds but not what a successful call says.
+ */
+export interface AuthoringContract {
+  readonly intelligence: string;
+  readonly model: string;
+  readonly reasoning: "low" | "medium" | "high" | "adaptive";
+}
+export const AUTHORING_CONTRACT: AuthoringContract = Object.freeze({
+  intelligence: INTELLIGENCE_VERSION,
+  model: MODEL,
+  reasoning: REASONING.effort ?? "adaptive",
+});
+const CONTRACT_KEY = JSON.stringify(AUTHORING_CONTRACT);
+/**
  * How long one call may take.
  *
  * MEASURED, NOT CHOSEN. On 30 August 2026 the company-research call for
@@ -195,6 +233,25 @@ export type Authorship = "written" | "computed";
 const cache = new Map<string, { value: unknown; at: number }>();
 
 /**
+ * Write one entry into the L1 store exactly as authoredResult() would, under
+ * exactly the key it would compute. THE SEAM FOR THE CACHE-IDENTITY
+ * INTEGRATION TEST and nothing else: it lets a test plant a reading under one
+ * authoring contract and then show, through the real lookup in
+ * authoredResult(), that a request under another contract never finds it.
+ * It calls no model and writes nothing to L2.
+ */
+export function primeAuthoringCache(
+  kind: string,
+  request: { facts: string; instruction: string; guardKey: string },
+  value: unknown,
+  contract: AuthoringContract = AUTHORING_CONTRACT
+): string {
+  const key = authoringCacheKey(kind, request, contract);
+  cache.set(key, { value, at: Date.now() });
+  return key;
+}
+
+/**
  * One line per authoring call, with the phases separated.
  *
  * WHY THIS EXISTS. Two authoring calls were observed at 568 and 951 seconds
@@ -222,6 +279,25 @@ function phaseLog(
       .map((p) => `${p.label} ${p.ms}ms`)
       .join(", ")})`
   );
+}
+
+/**
+ * The cache identity of one authoring request, pure and exported so the
+ * invalidation rules can be tested without a model or a Next render:
+ * same contract and same evidence reuse; a different model, reasoning,
+ * intelligence version, evidence or instruction never does.
+ */
+export function authoringCacheKey(
+  kind: string,
+  request: { facts: string; instruction: string; guardKey: string },
+  contract: AuthoringContract = AUTHORING_CONTRACT
+): string {
+  return keyOf(kind, {
+    contract,
+    facts: dayPrecision(request.facts),
+    instruction: request.instruction,
+    guardKey: request.guardKey,
+  });
 }
 
 function keyOf(kind: string, payload: unknown): string {
@@ -472,6 +548,7 @@ async function callModel(
         max_tokens: maxTokens + THINKING_HEADROOM,
         system: SYSTEM,
         messages: [{ role: "user", content: prompt }],
+        ...(REASONING.effort ? { output_config: { effort: REASONING.effort } } : {}),
       },
       // A SECOND, INDEPENDENT ABORT ON THE UNDERLYING REQUEST.
       //
@@ -508,7 +585,7 @@ async function callModel(
     // than from the failures alone. Counts only, never content: this line is
     // how the Fable 5.1 thinking load was measured on 4 September 2026.
     console.warn(
-      `[analyst-llm] call ok in ${Date.now() - started}ms: stop=${res.stop_reason}, out=${res.usage?.output_tokens ?? "?"}, thinking=${res.usage?.output_tokens_details?.thinking_tokens ?? "?"}`
+      `[analyst-llm] call ok in ${Date.now() - started}ms: model=${MODEL}, stop=${res.stop_reason}, out=${res.usage?.output_tokens ?? "?"}, thinking=${res.usage?.output_tokens_details?.thinking_tokens ?? "?"}`
     );
     return text.text;
   } catch (err) {
@@ -710,7 +787,7 @@ export async function authoredResult<T extends object>(
     temporal: guards.temporal ?? null,
     urgency: guards.urgency ?? null,
   });
-  const cacheKey = keyOf(kind, { facts: stable, instruction, guardKey });
+  const cacheKey = authoringCacheKey(kind, { facts: stable, instruction, guardKey });
   const hit = cache.get(cacheKey);
   if (hit && Date.now() - hit.at < TTL_MS) {
     return { value: hit.value as T, failure: null };
@@ -781,7 +858,10 @@ const cachedGenerate = unstable_cache(
         forbidFiller: boolean;
       }
     ),
-  ["analyst-insight"],
+  // The contract is a key part, so every entry written under a different
+  // model, reasoning setting or intelligence version is unreachable from this
+  // build without anything being purged.
+  ["analyst-insight", CONTRACT_KEY],
   { revalidate: TTL_MS / 1000 }
 );
 
