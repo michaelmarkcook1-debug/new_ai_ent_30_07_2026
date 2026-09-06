@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { discover } from "@/lib/dataops/discover";
-import { AIE_UPSTREAM, CANONICAL_FILES, type CanonicalFile } from "@/lib/dataops/sources";
+import { AIE_UPSTREAM, CANONICAL_FILES, meaningfulHash, payloadsForTransit, type CanonicalFile } from "@/lib/dataops/sources";
 import { FsStore } from "@/lib/dataops/store";
 import { SEED_CATEGORIES } from "@/lib/dataops/taxonomy";
 
@@ -31,6 +31,7 @@ async function fetchJson(endpoint: string): Promise<unknown | null> {
 export async function POST() {
   const store = new FsStore();
   const payloads: Partial<Record<CanonicalFile, unknown>> = {};
+  const payloadHashes: Partial<Record<CanonicalFile, string>> = {};
   const seen = new Map<string, unknown | null>();
   const remembering = async (endpoint: string) => {
     const data = await fetchJson(endpoint);
@@ -41,13 +42,18 @@ export async function POST() {
   for (const file of CANONICAL_FILES) {
     const f = discovery.files.find((x) => x.file === file);
     const data = seen.get(f?.endpoint ?? "");
-    if (data && f && (f.status === "new-capture" || f.status === "unchanged")) payloads[file] = data;
+    if (data && f && (f.status === "new-capture" || f.status === "unchanged")) {
+      payloads[file] = data;
+      payloadHashes[file] = meaningfulHash(data);
+    }
   }
   const rosterText = await store.read("vendors.json");
   const roster = ((rosterText ? (JSON.parse(rosterText) as { vendors?: { id: string; name: string }[] }).vendors : []) ?? []).map((v) => ({ id: v.id, name: v.name }));
   return NextResponse.json({
     ...discovery,
-    payloads,
+    // news.json stays behind (STAYS_BEHIND); ingest fetches it again and checks the hash.
+    payloads: payloadsForTransit(payloads),
+    payloadHashes,
     // The client's selects offer exactly these and nothing else.
     taxonomy: SEED_CATEGORIES,
     roster,

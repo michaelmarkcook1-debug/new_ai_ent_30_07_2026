@@ -3940,6 +3940,22 @@ so a value that moves here changes those facts and the key with them, and
 the next reader request authors the new reading. The result says so in those
 words, and nothing here calls the model (property 18).
 
+### What travels between the browser and the server
+
+The staged discovery goes to the client and comes back for validation and
+ingestion, so what is validated and ingested is exactly what was reviewed.
+Payloads are the weight in that round trip, and on 6 September 2026 the first
+production smoke showed why it matters: `news.json` now runs to 3,404 records,
+about four megabytes, and validate and ingest answered 413 at the platform's
+request-body limit before the handler ran. So `STAYS_BEHIND`
+(`lib/dataops/sources.ts:108`) keeps news.json out of the discovery, which
+carries its meaningful hash instead; validation travels without any payload,
+because it reads none; ingestion travels with the payloads the selection
+touches and nothing else; and for a file that stayed behind the ingest route
+fetches it again and accepts it only if `matchesReviewed()` (line 120) finds
+the same meaningful hash, answering 409 otherwise, because an upstream that
+moved between review and ingest is a reason to review again.
+
 ### Where writes are allowed
 
 `FsStore.reason()` (`lib/dataops/store.ts:74`) refuses on Vercel (read-only

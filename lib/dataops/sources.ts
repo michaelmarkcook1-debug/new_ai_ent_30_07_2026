@@ -97,6 +97,30 @@ export function meaningfulHash(payload: unknown): string {
     .slice(0, 16);
 }
 
+/**
+ * Payloads too large to travel with a discovery. news.json is a file-level
+ * change and today's capture runs to four megabytes, past the request-body
+ * limit of a Vercel function; on 6 September 2026 validate and ingest answered
+ * 413 on production for exactly that reason. These stay behind: the discovery
+ * carries their meaningful hash instead, and ingestion fetches them again and
+ * refuses unless the hash still matches what was reviewed.
+ */
+export const STAYS_BEHIND: ReadonlySet<CanonicalFile> = new Set<CanonicalFile>(["news.json"]);
+
+/** The payloads a discovery may carry to the client and back. */
+export function payloadsForTransit<T>(payloads: Partial<Record<CanonicalFile, T>>): Partial<Record<CanonicalFile, T>> {
+  const out: Partial<Record<CanonicalFile, T>> = {};
+  for (const [file, payload] of Object.entries(payloads) as [CanonicalFile, T][]) {
+    if (!STAYS_BEHIND.has(file)) out[file] = payload;
+  }
+  return out;
+}
+
+/** True when a re-fetched payload says what the reviewed one said. */
+export function matchesReviewed(reviewedHash: string | undefined, fetched: unknown): boolean {
+  return typeof reviewedHash === "string" && reviewedHash === meaningfulHash(fetched);
+}
+
 /** How many records a payload carries, by its known top-level array. */
 export function recordCount(file: CanonicalFile, payload: unknown): number | null {
   if (!payload || typeof payload !== "object") return null;

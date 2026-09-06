@@ -315,3 +315,17 @@ describe("19, 20, 21: nothing is scheduled", () => {
     for (const [k, v] of Object.entries(pkg.scripts)) expect(v, k).not.toMatch(/cron|schedule/i);
   });
 });
+
+describe("what travels with a discovery", () => {
+  it("leaves news.json behind and lets ingest verify a re-fetch against the reviewed hash", async () => {
+    const { payloadsForTransit, matchesReviewed, STAYS_BEHIND } = await import("@/lib/dataops/sources");
+    const payloads: Partial<Record<import("@/lib/dataops/sources").CanonicalFile, unknown>> = { "news.json": { news: [1, 2, 3] }, "vendors.json": { vendors: [] } };
+    const transit = payloadsForTransit(payloads);
+    expect(STAYS_BEHIND.has("news.json")).toBe(true);
+    expect(Object.keys(transit)).toEqual(["vendors.json"]);
+    const reviewed = meaningfulHash({ news: [{ id: 1 }], capturedAt: "2026-09-06T00:00:00Z" });
+    expect(matchesReviewed(reviewed, { news: [{ id: 1 }], capturedAt: "2026-09-07T00:00:00Z" })).toBe(true);
+    expect(matchesReviewed(reviewed, { news: [{ id: 1 }, { id: 2 }] })).toBe(false);
+    expect(matchesReviewed(undefined, { news: [] })).toBe(false);
+  });
+});

@@ -14,6 +14,7 @@ import type { IngestResult } from "@/lib/dataops/ingest";
 
 type DiscoveryResponse = Discovery & {
   payloads: Record<string, unknown>;
+  payloadHashes: Record<string, string>;
   taxonomy: string[];
   roster: { id: string; name: string }[];
   store: { writable: boolean; reason: string; root: string; staging: boolean };
@@ -54,7 +55,10 @@ export function DataOperations() {
     if (!discovery) return;
     setBusy("validate"); setError(null); setResult(null);
     try {
-      const r = await post("validate", { discovery, resolutions: Object.values(resolutions) });
+      // Validation never reads payloads, and they are what pushes a request past a function's body limit.
+      const { payloads: _omitted, ...light } = discovery;
+      void _omitted;
+      const r = await post("validate", { discovery: light, resolutions: Object.values(resolutions) });
       if (!r.ok) throw new Error((r.json as { error?: string }).error ?? `HTTP ${r.status}`);
       const v = r.json as Validation;
       setValidation(v);
@@ -66,7 +70,15 @@ export function DataOperations() {
     if (!discovery || !validation) return;
     setBusy("ingest"); setError(null);
     try {
-      const r = await post("ingest", { discovery, resolutions: Object.values(resolutions), approvedIds: [...selected] });
+      // Only the payloads the selection touches travel; anything that stayed
+      // behind is fetched again by the server and checked against its hash.
+      const touched = new Set<string>();
+      for (const rec of validation.records) {
+        if (!selected.has(rec.id)) continue;
+        touched.add(rec.kind === "entity" ? "vendors.json" : rec.change?.file ?? "");
+      }
+      const payloads = Object.fromEntries(Object.entries(discovery.payloads).filter(([f]) => touched.has(f)));
+      const r = await post("ingest", { discovery: { ...discovery, payloads }, resolutions: Object.values(resolutions), approvedIds: [...selected] });
       setResult(r.json as IngestResult);
       if (!r.ok && r.status !== 409 && r.status !== 500) throw new Error(`HTTP ${r.status}`);
     } catch (e) { setError(e instanceof Error ? e.message : String(e)); } finally { setBusy(""); }

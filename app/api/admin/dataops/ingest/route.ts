@@ -5,7 +5,7 @@ import { validate, type Resolution } from "@/lib/dataops/validate";
 import { plan, apply } from "@/lib/dataops/ingest";
 import { runDerivedArtefacts } from "@/lib/dataops/derived";
 import type { Discovery } from "@/lib/dataops/discover";
-import type { CanonicalFile } from "@/lib/dataops/sources";
+import { AIE_UPSTREAM, ENDPOINT_OF, STAYS_BEHIND, matchesReviewed, type CanonicalFile } from "@/lib/dataops/sources";
 import { FsStore } from "@/lib/dataops/store";
 
 // POST /api/admin/dataops/ingest  { discovery, resolutions, approvedIds }
@@ -20,7 +20,7 @@ import { FsStore } from "@/lib/dataops/store";
 export const maxDuration = 300;
 
 export async function POST(request: NextRequest) {
-  const body = (await request.json().catch(() => null)) as { discovery?: Discovery & { payloads?: Partial<Record<CanonicalFile, unknown>> }; resolutions?: Resolution[]; approvedIds?: string[] } | null;
+  const body = (await request.json().catch(() => null)) as { discovery?: Discovery & { payloads?: Partial<Record<CanonicalFile, unknown>>; payloadHashes?: Partial<Record<CanonicalFile, string>> }; resolutions?: Resolution[]; approvedIds?: string[] } | null;
   if (!body?.discovery) return NextResponse.json({ error: "a discovery is required" }, { status: 400 });
   const store = new FsStore();
   if (!store.writable()) {
@@ -29,6 +29,25 @@ export async function POST(request: NextRequest) {
   const rankingsText = await store.read("category-rankings.json");
   const validation = validate(body.discovery, body.resolutions ?? [], { canonicalRankings: rankingsText ? JSON.parse(rankingsText) : null });
   const planned = plan(validation, body.approvedIds ?? []);
+  // Payloads that stayed behind are fetched again now, and only accepted if
+  // they still say what was reviewed. The upstream moving between review and
+  // ingest is a reason to review again, never a reason to ingest the unseen.
+  body.discovery.payloads = { ...(body.discovery.payloads ?? {}) };
+  for (const r of planned.approved) {
+    const file = r.change?.file;
+    if (!file || !STAYS_BEHIND.has(file) || body.discovery.payloads[file] !== undefined) continue;
+    let fetched: unknown = null;
+    try {
+      const res = await fetch(`${AIE_UPSTREAM}/${ENDPOINT_OF[file]}`, { headers: { accept: "application/json" }, cache: "no-store", signal: AbortSignal.timeout(20_000) });
+      if (res.ok) fetched = await res.json();
+    } catch {
+      fetched = null;
+    }
+    if (!matchesReviewed(body.discovery.payloadHashes?.[file], fetched)) {
+      return NextResponse.json({ status: "FAILED", ingested: 0, error: `${file}: the upstream no longer says what was reviewed (or did not answer); discover again before ingesting it` }, { status: 409 });
+    }
+    body.discovery.payloads[file] = fetched;
+  }
   const result = await apply(body.discovery, planned, body.resolutions ?? [], store, {
     // On a staging root the derived scripts would read the real fixtures, so
     // the step is reported as skipped rather than pretending it regenerated.
