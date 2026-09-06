@@ -3818,6 +3818,183 @@ in 68 files.
 
 ---
 
+## 8.36 Data operations: manual discovery, categorisation and ingestion
+
+Verified against the working tree at commit `0813ba7` plus this change,
+6 September 2026.
+
+### What it is, and where
+
+An admin section, not a research tab: `/admin/data` (`app/(ai-ent)/admin/data/`),
+linked from `/admin` and reachable by URL like it, with three routes under
+`app/api/admin/dataops/` (`discover`, `validate`, `ingest`) and one module,
+`lib/dataops/`, that both the routes and `scripts/sync-aie-fixtures.mjs` read.
+The flow is DISCOVER, REVIEW, CATEGORISE, VALIDATE, INGEST, REBUILD DERIVED,
+VERIFY, and every step is started by a person. Nothing in it is scheduled and
+nothing in it calls the model: `tests/dataops.test.ts` reads every file in
+`lib/dataops/` and the three routes and fails on any import of the analyst or
+Anthropic modules.
+
+### Sources and what counts as a change
+
+`ENDPOINT_OF` (`lib/dataops/sources.ts:24`) maps the eight canonical
+files to their upstream endpoints; the sync script imports it (`scripts/sync-aie-fixtures.mjs:29`)
+so there is one list. `SCRIPT_CAPTURED` (line 44) names the four
+files no endpoint serves, so discovery reports them with their last capture
+rather than omitting them; `category-rankings.json` stays with
+`scripts/sync-category-rankings.mjs`, which parses upstream pages and
+cross-checks populations, and is not re-implemented in a route.
+
+A fetch time is not evidence. `meaningfulHash()` (line 93) hashes a
+payload with `TIMESTAMP_FIELDS` (line 69) removed, so a payload
+regenerated with the same values is "unchanged" and the file row says why.
+Every change carries the payload's own capture date; `discoveredAt` is
+labelled as the fetch time and used for nothing else. Discovery reads the
+store and never writes it (`tests/dataops.test.ts`, property 1).
+
+### Entity-level diff
+
+`SPECS` (`lib/dataops/discover.ts:113`) diffs vendors by id (name, category,
+ownership, headquarters, overallScore, marketPosition), market share by
+vendor and category (estimatedShare, confidence), reputation by vendor (the
+three pillar overalls), pricing by row id (the three per-million prices) and
+capabilities by vendor and capability (maturityScore, status). `FILE_LEVEL`
+(line 121) treats metadata, uptake and news as one record each. A row
+present here and absent upstream is shown as removed and is never applied.
+
+### Entities, matching and categories
+
+Every vendor id the upstream mentions is set against the canonical roster:
+KNOWN, NEW (a vendor row not held here), UNRESOLVED (an alias candidate, or an
+id that metric rows reference but no roster carries), REJECTED (no usable id
+or name). `matchExisting()` (`lib/dataops/entities.ts:86`) scores
+candidates by identical id (1.0), an alias the canonical name already answers
+to (0.95, so "Aleph Alpha" finds "Cohere (incl. Aleph Alpha)"), an
+abbreviation in either direction (0.9, so "AWS" and "Amazon Web Services"
+find each other), and shared name tokens at or above 60 per cent, with legal
+and field suffixes (`LEGAL_SUFFIXES`, line 8, including a trailing
+"AI") ignored. A suggestion needs 0.9 and no rival within 0.15; two rivals
+within 0.15 is ambiguous. Nothing is merged by the code: a match lands only as
+the operator's explicit resolution, and lands as an alias, not a new vendor.
+
+Categories come from `CATEGORY_TO_LAYER` in `lib/aie/vendors.ts:61`
+(exported for this) plus the investor category: `SEED_CATEGORIES`
+(`lib/dataops/taxonomy.ts:13`). `suggestCategory()` (line 32)
+suggests the upstream seed category when it is one of them, with the reason
+and the evidence stated; when it is not, it says so, marks the entity as
+needing a new top-level category, and the record is BLOCKED until a person
+assigns an existing one or rejects it. No path creates a category
+(properties 9 to 11).
+
+### Validation
+
+`validate()` (`lib/dataops/validate.ts:82`) is deterministic and puts
+every staged record at READY, WARNING or BLOCKED with the rule named:
+
+| Rule | Level | When |
+|---|---|---|
+| entity-validity | BLOCKED | no usable id or name |
+| new-entity-review, unresolved-entity | BLOCKED | no operator resolution |
+| taxonomy-validity | BLOCKED | a category outside `SEED_CATEGORIES` |
+| match-target | BLOCKED | a match to a non-canonical id |
+| required-identifier | BLOCKED | a figure whose vendor is neither canonical nor approved |
+| value-type, value-range | BLOCKED | `RANGES` (line 57): shares, confidence, reputation and maturity 0 to 100, prices at or above 0 |
+| observation-date | BLOCKED / WARNING | in the future, or older than canonical / absent |
+| duplicate | BLOCKED | the same id twice |
+| schema | BLOCKED | a file-level payload without its array |
+| category-change, category-override, possible-duplicate | WARNING | shown, not stopped |
+| population-consistency | WARNING | market-share vendors per category differ from canonical ranked plus held |
+| currency | WARNING | pricing states no currency; USD per million assumed per the source note |
+| removal | WARNING | shown; never applied |
+
+READY changes are pre-selected; entities and warnings never are.
+
+### The mutation boundary
+
+`plan()` (`lib/dataops/ingest.ts:26`) keeps only selected records that are
+READY or WARNING and applicable; BLOCKED never lands, whatever was selected
+(property 5). `apply()` (line 100) refuses on a read-only store before
+touching anything, builds every affected file in memory (new vendors under the
+operator's category first, then each approved value, aliases rewriting
+vendor ids, capture fields following the evidence, counts following the
+arrays), and writes through `FsStore.write()` (`lib/dataops/store.ts:84`):
+temps for every file first, renames only once all exist. Derived artefacts
+then regenerate (`lib/dataops/derived.ts:9`: the vendor directory,
+the signal snapshot and change log, the scorecard ledger, exactly as the sync
+script does). If any step fails the previous contents are written back
+(line 201) and the result is FAILED with `ingested: 0` (property 22).
+
+The audit record carries discovery and ingestion times, the source, every
+approved change with from, to, evidence date and endpoint, the skipped and
+blocked records with reasons, category mappings, aliases, the evidence
+version before and after, and the derived steps. It is written under
+`reports/dataops/` (`<ingestedAt>.json`) and returned in the response.
+
+### Evidence version, and the Analyst Insight cache
+
+`evidenceVersion()` (`lib/dataops/evidence.ts:16`) is a hash of the
+meaningful hash of every canonical file: it moves when a value moves and not
+when a timestamp does (property 17). The Analyst Insight cache is not touched
+and not read: it is keyed on the facts a page derives from these files (8.34),
+so a value that moves here changes those facts and the key with them, and
+the next reader request authors the new reading. The result says so in those
+words, and nothing here calls the model (property 18).
+
+### Where writes are allowed
+
+`FsStore.reason()` (`lib/dataops/store.ts:74`) refuses on Vercel (read-only
+filesystem), without `DATAOPS_WRITE=1` in the server's environment, or when
+the directory is not writable. Discovery, review, categorisation and
+validation work everywhere; ingestion works on an operator's checkout, and the
+commit that follows is the durable transaction. `DATAOPS_ROOT` points the
+store at a copy for a rehearsal; in that mode derived regeneration is
+reported as skipped and the audit lands under the copy.
+
+### The rehearsal, 6 September 2026
+
+Against the live upstream, on a staging copy, in the browser: seven payloads
+identical, `news.json` changed (200 records held, 3,404 served), four
+script-captured files reported with their captures; 0 NEW and 8 UNRESOLVED
+entities, all ids referenced by metric rows and on no roster (`arm` and `asml`
+from metadata, six from pricing and reputation), `aleph_alpha` suggested as an
+alias of Cohere at 95 per cent. After matching it, rejecting one orphan and
+validating: 0 READY, 3 WARNING, 6 BLOCKED, the ingest button at zero until the
+two warnings were selected by hand, then INGESTED: 1 value, 1 alias, 1
+skipped, 6 blocked, evidence version `24e04cc8a97f7c6b` to
+`b96a435d2ab8e779`, the audit written, no client exception at any step, no
+`[analyst-llm]` line in the server log. The staging copy differed from the
+real fixtures in `news.json` only afterwards, and the real fixtures were
+byte-identical to before. The Browser pane was hidden for the run, so the
+controls were driven from the page's own JavaScript and the rendering and
+console were read the normal way.
+
+### The build gate
+
+`npm run build` on 6 September 2026, cache cleared: exit 0, 88/88 pages,
+**0 Anthropic calls** (no `[analyst-llm]` line of any kind), so the release
+can be built and deployed without spending a reading.
+
+### Not automated
+
+`vercel.json` carries no cron, no workflow has a schedule trigger, no
+workflow references these routes, and no npm script mentions a schedule
+(properties 19 to 21, and `tests/spend-controls.test.ts`).
+
+### Limits, stated
+
+`category-rankings.json` is discovered by its script, not here. Removals are
+shown and never applied. Production ingestion is refused by design; the
+button says why. A resolution of "match" records the alias and re-keys the
+approved figures; it does not edit the canonical vendor's name.
+
+### Tests
+
+`tests/dataops.test.ts`: nineteen tests covering the twenty-two required
+properties on an in-memory store and a fake upstream shaped like the real
+payloads. Suite: 1,221 tests in 69 files before the final gate.
+
+---
+
 ## 9. Run costs
 
 `lib/admin/cost-model.ts`. List prices, measured rather than estimated:

@@ -12,8 +12,8 @@
     "ingest:catalogue": "node scripts/ingest-catalogue.mjs",
     "deploy": "node scripts/preflight-production.mjs && vercel --prod --yes",
     "warm": "node --import ./scripts/alias-hook.mjs scripts/warm.mjs",
-    "sync:aie": "node scripts/sync-aie-fixtures.mjs && node scripts/sync-category-rankings.mjs",
-    "sync:aie:dry": "node scripts/sync-aie-fixtures.mjs --dry && node scripts/sync-category-rankings.mjs --dry",
+    "sync:aie": "node --import ./scripts/alias-hook.mjs scripts/sync-aie-fixtures.mjs && node scripts/sync-category-rankings.mjs",
+    "sync:aie:dry": "node --import ./scripts/alias-hook.mjs scripts/sync-aie-fixtures.mjs --dry && node scripts/sync-category-rankings.mjs --dry",
     "preflight": "node scripts/preflight-production.mjs"
   },
   "dependencies": {

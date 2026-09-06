@@ -15,6 +15,35 @@ than a gap.
 
 ---
 
+## 6 September 2026 (data operations)
+
+**The product can now show what its source holds today against what it holds
+itself, and a person decides what comes in.**
+
+A new Data operations screen under Admin fetches the AI Enterprise source on
+request and lays it beside the recorded data: which files moved, which values
+differ, and which names appear that the product does not know. A name it does
+not know is never taken in on its own. The screen suggests, with the reason
+and the evidence, whether it is an existing vendor under another name or
+belongs to one of the existing categories, and it says plainly when the only
+honest answer would be a category the product does not have, which it will
+not create. The person chooses.
+
+Every proposed change is then checked against fixed rules, values in range,
+dates in order, identifiers present, duplicates caught, and marked ready, a
+warning, or blocked. Blocked never goes in. Nothing goes in until the person
+presses the one button that changes data, which says beforehand how many
+records it will change. Afterwards it reports what went in, what was skipped,
+what was blocked, whether the derived tables were rebuilt, and that the
+analyst readings were not rewritten: they rewrite themselves the next time a
+reader opens a page whose evidence moved. Everything is recorded, with the
+old and new values, where they came from and when.
+
+A fetched copy with the same figures and a newer timestamp is not treated as
+new evidence. Taking data in works from an operator's own copy of the product;
+the live site can discover, compare and validate but is deliberately unable
+to write. None of this runs on a schedule.
+
 ## 6 September 2026 (spend)
 
 **Nothing prepares an analyst reading on a schedule any more, building the

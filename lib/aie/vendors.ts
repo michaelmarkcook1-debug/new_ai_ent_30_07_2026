@@ -57,7 +57,8 @@ export interface EcosystemVendor {
 
 type Layer = TrackedVendor["layer"];
 
-const CATEGORY_TO_LAYER: Record<string, Layer> = {
+/** The seed categories this product knows, and the layer each maps to. Exported so Data Operations can offer exactly this list and nothing else. */
+export const CATEGORY_TO_LAYER: Record<string, Layer> = {
   "Frontier model/API": "frontier",
   "Cloud AI platform": "hyperscaler",
   "Enterprise applications": "application",
@@ -78,7 +79,7 @@ const LAYER_OVERRIDES: Record<string, Layer> = {
   sakana: "frontier", // model lab; no sovereign compute build-out
 };
 
-const INVESTOR_CATEGORY = "AI investor";
+export const INVESTOR_CATEGORY = "AI investor";
 
 // Tickers present in the ported seed data (exposure-map-data.ts) or already
 // confirmed in the previous probed roster. Everything else stays null.

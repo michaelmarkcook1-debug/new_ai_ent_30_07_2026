@@ -21,6 +21,11 @@ export default function AdminPage() {
         title="Admin"
         subtitle="The operations view: ingestion runs and what each costs, catalogue counts, connector health, and anonymous usage totals. Every cost figure is measured quantities times published unit prices, and the headline is stated plainly: on current plans, runs cost nothing."
         lanes={["live", "derived"]}
+        actions={
+          <a href="/admin/data" className="rounded border border-base-300 bg-base-100 px-3 py-2 text-sm font-semibold">
+            Data operations
+          </a>
+        }
       />
       <AdminOverview />
     </>

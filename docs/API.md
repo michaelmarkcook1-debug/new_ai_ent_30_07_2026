@@ -360,3 +360,38 @@ and only one of them is enforced by a NOT NULL.
 
 **A new endpoint.** Emit `x-eai-source`, use the error envelope in §1, and
 whitelist rather than blacklist any path or parameter that reaches an upstream.
+
+---
+
+## POST /api/admin/dataops/discover
+
+Fetches every canonical endpoint from the upstream and compares it with the
+canonical files. Writes nothing. No body. Returns the staged discovery:
+`discoveredAt` (fetch time, not evidence), `source`, `files[]` (file, endpoint,
+status `new-capture | unchanged | older | failed | script-captured`, captures,
+record counts, note), `entities[]` (id, name, state `KNOWN | NEW | UNRESOLVED |
+REJECTED`, source, upstreamCategory, suggestion, match, reason, evidenceDate),
+`changes[]` (id, kind, entity, label, file, field, current, discovered, status
+`new | changed | unchanged | removed`, canonicalCapture, evidenceDate, source),
+`summary`, `payloads` (what was seen, for validate and ingest), `taxonomy`,
+`roster`, and `store` (`writable`, `reason`, `root`, `staging`).
+
+## POST /api/admin/dataops/validate
+
+Body `{ discovery, resolutions[] }` where a resolution is `{ entityId, action:
+"new" | "match" | "reject", category?, matchId? }`. Deterministic; reads the
+canonical rankings for the population check; writes nothing. Returns
+`records[]` (id, kind `entity | change`, level `READY | WARNING | BLOCKED`,
+findings[] with rule and message, selectedByDefault, applicable) and `summary`.
+
+## POST /api/admin/dataops/ingest
+
+Body `{ discovery, resolutions[], approvedIds[] }`. The mutation boundary.
+Re-validates on the server, keeps only approved READY or WARNING records, and
+answers `409` with `status: "REFUSED"` and the reason when the store is
+read-only (always on Vercel; on a checkout without `DATAOPS_WRITE=1`). Otherwise
+writes every affected file or none, regenerates the derived artefacts, reverts
+on failure, and returns `status` (`INGESTED | FAILED | NOTHING | REFUSED`),
+`ingested`, `skipped`, `blocked`, `failed`, `files[]`, `derived[]`,
+`evidenceVersion { before, after, changed }`, `analystInsight` (always "not
+regenerated"), `audit`, `reverted`. `500` on FAILED.

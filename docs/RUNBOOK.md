@@ -132,6 +132,25 @@ the URL.
 
 ---
 
+### Data operations, by hand
+
+`/admin/data` (linked from `/admin`) discovers what the AI Enterprise source
+holds now against the canonical payloads, lets you decide what each unknown
+name is, validates, and ingests only what you approve. Discovery, review and
+validation work on production; ingestion works only on your own checkout:
+
+```bash
+DATAOPS_WRITE=1 npm run dev        # then open http://localhost:3000/admin/data
+```
+
+Add `DATAOPS_ROOT=/path/to/a/copy` to rehearse against a copy of
+`fixtures/aie-live` first. After a real ingestion the fixtures, the derived
+artefacts and `reports/dataops/<time>.json` have changed: review the diff,
+commit, and push, which deploys. `category-rankings.json` is refreshed by
+`npm run sync:aie`, not here; run it afterwards when the rankings' population
+warning appears. Analyst readings are not rewritten by ingestion; the next
+reader, or `npm run warm -- --yes`, authors them.
+
 ## 4. When something looks wrong
 
 | Symptom | Likely cause | What to do |
