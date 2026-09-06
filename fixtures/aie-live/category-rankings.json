@@ -1,7 +1,7 @@
 {
  "source": "https://ranking-engine-red.vercel.app/category/<id>",
  "note": "Weighted composite (0-5) of evidence-graded assessment domains, weights specific to each category, coverage-discounted. Parsed from the published pages: v1 does not expose this on its API and is read-only.",
- "capturedAt": "2026-09-05T08:28:16.861Z",
+ "capturedAt": "2026-09-06T08:46:34.031Z",
  "categories": [
   {
    "categoryId": "frontier_model_api",
