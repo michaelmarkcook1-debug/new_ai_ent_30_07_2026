@@ -835,10 +835,17 @@ export async function authoredResult<T extends object>(
     // point of this function. Matched on the message because that is what
     // crosses the unstable_cache boundary; an error class would not survive it.
     const msg = err instanceof Error ? err.message : "";
-    return {
-      value: null,
-      failure: msg.includes("discarded after retry") ? "rejected" : "unreachable",
-    };
+    const failure: AuthorFailure = msg.includes("discarded after retry") ? "rejected" : "unreachable";
+    // A rejection has already been logged by generate(). An "unreachable" that
+    // did not come from a model call is the one silent path left: an
+    // exception from the cache layer itself, before any call. On 6 September
+    // 2026 two production pages rendered computed in under a second with no
+    // call and no line in the log, which is this path. The name and message
+    // are what is needed to read it; no prompt, answer or key is here.
+    if (failure === "unreachable" && !msg.includes("no response")) {
+      console.warn(`[analyst-llm] ${kind} unreachable before any call: ${err instanceof Error ? err.name : "Error"}: ${msg.slice(0, 200)}`);
+    }
+    return { value: null, failure };
   }
 }
 

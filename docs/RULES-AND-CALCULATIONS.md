@@ -3792,7 +3792,11 @@ returned 400 on credit on 5 September and 200 on the 6th.
 Every model call line now names `surface=` (the kind), `model=`,
 `trigger=` (`build` or `request`) and, on success, `stop=`, `out=` and
 `thinking=` (`lib/analyst/llm.ts:589`). Attempt counts are on the
-phase line. Telling a reader's request from a manual warm at the call site would
+phase line. An exception from the cache layer before any call, which until
+6 September 2026 returned `unreachable` without a word, now logs
+`<kind> unreachable before any call: <name>: <message>`; two production pages
+rendered computed that way in under a second on the day, with no call and no
+line, which is what made the gap visible. Telling a reader's request from a manual warm at the call site would
 mean threading request headers into the authoring layer; the warm script's own
 report is the ledger for that, and the log's timestamps line up with it. No
 prompt, answer or key is ever logged; the test pins the pattern.
