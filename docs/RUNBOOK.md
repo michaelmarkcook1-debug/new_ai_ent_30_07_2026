@@ -48,50 +48,46 @@ Errors are a different matter and there should never be any.
 npm run deploy
 ```
 
-That runs three steps as one operation, and stops at the first that fails:
+Two steps, and it stops at the first that fails:
 
 1. **Preflight.** `scripts/preflight-production.mjs` pulls the production
-   environment to a private temporary file, sends one one-token request to
-   the model the code pins, and checks `CRON_SECRET` exists. It prints what it
-   found, never a value. `DEPLOYMENT BLOCKED` with the reasons means fix them
-   in Vercel and run again; nothing has been deployed. The three reasons it
-   has blocked on so far: the key rejected (401), the credit balance exhausted
-   (400), the scheduler secret unset.
+   environment to a private temporary file, sends one one-token request to the
+   model the code pins, and reports four stages: key present, authentication,
+   model access, credit. It prints stages, never a value. `DEPLOYMENT BLOCKED`
+   names the stage; fix it in Vercel or at Anthropic and run again.
 2. **Deploy.** `vercel --prod --yes`.
-3. **Warm.** `scripts/warm-insights.mjs` renders the pages the build could not
-   author, so the first reader after a deploy does not wait for a model call.
-   It prints one line per page (authored, cached, fallback, failed) and ends
-   `COMPLETE` or `PARTIAL`; a partial warm is not a failed deploy, it is a
-   list of pages that will be slow for their first reader.
 
-They became one command on 8 August 2026 after a deploy went out unwarmed and
-a cold sweep nine hours later still paid 35s on /vendor-view. The preflight
-joined on 5 September 2026 after production had shipped for two days with a
-key Anthropic no longer accepted.
-
-To warm without deploying, after a slow report:
+**Deploy warms nothing, and nothing warms on a schedule.** Analyst readings are
+prepared only when a reader opens a page or a person runs the warm by hand:
 
 ```bash
 npm run warm
 ```
 
-**What the cache actually does.** The authored reading is cached in Vercel's
-Data Cache, shared across instances, under a key that carries the evidence,
-the model, the reasoning setting and the intelligence version
-(RULES-AND-CALCULATIONS 8.34). A deploy that changes none of those keeps
-serving the existing readings, which is cheap and correct. A deploy that
-changes the model or bumps `INTELLIGENCE_VERSION` makes every old reading
-unreachable at once; they are not deleted and expire within a day. The earlier
-note here that the key carried the build id was wrong: the cache was observed
-surviving a deploy on 31 August 2026.
+prints the ten pages, the concurrency and the cost and fetches nothing;
 
-**The scheduled warm.** `/api/warm` runs at 05:00 and 17:00 UTC and accepts
-only `Authorization: Bearer $CRON_SECRET`, which Vercel sends when that variable
-is set. With it unset the run answers 401 `CRON_SECRET_UNSET` and nothing is
-warmed. It renders four pages at a time inside a 240-second budget and returns
-a report: 200 when every page was fetched, 503 with the remaining pages named
-when it could not finish. Fallbacks are counted in the body and logged as a
-warning; they mean the model's draft was declined, not that the warm failed.
+```bash
+npm run warm -- --yes
+```
+
+renders them four at a time and reports each as authored, cached, fallback,
+failed or timed out, ending COMPLETE or PARTIAL. Run it after a release that
+changes the model or `INTELLIGENCE_VERSION`, when every page is cold; run
+against a current site it costs nothing. The cron that did this twice a day was
+removed on 6 September 2026 at the owner's instruction.
+
+**A push to `main` deploys production on its own.** The Vercel Git integration
+builds every push, and that path skips the preflight. The build no longer calls
+the model (8.35), so a broken key shows up as computed badges at runtime rather
+than as build cost. Run `npm run preflight` before pushing a release.
+
+**What the cache actually does.** The authored reading is cached in Vercel's
+Data Cache under a key that carries the evidence, the model, the reasoning
+setting and the intelligence version (8.34). A deploy that changes none of
+those keeps serving the existing readings. A deploy that changes the model or
+bumps `INTELLIGENCE_VERSION` makes every old reading unreachable at once; they
+are not deleted and expire within a day, and the pages are cold until warmed
+by a person or a reader.
 
 ## 3. Refreshing the data
 

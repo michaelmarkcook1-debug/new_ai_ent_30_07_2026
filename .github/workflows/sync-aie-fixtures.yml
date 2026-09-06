@@ -3,9 +3,10 @@
 # WHY THIS IS A GITHUB ACTION AND NOT A VERCEL CRON. The sync WRITES FILES:
 # fixtures/aie-live/*.json, the generated lib/aie/vendor-directory.ts, and the
 # signal snapshot and change log. A Vercel cron runs inside a deployed function
-# with a read-only filesystem and no way to commit, so it can warm a cache but
-# it can never refresh a fixture. vercel.json's cron warms the analyst readings
-# and is a different job; this one is the only thing that can stop the drift.
+# with a read-only filesystem and no way to commit, so it can never refresh a
+# fixture. Nothing warms the analyst readings on a schedule (the cron was
+# removed on 6 September 2026); this one is the only thing that can stop the
+# drift, and it never calls the model.
 #
 # WHY IT GATES ON THE TEST SUITE. On 30 August 2026 a manual sync pulled a
 # vendor the upstream had just added, under a category this app had no mapping

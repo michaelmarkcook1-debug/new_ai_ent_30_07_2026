@@ -32,18 +32,6 @@ const CONTINUE = () =>
   new Response(null, { headers: { "x-middleware-next": "1" } });
 
 export function middleware(request: Request): Response {
-  // The warm cron runs unattended and carries no browser credentials, so the
-  // demo gate would 401 it and the analyst cache would quietly stop being
-  // refreshed. Today DEMO_USER and DEMO_PASS are deliberately unset in
-  // production and the gate never runs, which means the trap would only spring
-  // on whoever switched the gate on, weeks later, with the symptom being one
-  // slow tab.
-  //
-  // This exempts one path and weakens nothing: /api/warm does its own check for
-  // the scheduler and answers 401 to anybody else. The exemption lets a request
-  // reach that check rather than letting it past a check.
-  if (new URL(request.url).pathname === "/api/warm") return CONTINUE();
-
   const user = process.env.DEMO_USER;
   const pass = process.env.DEMO_PASS;
   if (!user || !pass) return CONTINUE();

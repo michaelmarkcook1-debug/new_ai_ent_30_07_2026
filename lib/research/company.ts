@@ -470,7 +470,7 @@ Keep every statement to one sentence. A long answer that runs past its limit arr
 
     // A call that never reached the API will not reach it on the retry either,
     // and a second attempt only doubles the wait before the same answer.
-    if (drafted.failure === "unreachable" || drafted.failure === "no-key") break;
+    if (drafted.failure === "unreachable" || drafted.failure === "no-key" || drafted.failure === "build") break;
 
     if (draft?.name) {
       const metricsA = citedMetrics(draft.metrics, attempt.hits.length);

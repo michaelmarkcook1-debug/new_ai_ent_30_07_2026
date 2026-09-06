@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
 import path from "node:path";
 import {
   authoringCacheKey,
@@ -10,7 +10,6 @@ import {
 import {
   runWarm,
   classify,
-  isScheduler,
   WARM_CONCURRENCY,
   WARM_BUDGET_MS,
   WARM_PAGE_TIMEOUT_MS,
@@ -194,63 +193,79 @@ describe("the warm run", () => {
   });
 });
 
-// ------------------------------------------------------------ the endpoint
+// ------------------------------------------------------------ no automation
 
-describe("12. /api/warm remains protected", () => {
-  it("admits only the bearer secret", () => {
-    expect(isScheduler("Bearer s3cret", "s3cret")).toBe(true);
-    expect(isScheduler("Bearer wrong", "s3cret")).toBe(false);
-    expect(isScheduler(null, "s3cret")).toBe(false);
+describe("12. there is no automated warm, and the manual one is explicit", () => {
+  it("no route, no cron, no scheduled workflow", () => {
+    expect(existsSync(path.join(process.cwd(), "app", "api", "warm"))).toBe(false);
+    const vercel = JSON.parse(src("vercel.json")) as { crons?: unknown[] };
+    expect(vercel.crons ?? []).toEqual([]);
+    for (const f of readdirSync(path.join(process.cwd(), ".github", "workflows"))) {
+      expect(src(path.join(".github", "workflows", f))).not.toMatch(/^\s*schedule:/m);
+    }
   });
 
-  it("fails closed when no secret is configured, even to a plausible bearer", () => {
-    expect(isScheduler("Bearer anything", undefined)).toBe(false);
-    expect(isScheduler("Bearer anything", "")).toBe(false);
-  });
-
-  it("no longer trusts a header any client can set", () => {
-    // A probe with `x-vercel-cron: 1` and nothing else opened production on
-    // 5 September 2026. The route must not reference that header at all.
-    expect(src("app/api/warm/route.ts")).not.toMatch(/x-vercel-cron/);
+  it("the manual warm plans by default and fetches only on --yes", () => {
+    const script = src("scripts/warm.mjs");
+    expect(script).toMatch(/args\.includes\("--yes"\)/);
+    expect(script).toMatch(/from "@\/lib\/analyst\/warm"/);
   });
 });
 
 // ------------------------------------------------------------ the key gate
 
-describe("13. the production key preflight fails closed", () => {
+describe("13. the production preflight fails closed, stage by stage", () => {
   const model = AUTHORING_CONTRACT.model;
+  const at = (status: number, type: string | null = null, message: string | null = null) =>
+    decide({ hasKey: true, check: { status, type, message }, model });
 
-  it("blocks on 401", () => {
-    const v = decide({ hasKey: true, keyStatus: 401, hasCronSecret: true, model });
+  it("a revoked key fails authentication", () => {
+    const v = at(401, "authentication_error", "invalid x-api-key");
     expect(v.ok).toBe(false);
+    expect(v.stages.auth).toBe("failed");
     expect(v.blockers.join(" ")).toMatch(/401/);
   });
 
-  it("blocks on an exhausted credit balance, which returns 400 on a valid key", () => {
-    // Measured live on 5 September 2026: the local key that authored every
-    // reading the day before returned 400 "credit balance is too low".
-    const v = decide({ hasKey: true, keyStatus: 400, hasCronSecret: true, model });
+  it("an exhausted balance is a credit block on a key that authenticated, not an auth failure", () => {
+    // Measured live on 5 September 2026: HTTP 400 on a valid key.
+    const v = at(400, "invalid_request_error", "Your credit balance is too low to access the Anthropic API.");
     expect(v.ok).toBe(false);
+    expect(v.stages.auth).toBe("ok");
+    expect(v.stages.model).toBe("ok");
+    expect(v.stages.credit).toBe("blocked");
     expect(v.blockers.join(" ")).toMatch(/credit/i);
   });
 
-  it("blocks on a missing key, a missing cron secret, and an unreachable model", () => {
-    expect(decide({ hasKey: false, keyStatus: null, hasCronSecret: true, model }).ok).toBe(false);
-    expect(decide({ hasKey: true, keyStatus: 200, hasCronSecret: false, model }).ok).toBe(false);
-    expect(decide({ hasKey: true, keyStatus: 404, hasCronSecret: true, model }).ok).toBe(false);
+  it("a model the key cannot reach is its own stage", () => {
+    const v = at(404, "not_found_error", "model: claude-fable-5-1");
+    expect(v.ok).toBe(false);
+    expect(v.stages.auth).toBe("ok");
+    expect(v.stages.model).toBe("inaccessible");
   });
 
-  it("passes only when the key authenticates and the secret exists", () => {
-    expect(decide({ hasKey: true, keyStatus: 200, hasCronSecret: true, model })).toEqual({ ok: true, blockers: [] });
+  it("a missing key blocks before any request", () => {
+    const v = decide({ hasKey: false, check: null, model });
+    expect(v.ok).toBe(false);
+    expect(v.stages.key).toBe("missing");
+  });
+
+  it("passes only when authenticated, the model is reachable and credit is available", () => {
+    const v = at(200);
+    expect(v).toEqual({ ok: true, stages: { key: "ok", auth: "ok", model: "ok", credit: "ok" }, blockers: [] });
   });
 
   it("checks the model the code actually pins, read from the source", () => {
     expect(modelFromSource(src("lib/analyst/llm.ts"))).toBe(AUTHORING_CONTRACT.model);
   });
 
-  it("runs first in the deploy script", () => {
+  it("requires no scheduler secret: that cron is gone", () => {
+    expect(src("scripts/preflight-production.mjs")).not.toMatch(/CRON_SECRET/);
+  });
+
+  it("runs first in the deploy script, and deploy warms nothing", () => {
     const pkg = JSON.parse(src("package.json")) as { scripts: Record<string, string> };
     expect(pkg.scripts.deploy.startsWith("node scripts/preflight-production.mjs &&")).toBe(true);
+    expect(pkg.scripts.deploy).not.toMatch(/warm/);
   });
 });
 

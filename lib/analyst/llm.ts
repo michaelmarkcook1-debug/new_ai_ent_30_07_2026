@@ -529,7 +529,8 @@ Return only the JSON object requested, with no prose around it and no code fence
 async function callModel(
   prompt: string,
   maxTokens: number,
-  timeoutMs: number = TIMEOUT_MS
+  timeoutMs: number = TIMEOUT_MS,
+  surface = "unknown"
 ): Promise<string | null> {
   const apiKey = llmKey();
   if (!apiKey) return null;
@@ -575,7 +576,7 @@ async function callModel(
       // answer truncated before it reached prose, an answer that was all
       // thinking, or a refusal. Logged rather than guessed at.
       console.warn(
-        `[analyst-llm] call returned no text after ${Date.now() - started}ms: stop=${res.stop_reason}, blocks=[${res.content
+        `[analyst-llm] call returned no text after ${Date.now() - started}ms: surface=${surface}, model=${MODEL}, trigger=${trigger()}, stop=${res.stop_reason}, blocks=[${res.content
           .map((b) => b.type)
           .join(", ")}], out=${res.usage?.output_tokens ?? "?"}`
       );
@@ -585,7 +586,7 @@ async function callModel(
     // than from the failures alone. Counts only, never content: this line is
     // how the Fable 5.1 thinking load was measured on 4 September 2026.
     console.warn(
-      `[analyst-llm] call ok in ${Date.now() - started}ms: model=${MODEL}, stop=${res.stop_reason}, out=${res.usage?.output_tokens ?? "?"}, thinking=${res.usage?.output_tokens_details?.thinking_tokens ?? "?"}`
+      `[analyst-llm] call ok in ${Date.now() - started}ms: surface=${surface}, model=${MODEL}, trigger=${trigger()}, stop=${res.stop_reason}, out=${res.usage?.output_tokens ?? "?"}, thinking=${res.usage?.output_tokens_details?.thinking_tokens ?? "?"}`
     );
     return text.text;
   } catch (err) {
@@ -601,7 +602,7 @@ async function callModel(
     // because a long provider payload in a log is noise.
     const e = err as { name?: string; status?: number; message?: string };
     console.warn(
-      `[analyst-llm] call failed after ${Date.now() - started}ms: ${e?.name ?? "Error"}${
+      `[analyst-llm] call failed after ${Date.now() - started}ms: surface=${surface}, model=${MODEL}, trigger=${trigger()}, ${e?.name ?? "Error"}${
         e?.status ? ` ${e.status}` : ""
       }: ${String(e?.message ?? "").slice(0, 200)}`
     );
@@ -747,7 +748,28 @@ export function dayPrecision(facts: string): string {
  *
  * Only `rejected` says anything at all about the sources.
  */
-export type AuthorFailure = "no-key" | "unreachable" | "rejected";
+export type AuthorFailure = "no-key" | "unreachable" | "rejected" | "build";
+
+/**
+ * Whether this code is running inside `next build`.
+ *
+ * WHY AUTHORING IS OFF DURING A BUILD. Next renders every dynamic-capable
+ * route once at build time to classify it, and that render used to call the
+ * model: seven Fable readings per build, on every push to main, each one
+ * either superseded by the runtime cache within the day or discarded when the
+ * contract changed. On 6 September 2026 a build made those seven calls to
+ * produce an artefact nobody read. A build now takes the computed floor and
+ * writes nothing to either cache; the first request at runtime authors as it
+ * always did. NEXT_PHASE is set by Next for the build process and inherited
+ * by its static-generation workers; measured, not assumed (8.35).
+ */
+export function buildPhase(): boolean {
+  return process.env.NEXT_PHASE === "phase-production-build";
+}
+/** What caused a model call, for the spend ledger in the log. */
+function trigger(): "build" | "request" {
+  return buildPhase() ? "build" : "request";
+}
 
 export interface AuthoredResult<T> {
   value: T | null;
@@ -762,6 +784,9 @@ export async function authoredResult<T extends object>(
   roster: readonly string[] = [],
   guards: CanonicalGuards = {}
 ): Promise<AuthoredResult<T>> {
+  // Before the cache lookup, deliberately: a build must neither read a
+  // reading it should not serve nor write one it should not have made.
+  if (buildPhase()) return { value: null, failure: "build" };
   if (!llmAvailable()) return { value: null, failure: "no-key" };
 
   // Normalised once, then used for the key, for L2's own argument-derived key,
@@ -956,7 +981,7 @@ ${instruction}`;
           ? ""
           : "\n\nCORRECTION: your previous answer was not valid JSON, most likely because it ran long. Answer again, shorter, as a single JSON object.";
 
-    const raw = await callModel(base + correction, maxTokens, timeoutFor(kind));
+    const raw = await callModel(base + correction, maxTokens, timeoutFor(kind), kind);
     attemptMs.push(Date.now() - attemptStarted);
     // Throw rather than return: a failed call must not be cached for a day.
     if (!raw) {

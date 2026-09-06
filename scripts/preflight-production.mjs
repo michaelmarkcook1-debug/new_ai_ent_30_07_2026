@@ -4,15 +4,16 @@
 // WHAT THIS CAUGHT ALREADY, IN REVERSE. Between 2 and 3 September 2026 the
 // production ANTHROPIC_API_KEY was revoked at Anthropic's end. Nothing noticed
 // for two days: every build logged a 401 and shipped, every insight fell back
-// to computed prose, and company research failed for every company. The
-// symptom a reader saw was one word changing on a badge. This check runs
-// BEFORE `vercel --prod` and answers the only three questions that matter:
-// is the key there, does Anthropic accept it, and can it reach the model the
-// code pins. Any "no" blocks the deploy with the reason. It never prints a
-// value.
+// to computed prose, and company research failed for every company. This
+// runs BEFORE `vercel --prod` and answers the four questions that matter, in
+// order: is the key there, does Anthropic accept it, can it reach the model
+// the code pins, and will Anthropic serve a request on the account's credit.
+// Any "no" blocks the deploy with the stage that failed. It never prints a
+// value, and the whole check is one one-token request.
 //
-// It also checks CRON_SECRET exists, because since 5 September 2026 the warm
-// endpoint refuses everyone, the scheduler included, when it is unset.
+// Auth and credit are different failures and are reported as such: a
+// revoked key is a 401; an exhausted balance is a 400 on a perfectly valid key
+// (seen on 5 September 2026), and the fix is a different person's job.
 //
 // Usage:  node scripts/preflight-production.mjs
 // Runs first in `npm run deploy`. Needs the Vercel CLI logged in and the
@@ -29,30 +30,11 @@ export function modelFromSource(src) {
   return m ? m[1] : null;
 }
 
-/** The verdict, pure so the fail-closed rule can be tested. */
-export function decide({ hasKey, keyStatus, hasCronSecret, model }) {
-  const blockers = [];
-  if (!hasKey) {
-    blockers.push("ANTHROPIC_API_KEY is not set in production");
-  } else if (keyStatus === 401 || keyStatus === 403) {
-    blockers.push(`ANTHROPIC_API_KEY is rejected by Anthropic (HTTP ${keyStatus}); rotate it in Vercel before deploying`);
-  } else if (keyStatus === 404) {
-    blockers.push(`the pinned model ${model} is not accessible to the production key (HTTP 404)`);
-  } else if (keyStatus === 400) {
-    // Seen 5 September 2026 on the working key: Anthropic answers 400 with
-    // "credit balance is too low" once the account is out of credit. The key
-    // is valid and production still cannot author a single reading.
-    blockers.push("Anthropic rejected an authenticated one-token request (HTTP 400), which is what an exhausted credit balance returns; check Plans & Billing");
-  } else if (keyStatus !== 200) {
-    blockers.push(`the authentication check returned HTTP ${keyStatus ?? "no response"}`);
-  }
-  if (!hasCronSecret) {
-    blockers.push("CRON_SECRET is not set in production, so /api/warm will refuse the scheduler and nothing will be kept warm");
-  }
-  return { ok: blockers.length === 0, blockers };
-}
-
-/** One authenticated, one-token request against the pinned model. Status only. */
+/**
+ * One one-token request against the pinned model. Returns what Anthropic
+ * said about it: the status, and the error type and (trimmed) message when
+ * there was one. Never the key, never a reading.
+ */
 export async function checkKey(apiKey, model, fetchImpl = fetch) {
   const res = await fetchImpl("https://api.anthropic.com/v1/messages", {
     method: "POST",
@@ -64,7 +46,56 @@ export async function checkKey(apiKey, model, fetchImpl = fetch) {
     body: JSON.stringify({ model, max_tokens: 1, messages: [{ role: "user", content: "ok" }] }),
     signal: AbortSignal.timeout(30_000),
   });
-  return res.status;
+  let type = null;
+  let message = null;
+  try {
+    const j = await res.json();
+    if (j && j.type === "error") {
+      type = typeof j.error?.type === "string" ? j.error.type : null;
+      message = typeof j.error?.message === "string" ? j.error.message.slice(0, 160) : null;
+    }
+  } catch {
+    // A body that is not JSON carries nothing this needs.
+  }
+  return { status: res.status, type, message };
+}
+
+/**
+ * The verdict, stage by stage, pure so the fail-closed rules can be tested.
+ * `check` is what checkKey returned, or null when no key was present.
+ */
+export function decide({ hasKey, check, model }) {
+  const stages = { key: hasKey ? "ok" : "missing", auth: "not checked", model: "not checked", credit: "not checked" };
+  const blockers = [];
+  if (!hasKey) {
+    blockers.push("ANTHROPIC_API_KEY is not set in production");
+    return { ok: false, stages, blockers };
+  }
+  const { status = null, type = null, message = null } = check ?? {};
+  if (status === 401 || status === 403 || type === "authentication_error" || type === "permission_error") {
+    stages.auth = "failed";
+    blockers.push(`ANTHROPIC_API_KEY is rejected by Anthropic (HTTP ${status}); rotate it in Vercel before deploying`);
+    return { ok: false, stages, blockers };
+  }
+  stages.auth = "ok";
+  if (status === 404 || type === "not_found_error") {
+    stages.model = "inaccessible";
+    blockers.push(`the pinned model ${model} is not accessible to the production key (HTTP ${status})`);
+    return { ok: false, stages, blockers };
+  }
+  stages.model = "ok";
+  if (status === 400 && /credit|billing|balance/i.test(message ?? "")) {
+    stages.credit = "blocked";
+    blockers.push(`authenticated, but Anthropic refused the request on credit: ${message}`);
+    return { ok: false, stages, blockers };
+  }
+  if (status === 200) {
+    stages.credit = "ok";
+    return { ok: true, stages, blockers };
+  }
+  stages.credit = "unknown";
+  blockers.push(`the one-token request returned HTTP ${status ?? "no response"}${type ? ` (${type})` : ""}`);
+  return { ok: false, stages, blockers };
 }
 
 function parseEnv(text) {
@@ -81,8 +112,8 @@ async function main() {
   const envFile = path.join(dir, "production.env");
   try {
     // Pulled to a private temp file that is removed in `finally`, never into
-    // the repo. The values are read into memory for one request and nothing
-    // here ever writes or prints one.
+    // the repo. The value is read into memory for one request and nothing
+    // here ever writes or prints it.
     execFileSync("vercel", ["env", "pull", envFile, "--environment", "production", "--yes"], {
       stdio: ["ignore", "ignore", "inherit"],
     });
@@ -90,15 +121,15 @@ async function main() {
     const env = parseEnv(fs.readFileSync(envFile, "utf8"));
     const model = modelFromSource(fs.readFileSync("lib/analyst/llm.ts", "utf8"));
     const hasKey = Boolean(env.ANTHROPIC_API_KEY);
-    const keyStatus = hasKey ? await checkKey(env.ANTHROPIC_API_KEY, model) : null;
-    const hasCronSecret = Boolean(env.CRON_SECRET);
+    const check = hasKey ? await checkKey(env.ANTHROPIC_API_KEY, model) : null;
+    const verdict = decide({ hasKey, check, model });
 
-    console.log(`  model pinned in code:        ${model}`);
-    console.log(`  ANTHROPIC_API_KEY present:   ${hasKey ? "yes" : "NO"}`);
-    console.log(`  authenticated request:       ${keyStatus === null ? "not attempted" : `HTTP ${keyStatus}`}`);
-    console.log(`  CRON_SECRET present:         ${hasCronSecret ? "yes" : "NO"}`);
+    console.log(`  key present:              ${verdict.stages.key}`);
+    console.log(`  authentication:           ${verdict.stages.auth}`);
+    console.log(`  model access (${model}): ${verdict.stages.model}`);
+    console.log(`  credit:                   ${verdict.stages.credit}`);
+    if (check) console.log(`  one-token request:        HTTP ${check.status}${check.type ? ` (${check.type})` : ""}`);
 
-    const verdict = decide({ hasKey, keyStatus, hasCronSecret, model });
     if (!verdict.ok) {
       console.error("\nDEPLOYMENT BLOCKED");
       for (const b of verdict.blockers) console.error(`  - ${b}`);

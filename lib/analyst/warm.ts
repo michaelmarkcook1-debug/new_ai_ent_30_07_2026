@@ -1,6 +1,12 @@
-import { WARM_PAGES } from "./warm-list";
+import { WARM_PAGES } from "@/lib/analyst/warm-list";
 
-// Preparing every authored reading inside one scheduled function call.
+// Preparing every authored reading, when a person asks for it.
+//
+// NEVER ON A SCHEDULE. This ran twice a day from a Vercel cron until
+// 6 September 2026, when the cron, the route and its secret were removed at
+// the owner's instruction: analyst readings are prepared only when a human
+// runs `npm run warm -- --yes`, or when a reader opens a page. The pool below
+// is what that script uses. Nothing else calls it.
 //
 // THE PROBLEM THIS REPLACES. The first cron fetched the warm pages one at a
 // time with no per-page abort and no elapsed budget, inside a 300-second
@@ -51,9 +57,9 @@ export const WARM_CONCURRENCY = 4;
 export const WARM_PAGE_TIMEOUT_MS = 150_000;
 
 /**
- * How long the pass may run before it stops STARTING pages. Under the route's
- * maxDuration of 300 by enough to finish the in-flight pages and return the
- * report. A target not started by then is counted as remaining.
+ * How long the pass may run before it stops STARTING pages. The default suits
+ * a 300-second hosting window; the manual script has no such ceiling and
+ * passes its own. A target not started by then is counted as remaining.
  */
 export const WARM_BUDGET_MS = 240_000;
 
@@ -103,24 +109,6 @@ export interface WarmReport {
   concurrency: number;
   totalMs: number;
   results: WarmResult[];
-}
-
-/**
- * Whether a request is the scheduler.
- *
- * Vercel sends `Authorization: Bearer $CRON_SECRET` with every cron invocation
- * once that variable is set. Nothing else is accepted: the `x-vercel-cron`
- * header the first version trusted is set by any client that chooses to, and
- * a probe on 5 September 2026 opened the production endpoint with it. With no
- * secret configured nobody is let in, the scheduler included, and the route
- * says why. Failing closed here costs a warm; failing open costs the budget.
- */
-export function isScheduler(
-  authorization: string | null,
-  secret: string | undefined
-): boolean {
-  if (!secret) return false;
-  return authorization === `Bearer ${secret}`;
 }
 
 /** What one fetched page tells us about its reading. */

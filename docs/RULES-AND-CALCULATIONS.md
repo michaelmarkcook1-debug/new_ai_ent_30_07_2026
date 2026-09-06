@@ -3297,7 +3297,7 @@ Two ceilings now, because one could not be raised.
 | `INSIGHT_TIMEOUT_MS` | `120_000` | `lib/analyst/llm.ts:112` |
 | `timeoutFor(kind)` | `company:` prefix takes the research ceiling, everything else the insight one | `lib/analyst/llm.ts:114` |
 | `staticPageGenerationTimeout` | `240` | `next.config.ts:15` |
-| warm-up per-page abort | `150_000` | `scripts/warm-insights.mjs:52` |
+| warm-up per-page abort | `150_000` | `WARM_PAGE_TIMEOUT_MS`, `lib/analyst/warm.ts:57` (the post-deploy script it first lived in was removed on 6 September 2026, 8.35) |
 
 Under the first Fable build, at the 75-second ceiling, the slowest call took
 69,826ms, and `generate()` does not retry a call that returned nothing, so at
@@ -3340,7 +3340,7 @@ tokens in that build ran from 1,453 to 5,107 per reading.
 
 ### Rollout: the cache key carries neither model nor effort
 
-`cachedGenerate` (`lib/analyst/llm.ts:826`) keys on kind, facts,
+`cachedGenerate` (`lib/analyst/llm.ts:851`) keys on kind, facts,
 instruction, `maxTokens`, roster, `cacheKey` and `guardKey`. A reading Opus 5
 wrote is served until its facts change or the 24-hour revalidation runs, and
 8.32's production check showed the Data Cache surviving a deploy. Fable readings
@@ -3351,8 +3351,8 @@ recorded so that a day-old Opus reading is not mistaken for a Fable one.
 
 ### Two things found on the way, neither changed here
 
-1. `/trust-rank` is on both warm lists (`lib/analyst/warm-list.ts:13`,
-   `scripts/warm-insights.mjs:52`) and never calls `authorInsight`. Warming it
+1. `/trust-rank` is on both warm lists (`lib/analyst/warm-list.ts:16`,
+   the mirror in the since-removed post-deploy script) and never calls `authorInsight`. Warming it
    renders a page for nothing.
 2. A probe that tests `html.includes("analyst written")` is always true on an
    insight page, because the derivation drawer prose contains the phrase. The
@@ -3362,7 +3362,7 @@ recorded so that a day-old Opus reading is not mistaken for a Fable one.
 ### Telemetry
 
 `callModel` now logs `call ok in Nms: stop=..., out=..., thinking=...` on
-success (`lib/analyst/llm.ts:588`), alongside the existing no-text
+success (`lib/analyst/llm.ts:589`), alongside the existing no-text
 line. Counts only, never content. It is how every number in this section was
 read.
 
@@ -3373,6 +3373,14 @@ read.
 Verified against the working tree at commit `80eacbb` plus this change,
 5 September 2026.
 
+**Superseded in part by 8.35 on 6 September 2026.** The `/api/warm` route, the
+Vercel cron, `isScheduler()`, the middleware exemption and the `CRON_SECRET`
+prerequisite described below were removed the next day at the owner's
+instruction that analyst warming must never run on a schedule. The pool in
+`lib/analyst/warm.ts` survives as the manual `npm run warm`. The removed
+pieces are described here as they were verified on 5 September, because the
+reasoning behind them is still the reasoning behind the manual warm.
+
 ### Configuration verified before anything changed
 
 | | Value | Where |
@@ -3382,7 +3390,7 @@ Verified against the working tree at commit `80eacbb` plus this change,
 | `TIMEOUT_MS` (research) | `75_000` | `lib/analyst/llm.ts:92` |
 | `THINKING_HEADROOM` | `12_000` | `lib/analyst/llm.ts:196` |
 | `staticPageGenerationTimeout` | `240` | `next.config.ts:15` |
-| warm-up per-page abort | `150_000` | `scripts/warm-insights.mjs` |
+| warm-up per-page abort | `150_000` | `WARM_PAGE_TIMEOUT_MS`, `lib/analyst/warm.ts:57` |
 | reasoning | adaptive default; no `output_config`, no `thinking` block | `lib/analyst/llm.ts:47` |
 
 None of these changed in this tranche.
@@ -3396,7 +3404,7 @@ an in-process Map (L1) and `unstable_cache` (L2, Vercel's Data Cache, which
 | | Before | After |
 |---|---|---|
 | L1 key payload | `{ facts, instruction, guardKey }` | `{ contract, facts, instruction, guardKey }` (`authoringCacheKey()`, line 290) |
-| L2 key parts | `["analyst-insight"]` | `["analyst-insight", CONTRACT_KEY]` (line 864) |
+| L2 key parts | `["analyst-insight"]` | `["analyst-insight", CONTRACT_KEY]` (line 889) |
 | L2 arguments | kind, facts, instruction, maxTokens, roster, cacheKey, guardKey | unchanged |
 
 **The authoring contract** (`AUTHORING_CONTRACT`, line 71) is
@@ -3406,7 +3414,7 @@ everything besides the evidence that can change what the model writes:
 |---|---|---|
 | `intelligence` | `"2026-09-05"` | `INTELLIGENCE_VERSION`, line 55. Bump when the prompt, guards or instruction wording change without the facts changing |
 | `model` | `"claude-fable-5-1"` | `MODEL`, line 38 |
-| `reasoning` | `"adaptive"` | `REASONING.effort ?? "adaptive"`, line 47. The request spreads the same object (line 551), so the identity and the request cannot drift |
+| `reasoning` | `"adaptive"` | `REASONING.effort ?? "adaptive"`, line 47164280. The request spreads the same object (line 552), so the identity and the request cannot drift |
 
 The evidence is already in the key as `facts` (day-precision normalised) and
 the per-reading canonical contract, `authoringContract()` in `author.ts`
@@ -3544,16 +3552,16 @@ section not yet taken; it was blocked by the credit balance and the harness
 
 | Constant | Value | Line |
 |---|---|---|
-| `WARM_CONCURRENCY` | `4` | `lib/analyst/warm.ts:43` |
-| `WARM_PAGE_TIMEOUT_MS` | `150_000` | `lib/analyst/warm.ts:51` |
-| `WARM_BUDGET_MS` | `240_000` | `lib/analyst/warm.ts:58` |
-| `AUTHORED_THRESHOLD_MS` | `5_000` | `lib/analyst/warm.ts:67` |
-| `maxDuration` | `300` | `app/api/warm/route.ts:28` |
+| `WARM_CONCURRENCY` | `4` | `lib/analyst/warm.ts:49` |
+| `WARM_PAGE_TIMEOUT_MS` | `150_000` | `lib/analyst/warm.ts:57` |
+| `WARM_BUDGET_MS` | `240_000` | `lib/analyst/warm.ts:64` |
+| `AUTHORED_THRESHOLD_MS` | `5_000` | `lib/analyst/warm.ts:73` |
+| `maxDuration` | `300` | `app/api/warm/route.ts`, removed on 6 September 2026 (8.35) |
 
-`runWarm()` (line 157) fetches through a pool of `WARM_CONCURRENCY`
+`runWarm()` (line 145) fetches through a pool of `WARM_CONCURRENCY`
 workers; each checks the elapsed budget BEFORE starting a page, so a run can
 never be extended by a page begun in its last second, and anything not started
-is reported as remaining. `classify()` (line 127) reads the badge
+is reported as remaining. `classify()` (line 115) reads the badge
 span: computed is a fallback, written is cached below the threshold and
 authored at or above it (cached pages served in 0.2 to 1.3 seconds on
 production; no Fable call has finished under 15.9), and no badge is a failure,
@@ -3578,17 +3586,18 @@ demo-gate credentials were forwarded on page fetches the same run answered
 A probe on 5 September 2026 with `x-vercel-cron: 1` and nothing else answered
 **HTTP 200** on production and ran a warm. The repository is public and
 `CRON_SECRET` is not set in production, so anyone could spend the budget.
-`isScheduler()` (line 118) now admits only
+`isScheduler()` (removed with the route on 6 September 2026, 8.35) admitted only
 `Authorization: Bearer $CRON_SECRET`, the mechanism Vercel documents, and
 returns false when the secret is unset: nobody in, the scheduler included, with
 the 401 body saying `CRON_SECRET_UNSET` so the operator knows which closed
-state it is. The middleware exemption for the route (`middleware.ts:45`)
-stands; the route does its own check. Verified locally: no header, a wrong
+state it is. The middleware exemption for the route was
+removed with it on 6 September 2026. Verified locally: no header, a wrong
 bearer and the spoofed header each answer 401.
 
 ### Schedule
 
-`vercel.json` keeps `0 5,17 * * *`. The 05:00 UTC run lands after the
+`vercel.json` kept `0 5,17 * * *` until 6 September 2026, when the cron was
+removed (8.35). While it ran, the 05:00 UTC run landed after the
 day-precision key flips at midnight UTC, so Today's Pulse is prepared before
 the working day; the 17:00 run halves the worst wait after an evidence move.
 Neither is tied to the fixture sync, which has run only by hand since
@@ -3605,13 +3614,15 @@ identical current-version reading; only a new contract or new evidence can.
 production environment to a private temporary file (`vercel env pull`,
 removed in `finally`), sends one one-token request to the model the code pins
 (read from `lib/analyst/llm.ts`, so it cannot drift), and decides
-(`decide()`, line 33): missing key, HTTP 401 or 403, HTTP 404 on the
+(`decide()`, line 67): missing key, HTTP 401 or 403, HTTP 404 on the
 model, HTTP 400 (an exhausted credit balance returns this on a valid key) and
-a missing `CRON_SECRET` each block with the reason. It prints presence and
+a missing `CRON_SECRET` each blocked with the reason (the `CRON_SECRET` stage
+was removed on 6 September 2026, 8.35). It prints presence and
 status, never a value. Against production on 5 September 2026 all three
-prerequisites fail: the key returns 401 (since 3 September), `CRON_SECRET` is
-unset, and the account's credit balance is exhausted. **Deployment is blocked
-until all three are fixed by the operator.**
+prerequisites failed: the key returned 401 (since 3 September), `CRON_SECRET` was
+unset, and the account's credit balance was exhausted. **By 6 September 2026 the
+key had been rotated, the credit restored and the `CRON_SECRET` stage removed;
+the preflight passed against production that day (8.35).**
 
 ### Fallback
 
@@ -3621,7 +3632,7 @@ intact, and three fresh model attempts in the log: nothing cached the failure.
 
 ### Telemetry
 
-The `call ok` line (`lib/analyst/llm.ts:588`) now carries
+The `call ok` line (`lib/analyst/llm.ts:589`) now carries
 `model=`, so a log proves which model authored a reading rather than leaving it
 to be inferred from thinking counts.
 
@@ -3673,6 +3684,137 @@ Thirty-eight tests across four files; the suite is 1,188 tests in 67 files.
 4. `AUTHORED_THRESHOLD_MS` is a classification, not a guard; a page that
    authored in under five seconds would be labelled cached. No Fable call has
    come close.
+
+---
+
+## 8.35 Manual warming only, build spend and the key gate
+
+Verified against the working tree at commit `944374c` plus this change,
+6 September 2026.
+
+### What could author a reading without a person asking, and what happened to it
+
+| Mechanism | Class | Found | Action |
+|---|---|---|---|
+| `vercel.json` cron `0 5,17 * * *` on `/api/warm` | SCHEDULED WARM | yes | removed; `vercel.json` now carries no `crons` |
+| `/api/warm` route, `isScheduler()`, `CRON_SECRET`, middleware exemption | the scheduled warm's surface | yes | removed outright; no secret remains to configure |
+| `npm run deploy` ending in `node scripts/warm-insights.mjs` | DEPLOY WARM | yes | removed; deploy is preflight then `vercel --prod --yes` and nothing after |
+| `next build` rendering dynamic routes to classify them | BUILD | yes: 7 Fable calls per build, on every push | suppressed: `buildPhase()` (`lib/analyst/llm.ts:766`) makes `authoredResult()` return `failure: "build"` before any cache lookup (line 789) |
+| `scripts/warm-insights.mjs` (sequential, post-deploy) | MANUAL WARM | yes | replaced by `scripts/warm.mjs`, which plans by default and fetches only on `--yes` |
+| `.github/workflows/sync-aie-fixtures.yml` | DATA SYNC | manual since 8.30; touches no model, holds no model key | unchanged |
+| Vercel Git integration | DEPLOY | **every push to `main` builds and deploys production** (build log: `Cloning github.com/... Commit: 944374c`) | not changed; recorded, because it means a push bypasses `npm run deploy` and its preflight |
+
+**Scheduled Analyst Insight warm invocations after this change: 0.** No cron,
+no scheduled workflow, no replacement mechanism. `tests/spend-controls.test.ts`
+pins all three.
+
+### The call-path matrix
+
+| Path | Class | Can author? | Bound |
+|---|---|---|---|
+| a reader opens a page whose reading is not current | USER REQUEST | yes | one `generate()` per kind on the page, at most two attempts inside `BUDGET_MS` |
+| a reader's request finds an expired entry | USER REQUEST (background revalidation) | yes, once per key per TTL | the same |
+| Company View research (`/api/research`) | USER REQUEST | yes | two source scopes inside `RETRY_BUDGET_MS`, each at most two attempts |
+| Ask your analyst, interrogate (`app/api/analyst/live.ts`, `app/api/interrogate/live.ts`) | USER REQUEST | yes, Haiku/Sonnet/Opus tiers | one request each; unchanged here |
+| `npm run warm -- --yes` | MANUAL WARM | yes, for pages not current | pool of 4, 150s per page, one pass, exit 1 on any failure; never loops |
+| `next build` | BUILD | **no** | measured: 0 calls (below) |
+| `vercel --prod`, or a push to `main` | DEPLOY | no: the build authors nothing and deploy warms nothing | |
+| any schedule | SCHEDULED | **none exists** | |
+| the fixture sync | BACKGROUND DATA SYNC | no: no model import, no model key | |
+| a rejected draft | RETRY | one more attempt, inside the budget | `SDK_RETRIES = 0` underneath |
+| `scripts/preflight-production.mjs` | OTHER (deploy gate) | one one-token request | |
+| `scripts/research-role-verticals.mjs` | OTHER (manual research script) | yes, Haiku and Sonnet | run by hand only; unchanged |
+
+### Build spend, before and after
+
+| Build | Calls | Outcome |
+|---|---|---|
+| `944374c`, auto-deployed at 11:06 UTC on 6 September | 8 (7 kinds, reputation on attempt 2) | authored with the rotated key: real spend to produce a build artefact |
+| this change, 16:30, cache cleared | **0** (no `[analyst-llm]` line of any kind) | exit 0, 84/84 pages, every reading on its computed floor |
+
+The suppression is one check on `NEXT_PHASE`, which Next sets for the build
+and its static-generation workers inherit; the second build proves the workers
+see it. A page a reader opens at runtime authors exactly as before: the test
+stubs `NEXT_PHASE` to the server value and shows the same request proceeding
+past the suppression and the empty L1 into L2.
+
+### The manual warm
+
+`npm run warm` prints the ten targets, the concurrency (4), the per-page
+ceiling (150s) and the cost, and fetches nothing. `npm run warm -- --yes`
+runs `runWarm()` (`lib/analyst/warm.ts:145`) over the list with a
+30-minute budget instead of the hosting window's, prints one line per page
+(authored, cached, fallback, failed, timed-out) and a COMPLETE or PARTIAL
+summary with every count, and exits 1 on anything but COMPLETE. It forwards the
+demo gate's credentials only when they are in its own environment. The script
+loads TypeScript through `scripts/alias-hook.mjs`, as `snapshot-signals.mjs`
+already did, so the list and the pool have one source each. Run against a
+current site it costs nothing: a cached page returns in under a second and
+calls no model (8.34, control case).
+
+**After a release that changes the model or `INTELLIGENCE_VERSION`, every page
+is cold until a person runs it or a reader opens the page.** That is the trade
+the owner chose, and it is recorded rather than softened.
+
+### The preflight, before and after
+
+| | before | after |
+|---|---|---|
+| key present | yes | yes |
+| one-token request | status only | status, error type and message |
+| 401 / 403 | blocked | stage `auth: failed` |
+| 404 | blocked | stage `model: inaccessible` |
+| 400 with a credit message | blocked as "HTTP 400" | stage `credit: blocked`, distinguished from auth |
+| `CRON_SECRET` | required | **not a prerequisite**; the cron is gone |
+
+`decide()` (`scripts/preflight-production.mjs:67`) returns the stage
+that failed. Against production on 6 September 2026: key present, authentication
+ok, model access ok for `claude-fable-5-1`, credit ok, HTTP 200. **PREFLIGHT
+PASSED.**
+
+### Anthropic authentication: the root cause, and the status now
+
+The 401 reported on 4 and 5 September was the production key itself: rotated or
+revoked at Anthropic's end between 2 and 3 September, while Vercel still held it
+(32 days old). It was replaced in Vercel Production on or about 4 September
+(the variable showed "2d ago" on the 6th). Diagnosed against the running
+system, values never printed: the app reads project `new_ai_ent_30_07_2026`,
+environment Production; exactly one `ANTHROPIC_API_KEY` exists and only there;
+the pulled value is 108 characters, `sk-ant-` prefixed, without trailing
+whitespace or carriage returns; the `944374c` build received it and authored
+seven readings with it; a one-token `claude-fable-5-1` request returns HTTP 200
+with `stop_reason: max_tokens` at `max_tokens: 1`. **Authenticated, model
+accessible, credit available. No credential was changed here.** The local key
+returned 400 on credit on 5 September and 200 on the 6th.
+
+### Telemetry
+
+Every model call line now names `surface=` (the kind), `model=`,
+`trigger=` (`build` or `request`) and, on success, `stop=`, `out=` and
+`thinking=` (`lib/analyst/llm.ts:589`). Attempt counts are on the
+phase line. Telling a reader's request from a manual warm at the call site would
+mean threading request headers into the authoring layer; the warm script's own
+report is the ledger for that, and the log's timestamps line up with it. No
+prompt, answer or key is ever logged; the test pins the pattern.
+
+### Tests
+
+`tests/spend-controls.test.ts` (new): build refuses before the cache and
+writes nothing while a runtime request proceeds; no cron, no scheduled workflow;
+the sync holds no model key and no run step warms; deploy is preflight then
+deploy; retries bounded (`SDK_RETRIES = 0`, two attempts gated on the budget,
+research budget, one call site); telemetry fields present and nothing sensitive
+logged. `tests/warm-list.test.ts` and `tests/fable-production-readiness.test.ts`
+rewritten for the manual warm and the stage-wise preflight. Suite: 1,202 tests
+in 68 files.
+
+### Remaining risks
+
+1. A push to `main` deploys without the preflight. The build no longer spends,
+   so a bad key now shows as computed badges at runtime rather than as build
+   cost; run `npm run preflight` before pushing a release.
+2. After a contract-changing release the first reader of each page pays the
+   cold render unless a person runs `npm run warm -- --yes` first.
 
 ---
 

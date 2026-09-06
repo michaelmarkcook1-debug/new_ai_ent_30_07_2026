@@ -15,6 +15,27 @@ than a gap.
 
 ---
 
+## 6 September 2026 (spend)
+
+**Nothing prepares an analyst reading on a schedule any more, building the
+site no longer costs a single model call, and production can author again.**
+
+The twice-daily job that prepared readings ahead of readers is gone, together
+with the web endpoint it called and the secret that protected it. Readings are
+now prepared in exactly two ways: a reader opens a page whose reading is not
+current, or a person runs the warm by hand. The hand-run version shows what it
+is about to do and what it will cost, and does nothing until told to proceed.
+
+Building the site used to write seven readings just to produce the build, and
+every push to the code did that again. It now builds on the plain computed
+text and writes nothing; the first reader of each page gets the written
+reading as before. Measured: zero model calls in the build.
+
+The production key that Anthropic had rejected since 3 September has been
+replaced, and a single one-token request confirms it authenticates, reaches
+Fable 5.1 and has credit. The pre-deployment check now reports those three
+things separately, so a spent balance is never mistaken for a bad key.
+
 ## 6 September 2026 (data)
 
 **Refreshing the product's recorded copies of the AI Enterprise data is a
