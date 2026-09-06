@@ -13,9 +13,10 @@ import { isScheduler, runWarm } from "@/lib/analyst/warm";
 // WHY A CRON RATHER THAN BACKGROUND REVALIDATION. An entry that merely expired
 // is served stale while it revalidates, and no reader waits. A key that
 // CHANGED has nothing to serve, and background revalidation cannot help with
-// what does not exist. Evidence moves daily and the contract moves with each
-// release, so the schedule runs half an hour after the daily fixture sync and
-// again twelve hours later, and a valid current cache makes a run cheap: the
+// what does not exist. Evidence moves whenever the upstream moves and the
+// contract moves with each release, so the schedule runs at 05:00 UTC, after
+// the day-precision key flips at midnight, and again twelve hours later, and a
+// valid current cache makes a run cheap: the
 // page returns in under a second and no model is called (8.34).
 //
 // THE EXECUTION IS IN lib/analyst/warm.ts, which is pure enough to test: a

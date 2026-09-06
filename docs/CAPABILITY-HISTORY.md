@@ -15,6 +15,23 @@ than a gap.
 
 ---
 
+## 6 September 2026 (data)
+
+**Refreshing the product's recorded copies of the AI Enterprise data is a
+manual step again, by decision.**
+
+Since 31 August a job had run itself every morning, pulled whatever the
+AI Enterprise source had changed, and recorded it. From today nobody but a
+person starts that job, and the person decides whether to keep what it found.
+Working out what has changed upstream, and whether the product should take it
+on, is a judgement rather than a routine.
+
+Nothing a reader sees changes. The live pages read the source directly when
+they are opened. The recorded copies are what a page falls back to when the
+source cannot be reached, so they will age until someone refreshes them, and
+that is the trade being made. The twice-daily preparation of analyst readings
+is unchanged and never touches the recorded copies.
+
 ## 5 September 2026 (readiness)
 
 **A reading written by one model can no longer be mistaken for another's, the

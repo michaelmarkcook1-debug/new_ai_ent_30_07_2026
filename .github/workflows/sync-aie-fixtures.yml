@@ -21,10 +21,13 @@
 name: Sync AIE fixtures
 
 on:
-  schedule:
-    # 04:30 UTC daily, ahead of the 05:00 analyst warm in vercel.json, so a
-    # deploy triggered by this commit is warmed rather than cold.
-    - cron: "30 4 * * *"
+  # MANUAL BY DECISION, 6 September 2026. This ran at 04:30 UTC every day from
+  # 31 August to 5 September and committed whatever the upstream had changed.
+  # Ingesting and discovering upstream changes is a person's call, so the
+  # schedule is gone: run it from the Actions tab ("Run workflow"), or locally
+  # with `npm run sync:aie` and commit what it reports. Either way it still
+  # refuses to commit unless typecheck, lint and the full suite pass on the
+  # refreshed payloads.
   workflow_dispatch:
 
 permissions:
@@ -91,7 +94,7 @@ jobs:
           git add fixtures lib/aie/vendor-directory.ts reports
           git commit -m "Refresh the recorded AIE payloads from the live source
 
-          Automated by .github/workflows/sync-aie-fixtures.yml. Typecheck, lint
+          Run by hand through .github/workflows/sync-aie-fixtures.yml. Typecheck, lint
           and the full test suite passed against these payloads before the
           commit was made."
           git push

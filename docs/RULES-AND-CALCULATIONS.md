@@ -2968,10 +2968,16 @@ out of date. The hook registers a resolver rather than rewriting `lib/` to
 relative imports, which would put a second import convention into application
 code to suit a script.
 
-### The scheduled refresh
+### The refresh, run by hand
 
-`.github/workflows/sync-aie-fixtures.yml`, daily at 04:30 UTC, ahead of the
-05:00 analyst warm in `vercel.json`.
+`.github/workflows/sync-aie-fixtures.yml`, `workflow_dispatch` only. It ran on
+a daily schedule at 04:30 UTC from 31 August to 5 September 2026 (the
+"Refresh the recorded AIE payloads" commits) and was made manual on
+6 September by decision: ingesting and discovering upstream changes is a
+person's call. Two ways to run it, both gated the same way: "Run workflow" on
+the Actions tab, or `npm run sync:aie` locally and commit what it reports.
+The fixtures are the fallback lane only; live pages read the upstream at
+render, so a refresh that is not run ages the fallback and nothing else.
 
 **A GitHub Action and not a Vercel cron**, because the sync writes files and a
 Vercel cron runs in a deployed function with a read-only filesystem. It can warm
@@ -3310,7 +3316,7 @@ worker and found the reading in the L1 cache.
 **The warm cron is now under-provisioned, and is not changed here.**
 `app/api/warm/route.ts` fetches the eleven warm pages one at a time inside a
 300-second `maxDuration`, with no per-page abort and no elapsed budget. Most
-runs are cache hits and fit. The run after the daily fixture sync re-authors
+runs are cache hits and fit. A run after the evidence has moved re-authors
 most pages, and at Fable's 42-second median that is about 420 seconds: the
 function is killed part way down the list, silently, and the pages after the
 cut wait for the next run or the next reader. Which pages those are depends
@@ -3338,8 +3344,9 @@ tokens in that build ran from 1,453 to 5,107 per reading.
 instruction, `maxTokens`, roster, `cacheKey` and `guardKey`. A reading Opus 5
 wrote is served until its facts change or the 24-hour revalidation runs, and
 8.32's production check showed the Data Cache surviving a deploy. Fable readings
-therefore appear page by page as facts move, which the daily fixture sync does
-for most pages within a day, rather than at the moment of deploy. Not a defect;
+therefore appear page by page as facts move, which the upstream does on its
+own cadence and a manual `npm run sync:aie` does for the fallback lane, rather
+than at the moment of deploy. Not a defect;
 recorded so that a day-old Opus reading is not mistaken for a Fable one.
 
 ### Two things found on the way, neither changed here
@@ -3581,10 +3588,12 @@ bearer and the spoofed header each answer 401.
 
 ### Schedule
 
-`vercel.json` keeps `0 5,17 * * *`. The 05:00 UTC run trails the 04:30 fixture
-sync by half an hour and lands after the day-precision key flips at midnight
-UTC, so Today's Pulse is prepared before the working day; the 17:00 run halves
-the worst wait after an evidence move. A run against a valid current cache is
+`vercel.json` keeps `0 5,17 * * *`. The 05:00 UTC run lands after the
+day-precision key flips at midnight UTC, so Today's Pulse is prepared before
+the working day; the 17:00 run halves the worst wait after an evidence move.
+Neither is tied to the fixture sync, which has run only by hand since
+6 September 2026: the warm prepares readings from whatever the pages read,
+and ingests nothing. A run against a valid current cache is
 cheap by construction: the page is served from L1 or L2 in under a second and
 no model is called, which the integration test's control case pins and the
 31 August production check showed live. Warming therefore cannot regenerate an

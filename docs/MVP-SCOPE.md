@@ -79,7 +79,7 @@ not code health.
 | # | Gap | Severity | Notes |
 |---|---|---|---|
 | 9 | **No instrumentation on the daily loop** | **High** | "Since you last looked" and the change log exist; nothing measures whether anyone returns. You cannot tune a retention product you cannot see |
-| 10 | **Fixture refresh is manual** | **High** | `sync-aie-fixtures` exists and is careful, but nothing runs it. Needs a schedule plus an alert when a source stops moving |
+| 10 | **Fixture refresh is manual, by decision** | **Medium** | `sync-aie-fixtures` is careful and gated. It ran daily from 31 August to 5 September 2026 and was made manual on 6 September so that ingesting and discovering upstream changes stays a person's call. The fixtures are the fallback lane only; live pages read the upstream at render. The exposure that remains is a cold-start fallback ageing until someone runs `npm run sync:aie` |
 | 11 | **BoardRadar stalls intermittently per ticker** | Medium | Upstream. Handled honestly (8 s, then recorded data badged as such) but not fixed, and not ours to fix |
 | 12 | **`/api/news` returns 3.28 MB and ignores `?limit`** | Medium | Mitigated with a 24 h module TTL and a trim to 300 items |
 | 13 | **`logo.clearbit.com` is dead** | Low | Fails in 19 ms, cached 24 h, renders a blank SVG |
