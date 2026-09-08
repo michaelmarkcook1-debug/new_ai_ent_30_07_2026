@@ -11,6 +11,13 @@ import { USE_CASES } from "@/lib/aie";
 import { workflowsForSegment } from "@/lib/peer/industry-workflows";
 
 export const metadata = { title: "Peer Insights | AI Enterprise" };
+// Never prerendered. This page authors an analyst reading, and a build no
+// longer calls the model (lib/analyst/llm.ts, buildPhase): a prerender would
+// bake the computed floor into the HTML and serve it from the edge until the
+// next build, which is what /peer-insights and /financial-snapshot did for 28
+// hours on 6 and 7 September 2026. Rendered on demand, the first request after
+// a deploy authors or finds the reading in the Data Cache.
+export const dynamic = "force-dynamic";
 
 // The two sources that measured this directly, later than the model the
 // explorer reads, and disagreeing with its top-two ordering. They sit above

@@ -3732,6 +3732,17 @@ pins all three.
 | `944374c`, auto-deployed at 11:06 UTC on 6 September | 8 (7 kinds, reputation on attempt 2) | authored with the rotated key: real spend to produce a build artefact |
 | this change, 16:30, cache cleared | **0** (no `[analyst-llm]` line of any kind) | exit 0, 84/84 pages, every reading on its computed floor |
 
+**A build must not prerender an authoring page.** Two pages touched no dynamic
+API, so Next prerendered them at build; with authoring suppressed, their HTML
+carried the computed floor and the edge served it for 28 hours on 6 and 7
+September 2026 (`x-nextjs-prerender: 1`, `x-vercel-cache: HIT`, `age: 102278`),
+with no model call and no log line, because the page function never ran. Every
+authoring page now exports `dynamic = "force-dynamic"`, pinned by
+`tests/spend-controls.test.ts`; the first request after a deploy authors or
+finds the reading in the Data Cache, and a build cannot bake the floor into a
+page. The two silent returns in `authoredResult()` (build phase, no key) now
+log as well.
+
 The suppression is one check on `NEXT_PHASE`, which Next sets for the build
 and its static-generation workers inherit; the second build proves the workers
 see it. A page a reader opens at runtime authors exactly as before: the test

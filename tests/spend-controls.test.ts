@@ -47,6 +47,20 @@ describe("a production build authors nothing", () => {
   });
 });
 
+describe("a build cannot bake the computed floor into a page", () => {
+  it("every authoring page is rendered on demand, never prerendered", async () => {
+    // With authoring suppressed at build, a prerendered page would carry the
+    // computed floor and be served from the edge until the next build. Seen
+    // on /peer-insights and /financial-snapshot for 28 hours on 6 and 7
+    // September 2026 (x-nextjs-prerender: 1, x-vercel-cache: HIT).
+    const { WARM_PAGES } = await import("@/lib/analyst/warm-list");
+    for (const page of WARM_PAGES) {
+      const file = path.join("app", "(ai-ent)", page.slice(1), "page.tsx");
+      expect(src(file), `${file} must export dynamic = "force-dynamic"`).toMatch(/^export const dynamic = "force-dynamic";/m);
+    }
+  });
+});
+
 describe("nothing scheduled can author", () => {
   const workflowDir = path.join(process.cwd(), ".github", "workflows");
   const workflows = readdirSync(workflowDir).map((f) => src(path.join(".github", "workflows", f)));

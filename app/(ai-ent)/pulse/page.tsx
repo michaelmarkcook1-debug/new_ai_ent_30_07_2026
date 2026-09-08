@@ -32,6 +32,13 @@ import { readWatchState, readChangeLog, buildSinceView } from "@/lib/changes/wat
 // where it lives now.
 
 export const metadata = { title: "Your Pulse | AI Enterprise" };
+// Never prerendered. This page authors an analyst reading, and a build no
+// longer calls the model (lib/analyst/llm.ts, buildPhase): a prerender would
+// bake the computed floor into the HTML and serve it from the edge until the
+// next build, which is what /peer-insights and /financial-snapshot did for 28
+// hours on 6 and 7 September 2026. Rendered on demand, the first request after
+// a deploy authors or finds the reading in the Data Cache.
+export const dynamic = "force-dynamic";
 
 // Everything derived is computed here, on the server, from the same selectors
 // the rest of the app uses. The view renders; it does not calculate.

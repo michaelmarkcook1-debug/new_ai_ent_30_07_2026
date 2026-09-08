@@ -77,9 +77,9 @@ against a current site it costs nothing. The cron that did this twice a day was
 removed on 6 September 2026 at the owner's instruction.
 
 **A push to `main` deploys production on its own.** The Vercel Git integration
-builds every push, and that path skips the preflight. The build no longer calls
-the model (8.35), so a broken key shows up as computed badges at runtime rather
-than as build cost. Run `npm run preflight` before pushing a release.
+builds every push, and that path skips the preflight. The build no longer calls the model (8.35), and no authoring page is prerendered,
+so a broken key shows up as computed badges at runtime rather than as build
+cost. Run `npm run preflight` before pushing a release.
 
 **What the cache actually does.** The authored reading is cached in Vercel's
 Data Cache under a key that carries the evidence, the model, the reasoning

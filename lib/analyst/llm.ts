@@ -786,8 +786,14 @@ export async function authoredResult<T extends object>(
 ): Promise<AuthoredResult<T>> {
   // Before the cache lookup, deliberately: a build must neither read a
   // reading it should not serve nor write one it should not have made.
-  if (buildPhase()) return { value: null, failure: "build" };
-  if (!llmAvailable()) return { value: null, failure: "no-key" };
+  if (buildPhase()) {
+    console.warn(`[analyst-llm] ${kind} not authored: build phase, computed floor used`);
+    return { value: null, failure: "build" };
+  }
+  if (!llmAvailable()) {
+    console.warn(`[analyst-llm] ${kind} not authored: no ANTHROPIC_API_KEY in this environment`);
+    return { value: null, failure: "no-key" };
+  }
 
   // Normalised once, then used for the key, for L2's own argument-derived key,
   // and for the prompt. All three have to agree or the caching is theatre.

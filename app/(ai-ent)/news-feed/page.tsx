@@ -24,6 +24,13 @@ import { readWatchState } from "@/lib/changes/watchlist";
 // per-request work is the render, not the 3.28MB pull. The Pulse made the same
 // trade for the same reason.
 export const metadata = { title: "News | AI Enterprise" };
+// Never prerendered. This page authors an analyst reading, and a build no
+// longer calls the model (lib/analyst/llm.ts, buildPhase): a prerender would
+// bake the computed floor into the HTML and serve it from the edge until the
+// next build, which is what /peer-insights and /financial-snapshot did for 28
+// hours on 6 and 7 September 2026. Rendered on demand, the first request after
+// a deploy authors or finds the reading in the Data Cache.
+export const dynamic = "force-dynamic";
 
 export default async function NewsFeedPage() {
   const news = await analystNews();
