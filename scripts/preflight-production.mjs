@@ -15,9 +15,11 @@
 // revoked key is a 401; an exhausted balance is a 400 on a perfectly valid key
 // (seen on 5 September 2026), and the fix is a different person's job.
 //
-// Usage:  node scripts/preflight-production.mjs
-// Runs first in `npm run deploy`. Needs the Vercel CLI logged in and the
-// project linked, which the deploy step needs anyway.
+// Usage:  node scripts/preflight-production.mjs   (also `npm run preflight`)
+// Step 2 of `npm run deploy`, which is scripts/release.mjs: that script
+// refuses to deploy unless runPreflight() below comes back ok, which is what
+// makes this unavoidable rather than merely conventional. Needs the Vercel CLI
+// logged in and the project linked, which the deploy step needs anyway.
 
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -107,38 +109,59 @@ function parseEnv(text) {
   return out;
 }
 
-async function main() {
+/**
+ * The production environment, pulled to a private temp file that is removed in
+ * `finally`, never into the repo. A value is read into memory for one request
+ * and nothing here ever writes or prints one.
+ */
+export async function pullProductionEnv() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "aie-preflight-"));
   const envFile = path.join(dir, "production.env");
   try {
-    // Pulled to a private temp file that is removed in `finally`, never into
-    // the repo. The value is read into memory for one request and nothing
-    // here ever writes or prints it.
     execFileSync("vercel", ["env", "pull", envFile, "--environment", "production", "--yes"], {
       stdio: ["ignore", "ignore", "inherit"],
     });
     fs.chmodSync(envFile, 0o600);
-    const env = parseEnv(fs.readFileSync(envFile, "utf8"));
-    const model = modelFromSource(fs.readFileSync("lib/analyst/llm.ts", "utf8"));
-    const hasKey = Boolean(env.ANTHROPIC_API_KEY);
-    const check = hasKey ? await checkKey(env.ANTHROPIC_API_KEY, model) : null;
-    const verdict = decide({ hasKey, check, model });
-
-    console.log(`  key present:              ${verdict.stages.key}`);
-    console.log(`  authentication:           ${verdict.stages.auth}`);
-    console.log(`  model access (${model}): ${verdict.stages.model}`);
-    console.log(`  credit:                   ${verdict.stages.credit}`);
-    if (check) console.log(`  one-token request:        HTTP ${check.status}${check.type ? ` (${check.type})` : ""}`);
-
-    if (!verdict.ok) {
-      console.error("\nDEPLOYMENT BLOCKED");
-      for (const b of verdict.blockers) console.error(`  - ${b}`);
-      process.exit(1);
-    }
-    console.log("\nPREFLIGHT PASSED: production can author with the pinned model.");
+    return parseEnv(fs.readFileSync(envFile, "utf8"));
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }
+}
+
+/**
+ * The whole check, as a value rather than an exit code, so scripts/release.mjs
+ * can refuse to deploy on it. Every dependency is injectable, which is how the
+ * refusals are tested without a real key and without the network.
+ */
+export async function runPreflight({
+  pullEnv = pullProductionEnv,
+  fetchImpl = fetch,
+  source = () => fs.readFileSync("lib/analyst/llm.ts", "utf8"),
+  log = console.log,
+} = {}) {
+  const env = await pullEnv();
+  const model = modelFromSource(source());
+  const hasKey = Boolean(env.ANTHROPIC_API_KEY);
+  const check = hasKey ? await checkKey(env.ANTHROPIC_API_KEY, model, fetchImpl) : null;
+  const verdict = decide({ hasKey, check, model });
+
+  log(`  key present:              ${verdict.stages.key}`);
+  log(`  authentication:           ${verdict.stages.auth}`);
+  log(`  model access (${model}): ${verdict.stages.model}`);
+  log(`  credit:                   ${verdict.stages.credit}`);
+  if (check) log(`  one-token request:        HTTP ${check.status}${check.type ? ` (${check.type})` : ""}`);
+
+  return { ...verdict, model, check };
+}
+
+async function main() {
+  const verdict = await runPreflight();
+  if (!verdict.ok) {
+    console.error("\nDEPLOYMENT BLOCKED");
+    for (const b of verdict.blockers) console.error(`  - ${b}`);
+    process.exit(1);
+  }
+  console.log("\nPREFLIGHT PASSED: production can author with the pinned model.");
 }
 
 if (process.argv[1] && path.basename(process.argv[1]) === "preflight-production.mjs") {
