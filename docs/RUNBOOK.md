@@ -44,18 +44,47 @@ Errors are a different matter and there should never be any.
 
 ## 2. Deploying
 
+**Pushing is not releasing.** A push to `main` updates GitHub and changes
+nothing on the live site. `vercel.json` tells Vercel not to deploy commits on
+`main`, and `scripts/release-guard.mjs` fails any production build that no
+release started (8.37). Previews on other branches are unaffected.
+
+Releasing is one command:
+
 ```bash
 npm run deploy
 ```
 
-Two steps, and it stops at the first that fails:
+It is `scripts/release.mjs`, and it stops at the first step that fails:
 
-1. **Preflight.** `scripts/preflight-production.mjs` pulls the production
-   environment to a private temporary file, sends one one-token request to the
-   model the code pins, and reports four stages: key present, authentication,
-   model access, credit. It prints stages, never a value. `DEPLOYMENT BLOCKED`
-   names the stage; fix it in Vercel or at Anthropic and run again.
-2. **Deploy.** `vercel --prod --yes`.
+1. **Release state.** On `main`, working tree clean including untracked files,
+   `HEAD` exactly `origin/main`. A release is a commit anyone can look up.
+2. **Preflight.** One one-token request to the pinned model: key present,
+   authentication, model access, credit. It prints stages, never a value.
+3. **Prerequisites.** `tsc --noEmit` and the full test suite, which Vercel does
+   not run for you.
+4. **Re-check.** Nothing moved while 2 and 3 were running.
+5. **Export.** A `git worktree` checkout of the release commit, so the upload is
+   that commit and nothing else.
+6. **Deploy.** `vercel --prod --yes`, carrying `RELEASE_SHA` into the build and
+   `releaseSha` onto the deployment record.
+7. **Verify.** The production domain now serves the new deployment, and `/admin`
+   answers 200.
+
+`RELEASE BLOCKED at <step>` names the step and the reason, and says plainly
+whether anything was deployed. To run every check and stop before the deploy:
+
+```bash
+npm run deploy -- --check
+```
+
+**Rolling back.** Instant Rollback reassigns the domains to a deployment that
+already served production. It does not rebuild, so the guard does not apply and
+it is the fastest way back. Vercel then turns OFF auto-assignment of production
+domains: the next `npm run deploy` will build and verify, and will report that
+the domain did not move. Promote that deployment to undo the rollback.
+Promoting a *preview* to production rebuilds, so the guard refuses it; release
+through `npm run deploy` instead.
 
 **Deploy warms nothing, and nothing warms on a schedule.** Analyst readings are
 prepared only when a reader opens a page or a person runs the warm by hand:
@@ -76,11 +105,6 @@ changes the model or `INTELLIGENCE_VERSION`, when every page is cold; run
 against a current site it costs nothing. The cron that did this twice a day was
 removed on 6 September 2026 at the owner's instruction.
 
-**A push to `main` deploys production on its own.** The Vercel Git integration
-builds every push, and that path skips the preflight. The build no longer calls the model (8.35), and no authoring page is prerendered,
-so a broken key shows up as computed badges at runtime rather than as build
-cost. Run `npm run preflight` before pushing a release.
-
 **What the cache actually does.** The authored reading is cached in Vercel's
 Data Cache under a key that carries the evidence, the model, the reasoning
 setting and the intelligence version (8.34). A deploy that changes none of
@@ -88,6 +112,7 @@ those keeps serving the existing readings. A deploy that changes the model or
 bumps `INTELLIGENCE_VERSION` makes every old reading unreachable at once; they
 are not deleted and expire within a day, and the pages are cold until warmed
 by a person or a reader.
+
 
 ## 3. Refreshing the data
 

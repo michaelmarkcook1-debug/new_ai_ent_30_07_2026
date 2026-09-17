@@ -3698,11 +3698,11 @@ Verified against the working tree at commit `944374c` plus this change,
 |---|---|---|---|
 | `vercel.json` cron `0 5,17 * * *` on `/api/warm` | SCHEDULED WARM | yes | removed; `vercel.json` now carries no `crons` |
 | `/api/warm` route, `isScheduler()`, `CRON_SECRET`, middleware exemption | the scheduled warm's surface | yes | removed outright; no secret remains to configure |
-| `npm run deploy` ending in `node scripts/warm-insights.mjs` | DEPLOY WARM | yes | removed; deploy is preflight then `vercel --prod --yes` and nothing after |
+| `npm run deploy` ending in `node scripts/warm-insights.mjs` | DEPLOY WARM | yes | removed; deploy is the preflight then `vercel --prod --yes` and nothing after (a seven-step release since 8.37) |
 | `next build` rendering dynamic routes to classify them | BUILD | yes: 7 Fable calls per build, on every push | suppressed: `buildPhase()` (`lib/analyst/llm.ts:766`) makes `authoredResult()` return `failure: "build"` before any cache lookup (line 789) |
 | `scripts/warm-insights.mjs` (sequential, post-deploy) | MANUAL WARM | yes | replaced by `scripts/warm.mjs`, which plans by default and fetches only on `--yes` |
 | `.github/workflows/sync-aie-fixtures.yml` | DATA SYNC | manual since 8.30; touches no model, holds no model key | unchanged |
-| Vercel Git integration | DEPLOY | **every push to `main` builds and deploys production** (build log: `Cloning github.com/... Commit: 944374c`) | not changed; recorded, because it means a push bypasses `npm run deploy` and its preflight |
+| Vercel Git integration | DEPLOY | **every push to `main` built and deployed production** (build log: `Cloning github.com/... Commit: 944374c`) | recorded here, **closed on 17 September 2026 in 8.37**: commits on `main` no longer deploy, and a production build that no release started fails |
 
 **Scheduled Analyst Insight warm invocations after this change: 0.** No cron,
 no scheduled workflow, no replacement mechanism. `tests/spend-controls.test.ts`
@@ -3718,7 +3718,7 @@ pins all three.
 | Ask your analyst, interrogate (`app/api/analyst/live.ts`, `app/api/interrogate/live.ts`) | USER REQUEST | yes, Haiku/Sonnet/Opus tiers | one request each; unchanged here |
 | `npm run warm -- --yes` | MANUAL WARM | yes, for pages not current | pool of 4, 150s per page, one pass, exit 1 on any failure; never loops |
 | `next build` | BUILD | **no** | measured: 0 calls (below) |
-| `vercel --prod`, or a push to `main` | DEPLOY | no: the build authors nothing and deploy warms nothing | |
+| `vercel --prod`, or a push to `main` | DEPLOY | no: the build authors nothing and deploy warms nothing | since 8.37 a push deploys nothing at all, and a bare `vercel --prod` fails the build guard |
 | any schedule | SCHEDULED | **none exists** | |
 | the fixture sync | BACKGROUND DATA SYNC | no: no model import, no model key | |
 | a rejected draft | RETRY | one more attempt, inside the budget | `SDK_RETRIES = 0` underneath |
@@ -3825,9 +3825,9 @@ in 68 files.
 
 ### Remaining risks
 
-1. A push to `main` deploys without the preflight. The build no longer spends,
-   so a bad key now shows as computed badges at runtime rather than as build
-   cost; run `npm run preflight` before pushing a release.
+1. ~~A push to `main` deploys without the preflight.~~ Closed on 17 September
+   2026 (8.37): commits on `main` no longer deploy, and the preflight is a step
+   of the release that the release refuses to continue without.
 2. After a contract-changing release the first reader of each page pays the
    cold render unless a person runs `npm run warm -- --yes` first.
 
@@ -4023,6 +4023,107 @@ approved figures; it does not edit the canonical vendor's name.
 `tests/dataops.test.ts`: nineteen tests covering the twenty-two required
 properties on an in-memory store and a fake upstream shaped like the real
 payloads. Suite: 1,221 tests in 69 files before the final gate.
+
+---
+
+## 8.37 Pushing is not releasing
+
+Verified against the working tree at commit `b7250a4` plus this change,
+17 September 2026.
+
+### What was wrong
+
+`npm run deploy` had run the Anthropic preflight since 6 September, and a push
+to `main` went round it. Vercel's GitHub integration created a **Production**
+deployment for every commit, which is a fact from GitHub rather than an
+inference: `vercel[bot]` created deployments with `environment=Production` for
+`992db7a`, `c570b5d`, `944374c`, `0813ba7`, `8967f17`, `17aa90e`, `9cd9645`
+and `b7250a4`. So a release could reach readers with a revoked key, an
+exhausted balance or an unreachable model, which is the exact failure the
+preflight exists to catch, and the fixture sync's own commits published too.
+
+It was the native Git integration and nothing else: the repository has no
+webhooks, no workflow that deploys, and no deploy hook. That is why the fix is
+a Vercel setting rather than a change to a workflow.
+
+### The two mechanisms
+
+| | Where | What it stops |
+|---|---|---|
+| `git.deploymentEnabled: { main: false }` | `vercel.json:5` | Vercel creating any deployment for a commit on `main`. Documented as "specify branches that should not trigger a deployment upon commits"; unspecified branches stay `true`, so every other branch still previews. |
+| `guardVerdict()` | `scripts/release-guard.mjs:38`, run by the `build` script | any **production build** that no release started. It fails the build, and Vercel assigns domains only to a build that succeeded. |
+
+They are different mechanisms at different layers on purpose. The setting stops
+the deployment being created. The guard stops a production build created some
+other way from becoming the live site: a bare `vercel --prod`, a dashboard
+promote of a preview (which the docs say rebuilds), or a push whose
+configuration was somehow not applied.
+
+The guard runs from the `build` script because the project's Framework Settings
+say `npm run vercel-build` or `npm run build`, and there is no `vercel-build`
+script; `tests/release-control.test.ts` pins both, since adding one would
+silently skip the guard.
+
+**Previews and local builds are never gated.** Only `VERCEL_ENV === "production"`
+is checked, and Vercel's system environment variables make that available at
+build time. A missing `VERCEL_ENV` allows the build: a release gate must not
+break previews.
+
+### The release, step by step
+
+`npm run deploy` is `node scripts/release.mjs` and nothing else. Each step must
+pass before the next begins, and the free checks come first.
+
+| Step | What it requires | Where |
+|---|---|---|
+| 1 release state | on `main`, clean including untracked, `HEAD == origin/main` | `decideReleaseState()`, `scripts/release.mjs:84` |
+| 2 preflight | key, authentication, model access, credit, in one one-token request | `runPreflight()`, `scripts/preflight-production.mjs:136` |
+| 3 prerequisites | `tsc --noEmit` and the full suite, which Vercel does not run | `runPrerequisites()`, line 136 |
+| 4 re-check | the same commit, still clean, after 2 and 3 | line 243 |
+| 5 export | a `git worktree` checkout of the release commit | `exportRelease()`, line 113 |
+| 6 deploy | `--prod --yes --build-env RELEASE_SHA=<sha> --meta releaseSha=<sha>` | `deployArgs()`, line 108 |
+| 7 verify | the domain serves the release, and `/admin` answers 200 | `verifyRelease()`, line 164 |
+
+`npm run deploy -- --check` runs 1 to 5 and stops at the safe point, which is
+how the path is exercised without releasing.
+
+The orchestrator (`release()`, line 212) takes every step as an
+injected function, which is how the refusals are tested without a deployment:
+an auth failure, a credit refusal, an unreachable model, a failing suite, a
+dirty tree, an unpushed commit and a HEAD that moves mid-flight each stop the
+run before the deploy step is reached.
+
+### Why the deploy runs from an export rather than the working folder
+
+Measured on 17 September 2026: the repository tracks **583** files and the last
+CLI deploy uploaded **1,480**. `.claude/worktrees/` holds about 915 files of
+stale copies of this repository, excluded from git by `.git/info/exclude`, a
+file the upload does not read (it reads `.vercelignore`, and there is none).
+Those files were never routed and changed nothing a reader saw, but "the
+release is this commit" was not true of the upload. A `git worktree` checkout
+of the release SHA makes it true, and the SHA then travels three ways: into the
+build as `RELEASE_SHA`, onto the deployment as `releaseSha` metadata, and into
+the verification, which finds the deployment by that metadata rather than by
+parsing what the CLI printed.
+
+### Rollback
+
+Instant Rollback reassigns the domains to a deployment that already served
+production. It does not rebuild, so the guard does not apply, and it is the
+fastest way back. Vercel then turns off auto-assignment of production domains,
+so the next `npm run deploy` will build and verify and then report that the
+domain did not move; promoting that deployment undoes the rollback. Promoting a
+preview to production rebuilds and the guard refuses it: release through
+`npm run deploy` instead.
+
+### What this does not change
+
+`/admin` stays public. The project carries no password protection, no Vercel
+Authentication and no Trusted IPs (read from the project on 17 September 2026),
+and nothing here adds any; the middleware gate is still the demo one, which is
+unset in production and is not path-based. Previews stay on for every branch.
+No schedule was added: there is still no Analyst Insight, discovery or
+ingestion cron, and no scheduled deployment.
 
 ---
 

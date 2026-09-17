@@ -90,9 +90,14 @@ describe("nothing scheduled can author", () => {
 describe("deployment does not warm", () => {
   const pkg = JSON.parse(src("package.json")) as { scripts: Record<string, string> };
 
-  it("deploy is preflight then deploy, and nothing after", () => {
-    expect(pkg.scripts.deploy).toBe("node scripts/preflight-production.mjs && vercel --prod --yes");
+  it("deploy is the release script, which runs the preflight and warms nothing", () => {
+    // Was "node scripts/preflight-production.mjs && vercel --prod --yes" until
+    // 17 September 2026, when the release path grew the git-state check, the
+    // clean export and the post-deploy verification (tests/release-control).
+    expect(pkg.scripts.deploy).toBe("node scripts/release.mjs");
     expect(pkg.scripts.deploy).not.toMatch(/warm/);
+    expect(src("scripts/release.mjs")).toMatch(/runPreflight/);
+    expect(src("scripts/release.mjs")).not.toMatch(/warm/);
   });
 
   it("warm is its own command, run through the alias hook", () => {

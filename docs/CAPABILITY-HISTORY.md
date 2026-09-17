@@ -15,6 +15,30 @@ than a gap.
 
 ---
 
+## 17 September 2026 (release control)
+
+**Saving code no longer publishes the site.**
+
+Until today, pushing code to GitHub published it to the live site by itself,
+within about a minute, and that route skipped the check that makes sure
+production can actually reach the analyst model. A release could go out with a
+key that no longer worked, or with no credit left, and the first sign would
+have been readings quietly falling back to their plainer computed text.
+
+Publishing is now a separate and deliberate act. Pushing code updates GitHub
+and nothing else. The site changes only when the release command is run, and
+that command refuses unless the code is committed and matches GitHub exactly,
+the key works, the model is reachable, there is credit, and the whole test
+suite passes. Afterwards it checks that the site really is serving the new
+release, rather than assuming it.
+
+There is a second lock behind the first: a production build that the release
+command did not start refuses to build at all, so an accidental publish from
+somewhere else cannot reach the site either.
+
+Nothing about the product changed. Work-in-progress previews still work,
+nothing new runs on a schedule, and the operations page stays public.
+
 ## 6 September 2026 (data operations)
 
 **The product can now show what its source holds today against what it holds

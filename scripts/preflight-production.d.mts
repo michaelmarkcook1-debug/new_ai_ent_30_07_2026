@@ -7,3 +7,10 @@ export interface Verdict {
 }
 export function decide(input: { hasKey: boolean; check: KeyCheck | null; model: string | null }): Verdict;
 export function checkKey(apiKey: string, model: string, fetchImpl?: typeof fetch): Promise<KeyCheck>;
+export function pullProductionEnv(): Promise<Record<string, string>>;
+export function runPreflight(deps?: {
+  pullEnv?: () => Promise<Record<string, string>> | Record<string, string>;
+  fetchImpl?: typeof fetch;
+  source?: () => string;
+  log?: (message: string) => void;
+}): Promise<Verdict & { model: string | null; check: KeyCheck | null }>;

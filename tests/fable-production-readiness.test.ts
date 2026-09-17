@@ -262,10 +262,12 @@ describe("13. the production preflight fails closed, stage by stage", () => {
     expect(src("scripts/preflight-production.mjs")).not.toMatch(/CRON_SECRET/);
   });
 
-  it("runs first in the deploy script, and deploy warms nothing", () => {
+  it("is a step the deploy cannot get past, and deploy warms nothing", () => {
     const pkg = JSON.parse(src("package.json")) as { scripts: Record<string, string> };
-    expect(pkg.scripts.deploy.startsWith("node scripts/preflight-production.mjs &&")).toBe(true);
+    expect(pkg.scripts.deploy).toBe("node scripts/release.mjs");
     expect(pkg.scripts.deploy).not.toMatch(/warm/);
+    // The release refuses on the verdict rather than merely running it first.
+    expect(src("scripts/release.mjs")).toMatch(/if \(!pre\.ok\) return stop\("preflight"/);
   });
 });
 
