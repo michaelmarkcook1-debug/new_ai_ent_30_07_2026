@@ -423,11 +423,11 @@ describe("no automatic production path remains", () => {
   });
 
   it("27. nothing in the repository holds a deploy hook", () => {
-    const hooks = spawnSync(
-      "git",
-      ["grep", "-lI", "-e", "api.vercel.com/v1/integrations/deploy", "--", "."],
-      { encoding: "utf8" }
-    );
+    // Assembled rather than written out, so this test cannot find itself: a
+    // literal here is a tracked file containing the string, and git grep
+    // rightly reports it. The release check caught exactly that.
+    const needle = ["api.vercel.com", "v1", "integrations", "deploy"].join("/");
+    const hooks = spawnSync("git", ["grep", "-lI", "-e", needle, "--", "."], { encoding: "utf8" });
     expect(`${hooks.stdout}`.trim()).toBe("");
   });
 

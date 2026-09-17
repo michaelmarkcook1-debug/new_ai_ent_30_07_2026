@@ -4106,6 +4106,49 @@ build as `RELEASE_SHA`, onto the deployment as `releaseSha` metadata, and into
 the verification, which finds the deployment by that metadata rather than by
 parsing what the CLI printed.
 
+### Proof
+
+Behaviour, not configuration read back to itself.
+
+| | Before | After |
+|---|---|---|
+| a commit pushed to `main` | a production deployment, every time | no deployment of any kind |
+| a commit pushed to a branch | a preview deployment | a preview deployment, unchanged |
+
+**Before.** GitHub's own record: `vercel[bot]` created deployments with
+`environment=Production` for the eight commits from `992db7a` to `b7250a4`,
+the last at 2026-09-08T00:52:24Z.
+
+**After, branch push.** `3e0dd1d` pushed to `release-control` at 18:49:31 on
+17 September 2026. Two seconds later Vercel created
+`dpl_5Eg5hbumbDSfJtQevXUQdj3eRt68`, **target preview**, and its build log reads
+`[release-guard] preview build: no release gate applies`. That one line is three
+findings: Vercel runs `npm run build`, `VERCEL_ENV` is readable at build time,
+and the guard leaves previews alone.
+
+**After, main push.** The merge commit `d897f14` pushed to `main` at 18:55:48,
+then watched every 30 seconds until 19:01:17:
+
+- the newest deployment stayed the branch's preview, ageing from 7 to 11 minutes;
+- the production domain stayed `dpl_8aStmiVoJNzLxyJziqFYDzezt1PG`, created
+  8 September, at every sample;
+- GitHub recorded no deployment for `d897f14`, no check run, and no commit
+  status context.
+
+**The production deployment ID is the same before and after the push:**
+`dpl_8aStmiVoJNzLxyJziqFYDzezt1PG`.
+
+**The explicit path, to the safe point.** `npm run deploy -- --check` on
+`d897f14`: release state passed ("main at d897f14, clean, matching
+origin/main"), the preflight passed every stage on one HTTP 200, and then the
+run **stopped at prerequisites with exit 1** on a single failing test. The test
+was this file's own check that no deploy hook exists anywhere in the repository:
+committing it made it a tracked file, so `git grep` found the URL literal
+inside the test itself. It is recorded rather than quietly fixed because it is
+the gate doing precisely its job on its first real run, and because it is the
+answer to "would this actually stop a release": it stopped one, for a defect
+that a human reviewer would have called cosmetic.
+
 ### Rollback
 
 Instant Rollback reassigns the domains to a deployment that already served
