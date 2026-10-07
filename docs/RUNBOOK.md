@@ -152,8 +152,9 @@ ingest holds all eight vendors to a single shared 20-second budget so a stalled
 upstream cannot turn one run into 98 seconds of hanging.
 
 `/admin` shows all of this live: what the catalogue holds, the last runs with
-their failures, and the priced cost of each. It is not in the sidebar: type
-the URL.
+their failures, and the priced cost of each. Since 7 October 2026 it sits in the
+sidebar under **Back office**, beside **Data operations** (`/admin/data`), where
+upstream changes are discovered, reviewed and ingested by hand.
 
 ---
 

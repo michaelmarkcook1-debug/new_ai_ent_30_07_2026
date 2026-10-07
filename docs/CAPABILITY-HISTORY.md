@@ -15,6 +15,14 @@ than a gap.
 
 ---
 
+## 7 October 2026 (back office)
+
+**The back office is in the sidebar.** A new group at the foot of the menu,
+**Back office**, holds **Data operations**, where you discover what has changed
+in the AI Enterprise data, review it and approve what goes in, and **Admin**,
+which shows ingestion runs, their cost and connector health. Both pages had
+existed since August but could only be reached by typing their address.
+
 ## 17 September 2026 (release control)
 
 **Saving code no longer publishes the site.**

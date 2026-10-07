@@ -47,6 +47,10 @@ const ICONS: Record<string, React.ReactNode> = {
   news: <><rect x="3" y="5" width="18" height="15" rx="2" /><path d="M7 9h7M7 13h10M7 17h10" /></>,
   interrogate: <><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 8.5-8.5 8.38 8.38 0 0 1 8.5 8.5Z" /><path d="M9.5 9.5a2.5 2.5 0 0 1 4.9.8c0 1.7-2.4 2.2-2.4 3.2" /><path d="M12 17h.01" /></>,
   assess: <><path d="M9 6h11M9 12h11M9 18h11" /><path d="m3.5 6 1 1 2-2M3.5 12l1 1 2-2M3.5 18l1 1 2-2" /></>,
+  // A stacked cylinder: the canonical data the operator discovers and ingests.
+  data: <><ellipse cx="12" cy="5.5" rx="7.5" ry="2.5" /><path d="M4.5 5.5v6.5c0 1.4 3.4 2.5 7.5 2.5s7.5-1.1 7.5-2.5V5.5" /><path d="M4.5 12v6.5C4.5 19.9 7.9 21 12 21s7.5-1.1 7.5-2.5V12" /></>,
+  // Three sliders: the operations view.
+  admin: <><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0" /><circle cx="16" cy="6" r="2" /><circle cx="10" cy="12" r="2" /><circle cx="18" cy="18" r="2" /></>,
 };
 
 function Icon({ name }: { name: string }) {
@@ -147,6 +151,18 @@ export const NAV_GROUPS: NavGroup[] = [
         icon: "alliance",
         hint: "Which firms deliver which AI vendors, and how deep the tie is",
       },
+    ],
+  },
+  {
+    // VISIBLE SINCE 7 OCTOBER 2026. The back office existed from 5 August and
+    // was reachable only by typing the address, by an early decision that it
+    // need not be in the sidebar. Once it became the place where data is
+    // discovered and ingested by hand, an unlinked page was a page nobody could
+    // find, so it has its own group. Public, as the rest of the site is.
+    label: "Back office",
+    items: [
+      { label: "Data operations", href: "/admin/data", icon: "data", hint: "Discover what changed upstream, review it, and ingest what you approve" },
+      { label: "Admin", href: "/admin", icon: "admin", hint: "Ingestion runs, what they cost, connector health and usage" },
     ],
   },
 ];
@@ -269,8 +285,18 @@ export function Shell({
                   )}
                   <ul className="space-y-0.5">
                     {group.items.map((item) => {
+                      // The most specific match wins, so /admin/data lights
+                      // Data operations and not Admin as well.
                       const on = (href: string) =>
-                        pathname === href || pathname.startsWith(`${href}/`);
+                        (pathname === href || pathname.startsWith(`${href}/`)) &&
+                        !NAV_GROUPS.some((g) =>
+                          g.items.some(
+                            (i) =>
+                              i.href.length > href.length &&
+                              i.href.startsWith(`${href}/`) &&
+                              (pathname === i.href || pathname.startsWith(`${i.href}/`))
+                          )
+                        );
                       const partners = item.also ?? [];
                       const alsoActive = partners.some((p) => on(p.href));
                       const active = on(item.href);
