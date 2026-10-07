@@ -112,13 +112,20 @@ describe("committed snapshot", () => {
     // The window is the difference between "ever mentioned since 2001" and
     // "named in a current annual report". A stale example would mean the
     // date bounds silently stopped being applied.
+    // JUDGED AGAINST THE MOMENT THE INGEST RAN, NOT AGAINST TODAY. The
+    // snapshot is committed, so it ages on the shelf; measuring it by today's
+    // clock tests the calendar rather than the bounds. On 7 October 2026 that
+    // blocked a release: the oldest example (2025-09-30) had passed 365 days
+    // plus a week of slack, although the ingest that produced it applied the
+    // window correctly when it ran on 2026-08-04. Whether the snapshot is old
+    // enough to re-run is an ingest decision, and ingests are manual here.
     const days = Number(snapshot.window.match(/\d+/)?.[0] ?? 365);
-    const floor = Date.now() - days * 86_400_000;
-    // One week of slack: the snapshot is committed and ages between runs.
-    const slack = 7 * 86_400_000;
+    const ranAt = Date.parse(snapshot.fetchedAt);
+    expect(Number.isFinite(ranAt), "the snapshot must say when it was fetched").toBe(true);
+    const floor = ranAt - days * 86_400_000;
     for (const r of snapshot.rows) {
       for (const e of r.examples) {
-        expect(Date.parse(e.filedOn)).toBeGreaterThan(floor - slack);
+        expect(Date.parse(e.filedOn)).toBeGreaterThan(floor);
       }
     }
   });

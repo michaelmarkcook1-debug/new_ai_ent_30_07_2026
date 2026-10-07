@@ -218,12 +218,24 @@ describe("the signal contract", () => {
   });
 });
 
+// THE MOMENT THESE FIXTURES ARE JUDGED AGAINST.
+//
+// `synthesise` takes `now` precisely so a test is deterministic, and these
+// calls were leaving it to the clock. On 7 October 2026 that blocked a release:
+// MOVING_UP is dated 2026-08-16 and "AIE vendor movement classification" has
+// the shortest shelf life in lib/analyst/freshness.ts (current 21, stale 45,
+// "an old movement reading is the exact thing that must never be presented as
+// current"). At 32 days old the fixture was aging and the movement rules fired;
+// at 52 days it is stale and they correctly refuse. The product was right and
+// the test was measuring the calendar, so the moment is pinned here.
+const OBSERVED = Date.parse("2026-08-26T12:00:00Z");
+
 // ------------------------------------------------------------- the synthesis
 
 describe("cross-signal relationships", () => {
   // E.
   it("E. detects capability and price divergence", () => {
-    const out = synthesise([CAPABILITY_NARROW, PRICE_WIDE]);
+    const out = synthesise([CAPABILITY_NARROW, PRICE_WIDE], OBSERVED);
     const hit = out.find((s) => s.id === "capability-price-divergence")!;
     expect(hit).toBeDefined();
     expect(hit.relation).toBe("reinforces");
@@ -232,7 +244,7 @@ describe("cross-signal relationships", () => {
 
   // F.
   it("F. detects a strong vendor carrying an open high-severity risk", () => {
-    const hit = synthesise([POSITION_LEADS, RISK_OPEN]).find(
+    const hit = synthesise([POSITION_LEADS, RISK_OPEN], OBSERVED).find(
       (s) => s.id === "strength-risk-divergence"
     )!;
     expect(hit).toBeDefined();
@@ -242,7 +254,7 @@ describe("cross-signal relationships", () => {
 
   // G.
   it("G. detects high adoption against thin delivery capacity", () => {
-    const hit = synthesise([ADOPTION_HIGH, DELIVERY_NARROW]).find(
+    const hit = synthesise([ADOPTION_HIGH, DELIVERY_NARROW], OBSERVED).find(
       (s) => s.id === "adoption-delivery-divergence"
     )!;
     expect(hit).toBeDefined();
@@ -251,7 +263,7 @@ describe("cross-signal relationships", () => {
 
   // H.
   it("H. detects a concentrated market with an uncontested lead", () => {
-    const hit = synthesise([CONCENTRATION_TIGHT, POSITION_LEADS]).find(
+    const hit = synthesise([CONCENTRATION_TIGHT, POSITION_LEADS], OBSERVED).find(
       (s) => s.id === "concentration-alternatives"
     )!;
     expect(hit).toBeDefined();
@@ -260,7 +272,7 @@ describe("cross-signal relationships", () => {
 
   // A.
   it("A. detects reinforcing movement across two datasets", () => {
-    const hit = synthesise([MOVING_UP, ALSO_UP]).find(
+    const hit = synthesise([MOVING_UP, ALSO_UP], OBSERVED).find(
       (s) => s.id === "reinforcing-movement"
     )!;
     expect(hit).toBeDefined();
@@ -269,7 +281,7 @@ describe("cross-signal relationships", () => {
 
   // B.
   it("B. detects contradictory movement and marks it against", () => {
-    const hit = synthesise([MOVING_UP, MOVING_DOWN]).find(
+    const hit = synthesise([MOVING_UP, MOVING_DOWN], OBSERVED).find(
       (s) => s.id === "contradictory-movement"
     )!;
     expect(hit).toBeDefined();
@@ -279,17 +291,17 @@ describe("cross-signal relationships", () => {
 
   // K.
   it("K. produces nothing at all from insufficient signals", () => {
-    expect(synthesise([])).toEqual([]);
-    expect(synthesise([CAPABILITY_NARROW])).toEqual([]);
-    expect(synthesise([SNAPSHOT])).toEqual([]);
+    expect(synthesise([], OBSERVED)).toEqual([]);
+    expect(synthesise([CAPABILITY_NARROW], OBSERVED)).toEqual([]);
+    expect(synthesise([SNAPSHOT], OBSERVED)).toEqual([]);
     // Half a relationship is not a relationship.
-    expect(synthesise([POSITION_LEADS])).toEqual([]);
+    expect(synthesise([POSITION_LEADS], OBSERVED)).toEqual([]);
   });
 
   it("does not fire where the states are present but point the other way", () => {
     const capWide = signal({ ...CAPABILITY_NARROW, id: "cap2", state: "wide" });
     expect(
-      synthesise([capWide, PRICE_WIDE]).find(
+      synthesise([capWide, PRICE_WIDE], OBSERVED).find(
         (s) => s.id === "capability-price-divergence"
       )
     ).toBeUndefined();
@@ -314,7 +326,7 @@ describe("what a synthesis may never do", () => {
   // 1. Traceability.
   it("names every signal that produced it, and they are real inputs", () => {
     const ids = new Set(everything.map((s) => s.id));
-    for (const s of synthesise(everything)) {
+    for (const s of synthesise(everything, OBSERVED)) {
       expect(s.signals.length).toBeGreaterThan(0);
       for (const input of s.signals) {
         expect(ids.has(input.id)).toBe(true);
@@ -325,14 +337,14 @@ describe("what a synthesis may never do", () => {
 
   // 2. No synthesis without inputs.
   it("never produces a finding with no supporting signal", () => {
-    for (const s of synthesise(everything)) {
+    for (const s of synthesise(everything, OBSERVED)) {
       expect(s.signals.length).toBeGreaterThanOrEqual(2);
     }
   });
 
   // 4. Snapshot does not become trend.
   it("never describes a snapshot as moving", () => {
-    for (const s of synthesise([...everything, SNAPSHOT])) {
+    for (const s of synthesise([...everything, SNAPSHOT], OBSERVED)) {
       if (s.signals.some((x) => !hasTrend(x))) {
         expect(s.temporal).toBe("state");
       }
@@ -345,7 +357,7 @@ describe("what a synthesis may never do", () => {
   });
 
   it("takes the weakest input's temporal class, not the strongest", () => {
-    const mixed = synthesise([CAPABILITY_NARROW, PRICE_WIDE]);
+    const mixed = synthesise([CAPABILITY_NARROW, PRICE_WIDE], OBSERVED);
     // Both inputs are single observations, so the joint claim is a state even
     // though the finding combines two datasets.
     expect(mixed[0].temporal).toBe("state");
@@ -353,23 +365,23 @@ describe("what a synthesis may never do", () => {
 
   // 5. Correlation is not causality.
   it("never claims one reading caused another", () => {
-    for (const s of synthesise(everything)) {
+    for (const s of synthesise(everything, OBSERVED)) {
       expect(claimsCausality(s.finding), s.id).toEqual([]);
       expect(claimsCausality(s.implication), s.id).toEqual([]);
     }
     // The block's own instruction names the forbidden words in order to forbid
     // them, so the check is on the finding lines rather than the whole block.
-    const findings = synthesisBlock(synthesise(everything))
+    const findings = synthesisBlock(synthesise(everything, OBSERVED))
       .split("\n")
       .filter((l) => l.trimStart().startsWith("- [") || l.trimStart().startsWith("What it means:"));
     expect(findings.length).toBeGreaterThan(0);
     for (const line of findings) expect(claimsCausality(line), line).toEqual([]);
     // And the instruction does spell them out, which is the point of it.
-    expect(synthesisBlock(synthesise(everything))).toMatch(/never "because"|never "?because/i);
+    expect(synthesisBlock(synthesise(everything, OBSERVED))).toMatch(/never "because"|never "?because/i);
   });
 
   it("has no causal member in the relation vocabulary", () => {
-    for (const s of synthesise(everything)) {
+    for (const s of synthesise(everything, OBSERVED)) {
       expect(["reinforces", "contradicts", "coincides with", "consistent with"]).toContain(
         s.relation
       );
@@ -383,7 +395,7 @@ describe("what a synthesis may never do", () => {
   });
 
   it("says coincides with, and says outright that no mechanism is established", () => {
-    const hit = synthesise([MOVING_UP, MOVING_DOWN, ALSO_UP]).find(
+    const hit = synthesise([MOVING_UP, MOVING_DOWN, ALSO_UP], OBSERVED).find(
       (s) => s.relation === "coincides with"
     );
     if (hit) {
@@ -394,7 +406,7 @@ describe("what a synthesis may never do", () => {
 
   it("carries a synthesis into evidence as modelled, never as measured", () => {
     // Every input can be measured and the RELATIONSHIP still is not.
-    const e = synthesisEvidence(synthesise([POSITION_LEADS, RISK_OPEN])[0]);
+    const e = synthesisEvidence(synthesise([POSITION_LEADS, RISK_OPEN], OBSERVED)[0]);
     expect(e.basis).toBe("modelled");
     expect(e.source).toContain("Cross-signal synthesis");
     expect(e.source).toContain("AIE risk register");
@@ -697,8 +709,8 @@ describe("signals built from the shared metrics object", () => {
   it("produces identical signals for two pages given the same metrics", () => {
     const m = metrics();
     expect(signalsFromMetrics(m)).toEqual(signalsFromMetrics(m));
-    expect(synthesise(signalsFromMetrics(m))).toEqual(
-      synthesise(signalsFromMetrics(m))
+    expect(synthesise(signalsFromMetrics(m), OBSERVED)).toEqual(
+      synthesise(signalsFromMetrics(m), OBSERVED)
     );
   });
 
