@@ -10,6 +10,7 @@ import {
   parseList,
   release,
   verifyRelease,
+  vercelOutput,
   type ReleaseDeps,
   type ReleaseStateFacts,
 } from "../scripts/release.mjs";
@@ -403,6 +404,53 @@ describe("the preflight itself, wired as the release calls it", () => {
 });
 
 // ------------------------------------------------------------- nothing automatic
+
+describe("the verification reads what the CLI actually prints", () => {
+  const report = (id: string) => `    id\t\t${id}\n    target\tproduction\n    status\t● Ready\n`;
+  const ok200 = (async () => new Response("", { status: 200 })) as unknown as typeof fetch;
+
+  it("28. takes both streams, because vercel inspect reports on stderr", () => {
+    // THE DEFECT THIS PINS. On 7 October 2026 a release deployed correctly and
+    // then reported "the release deployment is in an unknown state": the
+    // runner read stdout, which vercel inspect leaves empty, and parsed
+    // nothing. Every manual check had piped 2>&1 and hidden it.
+    const onlyStderr = (() => ({ stdout: "", stderr: report("dpl_x") })) as never;
+    expect(parseInspect(vercelOutput(["inspect", "x"], onlyStderr))).toMatchObject({
+      id: "dpl_x",
+      target: "production",
+      status: "Ready",
+    });
+  });
+
+  it("29. a release that did not become the domain fails verification", async () => {
+    const v = await verifyRelease({
+      sha: "a".repeat(40),
+      vercel: (args: string[]) =>
+        args[0] === "ls"
+          ? "https://newaient30072026-new.vercel.app"
+          : report(args[1].startsWith("https") ? "dpl_new" : "dpl_previous"),
+      fetchImpl: ok200,
+    });
+    expect(v.ok).toBe(false);
+    expect(v.blockers.join(" ")).toMatch(/still serves/);
+  });
+
+  it("30. a release that did become the domain, with /admin public, verifies", async () => {
+    const v = await verifyRelease({
+      sha: "a".repeat(40),
+      vercel: (args: string[]) =>
+        args[0] === "ls" ? "https://newaient30072026-new.vercel.app" : report("dpl_new"),
+      fetchImpl: ok200,
+    });
+    expect(v).toMatchObject({ ok: true, deploymentId: "dpl_new" });
+  });
+
+  it("31. a deployment nobody can find fails rather than passing quietly", async () => {
+    const v = await verifyRelease({ sha: "a".repeat(40), vercel: () => "", fetchImpl: ok200 });
+    expect(v.ok).toBe(false);
+    expect(v.blockers.join(" ")).toMatch(/no production deployment carries/);
+  });
+});
 
 describe("no automatic production path remains", () => {
   it("25. npm run deploy is the only deployment command in the project", () => {

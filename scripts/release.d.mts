@@ -60,6 +60,7 @@ export function decideReleaseState(facts: ReleaseStateFacts): ReleaseStateVerdic
 export function deployArgs(sha: string): string[];
 export function exportRelease(sha: string, run?: (args: string[]) => string): ExportedRelease;
 export function runPrerequisites(spawn?: unknown): StepVerdict;
+export function vercelOutput(args: string[], spawn?: unknown): string;
 export function parseInspect(text: string): Record<string, string>;
 export function parseList(text: string): string[];
 export function verifyRelease(arg: {

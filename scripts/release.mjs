@@ -144,6 +144,22 @@ export function runPrerequisites(spawn = spawnSync) {
   return { ok: true, blockers: [] };
 }
 
+/**
+ * Whatever the CLI said, from both streams.
+ *
+ * `vercel inspect` writes its report to STDERR. Measured on 7 October 2026,
+ * when the first release through this path deployed correctly and then
+ * reported "the release deployment is in an unknown state": the runner
+ * captured stdout, parsed an empty string, and found neither a status nor a
+ * target. Every manual check had piped `2>&1` and hidden the difference. Both
+ * streams are read here so the parsing cannot depend on which one a command
+ * happens to choose.
+ */
+export function vercelOutput(args, spawn = spawnSync) {
+  const r = spawn("vercel", args, { encoding: "utf8" });
+  return `${r.stdout ?? ""}\n${r.stderr ?? ""}`;
+}
+
 export function parseInspect(text) {
   const out = {};
   for (const m of text.matchAll(/^\s+(id|url|target|status)\s+(.+)$/gm)) {
@@ -163,7 +179,7 @@ export function parseList(text) {
  */
 export async function verifyRelease({
   sha,
-  vercel = (args) => execFileSync("vercel", args, { encoding: "utf8" }),
+  vercel = (args) => vercelOutput(args),
   fetchImpl = fetch,
   domain = PRODUCTION_DOMAIN,
 }) {
